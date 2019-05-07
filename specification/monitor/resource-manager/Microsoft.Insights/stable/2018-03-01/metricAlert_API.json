@@ -117,7 +117,9 @@
           "Get an alert rule for single resource": { "$ref": "./examples/getMetricAlertSingleResource.json" },
           "Get an alert rule for multiple resources": { "$ref": "./examples/getMetricAlertMultipleResource.json" },
           "Get an alert rule on resource group(s)": { "$ref": "./examples/getMetricAlertResourceGroup.json" },
-          "Get an alert rule on subscription": { "$ref": "./examples/getMetricAlertSubscription.json" }
+          "Get an alert rule on subscription": { "$ref": "./examples/getMetricAlertSubscription.json" },
+          "Get a dynamic alert rule for single resource": { "$ref": "./examples/getDynamicMetricAlertSingleResource.json" },
+          "Get a dynamic alert rule for multiple resources": { "$ref": "./examples/getDynamicMetricAlertMultipleResource.json" }
         }
       },
       "put": {
@@ -155,7 +157,9 @@
           "Create or update an alert rule for Single Resource": { "$ref": "./examples/createOrUpdateMetricAlertSingleResource.json" },
           "Create or update an alert rule for Multiple Resource": { "$ref": "./examples/createOrUpdateMetricAlertMultipleResource.json" },
           "Create or update an alert rule on Resource group(s)": { "$ref": "./examples/createOrUpdateMetricAlertResourceGroup.json" },
-          "Create or update an alert rule on Subscription ": { "$ref": "./examples/createOrUpdateMetricAlertSubscription.json" }
+          "Create or update an alert rule on Subscription ": { "$ref": "./examples/createOrUpdateMetricAlertSubscription.json" },
+          "Create or update a dynamic alert rule for Single Resource": { "$ref": "./examples/createOrUpdateDynamicMetricAlertSingleResource.json" },
+          "Create or update a dynamic alert rule for Multiple Resources": { "$ref": "./examples/createOrUpdateDynamicMetricAlertMultipleResource.json" }
         }
       },
       "patch": {
@@ -553,25 +557,10 @@
         }
       ],
      "required": [
-        "name",
-        "metricName",
         "operator",
-        "timeAggregation",
         "threshold"
       ],
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the criteria."
-        },
-        "metricName": {
-          "type": "string",
-          "description": "Name of the metric."
-        },
-        "metricNamespace": {
-          "type": "string",
-          "description": "Namespace of the metric."
-        },
         "operator": {
           "enum": [
             "Equals",
@@ -587,30 +576,10 @@
           },
           "description": "the criteria operator."
         },
-        "timeAggregation": {
-          "enum": [
-            "Average",
-            "Minimum",
-            "Maximum",
-            "Total"
-          ],
-          "x-ms-enum": {
-            "name": "AggregationType",
-            "modelAsString": true
-          },
-          "description": "the criteria time aggregation types."
-        },
         "threshold": {
           "type": "number",
           "format":  "double",
           "description": "the criteria threshold value that activates the alert."
-        },
-        "dimensions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricDimension"
-          },
-          "description": "List of dimension conditions."
         }
       },
       "description": "Criterion to filter metrics."
@@ -668,18 +637,119 @@
       "properties":{
         "criterionType" : {
           "enum":[
-           "StaticThresholdCriterion"            
+           "StaticThresholdCriterion",
+           "DynamicThresholdCriterion"
           ],
           "x-ms-enum" : {
             "name" : "criterionType",
             "modelAsString": true
           },
           "description":" Specifies the type of threshold criteria"
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the criteria."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Namespace of the metric."
+        },
+        "timeAggregation": {
+          "enum": [
+            "Average",
+            "Minimum",
+            "Maximum",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "name": "AggregationType",
+            "modelAsString": true
+          },
+          "description": "the criteria time aggregation types."
+        },
+        "dimensions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricDimension"
+          },
+          "description": "List of dimension conditions."
         }
       },
-      "required": ["criterionType"],
-      "description": "The types of conditions for a multi resource alert"
-    }    
+      "required": [ "criterionType", "name", "metricName", "timeAggregation" ],
+      "description": "The types of conditions for a multi resource alert."
+    },
+    "DynamicMetricCriteria" : {	 
+      "x-ms-discriminator-value": "DynamicThresholdCriterion",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/MultiMetricCriteria"
+        }
+      ],
+     "required": [
+        "operator",
+        "alertSensitivity",
+        "failingPeriods"
+      ],
+      "properties": {
+        "operator": {
+          "enum": [
+            "GreaterThan",
+            "LessThan",
+            "GreaterOrLessThan"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicThresholdOperator",
+            "modelAsString": true
+          },
+          "description": "The operator used to compare the metric value against the threshold."
+        },
+        "alertSensitivity": {
+          "enum" : [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum" : {
+            "name" : "DynamicThresholdSensitivity",
+            "modelAsString": true
+          },
+          "description": "The extent of deviation required to trigger an alert. This will affect how tight the threshold is to the metric series pattern."
+        },
+        "failingPeriods" : {
+          "type" : "object",
+          "$ref"  : "#/definitions/DynamicThresholdFailingPeriods",
+          "description" : "The minimum number of violations required within the selected lookback time window required to raise an alert."
+        },
+        "ignoreDataBefore" : {
+          "type" : "string",
+          "format": "date-time",
+          "description" :"Use this option to set the date from which to start learning the metric historical data and calculate the dynamic thresholds (in ISO8601 format)"
+        }
+      },
+      "description": "Criterion for dynamic threshold."
+    },
+    "DynamicThresholdFailingPeriods" : {
+      "required": [
+        "numberOfEvaluationPeriods",
+        "minFailingPeriodsToAlert"
+      ],
+      "properties": {
+        "numberOfEvaluationPeriods": {
+          "type": "number",
+          "description": "The number of aggregated lookback points. The lookback time window is calculated based on the aggregation granularity (windowSize) and the selected number of aggregated points."
+        },
+        "minFailingPeriodsToAlert": {
+          "type": "number",
+          "description": "The number of violations to trigger an alert. Should be smaller or equal to numberOfEvaluationPeriods."
+        }
+      },
+      "description": "The minimum number of violations required within the selected lookback time window required to raise an alert."
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {

@@ -40,13 +40,13 @@
         "operationId": "WorkItemConfigurations_List",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -80,13 +80,13 @@
         "operationId": "WorkItemConfigurations_Create",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -122,13 +122,13 @@
         "operationId": "WorkItemConfigurations_GetDefault",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -139,29 +139,29 @@
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/WorkItemConfiguration"
-              }
-            }
-          },
-          "x-ms-examples": {
-            "WorkItemConfigurationsGetDefault": {
-              "$ref": "./examples/WorkItemConfigDefaultGet.json"
             }
           }
+        },
+        "x-ms-examples": {
+          "WorkItemConfigurationsGetDefault": {
+            "$ref": "./examples/WorkItemConfigDefaultGet.json"
+          }
         }
-      },
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Insights/components/{resourceName}/WorkItemConfigs/{workItemConfigId}": {
       "delete": {
         "description": "Delete a work item configuration of an Application Insights component.",
         "operationId": "WorkItemConfigurations_Delete",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceNameParameter"
@@ -173,8 +173,7 @@
         "responses": {
           "200": {
             "description": "The work item configuration that was successfully deleted.",
-            "schema": {              
-			  }
+            "schema": {}
           }
         },
         "x-ms-examples": {
@@ -281,28 +280,6 @@
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client Api Version."
-    },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
