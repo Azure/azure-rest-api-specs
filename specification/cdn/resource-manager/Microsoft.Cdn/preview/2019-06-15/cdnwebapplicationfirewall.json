@@ -298,7 +298,7 @@
       ],
       "allOf": [
         {
-          "$ref": "./cdn.json#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ]
     },
@@ -693,7 +693,7 @@
       },
       "allOf": [
         {
-          "$ref": "./cdn.json#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ]
     },
@@ -813,6 +813,56 @@
           "type": "string"
         }
       }
+    },
+    "Resource": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "type": {
+          "description": "Resource type.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        }
+      },
+      "required": [
+        "location"
+      ]
     }
   },
   "parameters": {
@@ -836,7 +886,7 @@
       "required": true,
       "type": "string",
       "maxLength": 128,
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
       "description": "The name of the CdnWebApplicationFirewallPolicy."
     },
     "ResourceGroupNameParameter": {
