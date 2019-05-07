@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-04-15",
+    "api-version": "2019-06-15",
     "subscriptionId": "subid",
     "resourceGroupName": "RG",
     "profileName": "profile1",
@@ -8,7 +8,12 @@
     "endpointUpdateProperties": {
       "tags": {
         "additionalProperties": "Tag1"
-      }
+      },
+      "properties": {
+        "webApplicationFirewallPolicyLink": {
+          "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/MicrosoftCdnWafPolicy2"
+        }
+      }     
     }
   },
   "responses": {
@@ -44,7 +49,10 @@
             "isCompressionEnabled": false,
             "optimizationType": null,
             "probePath": null,
-            "geoFilters": []
+            "geoFilters": [],
+            "webApplicationFirewallPolicyLink": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/MicrosoftCdnWafPolicy2"
+            }
         }
       }
     },
@@ -80,7 +88,10 @@
             "isCompressionEnabled": false,
             "optimizationType": null,
             "probePath": null,
-            "geoFilters": []
+            "geoFilters": [],
+            "webApplicationFirewallPolicyLink": {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cdn/CdnWebApplicationFirewallPolicies/MicrosoftCdnWafPolicy2"
+            }          
         }
       }
     }
