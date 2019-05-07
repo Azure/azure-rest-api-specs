@@ -26,7 +26,17 @@ These are the global settings for the Cdn API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-04
+tag: package-2019-06
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/stable/2019-06-15/cdn.json
+- Microsoft.Cdn/preview/2019-06-15/cdnwebapplicationfirewall.json
 ```
 
 ### Tag: package-2019-04
