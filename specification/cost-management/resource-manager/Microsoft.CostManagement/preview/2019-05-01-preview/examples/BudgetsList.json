@@ -25,14 +25,14 @@
               "filter": {
                 "and": [
                   {
-                    "dimensions": {
+                    "dimension": {
                       "name": "ResourceGroupName",
                       "operator": "In",
                       "values": ["MYDEVTESTRG"]
                     }
                   },
                   {
-                    "dimensions": {
+                    "dimension": {
                       "name": "ResourceId",
                       "operator": "In",
                       "values": [
@@ -42,7 +42,7 @@
                     }
                   },
                   {
-                    "dimensions": {
+                    "dimension": {
                       "name": "Meter",
                       "operator": "In",
                       "values": ["00000000-0000-0000-0000-000000000000"]
@@ -102,39 +102,36 @@
                 "endDate": "2018-10-31T00:00:00Z"
               },
               "filter": {
-                "And": [
+                "and": [
                   {
-                    "Dimensions": {
-                      "Name": "ResourceGroupName",
-                      "Operator": "In",
-                      "Values": ["MYDEVTESTRG"]
+                    "dimension": {
+                      "name": "ResourceGroupName",
+                      "operator": "In",
+                      "values": ["MYDEVTESTRG"]
                     }
                   },
                   {
-                    "Dimensions": {
-                      "Name": "ResourceId",
-                      "Operator": "In",
-                      "Values": [
+                    "dimension": {
+                      "name": "ResourceId",
+                      "operator": "In",
+                      "values": [
                         "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/MYVM2",
                         "/subscriptions/{subscription-id}/resourceGroups/MYDEVTESTRG/providers/Microsoft.Compute/virtualMachines/platformcloudplatformGeneric1"
                       ]
                     }
                   },
                   {
-                    "Dimensions": {
-                      "Name": "Meter",
-                      "Operator": "In",
-                      "Values": ["00000000-0000-0000-0000-000000000000"]
+                    "dimension": {
+                      "name": "Meter",
+                      "operator": "In",
+                      "values": ["00000000-0000-0000-0000-000000000000"]
                     }
                   },
                   {
-                    "TagKey": {
-                      "Values": ["Dev"]
-                    }
-                  },
-                  {
-                    "TagValue": {
-                      "Values": ["engineering"]
+                    "tag": {
+                      "name": "Dev",
+                      "operator": "In",
+                      "values": ["engineering"]
                     }
                   }
                 ]
