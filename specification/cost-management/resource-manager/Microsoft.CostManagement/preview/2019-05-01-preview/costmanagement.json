@@ -325,19 +325,18 @@
     },
     "Budget": {
       "description": "A budget resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/BudgetProperties",
           "title": "Budget properties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "BudgetProperties": {
       "description": "The properties of the budget.",
