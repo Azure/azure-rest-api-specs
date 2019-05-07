@@ -57,6 +57,9 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -94,6 +97,9 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -171,6 +177,47 @@
           },
           "201": {
             "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/PlaybookConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Create or update a single playbook configuration": {
+            "$ref": "./examples/PlaybookConfigurations/PatchPlaybookConfiguration_example.json"
+          }
+        },
+        "tags": [ "PlaybookConfigurations" ],
+        "description": "Patch an existing playbook configuration. Supports only Tags",
+        "operationId": "PlaybookConfigurations_Patch",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PlaybookConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/PlaybookConfigurationInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/PlaybookConfiguration"
             }
@@ -440,15 +487,10 @@
           "type": "string",
           "description": "The data type of the compared operands.",
           "enum": [
-            "System.String",
-            "System.Boolean",
-            "System.Byte",
-            "System.Int16",
-            "System.Int32",
-            "System.Single",
-            "System.Double",
-            "System.Char"
-
+            "string",
+            "integer",
+            "number",
+            "boolean"
           ]
         },
         "expectedValue": {
