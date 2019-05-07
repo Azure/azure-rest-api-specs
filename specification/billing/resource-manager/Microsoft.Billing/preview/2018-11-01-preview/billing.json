@@ -33,7 +33,7 @@
           }
         },
         "operationId": "BillingAccounts_List",
-        "description": "Lists all billing accounts for a user which he has access to.",
+        "description": "Lists all billing accounts for a user which they have access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -341,6 +341,105 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "x-ms-examples": {
+          "CustomersListByBillingAccountName": {
+            "$ref": "./examples/CustomersListByBillingAccountName.json"
+          }
+        },
+        "operationId": "Customers_ListByBillingAccountName",
+        "description": "Lists all customers which the current user can work with on-behalf of a partner.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter using hasPermission('{permissionId}') to only return customers for which the caller has the specified permission.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "x-ms-examples": {
+          "Customer": {
+            "$ref": "./examples/Customer.json"
+          },
+          "CustomerWithExpand": {
+            "$ref": "./examples/CustomerWithExpand.json"
+          }
+        },
+        "operationId": "Customers_Get",
+        "description": "Get the customer by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand enabledAzureSkus, serviceProviders.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections": {
       "get": {
         "tags": [
@@ -355,7 +454,7 @@
           }
         },
         "operationId": "InvoiceSections_ListByBillingAccountName",
-        "description": "Lists all invoice sections for a user which he has access to.",
+        "description": "Lists all invoice sections for a user which they have access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -459,7 +558,7 @@
           }
         },
         "operationId": "InvoiceSections_ListByBillingProfileName",
-        "description": "Lists all invoice sections under a billing profile for a user which he has access to.",
+        "description": "Lists all invoice sections under a billing profile for a user which they have access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -656,7 +755,7 @@
           }
         },
         "operationId": "Departments_ListByBillingAccountName",
-        "description": "Lists all departments for a user which he has access to.",
+        "description": "Lists all departments for a user which they have access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -765,7 +864,7 @@
           }
         },
         "operationId": "EnrollmentAccounts_ListByBillingAccountName",
-        "description": "Lists all Enrollment Accounts for a user which he has access to.",
+        "description": "Lists all Enrollment Accounts for a user which they have access to.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -4156,6 +4255,63 @@
         }
       }
     },
+    "CustomerListResult": {
+      "description": "Result of listing customers.",
+      "properties": {
+        "value": {
+          "description": "The list of customers.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Customer"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Customer": {
+      "description": "A partner's customer.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The customer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomerProperties"
+        }
+      }
+    },
+    "CustomerProperties": {
+      "description": "The properties of a customer.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the customer.",
+          "type": "string"
+        },
+        "enabledAzureSKUs": {
+          "description": "Information about the product.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnabledAzureSKUs"
+          }
+        },
+        "serviceProviders": {
+          "description": "The service providers which are allowed to provide service to this customer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceProvider"
+          }
+        }
+      }
+    },
     "InvoiceSectionListResult": {
       "description": "Result of listing invoice sections.",
       "properties": {
@@ -4216,6 +4372,21 @@
         },
         "skuDescription": {
           "description": "The sku description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServiceProvider": {
+      "description": "Details about a service provider.",
+      "properties": {
+        "serviceProviderId": {
+          "description": "The service provider id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A description of the service provider.",
           "type": "string",
           "readOnly": true
         }
