@@ -2420,6 +2420,45 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Billing/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermissions"
+        ],
+        "x-ms-examples": {
+          "CustomerPermissionsList": {
+            "$ref": "./examples/CustomerPermissionsList.json"
+          }
+        },
+        "operationId": "BillingPermissions_ListByCustomers",
+        "description": "Lists all billing permissions for the caller under customer.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Billing/billingPermissions": {
       "get": {
         "tags": [
@@ -5545,14 +5584,22 @@
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Azure Subscription ID.",
+      "description": "Azure Subscription Id.",
       "required": true,
       "type": "string"
     },
     "billingAccountNameParameter": {
       "name": "billingAccountName",
       "in": "path",
-      "description": "billing Account Id.",
+      "description": "Billing Account Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "customerNameParameter": {
+      "name": "customerName",
+      "in": "path",
+      "description": "Customer Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
