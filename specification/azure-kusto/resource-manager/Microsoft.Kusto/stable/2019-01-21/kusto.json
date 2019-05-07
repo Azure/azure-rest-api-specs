@@ -400,7 +400,7 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": { "$ref": "#/definitions/ListSkusResult" }
+            "schema": { "$ref": "#/definitions/SkuDescriptionList" }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -469,9 +469,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability": {
       "post": {
         "tags": [
-          "Databases"
+          "Clusters"
         ],
-        "operationId": "Databases_CheckNameAvailability",
+        "operationId": "Clusters_CheckNameAvailability",
         "x-ms-examples": {
           "KustoDatabaseCheckNameAvailability": {
             "$ref": "./examples/KustoDatabasesCheckNameAvailability.json"
@@ -492,13 +492,13 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "databaseName",
+            "name": "resourceName",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseCheckNameRequest"
+              "$ref": "#/definitions/CheckNameRequest"
             },
-            "description": "The name of the database."
+            "description": "The name of the resource."
           }
         ],
         "responses": {
@@ -977,6 +977,160 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurations/{attachedDatabaseConfigurationName}": {
+      "get": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Returns an attached database configuration.",
+        "operationId": "AttachedDatabaseConfigurations_Get",
+        "x-ms-examples": {
+          "AttachedDatabaseConfigurationsGet": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the specified attached database configuration.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Creates or updates an attached database configuration.",
+        "operationId": "AttachedDatabaseConfigurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "AttachedDatabaseConfigurationsCreateOrUpdate": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            },
+            "description": "The database parameters supplied to the CreateOrUpdate operation."
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully updated the database.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "201": {
+            "description": "Successfully created the database.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfiguration"
+            }
+          },
+          "202": {
+            "description": "Accepted the create database request."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Deletes the attached database configuration with the given name.",
+        "operationId": "AttachedDatabaseConfigurations_Delete",
+        "x-ms-examples": {
+          "AttachedDatabaseConfigurationsDelete": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AttachedDatabaseConfigurationNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted the database."
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "204": {
+            "description": "The specified database does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/dataConnections": {
       "get": {
         "tags": [
@@ -1068,6 +1222,60 @@
             "description": "OK -- Operation to check the kusto resource name availability was successful.",
             "schema": {
               "$ref": "#/definitions/DataConnectionValidationListResult"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "DataConnections"
+        ],
+        "operationId": "DataConnections_CheckNameAvailability",
+        "x-ms-examples": {
+          "KustoDatabaseCheckNameAvailability": {
+            "$ref": "./examples/KustoDataConnectionsCheckNameAvailability.json"
+          }
+        },
+        "description": "Checks that the data connection name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "dataConnectionName",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataConnectionCheckNameRequest"
+            },
+            "description": "The name of the data connection."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Operation to check the Kusto resource name availability was successful.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -1370,7 +1578,8 @@
             "Creating",
             "Deleting",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Moving"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -1393,6 +1602,10 @@
             "$ref": "#/definitions/TrustedExternalTenant"
           },
           "description": "The cluster's external tenants."
+        },
+        "intelligentAutoscale": {
+          "$ref": "#/definitions/intelligentAutoscale",
+          "description": "Intelligent auto scale definition."
         }
       },
       "description": "Class representing the Kusto cluster properties."
@@ -1460,6 +1673,85 @@
       },
       "description": "Azure capacity definition."
     },
+    "SkuDescriptionList": {
+      "description": "The list of the EngagementFabric SKU descriptions",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "SKU descriptions",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuDescription"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "The Kusto SKU description of given resource type",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The resource type",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "tier": {
+          "description": "The tier of the SKU",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
+          "description": "The set of locations that the SKU is available",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "locationInfo": {
+          "description": "Locations and zones",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuLocationInfoItem"
+          },
+          "readOnly": true
+        },
+        "restrictions": {
+          "description": "The restrictions because of which SKU cannot be used",
+          "type": "array",
+          "items": {
+            "type": "object"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuLocationInfoItem": {
+      "description": "The locations and zones info for SKU.",
+      "type": "object",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "location": {
+          "description": "The available location of the SKU.",
+          "type": "string"
+        },
+        "zones": {
+          "description": "The available zone of the SKU.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
     "AzureSku": {
       "type": "object",
       "required": [
@@ -1471,13 +1763,17 @@
           "description": "SKU name.",
           "type": "string",
           "enum": [
-            "D13_v2",
-            "D14_v2",
-            "L8",
-            "L16",
-            "D11_v2",
-            "D12_v2",
-            "L4"
+            "Standard_DS13_v2+1TB_PS",
+            "Standard_DS13_v2+2TB_PS",
+            "Standard_DS14_v2+3TB_PS",
+            "Standard_DS14_v2+4TB_PS",
+            "Standard_D13_v2",
+            "Standard_D14_v2",
+            "Standard_L8s",
+            "Standard_L16s",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_L4s"
           ],
           "x-ms-enum": {
             "name": "AzureSkuName",
@@ -1502,6 +1798,29 @@
       },
       "description": "Azure SKU definition."
     },
+    "intelligentAutoscale": {
+      "type": "object",
+      "required": [
+        "version",
+        "minimum",
+        "maximum"
+      ],
+      "properties": {
+        "version": {
+          "description": "The version of the template defined, for instance 1.",
+          "type": "integer"
+        },
+        "minimum": {
+          "description": "Minimum allowed capacity.",
+          "type": "integer"
+        },
+        "maximum": {
+          "description": "Maximum allowed capacity.",
+          "type": "integer"
+        }
+      },
+      "description": "A class that contains the intelligent auto scale definition."
+    },
     "DatabaseStatistics": {
       "type": "object",
       "readOnly": true,
@@ -1512,6 +1831,40 @@
         }
       },
       "description": "A class that contains database statistics information."
+    },
+    "SpecificAttachedDatabaseConfigurationProperties": {
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database which you would like to attach."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "description": "The resource id of the cluster where the databases you would like to attach reside."
+        }
+      },
+      "description": "Class representing the an attached database configuration properties of kind specific.",
+      "required": [
+        "databaseName",
+        "clusterResourceId"
+      ]
+    },
+    "AllAttachedDatabaseConfigurationProperties": {
+      "properties": {
+        "databaseNames": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The list of current databases that are attached."
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "description": "The resource id of the cluster where the databases you would like to attach reside."
+        }
+      },
+      "description": "Class representing the an attached database configuration properties of kind all.",
+      "required": [
+        "clusterResourceId"
+      ]
     },
     "DatabaseProperties": {
       "properties": {
@@ -1524,7 +1877,8 @@
             "Creating",
             "Deleting",
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Moving"
           ],
           "x-ms-enum": {
             "name": "ProvisioningState",
@@ -1539,7 +1893,7 @@
         "hotCachePeriod": {
           "type": "string",
           "format": "duration",
-          "description": "The time the data that should be kept in cache for fast queries in TimeSpan."
+          "description": "The time the data should be kept in cache for fast queries in TimeSpan."
         },
         "statistics": {
           "$ref": "#/definitions/DatabaseStatistics",
@@ -1690,6 +2044,68 @@
         }
       ],
       "description": "Class representing an update to a Kusto cluster."
+    },
+    "AttachedDatabaseConfiguration": {
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location."
+        },
+        "kind": {
+          "description": "Kind of the attached database",
+          "enum": [
+            "All",
+            "Specific"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Class representing an attached database configuration.",
+      "discriminator": "kind"
+    },
+    "AllAttachedDatabaseConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the attached database configuration of all kind.",
+          "$ref": "#/definitions/AllAttachedDatabaseConfigurationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttachedDatabaseConfiguration"
+        }
+      ],
+      "description": "Class representing an attached database configuration for a all attached database kind.",
+      "x-ms-discriminator-value": "All"
+    },
+    "SpecificAttachedDatabaseConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the attached database configuration of specific kind.",
+          "$ref": "#/definitions/SpecificAttachedDatabaseConfigurationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AttachedDatabaseConfiguration"
+        }
+      ],
+      "description": "Class representing an attached database configuration for a specific attached database kind.",
+      "x-ms-discriminator-value": "Specific"
     },
     "Database": {
       "properties": {
@@ -1977,23 +2393,24 @@
       ],
       "description": "The result returned from a cluster check name availability request."
     },
-    "DatabaseCheckNameRequest": {
+    "CheckNameRequest": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Database name."
+          "description": "Resource name."
         },
         "type": {
           "type": "string",
           "enum": [
-            "Microsoft.Kusto/clusters/databases"
+            "Microsoft.Kusto/clusters/databases",
+            "Microsoft.Kusto/clusters/attachedDatabaseConfigurations"
           ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false
           },
-          "description": "The type of resource, Microsoft.Kusto/clusters/databases."
+          "description": "The type of resource, for instance Microsoft.Kusto/clusters/databases."
         }
       },
       "required": [
@@ -2001,6 +2418,31 @@
         "type"
       ],
       "description": "The result returned from a database check name availability request."
+    },
+    "DataConnectionCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Data Connection name."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Kusto/clusters/databases/dataConnections"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Kusto/clusters/databases/dataConnections."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a data connections check name availability request."
     },
     "CheckNameResult": {
       "type": "object",
@@ -2016,29 +2458,30 @@
         "message": {
           "type": "string",
           "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          },
+          "description": "Message providing the reason why the given name is invalid."
         }
       },
       "description": "The result returned from a check name availability request."
     },
     "ListResourceSkusResult": {
-      "description": "List of available SKUs for an existing Kusto Cluster.",
+      "description": "List of available SKUs for a Kusto Cluster.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": { "$ref": "#/definitions/AzureResourceSku" },
           "description": "The collection of available SKUs for an existing resource."
-        }
-      }
-    },
-    "ListSkusResult": {
-      "description": "List of available SKUs for a new Kusto Cluster.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": { "$ref": "#/definitions/AzureSku" },
-          "description": "The collection of available SKUs for new resources."
         }
       }
     },
@@ -2145,6 +2588,14 @@
       "name": "clusterName",
       "in": "path",
       "description": "The name of the Kusto cluster.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "AttachedDatabaseConfigurationNameParameter": {
+      "name": "attachedDatabaseConfigurationName",
+      "in": "path",
+      "description": "The name of the attached database configuration.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
