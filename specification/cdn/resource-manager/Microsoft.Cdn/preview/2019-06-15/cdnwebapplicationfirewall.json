@@ -341,7 +341,7 @@
           "description": "Describes managed rules inside the policy.",
           "$ref": "#/definitions/ManagedRuleSetList"
         },
-        "CdnEndpointLinks": {
+        "cdnEndpointLinks": {
           "description": "Describes Azure CDN endpoints associated with this Web Application Firewall policy.",
           "type": "array",
           "readOnly": true,
@@ -836,7 +836,8 @@
       "required": true,
       "type": "string",
       "maxLength": 128,
-      "description": "The name of the CdnWafPolicy."
+      "x-ms-parameter-location": "method"
+      "description": "The name of the CdnWebApplicationFirewallPolicy."
     },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
