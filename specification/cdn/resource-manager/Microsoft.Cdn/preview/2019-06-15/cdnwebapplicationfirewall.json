@@ -683,6 +683,7 @@
       "description": "Describes a managed rule set definition.",
       "properties": {
         "properties": {
+          "description": "Describes managed rule set definition properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedRuleSetDefinitionProperties"
         },
@@ -845,7 +846,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location."
+          "description": "Resource location.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
         },
         "tags": {
           "type": "object",
