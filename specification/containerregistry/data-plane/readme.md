@@ -62,7 +62,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.ContainerRegistry
   sync-methods: None
-  output-folder: $(csharp-sdks-folder)/containerregistry/Microsoft.Azure.ContainerRegistry/src/Generated
+  output-folder: $(csharp-sdks-folder)/ContainerRegistry/dataPlane/Microsoft.Azure.ContainerRegistry/Generated
   clear-output-folder: true
   add-credentials: true
 ```
