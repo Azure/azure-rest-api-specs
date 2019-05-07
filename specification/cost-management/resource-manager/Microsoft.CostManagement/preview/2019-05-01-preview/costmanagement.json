@@ -40,7 +40,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/definitions/Budget"
+            "$ref": "#/definitions/BudgetModel"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -93,7 +93,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Budget"
+              "$ref": "#/definitions/BudgetModel"
             }
           },
           "default": {
@@ -131,7 +131,7 @@
             "in": "body",
             "x-required": true,
             "schema": {
-              "$ref": "#/definitions/Budget"
+              "$ref": "#/definitions/BudgetModel"
             },
             "description": "Parameters supplied to the Create Budget operation."
           }
@@ -140,13 +140,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Budget"
+              "$ref": "#/definitions/BudgetModel"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/Budget"
+              "$ref": "#/definitions/BudgetModel"
             }
           },
           "default": {
@@ -288,7 +288,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Budget"
+            "$ref": "#/definitions/BudgetModel"
           }
         },
         "nextLink": {
@@ -323,9 +323,8 @@
       },
       "x-ms-azure-resource": true
     },
-    "Budget": {
+    "BudgetModel": {
       "description": "A budget resource.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
