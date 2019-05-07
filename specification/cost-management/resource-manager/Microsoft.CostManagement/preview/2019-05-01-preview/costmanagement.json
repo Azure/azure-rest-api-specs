@@ -323,6 +323,22 @@
       },
       "x-ms-azure-resource": true
     },
+    "Budget": {
+      "description": "A budget resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BudgetProperties",
+          "title": "Budget properties"
+        }
+      }
+    },
     "BudgetProperties": {
       "description": "The properties of the budget.",
       "properties": {
@@ -374,21 +390,6 @@
         }
       },
       "required": ["category", "amount", "timeGrain", "timePeriod"]
-    },
-    "Budget": {
-      "description": "A budget resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/BudgetProperties",
-          "title": "Budget properties"
-        }
-      }
     },
     "ReportConfigFilter": {
       "description": "The filter expression to be used in the report.",
