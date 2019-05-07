@@ -24,7 +24,7 @@ These are the global settings for the Blueprint API.
 title: BlueprintManagementClient
 description: Blueprint Client
 openapi-type: arm
-tag: package-2017-11-preview
+tag: package-2018-11-preview
 ```
 
 
@@ -38,6 +38,17 @@ input-file:
 - Microsoft.Blueprint/preview/2017-11-11-preview/blueprintAssignment.json
 ```
 
+### Tag: package-2018-11-preview
+
+These settings apply only when `--tag=package-2018-11-preview` is specified on the command line.
+ 
+``` yaml $(tag) == 'package-2018-11-preview'
+input-file:
+- Microsoft.Blueprint/preview/2018-11-01-preview/blueprintDefinition.json
+- Microsoft.Blueprint/preview/2018-11-01-preview/blueprintAssignment.json
+- Microsoft.Blueprint/preview/2018-11-01-preview/assignmentOperation.json
+```
+
 ---
 # Code Generation
 
@@ -49,7 +60,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-python
 ```
 
 
@@ -70,32 +82,7 @@ csharp:
 
 ## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.blueprint
-  package-name: azure-mgmt-blueprint
-  title: BlueprintManagementClient
-  description: The Blueprint Client.
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-blueprint/azure/mgmt/blueprint
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-blueprint
-```
+See configuration in [readme.python.md](./readme.python.md)
 
 ## Go
 
@@ -134,6 +121,10 @@ directive:
     where: $.paths
     reason: OperationsAPI for Microsoft.Management is out of scope.
   - from: blueprintDefinition.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI for Microsoft.Management is out of scope.    
+  - from: assignmentOperation.json
     suppress: OperationsAPIImplementation
     where: $.paths
     reason: OperationsAPI for Microsoft.Management is out of scope.    

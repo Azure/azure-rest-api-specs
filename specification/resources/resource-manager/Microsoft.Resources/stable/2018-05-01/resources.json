@@ -521,6 +521,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a deployment that will redeploy the last successful deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentLastSuccessful.json"
+          },
+          "Create a deployment that will redeploy another deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentSpecificDeployment.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -1014,6 +1022,9 @@
         "tags": [
           "ResourceGroups"
         ],
+        "x-ms-examples": {
+          "Create or update a resource group": { "$ref": "./examples/CreateResourceGroup.json" }
+        },
         "operationId": "ResourceGroups_CreateOrUpdate",
         "description": "Creates or updates a resource group.",
         "parameters": [

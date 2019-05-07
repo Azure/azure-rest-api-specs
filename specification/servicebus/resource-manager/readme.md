@@ -142,6 +142,11 @@ namespace: com.microsoft.azure.management.servicebus
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicebus
+directive:
+  rename-model:
+    from: PremiumMessagingRegions
+    to: PremiumMessagingRegion
+  
 ```
 
 ### Java multi-api

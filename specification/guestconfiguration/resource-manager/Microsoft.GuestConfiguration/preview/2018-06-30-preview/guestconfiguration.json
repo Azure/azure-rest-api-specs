@@ -76,6 +76,12 @@
               "$ref": "#/definitions/GuestConfigurationAssignment"
             }
           },
+          "200": {
+            "description": "OK. The guest configuration assignment for the VM was updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/GuestConfigurationAssignment"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -137,6 +143,57 @@
             }
           }
         },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "delete": {
+        "tags": [
+          "GuestConfigurationAssignments"
+        ],
+        "operationId": "GuestConfigurationAssignments_Delete",
+        "description": "Delete a guest configuration assignment",
+        "x-ms-examples": {
+          "Delete an guest configuration assignment": {
+            "$ref": "./examples/deleteGuestConfigurationAssignment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "guestConfigurationAssignmentName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Name of the guest configuration assignment"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/VmNameParameter"
+          },
+          {
+            "$ref": "../../common/v1/definitions.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
         "produces": [
           "application/json"
         ],
@@ -537,6 +594,7 @@
         "lastComplianceStatusChecked": {
           "type": "string",
           "readOnly": true,
+          "format":"date-time",
           "description": "Date and time when last compliance status was checked.",
           "x-nullable": true
         },
@@ -566,7 +624,10 @@
             "modelAsString": true
           },
           "enum": [
-            "Succeeded"
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Created"
           ]
         }
       },
@@ -631,6 +692,18 @@
         "vm": {
           "$ref": "#/definitions/VMInfo",
           "description": "Information about the VM."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "Start date and time of the guest configuration assignment compliance status check."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "details": {
           "$ref": "#/definitions/AssignmentReportDetails",
@@ -697,11 +770,13 @@
         "startTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "Start date and time of the guest configuration assignment compliance status check."
         },
         "endTime": {
           "type": "string",
           "readOnly": true,
+          "format": "date-time",
           "description": "End date and time of the guest configuration assignment compliance status check."
         },
         "jobId": {

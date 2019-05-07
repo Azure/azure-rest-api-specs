@@ -254,7 +254,7 @@ input-file:
 - Microsoft.Insights/stable/2015-05-01/favorites_API.json
 - Microsoft.Insights/stable/2015-05-01/webTestLocations_API.json
 - Microsoft.Insights/stable/2015-05-01/webTests_API.json
-- microsoft.insights/stable/2015-05-01/analyticsItems_API.json
+- Microsoft.Insights/stable/2015-05-01/analyticsItems_API.json
 - Microsoft.Insights/stable/2015-05-01/workbooks_API.json
 ```
 
@@ -275,6 +275,15 @@ These settings apply only when `--tag=package-2018-06-17-preview` is specified o
 ``` yaml $(tag) == 'package-2018-06-17-preview'
 input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
+```
+
+### Tag: package-2018-05-01-preview
+
+These settings apply only when `--tag=package-2018-05-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-01-preview'
+input-file:
+- Microsoft.Insights/preview/2018-05-01/componentProactiveDetection_API.json
 ```
 ---
 # Code Generation
