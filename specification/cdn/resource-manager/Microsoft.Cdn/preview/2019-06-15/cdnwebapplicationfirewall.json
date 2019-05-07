@@ -139,7 +139,7 @@
           {
             "description": "Policy to be created.",
             "in": "body",
-            "name": "parameters",
+            "name": "cdnWebApplicationFirewallPolicy",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CdnWebApplicationFirewallPolicy"
@@ -384,7 +384,7 @@
             "Enabled"
           ],
           "x-ms-enum": {
-            "name": "enabledState",
+            "name": "PolicyEnabledState",
             "modelAsString": true
           }
         },
@@ -452,9 +452,17 @@
           "description": "Defines the name of the custom rule",
           "type": "string"
         },
-        "enabled": {
-          "description": "Defines wheather the rule is enabled or not (defaults to true)",
-          "type": "boolean"
+        "enabledState": {
+          "description": "Describes if the custom rule is in enabled or disabled state. Defaults to Enabled if not specified.",
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "CustomRuleEnabledState",
+            "modelAsString": true
+          }
         },
         "priority": {
           "description": "Defines in what order this rule be evaluated in the overall list of custom rules",
@@ -513,7 +521,7 @@
       "required": [
         "matchVariable",
         "operator",
-        "matchValues"
+        "matchValue"
       ],
       "properties": {
         "matchVariable": {
@@ -565,7 +573,7 @@
           "description": "Describes if the result of this condition should be negated.",
           "type": "boolean"
         },
-        "matchValues": {
+        "matchValue": {
           "description": "List of possible match values.",
           "type": "array",
           "items": {
@@ -625,7 +633,7 @@
           "description": "Describes the managed rule group within the rule set to override",
           "type": "string"
         },
-        "ruleOverrides": {
+        "rules": {
           "description": "List of rules that will be disabled. If none specified, all rules in the group will be disabled.",
           "type": "array",
           "items": {

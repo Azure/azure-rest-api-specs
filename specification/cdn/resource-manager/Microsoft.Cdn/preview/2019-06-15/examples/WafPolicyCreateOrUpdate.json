@@ -3,11 +3,12 @@
         "api-version": "2019-06-15",
         "subscriptionId": "subid",
         "resourceGroupName": "rg1",
-        "policyName": "MicrosoftCdnWafPolicy",
-        "sku": {
-          "name": "Standard_Microsoft"
-        },        
-        "parameters": {
+        "policyName": "MicrosoftCdnWafPolicy",      
+        "cdnWebApplicationFirewallPolicy": {
+            "location": "WestUs",
+            "sku": {
+                "name": "Standard_Microsoft"
+            },
             "properties": {
                 "policySettings": {
                   "defaultRedirectUrl": "http://www.bing.com",
