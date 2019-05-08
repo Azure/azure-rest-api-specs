@@ -265,7 +265,7 @@ These settings apply only when `--tag=package-managedapplications-2019-03` is sp
 
 ``` yaml $(tag) == 'package-managedapplications-2019-03'
 input-file:
-- Microsoft.Solutions/preview/2019-03-01-preview/managedapplications.json
+- Microsoft.Solutions/stable/2019-03-01/managedapplications.json
 ```
 
 ### Tag: package-managedapplications-2018-06
