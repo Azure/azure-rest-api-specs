@@ -123,6 +123,9 @@
             "x-ms-examples":{
                "Get Azure Firewall":{
                   "$ref":"./examples/AzureFirewallGet.json"
+               },
+              "Get Azure Firewall With Zones":{
+                  "$ref":"./examples/AzureFirewallGetWithZones.json"
                }
             }
          },
@@ -180,6 +183,9 @@
             "x-ms-examples":{
                "Create Azure Firewall":{
                   "$ref":"./examples/AzureFirewallPut.json"
+               },
+               "Create Azure Firewall With Zones":{
+                  "$ref":"./examples/AzureFirewallPutWithZones.json"
                }
             },
             "x-ms-long-running-operation": true,
@@ -356,6 +362,13 @@
                "x-ms-client-flatten": true,
                "$ref": "#/definitions/AzureFirewallPropertiesFormat",
                "description": "Properties of the azure firewall."
+            },
+            "zones":{
+               "type":"array",
+               "items":{
+                  "type":"string"
+               },
+               "description":"A list of availability zones denoting where the resource needs to come from."
             },
             "etag":{
                "type":"string",
