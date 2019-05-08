@@ -93,40 +93,6 @@
                     "nextLinkName": "nextLink"
                 },
                 "x-ms-odata": "#/definitions/FabricLocation"
-            },
-            "put": {
-                "x-ms-examples": {
-                    "Creates or updates a fabric location.  This will fail if called outside deployment.": {
-                        "$ref": "./examples/FabricLocation/Put.json"
-                    }
-                },
-                "tags": [
-                    "FabricLocations"
-                ],
-                "description": "Creates or updates a fabric location.  This will fail if called outside deployment.",
-                "operationId": "FabricLocations_Create",
-                "parameters": [
-                    {
-                        "$ref": "Fabric.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref": "Fabric.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref": "#/parameters/FabricLocationObjectParameter"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/FabricLocation"
-                        }
-                    }
-                }
             }
         }
     },
@@ -170,16 +136,6 @@
             "name": "fabricLocation",
             "type": "string",
             "in": "path",
-            "required": true,
-            "x-ms-parameter-location": "method"
-        },
-        "FabricLocationObjectParameter": {
-            "description": "Fabric location object.",
-            "name": "fabricObject",
-            "schema": {
-                "$ref": "#/definitions/FabricLocation"
-            },
-            "in": "body",
             "required": true,
             "x-ms-parameter-location": "method"
         }

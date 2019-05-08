@@ -100,6 +100,36 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkIdentityHealth": {
+            "post": {
+                "x-ms-examples": {
+                    "Check the identity health.": {
+                        "$ref": "./examples/Subscriptions/CheckIdentityHealth.json"
+                    }
+                },
+                "description": "Checks the identity health",
+                "tags": [
+                    "Subscriptions"
+                ],
+                "operationId": "CheckIdentityHealth",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/IdentityHealthCheckReportDefinition"
+                        }
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/moveSubscriptions": {
             "post": {
                 "x-ms-examples": {
@@ -474,6 +504,240 @@
                 }
             }
         },
+        "IdentityHealthCheckReportDefinition": {
+            "description": "The identity health check report action definition.",
+            "type": "object",
+            "properties": {
+                "reportStartTimeUtc": {
+                    "description": "Start time of the report.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "reportEndTimeUtc": {
+                    "description": "End time of the report.",
+                    "type": "string",
+                    "format": "date-time"
+                },
+                "status": {
+                    "description": "The roll-up health status for the directory.",
+                    "$ref": "#/definitions/HealthStatus"
+                },
+                "directoryTenants": {
+                    "description": "List of directory tenant health reports.",
+                    "$ref": "#/definitions/DirectoryTenantHealthReportList"
+                }
+            }
+        },
+        "DirectoryTenantHealthReportList": {
+            "description": "List of directory tenant health reports.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "Directory tenant health report.",
+                    "items": {
+                        "$ref": "#/definitions/DirectoryTenantHealthReport"
+                    }
+                },
+                "nextLink": {
+                    "description": "URI to the next page.",
+                    "type": "string"
+                }
+            }
+        },
+        "DirectoryTenantHealthReport": {
+            "description": "A report of the health status of a directory tenant and identity applications within.",
+            "type": "object",
+            "properties": {
+                "tenantId": {
+                    "description": "The tenant unique identifier.",
+                    "type": "string"
+                },
+                "tenantName": {
+                    "description": "The directory tenant resource name.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The roll-up health status for the directory.",
+                    "$ref": "#/definitions/HealthStatus"
+                },
+                "applications": {
+                    "description": "List of the application health reports.",
+                    "$ref": "#/definitions/ApplicationHealthReportList"
+                }
+            }
+        },
+        "ApplicationHealthReportList": {
+            "description": "List of the application health reports.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "A report of the health status of an identity applications.",
+                    "items": {
+                        "$ref": "#/definitions/ApplicationHealthReport"
+                    }
+                },
+                "nextLink": {
+                    "description": "URI to the next page.",
+                    "type": "string"
+                }
+            }
+        },
+        "ApplicationHealthReport": {
+            "description": "A report of the health status of an identity applications.",
+            "type": "object",
+            "properties": {
+                "appId": {
+                    "description": "The application identifier.",
+                    "type": "string"
+                },
+                "servicePrincipalObjectId": {
+                    "description": "The service principal identifier.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The roll-up health status for the application",
+                    "$ref": "#/definitions/HealthStatus"
+                },
+                "appRoleAssignments": {
+                    "description": "List of AppRoleAssignment health reports for the application.",
+                    "$ref": "#/definitions/AppRoleAssignmentHealthReportList"
+                },
+                "oAuth2PermissionGrants": {
+                    "description": "List of OAuth2PermissionGrant health reports for the application.",
+                    "$ref": "#/definitions/OAuth2PermissionGrantHealthReportList"
+                },
+                "servicePrincipalTags": {
+                    "description": "List of ServicePrincipalTag health reports for the application.",
+                    "$ref": "#/definitions/ServicePrincipalTagHealthReportList"
+                }
+            }
+        },
+        "AppRoleAssignmentHealthReportList": {
+            "description": "List of AppRoleAssignment health reports for the application.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "A report of the health status of an AppRoleAssignment.",
+                    "items": {
+                        "$ref": "#/definitions/AppRoleAssignmentHealthReport"
+                    }
+                },
+                "nextLink": {
+                    "description": "URI to the next page.",
+                    "type": "string"
+                }
+            }
+        },
+        "AppRoleAssignmentHealthReport": {
+            "description": "A report of the health status of an AppRoleAssignment.",
+            "type": "object",
+            "properties": {
+                "appRoleAssignment": {
+                    "description": "The permission description.",
+                    "$ref": "#/definitions/AppRoleAssignmentDefinition"
+                },
+                "status": {
+                    "description": "The health status for the permission.",
+                    "$ref": "#/definitions/HealthStatus"
+                }
+            }
+        },
+        "AppRoleAssignmentDefinition": {
+            "description": "Application role assignment definition.",
+            "type": "object",
+            "properties": {
+                "resource": {
+                    "description": "The resource identifier. This should be the application identifier of the resource application.",
+                    "type": "string"
+                },
+                "client": {
+                    "description": "The client identifier. This should be the application identifier of the client application.",
+                    "type": "string"
+                },
+                "roleId": {
+                    "description": "The role identifier. This should be the ID of the AppRole exposed by the resource application.",
+                    "type": "string"
+                }
+            }
+        },
+        "OAuth2PermissionGrantHealthReportList": {
+            "description": "List of OAuth2PermissionGrant health reports for the application.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "A report of the health status of an OAuth2PermissionGrant.",
+                    "items": {
+                        "$ref": "#/definitions/OAuth2PermissionGrantHealthReport"
+                    }
+                },
+                "nextLink": {
+                    "description": "URI to the next page.",
+                    "type": "string"
+                }
+            }
+        },
+        "OAuth2PermissionGrantHealthReport": {
+            "description": "A report of the health status of an OAuth2PermissionGrant.",
+            "type": "object",
+            "properties": {
+                "oAuth2PermissionGrant": {
+                    "description": "The permission description.",
+                    "$ref": "#/definitions/OAuth2PermissionGrantDefinition"
+                },
+                "status": {
+                    "description": "The health status for the permission.",
+                    "$ref": "#/definitions/HealthStatus"
+                }
+            }
+        },
+        "OAuth2PermissionGrantDefinition": {
+            "description": "Application permission grant definition.",
+            "type": "object",
+            "properties": {
+                "resource": {
+                    "description": "The resource identifier. This should be the application identifier of the resource application.",
+                    "type": "string"
+                },
+                "client": {
+                    "description": "The client identifier. This should be the application identifier of the client application.",
+                    "type": "string"
+                },
+                "scope": {
+                    "description": "The scope identifier. This should be the scope value of the OAUTH2PERMISSION exposed by the resource application.",
+                    "type": "string"
+                }
+            }
+        },
+        "ServicePrincipalTagHealthReportList": {
+            "description": "List of ServicePrincipalTag health reports for the application.",
+            "properties": {
+                "value": {
+                    "type": "array",
+                    "description": "A report of the health status of a tag on an identity application service principal.",
+                    "items": {
+                        "$ref": "#/definitions/ServicePrincipalTagHealthReport"
+                    }
+                },
+                "nextLink": {
+                    "description": "URI to the next page.",
+                    "type": "string"
+                }
+            }
+        },
+        "ServicePrincipalTagHealthReport": {
+            "description": "A report of the health status of a tag on an identity application service principal.",
+            "type": "object",
+            "properties": {
+                "servicePrincipalTag": {
+                    "description": "The tag.",
+                    "type": "string"
+                },
+                "status": {
+                    "description": "The health status for the tag.",
+                    "$ref": "#/definitions/HealthStatus"
+                }
+            }
+        },
         "NameUnavailabilityReason": {
             "description": "The reason that the name is not available.",
             "type": "string",
@@ -636,6 +900,36 @@
                         "description": "This state is unique to Azure Stack and is only visible to the Azure Stack Operator, and if used, to the respective Delegated Provider. It means that deletion failed.  You can’t reverse the deletion process, so in this state all you can do is restart deletion.  This state is not reported to RPs.",
                         "name": "PartiallyDeleted",
                         "value": "PartiallyDeleted"
+                    }
+                ]
+            }
+        },
+        "HealthStatus": {
+            "description": "Health Status.",
+            "type": "string",
+            "enum": [
+                "Unknown",
+                "Unhealthy",
+                "Healthy"
+            ],
+            "x-ms-enum": {
+                "name": "HealthStatus",
+                "modelAsString": true,
+                "values": [
+                    {
+                        "description": "The health status is unknown.",
+                        "name": "Unknown",
+                        "value": "Unknown"
+                    },
+                    {
+                        "description": "The health status is unhealthy, indicating something is wrong or a sub-health status is Unhealthy or Unknown.",
+                        "name": "Unhealthy",
+                        "value": "Unhealthy"
+                    },
+                    {
+                        "description": "The health status is healthy, indicating nothing is wrong.",
+                        "name": "Healthy",
+                        "value": "Healthy"
                     }
                 ]
             }
@@ -903,6 +1197,14 @@
         "ResourceGroupParameter": {
             "description": "The resource group the resource is located under.",
             "name": "resourceGroupName",
+            "in": "path",
+            "type": "string",
+            "required": true,
+            "x-ms-parameter-location": "method"
+        },
+        "OperationsStatusParameter": {
+            "description": "The operation status name.",
+            "name": "operationsStatusName",
             "in": "path",
             "type": "string",
             "required": true,

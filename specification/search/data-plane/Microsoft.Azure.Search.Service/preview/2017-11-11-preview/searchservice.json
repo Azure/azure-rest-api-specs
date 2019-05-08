@@ -1689,7 +1689,8 @@
         "Edm.Double",
         "Edm.Boolean",
         "Edm.DateTimeOffset",
-        "Edm.GeographyPoint"
+        "Edm.GeographyPoint",
+        "Edm.ComplexType"
       ],
       "x-ms-enum": {
         "name": "DataType",
@@ -3908,7 +3909,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the field.",
+          "description": "The name of the field, which must be unique within the fields collection of the index or parent field.",
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Naming-rules"
           }
@@ -3922,50 +3923,48 @@
         },
         "key": {
           "type": "boolean",
-          "default": false,
-          "description": "A value indicating whether the field uniquely identifies documents in the index. Exactly one field in each index must be chosen as the key field and it must be of type Edm.String. Key fields can be used to look up documents directly and update or delete specific documents. Default is false."
+          "description": "A value indicating whether the field uniquely identifies documents in the index. Exactly one top-level field in each index must be chosen as the key field and it must be of type Edm.String. Key fields can be used to look up documents directly and update or delete specific documents. Default is false for simple fields and null for complex fields."
         },
         "retrievable": {
           "type": "boolean",
-          "default": true,
-          "description": "A value indicating whether the field can be returned in a search result. This is useful when you want to use a field (for example, margin) as a filter, sorting, or scoring mechanism but do not want the field to be visible to the end user. This property must be true for key fields. This property can be changed on existing fields. Enabling this property does not cause any increase in index storage requirements. All fields are retrievable by default."
+          "description": "A value indicating whether the field can be returned in a search result. You can disable this option if you want to use a field (for example, margin) as a filter, sorting, or scoring mechanism but do not want the field to be visible to the end user. This property must be true for key fields, and it must be null for complex fields. This property can be changed on existing fields. Enabling this property does not cause any increase in index storage requirements. Default is true for simple fields and null for complex fields."
         },
         "searchable": {
           "type": "boolean",
-          "description": "A value indicating whether the field is full-text search-able. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like \"sunny day\", internally it will be split into the individual tokens \"sunny\" and \"day\". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. Fields of other types are not searchable. Note: searchable fields consume extra space in your index since Azure Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false."
+          "description": "A value indicating whether the field is full-text searchable. This means it will undergo analysis such as word-breaking during indexing. If you set a searchable field to a value like \"sunny day\", internally it will be split into the individual tokens \"sunny\" and \"day\". This enables full-text searches for these terms. Fields of type Edm.String or Collection(Edm.String) are searchable by default. This property must be false for simple fields of other non-string data types, and it must be null for complex fields. Note: searchable fields consume extra space in your index since Azure Search will store an additional tokenized version of the field value for full-text searches. If you want to save space in your index and you don't need a field to be included in searches, set searchable to false."
         },
         "filterable": {
           "type": "boolean",
-          "description": "A value indicating whether to enable the field to be referenced in $filter queries. filterable differs from searchable in how strings are handled. Fields of type Edm.String or Collection(Edm.String) that are filterable do not undergo word-breaking, so comparisons are for exact matches only. For example, if you set such a field f to \"sunny day\", $filter=f eq 'sunny' will find no matches, but $filter=f eq 'sunny day' will. All fields are filterable by default."
+          "description": "A value indicating whether to enable the field to be referenced in $filter queries. filterable differs from searchable in how strings are handled. Fields of type Edm.String or Collection(Edm.String) that are filterable do not undergo word-breaking, so comparisons are for exact matches only. For example, if you set such a field f to \"sunny day\", $filter=f eq 'sunny' will find no matches, but $filter=f eq 'sunny day' will. This property must be null for complex fields. Default is true for simple fields and null for complex fields."
         },
         "sortable": {
           "type": "boolean",
-          "description": "A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Search sorts results by score, but in many experiences users will want to sort by fields in the documents. Fields of type Collection(Edm.String) cannot be sortable. All other fields are sortable by default."
+          "description": "A value indicating whether to enable the field to be referenced in $orderby expressions. By default Azure Search sorts results by score, but in many experiences users will want to sort by fields in the documents. A simple field can be sortable only if it is single-valued (it has a single value in the scope of the parent document). Simple collection fields cannot be sortable, since they are multi-valued. Simple sub-fields of complex collections are also multi-valued, and therefore cannot be sortable. This is true whether it's an immediate parent field, or an ancestor field, that's the complex collection. Complex fields cannot be sortable and the sortable property must be null for such fields. The default for sortable is true for single-valued simple fields, false for multi-valued simple fields, and null for complex fields."
         },
         "facetable": {
           "type": "boolean",
-          "description": "A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This option cannot be used with fields of type Edm.GeographyPoint. All other fields are facetable by default."
+          "description": "A value indicating whether to enable the field to be referenced in facet queries. Typically used in a presentation of search results that includes hit count by category (for example, search for digital cameras and see hits by brand, by megapixels, by price, and so on). This property must be null for complex fields. Fields of type Edm.GeographyPoint or Collection(Edm.GeographyPoint) cannot be facetable. Default is true for all other simple fields."
         },
         "analyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
           "$ref": "#/definitions/AnalyzerName",
-          "description": "The name of the language analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field."
+          "description": "The name of the language analyzer to use for the field. This option can be used only with searchable fields and it can't be set together with either searchAnalyzer or indexAnalyzer. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
         },
         "searchAnalyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
           "$ref": "#/definitions/AnalyzerName",
-          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This analyzer can be updated on an existing field."
+          "description": "The name of the analyzer used at search time for the field. This option can be used only with searchable fields. It must be set together with indexAnalyzer and it cannot be set together with the analyzer option. This analyzer can be updated on an existing field. Must be null for complex fields."
         },
         "indexAnalyzer": {
           "externalDocs": {
             "url": "https://docs.microsoft.com/rest/api/searchservice/Language-support"
           },
           "$ref": "#/definitions/AnalyzerName",
-          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option. Once the analyzer is chosen, it cannot be changed for the field."
+          "description": "The name of the analyzer used at indexing time for the field. This option can be used only with searchable fields. It must be set together with searchAnalyzer and it cannot be set together with the analyzer option. Once the analyzer is chosen, it cannot be changed for the field. Must be null for complex fields."
         },
         "synonymMaps": {
           "externalDocs": {
@@ -3975,7 +3974,14 @@
           "items": {
             "type": "string"
           },
-          "description": "A list of synonym map names that associates synonym maps with the field. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields."
+          "description": "A list of the names of synonym maps to associate with this field. This option can be used only with searchable fields. Currently only one synonym map per field is supported. Assigning a synonym map to a field ensures that query terms targeting that field are expanded at query-time using the rules in the synonym map. This attribute can be changed on existing fields. Must be null or an empty collection for complex fields."
+        },
+        "fields": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Field"
+          },
+          "description": "A list of sub-fields if this is a field of type Edm.ComplexType or Collection(Edm.ComplexType). Must be null or empty for simple fields."
         }
       },
       "required": [
@@ -4383,6 +4389,13 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
           }
         },
+        "encryptionKey": {
+          "$ref": "#/definitions/EncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Search. Once you have encrypted your data, it will always remain encrypted. Azure Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          }
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -4738,7 +4751,13 @@
         "includeTypelessEntities": {
           "type": "boolean",
           "x-nullable": true,
-          "description": "Determines whether or not to include entities which are well known but don't conform to a type. If this configuration is not set (default), set to null or set to false, entities which don't have a type will not be surfaced."
+          "description": "Determines whether or not to include entities which are well known but don't conform to a pre-defined type. If this configuration is not set (default), set to null or set to false, entities which don't conform to one of the pre-defined types will not be surfaced."
+        },
+        "minimumPrecision": {
+          "type": "number",
+          "format": "double",
+          "x-nullable": true,
+          "description": "A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included."
         }
       },
       "externalDocs": {
@@ -5156,6 +5175,13 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Synonym-Map#SynonymMapFormat"
           }
         },
+        "encryptionKey": {
+          "$ref": "#/definitions/EncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Search. Once you have encrypted your data, it will always remain encrypted. Azure Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          }
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -5182,6 +5208,51 @@
         }
       },
       "description": "Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps."
+    },
+    "EncryptionKey": {
+      "properties": {
+        "keyVaultKeyName": {
+          "type": "string",
+          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
+        },
+        "keyVaultKeyVersion": {
+          "type": "string",
+          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
+        },
+        "accessCredentials": {
+          "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
+          "description": "Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-msi"
+          }
+        }
+      },
+      "required": [
+        "keyVaultKeyName",
+        "keyVaultKeyVersion",
+        "keyVaultUri"
+      ],
+      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Search, such as indexes and synonym maps."
+    },
+    "AzureActiveDirectoryApplicationCredentials": {
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application."
+        },
+        "applicationSecret": {
+          "type": "string",
+          "description": "The authentication key of the specified AAD application."
+        }
+      },
+      "required": [
+        "applicationId"
+      ],
+      "description" : "Credentials of a registered application created for your Azure Search service, used for authenticated access to the encryption keys stored in Azure Key Vault."
     },
     "ServiceStatistics": {
       "properties": {
