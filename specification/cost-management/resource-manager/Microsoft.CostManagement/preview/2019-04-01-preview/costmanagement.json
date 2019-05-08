@@ -1796,6 +1796,786 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.CostManagement/views": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_List",
+        "description": "Lists all views at the given scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionViewList": {
+            "$ref": "./examples/View/ViewList/ViewListBySubscription.json"
+          },
+          "ResourceGroupViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByResourceGroup.json"
+          },
+          "ManagementGroupViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByManagementGroup.json"
+          },
+          "BillingAccountViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByBillingAccount.json"
+          },
+          "DepartmentViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByDepartment.json"
+          },
+          "EnrollmentAccountViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByEnrollmentAccount.json"
+          },
+          "BillingProfileViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByBillingProfile.json"
+          },
+          "InvoiceSectionViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/views":{
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_ListByExternalBillingAccount",
+        "description": "List all views by external billing account",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByExternalBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalBillingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId}/views":{
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_ListByExternalSubscription",
+        "description": "List all views by external subscription",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionViewList": {
+            "$ref": "./examples/View/ViewList/ViewListByExternalSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalSubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/views/{viewName}": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_Get",
+        "description": "Gets the view for the defined scope by view name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionView": {
+            "$ref": "./examples/View/ViewGet/ViewBySubscription.json"
+          },
+          "ResourceGroupView": {
+            "$ref": "./examples/View/ViewGet/ViewByResourceGroup.json"
+          },
+          "ManagementGroupView": {
+            "$ref": "./examples/View/ViewGet/ViewByManagementGroup.json"
+          },
+          "BillingAccountView": {
+            "$ref": "./examples/View/ViewGet/ViewByBillingAccount.json"
+          },
+          "DepartmentView": {
+            "$ref": "./examples/View/ViewGet/ViewByDepartment.json"
+          },
+          "EnrollmentAccountView": {
+            "$ref": "./examples/View/ViewGet/ViewByEnrollmentAccount.json"
+          },
+          "BillingProfileView": {
+            "$ref": "./examples/View/ViewGet/ViewByBillingProfile.json"
+          },
+          "InvoiceSectionView": {
+            "$ref": "./examples/View/ViewGet/ViewByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_CreateOrUpdate",
+        "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateBySubscription.json"
+          },
+          "ResourceGroupCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByResourceGroup.json"
+          },
+          "ManagementGroupCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByManagementGroup.json"
+          },
+          "BillingAccountCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByBillingAccount.json"
+          },
+          "DepartmentCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByDepartment.json"
+          },
+          "EnrollmentAccountCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByEnrollmentAccount.json"
+          },
+          "BillingProfileCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByBillingProfile.json"
+          },
+          "InvoiceSectionCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/View"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_Delete",
+        "description": "The operation to delete a view.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteBySubscription.json"
+          },
+          "ResourceGroupDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByResourceGroup.json"
+          },
+          "ManagementGroupDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByManagementGroup.json"
+          },
+          "BillingAccountDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByBillingAccount.json"
+          },
+          "DepartmentDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByDepartment.json"
+          },
+          "EnrollmentAccountDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByEnrollmentAccount.json"
+          },
+          "BillingProfileDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByBillingProfile.json"
+          },
+          "InvoiceSectionDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/views/{viewName}":{
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_GetByExternalBillingAccount",
+        "description": "Gets the view for exteranl billing account by view name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountView": {
+            "$ref": "./examples/View/ViewGet/ViewByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_CreateOrUpdateByExternalBillingAccount",
+        "description": "The operation to create or update a view by exteranl billing account. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByExternalBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/View"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_DeleteByExternalBillingAccount",
+        "description": "The operation to delete a view by external billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByExternalBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId}/views/{viewName}":{
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_GetByExternalSubscription",
+        "description": "Gets the view for exteranl subscription by view name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionView": {
+            "$ref": "./examples/View/ViewGet/ViewBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_CreateOrUpdateByExternalSubscription",
+        "description": "The operation to create or update a view by exteranl subscription. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionCreateOrUpdateView": {
+            "$ref": "./examples/View/ViewCreateOrUpdate/ViewCreateOrUpdateByExternalSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/View"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/ViewResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_DeleteByExternalSubscription",
+        "description": "The operation to delete a view by external subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionDeleteView": {
+            "$ref": "./examples/View/ViewDelete/ViewDeleteByExternalSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeViewsParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/checkNameAvailability": {
+      "post":{
+        "tags":[
+          "CostManagement"
+        ],
+        "operationId": "CostManagement_CheckNameAvailability",
+        "description": "The operation to check resource name availability under cost management. A name is available if no other resource exists with the same name, type and scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "SubscriptionCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityBySubscription_Available.json"
+          },
+          "SubscriptionCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityBySubscription_NotAvailable.json"
+          },
+          "ResourceGroupCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByResourceGroup_Available.json"
+          },
+          "ResourceGroupCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByResourceGroup_NotAvailable.json"
+          },
+          "ManagementGroupCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByManagementGroup_Available.json"
+          },
+          "ManagementGroupCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByManagementGroup_NotAvailable.json"
+          },
+          "BillingAccountCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByBillingAccount_Available.json"
+          },
+          "BillingAccountCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByBillingAccount_NotAvailable.json"
+          },
+          "DepartmentCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByDepartment_Available.json"
+          },
+          "DepartmentCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByDepartment_NotAvailable.json"
+          },
+          "EnrollmentAccountCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByEnrollmentAccount_Available.json"
+          },
+          "EnrollmentAccountCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByEnrollmentAccount_NotAvailable.json"
+          },
+          "BillingProfileCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByBillingProfile_Available.json"
+          },
+          "BillingProfileCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByBillingProfile_NotAvailable.json"
+          },
+          "InvoiceSectionCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByInvoiceSection_Available.json"
+          },
+          "InvoiceSectionCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByInvoiceSection_NotAvailable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeCheckNameAvailabilityParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
+            },
+            "description": "Parameters about Resource type and Resource name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }        
+      }      
+    },
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/checkNameAvailability":{
+      "post":{
+        "tags":[
+          "CostManagement"
+        ],
+        "operationId": "CostManagement_CheckNameAvailabilityByExternalBillingAccount",
+        "description": "The operation to check resource name availability by external billing account under cost management. A name is available if no other resource exists with the same name, type and scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByExternalBillingAccount_Available.json"
+          },
+          "ExternalBillingAccountCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByExternalBillingAccount_NotAvailable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/externalBillingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
+            },
+            "description": "Parameters about Resource type and Resource name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }        
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId}/checkNameAvailability":{
+      "post":{
+        "tags":[
+          "CostManagement"
+        ],
+        "operationId": "CostManagement_CheckNameAvailabilityByExternalSubscription",
+        "description": "The operation to check resource name availability by external subscription under cost management. A name is available if no other resource exists with the same name, type and scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability/Available/CheckNameAvailabilityByExternalSubscription_Available.json"
+          },
+          "ExternalSubscriptionCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability/NotAvailable/CheckNameAvailabilityByExternalSubscription_NotAvailable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/externalSubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
+            },
+            "description": "Parameters about Resource type and Resource name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }        
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -3066,6 +3846,196 @@
           "type": "string"
         }
       }
+    },
+    "ViewListResult": {
+      "description": "Result of listing views. It contains a list of available views.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of views.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/View"
+          }
+        }
+      }
+    },
+    "View": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ViewProperties",
+          "title": "View properties"
+        }
+      }
+    },
+    "ViewProperties": {
+      "type": "object",
+      "description": "The properties of the view.",
+      "properties": {
+        "version": {
+          "description": "View API version used to create the view.",
+          "type": "string"
+        },
+        "queryVersion": {
+          "description": "Query API version to use.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "User input name of the view. Required.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Cost Management scope to save the view on.",
+          "type": "string"
+        },
+        "createdOn": {
+          "description": "Date the user created this view.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedOn": {
+          "description": "Date when the user last modified this view.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "query": {
+          "description": "Query body configuration. Required.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QueryProperties"
+        },
+        "chart": {
+          "description": "Chart type of the main view in Cost Analysis. Required.",
+          "type": "string",
+          "enum": [
+            "Area",
+            "GroupedBar",
+            "GroupedColumn",
+            "Line",
+            "StackedBar",
+            "Table"
+          ],
+          "x-ms-enum": {
+            "name": "ChartType",
+            "modelAsString": true
+          }
+        },
+        "accumulated": {
+          "description": "Show costs accumulated over time.",
+          "type": "boolean"
+        },
+        "metric": {
+          "description": "Metric to use when displaying costs.",
+          "type": "string",
+          "enum": [
+            "ActualCost",
+            "AmortizedCost",
+            "AHUB"
+          ],
+          "x-ms-enum": {
+            "name": "MetricType",
+            "modelAsString": true
+          }
+        },
+        "kpis": {
+          "description": "List of KPIs to show in Cost Analysis UI.",
+          "type": "array",
+          "$ref": "#/definitions/KpiProperties"
+        },
+        "pivots": {
+          "description": "Configuration of 3 sub-views in the Cost Analysis UI.",
+          "type": "array",
+          "$ref": "#/definitions/PivotProperties"
+        }
+      }
+    },
+    "KpiProperties": {
+      "description": "Each KPI must contain a 'type' and 'enabled' key.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "KPI type (forecast, budget).",
+          "type": "string",
+          "enum": [
+            "forecast",
+            "budget"
+          ],
+          "x-ms-enum": {
+            "name": "TypeType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "ID of resource related to metric (budget).",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "show the KPI in the UI?",
+          "type": "boolean"
+        }
+      }
+    },
+    "PivotProperties": {
+      "description": "Each pivot must contain a 'type' and 'name'.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Data type to show in view.",
+          "type": "string",
+          "enum": [
+            "Dimension",
+            "TagKey"
+          ],
+          "x-ms-enum": {
+            "name": "TypeType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "Data field to show in view.",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityRequestBody": {
+      "description": "Resource Name availability input parameters - Resource type and resource name",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Describes the Resource type: Microsoft.CostManagement/Views",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name for which availability needs to be checked",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Required. True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Required if nameAvailable == false. Invalid indicates the name provided does not match the resource provider's naming requirements (incorrect length, unsupported characters, etc.) AlreadyExists indicates that the name is already in use and is therefore unavailable.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Required if nameAvailable == false, indicating why name is not available.",
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -3154,6 +4124,32 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "scopeViewParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with view operations. This includes '/subscriptions/{subscriptionId}' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "viewNameParameter": {
+      "name": "viewName",
+      "in": "path",
+      "description": "View name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeCheckNameAvailabilityParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with view operations. This includes '/subscriptions/{subscriptionId}' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
