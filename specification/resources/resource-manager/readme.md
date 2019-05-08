@@ -260,6 +260,14 @@ input-file:
 - Microsoft.Resources/stable/2016-09-01/links.json
 ```
 
+### Tag: package-managedapplications-2019-03
+These settings apply only when `--tag=package-managedapplications-2019-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2019-03'
+input-file:
+- Microsoft.Solutions/preview/2019-03-01-preview/managedapplications.json
+```
+
 ### Tag: package-managedapplications-2018-06
 These settings apply only when `--tag=package-managedapplications-2018-06` is specified on the command line.
 
@@ -404,6 +412,7 @@ batch:
   - tag: package-links-2016-09
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
+  - tag: package-managedapplications-2019-03
   - tag: package-managedapplications-2018-06
   - tag: package-managedapplications-2017-09
   - tag: package-policy-2018-05
@@ -464,6 +473,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.resource.locks.v2015_01_01
   output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/locks/v2015_01_01
+```
+
+### Tag: package-managedapplications-2019-03 and python
+
+These settings apply only when `--tag=package-managedapplications-2019-03 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-managedapplications-2019-03' && $(python)
+python:
+  namespace: azure.mgmt.resource.managedapplications
+  output-folder: $(python-sdks-folder)/azure-mgmt-resource/azure/mgmt/resource/managedapplications
 ```
 
 ### Tag: package-managedapplications-2018-06 and python
