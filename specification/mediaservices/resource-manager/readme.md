@@ -26,17 +26,31 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07
+tag: package-preview-2019-05
 opt-in-extensible-enums: true
-
 ```
 
 
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
+  - Microsoft.Media/preview/2019-05-01-preview/Accounts.json
+  - Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
+  - Microsoft.Media/preview/2019-05-01-preview/Common.json
+  - Microsoft.Media/preview/2019-05-01-preview/ContentKeyPolicies.json
+  - Microsoft.Media/preview/2019-05-01-preview/Encoding.json
+  - Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/preview/2019-05-01-preview/streamingservice.json
+```
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-07'
+``` yaml $(tag) == 'package-2018-07'
 input-file:
   - Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - Microsoft.Media/stable/2018-07-01/Accounts.json
@@ -47,6 +61,7 @@ input-file:
   - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2018-07-01/streamingservice.json
 ```
+
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
