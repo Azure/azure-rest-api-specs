@@ -1856,7 +1856,7 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/views":{
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/views":{
       "get": {
         "tags": [
           "Views"
@@ -1876,7 +1876,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/externalBillingAccountIdParameter"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           }
         ],
         "responses": {
@@ -1895,7 +1895,7 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId}/views":{
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}/views":{
       "get": {
         "tags": [
           "Views"
@@ -1915,7 +1915,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/externalSubscriptionIdParameter"
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
           }
         ],
         "responses": {
@@ -1985,7 +1985,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -2055,13 +2055,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -2131,7 +2131,7 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/views/{viewName}":{
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/views/{viewName}":{
       "get": {
         "tags": [
           "Views"
@@ -2148,10 +2148,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeViewsParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/viewNameParameter"
@@ -2161,7 +2161,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -2188,10 +2188,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeViewsParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/viewNameParameter"
@@ -2210,13 +2210,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -2243,10 +2243,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeViewsParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/viewNameParameter"
@@ -2265,7 +2265,7 @@
         }
       }
     },
-    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId}/views/{viewName}":{
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}/views/{viewName}":{
       "get": {
         "tags": [
           "Views"
@@ -2282,10 +2282,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeViewsParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/viewNameParameter"
@@ -2295,7 +2295,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -2322,10 +2322,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeViewsParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/viewNameParameter"
@@ -2344,13 +2344,13 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/ViewResult"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -2377,10 +2377,10 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/scopeViewsParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/viewNameParameter"
@@ -2486,7 +2486,7 @@
         }        
       }      
     },
-    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountId}/checkNameAvailability":{
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/checkNameAvailability":{
       "post":{
         "tags":[
           "CostManagement"
@@ -2506,7 +2506,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/externalBillingAccountIdParameter"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -2531,7 +2531,7 @@
         }        
       }
     },
-    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionId}/checkNameAvailability":{
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}/checkNameAvailability":{
       "post":{
         "tags":[
           "CostManagement"
@@ -2551,7 +2551,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/externalSubscriptionIdParameter"
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -4125,7 +4125,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "scopeViewParameter": {
+    "scopeViewsParameter": {
       "name": "scope",
       "in": "path",
       "required": true,
