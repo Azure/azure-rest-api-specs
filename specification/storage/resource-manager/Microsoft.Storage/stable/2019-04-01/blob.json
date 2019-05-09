@@ -125,6 +125,24 @@
             },
             {
               "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            },
+            {
+              "name": "$skipToken",
+              "in": "query",
+              "type": "string",
+              "description": "Optional. Continuation token for the list operation."
+            },
+            {
+              "name": "$maxpagesize",
+              "in": "query",
+              "type": "string",
+              "description": "Optional. Specified maximum number of containers that can be included in the list."
+            },
+            {
+              "name": "$filter",
+              "in": "query",
+              "type": "string",
+              "description": "Optional. When specified, only container names starting with the filter will be listed."
             }
           ],
           "responses": {
@@ -1054,10 +1072,16 @@
             "items": {
               "$ref": "#/definitions/ListContainerItem"
             },
-            "description": "The list of blob containers."
+            "description": "List of blobs containers returned.",
+            "readOnly": true
+          },
+          "nextLink": {
+            "type": "string",
+            "description": "Request URL that can be used to query next page of containers. Returned when total number of requested containers exceed maximum page size.",
+            "readOnly": true
           }
         },
-        "description": "The list of blob containers."
+        "description": "Response schema. Contains list of blobs returned, and if paging is requested or required, a URL to next page of containers."
       },
       "BlobServiceProperties": {
         "properties": {
