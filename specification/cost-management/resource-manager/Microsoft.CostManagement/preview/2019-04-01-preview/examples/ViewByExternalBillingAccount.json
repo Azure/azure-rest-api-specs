@@ -1,14 +1,13 @@
 {
   "parameters": {
     "api-version": "2019-04-01-preview",
-    "billingAccountId": "100",
-    "invoiceSectionId": "testis",
+    "externalBillingAccountName": "aws-123456789012",
     "viewName": "swaggerExample"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/100/invoiceSections/testis/providers/Microsoft.CostManagement/views/swaggerExample",
+        "id": "/providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012/views/swaggerExample",
         "name": "swaggerExample",
         "type": "Microsoft.CostManagement/Views",
         "eTag": "\"1d4ff9fe66f1d10\"",
@@ -16,7 +15,7 @@
           "version": "2019-04-01-preview",
           "queryVersion": "2019-04-01-preview",
           "displayName": "swagger Example",
-          "scope": "/providers/Microsoft.Billing/billingAccounts/100/invoiceSections/testis",
+          "scope": "/providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012",
           "query": {
             "type": "Usage",
             "timeframe": "MonthToDate",
@@ -38,7 +37,7 @@
             }
           },
           "chart": "Table",
-          "accumulate": "true",
+          "accumulated": "true",
           "metric": "ActualCost",
           "kpis": [
             {
@@ -48,7 +47,7 @@
             },
             {
               "type": "Budget",
-              "id": "/providers/Microsoft.Billing/billingAccounts/100/invoiceSections/testis/providers/Microsoft.Consumption/budgets/swaggerDemo",
+              "id": "/providers/Microsoft.CostManagement/externalBillingAccounts/aws-123456789012/providers/Microsoft.Consumption/budgets/swaggerDemo",
               "enabled": true
             }
           ],
