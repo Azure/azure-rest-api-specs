@@ -407,8 +407,12 @@
           "type": "string"
         },
         "defaultCustomBlockResponseStatusCode": {
-          "description": "If the action type is block, this field defines the default customer overridable response status code.",
-          "type": "integer"
+          "description": "If the action type is block, this field defines the default customer overridable http response status code.",
+          "type": "integer",
+          "maximum": 599,
+          "exclusiveMaximum": false,
+          "minimum": 200,
+          "exclusiveMinimum": false
         },
         "defaultCustomBlockResponseBody": {
           "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
@@ -509,7 +513,11 @@
         },
         "rateLimitDurationInMinutes": {
           "description": "Defines rate limit duration. Default is 1 minute.",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 60,
+          "exclusiveMaximum": false,
+          "minimum": 1,
+          "exclusiveMinimum": false
         }
       },
       "allOf": [
@@ -614,7 +622,11 @@
         },
         "anomalyScore": {
           "description": "Verizon only : If the rule set supports anomaly detection mode, this describes the threshold for blocking requests.",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 20,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false
         },
         "ruleGroupOverrides": {
           "description": "Defines the rule overrides to apply to the rule set.",
@@ -800,7 +812,11 @@
         },
         "customBlockResponseStatusCode": {
           "description": "If the action type is block, customer can override the response status code.",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 599,
+          "exclusiveMaximum": false,
+          "minimum": 200,
+          "exclusiveMinimum": false
         },
         "customBlockResponseBody": {
           "description": "If the action type is block, customer can override the response body. The body must be specified in base64 encoding.",
