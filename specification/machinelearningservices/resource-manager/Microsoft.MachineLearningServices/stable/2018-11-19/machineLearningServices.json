@@ -404,6 +404,47 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usagesbyvmfamily": {
+      "get": {
+        "tags": [
+          "UsageByVMFamily"
+        ],
+        "operationId": "UsagesByVMFamily_List",
+        "description": "Gets the current usage information in a detailed format as well as limits for Batch AI resources for given subscription, by VM family, workspace and cluster hierarchy.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesByVMFamilyResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List Usages": {
+            "$ref": "./examples/ListUsagesByVMFamilyResult.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/vmSizes": {
       "get": {
         "tags": [
@@ -1135,6 +1176,44 @@
       },
       "description": "Describes AML Resource Usage."
     },
+    "UsageByVMFamily": {
+      "properties": {
+          "properties": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/UsageByVMFamilyProperties",
+            "description": "The properties associated with UsageByVMFamily"
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/Usage"
+          }
+        ],
+        "description": "Describes Batch AI Resource Usage by VM Family, broken down by Workspace and Cluster usage"
+    },
+    "UsageByVMFamilyProperties": {
+      "properties": {
+          "resourceGroupName": {
+            "readOnly": true,
+            "type": "string",
+            "description": "The name of the resource group this resource type belongs to"
+          },
+          "resourceType": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The type of the resource, whether its VM family, workspace name, or cluster"
+          },
+          "usageBreakdown": {
+              "readOnly": true,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/UsageByVMFamily"
+              },
+              "description": "The breakdown of usage by Workspace or Cluster"
+            }
+        },
+        "description": "Properties of UsageByVMFamily definition, an extension of Usage definition"
+    },
     "ListUsagesResult": {
       "properties": {
         "value": {
@@ -1152,6 +1231,24 @@
         }
       },
       "description": "The List Usages operation response."
+    },
+    "ListUsagesByVMFamilyResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UsageByVMFamily"
+          },
+          "description": "The list of compute resource usages, by VM family, broken down by Workspace, and Cluster usage."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+        }
+      },
+      "description": "The List UsagesByVMFamily operation response."
     },
     "VirtualMachineSize": {
       "properties": {
