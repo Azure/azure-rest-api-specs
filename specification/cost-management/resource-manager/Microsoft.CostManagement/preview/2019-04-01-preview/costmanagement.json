@@ -3757,6 +3757,11 @@
           "items": {
             "$ref": "#/definitions/View"
           }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -3858,7 +3863,7 @@
     },
     "KpiProperties": {
       "description": "Each KPI must contain a 'type' and 'enabled' key.",
-      "type": "array",
+      "type": "object",
       "properties": {
         "type": {
           "description": "KPI type (forecast, budget).",
@@ -3884,7 +3889,7 @@
     },
     "PivotProperties": {
       "description": "Each pivot must contain a 'type' and 'name'.",
-      "type": "array",
+      "type": "object",
       "properties": {
         "type": {
           "description": "Data type to show in view.",
