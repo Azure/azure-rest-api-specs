@@ -29,7 +29,7 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Aadiam/operations": {
+    "/providers/microsoft.aadiam/operations": {
       "get": {
         "tags": ["Operations"],
         "operationId": "Operations_List",
@@ -58,11 +58,9 @@
         }
       }
     },
-    "/providers/Microsoft.Aadiam/diagnosticSettings": {
+    "/providers/microsoft.aadiam/diagnosticSettings": {
       "get": {
-        "tags": [
-          "DiagnosticSettings"
-        ],
+        "tags": ["DiagnosticSettings"],
         "operationId": "DiagnosticSettings_List",
         "description": "Gets the active diagnostic settings list for AadIam.",
         "parameters": [
@@ -72,7 +70,7 @@
         ],
         "responses": {
           "default": {
-            "description": "Error, request for AadIam diagnostic settings has failed",
+            "description": "Error. request for AadIam diagnostic settings has failed",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -85,13 +83,45 @@
           }
         },
         "x-ms-examples": {
-          "Gets the diagnostic setting": {
+          "Gets the diagnostic settings": {
             "$ref": "./examples/listDiagnosticSettings.json"
           }
         } 
       }
     },
-    "/providers/Microsoft.Aadiam/diagnosticSettings/{name}": {
+    "/providers/microsoft.aadiam/diagnosticSettings/{name}": {
+      "get": {
+        "tags": ["DiagnosticSettings"],
+        "operationId": "DiagnosticSettings_Get",
+        "description": "Gets the active diagnostic setting for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error. Request for AadIam diagnostic setting has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about diagnostic setting",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic setting": {
+            "$ref": "./examples/getDiagnosticSetting.json"
+          }
+        } 
+      },
       "put": {
         "tags": ["DiagnosticSettings"],
         "operationId": "DiagnosticSettings_CreateOrUpdate",
@@ -130,6 +160,69 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": ["DiagnosticSettings"],
+        "operationId": "DiagnosticSettings_Delete",
+        "description": "Deletes existing diagnostic setting for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error. The request to delete named diagnostic setting has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to remove a diagnostic setting"
+          },
+          "204": {
+            "description": "Successful request to remove a diagnostic setting"
+          }
+        },
+        "x-ms-examples": {
+          "Deletes the diagnostic setting": {
+            "$ref": "./examples/deleteDiagnosticSetting.json"
+          }
+        } 
+      }
+    },
+    "/providers/microsoft.aadiam/diagnosticSettingsCategories": {
+      "get": {
+        "tags": ["DiagnosticSettingsCategories"],
+        "operationId": "DiagnosticSettingsCategory_List",
+        "description": "Lists the diagnostic settings categories for AadIam.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error. The request to view diagnostic setting categories has failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get list of diagnostic setting categories",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsCategoryResourceCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic setting categories": {
+            "$ref": "./examples/listDiagnosticSettingsCategories.json"
+          }
+        } 
       }
     }
   },
@@ -344,6 +437,10 @@
       "description": "Contains the localized display information for this particular operation / action. These value will be used by several clients for (1) custom role definitions for RBAC; (2) complex query filters for the event service; and (3) audit history / records for management operations.",
       "type": "object",
       "properties": {
+        "publisher": {
+          "description": "The publisher. The localized friendly form of the resource publisher name.",
+          "type": "string"
+        },
         "provider": {
           "description": "The provider. The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
           "type": "string"
@@ -396,6 +493,48 @@
           }
         }
       }
+    },
+    "DiagnosticSettingsCategory": {
+      "properties": {
+        "categoryType": {
+          "enum": ["Metrics", "Logs"],
+          "type": "string",
+          "x-ms-enum": {
+             "name": "categoryType"
+          },
+          "x-nullable": false,
+          "description": "The type of the diagnostic settings category."
+        }
+      },
+      "description": "The diagnostic settings Category."
+    },
+    "DiagnosticSettingsCategoryResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticSettingsCategory",
+          "description": "The properties of a Diagnostic Settings Category."
+        }
+      },
+      "description": "The diagnostic settings category resource."
+    },
+    "DiagnosticSettingsCategoryResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticSettingsCategoryResource"
+          },
+          "description": "The collection of diagnostic settings category resources."
+        }
+      },
+      "description": "Represents a collection of diagnostic setting category resources."
     }
   },
   "parameters": {
