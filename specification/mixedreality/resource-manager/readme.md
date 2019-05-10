@@ -34,9 +34,9 @@ These settings apply only when `--tag=package-2019-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-12-preview'
 input-file:
-- Microsoft.MixedReality/preview/2019-12-07-preview/proxy.json
-- Microsoft.MixedReality/preview/2019-12-07-preview/remote-rendering.json
-- Microsoft.MixedReality/preview/2019-12-07-preview/spatial-anchors.json
+- Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
+- Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
+- Microsoft.MixedReality/preview/2019-12-02-preview/spatial-anchors.json
 ```
 
 ### Tag: package-2019-02-preview
