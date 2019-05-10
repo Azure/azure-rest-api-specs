@@ -303,8 +303,8 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "description": "Provisioning state of the policy."
+          "description": "Provisioning state of the policy.",
+          "$ref": "#/definitions/ProvisioningState"
         },
         "resourceState": {
           "title": "Resource status of the policy.",
@@ -439,12 +439,15 @@
           }
         },
         "rateLimitDurationInMinutes": {
-          "description": "Defines rate limit duration. Default is 1 minute.",
-          "type": "integer"
+          "description": "Time window for resetting the rate limit count. Default is 1 minute.",
+          "type": "integer",
+          "minimum": 0,
+          "maximum": 5
         },
         "rateLimitThreshold": {
-          "description": "Defines rate limit threshold.",
-          "type": "integer"
+          "description": "Number of allowed requests per client within the time window.",
+          "type": "integer",
+          "minimum": 0
         },
         "matchConditions": {
           "description": "List of match conditions.",
@@ -484,7 +487,7 @@
       ],
       "properties": {
         "matchVariable": {
-          "description": "Match variable to compare against.",
+          "description": "Request variable to compare with.",
           "type": "string",
           "enum": [
             "RemoteAddr",
@@ -502,11 +505,11 @@
           }
         },
         "selector": {
-          "description": "Selector can used to match against a specific key from QueryString, PostArgs, RequestHeader or Cookies.",
+          "description": "Match against a specific key from the QueryString, PostArgs, RequestHeader or Cookies variables. Default is null.",
           "type": "string"
         },
         "operator": {
-          "description": "Describes operator to be matched",
+          "description": "Comparison type to use for matching with the variable value.",
           "type": "string",
           "enum": [
             "Any",
@@ -652,6 +655,7 @@
       "description": "Describes the a managed rule set definition.",
       "properties": {
         "properties": {
+          "description": "Properties for a managed rule set definition.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ManagedRuleSetDefinitionProperties"
         }
@@ -767,6 +771,20 @@
           "type": "string",
           "description": "Resource ID."
         }
+      }
+    },
+    "ProvisioningState":{
+      "type":"string",
+      "readOnly":true,
+      "description": "The current resource provisioning state.",
+      "enum":[
+        "Succeeded",
+        "Creating",
+        "Failed"
+      ],
+      "x-ms-enum":{
+        "name":"ProvisioningState",
+        "modelAsString":true
       }
     }
   },
