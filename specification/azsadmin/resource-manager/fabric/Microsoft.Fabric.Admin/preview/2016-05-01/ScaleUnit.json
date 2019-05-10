@@ -352,6 +352,21 @@
         }
       }
     },
+    "DeploymentJsonPhysicalNodeParameters": {
+      "description": "Description of a bare metal node used for scale unit scale out operations.",
+      "type": "object",
+      "properties": {
+        "bmcIpAddress": {
+          "x-ms-client-name": "BMCIPAddress",
+          "description": "BMC address of the physical machine.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Computer name of the physical machine.",
+          "type": "string"
+        }
+      }
+    },
     "CreateFromJsonScaleUnitParametersList": {
       "description": "A list of input data that allows for creating the new scale unit.",
       "type": "object",
@@ -384,11 +399,11 @@
         },
         "infrastructureNetwork": {
           "description": "The information associated with the infrastructure network that will be subdivided into subnets.",
-          "type": "#/definitions/NetworkDefinitionParameter"
+          "$ref": "#/definitions/NetworkDefinitionParameter"
         },
         "storageNetwork": {
           "description": "The information associated with the storage network that will be subdivided into subnets.",
-          "type": "#/definitions/NetworkDefinitionParameter"
+          "$ref": "#/definitions/NetworkDefinitionParameter"
         },
         "netQosPriority": {
           "description": "The network QOS priority setting.",
