@@ -3852,12 +3852,16 @@
         "kpis": {
           "description": "List of KPIs to show in Cost Analysis UI.",
           "type": "array",
-          "$ref": "#/definitions/KpiProperties"
+          "items": {
+            "$ref": "#/definitions/KpiProperties"
+          }          
         },
         "pivots": {
           "description": "Configuration of 3 sub-views in the Cost Analysis UI.",
           "type": "array",
-          "$ref": "#/definitions/PivotProperties"
+          "items": {
+            "$ref": "#/definitions/PivotProperties"
+          }         
         }
       }
     },
