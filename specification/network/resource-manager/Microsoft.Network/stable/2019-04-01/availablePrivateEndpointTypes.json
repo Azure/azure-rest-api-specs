@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
       "get": {
         "operationId": "AvailablePrivateEndpointTypes_List",
-        "description": "Gets all of the available PrivateEndpoint type for this subscription in this location/region.",
+        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
         "parameters": [
           {
             "name": "location",
@@ -55,7 +55,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns all of the available PrivateEndpoint type for the subscription in the region.",
+            "description": "Request successful. Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
             "schema": {
               "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
             }
@@ -74,7 +74,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
       "get": {
         "operationId": "AvailableResourceGroupPrivateEndpointTypes_List",
-        "description": "Gets all of the available PrivateEndpoint type for this resource group in this region.",
+        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
         "parameters": [
           {
             "name": "location",
@@ -99,7 +99,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns all of the possible PrivateEndpoint type for the resource group in the region.",
+            "description": "Request successful. Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
             "schema": {
               "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
             }
