@@ -1345,6 +1345,85 @@
                 "x-ms-long-running-operation": true
             }
         },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/cloudEndpoints/{cloudEndpointName}/triggerChangeDetection": {
+            "post": {
+                "parameters": [{
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                }, {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                }, {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                }, {
+                    "name": "storageSyncServiceName",
+                    "in": "path",
+                    "description": "Name of Storage Sync Service resource.",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "syncGroupName",
+                    "in": "path",
+                    "description": "Name of Sync Group resource.",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "cloudEndpointName",
+                    "in": "path",
+                    "description": "Name of Cloud Endpoint object.",
+                    "required": true,
+                    "type": "string"
+                    }, 
+                    {
+                    "name": "parameters",
+                    "in": "body",
+                    "description": "Trigger Change Detecton Action parameters.",
+                    "required": true,
+                    "schema": {
+                        "$ref": "#/definitions/TriggerChangeDetectionParameters"
+                    }
+                }],
+                "tags": [
+                    "CloudEndpoint Resource",
+                    "Actions",
+                    "Change Detection"
+                ],
+                "operationId": "CloudEndpoints_TriggerChangeDetection",
+                "description": "Triggers detection of changes performed on Azure File share connected to the specified Azure File Sync Cloud Endpoint.",
+                "x-ms-examples": {
+                    "CloudEndpoints_TriggerChangeDetection": {
+                        "$ref": "./examples/CloudEndpoints_TriggerChangeDetection.json"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Ok"
+                    },
+                    "202": {
+                        "description": "Asynchronous Operation Status Location",
+                        "headers": {
+                            "Location": {
+                                "description": "Operation Status Location URI",
+                                "type": "string"
+                            },
+                            "x-ms-request-id": {
+                                "description": "request id.",
+                                "type": "string"
+                            },
+                            "x-ms-correlation-request-id": {
+                                "description": "correlation request id.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error message indicating why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/StorageSyncError"
+                        }
+                    }
+                },
+                "x-ms-long-running-operation": true
+            }
+        },
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/storageSyncServices/{storageSyncServiceName}/syncGroups/{syncGroupName}/serverEndpoints/{serverEndpointName}": {
             "put": {
                 "parameters": [{
@@ -2460,6 +2539,35 @@
                     "description": "Cloud Endpoint properties."
                 }
             }
+        },
+        "TriggerChangeDetectionParameters": {
+            "properties": {
+                "directoryPath": {
+                    "type": "string",
+                    "description": "Relative path to a directory Azure File share for which change detection is to be performed."
+                },
+                "changeDetectionMode": {
+                    "type": "string",
+                    "description": "Change Detection Mode. Applies to a directory specified in directoryPath parameter.",
+                    "enum": [
+                        "Default",
+                        "Recursive"
+                    ],
+                    "x-ms-enum": {
+                        "name": "changeDetectionMode",
+                        "modelAsString": true
+                    }
+                },
+                "paths": {
+                    "type": "array",
+                    "items": {
+                        "type": "string"
+                    },
+                    "description": "Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories.",
+                    "readOnly": true
+                }
+            },
+            "description": "The parameters used when calling trigger change detection action on cloud endpoint."
         },
         "RecallActionParameters": {
             "properties": {
