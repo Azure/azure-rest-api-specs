@@ -46,7 +46,18 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Personalizer
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Personalizer/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Personalizer/Personalizer/Generated
   sync-methods: all
   clear-output-folder: true
+
+directive:
+  # TODO: Remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      if ($.includes("class Events"))
+        return $
+          .replace( /\"this.Endpoint\"/g, "\"this.Client.Endpoint\"" )
+          .replace( /this.Endpoint/g, "Client.Endpoint" );
+      return $;
 ```
