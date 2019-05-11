@@ -221,7 +221,7 @@
             "items": {
               "type": "string"
             },
-            "description": "The list of field names to include in the full-text search.",
+            "description": "The list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter.",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
             }
@@ -1099,7 +1099,7 @@
         },
         "searchFields": {
           "type": "string",
-          "description": "The comma-separated list of field names to include in the full-text search."
+          "description": "The comma-separated list of field names to which to scope the full-text search. When using fielded search (fieldName:searchExpression) in a full Lucene query, the field names of each fielded search expression take precedence over any field names listed in this parameter."
         },
         "searchMode": {
           "$ref": "#/definitions/SearchMode",
@@ -1161,7 +1161,7 @@
         },
         "searchFields": {
           "type": "string",
-          "description": "The list of comma-separated field names to search for the specified search text. Target fields must be included in the specified suggester."
+          "description": "The comma-separated list of field names to search for the specified search text. Target fields must be included in the specified suggester."
         },
         "select": {
           "type": "string",
