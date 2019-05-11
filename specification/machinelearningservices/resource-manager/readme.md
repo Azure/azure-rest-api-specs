@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-11-19` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-11-19'
 input-file:
-- Microsoft.MachineLearningServices/preview/2018-11-19/machineLearningServices.json
+- Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
 ```
 
 ---
