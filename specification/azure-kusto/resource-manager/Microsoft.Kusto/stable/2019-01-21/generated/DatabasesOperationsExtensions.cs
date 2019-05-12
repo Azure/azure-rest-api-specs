@@ -179,7 +179,7 @@ namespace Microsoft.Azure.Management.Kusto
             /// <param name='parameters'>
             /// The database parameters supplied to the Update operation.
             /// </param>
-            public static Database Update(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, DatabaseUpdate parameters)
+            public static Database Update(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, Database parameters)
             {
                 return operations.UpdateAsync(resourceGroupName, clusterName, databaseName, parameters).GetAwaiter().GetResult();
             }
@@ -205,7 +205,7 @@ namespace Microsoft.Azure.Management.Kusto
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Database> UpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, DatabaseUpdate parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Database> UpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, Database parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.UpdateWithHttpMessagesAsync(resourceGroupName, clusterName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {
@@ -478,7 +478,7 @@ namespace Microsoft.Azure.Management.Kusto
             /// <param name='parameters'>
             /// The database parameters supplied to the Update operation.
             /// </param>
-            public static Database BeginUpdate(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, DatabaseUpdate parameters)
+            public static Database BeginUpdate(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, Database parameters)
             {
                 return operations.BeginUpdateAsync(resourceGroupName, clusterName, databaseName, parameters).GetAwaiter().GetResult();
             }
@@ -504,7 +504,7 @@ namespace Microsoft.Azure.Management.Kusto
             /// <param name='cancellationToken'>
             /// The cancellation token.
             /// </param>
-            public static async Task<Database> BeginUpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, DatabaseUpdate parameters, CancellationToken cancellationToken = default(CancellationToken))
+            public static async Task<Database> BeginUpdateAsync(this IDatabasesOperations operations, string resourceGroupName, string clusterName, string databaseName, Database parameters, CancellationToken cancellationToken = default(CancellationToken))
             {
                 using (var _result = await operations.BeginUpdateWithHttpMessagesAsync(resourceGroupName, clusterName, databaseName, parameters, null, cancellationToken).ConfigureAwait(false))
                 {

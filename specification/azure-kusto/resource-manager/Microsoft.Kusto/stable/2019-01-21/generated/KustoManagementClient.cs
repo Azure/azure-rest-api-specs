@@ -337,6 +337,8 @@ namespace Microsoft.Azure.Management.Kusto
             };
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<AttachedDatabaseConfiguration>("kind"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<AttachedDatabaseConfiguration>("kind"));
+            SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<Database>("kind"));
+            DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<Database>("kind"));
             SerializationSettings.Converters.Add(new PolymorphicSerializeJsonConverter<DataConnection>("kind"));
             DeserializationSettings.Converters.Add(new PolymorphicDeserializeJsonConverter<DataConnection>("kind"));
             CustomInitialize();

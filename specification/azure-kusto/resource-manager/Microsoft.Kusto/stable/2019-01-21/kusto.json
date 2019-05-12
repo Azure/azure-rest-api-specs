@@ -836,7 +836,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseUpdate"
+              "$ref": "#/definitions/Database"
             },
             "description": "The database parameters supplied to the Update operation."
           },
@@ -1968,7 +1968,7 @@
         "clusterResourceId"
       ]
     },
-    "DatabaseProperties": {
+    "ReadWriteDatabaseProperties": {
       "properties": {
         "provisioningState": {
           "type": "string",
@@ -1989,6 +1989,43 @@
         },
         "softDeletePeriod": {
           "type": "string",
+          "format": "duration",
+          "description": "The time the data should be kept before it stops being accessible to queries in TimeSpan."
+        },
+        "hotCachePeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time the data should be kept in cache for fast queries in TimeSpan."
+        },
+        "statistics": {
+          "$ref": "#/definitions/DatabaseStatistics",
+          "description": "The statistics of the database."
+        }
+      },
+      "description": "Class representing the Kusto database properties."
+    },
+    "ReadOnlyAttachedDatabaseProperties": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The provisioned state of the resource.",
+          "enum": [
+            "Running",
+            "Creating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Moving"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "softDeletePeriod": {
+          "type": "string",
+          "readOnly": true,
           "format": "duration",
           "description": "The time the data should be kept before it stops being accessible to queries in TimeSpan."
         },
@@ -2210,15 +2247,25 @@
       "x-ms-discriminator-value": "Specific"
     },
     "Database": {
+      "required": [
+        "kind"
+      ],
       "properties": {
         "location": {
           "type": "string",
           "description": "Resource location."
         },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The database properties.",
-          "$ref": "#/definitions/DatabaseProperties"
+        "kind": {
+          "description": "Kind of the database",
+          "enum": [
+            "ReadWrite",
+            "ReadOnlyAttached"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
         }
       },
       "allOf": [
@@ -2226,26 +2273,40 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Class representing a Kusto database."
+      "description": "Class representing a Kusto database.",
+      "discriminator": "kind"
     },
-    "DatabaseUpdate": {
+    "ReadWriteDatabase": {
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location."
-        },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "The properties of the updated database.",
-          "$ref": "#/definitions/DatabaseProperties"
+          "description": "The database properties.",
+          "$ref": "#/definitions/ReadWriteDatabaseProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+          "$ref": "#/definitions/Database"
         }
       ],
-      "description": "Class representing an update to a Kusto database."
+      "description": "Class representing a read write database.",
+      "x-ms-discriminator-value": "ReadWrite"
+    },
+    "ReadOnlyAttachedDatabase": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The database properties.",
+          "$ref": "#/definitions/ReadOnlyAttachedDatabaseProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Database"
+        }
+      ],
+      "description": "Class representing a read only attached database.",
+      "x-ms-discriminator-value": "ReadOnlyAttached"
     },
     "DatabasePrincipal": {
       "type": "object",

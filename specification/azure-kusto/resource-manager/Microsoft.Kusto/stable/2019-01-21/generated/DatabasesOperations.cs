@@ -500,7 +500,7 @@ namespace Microsoft.Azure.Management.Kusto
         /// <param name='cancellationToken'>
         /// The cancellation token.
         /// </param>
-        public async Task<AzureOperationResponse<Database>> UpdateWithHttpMessagesAsync(string resourceGroupName, string clusterName, string databaseName, DatabaseUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Database>> UpdateWithHttpMessagesAsync(string resourceGroupName, string clusterName, string databaseName, Database parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             // Send Request
             AzureOperationResponse<Database> _response = await BeginUpdateWithHttpMessagesAsync(resourceGroupName, clusterName, databaseName, parameters, customHeaders, cancellationToken).ConfigureAwait(false);
@@ -1449,7 +1449,7 @@ namespace Microsoft.Azure.Management.Kusto
         /// <return>
         /// A response object containing the response body and response headers.
         /// </return>
-        public async Task<AzureOperationResponse<Database>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string clusterName, string databaseName, DatabaseUpdate parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
+        public async Task<AzureOperationResponse<Database>> BeginUpdateWithHttpMessagesAsync(string resourceGroupName, string clusterName, string databaseName, Database parameters, Dictionary<string, List<string>> customHeaders = null, CancellationToken cancellationToken = default(CancellationToken))
         {
             if (resourceGroupName == null)
             {
