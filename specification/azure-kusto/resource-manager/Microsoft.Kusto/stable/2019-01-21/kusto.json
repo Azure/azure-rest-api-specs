@@ -299,6 +299,105 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/listFollowerDatabases": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Returns a list of databases that are owned by this cluster and were followed by another cluster.",
+        "operationId": "Clusters_ListFollowerDatabases",
+        "x-ms-examples": {
+          "KustoClusterListFollowerDatabases": {
+            "$ref": "./examples/KustoClusterListFollowerDatabases.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of followed databases.",
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/detachFollowerDatabases": {
+      "post": {
+        "tags": [
+          "Clusters"
+        ],
+        "description": "Detaches all followers of a database owned by this cluster.",
+        "operationId": "Clusters_DetachFollowerDatabases",
+        "x-ms-examples": {
+          "KustoClusterDetachFollowerDatabases": {
+            "$ref": "./examples/KustoClusterDetachFollowerDatabases.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "followerDatabasesToRemove",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseRequest"
+            },
+            "description": "List of follower databases to remove."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully detached the follower databases.",
+            "schema": {
+              "$ref": "#/definitions/FollowerDatabaseListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters": {
       "get": {
         "tags": [
@@ -2237,6 +2336,47 @@
       },
       "description": "The list Kusto database principals operation response."
     },
+    "FollowerDatabaseListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FollowerDatabaseResult"
+          },
+          "description": "The list of follower database result."
+        }
+      },
+      "description": "The list Kusto database principals operation response."
+    },
+    "FollowerDatabaseResult": {
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "Kind of the attached database",
+          "enum": [
+            "All",
+            "Specific"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "clusterResourceId": {
+          "description": "List of resource ids of clusters that are following the database owned by this cluster.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name owned by this cluster that was followed. Empty in case following all databases."
+        }
+      },
+      "description": "A class representing database principal entity."
+    },
     "DataConnection": {
       "required": [
         "kind"
@@ -2288,6 +2428,36 @@
         }
       },
       "description": "The list Kusto database principals operation request."
+    },
+    "FollowerDatabaseRequest": {
+      "type": "object",
+      "required": [
+        "kind",
+        "clusterResourceId"
+      ],
+      "properties": {
+        "kind": {
+          "description": "Kind of the attached database",
+          "enum": [
+            "All",
+            "Specific"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "Kind",
+            "modelAsString": true
+          }
+        },
+        "clusterResourceId": {
+          "type": "string",
+          "description": "Resource id of the cluster that follows a database owned by this cluster."
+        },
+        "databaseName": {
+          "type": "string",
+          "description": "The database name owned by this cluster that was followed. Empty in case following all databases."
+        }
+      },
+      "description": "A class representing follower database request."
     },
     "DataConnectionValidation": {
       "properties": {

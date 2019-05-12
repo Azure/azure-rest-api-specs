@@ -1,0 +1,32 @@
+﻿{
+  "parameters": {
+    "subscriptionId": "12345678-1234-1234-1234-123456789098",
+    "resourceGroupName": "kustorptest",
+    "clusterName": "KustoClusterRPTest4",
+    "api-version": "2019-01-21"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "All",
+            "clusterResourceId": [
+              "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/leader1",
+              "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/leader2"
+              ],
+            "databaseName": "*"
+          },
+          {
+            "kind": "Specific",
+            "clusterResourceId": [
+              "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/leader3",
+              "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.Kusto/clusters/leader4"
+            ],
+            "databaseName": "db1"
+          }
+        ]
+      }
+    }
+  }
+}
