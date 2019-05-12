@@ -13,6 +13,8 @@ namespace Microsoft.Azure.Management.Kusto.Models
     using Microsoft.Rest;
     using Microsoft.Rest.Serialization;
     using Newtonsoft.Json;
+    using System.Collections;
+    using System.Collections.Generic;
     using System.Linq;
 
     /// <summary>
@@ -47,7 +49,7 @@ namespace Microsoft.Azure.Management.Kusto.Models
         /// <param name="location">Resource location.</param>
         /// <param name="databaseNames">The list of current databases that are
         /// attached.</param>
-        public AllAttachedDatabaseConfiguration(string clusterResourceId, string id = default(string), string name = default(string), string type = default(string), string location = default(string), string databaseNames = default(string))
+        public AllAttachedDatabaseConfiguration(string clusterResourceId, string id = default(string), string name = default(string), string type = default(string), string location = default(string), IList<string> databaseNames = default(IList<string>))
             : base(id, name, type, location)
         {
             DatabaseNames = databaseNames;
@@ -64,7 +66,7 @@ namespace Microsoft.Azure.Management.Kusto.Models
         /// Gets the list of current databases that are attached.
         /// </summary>
         [JsonProperty(PropertyName = "properties.databaseNames")]
-        public string DatabaseNames { get; private set; }
+        public IList<string> DatabaseNames { get; private set; }
 
         /// <summary>
         /// Gets or sets the resource id of the cluster where the databases you
