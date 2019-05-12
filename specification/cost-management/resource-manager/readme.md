@@ -75,6 +75,10 @@ directive:
     from: costmanagement.json
     where: '$.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}"].put'
     reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.ChargeValue
+    reason: 'older PR, not forecast.'
 ```
 
 ### Tag: package-2018-08-preview
