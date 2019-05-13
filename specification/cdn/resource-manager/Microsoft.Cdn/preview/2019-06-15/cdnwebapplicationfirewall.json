@@ -179,6 +179,62 @@
         },
         "x-ms-long-running-operation": true
       },
+      "patch": {
+        "tags": [
+          "WebApplicationFirewallPolicies"
+        ],
+        "description": "Update an existing CdnWebApplicationFirewallPolicy with the specified policy name uner the specified subcription and resource group",
+        "operationId": "Policies_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/PolicyNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "CdnWebAplicationFirewallPolicy parameters to be patched.",
+            "in": "body",
+            "name": "cdnWebApplicationFirewallPolicyPatchParameters",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CdnWebApplicationFirewallPolicyPatchParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CdnWebApplicationFirewallPolicy"
+            }
+          },
+          "202": {
+            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/CdnWebApplicationFirewallPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates specific policy": {
+            "$ref": "./examples/WafPolicyCreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "delete": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -203,9 +259,6 @@
           "200": {
             "description": "Delete successful."
           },
-          "202": {
-            "description": "Accepted. The request has been accepted for processing and the operation will complete asynchronously."
-          },
           "204": {
             "description": "No Content. The request has been accepted but the policy was not found."
           }
@@ -215,7 +268,7 @@
             "$ref": "./examples/WafPolicyDelete.json"
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": false
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Cdn/CdnWebApplicationFirewallManagedRuleSets": {
@@ -323,6 +376,20 @@
         }
       },
       "type": "object"
+    },
+    "CdnWebApplicationFirewallPolicyPatchParameters" : {
+      "type": "object",
+      "description": "Properties required to update a CdnWebApplicationFirewallPolicy.",
+      "properties": {
+        "tags": {
+          "description": "CdnWebApplicationFirewallPolicy tags",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-azure-resource": true
     },
     "CdnWebApplicationFirewallPolicyProperties": {
       "description": "Defines CDN web application firewall policy properties.",
