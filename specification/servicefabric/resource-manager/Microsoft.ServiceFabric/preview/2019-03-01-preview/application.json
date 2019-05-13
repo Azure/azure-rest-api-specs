@@ -606,7 +606,7 @@
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/ApplicationResourceUpdate"
+              "$ref": "#/definitions/ApplicationResource"
             }
           },
           "default": {
@@ -862,7 +862,7 @@
           "202": {
             "description": "The request was accepted and the operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/ServiceResourceUpdate"
+              "$ref": "#/definitions/ServiceResource"
             }
           },
           "default": {
@@ -974,21 +974,21 @@
       "type": "object",
       "description": "Describes capacity information for a custom resource balancing metric. This can be used to limit the total consumption of this metric by the services of this application.\n",
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
           "description": "The name of the metric."
         },
-        "MaximumCapacity": {
+        "maximumCapacity": {
           "type": "integer",
           "format": "int64",
           "description": "The maximum node capacity for Service Fabric application.\nThis is the maximum Load for an instance of this application on a single node. Even if the capacity of node is greater than this value, Service Fabric will limit the total load of services within the application on each node to this value.\nIf set to zero, capacity for this metric is unlimited on each node.\nWhen creating a new application with application capacity defined, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.\nWhen updating existing application with application capacity, the product of MaximumNodes and this value must always be smaller than or equal to TotalApplicationCapacity.\n"
         },
-        "ReservationCapacity": {
+        "reservationCapacity": {
           "type": "integer",
           "format": "int64",
           "description": "The node reservation capacity for Service Fabric application.\nThis is the amount of load which is reserved on nodes which have instances of this application.\nIf MinimumNodes is specified, then the product of these values will be the capacity reserved in the cluster for the application.\nIf set to zero, no capacity is reserved for this metric.\nWhen setting application capacity or when updating application capacity; this value must be smaller than or equal to MaximumCapacity for each metric.\n"
         },
-        "TotalApplicationCapacity": {
+        "totalApplicationCapacity": {
           "description": "The total metric capacity for Service Fabric application.\nThis is the total metric capacity for this application in the cluster. Service Fabric will try to limit the sum of loads of services within the application to this value.\nWhen creating a new application with application capacity defined, the product of MaximumNodes and MaximumCapacity must always be smaller than or equal to this value.\n",
           "type": "integer",
           "format": "int64"
@@ -1032,6 +1032,11 @@
           "items": {
             "$ref": "#/definitions/ApplicationResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of application list results if there are any.",
+          "readOnly": true
         }
       }
     },
@@ -1141,6 +1146,11 @@
           "items": {
             "$ref": "#/definitions/ApplicationTypeResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of application type list results if there are any.",
+          "readOnly": true
         }
       }
     },
@@ -1181,6 +1191,11 @@
           "items": {
             "$ref": "#/definitions/ApplicationTypeVersionResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of application type version list results if there are any.",
+          "readOnly": true
         }
       }
     },
@@ -1210,7 +1225,7 @@
       "description": "Describes the policy for a monitored application upgrade.",
       "properties": {
         "upgradeReplicaSetCheckTimeout": {
-          "$ref": "#/definitions/UpgradeReplicaSetCheckTimeout",
+          "type": "string",
           "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer)."
         },
         "forceRestart": {
@@ -1218,7 +1233,7 @@
           "description": "If true, then processes are forcefully restarted during upgrade even when the code version has not changed (the upgrade only changes configuration or data)."
         },
         "rollingUpgradeMonitoringPolicy": {
-          "$ref": "#/definitions/RollingUpgradeMonitoringPolicy",
+          "$ref": "#/definitions/ArmRollingUpgradeMonitoringPolicy",
           "description": "The policy used for monitoring the application upgrade"
         },
         "applicationHealthPolicy": {
@@ -1231,24 +1246,105 @@
       "type": "object",
       "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.\n",
       "properties": {
-        "ConsiderWarningAsError": {
+        "considerWarningAsError": {
           "type": "boolean",
           "description": "Indicates whether warnings are treated with the same severity as errors.",
           "default": false
         },
-        "MaxPercentUnhealthyDeployedApplications": {
+        "maxPercentUnhealthyDeployedApplications": {
           "type": "integer",
           "description": "The maximum allowed percentage of unhealthy deployed applications. Allowed values are Byte values from zero to 100.\nThe percentage represents the maximum tolerated percentage of deployed applications that can be unhealthy before the application is considered in error.\nThis is calculated by dividing the number of unhealthy deployed applications over the number of nodes where the application is currently deployed on in the cluster.\nThe computation rounds up to tolerate one failure on small numbers of nodes. Default percentage is zero.\n",
           "default": 0
         },
-        "DefaultServiceTypeHealthPolicy": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicy",
+        "defaultServiceTypeHealthPolicy": {
+          "$ref": "#/definitions/ArmServiceTypeHealthPolicy",
           "description": "The health policy used by default to evaluate the health of a service type."
         },
-        "ServiceTypeHealthPolicyMap": {
-          "$ref": "#/definitions/ServiceTypeHealthPolicyMap",
+        "serviceTypeHealthPolicyMap": {
+          "$ref": "#/definitions/ArmServiceTypeHealthPolicyMap",
           "description": "The map with service type health policy per service type name. The map is empty by default."
         }
+      }
+    },
+    "ArmRollingUpgradeMonitoringPolicy": {
+      "description": "The policy used for monitoring the application upgrade",
+      "properties": {
+        "failureAction": {
+          "type": "string",
+          "description": "The activation Mode of the service package",
+          "enum": [
+            "Rollback",
+            "Manual"
+          ],
+          "x-ms-enum": {
+            "name": "ArmUpgradeFailureAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Rollback",
+                "description": "Indicates that a rollback of the upgrade will be performed by Service Fabric if the upgrade fails."
+              },
+              {
+                "value": "Manual",
+                "description": "Indicates that a manual repair will need to be performed by the administrator if the upgrade fails. Service Fabric will not proceed to the next upgrade domain automatically."
+              }
+            ]
+          }
+        },
+        "healthCheckWaitDuration": {
+          "$ref": "#/definitions/HealthCheckWaitDuration",
+          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "healthCheckStableDuration": {
+          "$ref": "#/definitions/HealthCheckStableDuration",
+          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "healthCheckRetryTimeout": {
+          "$ref": "#/definitions/HealthCheckRetryTimeout",
+          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "upgradeTimeout": {
+          "$ref": "#/definitions/UpgradeTimeout",
+          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        },
+        "upgradeDomainTimeout": {
+          "$ref": "#/definitions/UpgradeDomainTimeout",
+          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
+        }
+      }
+    },
+    "ArmServiceTypeHealthPolicy": {
+      "type": "object",
+      "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
+      "properties": {
+        "maxPercentUnhealthyServices": {
+          "type": "integer",
+          "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyPartitionsPerService": {
+          "type": "integer",
+          "description": "The maximum percentage of partitions per service allowed to be unhealthy before your application is considered in error.\n",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        },
+        "maxPercentUnhealthyReplicasPerPartition": {
+          "type": "integer",
+          "description": "The maximum percentage of replicas per partition allowed to be unhealthy before your application is considered in error.\n",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "ArmServiceTypeHealthPolicyMap": {
+      "type": "object",
+      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
+      "additionalProperties": {
+        "$ref": "#/definitions/ArmServiceTypeHealthPolicy"
       }
     },
     "AvailableOperationDisplay": {
@@ -1270,7 +1366,7 @@
           "description": "Operation description"
         }
       },
-      "description": "Operation supported by Service Fabric resource provider"
+      "description": "Operation supported by the Service Fabric resource provider"
     },
     "CorrelationSchemeList": {
       "type": "array",
@@ -1365,7 +1461,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of Service Fabric operations supported by the Microsoft.ServiceFabric resource provider.",
+          "description": "List of operations supported by the Service Fabric resource provider.",
           "items": {
             "$ref": "#/definitions/OperationResult"
           }
@@ -1376,7 +1472,7 @@
           "readOnly": true
         }
       },
-      "description": "Describes the result of the request to list Service Fabric operations."
+      "description": "Describes the result of the request to list Service Fabric resource provider operations."
     },
     "OperationResult": {
       "properties": {
@@ -1433,13 +1529,13 @@
     },
     "PartitionSchemeDescription": {
       "type": "object",
-      "discriminator": "PartitionScheme",
+      "discriminator": "partitionScheme",
       "description": "Describes how the service is partitioned.",
       "required": [
-        "PartitionScheme"
+        "partitionScheme"
       ],
       "properties": {
-        "PartitionScheme": {
+        "partitionScheme": {
           "$ref": "#/definitions/PartitionScheme",
           "description": "Specifies how the service is partitioned."
         }
@@ -1469,49 +1565,40 @@
             "create",
             "read"
           ]
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Azure resource tags.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "Azure resource etag.",
+          "readOnly": true
         }
       },
       "description": "The resource model definition for proxy-only resource.",
       "x-ms-azure-resource": true
     },
-    "RollingUpgradeMonitoringPolicy": {
-      "description": "The policy used for monitoring the application upgrade",
-      "properties": {
-        "healthCheckWaitDuration": {
-          "$ref": "#/definitions/HealthCheckWaitDuration",
-          "description": "The amount of time to wait after completing an upgrade domain before applying health policies. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-        },
-        "healthCheckStableDuration": {
-          "$ref": "#/definitions/HealthCheckStableDuration",
-          "description": "The amount of time that the application or cluster must remain healthy before the upgrade proceeds to the next upgrade domain. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-        },
-        "healthCheckRetryTimeout": {
-          "$ref": "#/definitions/HealthCheckRetryTimeout",
-          "description": "The amount of time to retry health evaluation when the application or cluster is unhealthy before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-        },
-        "upgradeTimeout": {
-          "$ref": "#/definitions/UpgradeTimeout",
-          "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-        },
-        "upgradeDomainTimeout": {
-          "$ref": "#/definitions/UpgradeDomainTimeout",
-          "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
-        }
-      }
-    },
     "ServiceCorrelationDescription": {
       "type": "object",
       "description": "Creates a particular correlation between services.",
       "required": [
-        "Scheme",
-        "ServiceName"
+        "scheme",
+        "serviceName"
       ],
       "properties": {
-        "Scheme": {
+        "scheme": {
           "$ref": "#/definitions/ServiceCorrelationScheme",
           "description": "The ServiceCorrelationScheme which describes the relationship between this service and the service specified via ServiceName."
         },
-        "ServiceName": {
+        "serviceName": {
           "$ref": "#/definitions/ServiceName",
           "description": "The name of the service that the correlation relationship is established with."
         }
@@ -1580,26 +1667,26 @@
       "type": "object",
       "description": "Specifies a metric to load balance a service during runtime.",
       "required": [
-        "Name"
+        "name"
       ],
       "properties": {
-        "Name": {
+        "name": {
           "type": "string",
           "description": "The name of the metric. If the service chooses to report load during runtime, the load metric name should match the name that is specified in Name exactly. Note that metric names are case sensitive."
         },
-        "Weight": {
+        "weight": {
           "$ref": "#/definitions/ServiceLoadMetricWeight",
           "description": "The service load metric relative weight, compared to other metrics configured for this service, as a number."
         },
-        "PrimaryDefaultLoad": {
+        "primaryDefaultLoad": {
           "type": "integer",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Primary replica."
         },
-        "SecondaryDefaultLoad": {
+        "secondaryDefaultLoad": {
           "type": "integer",
           "description": "Used only for Stateful services. The default amount of load, as a number, that this service creates for this metric when it is a Secondary replica."
         },
-        "DefaultLoad": {
+        "defaultLoad": {
           "type": "integer",
           "description": "Used only for Stateless services. The default amount of load, as a number, that this service creates for this metric."
         }
@@ -1734,6 +1821,11 @@
           "items": {
             "$ref": "#/definitions/ServiceResource"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of service list results if there are any.",
+          "readOnly": true
         }
       }
     },
@@ -2006,12 +2098,6 @@
       "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
       "default": "P10675199DT02H48M05.4775807S"
     },
-    "UpgradeReplicaSetCheckTimeout": {
-      "type": "integer",
-      "format": "int64",
-      "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. Valid values are between 0 and 42949672925 inclusive. (unsigned 32-bit integer).",
-      "default": 42949672925
-    },
     "UpgradeTimeout": {
       "type": "string",
       "description": "The amount of time the overall upgrade has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds.",
@@ -2038,26 +2124,6 @@
         }
       },
       "description": "The error details."
-    },
-    "ServiceTypeHealthPolicy": {
-      "type": "object",
-      "description": "Represents the health policy used to evaluate the health of services belonging to a service type.\n",
-      "properties": {
-        "maxPercentUnhealthyServices": {
-          "type": "integer",
-          "description": "The maximum percentage of services allowed to be unhealthy before your application is considered in error.\n",
-          "default": 0,
-          "minimum": 0,
-          "maximum": 100
-        }
-      }
-    },
-    "ServiceTypeHealthPolicyMap": {
-      "type": "object",
-      "description": "Defines a ServiceTypeHealthPolicy per service type name.\n\nThe entries in the map replace the default service type health policy for each specified service type.\nFor example, in an application that contains both a stateless gateway service type and a stateful engine service type, the health policies for the stateless and stateful services can be configured differently.\nWith policy per service type, there's more granular control of the health of the service.\n\nIf no policy is specified for a service type name, the DefaultServiceTypeHealthPolicy is used for evaluation.\n",
-      "additionalProperties": {
-        "$ref": "#/definitions/ServiceTypeHealthPolicy"
-      }
     }
   },
   "parameters": {

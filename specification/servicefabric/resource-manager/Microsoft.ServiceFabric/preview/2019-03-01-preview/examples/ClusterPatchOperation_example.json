@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2018-02-01",
+    "api-version": "2019-03-01-preview",
     "parameters": {
       "tags": {
         "a": "b"
@@ -43,7 +43,9 @@
             "durabilityLevel": "Bronze"
           }
         ],
-        "reliabilityLevel": "Bronze"
+        "reliabilityLevel": "Bronze",
+        "upgradeMode": "Automatic",
+        "eventStoreServiceEnabled": true
       }
     }
   },
@@ -51,7 +53,7 @@
     "202": {
       "headers": {
         "Retry-After": "10",
-        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2018-02-01"
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2019-03-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/clusters",
@@ -61,6 +63,7 @@
         "tags": {
           "a": "b"
         },
+        "etag": "W/\"636462502169240744\"",
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
@@ -79,6 +82,7 @@
           },
           "clientCertificateThumbprints": [],
           "clientCertificateCommonNames": [],
+          "eventStoreServiceEnabled": true,
           "fabricSettings": [
             {
               "name": "UpgradeService",
@@ -164,7 +168,7 @@
     "200": {
       "headers": {
         "Retry-After": "10",
-        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2018-02-01"
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2019-03-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/clusters",
@@ -174,6 +178,7 @@
         "tags": {
           "a": "b"
         },
+        "etag": "W/\"636462502169240744\"",
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
@@ -192,6 +197,7 @@
           },
           "clientCertificateThumbprints": [],
           "clientCertificateCommonNames": [],
+          "eventStoreServiceEnabled": true,
           "fabricSettings": [
             {
               "name": "UpgradeService",

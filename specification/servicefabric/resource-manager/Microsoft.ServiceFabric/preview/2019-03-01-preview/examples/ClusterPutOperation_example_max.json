@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "resRg",
     "clusterName": "myCluster",
-    "api-version": "2018-02-01",
+    "api-version": "2019-03-01-preview",
     "parameters": {
       "type": "Microsoft.ServiceFabric/clusters",
       "location": "eastus",
@@ -135,7 +135,8 @@
           "DnsService",
           "BackupRestoreService",
           "ResourceMonitorService"
-        ]
+        ],
+        "eventStoreServiceEnabled": true
       }
     }
   },
@@ -143,7 +144,7 @@
     "202": {
       "headers": {
         "Retry-After": "10",
-        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2018-02-01"
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2019-03-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/clusters",
@@ -151,6 +152,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
         "name": "myCluster",
         "tags": {},
+        "etag": "W/\"636462502169240745\"",
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
@@ -287,14 +289,15 @@
             "DnsService",
             "BackupRestoreService",
             "ResourceMonitorService"
-          ]
+          ],
+          "eventStoreServiceEnabled": true
         }
       }
     },
     "200": {
       "headers": {
         "Retry-After": "10",
-        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2018-02-01"
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/4b5f6709-bc12-4365-8df3-894984b2a221?api-version=2019-03-01-preview"
       },
       "body": {
         "type": "Microsoft.ServiceFabric/clusters",
@@ -302,6 +305,7 @@
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
         "name": "myCluster",
         "tags": {},
+        "etag": "W/\"636462502169240745\"",
         "properties": {
           "provisioningState": "Succeeded",
           "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
@@ -438,7 +442,8 @@
             "DnsService",
             "BackupRestoreService",
             "ResourceMonitorService"
-          ]
+          ],
+          "eventStoreServiceEnabled": true
         }
       }
     }
