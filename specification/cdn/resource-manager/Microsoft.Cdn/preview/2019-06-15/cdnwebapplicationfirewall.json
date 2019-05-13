@@ -421,7 +421,16 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Provisioning state of the WebApplicationFirewallPolicy."
+          "description": "Provisioning state of the WebApplicationFirewallPolicy.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Failed"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
         },
         "resourceState": {
           "title": "Resource status of the policy.",
