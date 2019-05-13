@@ -1671,6 +1671,7 @@
         "produces": [
           "application/json"
         ],
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "name": "iotHubName",
@@ -1703,11 +1704,11 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/IotHubDescription"
-            }
+          "202": {
+            "description": "Manual failover initiated"
+          },
+          "204": {
+            "description": "long running manual failover operation completed"
           },
           "default": {
             "description": "DefaultErrorResponse",
