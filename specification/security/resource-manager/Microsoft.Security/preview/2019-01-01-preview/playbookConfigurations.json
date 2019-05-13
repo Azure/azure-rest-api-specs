@@ -6,14 +6,12 @@
     "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
-  "security": [
-    {
-      "azure_auth": [ "user_impersonation" ]
-    }
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{
+    "azure_auth": ["user_impersonation"]
+  }],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -33,11 +31,10 @@
             "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationsSubscription_example.json"
           }
         },
-        "tags": [ "PlaybookConfigurations" ],
+        "tags": ["PlaybookConfigurations"],
         "description": "Get all playbook configurations in a subscription.",
         "operationId": "PlaybookConfigurations_List",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -70,11 +67,10 @@
             "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationsResourceGroup_example.json"
           }
         },
-        "tags": [ "PlaybookConfigurations" ],
+        "tags": ["PlaybookConfigurations"],
         "description": "Get all playbook configurations in a resource group.",
         "operationId": "PlaybookConfigurations_ListByResourceGroup",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -110,11 +106,10 @@
             "$ref": "./examples/PlaybookConfigurations/GetPlaybookConfigurationResourceGroup_example.json"
           }
         },
-        "tags": [ "PlaybookConfigurations" ],
+        "tags": ["PlaybookConfigurations"],
         "description": "Get the details of a playbook configuration.",
         "operationId": "PlaybookConfigurations_Get",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -148,11 +143,10 @@
             "$ref": "./examples/PlaybookConfigurations/PutPlaybookConfiguration_example.json"
           }
         },
-        "tags": [ "PlaybookConfigurations" ],
+        "tags": ["PlaybookConfigurations"],
         "description": "Create or update a playbook configuration. If a playbook configuration is already created and a subsequent create request is issued with different properties, the playbook configuration properties will be updated.",
         "operationId": "PlaybookConfigurations_CreateOrUpdate",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -195,11 +189,10 @@
             "$ref": "./examples/PlaybookConfigurations/PatchPlaybookConfiguration_example.json"
           }
         },
-        "tags": [ "PlaybookConfigurations" ],
+        "tags": ["PlaybookConfigurations"],
         "description": "Patch an existing playbook configuration. Supports only Tags",
         "operationId": "PlaybookConfigurations_Patch",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -236,11 +229,10 @@
             "$ref": "./examples/PlaybookConfigurations/DeletePlaybookConfiguration_example.json"
           }
         },
-        "tags": [ "PlaybookConfigurations" ],
+        "tags": ["PlaybookConfigurations"],
         "operationId": "PlaybookConfigurations_Delete",
         "description": "Delete a playbook configuration.",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -273,11 +265,10 @@
             "$ref": "./examples/PlaybookConfigurations/ValidatePlaybookConfiguration_example.json"
           }
         },
-        "tags": [ "PlaybookConfigurations" ],
+        "tags": ["PlaybookConfigurations"],
         "description": "Validate the playbook configuration model before create or update. Any validation errors are returned to the client.",
         "operationId": "PlaybookConfigurations_Validate",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -313,7 +304,7 @@
   "definitions": {
     "PlaybookConfigurationList": {
       "description": "List of playbook configurations response.",
-      "required": [ "value" ],
+      "required": ["value"],
       "properties": {
         "value": {
           "type": "array",
@@ -339,11 +330,9 @@
           "$ref": "#/definitions/PlaybookConfigurationProperties"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
-        }
-      ]
+      "allOf": [{
+        "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+      }]
     },
     "PlaybookConfigurationProperties": {
       "type": "object",
@@ -447,14 +436,33 @@
     "PlaybookConfigurationAction": {
       "type": "object",
       "description": "The action that should be triggered.",
+      "discriminator": "actionType",
       "properties": {
-        "resourceId": {
+        "actionType": {
+          "type": "string",
+          "description": "type of action that will be triggered by the PlaybookConfiguration",
+          "enum": ["LogicApp"],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true,
+            "values": [{
+              "value": "LogicApp"
+            }]
+          }
+        }
+      }
+    },
+    "PlaybookConfigurationActionLogicApp": {
+      "type": "object",
+      "description": "The logic app action that should be triggered.",
+      "x-ms-discriminator-value": "LogicApp",
+      "allOf": [{
+        "$ref": "#/definitions/PlaybookConfigurationAction"
+      }],
+      "properties": {
+        "logicAppResourceId": {
           "type": "string",
           "description": "The triggered resource id."
-        },
-        "resourceProviderNamespace": {
-          "type": "string",
-          "description": "The resource provider name."
         },
         "uri": {
           "type": "string",

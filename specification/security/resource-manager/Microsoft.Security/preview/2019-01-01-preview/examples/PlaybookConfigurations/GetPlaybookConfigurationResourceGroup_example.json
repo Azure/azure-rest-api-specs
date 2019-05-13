@@ -1,20 +1,20 @@
 {
   "parameters": {
     "api-version": "2019-01-01-preview",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "resourceGroupName": "myRg",
-    "playbookConfigurationName": "myPlaybookConfigName"
+    "subscriptionId": "e4272367-5645-4c4e-9c67-3b74b59a6982",
+    "resourceGroupName": "exampleResourceGroup",
+    "playbookConfigurationName": "examplePlaybookConfiguration"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/myRg/providers/Microsoft.Security/playbookConfigurations/myPlaybookConfigName",
-        "name": "myPlaybookConfigName",
+        "id": "/subscriptions/e4272367-5645-4c4e-9c67-3b74b59a6982/resourceGroups/exampleResourceGroup/providers/Microsoft.Security/playbookConfigurations/examplePlaybookConfiguration",
+        "name": "examplePlaybookConfiguration",
         "type": "Microsoft.Security/playbookConfigurations",
         "location": "Central US",
         "tags": {},        
         "properties": {
-          "description": "Alerts auto dismiss",
+          "description": "An example of a playbook configuration that triggers two LogicApp resources (myTest1 and myTest2) on any security assessment of type customAssessment",
           "isEnabled": true,
           "metadata": {
             "createdDateTimeUtc": "2019-03-27T08:43:54.5755094Z",
@@ -24,24 +24,24 @@
           },
           "scopes": [
             {
-              "description": "Some custom description",
-              "scopePath": "/subscriptions/6618f01b-9b61-4cfc-9010-836b34b1bb2a"
+              "description": "A description that helps to identify this scope - for example: security assessments that relate to the subscription 212f9889-769e-45ae-ab43-6da33674bd26",
+              "scopePath": "/subscriptions/212f9889-769e-45ae-ab43-6da33674bd26"
             },
             {
-              "description": "Some custom description",
-              "scopePath": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+              "description": "A description that help to identify this scope - for example: security assessments that relate to the resource group myResourceGroup within the subscription 212f9889-769e-45ae-ab43-6da33674bd26",
+              "scopePath": "/subscriptions/212f9889-769e-45ae-ab43-6da33674bd26/resourceGroups/myResourceGroup"
             }
           ],
           "sources": [
             {
-              "eventSource": "AscAlerts",
+              "eventSource": "AscAssessments",
               "ruleSets": [
                 {
                   "rules": [
                     {
-                      "propertyJPath": "$.Entity.AlertType",
+                      "propertyJPath": "$.Entity.AssessmentType",
                       "propertyType": "string",
-                      "expectedValue": "customAlert",
+                      "expectedValue": "customAssessment",
                       "operator": "EqualsIgnoreCase"
                     }
                   ]
@@ -51,14 +51,14 @@
           ],
           "actions": [
             {
-              "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
-              "resourceProviderNamespace": "Microsoft.Logic",
-              "uri": "https://triggerUri1.com"
+              "logicAppResourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest1",
+              "actionType": "LogicApp",
+              "uri": "(This value contains a secret and will not be retrieved)"
             },
             {
-              "resourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest2",
-              "resourceProviderNamespace": "Microsoft.Logic",
-              "uri": "https://triggerUri2.com"
+              "logicAppResourceId": "/subscriptions/e54a4a18-5b94-4f90-9471-bd3decad8a2e/resourceGroups/sample/providers/Microsoft.Logic/workflows/MyTest2",
+              "actionType": "LogicApp",
+              "uri": "(This value contains a secret and will not be retrieved)"
             }
           ]
         }
