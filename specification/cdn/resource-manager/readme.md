@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-06'
 input-file:
-- Microsoft.Cdn/stable/2019-06-15/cdn.json
+- Microsoft.Cdn/stable/2019-06-15-preview/cdn.json
 - Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
 directive:
   - where:

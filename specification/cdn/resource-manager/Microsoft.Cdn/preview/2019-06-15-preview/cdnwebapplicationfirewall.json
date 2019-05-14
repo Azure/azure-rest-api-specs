@@ -62,7 +62,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./cdn.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -107,7 +107,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./cdn.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -168,7 +168,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./cdn.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -224,7 +224,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./cdn.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -296,7 +296,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "./cdn.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -343,7 +343,7 @@
         },
         "sku": {
           "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CdnWebApplicationFirewallPolicy.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "./cdn.json#/definitions/Sku"
         }
       },
       "required": [
@@ -351,31 +351,9 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "./cdn.json#/definitions/TrackedResource"
         }
       ]
-    },
-    "Sku": {
-      "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CDN profile.",
-      "properties": {
-        "name": {
-          "description": "Name of the pricing tier.",
-          "enum": [
-            "Standard_Verizon",
-            "Premium_Verizon",
-            "Custom_Verizon",
-            "Standard_Akamai",
-            "Standard_ChinaCdn",
-            "Standard_Microsoft"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
-        }
-      },
-      "type": "object"
     },
     "CdnWebApplicationFirewallPolicyPatchParameters" : {
       "type": "object",
@@ -787,12 +765,12 @@
         },
         "sku": {
           "description": "The pricing tier (defines a CDN provider, feature list and rate) of the CdnWebApplicationFirewallPolicy.",
-          "$ref": "#/definitions/Sku"
+          "$ref": "./network.json#/definitions/Sku"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "./cdn.json#/definitions/Resource"
         }
       ]
     },
@@ -900,76 +878,6 @@
           "pattern": "^(?:[A-Za-z0-9+/]{4})*(?:[A-Za-z0-9+/]{2}==|[A-Za-z0-9+/]{3}=|[A-Za-z0-9+/]{4})$"
         }
       }
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "message": {
-          "description": "Error message indicating why the operation failed.",
-          "readOnly": true,
-          "type": "string"
-        }
-      }
-    },
-    "Resource": {
-      "description": "The core properties of ARM resources",
-      "properties": {
-        "id": {
-          "description": "Resource ID.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "name": {
-          "description": "Resource name.",
-          "readOnly": true,
-          "type": "string"
-        },
-        "type": {
-          "description": "Resource type.",
-          "readOnly": true,
-          "type": "string"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        }
-      },
-      "required": [
-        "location"
-      ]
     }
   },
   "parameters": {
