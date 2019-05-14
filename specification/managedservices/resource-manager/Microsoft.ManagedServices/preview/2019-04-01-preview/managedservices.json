@@ -91,10 +91,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - The registration definition is deleted.",
-            "schema": {
-              "$ref": "#/definitions/RegistrationDefinition"
-            }
+            "description": "OK - The registration definition is deleted."
           },
           "204": {
             "description": "No Content- The registration definition does not exist."
@@ -226,11 +223,11 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - The registration assignment is deleted."
+          },
           "202": {
-            "description": "OK - The registration assignment deletion operation is accepted.",
-            "schema": {
-              "$ref": "#/definitions/RegistrationAssignment"
-            }
+            "description": "Accepted - The registration assignment deletion operation is accepted."
           },
           "204": {
             "description": "No Content- The registration assignment does not exist."
@@ -379,50 +376,6 @@
         "x-ms-examples": {
           "Get Registration Assignments": {
             "$ref": "./examples/GetRegistrationAssignments.json"
-          }
-        }
-      }
-    },
-    "/{scope}/providers/Microsoft.ManagedServices/operationstatuses/{operationId}": {
-      "get": {
-        "tags": [
-          "Operations"
-        ],
-        "operationId": "OperationStatuses_Get",
-        "x-ms-long-running-operation": true,
-        "description": "Returns the status of operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ScopeParameter"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The target operation Id."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The operation completed.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "202": {
-            "description": "Accepted. The operation is ongoing.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get operation status": {
-            "$ref": "./examples/GetOperationStatuses.json"
           }
         }
       }
