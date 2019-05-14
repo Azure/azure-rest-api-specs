@@ -80,6 +80,22 @@ directive:
     from: costmanagement.json
     where: $.paths
     reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.Notification.properties.enabled
+    reason: 'false alarm '
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
+    reason: 'false alarm '  
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.KpiProperties.properties.enabled
+    reason: 'false alarm ' 
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ViewProperties.properties.accumulated
+    reason: 'false alarm ' 
 ```
 
 ### Tag: package-2018-08-preview
