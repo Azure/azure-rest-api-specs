@@ -12,7 +12,7 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !(profile)
+``` yaml $(csharp) && !$(multiapi) && !(csharp-profile)
 namespace: Microsoft.Azure.Management.ResourceManager  
 output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
 
@@ -261,9 +261,13 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```
 
-```yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
-output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
+### Profile: hybrid_2018_03_01
+
+These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+
+```yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
   - tag: package-features-2015-12
@@ -275,12 +279,30 @@ batch:
   - tag: package-subscriptions-2016-06
 ```
 
-``` yaml $(profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
-output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
+### Profile: profile_2017_03_09
+
+These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
+
+``` yaml $(csharp-profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
  - tag: package-resources-2016-02
  - tag: package-links-2016-09
  - tag: package-subscriptions-2016-06
+ ```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
+
+batch:
+ - tag: package-policy-2016-12
+ - tag: package-locks-2016-09
+ - tag: package-resources-2018-05
  ```

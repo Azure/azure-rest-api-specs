@@ -28,15 +28,58 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-12
+tag: package-2019-02
 ```
 
 
+### Tag: package-2019-02
+
+These settings apply only when `--tag=package-2019-02` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-02'
+input-file:
+  - Microsoft.Network/stable/2019-02-01/applicationGateway.json
+  - Microsoft.Network/stable/2019-02-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2019-02-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-02-01/azureFirewall.json
+  - Microsoft.Network/stable/2019-02-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2019-02-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2019-02-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2019-02-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2019-02-01/endpointService.json
+  - Microsoft.Network/stable/2019-02-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2019-02-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2019-02-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2019-02-01/expressRoutePort.json
+  - Microsoft.Network/stable/2019-02-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2019-02-01/loadBalancer.json
+  - Microsoft.Network/stable/2019-02-01/natGateway.json
+  - Microsoft.Network/stable/2019-02-01/network.json
+  - Microsoft.Network/stable/2019-02-01/networkInterface.json
+  - Microsoft.Network/stable/2019-02-01/networkProfile.json
+  - Microsoft.Network/stable/2019-02-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2019-02-01/networkWatcher.json
+  - Microsoft.Network/stable/2019-02-01/operation.json
+  - Microsoft.Network/stable/2019-02-01/publicIpAddress.json
+  - Microsoft.Network/stable/2019-02-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2019-02-01/routeFilter.json
+  - Microsoft.Network/stable/2019-02-01/routeTable.json
+  - Microsoft.Network/stable/2019-02-01/serviceCommunity.json
+  - Microsoft.Network/stable/2019-02-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2019-02-01/usage.json
+  - Microsoft.Network/stable/2019-02-01/virtualNetwork.json
+  - Microsoft.Network/stable/2019-02-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2019-02-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2019-02-01/virtualWan.json
+  - Microsoft.Network/stable/2019-02-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2019-02-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2019-02-01/webapplicationfirewall.json
+```
 ### Tag: package-2018-12
 
 These settings apply only when `--tag=package-2018-12` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-12'
+``` yaml $(tag) == 'package-2018-12'
 input-file:
   - Microsoft.Network/stable/2018-12-01/applicationGateway.json
   - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
@@ -835,6 +878,9 @@ directive:
     from: loadBalancer.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: natGateway.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: networkInterface.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -1074,4 +1120,22 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2017_10_01
 regenerate-manager: true
 generate-interface: true
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Network/stable/2017-10-01/loadBalancer.json
+- Microsoft.Network/stable/2017-10-01/virtualNetworkGateway.json
+- Microsoft.Network/stable/2017-10-01/network.json
+- Microsoft.Network/stable/2017-10-01/networkInterface.json
+- Microsoft.Network/stable/2017-10-01/networkSecurityGroup.json
+- Microsoft.Network/stable/2017-10-01/operation.json
+- Microsoft.Network/stable/2017-10-01/publicIpAddress.json
+- Microsoft.Network/stable/2017-10-01/routeTable.json
+- Microsoft.Network/stable/2017-10-01/virtualNetwork.json
 ```

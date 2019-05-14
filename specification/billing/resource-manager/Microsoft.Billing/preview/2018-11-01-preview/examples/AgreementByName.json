@@ -2,13 +2,13 @@
   "parameters": {
     "api-version": "2018-11-01-preview",
     "billingAccountName": "{billingAccountName}",
-    "agreementName": "Agreement1"
+    "agreementName": "{agreementName}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/Agreement1",
-        "name": "Agreement1",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/agreements/{agreementName}",
+        "name": "{agreementName}",
         "type": "Microsoft.Billing/agreements",
         "properties": {
           "agreementLink": "https://agreementuri1.com",
@@ -22,7 +22,8 @@
             },
             {
               "status": "Declined",
-              "statusDate": "xyz@contoso.com"
+              "statusDate": "2018-11-02T00:00:00Z",
+              "email": "xyz@contoso.com"
             }
           ],
           "status": "Published"

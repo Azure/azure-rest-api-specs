@@ -4389,6 +4389,13 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Custom-analyzers-in-Azure-Search"
           }
         },
+        "encryptionKey": {
+          "$ref": "#/definitions/EncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Search. Once you have encrypted your data, it will always remain encrypted. Azure Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          }
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -5168,6 +5175,13 @@
             "url": "https://docs.microsoft.com/rest/api/searchservice/Create-Synonym-Map#SynonymMapFormat"
           }
         },
+        "encryptionKey": {
+          "$ref": "#/definitions/EncryptionKey",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your data when you want full assurance that no one, not even Microsoft, can decrypt your data in Azure Search. Once you have encrypted your data, it will always remain encrypted. Azure Search will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your data will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-encryption-with-cmk"
+          }
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -5194,6 +5208,51 @@
         }
       },
       "description": "Response from a List SynonymMaps request. If successful, it includes the full definitions of all synonym maps."
+    },
+    "EncryptionKey": {
+      "properties": {
+        "keyVaultKeyName": {
+          "type": "string",
+          "description": "The name of your Azure Key Vault key to be used to encrypt your data at rest."
+        },
+        "keyVaultKeyVersion": {
+          "type": "string",
+          "description": "The version of your Azure Key Vault key to be used to encrypt your data at rest."
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The URI of your Azure Key Vault, also referred to as DNS name, that contains the key to be used to encrypt your data at rest. An example URI might be https://my-keyvault-name.vault.azure.net."
+        },
+        "accessCredentials": {
+          "$ref": "#/definitions/AzureActiveDirectoryApplicationCredentials",
+          "description": "Optional Azure Active Directory credentials used for accessing your Azure Key Vault. Not required if using managed identity instead.",
+          "externalDocs": {
+            "url": "https://aka.ms/azure-search-msi"
+          }
+        }
+      },
+      "required": [
+        "keyVaultKeyName",
+        "keyVaultKeyVersion",
+        "keyVaultUri"
+      ],
+      "description": "A customer-managed encryption key in Azure Key Vault. Keys that you create and manage can be used to encrypt or decrypt data-at-rest in Azure Search, such as indexes and synonym maps."
+    },
+    "AzureActiveDirectoryApplicationCredentials": {
+      "properties": {
+        "applicationId": {
+          "type": "string",
+          "description": "An AAD Application ID that was granted the required access permissions to the Azure Key Vault that is to be used when encrypting your data at rest. The Application ID should not be confused with the Object ID for your AAD Application."
+        },
+        "applicationSecret": {
+          "type": "string",
+          "description": "The authentication key of the specified AAD application."
+        }
+      },
+      "required": [
+        "applicationId"
+      ],
+      "description" : "Credentials of a registered application created for your Azure Search service, used for authenticated access to the encryption keys stored in Azure Key Vault."
     },
     "ServiceStatistics": {
       "properties": {

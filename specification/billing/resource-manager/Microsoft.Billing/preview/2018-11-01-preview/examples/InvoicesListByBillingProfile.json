@@ -1,8 +1,8 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
-    "billingAccountName": "2000200",
-    "billingProfileName": "BillingProfileId1",
+    "billingAccountName": "{billingAccountName}",
+    "billingProfileName": "{billingProfileName}",
     "periodStartDate": "2018-01-01",
     "periodEndDate": "2018-06-30",
     "$filter": "invoicePeriodStartDate le 2018-06-01"
@@ -12,7 +12,7 @@
       "body": {
         "value": [
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/2000200/billingProfile/345986/invoices/1383723",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/1383723",
             "name": "1383723",
             "type": "Microsoft.Billing/invoices",
             "properties": {
@@ -29,7 +29,8 @@
               },
               "invoicePeriodStartDate": "2018-01-01T17:32:28Z",
               "invoicePeriodEndDate": "2018-01-15T17:32:28Z",
-              "billingProfile": "345986",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
+              "billingProfileName": "Contoso Operations Billing",
               "purchaseOrderNumber": "123456",
               "documentUrls": [
                 {
@@ -58,7 +59,7 @@
             }
           },
           {
-            "id": "providers/Microsoft.Billing/billingAccounts/2000200/billingProfile/345986/invoices/1383724",
+            "id": "providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/1383724",
             "name": "1383724",
             "type": "Microsoft.Billing/invoices",
             "properties": {
@@ -75,7 +76,8 @@
               },
               "invoicePeriodStartDate": "2018-02-01T17:32:28Z",
               "invoicePeriodEndDate": "2018-02-30T17:32:28Z",
-              "billingProfile": "345987",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}",
+              "billingProfileName": "Contoso Operations Billing",
               "purchaseOrderNumber": "123456",
               "documentUrls": [
                 {
