@@ -13,6 +13,14 @@ variables:
 
 jobs:
 
+- job: "BranchProtectionForPrivateRepo"
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  condition: and(variables['PRIVATE'], eq(variables['System.PullRequest.TargetBranch'], 'master'))
+  steps:
+  - script: '>&2 echo "the branch is protected"'
+    failOnStderr: true
+
 - job: "Syntax"
   pool:
     vmImage: 'Ubuntu 16.04'

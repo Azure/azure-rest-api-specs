@@ -161,4 +161,14 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2016-06-01
+
+These settings apply only when `--tag=package-2016-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-06-01'
+input-file:
+- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+title: SubscriptionClient
+description: The subscription client
+```
 
