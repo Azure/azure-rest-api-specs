@@ -84,6 +84,55 @@
                     }
                 }
             },
+            "patch": {
+                "tags": [
+                    "Solution"
+                ],
+                "x-ms-examples": {
+                    "SolutionUpdate": { "$ref": "./examples/SolutionUpdate.json" }
+                },
+                "x-ms-long-running-operation": true,
+                "operationId": "Solutions_Update",
+                "summary": "Patch a Solution.",
+                "description": "Patch a Solution. Only updating tags supported.",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupNameParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SolutionNameParameter"
+                    },
+                    {
+                        "name": "parameters",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SolutionPatch"
+                        },
+                        "description": "The parameters required to patch a Solution."
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "Patch succeeded.",
+                        "schema": {
+                            "$ref": "#/definitions/Solution"
+                        }
+                    },
+                    "default": {
+                        "schema": {
+                            "$ref": "#/definitions/CodeMessageError"
+                        },
+                        "description": "Error response definition."
+                    }
+                }
+            },
             "delete": {
                 "tags": [
                     "Solution"
@@ -809,6 +858,13 @@
                     "type": "string",
                     "description": "Resource location"
                 },
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Resource tags"
+                },
                 "plan":{
                   "description": "Plan for solution object supported by the OperationsManagement resource provider.",
                   "$ref":"#/definitions/SolutionPlan"
@@ -819,6 +875,19 @@
                 }
             },
             "description": "The container for solution.",
+            "x-ms-azure-resource": true
+        },
+        "SolutionPatch": {
+            "properties": {
+                "tags": {
+                    "type": "object",
+                    "additionalProperties": {
+                      "type": "string"
+                    },
+                    "description": "Resource tags"
+                  }
+            },
+            "description": "The properties of a Solution that can be patched.",
             "x-ms-azure-resource": true
         },
         "ManagementAssociation": {
