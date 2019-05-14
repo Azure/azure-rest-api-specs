@@ -687,6 +687,174 @@
         }        
       }
     },
+    "/{scope}/providers/Microsoft.CostManagement/budgets": {
+      "get": {
+        "tags": ["Budgets"],
+        "operationId": "Budgets_List",
+        "description": "Lists all budgets for the defined scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "BudgetsList": {
+            "$ref": "./examples/BudgetsList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/budgets/{budgetName}": {
+      "get": {
+        "tags": ["Budgets"],
+        "operationId": "Budget_Get",
+        "description": "Gets the budget for the scope by budget name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "Budget": {
+            "$ref": "./examples/Budget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": ["Budgets"],
+        "operationId": "Budget_CreateOrUpdate",
+        "description": "The operation to create or update a budget. Update operation requires latest eTag to be set in the request mandatorily. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdateBudget": {
+            "$ref": "./examples/CreateOrUpdateBudget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "x-required": true,
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            },
+            "description": "Parameters supplied to the Create Budget operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/BudgetModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["Budgets"],
+        "operationId": "Budget_Delete",
+        "description": "The operation to delete a budget.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/cost-management/"
+        },
+        "x-ms-examples": {
+          "DeleteBudget": {
+            "$ref": "./examples/DeleteBudget.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeBudgetParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/budgetNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.CostManagement/operations": {
       "get": {
         "tags": [
@@ -1360,6 +1528,172 @@
           "type": "string"
         }
       }
+    },
+    "BudgetsListResult": {
+      "description": "Result of listing budgets. It contains a list of available budgets in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of budgets.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/BudgetModel"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "BudgetModel": {
+      "description": "A budget resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BudgetProperties",
+          "title": "Budget properties"
+        }
+      }
+    },
+    "BudgetProperties": {
+      "description": "The properties of the budget.",
+      "properties": {
+        "category": {
+          "description": "The category of the budget, whether the budget tracks cost or usage.",
+          "type": "string",
+          "enum": ["Cost", "Usage"],
+          "x-ms-enum": {
+            "name": "CategoryType",
+            "modelAsString": true
+          }
+        },
+        "amount": {
+          "description": "The total amount of cost to track with the budget",
+          "type": "number",
+          "format": "decimal"
+        },
+        "timeGrain": {
+          "description": "The time covered by a budget. Tracking of the amount will be reset based on the time grain.",
+          "type": "string",
+          "enum": ["Monthly", "Quarterly", "Annually"],
+          "x-ms-enum": {
+            "name": "TimeGrainType",
+            "modelAsString": true
+          }
+        },
+        "timePeriod": {
+          "description": "Has start and end date of the budget. The start date must be first of the month and should be less than the end date. Budget start date must be on or after June 1, 2017. Future start date should not be more than three months. Past start date should  be selected within the timegrain period. There are no restrictions on the end date.",
+          "$ref": "#/definitions/BudgetTimePeriod"
+        },
+        "filter": {
+          "description": "May be used to filter budgets.",
+          "type": "object",
+          "$ref": "#/definitions/ReportConfigFilter"
+        },
+        "currentSpend": {
+          "description": "The current amount of cost which is being tracked for a budget.",
+          "$ref": "#/definitions/CurrentSpend",
+          "readOnly": true
+        },
+        "notifications": {
+          "type": "object",
+          "description": "Dictionary of notifications associated with the budget. Budget can have up to five notifications.",
+          "additionalProperties": {
+            "type": "object",
+            "$ref": "#/definitions/Notification"
+          },
+          "maxItems": 5
+        }
+      },
+      "required": ["category", "amount", "timeGrain", "timePeriod"]
+    },
+    "BudgetTimePeriod": {
+      "description": "The start and end date for a budget.",
+      "properties": {
+        "startDate": {
+          "description": "The start date for the budget.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "endDate": {
+          "description": "The end date for the budget. If not provided, we default this to 10 years from the start date.",
+          "type": "string",
+          "format": "date-time"
+        }
+      },
+      "required": ["startDate"]
+    },
+    "CurrentSpend": {
+      "description": "The current amount of cost which is being tracked for a budget.",
+      "properties": {
+        "amount": {
+          "description": "The total amount of cost which is being tracked by the budget.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unit": {
+          "description": "The unit of measure for the budget amount.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Notification": {
+      "description": "The notification associated with a budget.",
+      "properties": {
+        "enabled": {
+          "description": "The notification is enabled or not.",
+          "type": "boolean"
+        },
+        "operator": {
+          "description": "The comparison operator.",
+          "type": "string",
+          "enum": ["EqualTo", "GreaterThan", "GreaterThanOrEqualTo"],
+          "x-ms-enum": {
+            "name": "NotificationOperatorType",
+            "modelAsString": true
+          }
+        },
+        "threshold": {
+          "description": "Threshold value associated with a notification. Notification is sent when the cost exceeded the threshold. It is always percent and has to be between 0 and 1000.",
+          "type": "number",
+          "format": "decimal"
+        },
+        "contactEmails": {
+          "description": "Email addresses to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1,
+          "maxItems": 50
+        },
+        "contactRoles": {
+          "description": "Contact roles to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "contactGroups": {
+          "description": "Action groups to send the budget notification to when the threshold is exceeded.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 0,
+          "maxItems": 50
+        }
+      },
+      "required": ["enabled", "operator", "threshold", "contactEmails"]
     }
   },
   "parameters": {
@@ -1417,14 +1751,6 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "connectorNameParameter": {
-      "name": "connectorName",
-      "in": "path",
-      "description": "Connector Name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "externalBillingAccountNameParameter": {
       "name": "externalBillingAccountName",
       "in": "path",
@@ -1465,6 +1791,23 @@
       "description": "The scope associated with view operations. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope and 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
+    },
+    "scopeBudgetParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with budget operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "budgetNameParameter": {
+      "name": "budgetName",
+      "in": "path",
+      "description": "Budget Name.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   }
 }
