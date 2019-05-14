@@ -565,129 +565,129 @@
           }
         }
       }
-    }
-  },
-  "ManagedRuleSets": {
-    "description": "Defines ManagedRuleSets - array of managedRuleSet",
-    "properties": {
-      "ruleSets": {
-        "description": "List of rules",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/ManagedRuleSet"
+    },
+    "ManagedRuleSets": {
+      "description": "Defines ManagedRuleSets - array of managedRuleSet",
+      "properties": {
+        "ruleSets": {
+          "description": "List of rules",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          }
         }
-      }
-    }
-  },
-  "ManagedRuleSet": {
-    "type": "object",
-    "description": "Base class for all types of ManagedRuleSet.",
-    "x-ms-discriminator-value": "Unknown",
-    "properties": {
-      "ruleSetVersion": {
-        "description": "defines version of the rule set",
-        "type": "string"
       },
-      "ruleSetType": {
-        "description": "RuleSetType - AzureManagedRuleSet or OWASP RuleSets.",
-        "type": "string"
-      }
-    },
-    "required": [
-      "ruleSetType"
-    ],
-    "discriminator": "ruleSetType"
-  },
-  "OWASPRuleSet": {
-    "type": "object",
-    "description": "Describes azure managed provider.",
-    "x-ms-discriminator-value": "OWASPRuleSet",
-    "properties": {
-      "ruleSetConfiguration": {
-        "$ref": "#/definitions/OWASPRuleSetConfiguration",
+      "ManagedRuleSet": {
+        "type": "object",
+        "description": "Base class for all types of ManagedRuleSet.",
+        "x-ms-discriminator-value": "Unknown",
+        "properties": {
+          "ruleSetVersion": {
+            "description": "defines version of the rule set",
+            "type": "string"
+          },
+          "ruleSetType": {
+            "description": "RuleSetType - AzureManagedRuleSet or OWASP RuleSets.",
+            "type": "string"
+          }
+        },
+        "required": [
+          "ruleSetType"
+        ],
+        "discriminator": "ruleSetType"
+      },
+      "OWASPRuleSet": {
+        "type": "object",
+        "description": "Describes azure managed provider.",
+        "x-ms-discriminator-value": "OWASPRuleSet",
+        "properties": {
+          "ruleSetConfiguration": {
+            "$ref": "#/definitions/OWASPRuleSetConfiguration",
+            "description": "OWASP rule set configuration."
+          }
+        },
+        "allOf": [
+          {
+            "$ref": "#/definitions/ManagedRuleSet"
+          }
+        ]
+      },
+      "OWASPRuleSetConfiguration": {
+        "properties": {
+          "disabledRuleGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/OWASPRuleSetDisabledRuleGroup"
+            },
+            "description": "The disabled rule groups."
+          },
+          "exclusions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/OWASPRuleSetExclusion"
+            },
+            "description": "The exclusion list."
+          }
+        },
         "description": "OWASP rule set configuration."
-      }
-    },
-    "allOf": [
-      {
-        "$ref": "#/definitions/ManagedRuleSet"
-      }
-    ]
-  },
-  "OWASPRuleSetConfiguration": {
-    "properties": {
-      "disabledRuleGroups": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/OWASPRuleSetDisabledRuleGroup"
+      },
+      "OWASPRuleSetDisabledRuleGroup": {
+        "properties": {
+          "ruleGroupName": {
+            "type": "string",
+            "description": "The name of the rule group that will be disabled."
+          },
+          "rules": {
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32",
+              "x-nullable": false
+            },
+            "description": "The list of rules that will be disabled. If null, all rules of the rule group will be disabled."
+          }
         },
-        "description": "The disabled rule groups."
+        "required": [
+          "ruleGroupName"
+        ],
+        "description": "Allows to disable rules within a rule group or an entire rule group."
       },
-      "exclusions": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/OWASPRuleSetExclusion"
+      "OWASPRuleSetExclusion": {
+        "properties": {
+          "matchVariable": {
+            "type": "string",
+            "description": "The variable to be excluded."
+          },
+          "selectorMatchOperator": {
+            "type": "string",
+            "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to."
+          },
+          "selector": {
+            "type": "string",
+            "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
+          }
         },
-        "description": "The exclusion list."
+        "required": [
+          "matchVariable"
+        ],
+        "description": "Allow to exclude some variable satisfy the condition for the WAF check"
       }
     },
-    "description": "OWASP rule set configuration."
-  },
-  "OWASPRuleSetDisabledRuleGroup": {
-    "properties": {
-      "ruleGroupName": {
+    "parameters": {
+      "SubscriptionIdParameter": {
+        "name": "subscriptionId",
+        "in": "path",
+        "required": true,
         "type": "string",
-        "description": "The name of the rule group that will be disabled."
+        "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
       },
-      "rules": {
-        "type": "array",
-        "items": {
-          "type": "integer",
-          "format": "int32",
-          "x-nullable": false
-        },
-        "description": "The list of rules that will be disabled. If null, all rules of the rule group will be disabled."
+      "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "required": true,
+        "type": "string",
+        "description": "Client API version."
       }
-    },
-    "required": [
-      "ruleGroupName"
-    ],
-    "description": "Allows to disable rules within a rule group or an entire rule group."
-  },
-  "OWASPRuleSetExclusion": {
-    "properties": {
-      "matchVariable": {
-        "type": "string",
-        "description": "The variable to be excluded."
-      },
-      "selectorMatchOperator": {
-        "type": "string",
-        "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to."
-      },
-      "selector": {
-        "type": "string",
-        "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
-      }
-    },
-    "required": [
-      "matchVariable"
-    ],
-    "description": "Allow to exclude some variable satisfy the condition for the WAF check"
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }
