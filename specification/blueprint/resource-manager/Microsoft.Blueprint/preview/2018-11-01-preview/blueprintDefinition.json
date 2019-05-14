@@ -830,12 +830,12 @@
             "modelAsString": true,
             "values": [
               {
-                  "value": "subscription",
-                  "description": "The blueprint targets a subscription during blueprint assignment."
+                "value": "subscription",
+                "description": "The blueprint targets a subscription during blueprint assignment."
               },
               {
-                  "value": "managementGroup",
-                  "description": "The blueprint targets a management group during blueprint assignment. This is reserved for future use."
+                "value": "managementGroup",
+                "description": "The blueprint targets a management group during blueprint assignment. This is reserved for future use."
               }
             ]
           }
@@ -860,7 +860,9 @@
       "type": "object",
       "x-ms-external": true,
       "allOf": [
-        { "$ref": "#/definitions/SharedBlueprintProperties" }
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
       ],
       "properties": {
         "versions": {
@@ -881,7 +883,9 @@
       "type": "object",
       "x-ms-external": true,
       "allOf": [
-        { "$ref": "#/definitions/SharedBlueprintProperties" }
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
       ],
       "properties": {
         "blueprintName": {
@@ -898,10 +902,11 @@
     "BlueprintStatus": {
       "description": "The status of the blueprint. This field is readonly.",
       "type": "object",
-      "properties": {
-      },
+      "properties": {},
       "allOf": [
-        { "$ref": "#/definitions/BlueprintResourceStatusBase" }
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
       ]
     },
     "TemplateArtifactProperties": {
@@ -1080,9 +1085,13 @@
           "description": "Actual value."
         }
       },
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretReferenceParameterValue": {
@@ -1094,9 +1103,13 @@
           "$ref": "#/definitions/SecretValueReference"
         }
       },
-      "required": [ "reference" ],
+      "required": [
+        "reference"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretValueReference": {
@@ -1130,7 +1143,9 @@
           "type": "string"
         }
       },
-      "required": [ "id" ]
+      "required": [
+        "id"
+      ]
     },
     "ParameterDefinitionCollection": {
       "description": "A dictionary hold parameter name and its metadata.",
@@ -1338,7 +1353,7 @@
       "properties": {
         "timeCreated": {
           "type": "string",
-          "format": "date-time",          
+          "format": "date-time",
           "readOnly": true,
           "description": "Creation time of this blueprint definition."
         },
@@ -1352,7 +1367,7 @@
     }
   },
   "parameters": {
-    "ScopeParameter":{
+    "ScopeParameter": {
       "name": "scope",
       "in": "path",
       "required": true,
