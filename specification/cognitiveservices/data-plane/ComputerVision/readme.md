@@ -49,7 +49,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.ComputerVision
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ComputerVision/ComputerVision/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Vision.ComputerVision/src/Generated
   clear-output-folder: true
 
 directive:
