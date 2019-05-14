@@ -45,6 +45,9 @@
   "paths": {
     "/availability": {
       "get": {
+        "tags": [
+          "Availability"
+        ],
         "operationId": "GetAvailability",
         "description": "Returns the time range and distribution of event count over the event timestamp ($ts). This API can be used to provide landing experience of navigating to the environment.",
         "x-ms-examples": {
@@ -98,6 +101,9 @@
     },
     "/eventSchema": {
       "post": {
+        "tags": [
+          "EventSchema"
+        ],
         "operationId": "GetEventSchema",
         "description": "Returns environment event schema for a given search span. Event schema is a set of property definitions. Event schema may not be contain all persisted properties when there are too many properties.",
         "x-ms-examples": {
@@ -160,6 +166,9 @@
     },
     "/timeseries/modelSettings": {
       "get": {
+        "tags": [
+          "ModelSettings"
+        ],
         "operationId": "GetModelSettings",
         "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.",
         "x-ms-examples": {
@@ -208,6 +217,9 @@
         }
       },
       "patch": {
+        "tags": [
+          "ModelSettings"
+        ],
         "operationId": "UpdateModelSettings",
         "description": "Updates time series model settings - either the model name or default type ID.",
         "x-ms-examples": {
@@ -267,6 +279,9 @@
     },
     "/timeseries/query": {
       "post": {
+        "tags": [
+          "TimeSeriesQuery"
+        ],
         "operationId": "ExecuteQueryPaged",
         "description": "Executes Time Series Query in pages of results - Get Events, Get Series or Aggregate Series.",
         "x-ms-examples": {
@@ -353,6 +368,9 @@
     },
     "/timeseries/instances": {
       "get": {
+        "tags": [
+          "Instances"
+        ],
         "operationId": "GetInstancesPaged",
         "description": "Gets time series instances in pages.",
         "x-ms-examples": {
@@ -412,6 +430,9 @@
     },
     "/timeseries/instances/$batch": {
       "post": {
+        "tags": [
+          "Instances"
+        ],
         "operationId": "ExecuteInstancesBatchOperation",
         "description": "Executes a batch get, create, update, delete operation on multiple time series instances.",
         "x-ms-examples": {
@@ -486,6 +507,9 @@
     },
     "/timeseries/instances/suggest": {
       "post": {
+        "tags": [
+          "Instances"
+        ],
         "operationId": "SuggestInstances",
         "description": "Suggests keywords based on time series instance attributes to be later used in Search Instances.",
         "x-ms-examples": {
@@ -545,6 +569,9 @@
     },
     "/timeseries/instances/search": {
       "post": {
+        "tags": [
+          "Instances"
+        ],
         "operationId": "SearchInstancesPaged",
         "description": "Partial list of hits on search for time series instances based on instance attributes.",
         "x-ms-examples": {
@@ -613,6 +640,9 @@
     },
     "/timeseries/types": {
       "get": {
+        "tags": [
+          "Types"
+        ],
         "operationId": "GetTypesPaged",
         "description": "Gets time series types in pages.",
         "x-ms-examples": {
@@ -672,6 +702,9 @@
     },
     "/timeseries/types/$batch": {
       "post": {
+        "tags": [
+          "Types"
+        ],
         "operationId": "ExecuteTypesBatchOperation",
         "description": "Executes a batch get, create, update, delete operation on multiple time series types.",
         "x-ms-examples": {
@@ -743,6 +776,9 @@
     },
     "/timeseries/hierarchies": {
       "get": {
+        "tags": [
+          "Hierarchies"
+        ],
         "operationId": "GetHierarchiesPaged",
         "description": "Returns time series hierarchies definitions in pages.",
         "x-ms-examples": {
@@ -802,6 +838,9 @@
     },
     "/timeseries/hierarchies/$batch": {
       "post": {
+        "tags": [
+          "Hierarchies"
+        ],
         "operationId": "ExecuteHierarchiesBatchOperation",
         "description": "Executes a batch get, create, update, delete operation on multiple time series hierarchy definitions.",
         "x-ms-examples": {
