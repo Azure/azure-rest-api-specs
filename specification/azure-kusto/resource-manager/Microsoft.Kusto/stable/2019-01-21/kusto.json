@@ -1931,40 +1931,28 @@
       },
       "description": "A class that contains database statistics information."
     },
-    "SpecificAttachedDatabaseConfigurationProperties": {
+    "AttachedDatabaseConfigurationProperties": {
       "properties": {
         "databaseName": {
           "type": "string",
-          "description": "The name of the database which you would like to attach."
+          "description": "The name of the database which you would like to attach, use * if you want to follow all current and future databases."
         },
         "clusterResourceId": {
           "type": "string",
           "description": "The resource id of the cluster where the databases you would like to attach reside."
-        }
-      },
-      "description": "Class representing the an attached database configuration properties of kind specific.",
-      "required": [
-        "databaseName",
-        "clusterResourceId"
-      ]
-    },
-    "AllAttachedDatabaseConfigurationProperties": {
-      "properties": {
-        "databaseNames": {
+        },
+        "AttachedDatabaseNames": {
           "type": "array",
           "items": {
             "type": "string"
           },
           "readOnly": true,
-          "description": "The list of current databases that are attached."
-        },
-        "clusterResourceId": {
-          "type": "string",
-          "description": "The resource id of the cluster where the databases you would like to attach reside."
+          "description": "The list of databases from the clusterResourceId which are currently attached to the cluster."
         }
       },
-      "description": "Class representing the an attached database configuration properties of kind all.",
+      "description": "Class representing the an attached database configuration properties of kind specific.",
       "required": [
+        "databaseName",
         "clusterResourceId"
       ]
     },
@@ -2185,25 +2173,15 @@
       "description": "Class representing an update to a Kusto cluster."
     },
     "AttachedDatabaseConfiguration": {
-      "required": [
-        "kind"
-      ],
       "properties": {
         "location": {
           "type": "string",
           "description": "Resource location."
         },
-        "kind": {
-          "description": "Kind of the attached database",
-          "enum": [
-            "All",
-            "Specific"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of the attached database configuration.",
+          "$ref": "#/definitions/AttachedDatabaseConfigurationProperties"
         }
       },
       "allOf": [
@@ -2211,40 +2189,7 @@
           "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Class representing an attached database configuration.",
-      "discriminator": "kind"
-    },
-    "AllAttachedDatabaseConfiguration": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The properties of the attached database configuration of all kind.",
-          "$ref": "#/definitions/AllAttachedDatabaseConfigurationProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AttachedDatabaseConfiguration"
-        }
-      ],
-      "description": "Class representing an attached database configuration for a all attached database kind.",
-      "x-ms-discriminator-value": "All"
-    },
-    "SpecificAttachedDatabaseConfiguration": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The properties of the attached database configuration of specific kind.",
-          "$ref": "#/definitions/SpecificAttachedDatabaseConfigurationProperties"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AttachedDatabaseConfiguration"
-        }
-      ],
-      "description": "Class representing an attached database configuration for a specific attached database kind.",
-      "x-ms-discriminator-value": "Specific"
+      "description": "Class representing an attached database configuration."
     },
     "Database": {
       "required": [
@@ -2415,18 +2360,6 @@
     "FollowerDatabaseResult": {
       "type": "object",
       "properties": {
-        "kind": {
-          "description": "Kind of the attached database",
-          "enum": [
-            "All",
-            "Specific"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
-        },
         "clusterResourceId": {
           "description": "List of resource ids of clusters that are following the database owned by this cluster.",
           "type": "array",
@@ -2436,7 +2369,7 @@
         },
         "databaseName": {
           "type": "string",
-          "description": "The database name owned by this cluster that was followed. Empty in case following all databases."
+          "description": "The database name owned by this cluster that was followed. * in case following all databases."
         }
       },
       "description": "A class representing database principal entity."
@@ -2496,29 +2429,17 @@
     "FollowerDatabaseRequest": {
       "type": "object",
       "required": [
-        "kind",
-        "clusterResourceId"
+        "clusterResourceId",
+        "databaseName"
       ],
       "properties": {
-        "kind": {
-          "description": "Kind of the attached database",
-          "enum": [
-            "All",
-            "Specific"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
-        },
         "clusterResourceId": {
           "type": "string",
           "description": "Resource id of the cluster that follows a database owned by this cluster."
         },
         "databaseName": {
           "type": "string",
-          "description": "The database name owned by this cluster that was followed. Empty in case following all databases."
+          "description": "The database name owned by this cluster that was followed. * in case following all databases."
         }
       },
       "description": "A class representing follower database request."
