@@ -32,72 +32,35 @@
       }
     }
   },
-  "paths": {
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/dimensions": {
+  "paths": {  
+    "/{scope}/providers/Microsoft.CostManagement/views": {
       "get": {
         "tags": [
-          "Dimensions"
+          "Views"
         ],
-        "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "Dimensions_ListByBillingAccount",
-        "description": "Lists the dimensions by billingAccount Id.",
+        "operationId": "Views_List",
+        "description": "Lists all views at the given scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "BillingAccountDimensionsList": {
-            "$ref": "./examples/BillingAccountDimensionsList.json"
-          },
-          "BillingAccountDimensionsListExpandAndTop": {
-            "$ref": "./examples/BillingAccountDimensionsListExpandAndTop.json"
-          },
-          "BillingAccountDimensionsListWithFilter": {
-            "$ref": "./examples/BillingAccountDimensionsListWithFilter.json"
+          "ResourceGroupViewList": {
+            "$ref": "./examples/ViewListByResourceGroup.json"
           }
         },
         "parameters": [
           {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N dimension data.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 1000
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DimensionsListResult"
+              "$ref": "#/definitions/ViewListResult"
             }
           },
           "default": {
@@ -106,32 +69,22 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/dimensions": {
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/views":{
       "get": {
         "tags": [
-          "Dimensions"
+          "Views"
         ],
-        "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "Dimensions_ListByEnrollmentAccount",
-        "description": "Lists the dimensions by Enrollment Account Id.",
+        "operationId": "Views_ListByExternalBillingAccount",
+        "description": "List all views by external billing account",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "EnrollmentAccountDimensionsList": {
-            "$ref": "./examples/EnrollmentAccountDimensionsList.json"
-          },
-          "EnrollmentAccountDimensionsListExpandAndTop": {
-            "$ref": "./examples/EnrollmentAccountDimensionsListExpandAndTop.json"
-          },
-          "EnrollmentAccountDimensionsListWithFilter": {
-            "$ref": "./examples/EnrollmentAccountDimensionsListWithFilter.json"
+          "ExternalBillingAccountViewList": {
+            "$ref": "./examples/ViewListByExternalBillingAccount.json"
           }
         },
         "parameters": [
@@ -139,47 +92,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountIdParameter"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N dimension data.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 1000
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DimensionsListResult"
+              "$ref": "#/definitions/ViewListResult"
             }
           },
           "default": {
@@ -188,32 +108,22 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/dimensions": {
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}/views":{
       "get": {
         "tags": [
-          "Dimensions"
+          "Views"
         ],
-        "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "Dimensions_ListByDepartment",
-        "description": "Lists the dimensions by Department Id.",
+        "operationId": "Views_ListByExternalSubscription",
+        "description": "List all views by external subscription",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "DepartmentDimensionsList": {
-            "$ref": "./examples/DepartmentDimensionsList.json"
-          },
-          "DepartmentDimensionsListExpandAndTop": {
-            "$ref": "./examples/DepartmentDimensionsListExpandAndTop.json"
-          },
-          "DepartmentDimensionsListWithFilter": {
-            "$ref": "./examples/DepartmentDimensionsListWithFilter.json"
+          "ExternalSubscriptionViewList": {
+            "$ref": "./examples/ViewListByExternalSubscription.json"
           }
         },
         "parameters": [
@@ -221,47 +131,14 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentIdParameter"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N dimension data.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 1000
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DimensionsListResult"
+              "$ref": "#/definitions/ViewListResult"
             }
           },
           "default": {
@@ -270,959 +147,40 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/dimensions": {
+    "/{scope}/providers/Microsoft.CostManagement/views/{viewName}": {
       "get": {
         "tags": [
-          "Dimensions"
+          "Views"
         ],
-        "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "Dimensions_ListByManagementGroup",
-        "description": "Lists the dimensions by managementGroup Id.",
+        "operationId": "Views_Get",
+        "description": "Gets the view for the defined scope by view name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "ManagementGroupDimensionsList": {
-            "$ref": "./examples/ManagementGroupDimensionsList.json"
-          },
-          "ManagementGroupDimensionsListExpandAndTop": {
-            "$ref": "./examples/ManagementGroupDimensionsListExpandAndTop.json"
-          },
-          "ManagementGroupDimensionsListWithFilter": {
-            "$ref": "./examples/ManagementGroupDimensionsListWithFilter.json"
+          "ResourceGroupView": {
+            "$ref": "./examples/ViewByResourceGroup.json"
           }
         },
         "parameters": [
           {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/managementGroupIdParameter"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N dimension data.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 1000
+            "$ref": "#/parameters/viewNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DimensionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/dimensions": {
-      "get": {
-        "tags": [
-          "Dimensions"
-        ],
-        "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "Dimensions_ListBySubscription",
-        "description": "Lists the dimensions by subscription Id.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionDimensionsList": {
-            "$ref": "./examples/SubscriptionDimensionsList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N dimension data.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 1000
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DimensionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Query": {
-      "post": {
-        "tags": [
-          "Query"
-        ],
-        "operationId": "Query_UsageBySubscription",
-        "description": "Query the usage data for subscriptionId.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionQuery": {
-            "$ref": "./examples/SubscriptionQuery.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CostManagement/Forecast": {
-      "post": {
-        "tags": [
-          "Forecast"
-        ],
-        "operationId": "Forecast_UsageBySubscription",
-        "description": "Forecast the usage data for subscriptionId.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "SubscriptionForecast": {
-            "$ref": "./examples/SubscriptionForecast.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CostManagement/dimensions": {
-      "get": {
-        "tags": [
-          "Dimensions"
-        ],
-        "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "Dimensions_ListByResourceGroup",
-        "description": "Lists the dimensions by resource group Id.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ResourceGroupDimensionsList": {
-            "$ref": "./examples/ResourceGroupDimensionsList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "$filter",
-            "description": "May be used to filter dimensions by properties/category, properties/usageStart, properties/usageEnd. Supported operators are 'eq','lt', 'gt', 'le', 'ge'.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the properties/data within a dimension category. By default, data is not included when listing dimensions.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$skiptoken",
-            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$top",
-            "description": "May be used to limit the number of results to the most recent N dimension data.",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "minimum": 1,
-            "maximum": 1000
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/DimensionsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Query": {
-      "post": {
-        "tags": [
-          "Query"
-        ],
-        "operationId": "Query_UsageByResourceGroup",
-        "description": "Query the usage data for subscriptionId and resource group.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ResourceGroupQuery": {
-            "$ref": "./examples/ResourceGroupQuery.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.CostManagement/Forecast": {
-      "post": {
-        "tags": [
-          "Forecast"
-        ],
-        "operationId": "Forecast_UsageByResourceGroup",
-        "description": "Forecast the usage data for subscriptionId and resource group.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ResourceGroupForecast": {
-            "$ref": "./examples/ResourceGroupForecast.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Query": {
-      "post": {
-        "tags": [
-          "Query"
-        ],
-        "operationId": "Query_UsageByBillingAccount",
-        "description": "Query the usage data for billing account.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "BillingAccountQuery": {
-            "$ref": "./examples/BillingAccountQuery.json"
-          },
-          "BillingAccountQueryGroupingUsage": {
-            "$ref": "./examples/BillingAccountQueryGrouping.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/Forecast": {
-      "post": {
-        "tags": [
-          "Forecast"
-        ],
-        "operationId": "Forecast_UsageByBillingAccount",
-        "description": "Forecast the usage data for billing account.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "BillingAccountForecast": {
-            "$ref": "./examples/BillingAccountForecast.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Query": {
-      "post": {
-        "tags": [
-          "Query"
-        ],
-        "operationId": "Query_UsageByEnrollmentAccount",
-        "description": "Query the usage data for an enrollment account.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "EnrollmentAccountQuery": {
-            "$ref": "./examples/EnrollmentAccountQuery.json"
-          },
-          "EnrollmentAccountQueryGroupingUsage": {
-            "$ref": "./examples/EnrollmentAccountQueryGrouping.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}/providers/Microsoft.CostManagement/Forecast": {
-      "post": {
-        "tags": [
-          "Forecast"
-        ],
-        "operationId": "Forecast_UsageByEnrollmentAccount",
-        "description": "Forecast the usage data for an enrollment account.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "EnrollmentAccountForecast": {
-            "$ref": "./examples/EnrollmentAccountForecast.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/enrollmentAccountIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Query": {
-      "post": {
-        "tags": [
-          "Query"
-        ],
-        "operationId": "Query_UsageByDepartment",
-        "description": "Query the usage data for department.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "DepartmentQuery": {
-            "$ref": "./examples/DepartmentQuery.json"
-          },
-          "DepartmentQueryGroupingUsage": {
-            "$ref": "./examples/DepartmentQueryGrouping.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.CostManagement/Forecast": {
-      "post": {
-        "tags": [
-          "Forecast"
-        ],
-        "operationId": "Forecast_UsageByDepartment",
-        "description": "Forecast the usage data for department.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "DepartmentForecast": {
-            "$ref": "./examples/DepartmentForecast.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/departmentIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Query": {
-      "post": {
-        "tags": [
-          "Query"
-        ],
-        "operationId": "Query_UsageByManagementGroup",
-        "description": "Lists the usage data for management group.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ManagementGroupQuery": {
-            "$ref": "./examples/ManagementGroupQuery.json"
-          },
-          "ManagementGroupQueryGroupingUsage": {
-            "$ref": "./examples/ManagementGroupQueryGrouping.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/managementGroupIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/Forecast": {
-      "post": {
-        "tags": [
-          "Forecast"
-        ],
-        "operationId": "Forecast_UsageByManagementGroup",
-        "description": "Lists the usage data for management group.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ManagementGroupForecast": {
-            "$ref": "./examples/ManagementGroupForecast.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/managementGroupIdParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ReportConfigDefinition"
-            },
-            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/QueryResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.CostManagement/cloudConnectors": {
-      "get": {
-        "tags": [
-          "CloudConnectors"
-        ],
-        "operationId": "CloudConnector_List",
-        "description": "List all cloud connector definitions",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "CloudConnector_List": {
-            "$ref": "./examples/CloudConnectorList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ConnectorDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.CostManagement/cloudConnectors/{connectorName}": {
-      "get": {
-        "tags": [
-          "CloudConnectors"
-        ],
-        "operationId": "CloudConnector_Get",
-        "description": "Get a cloud connector definition",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "CloudConnector_Get": {
-            "$ref": "./examples/CloudConnectorGet.json"
-          },
-          "CloudConnector_Get_Expand": {
-            "$ref": "./examples/CloudConnectorGetExpand.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/connectorNameParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ConnectorDefinition"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -1235,46 +193,49 @@
       },
       "put": {
         "tags": [
-          "CloudConnectors"
+          "Views"
         ],
-        "operationId": "CloudConnector_CreateOrUpdate",
-        "description": "Create or update a cloud connector definition",
+        "operationId": "Views_CreateOrUpdate",
+        "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "CloudConnector_Put": {
-            "$ref": "./examples/CloudConnectorPut.json"
+          "ResourceGroupCreateOrUpdateView": {
+            "$ref": "./examples/ViewCreateOrUpdateByResourceGroup.json"
           }
         },
         "parameters": [
           {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/connectorNameParameter"
+            "$ref": "#/parameters/viewNameParameter"
           },
           {
-            "name": "connector",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ConnectorDefinition"
+              "$ref": "#/definitions/View"
             },
-            "description": "Connector details"
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ConnectorDefinition"
+              "$ref": "#/definitions/View"
             }
           },
           "201": {
             "description": "Created.",
             "schema": {
-              "$ref": "#/definitions/ConnectorDefinition"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -1287,24 +248,27 @@
       },
       "delete": {
         "tags": [
-          "CloudConnectors"
+          "Views"
         ],
-        "operationId": "CloudConnector_Delete",
-        "description": "Delete a cloud connector definition",
+        "operationId": "Views_Delete",
+        "description": "The operation to delete a view.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "CloudConnector_Delete": {
-            "$ref": "./examples/CloudConnectorDelete.json"
+          "ResourceGroupDeleteView": {
+            "$ref": "./examples/ViewDeleteByResourceGroup.json"
           }
         },
         "parameters": [
           {
+            "$ref": "#/parameters/scopeViewParameter"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/connectorNameParameter"
+            "$ref": "#/parameters/viewNameParameter"
           }
         ],
         "responses": {
@@ -1318,109 +282,21 @@
             }
           }
         }
-      },
-      "patch": {
-        "tags": [
-          "CloudConnectors"
-        ],
-        "operationId": "CloudConnector_Update",
-        "description": "Update a cloud connector definition",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "CloudConnector_Update": {
-            "$ref": "./examples/CloudConnectorPatch.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/connectorNameParameter"
-          },
-          {
-            "name": "connector",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ConnectorDefinition"
-            },
-            "description": "Connector details"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ConnectorDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
-    "/providers/Microsoft.CostManagement/externalBillingAccounts": {
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/views/{viewName}":{
       "get": {
         "tags": [
-          "ExternalBillingAccounts"
+          "Views"
         ],
-        "operationId": "ExternalBillingAccount_List",
-        "description": "List all ExternalBillingAccount definitions",
+        "operationId": "Views_GetByExternalBillingAccount",
+        "description": "Gets the view for external billing account by view name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "ExternalBillingAccount_List": {
-            "$ref": "./examples/ExternalBillingAccountList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExternalBillingAccountDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}": {
-      "get": {
-        "tags": [
-          "ExternalBillingAccounts"
-        ],
-        "operationId": "ExternalBillingAccount_Get",
-        "description": "Get a ExternalBillingAccount definition",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ExternalBillingAccount_Get": {
-            "$ref": "./examples/ExternalBillingAccountGet.json"
-          },
-          "ExternalBillingAccount_Get_Expand": {
-            "$ref": "./examples/ExternalBillingAccountGetExpand.json"
+          "ExternalBillingAccountView": {
+            "$ref": "./examples/ViewByExternalBillingAccount.json"
           }
         },
         "parameters": [
@@ -1431,314 +307,14 @@
             "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
-            "name": "$expand",
-            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
-            "in": "query",
-            "required": false,
-            "type": "string"
+            "$ref": "#/parameters/viewNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ExternalBillingAccountDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/externalSubscriptions": {
-      "get": {
-        "tags": [
-          "ExternalSubscriptions"
-        ],
-        "operationId": "ExternalSubscription_ListByExternalBillingAccount",
-        "description": "List all ExternalSubscriptions by ExternalBillingAccount definitions",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ExternalBillingAccountExternalSubscription_List": {
-            "$ref": "./examples/ExternalBillingAccountExternalSubscriptionList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/externalBillingAccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExternalSubscriptionDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.CostManagement/externalSubscriptions": {
-      "get": {
-        "tags": [
-          "ExternalSubscriptions"
-        ],
-        "operationId": "ExternalSubscription_List",
-        "description": "List all ExternalSubscription definitions",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ExternalSubscription_List": {
-            "$ref": "./examples/ExternalSubscriptionList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExternalSubscriptionDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}": {
-      "get": {
-        "tags": [
-          "ExternalSubscriptions"
-        ],
-        "operationId": "ExternalSubscription_Get",
-        "description": "Get an ExternalSubscription definition",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ExternalSubscription_Get": {
-            "$ref": "./examples/ExternalSubscriptionGet.json"
-          },
-          "ExternalSubscription_Get_Expand": {
-            "$ref": "./examples/ExternalSubscriptionGetExpand.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/externalSubscriptionNameParameter"
-          },
-          {
-            "name": "$expand",
-            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExternalSubscriptionDefinition"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/externalSubscriptions": {
-      "get": {
-        "tags": [
-          "ExternalSubscriptions"
-        ],
-        "operationId": "ExternalSubscription_ListByManagementGroup",
-        "description": "List all ExternalSubscription definitions for Management Group",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ExternalSubscription_List": {
-            "$ref": "./examples/ManagementGroupExternalSubscriptionList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/managementGroupIdParameter"
-          },
-          {
-            "name": "$recurse",
-            "description": "The $recurse=true query string parameter allows returning externalSubscriptions associated with the specified managementGroup, or any of its descendants.",
-            "in": "query",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ExternalSubscriptionDefinitionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
-        }
-      }
-    },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}": {
-      "put": {
-        "tags": [
-          "ExternalSubscriptions"
-        ],
-        "operationId": "ExternalSubscription_UpdateManagementGroup",
-        "description": "Updates the management group of an ExternalSubscription",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ManagementGroupExternalSubscription_Put": {
-            "$ref": "./examples/ManagementGroupExternalSubscriptionUpdate.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/managementGroupIdParameter"
-          },
-          {
-            "$ref": "#/parameters/externalSubscriptionNameParameter"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "NoContent"
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules": {
-      "get": {
-        "tags": [
-          "ShowbackRules"
-        ],
-        "operationId": "ShowbackRules_List",
-        "description": "Get list all Showback Rules.",
-        "x-ms-examples": {
-          "ShowbackRules_List": {
-            "$ref": "./examples/ShowbackRulesList.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ShowbackRuleListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}": {
-      "get": {
-        "tags": [
-          "ShowbackRules"
-        ],
-        "operationId": "ShowbackRule_GetBillingAccountId",
-        "description": "Gets the showback rule by rule name.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ShowbackRules": {
-            "$ref": "./examples/ShowbackRuleGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ruleNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ShowbackRule"
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -1751,13 +327,16 @@
       },
       "put": {
         "tags": [
-          "ShowbackRules"
+          "Views"
         ],
-        "operationId": "ShowbackRule_CreateUpdateRule",
-        "description": "Create/Update showback rule for billing account.",
+        "operationId": "Views_CreateOrUpdateByExternalBillingAccount",
+        "description": "The operation to create or update a view by external billing account. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
         "x-ms-examples": {
-          "ShowbackRules": {
-            "$ref": "./examples/ShowbackRulePut.json"
+          "ExternalBillingAccountCreateOrUpdateView": {
+            "$ref": "./examples/ViewCreateOrUpdateByExternalBillingAccount.json"
           }
         },
         "parameters": [
@@ -1765,26 +344,32 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
-            "$ref": "#/parameters/ruleNameParameter"
+            "$ref": "#/parameters/viewNameParameter"
           },
           {
-            "name": "showbackRule",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ShowbackRuleProperties"
+              "$ref": "#/definitions/View"
             },
-            "description": "Showback rule to create or update."
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ShowbackRule"
+              "$ref": "#/definitions/View"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/View"
             }
           },
           "default": {
@@ -1794,6 +379,312 @@
             }
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_DeleteByExternalBillingAccount",
+        "description": "The operation to delete a view by external billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountDeleteView": {
+            "$ref": "./examples/ViewDeleteByExternalBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}/views/{viewName}":{
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_GetByExternalSubscription",
+        "description": "Gets the view for external subscription by view name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionView": {
+            "$ref": "./examples/ViewByExternalSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_CreateOrUpdateByExternalSubscription",
+        "description": "The operation to create or update a view by external subscription. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionCreateOrUpdateView": {
+            "$ref": "./examples/ViewCreateOrUpdateByExternalSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/View"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_DeleteByExternalSubscription",
+        "description": "The operation to delete a view by external subscription.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionDeleteView": {
+            "$ref": "./examples/ViewDeleteByExternalSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/checkNameAvailability": {
+      "post":{
+        "tags":[
+          "CostManagement"
+        ],
+        "operationId": "CostManagement_CheckNameAvailability",
+        "description": "The operation to check resource name availability under cost management. A name is available if no other resource exists with the same name, type and scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailabilityByResourceGroup_Available.json"
+          },
+          "ResourceGroupCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailabilityByResourceGroup_NotAvailable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeCheckNameAvailabilityParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
+            },
+            "description": "Parameters about Resource type and Resource name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }        
+      }      
+    },
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/checkNameAvailability":{
+      "post":{
+        "tags":[
+          "CostManagement"
+        ],
+        "operationId": "CostManagement_CheckNameAvailabilityByExternalBillingAccount",
+        "description": "The operation to check resource name availability by external billing account under cost management. A name is available if no other resource exists with the same name, type and scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailabilityByExternalBillingAccount_Available.json"
+          },
+          "ExternalBillingAccountCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailabilityByExternalBillingAccount_NotAvailable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
+            },
+            "description": "Parameters about Resource type and Resource name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }        
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}/checkNameAvailability":{
+      "post":{
+        "tags":[
+          "CostManagement"
+        ],
+        "operationId": "CostManagement_CheckNameAvailabilityByExternalSubscription",
+        "description": "The operation to check resource name availability by external subscription under cost management. A name is available if no other resource exists with the same name, type and scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalSubscriptionCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailabilityByExternalSubscription_Available.json"
+          },
+          "ExternalSubscriptionCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailabilityByExternalSubscription_NotAvailable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/externalSubscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
+            },
+            "description": "Parameters about Resource type and Resource name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }        
       }
     },
     "/providers/Microsoft.CostManagement/operations": {
@@ -1910,6 +801,31 @@
             "type": "string"
           },
           "description": "Resource tags."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "ProxyResource": {
+      "description": "The Resource model definition.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource name."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
         }
       },
       "x-ms-azure-resource": true
@@ -2177,586 +1093,6 @@
         "values"
       ]
     },
-    "DimensionsListResult": {
-      "description": "Result of listing dimensions. It contains a list of available dimensions.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of dimensions.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Dimension"
-          }
-        }
-      }
-    },
-    "Dimension": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DimensionProperties",
-          "title": "Dimension properties"
-        }
-      }
-    },
-    "DimensionProperties": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "type": "string"
-        },
-        "filterEnabled": {
-          "type": "boolean"
-        },
-        "groupingEnabled": {
-          "type": "boolean"
-        },
-        "data": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "total": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "category": {
-          "type": "string"
-        },
-        "usageStart": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "usageEnd": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "nextLink": {
-          "type": "string"
-        }
-      }
-    },
-    "QueryResult": {
-      "description": "Result of query. It contains all columns listed under groupings and aggregation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of usage data.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Query"
-          }
-        }
-      }
-    },
-    "Query": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QueryProperties",
-          "title": "Query properties"
-        }
-      }
-    },
-    "QueryProperties": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "type": "string"
-        },
-        "columns": {
-          "description": "Array of columns",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QueryColumn"
-          }
-        },
-        "rows": {
-          "type": "array",
-          "items": {
-            "type": "array",
-            "items": {}
-          }
-        }
-      }
-    },
-    "QueryColumn": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
-    "ConnectorDefinitionListResult": {
-      "description": "Result of listing connector definitions. It contains a list of available connector definitions in the scope provided.",
-      "properties": {
-        "value": {
-          "description": "The list of connector definitions.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ConnectorDefinition"
-          }
-        }
-      }
-    },
-    "ConnectorDefinition": {
-      "type": "object",
-      "description": "The Connector model definition",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "Connector kind (eg aws)"
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Connector id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Connector name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Connector type"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ConnectorProperties",
-          "description": "Connector properties"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ConnectorProperties": {
-      "type": "object",
-      "description": "The properties of a Connector",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Connector DisplayName"
-        },
-        "providerBillingAccountId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Connector providerBillingAccountId, determined from credentials (eg AWS Consolidated account number)",
-          "readOnly": true
-        },
-        "providerBillingAccountDisplayName": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "The display name of the providerBillingAccountId as defined on the external provider",
-          "readOnly": true
-        },
-        "credentialsKey": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Credentials authentication key (eg AWS ARN)"
-        },
-        "credentialsSecret": {
-          "type": "string",
-          "x-ms-mutability": [
-            "create",
-            "update"
-          ],
-          "description": "Credentials secret (eg AWS ExternalId)"
-        },
-        "reportId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Identifying source report. (For AWS this is a CUR report name, defined with Daily and with Resources)"
-        },
-        "createdOn": {
-          "format": "date-time",
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Connector definition creation datetime",
-          "readOnly": true
-        },
-        "modifiedOn": {
-          "format": "date-time",
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Connector last modified datetime",
-          "readOnly": true
-        },
-        "status": {
-          "enum": [
-            "active",
-            "error",
-            "expired",
-            "warning"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectorStatus",
-            "modelAsString": true
-          },
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Connector status",
-          "readOnly": true
-        },
-        "externalBillingAccountId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Associated ExternalBillingAccountId",
-          "readOnly": true
-        },
-        "defaultManagementGroupId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Default ManagementGroupId"
-        },
-        "subscriptionId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Billing SubscriptionId"
-        },
-        "billingModel": {
-          "enum": [
-            "trial",
-            "autoUpgrade",
-            "premium",
-            "expired"
-          ],
-          "x-ms-enum": {
-            "name": "ConnectorBillingModel",
-            "modelAsString": true
-          },
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Connector billing model"
-        },
-        "daysTrialRemaining": {
-          "type": "integer",
-          "x-nullable": true,
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Number of days remaining of trial",
-          "readOnly": true
-        },
-        "collectionInfo": {
-          "$ref": "#/definitions/ConnectorCollectionInfo",
-          "description": "Collection information",
-          "x-nullable": true,
-          "readOnly": true
-        }
-      }
-    },
-    "ConnectorCollectionInfo": {
-      "type": "object",
-      "description": "Collection and ingestion information",
-      "properties": {
-        "lastChecked": {
-          "format": "date-time",
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Last time the data acquisition process initiated connecting to the external provider",
-          "readOnly": true
-        },
-        "sourceLastUpdated": {
-          "format": "date-time",
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Source timestamp of external data currently available in Azure (eg AWS last processed CUR file timestamp)",
-          "readOnly": true
-        },
-        "lastUpdated": {
-          "format": "date-time",
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Last time the external data was updated into Azure",
-          "readOnly": true
-        },
-        "error": {
-          "$ref": "#/definitions/ConnectorCollectionErrorInfo",
-          "description": "Error information of last collection"
-        }
-      }
-    },
-    "ConnectorCollectionErrorInfo": {
-      "type": "object",
-      "description": "Details of any error encountered on last collection attempt",
-      "properties": {
-        "errorMessage": {
-          "type": "string",
-          "description": "Detailed error message",
-          "readOnly": true
-        },
-        "errorInnerMessage": {
-          "type": "string",
-          "description": "External Provider error message",
-          "readOnly": true
-        },
-        "errorCode": {
-          "type": "string",
-          "description": "Short error code",
-          "readOnly": true
-        },
-        "errorStartTime": {
-          "format": "date-time",
-          "type": "string",
-          "description": "Time the error started occurring (Last time error occurred in lastChecked)",
-          "readOnly": true
-        }
-      }
-    },
-    "ExternalBillingAccountDefinitionListResult": {
-      "description": "Result of listing ExternalBillingAccount definitions. It contains a list of available ExternalBillingAccount definitions in the scope provided.",
-      "properties": {
-        "value": {
-          "description": "The list of ExternalBillingAccount definitions.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ExternalBillingAccountDefinition"
-          }
-        }
-      }
-    },
-    "ExternalBillingAccountDefinition": {
-      "type": "object",
-      "description": "The ExternalBillingAccount model definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalBillingAccount id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalBillingAccount name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalBillingAccount type"
-        },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalBillingAccount kind (eg aws)"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExternalBillingAccountProperties",
-          "description": "ExternalBillingAccount properties"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ExternalBillingAccountProperties": {
-      "type": "object",
-      "description": "The properties of a ExternalBillingAccount",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "ExternalBillingAccount DisplayName",
-          "readOnly": true
-        },
-        "providerBillingAccountId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Provider BillingAccountId (eg AWS Consolidated Account number)",
-          "readOnly": true
-        },
-        "connectorId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Underlying ConnectorId",
-          "readOnly": true
-        },
-        "collectionInfo": {
-          "$ref": "#/definitions/ConnectorCollectionInfo",
-          "description": "Collection information",
-          "x-nullable": true,
-          "readOnly": true
-        }
-      }
-    },
-    "ExternalSubscriptionDefinitionListResult": {
-      "description": "Result of listing ExternalSubscription definitions. It contains a list of available ExternalSubscription definitions in the scope provided.",
-      "properties": {
-        "value": {
-          "description": "The list of ExternalSubscription definitions.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ExternalSubscriptionDefinition"
-          }
-        }
-      }
-    },
-    "ExternalSubscriptionDefinition": {
-      "type": "object",
-      "description": "The ExternalSubscription model definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalSubscription id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalSubscription name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalSubscription type"
-        },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "ExternalSubscription kind (eg aws)"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ExternalSubscriptionProperties",
-          "description": "ExternalSubscription properties"
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "ExternalSubscriptionProperties": {
-      "type": "object",
-      "description": "The properties of a ExternalSubscription",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "ExternalSubscription DisplayName",
-          "readOnly": true
-        },
-        "managementGroupId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Assigned ManagementGroupId",
-          "readOnly": true
-        },
-        "providerBillingAccountId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Provider BillingAccountId (eg AWS Consolidated Account number)",
-          "readOnly": true
-        },
-        "providerAccountId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Provider AccountId (eg AWS Linked Account number)",
-          "readOnly": true
-        },
-        "externalBillingAccountId": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Parent ExternalBillingAccountId",
-          "readOnly": true
-        },
-        "collectionInfo": {
-          "$ref": "#/definitions/ConnectorCollectionInfo",
-          "description": "Collection information",
-          "x-nullable": true,
-          "readOnly": true
-        }
-      }
-    },
-    "ExternalSubscriptionIdListRequest": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of ExternalSubscriptionIds."
-        }
-      },
-      "description": "The list of ExternalSubscriptionIds operation request."
-    },
     "OperationListResult": {
       "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
@@ -2806,237 +1142,6 @@
         }
       }
     },
-    "ShowbackRuleListResult": {
-      "description": "Result of listing showback rules. It contains a list of available rules in the scope provided.",
-      "properties": {
-        "value": {
-          "description": "The list of showback rules.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/ShowbackRule"
-          }
-        }
-      }
-    },
-    "ShowbackRule": {
-      "type": "object",
-      "description": "The showback rule model definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Rule id"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Rule name"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Rule type"
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ShowbackRuleProperties",
-          "description": "Showback rule properties"
-        }
-      }
-    },
-    "ShowbackRuleProperties": {
-      "description": "The properties of a showback rule.",
-      "discriminator": "RuleType",
-      "properties": {
-        "description": {
-          "description": "Description of a showback rule.",
-          "type": "string"
-        },
-        "status": {
-          "description": "The current status of the showback rule.",
-          "type": "string",
-          "enum": [
-            "NotActive",
-            "Active"
-          ],
-          "x-ms-enum": {
-            "name": "ShowbackRuleStatus",
-            "modelAsString": true
-          }
-        },
-        "version": {
-          "description": "The current version of showback rule.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "scopes": {
-          "description": "List of authorized assigned scopes.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Scope"
-          }
-        },
-        "creationTime": {
-          "format": "date-time",
-          "description": "The time when the showback rule was created.",
-          "type": "string",
-          "readOnly": true
-        },
-        "deprecationTime": {
-          "description": "The current time when showback rule was deprecate.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "modificationTime": {
-          "description": "The current status when showback rule was modified.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ShowbackRulesKind"
-        }
-      ]
-    },
-    "CustomPrice": {
-      "x-ms-discriminator-value": "CustomPrice",
-      "type": "object",
-      "description": "Represents Custom price showback rule model",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ShowbackRuleProperties"
-        }
-      ],
-      "properties": {
-        "details": {
-          "$ref": "#/definitions/CustomPriceProperties"
-        }
-      }
-    },
-    "CustomPriceProperties": {
-      "type": "object",
-      "title": "Custom price showback rule properties",
-      "properties": {
-        "pricesheet": {
-          "type": "string"
-        },
-        "benefits": {
-          "description": "Array of benefits.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "None",
-              "All",
-              "AHUB",
-              "Reservations"
-            ],
-            "x-ms-enum": {
-              "name": "FunctionType",
-              "modelAsString": true
-            }
-          }
-        },
-        "markups": {
-          "description": "List of markups.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Markup"
-          }
-        }
-      }
-    },
-    "CustomCharge": {
-      "x-ms-discriminator-value": "CustomCharge",
-      "type": "object",
-      "description": "Represents custom charge showback rule model",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ShowbackRuleProperties"
-        }
-      ],
-      "properties": {
-        "details": {
-          "$ref": "#/definitions/CustomChargeProperties"
-        }
-      }
-    },
-    "CustomChargeProperties": {
-      "type": "object",
-      "title": "Custom charge showback rule properties",
-      "properties": {
-        "recurring": {
-          "description": "Recurring of the charge.",
-          "type": "string",
-          "readOnly": true,
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "CustomChargeRecurring",
-            "modelAsString": true
-          }
-        },
-        "chargeType": {
-          "type": "string"
-        },
-        "ChargeValue": {
-          "type": "string"
-        },
-        "EffectiveMonth": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "EndMonth": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
-    "CostAllocation": {
-      "x-ms-discriminator-value": "CostAllocation",
-      "type": "object",
-      "description": "Represents cost allocation showback rule model",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ShowbackRuleProperties"
-        }
-      ],
-      "properties": {
-        "details": {
-          "$ref": "#/definitions/CostAllocationProperties"
-        }
-      }
-    },
-    "CostAllocationProperties": {
-      "type": "object",
-      "title": "Cost allocation showback rule properties",
-      "properties": {}
-    },
-    "ShowbackRulesKind": {
-      "type": "object",
-      "description": "Describes Showback rule with rule type",
-      "properties": {
-        "RuleType": {
-          "type": "string",
-          "description": "The rule type of the showback rule solution",
-          "enum": [
-            "CustomPrice",
-            "CustomChange",
-            "CostAllocation"
-          ],
-          "x-ms-enum": {
-            "name": "ShowbackRulesKind",
-            "modelAsString": true
-          }
-        }
-      }
-    },
     "Scope": {
       "type": "object",
       "description": "The Scope model definition",
@@ -3058,11 +1163,200 @@
         }
       }
     },
-    "Markup": {
+    "ViewListResult": {
+      "description": "Result of listing views. It contains a list of available views.",
       "type": "object",
-      "description": "The Markup model definition",
       "properties": {
-        "percentage": {
+        "value": {
+          "description": "The list of views.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/View"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "View": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ViewProperties",
+          "title": "View properties"
+        }
+      }
+    },
+    "ViewProperties": {
+      "type": "object",
+      "description": "The properties of the view.",
+      "properties": {
+        "version": {
+          "description": "View API version used to create the view.",
+          "type": "string"
+        },
+        "queryVersion": {
+          "description": "Query API version to use.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "User input name of the view. Required.",
+          "type": "string"
+        },
+        "scope": {
+          "description": "Cost Management scope to save the view on.",
+          "type": "string"
+        },
+        "createdOn": {
+          "description": "Date the user created this view.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "modifiedOn": {
+          "description": "Date when the user last modified this view.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "query": {
+          "description": "Query body configuration. Required.",
+          "type": "object",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReportConfigDefinition"
+        },
+        "chart": {
+          "description": "Chart type of the main view in Cost Analysis. Required.",
+          "type": "string",
+          "enum": [
+            "Area",
+            "Line",
+            "StackedColumn",
+            "GroupedColumn",
+            "Table"
+          ],
+          "x-ms-enum": {
+            "name": "ChartType",
+            "modelAsString": true
+          }
+        },
+        "accumulated": {
+          "description": "Show costs accumulated over time.",
+          "type": "boolean"
+        },
+        "metric": {
+          "description": "Metric to use when displaying costs.",
+          "type": "string",
+          "enum": [
+            "ActualCost",
+            "AmortizedCost",
+            "AHUB"
+          ],
+          "x-ms-enum": {
+            "name": "MetricType",
+            "modelAsString": true
+          }
+        },
+        "kpis": {
+          "description": "List of KPIs to show in Cost Analysis UI.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KpiProperties"
+          }          
+        },
+        "pivots": {
+          "description": "Configuration of 3 sub-views in the Cost Analysis UI.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PivotProperties"
+          }         
+        }
+      }
+    },
+    "KpiProperties": {
+      "description": "Each KPI must contain a 'type' and 'enabled' key.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "KPI type (Forecast, Budget).",
+          "type": "string",
+          "enum": [
+            "Forecast",
+            "Budget"
+          ],
+          "x-ms-enum": {
+            "name": "TypeType",
+            "modelAsString": true
+          }
+        },
+        "id": {
+          "description": "ID of resource related to metric (budget).",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "show the KPI in the UI?",
+          "type": "boolean"
+        }
+      }
+    },
+    "PivotProperties": {
+      "description": "Each pivot must contain a 'type' and 'name'.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Data type to show in view.",
+          "type": "string",
+          "enum": [
+            "Dimension",
+            "TagKey"
+          ],
+          "x-ms-enum": {
+            "name": "TypeType",
+            "modelAsString": true
+          }
+        },
+        "name": {
+          "description": "Data field to show in view.",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityRequestBody": {
+      "description": "Resource Name availability input parameters - Resource type and resource name",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Describes the Resource type: Microsoft.CostManagement/Views",
+          "type": "string"
+        },
+        "name": {
+          "description": "Resource name for which availability needs to be checked",
+          "type": "string"
+        }
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "description": "Response for check name availability API. Resource provider will set availability as true | false.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Required. True indicates name is valid and available. False indicates the name is invalid, unavailable, or both.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "Required if nameAvailable == false. Invalid indicates the name provided does not match the resource provider's naming requirements (incorrect length, unsupported characters, etc.) AlreadyExists indicates that the name is already in use and is therefore unavailable.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Required if nameAvailable == false, indicating why name is not available.",
           "type": "string"
         }
       }
@@ -3147,13 +1441,30 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "ruleNameParameter": {
-      "name": "ruleName",
+    "scopeViewParameter": {
+      "name": "scope",
       "in": "path",
-      "description": "Showback rule name",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with view operations. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope and 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope.",
+      "x-ms-parameter-location": "method"
+    },
+    "viewNameParameter": {
+      "name": "viewName",
+      "in": "path",
+      "description": "View name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "scopeCheckNameAvailabilityParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with view operations. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope and 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
