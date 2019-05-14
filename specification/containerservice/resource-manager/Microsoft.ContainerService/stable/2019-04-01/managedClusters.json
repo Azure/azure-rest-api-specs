@@ -1954,14 +1954,18 @@
       "required": true,
       "type": "string",
       "minLength": 1,
-      "description": "The name of the resource group."
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
     },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the managed cluster resource."
+      "minLength": 1,
+      "maxLength": 63,
+      "description": "The name of the resource.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
