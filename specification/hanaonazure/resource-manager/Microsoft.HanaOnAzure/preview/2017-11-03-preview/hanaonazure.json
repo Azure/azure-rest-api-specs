@@ -245,6 +245,47 @@
           }
         }
       },
+      "delete": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "HanaInstances_Delete",
+        "summary": "Deletes a SAP HANA instance.",
+        "description": "Deletes a SAP HANA instance with the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Get properties of a HANA instance": {
+            "$ref": "./examples/HanaInstances_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HanaInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Deleted HanaInstance",
+            "schema": {
+              "$ref": "#/definitions/HanaInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "HanaOnAzure"
