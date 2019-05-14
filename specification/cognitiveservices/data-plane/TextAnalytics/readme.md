@@ -131,11 +131,20 @@ input-file: stable/v2.0/TextAnalytics.json
 log-file: logs/log.txt
 ```
 
-### Release 2.1-Preview
+### Release 2.1
 
 These settings apply only when `--tag=release_2_1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_1'
+input-file: stable/v2.1/TextAnalytics.json
+log-file: logs/log.txt
+```
+
+### Release 2.1-Preview
+
+These settings apply only when `--tag=release_2_1_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1_preview'
 input-file: preview/v2.1/TextAnalytics.json
 log-file: logs/log.txt
 ```
@@ -167,7 +176,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.TextAnalytics
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/TextAnalytics/Generated/TextAnalytics
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Language.TextAnalytics/src/Generated
   clear-output-folder: true
 ```
 

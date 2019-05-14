@@ -52,6 +52,8 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 - Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
 - Microsoft.Media/stable/2018-01-01/MediaServices.json
+- Microsoft.Maps/stable/2018-01-01/Maps.json
+- Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
 ```
 
 ---
@@ -85,7 +87,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.EventGrid
   sync-methods: None
-  output-folder: $(csharp-sdks-folder)/EventGrid/DataPlane/Microsoft.Azure.EventGrid/Generated
+  output-folder: $(csharp-sdks-folder)/eventgrid/Microsoft.Azure.EventGrid/src/Generated
   clear-output-folder: true
 ```
 

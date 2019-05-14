@@ -204,6 +204,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_GetFeatureValueByFactory",
+        "x-ms-examples": {
+          "ExposureControl_GetFeatureValueByFactory": {
+            "$ref": "./examples/ExposureControl_GetFeatureValueByFactory.json"
+          }
+        },
+        "description": "Get exposure control feature for specific factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "The exposure control request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -2269,6 +2320,22 @@
             "x-ms-parameter-location": "method"
           },
           {
+            "name": "isRecovery",
+            "description": "Recovery mode flag. If recovery mode is set to true, the specified referenced pipeline run and the new run will be grouped under the same groupId.",
+            "in": "query",
+            "required": false,
+            "type": "boolean",
+            "x-ms-parameter-location": "method"
+          },
+          {
+            "name": "startActivityName",
+            "description": "In recovery mode, the rerun will start from this activity. If not specified, all activities will run.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "x-ms-parameter-location": "method"
+          },
+          {
             "name": "parameters",
             "description": "Parameters of the pipeline run. These parameters will be used only if the runId is not specified.",
             "in": "body",
@@ -2848,7 +2915,7 @@
         ],
         "operationId": "RerunTriggers_Start",
         "x-ms-examples": {
-          "Triggers_Start": {
+          "RerunTriggers_Start": {
             "$ref": "./examples/RerunTriggers_Start.json"
           }
         },
@@ -2894,7 +2961,7 @@
         ],
         "operationId": "RerunTriggers_Stop",
         "x-ms-examples": {
-          "Triggers_Stop": {
+          "RerunTriggers_Stop": {
             "$ref": "./examples/RerunTriggers_Stop.json"
           }
         },
@@ -2940,7 +3007,7 @@
         ],
         "operationId": "RerunTriggers_Cancel",
         "x-ms-examples": {
-          "Triggers_Cancel": {
+          "RerunTriggers_Cancel": {
             "$ref": "./examples/RerunTriggers_Cancel.json"
           }
         },
@@ -2986,7 +3053,7 @@
         ],
         "operationId": "RerunTriggers_ListByTrigger",
         "x-ms-examples": {
-          "RerunTriggers_List": {
+          "RerunTriggers_ListByTrigger": {
             "$ref": "./examples/RerunTriggers_ListByTrigger.json"
           }
         },
@@ -4093,7 +4160,9 @@
             "ActivityRunEnd",
             "ActivityType",
             "TriggerName",
-            "TriggerRunTimestamp"
+            "TriggerRunTimestamp",
+            "RunGroupId",
+            "LatestOnly"
           ],
           "x-ms-enum": {
             "name": "RunQueryFilterOperand",
@@ -4196,6 +4265,16 @@
         "runId": {
           "description": "Identifier of a run.",
           "type": "string",
+          "readOnly": true
+        },
+        "runGroupId": {
+          "description": "Identifier that correlates all the recovery runs of a pipeline run.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isLatest": {
+          "description": "Indicates if the recovered pipeline run is the latest in its group.",
+          "type": "boolean",
           "readOnly": true
         },
         "pipelineName": {
