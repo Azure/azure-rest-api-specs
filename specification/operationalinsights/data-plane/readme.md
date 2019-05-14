@@ -78,7 +78,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ```yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.OperationalInsights
-  output-folder: $(csharp-sdks-folder)/OperationalInsights/DataPlane/OperationalInsights/Generated
+  output-folder: $(csharp-sdks-folder)/operationalinsights/Microsoft.Azure.OperationalInsights/src/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
 directive:
