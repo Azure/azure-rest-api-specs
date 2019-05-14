@@ -2410,6 +2410,69 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageSync/locations/{locationName}/workflows/{workflowId}/operations/{operationId}": {
+            "get": {
+                "parameters": [{
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+                }, {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+                }, {
+                    "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+                }, {
+                    "name": "locationName",
+                    "in": "path",
+                    "required": true,
+                    "type": "string",
+                    "description": "The desired region to obtain information from."
+                }, {
+                    "name": "workflowId",
+                    "in": "path",
+                    "description": "workflow Id",
+                    "required": true,
+                    "type": "string"
+                }, {
+                    "name": "operationId",
+                    "in": "path",
+                    "description": "operation Id",
+                    "required": true,
+                    "type": "string"
+                }],
+                "tags": [
+                    "Operation Status"
+                ],
+                "operationId": "OperationStatus_Get",
+                "description": "Get Operation status",
+                "x-ms-examples": {
+                    "Workflows_Get": {
+                        "$ref": "./examples/OperationStatus_Get.json"
+                    }
+                },
+                "responses": {
+                    "200": {
+                        "description": "Operation Status",
+                        "schema": {
+                            "$ref": "#/definitions/OperationStatus"
+                        },
+                        "headers": {
+                            "x-ms-request-id": {
+                                "description": "request id.",
+                                "type": "string"
+                            },
+                            "x-ms-correlation-request-id": {
+                                "description": "correlation request id.",
+                                "type": "string"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error message indicating why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/StorageSyncError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -3756,7 +3819,40 @@
                 "upload",
                 "recall"
             ]
-        }
+        },
+        "OperationStatus": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Operation Id"
+                },
+                "status": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Operation status"
+                },
+                "startTime": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "Start time of the operation"
+                },
+                "endTime": {
+                    "readOnly": true,
+                    "type": "string",
+                    "format": "date-time",
+                    "description": "End time of the operation"
+                },
+                "error": {
+                    "readOnly": true,
+                    "$ref": "#/definitions/StorageSyncApiError",
+                    "description": "Error details."
+                }
+            },
+            "description": "Operation status object"
+        }        
     },
     "securityDefinitions": {
         "azure_auth": {
