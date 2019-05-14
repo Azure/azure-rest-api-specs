@@ -146,7 +146,7 @@
       "get": {
         "operationId": "Alerts_GetById",
         "summary": "Get a specific alert.",
-        "description": "Get information related to a specific alert",
+        "description": "Get information related to a specific alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get alert by id then use parent resource of scope. So in this example get alert by id call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
         "produces": [
           "application/json"
         ],
@@ -185,7 +185,7 @@
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/changestate": {
       "post": {
         "operationId": "Alerts_ChangeState",
-        "description": "Change the state of an alert.",
+        "description": "Change the state of an alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to change state of this particular alert then use parent resource of scope. So in this example change state call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}'.",
         "parameters": [
           {
             "$ref": "#/parameters/scope"
@@ -224,7 +224,7 @@
     "/{scope}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history": {
       "get": {
         "operationId": "Alerts_GetHistory",
-        "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved) and alert state changes (New/Acknowledged/Closed).",
+        "description": "Get the history of an alert, which captures any monitor condition changes (Fired/Resolved), alert state changes (New/Acknowledged/Closed) and applied action rules for that particular alert. If scope is a deleted resource then please use scope as parent resource of the delete resource. For example if my alert id is '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.AlertsManagement/alerts/{alertId}' and 'vm1' is deleted then if you want to get history of this particular alert then use parent resource of scope. So in this example get history call will look like this: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.AlertsManagement/alerts/{alertId}/history'.",
         "parameters": [
           {
             "$ref": "#/parameters/scope"
@@ -609,7 +609,8 @@
         "ServiceHealth",
         "SmartDetector",
         "VM Insights",
-        "Zabbix"
+        "Zabbix",
+        "Resource Health"
       ],
       "x-ms-enum": {
         "name": "MonitorService",
