@@ -273,39 +273,44 @@
       }
     },
     "/providers/Microsoft.Management/managementGroups/{groupId}/descendants" : {
-      "post" : {
-        "tags" : [ "ManagementGroups_Descendants" ],
-        "operationId" : "ManagementGroups_GetDescendants",
-        "description" : "List all entities that descend from a management group.\n",
-        "parameters" : [ {
-          "$ref" : "#/parameters/GroupIdParameter"
-        }, {
-          "$ref" : "#/parameters/ApiVersionParameter"
-        }, {
-          "$ref" : "#/parameters/SkipTokenParameter"
-        }, {
-          "$ref" : "#/parameters/TopParameter"
-        } ],
-        "responses" : {
-          "200" : {
-            "description" : "OK",
-            "schema" : {
-              "$ref" : "#/definitions/DescendantListResult"
+      "post": {
+        "tags": [ "ManagementGroups_Descendants" ],
+        "operationId": "ManagementGroups_GetDescendants",
+        "description": "List all entities that descend from a management group.\n",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SkipTokenParameter"
+          },
+          {
+            "$ref": "#/parameters/TopParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DescendantListResult"
             }
           },
-          "default" : {
-            "description" : "Error",
-            "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
-        "x-ms-pageable" : {
-          "nextLinkName" : "nextLink"
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         },
-        "x-ms-examples" : {
-          "GetDescendants" : {
-            "$ref" : "./examples/GetDescendants.json"
+        "x-ms-examples": {
+          "GetDescendants": {
+            "$ref": "./examples/GetDescendants.json"
           }
         }
       }
