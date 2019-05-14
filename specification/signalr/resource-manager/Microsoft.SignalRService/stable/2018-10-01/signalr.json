@@ -322,9 +322,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "SignalR_CreateOrUpdate": {
             "$ref": "./examples/SignalR_CreateOrUpdate.json"
@@ -360,9 +357,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "SignalR_Delete": {
             "$ref": "./examples/SignalR_Delete.json"
@@ -410,9 +404,6 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
         "x-ms-examples": {
           "SignalR_Update": {
             "$ref": "./examples/SignalR_Update.json"
@@ -914,7 +905,7 @@
       "type": "object",
       "properties": {
         "flag": {
-          "description": "Name of the feature. Required.",
+          "description": "Kind of feature. Required.",
           "enum": [
             "ServiceMode"
           ],
@@ -935,8 +926,7 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "x-ms-client-flatten": false
+          }
         }
       }
     },
