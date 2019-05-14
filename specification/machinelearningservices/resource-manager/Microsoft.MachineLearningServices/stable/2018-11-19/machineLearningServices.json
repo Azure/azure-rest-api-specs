@@ -404,7 +404,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/resourcesByVMFamily": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/usagesByVMFamily": {
       "get": {
         "tags": [
           "UsageByVMFamily"
@@ -1175,22 +1175,7 @@
       },
       "description": "Describes AML Resource Usage."
     },
-    "ResourceUsageName": {
-      "properties": {
-        "value": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the resource."
-        },
-        "localizedValue": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The localized name of the resource."
-        }
-      },
-      "description": "The Usage Names."
-    },
-    "ResourceUsage": {
+    "DummyObject": {
       "properties": {
         "unit": {
           "readOnly": true,
@@ -1218,7 +1203,7 @@
         },
         "name": {
           "readOnly": true,
-          "$ref": "#/definitions/ResourceUsageName",
+          "$ref": "#/definitions/UsageName",
           "description": "The name of the type of usage."
         }
       },
@@ -1229,7 +1214,7 @@
       "description": "Describes Batch AI Resource Usage by VM Family, broken down by Workspace and Cluster usage",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceUsage"
+          "$ref": "#/definitions/DummyObject"
         }
       ],
       "properties": {
