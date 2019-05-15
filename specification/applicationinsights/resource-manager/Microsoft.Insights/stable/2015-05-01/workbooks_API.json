@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks": {  
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks": {
       "get": {
         "description": "Get all Workbooks defined within a specified resource group and category.",
         "operationId": "Workbooks_ListByResourceGroup",
@@ -82,7 +82,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {  
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {
       "get": {
         "description": "Get a single workbook by its resourceName.",
         "operationId": "Workbooks_Get",
@@ -104,7 +104,7 @@
           "200": {
             "description": "A workbook definition.",
             "schema": {
-                "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/Workbook"
             }
           },
           "default": {
@@ -129,7 +129,7 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },                    
+          },
           {
             "$ref": "#/parameters/WorkbookResourceNameParameter"
           },
@@ -160,7 +160,7 @@
       "put": {
         "description": "Create a new workbook.",
         "operationId": "Workbooks_CreateOrUpdate",
-        "parameters": [          
+        "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -187,13 +187,13 @@
           "200": {
             "description": "The newly created workbook.",
             "schema": {
-                "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/Workbook"
             }
           },
           "201": {
             "description": "The newly created workbook.",
             "schema": {
-                "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/Workbook"
             }
           },
           "default": {
@@ -212,7 +212,7 @@
       "patch": {
         "description": "Updates a workbook that has already been added.",
         "operationId": "Workbooks_Update",
-        "parameters": [          
+        "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
@@ -239,7 +239,7 @@
           "200": {
             "description": "The workbook definition updated.",
             "schema": {
-                "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/Workbook"
             }
           },
           "default": {
@@ -315,7 +315,7 @@
       ],
       "properties": {
         "kind": {
-          "type": "string",          
+          "type": "string",
           "description": "The kind of workbook. Choices are user and shared.",
           "enum": [
             "user",
@@ -395,7 +395,7 @@
           "type": "string",
           "description": "Date and time in UTC of the last modification that was made to this workbook definition.",
           "readOnly": true
-        },       
+        },
         "category": {
           "type": "string",
           "description": "Workbook category, as defined by the user at creation time."
@@ -489,7 +489,7 @@
       "type": "string",
       "description": "Azure Resource Id that will fetch all linked workbooks.",
       "x-ms-parameter-location": "method"
-    },    
+    },
     "ResourceIdParameter": {
       "name": "resourceId",
       "in": "query",
@@ -497,7 +497,7 @@
       "type": "string",
       "description": "Azure Resource Id or any target workbook resource id.",
       "x-ms-parameter-location": "method"
-    },    
+    },
     "CanFetchWorkbookContentParameter": {
       "name": "canFetchContent",
       "in": "query",
