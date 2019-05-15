@@ -55,10 +55,10 @@
             "description": "The name of the resource group."
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -136,10 +136,10 @@
             "description": "The name of the policy."
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -179,7 +179,7 @@
             "description": "The name of the policy."
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
             "description": "Policy to be created.",
@@ -237,10 +237,10 @@
             "description": "The name of the policy."
           },
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -285,7 +285,7 @@
       "description": "Defines web application firewall policy properties.",
       "properties": {
         "policySettings": {
-          "description": "Describes  policySettings for policy.",
+          "description": "Describes policySettings for policy.",
           "$ref": "#/definitions/PolicySettings"
         },
         "policyDetailSettings": {
@@ -672,22 +672,6 @@
         "matchVariable"
       ],
       "description": "Allow to exclude some variable satisfy the condition for the WAF check."
-    }
-  },
-  "parameters": {
-    "SubscriptionIdParameter": {
-      "name": "subscriptionId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The subscription credentials which uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
-    },
-    "ApiVersionParameter": {
-      "name": "api-version",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Client API version."
     }
   }
 }
