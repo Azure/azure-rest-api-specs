@@ -12,7 +12,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.iothub
   package-name: azure-mgmt-iothub
-  package-version: 0.6.0
+  package-version: 0.8.2
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
