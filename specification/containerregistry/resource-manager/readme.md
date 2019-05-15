@@ -26,7 +26,26 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-04
+tag: package-2019-06
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
+- Microsoft.ContainerRegistry/stable/2019-06-01/containerregistry_build.json
+```
+
+### Tag: package-2019-06-only
+
+These settings apply only when `--tag=package-2019-06-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-only'
+input-file:
+- Microsoft.ContainerRegistry/stable/2019-06-01/containerregistry_build.json
 ```
 
 ### Tag: package-2019-04
