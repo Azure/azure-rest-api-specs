@@ -440,6 +440,99 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.BatchAI/locations/{location}/quotas": {
+      "post": {
+        "tags": [
+          "Quota"
+        ],
+        "operationId": "Quotas_Create",
+        "description": "Set the Quota base on VMFamily in the given Workspace.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for setup quota is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaCreateParameters"
+            },
+            "description": "Quota creation parameters."
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "201": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create a cluster": {
+            "$ref": "./examples/PutQuota.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "WorkspaceQuotasByVMFamily"
+        ],
+        "operationId": "WorkspaceQuotasByVMFamily_List",
+        "description": "Gets the currently assigned Workspace Quotas based on VMFamily.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListWorkspaceQuotasByVMFamily"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Create or update cluster": {
+            "$ref": "./examples/ListWorkspaceQuotasByVMFamily.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -1221,6 +1314,105 @@
         }
       },
       "description": "The List Virtual Machine size operation response."
+    },
+    "QuotaBaseProperties": {
+      "properties": {
+        "resourceGroupName": {
+          "type": "string",
+          "title": "Name of the resource group",
+          "description": "Name of the resource group to which the resource belongs."
+        },
+        "vmfamily": {
+          "type": "string",
+          "title": "Virtual Machine family name",
+          "description": "The family name of the virtual machine size."
+        },
+        "amlworkspacename": {
+          "type": "string",
+          "title": "AML workspace Name.",
+          "description": "Specifies the AML workspace Name."
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Quota.",
+          "description": "Quota."
+        }
+      },
+      "description": "The properties for Quota creation or retrieval."
+    },
+    "QuotaCreateParameters": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuotaBaseProperties",
+          "description": "The properties of create quota."
+        }
+      },
+      "description": "Quota creation parameters."
+    },
+    "ResourceName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Resource Name."
+    },
+    "ResourceQuota": {
+      "properties": {
+        "resourceName": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Name of the resource.",
+          "readOnly": true
+        },
+        "quota": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "title": "Quota",
+          "description": "Quota assigned to the resource."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The units used to represent the quota."
+        },
+        "quotaDistribution": {
+          "readOnly": true,
+          "type": "array",
+          "description": "The quota distribution among resources.",
+          "items": {
+            "$ref": "#/definitions/ResourceQuota"
+          }
+        }
+      },
+      "description": "The quota assigned to a resource."
+    },
+    "ListWorkspaceQuotasByVMFamily": {
+      "properties": {
+        "value": {
+          "description": "The list of Workspace Quotas by VM Family",
+          "items": {
+            "$ref": "#/definitions/ResourceQuota"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of workspace quota information by VM Family. Call ListNext() with this to fetch the next page of Workspace Quota information.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
     "WorkspaceListResult": {
       "description": "The result of a request to list machine learning workspaces.",
