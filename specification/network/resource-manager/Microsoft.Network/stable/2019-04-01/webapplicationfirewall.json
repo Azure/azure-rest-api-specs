@@ -3,7 +3,7 @@
   "info": {
     "version": "2019-04-01",
     "title": "WebApplicationFirewallManagement",
-    "description": "APIs to manage web application firewall rules"
+    "description": "APIs to manage web application firewall rules."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -133,7 +133,7 @@
             "required": true,
             "type": "string",
             "maxLength": 128,
-            "description": "The name of the policy"
+            "description": "The name of the policy."
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -213,7 +213,7 @@
         "tags": [
           "WebApplicationFirewallPolicies"
         ],
-        "description": "Deletes Policy",
+        "description": "Deletes Policy.",
         "operationId": "WebApplicationFirewallPolicies_Delete",
         "x-ms-examples": {
           "Deletes a WAF policy within a resource group": {
@@ -282,25 +282,25 @@
       ]
     },
     "WebApplicationFirewallPolicyPropertiesFormat": {
-      "description": "Defines web application firewall policy properties",
+      "description": "Defines web application firewall policy properties.",
       "properties": {
         "policySettings": {
-          "description": "Describes  policySettings for policy",
+          "description": "Describes  policySettings for policy.",
           "$ref": "#/definitions/PolicySettings"
         },
         "policyDetailSettings": {
-          "description": "Describes policyDetailSettings for policy",
+          "description": "Describes policyDetailSettings for policy.",
           "$ref": "#/definitions/PolicyDetailSettings"
         },
         "customRules": {
-          "description": "Describes custom rules inside the policy",
+          "description": "Describes custom rules inside the policy.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallCustomRule"
           }
         },
         "managedRules": {
-          "description": "Describes managed rules inside the policy",
+          "description": "Describes managed rules inside the policy.",
           "$ref": "#/definitions/ManagedRuleSets"
         },
         "applicationGateways": {
@@ -355,10 +355,10 @@
       }
     },
     "PolicySettings": {
-      "description": "Defines contents of a web application firewall global configuration",
+      "description": "Defines contents of a web application firewall global configuration.",
       "properties": {
         "enabledState": {
-          "description": "Describes if the policy is in enabled state or disabled state",
+          "description": "Describes if the policy is in enabled state or disabled state.",
           "type": "string",
           "enum": [
             "Disabled",
@@ -370,7 +370,7 @@
           }
         },
         "mode": {
-          "description": "Describes if it is in detection mode  or prevention mode at policy level",
+          "description": "Describes if it is in detection mode  or prevention mode at policy level.",
           "type": "string",
           "enum": [
             "Prevention",
@@ -384,7 +384,7 @@
       }
     },
     "PolicyDetailSettings": {
-      "description": "Defines contents of a web application firewall global detail configuration",
+      "description": "Defines contents of a web application firewall global detail configuration.",
       "properties": {
         "requestBodyCheck": {
           "type": "boolean",
@@ -409,7 +409,7 @@
       }
     },
     "WebApplicationFirewallCustomRule": {
-      "description": "Defines contents of a web application rule",
+      "description": "Defines contents of a web application rule.",
       "required": [
         "priority",
         "ruleType",
@@ -428,11 +428,11 @@
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
         },
         "priority": {
-          "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value",
+          "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value.",
           "type": "integer"
         },
         "ruleType": {
-          "description": "Describes type of rule",
+          "description": "Describes type of rule.",
           "type": "string",
           "enum": [
             "MatchRule",
@@ -444,14 +444,14 @@
           }
         },
         "matchConditions": {
-          "description": "List of match conditions",
+          "description": "List of match conditions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MatchCondition"
           }
         },
         "action": {
-          "description": "Type of Actions",
+          "description": "Type of Actions.",
           "type": "string",
           "enum": [
             "Allow",
@@ -466,7 +466,7 @@
       }
     },
     "Transform": {
-      "description": "Describes what transforms applied before matching",
+      "description": "Describes what transforms applied before matching.",
       "type": "string",
       "enum": [
         "Lowercase",
@@ -482,13 +482,13 @@
       }
     },
     "MatchVariable": {
-      "description": "Define match variables",
+      "description": "Define match variables.",
       "required": [
         "variableName"
       ],
       "properties": {
         "variableName": {
-          "description": "Match Variable",
+          "description": "Match Variable.",
           "type": "string",
           "enum": [
             "RemoteAddr",
@@ -506,13 +506,13 @@
           }
         },
         "selector": {
-          "description": "Describes field of the matchVariable collection",
+          "description": "Describes field of the matchVariable collection.",
           "type": "string"
         }
       }
     },
     "MatchCondition": {
-      "description": "Define match conditions",
+      "description": "Define match conditions.",
       "required": [
         "matchVariables",
         "operator",
@@ -520,14 +520,14 @@
       ],
       "properties": {
         "matchVariables": {
-          "description": "List of match variables",
+          "description": "List of match variables.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/MatchVariable"
           }
         },
         "operator": {
-          "description": "Describes operator to be matched",
+          "description": "Describes operator to be matched.",
           "type": "string",
           "enum": [
             "IPMatch",
@@ -547,18 +547,18 @@
           }
         },
         "negationConditon": {
-          "description": "Describes if this is negate condition or not",
+          "description": "Describes if this is negate condition or not.",
           "type": "boolean"
         },
         "matchValues": {
-          "description": "Match value",
+          "description": "Match value.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "transforms": {
-          "description": "List of transforms",
+          "description": "List of transforms.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Transform"
@@ -567,10 +567,10 @@
       }
     },
     "ManagedRuleSets": {
-      "description": "Defines ManagedRuleSets - array of managedRuleSet",
+      "description": "Defines ManagedRuleSets - array of managedRuleSet.",
       "properties": {
         "ruleSets": {
-          "description": "List of rules",
+          "description": "List of rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleSet"
@@ -584,7 +584,7 @@
       "x-ms-discriminator-value": "Unknown",
       "properties": {
         "ruleSetVersion": {
-          "description": "defines version of the rule set",
+          "description": "Defines version of the rule set.",
           "type": "string"
         },
         "ruleSetType": {
@@ -671,7 +671,7 @@
       "required": [
         "matchVariable"
       ],
-      "description": "Allow to exclude some variable satisfy the condition for the WAF check"
+      "description": "Allow to exclude some variable satisfy the condition for the WAF check."
     }
   },
   "parameters": {
