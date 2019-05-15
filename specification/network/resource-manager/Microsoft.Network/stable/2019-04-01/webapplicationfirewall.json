@@ -285,11 +285,11 @@
       "description": "Defines web application firewall policy properties.",
       "properties": {
         "policySettings": {
-          "description": "Describes policySettings for policy.",
+          "description": "Describes policy settings for policy.",
           "$ref": "#/definitions/PolicySettings"
         },
         "policyDetailSettings": {
-          "description": "Describes policyDetailSettings for policy.",
+          "description": "Describes policy detail settings for policy.",
           "$ref": "#/definitions/PolicyDetailSettings"
         },
         "customRules": {
@@ -314,7 +314,7 @@
         "provisioningState": {
           "readOnly": true,
           "type": "string",
-          "description": "Provisioning state of the WebApplicationFirewallPolicy."
+          "description": "Provisioning state of the web application firewall policy."
         },
         "resourceState": {
           "title": "Resource status of the policy.",
@@ -337,7 +337,7 @@
       }
     },
     "WebApplicationFirewallPolicyListResult": {
-      "description": "Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list web application firewall policies. It contains a list of web application firewall policy objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -345,12 +345,12 @@
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallPolicy"
           },
-          "description": "List of WebApplicationFirewallPolicies within a resource group."
+          "description": "List of web application firewall policies within a resource group."
         },
         "nextLink": {
           "readOnly": true,
           "type": "string",
-          "description": "URL to get the next set of WebApplicationFirewallPolicy objects if there are any."
+          "description": "URL to get the next set of web application firewall policy objects if there are any."
         }
       }
     },
@@ -370,7 +370,7 @@
           }
         },
         "mode": {
-          "description": "Describes if it is in detection mode  or prevention mode at policy level.",
+          "description": "Describes if it is in detection mode or prevention mode at policy level.",
           "type": "string",
           "enum": [
             "Prevention",
@@ -506,7 +506,7 @@
           }
         },
         "selector": {
-          "description": "Describes field of the matchVariable collection.",
+          "description": "Describes field of the match variable collection.",
           "type": "string"
         }
       }
@@ -567,7 +567,7 @@
       }
     },
     "ManagedRuleSets": {
-      "description": "Defines ManagedRuleSets - array of managedRuleSet.",
+      "description": "Defines managed rule sets - array of managed rule set.",
       "properties": {
         "ruleSets": {
           "description": "List of rules.",
@@ -580,7 +580,7 @@
     },
     "ManagedRuleSet": {
       "type": "object",
-      "description": "Base class for all types of ManagedRuleSet.",
+      "description": "Base class for all types of managed rule set.",
       "x-ms-discriminator-value": "Unknown",
       "properties": {
         "ruleSetVersion": {
@@ -661,11 +661,11 @@
         },
         "selectorMatchOperator": {
           "type": "string",
-          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to."
+          "description": "When match variable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to."
         },
         "selector": {
           "type": "string",
-          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
+          "description": "When match variable is a collection, operator used to specify which elements in the collection this exclusion applies to."
         }
       },
       "required": [
