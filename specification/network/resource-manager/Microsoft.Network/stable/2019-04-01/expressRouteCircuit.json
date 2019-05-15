@@ -1441,6 +1441,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1571,6 +1576,15 @@
       },
       "description": "Contains stats associated with the peering."
     },
+    "RouteFilterReference": {
+      "properties": {
+        "id": {
+          "type":"string",
+          "description": "Corresponding route filter Id."
+        }
+      },
+      "description": "Reference to a route filter."
+    },
     "ExpressRouteCircuitPeeringPropertiesFormat": {
       "properties": {
         "peeringType": {
@@ -1639,7 +1653,7 @@
           "description": "Gets whether the provider or the customer last modified the peering."
         },
         "routeFilter": {
-          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "$ref": "#/definitions/RouteFilterReference",
           "description": "The reference of the RouteFilter resource."
         },
         "ipv6PeeringConfig": {
@@ -1683,6 +1697,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1778,6 +1797,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1852,6 +1876,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
