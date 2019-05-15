@@ -248,21 +248,6 @@
           "type": "string",
           "readOnly": true,
           "description": "Azure resource location"
-        },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource kind"
-        },
-        "tags": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource tags"
-        },
-        "identity": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource identity"
         }
       },
       "x-ms-azure-resource": true,
@@ -284,33 +269,14 @@
       "required": [ "enabled", "days" ],
       "description": "Specifies the retention policy for the log."
     },
-    "MetricSettings": {
-      "properties": {
-        "timeGrain": {
-          "type": "string",
-          "format": "duration",
-          "description": "The timegrain of the metric in ISO8601 format."
-        },
-        "category": {
-          "type": "string",
-          "description": "Name of a Diagnostic Metric category for a resource type this setting is applied to. To obtain the list of Diagnostic metric categories for a resource, first perform a GET diagnostic settings operation."
-        },
-        "enabled": {
-          "type": "boolean",
-          "description": "A value indicating whether this category is enabled."
-        },
-        "retentionPolicy": {
-          "$ref": "#/definitions/RetentionPolicy",
-          "description": "The retention policy for this category."
-        }
-      },
-      "required": [ "enabled" ],
-      "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
-    },
     "LogSettings": {
       "properties": {
         "category": {
+          "enum": ["AuditLogs", "SignInLogs"],
           "type": "string",
+          "x-ms-enum": {
+            "name": "category"
+         },
           "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
         },
         "enabled": {
@@ -329,7 +295,7 @@
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs." 
         },
         "serviceBusRuleId": {
           "type": "string",
@@ -347,23 +313,12 @@
           "type": "string",
           "description": "The name of the event hub. If none is specified, the default event hub will be selected."
         },
-        "metrics": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MetricSettings"
-          },
-          "description": "The list of metric settings."
-        },
         "logs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSettings"
           },
           "description": "The list of logs settings."
-        },
-        "logAnalyticsDestinationType": {
-          "type": "string",
-          "description": "The type of log analytics destination."
         }
       },
       "description": "The diagnostic settings."
@@ -497,7 +452,7 @@
     "DiagnosticSettingsCategory": {
       "properties": {
         "categoryType": {
-          "enum": ["Metrics", "Logs"],
+          "enum": ["Logs"],
           "type": "string",
           "x-ms-enum": {
              "name": "categoryType"
