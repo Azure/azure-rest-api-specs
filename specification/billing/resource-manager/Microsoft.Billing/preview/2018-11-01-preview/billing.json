@@ -294,7 +294,7 @@
             }
           }
         }
-      }      
+      }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}": {
       "get": {
@@ -4140,21 +4140,16 @@
           "description": "If the billing profile is opted in to receive invoices via email.",
           "type": "boolean"
         },
-        "enableAzureSkuIds": {
-          "description": "Azure skus to enable for this billing profile.",
+        "enableAzureSKUs": {
+          "description": "Azure skus to enable for this billing profile..",
           "type": "array",
           "items": {
-            "description": "The sku id.",
-            "type": "string"
+            "$ref": "#/definitions/EnabledAzureSKUs"
           }
         },
         "createAzureSubscriptions": {
           "description": "Create azure subscriptions when creating this billing profile.",
           "type": "boolean"
-        },
-        "paymentInstrumentId": {
-          "description": "The paymentInstrument associated with the billing profile at creation.",
-          "type": "string"
         }
       }
     },
