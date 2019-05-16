@@ -489,7 +489,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a cluster": {
-            "$ref": "./examples/PutQuota.json"
+            "$ref": "./examples/UpdateQuota.json"
           }
         }
       },
@@ -1317,19 +1317,14 @@
     },
     "QuotaBaseProperties": {
       "properties": {
-        "resourceGroupName": {
-          "type": "string",
-          "title": "Name of the resource group",
-          "description": "Name of the resource group to which the resource belongs."
-        },
         "vmfamily": {
           "type": "string",
           "title": "Virtual Machine family name",
           "description": "The family name of the virtual machine size."
         },
-        "amlworkspacename": {
+        "workspaceId": {
           "type": "string",
-          "title": "AML workspace Name.",
+          "title": "AML workspace Id.",
           "description": "Specifies the AML workspace Name."
         },
         "quota": {
@@ -1346,7 +1341,9 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/QuotaBaseProperties",
-          "description": "The properties of create quota."
+          "description": "The properties of create quota.",
+          "readOnly": true,
+          "type": "array"
         }
       },
       "description": "Quota creation parameters."
