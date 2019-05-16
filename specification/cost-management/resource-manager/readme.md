@@ -95,6 +95,10 @@ directive:
     from: costmanagement.json
     where: $.definitions.ShowbackRuleProperties.properties.deprecationTime
     reason: not forecast
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: costmanagement.json
+    where: $.definitions.ShowbackRuleProperties
+    reason: not forecast
 ```
 
 ### Tag: package-2018-08-preview
