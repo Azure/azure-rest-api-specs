@@ -14,6 +14,25 @@
         "location" : "eastus",
         "properties" : {
           "provisioningState" : "Succeeded",
+          "visibility": {
+            "subscriptions": [
+              "subscription1",
+              "subscription2",
+              "subscription3"
+            ]
+          },
+          "autoApproval": {
+            "subscriptions": [
+              "subscription1",
+              "subscription2"
+            ]
+          },
+          "fqdns": [
+            "fqdn1",
+            "fqdn2",
+            "fqdn3"
+          ],
+          "alias": "ContosoService.{guid}.azure.privatelinkservice",
           "loadBalancerFrontendIPConfigurations": [
             {
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb"
