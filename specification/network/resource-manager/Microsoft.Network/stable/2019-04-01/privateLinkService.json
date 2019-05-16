@@ -466,23 +466,19 @@
           "description": "An array of list about connections to the private endpoint."
         },
         "visibility": {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ResourceSet",
-              "description": "the base resource set for this property."
-             }
-          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceSet"
+            }
+          ],
           "description": "The visibility list of the private link service."
         },
         "autoApproval": {
-          "properties": {
-            "properties": {
-              "x-ms-client-flatten": true,
-              "$ref": "#/definitions/ResourceSet",
-              "description": "the base resource set for this property."
+          "allOf": [
+            {
+              "$ref": "#/definitions/ResourceSet"
             }
-          },
+          ],
           "description": "The auto-approval list of the private link service."
         },
         "fqdns": {
@@ -523,7 +519,7 @@
           "description":"The name of private link service ip configuration."
         }
       },
-      "description": "private link service ip configuration."
+      "description": "The private link service ip configuration."
     },
     "PrivateLinkServiceIpConfigurationProperties": {
       "properties": {
