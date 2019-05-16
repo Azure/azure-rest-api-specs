@@ -105,9 +105,9 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
+    }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGatewayWebApplicationFirewallPolicies/{policyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/{policyName}": {
       "get": {
         "tags": [
           "WebApplicationFirewallPolicies"
@@ -277,7 +277,7 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+            "$ref": "./network.json#/definitions/Resource"
         }
       ]
     },
@@ -288,20 +288,12 @@
           "description": "Describes  policySettings for policy",
           "$ref": "#/definitions/PolicySettings"
         },
-        "policyDetailSettings": {
-          "description": "Describes policyDetailSettings for policy",
-          "$ref": "#/definitions/PolicyDetailSettings"
-        },
         "customRules": {
           "description": "Describes custom rules inside the policy",
           "type": "array",
           "items": {
             "$ref": "#/definitions/WebApplicationFirewallCustomRule"
           }
-        },
-        "managedRules": {
-          "description": "Describes managed rules inside the policy",
-          "$ref": "#/definitions/ManagedRuleSets"
         },
         "applicationGateways": {
           "readOnly": true,
@@ -380,31 +372,6 @@
             "name": "WebApplicationFirewallMode",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "PolicyDetailSettings": {
-      "description": "Defines contents of a web application firewall global detail configuration",
-      "properties": {
-        "requestBodyCheck": {
-          "type": "boolean",
-          "description": "Whether to allow WAF to check request Body."
-        },
-        "maxRequestBodySizeInKb": {
-          "type": "integer",
-          "format": "int32",
-          "maximum": 128,
-          "exclusiveMaximum": false,
-          "minimum": 8,
-          "exclusiveMinimum": false,
-          "description": "Maximum request body size in Kb for WAF."
-        },
-        "fileUploadLimitInMb": {
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0,
-          "exclusiveMinimum": false,
-          "description": "Maximum file upload size in Mb for WAF."
         }
       }
     },
@@ -565,113 +532,6 @@
           }
         }
       }
-    },
-    "ManagedRuleSets": {
-      "description": "Defines ManagedRuleSets - array of managedRuleSet",
-      "properties": {
-        "ruleSets": {
-          "description": "List of rules",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedRuleSet"
-          }
-        }
-      }
-    },
-    "ManagedRuleSet": {
-      "type": "object",
-      "description": "Base class for all types of ManagedRuleSet.",
-      "x-ms-discriminator-value": "Unknown",
-      "properties": {
-        "ruleSetVersion": {
-          "description": "defines version of the rule set",
-          "type": "string"
-        },
-        "ruleSetType": {
-          "description": "RuleSetType - AzureManagedRuleSet or OWASP RuleSets.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "ruleSetType"
-      ],
-      "discriminator": "ruleSetType"
-    },
-    "OWASPRuleSet": {
-      "type": "object",
-      "description": "Describes azure managed provider.",
-      "x-ms-discriminator-value": "OWASPRuleSet",
-      "properties": {
-        "ruleSetConfiguration": {
-          "$ref": "#/definitions/OWASPRuleSetConfiguration",
-          "description": "OWASP rule set configuration."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedRuleSet"
-        }
-      ]
-    },
-    "OWASPRuleSetConfiguration": {
-      "properties": {
-        "disabledRuleGroups": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OWASPRuleSetDisabledRuleGroup"
-          },
-          "description": "The disabled rule groups."
-        },
-        "exclusions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OWASPRuleSetExclusion"
-          },
-          "description": "The exclusion list."
-        }
-      },
-      "description": "OWASP rule set configuration."
-    },
-    "OWASPRuleSetDisabledRuleGroup": {
-      "properties": {
-        "ruleGroupName": {
-          "type": "string",
-          "description": "The name of the rule group that will be disabled."
-        },
-        "rules": {
-          "type": "array",
-          "items": {
-            "type": "integer",
-            "format": "int32",
-            "x-nullable": false
-          },
-          "description": "The list of rules that will be disabled. If null, all rules of the rule group will be disabled."
-        }
-      },
-      "required": [
-        "ruleGroupName"
-      ],
-      "description": "Allows to disable rules within a rule group or an entire rule group."
-    },
-    "OWASPRuleSetExclusion": {
-      "properties": {
-        "matchVariable": {
-          "type": "string",
-          "description": "The variable to be excluded."
-        },
-        "selectorMatchOperator": {
-          "type": "string",
-          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to."
-        },
-        "selector": {
-          "type": "string",
-          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
-        }
-      },
-      "required": [
-        "matchVariable"
-      ],
-      "description": "Allow to exclude some variable satisfy the condition for the WAF check"
     }
   },
   "parameters": {
