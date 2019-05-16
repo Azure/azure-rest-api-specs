@@ -2857,127 +2857,237 @@
         }
       }
     },
-		"ShowbackRuleListResult": {
-			"description": "Result of listing showback rules. It contains a list of available rules in the scope provided.",
-			"properties": {
-				"value": {
-					"description": "The list of showback rules.",
-					"type": "array",
-					"readOnly": true,
-					"items": {
-						"$ref": "#/definitions/ShowbackRule"
-					}
-				}
-			}
-		},
-		"ShowbackRule": {
-			"type": "object",
-			"description": "The showback rule model definition",
-			"properties": {
-				"id": {
-					"type": "string",
-					"readOnly": true,
-					"description": "Rule id"
-				},
-				"name": {
-					"type": "string",
-					"readOnly": true,
-					"description": "Rule name"
-				},
-				"type": {
-					"type": "string",
-					"readOnly": true,
-					"description": "Rule type"
-				},
-				"properties": {
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/ShowbackRuleProperties",
-					"description": "Showback rule properties"
-				}
-			}
-		},
-		"ShowbackRuleProperties": {
-			"description": "The properties of a showback rule.",
-			"discriminator": "RuleType",
-			"properties": {
-				"description": {
-					"description": "Description of a showback rule.",
-					"type": "string"
-				},
-				"status": {
-					"description": "The current status of the showback rule.",
-					"type": "string",
-					"enum": [
-						"NotActive",
-						"Active"
-					],
-					"x-ms-enum": {
-						"name": "ShowbackRuleStatus",
-						"modelAsString": true
-					}
-				},
-				"version": {
-					"description": "The current version of showback rule.",
-					"type": "integer",
-					"readOnly": true
-				},
-				"scopes": {
-					"description": "List of authorized assigned scopes.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Scope"
-					}
-				},
-				"creationTime": {
-					"format": "date-time",
-					"description": "The time when the showback rule was created.",
-					"type": "string",
-					"readOnly": true
-				},
-				"deprecationTime": {
-					"description": "The current time when showback rule was deprecate.",
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"modificationTime": {
-					"description": "The current status when showback rule was modified.",
-					"format": "date-time",
-					"type": "string",
-					"readOnly": true
-				},
-				"details": {
-					"allOf": [{
-						"$ref": "#/definitions/ShowbackDetailsKind"
-					}]
-				}
-			}
-		},
-		"ShowbackRulesKind": {
-			"type": "object",
-			"description": "Describes Showback rule with rule type",
-			"properties": {
-				"RuleType": {
-					"type": "string",
-					"description": "The rule type of the showback rule solution",
-					"enum": ["CustomPrice", "CustomChange", "CostAllocation"],
-					"x-ms-enum": {
-						"name": "ShowbackRulesKind",
-						"modelAsString": true,
-						"values": [{
-								"value": "CustomPrice"
-							},
-							{
-								"value": "CustomCharge"
-							},
-							{
-								"value": "CostAllocation"
-							}
-						]
-					}
-				}
-			}
-		},
+    "ShowbackRuleListResult": {
+      "description": "Result of listing showback rules. It contains a list of available rules in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of showback rules.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ShowbackRule"
+          }
+        }
+      }
+    },
+    "ShowbackRule": {
+      "type": "object",
+      "description": "The showback rule model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ShowbackRuleProperties",
+          "description": "Showback rule properties"
+        }
+      }
+    },
+    "ShowbackRuleProperties": {
+      "description": "The properties of a showback rule.",
+      "discriminator": "RuleType",
+      "properties": {
+        "description": {
+          "description": "Description of a showback rule.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the showback rule.",
+          "type": "string",
+          "enum": [
+            "NotActive",
+            "Active"
+          ],
+          "x-ms-enum": {
+            "name": "ShowbackRuleStatus",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "The current version of showback rule.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "scopes": {
+          "description": "List of authorized assigned scopes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Scope"
+          }
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "The time when the showback rule was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deprecationTime": {
+          "description": "The current time when showback rule was deprecate.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "modificationTime": {
+          "description": "The current status when showback rule was modified.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShowbackRulesKind"
+        }
+      ]
+    },
+    "CustomPrice": {
+      "x-ms-discriminator-value": "CustomPrice",
+      "type": "object",
+      "description": "Represents Custom price showback rule model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShowbackRuleProperties"
+        }
+      ],
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/CustomPriceProperties"
+        }
+      }
+    },
+    "CustomPriceProperties": {
+      "type": "object",
+      "title": "Custom price showback rule properties",
+      "properties": {
+        "pricesheet": {
+          "type": "string"
+        },
+        "benefits": {
+          "description": "Array of benefits.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "None",
+              "All",
+              "AHUB",
+              "Reservations"
+            ],
+            "x-ms-enum": {
+              "name": "FunctionType",
+              "modelAsString": true
+            }
+          }
+        },
+        "markups": {
+          "description": "List of markups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Markup"
+          }
+        }
+      }
+    },
+    "CustomCharge": {
+      "x-ms-discriminator-value": "CustomCharge",
+      "type": "object",
+      "description": "Represents custom charge showback rule model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShowbackRuleProperties"
+        }
+      ],
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/CustomChargeProperties"
+        }
+      }
+    },
+    "CustomChargeProperties": {
+      "type": "object",
+      "title": "Custom charge showback rule properties",
+      "properties": {
+        "recurring": {
+          "description": "Recurring of the charge.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "CustomChargeRecurring",
+            "modelAsString": true
+          }
+        },
+        "chargeType": {
+          "type": "string"
+        },
+        "ChargeValue": {
+          "type": "string"
+        },
+        "EffectiveMonth": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "EndMonth": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "CostAllocation": {
+      "x-ms-discriminator-value": "CostAllocation",
+      "type": "object",
+      "description": "Represents cost allocation showback rule model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShowbackRuleProperties"
+        }
+      ],
+      "properties": {
+        "details": {
+          "$ref": "#/definitions/CostAllocationProperties"
+        }
+      }
+    },
+    "CostAllocationProperties": {
+      "type": "object",
+      "title": "Cost allocation showback rule properties",
+      "properties": {}
+    },
+    "ShowbackRulesKind": {
+      "type": "object",
+      "description": "Describes Showback rule with rule type",
+      "properties": {
+        "RuleType": {
+          "type": "string",
+          "description": "The rule type of the showback rule solution",
+          "enum": [
+            "CustomPrice",
+            "CustomChange",
+            "CostAllocation"
+          ],
+          "x-ms-enum": {
+            "name": "ShowbackRulesKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Scope": {
       "type": "object",
       "description": "The Scope model definition",
@@ -3007,91 +3117,7 @@
           "type": "string"
         }
       }
-    },
-		"ShowbackDetailsKind": {
-			"type": "object",
-			"description": "Describes Showback rule with rule type",
-			"properties": {
-				"RuleType": {
-					"type": "string",
-					"description": "The rule type of the showback rule solution",
-					"enum": ["CustomPriceDetails","CostAllocationDetails"],
-					"x-ms-enum": {
-						"name": "ShowbackDetailsKind",
-						"modelAsString": true,
-						"values": [{
-							"value": "CustomPriceDetails"
-						},{
-							"value": "CostAllocationDetails"
-						}]
-					}
-				}
-			}
-		},
-		"CustomPriceDetails": {
-			"x-ms-discriminator-value": "CustomPriceDetails",
-			"type": "object",
-			"description": "Represents Custom price showback rule model",
-			"allOf": [{
-				"$ref": "#/definitions/ShowbackDetails"
-			}],
-			"properties": {
-				"pricesheet": {
-					"type": "string"
-				},
-				"benefits": {
-					"description": "Array of benefits.",
-					"type": "array",
-					"items": {
-						"type": "string",
-						"enum": [
-							"None", "All", "AHUB", "Reservations"
-						],
-						"x-ms-enum": {
-							"name": "FunctionType",
-							"modelAsString": true
-						}
-					}
-				},
-				"markups": {
-					"description": "List of markups.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/Markup"
-					}
-				}
-			}
-		},
-		"CostAllocationDetails": {
-			"x-ms-discriminator-value": "CostAllocationDetails",
-			"type": "object",
-			"description": "Represents Custom price showback rule model",
-			"allOf": [{
-				"$ref": "#/definitions/ShowbackDetails"
-			}],
-			"properties": {
-				"policy": {
-					"description": "Cost allocation policy.",
-					"type": "string",
-					"enum": [
-						"Proportional",
-						"Evenly",
-						"Fixed"
-					],
-					"x-ms-enum": {
-						"name": "CostAllocationPolicy",
-						"modelAsString": true
-					}
-				}
-			}
-		},
-		"ShowbackDetails": {
-			"type": "object",
-			"description": "The showback rule details",
-			"allOf": [{
-				"$ref": "#/definitions/ShowbackDetailsKind"
-			}]
-		}
+    }
   },
   "parameters": {
     "apiVersionParameter": {
