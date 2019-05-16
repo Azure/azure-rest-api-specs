@@ -1390,6 +1390,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways/{gatewayName}/reset": {
+      "post": {
+        "tags": [
+          "VpnGateways"
+        ],
+        "operationId": "VpnGateways_Reset",
+        "description": "Resets the primary of the vpn gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnGateway."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation reset the primary of the VpnGateway.",
+            "schema": {
+              "$ref": "#/definitions/VpnGateway"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResetVpnGateway": { "$ref": "./examples/VpnGatewayReset.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },	
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways": {
       "get": {
         "operationId": "VpnGateways_ListByResourceGroup",
@@ -2300,7 +2349,56 @@
           "final-state-via": "location"
         }
       }
-    }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealth": {
+      "post": {
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "operationId": "P2sVpnGateways_GetP2sVpnConnectionHealth",
+        "description": "Gets the connection health of P2S clients of the virtual wan P2SVpnGateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the P2SVpnGateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "P2S Vpn Gateway with P2S connection health details.",
+            "schema": {
+              "$ref": "#/definitions/P2SVpnGateway"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayGetConnectionHealth": { "$ref": "./examples/P2SVpnGatewayGetConnectionHealth.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    }	
   },
   "definitions": {
     "VirtualWanProperties": {
@@ -2708,6 +2806,10 @@
           "type": "boolean",
           "description": "EnableBgp flag"
         },
+        "usePolicyBasedTrafficSelectors": {
+          "type": "boolean",
+          "description": "Enable policy-based traffic selectors."
+        },		
         "ipsecPolicies": {
           "type": "array",
           "items": {
