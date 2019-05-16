@@ -6461,26 +6461,7 @@
         ],
         "x-ms-examples": {
           "Cancel a run": {
-            "parameters": {
-              "dnsSuffix": "api.azureml.ms",
-              "experimentName": "demo_experiment",
-              "region": "eastus",
-              "resourceGroupName": "demo_resource_group",
-              "runDetails": {
-                "runId": "demorun_15501234342_0",
-                "target": "local"
-              },
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
+            "$ref": "./examples/cancelRun.json"
           }
         }
       }
@@ -6564,20 +6545,7 @@
         ],
         "x-ms-examples": {
           "Start a local run": {
-            "parameters": {
-              "dnsSuffix": "api.azureml.ms",
-              "experimentName": "demo_experiment",
-              "files": "multipart-form-data",
-              "region": "eastus",
-              "resourceGroupName": "demo_resource_group",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {}
-              }
-            }
+            "$ref": "./examples/startLocalRun.json"
           }
         }
       }
@@ -6661,23 +6629,7 @@
         ],
         "x-ms-examples": {
           "Start a run": {
-            "parameters": {
-              "dnsSuffix": "api.azureml.ms",
-              "experimentName": "demo_experiment",
-              "files": "multipart-form-data",
-              "region": "eastus",
-              "resourceGroupName": "demo_resource_group",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
+            "$ref": "./examples/startRun.json"
           }
         }
       }
@@ -6749,23 +6701,7 @@
         ],
         "x-ms-examples": {
           "Cancel a run with URI": {
-            "parameters": {
-              "dnsSuffix": "api.azureml.ms",
-              "experimentName": "demo_experiment",
-              "region": "eastus",
-              "resourceGroupName": "demo_resource_group",
-              "runId": "demorun_15501234342_0",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
+            "$ref": "./examples/cancelRunWithUri.json"
           }
         }
       }
@@ -6851,60 +6787,7 @@
         ],
         "x-ms-examples": {
           "Start a snapshot run": {
-            "parameters": {
-              "definition": {
-                "configuration": {
-                  "arguments": [
-                    "234"
-                  ],
-                  "communicator": "None",
-                  "environment": {
-                    "docker": {
-                      "baseImage": "mcr.microsoft.com/azureml/base:0.2.2"
-                    },
-                    "python": {
-                      "condaDependencies": {
-                        "dependencies": [
-                          "python=3.6.2",
-                          {
-                            "pip": [
-                              "azureml-defaults"
-                            ]
-                          }
-                        ],
-                        "name": "project_environment"
-                      },
-                      "interpreterPath": "python",
-                      "userManagedDependencies": false
-                    }
-                  },
-                  "framework": "Python",
-                  "history": {
-                    "OutputCollection": true
-                  },
-                  "maxRunDurationSeconds": 1200,
-                  "nodeCount": 1,
-                  "script": "findsquare.py",
-                  "sourceDirectoryDataStore": null,
-                  "target": "batchai"
-                },
-                "snapshotId": "00000000-0000-0000-0000-000000000000"
-              },
-              "dnsSuffix": "api.azureml.ms",
-              "experimentName": "demo_experiment",
-              "region": "eastus",
-              "resourceGroupName": "demo_resource_group",
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "workspaceName": "demo_workspace"
-            },
-            "responses": {
-              "200": {
-                "body": {
-                  "runId": "demorun_15501234342_0",
-                  "target": "local"
-                }
-              }
-            }
+            "$ref": "./examples/startSnapshotRun.json"
           }
         }
       }
@@ -9222,7 +9105,7 @@
           "multipart/form-data"
         ],
         "description": "Create a HyperDrive Experiment.",
-        "operationId": "HyperDrive_CreateExperiment",
+        "operationId": "HyperDrive_CreateExperimentWithParentRun",
         "parameters": [
           {
             "$ref": "#/parameters/ArmScopeParameter"
