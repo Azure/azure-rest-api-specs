@@ -250,6 +250,7 @@
           "HanaOnAzure"
         ],
         "operationId": "HanaInstances_Delete",
+        "x-ms-long-running-operation": true,
         "summary": "Deletes a SAP HANA instance.",
         "description": "Deletes a SAP HANA instance with the specified subscription, resource group, and instance name.",
         "x-ms-examples": {
@@ -272,8 +273,14 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "Deleted HanaInstance",
+            "schema": {
+              "$ref": "#/definitions/HanaInstance"
+            }
+          },
+          "202": {
+            "description": "Deleting HanaInstance",
             "schema": {
               "$ref": "#/definitions/HanaInstance"
             }
