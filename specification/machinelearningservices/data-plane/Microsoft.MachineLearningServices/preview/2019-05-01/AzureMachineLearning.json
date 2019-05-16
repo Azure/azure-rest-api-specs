@@ -9,7 +9,7 @@
     "ACIServiceCreateRequest": {
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceCreateRequest"
+          "$ref": "#/definitions/CreateServiceRequest"
         },
         {
           "properties": {
@@ -189,7 +189,7 @@
     "AKSServiceCreateRequest": {
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceCreateRequest"
+          "$ref": "#/definitions/CreateServiceRequest"
         },
         {
           "properties": {
@@ -1191,7 +1191,7 @@
     "CreateIotServiceRequest": {
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceCreateRequest"
+          "$ref": "#/definitions/CreateServiceRequest"
         },
         {
           "properties": {
@@ -1324,7 +1324,7 @@
     "CreateServiceInMirRequest": {
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceCreateRequest"
+          "$ref": "#/definitions/CreateServiceRequest"
         },
         {
           "properties": {
@@ -1388,6 +1388,113 @@
       ],
       "description": "The request to create a service on MIR resource.",
       "properties": {},
+      "type": "object"
+    },
+    "CreateServiceRequest": {
+      "description": "The base class for creating a service.",
+      "discriminator": "createServiceRequestTypeDiscriminator",
+      "properties": {
+        "computeType": {
+          "description": "The compute environment type for the service.",
+          "enum": [
+            "ACS",
+            "FPGA",
+            "ACI",
+            "AKS",
+            "AMLCOMPUTE",
+            "IOT",
+            "MIR"
+          ],
+          "example": "AKS",
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ComputeEnvironmentType"
+          }
+        },
+        "createServiceRequestTypeDiscriminator": {
+          "description": "Property used by Swagger for polymorphic object generation.",
+          "type": "string"
+        },
+        "creationMode": {
+          "description": "The service creation mode.",
+          "enum": [
+            "Image",
+            "RegisteredModel",
+            "ModelFiles",
+            "Environment"
+          ],
+          "example": "Image",
+          "format": "int32",
+          "type": "integer",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceCreationSource"
+          }
+        },
+        "dependencies": {
+          "$ref": "#/definitions/ServiceCreationDependentEntities",
+          "description": "The entities (like models and images) that the service is dependent on and that need to be created as part of this call."
+        },
+        "deploymentType": {
+          "description": "The deployment type for the service.",
+          "enum": [
+            "GRPCRealtimeEndpoint",
+            "HttpRealtimeEndpoint"
+          ],
+          "example": "HttpRealtimeEndpoint",
+          "type": "string",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "DeploymentType"
+          }
+        },
+        "description": {
+          "description": "The description of the service.",
+          "type": "string"
+        },
+        "imageId": {
+          "description": "The Image Id.",
+          "type": "string"
+        },
+        "keys": {
+          "$ref": "#/definitions/AuthKeys",
+          "description": "The authentication keys."
+        },
+        "kvTags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The service tag dictionary. Tags are mutable.",
+          "type": "object"
+        },
+        "location": {
+          "description": "The location of the service.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The service name.",
+          "type": "string"
+        },
+        "properties": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The service properties dictionary. Properties are immutable.",
+          "type": "object"
+        },
+        "tags": {
+          "description": "The service tag list.",
+          "items": {
+            "type": "string"
+          },
+          "type": "array",
+          "uniqueItems": false
+        }
+      },
+      "required": [
+        "createServiceRequestTypeDiscriminator"
+      ],
       "type": "object"
     },
     "CreatedBy": {
@@ -1946,7 +2053,7 @@
     "FPGAServiceCreateRequest": {
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceCreateRequest"
+          "$ref": "#/definitions/CreateServiceRequest"
         },
         {
           "properties": {
@@ -3463,7 +3570,7 @@
       },
       "type": "object"
     },
-    "RegenerateKeyRequest": {
+    "RegenerateServiceKeysRequest": {
       "properties": {
         "keyType": {
           "description": "Specification for which type of key to generate.",
@@ -3486,9 +3593,11 @@
       },
       "type": "object"
     },
-    "RegisterSeviceBase": {
+    "RegisterServiceRequest": {
+      "description": "The base class for registering a service.",
       "properties": {
         "computeType": {
+          "description": "The type of compute environment used by the service.",
           "enum": [
             "ACS",
             "FPGA",
@@ -3505,21 +3614,25 @@
           }
         },
         "description": {
+          "description": "The description of the service.",
           "type": "string"
         },
         "kvTags": {
           "additionalProperties": {
             "type": "string"
           },
+          "description": "The service tag dictionary. Tags are mutable.",
           "type": "object"
         },
         "name": {
+          "description": "The name of the service to register.",
           "type": "string"
         },
         "properties": {
           "additionalProperties": {
             "type": "string"
           },
+          "description": "The service properties dictionary. Properties are immutable.",
           "type": "object"
         }
       },
@@ -4072,113 +4185,6 @@
           "type": "string"
         }
       },
-      "type": "object"
-    },
-    "ServiceCreateRequest": {
-      "description": "The base class for creating a service.",
-      "discriminator": "serviceCreateRequestTypeDiscriminator",
-      "properties": {
-        "computeType": {
-          "description": "The compute environment type for the service.",
-          "enum": [
-            "ACS",
-            "FPGA",
-            "ACI",
-            "AKS",
-            "AMLCOMPUTE",
-            "IOT",
-            "MIR"
-          ],
-          "example": "AKS",
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ComputeEnvironmentType"
-          }
-        },
-        "creationMode": {
-          "description": "The service creation mode.",
-          "enum": [
-            "Image",
-            "RegisteredModel",
-            "ModelFiles",
-            "Environment"
-          ],
-          "example": "Image",
-          "format": "int32",
-          "type": "integer",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ServiceCreationSource"
-          }
-        },
-        "dependencies": {
-          "$ref": "#/definitions/ServiceCreationDependentEntities",
-          "description": "The entities (like models and images) that the service is dependent on and that need to be created as part of this call."
-        },
-        "deploymentType": {
-          "description": "The deployment type for the service.",
-          "enum": [
-            "GRPCRealtimeEndpoint",
-            "HttpRealtimeEndpoint"
-          ],
-          "example": "HttpRealtimeEndpoint",
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "DeploymentType"
-          }
-        },
-        "description": {
-          "description": "The description of the service.",
-          "type": "string"
-        },
-        "imageId": {
-          "description": "The Image Id.",
-          "type": "string"
-        },
-        "keys": {
-          "$ref": "#/definitions/AuthKeys",
-          "description": "The authentication keys."
-        },
-        "kvTags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The service tag dictionary. Tags are mutable.",
-          "type": "object"
-        },
-        "location": {
-          "description": "The location of the service.",
-          "type": "string"
-        },
-        "name": {
-          "description": "The service name.",
-          "type": "string"
-        },
-        "properties": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "The service properties dictionary. Properties are immutable.",
-          "type": "object"
-        },
-        "serviceCreateRequestTypeDiscriminator": {
-          "description": "Property used by Swagger for polymorphic object generation.",
-          "type": "string"
-        },
-        "tags": {
-          "description": "The service tag list.",
-          "items": {
-            "type": "string"
-          },
-          "type": "array",
-          "uniqueItems": false
-        }
-      },
-      "required": [
-        "serviceCreateRequestTypeDiscriminator"
-      ],
       "type": "object"
     },
     "ServiceCreationDependentEntities": {
@@ -11164,7 +11170,7 @@
             "name": "request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ServiceCreateRequest"
+              "$ref": "#/definitions/CreateServiceRequest"
             }
           },
           {
@@ -11224,14 +11230,16 @@
           "text/json",
           "application/*+json"
         ],
-        "operationId": "RegisterServiceAsync",
+        "description": "Register a service using the provided payload.",
+        "operationId": "Services_Register",
         "parameters": [
           {
+            "description": "The payload describing the service to register.",
             "in": "body",
             "name": "request",
-            "required": false,
+            "required": true,
             "schema": {
-              "$ref": "#/definitions/RegisterSeviceBase"
+              "$ref": "#/definitions/RegisterServiceRequest"
             }
           },
           {
@@ -11268,7 +11276,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ServiceResponseBase"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -11277,6 +11288,7 @@
             }
           }
         },
+        "summary": "Register a service.",
         "tags": [
           "Service"
         ]
@@ -11592,7 +11604,7 @@
             "name": "request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RegenerateKeyRequest"
+              "$ref": "#/definitions/RegenerateServiceKeysRequest"
             }
           },
           {
