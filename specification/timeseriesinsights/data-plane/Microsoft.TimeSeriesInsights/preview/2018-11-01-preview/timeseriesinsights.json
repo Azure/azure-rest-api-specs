@@ -46,9 +46,9 @@
     "/availability": {
       "get": {
         "tags": [
-          "TimeSeries"
+          "Query"
         ],
-        "operationId": "TimeSeries_GetAvailability",
+        "operationId": "Query_GetAvailability",
         "description": "Returns the time range and distribution of event count over the event timestamp ($ts). This API can be used to provide landing experience of navigating to the environment.",
         "x-ms-examples": {
           "AvailabilityGet": {
@@ -102,9 +102,9 @@
     "/eventSchema": {
       "post": {
         "tags": [
-          "TimeSeries"
+          "Query"
         ],
-        "operationId": "TimeSeries_GetEventSchema",
+        "operationId": "Query_GetEventSchema",
         "description": "Returns environment event schema for a given search span. Event schema is a set of property definitions. Event schema may not be contain all persisted properties when there are too many properties.",
         "x-ms-examples": {
           "EventSchemaGet": {
@@ -280,9 +280,9 @@
     "/timeseries/query": {
       "post": {
         "tags": [
-          "TimeSeries"
+          "Query"
         ],
-        "operationId": "TimeSeriesQuery_ExecutePaged",
+        "operationId": "Query_Execute",
         "description": "Executes Time Series Query in pages of results - Get Events, Get Series or Aggregate Series.",
         "x-ms-examples": {
           "QueryAggregateSeriesPage1": {
@@ -369,9 +369,9 @@
     "/timeseries/instances": {
       "get": {
         "tags": [
-          "Instances"
+          "TimeSeriesInstances"
         ],
-        "operationId": "Instances_GetPaged",
+        "operationId": "TimeSeriesInstances_Get",
         "description": "Gets time series instances in pages.",
         "x-ms-examples": {
           "InstancesGetPage1": {
@@ -431,9 +431,9 @@
     "/timeseries/instances/$batch": {
       "post": {
         "tags": [
-          "Instances"
+          "TimeSeriesInstances"
         ],
-        "operationId": "Instances_ExecuteBatch",
+        "operationId": "TimeSeriesInstances_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series instances.",
         "x-ms-examples": {
           "InstancesBatchDeleteByIds": {
@@ -508,9 +508,9 @@
     "/timeseries/instances/suggest": {
       "post": {
         "tags": [
-          "Instances"
+          "TimeSeriesInstances"
         ],
-        "operationId": "Instances_Suggest",
+        "operationId": "TimeSeriesInstances_Suggest",
         "description": "Suggests keywords based on time series instance attributes to be later used in Search Instances.",
         "x-ms-examples": {
           "InstancesSuggest": {
@@ -570,9 +570,9 @@
     "/timeseries/instances/search": {
       "post": {
         "tags": [
-          "Instances"
+          "TimeSeriesInstances"
         ],
-        "operationId": "Instances_Search",
+        "operationId": "TimeSeriesInstances_Search",
         "description": "Partial list of hits on search for time series instances based on instance attributes.",
         "x-ms-examples": {
           "InstancesSearchPage1": {
@@ -641,9 +641,9 @@
     "/timeseries/types": {
       "get": {
         "tags": [
-          "Types"
+          "TimeSeriesTypes"
         ],
-        "operationId": "Types_GetPaged",
+        "operationId": "TimeSeriesTypes_Get",
         "description": "Gets time series types in pages.",
         "x-ms-examples": {
           "TypesGetPage1": {
@@ -703,9 +703,9 @@
     "/timeseries/types/$batch": {
       "post": {
         "tags": [
-          "Types"
+          "TimeSeriesTypes"
         ],
-        "operationId": "Types_ExecuteBatch",
+        "operationId": "TimeSeriesTypes_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series types.",
         "x-ms-examples": {
           "TypesBatchGetByIds": {
@@ -777,9 +777,9 @@
     "/timeseries/hierarchies": {
       "get": {
         "tags": [
-          "Hierarchies"
+          "TimeSeriesHierarchies"
         ],
-        "operationId": "Hierarchies_GetPaged",
+        "operationId": "TimeSeriesHierarchies_Get",
         "description": "Returns time series hierarchies definitions in pages.",
         "x-ms-examples": {
           "HierarchiesGetPage1": {
@@ -839,9 +839,9 @@
     "/timeseries/hierarchies/$batch": {
       "post": {
         "tags": [
-          "Hierarchies"
+          "TimeSeriesHierarchies"
         ],
-        "operationId": "Hierarchies_ExecuteBatch",
+        "operationId": "TimeSeriesHierarchies_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series hierarchy definitions.",
         "x-ms-examples": {
           "HierarchiesBatchGetByIds": {
