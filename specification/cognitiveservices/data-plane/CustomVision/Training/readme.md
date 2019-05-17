@@ -79,7 +79,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/CustomVision/Training/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Vision.CustomVision.Training/src/Generated
   clear-output-folder: true
 ```
 

@@ -44,7 +44,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.CognitiveServices.Language.SpellCheck
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/SpellCheck/BingSpellCheck/Generated/
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Language.SpellCheck/src/Generated
   sync-methods: none
 ```
 
