@@ -1,14 +1,14 @@
 {
     "parameters": {
-        "scope": "subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1",
-        "eventSubscriptionName": "examplesubscription10",
         "api-version": "2019-06-01",
+        "scope": "subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1",
+        "eventSubscriptionName": "examplesubscription1",
         "eventSubscriptionInfo": {
             "properties": {
                 "destination": {
-                    "endpointType": "WebHook",
+                    "endpointType": "EventHub",
                     "properties": {
-                        "endpointUrl": "https://requestb.in/15ksip71"
+                        "resourceId": "/subscriptions/55f3dcd4-cac7-43b4-990b-a139d62a1eb2/resourceGroups/TestRG/providers/Microsoft.EventHub/namespaces/ContosoNamespace/eventhubs/EH1"
                     }
                 },
                 "filter": {
@@ -38,10 +38,10 @@
                         "subjectEndsWith": "ExampleSuffix"
                     },
                     "provisioningState": "Succeeded",
-                    "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1"
+                    "topic": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/microsoft.eventgrid/topics/exampletopic1"
                 },
-                "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventHub/namespaces/examplenamespace1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription10",
-                "name": "examplesubscription10",
+                "id": "/subscriptions/5b4b650e-28b9-4790-b3ab-ddbd88d727c4/resourceGroups/examplerg/providers/Microsoft.EventGrid/topics/exampletopic1/providers/Microsoft.EventGrid/eventSubscriptions/examplesubscription1",
+                "name": "examplesubscription1",
                 "type": "Microsoft.EventGrid/eventSubscriptions"
             }
         }
