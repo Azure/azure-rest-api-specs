@@ -29,15 +29,15 @@ openapi-type: arm
 tag: package-41234123412341234
 ```
 
-
 ### Tag: package-41234123412341234
 
 These settings apply only when `--tag=package-41234123412341234` is specified on the command line.
 
-```yaml $(tag) == 'package-41234123412341234'
+``` yaml $(tag) == 'package-41234123412341234'
 input-file:
   - Microsoft.Cdn/stable/41234123412341234/cdn.json
 ```
+
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
@@ -137,3 +137,13 @@ See configuration in [readme.node.md](./readme.node.md)
 ## Ruby
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: INTERNAL_ERROR
+    from: aadf
+    where: ''
+    reason: asdf
+```
