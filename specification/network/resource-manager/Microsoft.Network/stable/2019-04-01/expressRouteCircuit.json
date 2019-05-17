@@ -1533,7 +1533,7 @@
           "description": "The Microsoft peering configuration."
         },
         "routeFilter": {
-          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the RouteFilter resource."
         },
         "state": {
@@ -1575,15 +1575,6 @@
         }
       },
       "description": "Contains stats associated with the peering."
-    },
-    "RouteFilterReference": {
-      "properties": {
-        "id": {
-          "type":"string",
-          "description": "Corresponding route filter Id."
-        }
-      },
-      "description": "Reference to a route filter."
     },
     "ExpressRouteCircuitPeeringPropertiesFormat": {
       "properties": {
@@ -1653,7 +1644,7 @@
           "description": "Gets whether the provider or the customer last modified the peering."
         },
         "routeFilter": {
-          "$ref": "#/definitions/RouteFilterReference",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the RouteFilter resource."
         },
         "ipv6PeeringConfig": {
