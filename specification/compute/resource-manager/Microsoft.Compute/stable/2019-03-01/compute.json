@@ -1886,7 +1886,13 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a VM by detaching data disk": {
+            "$ref": "./examples/UpdateVMDetachDataDiskUsingToBeDetachedProperty.json"
+          }
+
+        }
       },
       "delete": {
         "tags": [
@@ -3853,7 +3859,7 @@
             "description": "The input object for ConvertToSinglePlacementGroup API."
           },
           {
-                "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -5888,7 +5894,7 @@
         },
         "toBeDetached": {
           "type": "boolean",
-          "description":  "Specifies whether the datadisk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
+          "description":  "Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
         }
       },
       "required": [
@@ -7756,7 +7762,7 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
-        "doNotRunExtensionsOnOverprovisionedVMs":{
+        "doNotRunExtensionsOnOverprovisionedVMs": {
           "type": "boolean",
           "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
         },
@@ -8422,7 +8428,7 @@
       },
       "description": "The instance view of a virtual machine scale set VM."
     },
-      "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
+    "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
       "properties": {
         "networkInterfaceConfigurations": {
           "type": "array",
@@ -8821,7 +8827,7 @@
       "description": "LogAnalytics output properties"
     },
     "VMScaleSetConvertToSinglePlacementGroupInput": {
-      "properties":{
+      "properties": {
         "activePlacementGroupId": {
           "type": "string",
           "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."

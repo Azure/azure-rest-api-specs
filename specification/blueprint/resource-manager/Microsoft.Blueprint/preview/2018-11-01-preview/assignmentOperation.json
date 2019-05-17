@@ -112,7 +112,9 @@
       "type": "object",
       "description": "Represents underlying deployment detail for each update to the blueprint assignment.",
       "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
       ],
       "properties": {
         "properties": {
@@ -122,7 +124,7 @@
         }
       }
     },
-    "AssignmentOperationList":{
+    "AssignmentOperationList": {
       "type": "object",
       "description": "List of AssignmentOperation.",
       "properties": {
@@ -139,7 +141,6 @@
           "description": "Link to the next page of results."
         }
       }
-
     },
     "AssignmentOperationProperties": {
       "type": "object",
@@ -242,10 +243,11 @@
         }
       },
       "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
       ]
     },
-
     "AzureResourceBase": {
       "description": "Common properties for all Azure resources.",
       "type": "object",
@@ -280,7 +282,6 @@
           "type": "string",
           "description": "Error message."
         }
-
       }
     }
   },

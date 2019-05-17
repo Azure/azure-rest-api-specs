@@ -3889,6 +3889,11 @@
             "$ref": "#/definitions/IndexerExecutionResult"
           },
           "description": "History of the recent indexer executions, sorted in reverse chronological order."
+        },
+        "limits" : {
+          "$ref": "#/definitions/IndexerLimits",
+          "readOnly": true,
+          "description": "The execution limits for the indexer."
         }
       },
       "description": "Represents the current status and execution history of an indexer."
@@ -3905,6 +3910,28 @@
       },
       "x-nullable": false,
       "description": "Represents the overall indexer status."
+    },
+    "IndexerLimits": {
+      "properties": {
+        "maxRunTime": {
+          "type": "string",
+          "format": "duration",
+          "readOnly": true,
+          "description": "The maximum duration that the indexer is permitted to run for one execution."
+        },
+        "maxDocumentExtractionSize": {
+          "type": "number",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The maximum size of a document, in bytes, which will be considered valid for indexing."
+        },
+        "maxDocumentContentCharactersToExtract": {
+          "type": "number",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The maximum number of characters that will be extracted from a document picked up for indexing."
+        }
+      }
     },
     "Field": {
       "properties": {
@@ -4518,6 +4545,10 @@
       "properties": {
         "@odata.type": {
           "type": "string"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array."
         },
         "description": {
           "type": "string",
