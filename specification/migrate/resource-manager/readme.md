@@ -77,7 +77,7 @@ These settings apply only when `--tag=package-2018-05-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-05-preview'
 input-file:
-- Microsoft.Migrate/preview/2018-05-01-preview/migrate.json
+- Microsoft.OffAzure/2018-05-01-preview/migrate.json
 ```
 
 ---
