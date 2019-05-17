@@ -1,0 +1,17 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "dedicatedCloudServiceName": "myService",
+    "api-version": "2019-04-01"
+  },
+  "responses": {
+    "204": {},
+    "404":{
+      "error": {
+        "code": "SubscriptionNotFound",
+        "message": "The subscription '{subscription-id}' could not be found."
+      }
+    }
+  }
+}
