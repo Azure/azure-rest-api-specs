@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2018-06-01-privatepreview` is spec
 
 ``` yaml $(tag) == 'package-2018-06-01-privatepreview'
 input-file:
-- Microsoft.DBforMySQL/stable/2018-06-01-privatepreview/mysql.json
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
 ```
 
 
