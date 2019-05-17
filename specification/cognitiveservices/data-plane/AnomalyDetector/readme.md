@@ -48,7 +48,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.AnomalyDetector
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/AnomalyDetector/AnomalyDetector/Generated
+  output-folder: $(csharp-sdks-folder)/cognitiveservices/CognitiveServices.AnomalyDetector/src/Generated
   clear-output-folder: true
 ```
 

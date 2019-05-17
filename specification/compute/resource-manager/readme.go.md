@@ -16,7 +16,7 @@ batch:
   - tag: package-2018-10-01
   - tag: package-2018-06
   - tag: package-compute-2018-04
-  - tag: package-compute-only-2017-12
+  - tag: package-compute-2017-12
   - tag: package-compute-2017-03
   - tag: package-compute-2016-04-preview
   - tag: package-compute-2016-03
@@ -68,12 +68,12 @@ namespace: compute
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-04-01/$(namespace)
 ```
 
-### Tag: package-compute-only-2017-12 and go
+### Tag: package-compute-2017-12 and go
 
-These settings apply only when `--tag=package-compute-only-2017-12 --go` is specified on the command line.
+These settings apply only when `--tag=package-compute-2017-12 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag)=='package-compute-only-2017-12' && $(go)
+```yaml $(tag)=='package-compute-2017-12' && $(go)
 namespace: compute
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-12-01/$(namespace)
 ```

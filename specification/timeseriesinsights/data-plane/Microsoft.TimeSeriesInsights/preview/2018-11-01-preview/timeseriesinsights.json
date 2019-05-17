@@ -45,7 +45,10 @@
   "paths": {
     "/availability": {
       "get": {
-        "operationId": "GetAvailability",
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_GetAvailability",
         "description": "Returns the time range and distribution of event count over the event timestamp ($ts). This API can be used to provide landing experience of navigating to the environment.",
         "x-ms-examples": {
           "AvailabilityGet": {
@@ -98,7 +101,10 @@
     },
     "/eventSchema": {
       "post": {
-        "operationId": "GetEventSchema",
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_GetEventSchema",
         "description": "Returns environment event schema for a given search span. Event schema is a set of property definitions. Event schema may not be contain all persisted properties when there are too many properties.",
         "x-ms-examples": {
           "EventSchemaGet": {
@@ -160,7 +166,10 @@
     },
     "/timeseries/modelSettings": {
       "get": {
-        "operationId": "GetModelSettings",
+        "tags": [
+          "ModelSettings"
+        ],
+        "operationId": "ModelSettings_Get",
         "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.",
         "x-ms-examples": {
           "ModelSettingsGet": {
@@ -208,7 +217,10 @@
         }
       },
       "patch": {
-        "operationId": "UpdateModelSettings",
+        "tags": [
+          "ModelSettings"
+        ],
+        "operationId": "ModelSettings_Update",
         "description": "Updates time series model settings - either the model name or default type ID.",
         "x-ms-examples": {
           "ModelSettingsUpdateName": {
@@ -267,7 +279,10 @@
     },
     "/timeseries/query": {
       "post": {
-        "operationId": "ExecuteQueryPaged",
+        "tags": [
+          "Query"
+        ],
+        "operationId": "Query_Execute",
         "description": "Executes Time Series Query in pages of results - Get Events, Get Series or Aggregate Series.",
         "x-ms-examples": {
           "QueryAggregateSeriesPage1": {
@@ -353,7 +368,10 @@
     },
     "/timeseries/instances": {
       "get": {
-        "operationId": "GetInstancesPaged",
+        "tags": [
+          "TimeSeriesInstances"
+        ],
+        "operationId": "TimeSeriesInstances_Get",
         "description": "Gets time series instances in pages.",
         "x-ms-examples": {
           "InstancesGetPage1": {
@@ -412,7 +430,10 @@
     },
     "/timeseries/instances/$batch": {
       "post": {
-        "operationId": "ExecuteInstancesBatchOperation",
+        "tags": [
+          "TimeSeriesInstances"
+        ],
+        "operationId": "TimeSeriesInstances_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series instances.",
         "x-ms-examples": {
           "InstancesBatchDeleteByIds": {
@@ -486,7 +507,10 @@
     },
     "/timeseries/instances/suggest": {
       "post": {
-        "operationId": "SuggestInstances",
+        "tags": [
+          "TimeSeriesInstances"
+        ],
+        "operationId": "TimeSeriesInstances_Suggest",
         "description": "Suggests keywords based on time series instance attributes to be later used in Search Instances.",
         "x-ms-examples": {
           "InstancesSuggest": {
@@ -545,7 +569,10 @@
     },
     "/timeseries/instances/search": {
       "post": {
-        "operationId": "SearchInstancesPaged",
+        "tags": [
+          "TimeSeriesInstances"
+        ],
+        "operationId": "TimeSeriesInstances_Search",
         "description": "Partial list of hits on search for time series instances based on instance attributes.",
         "x-ms-examples": {
           "InstancesSearchPage1": {
@@ -613,7 +640,10 @@
     },
     "/timeseries/types": {
       "get": {
-        "operationId": "GetTypesPaged",
+        "tags": [
+          "TimeSeriesTypes"
+        ],
+        "operationId": "TimeSeriesTypes_Get",
         "description": "Gets time series types in pages.",
         "x-ms-examples": {
           "TypesGetPage1": {
@@ -672,7 +702,10 @@
     },
     "/timeseries/types/$batch": {
       "post": {
-        "operationId": "ExecuteTypesBatchOperation",
+        "tags": [
+          "TimeSeriesTypes"
+        ],
+        "operationId": "TimeSeriesTypes_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series types.",
         "x-ms-examples": {
           "TypesBatchGetByIds": {
@@ -743,7 +776,10 @@
     },
     "/timeseries/hierarchies": {
       "get": {
-        "operationId": "GetHierarchiesPaged",
+        "tags": [
+          "TimeSeriesHierarchies"
+        ],
+        "operationId": "TimeSeriesHierarchies_Get",
         "description": "Returns time series hierarchies definitions in pages.",
         "x-ms-examples": {
           "HierarchiesGetPage1": {
@@ -802,7 +838,10 @@
     },
     "/timeseries/hierarchies/$batch": {
       "post": {
-        "operationId": "ExecuteHierarchiesBatchOperation",
+        "tags": [
+          "TimeSeriesHierarchies"
+        ],
+        "operationId": "TimeSeriesHierarchies_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series hierarchy definitions.",
         "x-ms-examples": {
           "HierarchiesBatchGetByIds": {
@@ -974,7 +1013,7 @@
           "description": "Projected properties is an array of properties which you want to project. These properties must appear in the events; otherwise, they are not returned.",
           "type": "array",
           "items": {
-	          "$ref": "#/definitions/EventProperty"
+            "$ref": "#/definitions/EventProperty"
           }
         }
       },
@@ -1211,7 +1250,7 @@
             "values": {
               "description": "Values of a single property corresponding to the timestamps. May contain nulls. Type of values matches the type of property.",
               "type": "array",
-              "items": {}
+              "items": { }
             }
           }
         }
@@ -1270,7 +1309,7 @@
         "instanceFields": {
           "description": "Set of key-value pairs that contain user-defined instance properties. May be null.",
           "type": "object",
-          "additionalProperties": {}
+          "additionalProperties": { }
         }
       },
       "required": [
@@ -1666,11 +1705,11 @@
         "modelSettings": {
           "description": "Model settings including model name, Time Series ID properties and default type ID.",
           "readOnly": true,
-          "$ref": "#/definitions/ModelSettings"
+          "$ref": "#/definitions/TimeSeriesModelSettings"
         }
       }
     },
-    "ModelSettings": {
+    "TimeSeriesModelSettings": {
       "description": "Time series model settings including model name, Time Series ID properties and default type ID.",
       "type": "object",
       "properties": {
