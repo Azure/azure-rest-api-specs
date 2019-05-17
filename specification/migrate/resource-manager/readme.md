@@ -10,22 +10,34 @@ This is the AutoRest configuration file for Azure Migrate.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-05
+  - tag: package-2018-02
 ```
 
-### Tag: package-2018-05 and java
+### Tag: package-2018-02 and java
 
-These settings apply only when `--tag=package-2018-05 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2018_05_01
-  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_05_01
+  namespace: com.microsoft.azure.management.azuremigrate.v2018_02_02
+  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_02_02
 regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2018-05-preview and java
+
+These settings apply only when `--tag=package-2018-05-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.azuremigrate.v2018_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_05_01_preview
+regenerate-manager: true
+generate-interface: true
+```
 
 ## Getting Started
 To build the SDK for Migrate, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
@@ -46,19 +58,29 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05
+tag: package-2018-02
 ```
 
 
-### Tag: package-2018-05
+### Tag: package-2018-02
 
-These settings apply only when `--tag=package-2018-05` is specified on the command line.
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-05'
+``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.OffAzure/preview/2018-05-01-preview/migrate.json
+- Microsoft.Migrate/stable/2018-02-02/migrate.json
 ```
 
+### Tag: package-2018-05-preview
+
+These settings apply only when `--tag=package-2018-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-05-preview'
+input-file:
+- Microsoft.Migrate/preview/2018-05-01-preview/migrate.json
+```
+
+---
 # Code Generation
 
 ## Swagger to SDK
