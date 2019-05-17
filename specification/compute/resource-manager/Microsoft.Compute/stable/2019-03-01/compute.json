@@ -1886,7 +1886,13 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a VM by detaching data disk": {
+            "$ref": "./examples/UpdateVMDetachDataDiskUsingToBeDetachedProperty.json"
+          }
+
+        }
       },
       "delete": {
         "tags": [
@@ -5888,7 +5894,7 @@
         },
         "toBeDetached": {
           "type": "boolean",
-          "description": "Specifies whether the datadisk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
+          "description":  "Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
         }
       },
       "required": [
