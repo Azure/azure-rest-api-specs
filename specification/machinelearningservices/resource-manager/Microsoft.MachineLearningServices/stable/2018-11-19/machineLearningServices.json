@@ -445,15 +445,15 @@
         "tags": [
           "Quota"
         ],
-        "operationId": "Quotas_Create",
-        "description": "Set the Quota base on VMFamily in the given Workspace.",
+        "operationId": "Quotas_Update",
+        "description": "Update quota for each VM family in workspace.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The location for setup quota is queried.",
+            "description": "The location for update quota is queried.",
             "pattern": "^[-\\w\\._]+$"
           },
           {
@@ -461,9 +461,9 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QuotaCreateParameters"
+              "$ref": "#/definitions/QuotaUpdateParameters"
             },
-            "description": "Quota creation parameters."
+            "description": "Quota update parameters."
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
@@ -495,9 +495,9 @@
       },
       "get": {
         "tags": [
-          "WorkspaceQuotasByVMFamily"
+          "Quota"
         ],
-        "operationId": "WorkspaceQuotasByVMFamily_List",
+        "operationId": "Quotas_ListByVMFamily",
         "description": "Gets the currently assigned Workspace Quotas based on VMFamily.",
         "parameters": [
           {
@@ -1325,7 +1325,7 @@
         "workspaceId": {
           "type": "string",
           "title": "AML workspace Id.",
-          "description": "Specifies the AML workspace Name."
+          "description": "Specifies the AML workspace Id."
         },
         "quota": {
           "type": "integer",
@@ -1334,19 +1334,21 @@
           "description": "Quota."
         }
       },
-      "description": "The properties for Quota creation or retrieval."
+      "description": "The properties for Quota update or retrieval."
     },
-    "QuotaCreateParameters": {
+    "QuotaUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaBaseProperties",
-          "description": "The properties of create quota.",
+          "items": {
+            "$ref": "#/definitions/QuotaBaseProperties"
+          },
+          "description": "The properties for update quota.",
           "readOnly": true,
           "type": "array"
         }
       },
-      "description": "Quota creation parameters."
+      "description": "Quota update parameters."
     },
     "ResourceName": {
       "properties": {
