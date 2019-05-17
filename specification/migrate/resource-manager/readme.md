@@ -10,18 +10,18 @@ This is the AutoRest configuration file for Azure Migrate.
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-02
+  - tag: package-2018-05
 ```
 
-### Tag: package-2018-02 and java
+### Tag: package-2018-05 and java
 
-These settings apply only when `--tag=package-2018-02 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-05 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-02' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-05' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.azuremigrate.v2018_02_02
-  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_02_02
+  namespace: com.microsoft.azure.management.azuremigrate.v2018_05_01
+  output-folder: $(azure-libraries-for-java-folder)/azuremigrate/resource-manager/v2018_05_01
 regenerate-manager: true
 generate-interface: true
 ```
@@ -46,17 +46,17 @@ These are the global settings for the API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-02
+tag: package-2018-05
 ```
 
 
-### Tag: package-2018-02
+### Tag: package-2018-05
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2018-05` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-02'
+``` yaml $(tag) == 'package-2018-05'
 input-file:
-- Microsoft.Migrate/stable/2018-02-02/migrate.json
+- Microsoft.OffAzure/preview/2018-05-01-preview/migrate.json
 ```
 
 # Code Generation
