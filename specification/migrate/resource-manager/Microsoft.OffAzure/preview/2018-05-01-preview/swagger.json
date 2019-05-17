@@ -154,6 +154,7 @@
         "tags": [
           "HyperVCluster"
         ],
+        "summary": "Method to get all clusters in a site.",
         "operationId": "HyperVCluster_GetAllClustersInSite",
         "consumes": [
           
@@ -168,18 +169,21 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
@@ -352,6 +356,7 @@
         "tags": [
           "HyperVHost"
         ],
+        "summary": "Method to get all hosts in a site.",
         "operationId": "HyperVHost_GetAllHostsInSite",
         "consumes": [
           
@@ -366,18 +371,21 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
@@ -592,6 +600,7 @@
         "tags": [
           "HyperVMachines"
         ],
+        "summary": "Method to get machine.",
         "operationId": "HyperVMachines_GetAllMachinesInSite",
         "consumes": [
           
@@ -606,18 +615,21 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
@@ -636,6 +648,7 @@
           {
             "name": "pageSize",
             "in": "query",
+            "description": "Optional parameter for page size.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -643,12 +656,14 @@
           {
             "name": "continuationToken",
             "in": "query",
+            "description": "Optional parameter for continuation token.",
             "required": false,
             "type": "string"
           },
           {
             "name": "totalRecordCount",
             "in": "query",
+            "description": "Total record count.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1099,6 +1114,7 @@
         "tags": [
           "HyperVSites"
         ],
+        "summary": "Method to patch an existing site.",
         "operationId": "HyperVSites_PatchSite",
         "consumes": [
           "application/json",
@@ -1117,24 +1133,28 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Body with site details.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/HyperVSite"
@@ -1284,6 +1304,7 @@
         "tags": [
           "HyperVSites"
         ],
+        "summary": "Method to get site health summary.",
         "operationId": "HyperVSites_GetSiteHealthSummary",
         "consumes": [
           
@@ -1298,18 +1319,21 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
@@ -1518,6 +1542,7 @@
         "tags": [
           "Machines"
         ],
+        "summary": "Method to get machine.",
         "operationId": "Machines_GetAllMachinesInSite",
         "consumes": [
           
@@ -1532,18 +1557,21 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
@@ -1562,6 +1590,7 @@
           {
             "name": "pageSize",
             "in": "query",
+            "description": "Optional parameter for page size.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1569,12 +1598,14 @@
           {
             "name": "continuationToken",
             "in": "query",
+            "description": "Optional parameter for continuation token.",
             "required": false,
             "type": "string"
           },
           {
             "name": "totalRecordCount",
             "in": "query",
+            "description": "Total record count.",
             "required": false,
             "type": "integer",
             "format": "int32"
@@ -1842,724 +1873,6 @@
         "deprecated": false
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/jobs/{jobName}": {
-      "get": {
-        "tags": [
-          "ServerJobs"
-        ],
-        "operationId": "ServerJobs_GetJob",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerJob"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/jobs": {
-      "get": {
-        "tags": [
-          "ServerJobs"
-        ],
-        "operationId": "ServerJobs_GetAllJobsInSite",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerJobCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/operationsstatus/{operationStatusName}": {
-      "get": {
-        "tags": [
-          "ServerOperationsStatus"
-        ],
-        "operationId": "ServerOperationsStatus_GetOperationStatus",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationStatusName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/runasaccounts/{accountName}": {
-      "get": {
-        "tags": [
-          "ServerRunAsAccounts"
-        ],
-        "operationId": "ServerRunAsAccounts_GetRunAsAccount",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerRunAsAccount"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/runasaccounts": {
-      "get": {
-        "tags": [
-          "ServerRunAsAccounts"
-        ],
-        "operationId": "ServerRunAsAccounts_GetAllRunAsAccountsInSite",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerRunAsAccountCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/machines/{machineName}": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_GetMachine",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_PutMachine",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "machineName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Server"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "validationRequired",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/machines": {
-      "get": {
-        "tags": [
-          "Servers"
-        ],
-        "operationId": "Servers_GetAllMachinesInSite",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "pageSize",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "continuationToken",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "totalRecordCount",
-            "in": "query",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerCollection"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}": {
-      "get": {
-        "tags": [
-          "ServerSites"
-        ],
-        "operationId": "ServerSites_GetSite",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerSite"
-            }
-          }
-        },
-        "deprecated": false
-      },
-      "put": {
-        "tags": [
-          "ServerSites"
-        ],
-        "operationId": "ServerSites_PutSite",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ServerSite"
-            }
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerSite"
-            }
-          },
-          "201": {
-            "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ServerSite"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/refresh": {
-      "post": {
-        "tags": [
-          "ServerSites"
-        ],
-        "operationId": "ServerSites_RefreshSite",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "Tracking URL for long running operation.",
-                "type": "string"
-              }
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/usage": {
-      "get": {
-        "tags": [
-          "ServerSites"
-        ],
-        "operationId": "ServerSites_GetSiteUsage",
-        "consumes": [
-          
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "siteName",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerSiteUsage"
-            }
-          }
-        },
-        "deprecated": false
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/VMwareSites/{siteName}": {
       "get": {
         "tags": [
@@ -2746,6 +2059,7 @@
         "tags": [
           "Sites"
         ],
+        "summary": "Method to update an existing site.",
         "operationId": "Sites_PatchSite",
         "consumes": [
           "application/json",
@@ -2764,24 +2078,28 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "body",
             "in": "body",
+            "description": "Body with site details.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/VMwareSite"
@@ -2931,6 +2249,7 @@
         "tags": [
           "Sites"
         ],
+        "summary": "Method to get site health summary.",
         "operationId": "Sites_GetSiteHealthSummary",
         "consumes": [
           
@@ -2945,18 +2264,21 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
@@ -3123,6 +2445,7 @@
         "tags": [
           "VCenter"
         ],
+        "summary": "Method to get all vCenters in a site.",
         "operationId": "VCenter_GetAllVCentersInSite",
         "consumes": [
           
@@ -3137,18 +2460,21 @@
           {
             "name": "subscriptionId",
             "in": "path",
+            "description": "Subscription Id.",
             "required": true,
             "type": "string"
           },
           {
             "name": "resourceGroupName",
             "in": "path",
+            "description": "Resource group name.",
             "required": true,
             "type": "string"
           },
           {
             "name": "siteName",
             "in": "path",
+            "description": "Site name.",
             "required": true,
             "type": "string"
           },
@@ -3238,6 +2564,1432 @@
         },
         "deprecated": false
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "ImportJobs"
+        ],
+        "summary": "Method to get job.",
+        "operationId": "ImportJobs_GetJob",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportJob"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}/jobs": {
+      "get": {
+        "tags": [
+          "ImportJobs"
+        ],
+        "summary": "Method to get all jobs in a site.",
+        "operationId": "ImportJobs_GetAllJobsInSite",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportJobCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          "ImportMachines"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "ImportMachines_GetMachineAsync",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportMachine"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "ImportMachines"
+        ],
+        "summary": "Method to delete a site.",
+        "operationId": "ImportMachines_DeleteMachineAsync",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "The machine to be deleted.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          "ImportMachines"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "ImportMachines_GetAllMachinesInSiteAsync",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Optional parameter for page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Optional parameter for continuation token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "totalRecordCount",
+            "in": "query",
+            "description": "Total record count.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportMachineCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}": {
+      "get": {
+        "tags": [
+          "ImportSites"
+        ],
+        "summary": "Method to get a site.",
+        "operationId": "ImportSites_GetSiteAsync",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportSite"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "ImportSites"
+        ],
+        "summary": "Method to create or update a site.",
+        "operationId": "ImportSites_PutSiteAsync",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ImportSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ImportSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ImportSite"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "delete": {
+        "tags": [
+          "ImportSites"
+        ],
+        "summary": "Method to delete a site.",
+        "operationId": "ImportSites_DeleteSiteAsync",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}/ImportUri": {
+      "post": {
+        "tags": [
+          "ImportSites"
+        ],
+        "summary": "Gets the SAS URI for import.",
+        "operationId": "ImportSites_GetImportUriAsync",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/ImportSites/{siteName}/ExportUri": {
+      "post": {
+        "tags": [
+          "ImportSites"
+        ],
+        "summary": "Gets the SAS URI for import.",
+        "operationId": "ImportSites_GetExportUriAsync",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The request body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SasUriResponse"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/jobs/{jobName}": {
+      "get": {
+        "tags": [
+          "ServerJobs"
+        ],
+        "summary": "Method to get job.",
+        "operationId": "ServerJobs_GetJob",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerJob"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/jobs": {
+      "get": {
+        "tags": [
+          "ServerJobs"
+        ],
+        "summary": "Method to get all jobs in a site.",
+        "operationId": "ServerJobs_GetAllJobsInSite",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerJobCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/operationsstatus/{operationStatusName}": {
+      "get": {
+        "tags": [
+          "ServerOperationsStatus"
+        ],
+        "summary": "Method to get operation status.",
+        "operationId": "ServerOperationsStatus_GetOperationStatus",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationStatusName",
+            "in": "path",
+            "description": "Operation status ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/runasaccounts/{accountName}": {
+      "get": {
+        "tags": [
+          "ServerRunAsAccounts"
+        ],
+        "summary": "Method to get run as account.",
+        "operationId": "ServerRunAsAccounts_GetRunAsAccount",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Run as account ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerRunAsAccount"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/runasaccounts": {
+      "get": {
+        "tags": [
+          "ServerRunAsAccounts"
+        ],
+        "summary": "Method to get run as accounts.",
+        "operationId": "ServerRunAsAccounts_GetAllRunAsAccountsInSite",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerRunAsAccountCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/machines/{machineName}": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "Servers_GetMachine",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine ARM name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "Method to create or update a server in site.",
+        "operationId": "Servers_PutMachine",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "machineName",
+            "in": "path",
+            "description": "Machine name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Put server body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Server"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "validationRequired",
+            "in": "query",
+            "description": "Validation required of machine.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/machines": {
+      "get": {
+        "tags": [
+          "Servers"
+        ],
+        "summary": "Method to get machine.",
+        "operationId": "Servers_GetAllMachinesInSite",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "pageSize",
+            "in": "query",
+            "description": "Optional parameter for page size.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "Optional parameter for continuation token.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "totalRecordCount",
+            "in": "query",
+            "description": "Total record count.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerCollection"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}": {
+      "get": {
+        "tags": [
+          "ServerSites"
+        ],
+        "summary": "Method to get a site.",
+        "operationId": "ServerSites_GetSite",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerSite"
+            }
+          }
+        },
+        "deprecated": false
+      },
+      "put": {
+        "tags": [
+          "ServerSites"
+        ],
+        "summary": "Method to create or update a site.",
+        "operationId": "ServerSites_PutSite",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body with site details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerSite"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerSite"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ServerSite"
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/refresh": {
+      "post": {
+        "tags": [
+          "ServerSites"
+        ],
+        "summary": "Method to refresh a site.",
+        "operationId": "ServerSites_RefreshSite",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "Tracking URL for long running operation.",
+                "type": "string"
+              }
+            }
+          }
+        },
+        "deprecated": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OffAzure/serversites/{siteName}/usage": {
+      "get": {
+        "tags": [
+          "ServerSites"
+        ],
+        "summary": "Method to get site usage.",
+        "operationId": "ServerSites_GetSiteUsage",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "Subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "Resource group name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "siteName",
+            "in": "path",
+            "description": "Site name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerSiteUsage"
+            }
+          }
+        },
+        "deprecated": false
+      }
     }
   },
   "definitions": {
@@ -3312,6 +4064,7 @@
           }
         },
         "errors": {
+          "description": "Gets the errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthErrorDetails"
@@ -3321,38 +4074,47 @@
       }
     },
     "HealthErrorDetails": {
+      "description": "Error contract returned when some exception occurs in Rest API.",
       "type": "object",
       "properties": {
         "id": {
           "format": "int64",
+          "description": "Gets the error ID.",
           "type": "integer",
           "readOnly": true
         },
         "code": {
+          "description": "Gets the error name.",
           "type": "string",
           "readOnly": true
         },
         "message": {
+          "description": "Gets the error message.",
           "type": "string",
           "readOnly": true
         },
         "possibleCauses": {
+          "description": "Gets the possible causes of error.",
           "type": "string",
           "readOnly": true
         },
         "recommendedAction": {
+          "description": "Gets the recommended action to resolve error.",
           "type": "string",
           "readOnly": true
         },
         "severity": {
+          "description": "Gets the error severity.",
           "type": "string",
           "readOnly": true
         },
         "summaryMessage": {
+          "description": "Gets the error summary message.",
           "type": "string",
           "readOnly": true
         },
         "messageParameters": {
+          "description": "Gets the message parameters.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
@@ -3432,6 +4194,7 @@
           "readOnly": true
         },
         "errors": {
+          "description": "Gets the errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthErrorDetails"
@@ -3655,7 +4418,7 @@
           "readOnly": true
         },
         "managementServerType": {
-          "description": "Management server type captured as a string representation of the\r\n            {Microsoft.Azure.FDS.WebRole.HyperVMachine.HyperVMachineProperties.ManagementServerType} enumeration.",
+          "description": "Management server type captured as a string representation of the\r\n            {HyperVMachine.HyperVMachineProperties.ManagementServerType} enumeration.",
           "type": "string",
           "readOnly": true
         },
@@ -3671,6 +4434,7 @@
           "readOnly": true
         },
         "highAvailability": {
+          "description": "Value indicating whether the VM is highly available.",
           "enum": [
             "Unknown",
             "No",
@@ -3759,18 +4523,22 @@
           "readOnly": true
         },
         "biosSerialNumber": {
+          "description": "Machine BIOS serial number.",
           "type": "string",
           "readOnly": true
         },
         "vmFqdn": {
+          "description": "Machine FQDN.",
           "type": "string",
           "readOnly": true
         },
         "isDeleted": {
+          "description": "Value indicating whether VM is deleted.",
           "type": "boolean",
           "readOnly": true
         },
         "errors": {
+          "description": "Errors for machine.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthErrorDetails"
@@ -4096,9 +4864,11 @@
           "readOnly": true
         },
         "discoverySolutionId": {
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS.",
           "type": "string"
         },
         "applianceName": {
+          "description": "Gets or sets the Appliance Name.",
           "type": "string"
         }
       }
@@ -4190,9 +4960,11 @@
       }
     },
     "SiteHealthSummaryCollection": {
+      "description": "Collection of SiteHealthSummary.",
       "type": "object",
       "properties": {
         "value": {
+          "description": "Gets the list of SiteHealthSummary.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SiteHealthSummary"
@@ -4200,56 +4972,69 @@
           "readOnly": true
         },
         "nextLink": {
+          "description": "Gets the value of next link.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "SiteHealthSummary": {
+      "description": "The site health summary model.",
       "type": "object",
       "properties": {
         "applianceName": {
+          "description": "Gets the appliance name.",
           "type": "string",
           "readOnly": true
         },
         "errorMessage": {
+          "description": "Gets the error message.",
           "type": "string",
           "readOnly": true
         },
         "summaryMessage": {
+          "description": "Gets the summary message.",
           "type": "string",
           "readOnly": true
         },
         "errorId": {
           "format": "int64",
+          "description": "Gets the error Id.",
           "type": "integer",
           "readOnly": true
         },
         "errorCode": {
+          "description": "Gets the error code.",
           "type": "string",
           "readOnly": true
         },
         "affectedObjectsCount": {
           "format": "int64",
+          "description": "Gets or sets the count of affected objects.",
           "type": "integer"
         },
         "hitCount": {
           "format": "int64",
+          "description": "Gets or sets the hit count of the error.",
           "type": "integer"
         },
         "severity": {
+          "description": "Gets the severity of error.",
           "type": "string",
           "readOnly": true
         },
         "remediationGuidance": {
+          "description": "Gets the remediation guidance.",
           "type": "string",
           "readOnly": true
         },
         "affectedResourceType": {
+          "description": "Gets the affected resource type.",
           "type": "string",
           "readOnly": true
         },
         "affectedResources": {
+          "description": "Gets or sets the affected resources.",
           "type": "array",
           "items": {
             "type": "string"
@@ -4402,18 +5187,22 @@
           "readOnly": true
         },
         "hostInMaintenanceMode": {
+          "description": "Indicates whether the host is in maintenance mode.",
           "type": "boolean",
           "readOnly": true
         },
         "hostName": {
+          "description": "The host name.",
           "type": "string",
           "readOnly": true
         },
         "hostPowerState": {
+          "description": "The host power state.",
           "type": "string",
           "readOnly": true
         },
         "hostVersion": {
+          "description": "The host version.",
           "type": "string",
           "readOnly": true
         },
@@ -4473,18 +5262,22 @@
           "readOnly": true
         },
         "biosSerialNumber": {
+          "description": "Machine BIOS serial number.",
           "type": "string",
           "readOnly": true
         },
         "vmFqdn": {
+          "description": "Machine FQDN.",
           "type": "string",
           "readOnly": true
         },
         "isDeleted": {
+          "description": "Value indicating whether VM is deleted.",
           "type": "boolean",
           "readOnly": true
         },
         "errors": {
+          "description": "Errors for machine.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthErrorDetails"
@@ -4508,10 +5301,12 @@
           "readOnly": true
         },
         "diskProvisioningPolicy": {
+          "description": "The provisioning policy of the disk.\r\n            It is Thin or Thick or Unknown for the VMWare VMDK.",
           "type": "string",
           "readOnly": true
         },
         "diskScrubbingPolicy": {
+          "description": "The scrubbing policy of disks which can be\r\n            eagerly zeroed or lazily zeroed.",
           "type": "string",
           "readOnly": true
         },
@@ -4647,231 +5442,6 @@
         }
       }
     },
-    "ServerJob": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/JobProperties",
-          "description": "Gets nested properties.",
-          "readOnly": true
-        },
-        "status": {
-          "description": "Gets operation status.",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "description": "Gets operation start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "description": "Gets operation end time.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ServerJobCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerJob"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ServerRunAsAccount": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/RunAsAccountProperties",
-          "description": "Gets nested properties.",
-          "readOnly": true
-        }
-      }
-    },
-    "ServerRunAsAccountCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ServerRunAsAccount"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "Server": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "properties": {
-          "$ref": "#/definitions/ServerProperties"
-        }
-      }
-    },
-    "ServerProperties": {
-      "type": "object",
-      "properties": {
-        "createdTimestamp": {
-          "type": "string",
-          "readOnly": true
-        },
-        "updatedTimestamp": {
-          "type": "string",
-          "readOnly": true
-        },
-        "fqdn": {
-          "type": "string"
-        },
-        "runAsAccountId": {
-          "type": "string"
-        },
-        "ip": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "displayName": {
-          "type": "string"
-        },
-        "numberOfProcessorCore": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "allocatedMemoryInMB": {
-          "format": "double",
-          "type": "number"
-        },
-        "osType": {
-          "type": "string"
-        },
-        "osName": {
-          "type": "string"
-        },
-        "osVersion": {
-          "type": "string"
-        },
-        "powerStatus": {
-          "type": "string"
-        },
-        "biosSerialNumber": {
-          "type": "string"
-        },
-        "diskSize": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "diskName": {
-          "type": "string"
-        }
-      }
-    },
-    "ServerCollection": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Server"
-          },
-          "readOnly": true
-        },
-        "nextLink": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ServerSite": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "eTag": {
-          "description": "Gets or sets the eTag for concurrency control.",
-          "type": "string"
-        },
-        "location": {
-          "description": "Gets or sets the Azure location in which Sites is created.",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/SiteProperties",
-          "description": "Gets or sets the nested properties."
-        }
-      }
-    },
-    "ServerSiteUsage": {
-      "type": "object",
-      "properties": {
-        "runAsAccountCount": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "serverCount": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
     "VMwareSite": {
       "description": "Site REST Resource.",
       "type": "object",
@@ -4991,6 +5561,7 @@
           "readOnly": true
         },
         "errors": {
+          "description": "Gets the errors.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/HealthErrorDetails"
@@ -5015,6 +5586,593 @@
           "description": "Gets the value of next link.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ImportJob": {
+      "description": "Job REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the Name of the Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.OffAzure/VMWareSites/Jobs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Gets nested properties.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Gets operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Gets operation start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "Gets operation end time.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportJobCollection": {
+      "description": "Collection of VMware jobs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportJob"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportMachine": {
+      "description": "Machine REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the Name of the Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.OffAzure/ImportSites/Machines.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportMachineProperties",
+          "description": "Gets nested properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportMachineProperties": {
+      "description": "Class for machine properties.",
+      "type": "object",
+      "properties": {
+        "firmware": {
+          "description": "Firmware of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vCenterFQDN": {
+          "description": "VCenter FQDN/IPAddress.",
+          "type": "string",
+          "readOnly": true
+        },
+        "disks": {
+          "description": "Disks attached to the machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportDisk"
+          },
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "Display name of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "numberOfProcessorCore": {
+          "format": "int32",
+          "description": "Number of Processor Cores allocated for the machine.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "allocatedMemoryInMB": {
+          "format": "double",
+          "description": "Allocated Memory in MB.",
+          "type": "number",
+          "readOnly": true
+        },
+        "vmConfigurationFileLocation": {
+          "description": "Root location of the VM configuration file.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operatingSystemDetails": {
+          "$ref": "#/definitions/OperatingSystem",
+          "description": "Operating System Details installed on the machine.",
+          "readOnly": true
+        },
+        "createdTimestamp": {
+          "description": "Timestamp marking machine creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Timestamp marking last updated on the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceUuid": {
+          "description": "On-premise Instance UUID of the machine.",
+          "type": "string",
+          "readOnly": true
+        },
+        "powerStatus": {
+          "description": "Machine power status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "biosSerialNumber": {
+          "description": "Machine BIOS serial number.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmFqdn": {
+          "description": "Machine FQDN.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isDeleted": {
+          "description": "Value indicating whether VM is deleted.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errors": {
+          "description": "Errors for machine.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthErrorDetails"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ImportDisk": {
+      "description": "Class representing the imported machine web model.",
+      "type": "object",
+      "properties": {
+        "megabytesPerSecondOfRead": {
+          "format": "double",
+          "description": "Disk read throughput.",
+          "type": "number",
+          "readOnly": true
+        },
+        "megabytesPerSecondOfWrite": {
+          "format": "double",
+          "description": "Disk write throughput.",
+          "type": "number",
+          "readOnly": true
+        },
+        "numberOfReadOperationsPerSecond": {
+          "format": "double",
+          "description": "Disk read IOPS.",
+          "type": "number",
+          "readOnly": true
+        },
+        "numberOfWriteOperationsPerSecond": {
+          "format": "double",
+          "description": "Disk write IOPS.",
+          "type": "number",
+          "readOnly": true
+        },
+        "maxSizeInBytes": {
+          "format": "int64",
+          "description": "Bytes allocated for the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Name of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "diskType": {
+          "description": "Type of the disk.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lun": {
+          "format": "int32",
+          "description": "LUN of the disk.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "path": {
+          "description": "Path of the disk.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportMachineCollection": {
+      "description": "Collection of Import machines.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of machines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImportMachine"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ImportSite": {
+      "description": "Site REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets the relative URL to get this Site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the Hyper-V site.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.OffAzure/Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "Gets or sets the eTag for concurrency control.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Gets or sets the Azure location in which Sites is created.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ImportSiteProperties",
+          "description": "Gets or sets the nested properties."
+        }
+      }
+    },
+    "ImportSiteProperties": {
+      "description": "Class for site properties.",
+      "type": "object",
+      "properties": {
+        "serviceEndpoint": {
+          "description": "Gets the service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "discoverySolutionId": {
+          "description": "Gets or sets the ARM ID of migration hub solution for SDS.",
+          "type": "string"
+        }
+      }
+    },
+    "SasUriResponse": {
+      "description": "Import URI response class.",
+      "type": "object",
+      "properties": {
+        "jobId": {
+          "description": "Gets or sets the operation status ID.",
+          "type": "string"
+        },
+        "uri": {
+          "description": "Gets or sets the SAS URI.",
+          "type": "string"
+        }
+      }
+    },
+    "ServerJob": {
+      "description": "Job class for server agent.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this Sites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the Name of the job.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.OffAzure/serverSites/Jobs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/JobProperties",
+          "description": "Gets nested properties.",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Gets operation status.",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Gets operation start time.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endTime": {
+          "description": "Gets operation end time.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerJobCollection": {
+      "description": "Collection of Server jobs.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of jobs.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerJob"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerRunAsAccount": {
+      "description": "Run as account REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Relative URL to get this run as account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets the Name of the Run as accounts.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.OffAzure/serverSites/RunAsAccounts.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/RunAsAccountProperties",
+          "description": "Gets nested properties.",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerRunAsAccountCollection": {
+      "description": "Collection of server run as accounts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of run as accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerRunAsAccount"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Server": {
+      "description": "server REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets the relative URL to get this server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the server.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.OffAzure/serverSites/servers.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ServerProperties",
+          "description": "Gets or sets nested properties."
+        }
+      }
+    },
+    "ServerProperties": {
+      "description": "Class for server properties.",
+      "type": "object",
+      "properties": {
+        "createdTimestamp": {
+          "description": "Gets the timestamp marking server creation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "updatedTimestamp": {
+          "description": "Gets the timestamp marking last updated on the server.",
+          "type": "string",
+          "readOnly": true
+        },
+        "fqdn": {
+          "description": "Gets or sets the FQDN/IPAddress of the server.",
+          "type": "string"
+        },
+        "runAsAccountId": {
+          "description": "Gets or sets the run as account ID of the server.",
+          "type": "string"
+        },
+        "ip": {
+          "description": "Gets or sets the unique IP of the server.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "displayName": {
+          "description": "Gets or sets the Display name of the machine.",
+          "type": "string"
+        },
+        "numberOfProcessorCore": {
+          "format": "int32",
+          "description": "Gets or sets the Number of Processor Cores allocated for the machine.",
+          "type": "integer"
+        },
+        "allocatedMemoryInMB": {
+          "format": "double",
+          "description": "Gets or sets the Allocated Memory in MB.",
+          "type": "number"
+        },
+        "osType": {
+          "description": "Gets or sets the Operating System Details installed on the machine.",
+          "type": "string"
+        },
+        "osName": {
+          "description": "Gets or sets the Operating System Details installed on the machine.",
+          "type": "string"
+        },
+        "osVersion": {
+          "description": "Gets or sets the Operating System Details installed on the machine.",
+          "type": "string"
+        },
+        "powerStatus": {
+          "description": "Gets or sets the Machine power status.",
+          "type": "string"
+        },
+        "biosSerialNumber": {
+          "description": "Gets or sets the Machine BIOS serial number.",
+          "type": "string"
+        },
+        "diskSize": {
+          "format": "int64",
+          "description": "Gets or sets the Bytes allocated for the disk.",
+          "type": "integer"
+        },
+        "diskName": {
+          "description": "Gets or sets the Disk name.",
+          "type": "string"
+        }
+      }
+    },
+    "ServerCollection": {
+      "description": "Collection of servers.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Gets the list of servers.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Server"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "Gets the value of next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerSite": {
+      "description": "Site REST Resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Gets the relative URL to get this Site.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Gets or sets the name of the Server site.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Handled by resource provider. Type = Microsoft.OffAzure/serverSites.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eTag": {
+          "description": "Gets or sets the eTag for concurrency control.",
+          "type": "string"
+        },
+        "location": {
+          "description": "Gets or sets the Azure location in which Sites is created.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/SiteProperties",
+          "description": "Gets or sets the nested properties."
+        }
+      }
+    },
+    "ServerSiteUsage": {
+      "description": "Server site usage.",
+      "type": "object",
+      "properties": {
+        "runAsAccountCount": {
+          "format": "int32",
+          "description": "Gets or sets the number of run as accounts in the site.",
+          "type": "integer"
+        },
+        "serverCount": {
+          "format": "int32",
+          "description": "Gets or sets the number of servers part of the site.",
+          "type": "integer"
         }
       }
     }
