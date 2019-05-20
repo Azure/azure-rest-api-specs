@@ -79,7 +79,27 @@ directive:
   - suppress: R3023
     from: costmanagement.json
     where: $.paths
-    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
+    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing    
+  - suppress: XmsResourceInPutResponse
+    from: costmanagement.json
+    where: '$.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}"].put'
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.ChargeValue
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.EffectiveMonth
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.EndMonth
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.ShowbackRulesKind.properties.RuleType
+    reason: 'older PR, not forecast.'
   - suppress: EnumInsteadOfBoolean
     from: costmanagement.json
     where: $.definitions.Notification.properties.enabled
