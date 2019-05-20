@@ -27,7 +27,7 @@
          "type":"oauth2",
          "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
          "flow":"implicit",
-         "description":"Azure Active Directory OAuth2 Flow",
+         "description":"Azure Active Directory OAuth2 Flow.",
          "scopes":{
             "user_impersonation":"impersonate your user account"
          }
@@ -68,7 +68,7 @@
                   "description":"Accepted and the operation will complete asynchronously."
                },
                "204":{
-                  "description":"Request successful. Resource with the specified name does not exist"
+                  "description":"Request successful. Resource with the specified name does not exist."
                },
                "200":{
                   "description":"Delete successful."
@@ -381,7 +381,7 @@
                "$ref":"./network.json#/definitions/Resource"
             }
          ],
-         "description":"Azure Firewall resource"
+         "description":"Azure Firewall resource."
       },
       "AzureFirewallListResult":{
          "properties":{
@@ -401,7 +401,7 @@
       },
       "AzureFirewallThreatIntelMode":{
          "type":"string",
-         "description":"The operation mode for Threat Intel",
+         "description":"The operation mode for Threat Intel.",
          "enum":[
             "Alert",
             "Deny",
@@ -425,7 +425,7 @@
             },
             "action":{
                "$ref":"#/definitions/AzureFirewallRCAction",
-               "description":"The action type of a rule collection"
+               "description":"The action type of a rule collection."
             },
             "rules":{
                "type":"array",
@@ -463,12 +463,12 @@
                "$ref":"./network.json#/definitions/SubResource"
             }
          ],
-         "description":"Application rule collection resource"
+         "description":"Application rule collection resource."
       },
       "AzureFirewallApplicationRuleProtocol":{
          "properties":{
             "protocolType":{
-               "description":"Protocol type",
+               "description":"Protocol type.",
                "$ref":"#/definitions/AzureFirewallApplicationRuleProtocolType"
             },
             "port":{
@@ -537,7 +537,7 @@
             },
             "action":{
                "$ref":"#/definitions/AzureFirewallNatRCAction",
-               "description":"The action type of a NAT rule collection"
+               "description":"The action type of a NAT rule collection."
             },
             "rules":{
                "type":"array",
@@ -575,7 +575,7 @@
                "$ref":"./network.json#/definitions/SubResource"
             }
          ],
-         "description":"NAT rule collection resource"
+         "description":"NAT rule collection resource."
       },
       "AzureFirewallNatRule":{
          "properties":{
@@ -637,7 +637,7 @@
       },
       "AzureFirewallNatRCActionType":{
          "type":"string",
-         "description":"The action type of a NAT rule collection",
+         "description":"The action type of a NAT rule collection.",
          "enum":[
             "Snat",
             "Dnat"
@@ -660,7 +660,7 @@
             },
             "action":{
                "$ref":"#/definitions/AzureFirewallRCAction",
-               "description":"The action type of a rule collection"
+               "description":"The action type of a rule collection."
             },
             "rules":{
                "type":"array",
@@ -698,7 +698,7 @@
                "$ref":"./network.json#/definitions/SubResource"
             }
          ],
-         "description":"Network rule collection resource"
+         "description":"Network rule collection resource."
       },
       "AzureFirewallNetworkRule":{
          "properties":{
@@ -752,7 +752,7 @@
       },
       "AzureFirewallRCActionType":{
          "type":"string",
-         "description":"The action type of a rule collection",
+         "description":"The action type of a rule collection.",
          "enum":[
             "Allow",
             "Deny"
@@ -764,7 +764,7 @@
       },
       "AzureFirewallNetworkRuleProtocol":{
          "type":"string",
-         "description":"The protocol of a Network Rule resource",
+         "description":"The protocol of a Network Rule resource.",
          "enum":[
             "TCP",
             "UDP",
@@ -778,7 +778,7 @@
       },
       "AzureFirewallApplicationRuleProtocolType":{
          "type":"string",
-         "description":"The protocol type of a Application Rule resource",
+         "description":"The protocol type of a Application Rule resource.",
          "enum":[
             "Http",
             "Https"
