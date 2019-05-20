@@ -54,6 +54,7 @@ input-file:
 - Microsoft.Media/stable/2018-01-01/MediaServices.json
 - Microsoft.Maps/stable/2018-01-01/Maps.json
 - Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
+- Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
 ```
 
 ---
