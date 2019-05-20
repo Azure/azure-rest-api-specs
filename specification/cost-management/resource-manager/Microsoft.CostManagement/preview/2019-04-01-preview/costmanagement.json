@@ -1598,18 +1598,20 @@
           "type": "string"
         },
         "scope": {
-          "description": "Cost Management scope to save the view on.",
+          "description": "Cost Management scope to save the view on. This includes 'subscriptions/{subscriptionId}' for subscription scope, 'subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for InvoiceSection scope, 'providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}' for ExternalBillingAccount scope, and '/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}' for ExternalSubscription scope.",
           "type": "string"
         },
         "createdOn": {
           "description": "Date the user created this view.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readonly": true
         },
         "modifiedOn": {
           "description": "Date when the user last modified this view.",
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "readonly": true
         },
         "query": {
           "description": "Query body configuration. Required.",
@@ -1634,7 +1636,11 @@
         },
         "accumulated": {
           "description": "Show costs accumulated over time.",
-          "type": "boolean"
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ]
         },
         "metric": {
           "description": "Metric to use when displaying costs.",
