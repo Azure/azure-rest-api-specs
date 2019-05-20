@@ -568,9 +568,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/checkNameAvailability": {
       "post": {
         "tags": [
-          "Clusters"
+          "Databases"
         ],
-        "operationId": "Clusters_CheckNameAvailability",
+        "operationId": "Databases_CheckNameAvailability",
         "x-ms-examples": {
           "KustoDatabaseCheckNameAvailability": {
             "$ref": "./examples/KustoDatabasesCheckNameAvailability.json"
@@ -1073,6 +1073,51 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/attachedDatabaseConfigurations": {
+      "get": {
+        "tags": [
+          "AttachedDatabaseConfigurations"
+        ],
+        "description": "Returns the list of attached database configurations of the given Kusto cluster.",
+        "operationId": "AttachedDatabaseConfigurations_ListByCluster",
+        "x-ms-examples": {
+          "KustoAttachedDatabaseConfigurationsListByCluster": {
+            "$ref": "./examples/KustoAttachedDatabaseConfigurationsListByCluster.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ClusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of attached database configurations.",
+            "schema": {
+              "$ref": "#/definitions/AttachedDatabaseConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
         }
       }
     },
@@ -1872,7 +1917,8 @@
             "Standard_L16s",
             "Standard_D11_v2",
             "Standard_D12_v2",
-            "Standard_L4s"
+            "Standard_L4s",
+            "Dev(No SLA)_Standard_D11_v2"
           ],
           "x-ms-enum": {
             "name": "AzureSkuName",
@@ -1887,6 +1933,7 @@
           "description": "SKU tier.",
           "type": "string",
           "enum": [
+            "Basic",
             "Standard"
           ],
           "x-ms-enum": {
@@ -2171,6 +2218,18 @@
         }
       ],
       "description": "Class representing an update to a Kusto cluster."
+    },
+    "AttachedDatabaseConfigurationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttachedDatabaseConfiguration"
+          },
+          "description": "The list of attached database configurations."
+        }
+      },
+      "description": "The list attached database configurations operation response."
     },
     "AttachedDatabaseConfiguration": {
       "properties": {
