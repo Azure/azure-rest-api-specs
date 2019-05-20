@@ -7112,6 +7112,153 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationVaultSettings": {
+      "get": {
+        "tags": [
+          "ReplicationVaultSetting"
+        ],
+        "summary": "Gets the list of vault setting.",
+        "description": "Gets the list of vault setting. This includes the Migration Hub connection settings.",
+        "operationId": "ReplicationVaultSetting_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultSettingCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Gets the list of vault setting.": {
+            "$ref": "./examples/ReplicationVaultSetting_List.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationVaultSettings/{vaultSettingName}": {
+      "get": {
+        "tags": [
+          "ReplicationVaultSetting"
+        ],
+        "summary": "Gets the vault setting.",
+        "description": "Gets the vault setting. This includes the Migration Hub connection settings.",
+        "operationId": "ReplicationVaultSetting_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultSettingName",
+            "in": "path",
+            "description": "Vault setting name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultSetting"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the vault setting.": {
+            "$ref": "./examples/ReplicationVaultSetting_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ReplicationVaultSetting"
+        ],
+        "summary": "Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.",
+        "description": "The operation to configure vault setting.",
+        "operationId": "ReplicationVaultSetting_Create",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "vaultSettingName",
+            "in": "path",
+            "description": "Vault setting name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "description": "Vault setting creation input.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VaultSettingCreationInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VaultSetting"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Updates vault setting. A vault setting object is a singleton per vault and it is always present by default.": {
+            "$ref": "./examples/ReplicationVaultSetting_Create.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationvCenters": {
       "get": {
         "tags": [
@@ -16164,6 +16311,74 @@
         }
       }
     },
+    "VaultSetting": {
+      "description": "Vault setting.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultSettingProperties",
+          "description": "The vault setting properties."
+        }
+      }
+    },
+    "VaultSettingCollection": {
+      "description": "Vault setting collection.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of vault setting.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VaultSetting"
+          }
+        },
+        "nextLink": {
+          "description": "The value of next link.",
+          "type": "string"
+        }
+      }
+    },
+    "VaultSettingCreationInput": {
+      "description": "Input to create vault setting.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VaultSettingCreationInputProperties",
+          "description": "Vault setting creation input properties."
+        }
+      }
+    },
+    "VaultSettingCreationInputProperties": {
+      "description": "Input to create vault setting.",
+      "required": [
+        "migrationSolutionId"
+      ],
+      "type": "object",
+      "properties": {
+        "migrationSolutionId": {
+          "description": "The migration solution Id.",
+          "type": "string"
+        }
+      }
+    },
+    "VaultSettingProperties": {
+      "description": "Vault setting properties.",
+      "type": "object",
+      "properties": {
+        "migrationSolutionId": {
+          "description": "The migration solution ARM Id.",
+          "type": "string"
+        }
+      }
+    },
     "VCenter": {
       "description": "vCenter definition.",
       "type": "object",
@@ -17382,6 +17597,11 @@
         },
         "serviceEndpoint": {
           "description": "The service endpoint.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceResourceId": {
+          "description": "The service resource Id.",
           "type": "string",
           "readOnly": true
         }
