@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -1409,7 +1409,7 @@
         },
         "authorizationUseStatus": {
           "type": "string",
-          "description": "AuthorizationUseStatus. Possible values are: 'Available' and 'InUse'.",
+          "description": "The authorization use status.",
           "enum": [
             "Available",
             "InUse"
@@ -1441,6 +1441,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1480,11 +1485,11 @@
           "items": {
             "type": "string"
           },
-          "description": "The communities of bgp peering. Specified for microsoft peering"
+          "description": "The communities of bgp peering. Specified for microsoft peering."
         },
         "advertisedPublicPrefixesState": {
           "type": "string",
-          "description": "AdvertisedPublicPrefixState of the Peering resource. Possible values are 'NotConfigured', 'Configuring', 'Configured', and 'ValidationNeeded'.",
+          "description": "The advertised public prefix state of the Peering resource.",
           "enum": [
             "NotConfigured",
             "Configuring",
@@ -1533,7 +1538,7 @@
         },
         "state": {
           "type": "string",
-          "description": "The state of peering. Possible values are: 'Disabled' and 'Enabled'",
+          "description": "The state of peering.",
           "enum": [
             "Disabled",
             "Enabled"
@@ -1570,6 +1575,15 @@
         }
       },
       "description": "Contains stats associated with the peering."
+    },
+    "RouteFilterReference": {
+      "properties": {
+        "id": {
+          "type":"string",
+          "description": "Corresponding route filter Id."
+        }
+      },
+      "description": "Reference to a route filter."
     },
     "ExpressRouteCircuitPeeringPropertiesFormat": {
       "properties": {
@@ -1639,7 +1653,7 @@
           "description": "Gets whether the provider or the customer last modified the peering."
         },
         "routeFilter": {
-          "$ref": "./routeFilter.json#/definitions/RouteFilter",
+          "$ref": "#/definitions/RouteFilterReference",
           "description": "The reference of the RouteFilter resource."
         },
         "ipv6PeeringConfig": {
@@ -1683,6 +1697,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1710,7 +1729,7 @@
     },
     "ExpressRoutePeeringType": {
       "type": "string",
-      "description": "The PeeringType. Possible values are: 'AzurePublicPeering', 'AzurePrivatePeering', and 'MicrosoftPeering'.",
+      "description": "The peering type.",
       "enum": [
         "AzurePublicPeering",
         "AzurePrivatePeering",
@@ -1723,7 +1742,7 @@
     },
     "ExpressRoutePeeringState": {
       "type": "string",
-      "description": "The state of peering. Possible values are: 'Disabled' and 'Enabled'",
+      "description": "The state of peering.",
       "enum": [
         "Disabled",
         "Enabled"
@@ -1778,6 +1797,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1852,6 +1876,11 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1885,7 +1914,7 @@
         },
         "tier": {
           "type": "string",
-          "description": "The tier of the SKU. Possible values are 'Standard', 'Premium' or 'Local'.",
+          "description": "The tier of the SKU.",
           "enum": [
             "Standard",
             "Premium",
@@ -1899,7 +1928,7 @@
         },
         "family": {
           "type": "string",
-          "description": "The family of the SKU. Possible values are: 'UnlimitedData' and 'MeteredData'.",
+          "description": "The family of the SKU.",
           "enum": [
             "UnlimitedData",
             "MeteredData"
@@ -1934,7 +1963,7 @@
       "properties": {
         "allowClassicOperations": {
           "type": "boolean",
-          "description": "Allow classic operations"
+          "description": "Allow classic operations."
         },
         "circuitProvisioningState": {
           "type": "string",
@@ -2021,18 +2050,18 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "ExpressRouteCircuit resource"
+      "description": "ExpressRouteCircuit resource."
     },
     "ExpressRouteCircuitArpTable": {
       "properties": {
         "age": {
           "type": "integer",
           "format": "int32",
-          "description": "Entry age in minutes"
+          "description": "Entry age in minutes."
         },
         "interface": {
           "type": "string",
-          "description": "Interface address"
+          "description": "Interface address."
         },
         "ipAddress": {
           "type": "string",
@@ -2065,15 +2094,15 @@
       "properties": {
         "network": {
           "type": "string",
-          "description": "IP address of a network entity"
+          "description": "IP address of a network entity."
         },
         "nextHop": {
           "type": "string",
-          "description": "NextHop address"
+          "description": "NextHop address."
         },
         "locPrf": {
           "type": "string",
-          "description": "Local preference value as set with the set local-preference route-map configuration command"
+          "description": "Local preference value as set with the set local-preference route-map configuration command."
         },
         "weight": {
           "type": "integer",
@@ -2085,7 +2114,7 @@
           "description": "Autonomous system paths to the destination network."
         }
       },
-      "description": "The routes table associated with the ExpressRouteCircuit"
+      "description": "The routes table associated with the ExpressRouteCircuit."
     },
     "ExpressRouteCircuitsRoutesTableListResult": {
       "properties": {

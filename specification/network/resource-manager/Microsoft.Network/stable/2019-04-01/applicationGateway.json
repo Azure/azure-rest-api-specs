@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -73,7 +73,7 @@
             "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
-            "description": "Request successful. Resource with the specified name does not exist"
+            "description": "Request successful. Resource with the specified name does not exist."
           },
           "200": {
             "description": "Delete successful."
@@ -562,7 +562,7 @@
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "unexpected error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -598,7 +598,7 @@
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "unexpected error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -634,7 +634,7 @@
             }
           },
           "default": {
-            "description": "unexpected error",
+            "description": "unexpected error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -786,7 +786,7 @@
         },
         "path": {
           "type": "string",
-          "description": "Relative path of probe. Valid path starts from '/'. Probe is sent to <Protocol>://<host>:<port><path>"
+          "description": "Relative path of probe. Valid path starts from '/'. Probe is sent to <Protocol>://<host>:<port><path>."
         },
         "timeout": {
           "type": "integer",
@@ -807,10 +807,10 @@
         },
         "backendHttpSettingName": {
           "type": "string",
-          "description": "Name of backend http setting of application gateway to be used for test probe"
+          "description": "Name of backend http setting of application gateway to be used for test probe."
         }
       },
-      "description": "Details of on demand test probe request"
+      "description": "Details of on demand test probe request."
     },
     "ApplicationGatewayBackendHealthOnDemand": {
       "properties": {
@@ -823,7 +823,7 @@
           "description": "Application gateway BackendHealthHttp settings."
         }
       },
-      "description": "Result of on demand test probe"
+      "description": "Result of on demand test probe."
     },
     "ApplicationGatewayBackendHealth": {
       "properties": {
@@ -940,7 +940,7 @@
           "description": "Capacity (instance count) of an application gateway."
         }
       },
-      "description": "SKU of an application gateway"
+      "description": "SKU of an application gateway."
     },
     "ApplicationGatewaySslPolicy": {
       "properties": {
@@ -954,7 +954,7 @@
         },
         "policyType": {
           "type": "string",
-          "description": "Type of Ssl Policy",
+          "description": "Type of Ssl Policy.",
           "enum": [
             "Predefined",
             "Custom"
@@ -966,7 +966,7 @@
         },
         "policyName": {
           "$ref": "#/definitions/PolicyNameEnum",
-          "description": "Name of Ssl predefined policy"
+          "description": "Name of Ssl predefined policy."
         },
         "cipherSuites": {
           "type": "array",
@@ -1215,7 +1215,7 @@
         "port": {
           "type": "integer",
           "format": "int32",
-          "description": "Frontend port"
+          "description": "Frontend port."
         },
         "provisioningState": {
           "type": "string",
@@ -1233,7 +1233,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the frontend port that is unique within an Application Gateway"
+          "description": "Name of the frontend port that is unique within an Application Gateway."
         },
         "etag": {
           "type": "string",
@@ -1259,7 +1259,7 @@
         },
         "ipAddress": {
           "type": "string",
-          "description": "IP address"
+          "description": "IP address."
         }
       },
       "description": "Backend address of an application gateway."
@@ -1278,7 +1278,7 @@
           "items": {
             "$ref": "#/definitions/ApplicationGatewayBackendAddress"
           },
-          "description": "Backend addresses"
+          "description": "Backend addresses."
         },
         "provisioningState": {
           "type": "string",
@@ -1556,7 +1556,7 @@
         },
         "path": {
           "type": "string",
-          "description": "Relative path of probe. Valid path starts from '/'. Probe is sent to <Protocol>://<host>:<port><path>"
+          "description": "Relative path of probe. Valid path starts from '/'. Probe is sent to <Protocol>://<host>:<port><path>."
         },
         "interval": {
           "type": "integer",
@@ -1614,7 +1614,7 @@
           "description": "Allowed ranges of healthy status codes. Default range of healthy status codes is 200-399."
         }
       },
-      "description": "Application gateway probe health response match"
+      "description": "Application gateway probe health response match."
     },
     "ApplicationGatewayProbe": {
       "properties": {
@@ -1659,7 +1659,7 @@
         },
         "backendAddressPool": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Backend address pool resource of the application gateway. "
+          "description": "Backend address pool resource of the application gateway."
         },
         "backendHttpSettings": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -1667,7 +1667,7 @@
         },
         "httpListener": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Http listener resource of the application gateway. "
+          "description": "Http listener resource of the application gateway."
         },
         "urlPathMap": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -1789,7 +1789,7 @@
         },
         "pattern": {
           "type": "string",
-          "description": "The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition"
+          "description": "The pattern, either fixed string or regular expression, that evaluates the truthfulness of the condition."
         },
         "ignoreCase": {
           "type": "boolean",
@@ -1809,14 +1809,14 @@
           "items": {
             "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
           },
-          "description": "Request Header Actions in the Action Set"
+          "description": "Request Header Actions in the Action Set."
         },
         "responseHeaderConfigurations": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ApplicationGatewayHeaderConfiguration"
           },
-          "description": "Response Header Actions in the Action Set"
+          "description": "Response Header Actions in the Action Set."
         }
       },
       "description": "Set of actions in the Rewrite Rule in Application Gateway."
@@ -1825,11 +1825,11 @@
       "properties": {
         "headerName": {
           "type": "string",
-          "description": "Header name of the header configuration"
+          "description": "Header name of the header configuration."
         },
         "headerValue": {
           "type": "string",
-          "description": "Header value of the header configuration"
+          "description": "Header value of the header configuration."
         }
       },
       "description": "Header configuration of the Actions set in Application Gateway."
@@ -2097,7 +2097,7 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "Application gateway resource"
+      "description": "Application gateway resource."
     },
     "ApplicationGatewayListResult": {
       "properties": {
@@ -2259,14 +2259,14 @@
           "format": "int32",
           "minimum": 0,
           "exclusiveMinimum": false,
-          "description": "Lower bound on number of Application Gateway capacity"
+          "description": "Lower bound on number of Application Gateway capacity."
         },
         "maxCapacity": {
           "type": "integer",
           "format": "int32",
           "minimum": 2,
           "exclusiveMinimum": false,
-          "description": "Upper bound on number of Application Gateway capacity"
+          "description": "Upper bound on number of Application Gateway capacity."
         }
       },
       "required": [
@@ -2358,7 +2358,7 @@
         "selectorMatchOperator",
         "selector"
       ],
-      "description": "Allow to exclude some variable satisfy the condition for the WAF check"
+      "description": "Allow to exclude some variable satisfy the condition for the WAF check."
     },
     "ApplicationGatewayAvailableWafRuleSetsResult": {
       "properties": {
@@ -2483,7 +2483,7 @@
         },
         "defaultPolicy": {
           "$ref": "#/definitions/PolicyNameEnum",
-          "description": "Name of the Ssl predefined policy applied by default to application gateway"
+          "description": "Name of the Ssl predefined policy applied by default to application gateway."
         },
         "availableCipherSuites": {
           "type": "array",
@@ -2500,7 +2500,7 @@
           "description": "List of available Ssl protocols."
         }
       },
-      "description": "Properties of ApplicationGatewayAvailableSslOptions"
+      "description": "Properties of ApplicationGatewayAvailableSslOptions."
     },
     "ApplicationGatewayAvailableSslPredefinedPolicies": {
       "properties": {
@@ -2535,7 +2535,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "An Ssl predefined policy"
+      "description": "An Ssl predefined policy."
     },
     "ApplicationGatewaySslPredefinedPolicyPropertiesFormat": {
       "properties": {
@@ -2551,7 +2551,7 @@
           "description": "Minimum version of Ssl protocol to be supported on application gateway."
         }
       },
-      "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
+      "description": "Properties of ApplicationGatewaySslPredefinedPolicy."
     },
     "ApplicationGatewayCustomError": {
       "properties": {

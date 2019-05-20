@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -405,7 +405,7 @@
             "description": "Request successful. The operation reset the vpn client shared key of the virtual network gateway."
           },
           "202": {
-            "description": "Accepted and the operation will complete asynchronously"
+            "description": "Accepted and the operation will complete asynchronously."
           }
         },
         "x-ms-examples": {
@@ -618,7 +618,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of BGP peer statuses",
+            "description": "List of BGP peer statuses.",
             "schema": {
               "$ref": "#/definitions/BgpPeerStatusListResult"
             }
@@ -709,7 +709,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of advertised BGP routes",
+            "description": "List of advertised BGP routes.",
             "schema": {
               "$ref": "#/definitions/GatewayRouteListResult"
             }
@@ -754,7 +754,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "The IP address of the peer"
+            "description": "The IP address of the peer."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -765,7 +765,7 @@
         ],
         "responses": {
           "200": {
-            "description": "List of learned BGP routes",
+            "description": "List of learned BGP routes.",
             "schema": {
               "$ref": "#/definitions/GatewayRouteListResult"
             }
@@ -1572,6 +1572,55 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_GetVpnclientConnectionHealth",
+        "description": "Get VPN client connection health detail per P2S client connection of the virtual network gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },          
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of VPN client connection health details.",
+            "schema": {
+              "$ref": "#/definitions/VpnClientConnectionHealthDetailListResult"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetworkGatewayVpnclientConnectionHealth": { "$ref": "./examples/VirtualNetworkGatewayGetVpnclientConnectionHealth.json" }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -1595,7 +1644,7 @@
           "description": "The provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "description": "Properties of VirtualNetworkGatewayIPConfiguration"
+      "description": "Properties of VirtualNetworkGatewayIPConfiguration."
     },
     "VirtualNetworkGatewayIPConfiguration": {
       "properties": {
@@ -1618,7 +1667,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "IP configuration for virtual network gateway"
+      "description": "IP configuration for virtual network gateway."
     },
     "VirtualNetworkGatewayPropertiesFormat": {
       "properties": {
@@ -1631,7 +1680,7 @@
         },
         "gatewayType": {
           "type": "string",
-          "description": "The type of this virtual network gateway. Possible values are: 'Vpn' and 'ExpressRoute'.",
+          "description": "The type of this virtual network gateway.",
           "enum": [
             "Vpn",
             "ExpressRoute"
@@ -1643,7 +1692,7 @@
         },
         "vpnType": {
           "type": "string",
-          "description": "The type of this virtual network gateway. Possible values are: 'PolicyBased' and 'RouteBased'.",
+          "description": "The type of this virtual network gateway.",
           "enum": [
             "PolicyBased",
             "RouteBased"
@@ -1659,7 +1708,7 @@
         },
         "activeActive": {
           "type": "boolean",
-          "description": "ActiveActive flag"
+          "description": "ActiveActive flag."
         },
         "gatewayDefaultSite": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -1691,7 +1740,7 @@
           "description": "The provisioning state of the VirtualNetworkGateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "description": "VirtualNetworkGateway properties"
+      "description": "VirtualNetworkGateway properties."
     },
     "VpnClientRootCertificatePropertiesFormat": {
       "properties": {
@@ -1708,7 +1757,7 @@
       "required": [
         "publicCertData"
       ],
-      "description": "Properties of SSL certificates of application gateway"
+      "description": "Properties of SSL certificates of application gateway."
     },
     "VpnClientRootCertificate": {
       "properties": {
@@ -1734,7 +1783,7 @@
       "required": [
         "properties"
       ],
-      "description": "VPN client root certificate of virtual network gateway"
+      "description": "VPN client root certificate of virtual network gateway."
     },
     "VpnClientRevokedCertificatePropertiesFormat": {
       "properties": {
@@ -1824,6 +1873,18 @@
         "radiusServerSecret": {
           "type": "string",
           "description": "The radius secret property of the VirtualNetworkGateway resource for vpn client connection."
+        },
+        "aadTenant": {
+          "type": "string",
+          "description": "The AADTenant property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+        },
+        "aadAudience": {
+          "type": "string",
+          "description": "The AADAudience property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
+        },
+        "aadIssuer": {
+          "type": "string",
+          "description": "The AADIssuer property of the VirtualNetworkGateway resource for vpn client connection used for AAD authentication."
         }
       },
       "description": "VpnClientConfiguration for P2S client."
@@ -1882,7 +1943,7 @@
           "description": "The capacity."
         }
       },
-      "description": "VirtualNetworkGatewaySku details"
+      "description": "VirtualNetworkGatewaySku details."
     },
     "BgpSettings": {
       "properties": {
@@ -1901,30 +1962,30 @@
           "description": "The weight added to routes learned from this BGP speaker."
         }
       },
-      "description": "BGP settings details"
+      "description": "BGP settings details."
     },
     "BgpPeerStatus": {
       "properties": {
         "localAddress": {
           "type": "string",
           "readOnly": true,
-          "description": "The virtual network gateway's local address"
+          "description": "The virtual network gateway's local address."
         },
         "neighbor": {
           "type": "string",
           "readOnly": true,
-          "description": "The remote BGP peer"
+          "description": "The remote BGP peer."
         },
         "asn": {
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "description": "The autonomous system number of the remote BGP peer"
+          "description": "The autonomous system number of the remote BGP peer."
         },
         "state": {
           "type": "string",
           "readOnly": true,
-          "description": "The BGP peer state",
+          "description": "The BGP peer state.",
           "enum": [
             "Unknown",
             "Stopped",
@@ -1940,69 +2001,69 @@
         "connectedDuration": {
           "type": "string",
           "readOnly": true,
-          "description": "For how long the peering has been up"
+          "description": "For how long the peering has been up."
         },
         "routesReceived": {
           "type": "integer",
           "format": "int64",
           "readOnly": true,
-          "description": "The number of routes learned from this peer"
+          "description": "The number of routes learned from this peer."
         },
         "messagesSent": {
           "type": "integer",
           "format": "int64",
           "readOnly": true,
-          "description": "The number of BGP messages sent"
+          "description": "The number of BGP messages sent."
         },
         "messagesReceived": {
           "type": "integer",
           "format": "int64",
           "readOnly": true,
-          "description": "The number of BGP messages received"
+          "description": "The number of BGP messages received."
         }
       },
-      "description": "BGP peer status details"
+      "description": "BGP peer status details."
     },
     "GatewayRoute": {
       "properties": {
         "localAddress": {
           "type": "string",
           "readOnly": true,
-          "description": "The gateway's local address"
+          "description": "The gateway's local address."
         },
         "network": {
           "type": "string",
           "readOnly": true,
-          "description": "The route's network prefix"
+          "description": "The route's network prefix."
         },
         "nextHop": {
           "type": "string",
           "readOnly": true,
-          "description": "The route's next hop"
+          "description": "The route's next hop."
         },
         "sourcePeer": {
           "type": "string",
           "readOnly": true,
-          "description": "The peer this route was learned from"
+          "description": "The peer this route was learned from."
         },
         "origin": {
           "type": "string",
           "readOnly": true,
-          "description": "The source this route was learned from"
+          "description": "The source this route was learned from."
         },
         "asPath": {
           "type": "string",
           "readOnly": true,
-          "description": "The route's AS path sequence"
+          "description": "The route's AS path sequence."
         },
         "weight": {
           "type": "integer",
           "format": "int32",
           "readOnly": true,
-          "description": "The route's weight"
+          "description": "The route's weight."
         }
       },
-      "description": "Gateway routing details"
+      "description": "Gateway routing details."
     },
     "VirtualNetworkGateway": {
       "properties": {
@@ -2024,13 +2085,13 @@
       "required": [
         "properties"
       ],
-      "description": "A common class for general resource information"
+      "description": "A common class for general resource information."
     },
     "VpnClientParameters": {
       "properties": {
         "processorArchitecture": {
           "type": "string",
-          "description": "VPN client Processor Architecture. Possible values are: 'AMD64' and 'X86'.",
+          "description": "VPN client Processor Architecture.",
           "enum": [
             "Amd64",
             "X86"
@@ -2056,7 +2117,7 @@
           "description": "A list of client root certificates public certificate data encoded as Base-64 strings. Optional parameter for external radius based authentication with EAPTLS."
         }
       },
-      "description": "Vpn Client Parameters for package generation"
+      "description": "Vpn Client Parameters for package generation."
     },
     "VirtualNetworkGatewayListResult": {
       "properties": {
@@ -2082,10 +2143,10 @@
           "items": {
             "$ref": "#/definitions/BgpPeerStatus"
           },
-          "description": "List of BGP peers"
+          "description": "List of BGP peers."
         }
       },
-      "description": "Response for list BGP peer status API service call"
+      "description": "Response for list BGP peer status API service call."
     },
     "GatewayRouteListResult": {
       "properties": {
@@ -2094,10 +2155,10 @@
           "items": {
             "$ref": "#/definitions/GatewayRoute"
           },
-          "description": "List of gateway routes"
+          "description": "List of gateway routes."
         }
       },
-      "description": "List of virtual network gateway routes"
+      "description": "List of virtual network gateway routes."
     },
     "TunnelConnectionHealth": {
       "properties": {
@@ -2109,19 +2170,19 @@
         "connectionStatus": {
           "readOnly": true,
           "$ref": "#/definitions/VirtualNetworkGatewayConnectionStatus",
-          "description": "Virtual Network Gateway connection status"
+          "description": "Virtual Network Gateway connection status."
         },
         "ingressBytesTransferred": {
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "The Ingress Bytes Transferred in this connection"
+          "description": "The Ingress Bytes Transferred in this connection."
         },
         "egressBytesTransferred": {
           "readOnly": true,
           "type": "integer",
           "format": "int64",
-          "description": "The Egress Bytes Transferred in this connection"
+          "description": "The Egress Bytes Transferred in this connection."
         },
         "lastConnectionEstablishedUtcTime": {
           "readOnly": true,
@@ -2129,7 +2190,7 @@
           "description": "The time at which connection was established in Utc format."
         }
       },
-      "description": "VirtualNetworkGatewayConnection properties"
+      "description": "VirtualNetworkGatewayConnection properties."
     },
     "VirtualNetworkGatewayConnectionPropertiesFormat": {
       "properties": {
@@ -2155,7 +2216,7 @@
         },
         "connectionProtocol": {
           "$ref":  "#/definitions/ConnectionProtocol",
-          "description": "Connection protocol used for this connection"
+          "description": "Connection protocol used for this connection."
         },
         "routingWeight": {
           "type": "integer",
@@ -2197,7 +2258,7 @@
         },
         "enableBgp": {
           "type": "boolean",
-          "description": "EnableBgp flag"
+          "description": "EnableBgp flag."
         },
         "usePolicyBasedTrafficSelectors": {
           "type": "boolean",
@@ -2221,14 +2282,14 @@
         },
         "expressRouteGatewayBypass": {
           "type": "boolean",
-          "description": "Bypass ExpressRoute Gateway for data forwarding"
+          "description": "Bypass ExpressRoute Gateway for data forwarding."
         }
       },
       "required": [
         "virtualNetworkGateway1",
         "connectionType"
       ],
-      "description": "VirtualNetworkGatewayConnection properties"
+      "description": "VirtualNetworkGatewayConnection properties."
     },
     "VirtualNetworkGatewayConnection": {
       "properties": {
@@ -2250,7 +2311,7 @@
       "required": [
         "properties"
       ],
-      "description": "A common class for general resource information"
+      "description": "A common class for general resource information."
     },
     "VirtualNetworkGatewayConnectionListResult": {
       "properties": {
@@ -2267,7 +2328,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for the ListVirtualNetworkGatewayConnections API service call"
+      "description": "Response for the ListVirtualNetworkGatewayConnections API service call."
     },
     "ConnectionResetSharedKey": {
       "properties": {
@@ -2282,7 +2343,7 @@
       "required": [
         "keyLength"
       ],
-      "description": "The virtual network connection reset shared key"
+      "description": "The virtual network connection reset shared key."
     },
     "ConnectionSharedKey": {
       "properties": {
@@ -2299,7 +2360,7 @@
       "required": [
         "value"
       ],
-      "description": "Response for GetConnectionSharedKey API service call"
+      "description": "Response for GetConnectionSharedKey API service call."
     },
     "IpsecPolicy": {
       "properties": {
@@ -2348,11 +2409,11 @@
         "dhGroup",
         "pfsGroup"
       ],
-      "description": "An IPSec Policy configuration for a virtual network gateway connection"
+      "description": "An IPSec Policy configuration for a virtual network gateway connection."
     },
     "ConnectionProtocol": {
         "type": "string",
-        "description": "Gateway connection protocol. Possible values are: 'IKEv2', 'IKEv1'.",
+        "description": "Gateway connection protocol.",
         "enum": [
           "IKEv2",
           "IKEv1"
@@ -2435,7 +2496,7 @@
           "description": "The provisioning state of the LocalNetworkGateway resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "description": "LocalNetworkGateway properties"
+      "description": "LocalNetworkGateway properties."
     },
     "LocalNetworkGateway": {
       "properties": {
@@ -2457,7 +2518,7 @@
       "required": [
         "properties"
       ],
-      "description": "A common class for general resource information"
+      "description": "A common class for general resource information."
     },
     "LocalNetworkGatewayListResult": {
       "properties": {
@@ -2512,7 +2573,7 @@
         },
         "connectionProtocol": {
             "$ref":  "#/definitions/ConnectionProtocol",
-            "description": "Connection protocol used for this connection"
+            "description": "Connection protocol used for this connection."
         },
         "routingWeight": {
           "type": "integer",
@@ -2554,7 +2615,7 @@
         },
         "enableBgp": {
           "type": "boolean",
-          "description": "EnableBgp flag"
+          "description": "EnableBgp flag."
         },
         "usePolicyBasedTrafficSelectors": {
           "type": "boolean",
@@ -2578,14 +2639,14 @@
         },
         "expressRouteGatewayBypass": {
           "type": "boolean",
-          "description": "Bypass ExpressRoute Gateway for data forwarding"
+          "description": "Bypass ExpressRoute Gateway for data forwarding."
         }
       },
       "required": [
         "virtualNetworkGateway1",
         "connectionType"
       ],
-      "description": "VirtualNetworkGatewayConnection properties"
+      "description": "VirtualNetworkGatewayConnection properties."
     },
     "VirtualNetworkGatewayConnectionListEntity": {
       "properties": {
@@ -2607,7 +2668,7 @@
       "required": [
         "properties"
       ],
-      "description": "A common class for general resource information"
+      "description": "A common class for general resource information."
     },
     "VirtualNetworkGatewayListConnectionsResult": {
       "properties": {
@@ -2624,7 +2685,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for the VirtualNetworkGatewayListConnections API service call"
+      "description": "Response for the VirtualNetworkGatewayListConnections API service call."
     },
     "VpnDeviceScriptParameters": {
       "properties": {
@@ -2641,7 +2702,7 @@
           "description": "The firmware version for the vpn device."
         }
       },
-      "description": "Vpn device configuration script generation parameters"
+      "description": "Vpn device configuration script generation parameters."
     },
     "DhGroup": {
       "type": "string",
@@ -2775,6 +2836,90 @@
         "name": "VirtualNetworkGatewayConnectionType",
         "modelAsString": true
       }
+    },
+    "VpnClientConnectionHealthDetailListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnClientConnectionHealthDetail"
+          },
+          "description": "List of vpn client connection health."
+        }
+      },
+      "description": "List of virtual network gateway vpn client connection health."
+    },
+    "VpnClientConnectionHealthDetail": {
+      "properties": {
+        "vpnConnectionId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The vpn client Id."
+        },
+        "vpnConnectionDuration": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The duration time of a connected vpn client."
+        },
+        "vpnConnectionTime": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The start time of a connected vpn client."
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The public Ip of a connected vpn client."
+        },
+        "privateIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The assigned private Ip of a connected vpn client."
+        },
+        "vpnUserName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The user name of a connected vpn client."
+        },
+        "maxBandwidth": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The max band width."
+        },
+        "egressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The egress packets per second."
+        },
+        "egressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The egress bytes per second."
+        },
+        "ingressPacketsTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The ingress packets per second."
+        },
+        "ingressBytesTransferred": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The ingress bytes per second."
+        },
+        "maxPacketsPerSecond": {
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The max packets transferred per second."
+        }
+      },
+      "description": "VPN client connection health detail."
     }
   }
 }

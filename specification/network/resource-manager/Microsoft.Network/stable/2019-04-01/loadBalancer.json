@@ -28,7 +28,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -1066,7 +1066,7 @@
           }
         }
       },
-      "description": "SKU of a load balancer"
+      "description": "SKU of a load balancer."
     },
     "FrontendIPConfigurationPropertiesFormat": {
       "properties": {
@@ -1232,7 +1232,7 @@
         },
         "loadDistribution": {
           "type": "string",
-          "description": "The load distribution policy for this rule. Possible values are 'Default', 'SourceIP', and 'SourceIPProtocol'.",
+          "description": "The load distribution policy for this rule.",
           "enum": [
             "Default",
             "SourceIP",
@@ -1316,7 +1316,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The protocol of the end point. Possible values are: 'Http', 'Tcp', or 'Https'. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
+          "description": "The protocol of the end point. If 'Tcp' is specified, a received ACK is required for the probe to be successful. If 'Http' or 'Https' is specified, a 200 OK response from the specifies URI is required for the probe to be successful.",
           "enum": [
             "Http",
             "Tcp",
@@ -1546,7 +1546,7 @@
         },
         "protocol": {
           "type": "string",
-          "description": "The protocol for the outbound rule in load balancer. Possible values are: 'Tcp', 'Udp', and 'All'.",
+          "description": "The protocol for the outbound rule in load balancer.",
           "enum": [
             "Tcp",
             "Udp",
@@ -1563,7 +1563,7 @@
         },
         "idleTimeoutInMinutes": {
            "type": "integer",
-           "description": "The timeout for the TCP idle connection"
+           "description": "The timeout for the TCP idle connection."
         }
       },
       "required": [
@@ -1603,28 +1603,28 @@
           "items": {
             "$ref": "#/definitions/FrontendIPConfiguration"
           },
-          "description": "Object representing the frontend IPs to be used for the load balancer"
+          "description": "Object representing the frontend IPs to be used for the load balancer."
         },
         "backendAddressPools": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/BackendAddressPool"
           },
-          "description": "Collection of backend address pools used by a load balancer"
+          "description": "Collection of backend address pools used by a load balancer."
         },
         "loadBalancingRules": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadBalancingRule"
           },
-          "description": "Object collection representing the load balancing rules Gets the provisioning "
+          "description": "Object collection representing the load balancing rules Gets the provisioning."
         },
         "probes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/Probe"
           },
-          "description": "Collection of probe objects used in the load balancer"
+          "description": "Collection of probe objects used in the load balancer."
         },
         "inboundNatRules": {
           "type": "array",
@@ -1679,7 +1679,7 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "LoadBalancer resource"
+      "description": "LoadBalancer resource."
     },
     "LoadBalancerListResult": {
       "properties": {
@@ -1802,7 +1802,7 @@
     },
     "TransportProtocol": {
       "type": "string",
-      "description": "The transport protocol for the endpoint. Possible values are 'Udp' or 'Tcp' or 'All'.",
+      "description": "The transport protocol for the endpoint.",
       "enum": [
         "Udp",
         "Tcp",
