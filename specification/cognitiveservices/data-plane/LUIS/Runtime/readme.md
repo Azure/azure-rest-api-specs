@@ -62,7 +62,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Runtime/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Language.LUIS.Runtime/src/Generated
   clear-output-folder: true
 
 # csharp has support for modelAsExtensible now; replace modelAsString with that.
