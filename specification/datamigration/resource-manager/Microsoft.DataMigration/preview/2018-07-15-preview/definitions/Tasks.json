@@ -69,7 +69,9 @@
           }
         }
       },
-      "required": [ "taskType" ],
+      "required": [
+        "taskType"
+      ],
       "discriminator": "taskType"
     },
     "ProjectTask": {
@@ -179,7 +181,7 @@
         }
       ]
     },
-	"ConnectToSourcePostgreSqlSyncTaskProperties": {
+    "ConnectToSourcePostgreSqlSyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToSource.PostgreSql.Sync",
       "type": "object",
       "description": "Properties for the task that validates connection to PostgreSQL server and source server requirements for online migration",
@@ -251,7 +253,7 @@
         }
       ]
     },
-	"ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties": {
+    "ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureDbForPostgreSql.Sync",
       "type": "object",
       "description": "Properties for the task that validates connection to Azure Database For PostgreSQL server and target server requirements for online migration",
@@ -347,7 +349,7 @@
         }
       ]
     },
-	"ConnectToTargetSqlMISyncTaskProperties": {
+    "ConnectToTargetSqlMISyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI.Sync.LRS",
       "type": "object",
       "description": "Properties for the task that validates connection to Azure SQL Database Managed Instance",
@@ -441,7 +443,7 @@
         }
       ]
     },
-	"MigrateSqlServerSqlMISyncTaskProperties": {
+    "MigrateSqlServerSqlMISyncTaskProperties": {
       "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
       "type": "object",
       "description": "Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance sync scenario",
@@ -609,7 +611,7 @@
         }
       ]
     },
-	"ValidateMigrationInputSqlServerSqlMISyncTaskProperties": {
+    "ValidateMigrationInputSqlServerSqlMISyncTaskProperties": {
       "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS",
       "type": "object",
       "description": "Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance sync scenario",
