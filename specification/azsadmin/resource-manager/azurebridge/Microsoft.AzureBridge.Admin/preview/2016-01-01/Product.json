@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/ProductResourcesPage"
             }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -91,8 +97,11 @@
               "$ref": "#/definitions/ProductResource"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -134,16 +143,22 @@
         ],
         "responses": {
           "200": {
-            "description": "Accepted"
+            "description": "OK",
+            "schema": {
+              "$ref": "DownloadedProduct.json#/definitions/DownloadedProductResource"
+            }
           },
-          "202": {
-            "description": "Accepted"
-          },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "produces": [
           "application/json"
         ],

@@ -39,6 +39,12 @@
             "schema": {
               "$ref": "#/definitions/ActivationResourcesPage"
             }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -85,8 +91,11 @@
               "$ref": "#/definitions/ActivationResource"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -130,6 +139,12 @@
             "schema": {
               "$ref": "#/definitions/ActivationResource"
             }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -169,6 +184,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ActivationResource"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
             }
           }
         },

@@ -42,6 +42,12 @@
             "schema": {
               "$ref": "#/definitions/DownloadedProductResourcesPage"
             }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -91,9 +97,68 @@
               "$ref": "#/definitions/DownloadedProductResource"
             }
           },
-          "404": {
-            "description": "Not Found"
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
+      },
+      "put": {
+        "x-ms-examples": {
+          "Upserts a downloaded product.": {
+            "$ref": "./examples/DownloadedProduct/Put.json"
+          }
+        },
+        "description": "Create or update a downloaded product.",
+        "tags": [
+          "DownloadedProducts"
+        ],
+        "operationId": "DownloadedProducts_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ActivationNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ProductNameParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DownloadedProductParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DownloadedProductResource"
+            }
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "produces": [
           "application/json"
@@ -131,20 +196,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/DownloadedProductResource"
-            }
-          },
           "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/DownloadedProductResource"
-            }
+            "description": "Accepted"
           },
-          "404": {
-            "description": "Not Found"
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "AzureBridge.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -205,6 +267,25 @@
         }
       ]
     },
+    "PutDownloadedProduct": {
+      "description": "Properties for aggregate usage (upsert).",
+      "type": "object",
+      "properties": {
+        "galleryPackageBlobSasUri": {
+          "description": "SAS uri of gallery package blob.",
+          "type": "string"
+        },
+        "productDetailsProperties": {
+          "description": "Product details in JToken",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DownloadedProduct"
+        }
+      ]
+    },
     "DownloadedProductResourcesPage": {
       "description": "Holds an array of downloaded products and the URI to the next page.",
       "properties": {
@@ -222,7 +303,18 @@
       }
     }
   },
-  "parameters": {},
+  "parameters": {
+    "DownloadedProductParameter": {
+      "name": "parameters",
+      "in": "body",
+      "description": "Parameters supplied to create or update downloaded product.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/PutDownloadedProduct"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
