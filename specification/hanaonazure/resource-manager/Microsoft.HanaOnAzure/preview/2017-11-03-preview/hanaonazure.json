@@ -219,6 +219,9 @@
           },
           {
             "$ref": "#/parameters/HanaInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HanaInstanceParameter"
           }
         ],
         "responses": {
@@ -824,6 +827,16 @@
         "$ref": "#/definitions/MonitoringDetails"
       },
       "description": "Request body that only contains monitoring attributes",
+      "x-ms-parameter-location": "method"
+    },
+    "HanaInstanceParameter": {
+      "name": "hanaInstanceParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/HanaInstance"
+      },
+      "description": "Request body representing a HanaInstance",
       "x-ms-parameter-location": "method"
     }
   }
