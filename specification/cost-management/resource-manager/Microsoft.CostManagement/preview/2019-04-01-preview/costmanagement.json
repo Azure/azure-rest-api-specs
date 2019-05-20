@@ -33,12 +33,51 @@
     }
   },
   "paths": {  
-    "/{scope}/providers/Microsoft.CostManagement/views": {
+    "/providers/Microsoft.CostManagement/views": {
       "get": {
         "tags": [
           "Views"
         ],
         "operationId": "Views_List",
+        "description": "Lists all views by tenant and object.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "PrivateViewList": {
+            "$ref": "./examples/PrivateViewList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ViewListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/views": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_ListByScope",
         "description": "Lists all views at the given scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -159,12 +198,137 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.CostManagement/views/{viewName}": {
+    "/providers/Microsoft.CostManagement/views/{viewName}": {
       "get": {
         "tags": [
           "Views"
         ],
         "operationId": "Views_Get",
+        "description": "Gets the view by view name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "PrivateView": {
+            "$ref": "./examples/PrivateView.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_CreateOrUpdate",
+        "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdatePrivateView": {
+            "$ref": "./examples/PrivateViewCreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/View"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate View operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "201": {
+            "description": "Created.",
+            "schema": {
+              "$ref": "#/definitions/View"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_Delete",
+        "description": "The operation to delete a view.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "DeletePrivateView": {
+            "$ref": "./examples/PrivateViewDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/viewNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.CostManagement/views/{viewName}": {
+      "get": {
+        "tags": [
+          "Views"
+        ],
+        "operationId": "Views_GetByScope",
         "description": "Gets the view for the defined scope by view name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -204,7 +368,7 @@
         "tags": [
           "Views"
         ],
-        "operationId": "Views_CreateOrUpdate",
+        "operationId": "Views_CreateOrUpdateByScope",
         "description": "The operation to create or update a view. Update operation requires latest eTag to be set in the request. You may obtain the latest eTag by performing a get operation. Create operation does not require eTag.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -259,7 +423,7 @@
         "tags": [
           "Views"
         ],
-        "operationId": "Views_Delete",
+        "operationId": "Views_DeleteByScope",
         "description": "The operation to delete a view.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -560,14 +724,56 @@
           }
         }
       }
-    },
-    "/{scope}/providers/Microsoft.CostManagement/checkNameAvailability": {
+    },  
+    "/providers/Microsoft.CostManagement/checkNameAvailability": {
       "post":{
         "tags":[
           "CostManagement"
         ],
         "operationId": "CostManagement_CheckNameAvailability",
         "description": "The operation to check resource name availability under cost management. A name is available if no other resource exists with the same name, type and scope.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ResourceGroupCheckNameAvailabilityAvailable": {
+            "$ref": "./examples/CheckNameAvailability_Available.json"
+          },
+          "ResourceGroupCheckNameAvailabilityNotAvailable": {
+            "$ref": "./examples/CheckNameAvailability_NotAvailable.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "input",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequestBody"
+            },
+            "description": "Parameters about Resource type and Resource name."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          }
+        }        
+      }      
+    },
+    "/{scope}/providers/Microsoft.CostManagement/checkNameAvailability": {
+      "post":{
+        "tags":[
+          "CostManagement"
+        ],
+        "operationId": "CostManagement_CheckNameAvailabilityByScope",
+        "description": "The operation to check resource name availability by scope under cost management. A name is available if no other resource exists with the same name, type and scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
