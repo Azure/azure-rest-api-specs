@@ -2,24 +2,26 @@
   "parameters": {
     "api-version": "2018-11-01-preview",
     "billingAccountName": "{billingAccountName}",
-    "billingProfileName": "BillingProfileId1",
+    "billingProfileName": "{billingProfileName}",
     "eTag": "\"1d34d012214157f\"",
     "parameters": {
       "properties": {
         "reservationPurchasesAllowed": true,
-        "marketplacePurchasesAllowed": false
+        "marketplacePurchasesAllowed": false,
+        "subscriptionOwnerCanViewCharges": true
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/BillingProfileId1/policies/default",
-        "name": "latest",
+        "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default",
+        "name": "default",
         "type": "Microsoft.Billing/policies",
         "properties": {
           "reservationPurchasesAllowed": true,
-          "marketplacePurchasesAllowed": true
+          "marketplacePurchasesAllowed": false,
+          "subscriptionOwnerCanViewCharges": true
         }
       }
     }
