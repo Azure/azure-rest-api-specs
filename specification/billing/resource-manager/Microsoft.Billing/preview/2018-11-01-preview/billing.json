@@ -322,7 +322,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "BillingProfiles"
         ],
@@ -623,7 +623,7 @@
           }
         }
       },
-      "put": {
+      "patch": {
         "tags": [
           "InvoiceSections"
         ],
@@ -3261,6 +3261,99 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingAccounts/default/lineOfCredit/default": {
+      "get": {
+        "tags": [
+          "LineOfCredits"
+        ],
+        "x-ms-examples": {
+          "LineOfCreditBySubscription": {
+            "$ref": "./examples/LineOfCreditBySubscription.json"
+          }
+        },
+        "operationId": "LineOfCredits_Get",
+        "description": "Get the current line of credit.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LineOfCredit"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingAccounts/default/lineOfCredit/default/increase": {
+      "post": {
+        "tags": [
+          "LineOfCredits"
+        ],
+        "operationId": "LineOfCredits_Increase",
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "IncreaseLineOfCreditBySubscription": {
+            "$ref": "./examples/IncreaseLineOfCreditBySubscription.json"
+          }
+        },
+        "description": "Increase the current line of credit.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IncreaseLineOfCreditRequestProperties"
+            },
+            "description": "Parameters supplied to the increase line of credit operation."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. Line of credit increase is in progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5391,6 +5484,57 @@
           "description": "The email address of the participant or signer.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "LineOfCredit": {
+      "description": "Line of credit resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A line of credit.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LineOfCreditProperties"
+        }
+      }
+    },
+    "LineOfCreditProperties": {
+      "description": "The properties of the line of credit.",
+      "properties": {
+        "creditLimit": {
+          "description": "The current credit limit.",
+          "$ref": "#/definitions/Amount",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for the line of credit status when not approved.",
+          "type": "string",
+          "readOnly": true
+        },
+        "remainingBalance": {
+          "description": "Remaining balance.",
+          "$ref": "#/definitions/Amount",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The line of credit status.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "IncreaseLineOfCreditRequestProperties": {
+      "type": "object",
+      "description": "Request parameters to increase line of credit.",
+      "properties": {
+        "desiredCreditLimit": {
+          "description": "The desired credit limit.",
+          "type": "number"
         }
       }
     },
