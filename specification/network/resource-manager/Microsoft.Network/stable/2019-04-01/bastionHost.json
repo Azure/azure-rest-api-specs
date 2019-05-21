@@ -3,7 +3,7 @@
     "info":{  
        "title":"NetworkManagementClient",
        "description":"The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-       "version": "2018-12-01"
+       "version": "2019-04-01"
     },
     "host":"management.azure.com",
     "schemes":[  
@@ -79,7 +79,10 @@
                    "$ref":"./examples/BastionHostDelete.json"
                 }
              },
-             "x-ms-long-running-operation":true
+             "x-ms-long-running-operation":true,
+             "x-ms-long-running-operation-options": {
+               "final-state-via": "location"
+             }
           },
           "get":{  
              "tags":[  
@@ -179,7 +182,10 @@
                    "$ref":"./examples/BastionHostPut.json"
                 }
              },
-             "x-ms-long-running-operation":true
+             "x-ms-long-running-operation":true,
+             "x-ms-long-running-operation-options": {
+               "final-state-via": "azure-async-operation"
+             }
           }
        },
        "/subscriptions/{subscriptionId}/providers/Microsoft.Network/bastionHosts":{  
@@ -260,7 +266,7 @@
              "tags":[  
                 "BastionHosts"
              ],
-             "operationId":"BastionHosts_ListVnet",
+             "operationId":"BastionHosts_ListByVirtualNetwork",
              "description":"Gets the Bastion Host associated with a virtual network.",
              "parameters":[  
                 {
@@ -305,29 +311,25 @@
           "properties":{  
              "subnet":{
                 "$ref":"./network.json#/definitions/SubResource",
-                "description":"Reference of the subnet resource. This field is a mandatory input."
+                "description":"Reference of the subnet resource."
              },
              "publicIPAddress": {
                 "$ref": "./network.json#/definitions/SubResource",
-                "description": "Reference of the PublicIP resource. This field is a mandatory input."
+                "description": "Reference of the PublicIP resource."
              },
              "provisioningState":{
                "description":"The provisioning state of the resource.",
                "$ref":"./network.json#/definitions/ProvisioningState"
              },
              "privateIPAllocationMethod": {
-               "type": "string",
-               "description": "PrivateIP allocation method.",
-               "enum": [
-                 "Static",
-                 "Dynamic"
-               ],
-               "x-ms-enum": {
-                 "name": "IPAllocationMethod",
-                 "modelAsString": true
-               }
-            }
+               "$ref": "./network.json#/definitions/IPAllocationMethod",
+               "description": "Private IP allocation method."
+             }
           },
+          "required": [
+            "subnet",
+            "publicIPAddress"
+          ],
           "description":"Properties of IP configuration of an Bastion Host."
        },
        "BastionHostIPConfiguration":{  
@@ -351,11 +353,6 @@
                "readOnly": true,
                "type": "string",
                "description": "Ip configuration type."
-             },
-             "id": {
-                "readOnly": true,
-                "type": "string",
-                "description": "Id for The resource"
              }
           },
           "allOf":[  
@@ -392,21 +389,6 @@
                 "$ref":"#/definitions/BastionHostPropertiesFormat",
                 "description":"Represents the bastion host resource."
              },
-             "name":{  
-               "type":"string",
-               "readOnly": true,
-               "description":"Name of the resource that is unique within a resource group. This name can be used to access the resource."
-            },
-            "type": {
-               "readOnly": true,
-               "type": "string",
-               "description": "Bastion host type."
-             },
-             "id": {
-                "readOnly": true,
-                "type": "string",
-                "description": "Id for The resource"
-            },
             "etag":{  
                 "type":"string",
                 "readOnly":true,
