@@ -1,0 +1,1693 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-05-01",
+    "title": "Artifact API"
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/metadata": {
+      "post": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Create Artifact.",
+        "description": "Create an Artifact.",
+        "operationId": "Artifacts_Create",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactDto",
+            "in": "body",
+            "description": "The Artifact details.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact is created successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/metadata": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get Artifact metadata by Id.",
+        "description": "Get Artifact metadata for a specific Id.",
+        "operationId": "Artifacts_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the Artifact are returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Delete Artifact Metadata.",
+        "description": "Delete an Artifact Metadata.",
+        "operationId": "Artifacts_DeleteMetaData",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "hardDelete",
+            "in": "query",
+            "description": "If set to true. The delete cannot be revert at later time.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact metadata deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get Artifacts metadata in a container or path.",
+        "description": "Get Artifacts metadata in a specific container or path.",
+        "operationId": "Artifacts_ListInContainer",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "The continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the Artifacts are returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedArtifactList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/content": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get Artifact content by Id.",
+        "description": "Get Artifact content of a specific Id.",
+        "operationId": "Artifacts_Download",
+        "consumes": [],
+        "produces": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The details of the Artifact content are returned successfully.",
+            "schema": {
+              "format": "byte",
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "post": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Upload Artifact content.",
+        "description": "Upload content to an Artifact.",
+        "operationId": "Artifacts_Upload",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "index",
+            "in": "query",
+            "description": "The index.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "append",
+            "in": "query",
+            "description": "Whether or not to append the content or replace it.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
+            "name": "content",
+            "in": "body",
+            "description": "The content.",
+            "required": true,
+            "schema": {
+              "format": "binary",
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact content is uploaded successfully.",
+            "schema": {
+              "$ref": "#/definitions/Artifact"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/contentinfo": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get Artifact content information.",
+        "description": "Get content information of an Artifact.",
+        "operationId": "Artifacts_GetContentInformation",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact content information is returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactContentInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/contentinfo/storageuri": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get Artifact storage content information.",
+        "description": "Get storage content information of an Artifact.",
+        "operationId": "Artifacts_GetStorageContentInformation",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact storage content information is returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactContentInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/write": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get writable shared access signature for Artifact.",
+        "description": "Get writable shared access signature for a specific Artifact.",
+        "operationId": "Artifacts_GetSas",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact writable shared access signature is returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/ArtifactContentInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/prefix/contentinfo": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get shared access signature for an Artifact",
+        "description": "Get shared access signature for an Artifact in specific path.",
+        "operationId": "Artifacts_ListSasByPrefix",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "The continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact writable shared access signature is returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedArtifactContentInformationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/prefix/contentinfo/storageuri": {
+      "get": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get storage Uri for Artifacts in a path.",
+        "description": "Get storage Uri for Artifacts in a specific path.",
+        "operationId": "Artifacts_ListStorageUriByPrefix",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "The Artifact Path.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "continuationToken",
+            "in": "query",
+            "description": "The continuation token.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact storage uri is returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedArtifactContentInformationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/batch/metadata": {
+      "post": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get Batch Artifacts by Ids.",
+        "description": "Get Batch Artifacts by the specific Ids.",
+        "operationId": "Artifacts_BatchGetById",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactIds",
+            "in": "body",
+            "description": "The command for Batch Artifact get request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactIdList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The requested Batch Artifacts are returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/BatchArtifactContentInformationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/storageuri/batch/metadata": {
+      "post": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Get Batch Artifacts storage by Ids.",
+        "description": "Get Batch Artifacts storage by specific Ids.",
+        "operationId": "Artifacts_BatchGetStorageById",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactIds",
+            "in": "body",
+            "description": "The list of artifactIds to get.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactIdList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Batch Artifact's storage are returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/BatchArtifactContentInformationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/batch/ingest/containersas": {
+      "post": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Batch ingest using shared access signature.",
+        "description": "Ingest Batch Artifacts using shared access signature.",
+        "operationId": "Artifacts_BatchIngestFromSas",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactContainerSas",
+            "in": "body",
+            "description": "The artifact container shared access signature to use for batch ingest.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactContainerSas"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Batch is ingested using shared access signature successfully.",
+            "schema": {
+              "$ref": "#/definitions/PaginatedArtifactList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/batch/metadata": {
+      "post": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Create a batch of empty Artifacts.",
+        "description": "Create a Batch of empty Artifacts from the supplied paths.",
+        "operationId": "Artifacts_BatchCreateEmptyArtifacts",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactPaths",
+            "in": "body",
+            "description": "The list of Artifact paths to create.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ArtifactPathList"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Batch of empty Artifacts created successfully.",
+            "schema": {
+              "$ref": "#/definitions/BatchArtifactContentInformationResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Delete Batch of Artifact Metadata.",
+        "description": "Delete a Batch of Artifact Metadata.",
+        "operationId": "Artifacts_BatchDeleteMetaData",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "artifactPaths",
+            "in": "body",
+            "description": "The list of Artifact paths to delete.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ArtifactPathList"
+            }
+          },
+          {
+            "name": "hardDelete",
+            "in": "query",
+            "description": "If set to true. The delete cannot be revert at later time.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The batch delete of Artifact metadata is completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/batch": {
+      "delete": {
+        "tags": [
+          "Artifact"
+        ],
+        "summary": "Delete Artifact Metadata.",
+        "description": "Delete Artifact Metadata in a specific container.",
+        "operationId": "Artifacts_DeleteMetaDataInContainer",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "path",
+            "description": "The origin of the Artifact.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "container",
+            "in": "path",
+            "description": "The container name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "hardDelete",
+            "in": "query",
+            "description": "If set to true. The delete cannot be revert at later time.",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Artifact metadata deleted successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Artifact": {
+      "type": "object",
+      "properties": {
+        "artifactId": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "container": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        },
+        "etag": {
+          "type": "string"
+        },
+        "createdTime": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedArtifactList": {
+      "description": "A paginated list of items and an optional link to the next page of items.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of items in this page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "continuationToken": {
+          "description": "The token used in retrieving the next page.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        }
+      }
+    },
+    "Stream": {
+      "type": "object",
+      "properties": {
+        "canRead": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canSeek": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canTimeout": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "canWrite": {
+          "type": "boolean",
+          "readOnly": true
+        },
+        "length": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "position": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "readTimeout": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "writeTimeout": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "ArtifactContentInformation": {
+      "type": "object",
+      "properties": {
+        "contentUri": {
+          "type": "string"
+        },
+        "origin": {
+          "type": "string"
+        },
+        "container": {
+          "type": "string"
+        },
+        "path": {
+          "type": "string"
+        }
+      }
+    },
+    "PaginatedArtifactContentInformationList": {
+      "description": "A paginated list of items and an optional link to the next page of items.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of items in this page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactContentInformation"
+          }
+        },
+        "continuationToken": {
+          "description": "The token used in retrieving the next page.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        }
+      }
+    },
+    "ArtifactIdList": {
+      "type": "object",
+      "properties": {
+        "artifactIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "BatchArtifactContentInformationResult": {
+      "type": "object",
+      "properties": {
+        "artifacts": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/Artifact"
+          }
+        },
+        "artifactContentInformation": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ArtifactContentInformation"
+          }
+        },
+        "errors": {
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response.",
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/RootError",
+          "description": "The top level error that occurred."
+        },
+        "correlation": {
+          "description": "Dictionary containing correlation details for the error.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "environment": {
+          "description": "The hosting environment.",
+          "type": "string"
+        },
+        "location": {
+          "description": "The Azure region.",
+          "type": "string"
+        },
+        "time": {
+          "format": "date-time",
+          "description": "The time in UTC.",
+          "type": "string"
+        }
+      }
+    },
+    "RootError": {
+      "description": "The root error.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The service-defined error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the error (e.g., the name of the property in error).",
+          "type": "string"
+        },
+        "details": {
+          "description": "The related errors that occurred during the request.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
+        },
+        "debugInfo": {
+          "$ref": "#/definitions/DebugInfoResponse",
+          "description": "An internal representation of the error. May be null for non-AzureML services."
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The error details.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the error (e.g., the name of the property in error).",
+          "type": "string"
+        }
+      }
+    },
+    "InnerErrorResponse": {
+      "description": "A nested structure of errors.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "type": "string"
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerErrorResponse",
+          "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
+        }
+      }
+    },
+    "DebugInfoResponse": {
+      "description": "Internal debugging information not intended for external clients.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message.",
+          "type": "string"
+        },
+        "stackTrace": {
+          "description": "The stack trace.",
+          "type": "string"
+        },
+        "innerException": {
+          "$ref": "#/definitions/DebugInfoResponse",
+          "description": "The inner exception."
+        },
+        "data": {
+          "description": "The data associated with the error.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "errorResponse": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "The error response."
+        }
+      }
+    },
+    "ArtifactContainerSas": {
+      "type": "object",
+      "properties": {
+        "containerSas": {
+          "type": "string"
+        },
+        "containerUri": {
+          "type": "string"
+        },
+        "prefix": {
+          "type": "string"
+        },
+        "artifactPrefix": {
+          "type": "string"
+        }
+      }
+    },
+    "ArtifactPathList": {
+      "type": "object",
+      "properties": {
+        "paths": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ArtifactPath"
+          }
+        }
+      }
+    },
+    "ArtifactPath": {
+      "type": "object",
+      "properties": {
+        "path": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "dnsSuffix": {
+      "name": "dnsSuffix",
+      "in": "path",
+      "description": "The DNS suffix for the Azure Machine Learning Service endpoint.",
+      "required": true,
+      "type": "string",
+      "default": "api.azureml.ms",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "region": {
+      "name": "region",
+      "in": "path",
+      "description": "The Azure region name.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "tags": [],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{region}.{dnsSuffix}",
+    "parameters": [
+      {
+        "$ref": "#/parameters/region"
+      },
+      {
+        "$ref": "#/parameters/dnsSuffix"
+      }
+    ]
+  }
+}

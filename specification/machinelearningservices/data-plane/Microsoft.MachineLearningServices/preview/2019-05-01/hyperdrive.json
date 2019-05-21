@@ -1,0 +1,495 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"description": "HyperDrive REST API",
+        "version": "2019-05-01",
+		"title": "HyperDrive"
+	},
+	"tags": [],
+	"schemes": [
+		"https"
+	],
+	"paths": {
+		"/hyperdrive/v1.0/{arm_scope}/runs": {
+			"post": {
+				"tags": [
+					"HyperDriveExperiment"
+				],
+				"summary": "Create an Experiment.",
+				"description": "Create a HyperDrive Experiment.",
+				"operationId": "HyperDrive_CreateExperiment",
+				"consumes": [
+					"multipart/form-data"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ArmScopeParameter"
+					},
+					{
+						"in": "formData",
+						"name": "config",
+						"description": "The configuration file with experiment JSON content.",
+						"type": "file",
+						"required": true
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/HyperDriveExperimentResponse"
+						}
+					},
+					"default": {
+						"description": "Error",
+						"schema": {
+							"$ref": "#/definitions/HyperDriveErrorResponse"
+						}
+					}
+				}
+			}
+		},
+		"/hyperdrive/v1.0/{arm_scope}/runs/{run_id}": {
+			"post": {
+				"tags": [
+					"HyperDriveExperiment"
+				],
+				"summary": "Create an Experiment.",
+				"description": "Create a HyperDrive Experiment.",
+				"operationId": "HyperDrive_CreateExperimentWithParentRun",
+				"consumes": [
+					"multipart/form-data"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ArmScopeParameter"
+					},
+					{
+						"name": "run_id",
+						"in": "path",
+						"description": "The run id to use as parent_id for the HyperDrive run.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "formData",
+						"name": "config",
+						"description": "The configuration file with experiment JSON content.",
+						"type": "file",
+						"required": true
+					}
+				],
+				"responses": {
+					"201": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/HyperDriveExperimentResponse"
+						}
+					},
+					"default": {
+						"description": "Error",
+						"schema": {
+							"$ref": "#/definitions/HyperDriveErrorResponse"
+						}
+					}
+				}
+			}
+		},
+		"/hyperdrive/v1.0/{arm_scope}/runs/{run_id}/cancel": {
+			"post": {
+				"tags": [
+					"HyperDriveExperiment"
+				],
+				"summary": "Cancel an Experiment.",
+				"description": "Cancel a HyperDrive Experiment.",
+				"operationId": "HyperDrive_CancelExperiment",
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/ArmScopeParameter"
+					},
+					{
+						"name": "run_id",
+						"in": "path",
+						"description": "Hyperdrive run id to cancel.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"in": "header",
+						"name": "RunHistoryHost",
+						"description": "The host for run location.",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"$ref": "#/definitions/HyperDriveCancelExperimentResponse"
+						}
+					},
+					"default": {
+						"description": "Error",
+						"schema": {
+							"$ref": "#/definitions/HyperDriveErrorResponse"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"HyperDriveErrorResponse": {
+			"properties": {
+				"code": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"message": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"code",
+				"message"
+			],
+			"type": "object"
+		},
+		"HyperDriveCancelExperimentResponse": {
+			"properties": {
+				"code": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"result": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"code",
+				"result"
+			],
+			"type": "object"
+		},
+		"HyperDriveExperiment": {
+			"properties": {
+				"all_jobs_generated": {
+					"type": "boolean"
+				},
+				"cancellation_requested": {
+					"type": "boolean"
+				},
+				"created": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"created_by_user_id": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"description": {
+					"type": "string"
+				},
+				"experiment_id": {
+					"type": "object"
+				},
+				"experiment_uri": {
+					"type": "string"
+				},
+				"generator_config": {
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"parameter_space": {
+							"type": "object"
+						},
+						"properties": {
+							"type": "object"
+						}
+					},
+					"required": [
+						"name",
+						"parameter_space"
+					],
+					"type": "object"
+				},
+				"max_concurrent_jobs": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"max_duration_minutes": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"max_total_jobs": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"modified": {
+					"format": "date-time",
+					"type": "string"
+				},
+				"name": {
+					"type": "string"
+				},
+				"platform": {
+					"type": "string"
+				},
+				"platform_config": {
+					"type": "object"
+				},
+				"policy_config": {
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"properties": {
+							"type": "object"
+						}
+					},
+					"required": [
+						"name"
+					],
+					"type": "object"
+				},
+				"primary_metric_config": {
+					"properties": {
+						"goal": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"goal",
+						"name"
+					],
+					"type": "object"
+				},
+				"status": {
+					"type": "string"
+				},
+				"study_id": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"study_uri": {
+					"type": "string"
+				},
+				"hyperdrive_run_id": {
+					"type": "string"
+				}
+			},
+			"required": [
+				"all_jobs_generated",
+				"cancellation_requested",
+				"created",
+				"created_by_user_id",
+				"experiment_id",
+				"generator_config",
+				"modified",
+				"name",
+				"platform",
+				"platform_config",
+				"policy_config",
+				"primary_metric_config",
+				"status",
+				"study_id",
+				"hyperdrive_run_id"
+			],
+			"type": "object"
+		},
+		"HyperDriveCreateExperiment": {
+			"properties": {
+				"description": {
+					"maxLength": 511,
+					"type": "string",
+					"x-nullable": true
+				},
+				"generator_config": {
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"parameter_space": {
+							"type": "object"
+						},
+						"properties": {
+							"type": "object"
+						}
+					},
+					"required": [
+						"name",
+						"parameter_space"
+					],
+					"type": "object"
+				},
+				"max_concurrent_jobs": {
+					"format": "int32",
+					"maximum": 100,
+					"minimum": 1,
+					"type": "integer"
+				},
+				"max_duration_minutes": {
+					"format": "int32",
+					"maximum": 43200,
+					"minimum": 1,
+					"type": "integer"
+				},
+				"max_total_jobs": {
+					"format": "int32",
+					"maximum": 1000,
+					"minimum": 1,
+					"type": "integer"
+				},
+				"name": {
+					"maxLength": 255,
+					"type": "string"
+				},
+				"platform": {
+					"type": "string"
+				},
+				"platform_config": {
+					"type": "object"
+				},
+				"policy_config": {
+					"properties": {
+						"name": {
+							"type": "string"
+						},
+						"properties": {
+							"type": "object"
+						}
+					},
+					"required": [
+						"name"
+					],
+					"type": "object"
+				},
+				"primary_metric_config": {
+					"properties": {
+						"goal": {
+							"type": "string"
+						},
+						"name": {
+							"type": "string"
+						}
+					},
+					"required": [
+						"goal",
+						"name"
+					],
+					"type": "object"
+				},
+				"study_id": {
+					"format": "int32",
+					"minimum": 0,
+					"type": "integer",
+					"x-nullable": true
+				},
+				"user": {
+					"maxLength": 255,
+					"type": "string"
+				}
+			},
+			"required": [
+				"generator_config",
+				"name",
+				"platform",
+				"platform_config",
+				"policy_config",
+				"primary_metric_config",
+				"user"
+			],
+			"type": "object"
+		},
+		"HyperDriveExperimentResponse": {
+			"properties": {
+				"code": {
+					"format": "int32",
+					"type": "integer"
+				},
+				"result": {
+					"$ref": "#/definitions/HyperDriveExperiment"
+				}
+			},
+			"required": [
+				"code",
+				"result"
+			],
+			"type": "object"
+		}
+	},
+	"parameters": {
+		"ArmScopeParameter": {
+			"name": "arm_scope",
+			"in": "path",
+			"description": "The ARM scope passed in through URL with format:\r\n            subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}.\r\n",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method"
+		},
+		"dnsSuffix": {
+			"name": "dnsSuffix",
+			"in": "path",
+			"description": "The DNS suffix for the Azure Machine Learning Service endpoint.",
+			"required": true,
+			"type": "string",
+			"default": "api.azureml.ms",
+			"x-ms-skip-url-encoding": true,
+			"x-ms-parameter-location": "client"
+		},
+		"region": {
+			"name": "region",
+			"in": "path",
+			"description": "The Azure region name.",
+			"required": true,
+			"type": "string",
+			"x-ms-skip-url-encoding": true,
+			"x-ms-parameter-location": "client"
+		}
+	},
+	"securityDefinitions": {
+		"azure_auth": {
+			"flow": "implicit",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			},
+			"type": "oauth2"
+		}
+	},
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"x-ms-parameterized-host": {
+		"hostTemplate": "{region}.{dnsSuffix}",
+		"parameters": [
+			{
+				"$ref": "#/parameters/region"
+			},
+			{
+				"$ref": "#/parameters/dnsSuffix"
+			}
+		]
+	}
+}
