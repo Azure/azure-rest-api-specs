@@ -1,6 +1,6 @@
 {
     "parameters": {
-        "scope": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1",
+        "scope": "scope",
         "api-version": "2018-09-01-preview"
     },
     "responses": {
@@ -9,11 +9,11 @@
             "body": {
                 "value": [
                     {
-                        "name": "association1",
-                        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.Compute/virtualMachines/vm1/providers/Microsoft.CustomProviders/associations/association1",
+                        "name": "associationName",
+                        "id": "scope/providers/Microsoft.CustomProviders/associations/associationName",
                         "type": "Microsoft.CustomProviders/associations",
                         "properties": {
-                            "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000001/resourceGroups/appRG/providers/Microsoft.Solutions/applications/application1",
+                            "targetResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/appRG/providers/Microsoft.Solutions/applications/applicationName",
                             "provisioningState": "Succeeded"
                         }
                     }
