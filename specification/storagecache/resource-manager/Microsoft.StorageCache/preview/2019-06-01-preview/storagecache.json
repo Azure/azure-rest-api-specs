@@ -1345,12 +1345,10 @@
     "ResourceSku": {
       "description": "A resource SKU",
       "properties": {
-        "cacheSizesGB": {
-          "description": "A list of cache sizes that are valid for this Sku (in GB)",
-          "items": {
-            "type": "integer"
-          },
-          "type": "array"
+        "resourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of resource the sku applies to."
         },
         "capabilities": {
           "description": "A list of capabilities of this SKU, such as throughput or ops/sec",
@@ -1360,6 +1358,14 @@
           "type": "array"
         },
         "locations": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
+        },
+        "locationInfo": {
           "description": "The set of locations that the SKU is available.",
           "items": {
             "$ref": "#/definitions/ResourceSkuLocationInfo"
@@ -1369,9 +1375,46 @@
         "name": {
           "description": "The name of this sku.",
           "type": "string"
+        },
+        "restrictions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Restriction"
+          },
+          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       },
       "type": "object"
+    },
+    "Restriction": {
+      "properties": {
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of restrictions. As of now only possible value for this is location."
+        },
+        "values": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+        },
+        "reasonCode": {
+          "type": "string",
+          "enum": [
+            "QuotaId",
+            "NotAvailableForSubscription"
+          ],
+          "x-ms-enum": {
+            "name": "ReasonCode",
+            "modelAsString": true
+          },
+          "description": "The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The \"NotAvailableForSubscription\" is related to capacity at DC."
+        }
+      },
+      "description": "The restriction because of which SKU cannot be used."
     },
     "ResourceSkuCapabilities": {
       "description": "A resource SKU capability.",
@@ -1393,12 +1436,19 @@
         "location": {
           "description": "Location where this Sku is available",
           "type": "string"
+        },
+        "zones": {
+          "description": "Zones if any.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "type": "object"
     },
     "ResourceSkusResult": {
-      "description": "A list of cache Skus.",
+      "description": "The response from the List Cache SKUs operation.",
       "properties": {
         "nextLink": {
           "description": "The uri to fetch the next page of cache Skus.",
@@ -1406,13 +1456,13 @@
         },
         "value": {
           "description": "The list of skus available for the subscription.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceSku"
           },
           "type": "array"
         }
-      },
-      "type": "object"
+      }
     },
     "StorageTarget": {
       "description": "A storage system being cached by a Cache.",
