@@ -863,6 +863,10 @@
         "customSubDomainName": {
           "type": "string",
           "description": "Optional subdomain name used for token-based authentication."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -1298,6 +1302,81 @@
         "value"
       ],
       "description": "The Get Skus operation response."
+    },
+	  "NetworkRuleSet": {
+      "properties": {
+        "bypass": {
+          "type": "string",
+          "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
+            "modelAsString": true
+          }
+        },
+        "defaultAction": {
+          "type": "string",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleAction",
+            "modelAsString": true
+          }
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "description": "The list of IP address rules."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules."
+        }
+      },
+      "description": "A set of rules governing the network accessibility."
+    },
+    "IpRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "A rule governing the accessibility from a specific ip address or ip range."
+    },
+    "VirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Ignore missing vnet service endpoint or not."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A rule governing the accessibility from a specific virtual network."
     }
   },
   "parameters": {
