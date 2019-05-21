@@ -17,10 +17,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-subscription/azure/mgmt/subscription
+  output-folder: $(python-sdks-folder)/subscription/azure-mgmt-subscription/azure/mgmt/subscription
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-subscription
+  output-folder: $(python-sdks-folder)/subscription/azure-mgmt-subscription
 ```
