@@ -8,36 +8,35 @@
     "tableName": "tableName",
     "createUpdateCassandraTableParameters": {
       "properties": {
-          "resource": {
-              "id": "tableName",
-              "defaultTtl": 100,
-              "schema": {
-                "columns": [
-                  {
-                    "name": "columnA",
-                    "type": "Ascii"
-                  }
-                ],
-                "partitionKeys": [
-                  {
-                    "name": "columnA"
-                  }
-                ],
-                "clusterKeys": [
-                  {
-                    "name": "columnA",
-                    "orderBy": "Asc"
-                  }
-                ]
+        "resource": {
+          "id": "tableName",
+          "defaultTtl": 100,
+          "schema": {
+            "columns": [
+              {
+                "name": "columnA",
+                "type": "Ascii"
               }
-          },
-          "options": {
+            ],
+            "partitionKeys": [
+              {
+                "name": "columnA"
+              }
+            ],
+            "clusterKeys": [
+              {
+                "name": "columnA",
+                "orderBy": "Asc"
+              }
+            ]
           }
+        },
+        "options": {}
       }
     }
   },
   "responses": {
-    "200": { 
+    "200": {
       "body": {
         "id": "tableName",
         "name": "tableName",
@@ -67,8 +66,6 @@
         }
       }
     },
-    "202": {
-
-    }
+    "202": {}
   }
 }
