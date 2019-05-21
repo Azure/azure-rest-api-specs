@@ -303,8 +303,8 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "description": "Provisioning state of the policy.",
-          "$ref": "#/definitions/ProvisioningState"
+          "type": "string",
+          "description": "Provisioning state of the policy."
         },
         "resourceState": {
           "title": "Resource status of the policy.",
@@ -771,20 +771,6 @@
           "type": "string",
           "description": "Resource ID."
         }
-      }
-    },
-    "ProvisioningState":{
-      "type":"string",
-      "readOnly":true,
-      "description": "The current resource provisioning state.",
-      "enum":[
-        "Succeeded",
-        "Creating",
-        "Failed"
-      ],
-      "x-ms-enum":{
-        "name":"ProvisioningState",
-        "modelAsString":true
       }
     }
   },
