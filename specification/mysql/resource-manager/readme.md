@@ -50,6 +50,16 @@ input-file:
 ```
 
 
+### Tag: package-2018-06-01-privatepreview
+
+These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
+```
+
+
 ---
 # Code Generation
 
