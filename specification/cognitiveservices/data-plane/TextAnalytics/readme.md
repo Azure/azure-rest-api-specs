@@ -176,7 +176,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.TextAnalytics
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/TextAnalytics/Generated/TextAnalytics
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Language.TextAnalytics/src/Generated
   clear-output-folder: true
 ```
 

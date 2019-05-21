@@ -162,21 +162,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_dns']
 ```
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Dns
-  payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/Dns/Management.Dns/Generated
-  clear-output-folder: true
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -227,4 +212,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/dns/resource-manager/v2016_04_01
 regenerate-manager: true
 generate-interface: true
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Network/stable/2016-04-01/dns.json
 ```

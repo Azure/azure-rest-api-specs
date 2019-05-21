@@ -5928,7 +5928,7 @@
         },
         "enableAutomaticUpdates": {
           "type": "boolean",
-          "description": "Indicates whether virtual machine is enabled for automatic updates."
+          "description": "Indicates whether virtual machine is enabled for automatic Windows updates. Default value is true. <br><br> For virtual machine scale sets, this property can be updated and updates will take effect on OS reprovisioning."
         },
         "timeZone": {
           "type": "string",
@@ -6521,7 +6521,7 @@
       "properties": {
         "enableAutomaticOSUpgrade": {
           "type": "boolean",
-          "description": "Whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the image becomes available. Default value is false."
+          "description": "Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. Default value is false. If this is set to true for Windows based scale sets, recommendation is to set [enableAutomaticUpdates](https://docs.microsoft.com/dotnet/api/microsoft.azure.management.compute.models.windowsconfiguration.enableautomaticupdates?view=azure-dotnet) to false."
         },
         "disableAutomaticRollback": {
           "type": "boolean",
@@ -7674,7 +7674,7 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
-        "doNotRunExtensionsOnOverprovisionedVMs":{
+        "doNotRunExtensionsOnOverprovisionedVMs": {
           "type": "boolean",
           "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
         },

@@ -115,6 +115,7 @@ These settings apply only when `--tag=package-composite-v3` is specified on the 
 
 ```yaml $(tag) == 'package-composite-v3'
 input-file:
+- Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/stable/2019-01-01/settings.json
@@ -132,6 +133,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
 
 # Needed when there is more than one input file
 override-info:
