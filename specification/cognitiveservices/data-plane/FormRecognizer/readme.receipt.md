@@ -18,7 +18,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: preview/v1.0/FormRecognizer.json
+input-file: preview/v1.0/FormRecognizerReceipt.json
 ```
 
 ## Swagger to SDK
@@ -34,9 +34,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_formrecognizer']
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_formrecognizerreceipt']
 ```
-
 
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
@@ -45,9 +44,9 @@ csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.FormRecognizer
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Vision.FormRecognizer/src/Generated
-  title: "FormRecognizerClient"
+  namespace: Microsoft.Azure.CognitiveServices.FormRecognizerReceipt
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Vision.FormRecognizerReceipt/src/Generated
+  title: "FormRecognizerReceiptClient"
   clear-output-folder: true
 ```
 
@@ -63,10 +62,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.formrecognizer
+  namespace: com.microsoft.azure.cognitiveservices.formrecognizerreceipt
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/formrecognizer
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/vision/formrecognizerreceipt
   with-optional-parameters: true
   with-single-async-method: true
 ```
