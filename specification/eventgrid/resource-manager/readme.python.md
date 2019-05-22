@@ -9,7 +9,7 @@ python-mode: create
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
+  payload-flattening-threshold: 1
   namespace: azure.mgmt.eventgrid
   package-name: azure-mgmt-eventgrid
   package-version: 2.2.0
