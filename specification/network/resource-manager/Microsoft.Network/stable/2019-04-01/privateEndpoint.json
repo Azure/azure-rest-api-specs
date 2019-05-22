@@ -295,6 +295,7 @@
     "PrivateEndpoint": {
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/PrivateEndpointProperties",
           "description": "Properties of the private endpoint."
         },
@@ -349,8 +350,9 @@
     "PrivateLinkServiceConnection": {
       "properties": {
         "properties": {
-            "$ref": "#/definitions/PrivateLinkServiceConnectionProperties",
-            "description": "Properties of the private link service connection"
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkServiceConnectionProperties",
+          "description": "Properties of the private link service connection"
         },
         "name": {
           "type": "string",
