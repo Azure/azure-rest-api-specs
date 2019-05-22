@@ -555,7 +555,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/ResourceNavigationLinks": {
       "get": {
-        "operationId": "ResourceNavigationLinks_Get",
+        "operationId": "ResourceNavigationLinks_List",
         "description": "Gets a list of resource navigation links for a subnet.",
         "parameters": [
           {
@@ -601,7 +601,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/subnets/{subnetName}/ServiceAssociationLinks": {
       "get": {
-        "operationId": "ServiceAssociationLinks_Get",
+        "operationId": "ServiceAssociationLinks_List",
         "description": "Gets a list of service association links for a subnet.",
         "parameters": [
           {
@@ -1008,6 +1008,17 @@
           "readOnly": true,
           "type": "string",
           "description": "Provisioning state of the ServiceAssociationLink resource."
+        },
+        "allowDelete": {
+          "type": "boolean",
+          "description": "If true, the resource can be deleted."
+        },
+        "locations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of locations."
         }
       },
       "description": "Properties of ServiceAssociationLink."
@@ -1027,6 +1038,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Resource type"
         }
       },
       "allOf": [
@@ -1065,10 +1080,20 @@
           "type": "string",
           "description": "Name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource navigation link identifier."
+        },
         "etag": {
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
         }
       },
       "allOf": [
@@ -1360,7 +1385,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for ResourceNavigationLinks_Get operation."
+      "description": "Response for ResourceNavigationLinks_List operation."
     },
     "ServiceAssociationLinksListResult": {
       "properties": {
@@ -1376,7 +1401,7 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "Response for ServiceAssociationLinks_Get operation."
+      "description": "Response for ServiceAssociationLinks_List operation."
     },
     "VirtualNetworkPeeringListResult": {
       "properties": {
