@@ -184,7 +184,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel": {
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel": {
       "post": {
         "tags": [
           "Deployments"
@@ -210,7 +210,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deployments/{deploymentName}/validate": {
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/validate": {
       "post": {
         "tags": [
           "Deployments"
@@ -253,7 +253,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
       "post": {
         "tags": [
           "Deployments"
@@ -281,7 +281,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deployments/": {
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/": {
       "get": {
         "tags": [
           "Deployments"
@@ -2374,7 +2374,7 @@
         "tags": [
           "DeploymentOperations"
         ],
-        "operationId": "DeploymentOperations_ListAtSubscriptionScope",
+        "operationId": "DeploymentOperations_ListAtManagementGroupScope",
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
           {
@@ -3493,6 +3493,11 @@
           "format": "date-time",
           "description": "The date and time of the operation."
         },
+        "duration": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The duration of the operation."
+        },
         "serviceRequestId": {
           "readOnly": true,
           "type": "string",
@@ -3697,6 +3702,7 @@
       "required": true,
       "type": "string",
       "description": "The management group ID.",
+      "x-ms-parameter-location": "method",
       "minLength": 1,
       "maxLength": 90
     },
@@ -3713,6 +3719,7 @@
       "required": true,
       "type": "string",
       "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method",
       "minLength": 1,
       "maxLength": 64,
       "description": "The name of the deployment."
