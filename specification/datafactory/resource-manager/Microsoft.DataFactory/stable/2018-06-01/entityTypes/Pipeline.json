@@ -205,6 +205,89 @@
         "type": "object"
       }
     },
+    "DelimitedTextReadSetting": {
+      "description": "Delimited text read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatReadSetting"
+        }
+      ],
+      "properties": {
+        "skipLineCount": {
+          "type": "object",
+          "description": "Indicates the number of non-empty rows to skip when reading data from input files. Type: integer (or Expression with resultType integer)."
+        },
+        "addtionalNullValues": {
+          "description": "List of strings each of which will be treated as a null value as well as that in dataset.",
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        }
+      }
+    },
+    "DelimitedTextWriteSetting": {
+      "description": "Delimited text write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSetting"
+        }
+      ],
+      "properties": {
+        "quoteAllText": {
+          "type": "object",
+          "description": "Indicates whether string values should always be enclosed with quotes. Type: boolean (or Expression with resultType boolean)."
+        },
+        "fileExtension": {
+          "type": "object",
+          "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "fileExtension"
+      ]
+    },
+    "DelimitedTextSource": {
+      "description": "A copy activity DelimitedText source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/ConnectorReadSetting",
+          "description": "DelimitedText store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/DelimitedTextReadSetting",
+          "description": "DelimitedText format settings."
+        }
+      }
+    },
+    "DelimitedTextSink": {
+      "description": "A copy activity DelimitedText sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/ConnectorWriteSetting",
+          "description": "DelimitedText store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/DelimitedTextWriteSetting",
+          "description": "DelimitedText format settings."
+        }
+      }
+    },
     "CopyActivity": {
       "x-ms-discriminator-value": "Copy",
       "description": "Copy activity.",
@@ -251,7 +334,7 @@
         },
         "translator": {
           "description": "Copy activity translator. If not specified, tabular translator is used.",
-          "$ref": "#/definitions/CopyTranslator"
+          "type": "object"
         },
         "enableStaging": {
           "type": "object",
@@ -284,6 +367,14 @@
             "description": "Type: string (or Expression with resultType string)."
           },
           "description": "Preserve Rules."
+        },
+        "preserve": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Preserve."
         }
       },
       "required": [
@@ -426,7 +517,7 @@
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Query",
             "QueryAll"
@@ -463,20 +554,10 @@
       ],
       "properties": {
         "query": {
-          "type": "string",
+          "type": "object",
           "description": "SAP ECC OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         }
       }
-    },
-    "SapOpenHubSource": {
-      "description": "A copy activity source for SAP Business Warehouse Open Hub Destination source.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CopySource"
-        }
-      ],
-      "properties": {}
     },
     "RestSource": {
       "description": "A copy activity Rest service source.",
@@ -520,6 +601,66 @@
           "additionalProperties": {
             "$ref": "#/definitions/StoredProcedureParameter"
           }
+        }
+      }
+    },
+    "SqlServerSource": {
+      "description": "A copy activity SQL server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        }
+      }
+    },
+    "AzureSqlSource": {
+      "description": "A copy activity Azure SQL source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a SQL Database source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
         }
       }
     },
@@ -659,6 +800,49 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for oracle read in parallel.",
+          "type": "object",
+          "enum": [
+            "None",
+            "PhysicalPartitionsOfTable",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "TabularPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for oracle source partitioning.",
+          "$ref": "#/definitions/OraclePartitionSettings"
+        }
+      }
+    },
+    "OraclePartitionSettings": {
+      "description": "The settings that will be leveraged for oracle source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionNames": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          },
+          "description": "Names of the physical partitions of oracle table. "
+        },
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -687,7 +871,7 @@
         },
         "consistencyLevel": {
           "description": "The consistency level specifies how many Cassandra servers must respond to a read request before returning data to the client application. Cassandra checks the specified number of Cassandra servers for data to satisfy the read request. Must be one of cassandraSourceReadConsistencyLevels. The default value is 'ONE'. It is case-insensitive.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "ALL",
             "EACH_QUORUM",
@@ -1408,6 +1592,7 @@
       "enum": [
         "String",
         "Int",
+        "Int64",
         "Decimal",
         "Guid",
         "Boolean",
@@ -1466,7 +1651,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is 'Insert'.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Insert",
             "Update"
@@ -1490,7 +1675,7 @@
     },
     "CopyBehaviorType": {
       "description": "All available types of copy behavior.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "PreserveHierarchy",
         "FlattenHierarchy",
@@ -1528,6 +1713,16 @@
         }
       }
     },
+    "ParquetSink": {
+      "description": "A copy activity Parquet sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {}
+    },
     "BlobSink": {
       "description": "A copy activity Azure Blob sink.",
       "type": "object",
@@ -1551,7 +1746,7 @@
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1566,7 +1761,7 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1582,6 +1777,10 @@
         "nestingSeparator": {
           "type": "object",
           "description": "Nested properties separator. Default is . (dot). Type: string (or Expression with resultType string)."
+        },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Describes how to write data to Azure Cosmos DB. Allowed values: insert and upsert."
         }
       }
     },
@@ -1612,6 +1811,78 @@
           "additionalProperties": {
             "$ref": "#/definitions/StoredProcedureParameter"
           }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SqlServerSink": {
+      "description": "A copy activity SQL server sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "sqlWriterStoredProcedureName": {
+          "type": "object",
+          "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterTableType": {
+          "type": "object",
+          "description": "SQL writer table type. Type: string (or Expression with resultType string)."
+        },
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "SQL stored procedure parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureSqlSink": {
+      "description": "A copy activity Azure SQL sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "sqlWriterStoredProcedureName": {
+          "type": "object",
+          "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterTableType": {
+          "type": "object",
+          "description": "SQL writer table type. Type: string (or Expression with resultType string)."
+        },
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "SQL stored procedure parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1765,7 +2036,11 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
+        },
+        "enableAdlsSingleFileParallel": {
+          "description": "Single File Parallel.",
+          "type": "object"
         }
       }
     },
@@ -1780,7 +2055,7 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "$ref": "#/definitions/CopyBehaviorType"
+          "type": "object"
         }
       }
     },
@@ -1795,7 +2070,7 @@
       "properties": {
         "writeBehavior": {
           "description": "Specify the write behavior when upserting documents into Azure Search Index.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Merge",
             "Upload"
@@ -1833,7 +2108,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Upsert"
           ],
@@ -1885,7 +2160,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
-          "type": "string",
+          "type": "object",
           "enum": [
             "Insert",
             "Upsert"

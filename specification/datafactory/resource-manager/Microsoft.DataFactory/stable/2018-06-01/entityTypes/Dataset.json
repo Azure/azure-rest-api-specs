@@ -197,7 +197,7 @@
     },
     "JsonFormatFilePattern": {
       "description": "JSON format file pattern. A property of JsonFormat.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "setOfObjects",
         "arrayOfObjects"
@@ -313,7 +313,7 @@
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "Optimal",
         "Fastest"
@@ -432,6 +432,82 @@
           "$ref": "#/definitions/DatasetCompression"
         }
       }
+    },
+    "DelimitedTextDataset": {
+      "x-ms-discriminator-value": "DelimitedText",
+      "description": "Delimited text dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Delimited text dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DelimitedTextDatasetTypeProperties"
+        }
+      }
+    },
+    "DelimitedTextDatasetTypeProperties": {
+      "description": "DelimitedText dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the delimited text storage."
+        },
+        "columnDelimiter": {
+          "type": "object",
+          "description": "The column delimiter. Type: string (or Expression with resultType string)."
+        },
+        "rowDelimiter": {
+          "type": "object",
+          "description": "The row delimiter. Type: string (or Expression with resultType string)."
+        },
+        "encodingName": {
+          "type": "object",
+          "description": "The code page name of the preferred encoding. If miss, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
+        },
+        "compressionCodec": {
+          "type": "object",
+          "enum": [
+            "bzip2",
+            "gzip",
+            "deflate",
+            "zipDeflate",
+            "snappy",
+            "lz4"
+          ],
+          "x-ms-enum": {
+            "name": "compressionCodec",
+            "modelAsString": true
+          }
+        },
+        "compressionLevel": {
+          "description": "The data compression method used for DelimitedText.",
+          "$ref": "#/definitions/CompressionLevel"
+        },
+        "quoteChar": {
+          "type": "object",
+          "description": "The quote character. Type: string (or Expression with resultType string)."
+        },
+        "escapeChar": {
+          "type": "object",
+          "description": "The escape character. Type: string (or Expression with resultType string)."
+        },
+        "firstRowAsHeader": {
+          "type": "object",
+          "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "nullValue": {
+          "type": "object",
+          "description": "The null value string. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "location"
+      ]
     },
     "AzureTableDataset": {
       "x-ms-discriminator-value": "AzureTable",
@@ -1074,7 +1150,7 @@
       "description": "Sap ECC OData resource dataset properties.",
       "properties": {
         "path": {
-          "type": "string",
+          "type": "object",
           "description": "The path of the SAP ECC OData entity. Type: string (or Expression with resultType string)."
         }
       },
@@ -1850,7 +1926,7 @@
       "description": "Dynamics AX OData resource dataset properties.",
       "properties": {
         "path": {
-          "type": "string",
+          "type": "object",
           "description": "The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string)."
         }
       },
