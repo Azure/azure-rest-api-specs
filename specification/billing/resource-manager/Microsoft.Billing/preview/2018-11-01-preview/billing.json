@@ -3691,8 +3691,12 @@
       "description": "The properties of the product to initiate a transfer.",
       "properties": {
         "destinationInvoiceSectionId": {
-          "description": "Destination invoice section id.",
-          "type": "string"
+          "type": "string",
+          "description": "The destination invoice section id."
+        },
+        "destinationBillingProfileId": {
+          "type": "string",
+          "description": "The destination billing profile id."
         }
       }
     },
@@ -3735,7 +3739,62 @@
         "destinationInvoiceSectionId": {
           "type": "string",
           "description": "The destination invoice section id."
+        },
+        "destinationBillingProfileId": {
+          "type": "string",
+          "description": "The destination billing profile id."
         }
+      }
+    },
+    "ValidateSubscriptionTransferEligibilityResult": {
+      "type": "object",
+      "description": "Result of the transfer eligibility validation.",
+      "properties": {
+        "isTransferEligible": {
+          "description": "Specifies whether the transfer is eligible or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "Validation error details.",
+          "type": "#/definitions/ValidateSubscriptionTransferEligibilityError"
+        }
+      }
+    },
+    "ValidateSubscriptionTransferEligibilityError": {
+      "type": "object",
+      "description": "Error details of the transfer eligibility validation",
+      "properties": {
+        "code": {
+          "description": "Error code for the product transfer validation.",
+          "$ref": "#/definitions/SubscriptionTransferValidationErrorCode"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Detailed error message explaining the error.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionTransferValidationErrorCode": {
+      "type": "string",
+      "description": "Error code of the transfer validation response.",
+      "enum": [
+        "InvalidSource",
+        "SubscriptionNotActive",
+        "InsufficienctPermissionOnSource",
+        "InsufficienctPermissionOnDestination",
+        "DestinationBillingProfilePastDue",
+        "SubscriptionTypeNotSupported",
+        "CrossBillingAccountNotAllowed",
+        "NotAvailableForDestinationMarket"
+      ],
+      "x-ms-enum": {
+        "name": "subscriptionTransferValidationErrorCode",
+        "modelAsString": true
       }
     },
     "UpdateAutoRenewOperationSummary": {
@@ -4736,6 +4795,58 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "ValidateProductTransferEligibilityResult": {
+      "type": "object",
+      "description": "Result of the product transfer eligibility validation.",
+      "properties": {
+        "isTransferEligible": {
+          "description": "Specifies whether the transfer is eligible or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "Validation error details.",
+          "type": "#/definitions/ValidateProductTransferEligibilityError"
+        }
+      }
+    },
+    "ValidateProductTransferEligibilityError": {
+      "type": "object",
+      "description": "Error details of the product transfer eligibility validation.",
+      "properties": {
+        "code": {
+          "description": "Error code for the product transfer validation.",
+          "$ref": "#/definitions/ProductTransferValidationErrorCode"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Detailed error message explaining the error.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductTransferValidationErrorCode": {
+      "type": "string",
+      "description": "Error code of the transfer validation response.",
+      "enum": [
+        "InvalidSource",
+        "ProductNotActive",
+        "InsufficienctPermissionOnSource",
+        "InsufficienctPermissionOnDestination",
+        "DestinationBillingProfilePastDue",
+        "ProductTypeNotSupported",
+        "CrossBillingAccountNotAllowed",
+        "NotAvailableForDestinationMarket",
+        "OneTimePurchaseProductTransferNotAllowed"
+      ],
+      "x-ms-enum": {
+        "name": "productTransferValidationErrorCode",
+        "modelAsString": true
       }
     },
     "BillingSubscriptionsListResult": {
