@@ -85,7 +85,7 @@ directive:
     from: EventGrid.json
     where: $.definitions.EventSubscriptionProperties.properties.destination
     reason: |-
-      This is a false positive. We have multiple EventSubscriptionDestination types (EventHubEventSubscriptionDestination, HybridConnectionEventSubscriptionDestination etc.) and each of them has corresponding property classes e.g. EventHubEventSubscriptionDestinationProperties and HybridConnectionEventSubscriptionDestinationProperties have both a property called resourceId which is why the validation appears to be flagging this. 
+      This is a false positive. We have multiple EventSubscriptionDestination types (EventHubEventSubscriptionDestination, HybridConnectionEventSubscriptionDestination etc.) and each of them has corresponding property classes e.g. EventHubEventSubscriptionDestinationProperties and HybridConnectionEventSubscriptionDestinationProperties have both a property called resourceId which is why the validation appears to be flagging this.
 
       However, the discriminator value (endpointType) is separate for each of these destinations, hence based on the discriminator it will get deserialized into the appropriate type.
 ```
@@ -162,35 +162,6 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.eventgrid
-  package-name: azure-mgmt-eventgrid
-  package-version: 1.0.0
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-eventgrid/azure/mgmt/eventgrid
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-eventgrid
-```
 
 ## Go
 
@@ -270,11 +241,11 @@ These settings apply only when `--tag=package-2018-09-preview --java` is specifi
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2018-09-preview' && $(java) && $(multiapi)
-java: 
-  namespace: com.microsoft.azure.management.eventgrid.v2018_09_15_preview 
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_09_15_preview 
-regenerate-manager: true 
-generate-interface: true 
+java:
+  namespace: com.microsoft.azure.management.eventgrid.v2018_09_15_preview
+  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_09_15_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-05-preview and java
