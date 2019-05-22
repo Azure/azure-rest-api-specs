@@ -1,28 +1,28 @@
 {
-  "parameters" : {
+  "parameters": {
     "api-version": "2019-04-01",
-    "subscriptionId" : "subId",
-    "resourceGroupName" : "rg1",
-    "privateEndpointName"  : "testPe"
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "privateEndpointName": "testPe"
   },
-  "responses" : {
-    "200" : {
-      "body" : {
-        "name" : "testPe",
-        "id" : "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
-        "type" : "Microsoft.Network/privateEndpoints",
-        "location" : "eastus",
-        "properties" : {
-          "provisioningState" : "Succeeded",
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testPe",
+        "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/testPe",
+        "type": "Microsoft.Network/privateEndpoints",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "Succeeded",
           "privateLinkServiceConnections": [
             {
               "properties": {
-                "privateLinkServiceId":"/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
+                "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls",
                 "groupIds": [
                   "groupIdFromResource"
                 ],
                 "requestMessage": "Please approve my connection.",
-                "privateLinkServiceConnectionState" : {
+                "privateLinkServiceConnectionState": {
                   "status": "Approved",
                   "description": "Auto-approved",
                   "actionRequired": "None"

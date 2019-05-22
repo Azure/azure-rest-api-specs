@@ -85,7 +85,9 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete private endpoint": { "$ref": "./examples/PrivateEndpointDelete.json" }
+          "Delete private endpoint": {
+            "$ref": "./examples/PrivateEndpointDelete.json"
+          }
         }
       },
       "get": {
@@ -138,8 +140,12 @@
           }
         },
         "x-ms-examples": {
-          "Get private endpoint": { "$ref": "./examples/PrivateEndpointGet.json" },
-          "Get private endpoint with manual approval connection" : {"$ref": "./examples/PrivateEndpointGetForManualApproval.json"}
+          "Get private endpoint": {
+            "$ref": "./examples/PrivateEndpointGet.json"
+          },
+          "Get private endpoint with manual approval connection": {
+            "$ref": "./examples/PrivateEndpointGetForManualApproval.json"
+          }
         }
       },
       "put": {
@@ -204,8 +210,12 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create private endpoint": { "$ref": "./examples/PrivateEndpointCreate.json" },
-          "Create private endpoint with manual approval connection": { "$ref": "./examples/PrivateEndpointCreateForManualApproval.json" }
+          "Create private endpoint": {
+            "$ref": "./examples/PrivateEndpointCreate.json"
+          },
+          "Create private endpoint with manual approval connection": {
+            "$ref": "./examples/PrivateEndpointCreateForManualApproval.json"
+          }
         }
       }
     },
@@ -246,7 +256,9 @@
           }
         },
         "x-ms-examples": {
-          "List private endpoints in resource group": { "$ref": "./examples/PrivateEndpointList.json" }
+          "List private endpoints in resource group": {
+            "$ref": "./examples/PrivateEndpointList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -283,7 +295,9 @@
           }
         },
         "x-ms-examples": {
-          "List all private endpoints": { "$ref": "./examples/PrivateEndpointListAll.json" }
+          "List all private endpoints": {
+            "$ref": "./examples/PrivateEndpointListAll.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -369,22 +383,22 @@
     "PrivateLinkServiceConnectionProperties": {
       "properties": {
         "privateLinkServiceId": {
-          "type":"string",
+          "type": "string",
           "description": "The resource id of private link service."
         },
         "groupIds": {
-          "type":"array",
+          "type": "array",
           "items": {
-            "type":"string"
+            "type": "string"
           },
           "description": "The ID(s) of the group(s) obtained from the remote resource that this private endpoint should connect to."
         },
         "requestMessage": {
-          "type":"string",
+          "type": "string",
           "description": "A message passed to the owner of the remote resource with this connection request. Restricted to 140 chars."
         },
         "privateLinkServiceConnectionState": {
-          "$ref":"./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState",
+          "$ref": "./privateLinkService.json#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of read-only information about the state of the connection to the remote resource."
         }
       },

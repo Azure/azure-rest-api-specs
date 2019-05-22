@@ -85,7 +85,9 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete private link service": { "$ref": "./examples/PrivateLinkServiceDelete.json" }
+          "Delete private link service": {
+            "$ref": "./examples/PrivateLinkServiceDelete.json"
+          }
         }
       },
       "get": {
@@ -138,7 +140,9 @@
           }
         },
         "x-ms-examples": {
-          "Get private link service": { "$ref": "./examples/PrivateLinkServiceGet.json" }
+          "Get private link service": {
+            "$ref": "./examples/PrivateLinkServiceGet.json"
+          }
         }
       },
       "put": {
@@ -203,7 +207,9 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "Create private link service": { "$ref": "./examples/PrivateLinkServiceCreate.json" }
+          "Create private link service": {
+            "$ref": "./examples/PrivateLinkServiceCreate.json"
+          }
         }
       }
     },
@@ -244,7 +250,9 @@
           }
         },
         "x-ms-examples": {
-          "List private link service in resource group": { "$ref": "./examples/PrivateLinkServiceList.json" }
+          "List private link service in resource group": {
+            "$ref": "./examples/PrivateLinkServiceList.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -281,7 +289,9 @@
           }
         },
         "x-ms-examples": {
-          "List all private list service": { "$ref": "./examples/PrivateLinkServiceListAll.json" }
+          "List all private list service": {
+            "$ref": "./examples/PrivateLinkServiceListAll.json"
+          }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -485,14 +495,14 @@
         "fqdns": {
           "type": "array",
           "items": {
-            "type":"string"
+            "type": "string"
           },
           "description": "The list of Fqdn."
         },
         "alias": {
           "readOnly": true,
           "type": "string",
-          "description":"The alias of the private link service."
+          "description": "The alias of the private link service."
         }
       },
       "description": "Properties of the private link service."
@@ -502,7 +512,7 @@
         "subscriptions": {
           "type": "array",
           "items": {
-            "type":"string"
+            "type": "string"
           },
           "description": "The list of subscriptions."
         }
@@ -516,9 +526,9 @@
           "$ref": "#/definitions/PrivateLinkServiceIpConfigurationProperties",
           "description": "Properties of the private link service ip configuration"
         },
-        "name" : {
-          "type":"string",
-          "description":"The name of private link service ip configuration."
+        "name": {
+          "type": "string",
+          "description": "The name of private link service ip configuration."
         }
       },
       "description": "The private link service ip configuration."
@@ -550,7 +560,7 @@
           "description": "Available from Api-Version 2016-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4."
         }
       },
-      "description" : "Properties of private link service IP configuration."
+      "description": "Properties of private link service IP configuration."
     },
     "PrivateEndpointConnection": {
       "properties": {
@@ -578,7 +588,7 @@
           "description": "The resource of private end point."
         },
         "privateLinkServiceConnectionState": {
-          "$ref":"#/definitions/PrivateLinkServiceConnectionState",
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of information about the state of the connection between service consumer and provider."
         }
       },
@@ -587,15 +597,15 @@
     "PrivateLinkServiceConnectionState": {
       "properties": {
         "status": {
-          "type":"string",
+          "type": "string",
           "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
         },
         "description": {
-          "type":"string",
+          "type": "string",
           "description": "The reason for approval/rejection of the connection."
         },
         "actionRequired": {
-          "type":"string",
+          "type": "string",
           "description": "A message indicating if changes on the service provider require any updates on the consumer."
         }
       },
