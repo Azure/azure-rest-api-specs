@@ -45,6 +45,9 @@ directive:
     reason: Existing API for batch deletion
   - suppress: LROStatusCodesReturnTypeSchema
     reason: Not a Long Running Operation
+  - from: hyperdrive.json
+    suppress: DefinitionsPropertiesNamesCamelCase
+    reason: Existing service; would be a breaking change	
 ```
 
 ### Tag: package-2019-05-preview
