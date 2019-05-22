@@ -36,18 +36,20 @@ azure-validator: true
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01'
+``` yaml $(tag) == 'package-2019-01'
 input-file:
   - Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
 ```
+
 ### Tag: package-preview-2019-03
 
 These settings apply only when `--tag=package-preview-2019-03` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-03'
+``` yaml $(tag) == 'package-preview-2019-03'
 input-file:
   - Microsoft.CostManagement/preview/2019-03-01-preview/costmanagement.json
 ```
+
 ### Tag: package-2018-05
 
 These settings apply only when `--tag=package-2018-05` is specified on the command line.
@@ -69,6 +71,26 @@ directive:
     from: costmanagement.json
     where: $.paths
     reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
+  - suppress: XmsResourceInPutResponse
+    from: costmanagement.json
+    where: '$.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}"].put'
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.ChargeValue
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.EffectiveMonth
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.EndMonth
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.ShowbackRulesKind.properties.RuleType
+    reason: 'older PR, not forecast.'
 ```
 
 ### Tag: package-2018-08-preview
