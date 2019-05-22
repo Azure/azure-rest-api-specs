@@ -51,6 +51,19 @@ csharp:
   clear-output-folder: true
 ```
 
+## CSharp Settings
+These settings apply only when `--csharp` is specified on the command line.
+``` yaml $(csharp)
+csharp:
+  sync-methods: None
+  license-header: MICROSOFT_MIT_NO_VERSION
+  azure-arm: false
+  namespace: Microsoft.Azure.CognitiveServices.FormRecognizerReceipt
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Vision.FormRecognizerReceipt/src/Generated
+  title: "FormRecognizerReceiptClient"
+  clear-output-folder: true
+```
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
