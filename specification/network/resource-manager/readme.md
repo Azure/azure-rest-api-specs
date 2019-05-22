@@ -41,6 +41,7 @@ input-file:
   - Microsoft.Network/stable/2019-04-01/applicationGateway.json
   - Microsoft.Network/stable/2019-04-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-04-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-04-01/availablePrivateEndpointTypes.json
   - Microsoft.Network/stable/2019-04-01/azureFirewall.json
   - Microsoft.Network/stable/2019-04-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2019-04-01/checkDnsAvailability.json
@@ -51,7 +52,8 @@ input-file:
   - Microsoft.Network/stable/2019-04-01/expressRouteCrossConnection.json
   - Microsoft.Network/stable/2019-04-01/expressRouteGateway.json
   - Microsoft.Network/stable/2019-04-01/expressRoutePort.json
-  - Microsoft.Network/stable/2019-04-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2019-04-01/privateEndpoint.json
+  - Microsoft.Network/stable/2019-04-01/privateLinkService.json
   - Microsoft.Network/stable/2019-04-01/loadBalancer.json
   - Microsoft.Network/stable/2019-04-01/natGateway.json
   - Microsoft.Network/stable/2019-04-01/network.json
@@ -967,7 +969,10 @@ directive:
     from: virtualNetworkGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: interfaceEndpoint.json
+    from: privateEndpoint.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: privateLinkService.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkProfile.json
