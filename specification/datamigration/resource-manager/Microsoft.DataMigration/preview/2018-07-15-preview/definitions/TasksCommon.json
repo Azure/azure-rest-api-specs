@@ -305,7 +305,7 @@
         "projectLocation"
       ]
     },
-	"SqlServerSqlMISyncTaskInput": {
+    "SqlServerSqlMISyncTaskInput": {
       "type": "object",
       "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
       "properties": {
@@ -325,16 +325,16 @@
           "description": "Fully qualified resourceId of storage"
         },
         "sourceConnectionInfo": {
-            "$ref": "./Common.json#/definitions/SqlConnectionInfo",
-            "description": "Connection information for source SQL Server"
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Connection information for source SQL Server"
         },
         "targetConnectionInfo": {
-            "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
-            "description": "Connection information for Azure SQL Database Managed Instance"
+          "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
+          "description": "Connection information for Azure SQL Database Managed Instance"
         },
-        "azureApp":{
-            "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
-            "description" : "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
+        "azureApp": {
+          "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
+          "description": "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
         }
       },
       "required": [
@@ -1162,7 +1162,7 @@
         "name": "BackupType",
         "modelAsString": true
       }
-	},
+    },
     "DatabaseMigrationState": {
       "type": "string",
       "description": "Database level migration state.",
