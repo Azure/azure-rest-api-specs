@@ -334,7 +334,7 @@
     "CountrySet": {
       "name": "countrySet",
       "in": "query",
-      "description": "Comma separated string of country codes, e.g. FR, ES. This will limit the search to the specified countries",
+      "description": "Comma separated string of country codes, e.g. FR,ES. This will limit the search to the specified countries",
       "required": false,
       "type": "array",
       "items": {
@@ -357,6 +357,93 @@
       "description": "The POI name to search for (e.g., \"statue of liberty\", \"starbucks\", \"pizza\"). Must be properly URL encoded.",
       "required": true,
       "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BrandSet": {
+      "name": "brandSet",
+      "in": "query",
+      "description": "A comma-separated list of brand names which could be used to restrict the result to specific brands. Item order does not matter. When multiple brands are provided, only results that belong to (at least) one of the provided list will be returned. Brands that contain a \",\" in their name should be put into quotes.\n\nUsage examples:\n\n brandSet=Foo\n\n brandSet=Foo,Bar\n\n brandSet=\"A,B,C Comma\",Bar",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method"
+    },
+    "ConnectorSet": {
+      "name": "connectorSet",
+      "in": "query",
+      "description": "A comma-separated list of connector types which could be used to restrict the result to Electric Vehicle Station supporting specific connector types. Item order does not matter. When multiple connector types are provided, only results that belong to (at least) one of the provided list will be returned.\n\nAvailable connector types are:\n  * `StandardHouseholdCountrySpecific` - These are the standard household connectors for a certain region. They are all AC single phase and the standard Voltage and standard Amperage. See also: [Plug & socket types - World Standards](https://www.worldstandards.eu/electricity/plugs-and-sockets).\n  * `IEC62196Type1` - Type 1 connector as defined in the IEC 62196-2 standard. Also called Yazaki after the original manufacturer or SAE J1772 after the standard that first published it. Mostly used in combination with 120V single phase or up to 240V single phase infrastructure.\n  * `IEC62196Type1CCS` - Type 1 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 1 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging.\n  * `IEC62196Type2CableAttached` - Type 2 connector as defined in the IEC 62196-2 standard. Provided as a cable and plug attached to the charging point.\n  * `IEC62196Type2Outlet` - Type 2 connector as defined in the IEC 62196-2 standard. Provided as a socket set into the charging point.\n  * `IEC62196Type2CCS` - Type 2 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 2 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging.\n  * `IEC62196Type3` - Type 3 connector as defined in the IEC 62196-2 standard. Also called Scame after the original manufacturer. Mostly used in combination with up to 240V single phase or up to 420V three phase infrastructure.\n  * `Chademo` - CHAdeMO connector named after an association formed by the Tokyo Electric Power Company and industrial partners. Because of this is is also known as the TEPCO's connector. It supports fast DC charging.\n  * `IEC60309AC1PhaseBlue` - Industrial Blue connector is a connector defined in the IEC 60309 standard. It is sometime referred to as by some combination of the standard, the color and the fact that is a single phase connector. The connector usually has the \"P+N+E, 6h\" configuration.\n  * `IEC60309DCWhite` - Industrial White connector is a DC connector defined in the IEC 60309 standard.\n  * `Tesla` - The Tesla connector is the regionally specific Tesla Supercharger connector. I.e. it refers to either Tesla's proprietary connector, sometimes referred to as Tesla Port mostly limited to North America or the modified Type 2 (DC over Type 2) in Europe.\n\nUsage examples:\n\n connectorSet=IEC62196Type2CableAttached\n connectorSet=IEC62196Type2Outlet,IEC62196Type2CableAttached",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "StandardHouseholdCountrySpecific",
+          "IEC62196Type1",
+          "IEC62196Type1CCS",
+          "IEC62196Type2CableAttached",
+          "IEC62196Type2Outlet",
+          "IEC62196Type2CCS",
+          "IEC62196Type3",
+          "Chademo",
+          "IEC60309AC1PhaseBlue",
+          "IEC60309DCWhite",
+          "Tesla"
+        ],
+        "x-ms-enum": {
+          "name": "ConnectorSet",
+          "modelAsString": false,
+          "values": [
+            {
+              "value": "StandardHouseholdCountrySpecific",
+              "description": "These are the standard household connectors for a certain region. They are all AC single phase and the standard Voltage and standard Amperage.\n\nSee also: [Plug & socket types - World Standards](https://www.worldstandards.eu/electricity/plugs-and-sockets)"
+            },
+            {
+              "value": "IEC62196Type1",
+              "description": "Type 1 connector as defined in the IEC 62196-2 standard. Also called Yazaki after the original manufacturer or SAE J1772 after the standard that first published it. Mostly used in combination with 120V single phase or up to 240V single phase infrastructure."
+            },
+            {
+              "value": "IEC62196Type1CCS",
+              "description": "Type 1 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 1 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging."
+            },
+            {
+              "value": "IEC62196Type2CableAttached",
+              "description": "Type 2 connector as defined in the IEC 62196-2 standard. Provided as a cable and plug attached to the charging point"
+            },
+            {
+              "value": "IEC62196Type2Outlet",
+              "description": "Type 2 connector as defined in the IEC 62196-2 standard. Provided as a socket set into the charging point."
+            },
+            {
+              "value": "IEC62196Type2CCS",
+              "description": "Type 2 based combo connector as defined in the IEC 62196-3 standard. The connector is based on the Type 2 connector – as defined in the IEC 62196-2 standard – with two additional direct current (DC) contacts to allow DC fast charging."
+            },
+            {
+              "value": "IEC62196Type3",
+              "description": "Type 3 connector as defined in the IEC 62196-2 standard. Also called Scame after the original manufacturer. Mostly used in combination with up to 240V single phase or up to 420V three phase infrastructure."
+            },
+            {
+              "value": "Chademo",
+              "description": "CHAdeMO connector named after an association formed by the Tokyo Electric Power Company and industrial partners. Because of this is is also known as the TEPCO's connector. It supports fast DC charging."
+            },
+            {
+              "value": "IEC60309AC1PhaseBlue",
+              "description": "Industrial Blue connector is a connector defined in the IEC 60309 standard. It is sometime referred to as by some combination of the standard, the color and the fact that is a single phase connector. The connector usually has the \"P+N+E, 6h\" configuration."
+            },
+            {
+              "value": "IEC60309DCWhite",
+              "description": "Industrial White connector is a DC connector defined in the IEC 60309 standard."
+            },
+            {
+              "value": "Tesla",
+              "description": "The Tesla connector is the regionally specific Tesla Supercharger connector. I.e. it refers to either Tesla's proprietary connector, sometimes referred to as Tesla Port mostly limited to North America or the modified Type 2 (DC over Type 2) in Europe."
+            }
+          ]
+        }
+      },
+      "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
     }
   },
@@ -516,6 +603,12 @@
             "$ref": "#/parameters/SearchIndexSet"
           },
           {
+            "$ref": "#/parameters/BrandSet"
+          },
+          {
+            "$ref": "#/parameters/ConnectorSet"
+          },
+          {
             "$ref": "#/parameters/View"
           }
         ],
@@ -616,6 +709,12 @@
             "$ref": "#/parameters/ExtendedPostalCodesForPoi"
           },
           {
+            "$ref": "#/parameters/BrandSet"
+          },
+          {
+            "$ref": "#/parameters/ConnectorSet"
+          },
+          {
             "$ref": "#/parameters/View"
           }
         ],
@@ -701,6 +800,12 @@
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
+          },
+          {
+            "$ref": "#/parameters/BrandSet"
+          },
+          {
+            "$ref": "#/parameters/ConnectorSet"
           },
           {
             "$ref": "#/parameters/View"
@@ -791,6 +896,12 @@
           },
           {
             "$ref": "#/parameters/ExtendedPostalCodesFor"
+          },
+          {
+            "$ref": "#/parameters/BrandSet"
+          },
+          {
+            "$ref": "#/parameters/ConnectorSet"
           },
           {
             "$ref": "#/parameters/View"
@@ -1431,6 +1542,15 @@
             "maximum": 20
           },
           {
+            "$ref": "#/parameters/BrandSet"
+          },
+          {
+            "$ref": "#/parameters/ConnectorSet"
+          },
+          {
+            "$ref": "#/parameters/View"
+          },
+          {
             "name": "searchAlongRouteRequestBody",
             "in": "body",
             "description": "This represents the route to search along and should be a valid `GeoJSON LineString` type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
@@ -1438,9 +1558,6 @@
             "schema": {
               "$ref": "#/definitions/SearchAlongRouteRequestBody"
             }
-          },
-          {
-            "$ref": "#/parameters/View"
           }
         ],
         "responses": {
