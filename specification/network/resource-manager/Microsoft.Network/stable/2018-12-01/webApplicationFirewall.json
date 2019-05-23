@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-02-01",
+    "version": "2018-12-01",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules"
   },
@@ -105,8 +105,8 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      }
-    },
+    }
+	},
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ApplicationGatewayWebApplicationFirewallPolicies/{policyName}": {
       "get": {
         "tags": [
@@ -254,10 +254,7 @@
             "description": "Delete successful."
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        }
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -277,17 +274,12 @@
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/Resource"
+            "$ref": "./network.json#/definitions/Resource"
         }
       ]
     },
     "WebApplicationFirewallPolicyPropertiesFormat": {
       "description": "Defines web application firewall policy properties",
-      "properties": {
-        "policySettings": {
-          "description": "Describes  policySettings for policy",
-          "$ref": "#/definitions/PolicySettings"
-        },
         "customRules": {
           "description": "Describes custom rules inside the policy",
           "type": "array",
@@ -311,8 +303,6 @@
         "resourceState": {
           "title": "Resource status of the policy.",
           "readOnly": true,
-          "type": "string",
-          "description": "Resource status of the policy.",
           "enum": [
             "Creating",
             "Enabling",
@@ -329,7 +319,7 @@
       }
     },
     "WebApplicationFirewallPolicyListResult": {
-      "description": "Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -343,35 +333,6 @@
           "readOnly": true,
           "type": "string",
           "description": "URL to get the next set of WebApplicationFirewallPolicy objects if there are any."
-        }
-      }
-    },
-    "PolicySettings": {
-      "description": "Defines contents of a web application firewall global configuration",
-      "properties": {
-        "enabledState": {
-          "description": "Describes if the policy is in enabled state or disabled state",
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "WebApplicationFirewallEnabledState",
-            "modelAsString": true
-          }
-        },
-        "mode": {
-          "description": "Describes if it is in detection mode  or prevention mode at policy level",
-          "type": "string",
-          "enum": [
-            "Prevention",
-            "Detection"
-          ],
-          "x-ms-enum": {
-            "name": "WebApplicationFirewallMode",
-            "modelAsString": true
-          }
         }
       }
     },
