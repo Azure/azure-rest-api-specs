@@ -31,6 +31,78 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.ResourceHealth/metadata/{name}": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Gets the metadata entity.",
+        "operationId": "Metadata_Get",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of metadata entity.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntity"
+            }
+          },
+          "404": {
+            "description": "Client sent unknown metadata name",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/Metadata_GetMetadataEntity.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ResourceHealth/metadata": {
+      "get": {
+        "tags": [
+          "Metadata"
+        ],
+        "summary": "Gets the list of metadata entities.",
+        "operationId": "Metadata_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved metadata entities",
+            "schema": {
+              "$ref": "#/definitions/MetadataEntityListResult"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "GetMetadata": {
+            "$ref": "./examples/Metadata_ListMetadata.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/events": {
       "get": {
         "tags": [
@@ -1087,6 +1159,77 @@
           "description": "The error details.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MetadataEntityListResult": {
+      "description": "The list of metadata entities",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of metadata entities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataEntity"
+          }
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of metadata.",
+          "type": "string"
+        }
+      }
+    },
+    "MetadataEntity": {
+      "description": "The metadata entity contract.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MetadataEntityProperties",
+          "description": "The metadata entity properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "MetadataEntityProperties": {
+      "description": "The metadata entity properties",
+      "type": "object",
+      "properties": {
+        "displayName": {
+          "description": "The display name.",
+          "type": "string"
+        },
+        "dependsOn": {
+          "description": "The list of keys on which this entity depends on.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "supportedValues": {
+          "description": "The list of supported values.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetadataSupportedValueDetail"
+          }
+        }
+      }
+    },
+    "MetadataSupportedValueDetail": {
+      "description": "The metadata supported value detail.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The id.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name.",
+          "type": "string"
         }
       }
     }

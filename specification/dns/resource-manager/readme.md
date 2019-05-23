@@ -212,4 +212,18 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/dns/resource-manager/v2016_04_01
 regenerate-manager: true
 generate-interface: true
+<<<<<<< HEAD
 ```
+=======
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Network/stable/2016-04-01/dns.json
+```
+>>>>>>> master
