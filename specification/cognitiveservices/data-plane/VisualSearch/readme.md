@@ -70,12 +70,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-visualsearch/azure/cognitiveservices/search/visualsearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-visualsearch/azure/cognitiveservices/search/visualsearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-visualsearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-visualsearch
 ```
 
 ## Go
