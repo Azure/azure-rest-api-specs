@@ -74,22 +74,27 @@
       "properties": {
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the cloud."
         },
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The ID of the cloud."
         },
         "type": {
           "type": "string",
+          "readOnly": true,
           "description": "The azure resource type."
         },
         "changeNumber": {
           "type": "string",
+          "readOnly": true,
           "description": "The iteration number."
         },
         "cloud": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of the cloud."
         },
         "values": {
@@ -97,6 +102,7 @@
           "items": {
             "$ref": "#/definitions/ServiceTagInformation"
           },
+          "readOnly": true,
           "description": "The list of service tag information resources."
         }
       },
@@ -106,14 +112,17 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServiceTagInformationPropertiesFormat",
+          "readOnly": true,
           "description": "Properties of the service tag information."
         },
         "name": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of service tag."
         },
         "id": {
           "type": "string",
+          "readOnly": true,
           "description": "The ID of service tag."
         }
       },
@@ -123,14 +132,17 @@
       "properties": {
         "changeNumber": {
           "type": "string",
+          "readOnly": true,
           "description": "The iteration number of service tag."
         },
         "region": {
           "type": "string",
+          "readOnly": true,
           "description": "The region of service tag."
         },
         "systemService": {
           "type": "string",
+          "readOnly": true,
           "description": "The name of system service."
         },
         "addressPrefixes": {
@@ -138,6 +150,7 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
           "description": "The list of IP address prefixes."
         }
       },
