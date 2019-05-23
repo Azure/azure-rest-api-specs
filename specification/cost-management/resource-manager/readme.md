@@ -174,13 +174,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-costmanagement/azure/mgmt/costmanagement
+  output-folder: $(python-sdks-folder)/costmanagement/azure-mgmt-costmanagement/azure/mgmt/costmanagement
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-costmanagement
+  output-folder: $(python-sdks-folder)/costmanagement/azure-mgmt-costmanagement
 ```
 
 ## Go
