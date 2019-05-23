@@ -1431,14 +1431,16 @@
           }
         },
         "x-ms-examples": {
-          "ResetVpnGateway": { "$ref": "./examples/VpnGatewayReset.json" }
+          "ResetVpnGateway": {
+            "$ref": "./examples/VpnGatewayReset.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
       }
-    },	
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnGateways": {
       "get": {
         "operationId": "VpnGateways_ListByResourceGroup",
@@ -2342,7 +2344,9 @@
           }
         },
         "x-ms-examples": {
-          "GenerateP2SVpnGatewayVPNProfile": { "$ref": "./examples/P2SVpnGatewayGenerateVpnProfile.json" }
+          "GenerateP2SVpnGatewayVPNProfile": {
+            "$ref": "./examples/P2SVpnGatewayGenerateVpnProfile.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -2391,14 +2395,16 @@
           }
         },
         "x-ms-examples": {
-          "P2SVpnGatewayGetConnectionHealth": { "$ref": "./examples/P2SVpnGatewayGetConnectionHealth.json" }
+          "P2SVpnGatewayGetConnectionHealth": {
+            "$ref": "./examples/P2SVpnGatewayGetConnectionHealth.json"
+          }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         }
       }
-    }	
+    }
   },
   "definitions": {
     "VirtualWanProperties": {
@@ -2628,32 +2634,32 @@
       "description": "Parameters for VirtualHub."
     },
     "VirtualHubRouteTable": {
-      "properties" : {
+      "properties": {
         "routes": {
-            "type": "array",
-            "description": "List of all routes.",
-            "items": {
-                "$ref": "#/definitions/VirtualHubRoute"
-            }
+          "type": "array",
+          "description": "List of all routes.",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRoute"
+          }
         }
       },
-      "description" : "VirtualHub route table."
+      "description": "VirtualHub route table."
     },
     "VirtualHubRoute": {
-      "properties" : {
+      "properties": {
         "addressPrefixes": {
-            "type": "array",
-            "description": "List of all addressPrefixes.",
-            "items": {
-                "type": "string"
-            }
+          "type": "array",
+          "description": "List of all addressPrefixes.",
+          "items": {
+            "type": "string"
+          }
         },
         "nextHopIpAddress": {
-            "type": "string",
-            "description": "NextHop ip address."
+          "type": "string",
+          "description": "NextHop ip address."
         }
       },
-      "description" : "VirtualHub route."
+      "description": "VirtualHub route."
     },
     "VirtualHub": {
       "required": [
@@ -2779,7 +2785,7 @@
         },
         "vpnConnectionProtocolType": {
           "description": "Connection protocol used for this connection.",
-          "$ref":  "./virtualNetworkGateway.json#/definitions/ConnectionProtocol"
+          "$ref": "./virtualNetworkGateway.json#/definitions/ConnectionProtocol"
         },
         "ingressBytesTransferred": {
           "type": "integer",
@@ -2809,7 +2815,7 @@
         "usePolicyBasedTrafficSelectors": {
           "type": "boolean",
           "description": "Enable policy-based traffic selectors."
-        },		
+        },
         "ipsecPolicies": {
           "type": "array",
           "items": {

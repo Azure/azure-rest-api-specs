@@ -1,29 +1,29 @@
 {
-  "parameters" : {
+  "parameters": {
     "api-version": "2019-04-01",
-    "subscriptionId" : "subId",
-    "resourceGroupName" : "rg1"
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1"
   },
-  "responses" : {
-    "200" : {
-      "body" : {
+  "responses": {
+    "200": {
+      "body": {
         "value": [
           {
             "id": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateEndpoints/pe1",
             "name": "pe1",
             "type": "Microsoft.Network/privateEndpoints",
             "location": "eastus",
-            "properties" : {
-              "provisioningState" : "Succeeded",
+            "properties": {
+              "provisioningState": "Succeeded",
               "privateLinkServiceConnections": [
                 {
                   "properties": {
-                    "privateLinkServiceId":"/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls1",
+                    "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls1",
                     "groupIds": [
                       "groupIdFromResource"
                     ],
                     "requestMessage": "Please approve my connection for pe1.",
-                    "privateLinkServiceConnectionState" : {
+                    "privateLinkServiceConnectionState": {
                       "status": "Approved",
                       "description": "Auto-approved",
                       "actionRequired": "None"
@@ -47,18 +47,18 @@
             "name": "pe2",
             "type": "Microsoft.Network/privateEndpoints",
             "location": "eastus",
-            "properties" : {
-              "provisioningState" : "Succeeded",
+            "properties": {
+              "provisioningState": "Succeeded",
               "privateLinkServiceConnections": [],
               "manualPrivateLinkServiceConnections": [
                 {
                   "properties": {
-                    "privateLinkServiceId":"/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls2",
+                    "privateLinkServiceId": "/subscriptions/subId/resourceGroups/rg1/providers/Microsoft.Network/privateLinkServices/testPls2",
                     "groupIds": [
                       "groupIdFromResource"
                     ],
                     "requestMessage": "Please manually approve my connection for pe2.",
-                    "privateLinkServiceConnectionState" : {
+                    "privateLinkServiceConnectionState": {
                       "status": "Pending",
                       "description": "Awaiting approval",
                       "actionRequired": "None"
