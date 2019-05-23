@@ -68,6 +68,7 @@ input-file:
   - Microsoft.Network/stable/2019-04-01/routeTable.json
   - Microsoft.Network/stable/2019-04-01/serviceCommunity.json
   - Microsoft.Network/stable/2019-04-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2019-04-01/serviceTags.json
   - Microsoft.Network/stable/2019-04-01/usage.json
   - Microsoft.Network/stable/2019-04-01/virtualNetwork.json
   - Microsoft.Network/stable/2019-04-01/virtualNetworkGateway.json
