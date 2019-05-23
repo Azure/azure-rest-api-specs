@@ -131,7 +131,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/BillingAccount"
+              "$ref": "#/definitions/BillingAccountUpdateProperties"
             },
             "description": "Parameters supplied to the update billing account operation."
           }
@@ -3797,6 +3797,15 @@
           "description": "Specifies whether the user has read access on billing account.",
           "type": "boolean",
           "readOnly": true
+        }
+      }
+    },
+    "BillingAccountUpdateProperties": {
+      "description": "The properties of the billing account that can be updated.",
+      "properties": {
+        "address": {
+          "description": "The address associated with billing account.",
+          "$ref": "#/definitions/Address"
         }
       }
     },
