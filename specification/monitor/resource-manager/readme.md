@@ -347,21 +347,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_monitor']
 ```
 
-## C#
-
-These settings apply only when `--csharp` is specified on the command line.
-Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
-
-``` yaml $(csharp)
-csharp:
-  azure-arm: true
-  payload-flattening-threshold: 1
-  license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Monitor
-  output-folder: $(csharp-sdks-folder)/Monitor/Management.Monitor/Generated
-  clear-output-folder: true
-```
-
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
@@ -392,4 +377,19 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 directive:
   - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
     reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Insights/stable/2018-01-01/metrics_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
+- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
+- Microsoft.Insights/stable/2015-04-01/operations_API.json
 ```

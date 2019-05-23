@@ -73,7 +73,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Authoring/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Language.LUIS.Authoring/src/Generated
   clear-output-folder: true
 ```
 

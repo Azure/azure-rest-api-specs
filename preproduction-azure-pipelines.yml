@@ -107,3 +107,18 @@ jobs:
   - script: 'npm install -D @azure/rest-api-specs-scripts@0.3.9'
   - script: 'npm run tsc && node scripts/momentOfTruth.js && node scripts/momentOfTruthPostProcessing.js'
     displayName: 'LintDiff'
+
+- job: "Spellcheck"
+  condition: "not(variables['PRIVATE'])"
+  variables:
+    NODE_OPTIONS: '--max-old-space-size=8192'
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  continueOnError: true
+  steps:
+  - task: Npm@1
+    displayName: 'npm install'
+    inputs:
+      verbose: false
+  - script: 'npm run spellcheck'
+    displayName: 'Run cSpell'
