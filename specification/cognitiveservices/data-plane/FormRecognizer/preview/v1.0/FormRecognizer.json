@@ -81,7 +81,7 @@
         "consumes": [],
         "produces": [
           "application/json"
-		],
+        ],
         "parameters": [
           {
             "name": "id",
@@ -167,7 +167,7 @@
           "200": {
             "description": "Success",
             "schema": {
-                "$ref": "#/definitions/ModelResult"
+              "$ref": "#/definitions/ModelResult"
             }
           },
           "default": {
@@ -337,7 +337,9 @@
           "additionalProperties": {
             "uniqueItems": false,
             "type": "array",
-            "items": { "type": "string" }
+            "items": {
+              "type": "string"
+            }
           }
         }
       }
@@ -354,7 +356,11 @@
         },
         "status": {
           "description": "Get or set the status of model.",
-          "enum": [ "created", "ready", "invalid" ],
+          "enum": [
+            "created",
+            "ready",
+            "invalid"
+          ],
           "type": "string"
         },
         "createdDateTime": {
