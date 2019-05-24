@@ -3305,6 +3305,9 @@
         ],
         "operationId": "LineOfCredits_Increase",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "x-ms-examples": {
           "IncreaseLineOfCreditBySubscription": {
             "$ref": "./examples/IncreaseLineOfCreditBySubscription.json"
@@ -5530,7 +5533,14 @@
         "status": {
           "description": "The line of credit status.",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
         }
       }
     },
