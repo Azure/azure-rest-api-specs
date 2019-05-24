@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -196,7 +196,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -701,6 +701,10 @@
             "$ref": "#/definitions/Operation"
           },
           "description": "List of Resource Graph operations supported by the Resource Graph resource provider."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string"
         }
       }
     },
@@ -745,7 +749,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "API version."
+      "description": "Client Api Version."
     }
   }
 }

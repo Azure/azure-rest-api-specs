@@ -4209,6 +4209,21 @@
       },
       "description": "The response of the list schema operation."
     },
+    "SchemaCreateOrUpdateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaCreateOrUpdateProperties",
+          "description": "Properties of the Schema."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Schema Contract details."
+    },
     "SchemaContract": {
       "properties": {
         "properties": {
@@ -4228,11 +4243,10 @@
       "properties": {
         "contentType": {
           "type": "string",
-          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml)."
+          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`. "
         },
         "document": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/SchemaDocumentProperties",
+          "type": "object",
           "description": "Properties of the Schema Document."
         }
       },
@@ -4240,6 +4254,23 @@
         "contentType"
       ],
       "description": "Schema contract Properties."
+    },
+    "SchemaCreateOrUpdateProperties": {
+      "properties": {
+        "contentType": {
+          "type": "string",
+          "description": "Must be a valid a media type used in a Content-Type header as defined in the RFC 2616. Media type of the schema document (e.g. application/json, application/xml). </br> - `Swagger` Schema use `application/vnd.ms-azure-apim.swagger.definitions+json` </br> - `WSDL` Schema use `application/vnd.ms-azure-apim.xsd+xml` </br> - `OpenApi` Schema use `application/vnd.oai.openapi.components+json` </br> - `WADL Schema` use `application/vnd.ms-azure-apim.wadl.grammars+xml`."
+        },
+        "document": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SchemaDocumentProperties",
+          "description": "Create or update Properties of the Schema Document."
+        }
+      },
+      "required": [
+        "contentType"
+      ],
+      "description": "API Schema create or update contract Properties."
     },
     "SchemaDocumentProperties": {
       "properties": {

@@ -490,9 +490,7 @@
       "description": "Policy Export Format.",
       "enum": [
         "xml",
-        "xml-link",
-        "rawxml",
-        "rawxml-link"
+        "rawxml"
       ],
       "x-ms-enum": {
         "name": "PolicyExportFormat",
@@ -503,16 +501,8 @@
             "description": "The contents are inline and Content type is an XML document."
           },
           {
-            "value": "xml-link",
-            "description": "The policy XML document is exported to a storage blob with SAS key valid for 5 minutes."
-          },
-          {
             "value": "rawxml",
             "description": "The contents are inline and Content type is a non XML encoded policy document."
-          },
-          {
-            "value": "rawxml-link",
-            "description": "The policy document is not XML encoded is exported to a storage blob with SAS Key valid for 5 minutes."
           }
         ]
       },
