@@ -150,6 +150,53 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validateAddress": {
+      "post": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "BillingAccountValidateAddress": {
+            "$ref": "./examples/BillingAccountValidateAddress.json"
+          },
+          "BillingAccountValidateAddressInvalid": {
+            "$ref": "./examples/BillingAccountValidateAddressInvalid.json"
+          }
+        },
+        "operationId": "BillingAccountsValidateAddress_Post",
+        "description": "Validates the address.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "address",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateAddressResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/availableBalance/default": {
       "get": {
         "tags": [
@@ -3275,6 +3322,39 @@
         }
       }
     },
+    "ValidateAddressResponse": {    
+    "type":"object",
+    "description" :" Result of the address validation",
+    "properties" : {
+      "status": {
+        "description": "status of the address validation.",
+        "$ref": "#/definitions/AddressValidationStatus"
+      },
+      "suggestedAddresses": {
+        "description": "list of suggested addresses.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Address"
+        }
+      },
+      "validationMessage" : {
+        "description": "Validation error message.",
+        "type": "string"
+       }
+      }
+    },
+    "AddressValidationStatus": {
+      "type": "string",
+      "description": "Status of the address validation response.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "addressValidationStatus",
+        "modelAsString": true
+      }
+    }, 
     "InitiateTransferProperties": {
       "type": "object",
       "description": "Request parameters to initiate transfer.",
