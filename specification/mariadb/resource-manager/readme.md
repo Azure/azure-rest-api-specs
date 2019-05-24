@@ -114,12 +114,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/mariadb
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mariadb
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms
 ```
 
 ## Go
