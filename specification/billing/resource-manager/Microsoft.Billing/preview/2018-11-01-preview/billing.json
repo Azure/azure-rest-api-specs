@@ -113,6 +113,9 @@
         ],
         "operationId": "BillingAccounts_Update",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "description": "The operation to update a billing account.",
         "x-ms-examples": {
           "UpdateBillingAccount": {
@@ -144,18 +147,8 @@
             }
           },
           "202": {
-            "description": "Accepted. Billing account update is in progress.",
-            "headers": {
-              "Location": {
-                "description": "GET this URL to retrieve the status of the asynchronous operation.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
-                "type": "string"
-              }
-            }
-          },
+            "description": "Accepted. Billing account update is in progress."
+            },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
