@@ -1983,13 +1983,13 @@
           "description": "Primary and secondary location for iot hub",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IotHubLocationInfo"
+            "$ref": "#/definitions/IotHubLocationDescription"
           }
         }
       }
     },
-    "IotHubLocationInfo": {
-      "description": "Locations details for iot hub.",
+    "IotHubLocationDescription": {
+      "description": "Public representation of one of the locations where a resource is provisioned.",
       "type": "object",
       "properties": {
         "location": {
@@ -1999,27 +1999,16 @@
         "role": {
           "description": "Specific Role assigned to this location",
           "enum": [
-            "Primary",
-            "StandbySecondary",
-            "ReplicatingSecondary",
-            "RestoringPrimary",
-            "Unprovisioned"
+            "primary",
+            "secondary"
           ],
           "type": "string",
           "x-ms-enum": {
-            "name": "IotHubReplicaRole",
+            "name": "IotHubReplicaRoleType",
             "modelAsString": true
           }
-        },
-        "scaleUnitName": {
-          "description": "Name of the scale unit where the resource is provisioned.",
-          "type": "string"
         }
-      },
-      "required": [
-        "location",
-        "role"
-      ]
+      }
     },
     "IotHubSkuInfo": {
       "description": "Information about the SKU of the IoT hub.",
