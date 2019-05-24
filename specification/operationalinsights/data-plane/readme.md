@@ -105,12 +105,12 @@ directive:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/loganalytics/azure-loganalytics/azure/loganalytics
+  output-folder: $(python-sdks-folder)/operationalinsights/azure-loganalytics/azure/loganalytics
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/loganalytics/azure-loganalytics
+  output-folder: $(python-sdks-folder)/operationalinsights/azure-loganalytics
 ```
 
 ## Go
