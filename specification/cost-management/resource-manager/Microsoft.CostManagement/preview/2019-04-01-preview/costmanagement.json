@@ -70,37 +70,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "delete": {
-        "tags": [
-          "Views"
-        ],
-        "operationId": "Views_DeleteAll",
-        "description": "The operation to delete all private views.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "DeletePrivateView": {
-            "$ref": "./examples/PrivateViewDeleteAll.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/{scope}/providers/Microsoft.CostManagement/views": {
@@ -142,40 +111,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      },
-      "delete": {
-        "tags": [
-          "Views"
-        ],
-        "operationId": "Views_DeleteAllByScope",
-        "description": "The operation to delete all views by scope.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ResourceGroupDeleteView": {
-            "$ref": "./examples/ViewDeleteAllByResourceGroup.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeViewParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -219,40 +154,6 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
-      },
-      "delete": {
-        "tags": [
-          "Views"
-        ],
-        "operationId": "Views_DeleteAllByExternalBillingAccount",
-        "description": "The operation to delete all views by external billing account.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ExternalBillingAccountDeleteView": {
-            "$ref": "./examples/ViewDeleteAllByExternalBillingAccount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/externalBillingAccountNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
       }
     },
     "/providers/Microsoft.CostManagement/externalSubscriptions/{externalSubscriptionName}/views":{
@@ -294,40 +195,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      },
-      "delete": {
-        "tags": [
-          "Views"
-        ],
-        "operationId": "Views_DeleteAllByExternalSubscription",
-        "description": "The operation to delete all views by external subscription.",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
-        },
-        "x-ms-examples": {
-          "ExternalSubscriptionDeleteView": {
-            "$ref": "./examples/ViewDeleteAllByExternalSubscription.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/externalSubscriptionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
