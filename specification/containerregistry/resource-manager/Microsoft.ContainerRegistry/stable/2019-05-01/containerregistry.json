@@ -1628,7 +1628,15 @@
         },
         "status": {
           "description": "The value that indicates whether the policy is enabled or not.",
-          "type": "string"
+          "enum": [
+            "enabled",
+            "disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "PolicyStatus",
+            "modelAsString": true
+          }
         }
       }
     },
