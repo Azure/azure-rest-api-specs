@@ -67,12 +67,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-spellcheck/azure/cognitiveservices/language/spellcheck
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-spellcheck/azure/cognitiveservices/language/spellcheck
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-spellcheck
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-spellcheck
 ```
 
 ## Go
