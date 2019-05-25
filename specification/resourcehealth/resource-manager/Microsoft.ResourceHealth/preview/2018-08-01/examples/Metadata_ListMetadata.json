@@ -1,0 +1,112 @@
+{
+  "parameters": {
+    "api-version": "2017-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "string",
+        "value": [
+          {
+            "id": "providers/Microsoft.ResourceHealth/metadata/status",
+            "name": "status",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "properties": {
+              "displayName": "Status",
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "supportedValues": [
+                {
+                  "id": "Active",
+                  "displayName": "Active"
+                },
+                {
+                  "id": "Resolved",
+                  "displayName": "Resolved"
+                },
+                {
+                  "id": "InProgress",
+                  "displayName": "InProgress"
+                },
+                {
+                  "id": "Updated",
+                  "displayName": "Updated"
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.ResourceHealth/metadata/cause",
+            "name": "cause",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "properties": {
+              "displayName": "cause",
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "supportedValues": [
+                {
+                  "id": "PlatformInitiated",
+                  "displayName": "PlatformInitiated"
+                },
+                {
+                  "id": "UserInitiated",
+                  "displayName": "UserInitiated"
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.ResourceHealth/metadata/previousHealthStatus",
+            "name": "previousHealthStatus",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "properties": {
+              "displayName": "Previous Health Status",
+              "applicableScenarios": [
+                "Alerts"
+              ],
+              "supportedValues": [
+                {
+                  "id": "Available",
+                  "displayName": "Available"
+                },
+                {
+                  "id": "Unavailable",
+                  "displayName": "Unavailable"
+                },
+                {
+                  "id": "Degraded",
+                  "displayName": "Degraded"
+                }
+              ]
+            }
+          },
+          {
+            "id": "providers/Microsoft.ResourceHealth/metadata/currentHealthStatus",
+            "name": "currentHealthStatus",
+            "type": "Microsoft.ResourceHealth/metadata",
+            "properties": {
+              "displayName": "Current Health Status",
+              "applicableScenarios": null,
+              "supportedValues": [
+                {
+                  "id": "Available",
+                  "displayName": "Available"
+                },
+                {
+                  "id": "Unavailable",
+                  "displayName": "Unavailable"
+                },
+                {
+                  "id": "Degraded",
+                  "displayName": "Degraded"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

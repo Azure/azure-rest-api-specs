@@ -194,6 +194,57 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "HanaInstances_Create",
+        "x-ms-long-running-operation": true,
+        "summary": "Creates a SAP HANA instance.",
+        "description": "Creates a SAP HANA instance for the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Get properties of a HANA instance": {
+            "$ref": "./examples/HanaInstances_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HanaInstanceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HanaInstanceParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created HanaInstance",
+            "schema": {
+              "$ref": "#/definitions/HanaInstance"
+            }
+          },
+          "201": {
+            "description": "Creating HanaInstance",
+            "schema": {
+              "$ref": "#/definitions/HanaInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "HanaOnAzure"
@@ -447,6 +498,29 @@
           "readOnly": true,
           "type": "string",
           "description": "Hardware revision of a HANA instance"
+        },
+        "partnerNodeId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "ARM ID of another HanaInstance that will share a network with this HanaInstance"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "HanaProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the HanaInstance"
         }
       },
       "description": "Describes the properties of a HANA instance."
@@ -487,7 +561,12 @@
             "S768",
             "S768m",
             "S768xm",
-            "S960m"
+            "S960m",
+            "S224o",
+            "S224m",
+            "S224om",
+            "S224oxm",
+            "S224oxxm"
           ],
           "x-ms-enum": {
             "name": "HanaInstanceSizeNamesEnum",
@@ -551,6 +630,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Specifies version of operating system."
+        },
+        "sshPublicKey": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the SSH public key used to access the operating system."
         }
       },
       "description": "Specifies the operating system settings for the HANA instance."
@@ -671,34 +755,21 @@
     "MonitoringDetails": {
       "type": "object",
       "properties": {
-        "hanaVnet": {
+        "hanaSubnet": {
           "type": "string",
-          "description": "ARM ID of an Azure Vnet with access to the HANA instance."
+          "description": "ARM ID of an Azure Subnet with access to the HANA instance."
         },
         "hanaHostname": {
           "type": "string",
           "description": "Hostname of the HANA Instance blade."
         },
-        "hanaInstanceNum": {
+        "hanaDbName": {
           "type": "string",
-          "description": "A number between 00 and 99, stored as a string to maintain leading zero."
+          "description": "Name of the database itself."
         },
-        "dbContainer": {
-          "type": "string",
-          "enum": [
-            "single",
-            "multiple"
-          ],
-          "default": "single",
-          "x-ms-enum": {
-            "name": "HanaDatabaseContainersEnum",
-            "modelAsString": true
-          },
-          "description": "Either single or multiple depending on the use of MDC(Multiple Database Containers)"
-        },
-        "hanaDatabase": {
-          "type": "string",
-          "description": "Name of the database itself.  It only needs to be specified if using MDC"
+        "hanaDbSqlPort": {
+          "type": "integer",
+          "description": "The port number of the tenant DB. Used to connect to the DB."
         },
         "hanaDbUsername": {
           "type": "string",
@@ -761,6 +832,16 @@
         "$ref": "#/definitions/MonitoringDetails"
       },
       "description": "Request body that only contains monitoring attributes",
+      "x-ms-parameter-location": "method"
+    },
+    "HanaInstanceParameter": {
+      "name": "hanaInstanceParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/HanaInstance"
+      },
+      "description": "Request body representing a HanaInstance",
       "x-ms-parameter-location": "method"
     }
   }

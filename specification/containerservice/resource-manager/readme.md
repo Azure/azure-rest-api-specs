@@ -41,24 +41,26 @@ tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04'
+``` yaml $(tag) == 'package-2019-04'
 input-file:
 - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
-- Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
-- Microsoft.ContainerService/stable/2017-09-30/location.json
+- Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
 ```
+
 ### Tag: package-2019-02
 
 These settings apply only when `--tag=package-2019-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-02'
+``` yaml $(tag) == 'package-2019-02'
 input-file:
 - Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 - Microsoft.ContainerService/stable/2019-02-01/managedClusters.json
 - Microsoft.ContainerService/stable/2017-09-30/location.json
 ```
+
 ### Tag: package-2018-08-preview
 
 These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
@@ -124,13 +126,22 @@ input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 ```
 
-### Tag: package-2019-04-only
+### Tag: package-2019-04-30-only
 
-These settings apply only when `--tag=package-2019-04-only` is specified on the command line.
+These settings apply only when `--tag=package-2019-04-30-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04-only'
+```yaml $(tag) == 'package-2019-04-30-only'
 input-file:
 - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+```
+
+### Tag: package-2019-04-01-only
+
+These settings apply only when `--tag=package-2019-04-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-04-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
 ```
 
 ### Tag: package-2019-02-only
@@ -180,7 +191,7 @@ multi-api operation group for now.
 ``` yaml $(tag) == 'package-2017-07-only-extended'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
-- Microsoft.ContainerService/stable/2017-09-30/location.json
+- Microsoft.ContainerService/stable/2019-04-01/location.json
 ```
 
 ### Tag: package-2017-08-only

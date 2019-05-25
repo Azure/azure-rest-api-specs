@@ -1886,7 +1886,13 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a VM by detaching data disk": {
+            "$ref": "./examples/UpdateVMDetachDataDiskUsingToBeDetachedProperty.json"
+          }
+
+        }
       },
       "delete": {
         "tags": [
@@ -3853,7 +3859,7 @@
             "description": "The input object for ConvertToSinglePlacementGroup API."
           },
           {
-                "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -4686,6 +4692,18 @@
         }
       },
       "description": "Describes the properties of a Compute Operation Value Display."
+    },
+    "HyperVGenerationType": {
+      "type": "string",
+      "description": "Specifies the HyperVGeneration Type for the Virtual Machine created from the image",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "x-ms-enum": {
+        "name": "HyperVGenerationTypes",
+        "modelAsString": true
+      }
     },
     "InstanceViewStatus": {
       "properties": {
@@ -5876,7 +5894,7 @@
         },
         "toBeDetached": {
           "type": "boolean",
-          "description":  "Specifies whether the datadisk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
+          "description":  "Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
         }
       },
       "required": [
@@ -6804,6 +6822,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The provisioning state."
+        },
+        "hyperVGeneration": {
+          "$ref": "#/definitions/HyperVGenerationType",
+          "description": "Gets the HyperVGenerationType of the VirtualMachine created from the image"
         }
       },
       "description": "Describes the properties of an Image."
@@ -7649,10 +7671,6 @@
           "$ref": "#/definitions/VirtualMachineScaleSetStorageProfile",
           "description": "Specifies the storage settings for the virtual machine disks."
         },
-        "additionalCapabilities": {
-          "$ref": "#/definitions/AdditionalCapabilities",
-          "description": "Specifies additional capabilities enabled or disabled on the virtual machine in the scale set. For instance: whether the virtual machine has the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
-        },
         "networkProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetNetworkProfile",
           "description": "Specifies properties of the network interfaces of the virtual machines in the scale set."
@@ -7744,7 +7762,7 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
-        "doNotRunExtensionsOnOverprovisionedVMs":{
+        "doNotRunExtensionsOnOverprovisionedVMs": {
           "type": "boolean",
           "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
         },
@@ -7769,6 +7787,10 @@
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine scale set should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -7790,6 +7812,10 @@
         "singlePlacementGroup": {
           "type": "boolean",
           "description": "When true this limits the scale set to a single placement group, of max size 100 virtual machines."
+        },
+        "additionalCapabilities": {
+          "$ref": "#/definitions/AdditionalCapabilities",
+          "description": "Specifies additional capabilities enabled or disabled on the Virtual Machines in the Virtual Machine Scale Set. For instance: whether the Virtual Machines have the capability to support attaching managed data disks with UltraSSD_LRS storage account type."
         }
       },
       "description": "Describes the properties of a Virtual Machine Scale Set."
@@ -8402,7 +8428,7 @@
       },
       "description": "The instance view of a virtual machine scale set VM."
     },
-      "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
+    "VirtualMachineScaleSetVMNetworkProfileConfiguration": {
       "properties": {
         "networkInterfaceConfigurations": {
           "type": "array",
@@ -8801,7 +8827,7 @@
       "description": "LogAnalytics output properties"
     },
     "VMScaleSetConvertToSinglePlacementGroupInput": {
-      "properties":{
+      "properties": {
         "activePlacementGroupId": {
           "type": "string",
           "description": "Id of the placement group in which you want future virtual machine instances to be placed. To query placement group Id, please use Virtual Machine Scale Set VMs - Get API. If not provided, the platform will choose one with maximum number of virtual machine instances."
