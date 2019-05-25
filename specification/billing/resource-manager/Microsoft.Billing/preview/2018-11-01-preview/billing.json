@@ -3796,9 +3796,10 @@
     "BillingAccountUpdateProperties": {
       "description": "The properties of the billing account that can be updated.",
       "properties": {
-        "address": {
-          "description": "The address associated with billing account.",
-          "$ref": "#/definitions/Address"
+        "properties": {
+          "description": "A billing property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingAccountProperties"
         }
       }
     },
