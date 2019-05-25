@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchService",
-    "version": "2018-12-01.8.0",
+    "version": "2019-06-01.9.0",
     "description": "A client for issuing REST requests to the Azure Batch service.",
     "x-ms-code-generation-settings": {
       "name": "BatchServiceClient"
@@ -430,7 +430,7 @@
         }
       }
     },
-    "/nodeagentskus": {
+    "/supportedimages": {
       "get": {
         "tags": [
           "Accounts"
@@ -438,11 +438,11 @@
         "x-ms-pageable": {
           "nextLinkName": "odata.nextLink"
         },
-        "operationId": "Account_ListNodeAgentSkus",
+        "operationId": "Account_ListSupportedImages",
         "x-ms-examples": {
-          "Account list node agent skus": { "$ref": "./examples/AccountListNodeAgentSkus.json" }
+          "Account list node agent skus": { "$ref": "./examples/AccountListSupportedImages.json" }
         },
-        "summary": "Lists all node agent SKUs supported by the Azure Batch service.",
+        "summary": "Lists all Virtual Machine Images supported by the Azure Batch service.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -450,7 +450,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-node-agent-skus.",
+            "description": "An OData $filter clause. For more information on constructing this filter, see https://docs.microsoft.com/en-us/rest/api/batchservice/odata-filters-in-batch#list-support-images.",
             "x-ms-parameter-grouping": {
               "postfix": "Options"
             }
@@ -543,9 +543,9 @@
                 "format": "date-time-rfc1123"
               }
             },
-            "description": "A response containing the list of node agent SKUs.",
+            "description": "A response containing the list of supported Virtual Machine Images.",
             "schema": {
-              "$ref": "#/definitions/AccountListNodeAgentSkusResult"
+              "$ref": "#/definitions/AccountListSupportedImagesResult"
             }
           },
           "default": {
@@ -10515,23 +10515,19 @@
       },
       "title": "The result of a listing the usage metrics for an account."
     },
-    "NodeAgentSku": {
+    "ImageInformation": {
       "properties": {
-        "id": {
+        "nodeAgentSKUId": {
           "type": "string",
-          "title": "The ID of the node agent SKU."
+          "title": "The ID of the node agent SKU which the Image supports."
         },
-        "verifiedImageReferences": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ImageReference"
-          },
-          "title": "The list of Azure Marketplace images verified to be compatible with this node agent SKU.",
-          "description": "This collection is not exhaustive (the node agent may be compatible with other images)."
+        "imageReference": {
+          "$ref": "#/definitions/ImageReference",
+          "title": "The reference to the Azure Virtual Machine's Marketplace Image."
         },
         "osType": {
           "type": "string",
-          "title": "The type of operating system (e.g. Windows or Linux) compatible with the node agent SKU.",
+          "title": "The type of operating system (e.g. Windows or Linux) of the Image.",
           "enum": [
             "linux",
             "windows"
@@ -10550,10 +10546,45 @@
               }
             ]
           }
+        },
+        "capabilities": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The capabilities or features which the Image supports.",
+          "description": "Not every capability of the Image is listed. Capabilities in this list are considered of special interest and are generally related to integration with other features in the Azure Batch service."
+        },
+        "batchSupportEndOfLife": {
+          "type": "string",
+          "format": "date-time",
+          "title": "The time when the Azure Batch service will stop accepting create pool requests for the Image."
+        },
+        "verificationType": {
+          "type": "string",
+          "title": "Whether the Azure Batch service actively verifies that the Image is compatible with the associated node agent SKU.",
+          "enum": [
+            "verified",
+            "unverified"
+          ],
+          "x-ms-enum": {
+            "name": "VerificationType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "verified",
+                "description": "The Image is guaranteed to be compatible with the associated node agent SKU and all Batch features have been confirmed to work as expected."
+              },
+              {
+                "value": "unverified",
+                "description": "The associated node agent SKU should have binary compatibility with the Image, but specific functionality has not been verified."
+              }
+            ]
+          }
         }
       },
-      "title": "A node agent SKU supported by the Batch service.",
-      "description": "The Batch node agent is a program that runs on each node in the pool, and provides the command-and-control interface between the node and the Batch service. There are different implementations of the node agent, known as SKUs, for different operating systems."
+      "required": [ "imageReference", "verificationType", "osType", "nodeAgentSKUId" ],
+      "title": "A reference to the Azure Virtual Machines Marketplace Image and additional information about the Image."
     },
     "AuthenticationTokenSettings": {
       "properties": {
@@ -10582,21 +10613,21 @@
       },
       "title": "The settings for an authentication token that the task can use to perform Batch service operations."
     },
-    "AccountListNodeAgentSkusResult": {
+    "AccountListSupportedImagesResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NodeAgentSku"
+            "$ref": "#/definitions/ImageInformation"
           },
-          "title": "The list of supported node agent SKUs."
+          "title": "The list of supported Virtual Machine Images."
         },
         "odata.nextLink": {
           "type": "string",
           "title": "The URL to get the next set of results."
         }
       },
-      "title": "The result of listing the supported node agent SKUs."
+      "title": "The result of listing the supported Virtual Machine Images."
     },
     "UsageStatistics": {
       "properties": {
@@ -11092,8 +11123,12 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "title": "The ARM resource identifier of the virtual network subnet which nodes running tasks from the job will join for the duration of the task.",
-          "description": "This is only supported for jobs running on VirtualMachineConfiguration pools. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes which will run tasks from the job. For more details, see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
+          "title": "The ARM resource identifier of the virtual network subnet which nodes running tasks from the job will join for the duration of the task. This will only work with a VirtualMachineConfiguration pool.",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes which will run tasks from the job. This can be up to the number of nodes in the pool. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet so that Azure Batch service can schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication from the Azure Batch service. For pools created with a Virtual Machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. Port 443 is also required to be open for outbound connections for communications to Azure Storage. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
+            "description": "Setting up RBAC for Azure Batch VNETs"
+          }
         }
       },
       "required": [ "subnetId" ],
@@ -11115,10 +11150,33 @@
           "$ref": "#/definitions/ContainerRegistry",
           "title": "The private registry which contains the container image.",
           "description": "This setting can be omitted if was already provided at pool creation."
+        },
+        "workingDirectory": {
+          "type": "string",
+          "title": "The location of the container task working directory.",
+          "description": "The default is 'taskWorkingDirectory'.",
+          "enum": [
+            "taskWorkingDirectory",
+            "containerImageDefault"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerWorkingDirectory",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "taskWorkingDirectory",
+                "description": "Use the standard Batch service task working directory, which will contain the Task Resource Files populated by Batch."
+              },
+              {
+                "value": "containerImageDefault",
+                "description": "Use the working directory defined in the container image. Beware that this directory will not contain the Resource Files downloaded by Batch."
+              }
+            ]
+          }
         }
       },
       "required": [ "imageName" ],
-      "title": "The container settings for a task."
+      "title": "The container settings for a Task."
     },
     "ResourceFile": {
       "properties": {
@@ -11369,8 +11427,8 @@
       "properties": {
         "loginMode": {
           "type": "string",
-          "title": "The login mode for the user.",
-          "description": "The default value for VirtualMachineConfiguration pools is batch and for CloudServiceConfiguration pools is interactive.",
+          "title": "The login mode for user",
+          "description": "The default value for VirtualMachineConfiguration pools is 'batch' and for CloudServiceConfiguration pools is 'interactive'.",
           "enum": [
             "batch",
             "interactive"
@@ -11465,7 +11523,7 @@
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
           "title": "The settings for the container under which the Job Manager task runs.",
-          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
         },
         "resourceFiles": {
           "type": "array",
@@ -11515,7 +11573,7 @@
             "$ref": "#/definitions/ApplicationPackageReference"
           },
           "title": "A list of application packages that the Batch service will deploy to the compute node before running the command line.",
-          "description": "Application packages are downloaded and deployed to a shared directory, not the task working directory. Therefore, if a referenced package is already on the compute node, and is up to date, then it is not re-downloaded; the existing copy on the compute node is used. If a referenced application package cannot be installed, for example because the package has been deleted or because download failed, the task fails."
+          "description": "Application packages are downloaded and deployed to a shared directory, not the task working directory. Therefore, if a referenced package is already on the compute node, and is up to date, then it is not re-downloaded; the existing copy on the compute node is used. If a referenced application package cannot be installed, for example because the package has been deleted or because download failed, the task fails. A maximum of 10 references may be specified on a given pool."
         },
         "authenticationTokenSettings": {
           "title": "The settings for an authentication token that the task can use to perform Batch service operations.",
@@ -11547,7 +11605,7 @@
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
           "title": "The settings for the container under which the Job Preparation task runs.",
-          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
         },
         "resourceFiles": {
           "type": "array",
@@ -11603,7 +11661,7 @@
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
           "title": "The settings for the container under which the Job Release task runs.",
-          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
         },
         "resourceFiles": {
           "type": "array",
@@ -11679,7 +11737,7 @@
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
           "title": "The settings for the container under which the start task runs.",
-          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+          "description": "When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
         },
         "resourceFiles": {
           "type": "array",
@@ -12927,31 +12985,31 @@
       "properties": {
         "publisher": {
           "type": "string",
-          "title": "The publisher of the Azure Virtual Machines Marketplace image.",
+          "title": "The publisher of the Azure Virtual Machines Marketplace Image.",
           "description": "For example, Canonical or MicrosoftWindowsServer."
         },
         "offer": {
           "type": "string",
-          "title": "The offer type of the Azure Virtual Machines Marketplace image.",
+          "title": "The offer type of the Azure Virtual Machines Marketplace Image.",
           "description": "For example, UbuntuServer or WindowsServer."
         },
         "sku": {
           "type": "string",
-          "title": "The SKU of the Azure Virtual Machines Marketplace image.",
+          "title": "The SKU of the Azure Virtual Machines Marketplace Image.",
           "description": "For example, 14.04.0-LTS or 2012-R2-Datacenter."
         },
         "version": {
           "type": "string",
-          "title": "The version of the Azure Virtual Machines Marketplace image.",
-          "description": "A value of 'latest' can be specified to select the latest version of an image. If omitted, the default is 'latest'."
+          "title": "The version of the Azure Virtual Machines Marketplace Image.",
+          "description": "A value of 'latest' can be specified to select the latest version of an Image. If omitted, the default is 'latest'."
         },
         "virtualMachineImageId": {
           "type": "string",
-          "title": "The ARM resource identifier of the virtual machine image. Computes nodes of the pool will be created using this custom image. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}",
-          "description": "This property is mutually exclusive with other ImageReference properties. The virtual machine image must be in the same region and subscription as the Azure Batch account. For more details, see https://docs.microsoft.com/azure/batch/batch-custom-images."
+          "title": "The ARM resource identifier of the Virtual Machine Image. Computes nodes of the pool will be created using this custom image. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}",
+          "description": "This property is mutually exclusive with other ImageReference properties. The Virtual Machine Image must be in the same region and subscription as the Azure Batch account. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         }
       },
-      "title": "A reference to an Azure Virtual Machines Marketplace image or a custom Azure Virtual Machine image. To get the list of all Azure Marketplace image references verified by Azure Batch, see the 'List node agent SKUs' operation."
+      "title": "A reference to an Azure Virtual Machines Marketplace Image or a custom Azure Virtual Machine Image. To get the list of all Azure Marketplace Image references verified by Azure Batch, see the 'List supported Images' operation."
     },
     "WindowsConfiguration": {
       "properties": {
@@ -13051,7 +13109,7 @@
       "properties": {
         "imageReference": {
           "$ref": "#/definitions/ImageReference",
-          "title": "A reference to the Azure Virtual Machines Marketplace image or the custom Virtual Machine image to use."
+          "title": "A reference to the Azure Virtual Machines Marketplace image or the custom Virtual Machine Image to use."
         },
         "nodeAgentSKUId": {
           "type": "string",
@@ -13148,8 +13206,12 @@
       "properties": {
         "subnetId": {
           "type": "string",
-          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join.",
-          "description": "This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}. The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. For pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. For more details, see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration"
+          "title": "The ARM resource identifier of the virtual network subnet which the compute nodes of the pool will join. This is of the form /subscriptions/{subscription}/resourceGroups/{group}/providers/{provider}/virtualNetworks/{network}/subnets/{subnet}.",
+          "description": "The virtual network must be in the same region and subscription as the Azure Batch account. The specified subnet should have enough free IP addresses to accommodate the number of nodes in the pool. If the subnet doesn't have enough free IP addresses, the pool will partially allocate compute nodes, and a resize error will occur. The 'MicrosoftAzureBatch' service principal must have the 'Classic Virtual Machine Contributor' Role-Based Access Control (RBAC) role for the specified VNet. The specified subnet must allow communication from the Azure Batch service to be able to schedule tasks on the compute nodes. This can be verified by checking if the specified VNet has any associated Network Security Groups (NSG). If communication to the compute nodes in the specified subnet is denied by an NSG, then the Batch service will set the state of the compute nodes to unusable. For pools created with virtualMachineConfiguration only ARM virtual networks ('Microsoft.Network/virtualNetworks') are supported, but for pools created with cloudServiceConfiguration both ARM and classic virtual networks are supported. If the specified VNet has any associated Network Security Groups (NSG), then a few reserved system ports must be enabled for inbound communication. For pools created with a virtual machine configuration, enable ports 29876 and 29877, as well as port 22 for Linux and port 3389 for Windows. For pools created with a cloud service configuration, enable ports 10100, 20100, and 30100. Also enable outbound connections to Azure Storage on port 443. For more details see: https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration",
+          "externalDocs": {
+            "url": "https://azure.microsoft.com/en-us/documentation/articles/role-based-access-built-in-roles/#classic-virtual-machine-contributor",
+            "description": "Setting up RBAC for Azure Batch VNETs"
+          }
         },
         "dynamicVNetAssignmentScope": {
           "type": "string",
@@ -13882,7 +13944,7 @@
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
           "title": "The settings for the container under which the task runs.",
-          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
         },
         "resourceFiles": {
           "type": "array",
@@ -13978,7 +14040,7 @@
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
           "title": "The settings for the container under which the task runs.",
-          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container."
+          "description": "If the pool that will run this task has containerConfiguration set, this must be set as well. If the pool that will run this task doesn't have containerConfiguration set, this must not be set. When this is specified, all directories recursively below the AZ_BATCH_NODE_ROOT_DIR (the root of Azure Batch directories on the node) are mapped into the container, all task environment variables are mapped into the container, and the task command line is executed in the container. Files produced in the container outside of AZ_BATCH_NODE_ROOT_DIR might not be reflected to the host disk, meaning that Batch file APIs will not be able to access those files."
         },
         "exitConditions": {
           "$ref": "#/definitions/ExitConditions",
@@ -14646,6 +14708,14 @@
           "type": "string",
           "title": "The source address prefix or tag to match for the rule.",
           "description": "Valid values are a single IP address (i.e. 10.10.10.10), IP subnet (i.e. 192.168.1.0/24), default tag, or * (for all addresses).  If any other values are provided the request fails with HTTP status code 400."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The source port ranges to match for the rule.",
+          "description": "Valid values are '*' (for all ports 0 - 65535), a specific port (i.e. 22), or a port range (i.e. 100-200). The ports must be in the range of 0 to 65535. Each entry in this collection must not overlap any other entry (either a range or an individual port). If any other values are provided the request fails with HTTP status code 400. The default value is '*'."
         }
       },
       "required": [ "priority", "access", "sourceAddressPrefix" ],
@@ -15024,8 +15094,8 @@
           "items": {
             "$ref": "#/definitions/ApplicationPackageReference"
           },
-          "title": "The list of application packages to be installed on each compute node in the pool.",
-          "description": "The list replaces any existing application package references on the pool. Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. There is a maximum of 10 application package references on any given pool. If omitted, any existing application package references are left unchanged."
+          "title": "A list of application packages to be installed on each compute node in the pool.",
+          "description": "Changes to application package references affect all new compute nodes joining the pool, but do not affect compute nodes that are already in the pool until they are rebooted or reimaged. If this element is present, it replaces any existing application package references. If you specify an empty collection, then all application package references are removed from the pool. If omitted, any existing application package references are left unchanged."
         },
         "metadata": {
           "type": "array",
