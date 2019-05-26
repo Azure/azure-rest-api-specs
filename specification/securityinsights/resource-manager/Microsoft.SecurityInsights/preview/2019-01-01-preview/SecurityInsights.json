@@ -924,6 +924,9 @@
                     },
                     "Get an AAD data connector.": {
                         "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
+                    },
+                    "Get an AwsCloudTrail data connector.": {
+                      "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
                     }
                 },
                 "tags": [
@@ -2128,7 +2131,8 @@
                         "AzureSecurityCenter",
                         "MicrosoftCloudAppSecurity",
                         "ThreatIntelligence",
-                        "Office365"
+                        "Office365",
+                        "AmazonWebServicesCloudTrail"
                     ],
                     "x-ms-enum": {
                         "name": "DataConnectorKind",
@@ -2148,6 +2152,9 @@
                             },
                             {
                                 "value": "Office365"
+                            },
+                            {
+                                "value": "AmazonWebServicesCloudTrail"
                             }
                         ]
                     }
@@ -2259,6 +2266,63 @@
                 "indicators": {
                     "type": "object",
                     "description": "Data type for indicators connection.",
+                    "allOf": [
+                        {
+                            "$ref": "#/definitions/DataConnectorDataTypeCommon"
+                        }
+                    ]
+                }
+            }
+        },
+        "DataConnectorAwsRoleArn": {
+          "type": "object",
+          "description": "The Aws Role Arn that is used to access the Aws account.",
+          "properties": {
+              "AwsRoleArn": {
+                  "type": "string",
+                  "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account."
+              }
+          }
+        },
+        "AwsCloudTrailDataConnector": {
+          "x-ms-discriminator-value": "AmazonWebServicesCloudTrail",
+          "type": "object",
+          "description": "Represents Amazon Web Services CloudTrail data connector.",
+          "allOf": [
+              {
+                  "$ref": "#/definitions/DataConnector"
+              }
+          ],
+          "properties": {
+              "properties": {
+                  "x-ms-client-flatten": true,
+                  "description": "Amazon Web Services CloudTrail data connector properties.",
+                  "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties"
+              }
+          }
+       },
+        "AwsCloudTrailDataConnectorProperties": {
+            "type": "object",
+            "description": "Amazon Web Services CloudTrail data connector properties.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/DataConnectorAwsRoleArn"
+                }
+            ],
+            "properties": {
+                "dataTypes": {
+                    "description": "The available data types for the connector.",
+                    "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes"
+                }
+            }
+        },
+        "AwsCloudTrailDataConnectorDataTypes": {
+            "type": "object",
+            "description": "The available data types for Amazon Web Services CloudTrail data connector.",
+            "properties": {
+                "logs": {
+                    "type": "object",
+                    "description": "Logs data type.",
                     "allOf": [
                         {
                             "$ref": "#/definitions/DataConnectorDataTypeCommon"
