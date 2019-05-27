@@ -97,12 +97,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-advisor/azure/mgmt/advisor
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-advisor
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor
 ```
 
 ## Go
