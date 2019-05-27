@@ -113,12 +113,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-devtestlabs/azure/mgmt/devtestlabs
+  output-folder: $(python-sdks-folder)/devtestlabs/azure-mgmt-devtestlabs/azure/mgmt/devtestlabs
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-devtestlabs
+  output-folder: $(python-sdks-folder)/devtestlabs/azure-mgmt-devtestlabs
 ```
 
 ## Go
