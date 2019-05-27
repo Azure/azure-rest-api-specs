@@ -26,18 +26,27 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2018-11
+tag: package-preview-2019-04
 ```
 
 
+### Tag: package-preview-2019-04
+
+These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-04'
+input-file:
+  - Microsoft.Consumption/preview/2019-04-01-preview/consumption.json
+```
 ### Tag: package-preview-2018-11
 
 These settings apply only when `--tag=package-preview-2018-11` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2018-11'
+``` yaml $(tag) == 'package-preview-2018-11'
 input-file:
   - Microsoft.Consumption/preview/2018-11-01-preview/consumption.json
 ```
+
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
@@ -189,36 +198,6 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.consumption
-  package-name: azure-mgmt-consumption
-  package-version: 1.2.0
-  clear-output-folder: true
-```
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-consumption/azure/mgmt/consumption
-```
-
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-consumption
-```
-
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
@@ -298,12 +277,12 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/consumption/resource-manager/v2018_03_31
 regenerate-manager: true
 generate-interface: true
-directive: 
- - rename-model: 
-     from: CostTags 
+directive:
+ - rename-model:
+     from: CostTags
      to: CostTagsModel
  - rename-model:
-     from: Tags 
+     from: Tags
      to: TagsModel
  - rename-model:
      from: ReservationRecommendations

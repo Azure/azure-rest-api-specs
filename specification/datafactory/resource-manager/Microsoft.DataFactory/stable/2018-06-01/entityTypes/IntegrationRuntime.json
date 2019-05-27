@@ -1011,6 +1011,223 @@
         "name": "SsisObjectMetadataType",
         "modelAsString": true
       }
+    },
+    "SsisFolder": {
+      "x-ms-discriminator-value": "Folder",
+      "type": "object",
+      "description": "Ssis folder.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ]
+    },
+    "SsisProject": {
+      "x-ms-discriminator-value": "Project",
+      "type": "object",
+      "description": "Ssis project.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ],
+      "properties": {
+        "folderId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Folder id which contains project."
+        },
+        "version": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Project version."
+        },
+        "environmentRefs": {
+          "type": "array",
+          "description": "Environment reference in project",
+          "items": {
+            "$ref": "#/definitions/SsisEnvironmentReference"
+          }
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in project",
+          "items": {
+            "$ref": "#/definitions/SsisParameter"
+          }
+        }
+      }
+    },
+    "SsisPackage": {
+      "x-ms-discriminator-value": "Package",
+      "type": "object",
+      "description": "Ssis Package.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ],
+      "properties": {
+        "folderId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Folder id which contains package."
+        },
+        "projectVersion": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Project version which contains package."
+        },
+        "projectId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Project id which contains package."
+        },
+        "parameters": {
+          "type": "array",
+          "description": "Parameters in package",
+          "items": {
+            "$ref": "#/definitions/SsisParameter"
+          }
+        }
+      }
+    },
+    "SsisEnvironment": {
+      "x-ms-discriminator-value": "Environment",
+      "type": "object",
+      "description": "Ssis environment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SsisObjectMetadata"
+        }
+      ],
+      "properties": {
+        "folderId": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Folder id which contains environment."
+        },
+        "variables": {
+          "type": "array",
+          "description": "Variable in environment",
+          "items": {
+            "$ref": "#/definitions/SsisVariable"
+          }
+        }
+      }
+    },
+    "SsisParameter": {
+      "type": "object",
+      "description": "Ssis parameter.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Parameter id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Parameter name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Parameter description."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Parameter type."
+        },
+        "required": {
+          "type": "boolean",
+          "description": "Whether parameter is required."
+        },
+        "sensitive": {
+          "type": "boolean",
+          "description": "Whether parameter is sensitive."
+        },
+        "designDefaultValue": {
+          "type": "string",
+          "description": "Design default value of parameter."
+        },
+        "defaultValue": {
+          "type": "string",
+          "description": "Default value of parameter."
+        },
+        "sensitiveDefaultValue": {
+          "type": "string",
+          "description": "Default sensitive value of parameter."
+        },
+        "valueType": {
+          "type": "string",
+          "description": "Parameter value type."
+        },
+        "valueSet": {
+          "type": "boolean",
+          "description": "Parameter value set."
+        },
+        "variable": {
+          "type": "string",
+          "description": "Parameter reference variable."
+        }
+      }
+    },
+    "SsisVariable": {
+      "type": "object",
+      "description": "Ssis variable.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Variable id."
+        },
+        "name": {
+          "type": "string",
+          "description": "Variable name."
+        },
+        "description": {
+          "type": "string",
+          "description": "Variable description."
+        },
+        "dataType": {
+          "type": "string",
+          "description": "Variable type."
+        },
+        "sensitive": {
+          "type": "boolean",
+          "description": "Whether variable is sensitive."
+        },
+        "value": {
+          "type": "string",
+          "description": "Variable value."
+        },
+        "sensitiveValue": {
+          "type": "string",
+          "description": "Variable sensitive value."
+        }
+      }
+    },
+    "SsisEnvironmentReference": {
+      "type": "object",
+      "description": "Ssis environment reference.",
+      "properties": {
+        "id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Environment reference id."
+        },
+        "environmentFolderName": {
+          "type": "string",
+          "description": "Environment folder name."
+        },
+        "environmentName": {
+          "type": "string",
+          "description": "Environment name."
+        },
+        "referenceType": {
+          "type": "string",
+          "description": "Reference type"
+        }
+      }
     }
   }
 }
