@@ -10,19 +10,21 @@
          "body":{  
             "value":[  
                {  
-                  "id":"/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/smssolution",
-                  "name":"smssolution",
+                  "id":"/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/dbsolution",
+                  "name":"dbsolution",
                   "type":"Microsoft.Migrate/MigrateProjects/Solutions",
+                  "etag":"\"1c0018c7-0000-0000-0000-5c936e530000\"",
                   "properties":{  
-                     "tool":"ServerMigration",
-                     "purpose":"Migration",
-                     "goal":"Servers",
-                     "status":"Active",
+                     "tool":"ServerDiscovery",
+                     "purpose":"Assessment",
+                     "goal":"Databases",
+                     "status":"Inactive",
+                     "cleanupState":"None",
                      "summary":{  
-                        "discoveredCount":0,
-                        "assessedCount":0,
-                        "replicatingCount":0,
-                        "migratedCount":0
+                        "instanceType":"Databases",
+                        "databasesAssessedCount":0,
+                        "databaseInstancesAssessedCount":0,
+                        "migrationReadyCount":0
                      },
                      "details":{  
                         "groupCount":0,
@@ -34,18 +36,22 @@
                   }
                },
                {  
-                  "id":"/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/sassolution",
-                  "name":"sassolution",
+                  "id":"/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/serversolution",
+                  "name":"serversolution",
                   "type":"Microsoft.Migrate/MigrateProjects/Solutions",
+                  "etag":"\"1c001dc7-0000-0000-0000-5c936e6f0000\"",
                   "properties":{  
-                     "tool":"ServerAssessment",
-                     "purpose":"Assessment",
+                     "tool":"ServerDiscovery",
+                     "purpose":"Discovery",
                      "goal":"Servers",
-                     "status":"Active",
+                     "status":"Inactive",
+                     "cleanupState":"None",
                      "summary":{  
+                        "instanceType":"Servers",
                         "discoveredCount":0,
                         "assessedCount":0,
                         "replicatingCount":0,
+                        "testMigratedCount":0,
                         "migratedCount":0
                      },
                      "details":{  
@@ -57,7 +63,8 @@
                      }
                   }
                }
-            ]
+            ],
+            "nextLink":""
          }
       }
    }
