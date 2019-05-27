@@ -96,12 +96,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-powerbiembedded/azure/mgmt/powerbiembedded
+  output-folder: $(python-sdks-folder)/powerbiembedded/azure-mgmt-powerbiembedded/azure/mgmt/powerbiembedded
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-powerbiembedded
+  output-folder: $(python-sdks-folder)/powerbiembedded/azure-mgmt-powerbiembedded
 ```
 
 ## Go
