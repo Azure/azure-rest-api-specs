@@ -200,13 +200,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-textanalytics/azure/cognitiveservices/language/textanalytics
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-textanalytics/azure/cognitiveservices/language/textanalytics
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-textanalytics
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-textanalytics
 ```
 
 ## Go
