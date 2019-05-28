@@ -193,16 +193,16 @@
             "$ref": "./examples/QueryTimeSeriesGroup.json"
           }
         }
+      }
+    },
     "/timeseriesgroups/{timeSeriesGroupId}": {
       "get": {
         "summary": "",
         "description": "",
         "operationId": "TimeSeriesGroup_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          }
-        ],
+        "parameters": [{
+          "$ref": "#/parameters/timeSeriesGroupId"
+        }],
         "consumes": [
           "application/json"
         ],
@@ -233,8 +233,7 @@
         "summary": "",
         "description": "",
         "operationId": "TimeSeriesGroup_Create",
-        "parameters": [
-          {
+        "parameters": [{
             "$ref": "#/parameters/timeSeriesGroupId"
           },
           {
@@ -274,11 +273,9 @@
         "summary": "",
         "description": "",
         "operationId": "TimeSeriesGroup_Delete",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          }
-        ],
+        "parameters": [{
+          "$ref": "#/parameters/timeSeriesGroupId"
+        }],
         "consumes": [
           "application/json"
         ],
@@ -308,11 +305,9 @@
         "summary": "",
         "description": "",
         "operationId": "TimeSeriesGroup_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/timeSeriesGroupId"
-          }
-        ],
+        "parameters": [{
+          "$ref": "#/parameters/timeSeriesGroupId"
+        }],
         "consumes": [
           "application/json"
         ],
@@ -334,7 +329,7 @@
           }
         },
         "x-ms-pageable": {
-            "nextLinkName": "nextLink"
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Detect anomaly status of the latest point in time series example": {
@@ -342,34 +337,34 @@
           }
         }
       }
+    }
+  },
+  "definitions": {
+    "APIError": {
+      "type": "object",
+      "description": "Error information returned by the API.",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "enum": [
+            "InvalidCustomInterval",
+            "BadArgument",
+            "InvalidGranularity",
+            "InvalidPeriod",
+            "InvalidModelArgument",
+            "InvalidSeries"
+          ],
+          "x-ms-enum": {
+            "name": "AnomalyDetectorErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        }
       }
     },
-    "definitions": {
-      "APIError": {
-        "type": "object",
-        "description": "Error information returned by the API.",
-        "properties": {
-          "code": {
-            "description": "The error code.",
-            "enum": [
-              "InvalidCustomInterval",
-              "BadArgument",
-              "InvalidGranularity",
-              "InvalidPeriod",
-              "InvalidModelArgument",
-              "InvalidSeries"
-            ],
-            "x-ms-enum": {
-              "name": "AnomalyDetectorErrorCodes",
-              "modelAsString": true
-            }
-          },
-          "message": {
-            "description": "A message explaining the error reported by the service.",
-            "type": "string"
-          }
-        }
-      },
     "Granularity": {
       "type": "string",
       "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
@@ -387,185 +382,185 @@
         "minutely"
       ]
     },
-      "Request": {
-        "type": "object",
-        "required": [
-          "granularity",
-          "series"
-        ],
-        "properties": {
-          "series": {
-            "type": "array",
-            "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.",
-            "items": {
-              "$ref": "#/definitions/Point"
-            }
-          },
-          "granularity": {
+    "Request": {
+      "type": "object",
+      "required": [
+        "granularity",
+        "series"
+      ],
+      "properties": {
+        "series": {
+          "type": "array",
+          "description": "Time series data points. Points should be sorted by timestamp in ascending order to match the anomaly detection result. If the data is not sorted correctly or there is duplicated timestamp, the API will not work. In such case, an error message will be returned.",
+          "items": {
+            "$ref": "#/definitions/Point"
+          }
+        },
+        "granularity": {
           "$ref": "#/definitions/Granularity"
-          },
-          "customInterval": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
-          },
-          "period": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
-          },
-          "maxAnomalyRatio": {
-            "type": "number",
-            "format": "float",
-            "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series."
-          },
-          "sensitivity": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
-          }
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+        },
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, periodic value of a time series. If the value is null or does not present, the API will determine the period automatically."
+        },
+        "maxAnomalyRatio": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional argument, advanced model parameter, max anomaly ratio in a time series."
+        },
+        "sensitivity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional argument, advanced model parameter, between 0-99, the lower the value is, the larger the margin value will be which means less anomalies will be accepted."
         }
-      },
-      "Point": {
-        "type": "object",
-        "required": [
-          "timestamp",
-          "value"
-        ],
-        "properties": {
-          "timestamp": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Timestamp of a data point (ISO8601 format)."
-          },
-          "value": {
-            "type": "number",
-            "format": "float",
-            "description": "The measurement of that point, should be float."
-          }
+      }
+    },
+    "Point": {
+      "type": "object",
+      "required": [
+        "timestamp",
+        "value"
+      ],
+      "properties": {
+        "timestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp of a data point (ISO8601 format)."
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The measurement of that point, should be float."
         }
-      },
-      "EntireDetectResponse": {
-        "type": "object",
-        "required": [
-          "expectedValues",
-          "isAnomaly",
-          "isNegativeAnomaly",
-          "isPositiveAnomaly",
-          "lowerMargins",
-          "period",
-          "upperMargins"
-        ],
-        "properties": {
-          "period": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
-          },
-          "expectedValues": {
-            "type": "array",
-            "description": "ExpectedValues contain expected value for each input point. The index of the array is consistent with the input series.",
-            "items": {
-              "type": "number",
-              "format": "float",
-              "x-nullable": false
-            }
-          },
-          "upperMargins": {
-            "type": "array",
-            "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
-            "items": {
-              "type": "number",
-              "format": "float",
-              "x-nullable": false
-            }
-          },
-          "lowerMargins": {
-            "type": "array",
-            "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
-            "items": {
-              "type": "number",
-              "format": "float",
-              "x-nullable": false
-            }
-          },
-          "isAnomaly": {
-            "type": "array",
-            "description": "IsAnomaly contains anomaly properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
-            "items": {
-              "type": "boolean",
-              "x-nullable": false
-            }
-          },
-          "isNegativeAnomaly": {
-            "type": "array",
-            "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input point. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with the input series.",
-            "items": {
-              "type": "boolean",
-              "x-nullable": false
-            }
-          },
-          "isPositiveAnomaly": {
-            "type": "array",
-            "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input point. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with the input series.",
-            "items": {
-              "type": "boolean",
-              "x-nullable": false
-            }
+      }
+    },
+    "EntireDetectResponse": {
+      "type": "object",
+      "required": [
+        "expectedValues",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly",
+        "lowerMargins",
+        "period",
+        "upperMargins"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "expectedValues": {
+          "type": "array",
+          "description": "ExpectedValues contain expected value for each input point. The index of the array is consistent with the input series.",
+          "items": {
+            "type": "number",
+            "format": "float",
+            "x-nullable": false
           }
-        }
-      },
-      "LastDetectResponse": {
-        "type": "object",
-        "required": [
-          "expectedValue",
-          "isAnomaly",
-          "isNegativeAnomaly",
-          "isPositiveAnomaly",
-          "lowerMargin",
-          "period",
-          "upperMargin",
-          "suggestedWindow"
-        ],
-        "properties": {
-          "period": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
-          },
-          "suggestedWindow": {
-            "type": "integer",
-            "format": "int32",
-            "description": "Suggested input series points needed for detecting the latest point."
-          },
-          "expectedValue": {
+        },
+        "upperMargins": {
+          "type": "array",
+          "description": "UpperMargins contain upper margin of each input point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. Anomalies in response can be filtered by upperBoundary and lowerBoundary. By adjusting marginScale value, less significant anomalies can be filtered in client side. The index of the array is consistent with the input series.",
+          "items": {
             "type": "number",
             "format": "float",
-            "description": "Expected value of the latest point."
-          },
-          "upperMargin": {
+            "x-nullable": false
+          }
+        },
+        "lowerMargins": {
+          "type": "array",
+          "description": "LowerMargins contain lower margin of each input point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. Points between the boundary can be marked as normal ones in client side. The index of the array is consistent with the input series.",
+          "items": {
             "type": "number",
             "format": "float",
-            "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. If the value of latest point is between upperBoundary and lowerBoundary, it should be treated as normal value. By adjusting marginScale value, anomaly status of latest point can be changed."
-          },
-          "lowerMargin": {
-            "type": "number",
-            "format": "float",
-            "description": "Lower margin of the latest point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. "
-          },
-          "isAnomaly": {
+            "x-nullable": false
+          }
+        },
+        "isAnomaly": {
+          "type": "array",
+          "description": "IsAnomaly contains anomaly properties for each input point. True means an anomaly either negative or positive has been detected. The index of the array is consistent with the input series.",
+          "items": {
             "type": "boolean",
-            "description": "Anomaly status of the latest point, true means the latest point is an anomaly either in negative direction or positive direction."
-          },
-          "isNegativeAnomaly": {
+            "x-nullable": false
+          }
+        },
+        "isNegativeAnomaly": {
+          "type": "array",
+          "description": "IsNegativeAnomaly contains anomaly status in negative direction for each input point. True means a negative anomaly has been detected. A negative anomaly means the point is detected as an anomaly and its real value is smaller than the expected one. The index of the array is consistent with the input series.",
+          "items": {
             "type": "boolean",
-            "description": "Anomaly status in negative direction of the latest point. True means the latest point is an anomaly and its real value is smaller than the expected one."
-          },
-          "isPositiveAnomaly": {
+            "x-nullable": false
+          }
+        },
+        "isPositiveAnomaly": {
+          "type": "array",
+          "description": "IsPositiveAnomaly contain anomaly status in positive direction for each input point. True means a positive anomaly has been detected. A positive anomaly means the point is detected as an anomaly and its real value is larger than the expected one. The index of the array is consistent with the input series.",
+          "items": {
             "type": "boolean",
-            "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+            "x-nullable": false
           }
         }
+      }
+    },
+    "LastDetectResponse": {
+      "type": "object",
+      "required": [
+        "expectedValue",
+        "isAnomaly",
+        "isNegativeAnomaly",
+        "isPositiveAnomaly",
+        "lowerMargin",
+        "period",
+        "upperMargin",
+        "suggestedWindow"
+      ],
+      "properties": {
+        "period": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Frequency extracted from the series, zero means no recurrent pattern has been found."
+        },
+        "suggestedWindow": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Suggested input series points needed for detecting the latest point."
+        },
+        "expectedValue": {
+          "type": "number",
+          "format": "float",
+          "description": "Expected value of the latest point."
+        },
+        "upperMargin": {
+          "type": "number",
+          "format": "float",
+          "description": "Upper margin of the latest point. UpperMargin is used to calculate upperBoundary, which equals to expectedValue + (100 - marginScale)*upperMargin. If the value of latest point is between upperBoundary and lowerBoundary, it should be treated as normal value. By adjusting marginScale value, anomaly status of latest point can be changed."
+        },
+        "lowerMargin": {
+          "type": "number",
+          "format": "float",
+          "description": "Lower margin of the latest point. LowerMargin is used to calculate lowerBoundary, which equals to expectedValue - (100 - marginScale)*lowerMargin. "
+        },
+        "isAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status of the latest point, true means the latest point is an anomaly either in negative direction or positive direction."
+        },
+        "isNegativeAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status in negative direction of the latest point. True means the latest point is an anomaly and its real value is smaller than the expected one."
+        },
+        "isPositiveAnomaly": {
+          "type": "boolean",
+          "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
+        }
+      }
     },
     "SeriesId": {
       "type": "string",
@@ -618,89 +613,97 @@
           "type": "string"
         }
       }
-          "startTimeInclusive": {
-            "type": "array",
-            "format": "date-time",
-            "description": "start time of the time series group."
-          },
-          "endTimeInclusive": {
-            "type": "array",
-            "format": "date-time",
-            "description": "end time of the time series group."
-          }
-        }
-      },
-      "QueryTimeSeriesGroupResponse": {
-        "type": "array",
-        "required": [
-          "TimeSeries"
-        ],
-        "properties": {
-          "TimeSeries": {
-            "type": "object",
-            "description": "Time Series related values"
-          }
-        }
-      },
-      "TimeSeries": {
-        "type": "object",
-        "required": [
-          "Columns",
-          "Ids",
-          "Points"
-        ],
-        "properties": {
-          "Columns": {
-            "type": "array",
-            "format": "string",
-            "description": "definition of value of the time series."
-          },
-          "ID": {
-            "type": "object",
-            "items": {
-              "$ref": "#/definitions/ID"
-            },
-            "description": "end time of the time series group."
-          },
-          "Points": {
-            "type": "array",
-            "format": "object",
-            "description": "end time of the time series group."
-          }
-        }
-      },
-      "ID": {
-        "type": "object",
-        "required": [
-          "dimensions",
-          "metricGuid",
-          "seriesId"
-        ],
-        "properties": {
-          "dimensions": {
-            "type": "object",
-            "description": "dimensions of the time series."
-          },
-          "metricGuid": {
-            "type": "string",
-            "description": "the measurement where the time series is recorded."
-          },
-          "seriesId": {
-            "type": "string",
-            "description": "Id of the time series."
-          }
+    },
+    "QueryTimeSeriesGroupRequest": {
+      "type": "object",
+      "required": [
+        "startTimeInclusive",
+        "endTimeInclusive"
+      ],
+      "properties": {
+        "startTimeInclusive": {
+          "type": "array",
+          "format": "date-time",
+          "description": "start time of the time series group."
+        },
+        "endTimeInclusive": {
+          "type": "array",
+          "format": "date-time",
+          "description": "end time of the time series group."
         }
       }
     },
-    "parameters": {
-      "Endpoint": {
-        "name": "Endpoint",
-        "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
-        "x-ms-parameter-location": "client",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
+    "QueryTimeSeriesGroupResponse": {
+      "type": "array",
+      "required": [
+        "TimeSeries"
+      ],
+      "properties": {
+        "TimeSeries": {
+          "type": "object",
+          "description": "Time Series related values"
+        }
+      }
+    },
+    "TimeSeries": {
+      "type": "object",
+      "required": [
+        "Columns",
+        "Ids",
+        "Points"
+      ],
+      "properties": {
+        "Columns": {
+          "type": "array",
+          "format": "string",
+          "description": "definition of value of the time series."
+        },
+        "ID": {
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/ID"
+          },
+          "description": "end time of the time series group."
+        },
+        "Points": {
+          "type": "array",
+          "format": "object",
+          "description": "end time of the time series group."
+        }
+      }
+    },
+    "ID": {
+      "type": "object",
+      "required": [
+        "dimensions",
+        "metricGuid",
+        "seriesId"
+      ],
+      "properties": {
+        "dimensions": {
+          "type": "object",
+          "description": "dimensions of the time series."
+        },
+        "metricGuid": {
+          "type": "string",
+          "description": "the measurement where the time series is recorded."
+        },
+        "seriesId": {
+          "type": "string",
+          "description": "Id of the time series."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
     },
     "timeSeriesId": {
       "name": "timeSeriesId",
@@ -721,6 +724,6 @@
       "in": "path",
       "maxLength": 64,
       "pattern": "^[a-z0-9-_]+$"
-      }
     }
   }
+}
