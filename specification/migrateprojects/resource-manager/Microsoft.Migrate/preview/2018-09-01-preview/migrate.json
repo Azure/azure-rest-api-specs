@@ -1450,61 +1450,14 @@
                "type":"string"
             }
          },
-         "discriminator":"InstanceType"
+         "discriminator":"instanceType"
       },
       "ODataQueryOptions`1":{  
          "type":"object",
          "properties":{  
-            "ifMatch":{  
-               "$ref":"#/definitions/Object",
-               "readOnly":true
-            },
-            "ifNoneMatch":{  
-               "$ref":"#/definitions/Object",
-               "readOnly":true
-            },
-            "request":{  
-               "$ref":"#/definitions/Object",
-               "readOnly":true
-            },
-            "context":{  
-               "$ref":"#/definitions/ODataQueryContext",
-               "readOnly":true
-            },
-            "rawValues":{  
-               "$ref":"#/definitions/ODataRawQueryOptions",
-               "readOnly":true
-            },
-            "selectExpand":{  
-               "$ref":"#/definitions/SelectExpandQueryOption",
-               "readOnly":true
-            },
-            "apply":{  
-               "$ref":"#/definitions/ApplyQueryOption",
-               "readOnly":true
-            },
             "filter":{  
                "$ref":"#/definitions/FilterQueryOption",
                "readOnly":true
-            },
-            "orderBy":{  
-               "$ref":"#/definitions/OrderByQueryOption",
-               "readOnly":true
-            },
-            "skip":{  
-               "$ref":"#/definitions/SkipQueryOption",
-               "readOnly":true
-            },
-            "top":{  
-               "$ref":"#/definitions/TopQueryOption",
-               "readOnly":true
-            },
-            "count":{  
-               "$ref":"#/definitions/CountQueryOption",
-               "readOnly":true
-            },
-            "validator":{  
-               "$ref":"#/definitions/ODataQueryValidator"
             }
          }
       },
@@ -1547,95 +1500,6 @@
             "filter":{  
                "type":"string",
                "readOnly":true
-            },
-            "apply":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "orderBy":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "top":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "skip":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "select":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "expand":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "count":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "format":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "skipToken":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "deltaToken":{  
-               "type":"string",
-               "readOnly":true
-            }
-         }
-      },
-      "SelectExpandQueryOption":{  
-         "type":"object",
-         "properties":{  
-            "context":{  
-               "$ref":"#/definitions/ODataQueryContext",
-               "readOnly":true
-            },
-            "rawSelect":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "rawExpand":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "validator":{  
-               "$ref":"#/definitions/SelectExpandQueryValidator"
-            },
-            "selectExpandClause":{  
-               "$ref":"#/definitions/SelectExpandClause",
-               "readOnly":true
-            },
-            "levelsMaxLiteralExpansionDepth":{  
-               "format":"int32",
-               "type":"integer"
-            }
-         }
-      },
-      "ApplyQueryOption":{  
-         "type":"object",
-         "properties":{  
-            "context":{  
-               "$ref":"#/definitions/ODataQueryContext",
-               "readOnly":true
-            },
-            "resultClrType":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "applyClause":{  
-               "$ref":"#/definitions/ApplyClause",
-               "readOnly":true
-            },
-            "rawValue":{  
-               "type":"string",
-               "readOnly":true
             }
          }
       },
@@ -1656,95 +1520,6 @@
             "rawValue":{  
                "type":"string",
                "readOnly":true
-            }
-         }
-      },
-      "OrderByQueryOption":{  
-         "type":"object",
-         "properties":{  
-            "context":{  
-               "$ref":"#/definitions/ODataQueryContext",
-               "readOnly":true
-            },
-            "orderByNodes":{  
-               "type":"array",
-               "items":{  
-                  "$ref":"#/definitions/OrderByNode"
-               },
-               "readOnly":true
-            },
-            "rawValue":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "validator":{  
-               "$ref":"#/definitions/OrderByQueryValidator"
-            },
-            "orderByClause":{  
-               "$ref":"#/definitions/OrderByClause",
-               "readOnly":true
-            }
-         }
-      },
-      "SkipQueryOption":{  
-         "type":"object",
-         "properties":{  
-            "context":{  
-               "$ref":"#/definitions/ODataQueryContext",
-               "readOnly":true
-            },
-            "rawValue":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "value":{  
-               "format":"int32",
-               "type":"integer",
-               "readOnly":true
-            },
-            "validator":{  
-               "$ref":"#/definitions/SkipQueryValidator"
-            }
-         }
-      },
-      "TopQueryOption":{  
-         "type":"object",
-         "properties":{  
-            "context":{  
-               "$ref":"#/definitions/ODataQueryContext",
-               "readOnly":true
-            },
-            "rawValue":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "value":{  
-               "format":"int32",
-               "type":"integer",
-               "readOnly":true
-            },
-            "validator":{  
-               "$ref":"#/definitions/TopQueryValidator"
-            }
-         }
-      },
-      "CountQueryOption":{  
-         "type":"object",
-         "properties":{  
-            "context":{  
-               "$ref":"#/definitions/ODataQueryContext",
-               "readOnly":true
-            },
-            "rawValue":{  
-               "type":"string",
-               "readOnly":true
-            },
-            "value":{  
-               "type":"boolean",
-               "readOnly":true
-            },
-            "validator":{  
-               "$ref":"#/definitions/CountQueryValidator"
             }
          }
       },
@@ -1956,72 +1731,6 @@
                "$ref":"#/definitions/IEdmTypeReference",
                "readOnly":true
             }
-         }
-      },
-      "OrderByNode":{  
-         "type":"object",
-         "properties":{  
-            "direction":{  
-               "enum":[  
-                  "Ascending",
-                  "Descending"
-               ],
-               "type":"string",
-               "readOnly":true
-            }
-         }
-      },
-      "OrderByQueryValidator":{  
-         "type":"object",
-         "properties":{  
-
-         }
-      },
-      "OrderByClause":{  
-         "type":"object",
-         "properties":{  
-            "thenBy":{  
-               "$ref":"#/definitions/OrderByClause",
-               "readOnly":true
-            },
-            "expression":{  
-               "$ref":"#/definitions/SingleValueNode",
-               "readOnly":true
-            },
-            "direction":{  
-               "enum":[  
-                  "Ascending",
-                  "Descending"
-               ],
-               "type":"string",
-               "readOnly":true
-            },
-            "rangeVariable":{  
-               "$ref":"#/definitions/RangeVariable",
-               "readOnly":true
-            },
-            "itemType":{  
-               "$ref":"#/definitions/IEdmTypeReference",
-               "readOnly":true
-            }
-         }
-      },
-      "SkipQueryValidator":{  
-         "type":"object",
-         "properties":{  
-
-         }
-      },
-      "TopQueryValidator":{  
-         "type":"object",
-         "properties":{  
-
-         }
-      },
-      "CountQueryValidator":{  
-         "type":"object",
-         "properties":{  
-
          }
       },
       "IEdmSchemaElement":{  
@@ -3010,7 +2719,7 @@
                }
             }
          },
-         "discriminator":"InstanceType"
+         "discriminator":"instanceType"
       },
       "RegisterToolInput":{  
          "description":"Class representing the register tool input.",
@@ -3177,7 +2886,7 @@
                "readOnly":true
             }
          },
-         "discriminator":"InstanceType"
+         "discriminator":"instanceType"
       },
       "SolutionDetails":{  
          "description":"Class representing the details of the solution.",
