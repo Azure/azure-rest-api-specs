@@ -3725,7 +3725,13 @@
         "kty": {
           "type": "string",
           "description": "JsonWebKey Key Type (kty), as defined in https://tools.ietf.org/html/draft-ietf-jose-json-web-algorithms-40.",
-          "enum": [ "EC", "EC-HSM", "RSA", "RSA-HSM", "oct" ],
+          "enum": [
+            "EC",
+            "EC-HSM",
+            "RSA",
+            "RSA-HSM",
+            "oct"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true,
@@ -3817,7 +3823,12 @@
         "crv": {
           "type": "string",
           "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
-          "enum": [ "P-256", "P-384", "P-521", "P-256K" ],
+          "enum": [
+            "P-256",
+            "P-384",
+            "P-521",
+            "P-256K"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
             "modelAsString": true,
@@ -3864,7 +3875,12 @@
         "recoveryLevel": {
           "type": "string",
           "description": "Reflects the deletion recovery level currently in effect for keys in the current vault. If it contains 'Purgeable' the key can be permanently deleted by a privileged user; otherwise, only the system can purge the key, at the end of the retention interval.",
-          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription"
+          ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
             "modelAsString": true
@@ -4106,7 +4122,12 @@
         "recoveryLevel": {
           "type": "string",
           "description": "Reflects the deletion recovery level currently in effect for secrets in the current vault. If it contains 'Purgeable', the secret can be permanently deleted by a privileged user; otherwise, only the system can purge the secret, at the end of the retention interval.",
-          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription"
+          ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
             "modelAsString": true
@@ -4127,7 +4148,9 @@
         }
       },
       "description": "The secret restore parameters.",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "StorageRestoreParameters": {
       "properties": {
@@ -4139,7 +4162,9 @@
         }
       },
       "description": "The secret restore parameters.",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "CertificateAttributes": {
       "allOf": [
@@ -4151,7 +4176,12 @@
         "recoveryLevel": {
           "type": "string",
           "description": "Reflects the deletion recovery level currently in effect for certificates in the current vault. If it contains 'Purgeable', the certificate can be permanently deleted by a privileged user; otherwise, only the system can purge the certificate, at the end of the retention interval.",
-          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription"
+          ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
             "modelAsString": true
@@ -4400,7 +4430,13 @@
           "x-ms-client-name": "keyType",
           "type": "string",
           "description": "The type of key pair to be used for the certificate.",
-          "enum": [ "EC", "EC-HSM", "RSA", "RSA-HSM", "oct" ],
+          "enum": [
+            "EC",
+            "EC-HSM",
+            "RSA",
+            "RSA-HSM",
+            "oct"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true
@@ -4419,7 +4455,12 @@
           "x-ms-client-name": "curve",
           "type": "string",
           "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
-          "enum": [ "P-256", "P-384", "P-521", "P-256K" ],
+          "enum": [
+            "P-256",
+            "P-384",
+            "P-521",
+            "P-256K"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
             "modelAsString": true
@@ -4459,7 +4500,17 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "digitalSignature", "nonRepudiation", "keyEncipherment", "dataEncipherment", "keyAgreement", "keyCertSign", "cRLSign", "encipherOnly", "decipherOnly" ],
+            "enum": [
+              "digitalSignature",
+              "nonRepudiation",
+              "keyEncipherment",
+              "dataEncipherment",
+              "keyAgreement",
+              "keyCertSign",
+              "cRLSign",
+              "encipherOnly",
+              "decipherOnly"
+            ],
             "x-ms-enum": {
               "name": "KeyUsageType",
               "modelAsString": true
@@ -4514,7 +4565,10 @@
         "action_type": {
           "type": "string",
           "description": "The type of the action.",
-          "enum": [ "EmailContacts", "AutoRenew" ],
+          "enum": [
+            "EmailContacts",
+            "AutoRenew"
+          ],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": false
@@ -4708,7 +4762,13 @@
           "type": "string",
           "minLength": 1,
           "description": "The type of key to create. For valid values, see JsonWebKeyType.",
-          "enum": [ "EC", "EC-HSM", "RSA", "RSA-HSM", "oct" ],
+          "enum": [
+            "EC",
+            "EC-HSM",
+            "RSA",
+            "RSA-HSM",
+            "oct"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyType",
             "modelAsString": true
@@ -4724,7 +4784,14 @@
           "items": {
             "type": "string",
             "description": "JSON web key operations. For more information, see JsonWebKeyOperation.",
-            "enum": [ "encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey" ],
+            "enum": [
+              "encrypt",
+              "decrypt",
+              "sign",
+              "verify",
+              "wrapKey",
+              "unwrapKey"
+            ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
               "modelAsString": true
@@ -4746,7 +4813,12 @@
           "x-ms-client-name": "curve",
           "type": "string",
           "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
-          "enum": [ "P-256", "P-384", "P-521", "P-256K" ],
+          "enum": [
+            "P-256",
+            "P-384",
+            "P-521",
+            "P-256K"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyCurveName",
             "modelAsString": true
@@ -4754,7 +4826,9 @@
         }
       },
       "description": "The key create parameters.",
-      "required": [ "kty" ]
+      "required": [
+        "kty"
+      ]
     },
     "KeyImportParameters": {
       "properties": {
@@ -4780,7 +4854,9 @@
         }
       },
       "description": "The key import parameters.",
-      "required": [ "key" ]
+      "required": [
+        "key"
+      ]
     },
     "KeyOperationsParameters": {
       "properties": {
@@ -4789,7 +4865,11 @@
           "type": "string",
           "minLength": 1,
           "description": "algorithm identifier",
-          "enum": [ "RSA-OAEP", "RSA-OAEP-256", "RSA1_5" ],
+          "enum": [
+            "RSA-OAEP",
+            "RSA-OAEP-256",
+            "RSA1_5"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeyEncryptionAlgorithm",
             "modelAsString": true
@@ -4801,7 +4881,10 @@
         }
       },
       "description": "The key operations parameters.",
-      "required": [ "alg", "value" ]
+      "required": [
+        "alg",
+        "value"
+      ]
     },
     "KeySignParameters": {
       "properties": {
@@ -4810,7 +4893,19 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ES256K" ],
+          "enum": [
+            "PS256",
+            "PS384",
+            "PS512",
+            "RS256",
+            "RS384",
+            "RS512",
+            "RSNULL",
+            "ES256",
+            "ES384",
+            "ES512",
+            "ES256K"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true,
@@ -4868,7 +4963,10 @@
         }
       },
       "description": "The key operations parameters.",
-      "required": [ "alg", "value" ]
+      "required": [
+        "alg",
+        "value"
+      ]
     },
     "KeyVerifyParameters": {
       "properties": {
@@ -4877,7 +4975,19 @@
           "type": "string",
           "minLength": 1,
           "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
-          "enum": [ "PS256", "PS384", "PS512", "RS256", "RS384", "RS512", "RSNULL", "ES256", "ES384", "ES512", "ES256K" ],
+          "enum": [
+            "PS256",
+            "PS384",
+            "PS512",
+            "RS256",
+            "RS384",
+            "RS512",
+            "RSNULL",
+            "ES256",
+            "ES384",
+            "ES512",
+            "ES256K"
+          ],
           "x-ms-enum": {
             "name": "JsonWebKeySignatureAlgorithm",
             "modelAsString": true
@@ -4896,7 +5006,11 @@
         }
       },
       "description": "The key verify parameters.",
-      "required": [ "alg", "digest", "value" ]
+      "required": [
+        "alg",
+        "digest",
+        "value"
+      ]
     },
     "KeyUpdateParameters": {
       "properties": {
@@ -4904,7 +5018,14 @@
           "type": "array",
           "items": {
             "type": "string",
-            "enum": [ "encrypt", "decrypt", "sign", "verify", "wrapKey", "unwrapKey" ],
+            "enum": [
+              "encrypt",
+              "decrypt",
+              "sign",
+              "verify",
+              "wrapKey",
+              "unwrapKey"
+            ],
             "x-ms-enum": {
               "name": "JsonWebKeyOperation",
               "modelAsString": true
@@ -4936,7 +5057,9 @@
         }
       },
       "description": "The key restore parameters.",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "SecretSetParameters": {
       "properties": {
@@ -4962,7 +5085,9 @@
         }
       },
       "description": "The secret set parameters.",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "SecretUpdateParameters": {
       "properties": {
@@ -5038,7 +5163,9 @@
         }
       },
       "description": "The certificate import parameters.",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "CertificateUpdateParameters": {
       "properties": {
@@ -5087,7 +5214,9 @@
         }
       },
       "description": "The certificate merge parameters",
-      "required": [ "x5c" ]
+      "required": [
+        "x5c"
+      ]
     },
     "CertificateIssuerSetParameters": {
       "properties": {
@@ -5110,7 +5239,9 @@
         }
       },
       "description": "The certificate issuer set parameters.",
-      "required": [ "provider" ]
+      "required": [
+        "provider"
+      ]
     },
     "CertificateIssuerUpdateParameters": {
       "properties": {
@@ -5142,7 +5273,9 @@
         }
       },
       "description": "The certificate operation update parameters.",
-      "required": [ "cancellation_requested" ]
+      "required": [
+        "cancellation_requested"
+      ]
     },
     "KeyOperationResult": {
       "properties": {
@@ -5360,7 +5493,12 @@
         "recoveryLevel": {
           "type": "string",
           "description": "Reflects the deletion recovery level currently in effect for storage accounts in the current vault. If it contains 'Purgeable' the storage account can be permanently deleted by a privileged user; otherwise, only the system can purge the storage account, at the end of the retention interval.",
-          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription"
+          ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
             "modelAsString": true
@@ -5472,7 +5610,11 @@
         }
       },
       "description": "The storage account create parameters.",
-      "required": [ "resourceId", "activeKeyName", "autoRegenerateKey" ]
+      "required": [
+        "resourceId",
+        "activeKeyName",
+        "autoRegenerateKey"
+      ]
     },
     "StorageAccountUpdateParameters": {
       "properties": {
@@ -5511,7 +5653,9 @@
         }
       },
       "description": "The storage account key regenerate parameters.",
-      "required": [ "keyName" ]
+      "required": [
+        "keyName"
+      ]
     },
     "StorageAccountItem": {
       "properties": {
@@ -5624,7 +5768,12 @@
         "recoveryLevel": {
           "type": "string",
           "description": "Reflects the deletion recovery level currently in effect for SAS definitions in the current vault. If it contains 'Purgeable' the SAS definition can be permanently deleted by a privileged user; otherwise, only the system can purge the SAS definition, at the end of the retention interval.",
-          "enum": [ "Purgeable", "Recoverable+Purgeable", "Recoverable", "Recoverable+ProtectedSubscription" ],
+          "enum": [
+            "Purgeable",
+            "Recoverable+Purgeable",
+            "Recoverable",
+            "Recoverable+ProtectedSubscription"
+          ],
           "x-ms-enum": {
             "name": "DeletionRecoveryLevel",
             "modelAsString": true
@@ -5656,7 +5805,10 @@
         "sasType": {
           "type": "string",
           "description": "The type of SAS token the SAS definition will create.",
-          "enum": [ "account", "service" ],
+          "enum": [
+            "account",
+            "service"
+          ],
           "x-ms-enum": {
             "name": "SasTokenType",
             "modelAsString": true
@@ -5810,7 +5962,10 @@
         "sasType": {
           "type": "string",
           "description": "The type of SAS token the SAS definition will create.",
-          "enum": [ "account", "service" ],
+          "enum": [
+            "account",
+            "service"
+          ],
           "x-ms-enum": {
             "name": "SasTokenType",
             "modelAsString": true
@@ -5834,7 +5989,11 @@
         }
       },
       "description": "The SAS definition create parameters.",
-      "required": [ "templateUri", "sasType", "validityPeriod" ]
+      "required": [
+        "templateUri",
+        "sasType",
+        "validityPeriod"
+      ]
     },
     "SasDefinitionUpdateParameters": {
       "properties": {
@@ -5845,7 +6004,10 @@
         "sasType": {
           "type": "string",
           "description": "The type of SAS token the SAS definition will create.",
-          "enum": [ "account", "service" ],
+          "enum": [
+            "account",
+            "service"
+          ],
           "x-ms-enum": {
             "name": "SasTokenType",
             "modelAsString": true
@@ -5909,7 +6071,9 @@
         }
       },
       "description": "The certificate restore parameters.",
-      "required": [ "value" ]
+      "required": [
+        "value"
+      ]
     },
     "BackupCertificateResult": {
       "properties": {
