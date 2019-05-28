@@ -1113,6 +1113,46 @@
 
          }
       },
+      "DatabaseInstanceCollection":{  
+         "description":"Collection of database instances.",
+         "type":"object",
+         "properties":{  
+            "value":{  
+               "description":"Gets or sets the database instances.",
+               "type":"array",
+               "items":{  
+                  "$ref":"#/definitions/DatabaseInstance"
+               }
+            },
+            "nextLink":{  
+               "description":"Gets or sets the value of nextLink.",
+               "type":"string"
+            }
+         }
+      },
+      "DatabaseInstance":{  
+         "description":"DatabaseInstance REST resource.",
+         "type":"object",
+         "properties":{  
+            "id":{  
+               "description":"Gets or sets the relative URL to get to this REST resource.",
+               "type":"string"
+            },
+            "name":{  
+               "description":"Gets or sets the name of this REST resource.",
+               "type":"string"
+            },
+            "type":{  
+               "description":"Gets the type of this REST resource.",
+               "type":"string",
+               "readOnly":true
+            },
+            "properties":{  
+               "$ref":"#/definitions/DatabaseInstanceProperties",
+               "description":"Gets or sets the properties of the machine."
+            }
+         }
+      },
       "DatabaseCollection":{  
          "description":"Collection of databases.",
          "type":"object",
