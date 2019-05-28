@@ -27,7 +27,7 @@
       "post": {
         "summary": "Detect anomalies for the entire series in batch.",
         "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
-        "operationId": "EntireDetect",
+        "operationId": "Detection_EntireDetect",
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -68,7 +68,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
         "description": "This operation generates a model using points before the latest one. With this method, only historical points are used to determine whether the target point is an anomaly. The latest point detecting operation matches the scenario of real-time monitoring of business metrics.",
-        "operationId": "LastDetect",
+        "operationId": "Detection_LastDetect",
         "parameters": [{
           "name": "body",
           "in": "body",
@@ -193,6 +193,155 @@
             "$ref": "./examples/QueryTimeSeriesGroup.json"
           }
         }
+    "/timeseriesgroups/{timeSeriesGroupId}": {
+      "get": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesGroup"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesGroup"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupDelete.json"
+          }
+        }
+      }
+    },
+    "/timeseriesgroups": {
+      "get": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesGroups"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupList.json"
+          }
+        }
+      }
       }
     },
     "definitions": {
@@ -221,6 +370,23 @@
           }
         }
       },
+    "Granularity": {
+      "type": "string",
+      "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "Granularity",
+        "modelAsString": false
+      },
+      "enum": [
+        "yearly",
+        "monthly",
+        "weekly",
+        "daily",
+        "hourly",
+        "minutely"
+      ]
+    },
       "Request": {
         "type": "object",
         "required": [
@@ -236,20 +402,7 @@
             }
           },
           "granularity": {
-            "type": "string",
-            "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
-            "x-ms-enum": {
-              "name": "Granularity",
-              "modelAsString": false
-            },
-            "enum": [
-              "yearly",
-              "monthly",
-              "weekly",
-              "daily",
-              "hourly",
-              "minutely"
-            ]
+          "$ref": "#/definitions/Granularity"
           },
           "customInterval": {
             "type": "integer",
@@ -413,58 +566,58 @@
             "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
           }
         }
-      },
-      "DetectInconsistencyRequest": {
-        "type": "object",
-        "required": [
-          "epsilon",
-          "startTimeInclusive",
-          "endtTimeInclusive"
-        ],
-        "properties": {
-          "epsilon": {
-            "type": "number",
-            "format": "float",
-            "description": "Parameters to get inconsistentcy result. Smaller epislon mean greater sensistivity."
-          },
-          "startTimeInclusive": {
-            "type": "string",
-            "format": "date-time",
-            "description": "Start time of the time series group (ISO8601 format)."
-          },
-          "endtTimeInclusive": {
-            "type": "string",
-            "format": "date-time",
-            "description": "End time of the time series group (ISO8601 format)."
-          }
+    },
+    "SeriesId": {
+      "type": "string",
+      "description": "",
+      "x-nullable": false
+    },
+    "GroupId": {
+      "type": "string",
+      "description": "",
+      "x-nullable": false
+    },
+    "TimeSeriesGroup": {
+      "type": "object",
+      "required": [
+        "groupId",
+        "granularity"
+      ],
+      "properties": {
+        "groupId": {
+          "$ref": "#/definitions/GroupId"
+        },
+        "description": {
+          "type": "string",
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
         }
-      },
-      "DetectInconsistencyResponse": {
-        "type": "object",
-        "required": [
-          "inconsistency",
-          "score"
-        ],
-        "properties": {
-          "inconsistency": {
-            "type": "array",
-            "format": "string",
-            "description": "IDs of the inconsistent series."
-          },
-          "score": {
-            "type": "array",
-            "format": "float",
-            "description": "Severities of the inconsistent series."
+      }
+    },
+    "TimeSeriesGroups": {
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "All time series groups.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesGroup"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
-      },
-      "QueryTimeSeriesGroupRequest": {
-        "type": "object",
-        "required": [
-          "startTimeInclusive",
-          "endTimeInclusive"
-        ],
-        "properties": {
+      }
           "startTimeInclusive": {
             "type": "array",
             "format": "date-time",
@@ -548,15 +701,26 @@
         "type": "string",
         "in": "path",
         "x-ms-skip-url-encoding": true
-      },
-      "timeseriesGroupId": {
-        "name": "timeseriesGroupId",
-        "description": "Supported Cognitive Services time series group (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
-        "x-ms-parameter-location": "client",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
+    },
+    "timeSeriesId": {
+      "name": "timeSeriesId",
+      "description": "",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
+    },
+    "timeSeriesGroupId": {
+      "name": "timeSeriesGroupId",
+      "description": "",
+      "x-ms-parameter-location": "method",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "maxLength": 64,
+      "pattern": "^[a-z0-9-_]+$"
       }
     }
   }
