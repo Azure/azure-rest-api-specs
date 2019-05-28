@@ -112,6 +112,156 @@
           }
         }
       }
+    },
+    "/timeseriesgroups/{timeSeriesGroupId}": {
+      "get": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesGroup"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupGet.json"
+          }
+        }
+      },
+      "put": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesGroup"
+            }
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation."
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupDelete.json"
+          }
+        }
+      }
+    },
+    "/timeseriesgroups": {
+      "get": {
+        "summary": "",
+        "description": "",
+        "operationId": "TimeSeriesGroup_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/timeSeriesGroupId"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/SeriesGroupResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/APIError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+            "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Detect anomaly status of the latest point in time series example": {
+            "$ref": "./examples/TimeSeriesGroupList.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -336,6 +486,58 @@
           "description": "Anomaly status in positive direction of the latest point. True means the latest point is an anomaly and its real value is larger than the expected one."
         }
       }
+    },
+    "SeriesId": {
+      "type": "string",
+      "description": "",
+      "x-nullable": false
+    },
+    "GroupId": {
+      "type": "string",
+      "description": "",
+      "x-nullable": false
+    },
+    "TimeSeriesGroup": {
+      "type": "object",
+      "required": [
+        "groupId",
+        "granularity"
+      ],
+      "properties": {
+        "groupId": {
+          "$ref": "#/definitions/GroupId"
+        },
+        "description": {
+          "type": "string",
+          "description": ""
+        },
+        "name": {
+          "type": "string",
+          "description": ""
+        },
+        "granularity": {
+          "$ref": "#/definitions/Granularity"
+        },
+        "customInterval": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Custom Interval is used to set non-standard time interval, for example, if the series is 5 minutes, request can be set as {\"granularity\":\"minutely\", \"customInterval\":5}."
+        }
+      }
+    },
+    "SeriesGroupResponse": {
+      "properties": {
+        "groups": {
+          "type": "array",
+          "description": "All time series groups.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesGroup"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
     }
   },
   "parameters": {
@@ -348,8 +550,8 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
-    "timeseriesId": {
-      "name": "timeseriesId",
+    "timeSeriesId": {
+      "name": "timeSeriesId",
       "description": "",
       "x-ms-parameter-location": "method",
       "required": true,
@@ -358,8 +560,8 @@
       "maxLength": 64,
       "pattern": "^[a-z0-9-_]+$"
     },
-    "timeseriesGroupId": {
-      "name": "timeseriesGroupId",
+    "timeSeriesGroupId": {
+      "name": "timeSeriesGroupId",
       "description": "",
       "x-ms-parameter-location": "method",
       "required": true,
