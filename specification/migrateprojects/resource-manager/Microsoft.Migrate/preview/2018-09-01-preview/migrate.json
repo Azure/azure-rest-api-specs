@@ -1153,6 +1153,102 @@
             }
          }
       },
+      "DatabaseInstanceProperties":{  
+         "description":"Properties of the database instance resource.",
+         "type":"object",
+         "properties":{  
+            "discoveryData":{  
+               "description":"Gets or sets the assessment details of the database instance published by various sources.",
+               "type":"array",
+               "items":{  
+                  "$ref":"#/definitions/DatabaseInstanceDiscoveryDetails"
+               }
+            },
+            "summary":{  
+               "description":"Gets or sets the database instances summary per solution. The key of\r\n            dictionary is the solution name and value is the corresponding database instance summary object.",
+               "type":"object",
+               "additionalProperties":{  
+                  "$ref":"#/definitions/DatabaseInstanceSummary"
+               }
+            },
+            "lastUpdatedTime":{  
+               "format":"date-time",
+               "description":"Gets or sets the time of the last modification of the database.",
+               "type":"string"
+            }
+         }
+      },
+      "DatabaseInstanceDiscoveryDetails":{  
+         "description":"Discovery properties that can be shared by various publishers.",
+         "type":"object",
+         "properties":{  
+            "lastUpdatedTime":{  
+               "format":"date-time",
+               "description":"Gets or sets the time of the last modification of\r\n            the database instance details.",
+               "type":"string"
+            },
+            "instanceId":{  
+               "description":"Gets or sets the database instance Id.",
+               "type":"string"
+            },
+            "enqueueTime":{  
+               "description":"Gets or sets the time the message was enqueued.",
+               "type":"string"
+            },
+            "solutionName":{  
+               "description":"Gets or sets the name of the solution that sent the data.",
+               "type":"string"
+            },
+            "instanceName":{  
+               "description":"Gets or sets the database instance name.",
+               "type":"string"
+            },
+            "instanceVersion":{  
+               "description":"Gets or sets the database instance version.",
+               "type":"string"
+            },
+            "instanceType":{  
+               "description":"Gets or sets the database instance type.",
+               "type":"string"
+            },
+            "hostName":{  
+               "description":"Gets or sets the host name of the database server.",
+               "type":"string"
+            },
+            "ipAddress":{  
+               "description":"Gets or sets the IP addresses of the database server.\r\n            IP addresses could be IP V4 or IP V6.",
+               "type":"string"
+            },
+            "portNumber":{  
+               "format":"int32",
+               "description":"Gets or sets the port number of the database server.",
+               "type":"integer"
+            },
+            "extendedInfo":{  
+               "description":"Gets or sets the extended properties of the database server.",
+               "type":"object",
+               "additionalProperties":{  
+                  "type":"string"
+               }
+            }
+         }
+      },
+      "DatabaseInstanceSummary":{  
+         "description":"Class representing the database instance summary object.",
+         "type":"object",
+         "properties":{  
+            "databasesAssessedCount":{  
+               "format":"int32",
+               "description":"Gets or sets the count of databases assessed.",
+               "type":"integer"
+            },
+            "migrationReadyCount":{  
+               "format":"int32",
+               "description":"Gets or sets the count of databases ready for migration.",
+               "type":"integer"
+            }
+         }
+      },
       "DatabaseCollection":{  
          "description":"Collection of databases.",
          "type":"object",
