@@ -31,7 +31,7 @@
       "post": {
         "summary": "Detect anomalies for the entire series in batch.",
         "description": "This operation generates a model using an entire series, each point is detected with the same model. With this method, points before and after a certain point are used to determine whether it is an anomaly. The entire detection can give user an overall status of the time series.",
-        "operationId": "EntireDetect",
+        "operationId": "Detection_EntireDetect",
         "parameters": [
           {
             "name": "body",
@@ -74,7 +74,7 @@
       "post": {
         "summary": "Detect anomaly status of the latest point in time series.",
         "description": "This operation generates a model using points before the latest one. With this method, only historical points are used to determine whether the target point is an anomaly. The latest point detecting operation matches the scenario of real-time monitoring of business metrics.",
-        "operationId": "LastDetect",
+        "operationId": "Detection_LastDetect",
         "parameters": [
           {
             "name": "body",
@@ -140,6 +140,23 @@
         }
       }
     },
+    "Granularity": {
+      "type": "string",
+      "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
+      "x-nullable": false,
+      "x-ms-enum": {
+        "name": "Granularity",
+        "modelAsString": false
+      },
+      "enum": [
+        "yearly",
+        "monthly",
+        "weekly",
+        "daily",
+        "hourly",
+        "minutely"
+      ]
+    },
     "Request": {
       "type": "object",
       "required": [
@@ -155,20 +172,7 @@
           }
         },
         "granularity": {
-          "type": "string",
-          "description": "Can only be one of yearly, monthly, weekly, daily, hourly or minutely. Granularity is used for verify whether input series is valid.",
-          "x-ms-enum": {
-            "name": "Granularity",
-            "modelAsString": false
-          },
-          "enum": [
-            "yearly",
-            "monthly",
-            "weekly",
-            "daily",
-            "hourly",
-            "minutely"
-          ]
+          "$ref": "#/definitions/Granularity"
         },
         "customInterval": {
           "type": "integer",
