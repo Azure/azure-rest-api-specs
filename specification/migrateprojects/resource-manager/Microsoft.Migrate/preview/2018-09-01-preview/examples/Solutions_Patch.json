@@ -4,7 +4,7 @@
       "api-version":"2018-09-01-preview",
       "subscriptionId":"75dd7e42-4fd1-4512-af04-83ad9864335b",
       "migrateProjectName":"project01",
-      "solutionName":"smssolution",
+      "solutionName":"dbsolution",
       "solutionInput":{  
          "properties":{  
             "status":"Active"
@@ -14,19 +14,21 @@
    "responses":{  
       "200":{  
          "body":{  
-            "id":"/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/smssolution",
-            "name":"smssolution",
+            "id":"/subscriptions/75dd7e42-4fd1-4512-af04-83ad9864335b/resourceGroups/myResourceGroup/providers/Microsoft.Migrate/MigrateProjects/project01/Solutions/dbsolution",
+            "name":"dbsolution",
             "type":"Microsoft.Migrate/MigrateProjects/Solutions",
+            "etag":"\"1c0018c7-0000-0000-0000-5c936e530000\"",
             "properties":{  
-               "tool":"ServerMigration",
-               "purpose":"Migration",
-               "goal":"Servers",
+               "tool":"DataMigrationAssistant",
+               "purpose":"Assessment",
+               "goal":"Databases",
                "status":"Active",
+               "cleanupState":"None",
                "summary":{  
-                  "discoveredCount":0,
-                  "assessedCount":0,
-                  "replicatingCount":0,
-                  "migratedCount":0
+                  "instanceType":"Databases",
+                  "databasesAssessedCount":0,
+                  "databaseInstancesAssessedCount":0,
+                  "migrationReadyCount":0
                },
                "details":{  
                   "groupCount":0,
