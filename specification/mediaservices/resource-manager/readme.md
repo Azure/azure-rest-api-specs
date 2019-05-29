@@ -30,12 +30,11 @@ tag: package-preview-2019-05
 opt-in-extensible-enums: true
 ```
 
-
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-05'
+``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
   - Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
   - Microsoft.Media/preview/2019-05-01-preview/Accounts.json
@@ -46,6 +45,7 @@ input-file:
   - Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/preview/2019-05-01-preview/streamingservice.json
 ```
+
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
@@ -243,4 +243,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
 regenerate-manager: true
 generate-interface: true
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: Encoding.json
+    where: $.definitions.JobProperties
+    reason: Input not required for Job update
 ```
