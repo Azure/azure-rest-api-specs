@@ -1165,7 +1165,7 @@
                }
             },
             "summary":{  
-               "description":"Gets or sets the database instances summary per solution. The key of\r\n            dictionary is the solution name and value is the corresponding database instance summary object.",
+               "description":"Gets or sets the database instances summary per solution. The key of dictionary is the solution name and value is the corresponding database instance summary object.",
                "type":"object",
                "additionalProperties":{  
                   "$ref":"#/definitions/DatabaseInstanceSummary"
@@ -1184,7 +1184,7 @@
          "properties":{  
             "lastUpdatedTime":{  
                "format":"date-time",
-               "description":"Gets or sets the time of the last modification of\r\n            the database instance details.",
+               "description":"Gets or sets the time of the last modification of the database instance details.",
                "type":"string"
             },
             "instanceId":{  
@@ -1216,7 +1216,7 @@
                "type":"string"
             },
             "ipAddress":{  
-               "description":"Gets or sets the IP addresses of the database server.\r\n            IP addresses could be IP V4 or IP V6.",
+               "description":"Gets or sets the IP addresses of the database server. IP addresses could be IP V4 or IP V6.",
                "type":"string"
             },
             "portNumber":{  
@@ -2614,7 +2614,9 @@
                "description":"Gets or sets the tags.",
                "type":"object",
                "properties":{  
-
+                  "additionalProperties":{  
+                     "type":"string"
+                  }
                }
             }
          }
@@ -2948,11 +2950,6 @@
             }
          ],
          "properties":{  
-            "instanceType":{  
-               "description":"Gets the Instance type.",
-               "type":"string",
-               "readOnly":true
-            },
             "discoveredCount":{  
                "format":"int32",
                "description":"Gets or sets the count of entities discovered.",
@@ -2977,28 +2974,6 @@
                "format":"int32",
                "description":"Gets or sets the count of entities migrated.",
                "type":"integer"
-            },
-            "refreshSummaryState":{  
-               "description":"Gets or sets the state of refresh summary.",
-               "enum":[  
-                  "Started",
-                  "InProgress",
-                  "Completed",
-                  "Failed"
-               ],
-               "type":"string"
-            },
-            "lastSummaryRefreshedTime":{  
-               "format":"date-time",
-               "description":"Gets or sets the time when summary was last refreshed.",
-               "type":"string"
-            },
-            "extendedSummary":{  
-               "description":"Gets or sets the extended summary.",
-               "type":"object",
-               "additionalProperties":{  
-                  "type":"string"
-               }
             }
          },
          "x-ms-discriminator-value":"Servers"
@@ -3012,33 +2987,7 @@
             }
          ],
          "properties":{  
-            "instanceType":{  
-               "description":"Gets the Instance type.",
-               "type":"string",
-               "readOnly":true
-            },
-            "refreshSummaryState":{  
-               "description":"Gets or sets the state of refresh summary.",
-               "enum":[  
-                  "Started",
-                  "InProgress",
-                  "Completed",
-                  "Failed"
-               ],
-               "type":"string"
-            },
-            "lastSummaryRefreshedTime":{  
-               "format":"date-time",
-               "description":"Gets or sets the time when summary was last refreshed.",
-               "type":"string"
-            },
-            "extendedSummary":{  
-               "description":"Gets or sets the extended summary.",
-               "type":"object",
-               "additionalProperties":{  
-                  "type":"string"
-               }
-            }
+
          },
          "x-ms-discriminator-value":"Databases"
       },
@@ -3051,11 +3000,6 @@
             }
          ],
          "properties":{  
-            "instanceType":{  
-               "description":"Gets the Instance type.",
-               "type":"string",
-               "readOnly":true
-            },
             "discoveredCount":{  
                "format":"int32",
                "description":"Gets or sets the count of servers discovered.",
@@ -3093,11 +3037,6 @@
             }
          ],
          "properties":{  
-            "instanceType":{  
-               "description":"Gets the Instance type.",
-               "type":"string",
-               "readOnly":true
-            },
             "databasesAssessedCount":{  
                "format":"int32",
                "description":"Gets or sets the count of databases assessed.",
@@ -3125,37 +3064,8 @@
             }
          ],
          "properties":{  
-            "instanceType":{  
-               "description":"Gets the Instance type.",
-               "type":"string",
-               "readOnly":true
-            },
             "machine":{  
                "description":"Gets or sets the machine for which the error is being reported.",
-               "type":"string"
-            },
-            "errorCode":{  
-               "description":"Gets or sets the error code.",
-               "type":"string"
-            },
-            "errorMessage":{  
-               "description":"Gets or sets the error message.",
-               "type":"string"
-            },
-            "recommendation":{  
-               "description":"Gets or sets the recommendation for the error.",
-               "type":"string"
-            },
-            "possibleCauses":{  
-               "description":"Gets or sets the possible causes for the error.",
-               "type":"string"
-            },
-            "solution":{  
-               "description":"Gets or sets the solution for which the error is being reported.",
-               "type":"string"
-            },
-            "clientRequestId":{  
-               "description":"Gets or sets the client request Id of the payload for which the event is being reported.",
                "type":"string"
             }
          },
@@ -3170,41 +3080,12 @@
             }
          ],
          "properties":{  
-            "instanceType":{  
-               "description":"Gets the Instance type.",
-               "type":"string",
-               "readOnly":true
-            },
             "database":{  
                "description":"Gets or sets the database for which the error is being reported.",
                "type":"string"
             },
             "databaseInstanceId":{  
                "description":"Gets or sets the database instance for which the error is being reported.",
-               "type":"string"
-            },
-            "errorCode":{  
-               "description":"Gets or sets the error code.",
-               "type":"string"
-            },
-            "errorMessage":{  
-               "description":"Gets or sets the error message.",
-               "type":"string"
-            },
-            "recommendation":{  
-               "description":"Gets or sets the recommendation for the error.",
-               "type":"string"
-            },
-            "possibleCauses":{  
-               "description":"Gets or sets the possible causes for the error.",
-               "type":"string"
-            },
-            "solution":{  
-               "description":"Gets or sets the solution for which the error is being reported.",
-               "type":"string"
-            },
-            "clientRequestId":{  
-               "description":"Gets or sets the client request Id of the payload for which the event is being reported.",
                "type":"string"
             }
          },
