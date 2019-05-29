@@ -1,0 +1,45 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "timeseriesGroupId": "{timeseriesGroupId}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {
+      "startTimeInclusive": "1975-05-01T00:00:00Z",
+      "endtTimeInclusive": "1975-05-02T00:00:00Z"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "inconsistencies": [{
+            "inconsistentSeriesId": [
+              "1",
+              "2"
+            ],
+            "score": {
+              0.4,
+              0.6
+            },
+            "begin": "2019-04-29T03:49:39.027Z",
+            "end": "2019-05-1T03:49:39.027Z"
+          },
+
+          {
+            "inconsistentSeriesId": [
+              "1",
+              "2"
+            ],
+            "score": {
+              0.1,
+              0.6
+            },
+            "begin": "2019-04-30T03:49:39.027Z",
+            "end": "2019-05-2T03:49:39.027Z"
+          }
+
+        ]
+      }
+    }
+  }
+}

@@ -150,7 +150,7 @@
         }
       }
     },
-    "/timeseriesgroups/{timeseriesGroupId}/query": {
+    "/timeseriesgroups/{timeseriesGroupId}/inconsistency/query": {
       "post": {
         "summary": "Query time series properties from a group of similiar time series",
         "description": " This operation helps query properties of one group, for example the inconsistent series among a group series with similiar trend.",
@@ -614,83 +614,96 @@
         }
       }
     },
+    "DetectInconsistencyRequest": {
+      "type": "object",
+      "required": [
+        "begin",
+        "end",
+        "epsilon"
+      ],
+      "properties": {
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        },
+        "epsilon": {
+          "type": "number",
+          "format": "float",
+          "description": "Parameter to be tuned to get inconsistency."
+        }
+      }
+    },
+    "DetectInconsistencyResponse": {
+      "type": "object",
+      "required": [
+        "inconsistentSeriesId",
+        "score",
+        "begin",
+        "end",
+        "epsilon"
+      ],
+      "properties": {
+        "inconsistentSeriesId": {
+          "type": "array",
+          "format": "String",
+          "description": "IDs of inconsistent series in the time series group."
+        },
+        "score": {
+          "type": "array",
+          "format": "float",
+          "description": "Scores of inconsitent series in the time series group. "
+        },
+        "begin": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Start time of the time series group."
+        },
+        "end": {
+          "type": "string",
+          "format": "date-time",
+          "description": "End time of the time series group."
+        },
+        "epsilon": {
+          "type": "number",
+          "format": "float",
+          "description": "Parameter to be tuned to get inconsistency."
+        }
+      }
+    },
     "QueryTimeSeriesGroupRequest": {
       "type": "object",
       "required": [
-        "startTimeInclusive",
-        "endTimeInclusive"
+        "begin",
+        "end"
       ],
       "properties": {
-        "startTimeInclusive": {
-          "type": "array",
+        "begin": {
+          "type": "string",
           "format": "date-time",
-          "description": "start time of the time series group."
+          "description": "Start time of the time series group."
         },
-        "endTimeInclusive": {
-          "type": "array",
+        "end": {
+          "type": "string",
           "format": "date-time",
-          "description": "end time of the time series group."
+          "description": "End time of the time series group."
         }
       }
     },
     "QueryTimeSeriesGroupResponse": {
-      "type": "array",
-      "required": [
-        "TimeSeries"
-      ],
-      "properties": {
-        "TimeSeries": {
-          "type": "object",
-          "description": "Time Series related values"
-        }
-      }
-    },
-    "TimeSeries": {
       "type": "object",
       "required": [
-        "Columns",
-        "Ids",
-        "Points"
+        "Inconsistencies"
       ],
       "properties": {
-        "Columns": {
+        "Inconsistencies": {
           "type": "array",
-          "format": "string",
-          "description": "definition of value of the time series."
-        },
-        "ID": {
-          "type": "object",
-          "items": {
-            "$ref": "#/definitions/ID"
-          },
-          "description": "end time of the time series group."
-        },
-        "Points": {
-          "type": "array",
-          "format": "object",
-          "description": "end time of the time series group."
-        }
-      }
-    },
-    "ID": {
-      "type": "object",
-      "required": [
-        "dimensions",
-        "metricGuid",
-        "seriesId"
-      ],
-      "properties": {
-        "dimensions": {
-          "type": "object",
-          "description": "dimensions of the time series."
-        },
-        "metricGuid": {
-          "type": "string",
-          "description": "the measurement where the time series is recorded."
-        },
-        "seriesId": {
-          "type": "string",
-          "description": "Id of the time series."
+          "description": "Inconsistencies result at different timestamp"
         }
       }
     }
