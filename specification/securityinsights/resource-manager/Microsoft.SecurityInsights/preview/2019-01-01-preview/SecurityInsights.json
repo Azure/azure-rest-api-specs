@@ -2999,7 +2999,56 @@
                 {
                     "$ref": "#/definitions/Resource"
                 }
-            ]
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Entity query properties",
+                    "$ref": "#/definitions/EntityQueryProperties"
+                }
+            }
+        },
+        "EntityQueryProperties": {
+            "type": "object",
+            "description": "Describes entity query properties",
+            "properties": {
+                "queryTemplate": {
+                    "type": "string",
+                    "description": "The template query string to be parsed and formatted"
+                },
+                "inputEntityType": {
+                    "type": "string",
+                    "description": "The type of the query's source entity"
+                },
+                "inputFields": {
+                    "type": "array",
+                    "items": {
+                        "description": "input field",
+                        "type": "string"
+                    },
+                    "description": "List of the fields of the source entity that are required to run the query"
+                },
+                "outputEntityTypes": {
+                    "type": "array",
+                    "items": {
+                        "description": "output entity type",
+                        "type": "string"
+                    },
+                    "description": "List of the desired output types to be constructed from the result"
+                },
+                "dataSources": {
+                    "type": "array",
+                    "items": {
+                        "description": "data source",
+                        "type": "string"
+                    },
+                    "description": "List of the data sources that are required to run the query"
+                },
+                "displayName": {
+                    "type": "string",
+                    "description": "The query display name"
+                }
+            }
         }
     },
     "parameters": {
