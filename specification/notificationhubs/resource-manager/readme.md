@@ -129,12 +129,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-notificationhubs/azure/mgmt/notificationhubs
+  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs/azure/mgmt/notificationhubs
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-notificationhubs
+  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs
 ```
 
 ## Go

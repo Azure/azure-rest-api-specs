@@ -109,11 +109,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/expressRouteCrossConnections/{crossConnectionName}": {
       "get": {
-      "tags": [
-        "ExpressRouteCrossConnections"
-      ],
-      "operationId": "ExpressRouteCrossConnections_Get",
-      "description": "Gets details about the specified ExpressRouteCrossConnection.",
+        "tags": [
+          "ExpressRouteCrossConnections"
+        ],
+        "operationId": "ExpressRouteCrossConnections_Get",
+        "description": "Gets details about the specified ExpressRouteCrossConnection.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -176,7 +176,7 @@
             "in": "body",
             "required": true,
             "schema": {
-            "$ref": "#/definitions/ExpressRouteCrossConnection"
+              "$ref": "#/definitions/ExpressRouteCrossConnection"
             },
             "description": "Parameters supplied to the update express route crossConnection operation."
           },
@@ -192,7 +192,7 @@
             "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnection resource.",
             "schema": {
               "$ref": "#/definitions/ExpressRouteCrossConnection"
-              }
+            }
           }
         },
         "x-ms-examples": {
@@ -204,48 +204,48 @@
       },
       "patch": {
         "tags": [
-        "ExpressRouteCrossConnections"
+          "ExpressRouteCrossConnections"
         ],
         "operationId": "ExpressRouteCrossConnections_UpdateTags",
         "description": "Updates an express route cross connection tags.",
         "parameters": [
-        {
-          "name": "resourceGroupName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the resource group."
-        },
-        {
-          "name": "crossConnectionName",
-          "in": "path",
-          "required": true,
-          "type": "string",
-          "description": "The name of the cross connection."
-        },
-        {
-          "name": "crossConnectionParameters",
-          "in": "body",
-          "required": true,
-          "schema": {
-          "$ref": "./network.json#/definitions/TagsObject"
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
           },
-          "description": "Parameters supplied to update express route cross connection tags."
-        },
-        {
-          "$ref": "./network.json#/parameters/ApiVersionParameter"
-        },
-        {
-          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-        }
+          {
+            "name": "crossConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cross connection."
+          },
+          {
+            "name": "crossConnectionParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update express route cross connection tags."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
         ],
         "responses": {
-        "200": {
-          "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnection resource.",
-          "schema": {
-          "$ref": "#/definitions/ExpressRouteCrossConnection"
+          "200": {
+            "description": "Update successful. The operation returns the resulting ExpressRouteCrossConnection resource.",
+            "schema": {
+              "$ref": "#/definitions/ExpressRouteCrossConnection"
+            }
           }
-        }
         },
         "x-ms-examples": {
           "UpdateExpressRouteCrossConnectionTags": {
@@ -701,7 +701,7 @@
     "ExpressRouteCircuitReference": {
       "properties": {
         "id": {
-          "type":"string",
+          "type": "string",
           "description": "Corresponding Express Route Circuit Id."
         }
       }

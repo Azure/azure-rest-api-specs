@@ -75,7 +75,7 @@
               "name": "$filter",
               "in": "query",
               "type": "string",
-              "description": "The **$filter** is used to describe a set of dimensions with their concrete values which produce a specific metric�s time series, in which a baseline is requested for.",
+              "description": "The **$filter** is used to describe a set of dimensions with their concrete values which produce a specific metric's time series, in which a baseline is requested for.",
               "required": false
             }
           ],
@@ -96,6 +96,68 @@
           "x-ms-examples": {
             "Get Metric for data": { "$ref": "./examples/GetBaseline.json" },
             "Get Metric for metadata": { "$ref": "./examples/GetBaselineMetadata.json" }
+          }
+        }
+      },
+      "/{resourceUri}/providers/microsoft.insights/baseline": {
+        "get": {
+          "tags": [
+            "Baseline"
+          ],
+          "operationId": "Baseline_Get",
+          "description": "**Gets the baseline values for a resource**.",
+          "parameters": [
+            {
+              "$ref": "#/parameters/ExtendedResourceUriParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamesParameter"
+            },
+            {
+              "$ref": "#/parameters/TimespanParameter"
+            },
+            {
+              "$ref": "#/parameters/IntervalParameter"
+            },
+            {
+              "$ref": "#/parameters/AggregationParameter"
+            },
+            {
+              "$ref": "#/parameters/SensitivitiesParameter"
+            },
+            {
+              "$ref": "#/parameters/BaselineResultTypeParameter"
+            },
+            {
+              "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+              "$ref": "#/parameters/MetricNamespaceParameter"
+            },
+            {
+              "name": "$filter",
+              "in": "query",
+              "type": "string",
+              "description": "The **$filter** is used to describe a set of dimensions with their concrete values which produce a specific metric's time series, in which a baseline is requested for.",
+              "required": false
+            }
+          ],
+          "responses": {
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "#/definitions/ErrorResponse"
+              }
+            },
+            "200": {
+              "description": "Successful request to get the list of metric values.",
+              "schema": {
+                "$ref": "#/definitions/BaselineResponse"
+              }
+            }
+          },
+          "x-ms-examples": {
+            "Get Metric for data": { "$ref": "./examples/GetBaseline.json" }
           }
         }
       }
@@ -281,6 +343,14 @@
         "type": "string",
         "format": "duration",
         "description": "The interval (i.e. timegrain) of the query.",
+        "x-ms-parameter-location": "method"
+      },
+      "MetricNamesParameter": {
+        "name": "metricnames",
+        "in": "query",
+        "required": false,
+        "type": "string",
+        "description": "The names of the metrics (comma separated) to retrieve.",
         "x-ms-parameter-location": "method"
       },
       "AggregationParameter": {
