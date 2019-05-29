@@ -8,7 +8,7 @@ csharp:
   # last generated with AutoRest.0.17.3
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.NetApp
+  namespace: Microsoft.Azure.Management.NetApp
   output-folder: $(csharp-sdks-folder)/NetApp/Management.NetApp/Generated
   clear-output-folder: true
 ```

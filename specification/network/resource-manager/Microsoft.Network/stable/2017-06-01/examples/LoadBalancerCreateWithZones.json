@@ -1,10 +1,11 @@
 {
-  "parameters" : {
-    "api-version" : "2017-06-01",
-    "subscriptionId" : "subid",
-    "resourceGroupName" : "rg1",
-    "loadBalancerName" : "lb",
+  "parameters": {
+    "api-version": "2017-06-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "loadBalancerName": "lb",
     "parameters": {
+      "location": "eastus",
       "properties": {
         "frontendIPConfigurations": [
           {
@@ -24,7 +25,9 @@
                 }
               ]
             },
-            "zones": [ "1" ]
+            "zones": [
+              "1"
+            ]
           }
         ],
         "backendAddressPools": [
@@ -98,23 +101,22 @@
       }
     }
   },
-  "responses" : {
-    "200" : {
-      "body" : {
+  "responses": {
+    "200": {
+      "body": {
         "name": "lb",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "type": "Microsoft.Network/loadBalancers",
-        "location": "westus",
-        "sku": {
-            "name": "Basic"
-        },
+        "location": "eastus",
         "properties": {
           "provisioningState": "Succeeded",
           "frontendIPConfigurations": [
             {
               "name": "fe-lb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
-              "zones": [ "1" ],
+              "zones": [
+                "1"
+              ],
               "properties": {
                 "provisioningState": "Succeeded",
                 "privateIPAddress": "10.0.1.4",
@@ -169,8 +171,7 @@
                 },
                 "probe": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
-                },
-                "disableOutboundSnat": false
+                }
               }
             }
           ],
@@ -215,22 +216,21 @@
         }
       }
     },
-    "201" : {
-      "body" : {
+    "201": {
+      "body": {
         "name": "lb",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "type": "Microsoft.Network/loadBalancers",
-        "location": "westus",
-        "sku": {
-            "name": "Basic"
-        },
+        "location": "eastus",
         "properties": {
           "provisioningState": "Succeeded",
           "frontendIPConfigurations": [
             {
               "name": "fe-lb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
-              "zones": [ "1" ],
+              "zones": [
+                "1"
+              ],
               "properties": {
                 "provisioningState": "Succeeded",
                 "privateIPAddress": "10.0.1.4",
@@ -285,8 +285,7 @@
                 },
                 "probe": {
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb"
-                },
-                "disableOutboundSnat": false
+                }
               }
             }
           ],

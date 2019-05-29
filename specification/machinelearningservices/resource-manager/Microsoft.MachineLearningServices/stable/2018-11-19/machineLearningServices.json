@@ -439,7 +439,7 @@
           "nextLinkName": null
         }
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -1103,6 +1103,16 @@
     },
     "Usage": {
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
         "unit": {
           "readOnly": true,
           "type": "string",
@@ -1782,7 +1792,7 @@
     },
     "SslConfiguration": {
       "type": "object",
-      "description": "The ssl configugation for scoring",
+      "description": "The ssl configuration for scoring",
       "properties": {
         "status": {
           "description": "Enable or disable ssl for scoring",
@@ -2082,7 +2092,7 @@
           "type": "object",
           "properties": {
             "administratorAccount": {
-              "description": "Admin creadentials for virtual machine.",
+              "description": "Admin credentials for virtual machine.",
               "$ref": "#/definitions/VirtualMachineSshCredentials"
             }
           }

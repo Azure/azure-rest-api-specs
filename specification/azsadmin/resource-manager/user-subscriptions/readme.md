@@ -1,11 +1,11 @@
 # Subscriptions Admin
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Subscriptions Admin.
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Subscriptions Admin, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -17,7 +17,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the Subscriptions API.
 
 ``` yaml
@@ -34,6 +34,9 @@ directive:
     reason: Subscription is not modelled as ARM resource in azure for legacy reasons. In Azure stack as well, Subscription is not modelled as ARM resource for azure consistency
     where:
       - $.paths["/subscriptions/{subscriptionId}"].put
+
+  - suppress: R3023
+    reason: No operations endpoint as not ARM resource provider.
 
   - suppress: SubscriptionIdParameterInOperations
     reason: Subscription is the main resource in the API spec and it should not be masked in global parameters.
@@ -67,7 +70,7 @@ input-file:
 ---
 # Code Generation
 
-## C# 
+## C#
 
 ``` yaml $(csharp)
 csharp:
