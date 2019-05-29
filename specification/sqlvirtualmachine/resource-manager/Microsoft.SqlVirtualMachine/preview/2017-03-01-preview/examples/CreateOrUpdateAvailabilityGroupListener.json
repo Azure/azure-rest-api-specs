@@ -7,24 +7,24 @@
     "api-version": "2017-03-01-preview",
     "parameters": {
       "properties": {
-        "AvailabilityGroupName": "ag-test",
-        "LoadBalancerConfigurations": [
+        "availabilityGroupName": "ag-test",
+        "loadBalancerConfigurations": [
           {
-            "PrivateIPAddress": {
-              "IpAddress": "10.1.0.112",
-              "SubnetResourceId":
+            "privateIPAddress": {
+              "ipAddress": "10.1.0.112",
+              "subnetResourceId":
                 "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/default"
             },
-            "LoadBalancerResourceId":
+            "loadBalancerResourceId":
               "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.Network/loadBalancers/lb-test",
-            "ProbePort": "59983",
-            "SqlVirtualMachineInstances": [
+            "probePort": "59983",
+            "sqlVirtualMachineInstances": [
               "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm2",
               "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachines/testvm3"
             ]
           }
         ],
-        "Port": "1433"
+        "port": "1433"
       }
     }
   },
