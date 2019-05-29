@@ -18,7 +18,7 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_2_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_2_0'
-input-file: 
+input-file:
   - stable/v2.0/ComputerVision.json
   - stable/v2.0/Ocr.json
 ```
@@ -85,12 +85,12 @@ directive:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision/azure/cognitiveservices/vision/computervision
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-computervision
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-computervision
 ```
 
 ## Go

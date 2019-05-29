@@ -98,8 +98,11 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrationValidation.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MongoDbTasks.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetTdeCertificatesSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/OracleAzureDbPostgreSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ServiceFeatureOCITask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ServiceTasks.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Tasks.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/TasksCommon.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json

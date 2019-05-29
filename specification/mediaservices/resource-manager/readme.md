@@ -31,12 +31,11 @@ opt-in-extensible-enums: true
 
 ```
 
-
 ### Tag: package-2018-07
 
 These settings apply only when `--tag=package-2018-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-07'
+``` yaml $(tag) == 'package-2018-07'
 input-file:
   - Microsoft.Media/stable/2018-07-01/AccountFilters.json
   - Microsoft.Media/stable/2018-07-01/Accounts.json
@@ -47,6 +46,7 @@ input-file:
   - Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
   - Microsoft.Media/stable/2018-07-01/streamingservice.json
 ```
+
 ### Tag: package-2015-10
 
 These settings apply only when `--tag=package-2015-10` is specified on the command line.
@@ -228,4 +228,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
 regenerate-manager: true
 generate-interface: true
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: Encoding.json
+    where: $.definitions.JobProperties
+    reason: Input is not required when updating a job.
 ```
