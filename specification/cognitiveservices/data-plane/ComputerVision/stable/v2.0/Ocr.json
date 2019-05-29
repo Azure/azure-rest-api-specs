@@ -52,7 +52,7 @@
         ],
         "responses": {
           "202": {
-            "description": "The service has accepted the request and will start processing later. It will return Accepted immediately and include an Operation-Location header. Client side should further query the operation status using the URL specified in this header. The operation ID will expire in 48 hours.",
+            "description": "The service has accepted the request and will start processing later. It will return Accepted immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The operation ID will expire in 48 hours.",
             "headers": {
               "Operation-Location": {
                 "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
@@ -68,7 +68,7 @@
           }
         },
         "x-ms-examples": {
-          "Successful Domain Model analysis request": {
+          "Successful Recognize Text request": {
             "$ref": "./examples/SuccessfulRecognizeTextWithUrl.json"
           }
         }
@@ -105,8 +105,84 @@
           }
         },
         "x-ms-examples": {
-          "Successful Domain Model analysis request": {
+          "Successful Get Text Operation Result request": {
             "$ref": "./examples/SuccessfulGetTextOperationResult.json"
+          }
+        }
+      }
+    },
+    "/read/core/asyncBatchAnalyze": {
+      "post": {
+        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadOperationResult' operation to access OCR results.​",
+        "operationId": "BatchReadFile",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageUrl"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Batch Read File request": {
+            "$ref": "./examples/SuccessfulBatchReadFileWithUrl.json"
+          }
+        }
+      }
+    },
+    "/read/operations/{operationId}": {
+      "get": {
+        "description": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from 'Operation-Location' field returned from Batch Read File interface.",
+        "operationId": "GetReadOperationResult",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of read operation returned in the response of the 'Batch Read File' interface.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the read operation status.",
+            "schema": {
+              "$ref": "#/definitions/ReadOperationResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Get Read Operation Result request": {
+            "$ref": "./examples/SuccessfulGetReadOperationResult.json"
           }
         }
       }
@@ -149,8 +225,47 @@
           }
         },
         "x-ms-examples": {
-          "Successful Domain Model analysis request": {
+          "Successful Recognize Text request": {
             "$ref": "./examples/SuccessfulRecognizeTextWithStream.json"
+          }
+        }
+      }
+    },
+    "/read/core/asyncBatchAnalyze?overload=stream": {
+      "post": {
+        "description": "Use this interface to get the result of a Read Document operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read Document interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'Get Read Result operation' to access OCR results.​",
+        "operationId": "BatchReadFileInStream",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageStream"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful Batch Read File request": {
+            "$ref": "./examples/SuccessfulBatchReadFileWithStream.json"
           }
         }
       }
@@ -159,31 +274,88 @@
   "definitions": {
     "TextOperationResult": {
       "type": "object",
+      "description": "Result of recognition text operation.",
       "properties": {
         "status": {
-          "type": "string",
           "description": "Status of the text operation.",
-          "enum": [
-            "Not Started",
-            "Running",
-            "Failed",
-            "Succeeded"
-          ],
-          "x-ms-enum": {
-            "name": "TextOperationStatusCodes",
-            "modelAsString": false
-          },
-          "x-nullable": false
+          "$ref": "#/definitions/OperationStatus"
         },
         "recognitionResult": {
-          "$ref": "#/definitions/RecognitionResult"
+          "$ref": "#/definitions/TextRecognitionResult",
+          "description": "Text recognition result of the text operation."
         }
       }
     },
-    "RecognitionResult": {
+    "ReadOperationResult": {
       "type": "object",
+      "description": "OCR result of the read operation.",
       "properties": {
+        "status": {
+          "description": "Status of the read operation.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "recognitionResults": {
+          "description": "An array of text recognition result of the read operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextRecognitionResult"
+          }
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Status code of the text operation.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "TextOperationStatusCodes",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
+    "TextRecognitionResult": {
+      "description": "An object representing a recognized text region",
+      "type": "object",
+      "required": [
+        "lines"
+      ],
+      "properties": {
+        "page": {
+          "description": "The 1-based page number of the recognition result.",
+          "type": "integer"
+        },
+        "clockwiseOrientation": {
+          "description": "The orientation of the image in degrees in the clockwise direction. Range between [0, 360).",
+          "type": "number"
+        },
+        "width": {
+          "description": "The width of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+        "height": {
+          "description": "The height of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+        "unit": {
+          "description": "The unit used in the Width, Height and BoundingBox. For images, the unit is 'pixel'. For PDF, the unit is 'inch'.",
+          "type": "string",
+          "enum": [
+            "pixel",
+            "inch"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultDimensionUnit",
+            "modelAsString": false
+          },
+          "x-nullable": true
+        },
         "lines": {
+          "description": "A list of recognized text lines.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Line"
@@ -192,15 +364,19 @@
       }
     },
     "Line": {
+      "description": "An object representing a recognized text line.",
       "type": "object",
       "properties": {
         "boundingBox": {
+          "description": "Bounding box of a recognized line.",
           "$ref": "#/definitions/BoundingBox"
         },
         "text": {
+          "description": "The text content of the line.",
           "type": "string"
         },
         "words": {
+          "description": "List of words in the text line.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/Word"
@@ -209,60 +385,87 @@
       }
     },
     "Word": {
+      "description": "An object representing a recognized word.",
       "type": "object",
+      "required": [
+        "boundingBox",
+        "text"
+      ],
       "properties": {
         "boundingBox": {
+          "description": "Bounding box of a recognized word.",
           "$ref": "#/definitions/BoundingBox"
         },
         "text": {
+          "description": "The text content of the word.",
           "type": "string"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "type": "string",
+          "enum": [
+            "High",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultConfidenceClass",
+            "modelAsString": false
+          },
+          "x-nullable": true
         }
       }
     },
     "BoundingBox": {
+      "description": "Quadrangle bounding box, with coordinates in original image. The eight numbers represent the four points (x-coordinate, y-coordinate from the left-top corner of the image) of the detected rectangle from the left-top corner in the clockwise direction. For images, coordinates are in pixels. For PDF, coordinates are in inches.",
       "type": "array",
       "items": {
-        "type": "integer",
+        "type": "number",
         "x-nullable": false
       }
     },
     "ComputerVisionError": {
-      "type": "object",
+      "description": "Details about the API request error.",
       "required": [
         "code",
         "message"
       ],
+      "type": "object",
       "properties": {
         "code": {
-          "type": "string",
           "description": "The error code.",
           "enum": [
-            "InvalidImageUrl",
             "InvalidImageFormat",
-            "InvalidImageSize",
-            "NotSupportedVisualFeature",
+            "UnsupportedMediaType",
+            "InvalidImageUrl",
+            "NotSupportedFeature",
             "NotSupportedImage",
-            "InvalidDetails",
-            "NotSupportedLanguage",
-            "BadArgument",
-            "FailedToProcess",
             "Timeout",
             "InternalServerError",
+            "InvalidImageSize",
+            "BadArgument",
+            "DetectFaceError",
+            "NotSupportedLanguage",
+            "InvalidThumbnailSize",
+            "InvalidDetails",
+            "InvalidModel",
+            "CancelledRequest",
+            "NotSupportedVisualFeature",
+            "FailedToProcess",
             "Unspecified",
             "StorageException"
           ],
           "x-ms-enum": {
             "name": "ComputerVisionErrorCodes",
-            "modelAsString": false
+            "modelAsString": true
           }
         },
         "message": {
-          "type": "string",
-          "description": "A message explaining the error reported by the service."
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
         },
         "requestId": {
-          "type": "string",
-          "description": "A unique request identifier."
+          "description": "A unique request identifier.",
+          "type": "string"
         }
       }
     },
@@ -273,7 +476,7 @@
       ],
       "properties": {
         "url": {
-          "description": "Publicly reachable URL of an image",
+          "description": "Publicly reachable URL of an image.",
           "type": "string"
         }
       }
@@ -320,7 +523,7 @@
     },
     "Endpoint": {
       "name": "Endpoint",
-      "description": "Supported Cognitive Services endpoints",
+      "description": "Supported Cognitive Services endpoints.",
       "x-ms-parameter-location": "client",
       "required": true,
       "type": "string",

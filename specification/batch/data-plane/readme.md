@@ -26,7 +26,16 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-08.7.0
+tag: package-2018-12.8.0
+```
+
+### Tag: package-2018-12.8.0
+
+These settings apply only when `--tag=package-2018-12.8.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12.8.0'
+input-file:
+- Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
 ```
 
 ### Tag: package-2018-08.7.0
@@ -245,37 +254,11 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Batch.Protocol
-  output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Batch/src/Generated
   clear-output-folder: true
   client-side-validation: false
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.batch
-  package-name: azure-batch
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-batch/azure/batch
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-batch
-```
 
 ## Go
 

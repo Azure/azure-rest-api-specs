@@ -52,6 +52,9 @@ input-file:
 - Microsoft.ContainerRegistry/stable/2018-01-01/ContainerRegistry.json
 - Microsoft.ServiceBus/stable/2018-01-01/ServiceBus.json
 - Microsoft.Media/stable/2018-01-01/MediaServices.json
+- Microsoft.Maps/stable/2018-01-01/Maps.json
+- Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
+- Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
 ```
 
 ---
@@ -85,38 +88,10 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.EventGrid
   sync-methods: None
-  output-folder: $(csharp-sdks-folder)/EventGrid/DataPlane/Microsoft.Azure.EventGrid/Generated
+  output-folder: $(csharp-sdks-folder)/eventgrid/Microsoft.Azure.EventGrid/src/Generated
   clear-output-folder: true
 ```
 
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  add-credentials: true
-  namespace: azure.eventgrid
-  package-name: azure-eventgrid
-  package-version: 1.0.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-eventgrid/azure/eventgrid
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-eventgrid
-```
 
 ## Go
 
@@ -132,24 +107,5 @@ azure-arm: true
 namespace: com.microsoft.azure.eventgrid
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-eventgrid
+output-folder: $(azure-libraries-for-java-folder)/eventgrid/data-plane
 ```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-01
-```
-
-### Tag: package-2018-01 and java
-
-These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.eventgrid.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/data-plane/v2018_01_01
-```
-
