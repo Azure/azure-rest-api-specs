@@ -1459,6 +1459,102 @@
                     }
                 }
             }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries": {
+            "get": {
+                "x-ms-examples": {
+                    "Get all entity queries.": {
+                        "$ref": "./examples/entityQueries/GetEntityQueries.json"
+                    }
+                },
+                "tags": [
+                    "EntityQueries"
+                ],
+                "description": "Gets all entity queries.",
+                "operationId": "EntityQueries_List",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/EntityQueryList"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": "nextLink"
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}": {
+            "get": {
+                "x-ms-examples": {
+                    "Get an entity query.": {
+                        "$ref": "./examples/entityQueries/GetEntityQueryById.json"
+                    }
+                },
+                "tags": [
+                    "EntityQueries"
+                ],
+                "description": "Gets an entity query.",
+                "operationId": "EntityQueries_Get",
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersion"
+                    },
+                    {
+                        "$ref": "#/parameters/SubscriptionId"
+                    },
+                    {
+                        "$ref": "#/parameters/ResourceGroupName"
+                    },
+                    {
+                        "$ref": "#/parameters/OperationalInsightsResourceProvider"
+                    },
+                    {
+                        "$ref": "#/parameters/WorkspaceName"
+                    },
+                    {
+                        "$ref": "#/parameters/EntityQueryId"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/EntityQuery"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response describing why the operation failed.",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
+                    }
+                }
+            }
         }
     },
     "definitions": {
@@ -2875,6 +2971,35 @@
                     }
                 }
             }
+        },
+        "EntityQueryList": {
+            "description": "List of all the entity queries.",
+            "properties": {
+                "nextLink": {
+                    "readOnly": true,
+                    "description": "URL to fetch the next set of entity queries.",
+                    "type": "string"
+                },
+                "value": {
+                    "description": "Array of entity queries.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/EntityQuery"
+                    }
+                }
+            },
+            "required": [
+                "value"
+            ]
+        },
+        "EntityQuery": {
+            "type": "object",
+            "description": "Specific entity query.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ]
         }
     },
     "parameters": {
@@ -3055,6 +3180,14 @@
             "required": true,
             "type": "string",
             "description": "The aggregation name. Supports - Cases",
+            "x-ms-parameter-location": "method"
+        },
+        "EntityQueryId": {
+            "name": "entityQueryId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "entity query ID",
             "x-ms-parameter-location": "method"
         }
     }
