@@ -2704,7 +2704,8 @@
           "type": "string",
           "description": "Specifies the type of information to log for debugging. The permitted values are none, requestContent, responseContent, or both requestContent and responseContent separated by a comma. The default is none. When setting this value, carefully consider the type of information you are passing in during deployment. By logging information about the request or response, you could potentially expose sensitive data that is retrieved through the deployment operations."
         }
-      }
+      },
+      "description": "The debug setting."
     },
     "Deployment": {
       "properties": {
@@ -3282,7 +3283,8 @@
           "description": "The type of the resource group."
         },
         "properties": {
-          "$ref": "#/definitions/ResourceGroupProperties"
+          "$ref": "#/definitions/ResourceGroupProperties",
+          "description": "The resource group properties."
         },
         "location": {
           "type": "string",
@@ -3314,7 +3316,8 @@
           "description": "The name of the resource group."
         },
         "properties": {
-          "$ref": "#/definitions/ResourceGroupProperties"
+          "$ref": "#/definitions/ResourceGroupProperties",
+          "description": "The resource group properties."
         },
         "managedBy": {
           "type": "string",
