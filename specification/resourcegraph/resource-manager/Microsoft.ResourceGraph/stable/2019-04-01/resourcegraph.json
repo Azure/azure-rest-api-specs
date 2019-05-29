@@ -170,6 +170,18 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
+        },
+        "resultFormat": {
+          "description": "Defines in which format query result returned.",
+          "type": "string",
+          "enum": [
+            "table",
+            "objectArray"
+          ],
+          "x-ms-enum": {
+            "name": "ResultFormat",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -255,7 +267,7 @@
         },
         "data": {
           "description": "Query output in tabular format.",
-          "$ref": "#/definitions/Table"
+          "type": "object"
         },
         "facets": {
           "description": "Query facets.",
@@ -358,7 +370,7 @@
       ],
       "discriminator": "resultType"
     },
-    "FacetResult" : {
+    "FacetResult": {
       "x-ms-discriminator-value": "FacetResult",
       "description": "Successfully executed facet containing additional statistics on the response of a query.",
       "type": "object",
@@ -375,7 +387,7 @@
         },
         "data": {
           "description": "A table containing the desired facets. Only present if the facet is valid.",
-          "$ref": "#/definitions/Table"
+          "type": "object"
         }
       },
       "required": [
@@ -389,7 +401,7 @@
         }
       ]
     },
-    "FacetError" : {
+    "FacetError": {
       "x-ms-discriminator-value": "FacetError",
       "description": "A facet whose execution resulted in an error.",
       "type": "object",
@@ -473,7 +485,7 @@
       ]
     },
     "OperationListResult": {
-     "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -513,7 +525,7 @@
           }
         },
         "origin": {
-          "type" : "string",
+          "type": "string",
           "description": "The origin of operations."
         }
       }
