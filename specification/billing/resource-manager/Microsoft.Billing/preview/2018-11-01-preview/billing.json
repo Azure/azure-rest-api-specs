@@ -1400,6 +1400,54 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}/validateTransferEligibility": {
+      "post": {
+        "x-ms-examples": {
+          "SubscriptionTransferValidateSuccess": {
+            "$ref": "./examples/ValidateSubscriptionTransferSuccess.json"
+          },
+          "SubscriptionTransferValidateFailure": {
+            "$ref": "./examples/ValidateSubscriptionTransferFailure.json"
+          }
+        },
+        "operationId": "BillingSubscriptions_ValidateTransfer",
+        "description": "Validates the transfer of billing subscriptions across invoice sections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+            },
+            "description": "Parameters supplied to the Transfer Billing Subscription operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateSubscriptionTransferEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products": {
       "get": {
         "tags": [
@@ -1600,6 +1648,54 @@
                 "description": "URI to poll for the operation status",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/products/{productName}/validateTransferEligibility": {
+      "post": {
+        "x-ms-examples": {
+          "SubscriptionTransferValidateSuccess": {
+            "$ref": "./examples/ValidateProductTransferSuccess.json"
+          },
+          "SubscriptionTransferValidateFailure": {
+            "$ref": "./examples/ValidateProductTransferFailure.json"
+          }
+        },
+        "operationId": "Products_ValidateTransfer",
+        "description": "Validates the transfer of products across invoice sections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferProductRequestProperties"
+            },
+            "description": "Parameters supplied to the Transfer Products operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateProductTransferEligibilityResult"
             }
           },
           "default": {
@@ -3785,8 +3881,8 @@
       "enum": [
         "InvalidSource",
         "SubscriptionNotActive",
-        "InsufficienctPermissionOnSource",
-        "InsufficienctPermissionOnDestination",
+        "InsufficientPermissionOnSource",
+        "InsufficientPermissionOnDestination",
         "DestinationBillingProfilePastDue",
         "SubscriptionTypeNotSupported",
         "CrossBillingAccountNotAllowed",
