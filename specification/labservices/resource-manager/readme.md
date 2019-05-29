@@ -94,12 +94,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-labservices/azure/mgmt/labservices
+  output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices/azure/mgmt/labservices
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-labservices
+  output-folder: $(python-sdks-folder)/labservices/azure-mgmt-labservices
 ```
 
 ## Go

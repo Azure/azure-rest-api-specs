@@ -94,12 +94,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-edgegateway/azure/mgmt/edgegateway
+  output-folder: $(python-sdks-folder)/edgegateway/azure-mgmt-edgegateway/azure/mgmt/edgegateway
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-edgegateway
+  output-folder: $(python-sdks-folder)/edgegateway/azure-mgmt-edgegateway
 ```
 
 ## Ruby

@@ -162,7 +162,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
