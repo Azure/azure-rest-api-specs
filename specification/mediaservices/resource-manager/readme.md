@@ -253,4 +253,8 @@ directive:
     from: Encoding.json
     where: $.definitions.JobProperties
     reason: Input not required for Job update
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: Encoding.json
+    where: $.definitions.JobProperties
+    reason: Output not required for job update
 ```
