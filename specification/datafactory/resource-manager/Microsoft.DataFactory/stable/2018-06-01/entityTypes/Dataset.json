@@ -61,6 +61,139 @@
         "linkedServiceName"
       ]
     },
+    "DatasetLocation": {
+      "description": "Dataset location.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of dataset storage location."
+        },
+        "folderPath": {
+          "type": "object",
+          "description": "Specify the folder path of dataset. Type: string (or Expression with resultType string)"
+        },
+        "fileName": {
+          "type": "object",
+          "description": "Specify the file name of dataset. Type: string (or Expression with resultType string)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureBlobStorageLocation": {
+      "description": "The location of azure blob dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "container": {
+          "type": "object",
+          "description": "Specify the container of azure blob. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureBlobFSLocation": {
+      "description": "The location of azure blobFS dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "fileSystem": {
+          "type": "object",
+          "description": "Specify the fileSystem of azure blobFS. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDataLakeStoreLocation": {
+      "description": "The location of azure data lake store dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "AmazonS3Location": {
+      "description": "The location of amazon S3 dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "Specify the bucketName of amazon S3. Type: string (or Expression with resultType string)"
+        },
+        "version": {
+          "type": "object",
+          "description": "Specify the version of amazon S3. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "FileServerLocation": {
+      "description": "The location of file server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "FtpServerLocation": {
+      "description": "The location of ftp server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "SftpLocation": {
+      "description": "The location of SFTP dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "HttpServerLocation": {
+      "description": "The location of http server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "relativeUrl": {
+          "type": "object",
+          "description": "Specify the relativeUrl of http server. Type: string (or Expression with resultType string)"
+        }
+      }
+    },
+    "HdfsLocation": {
+      "description": "The location of HDFS.",
+      "type": "object",
+       "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
     "DatasetDataElement": {
       "description": "Columns that define the structure of the dataset.",
       "type": "object",
@@ -383,9 +516,9 @@
         "bucketName"
       ]
     },
-    "AzureBlobDataset": {
-      "x-ms-discriminator-value": "AzureBlob",
-      "description": "The Azure Blob storage.",
+    "ParquetDataset": {
+      "x-ms-discriminator-value": "Parquet",
+      "description": "Parquet dataset.",
       "type": "object",
       "allOf": [
         {
@@ -394,44 +527,36 @@
       ],
       "properties": {
         "typeProperties": {
-          "description": "Azure Blob dataset properties.",
+          "description": "Parquet dataset properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AzureBlobDatasetTypeProperties"
+          "$ref": "#/definitions/ParquetDatasetTypeProperties"
         }
       }
     },
-    "AzureBlobDatasetTypeProperties": {
-      "description": "Azure Blob dataset properties.",
+    "ParquetDatasetTypeProperties": {
+      "description": "Parquet dataset properties.",
       "properties": {
-        "folderPath": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the parquet storage."
+        },
+        "compressionCodec": {
           "type": "object",
-          "description": "The path of the Azure Blob storage. Type: string (or Expression with resultType string)."
-        },
-        "tableRootLocation": {
-          "type": "object",
-          "description": "The root of blob path. Type: string (or Expression with resultType string)."
-        },
-        "fileName": {
-          "type": "object",
-          "description": "The name of the Azure Blob. Type: string (or Expression with resultType string)."
-        },
-        "modifiedDatetimeStart": {
-          "type": "object",
-          "description": "The start of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
-        },
-        "modifiedDatetimeEnd": {
-          "type": "object",
-          "description": "The end of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
-        },
-        "format": {
-          "description": "The format of the Azure Blob storage.",
-          "$ref": "#/definitions/DatasetStorageFormat"
-        },
-        "compression": {
-          "description": "The data compression method used for the blob storage.",
-          "$ref": "#/definitions/DatasetCompression"
+          "enum": [
+            "none",
+            "gzip",
+            "snappy",
+            "lzo"
+          ],
+          "x-ms-enum": {
+            "name": "compressionCodec",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     },
     "DelimitedTextDataset": {
       "x-ms-discriminator-value": "DelimitedText",
@@ -508,6 +633,56 @@
       "required": [
         "location"
       ]
+    },
+    "AzureBlobDataset": {
+      "x-ms-discriminator-value": "AzureBlob",
+      "description": "The Azure Blob storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Blob dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureBlobDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureBlobDatasetTypeProperties": {
+      "description": "Azure Blob dataset properties.",
+      "properties": {
+        "folderPath": {
+          "type": "object",
+          "description": "The path of the Azure Blob storage. Type: string (or Expression with resultType string)."
+        },
+        "tableRootLocation": {
+          "type": "object",
+          "description": "The root of blob path. Type: string (or Expression with resultType string)."
+        },
+        "fileName": {
+          "type": "object",
+          "description": "The name of the Azure Blob. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of Azure Blob's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "format": {
+          "description": "The format of the Azure Blob storage.",
+          "$ref": "#/definitions/DatasetStorageFormat"
+        },
+        "compression": {
+          "description": "The data compression method used for the blob storage.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      }
     },
     "AzureTableDataset": {
       "x-ms-discriminator-value": "AzureTable",

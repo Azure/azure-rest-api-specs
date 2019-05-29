@@ -205,6 +205,405 @@
         "type": "object"
       }
     },
+    "ConnectorReadSetting": {
+      "description": "Connector read settings.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The read setting type."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureBlobStorageReadSetting": {
+      "description": "Azure blob read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Azure blob wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Azure blob wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureBlobFSReadSetting": {
+      "description": "Azure blobFS read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Azure blobFS wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Azure blobFS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDataLakeStoreReadSetting": {
+      "description": "Azure data lake store read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "ADLS wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "ADLS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AmazonS3ReadSetting": {
+      "description": "Azure data lake store read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "AmazonS3 wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "AmazonS3 wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the S3 object name. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "FileServerReadSetting": {
+      "description": "File server read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "FileServer wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "FileServer wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "FtpReadSetting": {
+      "description": "Ftp read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Ftp wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Ftp wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "useBinaryTransfer": {
+          "type": "boolean",
+          "description": "Specify whether to use binary transfer mode for FTP stores."
+        }
+      }
+    },
+    "SftpReadSetting": {
+      "description": "Sftp read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Sftp wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Sftp wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "HttpReadSetting": {
+      "description": "Sftp read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
+        },
+        "requestBody": {
+          "type": "object",
+          "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+        },
+        "requestTimeout": {
+          "type": "object",
+          "description": "Specifies the timeout for a HTTP client to get HTTP response from HTTP server."
+        }
+      }
+    },
+    "HdfsReadSetting": {
+      "description": "HDFS read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorReadSetting"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "HDFS wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "HDFS wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "distcpSettings": {
+          "description": "Specifies Distcp-related settings.",
+          "$ref": "#/definitions/DistcpSettings"
+        }
+      }
+    },
+    "ConnectorWriteSetting": {
+      "description": "Connector write settings.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The write setting type."
+        },
+        "maxConcurrentConnections": {
+          "type": "object",
+          "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "copyBehavior": {
+          "description": "The type of copy behavior for copy sink.",
+          "type": "object"
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureBlobStorageWriteSetting": {
+      "description": "Azure blob write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorWriteSetting"
+        }
+      ]
+    },
+    "AzureBlobFSWriteSetting": {
+      "description": "Azure blobFS write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorWriteSetting"
+        }
+      ]
+    },
+    "AzureDataLakeStoreWriteSetting": {
+      "description": "Azure data lake store write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorWriteSetting"
+        }
+      ]
+    },
+    "FileServerWriteSetting": {
+      "description": "File server write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectorWriteSetting"
+        }
+      ]
+    },
+    "FormatReadSetting": {
+      "description": "Format read settings.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The read setting type."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
     "DelimitedTextReadSetting": {
       "description": "Delimited text read settings.",
       "type": "object",
@@ -218,15 +617,27 @@
           "type": "object",
           "description": "Indicates the number of non-empty rows to skip when reading data from input files. Type: integer (or Expression with resultType integer)."
         },
-        "addtionalNullValues": {
-          "description": "List of strings each of which will be treated as a null value as well as that in dataset.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "Type: string (or Expression with resultType string)."
-          }
+        "treatEmptyAsNull": {
+          "type": "boolean",
+          "description": "Specify whether to treat null or empty string as a null value when reading data from an input file."
         }
       }
+    },
+    "FormatWriteSetting": {
+      "description": "Format write settings.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The write setting type."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
     },
     "DelimitedTextWriteSetting": {
       "description": "Delimited text write settings.",
@@ -244,12 +655,27 @@
         "fileExtension": {
           "type": "object",
           "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
-        }
-      },
-      "required": [
-        "fileExtension"
-      ]
+      }
     },
+    "required": [
+      "fileExtension"
+    ]
+   },
+   "ParquetSource": {
+    "description": "A copy activity Parquet source.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/CopySource"
+      }
+    ],
+    "properties": {
+      "storeSettings": {
+        "$ref": "#/definitions/ConnectorReadSetting",
+        "description": "Parquet store settings."
+      }
+    }
+  },
     "DelimitedTextSource": {
       "description": "A copy activity DelimitedText source.",
       "type": "object",
@@ -374,7 +800,7 @@
             "type": "object",
             "description": "Type: string (or Expression with resultType string)."
           },
-          "description": "Preserve."
+          "description": "Preserve rules."
         }
       },
       "required": [
@@ -558,6 +984,16 @@
           "description": "SAP ECC OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "SapOpenHubSource": {
+      "description": "A copy activity source for SAP Business Warehouse Open Hub Destination source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {}
     },
     "RestSource": {
       "description": "A copy activity Rest service source.",
@@ -2232,6 +2668,10 @@
         "collectionReference": {
           "type": "object",
           "description": "The JSON Path of the Nested Array that is going to do cross-apply. Type: object (or Expression with resultType object)."
+        },
+        "mappings": {
+          "type": "object",
+          "description": "Column mappings with logical types"
         }
       }
     },
