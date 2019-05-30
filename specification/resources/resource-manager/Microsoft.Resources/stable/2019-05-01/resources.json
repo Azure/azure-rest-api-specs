@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2019-03-01",
+    "version": "2019-05-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -59,6 +59,277 @@
         }
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_DeleteAtManagementGroupScope",
+        "summary": "Deletes a deployment from the deployment history.",
+        "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "head": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CheckExistenceAtManagementGroupScope",
+        "description": "Checks whether the deployment exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CreateOrUpdateAtManagementGroupScope",
+        "summary": "Deploys resources at management group scope.",
+        "description": "You can provide the template and parameters directly in the request or link to JSON files.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Additional parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": { 
+          "Create deployment at management group scope.": { 
+            "$ref": "./examples/PutDeploymentAtManagementGroup.json" 
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_GetAtManagementGroupScope",
+        "description": "Gets a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CancelAtManagementGroupScope",
+        "summary": "Cancels a currently running template deployment.",
+        "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/validate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ValidateAtManagementGroupScope",
+        "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ExportTemplateAtManagementGroupScope",
+        "description": "Exports the template used for specified deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the template.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExportResult"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ListAtManagementGroupScope",
+        "description": "Get all the deployments for a management group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. For example, you can use $filter=provisioningState eq '{state}'."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of results to get. If null is passed, returns all deployments."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of deployments.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DeploymentExtendedFilter"
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}": {
       "delete": {
         "tags": [
@@ -69,14 +340,7 @@
         "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to delete.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -103,14 +367,7 @@
         "description": "Checks whether the deployment exists.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to check.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -137,14 +394,7 @@
         "description": "You can provide the template and parameters directly in the request or link to JSON files.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -186,14 +436,7 @@
         "description": "Gets a deployment.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -222,14 +465,7 @@
         "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to cancel.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -254,14 +490,7 @@
         "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -304,14 +533,7 @@
         "description": "Exports the template used for specified deployment.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment from which to get the template.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -394,14 +616,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to delete.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -438,14 +653,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to check.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -482,14 +690,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -549,14 +750,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -595,14 +789,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment to cancel.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -637,14 +824,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "parameters",
@@ -697,14 +877,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment from which to get the template.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -2166,6 +2339,80 @@
         }
       }
     },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "DeploymentOperations"
+        ],
+        "operationId": "DeploymentOperations_GetAtManagementGroupScope",
+        "description": "Gets a deployments operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the operation to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment operation.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentOperation"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations": {
+      "get": {
+        "tags": [
+          "DeploymentOperations"
+        ],
+        "operationId": "DeploymentOperations_ListAtManagementGroupScope",
+        "description": "Gets all deployments operations for a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/GroupIdParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Return an array of deployment operations.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentOperationsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": {
       "get": {
         "tags": [
@@ -2175,14 +2422,7 @@
         "description": "Gets a deployments operation.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "operationId",
@@ -2217,14 +2457,7 @@
         "description": "Gets all deployments operations for a deployment.",
         "parameters": [
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment with the operation to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "$top",
@@ -2273,14 +2506,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "operationId",
@@ -2325,14 +2551,7 @@
             "maxLength": 90
           },
           {
-            "name": "deploymentName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the deployment with the operation to get.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 64
+            "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
             "name": "$top",
@@ -2485,7 +2704,8 @@
           "type": "string",
           "description": "Specifies the type of information to log for debugging. The permitted values are none, requestContent, responseContent, or both requestContent and responseContent separated by a comma. The default is none. When setting this value, carefully consider the type of information you are passing in during deployment. By logging information about the request or response, you could potentially expose sensitive data that is retrieved through the deployment operations."
         }
-      }
+      },
+      "description": "The debug setting."
     },
     "Deployment": {
       "properties": {
@@ -2704,6 +2924,11 @@
           "type": "string",
           "format": "date-time",
           "description": "The timestamp of the template deployment."
+        },
+        "duration": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The duration of the template deployment."
         },
         "outputs": {
           "type": "object",
@@ -3058,7 +3283,8 @@
           "description": "The type of the resource group."
         },
         "properties": {
-          "$ref": "#/definitions/ResourceGroupProperties"
+          "$ref": "#/definitions/ResourceGroupProperties",
+          "description": "The resource group properties."
         },
         "location": {
           "type": "string",
@@ -3090,7 +3316,8 @@
           "description": "The name of the resource group."
         },
         "properties": {
-          "$ref": "#/definitions/ResourceGroupProperties"
+          "$ref": "#/definitions/ResourceGroupProperties",
+          "description": "The resource group properties."
         },
         "managedBy": {
           "type": "string",
@@ -3278,6 +3505,11 @@
           "type": "string",
           "format": "date-time",
           "description": "The date and time of the operation."
+        },
+        "duration": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The duration of the operation."
         },
         "serviceRequestId": {
           "readOnly": true,
@@ -3477,12 +3709,33 @@
     }
   },
   "parameters": {
+    "GroupIdParameter": {
+      "name": "groupId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The management group ID.",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 90
+    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription."
+    },
+    "DeploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "x-ms-parameter-location": "method",
+      "minLength": 1,
+      "maxLength": 64,
+      "description": "The name of the deployment."
     },
     "ApiVersionParameter": {
       "name": "api-version",
