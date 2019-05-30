@@ -10,6 +10,7 @@ namespace: com.microsoft.azure.management.monitor
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
+service-name: Monitor
 ```
 
 ### Java multi-api
@@ -18,7 +19,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
 batch:
   - tag: package-2018-01-01-only
   - tag: package-2017-05-01-preview-only
-  - tag: package-2017-04-01-only
+  - tag: package-2015-04-01-only
 ```
 
 ## Suppression
@@ -55,15 +56,15 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-### Tag: package-2017-04-01-onlyand java
+### Tag: package-2015-04-01-only and java
 
-These settings apply only when `--tag=package-2017-04-01-only --java` is specified on the command line.
+These settings apply only when `--tag=package-2015-04-01-only --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2017-04-01-only' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2015-04-01-only' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.monitor.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/monitor/resource-manager/v2017_04_01
+  namespace: com.microsoft.azure.management.monitor.v2015_04_01
+  output-folder: $(azure-libraries-for-java-folder)/monitor/resource-manager/v2015_04_01
 regenerate-manager: true
 generate-interface: true
 ```
