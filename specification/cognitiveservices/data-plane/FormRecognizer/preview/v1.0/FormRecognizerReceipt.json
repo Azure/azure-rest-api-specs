@@ -22,7 +22,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "Ocr.json#/parameters/Endpoint"
+        "$ref": "FormRecognizerReceiptOcr.json#/parameters/Endpoint"
       }
     ]
   },
@@ -36,7 +36,7 @@
         "operationId": "BatchReadReceipt",
         "parameters": [
           {
-            "$ref": "Ocr.json#/parameters/ImageUrl"
+            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageUrl"
           }
         ],
         "consumes": [
@@ -58,7 +58,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "Ocr.json#/definitions/ComputerVisionError"
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
             }
           }
         },
@@ -95,7 +95,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "Ocr.json#/definitions/ComputerVisionError"
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
             }
           }
         },
@@ -114,7 +114,7 @@
         "operationId": "BatchReadReceiptInStream",
         "parameters": [
           {
-            "$ref": "Ocr.json#/parameters/ImageStream"
+            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageStream"
           }
         ],
         "consumes": [
@@ -136,7 +136,7 @@
           "default": {
             "description": "Error response.",
             "schema": {
-              "$ref": "Ocr.json#/definitions/ComputerVisionError"
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
             }
           }
         },
@@ -155,13 +155,13 @@
       "properties": {
         "status": {
           "description": "Status of the read operation.",
-          "$ref": "Ocr.json#/definitions/OperationStatus"
+          "$ref": "FormRecognizerReceiptOcr.json$definitions/OperationStatus"
         },
         "recognitionResults": {
           "description": "Text recognition result of the 'Batch Read Receipt' operation.",
           "type": "array",
           "items": {
-            "$ref": "Ocr.json#/definitions/TextRecognitionResult"
+            "$ref": "FormRecognizerReceiptOcr.json#/definitions/TextRecognitionResult"
           }
         },
         "understandingResults": {
