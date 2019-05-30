@@ -98,12 +98,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-mixedreality/azure/mgmt/mixedreality
+  output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-mixedreality
+  output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
 ```
 
 ## Go

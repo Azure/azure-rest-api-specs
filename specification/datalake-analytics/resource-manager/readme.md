@@ -111,7 +111,7 @@ python:
   clear-output-folder: true
   no-namespace-folders: true
   namespace: azure.mgmt.datalake.analytics.account
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
 ```
 
 ## Go

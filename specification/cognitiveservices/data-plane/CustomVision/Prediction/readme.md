@@ -54,7 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_customvision_prediction']  
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_customvision_prediction']
 ```
 
 ## CSharp Settings
@@ -87,12 +87,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision/azure/cognitiveservices/vision/customvision/prediction
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-customvision/azure/cognitiveservices/vision/customvision/prediction
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-customvision
 ```
 
 ## Go

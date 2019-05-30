@@ -67,12 +67,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-imagesearch/azure/cognitiveservices/search/imagesearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-imagesearch/azure/cognitiveservices/search/imagesearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-imagesearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-imagesearch
 ```
 
 ## Suppressions
