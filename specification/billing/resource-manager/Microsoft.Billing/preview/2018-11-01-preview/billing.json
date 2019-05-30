@@ -3296,10 +3296,8 @@
             }
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingAccounts/default/lineOfCredit/default/increase": {
-      "post": {
+      },
+      "put": {
         "tags": [
           "LineOfCredits"
         ],
@@ -3326,7 +3324,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IncreaseLineOfCreditRequestProperties"
+              "$ref": "#/definitions/LineOfCredit"
             },
             "description": "Parameters supplied to the increase line of credit operation."
           }
@@ -5517,8 +5515,7 @@
       "properties": {
         "creditLimit": {
           "description": "The current credit limit.",
-          "$ref": "#/definitions/Amount",
-          "readOnly": true
+          "$ref": "#/definitions/Amount"
         },
         "reason": {
           "description": "The reason for the line of credit status when not approved.",
@@ -5541,16 +5538,6 @@
             "name": "status",
             "modelAsString": true
           }
-        }
-      }
-    },
-    "IncreaseLineOfCreditRequestProperties": {
-      "type": "object",
-      "description": "Request parameters to increase line of credit.",
-      "properties": {
-        "desiredCreditLimit": {
-          "description": "The desired credit limit.",
-          "type": "number"
         }
       }
     },
