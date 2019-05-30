@@ -66,66 +66,6 @@
         }
       }
     },
-    "Line": {
-      "description": "An object representing a recognized text line.",
-      "type": "object",
-      "properties": {
-        "boundingBox": {
-          "description": "Bounding box of a recognized line.",
-          "$ref": "#/definitions/BoundingBox"
-        },
-        "text": {
-          "description": "The text content of the line.",
-          "type": "string"
-        },
-        "words": {
-          "description": "List of words in the text line.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Word"
-          }
-        }
-      }
-    },
-    "Word": {
-      "description": "An object representing a recognized word.",
-      "type": "object",
-      "required": [
-        "boundingBox",
-        "text"
-      ],
-      "properties": {
-        "boundingBox": {
-          "description": "Bounding box of a recognized word.",
-          "$ref": "#/definitions/BoundingBox"
-        },
-        "text": {
-          "description": "The text content of the word.",
-          "type": "string"
-        },
-        "confidence": {
-          "description": "Qualitative confidence measure.",
-          "type": "string",
-          "enum": [
-            "High",
-            "Low"
-          ],
-          "x-ms-enum": {
-            "name": "TextRecognitionResultConfidenceClass",
-            "modelAsString": false
-          },
-          "x-nullable": true
-        }
-      }
-    },
-    "BoundingBox": {
-      "description": "Quadrangle bounding box, with coordinates in original image. The eight numbers represent the four points (x-coordinate, y-coordinate from the left-top corner of the image) of the detected rectangle from the left-top corner in the clockwise direction. For images, coordinates are in pixels. For PDF, coordinates are in inches.",
-      "type": "array",
-      "items": {
-        "type": "integer",
-        "x-nullable": false
-      }
-    },
     "ComputerVisionError": {
       "description": "Details about the API request error.",
       "required": [
@@ -217,5 +157,7 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     }
+  },
+  "paths": {
   }
 }
