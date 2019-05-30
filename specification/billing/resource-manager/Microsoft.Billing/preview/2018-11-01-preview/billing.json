@@ -452,7 +452,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InvoiceSectionProperties"
+              "$ref": "#/definitions/InvoiceSectionCreationRequest"
             },
             "description": "Parameters supplied to the Create InvoiceSection operation."
           }
@@ -4298,6 +4298,19 @@
         }
       }
     },
+    "InvoiceSectionCreationRequest": {
+      "description": "The properties of an InvoiceSection.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the InvoiceSection.",
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The billing profile id.",
+          "type": "string"
+        }
+      }
+    },
     "InvoiceSectionListResult": {
       "description": "Result of listing invoice sections.",
       "properties": {
@@ -5514,7 +5527,8 @@
       "properties": {
         "creditLimit": {
           "description": "The current credit limit.",
-          "$ref": "#/definitions/Amount"
+          "$ref": "#/definitions/Amount",
+          "readOnly": false
         },
         "reason": {
           "description": "The reason for the line of credit status when not approved.",
