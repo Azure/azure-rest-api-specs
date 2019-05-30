@@ -108,7 +108,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.FrontDoor
-  output-folder: $(csharp-sdks-folder)/FrontDoor/Management.FrontDoor/Generated
+  output-folder: $(csharp-sdks-folder)/frontdoor/Microsoft.Azure.Management.FrontDoor/src/Generated
   clear-output-folder: true
 ```
 

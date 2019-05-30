@@ -117,7 +117,7 @@ csharp:
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Media
-  output-folder: $(csharp-sdks-folder)/Media/Management.Media/Generated
+  output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Management.Media/src/Generated
   clear-output-folder: true
 ```
 
