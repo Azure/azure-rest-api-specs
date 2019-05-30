@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.storagecache
   package-name: azure-mgmt-storagecache
-  package-version: 2.0.0
+  package-version: 0.1.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-storagecache/azure/mgmt/storagecache
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagecache/azure/mgmt/storagecache
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-storagecache
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagecache
 ```
