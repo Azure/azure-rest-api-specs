@@ -1464,10 +1464,17 @@
           "description": "The endpoint URL for receiving update triggers.",
           "type": "string"
         },
-        "includeTriggerMetadata": {
-          "description": "Include Trigger metadata on Base image update triggers.",
-          "default": true,
-          "type": "boolean"
+        "updateTriggerPayloadType": {
+          "description": "Type of Payload body for Base image update triggers.",
+          "enum": [
+            "Default",
+            "Token"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpdateTriggerPayloadType",
+            "modelAsString": true
+          }
         },
         "status": {
           "description": "The current status of trigger.",
@@ -1880,9 +1887,17 @@
           "description": "The endpoint URL for receiving update triggers.",
           "type": "string"
         },
-        "includeTriggerMetadata": {
-          "description": "Include Trigger metadata on Base image update triggers.",
-          "type": "boolean"
+        "updateTriggerPayloadType": {
+          "description": "Type of Payload body for Base image update triggers.",
+          "enum": [
+            "Default",
+            "Token"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "UpdateTriggerPayloadType",
+            "modelAsString": true
+          }
         },
         "status": {
           "description": "The current status of trigger.",
@@ -2223,10 +2238,6 @@
         "overrideTaskStepProperties": {
           "$ref": "#/definitions/OverrideTaskStepProperties",
           "description": "Set of overridable parameters that can be passed when running a Task."
-        },
-        "continuationToken": {
-          "description": "Base64 encoded continuation token that will be attached with the base image trigger webhook.",
-          "type": "string"
         }
       },
       "x-ms-discriminator-value": "TaskRunRequest"
@@ -2259,6 +2270,10 @@
           "items": {
             "$ref": "#/definitions/SetValue"
           }
+        },
+        "updateTriggerToken": {
+          "description": "Base64 encoded update trigger token that will be attached with the base image trigger webhook.",
+          "type": "string"
         }
       }
     },
