@@ -782,6 +782,43 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/maintenanceConfigurations": {
+            "get": {
+                "tags": ["MaintenanceConfigurations"],
+                "summary": "Get Configuration records within a subscription",
+                "operationId": "MaintenanceConfigurations_List",
+                "consumes": [],
+                "produces": ["application/json"],
+                "parameters": [{
+                    "$ref": "#/parameters/SubscriptionIdParameter"
+                },
+                {
+                    "$ref": "#/parameters/ApiVersionParameter"
+                }],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ListMaintenanceConfigurationsResult"
+                        }
+                    },
+                    "default": {
+                        "description": "BadRequest",
+                        "schema": {
+                            "$ref": "#/definitions/MaintenanceError"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                },
+                "x-ms-examples": {
+                    "MaintenanceConfigurations_List": {
+                        "$ref": "./examples/MaintenanceConfigurations_List.json"
+                    }
+                }
+            }
+        },
         "/providers/Microsoft.Maintenance/operations": {
             "get": {
                 "tags": ["Operations"],
@@ -973,6 +1010,11 @@
                 "resourceId": {
                     "description": "The resourceId",
                     "type": "string"
+                },
+                "lastUpdateTime": {
+                    "format": "date-time",
+                    "description": "Last Update time",
+                    "type": "string"
                 }
             }
         },
@@ -1021,7 +1063,7 @@
                     "type": "string"
                 },
                 "resourceId": {
-                    "description": "The resourceId",
+                    "description": "The unique resourceId",
                     "type": "string"
                 }
             }
@@ -1052,11 +1094,19 @@
                     "description": "Gets or sets namespace of the resource",
                     "type": "string"
                 },
+                "extensionProperties": {
+                    "description": "Gets or sets extensionProperties of the maintenanceConfiguration",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "string"
+                    }
+                },
                 "maintenanceScope": {
                     "description": "Gets or sets maintenanceScope of the configuration",
                     "enum": ["All",
                     "Host",
-                    "Resource"],
+                    "Resource",
+                    "InResource"],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "MaintenanceScope",
@@ -1111,6 +1161,19 @@
                 "message": {
                     "description": "Human-readable representation of the error.",
                     "type": "string"
+                }
+            }
+        },
+        "ListMaintenanceConfigurationsResult": {
+            "description": "Response for MaintenanceConfigurations list",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "The list of maintenance Configurations",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/MaintenanceConfiguration"
+                    }
                 }
             }
         },
@@ -1193,7 +1256,8 @@
                     "description": "The impact area",
                     "enum": ["All",
                     "Host",
-                    "Resource"],
+                    "Resource",
+                    "InResource"],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "MaintenanceScope",
@@ -1202,8 +1266,9 @@
                 },
                 "impactType": {
                     "description": "The impact type",
-                    "enum": ["Freeze",
-                    "Reset",
+                    "enum": ["None",
+                    "Freeze",
+                    "Restart",
                     "Redeploy"],
                     "type": "string",
                     "x-ms-enum": {
