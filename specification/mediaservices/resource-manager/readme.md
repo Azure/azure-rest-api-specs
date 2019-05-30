@@ -26,13 +26,13 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-05
+tag: package-2019-05-preview
 opt-in-extensible-enums: true
 ```
 
-### Tag: package-preview-2019-05
+### Tag: package-2019-05-preview
 
-These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
@@ -156,13 +156,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-media/azure/mgmt/media
+  output-folder: $(python-sdks-folder)/media/azure-mgmt-media/azure/mgmt/media
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-media
+  output-folder: $(python-sdks-folder)/media/azure-mgmt-media
 ```
 
 ## Go

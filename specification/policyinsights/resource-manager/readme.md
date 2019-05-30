@@ -166,12 +166,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights/azure/mgmt/policyinsights
+  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights/azure/mgmt/policyinsights
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights
+  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
 ```
 
 ## Go
