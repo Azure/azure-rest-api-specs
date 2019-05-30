@@ -674,13 +674,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sql/azure/mgmt/sql
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql/azure/mgmt/sql
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sql
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql
 ```
 
 ### Go
