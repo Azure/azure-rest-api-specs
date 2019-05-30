@@ -357,39 +357,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.monitor
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-monitor
-```
-
-# Validation
-
-## Suppression
-
-``` yaml
-directive:
-  - suppress: R3016  # DefinitionsPropertiesNamesCamelCase (to suppress the error due to odata.type)
-    reason: The feature (polymorphic types) is in the process of deprecation and fixing this will require changes in the backend.
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Insights/stable/2018-01-01/metricDefinitions_API.json
-- Microsoft.Insights/stable/2018-01-01/metrics_API.json
-- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettings_API.json
-- Microsoft.Insights/preview/2017-05-01-preview/diagnosticsSettingsCategories_API.json
-- Microsoft.Insights/stable/2015-04-01/eventCategories_API.json
-- Microsoft.Insights/stable/2015-04-01/operations_API.json
-```
+See configuration in [readme.java.md](./readme.java.md)
