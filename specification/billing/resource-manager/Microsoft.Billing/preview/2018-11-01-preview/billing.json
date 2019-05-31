@@ -200,27 +200,24 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/validateAddress": {
+    "/providers/Microsoft.Billing/validateAddress": {
       "post": {
         "tags": [
-          "BillingAccounts"
+          "ValidateAddress"
         ],
         "x-ms-examples": {
-          "BillingAccountValidateAddress": {
-            "$ref": "./examples/BillingAccountValidateAddress.json"
+          "ValidateAddressValid": {
+            "$ref": "./examples/ValidateAddressValid.json"
           },
-          "BillingAccountValidateAddressInvalid": {
-            "$ref": "./examples/BillingAccountValidateAddressInvalid.json"
+          "ValidateAddressInvalid": {
+            "$ref": "./examples/ValidateAddressInvalid.json"
           }
         },
-        "operationId": "BillingAccountsValidateAddress_Post",
+        "operationId": "Addresses_Validate",
         "description": "Validates the address.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
             "name": "address",
