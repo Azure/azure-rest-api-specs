@@ -118,12 +118,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-store/azure/mgmt/datalake/store
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store/azure/mgmt/datalake/store
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-store
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store
 ```
 
 ## Go
