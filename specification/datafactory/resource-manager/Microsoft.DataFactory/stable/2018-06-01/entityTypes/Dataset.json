@@ -1435,6 +1435,38 @@
         }
       }
     },
+    "SapTableResourceDataset": {
+      "x-ms-discriminator-value": "SapTableResource",
+      "description": "SAP Table Resource properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP Table Resource properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapTableResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapTableResourceDatasetTypeProperties": {
+      "description": "SAP Table Resource properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The name of the SAP Table. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "tableName"
+      ]
+    },
     "WebTableDataset": {
       "x-ms-discriminator-value": "WebTable",
       "description": "The dataset points to a HTML table in the web page.",
