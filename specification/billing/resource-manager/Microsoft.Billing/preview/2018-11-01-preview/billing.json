@@ -106,6 +106,56 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "operationId": "BillingAccounts_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "The operation to update a billing account.",
+        "x-ms-examples": {
+          "UpdateBillingAccount": {
+            "$ref": "./examples/UpdateBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingAccountUpdateProperties"
+            },
+            "description": "Parameters supplied to the update billing account operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "202": {
+            "description": "Accepted. Billing account update is in progress."
+            },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods": {
@@ -3962,6 +4012,16 @@
           "description": "Specifies whether the user has read access on billing account.",
           "type": "boolean",
           "readOnly": true
+        }
+      }
+    },
+    "BillingAccountUpdateProperties": {
+      "description": "The properties of the billing account that can be updated.",
+      "properties": {
+        "properties": {
+          "description": "A billing property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingAccountProperties"
         }
       }
     },
