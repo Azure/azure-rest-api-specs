@@ -3,7 +3,7 @@
   "info": {
     "version": "4.0",
     "title": "QnAMaker Client",
-    "description": "An API for QnAMaker Service"
+    "description": "An API for QnAMaker runtime"
   },
   "securityDefinitions": {
     "auth_key": {
@@ -39,7 +39,7 @@
             "$ref": "#/parameters/KbId"
           },
           {
-            "$ref": "#/definitions/QueryDTO"
+            "$ref": "#/parameters/GenerateAnswerPayload"
           }
         ],
         "consumes": [
@@ -81,7 +81,7 @@
             "$ref": "#/parameters/KbId"
           },
           {
-            "$ref": "#/definitions/FeedbackRecordsDTO"
+            "$ref": "#/parameters/TrainPayload"
           }
         ],
         "consumes": [
@@ -387,13 +387,11 @@
       "additionalProperties": false,
       "properties": {
         "answers": {
-          "type": "object",
-          "description": "Previous QnA Id - qnaId of the top result.",
-          "allOf": [
-            {
+          "type": "array",
+          "description": "Represents Search Result list.",
+          "items": {
               "$ref": "#/definitions/QnASearchResult"
-            }
-          ]
+          }
         }
       }
     },
