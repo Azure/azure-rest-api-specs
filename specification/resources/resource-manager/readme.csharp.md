@@ -12,7 +12,7 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !(csharp-profile)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.ResourceManager  
 output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
 
