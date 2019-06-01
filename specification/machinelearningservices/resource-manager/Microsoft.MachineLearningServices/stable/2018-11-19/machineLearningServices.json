@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Machine Learning Workspaces",
     "description": "These APIs allow end users to operate on Azure Machine Learning Workspace resources.",
-    "version": "2018-11-19"
+    "version": "2019-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1994,11 +1994,17 @@
           "title": "Node ID.",
           "description": "ID of the compute node."
         },
-        "ipAddress": {
+        "publicIpAddress": {
           "readOnly": true,
           "type": "string",
-          "title": "IP address.",
+          "title": "Public IP address.",
           "description": "Public IP address of the compute node."
+        },
+        "privateIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Private IP address.",
+          "description": "Private IP address of the compute node."
         },
         "port": {
           "readOnly": true,
@@ -2006,6 +2012,39 @@
           "format": "int32",
           "title": "Port.",
           "description": "SSH port number of the node."
+        },
+        "nodeState": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Node State.",
+          "enum": [
+            "idle",
+            "running",
+            "preparing",
+            "unusable",
+            "leaving",
+            "preempted"
+          ],
+          "description": "State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.",
+          "x-ms-enum": {
+            "name": "NodeState",
+            "modelAsString": true
+          }
+        },
+        "runId": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Run ID",
+          "description": "ID of the Experiment Run"
+        },
+        "runInstances": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "Run Instances",
+          "description": "Instances of the Run running on the node incase of multiprocess experiment"
         }
       },
       "x-ms-discriminator-value": "AmlCompute"
