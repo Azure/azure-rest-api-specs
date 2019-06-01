@@ -30,16 +30,6 @@ tag: package-2017-12-01
 ```
 
 
-### Tag: package-2017-04-preview
-
-These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-04-preview'
-input-file:
-- Microsoft.DBforMySQL/preview/2017-04-30-preview/mysql.json
-```
-
-
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
@@ -50,14 +40,24 @@ input-file:
 ```
 
 
-### Tag: package-2017-12-01 
+### Tag: package-2017-12-01
 
-These settings apply only when `--tag=package-2017-12-01` is specified on the command line. 
+These settings apply only when `--tag=package-2017-12-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-12-01' 
-input-file: 
-- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json 
-``` 
+``` yaml $(tag) == 'package-2017-12-01'
+input-file:
+- Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+```
+
+
+### Tag: package-2018-06-01-privatepreview
+
+These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
+```
 
 
 ---
@@ -74,6 +74,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -112,59 +113,17 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: mysql
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-12-01
-```
-
-### Tag: package-2017-04-preview and go
-
-These settings apply only when `--tag=package-2017-04-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/mysql/mgmt/2017-04-30-preview/mysql
-```
-
-### Tag: package-2017-12-01-preview and go
-
-These settings apply only when `--tag=package-2017-12-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/mysql/mgmt/2017-12-01-preview/mysql
-```
-
-### Tag: package-2017-12-01 and go 
-
-These settings apply only when `--tag=package-2017-12-01 --go` is specified on the command line. 
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`. 
-
-``` yaml $(tag) == 'package-2017-12-01' && $(go) 
-output-folder: $(go-sdk-folder)/services/mysql/mgmt/2017-12-01/mysql
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

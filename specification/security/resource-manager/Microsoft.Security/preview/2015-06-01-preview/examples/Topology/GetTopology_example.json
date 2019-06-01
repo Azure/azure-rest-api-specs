@@ -1,0 +1,36 @@
+{
+    "parameters": {
+        "api-version": "2015-06-01-preview",
+        "subscriptionId": "3eeab341-f466-499c-a8be-85427e154bad",
+        "resourceGroupName": "myservers",
+        "ascLocation": "centralus",
+        "topologyResourceName": "vnets"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "properties": {
+                    "calculatedDateTime": "2018-07-10T13:56:10.5755270Z",
+                    "topologyResources": [
+                        {
+                            "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet",
+						    "severity": "Healthy",
+						    "networkZones": "InternetFacing",
+                            "recommendationsExist": false,
+						    "topologyScore": 0,
+						    "location": "westus",
+						    "children": [{
+								"resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Network/virtualNetworks/myvnet/subnets/mysubnet"
+							    }
+						    ]
+                        }
+                    ]
+                },
+                "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154bad/resourceGroups/myservers/providers/Microsoft.Security/locations/centralus/topologies/vnets",
+                "name": "vnets",
+                "type": "Microsoft.Security/locations/topologies",
+                "location": "westus"
+            }
+        }
+    }
+}

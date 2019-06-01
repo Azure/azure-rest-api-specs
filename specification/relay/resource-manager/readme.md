@@ -64,6 +64,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -85,71 +86,9 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.relay
-  package-name: azure-mgmt-relay
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-relay/azure/mgmt/relay
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-relay
-```
-
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: relay
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-04
-  - tag: package-2016-07
-```
-
-### Tag: package-2017-04 and go
-
-These settings apply only when `--tag=package-2017-04 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(go)
-output-folder: $(go-sdk-folder)/services/relay/mgmt/2017-04-01/relay
-```
-
-### Tag: package-2016-07 and go
-
-These settings apply only when `--tag=package-2016-07 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-07' && $(go)
-output-folder: $(go-sdk-folder)/services/relay/mgmt/2016-07-01/relay
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

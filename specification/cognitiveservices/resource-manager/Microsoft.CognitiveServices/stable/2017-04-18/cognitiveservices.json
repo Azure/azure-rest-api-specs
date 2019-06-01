@@ -35,7 +35,7 @@
         "description": "Create Cognitive Services Account. Accounts is a resource group wide resource type. It holds the keys for developer to access intelligent APIs. It's also the resource type for billing.",
         "operationId": "Accounts_Create",
         "x-ms-examples": {
-          "Get Account": {
+          "Create Account": {
             "$ref": "./examples/CreateAccount.json"
           }
         },
@@ -101,7 +101,7 @@
         "description": "Updates a Cognitive Services account",
         "operationId": "Accounts_Update",
         "x-ms-examples": {
-          "Get Account": {
+          "Update Account": {
             "$ref": "./examples/UpdateAccount.json"
           }
         },
@@ -493,7 +493,7 @@
         }
       }
     },
-   "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/skus": {
       "get": {
         "tags": [
           "CognitiveServicesAccounts"
@@ -663,7 +663,7 @@
             "schema": {
               "$ref": "#/definitions/CheckSkuAvailabilityParameter"
             },
-            "description": "Check SKU Availablity POST body."
+            "description": "Check SKU Availability POST body."
           }
         ],
         "responses": {
@@ -714,32 +714,7 @@
     },
     "CognitiveServicesAccountKind": {
       "type": "string",
-      "description": "Required. Indicates the type of cognitive service account.",
-      "enum": [
-        "Bing.Autosuggest.v7",
-        "Bing.CustomSearch",
-        "Bing.Search.v7",
-        "Bing.Speech",
-        "Bing.SpellCheck.v7",
-        "ComputerVision",
-        "ContentModerator",
-        "CustomSpeech",
-        "CustomVision.Prediction",
-        "CustomVision.Training",
-        "Emotion",
-        "Face",
-        "LUIS",
-        "QnAMaker",
-        "SpeakerRecognition",
-        "SpeechTranslation",
-        "TextAnalytics",
-        "TextTranslation",
-        "WebLM"
-      ],
-      "x-ms-enum": {
-        "name": "Kind",
-        "modelAsString": true
-      }
+      "description": "Required. Indicates the type of cognitive service account."
     },
     "CognitiveServicesAccountUpdateParameters": {
       "properties": {
@@ -753,6 +728,10 @@
             "type": "string"
           },
           "description": "Gets or sets a list of key value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional properties for Account. Only provided fields will be updated."
         }
       },
       "description": "The parameters to provide for the account."
@@ -785,24 +764,7 @@
     },
     "SkuName": {
       "type": "string",
-      "description": "The name of SKU.",
-      "enum": [
-        "F0",
-        "P0",
-        "P1",
-        "P2",
-        "S0",
-        "S1",
-        "S2",
-        "S3",
-        "S4",
-        "S5",
-        "S6"
-      ],
-      "x-ms-enum": {
-        "name": "SkuName",
-        "modelAsString": true
-      }
+      "description": "The name of SKU."
     },
     "CognitiveServicesAccount": {
       "description": "Cognitive Services Account is an Azure resource representing the provisioned account, its type, location and SKU.",
@@ -897,6 +859,14 @@
         "internalId": {
           "type": "string",
           "description": "The internal identifier."
+        },
+        "customSubDomainName": {
+          "type": "string",
+          "description": "Optional subdomain name used for token-based authentication."
+        },
+        "networkAcls": {
+          "$ref": "#/definitions/NetworkRuleSet",
+          "description": "A collection of rules governing the accessibility from specific network locations."
         }
       },
       "description": "Properties of Cognitive Services account."
@@ -1332,6 +1302,81 @@
         "value"
       ],
       "description": "The Get Skus operation response."
+    },
+	  "NetworkRuleSet": {
+      "properties": {
+        "bypass": {
+          "type": "string",
+          "description": "Tells what traffic can bypass network rules. This can be 'AzureServices' or 'None'.  If not specified the default is 'AzureServices'.",
+          "enum": [
+            "AzureServices",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleBypassOptions",
+            "modelAsString": true
+          }
+        },
+        "defaultAction": {
+          "type": "string",
+          "description": "The default action when no rule from ipRules and from virtualNetworkRules match. This is only used after the bypass property has been evaluated.",
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkRuleAction",
+            "modelAsString": true
+          }
+        },
+        "ipRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpRule"
+          },
+          "description": "The list of IP address rules."
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          },
+          "description": "The list of virtual network rules."
+        }
+      },
+      "description": "A set of rules governing the network accessibility."
+    },
+    "IpRule": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "An IPv4 address range in CIDR notation, such as '124.56.78.91' (simple IP address) or '124.56.78.0/24' (all addresses that start with 124.56.78)."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "A rule governing the accessibility from a specific ip address or ip range."
+    },
+    "VirtualNetworkRule": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Full resource id of a vnet subnet, such as '/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1'."
+        },
+        "state": {
+          "type": "string",
+          "description": "Gets the state of virtual network rule."
+        },
+        "ignoreMissingVnetServiceEndpoint": {
+          "type": "boolean",
+          "description": "Ignore missing vnet service endpoint or not."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "A rule governing the accessibility from a specific virtual network."
     }
   },
   "parameters": {

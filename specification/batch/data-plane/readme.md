@@ -26,7 +26,16 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-08.7.0
+tag: package-2018-12.8.0
+```
+
+### Tag: package-2018-12.8.0
+
+These settings apply only when `--tag=package-2018-12.8.0` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12.8.0'
+input-file:
+- Microsoft.Batch/stable/2018-12-01.8.0/BatchService.json
 ```
 
 ### Tag: package-2018-08.7.0
@@ -230,6 +239,7 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -244,37 +254,15 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Batch.Protocol
-  output-folder: $(csharp-sdks-folder)/Batch/DataPlane/Azure.Batch/GeneratedProtocol
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Batch/src/Generated
   clear-output-folder: true
   client-side-validation: false
 ```
 
-## Python
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
+## Go
 
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.batch
-  package-name: azure-batch
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-batch/azure/batch
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-batch
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -291,108 +279,6 @@ nodejs:
   generate-license-txt: true
   clear-output-folder: true
 ```
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: batch
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-05.5.0
-  - tag: package-2018-03.6.1
-  - tag: package-2018-08.7.0
-```
-
-### Tag: package-2018-08.7.0 and go
-
-These settings apply only when `--tag=package-2018-08.7.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-08.7.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2018-08-01.7.0/batch
-```
-
-### Tag: package-2018-03.6.1 and go
-
-These settings apply only when `--tag=package-2018-03.6.1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-03.6.1' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2018-03-01.6.1/batch
-```
-
-### Tag: package-2017-09.6.0 and go
-
-These settings apply only when `--tag=package-2017-09.6.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-09.6.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-09-01.6.0/batch
-```
-
-### Tag: package-2017-06.5.1 and go
-
-These settings apply only when `--tag=package-2017-06.5.1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-06.5.1' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-06-01.5.1/batch
-```
-
-### Tag: package-2017-05.5.0 and go
-
-These settings apply only when `--tag=package-2017-05.5.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-05.5.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-05-01.5.0/batch
-```
-
-### Tag: package-2017-01.4.0 and go
-
-These settings apply only when `--tag=package-2017-01.4.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-01.4.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2017-01-01.4.0/batch
-```
-
-### Tag: package-2016-07.3.1 and go
-
-These settings apply only when `--tag=package-2016-07.3.1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-07.3.1' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2016-07-01.3.1/batch
-```
-
-### Tag: package-2016-02.3.0 and go
-
-These settings apply only when `--tag=package-2016-02.3.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-02.3.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2016-02-01.3.0/batch
-```
-
-### Tag: package-2015-12.2.2 and go
-
-These settings apply only when `--tag=package-2017-05.5.0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-05.5.0' && $(go)
-output-folder: $(go-sdk-folder)/services/batch/2015-12-01.2.2/batch
-```
-
 
 ## Java
 

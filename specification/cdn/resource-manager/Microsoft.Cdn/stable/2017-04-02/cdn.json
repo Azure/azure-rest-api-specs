@@ -337,7 +337,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
+        "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
         "operationId": "Profiles_GenerateSsoUri",
         "x-ms-examples": {
           "Profiles_GenerateSsoUri": {
@@ -870,7 +870,7 @@
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
@@ -936,7 +936,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -983,7 +983,7 @@
           {
             "name": "contentFilePaths",
             "in": "body",
-            "description": "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictires/city.png' which loads a single file ",
+            "description": "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictures/city.png' which loads a single file ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadParameters"
@@ -999,7 +999,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -1382,7 +1382,7 @@
         "tags": [
           "CustomDomains"
         ],
-        "description": "Gets an exisitng custom domain within an endpoint.",
+        "description": "Gets an existing custom domain within an endpoint.",
         "operationId": "CustomDomains_Get",
         "x-ms-examples": {
           "CustomDomains_Get": {
@@ -1956,7 +1956,7 @@
       }
     },
     "ProfileListResult": {
-      "description": "Result of the request to list profiles. It contains a list of profile objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list profiles. It contains a list of profile objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2038,7 +2038,7 @@
       ],
       "properties": {
         "hostName": {
-          "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. consoto.azureedge.net",
+          "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net",
           "type": "string",
           "readOnly": true
         },
@@ -2074,7 +2074,7 @@
       }
     },
     "EndpointListResult": {
-      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2116,7 +2116,7 @@
           "type": "string"
         },
         "originPath": {
-          "description": "A directory path on the origin that CDN can use to retreive content from, e.g. contoso.cloudapp.net/originpath.",
+          "description": "A directory path on the origin that CDN can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
           "type": "string"
         },
         "contentTypesToCompress": {
@@ -2151,7 +2151,7 @@
           "type": "string"
         },
         "geoFilters": {
-          "description": "List of rules defining the user's geo access within a CDN endpoint. Each geo filter defines an acess rule to a specified path or content, e.g. block APAC for path /pictures/",
+          "description": "List of rules defining the user's geo access within a CDN endpoint. Each geo filter defines an access rule to a specified path or content, e.g. block APAC for path /pictures/",
           "type": "array",
           "items": {
             "$ref": "#/definitions/GeoFilter"
@@ -2389,7 +2389,7 @@
       }
     },
     "CustomDomain": {
-      "description": "Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.consoto.com.",
+      "description": "Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.",
       "type": "object",
       "allOf": [
         {
@@ -2799,7 +2799,7 @@
       "type": "object",
       "properties": {
         "baseIpAddress": {
-          "description": "Ip adress itself.",
+          "description": "IP address itself.",
           "type": "string"
         },
         "prefixLength": {
@@ -2917,7 +2917,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {

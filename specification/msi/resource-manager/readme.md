@@ -22,9 +22,17 @@ These are the global settings for the Managed Service Identity API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-08-31-preview
+tag: package-2018-11-30
 ```
 
+### Tag: package-2018-11-30
+
+These settings apply only when `--tag=package-2018-11-30` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11-30'
+input-file:
+- Microsoft.ManagedIdentity/stable/2018-11-30/ManagedIdentity.json
+```
 
 ### Tag: package-2015-08-31-preview
 
@@ -52,6 +60,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_msi']
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 
@@ -69,60 +79,9 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.msi
-  package-name: azure-mgmt-msi
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-msi/azure/mgmt/msi
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-msi
-```
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: msi
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2015-08-31-preview
-```
-
-### Tag: package-2015-08-31-preview and go
-
-These settings apply only when `--tag=package-2015-08-31-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-08-31-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/msi/mgmt/2015-08-31-preview/msi
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -142,7 +101,21 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-msi
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2018-11-30
   - tag: package-2015-08-31-preview
+```
+
+### Tag: package-2018-11-30 and java
+
+These settings apply only when `--tag=package-2018-11-30 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-11-30' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.managedserviceidentity.v2018-11-30
+  output-folder: $(azure-libraries-for-java-folder)/managedserviceidentity/resource-manager/v2018-11-30
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2015-08-31-preview and java

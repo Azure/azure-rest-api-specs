@@ -79,7 +79,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwritting concurrent changes."
+            "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting concurrent changes."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -165,7 +165,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes."
+            "description": "The etag of the record set. Omit this value to always overwrite the current record set. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -523,7 +523,7 @@
             "required": false,
             "type": "string",
             "x-ms-client-name": "IfMatch",
-            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwritting any concurrent changes."
+            "description": "The etag of the DNS zone. Omit this value to always overwrite the current zone. Specify the last-seen etag value to prevent accidentally overwriting any concurrent changes."
           },
           {
             "name": "If-None-Match",
@@ -1160,18 +1160,30 @@
     },
     "CloudError": {
       "type": "object",
-      "properties": { "error": { "$ref": "#/definitions/CloudErrorBody" } },
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
       "x-ms-external": true
     },
     "CloudErrorBody": {
       "type": "object",
       "properties": {
-        "code": { "type": "string" },
-        "message": { "type": "string" },
-        "target": { "type": "string" },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
         "details": {
           "type": "array",
-          "items": { "$ref": "#/definitions/CloudErrorBody" }
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
         }
       },
       "x-ms-external": true

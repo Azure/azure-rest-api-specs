@@ -37,6 +37,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -48,8 +49,8 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  namespace: Microsoft.CognitiveServices.ContentModerator
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ContentModerator/ContentModerator/Generated
+  namespace: Microsoft.Azure.CognitiveServices.ContentModerator
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Vision.ContentModerator/src/Generated
 ```
 
 ``` yaml
@@ -79,41 +80,17 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator/azure/cognitiveservices/vision/contentmoderator
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-contentmoderator/azure/cognitiveservices/vision/contentmoderator
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-contentmoderator
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: contentmoderator
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: release_1_0
-```
-
-### Tag: release_1_0 and go
-
-These settings apply only when `--tag=release_1_0 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_1_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v1.0/contentmoderator
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

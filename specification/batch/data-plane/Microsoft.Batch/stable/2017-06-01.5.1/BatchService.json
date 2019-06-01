@@ -3111,7 +3111,7 @@
           "JobSchedule update": { "$ref": "./examples/JobScheduleUpdate.json" }
         },
         "summary": "Updates the properties of the specified job schedule.",
-        "description": "This fully replaces all the updateable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.",
+        "description": "This fully replaces all the updatable properties of the job schedule. For example, if the schedule property is not specified with this request, then the Batch service will remove the existing schedule. Changes to a job schedule only impact jobs created by the schedule after the update has taken place; currently running jobs are unaffected.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -4426,7 +4426,7 @@
           "Job update": { "$ref": "./examples/JobUpdate.json" }
         },
         "summary": "Updates the properties of the specified job.",
-        "description": "This fully replaces all the updateable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.",
+        "description": "This fully replaces all the updatable properties of the job. For example, if the job has constraints associated with it and if constraints is not specified with this request, then the Batch service will remove the existing constraints.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -7249,7 +7249,7 @@
           "Pool update": { "$ref": "./examples/PoolUpdate.json" }
         },
         "summary": "Updates the properties of the specified pool.",
-        "description": "This fully replaces all the updateable properties of the pool. For example, if the pool has a start task associated with it and if start task is not specified with this request, then the Batch service will remove the existing start task.",
+        "description": "This fully replaces all the updatable properties of the pool. For example, if the pool has a start task associated with it and if start task is not specified with this request, then the Batch service will remove the existing start task.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -9207,7 +9207,7 @@
           "Node update user": { "$ref": "./examples/NodeUpdateUser.json" }
         },
         "summary": "Updates the password and expiration time of a user account on the specified compute node.",
-        "description": "This operation replaces of all the updateable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.",
+        "description": "This operation replaces of all the updatable properties of the account. For example, if the expiryTime element is not specified, the current value is replaced with the default value, not left unmodified. You can update a user account on a node only when it is in the idle or running state.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -10974,7 +10974,7 @@
         "default": {
           "$ref": "#/definitions/ExitOptions",
           "title": "How the Batch service should respond if the task fails with an exit condition not covered by any of the other properties.",
-          "description": "This value is used if the task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behaviour on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
+          "description": "This value is used if the task exits with any nonzero exit code not listed in the exitCodes or exitCodeRanges collection, with a pre-processing error if the preProcessingError property is not present, or with a file upload error if the fileUploadError property is not present. If you want non-default behavior on exit code 0, you must list it explicitly using the exitCodes or exitCodeRanges collection."
         }
       },
       "title": "Specifies how the Batch service should respond when the task completes."
@@ -11033,7 +11033,7 @@
         "dependencyAction": {
           "type": "string",
           "title": "An action that the Batch service performs on tasks that depend on this task.",
-          "description": "Values are:\n\n satisfy - Satisfy the task's dependencies.\n block - Block the task's dependencies.\n\n The default is 'satisfy' for exit code 0, and 'block' for all other exit conditions. If the job's usesTaskDependencies property is set to false, then specifying the dependencyAction property returns an erro and the add task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400  (Bad Request).",
+          "description": "Values are:\n\n satisfy - Satisfy the task's dependencies.\n block - Block the task's dependencies.\n\n The default is 'satisfy' for exit code 0, and 'block' for all other exit conditions. If the job's usesTaskDependencies property is set to false, then specifying the dependencyAction property returns an error and the add task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400  (Bad Request).",
           "enum": [
             "satisfy",
             "block"
@@ -11276,7 +11276,7 @@
         "userIdentity": {
           "$ref": "#/definitions/UserIdentity",
           "title": "The user identity under which the Job Preparation task runs.",
-          "description": "If omitted, the task runs as a non-administrative user unique to the task on Windows nodes, or a a non-administrative user unique to the pool on Linux nodes."
+          "description": "If omitted, the task runs as a non-administrative user unique to the task on Windows nodes, or a non-administrative user unique to the pool on Linux nodes."
         },
         "rerunOnNodeRebootAfterSuccess": {
           "type": "boolean",
@@ -12554,7 +12554,7 @@
             "type": "string"
           },
           "title": "The collection of Virtual Hard Disk (VHD) URIs.",
-          "description": "All the VHDs must be identical and must reside in an Azure Storage account within the same subscription and same region as the Batch account. For best performance, it is recommended that each VHD resides in a separate Azure Storage account. Each VHD can serve upto 20 Windows compute nodes or 40 Linux compute nodes. You must supply enough VHD URIs to satisfy the 'targetDedicated' property of the pool. If you do not supply enough VHD URIs, the pool will partially allocate compute nodes, and a resize error will occur."
+          "description": "All the VHDs must be identical and must reside in an Azure Storage account within the same subscription and same region as the Batch account. For best performance, it is recommended that each VHD resides in a separate Azure Storage account. Each VHD can serve up to 20 Windows compute nodes or 40 Linux compute nodes. You must supply enough VHD URIs to satisfy the 'targetDedicated' property of the pool. If you do not supply enough VHD URIs, the pool will partially allocate compute nodes, and a resize error will occur."
         },
         "caching": {
           "type": "string",
@@ -13712,7 +13712,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the compute node.",
-          "description": "Values are:\n\n idle - The node is not currently running a task.\n rebooting - The node is rebooting.\n reimaging - The node is reimaging.\n running - The node is running one or more tasks (other than a start task).\n unusable - The node cannot be used for task execution due to errors.\n creating - The Batch service has obtained the underlying virtual machine from Azure Compute, but it has not yet started to join the pool.\n starting - the Batch service is starting on the underlying virtual machine.\n waitingforstarttask - The start task has started running on the compute node, but waitForSuccess is set and the start task has not yet completed.\n starttaskfailed - The start task has failed on the compute node (and exhausted all retries), and waitForSuccess is set. The node is not usable for running tasks.\n unknown - The Batch service has lost contact with the node, and does not know its true state.\n leavingpool - The node is leaving the pool, either because the user explicitly removed it or because the pool is resizing or autoscaling down.\n offline - The node is not currently running a task, and scheduling of new tasks to the node is disabled.\n preempted - The low-priority node has been preempted. Tasks which were running on the node when it was pre-empted will be rescheduled when another node becomes available.",
+          "description": "Values are:\n\n idle - The node is not currently running a task.\n rebooting - The node is rebooting.\n reimaging - The node is reimaging.\n running - The node is running one or more tasks (other than a start task).\n unusable - The node cannot be used for task execution due to errors.\n creating - The Batch service has obtained the underlying virtual machine from Azure Compute, but it has not yet started to join the pool.\n starting - the Batch service is starting on the underlying virtual machine.\n waitingforstarttask - The start task has started running on the compute node, but waitForSuccess is set and the start task has not yet completed.\n starttaskfailed - The start task has failed on the compute node (and exhausted all retries), and waitForSuccess is set. The node is not usable for running tasks.\n unknown - The Batch service has lost contact with the node, and does not know its true state.\n leavingpool - The node is leaving the pool, either because the user explicitly removed it or because the pool is resizing or autoscaling down.\n offline - The node is not currently running a task, and scheduling of new tasks to the node is disabled.\n preempted - The low-priority node has been preempted. Tasks which were running on the node when it was preempted will be rescheduled when another node becomes available.",
           "enum": [
             "idle",
             "rebooting",

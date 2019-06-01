@@ -86,54 +86,9 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_key_vault']
 ```
 
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: keyvault
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-02
-  - tag: package-2016-10
-  - tag: package-2015-06
-```
-
-### Tag: package-2018-02 and go
-
-These settings apply only when `--tag=package-2018-02 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-02' && $(go)
-output-folder: $(go-sdk-folder)/services/keyvault/mgmt/2018-02-14/keyvault
-```
-
-### Tag: package-2016-10 and go
-
-These settings apply only when `--tag=package-2016-10 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2016-10' && $(go)
-output-folder: $(go-sdk-folder)/services/keyvault/mgmt/2016-10-01/keyvault
-```
-
-### Tag: package-2015-06 and go
-
-These settings apply only when `--tag=package-2015-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2015-06' && $(go)
-output-folder: $(go-sdk-folder)/services/keyvault/mgmt/2015-06-01/keyvault
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -184,4 +139,16 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2015_06_01
 regenerate-manager: true
 generate-interface: true
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.KeyVault/stable/2016-10-01/providers.json
+- Microsoft.KeyVault/stable/2016-10-01/keyvault.json
+- Microsoft.KeyVault/stable/2016-10-01/secrets.json
 ```

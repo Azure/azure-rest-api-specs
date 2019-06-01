@@ -26,7 +26,16 @@ These are the global settings for the Cdn API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2017-10
+tag: package-2019-04
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04'
+input-file:
+- Microsoft.Cdn/stable/2019-04-15/cdn.json
 ```
 
 ### Tag: package-2017-10
@@ -90,6 +99,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:

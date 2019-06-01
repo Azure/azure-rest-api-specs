@@ -1,12 +1,13 @@
 # AlertsManagement
-    
+
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for AlerManagement.
-
+This is the AutoRest configuration file for AlertManagement.
 
 ---
-## Getting Started 
+
+## Getting Started
+
 To build the SDK for AlertManagement, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,19 +15,38 @@ To build the SDK for AlertManagement, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
+### Basic Information
 
-### Basic Information 
 These are the global settings for the AlertManagement API.
 
 ``` yaml
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2018-05
+tag: package-2019-03
+```
+
+
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
+```
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
 ```
 
 ### Tag: package-2018-05
@@ -48,6 +68,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -62,7 +83,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -92,43 +113,22 @@ python:
   package-name: azure-mgmt-alertsmanagement
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
+  output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-alertsmanagement
+  output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: alertsmanagement
-  clear-output-folder: true
-```
-
-### Go multi-api
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-05-preview
-```
-
-### Tag: package-2018-05-preview and go
-
-These settings apply only when `--tag=package-2018-05-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-05-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/$(namespace)/mgmt/2018-05-05-preview/$(namespace)
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -144,5 +144,3 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-alertsmanagement
 ```
-
-

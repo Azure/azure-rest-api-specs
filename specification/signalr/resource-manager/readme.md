@@ -1,5 +1,5 @@
 # SignalR
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for SignalR.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for SignalR.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for SignalR, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -21,14 +21,36 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the SignalR API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-01-preview
+tag: package-2018-10-01
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.NameAvailability.properties.nameAvailable
+    reason:  The boolean properties 'nameAvailable' is actually boolean value defined by Azure API spec
+  - suppress: EnumInsteadOfBoolean
+    from: signalr.json
+    where: $.definitions.Dimension.properties.toBeExportedForShoebox
+    reason:  The boolean properties 'toBeExportedForShoebox' is defined by Geneva metrics
+```
+
+### Tag: package-2018-10-01
+
+These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10-01'
+input-file:
+- Microsoft.SignalRService/stable/2018-10-01/signalr.json
+```
 
 ### Tag: package-2018-03-01-preview
 
@@ -53,6 +75,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -60,61 +83,9 @@ swagger-to-sdk:
 ```
 
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.signalr
-  package-name: azure-mgmt-signalr
-  package-version: 0.1.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-signalr/azure/mgmt/signalr
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-signalr
-```
-
-
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: signalr
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03-01-preview
-```
-
-### Tag: package-2018-03-01-preview and go
-
-These settings apply only when `--tag=package-2018-03-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-03-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/signalr/mgmt/2018-03-01-preview/signalr
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -135,6 +106,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-signalr
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-03-01-preview
+  - tag: package-2018-10-01
+```
+
+### Tag: package-2018-10-01 and java
+
+These settings apply only when `--tag=package-2018-10-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-10-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.signalr.v2018_10_01
+  output-folder: $(azure-libraries-for-java-folder)/signalr/resource-manager/v2018_10_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-03-01-preview and java
@@ -150,7 +135,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.

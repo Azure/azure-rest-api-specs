@@ -38,13 +38,13 @@ directive:
     reason: Not available during preview.
   - suppress: TrackedResourcePatchOperation
     reason: Not available at this time.
-    from: deploymentmanager.json     
+    from: deploymentmanager.json
   - suppress: TrackedResourceListBySubscription
     reason: Not available at this time.
-    from: deploymentmanager.json 
+    from: deploymentmanager.json
   - suppress: TrackedResourceListByResourceGroup
     reason: Not available at this time.
-    from: deploymentmanager.json 
+    from: deploymentmanager.json
   - suppress: TrackedResourceGetOperation
     reason: The rollout resource has a get operation. The request and response types are separated for clarity.
     where: $.definitions.RolloutRequest
@@ -78,6 +78,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -94,9 +95,9 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DeploymentManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DeploymentManager/Management/Generated
-  clear-output-folder: true  
-``` 
+  output-folder: $(csharp-sdks-folder)/DeploymentManager/Management.DeploymentManager/Generated
+  clear-output-folder: true
+```
 
 
 ## Python
@@ -115,46 +116,22 @@ python:
   package-name: azure-mgmt-deploymentmanager
   package-version: 0.9.0
   clear-output-folder: true
+  override-client-name: DeploymentManagerClient
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-deploymentmanager/azure/mgmt/deploymentmanager
+  output-folder: $(python-sdks-folder)/deploymentmanager/azure-mgmt-deploymentmanager/azure/mgmt/deploymentmanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-deploymentmanager
+  output-folder: $(python-sdks-folder)/deploymentmanager/azure-mgmt-deploymentmanager
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: deploymentmanager
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-09-01-preview
-```
-
-### Tag: package-2018-09-01-preview and go
-
-These settings apply only when `--tag=package-2018-09-01-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-09-01-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/deploymentmanager/mgmt/2018-09-01-preview/deploymentmanager
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
