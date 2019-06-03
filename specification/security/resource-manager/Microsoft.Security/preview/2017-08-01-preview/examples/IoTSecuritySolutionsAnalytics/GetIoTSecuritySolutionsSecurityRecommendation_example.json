@@ -4,7 +4,7 @@
     "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
     "resourceGroupName": "MyGroup",
     "solutionName": "default",
-    "AggregatedRecommendationName" : "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/recommendationtype1"
+    "aggregatedRecommendationName" : "recommendationtype1"
   },
   "responses": {
     "200": {
@@ -12,15 +12,12 @@
         "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/recommendationtype1",
         "name": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/recommendationtype1",
         "type": "Microsoft.Security/IoTSecurityAggregatedRecommendation",
-        "location": "East Us",
-        "tags": {},
-        "properties": {
           "recommendationName": "recommendationtype1",
           "recommendationDisplayName" : "Permissive firewall policy in one of the chains was found",
           "description" : "An allowed firewall policy was found in main firewall Chains (INPUT/OUTPUT). The policy should Deny all traffic by default define rules to allow necessary communication to/from the device",
           "recommendationTypeId" : "{20ff7fc3-e762-44dd-bd96-b71116dcdc23}",
           "detectedBy" : "Microsoft",
-          "reportedSeverity" : "low",
+          "reportedSeverity" : "Low",
           "healthyDevices" : 10000,
           "unhealthyDevices" : 200,
           "logAnalyticsQuery" : "SecurityRecommendation | where tolower(AssessedResourceId) == tolower('/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/IoTEdgeResources/providers/Microsoft.Devices/IotHubs/t-ofdadu-hub') and tolower(RecommendationName) == tolower('IoT_PermissiveFirewallPolicy')"
@@ -28,4 +25,3 @@
       }
     }
   }
-}
