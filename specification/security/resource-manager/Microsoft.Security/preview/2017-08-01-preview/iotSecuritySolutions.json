@@ -226,10 +226,19 @@
                 {
                   "name": "securitySolutionTags",
                   "in": "body",
-                  "required": true,
+                  "required": false,
                   "description": "Updated tag information to set into the iot hub instance.",
                   "schema": {
                     "$ref": "#/definitions/TagsResource"
+                  }
+                },
+				{
+                  "name": "securitySolutionUserDefinedResources",
+                  "in": "body",
+                  "required": false,
+                  "description": "Updated user defined resources information to set into the security solution.",
+                  "schema": {
+                    "$ref": "#/definitions/UserDefinedResources"
                   }
                 }
               ],
@@ -403,8 +412,8 @@
                   "description": "IoT Hub resource IDs",
                   "items": { "type": "string" }
               },
-			  "userDefinedResources": {
-				"$ref": "#/definitions/UserDefinedResourcesProperties"
+			  {
+				"$ref": "#/definitions/UserDefinedResources"
 			  },
 			  "autoDiscoveredResources": {
 				  "type": "array",
@@ -419,6 +428,13 @@
               "displayName"
           ]
       },
+	  "UserDefinedResources": {
+		"properties": {
+			"userDefinedResources": {
+				"$ref": "#/definitions/UserDefinedResourcesProperties"
+			}
+		}
+	  },
 	  "UserDefinedResourcesProperties": {
 		"type": "object",
 		"description": "Properties of the solution's user defined resources.",
