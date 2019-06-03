@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -76,7 +76,60 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/AggregatedAlert/{aggregatedAlertName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedAlert": {
+      "get": {
+        "x-ms-examples": {
+          "Get Security Solutions Analytics": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAggregatedAlertList_example.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions Analytics"
+        ],
+        "description": "Security Analytics of a security solution",
+        "operationId": "IoTSecuritySolutionsAnalyticsAggregatedAlerts_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "description": "The number of results to retrieve.",
+            "required": false,
+            "type": "integer"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IoTSecurityAggregatedAlertList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedAlert/{aggregatedAlertName}": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -103,13 +156,6 @@
           },
           {
             "$ref": "#/parameters/AggregatedAlertName"
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The number of results to retrieve.",
-            "required": false,
-            "type": "integer"
           }
         ],
         "responses": {
@@ -125,13 +171,10 @@
               "$ref": "../../../common/v1/types.json#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/AggregatedAlert/{aggregatedAlertName}/Dismiss": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedAlert/{aggregatedAlertName}/Dismiss": {
       "put": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -173,7 +216,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/AggregatedRecommendation/{aggregatedRecommendationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedRecommendation/{aggregatedRecommendationName}": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -200,6 +243,48 @@
           },
           {
             "$ref": "#/parameters/AggregatedRecommendationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IoTSecurityAggregatedRecommendation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedRecommendation": {
+      "get": {
+        "x-ms-examples": {
+          "Get Security Solutions Analytics": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityRecommendationList_example.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions Analytics"
+        ],
+        "description": "Security Analytics of a security solution",
+        "operationId": "IoTSecuritySolutionsAnalyticsRecommendations_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
           },
           {
             "name": "$top",
@@ -213,7 +298,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IoTSecurityAggregatedRecommendation"
+              "$ref": "#/definitions/IoTSecurityAggregatedRecommendationList"
             }
           },
           "default": {
