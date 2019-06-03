@@ -6,29 +6,18 @@
     "api-version": "2019-04-01",
     "Referer": "https://management.azure.com/",
     "virtualMachineRequest": {
-      "name": "myVirtualMachine",
-      "type": "Microsoft.VMwareCloudSimple/virtualMachines",
       "location": "westus2",
       "properties": {
         "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
         "templateId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34",
         "numberOfCores": 2,
         "amountOfRam": 4096,
-        "controllers": [
-          {
-            "id": "1000",
-            "name": "SCSI controller 0",
-            "subType": "LSI_PARALEL",
-            "type": "SCSI"
-          }
-        ],
         "disks": [
           {
             "controllerId": "1000",
             "independenceMode": "persistent",
             "totalSize": 10485760,
-            "virtualDiskId": "2000",
-            "virtualDiskName": "Hard disk 1"
+            "virtualDiskId": "2000"
           }
         ],
         "resourcePool":{
@@ -43,8 +32,7 @@
             },
             "nicType": "E1000",
             "powerOnBoot": true,
-            "virtualNicId": "4000",
-            "virtualNicName": "Network adapter 1"
+            "virtualNicId": "4000"
           }
         ]
       }
