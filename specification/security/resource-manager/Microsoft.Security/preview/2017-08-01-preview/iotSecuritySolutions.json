@@ -404,23 +404,7 @@
                   "items": { "type": "string" }
               },
 			  "userDefinedResources": {
-				"type": "object",
-				"description": "Properties of the solution's user defined resources.",
-				"properties": {
-					"query": {
-						"type": "string",
-						"description": "Azure Resource Graph query which represents the security solution's user defined resources. Required to start with \"where type != \"Microsoft.Devices/IotHubs\"\""
-					},
-					"querySubscriptions": {
-						"type": "array",
-						"description": "List of subscriptions on which the user defined resources query should be executed.",
-						"items": { "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId" }
-					}
-				},
-				"required": [
-					"query",
-					"querySubscriptions"
-				]
+				"$ref": "#/definitions/UserDefinedResourcesProperties"
 			  },
 			  "autoDiscoveredResources": {
 				  "type": "array",
@@ -434,7 +418,26 @@
               "workspace",
               "displayName"
           ]
-      }
+      },
+	  "UserDefinedResourcesProperties": {
+		"type": "object",
+		"description": "Properties of the solution's user defined resources.",
+		"properties": {
+			"query": {
+				"type": "string",
+				"description": "Azure Resource Graph query which represents the security solution's user defined resources. Required to start with \"where type != \"Microsoft.Devices/IotHubs\"\""
+			},
+			"querySubscriptions": {
+				"type": "array",
+				"description": "List of subscriptions on which the user defined resources query should be executed.",
+				"items": { "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId" }
+			}
+		},
+		"required": [
+			"query",
+			"querySubscriptions"
+		]
+	  }
   },
   "parameters": {
       "SolutionName": {
