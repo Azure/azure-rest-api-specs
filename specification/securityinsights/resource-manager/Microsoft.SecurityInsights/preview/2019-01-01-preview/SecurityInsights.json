@@ -2842,7 +2842,13 @@
                 {
                     "$ref": "#/definitions/SettingsKind"
                 }
-            ]
+            ],
+            "properties": {
+                "etag": {
+                    "type": "string",
+                    "description": "Etag of the alert rule."
+                }
+            }
         },
         "SettingsKind": {
             "type": "object",
@@ -2901,7 +2907,7 @@
                     }
                 },
                 "atpLicenseStatus": {
-                    "type": "boolean",
+                    "type": "string",
                     "readOnly": true,
                     "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
                     "enum": [
