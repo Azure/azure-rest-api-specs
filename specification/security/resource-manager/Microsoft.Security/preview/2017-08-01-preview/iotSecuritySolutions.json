@@ -203,12 +203,12 @@
           },
           "patch": {
               "x-ms-examples": {
-                  "Create an iot security solution": {
+                  "Update an iot security solution": {
                       "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution_example.json"
                   }
               },
               "tags": ["IoT Security Solutions"],
-              "description": "update exists Security Solution tags. to update other fields use the CreateOrUpdate method",
+              "description": "update existing Security Solution tags or user defined resources. To update other fields use the CreateOrUpdate method",
               "operationId": "IotSecuritySolution_Update",
               "parameters": [
                 {
@@ -232,14 +232,8 @@
                     "$ref": "#/definitions/TagsResource"
                   }
                 },
-				{
-                  "name": "securitySolutionUserDefinedResources",
-                  "in": "body",
-                  "required": false,
-                  "description": "Updated user defined resources information to set into the security solution.",
-                  "schema": {
-                    "$ref": "#/definitions/UserDefinedResources"
-                  }
+			    {
+                  "$ref": "#/parameters/UserDefinedResources"
                 }
               ],
               "responses": {
@@ -428,13 +422,6 @@
               "displayName"
           ]
       },
-	  "UserDefinedResources": {
-		"properties": {
-			"userDefinedResources": {
-				"$ref": "#/definitions/UserDefinedResourcesProperties"
-			}
-		}
-	  },
 	  "UserDefinedResourcesProperties": {
 		"type": "object",
 		"description": "Properties of the solution's user defined resources.",
@@ -481,6 +468,16 @@
         "description": "filter the Security Solution with OData syntax. supporting filter by iotHubs",
         "type": "string",
         "x-ms-parameter-location": "method"
-      }
+      },
+	  "UserDefinedResources": {
+		"name": "userDefinedResources",
+		"in": "body",
+		"required": false,
+		"description": "",
+		"schema": {
+			"$ref": "#/definitions/UserDefinedResourcesProperties"
+		},
+		"x-ms-parameter-location": "method"
+	  }
   }
 }
