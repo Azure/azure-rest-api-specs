@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationClient",
-    "version": "2018-06-01",
+    "version": "2019-03-01",
     "description": "ARM applications"
   },
   "host": "management.azure.com",
@@ -742,6 +742,278 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}/updateAccess": {
+      "post": {
+        "tags": [
+          "updateAccess"
+        ],
+        "operationId": "updateAccess_Post",
+        "description": "Update Access on application.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the application access update.",
+            "schema": {
+              "$ref": "#/definitions/JitUpdateAccessDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/jitRequests/{jitRequestName}": {
+      "get": {
+        "tags": [
+          "jitRequests"
+        ],
+        "operationId": "jitRequests_GetByName",
+        "description": "Gets the JIT request.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "jitRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the JIT request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the JIT request",
+            "schema": {
+              "$ref": "#/definitions/JitRequestDefinition"
+            }
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "jitRequests"
+        ],
+        "operationId": "jitRequests_CreateOrUpdate",
+        "description": "Creates or updates the JIT request.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "jitRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the JIT request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created - Returns information about the JIT request.",
+            "schema": {
+              "$ref": "#/definitions/JitRequestDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "jitRequests"
+        ],
+        "operationId": "jitRequests_Delete",
+        "description": "Deletes the JIT request.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "jitRequestName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the JIT request."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Solutions/jitRequests": {
+      "get": {
+        "tags": [
+          "jitRequests"
+        ],
+        "operationId": "jitRequests_ListBySubscription",
+        "description": "Retrieves all JIT requests within the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of JIT requests.",
+            "schema": {
+              "$ref": "#/definitions/JitRequestDefinitionListResult"
+            }
+          },         
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        } 
+      }     
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/jitRequests": {
+      "get": {
+        "tags": [
+          "jitRequests"
+        ],
+        "operationId": "jitRequests_ListByResourceGroup",
+        "description": "Retrieves all JIT requests within the subscription.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },          
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of JIT requests.",
+            "schema": {
+              "$ref": "#/definitions/JitRequestDefinitionListResult"
+            }
+          },         
+          "404": {
+            "description": "Not Found"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        } 
+      }   
     }
   },
   "x-ms-paths": {
@@ -1350,6 +1622,247 @@
           "description": "Error message indicating why the operation failed.",
           "type": "string"
         }
+      }
+    },
+    "JitRequestDefinition": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JitRequestProperties",
+          "description": "The JIT request properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Information about JIT request definition."
+    },
+    "JitRequestDefinitionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JitRequestDefinition"
+          },
+          "description": "The array of Jit request definition."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of managed applications."
+    },
+    "JitRequestProperties": {
+      "properties": {
+        "ApplicationResourceId": {
+          "type": "string",
+          "description": "The parent application id."
+        },
+        "PublisherTenantId": {
+          "type": "string",
+          "description": "The publisher tenant id."
+        },
+        "JitAuthorizationPolicies": {
+          "description": "The JIT authorization policies.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/JitAuthorizationPolicies"
+          }
+        },
+        "JitSchedulingPolicy": {          
+          "$ref": "#/definitions/JitRequestProperties",
+          "description": "The JIT request properties."
+        },
+        "ProvisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The JIT request provisioning state."
+        },
+        "JitRequestState": {
+          "readOnly": true,
+          "$ref": "#/definitions/JitRequestState",
+          "description": "The JIT request state."
+        },
+        "CreatedBy": {
+          "$ref": "#/definitions/ApplicationClientDetails",
+          "description": "The client entity that created the JIT request."
+        },
+        "UpdatedBy": {
+          "$ref": "#/definitions/ApplicationClientDetails",
+          "description": "The client entity that last updated the JIT request."
+        }
+      },
+      "required":  [
+        "ApplicationResourceId",
+        "JitAuthorizationPolicies",
+        "JitSchedulingPolicy"
+      ],
+      "description": "Information about JIT request properties"
+    },
+    "JitAuthorizationPolicies": {
+      "properties": {
+        "PrincipalId": {
+          "type": "string",
+          "description": "The the principal id that will be granted JIT access."
+        },
+        "RoleDefinitionId": {
+          "type": "string",
+          "description": "The role definition id that will be granted to the Principal."
+        }
+      },
+      "required": [
+        "PrincipalId",
+        "RoleDefinitionId"
+      ],
+      "description": "The JIT authorization policies."
+    },
+    "JitSchedulingPolicy": {
+      "properties": {
+        "Type": {
+          "$ref": "#/definitions/JitSchedulingType",
+          "description": "The type of JIT schedule."
+        },
+        "Duration": {
+          "type": "string",
+          "format": "duration",
+          "title": "The required duration of the JIT request."
+        },
+        "StartTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the request."
+        }
+      },
+      "required": [
+        "Type",
+        "Duration",
+        "StartTime"
+      ],
+      "description": "The JIT scheduling policies."
+    },
+    "ApplicationClientDetails": {
+      "properties": {
+        "Oid": {
+          "type": "string",
+          "description": "The client Oid."
+        },
+        "Puid": {
+          "type": "string",
+          "description": "The client Puid"
+        },
+        "ApplicationId": {
+          "type": "string",
+          "description": "The client application Id."
+        }
+      },
+      "description": "The application client details to track the entity creating/updating the managed app resource."
+    },
+    "JitRequestState": {
+      "description": "The JIT request state.",
+      "readOnly": true,
+      "enum": [
+        "NotSpecified",
+        "Pending",
+        "Approved",
+        "Denied",
+        "Failed",
+        "Canceled",
+        "Expired",
+        "Timeout"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JitRequestState",
+        "modelAsString": true
+      }
+    },
+    "JitSchedulingType": {
+      "description": "The JIT request scheduling type.",
+      "readOnly": true,
+      "enum": [
+        "NotSpecified",
+        "Once",
+        "Recurring"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JitSchedulingType",
+        "modelAsString": true
+      }
+    },
+    "JitUpdateAccessDefinition": {
+      "description": "The JIT update access definition.",
+      "properties": {
+        "Approver": {
+          "type": "string",
+          "description": "The approver name."
+        },
+        "Metadata": {
+
+        },
+        "Status": {
+          "$ref": "#/definitions/JITStatusUpdate",
+          "description": "The JIT status."
+        },
+        "SubStatus": {
+          "$ref": "#/definitions/JITSubStatus",
+          "description": "The JIT sub-status."
+        }
+      }
+    },
+    "JitRequestMetadata": {
+      "description": "The JIT request metadata.",
+      "properties": {
+        "OriginRequestId": {
+          "type": "string",
+          "description": "The JIT request id."
+        },
+        "RequestorId": {
+          "type": "string",
+          "description": "The publisher tenant requestor id."
+        },
+        "TenantDisplayName": {
+          "type": "string",
+          "description": "The publisher tenant name."
+        },
+        "SubjectDisplayName": {
+          "type": "string",
+          "description": "The publisher subject display name."
+        }
+      }
+    },
+    "JITStatusUpdate": {
+      "description": "The application JIT status update from PIM service.",
+      "readOnly": true,
+      "enum": [
+        "NotSpecified",
+        "Elevate",
+        "Remove"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JITStatusUpdate",
+        "modelAsString": true
+      }
+    },
+    "JITSubStatus": {
+      "description": "The JIT request state.",
+      "readOnly": true,
+      "enum": [
+        "NotSpecified",
+        "Approved",
+        "Denied",
+        "Failed",
+        "Expired",
+        "Timeout"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "JITSubStatus",
+        "modelAsString": true
       }
     }
   },
