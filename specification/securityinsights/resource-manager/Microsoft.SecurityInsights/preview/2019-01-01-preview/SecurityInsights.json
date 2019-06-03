@@ -2000,7 +2000,7 @@
                     "description": "The status of the case",
                     "enum": [
                         "Draft",
-                        "Open",
+                        "New",
                         "InProgress",
                         "Closed"
                     ],
@@ -2013,7 +2013,7 @@
                                 "description": "Case that wasn't promoted yet to active"
                             },
                             {
-                                "value": "Open",
+                                "value": "New",
                                 "description": "An active case which isn't handled currently"
                             },
                             {
@@ -2975,6 +2975,94 @@
                         "name": "AggregationsKind",
                         "modelAsString": true
                     }
+                }
+            }
+        },
+        "CasesAggregation": {
+            "x-ms-discriminator-value": "CasesAggregation",
+            "type": "object",
+            "description": "Represents aggregations results for cases.",
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Aggregations"
+                }
+            ],
+            "properties": {
+                "properties": {
+                    "x-ms-client-flatten": true,
+                    "description": "Properties of aggregations results of cases.",
+                    "$ref": "#/definitions/CasesAggregationProperties"
+                }
+            }
+        },
+        "CasesAggregationProperties": {
+            "type": "object",
+            "description": "Aggregative results of cases property bag.",
+            "properties": {
+                "aggregationBySeverity": {
+                    "description": "Aggregations results by case severity.",
+                    "$ref": "#/definitions/CasesAggregationBySeverityProperties"
+                },
+                "aggregationByStatus": {
+                    "description": "Aggregations results by case status.",
+                    "$ref": "#/definitions/CasesAggregationByStatusProperties"
+                }
+            }
+        },
+        "CasesAggregationBySeverityProperties": {
+            "type": "object",
+            "description": "Aggregative results of cases by severity property bag.",
+            "properties": {
+                "totalCriticalSeverity": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with severity Critical"
+                },
+                "totalHighSeverity": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with severity High"
+                },
+                "totalMediumSeverity": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with severity medium"
+                },
+                "totalLowSeverity": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with severity Low"
+                },
+                "totalInformationalSeverity": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with severity Informational"
+                }
+            }
+        },
+        "CasesAggregationByStatusProperties": {
+            "type": "object",
+            "description": "Aggregative results of cases by status property bag.",
+            "properties": {
+                "totalNewStatus": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with status New"
+                },
+                "totalInProgressStatus": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with status InProgress"
+                },
+                "totalResolvedStatus": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with status Resolved"
+                },
+                "totalDismissedStatus": {
+                    "type": "integer",
+                    "readOnly": true,
+                    "description": "Total amount of open cases with status Dismissed"
                 }
             }
         },
