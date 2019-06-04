@@ -4,8 +4,6 @@
 
 This is the AutoRest configuration file for AzureMachineLearning.
 
-
-
 ---
 ## Getting Started
 To build the SDK for AzureMachineLearning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
