@@ -390,9 +390,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "List": {
             "$ref": "./examples/SmartGroups_List.json"
@@ -897,6 +894,10 @@
     "operationsList": {
       "description": "Lists the operations available in the AlertsManagement RP.",
       "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alerts.",
+          "type": "string"
+        },
         "value": {
           "description": "Array of operations",
           "type": "array",
@@ -911,6 +912,7 @@
     },
     "errorResponse": {
       "description": "An error response from the service.",
+      "x-ms-external": true,
       "properties": {
         "error": {
           "$ref": "#/definitions/errorResponseBody"
@@ -919,6 +921,7 @@
     },
     "errorResponseBody": {
       "description": "Details of error response.",
+      "x-ms-external": true,
       "properties": {
         "code": {
           "type": "string",
@@ -978,6 +981,10 @@
     "alertsList": {
       "description": "List the alerts.",
       "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alerts.",
+          "type": "string"
+        },
         "value": {
           "description": "List of alerts",
           "type": "array",
@@ -1371,10 +1378,14 @@
       }
     },
     "smartGroupsList": {
-      "description": "List the smart groups.",
+      "description": "List the alerts.",
       "properties": {
+        "nextLink": {
+          "description": "URL to fetch the next set of alerts.",
+          "type": "string"
+        },
         "value": {
-          "description": "List of smart groups",
+          "description": "List of alerts",
           "type": "array",
           "items": {
             "$ref": "#/definitions/smartGroup"
@@ -1391,6 +1402,7 @@
       ],
       "properties": {
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/smartGroupProperties"
         }
       }
