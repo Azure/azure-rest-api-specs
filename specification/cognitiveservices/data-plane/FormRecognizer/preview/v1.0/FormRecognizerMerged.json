@@ -69,9 +69,6 @@
         "x-ms-examples": {
           "Train new model example": {
             "$ref": "./examples/Train.json"
-          },
-          "Train new model example, subfolder filter options": {
-            "$ref": "./examples/TrainWithSubFolders.json"
           }
         }
       }
@@ -284,8 +281,125 @@
           }
         }
       }
-    }
+    },
+    "/prebuilt/receipt/asyncBatchAnalyze": {
+      "post": {
+        "description": "Batch Read Receipt operation. The response contains a field called 'Operation-Location', which contains the URL that you must use for your 'Get Read Receipt Result' operation.",
+        "operationId": "BatchReadReceipt",
+        "parameters": [
+          {
+            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageUrl"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The 'Operation-Location' URL will expire in 48 hours.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The URL will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful 'Batch Read Receipt' request": {
+            "$ref": "./examples/SuccessfulBatchReadReceiptWithUrl.json"
+          }
+        }
+      }
+    },
+    "/prebuilt/receipt/operations/{operationId}": {
+      "get": {
+        "description": "This interface is used for getting the analysis results of a 'Batch Read Receipt' operation. The URL to this interface should be retrieved from the 'Operation-Location' field returned from the 'Batch Read Receipt' operation.",
+        "operationId": "GetReadReceiptResult",
+        "parameters": [
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Id of read operation returned in the response of a 'Batch Read Receipt' operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the read operation status.",
+            "schema": {
+              "$ref": "#/definitions/readReceiptResult"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful 'Get Read Receipt Result' request": {
+            "$ref": "./examples/SuccessfulReadReceiptResult.json"
+          }
+        }
+      }
+    }    
   },
+  "x-ms-paths": {
+    "/prebuilt/receipt/asyncBatchAnalyze?overload=stream": {
+      "post": {
+        "description": "Read Receipt operation. When you use the 'Batch Read Receipt' interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'Get Read Receipt Result' operation.",
+        "operationId": "BatchReadReceiptInStream",
+        "parameters": [
+          {
+            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageStream"
+          }
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "202": {
+            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The 'Operation-Location' URL will expire in 48 hours.",
+            "headers": {
+              "Operation-Location": {
+                "description": "URL to query for status of the operation. The URL will expire in 48 hours. ",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful 'Batch Read Receipt' request": {
+            "$ref": "./examples/SuccessfulBatchReadReceiptWithStream.json"
+          }
+        }
+      }
+    }
+  },  
   "definitions": {
     "TrainRequest": {
       "description": "Contract to initiate a train request.",
@@ -645,9 +759,314 @@
           }
         }
       }
-    }
+    },
+    "readReceiptResult": {
+      "type": "object",
+      "description": "Analysis result of the 'Batch Read Receipt' operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the read operation.",
+          "$ref": "FormRecognizerReceiptOcr.json#/definitions/OperationStatus"
+        },
+        "recognitionResults": {
+          "description": "Text recognition result of the 'Batch Read Receipt' operation.",
+          "type": "array",
+          "items": {
+            "$ref": "FormRecognizerReceiptOcr.json#/definitions/TextRecognitionResult"
+          }
+        },
+        "understandingResults": {
+          "description": "Semantic understanding result of the 'Batch Read Receipt' operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/understandingResult"
+          }
+        }
+      }
+    },
+    "understandingResult": {
+      "description" : "A set of extracted fields corresponding to a semantic object, such as a receipt, in the input document.",
+      "properties": {
+        "pages": {
+          "description": "List of pages where the document is found.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "x-nullable": false
+          }
+        },
+        "fields": {
+          "description": "Dictionary of recognized field values.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/fieldValue"
+          }
+        }
+      }
+    },
+    "elementReference": {
+      "description": "Reference to an OCR word.",
+      "properties": {
+        "$ref": {
+          "type": "string"
+        }
+      }
+    },
+    "fieldValue": {
+      "description": "Base class representing a recognized field value.",
+      "type": "object",
+      "discriminator": "valueType",
+      "required": [
+        "valueType"
+      ],
+      "properties": {
+        "valueType": {
+          "description": "Discriminator for derived types.",
+          "type": "string"
+        },
+        "text": {
+          "description": "OCR text content of the recognized field.",
+          "type": "string"
+        },
+        "elements": {
+          "description": "List of references to OCR words comprising the recognized field value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/elementReference"
+          }
+        }
+      }
+    },
+    "stringValue": {
+      "description": "Recognized string field value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/fieldValue"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "String value of the recognized field.",
+          "type": "string"
+        }
+      }
+    },
+    "numberValue": {
+      "description": "Recognized numeric field value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/fieldValue"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "Numeric value of the recognized field.",
+          "type": "number"
+        }
+      }
+    },
+    "OperationStatus": {
+      "type": "string",
+      "description": "Status code of the text operation.",
+      "enum": [
+        "Not Started",
+        "Running",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "TextOperationStatusCodes",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },    
+    "TextRecognitionResult": {
+      "description": "An object representing a recognized text region",
+      "type": "object",
+      "required": [
+        "lines"
+      ],
+      "properties": {
+        "page": {
+          "description": "The 1-based page number of the recognition result.",
+          "type": "integer"
+        },
+        "clockwiseOrientation": {
+          "description": "The orientation of the image in degrees in the clockwise direction. Range between [0, 360).",
+          "type": "number"
+        },
+         "width": {
+          "description": "The width of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+        "height": {
+          "description": "The height of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+       "unit": {
+          "description": "The unit used in the Width, Height and BoundingBox. For images, the unit is 'pixel'. For PDF, the unit is 'inch'.",
+          "type": "string",
+          "enum": [
+            "pixel",
+            "inch"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultDimensionUnit",
+            "modelAsString": false
+          },
+          "x-nullable": true
+        },
+        "lines": {
+          "description": "A list of recognized text lines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Line"
+          }
+        }
+      }
+    },
+    "Line": {
+      "description": "An object representing a recognized text line.",
+      "type": "object",
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of a recognized line.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the line.",
+          "type": "string"
+        },
+        "words": {
+          "description": "List of words in the text line.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Word"
+          }
+        }
+      }
+    },
+    "Word": {
+      "description": "An object representing a recognized word.",
+      "type": "object",
+      "required": [
+        "boundingBox",
+        "text"
+      ],
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of a recognized word.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the word.",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "type": "string",
+          "enum": [
+            "High",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultConfidenceClass",
+            "modelAsString": false
+          },
+          "x-nullable": true
+        }
+      }
+    },
+    "BoundingBox": {
+      "description": "Quadrangle bounding box, with coordinates in original image. The eight numbers represent the four points (x-coordinate, y-coordinate from the left-top corner of the image) of the detected rectangle from the left-top corner in the clockwise direction. For images, coordinates are in pixels. For PDF, coordinates are in inches.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "x-nullable": false
+      }
+    },
+    "ComputerVisionError": {
+      "description": "Details about the API request error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "enum": [
+            "InvalidImageFormat",
+            "UnsupportedMediaType",
+            "InvalidImageUrl",
+            "NotSupportedFeature",
+            "NotSupportedImage",
+            "Timeout",
+            "InternalServerError",
+            "InvalidImageSize",
+            "BadArgument",
+            "DetectFaceError",
+            "NotSupportedLanguage",
+            "InvalidThumbnailSize",
+            "InvalidDetails",
+            "InvalidModel",
+            "CancelledRequest",
+            "NotSupportedVisualFeature",
+            "FailedToProcess",
+            "Unspecified",
+            "StorageException"
+          ],
+          "x-ms-enum": {
+            "name": "ComputerVisionErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        },
+        "requestId": {
+          "description": "A unique request identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image.",
+          "type": "string"
+        }
+      }
+    }  
   },
   "parameters": {
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    },
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      }
+    },    
     "Endpoint": {
       "name": "Endpoint",
       "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
