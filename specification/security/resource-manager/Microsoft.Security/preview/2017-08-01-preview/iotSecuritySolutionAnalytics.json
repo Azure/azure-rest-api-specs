@@ -205,7 +205,8 @@
         ],
         "responses": {
           "200": {
-            "description": "Dismissed"
+            "description": "Dismissed",
+            "schema" : {} 
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -337,7 +338,7 @@
       "description": "Security Analytics of a security solution",
       "properties": {
         "metrics": {
-          "type": "object", 
+          "type": "object",
           "$ref": "#/definitions/IoTSeverityMetrics",
           "description": "Security Analytics of a security solution",
           "readOnly": true
@@ -448,6 +449,20 @@
     "IoTSecurityAggregatedAlert": {
       "type": "object",
       "description": "Security Solution",
+      "required": [
+        "alertType",
+        "alertDisplayName",
+        "aggregatedDateUtc",
+        "vendorName",
+        "reportedSeverity",
+        "remediationSteps",
+        "description",
+        "count",
+        "effectedResourceType",
+        "systemSource",
+        "actionTaken",
+        "logAnalyticsQuery"
+      ],
       "properties": {
         "alertType": {
           "readOnly": true,
@@ -459,7 +474,7 @@
           "type": "string",
           "description": "Display name of the alert type"
         },
-        "AggregatedDateUtc": {
+        "aggregatedDateUtc": {
           "readOnly": true,
           "type": "string",
           "format": "date",
@@ -544,6 +559,7 @@
     "IoTSecurityAggregatedRecommendation": {
       "type": "object",
       "description": "Security Solution",
+      "required": [ "recommendationName", "recommendationDisplayName", "description", "recommendationTypeId", "detectedBy", "reportedSeverity", "healthyDevices", "unhealthyDevices", "logAnalyticsQuery" ],
       "properties": {
         "recommendationName": {
           "readOnly": true,
@@ -614,7 +630,8 @@
           "description": "query in log analytics to get the list of affected devices/alerts"
         }
       },
-      "allOf": [
+      "allOf" : 
+      [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         }
