@@ -453,6 +453,14 @@
             "default": false
           },
           {
+            "name": "allowOverwrite",
+            "in": "query",
+            "description": "whether to allow overwrite if Artifact Content exist already. when set to true, Overwrite happens if Artifact Content already exists",
+            "required": false,
+            "type": "boolean",
+            "default": false
+          },
+          {
             "name": "content",
             "in": "body",
             "description": "The content.",
@@ -1316,25 +1324,32 @@
   },
   "definitions": {
     "Artifact": {
+      "description": "Details of an Artifact.",
       "type": "object",
       "properties": {
         "artifactId": {
+          "description": "The identifier of an Artifact. Format of ArtifactId - {Origin}/{Container}/{Path}.",
           "type": "string"
         },
         "origin": {
+          "description": "The origin of the Artifact creation request. Available origins are 'ExperimentRun', 'LocalUpload', 'WebUpload', 'Dataset' and 'Unknown'.",
           "type": "string"
         },
         "container": {
+          "description": "The name of container. Artifacts can be grouped by container.",
           "type": "string"
         },
         "path": {
+          "description": "The path to the Artifact in a container.",
           "type": "string"
         },
         "etag": {
+          "description": "The Etag of the Artifact.",
           "type": "string"
         },
         "createdTime": {
           "format": "date-time",
+          "description": "The Date and Time at which the Artifact is created. The DateTime is in UTC.",
           "type": "string"
         }
       }
@@ -1361,57 +1376,24 @@
         }
       }
     },
-    "Stream": {
-      "type": "object",
-      "properties": {
-        "canRead": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canSeek": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canTimeout": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canWrite": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "length": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "position": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "readTimeout": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "writeTimeout": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
     "ArtifactContentInformation": {
+      "description": "Details of an Artifact Content Information.",
       "type": "object",
       "properties": {
         "contentUri": {
+          "description": "The URI of the content.",
           "type": "string"
         },
         "origin": {
+          "description": "The origin of the Artifact creation request. Available origins are 'ExperimentRun', 'LocalUpload', 'WebUpload', 'Dataset' and 'Unknown'.",
           "type": "string"
         },
         "container": {
+          "description": "The name of container. Artifacts can be grouped by container.",
           "type": "string"
         },
         "path": {
+          "description": "The path to the Artifact in a container.",
           "type": "string"
         }
       }
@@ -1439,9 +1421,11 @@
       }
     },
     "ArtifactIdList": {
+      "description": "Contains list of Artifact Ids.",
       "type": "object",
       "properties": {
         "artifactIds": {
+          "description": "List of Artifacts Ids.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1451,21 +1435,25 @@
       }
     },
     "BatchArtifactContentInformationResult": {
+      "description": "Results of the Batch Artifact Content Information request.",
       "type": "object",
       "properties": {
         "artifacts": {
+          "description": "Artifact details of the Artifact Ids requested.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Artifact"
           }
         },
         "artifactContentInformation": {
+          "description": "Artifact Content Information details of the Artifact Ids requested.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ArtifactContentInformation"
           }
         },
         "errors": {
+          "description": "Errors occured while fetching the requested Artifact Ids.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/ErrorResponse"
@@ -1603,26 +1591,33 @@
       }
     },
     "ArtifactContainerSas": {
+      "description": "Details of the Artifact Container's shared access signature.",
       "type": "object",
       "properties": {
         "containerSas": {
+          "description": "The shared access signature of the Container.",
           "type": "string"
         },
         "containerUri": {
+          "description": "The URI of the Container.",
           "type": "string"
         },
         "prefix": {
+          "description": "The Prefix to the Blobs in the Container.",
           "type": "string"
         },
         "artifactPrefix": {
+          "description": "The Prefix to the Artifact in the Blob.",
           "type": "string"
         }
       }
     },
     "ArtifactPathList": {
+      "description": "Contains list of Artifact Paths.",
       "type": "object",
       "properties": {
         "paths": {
+          "description": "List of Artifact Paths.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -1632,9 +1627,11 @@
       }
     },
     "ArtifactPath": {
+      "description": "Details of an Artifact Path.",
       "type": "object",
       "properties": {
         "path": {
+          "description": "The path to the Artifact in a container.",
           "type": "string"
         }
       }
