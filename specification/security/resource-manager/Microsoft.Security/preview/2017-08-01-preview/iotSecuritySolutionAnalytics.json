@@ -450,22 +450,10 @@
       "type": "object",
       "description": "Security Solution",
       "required": [
-        "alertType",
-        "alertDisplayName",
-        "aggregatedDateUtc",
-        "vendorName",
-        "reportedSeverity",
-        "remediationSteps",
-        "description",
-        "count",
-        "effectedResourceType",
-        "systemSource",
-        "actionTaken",
-        "logAnalyticsQuery"
+        "alertType"
       ],
       "properties": {
         "alertType": {
-          "readOnly": true,
           "type": "string",
           "description": "Name of the alert type"
         },
@@ -558,11 +546,10 @@
     },
     "IoTSecurityAggregatedRecommendation": {
       "type": "object",
-      "description": "Security Solution",
-      "required": [ "recommendationName", "recommendationDisplayName", "description", "recommendationTypeId", "detectedBy", "reportedSeverity", "healthyDevices", "unhealthyDevices", "logAnalyticsQuery" ],
+      "description": "Security Solution Recommendation Information",
+      "required": [ "recommendationName" ],
       "properties": {
         "recommendationName": {
-          "readOnly": true,
           "type": "string",
           "description": "Name of the alert type"
         },
