@@ -218,22 +218,13 @@
                     "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
                 },
                 {
-                  "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+					"$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
                 },
                 {
                     "$ref": "#/parameters/SolutionName"
                 },
-                {
-                  "name": "securitySolutionTags",
-                  "in": "body",
-                  "required": false,
-                  "description": "Updated tag information to set into the iot hub instance.",
-                  "schema": {
-                    "$ref": "#/definitions/TagsResource"
-                  }
-                },
 			    {
-                  "$ref": "#/parameters/UserDefinedResources"
+					"$ref": "#/parameters/UpdateIotSecuritySolution"
                 }
               ],
               "responses": {
@@ -432,14 +423,26 @@
 			},
 			"querySubscriptions": {
 				"type": "array",
-				"description": "List of subscriptions on which the user defined resources query should be executed.",
-				"items": { "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId" }
+				"description": "List of Azure subscription ids on which the user defined resources query should be executed.",
+				"items": {
+					"type": "string",
+					"pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+				}
 			}
 		},
 		"required": [
 			"query",
 			"querySubscriptions"
 		]
+	  },
+	  "UpdateIotSecuritySolutionData": {
+		"type": "object",
+		"properties": {
+			"userDefinedResources": {
+				"$ref": "#/definitions/UserDefinedResourcesProperties"
+			}
+		},
+		"allOf": [{"$ref": "#/definitions/TagsResource"}]
 	  }
   },
   "parameters": {
@@ -469,15 +472,16 @@
         "type": "string",
         "x-ms-parameter-location": "method"
       },
-	  "UserDefinedResources": {
-		"name": "userDefinedResources",
+	  "UpdateIotSecuritySolution": {
+		"name": "updateIotSecuritySolutionData",
 		"in": "body",
-		"required": false,
-		"description": "",
+		"required": true,
+		"description": "The security solution data",
+		"x-ms-parameter-location": "method",
+		"type": "object",	
 		"schema": {
-			"$ref": "#/definitions/UserDefinedResourcesProperties"
-		},
-		"x-ms-parameter-location": "method"
+          "$ref": "#/definitions/UpdateIotSecuritySolutionData"
+        }
 	  }
   }
 }
