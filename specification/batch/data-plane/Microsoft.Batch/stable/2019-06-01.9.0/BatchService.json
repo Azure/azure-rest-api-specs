@@ -2391,7 +2391,7 @@
         "x-ms-examples": {
           "File list from task": { "$ref": "./examples/FileListFromTask.json" }
         },
-        "summary": "Lists the files in a task's directory on its Compute Node.",
+        "summary": "Lists the files in a Task's directory on its Compute Node.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -7132,7 +7132,7 @@
           "Pool resize": { "$ref": "./examples/PoolResize.json" }
         },
         "summary": "Changes the number of Compute Nodes that are assigned to a Pool.",
-        "description": "You can only resize a Pool when its allocation state is steady. If the Pool is already resizing, the request fails with status code 409. When you resize a Pool, the pool's allocation state changes from steady to resizing. You cannot resize Pools which are configured for automatic scaling. If you try to do this, the Batch service returns an error 409. If you resize a Pool downwards, the Batch service chooses which Compute Nodes to remove. To remove specific Compute Nodes, use the Pool remove Compute Nodes API instead.",
+        "description": "You can only resize a Pool when its allocation state is steady. If the Pool is already resizing, the request fails with status code 409. When you resize a Pool, the Pool's allocation state changes from steady to resizing. You cannot resize Pools which are configured for automatic scaling. If you try to do this, the Batch service returns an error 409. If you resize a Pool downwards, the Batch service chooses which Compute Nodes to remove. To remove specific Compute Nodes, use the Pool remove Compute Nodes API instead.",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -8859,7 +8859,7 @@
           "Task reactivate": { "$ref": "./examples/TaskReactivate.json" }
         },
         "summary": "Reactivates a Task, allowing it to run again even if its retry count has been exhausted.",
-        "description": "Reactivation makes a Task eligible to be retried again up to its maximum retry count. The task's state is changed to active. As the Task is no longer in the completed state, any previous exit code or failure information is no longer available after reactivation. Each time a Task is reactivated, its retry count is reset to 0. Reactivation will fail for Tasks that are not completed or that previously completed successfully (with an exit code of 0). Additionally, it will fail if the Job has completed (or is terminating or deleting).",
+        "description": "Reactivation makes a Task eligible to be retried again up to its maximum retry count. The Task's state is changed to active. As the Task is no longer in the completed state, any previous exit code or failure information is no longer available after reactivation. Each time a Task is reactivated, its retry count is reset to 0. Reactivation will fail for Tasks that are not completed or that previously completed successfully (with an exit code of 0). Additionally, it will fail if the Job has completed (or is terminating or deleting).",
         "x-ms-request-id": "request-id",
         "parameters": [
           {
@@ -10982,7 +10982,7 @@
         },
         "password": {
           "type": "string",
-          "title": "The password to access the certificate's private key.",
+          "title": "The password to access the Certificate's private key.",
           "description": "This is required if the Certificate format is pfx. It should be omitted if the Certificate format is cer."
         }
       },
@@ -11202,8 +11202,8 @@
         },
         "filePath": {
           "type": "string",
-          "title": "The location on the Compute Node to which to download the file(s), relative to the task's working directory.",
-          "description": "If the httpUrl property is specified, the filePath is required and describes the path which the file will be downloaded to, including the filename. Otherwise, if the autoStorageContainerName or storageContainerUrl property is specified, filePath is optional and is the directory to download the files to. In the case where filePath is used as a directory, any directory structure already associated with the input data will be retained in full and appended to the specified filePath directory. The specified relative path cannot break out of the task's working directory (for example by using '..')."
+          "title": "The location on the Compute Node to which to download the file(s), relative to the Task's working directory.",
+          "description": "If the httpUrl property is specified, the filePath is required and describes the path which the file will be downloaded to, including the filename. Otherwise, if the autoStorageContainerName or storageContainerUrl property is specified, filePath is optional and is the directory to download the files to. In the case where filePath is used as a directory, any directory structure already associated with the input data will be retained in full and appended to the specified filePath directory. The specified relative path cannot break out of the Task's working directory (for example by using '..')."
         },
         "fileMode": {
           "type": "string",
@@ -11299,8 +11299,8 @@
       "properties": {
         "jobAction": {
           "type": "string",
-          "title": "An action to take on the Job containing the Task, if the Task completes with the given exit condition and the job's onTaskFailed property is 'performExitOptionsJobAction'.",
-          "description": "The default is none for exit code 0 and terminate for all other exit conditions. If the job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).",
+          "title": "An action to take on the Job containing the Task, if the Task completes with the given exit condition and the Job's onTaskFailed property is 'performExitOptionsJobAction'.",
+          "description": "The default is none for exit code 0 and terminate for all other exit conditions. If the Job's onTaskFailed property is noaction, then specifying this property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400 (Bad Request).",
           "enum": [
             "none",
             "disable",
@@ -11320,7 +11320,7 @@
               },
               {
                 "value": "terminate",
-                "description": "Terminate the Job. The terminateReason in the job's executionInfo is set to \"TaskFailed\"."
+                "description": "Terminate the Job. The terminateReason in the Job's executionInfo is set to \"TaskFailed\"."
               }
             ]
           }
@@ -11328,7 +11328,7 @@
         "dependencyAction": {
           "type": "string",
           "title": "An action that the Batch service performs on Tasks that depend on this Task.",
-          "description": "The default is 'satisfy' for exit code 0, and 'block' for all other exit conditions. If the job's usesTaskDependencies property is set to false, then specifying the dependencyAction property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400  (Bad Request).",
+          "description": "The default is 'satisfy' for exit code 0, and 'block' for all other exit conditions. If the Job's usesTaskDependencies property is set to false, then specifying the dependencyAction property returns an error and the add Task request fails with an invalid property value error; if you are calling the REST API directly, the HTTP status code is 400  (Bad Request).",
           "enum": [
             "satisfy",
             "block"
@@ -11339,11 +11339,11 @@
             "values": [
               {
                 "value": "satisfy",
-                "description": "Satisfy the task's dependencies."
+                "description": "Satisfy the Task's dependencies."
               },
               {
                 "value": "block",
-                "description": "Block the task's dependencies."
+                "description": "Block the Task's dependencies."
               }
             ]
           }
@@ -11418,7 +11418,7 @@
         "sshPrivateKey": {
           "type": "string",
           "title": "The SSH private key for the user Account.",
-          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done)."
+          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between Compute Nodes in a Linux Pool when the Pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between Compute Nodes (no modification of the user's .ssh directory is done)."
         }
       },
       "title": "Properties used to create a user Account on a Linux Compute Node."
@@ -11531,7 +11531,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the Compute Node before running the command line.",
-          "description": "Files listed under this element are located in the task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
+          "description": "Files listed under this element are located in the Task's working directory. There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
         },
         "outputFiles": {
           "type": "array",
@@ -11565,7 +11565,7 @@
         "runExclusive": {
           "type": "boolean",
           "title": "Whether the Job Manager Task requires exclusive use of the Compute Node where it runs.",
-          "description": "If true, no other Tasks will run on the same Node for as long as the Job Manager is running. If false, other Tasks can run simultaneously with the Job Manager on a Compute Node. The Job Manager Task counts normally against the node's concurrent Task limit, so this is only relevant if the Compute Node allows multiple concurrent Tasks. The default value is true."
+          "description": "If true, no other Tasks will run on the same Node for as long as the Job Manager is running. If false, other Tasks can run simultaneously with the Job Manager on a Compute Node. The Job Manager Task counts normally against the Compute Node's concurrent Task limit, so this is only relevant if the Compute Node allows multiple concurrent Tasks. The default value is true."
         },
         "applicationPackageReferences": {
           "type": "array",
@@ -11613,7 +11613,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the Compute Node before running the command line.",
-          "description": "Files listed under this element are located in the task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
+          "description": "Files listed under this element are located in the Task's working directory.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers."
         },
         "environmentSettings": {
           "type": "array",
@@ -11669,7 +11669,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files.  When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
-          "description": "Files listed under this element are located in the task's working directory."
+          "description": "Files listed under this element are located in the Task's working directory."
         },
         "environmentSettings": {
           "type": "array",
@@ -11697,7 +11697,7 @@
       },
       "required": [ "commandLine" ],
       "title": "A Job Release Task to run on Job completion on any Compute Node where the Job has run.",
-      "description": "The Job Release Task runs when the Job ends, because of one of the following: The user calls the Terminate Job API, or the Delete Job API while the Job is still active, the job's maximum wall clock time constraint is reached, and the Job is still active, or the job's Job Manager Task completed, and the Job is configured to terminate when the Job Manager completes. The Job Release Task runs on each Node where Tasks of the Job have run and the Job Preparation Task ran and completed. If you reimage a Node after it has run the Job Preparation Task, and the Job ends without any further Tasks of the Job running on that Node (and hence the Job Preparation Task does not re-run), then the Job Release Task does not run on that Compute Node. If a Node reboots while the Job Release Task is still running, the Job Release Task runs again when the Compute Node starts up. The Job is not marked as complete until all Job Release Tasks have completed. The Job Release Task runs in the background. It does not occupy a scheduling slot; that is, it does not count towards the maxTasksPerNode limit specified on the Pool."
+      "description": "The Job Release Task runs when the Job ends, because of one of the following: The user calls the Terminate Job API, or the Delete Job API while the Job is still active, the Job's maximum wall clock time constraint is reached, and the Job is still active, or the Job's Job Manager Task completed, and the Job is configured to terminate when the Job Manager completes. The Job Release Task runs on each Node where Tasks of the Job have run and the Job Preparation Task ran and completed. If you reimage a Node after it has run the Job Preparation Task, and the Job ends without any further Tasks of the Job running on that Node (and hence the Job Preparation Task does not re-run), then the Job Release Task does not run on that Compute Node. If a Node reboots while the Job Release Task is still running, the Job Release Task runs again when the Compute Node starts up. The Job is not marked as complete until all Job Release Tasks have completed. The Job Release Task runs in the background. It does not occupy a scheduling slot; that is, it does not count towards the maxTasksPerNode limit specified on the Pool."
     },
     "TaskSchedulingPolicy": {
       "properties": {
@@ -11746,7 +11746,7 @@
             "$ref": "#/definitions/ResourceFile"
           },
           "title": "A list of files that the Batch service will download to the Compute Node before running the command line.  There is a maximum size for the list of resource files. When the max size is exceeded, the request will fail and the response error code will be RequestEntityTooLarge. If this occurs, the collection of ResourceFiles must be reduced in size. This can be achieved using .zip files, Application Packages, or Docker Containers.",
-          "description": "Files listed under this element are located in the task's working directory."
+          "description": "Files listed under this element are located in the Task's working directory."
         },
         "environmentSettings": {
           "type": "array",
@@ -12045,7 +12045,7 @@
         "autoPoolSpecification": {
           "$ref": "#/definitions/AutoPoolSpecification",
           "title": "Characteristics for a temporary 'auto pool'. The Batch service will create this auto Pool when the Job is submitted.",
-          "description": "If auto Pool creation fails, the Batch service moves the Job to a completed state, and the Pool creation error is set in the job's scheduling error property. The Batch service manages the lifetime (both creation and, unless keepAlive is specified, deletion) of the auto Pool. Any user actions that affect the lifetime of the auto Pool while the Job is active will result in unexpected behavior. You must specify either the Pool ID or the auto Pool specification, but not both."
+          "description": "If auto Pool creation fails, the Batch service moves the Job to a completed state, and the Pool creation error is set in the Job's scheduling error property. The Batch service manages the lifetime (both creation and, unless keepAlive is specified, deletion) of the auto Pool. Any user actions that affect the lifetime of the auto Pool while the Job is active will result in unexpected behavior. You must specify either the Pool ID or the auto Pool specification, but not both."
         }
       },
       "title": "Specifies how a Job should be assigned to a Pool."
@@ -12056,7 +12056,7 @@
           "type": "integer",
           "format": "int32",
           "title": "The priority of Jobs created under this schedule.",
-          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a job's priority after it has been created using by using the update Job API."
+          "description": "Priority values can range from -1000 to 1000, with -1000 being the lowest priority and 1000 being the highest priority. The default value is 0. This priority is used as the default for all Jobs under the Job Schedule. You can update a Job's priority after it has been created using by using the update Job API."
         },
         "displayName": {
           "type": "string",
@@ -12413,7 +12413,7 @@
         "terminateReason": {
           "type": "string",
           "title": "A string describing the reason the Job ended.",
-          "description": "This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a job' operation."
+          "description": "This property is set only if the Job is in the completed state. If the Batch service terminates the Job, it sets the reason as follows: JMComplete - the Job Manager Task completed, and killJobOnCompletion was set to true. MaxWallClockTimeExpiry - the Job reached its maxWallClockTime constraint. TerminateJobSchedule - the Job ran as part of a schedule, and the schedule terminated. AllTasksComplete - the Job's onAllTasksComplete attribute is set to terminatejob, and all Tasks in the Job are complete. TaskFailed - the Job's onTaskFailure attribute is set to performExitOptionsJobAction, and a Task in the Job failed with an exit condition that specified a jobAction of terminatejob. Any other string is a user-defined reason specified in a call to the 'Terminate a Job' operation."
         }
       },
       "required": [ "startTime" ],
@@ -12569,7 +12569,7 @@
         "jobManagerTask": {
           "$ref": "#/definitions/JobManagerTask",
           "title": "Details of a Job Manager Task to be launched when the Job is started.",
-          "description": "If the Job does not specify a Job Manager Task, the user must explicitly add Tasks to the Job. If the Job does specify a Job Manager Task, the Batch service creates the Job Manager Task when the Job is created, and will try to schedule the Job Manager Task before scheduling other Tasks in the Job. The Job Manager task's typical purpose is to control and/or monitor Job execution, for example by deciding what additional Tasks to run, determining when the work is complete, etc. (However, a Job Manager Task is not restricted to these activities - it is a fully-fledged Task in the system and perform whatever actions are required for the Job.) For example, a Job Manager Task might download a file specified as a parameter, analyze the contents of that file and submit additional Tasks based on those contents."
+          "description": "If the Job does not specify a Job Manager Task, the user must explicitly add Tasks to the Job. If the Job does specify a Job Manager Task, the Batch service creates the Job Manager Task when the Job is created, and will try to schedule the Job Manager Task before scheduling other Tasks in the Job. The Job Manager Task's typical purpose is to control and/or monitor Job execution, for example by deciding what additional Tasks to run, determining when the work is complete, etc. (However, a Job Manager Task is not restricted to these activities - it is a fully-fledged Task in the system and perform whatever actions are required for the Job.) For example, a Job Manager Task might download a file specified as a parameter, analyze the contents of that file and submit additional Tasks based on those contents."
         },
         "jobPreparationTask": {
           "$ref": "#/definitions/JobPreparationTask",
@@ -12591,7 +12591,7 @@
         },
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
-          "title": "The Pool on which the Batch service runs the job's Tasks."
+          "title": "The Pool on which the Batch service runs the Job's Tasks."
         },
         "onAllTasksComplete": {
           "title": "The action the Batch service should take when all Tasks in the Job are in the completed state.",
@@ -13529,7 +13529,7 @@
         "autoScaleFormula": {
           "type": "string",
           "title": "A formula for the desired number of Compute Nodes in the Pool.",
-          "description": "This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch pool' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/)."
+          "description": "This property must not be specified if enableAutoScale is set to false. It is required if enableAutoScale is set to true. The formula is checked for validity before the Pool is created. If the formula is not valid, the Batch service rejects the request with detailed error information. For more information about specifying this formula, see 'Automatically scale Compute Nodes in an Azure Batch Pool' (https://azure.microsoft.com/documentation/articles/batch-automatic-scaling/)."
         },
         "autoScaleEvaluationInterval": {
           "type": "string",
@@ -14913,7 +14913,7 @@
       "properties": {
         "terminateReason": {
           "type": "string",
-          "title": "The text you want to appear as the job's TerminateReason. The default is 'UserTerminate'."
+          "title": "The text you want to appear as the Job's TerminateReason. The default is 'UserTerminate'."
         }
       },
       "title": "Options when terminating a Job."
@@ -14938,7 +14938,7 @@
         },
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
-          "title": "The Pool on which the Batch service runs the job's Tasks.",
+          "title": "The Pool on which the Batch service runs the Job's Tasks.",
           "description": "You may change the Pool for a Job only when the Job is disabled. The Patch Job call will fail if you include the poolInfo element and the Job is not disabled. If you specify an autoPoolSpecification specification in the poolInfo, only the keepAlive property can be updated, and then only if the auto Pool has a poolLifetimeOption of Job. If omitted, the Job continues to run on its current Pool."
         },
         "metadata": {
@@ -14967,7 +14967,7 @@
         },
         "poolInfo": {
           "$ref": "#/definitions/PoolInformation",
-          "title": "The Pool on which the Batch service runs the job's Tasks.",
+          "title": "The Pool on which the Batch service runs the Job's Tasks.",
           "description": "You may change the Pool for a Job only when the Job is disabled. The Update Job call will fail if you include the poolInfo element and the Job is not disabled. If you specify an autoPoolSpecification specification in the poolInfo, only the keepAlive property can be updated, and then only if the auto Pool has a poolLifetimeOption of Job."
         },
         "metadata": {
@@ -14980,7 +14980,7 @@
         },
         "onAllTasksComplete": {
           "title": "The action the Batch service should take when all Tasks in the Job are in the completed state.",
-          "description": "If omitted, the completion behavior is set to noaction. If the current value is terminatejob, this is an error because a job's completion behavior may not be changed from terminatejob to noaction. You may not change the value from terminatejob to noaction - that is, once you have engaged automatic Job termination, you cannot turn it off again. If you try to do this, the request fails and Batch returns status code 400 (Bad Request) and an 'invalid property value' error response. If you do not specify this element in a PUT request, it is equivalent to passing noaction. This is an error if the current value is terminatejob.",
+          "description": "If omitted, the completion behavior is set to noaction. If the current value is terminatejob, this is an error because a Job's completion behavior may not be changed from terminatejob to noaction. You may not change the value from terminatejob to noaction - that is, once you have engaged automatic Job termination, you cannot turn it off again. If you try to do this, the request fails and Batch returns status code 400 (Bad Request) and an 'invalid property value' error response. If you do not specify this element in a PUT request, it is equivalent to passing noaction. This is an error if the current value is terminatejob.",
           "$ref": "#/definitions/OnAllTasksComplete"
         }
       },
@@ -15008,7 +15008,7 @@
         "autoScaleFormula": {
           "type": "string",
           "title": "The formula for the desired number of Compute Nodes in the Pool.",
-          "description": "The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling)."
+          "description": "The formula is validated and its results calculated, but it is not applied to the Pool. To apply the formula to the Pool, 'Enable automatic scaling on a Pool'. For more information about specifying this formula, see Automatically scale Compute Nodes in an Azure Batch Pool (https://azure.microsoft.com/en-us/documentation/articles/batch-automatic-scaling)."
         }
       },
       "required": [ "autoScaleFormula" ],
@@ -15533,7 +15533,7 @@
           },
           {
             "value": "terminatejob",
-            "description": "Terminate the Job. The job's terminateReason is set to 'AllTasksComplete'.",
+            "description": "Terminate the Job. The Job's terminateReason is set to 'AllTasksComplete'.",
             "name": "terminateJob"
           }
         ]
@@ -15558,7 +15558,7 @@
           },
           {
             "value": "performexitoptionsjobaction",
-            "description": "Take the action associated with the Task exit condition in the task's exitConditions collection. (This may still result in no action being taken, if that is what the Task specifies.)",
+            "description": "Take the action associated with the Task exit condition in the Task's exitConditions collection. (This may still result in no action being taken, if that is what the Task specifies.)",
             "name": "performExitOptionsJobAction"
           }
         ]
