@@ -742,7 +742,10 @@
         ],
         "responses": {
           "200": {
-            "description": "The operation was successful."
+            "description": "The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkspaceQuotas"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -764,7 +767,7 @@
         "tags": [
           "Quota"
         ],
-        "operationId": "Quotas_ListByVMFamily",
+        "operationId": "Quotas_List",
         "description": "Gets the currently assigned Workspace Quotas based on VMFamily.",
         "parameters": [
           {
@@ -786,7 +789,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ListWorkspaceQuotasByVMFamily"
+              "$ref": "#/definitions/ListWorkspaceQuotas"
             }
           }
         },
@@ -1091,6 +1094,42 @@
       },
       "description": "Quota update parameters."
     },
+    "UpdateWorkspaceQuotas": {
+      "properties": {
+        "vmFamily": {
+          "type": "string",
+          "title": "Virtual Machine family name.",
+          "description": "The family name of the virtual machine size."
+        },
+        "workspaceId": {
+          "type": "string",
+          "title": "AML workspace Id.",
+          "description": "Fully qualified resource identifier of the workspace."
+        },
+        "quota": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Quota.",
+          "description": "Quota."
+        },
+        "status": {
+          "type": "string",
+          "readOnly": false,
+          "title": "Update Workspace Quota Status.",
+          "description": "Status of update workspace quota.",
+          "enum": [
+            "Undefined",
+            "Success",
+            "Failure"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties for update Quota response."
+    },
     "ResourceName": {
       "properties": {
         "value": {
@@ -1108,7 +1147,17 @@
     },
     "ResourceQuota": {
       "properties": {
-        "resourceName": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
+        "name": {
           "$ref": "#/definitions/ResourceName",
           "description": "Name of the resource.",
           "readOnly": true
@@ -1124,19 +1173,11 @@
           "readOnly": true,
           "type": "string",
           "description": "The units used to represent the quota."
-        },
-        "quotaDistribution": {
-          "readOnly": true,
-          "type": "array",
-          "description": "The quota distribution among resources.",
-          "items": {
-            "$ref": "#/definitions/ResourceQuota"
-          }
         }
       },
       "description": "The quota assigned to a resource."
     },
-    "ListWorkspaceQuotasByVMFamily": {
+    "ListWorkspaceQuotas": {
       "properties": {
         "value": {
           "description": "The list of Workspace Quotas by VM Family",

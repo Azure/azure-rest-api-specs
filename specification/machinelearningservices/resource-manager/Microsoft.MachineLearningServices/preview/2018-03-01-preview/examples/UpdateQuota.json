@@ -5,12 +5,12 @@
     "api-version": "2019-05-01",
     "parameters": [
       {
-        "vmfamily": "demo_vmfamily1",
-        "workspaceId": "demo_WorkspaceId1",
+        "vmFamily": "demo_vmFamily1",
+        "workspaceId": "demo_workspaceId1",
         "quota": 100
       },
       {
-        "vmfamily": "demo_vmfamily2",
+        "vmFamily": "demo_vmFamily2",
         "workspaceId": "demo_workspaceId2",
         "quota": 200
       }
@@ -18,6 +18,22 @@
   },
   "responses": {
     "200": {
+      "body": {
+        "value": [
+          {
+            "vmFamily": "demo_vmFamily1",
+            "workspaceId": "demo_workspaceId1",
+            "quota": 100,
+            "status": "Success"
+          },
+          {
+            "vmfamily": "demo_vmFamily2",
+            "workspaceId": "demo_workspaceId2",
+            "quota": 200,
+            "status": "Success"
+          }
+        ]
+      }
     }
   }
 }
