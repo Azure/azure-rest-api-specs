@@ -450,7 +450,23 @@
       "type": "object",
       "description": "Security Solution",
       "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IoTSecurityAggregatedAlertProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "IoTSecurityAggregatedAlertProperties": {
+      "type": "object",
+      "description": "describes security alert properties.",
+      "properties": {
         "alertType": {
+          "readOnly": true,
           "type": "string",
           "description": "Name of the alert type"
         },
@@ -613,8 +629,7 @@
           "description": "query in log analytics to get the list of affected devices/alerts"
         }
       },
-      "allOf" : 
-      [
+      "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         }
