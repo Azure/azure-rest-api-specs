@@ -1,0 +1,76 @@
+{
+    "parameters": {
+        "api-version": "1.0",
+        "format": "json",
+        "query": "CS%3A2122%3A1_WMWWJ320903G47601"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "name": "YL68GGJ",
+                "model": "MINI Convertible",
+                "seatCount": 4,
+                "fuelLevel": 28,
+                "pricing": {
+                    "currency": "GBP",
+                    "usagePrice": "39.0 p/Minute",
+                    "reservationPrice": "19.0 p/Minute"
+                },
+                "position": {
+                    "latitude": 51.560829,
+                    "longitude": -0.138117
+                },
+                "operatorInfo": {
+                    "id": "1",
+                    "name": "Contoso-Now",
+                    "siteUrl": "www.contoso-now.com"
+                }
+            }
+        },
+        "400": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "400 BadRequest",
+                    "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+                }
+            }
+        },
+        "401": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "401 Unauthorized",
+                    "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+                }
+            }
+        },
+        "403": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "403 Forbidden",
+                    "message": "Permission, capacity, or authentication issues."
+                }
+            }
+        },
+        "404": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "404 NotFound",
+                    "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+                }
+            }
+        },
+        "500": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "500 InternalServerError",
+                    "message": "An error occurred while processing the request. Please try again later."
+                }
+            }
+        }
+    }
+}

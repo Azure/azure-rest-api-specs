@@ -1,0 +1,85 @@
+{
+    "parameters": {
+        "api-version": "1.0",
+        "format": "json",
+        "metroId": 121,
+        "query": "14015126",
+        "queryType": "stopId",
+        "detailType": "lines"
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "stop": {
+                    "stopId": "14015126",
+                    "stopKey": "302923",
+                    "stopName": "3 Av / State St",
+                    "position": {
+                        "latitude": 40.686142,
+                        "longitude": -73.979975
+                    },
+                    "mainTransitType": "Bus",
+                    "mainAgencyId": "857463",
+                    "mainAgencyName": "MTA Bus"
+                },
+                "lines": [
+                    {
+                        "lineId": "1228526",
+                        "lineGroupId": "373411",
+                        "direction": "backward",
+                        "agencyId": "857463",
+                        "agencyName": "MTA Bus",
+                        "lineNumber": "B103",
+                        "lineDestination": "Limited Downtown Bklyn - Tillary St Via Avenue M Via Avenue H",
+                        "transitType": "Bus"
+                    }
+                ]
+            }
+        },
+        "400": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "400 BadRequest",
+                    "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+                }
+            }
+        },
+        "401": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "401 Unauthorized",
+                    "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+                }
+            }
+        },
+        "403": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "403 Forbidden",
+                    "message": "Permission, capacity, or authentication issues."
+                }
+            }
+        },
+        "404": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "404 NotFound",
+                    "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+                }
+            }
+        },
+        "500": {
+            "headers": {},
+            "body": {
+                "error": {
+                    "code": "500 InternalServerError",
+                    "message": "An error occurred while processing the request. Please try again later."
+                }
+            }
+        }
+    }
+}
