@@ -64,21 +64,6 @@
         "x-ms-examples": {
           "Registries_ScheduleRun": {
             "$ref": "./examples/RegistriesScheduleRun.json"
-          },
-          "Registries_ScheduleRun_EncodedTaskRun": {
-            "$ref": "./examples/RegistriesScheduleRun_EncodedTaskRun.json"
-          },
-          "Registries_ScheduleRun_FileTaskRun": {
-            "$ref": "./examples/RegistriesScheduleRun_FileTaskRun.json"
-          },
-          "Registries_ScheduleRun_Task": {
-            "$ref": "./examples/RegistriesScheduleRun_Task.json"
-          },
-          "Registries_ScheduleRun_Task_WithCustomCredentials": {
-            "$ref": "./examples/RegistriesScheduleRun_FileTask_WithCustomCredentials.json"
-          },
-          "Registries_ScheduleRun_WithCustomCredentials": {
-            "$ref": "./examples/RegistriesScheduleRun_WithCustomCredentials.json"
           }
         }
       }
@@ -515,15 +500,6 @@
         "x-ms-examples": {
           "Tasks_Create": {
             "$ref": "./examples/TasksCreate.json"
-          },
-          "Tasks_Create_WithSystemAndUserIdentities": {
-            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemAndUserIdentities.json"
-          },
-          "Tasks_Create_WithUserIdentities_WithSystemIdentity": {
-            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemIdentity.json"
-          },
-          "Tasks_Create_WithUserIdentities": {
-            "$ref": "./examples/ManagedIdentity/TasksCreate_WithUserIdentities.json"
           }
         }
       },
@@ -624,15 +600,6 @@
         "x-ms-examples": {
           "Tasks_Update": {
             "$ref": "./examples/TasksUpdate.json"
-          },
-          "Tasks_Update_WithKeyVaultCustomCredentials": {
-            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithKeyVaultCustomCredentials.json"
-          },
-          "Tasks_Update_WithMSICustomCredentials": {
-            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithMSICustomCredentials.json"
-          },
-          "Tasks_Update_WithOpaqueCustomCredentials": {
-            "$ref": "./examples/TasksUpdate_WithOpaqueCustomCredentials.json"
           }
         }
       }
@@ -793,6 +760,10 @@
           "$ref": "#/definitions/SourceTriggerDescriptor",
           "description": "The source trigger that caused the run."
         },
+        "timerTrigger": {
+          "$ref": "#/definitions/TimerTriggerDescriptor",
+          "description": "The timer trigger that caused the run."
+        },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
           "description": "The platform properties against which the run will happen."
@@ -816,6 +787,10 @@
           "description": "The error message received from backend systems after the run is scheduled.",
           "type": "string",
           "readOnly": true
+        },
+        "updateTriggerToken": {
+          "description": "The update trigger token passed for the Run.",
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of a run.",
@@ -918,6 +893,19 @@
         }
       }
     },
+    "TimerTriggerDescriptor": {
+      "type": "object",
+      "properties": {
+        "timerTriggerName": {
+          "description": "The timer trigger name that caused the run.",
+          "type": "string"
+        },
+        "scheduleOccurrence": {
+          "description": "The occurrence that triggered the run.",
+          "type": "string"
+        }
+      }
+    },
     "PlatformProperties": {
       "description": "The platform properties against which the run has to happen.",
       "required": [
@@ -942,7 +930,8 @@
           "enum": [
             "amd64",
             "x86",
-            "arm"
+            "arm",
+            "arm64"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1695,7 +1684,8 @@
           "enum": [
             "amd64",
             "x86",
-            "arm"
+            "arm",
+            "arm64"
           ],
           "type": "string",
           "x-ms-enum": {
