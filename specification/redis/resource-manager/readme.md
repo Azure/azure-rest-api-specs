@@ -135,12 +135,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-redis/azure/mgmt/redis
+  output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis/azure/mgmt/redis
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-redis
+  output-folder: $(python-sdks-folder)/redis/azure-mgmt-redis
 ```
 
 ## Go

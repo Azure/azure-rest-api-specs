@@ -26,12 +26,21 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-01
+tag: package-preview-2019-04
 azure-validator: true
 ```
 
 ---
 
+
+### Tag: package-preview-2019-04
+
+These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-04'
+input-file:
+  - Microsoft.CostManagement/preview/2019-04-01-preview/costmanagement.json
+```
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
@@ -70,7 +79,7 @@ directive:
   - suppress: R3023
     from: costmanagement.json
     where: $.paths
-    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing
+    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing    
   - suppress: XmsResourceInPutResponse
     from: costmanagement.json
     where: '$.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}"].put'
@@ -91,6 +100,22 @@ directive:
     from: costmanagement.json
     where: $.definitions.ShowbackRulesKind.properties.RuleType
     reason: 'older PR, not forecast.'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.Notification.properties.enabled
+    reason: 'false alarm '
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
+    reason: 'false alarm '  
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.KpiProperties.properties.enabled
+    reason: 'false alarm ' 
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ViewProperties.properties.accumulated
+    reason: 'false alarm ' 
 ```
 
 ### Tag: package-2018-08-preview
@@ -174,13 +199,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-costmanagement/azure/mgmt/costmanagement
+  output-folder: $(python-sdks-folder)/costmanagement/azure-mgmt-costmanagement/azure/mgmt/costmanagement
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-costmanagement
+  output-folder: $(python-sdks-folder)/costmanagement/azure-mgmt-costmanagement
 ```
 
 ## Go

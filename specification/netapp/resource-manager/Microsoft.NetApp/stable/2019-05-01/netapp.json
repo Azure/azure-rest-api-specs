@@ -1150,10 +1150,10 @@
         "type": {
           "description": "Resource type used for verification.",
           "enum": [
-            "Microsoft.NetApp/netAppAccount",
-            "Microsoft.NetApp/netAppAccount/capacityPools",
-            "Microsoft.NetApp/netAppAccount/capacityPools/volumes",
-            "Microsoft.NetApp/netAppAccount/capacityPools/volumes/snapshots"
+            "Microsoft.NetApp/netAppAccounts",
+            "Microsoft.NetApp/netAppAccounts/capacityPools",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes",
+            "Microsoft.NetApp/netAppAccounts/capacityPools/volumes/snapshots"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -1372,6 +1372,10 @@
     "poolProperties": {
       "description": "Pool properties",
       "type": "object",
+      "required": [
+        "size",
+        "serviceLevel"
+      ],
       "properties": {
         "poolId": {
           "title": "poolId",
@@ -1574,7 +1578,8 @@
       "type": "object",
       "required": [
         "creationToken",
-        "serviceLevel"
+        "usageThreshold",
+        "subnetId"
       ],
       "properties": {
         "fileSystemId": {
@@ -1629,7 +1634,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB. Specified in bytes.",
           "minimum": 107374182400,
           "maximum": 109951162777600,
           "default": 107374182400,
@@ -1648,6 +1653,15 @@
               }
             }
           }
+        },
+        "protocolTypes": {
+          "title": "protocolTypes",
+	  "description": "Set of protocol types",
+	  "type": "array",
+          "items": {
+	    "type": "string"
+          },
+          "example": "['NFSv3', 'NFSv4']"
         },
         "provisioningState": {
           "type": "string",
@@ -1676,6 +1690,13 @@
         "subnetId": {
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        },
+        "mountTargets": {
+          "title": "mountTargets",
+	  "description": "List of mount targets",
+          "items": {
+             "$ref": "#/definitions/mountTargetList"
+          }
         }
       }
     },
@@ -1786,7 +1807,7 @@
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB.",
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB. Specified in bytes.",
           "minimum": 107374182400,
           "maximum": 109951162777600,
           "default": 107374182400,
@@ -2111,7 +2132,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2017-08-15"
+      "default": "2019-05-01"
     }
   }
 }
