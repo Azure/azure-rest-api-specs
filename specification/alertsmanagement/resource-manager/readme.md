@@ -39,6 +39,7 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 ```yaml $(tag) == 'package-2019-03'
 input-file:
   - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
+  - Microsoft.AlertsManagement/stable/2019-03-01/SmartDetectorAlertRulesApi.json
 ```
 ### Tag: package-preview-2019-05
 
