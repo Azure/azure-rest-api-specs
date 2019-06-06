@@ -1280,6 +1280,11 @@
     "TaskStepProperties": {
       "description": "Base properties for any task step.",
       "type": "object",
+      "anyOf": [
+        { "$ref": "#definitions/DockerBuildStep" },
+        { "$ref": "#definitions/FileTaskStep" },
+        { "$ref": "#definitions/EncodedTaskStep" }
+      ],
       "properties": {
         "type": {
           "description": "The type of the step.",
