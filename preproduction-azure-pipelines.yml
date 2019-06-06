@@ -122,3 +122,14 @@ jobs:
       verbose: false
   - script: 'npm run spellcheck'
     displayName: 'Run cSpell'
+
+- job: "jsonfmt"
+  pool:
+    vmImage: 'Ubuntu 16.04'
+  steps:
+  - task: Docker@2
+    displayName: jsonfmt
+    inputs:
+      command: run
+      tags: caarlos0/jsonfmt
+      arguments: -v $(System.DefaultWorkingDirectory)/specification/:/specification/ --workdir /specification/ --failfast
