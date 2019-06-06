@@ -18,7 +18,10 @@ openapi-type: data-plane
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
-input-file: preview/v1.0/FormRecognizer.json
+input-file: 
+  - preview/v1.0/FormRecognizer.json
+  - preview/v1.0/FormRecognizerReceipt.json
+  - preview/v1.0/FormRecognizerReceiptOcr.json
 ```
 
 ## Swagger to SDK

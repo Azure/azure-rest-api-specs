@@ -41,7 +41,7 @@ tag: package-policy-2018-05
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-03
+tag: package-resources-2019-05
 ```
 
 ``` yaml $(package-subscriptions)
@@ -162,6 +162,14 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2019-05
+These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-05'
+input-file:
+- Microsoft.Resources/stable/2019-05-01/resources.json
 ```
 
 ### Tag: package-resources-2019-03
@@ -378,7 +386,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
 ```
 
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -408,6 +415,7 @@ batch:
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2019-05
   - tag: package-resources-2019-03
   - tag: package-resources-2018-02
   - tag: package-resources-2016-09
@@ -495,6 +503,19 @@ directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
   transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-resources-2019-05 and java
+
+These settings apply only when `--tag=package-resources-2019-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_05_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-resources-2019-03 and java
