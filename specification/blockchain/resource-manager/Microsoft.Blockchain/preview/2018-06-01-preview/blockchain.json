@@ -948,7 +948,7 @@
       "type": "object",
       "allOf": [
         {
-            "$ref": "#/definitions/TrackedResource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -1065,12 +1065,12 @@
           "description": "Tags of the service which is a list of key value pairs that describes the resource.",
           "type": "object",
           "additionalProperties": {
-              "type": "string"
+            "type": "string"
           },
           "x-ms-mutability": [
-              "read",
-              "create",
-              "update"
+            "read",
+            "create",
+            "update"
           ]
         },
         "properties": {
@@ -1079,13 +1079,13 @@
           "x-ms-client-flatten": true
         }
       }
-    },    
+    },
     "BlockchainMemberPropertiesUpdate": {
       "description": "Update the payload of the blockchain member properties for a blockchain member.",
       "type": "object",
       "allOf": [
         {
-            "$ref": "#/definitions/TransactionNodePropertiesUpdate"
+          "$ref": "#/definitions/TransactionNodePropertiesUpdate"
         }
       ],
       "properties": {
@@ -1466,7 +1466,7 @@
       "type": "object",
       "allOf": [
         {
-            "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
@@ -1581,52 +1581,52 @@
       "description": "The resource model definition for a top level resource.",
       "type": "object",
       "allOf": [
-          {
-              "$ref": "#/definitions/Resource"
-          }
+        {
+          "$ref": "#/definitions/Resource"
+        }
       ],
       "properties": {
-          "location": {
-              "description": "The GEO location of the blockchain service.",
-              "type": "string",
-              "x-ms-mutability": [
-                  "read",
-                  "create"
-              ]
+        "location": {
+          "description": "The GEO location of the blockchain service.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "Tags of the service which is a list of key value pairs that describes the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
           },
-          "tags": {
-              "description": "Tags of the service which is a list of key value pairs that describes the resource.",
-              "type": "object",
-              "additionalProperties": {
-                  "type": "string"
-              },
-              "x-ms-mutability": [
-                  "read",
-                  "create",
-                  "update"
-              ]
-          }
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        }
       }
     },
     "Resource": {
       "description": "The core properties of the resources.",
       "type": "object",
       "properties": {
-          "id": {
-              "description": "Fully qualified resource Id of the resource.",
-              "type": "string",
-              "readOnly": true
-          },
-          "name": {
-              "description": "The name of the resource.",
-              "type": "string",
-              "readOnly": true
-          },
-          "type": {
-              "description": "The type of the service - e.g. \"Microsoft.Blockchain\"",
-              "type": "string",
-              "readOnly": true
-          }
+        "id": {
+          "description": "Fully qualified resource Id of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the service - e.g. \"Microsoft.Blockchain\"",
+          "type": "string",
+          "readOnly": true
+        }
       },
       "x-ms-azure-resource": true
     }
