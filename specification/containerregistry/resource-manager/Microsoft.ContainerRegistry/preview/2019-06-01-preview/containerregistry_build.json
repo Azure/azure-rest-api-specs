@@ -1988,21 +1988,40 @@
       }
     },
     "Resource": {
+      "description": "An Azure resource.",
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
-          "readOnly": true,
+          "description": "The resource ID.",
           "type": "string",
-          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "readOnly": true
         },
         "name": {
-          "readOnly": true,
+          "description": "The name of the resource.",
           "type": "string",
-          "description": "The name of the resource"
+          "readOnly": true
         },
         "type": {
-          "readOnly": true,
+          "description": "The type of the resource.",
           "type": "string",
-          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+          "readOnly": true
+        },
+        "location": {
+          "description": "The location of the resource. This cannot be changed after the resource is created.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "description": "The tags of the resource.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-azure-resource": true
@@ -2260,7 +2279,8 @@
           "description": "Base64 encoded update trigger token that will be attached with the base image trigger webhook.",
           "type": "string"
         }
-      }
+      },
+      "x-ms-discriminator-value": "TaskRunRequest"
     },
     "EncodedTaskRunRequest": {
       "description": "The parameters for a quick task run request.",
