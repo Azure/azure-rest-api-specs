@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
 - Microsoft.Network/stable/2019-04-01/frontdoor.json
 - Microsoft.Network/stable/2019-04-01/network.json
-- Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json
+- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths

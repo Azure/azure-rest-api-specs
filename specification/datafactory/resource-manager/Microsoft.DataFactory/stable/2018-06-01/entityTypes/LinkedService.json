@@ -575,6 +575,10 @@
         "isEspEnabled": {
           "type": "object",
           "description": "Specify if the HDInsight is created with ESP (Enterprise Security Package). Type: Boolean."
+        },
+        "fileSystem": {
+          "type": "object",
+          "description": "Specify the FileSystem if the main storage for the HDInsight is ADLS Gen2. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -4406,6 +4410,14 @@
           "items": {
             "$ref": "#/definitions/ScriptAction"
           }
+        },
+        "virtualNetworkId": {
+          "type": "object",
+          "description": "The ARM resource ID for the vNet to which the cluster should be joined after creation. Type: string (or Expression with resultType string)."
+        },
+        "subnetName": {
+          "type": "object",
+          "description": "The ARM resource ID for the subnet in the vNet. If virtualNetworkId was specified, then this property is required. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
