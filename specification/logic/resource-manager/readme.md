@@ -160,13 +160,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-logic/azure/mgmt/logic
+  output-folder: $(python-sdks-folder)/logic/azure-mgmt-logic/azure/mgmt/logic
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-logic
+  output-folder: $(python-sdks-folder)/logic/azure-mgmt-logic
 ```
 
 ## Go
