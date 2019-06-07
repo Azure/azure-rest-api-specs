@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-06-01",
+    "version": "2019-06-01-preview",
     "title": "ContainerRegistryManagementClient"
   },
   "host": "management.azure.com",
@@ -819,8 +819,7 @@
         },
         "updateTriggerToken": {
           "description": "The update trigger token passed for the Run.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "provisioningState": {
           "description": "The provisioning state of a run.",
@@ -1989,40 +1988,21 @@
       }
     },
     "Resource": {
-      "description": "An Azure resource.",
-      "required": [
-        "location"
-      ],
       "properties": {
         "id": {
-          "description": "The resource ID.",
+          "readOnly": true,
           "type": "string",
-          "readOnly": true
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
         },
         "name": {
-          "description": "The name of the resource.",
+          "readOnly": true,
           "type": "string",
-          "readOnly": true
+          "description": "The name of the resource"
         },
         "type": {
-          "description": "The type of the resource.",
+          "readOnly": true,
           "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "The location of the resource. This cannot be changed after the resource is created.",
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "description": "The tags of the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
         }
       },
       "x-ms-azure-resource": true
