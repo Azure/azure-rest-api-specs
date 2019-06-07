@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-06-01-preview",
+    "version": "2.0",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -35,6 +35,13 @@
             "type": "string"
           },
           {
+            "name": "expandChildren",
+            "in": "query",
+            "description": "Optional request parameter to include managed instance usages within the instance pool.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -45,7 +52,7 @@
           "200": {
             "description": "Successfully retrieved the instance pool usages.",
             "schema": {
-              "$ref": "#/definitions/InstancePoolUsageListResult"
+              "$ref": "#/definitions/UsageListResult"
             }
           },
           "default": {
@@ -57,87 +64,25 @@
         },
         "x-ms-examples": {
           "List instance pool usages.": {
-            "$ref": "./examples/InstancePoolUsageListByInstancePool.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/usages/{usageName}": {
-      "get": {
-        "tags": [
-          "InstancePoolUsages"
-        ],
-        "description": "Gets an instance pool usage metric.",
-        "operationId": "InstancePoolUsages_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "./examples/ListInstancePoolUsage.json"
           },
-          {
-            "name": "instancePoolName",
-            "in": "path",
-            "description": "The name of the instance pool to be retrieved.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "usageName",
-            "in": "path",
-            "description": "Name of usage to return.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "vcore_utilization",
-              "storage_utilization",
-              "database_utilization"
-            ],
-            "x-ms-enum": {
-              "name": "InstancePoolUsages",
-              "modelAsString": true
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved the instance pool usage.",
-            "schema": {
-              "$ref": "#/definitions/InstancePoolUsage"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InstancePoolWrongUsageName - Request for an instance pool's usage has an unsupported usage name\n\n * 400 InstancePoolManagedInstanceInfoUnavailable - Information for managed instances inside this instance pool is not available\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
-          }
-        },
-        "x-ms-examples": {
-          "Gets the instance pool vCore usage.": {
-            "$ref": "./examples/GetInstancePoolUsagesVCoreUtilization.json"
-          },
-          "Gets the instance pool storage usage.": {
-            "$ref": "./examples/GetInstancePoolUsagesStorageUtilization.json"
-          },
-          "Gets the instance pool database usage.": {
-            "$ref": "./examples/GetInstancePoolUsagesDatabaseUtilization.json"
+          "List instance pool usages expanded with children.": {
+            "$ref": "./examples/ListInstancePoolUsageExpanded.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "InstancePoolUsageListResult": {
-      "description": "A list of instance pool usages.",
+    "UsageListResult": {
+      "description": "A list of usages.",
       "type": "object",
       "properties": {
         "value": {
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/InstancePoolUsage"
+            "$ref": "#/definitions/Usage"
           },
           "readOnly": true
         },
@@ -148,98 +93,61 @@
         }
       }
     },
-    "InstancePoolUsageProperties": {
-      "description": "Properties of an instance pool usage.",
+    "Usage": {
+      "description": "ARM usage.",
       "type": "object",
       "properties": {
-        "displayName": {
-          "description": "User-readable name of the metric.",
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "$ref": "#/definitions/UsageName",
+          "description": "Resource name.",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource type.",
           "type": "string",
           "readOnly": true
         },
         "unit": {
-          "description": "Unit of the metric",
-          "enum": [
-            "VCores",
-            "Gigabytes"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "InstancePoolUsageUnit",
-            "modelAsString": true
-          }
-        },
-        "currentValue": {
-          "format": "int32",
-          "description": "Instance pool current value.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "currentLimit": {
-          "format": "int32",
-          "description": "Instance pool current limit.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "requestedLimit": {
-          "format": "int32",
-          "description": "Instance pool requested limit.",
-          "type": "integer",
-          "readOnly": true
-        },
-        "managedInstanceUtilizations": {
-          "description": "Utilizations of managed instances inside the instance pool.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InstancePoolManagedInstanceUtilization"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "InstancePoolManagedInstanceUtilization": {
-      "description": "A managed instance in an instance pool usage info.",
-      "type": "object",
-      "properties": {
-        "managedInstanceName": {
-          "description": "Name of the managed instance.",
+          "description": "Usage unit.",
           "type": "string",
           "readOnly": true
         },
         "currentValue": {
           "format": "int32",
-          "description": "The current value.",
+          "description": "Usage current value.",
           "type": "integer",
           "readOnly": true
         },
-        "currentLimit": {
+        "limit": {
           "format": "int32",
-          "description": "The current limit.",
+          "description": "Usage limit.",
           "type": "integer",
           "readOnly": true
         },
         "requestedLimit": {
           "format": "int32",
-          "description": "The requested limit.",
+          "description": "Usage requested limit.",
           "type": "integer",
           "readOnly": true
         }
       }
     },
-    "InstancePoolUsage": {
-      "description": "A instance pool's usage.",
+    "UsageName": {
+      "description": "ARM Usage Name",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/InstancePoolUsageProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+        "value": {
+          "description": "Usage name value",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Usage name localized value.",
+          "type": "string"
         }
       }
     }
