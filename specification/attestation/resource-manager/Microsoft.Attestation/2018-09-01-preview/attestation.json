@@ -101,9 +101,6 @@
                             "$ref": "#/definitions/AttestationProvider"
                         }
                     },
-                    "404": {
-                        "description": "Attestation provider not found"
-                    },
                     "default": {
                         "description": "Error result from Attestation service",
                         "schema": {
@@ -165,12 +162,6 @@
                             "$ref": "#/definitions/AttestationProvider"
                         }
                     },
-                    "409": {
-                        "description": "Duplicate attestation name.",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
-                    },
                     "default": {
                         "description": "Error result from Attestation service",
                         "schema": {
@@ -213,14 +204,11 @@
                     "202": {
                         "description": "Request accepted for deletion of attestation service"
                     },
-                    "404": {
-                        "description": "Message not found"
+                    "200": {
+                        "description": "Resource exists and was deleted successfully"
                     },
-                    "500": {
-                        "description": "Internal error",
-                        "schema": {
-                            "$ref": "#/definitions/ErrorResponse"
-                        }
+                    "204": {
+                        "description": "Resource does not exist"
                     },
                     "default": {
                         "description": "Error result from Attestation service",
@@ -229,8 +217,90 @@
                         }
                     }
                 }
+            }   
+        },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Attestation/attestationProviders": {
+        "get": {
+            "tags": [
+            "AttestationProviders"
+            ],
+            "operationId": "AttestationProviders_List",
+            "description": "Returns a list of attestation providers in a subscription.",
+            "x-ms-examples": {
+            "AttestationProviders_List": {
+                "$ref": "./examples/Get_AttestationProvidersList.json"
+            }
+            },
+            "parameters": [
+            {
+                "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+                "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+            ],
+            "x-ms-pageable": {
+            "nextLinkName": null
+            },
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/definitions/AttestationProviderListResult"
+                }
+            },
+            "default": {
+                "description": "Attestation service error result",
+                "schema": {
+                "$ref": "#/definitions/ErrorResult"
+                }
+            }
             }
         }
+        },
+        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders": {
+        "get": {
+            "tags": [
+            "AttestationProviders"
+            ],
+            "operationId": "AttestationProviders_ListByResourceGroup",
+            "description": "Returns attestation providers list in a resource group.",
+            "x-ms-examples": {
+            "AttestationProviders_ListByResourceGroup": {
+                "$ref": "./examples/Get_AttestationProvidersListByResourceGroup.json"
+            }
+            },
+            "parameters": [
+            {
+                "$ref": "#/parameters/ResourceGroupNameParameter"
+            },
+            {
+                "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+                "$ref": "#/parameters/SubscriptionIdParameter"
+            }
+            ],
+            "x-ms-pageable": {
+            "nextLinkName": null,
+            "itemName": "keys"
+            },
+            "responses": {
+            "200": {
+                "description": "OK",
+                "schema": {
+                "$ref": "#/definitions/AttestationProviderListResult"
+                }
+            },
+            "default": {
+                "description": "Attestation service error result",
+                "schema": {
+                "$ref": "#/definitions/ErrorResult"
+                }
+            }
+            }
+        }
+        } 
     },
     "definitions": {
         "OperationList": {
@@ -282,28 +352,17 @@
             }
         },
         "AttestationProvider": {
-            "type": "object",
             "description": "Attestation service response message.",
             "required": [
                 "properties"
+            ],           
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
             ],
             "x-ms-azure-resource": true,
             "properties": {
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}\""
-                },
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The name of the  attestation service."
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Microsoft.Attestation/attestationProviders"
-                },
                 "properties": {
                     "type": "object",
                     "$ref": "#/definitions/StatusResult",
@@ -321,7 +380,16 @@
             "properties": {
                 "status": {
                     "type": "string",
-                    "description": "Status of attestation service."
+                    "description": "Status of attestation service.",
+                    "enum": [
+                        "Ready",
+                        "NotReady",
+                        "Error"
+                        ],
+                    "x-ms-enum": {
+                        "name": "AttestationServiceStatus",
+                        "modelAsString": true
+                        }
                 }
             }
         },
@@ -358,17 +426,17 @@
         },
         "ErrorResponse": {
             "type": "object",
-            "description": "Describes the format of Error response", 
+            "description": "Error response", 
             "properties": {
                 "error": {
                     "type": "object",
-                    "description":"Describes the Error response",  
+                    "description":"Error response",  
                     "properties": {
-                        "Code": {
+                        "code": {
                             "type": "string",
                             "description": "Description of the error." 
                         },
-                        "Message": {
+                        "message": {
                             "type": "string",
                             "description":  "Service specific error code."  
                         }
@@ -397,6 +465,27 @@
                     "description":"Name of attestation policy."   
                 }
             }
+        },
+        "Resource": {
+            "properties": {
+                "id": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}\""
+                },
+                "name": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "The name of the  attestation service."
+                },
+                "type": {
+                    "readOnly": true,
+                    "type": "string",
+                    "description": "Microsoft.Attestation/attestationProviders"
+                }
+            },
+            "description": "Attestation resource",
+            "x-ms-azure-resource": true
         }
     },
     "parameters": {
