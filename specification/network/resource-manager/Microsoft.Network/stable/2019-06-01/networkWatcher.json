@@ -3339,12 +3339,29 @@
           "type": "integer",
           "default": 60,
           "description": "Monitoring interval in seconds."
-        }
+        },
+        "endpoints": {
+          "type": "array",
+          "description": "List of connection monitor endpoints.",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpoint"
+          }
+        },
+        "tests": {
+          "type": "array",
+          "description": "List of connection monitor tests.",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorTest"
+          }
+        }, 
+        "testConfigurations": {
+          "type": "array",
+          "description": "List of connection monitor test configurations.",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorTestConfiguration"
+          }
+        }      
       },
-      "required": [
-        "source",
-        "destination"
-      ],
       "description": "Parameters that define the operation to create a connection monitor."
     },
     "ConnectionMonitorSource": {
@@ -3379,6 +3396,242 @@
         }
       },
       "description": "Describes the destination of connection monitor."
+    },
+    "ConnectionMonitorEndpoint": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of connection monitor endpoint."
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "The ID of the resource used as an endpoint by connection monitor."
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of connection monitor endpoint. Can be FQDN or IP address."
+        },
+        "filter": {
+          "$ref": "#/definitions/ConnectionMonitorEndpointFilter",
+          "description": "Additional information about connection monitor endpoint."
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "description": "Describes the connection monitor endpoint."
+    },
+    "ConnectionMonitorTest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of connection monitor test."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "A value indicating whether test is enabled."
+        },
+        "testConfigurations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of test configuration names."
+        },
+        "sources": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of source endpoint names."
+        },
+        "destinations": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of destination endpoint names."
+        }
+      },
+      "required": [
+        "name",
+        "testConfigurations",
+        "sources",
+        "destinations"
+      ],
+      "description": "Describes the connection monitor test."
+    },
+    "ConnectionMonitorTestConfiguration": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of connection monitor test."
+        },
+        "testFrequencySeconds": {
+          "type": "int",
+          "description": "An interval between tests in seconds."
+        },
+        "protocol": {
+          "type": "string",
+          "description": "Network protocol.",
+          "enum": [
+            "Tcp",
+            "Http",
+            "Https",
+            "Icmp"
+          ],
+          "x-ms-enum": {
+            "name": "Protocol",
+            "modelAsString": true
+          }
+        },
+        "httpConfiguration": {
+          "$ref": "#/definitions/ConnectionMonitorHTTPConfiguration",
+          "description": "Describes HTTP configuration of connection monitor test."
+        },
+        "tcpConfiguration": {
+          "$ref": "#/definitions/ConnectionMonitorTCPConfiguration",
+          "description": "Describes TCP configuration of connection monitor test."
+        },
+        "icmpConfiguration": {
+          "$ref": "#/definitions/ConnectionMonitorICMPConfiguration",
+          "description": "Describes ICMP configuration of connection monitor test."
+        },
+        "healthThreshold": {
+          "$ref": "#/definitions/ConnectionMonitorHealthThreshold",
+          "description": "Describes health threshold of connection monitor test."
+        }
+      },
+      "required": [
+        "name",
+        "protocol"
+      ],
+      "description": "Describes the connection monitor test configuration."
+    },
+    "ConnectionMonitorTCPConfiguration": {
+      "properties": {
+        "enableTraceRoute": {
+          "type": "boolean",
+          "description": "A value indication whether trace route is enabled."
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port to run the TCP probe."
+        }
+      },
+      "description": "Describes the TCP configuration."
+    },
+    "ConnectionMonitorICMPConfiguration": {
+      "properties": {
+        "enableTraceRoute": {
+          "type": "boolean",
+          "description": "A value indication whether trace route is enabled."
+        }
+      },
+      "description": "Describes the ICMP configuration."
+    },
+    "ConnectionMonitorHTTPConfiguration": {
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "HTTP method.",
+          "enum": [
+            "Get",
+            "Post"
+          ],
+          "x-ms-enum": {
+            "name": "HTTPConfigurationMethod",
+            "modelAsString": true
+          }
+        },
+        "port": {
+          "type": "integer",
+          "description": "The port to run the HTTP probe."
+        },
+        "path": {
+          "type": "string",
+          "description": "The path to add to provided URI."
+        },
+        "headers": {
+          "type": "array",
+          "description": "List of HTTP headers.",
+          "items": {
+            "$ref": "#/definitions/HTTPHeader"
+          }
+        },
+        "validStatusCodes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "Describes the HTTP configuration."
+    },
+    "ConnectionMonitorHealthThreshold": {
+      "properties": {
+        "checksFailedPercent": {
+          "type": "integer",
+          "description": "Percentage of failed checks."
+        },
+        "roundTripTimeMicroseconds": {
+          "type": "integer",
+          "description": "Maximum roundtrip time in Ms."
+        }
+      },
+      "description": "Describes the test health threshold."
+    },
+    "ConnectionMonitorEndpointFilter": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "Include",
+            "Exclude"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorEndpointFilterType",
+            "modelAsString": true
+          },
+          "description": "Type of connection monitor endpoint filter."
+        },
+        "items": {
+          "type": "array",
+          "description": "List of connection monitor endpoint items.",
+          "items": {
+            "$ref": "#/definitions/ConnectionMonitorEndpointItem"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "items"
+      ],
+      "description": "Describes the connection monitor endpoint filter."
+    },
+    "ConnectionMonitorEndpointItem": {
+      "properties": {
+        "type": {
+          "type": "string",
+          "enum": [
+            "AgentAddress"
+          ],
+          "x-ms-enum": {
+            "name": "ConnectionMonitorEndpointItemType",
+            "modelAsString": true
+          },
+          "description": "Type of connection monitor endpoint item."
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of connection monitor endpoint item."
+        }
+      },
+      "required": [
+        "type",
+        "address"
+      ],
+      "description": "Describes the connection monitor endpoint item."
     },
     "ConnectionMonitorListResult": {
       "properties": {
