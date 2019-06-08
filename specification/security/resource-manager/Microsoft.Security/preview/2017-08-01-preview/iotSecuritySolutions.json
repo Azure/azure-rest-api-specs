@@ -525,7 +525,10 @@
             ]
           }
         },
-        "description": "string",
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
         "status": {
           "type": "string",
           "enum": [
@@ -539,7 +542,11 @@
             "modelAsString": true
           }
         }
-      }
+      },
+      "required": [
+        "recommendationType",
+        "status"
+      ]
     },
     "RecommendationConfigurationList": {
       "type": "array",
