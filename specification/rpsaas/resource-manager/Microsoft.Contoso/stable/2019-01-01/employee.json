@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.contoso/employees/{employeeName}": {
       "get": {
         "description": "Returns employee resource for a given name.",
-        "operationId": "Employees_Get",
+        "operationId": "Employee_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -56,7 +56,7 @@
           "200": {
             "description": "Employee details.",
             "schema": {
-              "$ref": "#/definitions/EmployeeDetails"
+              "$ref": "#/definitions/EmployeeResource"
             }
           }
         },
@@ -68,7 +68,7 @@
       },
       "put": {
         "description": "Create or update employee resource.",
-        "operationId": "Employees_CreateAndUpdate",
+        "operationId": "Employee_CreateAndUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -83,32 +83,32 @@
             "$ref": "#/parameters/EmployeeNameParameter"
           },
           {
-            "name": "EmployeeProperties",
-            "description": "Properties that need to be specified to update current pricing plan for an Application Insights component.",
+            "name": "EmployeeResource",
+            "description": "Employee details.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+              "$ref": "#/definitions/EmployeeResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.",
+            "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+              "$ref": "#/definitions/EmployeeResource"
             }
           }
         },
         "x-ms-examples": {
-          "ComponentCurrentPricingPlanUpdate": {
-            "$ref": "./examples/CurrentPricingPlanCreateAndUpdate.json"
+          "EmployeeResourceUpdate": {
+            "$ref": "./examples/EmployeeResourceUpdate.json"
           }
         }
       },
       "patch": {
-        "description": "Update current pricing plan for an Application Insights component.",
-        "operationId": "ComponentCurrentPricingPlan_Update",
+        "description": "Update employee details.",
+        "operationId": "Employees_Update",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -123,26 +123,60 @@
             "$ref": "#/parameters/EmployeeNameParameter"
           },
           {
-            "name": "EmployeeProperties",
-            "description": "Properties that need to be specified to update current pricing plan for an Application Insights component.",
+            "name": "EmployeePatchResource",
+            "description": "Employee patch details.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+              "$ref": "#/definitions/EmployeePatchResource"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Successful request when updating billing features for an Application Insights component. The updated current billing features are returned.",
+            "description": "Successful.",
             "schema": {
-              "$ref": "#/definitions/ApplicationInsightsComponentPricingPlan"
+              "$ref": "#/definitions/EmployeeResource"
             }
           }
         },
         "x-ms-examples": {
-          "ComponentCurrentPricingPlanUpdate": {
-            "$ref": "./examples/CurrentPricingPlanUpdate.json"
+          "EmployeeResourceUpdate": {
+            "$ref": "./examples/EmployeeResourceUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.contoso/employees": {
+      "get": {
+        "description": "Returns list of employees.",
+        "operationId": "Employee_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Employee details.",
+            "schema": {
+              "$ref": "#/definitions/EmployeeResourceList"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EmployeeDetailsGet": {
+            "$ref": "./examples/EmployeeResourceList.json"
           }
         }
       }
@@ -166,64 +200,112 @@
           "description": "Azure resource type.",
           "type": "string",
           "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
+        },
+        "location": {
+          "description": "Location of the resource.",
+          "type": "string",
+          "readOnly": false
+        },
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "x-ms-azure-resource": true
+      }
     },
-    "ApplicationInsightsComponentPricingPlan": {
-      "description": "An Application Insights component pricing plan",
+    "EmployeeResource": {
       "type": "object",
+      "description": "Employee details",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
+      "required": [ "properties" ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/EmployeeProperties",
-          "description": "The properties of the suppression.",
-          "x-ms-client-flatten": true
+          "type": "object",
+          "required": [ "firstName", "lastName", "group", "likesTea" ],
+          "properties": {
+            "firstName": {
+              "type": "string",
+              "description": "Employee full name."
+            },
+            "middleName": {
+              "type": "string",
+              "description": "Employee middle name."
+            },
+            "lastName": {
+              "type": "string",
+              "description": "Employee last name."
+            },
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc..."
+            },
+            "identificationNumber": {
+              "type": "string",
+              "readOnly": true,
+              "description": "unique id assigned at the time of user creation"
+            },
+            "likesTea": {
+              "type": "string",
+              "description": "Gets or sets the deployment mode.",
+              "enum": [ "Yes" ],
+              "x-ms-enum": {
+                "name": "likesTea",
+                "modelAsString": true
+              }
+            }
+          }
         }
       }
     },
-    "EmployeeProperties": {
+    "EmployeePatchResource": {
       "type": "object",
-      "description": "An Application Insights component daily data volume cap",
+      "description": "Employee patch properties",
       "properties": {
-        "fullname": {
-          "type": "string",
-          "description": "Employee full name."
+        "tags": {
+          "description": "resource tags.",
+          "type": "object",
+          "readOnly": false,
+          "additionalProperties": {
+            "type": "string"
+          }
         },
-        "city": {
-          "type": "string",
-          "description": "city."
+        "properties": {
+          "type": "object",
+          "properties": {
+            "group": {
+              "type": "string",
+              "description": "group like Finance, HR etc..."
+            }
+          }
+        }
+      }
+    },
+    "EmployeeResourceList": {
+      "description": "The list of employees.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of employees list.",
+          "type": "string"
         },
-        "organization": {
-          "type": "string",
-          "readOnly": true,
-          "description": "org like ARM, Cosine, Bing, Office etc..."
-        },
-        "building": {
-          "type": "integer",
-          "description": "building number like 41."
-        },
-        "transportation": {
-          "type": "string",
-          "description": "Gets or sets the deployment mode.",
-          "enum": [
-            "CarPool",
-            "PublicTransport",
-			"Personal",
-			"Bike",
-			"Walk"
-          ],
-          "x-ms-enum": {
-            "name": "transportation",
-            "modelAsString": false
+        "value": {
+          "description": "The list of recommendations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmployeeResource"
           }
         }
       }
     }
+
   },
   "parameters": {
     "SubscriptionIdParameter": {
