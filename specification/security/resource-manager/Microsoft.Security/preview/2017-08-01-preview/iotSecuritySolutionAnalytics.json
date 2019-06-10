@@ -450,175 +450,209 @@
       "type": "object",
       "description": "Security Solution Aggregated Alert information",
       "properties": {
-          "alertType": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Name of the alert type"
-          },
-          "alertDisplayName": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Display name of the alert type"
-          },
-          "aggregatedDateUtc": {
-            "readOnly": true,
-            "type": "string",
-            "format": "date",
-            "description": "The date the incidents were detected by the vendor"
-          },
-          "vendorName": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Name of the vendor that discovered the incident"
-          },
-          "reportedSeverity": {
-            "readOnly": true,
-            "type": "string",
-            "enum": [
-              "Informational",
-              "Low",
-              "Medium",
-              "High"
-            ],
-            "x-ms-enum": {
-              "name": "reportedSeverity",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Informational"
-                },
-                {
-                  "value": "Low"
-                },
-                {
-                  "value": "Medium"
-                },
-                {
-                  "value": "High"
-                }
-              ]
-            },
-            "description": "Estimated severity of this alert"
-          },
-          "remediationSteps": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Recommended steps for remediation"
-          },
-          "description": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Description of the incident and what it means"
-          },
-          "count": {
-            "readOnly": true,
-            "type": "integer",
-            "description": "Occurrence number of the alert within the aggregated date"
-          },
-          "effectedResourceType": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Azure resource ID of the resource that got the alerts"
-          },
-          "systemSource": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The type of the alerted resource (Azure, Non-Azure)"
-          },
-          "actionTaken": {
-            "readOnly": true,
-            "type": "string",
-            "description": "The action that was taken as a response to the alert (Active, Blocked etc.)"
-          },
-          "logAnalyticsQuery": {
-            "readOnly": true,
-            "type": "string",
-            "description": "query in log analytics to get the list of affected devices/alerts"
-          }
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security Solution  Aggregated Alert data",
+          "$ref": "#/definitions/IoTSecurityAggregatedAlertProperties"
+        }
       },
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        }
+        },
+        { "$ref": "#/definitions/TagsResource" }
       ]
+
+    },
+    "IoTSecurityAggregatedAlertProperties": {
+      "type": "object",
+      "description": "Security Solution Aggregated Alert data",
+      "properties": {
+        "alertType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the alert type"
+        },
+        "alertDisplayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Display name of the alert type"
+        },
+        "aggregatedDateUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date",
+          "description": "The date the incidents were detected by the vendor"
+        },
+        "vendorName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the vendor that discovered the incident"
+        },
+        "reportedSeverity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Informational",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "reportedSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Informational"
+              },
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          },
+          "description": "Estimated severity of this alert"
+        },
+        "remediationSteps": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Recommended steps for remediation"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the incident and what it means"
+        },
+        "count": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "Occurrence number of the alert within the aggregated date"
+        },
+        "effectedResourceType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Azure resource ID of the resource that got the alerts"
+        },
+        "systemSource": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the alerted resource (Azure, Non-Azure)"
+        },
+        "actionTaken": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The action that was taken as a response to the alert (Active, Blocked etc.)"
+        },
+        "logAnalyticsQuery": {
+          "readOnly": true,
+          "type": "string",
+          "description": "query in log analytics to get the list of affected devices/alerts"
+        }
+      },
+      "required": [ "alertType" ]
     },
     "IoTSecurityAggregatedRecommendation": {
       "type": "object",
       "description": "Security Solution Recommendation Information",
       "properties": {
-          "recommendationName": {
-            "type": "string",
-            "description": "Name of the alert type"
-          },
-          "recommendationDisplayName": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Display name of the alert type"
-          },
-          "description": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Description of the incident and what it means"
-          },
-          "recommendationTypeId": {
-            "description": "The recommendation-type GUID.",
-            "type": "string"
-          },
-          "detectedBy": {
-            "readOnly": true,
-            "type": "string",
-            "description": "Name of the vendor that discovered the incident"
-          },
-          "reportedSeverity": {
-            "readOnly": true,
-            "type": "string",
-            "enum": [
-              "Informational",
-              "Low",
-              "Medium",
-              "High"
-            ],
-            "x-ms-enum": {
-              "name": "reportedSeverity",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Informational"
-                },
-                {
-                  "value": "Low"
-                },
-                {
-                  "value": "Medium"
-                },
-                {
-                  "value": "High"
-                }
-              ]
-            },
-            "description": "Estimated severity of this alert"
-          },
-          "healthyDevices": {
-            "readOnly": true,
-            "type": "integer",
-            "description": "the number of the healthy devices within the solution"
-          },
-          "unhealthyDevices": {
-            "readOnly": true,
-            "type": "integer",
-            "description": "the number of the unhealthy devices within the solution"
-          },
-          "logAnalyticsQuery": {
-            "readOnly": true,
-            "type": "string",
-            "description": "query in log analytics to get the list of affected devices/alerts"
-          }
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security Solution data",
+          "$ref": "#/definitions/IoTSecurityAggregatedRecommendationProperties"
+        }
       },
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        }
+        },
+        { "$ref": "#/definitions/TagsResource" }
       ]
+    },
+    "IoTSecurityAggregatedRecommendationProperties": {
+      "type": "object",
+      "description": "Security Solution Recommendation Information",
+      "properties": {
+        "recommendationName": {
+          "type": "string",
+          "description": "Name of the alert type"
+        },
+        "recommendationDisplayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Display name of the alert type"
+        },
+        "description": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Description of the incident and what it means"
+        },
+        "recommendationTypeId": {
+          "description": "The recommendation-type GUID.",
+          "type": "string"
+        },
+        "detectedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the vendor that discovered the incident"
+        },
+        "reportedSeverity": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Informational",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "reportedSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Informational"
+              },
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          },
+          "description": "Estimated severity of this alert"
+        },
+        "healthyDevices": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "the number of the healthy devices within the solution"
+        },
+        "unhealthyDevices": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "the number of the unhealthy devices within the solution"
+        },
+        "logAnalyticsQuery": {
+          "readOnly": true,
+          "type": "string",
+          "description": "query in log analytics to get the list of affected devices/alerts"
+        }
+      }
     },
     "IoTSecurityDeviceAlerts": {
       "type": "object",
@@ -635,6 +669,18 @@
           "description": "the number of alerts raised for this device"
         }
       }
+    },
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags."
     }
   },
   "parameters": {
