@@ -18,7 +18,7 @@
             "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/DSCPTest-VM4"
           }
         ],
-        "tests": [
+        "testGroups": [
           {
             "name": "test1",
             "enabled": true,
@@ -37,15 +37,16 @@
           {
             "name": "testConfig1",
             "testFrequencySeconds": 60,
-            "protocol": "TCP",
+            "protocol": "Tcp",
             "tcpConfiguration": {
               "port": 3389,
-              "enableTraceRoute": true
+              "disableTraceRoute": false
             }
           }
         ]
       }
-    },
+    }
+  },
   "responses": {
     "200": {
       "body": {
@@ -63,7 +64,7 @@
               "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/DSCPTest-VM4"
             }
           ],
-          "tests": [
+          "testGroups": [
             {
               "name": "test1",
               "enabled": true,
@@ -85,7 +86,7 @@
               "protocol": "TCP",
               "tcpConfiguration": {
                 "port": 3389,
-                "enableTraceRoute": true
+                "disableTraceRoute": false
               }
             }
           ]
@@ -110,7 +111,7 @@
               "resourceId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Compute/virtualMachines/DSCPTest-VM4"
             }
           ],
-          "tests": [
+          "testGroups": [
             {
               "name": "test1",
               "enabled": true,
@@ -132,7 +133,7 @@
               "protocol": "TCP",
               "tcpConfiguration": {
                 "port": 3389,
-                "enableTraceRoute": true
+                "disableTraceRoute": false
               }
             }
           ]

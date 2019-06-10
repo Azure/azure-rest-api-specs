@@ -1525,6 +1525,9 @@
         "x-ms-examples": {
           "Create connection monitor": {
             "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json"
+          },
+          "Create multi endpoints connection monitor": {
+            "$ref": "./examples/NetworkWatcherMultiEndpointsConnectionMonitorCreate.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3349,7 +3352,7 @@
         },
         "testGroups": {
           "type": "array",
-          "description": "List of connection monitor tests.",
+          "description": "List of connection monitor test groups.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorTestGroup"
           }
@@ -3425,11 +3428,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of connection monitor test."
+          "description": "The name of connection monitor test group."
         },
         "enabled": {
           "type": "boolean",
-          "description": "A value indicating whether test is enabled."
+          "description": "A value indicating whether test group is enabled."
         },
         "testConfigurations": {
           "type": "array",
@@ -3510,9 +3513,9 @@
     },
     "ConnectionMonitorTCPConfiguration": {
       "properties": {
-        "enableTraceRoute": {
+        "disableTraceRoute": {
           "type": "boolean",
-          "description": "A value indication whether trace route is enabled."
+          "description": "A value indication whether trace route is disabled."
         },
         "port": {
           "type": "integer",
@@ -3526,9 +3529,9 @@
     },
     "ConnectionMonitorICMPConfiguration": {
       "properties": {
-        "enableTraceRoute": {
+        "disableTraceRoute": {
           "type": "boolean",
-          "description": "A value indication whether trace route is enabled."
+          "description": "A value indication whether trace route is disabled."
         }
       },
       "description": "Describes the ICMP configuration."
@@ -3564,6 +3567,7 @@
         },
         "validStatusCodes": {
           "type": "array",
+          "description": "List of valid status codes.",
           "items": {
             "type": "string"
           }
