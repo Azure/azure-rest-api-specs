@@ -3347,11 +3347,11 @@
             "$ref": "#/definitions/ConnectionMonitorEndpoint"
           }
         },
-        "tests": {
+        "testGroups": {
           "type": "array",
           "description": "List of connection monitor tests.",
           "items": {
-            "$ref": "#/definitions/ConnectionMonitorTest"
+            "$ref": "#/definitions/ConnectionMonitorTestGroup"
           }
         }, 
         "testConfigurations": {
@@ -3421,7 +3421,7 @@
       ],
       "description": "Describes the connection monitor endpoint."
     },
-    "ConnectionMonitorTest": {
+    "ConnectionMonitorTestGroup": {
       "properties": {
         "name": {
           "type": "string",
@@ -3481,7 +3481,7 @@
             "Icmp"
           ],
           "x-ms-enum": {
-            "name": "Protocol",
+            "name": "ConnectionMonitorTestConfigurationProtocol",
             "modelAsString": true
           }
         },
@@ -3519,6 +3519,9 @@
           "description": "The port to run the TCP probe."
         }
       },
+      "required": [
+        "port"
+      ],
       "description": "Describes the TCP configuration."
     },
     "ConnectionMonitorICMPConfiguration": {
@@ -3566,6 +3569,9 @@
           }
         }
       },
+      "required": [
+        "port"
+      ],
       "description": "Describes the HTTP configuration."
     },
     "ConnectionMonitorHealthThreshold": {
