@@ -729,6 +729,100 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/upgradeProfiles/default": {
+      "get": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "AgentPools_GetUpgradeProfile",
+        "summary": "Gets upgrade profile for an agent pool.",
+        "description": "Gets the details of the upgrade profile for an agent pool with a specified resource group and managed cluster name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolUpgradeProfile"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Upgrade Profile for Agent Pool": {
+            "$ref": "./examples/AgentPoolsGetUpgradeProfile.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/agentPools/{agentPoolName}/availableagentpoolversions": {
+      "get": {
+        "tags": [
+          "AgentPools"
+        ],
+        "operationId": "AgentPools_GetAvailableAgentPoolVersions",
+        "summary": "Gets a list of supported versions for the specified agent pool.",
+        "description": "Gets a list of supported versions for the specified agent pool.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "name": "agentPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the agent pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AgentPoolAvailableVersions"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get available versions for agent pool": {
+            "$ref": "./examples/AgentPoolsGetAgentPoolAvailableVersions.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/resetServicePrincipalProfile": {
       "post": {
         "tags": [
@@ -1851,6 +1945,130 @@
         "properties"
       ],
       "description": "The list of available upgrades for compute pools."
+    },
+    "AgentPoolUpgradeProfile": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the agent pool upgrade profile."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the agent pool upgrade profile."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the agent pool upgrade profile."
+        },
+        "properties": {
+          "$ref": "#/definitions/AgentPoolUpgradeProfileProperties",
+          "description": "Properties of agent pool upgrade profile.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The list of available upgrades for an agent pool."
+    },
+    "AgentPoolUpgradeProfileProperties": {
+      "properties": {
+        "kubernetesVersion": {
+          "type": "string",
+          "description": "Kubernetes version (major, minor, patch)."
+        },
+        "osType": {
+          "$ref": "#/definitions/OSType",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerServiceOSTypes",
+            "modelAsString": true
+          },
+          "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
+        },
+        "upgrades": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "kubernetesVersion": {
+                "type": "string",
+                "description": "Kubernetes version (major, minor, patch)."
+              },
+              "isPreview": {
+                "type": "boolean",
+                "description": "Whether Kubernetes version is currently in preview."
+              }
+            }
+          },
+          "description": "List of orchestrator types and versions available for upgrade."
+        }
+      },
+      "required": [
+        "kubernetesVersion",
+        "osType"
+      ],
+      "description": "The list of available upgrade versions."
+    },
+    "AgentPoolAvailableVersions":{
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Id of the agent pool avaialbe versions."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the agent pool avaialbe versions."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the agent pool  avaialbe versions."
+        },
+        "properties": {
+          "$ref": "#/definitions/AgentPoolAvailableVersionsProperties",
+          "description": "Properties of agent pool avaialbe versions.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "The list of available versions for an agent pool."
+    },
+    "AgentPoolAvailableVersionsProperties": {
+      "properties": {
+        "agentPoolVersions": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "default":{
+                "type": "boolean",
+                "description": "Whether this version is the default agent pool version."
+              },
+              "kubernetesVersion": {
+                "type": "string",
+                "description": "Kubernetes version (major, minor, patch)."
+              },
+              "isPreview": {
+                "type": "boolean",
+                "description": "Whether Kubernetes version is currently in preview."
+              }
+            }
+          },
+          "description": "List of versions available for agent pool."
+        }
+      },
+      "description": "The list of available agent pool versions."
     },
     "OSType": {
       "type": "string",
