@@ -369,6 +369,67 @@
             }
           }
         }
+      },
+      "post": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "operationId": "BillingProfiles_Create",
+        "x-ms-long-running-operation": true,
+        "description": "The operation to create a BillingProfile.",
+        "x-ms-examples": {
+          "CreateBillingProfile": {
+            "$ref": "./examples/CreateBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfileCreationParameters"
+            },
+            "description": "Parameters supplied to the Create BillingProfile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}": {
@@ -4494,6 +4555,34 @@
         }
       }
     },
+    "BillingProfileCreationParameters": {
+      "description": "The parameters for creating a new billing profile.",
+      "properties": {
+        "displayName": {
+          "description": "The billing profile name.",
+          "type": "string"
+        },
+        "poNumber": {
+          "description": "Purchase order number.",
+          "type": "string"
+        },
+        "address": {
+          "description": "Billing address.",
+          "$ref": "#/definitions/Address"
+        },
+        "invoiceEmailOptIn": {
+          "description": "If the billing profile is opted in to receive invoices via email.",
+          "type": "boolean"
+        },
+        "enableAzureSKUs": {
+          "description": "Azure skus to enable for this billing profile..",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnabledAzureSKUs"
+          }
+        }
+      }
+    },
     "BillingProfileProperties": {
       "description": "The properties of the billing profile.",
       "properties": {
@@ -4658,8 +4747,7 @@
       "properties": {
         "skuId": {
           "description": "The sku id.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuDescription": {
           "description": "The sku description.",
