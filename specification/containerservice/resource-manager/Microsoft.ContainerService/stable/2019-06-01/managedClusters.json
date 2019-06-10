@@ -1402,6 +1402,21 @@
             "type": "string"
           },
           "description": "(PREVIEW) Availability zones for nodes. Must use VirtualMachineScaleSets AgentPoolType."
+        },
+        "scaleSetPriority": {
+          "$ref": "#/definitions/ScaleSetPriority",
+          "description": "ScaleSetPriority to be used to specify virtual machine scale set priority. Default to regular."
+        },
+        "scaleSetEvictionPolicy": {
+          "$ref": "#/definitions/ScaleSetEvictionPolicy",
+          "description": "ScaleSetEvictionPolicy to be used to specify evicition policy for low priority virtual machine scale set. Default to Delete."
+        },
+        "nodeTaints": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Taints to add when registering nodes."
         }
       },
       "required": [
@@ -2082,6 +2097,32 @@
         "modelAsString": true
       },
       "description": "OsType to be used to specify os type. Choose from Linux and Windows. Default to Linux."
+    },
+    "ScaleSetPriority": {
+      "type": "string",
+      "default": "Regular",
+      "enum": [
+        "Low",
+        "Regular"
+      ],
+      "x-ms-enum": {
+        "name": "ScaleSetPriority",
+        "modelAsString": true
+      },
+      "description": "ScaleSetPriority to be used to specify virtual machine scale set priority. Default to regular."
+    },
+    "ScaleSetEvictionPolicy": {
+      "type": "string",
+      "default": "Delete",
+      "enum": [
+        "Delete",
+        "Deallocate"
+      ],
+      "x-ms-enum": {
+        "name": "ScaleSetEvictionPolicy",
+        "modelAsString": true
+      },
+      "description": "ScaleSetEvictionPolicy to be used to specify evicition policy for low priority virtual machine scale set. Default to Delete."
     },
     "CredentialResults": {
       "properties": {
