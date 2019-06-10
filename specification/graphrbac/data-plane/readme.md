@@ -36,7 +36,19 @@ These settings apply only when `--tag=1.6` is specified on the command line.
 
 ``` yaml $(tag) == '1.6'
 input-file:
-- stable/1.6/graphrbac.json
+- Microsoft.GraphRbac/stable/1.6/graphrbac.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: D5001
+    reason: this spec never has examples. It is owned by the SDK group and we already have CLI commands testing it
+  - suppress: R2058
+    reason: existing since the spec started
+  - suppress: R3016
+    reason: existing since the spec started
 ```
 
 ---
@@ -73,48 +85,6 @@ csharp:
   namespace: Microsoft.Azure.Graph.RBAC
   output-folder: $(csharp-sdks-folder)/Graph.RBAC/Graph.RBAC/Generated
   clear-output-folder: true
-```
-
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.graphrbac
-  package-name: azure-graphrbac
-  package-version: 0.50.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-graphrbac/azure/graphrbac
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-graphrbac
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.graphrbac
 ```
 
 ## Go

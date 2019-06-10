@@ -72,8 +72,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
-  - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_scheduler']
@@ -113,12 +111,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-scheduler/azure/mgmt/scheduler
+  output-folder: $(python-sdks-folder)/scheduler/azure-mgmt-scheduler/azure/mgmt/scheduler
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-scheduler
+  output-folder: $(python-sdks-folder)/scheduler/azure-mgmt-scheduler
 ```
 
 ## Go

@@ -1,0 +1,115 @@
+{
+  "parameters": {
+    "api-version": "2019-03-01-preview",
+    "managementGroupId": "MyMgId",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-11-01T00:00:00.000Z",
+        "to": "2019-01-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",
+        "filter": {
+          "or": [
+            {
+              "dimension": {
+                "name": "SubscriptionName",
+                "operator": "In",
+                "values": [
+                  "Azure Dev",
+                  "Azure Prod",
+                  "Azure PPE"
+                ]
+              }
+            },
+            {
+              "tag": {
+                "name": "Environment",
+                "operator": "In",
+                "values": [
+                  "Dev",
+                  "PPE",
+                  "Prod"
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Forecast/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+            "type": "microsoft.costmanagement/Forecast",
+            "properties": {
+              "nextLink": "https://management.azure.com/providers/Microsoft.Management/managementGroups/MyMgId/providers/Microsoft.CostManagement/Forecast?api-version=2019-03-01-preview&$skiptoken=AQAAAA%3D%3D",
+              "columns": [
+                {
+                  "name": "PreTaxCost",
+                  "type": "Number"
+                },
+                {
+                  "name": "UsageDate",
+                  "type": "Number"
+                },
+                {
+                  "name": "CostStatus",
+                  "type": "String"
+                },
+                {
+                  "name": "Currency",
+                  "type": "String"
+                }
+              ],
+              "rows": [
+                [
+                  19.045363672276512,
+                  20190126,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  19.41979241290323,
+                  20190127,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  20.359416562625452,
+                  20190128,
+                  "Actual",
+                  "USD"
+                ],
+                [
+                  19.045363672276512,
+                  20190129,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  19.41979241290323,
+                  20190130,
+                  "Forecast",
+                  "USD"
+                ],
+                [
+                  20.359416562625452,
+                  20190131,
+                  "Forecast",
+                  "USD"
+                ]
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

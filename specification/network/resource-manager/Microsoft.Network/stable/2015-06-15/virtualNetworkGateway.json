@@ -36,7 +36,7 @@
     }
   },
   "paths": {
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}": {
       "put": {
         "tags": [
           "VirtualNetworkGateways"
@@ -437,45 +437,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{connectionSharedKeyName}/sharedkey": {
-      "get": {
-        "tags": [
-          "VirtualNetworkGatewayConnections"
-        ],
-        "operationId": "VirtualNetworkGatewayConnections_GetSharedKey",
-        "description": "The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "connectionSharedKeyName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The virtual network gateway connection shared key name."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "",
-            "schema": {
-              "$ref": "#/definitions/ConnectionSharedKeyResult"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections": {
       "get": {
         "tags": [
@@ -592,7 +553,7 @@
             "schema": {
               "$ref": "#/definitions/ConnectionSharedKey"
             },
-            "description": "Parameters supplied to the Begin Set Virtual Network Gateway conection Shared key operation throughNetwork resource provider."
+            "description": "Parameters supplied to the Begin Set Virtual Network Gateway connection Shared key operation throughNetwork resource provider."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -616,6 +577,43 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "get": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_GetSharedKey",
+        "description": "The Get VirtualNetworkGatewayConnectionSharedKey operation retrieves information about the specified virtual network gateway connection shared key through Network resource provider.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The virtual network gateway connection shared key name."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "",
+            "schema": {
+              "$ref": "#/definitions/ConnectionSharedKeyResult"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/localNetworkGateways/{localNetworkGatewayName}": {
@@ -788,7 +786,7 @@
     }
   },
   "definitions": {
-   "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
+    "VirtualNetworkGatewayIPConfigurationPropertiesFormat": {
       "properties": {
         "privateIPAddress": {
           "type": "string",
@@ -977,7 +975,6 @@
       ],
       "description": "VPN client revoked certificate of virtual network gateway."
     },
-
     "VpnClientConfiguration": {
       "properties": {
         "vpnClientAddressPool": {
@@ -1037,7 +1034,7 @@
       },
       "description": "VirtualNetworkGatewaySku details"
     },
-	"BgpSettings": {
+    "BgpSettings": {
       "properties": {
         "asn": {
           "type": "integer",
@@ -1123,7 +1120,7 @@
         },
         "connectionType": {
           "type": "string",
-          "description": "Gateway connection type. Possible values are: 'Ipsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
+          "description": "Gateway connection type. Possible values are: 'IPsec','Vnet2Vnet','ExpressRoute', and 'VPNClient.",
           "enum": [
             "IPsec",
             "Vnet2Vnet",
@@ -1205,7 +1202,6 @@
       ],
       "description": "A common class for general resource information"
     },
-
     "ConnectionSharedKeyResult": {
       "properties": {
         "value": {
@@ -1213,7 +1209,7 @@
           "description": "The virtual network connection shared key value"
         }
       },
-      "description": "Response for CheckConnectionSharedKey Api servive call"
+      "description": "Response for CheckConnectionSharedKey API service call"
     },
     "VirtualNetworkGatewayConnectionListResult": {
       "properties": {
@@ -1247,9 +1243,9 @@
           "description": "The virtual network connection shared key value"
         }
       },
-      "description": "Response for GetConnectionSharedKey Api servive call"
+      "description": "Response for GetConnectionSharedKey API service call"
     },
-	"LocalNetworkGatewayPropertiesFormat": {
+    "LocalNetworkGatewayPropertiesFormat": {
       "properties": {
         "localNetworkAddressSpace": {
           "$ref": "./virtualNetwork.json#/definitions/AddressSpace",
@@ -1287,7 +1283,7 @@
       },
       "allOf": [
         {
-          "$ref":  "./network.json#/definitions/Resource"
+          "$ref": "./network.json#/definitions/Resource"
         }
       ],
       "description": "A common class for general resource information"

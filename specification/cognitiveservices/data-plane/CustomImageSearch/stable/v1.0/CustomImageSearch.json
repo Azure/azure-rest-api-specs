@@ -22,6 +22,15 @@
       ]
     }
   },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "../../../Common/Parameters.json#/parameters/GlobalEndpoint"
+      }
+    ]
+  },
   "host": "api.cognitive.microsoft.com",
   "basePath": "/bingcustomsearch/v7.0",
   "schemes": [
@@ -37,9 +46,11 @@
       "in": "header"
     }
   },
-  "security": [{
-    "apiKeyHeader": []
-  }],
+  "security": [
+    {
+      "apiKeyHeader": []
+    }
+  ],
   "paths": {
     "/images/search": {
       "get": {
@@ -48,7 +59,8 @@
         "tags": [
           "CustomImageSearch"
         ],
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "#/parameters/x-bingapis-sdk"
           },
           {
@@ -418,9 +430,11 @@
   "definitions": {
     "Images": {
       "description": "Defines an image answer",
-      "allOf": [{
-        "$ref": "#/definitions/SearchResultsAnswer"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchResultsAnswer"
+        }
+      ],
       "type": "object",
       "required": [
         "value"
@@ -443,9 +457,11 @@
     },
     "SearchResultsAnswer": {
       "description": "Defines a search result answer.",
-      "allOf": [{
-        "$ref": "#/definitions/Answer"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Answer"
+        }
+      ],
       "type": "object",
       "properties": {
         "totalEstimatedMatches": {
@@ -458,9 +474,11 @@
     },
     "ImageObject": {
       "description": "Defines an image",
-      "allOf": [{
-        "$ref": "#/definitions/MediaObject"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/MediaObject"
+        }
+      ],
       "type": "object",
       "properties": {
         "thumbnail": {
@@ -525,17 +543,21 @@
     },
     "Answer": {
       "description": "Defines an answer.",
-      "allOf": [{
-        "$ref": "#/definitions/Response"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
       "type": "object",
       "properties": {}
     },
     "MediaObject": {
       "description": "Defines a media object.",
-      "allOf": [{
-        "$ref": "#/definitions/CreativeWork"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
       "type": "object",
       "properties": {
         "contentUrl": {
@@ -579,9 +601,11 @@
     },
     "Response": {
       "description": "Defines a response. All schemas that could be returned at the root of a response should inherit from this",
-      "allOf": [{
-        "$ref": "#/definitions/Identifiable"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Identifiable"
+        }
+      ],
       "type": "object",
       "properties": {
         "readLink": {
@@ -598,9 +622,11 @@
     },
     "CreativeWork": {
       "description": "The most generic kind of creative work, including books, movies, photographs, software programs, etc.",
-      "allOf": [{
-        "$ref": "#/definitions/Thing"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Thing"
+        }
+      ],
       "type": "object",
       "properties": {
         "thumbnailUrl": {
@@ -625,9 +651,11 @@
     },
     "Identifiable": {
       "description": "Defines the identity of a resource.",
-      "allOf": [{
-        "$ref": "#/definitions/ResponseBase"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResponseBase"
+        }
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -639,9 +667,11 @@
     },
     "ErrorResponse": {
       "description": "The top-level response that represents a failed request.",
-      "allOf": [{
-        "$ref": "#/definitions/Response"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
       "type": "object",
       "required": [
         "errors"
@@ -658,9 +688,11 @@
     },
     "Thing": {
       "description": "Defines a thing.",
-      "allOf": [{
-        "$ref": "#/definitions/Response"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Response"
+        }
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -697,9 +729,11 @@
     },
     "WebPage": {
       "description": "Defines a webpage that is relevant to the query.",
-      "allOf": [{
-        "$ref": "#/definitions/CreativeWork"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreativeWork"
+        }
+      ],
       "type": "object",
       "properties": {}
     },

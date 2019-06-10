@@ -9,7 +9,7 @@ The App service RP comprises of services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
@@ -34,8 +34,69 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2018-12
 ```
+
+### Tag: package-2018-12
+
+These settings apply only when `--tag=package-2018-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12'
+input-file:
+- Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2018-11-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
+- Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
+- Microsoft.Web/stable/2018-02-01/Diagnostics.json
+- Microsoft.Web/stable/2018-02-01/Provider.json
+- Microsoft.Web/stable/2018-02-01/Recommendations.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-11-01/WebApps.json
+- Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+- Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3019 error
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+```
+
+### Tag: package-2018-11
+
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11'
+input-file:
+- Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2018-02-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2018-11-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
+- Microsoft.Web/stable/2018-02-01/DeletedWebApps.json
+- Microsoft.Web/stable/2018-02-01/Diagnostics.json
+- Microsoft.Web/stable/2018-02-01/Provider.json
+- Microsoft.Web/stable/2018-02-01/Recommendations.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/WebApps.json
+- Microsoft.Web/stable/2018-02-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+- Microsoft.Web/stable/2018-02-01/ResourceHealthMetadata.json
+directive:
+  # suppress each RPC 3019 error
+- where: $.definitions.Identifier.properties
+  suppress: R3019
+  reason: It's an old API, will resolve in next API version
+  approved-by: "@ravbhatnagar"
+```
+
 
 ### Tag: package-2018-02
 
@@ -66,7 +127,6 @@ directive:
   reason: It's an old API, will resolve in next API version
   approved-by: "@ravbhatnagar"
 ```
-
 
 ### Tag: package-2016-09
 
@@ -289,49 +349,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_web']
 ```
 
-
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.web
-  package-name: azure-mgmt-web
-  package-version: 0.36.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-web/azure/mgmt/web
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-web
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  # override the default output folder
-  output-folder: $(output-folder)/python
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.web
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
@@ -435,4 +452,21 @@ input-file:
 - Microsoft.Web/stable/2016-03-01/Recommendations.json
 - Microsoft.Web/stable/2016-09-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2016-09-01/AppServicePlans.json
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Web/stable/2018-02-01/Certificates.json
+- Microsoft.Web/stable/2018-02-01/CommonDefinitions.json
+- Microsoft.Web/stable/2018-02-01/WebApps.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/AppServicePlans.json
+- Microsoft.Web/stable/2018-02-01/Provider.json
+- Microsoft.Web/stable/2018-02-01/ResourceProvider.json
+- Microsoft.Web/stable/2018-02-01/Recommendations.json
 ```

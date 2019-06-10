@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Azure EventGrid.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Azure EventGrid, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,55 @@ To build the SDK for Azure EventGrid, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Azure EventGrid API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05-preview
+tag: package-2019-06
 ```
 
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.EventGrid/stable/2019-06-01/EventGrid.json
+```
+
+### Tag: package-2019-02-preview
+
+These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02-preview'
+input-file:
+- Microsoft.EventGrid/preview/2019-02-01-preview/EventGrid.json
+```
+
+### Tag: package-2019-01
+
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-01'
+input-file:
+- Microsoft.EventGrid/stable/2019-01-01/EventGrid.json
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: EventGrid.json
+    reason: PATCH operation already exists in the json file but this is known issue in the ARM validation.
+```
 
 ### Tag: package-2018-09-preview
 
@@ -39,6 +74,21 @@ input-file:
 - Microsoft.EventGrid/preview/2018-09-15-preview/EventGrid.json
 ```
 
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TrackedResourcePatchOperation
+    from: EventGrid.json
+    reason: PATCH operation already exists in the json file but this is known issue in the ARM validation.
+  - suppress: ONE_OF_MULTIPLE
+    from: EventGrid.json
+    where: $.definitions.EventSubscriptionProperties.properties.destination
+    reason: |-
+      This is a false positive. We have multiple EventSubscriptionDestination types (EventHubEventSubscriptionDestination, HybridConnectionEventSubscriptionDestination etc.) and each of them has corresponding property classes e.g. EventHubEventSubscriptionDestinationProperties and HybridConnectionEventSubscriptionDestinationProperties have both a property called resourceId which is why the validation appears to be flagging this.
+
+      However, the discriminator value (endpointType) is separate for each of these destinations, hence based on the discriminator it will get deserialized into the appropriate type.
+```
 
 ### Tag: package-2018-05-preview
 
@@ -49,7 +99,6 @@ input-file:
 - Microsoft.EventGrid/preview/2018-05-01-preview/EventGrid.json
 ```
 
-
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
@@ -58,7 +107,6 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 input-file:
 - Microsoft.EventGrid/stable/2018-01-01/EventGrid.json
 ```
-
 
 ### Tag: package-2017-09-preview
 
@@ -69,7 +117,6 @@ input-file:
 - Microsoft.EventGrid/preview/2017-09-15-preview/EventGrid.json
 ```
 
-
 ### Tag: package-2017-06-preview
 
 These settings apply only when `--tag=package-2017-06-preview` is specified on the command line.
@@ -79,10 +126,9 @@ input-file:
 - Microsoft.EventGrid/preview/2017-06-15-preview/EventGrid.json
 ```
 
-
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -101,7 +147,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_event_grid']
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -117,82 +162,10 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.eventgrid
-  package-name: azure-mgmt-eventgrid
-  package-version: 1.0.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-eventgrid/azure/mgmt/eventgrid
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-eventgrid
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.eventgrid
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-eventgrid
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-05-preview
-  - tag: package-2018-01
-```
-
-### Tag: package-2018-05-preview and java
-
-These settings apply only when `--tag=package-2018-05-preview --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-05-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.eventgrid.v2018_05_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_05_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-01 and java
-
-These settings apply only when `--tag=package-2018-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.eventgrid.v2018_01_01
-  output-folder: $(azure-libraries-for-java-folder)/eventgrid/resource-manager/v2018_01_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)

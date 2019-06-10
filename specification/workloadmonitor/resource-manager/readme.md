@@ -1,11 +1,11 @@
-# Microsoft.WorkloadMonitor 
-    
+# Microsoft.WorkloadMonitor
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Microsoft.WorkloadMonitor.
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for Microsoft.WorkloadMonitor, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 
 
-### Basic Information 
+### Basic Information
 These are the global settings for the API.
 
 ``` yaml
@@ -34,7 +34,7 @@ These settings apply only when `--tag=package-2018-08-31-preview` is specified o
 
 ``` yaml $(tag) == 'package-2018-08-31-preview'
 input-file:
-- microsoft.workloadmonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
+- Microsoft.WorkloadMonitor/preview/2018-08-31-preview/Microsoft.WorkloadMonitor.json
 ```
 
 ``` yaml
@@ -75,13 +75,11 @@ csharp:
   clear-output-folder: true
 ```
 
-
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
 ``` yaml $(python)
 python-mode: create
 python:
@@ -102,6 +100,7 @@ python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-workloadmonitor
 ```
+
 
 
 ## Go

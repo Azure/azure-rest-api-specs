@@ -37,6 +37,9 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
+  - repo: azure-sdk-for-go
 ```
 
 ## CSharp Settings
@@ -44,7 +47,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.VisualSearch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/Search/Generated/VisualSearch
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Search.BingVisualSearch/src/Generated
   sync-methods: none
 ```
 
@@ -67,12 +70,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-visualsearch/azure/cognitiveservices/search/visualsearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-visualsearch/azure/cognitiveservices/search/visualsearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-visualsearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-visualsearch
 ```
 
 ## Go

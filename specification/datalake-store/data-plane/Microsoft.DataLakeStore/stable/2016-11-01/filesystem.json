@@ -130,7 +130,7 @@
               "format": "file"
             },
             "required": true,
-            "description": "The file contents to include when appending to the file."
+            "description": "The file contents to include when appending to the file.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "appendMode",
@@ -472,21 +472,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the item or lexographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
+            "description": "Gets or sets the item or lexicographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
           },
           {
             "name": "listBefore",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the item or lexographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
+            "description": "Gets or sets the item or lexicographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
           },
           {
             "name": "tooId",
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "An optional switch to return friendly names in place of owner and group. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+            "description": "An optional switch to return friendly names in place of owner and group. tooId=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
           },
           {
             "name": "op",
@@ -593,7 +593,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "An optional switch to return friendly names in place of owner and group. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+            "description": "An optional switch to return friendly names in place of owner and group. tooId=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
           },
           {
             "name": "op",
@@ -743,7 +743,7 @@
               "format": "file"
             },
             "required": true,
-            "description": "The file contents to include when appending to the file."
+            "description": "The file contents to include when appending to the file.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "offset",
@@ -854,7 +854,7 @@
               "format": "file"
             },
             "required": false,
-            "description": "The file contents to include when creating the file. This parameter is optional, resulting in an empty file if not specified."
+            "description": "The file contents to include when creating the file. This parameter is optional, resulting in an empty file if not specified.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "overwrite",
@@ -1213,7 +1213,7 @@
             "in": "query",
             "required": false,
             "type": "boolean",
-            "description": "An optional switch to return friendly names in place of object ID for ACL entries. tooid=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
+            "description": "An optional switch to return friendly names in place of object ID for ACL entries. tooId=false returns friendly names instead of the AAD Object ID. Default value is true, returning AAD object IDs."
           },
           {
             "name": "op",

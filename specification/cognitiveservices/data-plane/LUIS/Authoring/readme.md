@@ -61,6 +61,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ### Authoring 2.0 - CSharp Settings
@@ -71,7 +73,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS.Authoring
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Authoring/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Language.LUIS.Authoring/src/Generated
   clear-output-folder: true
 ```
 

@@ -5,7 +5,7 @@
     "serverName": "blobauditingtest-6440",
     "databaseName": "testdb",
     "blobAuditingPolicyName": "default",
-    "api-version": "2017-03-01-preview",
+    "api-version": "2015-05-01-preview",
     "parameters": {
       "properties": {
           "state": "Enabled",
@@ -14,7 +14,8 @@
           "retentionDays": 6,
           "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
           "isStorageSecondaryKeyInUse": false,
-          "auditActionsAndGroups":["DATABASE_LOGOUT_GROUP","DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public"]
+          "auditActionsAndGroups":["DATABASE_LOGOUT_GROUP","DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public"],
+          "isAzureMonitorTargetEnabled": true
       }
     }
   },
@@ -32,7 +33,8 @@
             "retentionDays": 0,
             "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
             "isStorageSecondaryKeyInUse": false,
-            "auditActionsAndGroups": ["DATABASE_LOGOUT_GROUP", "DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public"]
+            "auditActionsAndGroups": ["DATABASE_LOGOUT_GROUP", "DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public"],
+            "isAzureMonitorTargetEnabled": true
         }
       }
     },
@@ -49,7 +51,8 @@
             "retentionDays": 0,
             "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
             "isStorageSecondaryKeyInUse": false,
-            "auditActionsAndGroups": ["DATABASE_LOGOUT_GROUP", "DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public"]
+            "auditActionsAndGroups": [ "DATABASE_LOGOUT_GROUP", "DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public" ],
+            "isAzureMonitorTargetEnabled": true
         }
       }
     }

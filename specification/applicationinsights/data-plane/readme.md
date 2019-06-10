@@ -37,7 +37,7 @@ These settings apply only when `--tag=v1` is specified on the command line.
 
 ``` yaml $(tag) == 'v1'
 input-file:
-- microsoft.insights/preview/v1/AppInsights.json
+- Microsoft.Insights/preview/v1/AppInsights.json
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
@@ -48,7 +48,7 @@ directive:
 
 ``` yaml $(tag) == '20180420'
 input-file:
-- microsoft.insights/preview/2018-04-20/swagger.json
+- Microsoft.Insights/preview/2018-04-20/swagger.json
 directive:
   - reason: Don't expose the GET endpoint since it's behavior is more limited than POST
     remove-operation: Query_Get
@@ -81,10 +81,12 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.ApplicationInsights.Query
-  output-folder: $(csharp-sdks-folder)/ApplicationInsights/DataPlane/ApplicationInsights/Generated
+  output-folder: $(csharp-sdks-folder)/ApplicationInsights/Microsoft.Azure.ApplicationInsights/src/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
 ```
+
+## Python
 
 ``` yaml $(python)
 python-mode: create
@@ -102,12 +104,12 @@ directive:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-applicationinsights/azure/applicationinsights
+  output-folder: $(python-sdks-folder)/azure-applicationinsights-query/azure/applicationinsights/query
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-applicationinsights
+  output-folder: $(python-sdks-folder)/azure-applicationinsights-query
 ```
 
 ## Go

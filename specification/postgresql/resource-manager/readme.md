@@ -30,16 +30,6 @@ tag: package-2017-12-01
 ```
 
 
-### Tag: package-2017-04-preview
-
-These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-04-preview'
-input-file:
-- Microsoft.DBforPostgreSQL/preview/2017-04-30-preview/postgresql.json
-```
-
-
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
@@ -113,12 +103,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/postgresql
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms
 ```
 
 ## Go

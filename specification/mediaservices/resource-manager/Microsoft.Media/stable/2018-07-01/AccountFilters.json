@@ -56,18 +56,10 @@
         },
         "forceEndTimestamp": {
           "type": "boolean",
-          "description": "The indicator of forcing exsiting of end time stamp."
+          "description": "The indicator of forcing existing of end time stamp."
         }
       },
       "type": "object",
-      "required": [
-        "startTimestamp",
-        "endTimestamp",
-        "presentationWindowDuration",
-        "liveBackoffDuration",
-        "timescale",
-        "forceEndTimestamp"
-      ],
       "description": "The presentation time range, this is asset related and not recommended for Account Filter."
     },
     "FilterTrackPropertyCondition": {
@@ -110,13 +102,13 @@
                 "description": "The bitrate."
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "The track property type."
         },
         "value": {
           "type": "string",
-          "description": "The track proprty value."
+          "description": "The track property value."
         },
         "operation": {
           "type": "string",
@@ -136,7 +128,7 @@
                 "description": "The not equal operation."
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "The track property condition operation."
         }

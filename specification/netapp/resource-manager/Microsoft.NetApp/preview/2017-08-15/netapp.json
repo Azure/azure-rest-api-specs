@@ -49,6 +49,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -65,7 +68,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -83,6 +86,9 @@
           "NetApp Accounts"
         ],
         "operationId": "Accounts_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -104,7 +110,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -164,6 +170,12 @@
         ],
         "responses": {
           "200": {
+            "description": "OK - account updated",
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
+          "201": {
             "description": "Account created",
             "schema": {
               "$ref": "#/definitions/netAppAccount"
@@ -251,7 +263,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -272,6 +284,9 @@
           "Capacity Pools"
         ],
         "operationId": "Pools_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -293,7 +308,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -356,7 +371,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Pool created or updated",
+            "description": "OK - pool updated",
+            "schema": {
+              "$ref": "#/definitions/capacityPool"
+            }
+          },
+          "201": {
+            "description": "Pool created",
             "schema": {
               "$ref": "#/definitions/capacityPool"
             }
@@ -443,7 +464,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -467,6 +488,9 @@
           "Volumes"
         ],
         "operationId": "Volumes_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -488,7 +512,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -554,7 +578,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Volume created or updated",
+            "description": "Ok - volume updated",
+            "schema": {
+              "$ref": "#/definitions/volume"
+            }
+          },
+          "201": {
+            "description": "Volume created",
             "schema": {
               "$ref": "#/definitions/volume"
             }
@@ -641,7 +671,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/mountTargets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -668,6 +698,9 @@
         ],
         "operationId": "MountTargets_List",
         "description": "List mount targets",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -689,85 +722,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/mountTargets/{mountTargetName}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/SubscriptionId"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroup"
-        },
-        {
-          "$ref": "#/parameters/AccountName"
-        },
-        {
-          "$ref": "#/parameters/PoolName"
-        },
-        {
-          "$ref": "#/parameters/VolumeName"
-        },
-        {
-          "$ref": "#/parameters/MountTargetName"
-        },
-        {
-          "$ref": "#/parameters/ApiVersionParameter"
-        }
-      ],
-      "get": {
-        "tags": [
-          "MountTargets"
-        ],
-        "operationId": "MountTargets_Get",
-        "description": "Get a mount target",
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/mountTarget"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "MountTargets_Get": {
-            "$ref": "examples/MountTargets_Get.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "MountTargets"
-        ],
-        "operationId": "MountTargets_Delete",
-        "description": "Delete mount target",
-        "responses": {
-          "202": {
-            "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
-          },
-          "204": {
-            "description": "NoContent -- Resource does not exist."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "MountTargets_Delete": {
-            "$ref": "examples/MountTargets_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/snapshots": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -794,6 +749,9 @@
         ],
         "operationId": "Snapshots_List",
         "description": "List snapshots",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
         "responses": {
           "200": {
             "description": "OK",
@@ -815,7 +773,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/pools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}": {
       "parameters": [
         {
           "$ref": "#/parameters/SubscriptionId"
@@ -865,6 +823,84 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Create",
+        "description": "Create a snapshot",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Snapshot object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Snapshot created",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "202": {
+            "description": "Accepted -- Create request accepted; operation will complete asynchronously"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Snapshots_Create": {
+            "$ref": "examples/Snapshots_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Snapshots"
+        ],
+        "operationId": "Snapshots_Update",
+        "description": "Patch a snapshot",
+        "parameters": [
+          {
+            "name": "body",
+            "description": "Snapshot object supplied in the body of the operation.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/snapshotPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/snapshot"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Snapshots_Update": {
+            "$ref": "examples/Snapshots_Update.json"
+          }
+        }
+      },
       "delete": {
         "tags": [
           "Snapshots"
@@ -872,6 +908,9 @@
         "operationId": "Snapshots_Delete",
         "description": "Delete snapshot",
         "responses": {
+          "200": {
+            "description": "OK"
+          },
           "202": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
           },
@@ -1013,7 +1052,7 @@
       }
     },
     "Dimension": {
-      "description": "Dimension of blobs, possiblly be blob type or access tier.",
+      "description": "Dimension of blobs, possibly be blob type or access tier.",
       "properties": {
         "name": {
           "type": "string",
@@ -1086,9 +1125,33 @@
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
         "tags": {
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "NetApp Account properties",
+          "$ref": "#/definitions/accountProperties",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1096,20 +1159,55 @@
       "description": "NetApp account properties",
       "type": "object",
       "properties": {
-        "accountId": {
-          "title": "accountId",
-          "type": "string",
-          "readOnly": true,
-          "description": "UUID v4 used to identify the Account",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "maxLength": 36,
-          "minLength": 36,
-          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
-        },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
           "description": "Azure lifecycle management"
+        },
+        "activeDirectories": {
+          "description": "Active Directories",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/activeDirectory"
+          }
+        }
+      }
+    },
+    "activeDirectory": {
+      "description": "Active Directory",
+      "type": "object",
+      "properties": {
+        "activeDirectoryId": {
+          "type": "string",
+          "description": "Id of the Active Directory"
+        },
+        "username": {
+          "type": "string",
+          "description": "Username of Active Directory domain administrator"
+        },
+        "password": {
+          "type": "string",
+          "description": "Plain text password of Active Directory domain administrator"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Name of the Active Directory domain"
+        },
+        "dNS": {
+          "type": "string",
+          "description": "Comma separated list of DNS server IP addresses for the Active Directory domain"
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the Active Directory"
+        },
+        "sMBServerName": {
+          "type": "string",
+          "description": "NetBIOS name of the SMB server. This name will be registered as a computer account in the AD and used to mount volumes"
+        },
+        "organizationalUnit": {
+          "type": "string",
+          "description": "The Organizational Unit (OU) within the Windows Active Directory"
         }
       }
     },
@@ -1169,33 +1267,10 @@
         }
       }
     },
-    "capacityPoolPatch": {
-      "description": "Capacity pool patch resource",
-      "type": "object",
-      "x-ms-azure-resource": true,
-      "properties": {
-        "tags": {
-          "description": "Resource tags",
-          "$ref": "#/definitions/resourceTags"
-        }
-      }
-    },
     "poolProperties": {
       "description": "Pool properties",
       "type": "object",
-      "required": [
-        "accountId"
-      ],
       "properties": {
-        "accountId": {
-          "title": "accountId",
-          "type": "string",
-          "description": "UUID v4 used to identify the Account",
-          "pattern": "^[a-fA-F0-9]{8}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{4}-[a-fA-F0-9]{12}$",
-          "maxLength": 36,
-          "minLength": 36,
-          "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
-        },
         "poolId": {
           "title": "poolId",
           "type": "string",
@@ -1209,27 +1284,25 @@
         "size": {
           "title": "size",
           "type": "integer",
-          "description": "Provisioned size of the pool (in GB)",
-          "minimum": 4096,
-          "default": 4096
+          "format": "int64",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
+          "minimum": 4398046511104,
+          "maximum": 549755813888000,
+          "default": 4398046511104
         },
         "serviceLevel": {
           "title": "serviceLevel",
           "type": "string",
           "description": "The service level of the file system",
           "enum": [
-            "Basic",
             "Standard",
-            "Premium"
+            "Premium",
+            "Ultra"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
             "values": [
-              {
-                "value": "Basic",
-                "description": "Basic service level"
-              },
               {
                 "value": "Standard",
                 "description": "Standard service level"
@@ -1237,16 +1310,100 @@
               {
                 "value": "Premium",
                 "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
               }
             ]
           },
-          "example": "Premium",
-          "default": "Standard"
+          "example": "Ultra",
+          "default": "Premium"
         },
         "provisioningState": {
           "type": "string",
           "readOnly": true,
           "description": "Azure lifecycle management"
+        }
+      }
+    },
+    "capacityPoolPatch": {
+      "description": "Capacity pool patch resource",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Resource location"
+        },
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags"
+        },
+        "properties": {
+          "description": "Capacity pool properties",
+          "$ref": "#/definitions/poolPatchProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "poolPatchProperties": {
+      "description": "Patchable pool properties",
+      "type": "object",
+      "properties": {
+        "size": {
+          "title": "size",
+          "type": "integer",
+          "format": "int64",
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 4TiB chunks (value must be multiply of 4398046511104).",
+          "minimum": 4398046511104,
+          "maximum": 549755813888000,
+          "default": 4398046511104
+        },
+        "serviceLevel": {
+          "title": "serviceLevel",
+          "type": "string",
+          "description": "The service level of the file system",
+          "enum": [
+            "Standard",
+            "Premium",
+            "Ultra"
+          ],
+          "x-ms-enum": {
+            "name": "ServiceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Standard",
+                "description": "Standard service level"
+              },
+              {
+                "value": "Premium",
+                "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
+              }
+            ]
+          },
+          "example": "Ultra",
+          "default": "Premium"
         }
       }
     },
@@ -1328,12 +1485,6 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca7778"
         },
-        "name": {
-          "title": "FileSystem name",
-          "type": "string",
-          "description": "FileSystem name",
-          "example": "myvolume"
-        },
         "creationToken": {
           "title": "Creation Token or File Path",
           "type": "string",
@@ -1347,18 +1498,14 @@
           "type": "string",
           "description": "The service level of the file system",
           "enum": [
-            "Basic",
             "Standard",
-            "Premium"
+            "Premium",
+            "Ultra"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
             "values": [
-              {
-                "value": "Basic",
-                "description": "Basic service level"
-              },
               {
                 "value": "Standard",
                 "description": "Standard service level"
@@ -1366,21 +1513,36 @@
               {
                 "value": "Premium",
                 "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
               }
             ]
           },
-          "example": "Premium",
-          "default": "Standard"
+          "example": "Ultra",
+          "default": "Premium"
         },
         "usageThreshold": {
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Upper limit is 100TB.",
-          "minimum": 0,
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB.",
+          "minimum": 107374182400,
           "maximum": 109951162777600,
-          "default": 0,
-          "example": 101010
+          "default": 107374182400,
+          "example": 107374182400
+        },
+        "exportPolicy": {
+          "description": "Export policy rule",
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/exportPolicyRule"
+              }
+            }
+          }
         },
         "provisioningState": {
           "type": "string",
@@ -1390,6 +1552,40 @@
         "subnetId": {
           "type": "string",
           "description": "The Azure Resource URI for a delegated subnet. Must have the delegation Microsoft.NetApp/volumes"
+        }
+      }
+    },
+    "exportPolicyRule": {
+      "description": "Volume Export Policy Rule",
+      "type": "object",
+      "properties": {
+        "ruleIndex": {
+          "type": "integer",
+          "description": "Order index"
+        },
+        "unixReadOnly": {
+          "type": "boolean",
+          "description": "Read only access"
+        },
+        "unixReadWrite": {
+          "type": "boolean",
+          "description": "Read and write access"
+        },
+        "cifs": {
+          "type": "boolean",
+          "description": "Allows CIFS protocol"
+        },
+        "nfsv3": {
+          "type": "boolean",
+          "description": "Allows NFSv3 protocol"
+        },
+        "nfsv4": {
+          "type": "boolean",
+          "description": "Allows NFSv4 protocol"
+        },
+        "allowedClients": {
+          "type": "string",
+          "description": "Client ingress specification as comma separated string with IPv4 CIDRs, IPv4 host addresses and host names"
         }
       }
     },
@@ -1432,29 +1628,19 @@
       "description": "Patchable volume properties",
       "type": "object",
       "properties": {
-        "name": {
-          "title": "FileSystem name",
-          "type": "string",
-          "description": "FileSystem name",
-          "example": "myvolume"
-        },
         "serviceLevel": {
           "title": "serviceLevel",
           "type": "string",
           "description": "The service level of the file system",
           "enum": [
-            "Basic",
             "Standard",
-            "Premium"
+            "Premium",
+            "Ultra"
           ],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
             "values": [
-              {
-                "value": "Basic",
-                "description": "Basic service level"
-              },
               {
                 "value": "Standard",
                 "description": "Standard service level"
@@ -1462,21 +1648,36 @@
               {
                 "value": "Premium",
                 "description": "Premium service level"
+              },
+              {
+                "value": "Ultra",
+                "description": "Ultra service level"
               }
             ]
           },
-          "example": "Premium",
-          "default": "Standard"
+          "example": "Ultra",
+          "default": "Premium"
         },
         "usageThreshold": {
           "title": "usageThreshold",
           "type": "integer",
           "format": "int64",
-          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Upper limit is 100TB.",
-          "minimum": 0,
+          "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. Minimum size is 100 GiB. Upper limit is 100TiB.",
+          "minimum": 107374182400,
           "maximum": 109951162777600,
-          "default": 0,
-          "example": 101010
+          "default": 107374182400,
+          "example": 107374182400
+        },
+        "exportPolicy": {
+          "description": "Export policy rule",
+          "properties": {
+            "rules": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/exportPolicyRule"
+              }
+            }
+          }
         }
       }
     },
@@ -1555,23 +1756,16 @@
         },
         "ipAddress": {
           "title": "ipAddress",
-          "description": "The mount targets's IPv4 address",
+          "description": "The mount target's IPv4 address",
           "type": "string",
           "readOnly": true,
           "example": "1.2.3.4"
         },
-        "name": {
-          "title": "name",
+        "subnet": {
+          "title": "subnet",
           "type": "string",
-          "readOnly": true,
-          "description": "The name of the mount target",
-          "example": "mountTarget1"
-        },
-        "vlanId": {
-          "title": "vlanid",
-          "type": "integer",
-          "description": "Vlan Id",
-          "example": 1337
+          "description": "The subnet",
+          "example": "1.2.3.4"
         },
         "startIp": {
           "title": "startIp",
@@ -1580,7 +1774,7 @@
           "example": "1.2.3.4"
         },
         "endIp": {
-          "title": "startIp",
+          "title": "endIp",
           "description": "The end of IPv4 address range to use when creating a new mount target",
           "type": "string",
           "example": "1.2.3.4"
@@ -1596,6 +1790,12 @@
           "description": "The netmask of the IPv4 address range to use when creating a new mount target",
           "type": "string",
           "example": "255.255.255.0"
+        },
+        "smbServerFqdn": {
+          "title": "smbServerFQDN",
+          "description": "The SMB server's Fully Qualified Domain Name, FQDN",
+          "type": "string",
+          "example": "fullyqualified.domainname.com"
         },
         "provisioningState": {
           "type": "string",
@@ -1620,6 +1820,7 @@
     "snapshot": {
       "description": "Snapshot of a Volume",
       "type": "object",
+      "x-ms-azure-resource": true,
       "required": [
         "location",
         "properties"
@@ -1627,7 +1828,11 @@
       "properties": {
         "location": {
           "type": "string",
-          "description": "Resource location"
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "id": {
           "type": "string",
@@ -1639,6 +1844,11 @@
           "readOnly": true,
           "description": "Resource name"
         },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
+        },
         "tags": {
           "description": "Resource tags",
           "$ref": "#/definitions/resourceTags",
@@ -1647,6 +1857,18 @@
         "properties": {
           "description": "Snapshot Properties",
           "$ref": "#/definitions/snapshotProperties",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "snapshotPatch": {
+      "description": "Snapshot patch",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "tags": {
+          "description": "Resource tags",
+          "$ref": "#/definitions/resourceTags",
           "x-ms-client-flatten": true
         }
       }
@@ -1676,13 +1898,6 @@
           "maxLength": 36,
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
-        },
-        "name": {
-          "title": "name",
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the snapshot",
-          "example": "snapshot1"
         },
         "creationDate": {
           "title": "name",
@@ -1729,11 +1944,14 @@
       "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
     },
     "ResourceGroup": {
-      "name": "resourceGroup",
+      "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The name of the resource group.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method"
     },
     "AccountName": {

@@ -180,8 +180,7 @@
         "responses": {
           "202": {
             "description": "Accepted",
-            "headers": {
-            },
+            "headers": {},
             "schema": {
               "$ref": "#/definitions/CanonicalSupportPlanResponseEnvelope"
             }
@@ -246,7 +245,15 @@
         "provisioningState": {
           "type": "string",
           "description": "The provisioning state of the resource.",
-          "enum": [ "Succeeded", "Failed", "Cancelled", "Purchasing", "Downgrading", "Cancelling", "Upgrading" ],
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Purchasing",
+            "Downgrading",
+            "Cancelling",
+            "Upgrading"
+          ],
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
@@ -295,12 +302,16 @@
     },
     "CanonicalSupportPlanInfoDefinition": {
       "type": "object",
-      "description": "Definition object with the properties of a camonical plan",
+      "description": "Definition object with the properties of a canonical plan",
       "properties": {
         "supportPlanType": {
           "type": "string",
           "description": "Support plan type.",
-          "enum": [ "essential", "standard", "advanced" ],
+          "enum": [
+            "essential",
+            "standard",
+            "advanced"
+          ],
           "x-ms-enum": {
             "name": "SupportPlanType",
             "modelAsString": true
@@ -313,7 +324,11 @@
         "oneTimeCharge": {
           "type": "string",
           "description": "The one time charge status for the subscription.",
-          "enum": [ "no", "onEnabled", "onReenabled" ],
+          "enum": [
+            "no",
+            "onEnabled",
+            "onReenabled"
+          ],
           "x-ms-enum": {
             "name": "OneTimeCharge",
             "modelAsString": true
@@ -415,7 +430,11 @@
       "required": true,
       "type": "string",
       "description": "The Canonical support plan type.",
-      "enum": [ "Essential", "Standard", "Advanced" ],
+      "enum": [
+        "Essential",
+        "Standard",
+        "Advanced"
+      ],
       "x-ms-enum": {
         "name": "PlanTypeName",
         "modelAsString": true

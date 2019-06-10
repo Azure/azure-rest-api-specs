@@ -1,0 +1,372 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2017-08-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/GetPricingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Security pricing configurations in the subscription",
+        "operationId": "Pricings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PricingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/pricings": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/GetPricingsResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Security pricing configurations in the resource group",
+        "operationId": "Pricings_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/PricingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/pricings/{pricingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/GetPricingSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Security pricing configuration in the subscriptionSecurity pricing configuration in the subscription",
+        "operationId": "Pricings_GetSubscriptionPricing",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update pricings on subscription": {
+            "$ref": "./examples/Pricings/CreatePricingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Security pricing configuration in the subscription",
+        "operationId": "Pricings_UpdateSubscriptionPricing",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/Pricing"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/pricings/{pricingName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get pricings on subscription": {
+            "$ref": "./examples/Pricings/GetPricingResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Security pricing configuration in the resource group",
+        "operationId": "Pricings_GetResourceGroupPricing",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update pricings on resource group": {
+            "$ref": "./examples/Pricings/CreatePricingsResourceGroup_example.json"
+          }
+        },
+        "tags": [
+          "Pricings"
+        ],
+        "description": "Security pricing configuration in the resource group",
+        "operationId": "Pricings_CreateOrUpdateResourceGroupPricing",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PricingName"
+          },
+          {
+            "$ref": "#/parameters/Pricing"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Pricing"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PricingList": {
+      "description": "List of pricing configurations response",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of pricing configurations",
+          "items": {
+            "$ref": "#/definitions/Pricing"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "Pricing": {
+      "type": "object",
+      "description": "Pricing tier will be applied for the scope based on the resource ID",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Pricing data",
+          "$ref": "#/definitions/PricingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "PricingProperties": {
+      "type": "object",
+      "description": "Pricing data",
+      "properties": {
+        "pricingTier": {
+          "type": "string",
+          "description": "Pricing tier type",
+          "enum": [
+            "Free",
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "pricingTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Free",
+                "description": "Get free Azure security center experience with basic security features"
+              },
+              {
+                "value": "Standard",
+                "description": "Get the standard Azure security center experience with advanced security features"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "pricingTier"
+      ]
+    }
+  },
+  "parameters": {
+    "PricingName": {
+      "name": "pricingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "name of the pricing configuration",
+      "x-ms-parameter-location": "method"
+    },
+    "Pricing": {
+      "name": "pricing",
+      "in": "body",
+      "required": true,
+      "description": "Pricing object",
+      "schema": {
+        "$ref": "#/definitions/Pricing"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

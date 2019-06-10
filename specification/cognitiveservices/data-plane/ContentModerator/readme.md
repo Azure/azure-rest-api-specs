@@ -37,6 +37,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -48,8 +49,8 @@ swagger-to-sdk:
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
-  namespace: Microsoft.CognitiveServices.ContentModerator
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ContentModerator/ContentModerator/Generated
+  namespace: Microsoft.Azure.CognitiveServices.ContentModerator
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Vision.ContentModerator/src/Generated
 ```
 
 ``` yaml
@@ -79,12 +80,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator/azure/cognitiveservices/vision/contentmoderator
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-contentmoderator/azure/cognitiveservices/vision/contentmoderator
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-contentmoderator
 ```
 
 ## Go

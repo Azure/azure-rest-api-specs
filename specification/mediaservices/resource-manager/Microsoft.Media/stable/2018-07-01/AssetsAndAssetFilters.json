@@ -84,7 +84,7 @@
                 "description": "The Asset is encrypted with Media Services client-side encryption."
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "The Asset encryption format. One of None or MediaStorageEncryption.",
           "readOnly": true,
@@ -260,18 +260,10 @@
         },
         "forceEndTimestamp": {
           "type": "boolean",
-          "description": "The indicator of forcing exsiting of end time stamp."
+          "description": "The indicator of forcing existing of end time stamp."
         }
       },
       "type": "object",
-      "required": [
-        "startTimestamp",
-        "endTimestamp",
-        "presentationWindowDuration",
-        "liveBackoffDuration",
-        "timescale",
-        "forceEndTimestamp"
-      ],
       "description": "The presentation time range, this is asset related and not recommended for Account Filter."
     },
     "FilterTrackPropertyCondition": {
@@ -314,13 +306,13 @@
                 "description": "The bitrate."
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "The track property type."
         },
         "value": {
           "type": "string",
-          "description": "The track proprty value."
+          "description": "The track property value."
         },
         "operation": {
           "type": "string",
@@ -340,7 +332,7 @@
                 "description": "The not equal operation."
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           },
           "description": "The track property condition operation."
         }
@@ -498,7 +490,7 @@
                 "description": "The SAS URL will allow read, write and delete access to the container."
               }
             ],
-            "modelAsExtensible": true
+            "modelAsString": true
           }
         },
         "expiryTime": {
@@ -579,7 +571,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Specifies the the key by which the result collection should be ordered."
+            "description": "Specifies the key by which the result collection should be ordered."
           }
         ],
         "x-ms-pageable": {

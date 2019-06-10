@@ -31,6 +31,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -43,7 +44,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.AutoSuggest
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingAutoSuggest/BingAutoSuggest/Generated/AutoSuggest
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Search.BingAutoSuggest/src/Generated
 ```
 
 ``` yaml
@@ -72,12 +73,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-autosuggest/azure/cognitiveservices/search/autosuggest
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-autosuggest/azure/cognitiveservices/search/autosuggest
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-autosuggest
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-autosuggest
 ```
 
 ## Go

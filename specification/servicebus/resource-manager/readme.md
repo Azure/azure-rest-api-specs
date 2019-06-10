@@ -118,12 +118,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicebus/azure/mgmt/servicebus
+  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicebus
+  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus
 ```
 
 ## Go
@@ -142,6 +142,11 @@ namespace: com.microsoft.azure.management.servicebus
 license-header: MICROSOFT_MIT_NO_CODEGEN
 payload-flattening-threshold: 1
 output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicebus
+directive:
+  rename-model:
+    from: PremiumMessagingRegions
+    to: PremiumMessagingRegion
+  
 ```
 
 ### Java multi-api

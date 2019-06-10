@@ -31,6 +31,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -43,7 +44,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.CognitiveServices.Language.SpellCheck
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/SpellCheck/BingSpellCheck/Generated/
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Language.SpellCheck/src/Generated
   sync-methods: none
 ```
 
@@ -66,12 +67,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-spellcheck/azure/cognitiveservices/language/spellcheck
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-spellcheck/azure/cognitiveservices/language/spellcheck
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-spellcheck
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-spellcheck
 ```
 
 ## Go

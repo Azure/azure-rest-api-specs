@@ -6,16 +6,23 @@
     "description": "Use this API to manage the IoT hubs in your Azure subscription."
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get the non-security related metadata of an IoT hub.",
         "description": "Get the non-security related metadata of an IoT hub.",
         "operationId": "IotHubResource_Get",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -55,13 +62,21 @@
         "deprecated": false
       },
       "put": {
-        "tags": [ "PUT" ],
+        "tags": [
+          "PUT"
+        ],
         "summary": "Create or update the metadata of an IoT hub.",
         "description": "Create or update the metadata of an Iot hub. The usual pattern to modify a property is to retrieve the IoT hub metadata and security metadata, and then combine them with the modified values in a new body to update the IoT hub.",
         "operationId": "IotHubResource_CreateOrUpdate",
         "x-ms-long-running-operation": true,
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -116,13 +131,18 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [ "DELETE" ],
+        "tags": [
+          "DELETE"
+        ],
         "summary": "Delete an IoT hub.",
         "description": "Delete an IoT hub.",
         "operationId": "IotHubResource_Delete",
         "x-ms-long-running-operation": true,
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -179,12 +199,17 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/IotHubs": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get all the IoT hubs in a subscription.",
         "description": "Get all the IoT hubs in a subscription.",
         "operationId": "IotHubResource_ListBySubscription",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -215,12 +240,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get all the IoT hubs in a resource group.",
         "description": "Get all the IoT hubs in a resource group.",
         "operationId": "IotHubResource_ListByResourceGroup",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -258,12 +288,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubStats": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get the statistics from an IoT hub.",
         "description": "Get the statistics from an IoT hub.",
         "operationId": "IotHubResource_GetStats",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -305,12 +340,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/skus": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get the list of valid SKUs for an IoT hub.",
         "description": "Get the list of valid SKUs for an IoT hub.",
         "operationId": "IotHubResource_GetValidSkus",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -355,12 +395,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.",
         "description": "Get a list of the consumer groups in the Event Hub-compatible device-to-cloud endpoint in an IoT hub.",
         "operationId": "IotHubResource_ListEventHubConsumerGroups",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -392,7 +437,7 @@
         ],
         "responses": {
           "200": {
-            "description": "This is a synchronous operation. The body contains a JSON-serialized list of the consumer groups in the the Event Hub-compatible endpoint in this IoT hub",
+            "description": "This is a synchronous operation. The body contains a JSON-serialized list of the consumer groups in the Event Hub-compatible endpoint in this IoT hub",
             "schema": {
               "$ref": "#/definitions/EventHubConsumerGroupsListResult"
             }
@@ -412,12 +457,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/eventHubEndpoints/{eventHubEndpointName}/ConsumerGroups/{name}": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub.",
         "description": "Get a consumer group from the Event Hub-compatible device-to-cloud endpoint for an IoT hub.",
         "operationId": "IotHubResource_GetEventHubConsumerGroup",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -471,12 +521,17 @@
         "deprecated": false
       },
       "put": {
-        "tags": [ "PUT" ],
+        "tags": [
+          "PUT"
+        ],
         "summary": "Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.",
         "description": "Add a consumer group to an Event Hub-compatible endpoint in an IoT hub.",
         "operationId": "IotHubResource_CreateEventHubConsumerGroup",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -530,12 +585,17 @@
         "deprecated": false
       },
       "delete": {
-        "tags": [ "DELETE" ],
+        "tags": [
+          "DELETE"
+        ],
         "summary": "Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub.",
         "description": "Delete a consumer group from an Event Hub-compatible endpoint in an IoT hub.",
         "operationId": "IotHubResource_DeleteEventHubConsumerGroup",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -588,12 +648,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "description": "Get a list of all the jobs in an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "operationId": "IotHubResource_ListJobs",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -638,12 +703,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/jobs/{jobId}": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "description": "Get the details of a job from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry.",
         "operationId": "IotHubResource_GetJob",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -692,12 +762,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/quotaMetrics": {
       "get": {
-        "tags": [ "GET" ],
+        "tags": [
+          "GET"
+        ],
         "summary": "Get the quota metrics for an IoT hub.",
         "description": "Get the quota metrics for an IoT hub.",
         "operationId": "IotHubResource_GetQuotaMetrics",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -742,12 +817,20 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Devices/checkNameAvailability": {
       "post": {
-        "tags": [ "POST" ],
+        "tags": [
+          "POST"
+        ],
         "summary": "Check if an IoT hub name is available.",
         "description": "Check if an IoT hub name is available.",
         "operationId": "IotHubResource_CheckNameAvailability",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -784,12 +867,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/listkeys": {
       "post": {
-        "tags": [ "POST" ],
+        "tags": [
+          "POST"
+        ],
         "summary": "Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "description": "Get the security metadata for an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "operationId": "IotHubResource_ListKeys",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -834,12 +922,17 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/IotHubKeys/{keyName}/listkeys": {
       "post": {
-        "tags": [ "POST" ],
+        "tags": [
+          "POST"
+        ],
         "summary": "Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "description": "Get a shared access policy by name from an IoT hub. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-security.",
         "operationId": "IotHubResource_GetKeysForKeyName",
-        "consumes": [ ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -888,12 +981,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/exportDevices": {
       "post": {
-        "tags": [ "POST" ],
+        "tags": [
+          "POST"
+        ],
         "summary": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "description": "Exports all the device identities in the IoT hub identity registry to an Azure Storage blob container. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "operationId": "IotHubResource_ExportDevices",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -944,12 +1045,20 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Devices/IotHubs/{resourceName}/importDevices": {
       "post": {
-        "tags": [ "POST" ],
+        "tags": [
+          "POST"
+        ],
         "summary": "Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "description": "Import, update, or delete device identities in the IoT hub identity registry from a blob. For more information, see: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-identity-registry#import-and-export-device-identities.",
         "operationId": "IotHubResource_ImportDevices",
-        "consumes": [ "application/json", "text/json" ],
-        "produces": [ "application/json", "text/json" ],
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -1112,7 +1221,10 @@
         },
         "features": {
           "description": "The capabilities and features enabled for the IoT hub.",
-          "enum": [ "None", "DeviceManagement" ],
+          "enum": [
+            "None",
+            "DeviceManagement"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "Capabilities",
@@ -1127,7 +1239,12 @@
       "properties": {
         "name": {
           "description": "The name of the SKU.",
-          "enum": [ "F1", "S1", "S2", "S3" ],
+          "enum": [
+            "F1",
+            "S1",
+            "S2",
+            "S3"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "IotHubSku",
@@ -1136,7 +1253,10 @@
         },
         "tier": {
           "description": "The billing tier for the IoT hub.",
-          "enum": [ "Free", "Standard" ],
+          "enum": [
+            "Free",
+            "Standard"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1166,7 +1286,7 @@
         },
         "partitionCount": {
           "format": "int32",
-          "description": "The number of paritions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages.",
+          "description": "The number of partitions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages.",
           "type": "integer"
         },
         "partitionIds": {
@@ -1194,7 +1314,7 @@
       "type": "object",
       "properties": {
         "sasTtlAsIso8601": {
-          "description": "The period of time for which the the SAS URI generated by IoT Hub for file upload is valid. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-file-upload#file-upload-notification-configuration-options.",
+          "description": "The period of time for which the SAS URI generated by IoT Hub for file upload is valid. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-file-upload#file-upload-notification-configuration-options.",
           "type": "string",
           "format": "duration"
         },
@@ -1263,7 +1383,12 @@
         "events": {
           "type": "object",
           "additionalProperties": {
-            "enum": [ "None", "Error", "Information", "Error, Information" ],
+            "enum": [
+              "None",
+              "Error",
+              "Information",
+              "Error, Information"
+            ],
             "description": "The operations monitoring level.",
             "type": "string",
             "x-ms-enum": {
@@ -1284,7 +1409,10 @@
         },
         "action": {
           "description": "The desired action for requests captured by this rule.",
-          "enum": [ "Accept", "Reject" ],
+          "enum": [
+            "Accept",
+            "Reject"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "IpFilterActionType",
@@ -1546,7 +1674,11 @@
         },
         "scaleType": {
           "description": "The type of the scaling enabled.",
-          "enum": [ "Automatic", "Manual", "None" ],
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
           "readOnly": true,
           "type": "string",
           "x-ms-enum": {
@@ -1636,7 +1768,18 @@
         },
         "type": {
           "description": "The type of the job.",
-          "enum": [ "unknown", "export", "import", "backup", "readDeviceProperties", "writeDeviceProperties", "updateDeviceConfiguration", "rebootDevice", "factoryResetDevice", "firmwareUpdate" ],
+          "enum": [
+            "unknown",
+            "export",
+            "import",
+            "backup",
+            "readDeviceProperties",
+            "writeDeviceProperties",
+            "updateDeviceConfiguration",
+            "rebootDevice",
+            "factoryResetDevice",
+            "firmwareUpdate"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1646,7 +1789,14 @@
         },
         "status": {
           "description": "The status of the job.",
-          "enum": [ "unknown", "enqueued", "running", "completed", "failed", "cancelled" ],
+          "enum": [
+            "unknown",
+            "enqueued",
+            "running",
+            "completed",
+            "failed",
+            "cancelled"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1736,7 +1886,10 @@
         },
         "reason": {
           "description": "The reason for unavailability.",
-          "enum": [ "Invalid", "AlreadyExists" ],
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -1803,5 +1956,5 @@
       "type": "string"
     }
   },
-  "security": [ ]
+  "security": []
 }

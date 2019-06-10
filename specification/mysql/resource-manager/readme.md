@@ -30,16 +30,6 @@ tag: package-2017-12-01
 ```
 
 
-### Tag: package-2017-04-preview
-
-These settings apply only when `--tag=package-2017-04-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2017-04-preview'
-input-file:
-- Microsoft.DBforMySQL/preview/2017-04-30-preview/mysql.json
-```
-
-
 ### Tag: package-2017-12-01-preview
 
 These settings apply only when `--tag=package-2017-12-01-preview` is specified on the command line.
@@ -57,6 +47,16 @@ These settings apply only when `--tag=package-2017-12-01` is specified on the co
 ``` yaml $(tag) == 'package-2017-12-01'
 input-file:
 - Microsoft.DBforMySQL/stable/2017-12-01/mysql.json
+```
+
+
+### Tag: package-2018-06-01-privatepreview
+
+These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-01-privatepreview'
+input-file:
+- Microsoft.DBforMySQL/preview/2018-06-01-privatepreview/mysql.json
 ```
 
 
@@ -113,12 +113,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mysql
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms
 ```
 
 ## Go
