@@ -28,15 +28,62 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2019-02
+tag: package-2019-04
 ```
 
 
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-04'
+input-file:
+  - Microsoft.Network/stable/2019-04-01/applicationGateway.json
+  - Microsoft.Network/stable/2019-04-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2019-04-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-04-01/availablePrivateEndpointTypes.json
+  - Microsoft.Network/stable/2019-04-01/azureFirewall.json
+  - Microsoft.Network/stable/2019-04-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2019-04-01/bastionHost.json
+  - Microsoft.Network/stable/2019-04-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2019-04-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2019-04-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2019-04-01/endpointService.json
+  - Microsoft.Network/stable/2019-04-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2019-04-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2019-04-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2019-04-01/expressRoutePort.json
+  - Microsoft.Network/stable/2019-04-01/privateEndpoint.json
+  - Microsoft.Network/stable/2019-04-01/privateLinkService.json
+  - Microsoft.Network/stable/2019-04-01/loadBalancer.json
+  - Microsoft.Network/stable/2019-04-01/natGateway.json
+  - Microsoft.Network/stable/2019-04-01/network.json
+  - Microsoft.Network/stable/2019-04-01/networkInterface.json
+  - Microsoft.Network/stable/2019-04-01/networkProfile.json
+  - Microsoft.Network/stable/2019-04-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2019-04-01/networkWatcher.json
+  - Microsoft.Network/stable/2019-04-01/operation.json
+  - Microsoft.Network/stable/2019-04-01/publicIpAddress.json
+  - Microsoft.Network/stable/2019-04-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2019-04-01/routeFilter.json
+  - Microsoft.Network/stable/2019-04-01/routeTable.json
+  - Microsoft.Network/stable/2019-04-01/serviceCommunity.json
+  - Microsoft.Network/stable/2019-04-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2019-04-01/serviceTags.json
+  - Microsoft.Network/stable/2019-04-01/usage.json
+  - Microsoft.Network/stable/2019-04-01/virtualNetwork.json
+  - Microsoft.Network/stable/2019-04-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2019-04-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2019-04-01/virtualWan.json
+  - Microsoft.Network/stable/2019-04-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2019-04-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2019-04-01/webapplicationfirewall.json
+```
 ### Tag: package-2019-02
 
 These settings apply only when `--tag=package-2019-02` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-02'
+``` yaml $(tag) == 'package-2019-02'
 input-file:
   - Microsoft.Network/stable/2019-02-01/applicationGateway.json
   - Microsoft.Network/stable/2019-02-01/applicationSecurityGroup.json
@@ -75,6 +122,7 @@ input-file:
   - Microsoft.Network/stable/2019-02-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-02-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2018-12
 
 These settings apply only when `--tag=package-2018-12` is specified on the command line.
@@ -851,6 +899,9 @@ directive:
     from: azureFirewallFqdnTag.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: bastionHost.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
@@ -923,7 +974,10 @@ directive:
     from: virtualNetworkGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: interfaceEndpoint.json
+    from: privateEndpoint.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: privateLinkService.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkProfile.json
@@ -968,6 +1022,48 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: webapplicationfirewall.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: PostOperationIdContainsUrlVerb
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/query"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: GetInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"].get.operationId
+    reason: Customized verb is used for API
 ```
 
 ---
@@ -982,8 +1078,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
+      - python ./scripts/trim_aio.py ./sdk/network/azure-mgmt-network
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
