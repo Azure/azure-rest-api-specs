@@ -14,19 +14,23 @@
             "name": "default",
             "type": "Microsoft.Security/IoTSecuritySolutions",
             "location": "East Us",
-            "tags": { },
+            "tags": {},
             "properties": {
               "workspace": "/subscriptions/c4930e90-cd72-4aa5-93e9-2d081d129569/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace1",
               "status": "Enabled",
-              "export": [ "RawEvents" ],
-              "disabledDataSources": [ ],
+              "export": [
+                "RawEvents"
+              ],
+              "disabledDataSources": [],
               "displayName": "Solution Default",
               "iotHubs": [
                 "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub"
               ],
               "userDefinedResources": {
                 "query": "where type != \"microsoft.devices/iothubs\" | where name contains \"iot\"",
-                "querySubscriptions": [ "075423e9-7d33-4166-8bdf-3920b04e3735" ]
+                "querySubscriptions": [
+                  "075423e9-7d33-4166-8bdf-3920b04e3735"
+                ]
               },
               "autoDiscoveredResources": [
                 "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735",

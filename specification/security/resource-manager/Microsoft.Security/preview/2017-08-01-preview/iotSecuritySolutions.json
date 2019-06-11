@@ -6,9 +6,15 @@
     "version": "2017-08-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
       "azure_auth": [
@@ -38,7 +44,9 @@
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHub_example.json"
           }
         },
-        "tags": [ "IoT Security Solutions" ],
+        "tags": [
+          "IoT Security Solutions"
+        ],
         "description": "List of security solutions",
         "operationId": "IoTSecuritySolutions_List",
         "parameters": [
@@ -81,7 +89,9 @@
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHubAndRg_example.json"
           }
         },
-        "tags": [ "IoT Security Solutions" ],
+        "tags": [
+          "IoT Security Solutions"
+        ],
         "description": "List of security solutions",
         "operationId": "IoTSecuritySolutionsResourceGroup_List",
         "parameters": [
@@ -124,7 +134,9 @@
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolution_example.json"
           }
         },
-        "tags": [ "IoT Security Solutions" ],
+        "tags": [
+          "IoT Security Solutions"
+        ],
         "description": "Details of a specific iot security solution",
         "operationId": "IotSecuritySolution_Get",
         "parameters": [
@@ -162,7 +174,9 @@
             "$ref": "./examples/IoTSecuritySolutions/CreateIoTSecuritySolution_example.json"
           }
         },
-        "tags": [ "IoT Security Solutions" ],
+        "tags": [
+          "IoT Security Solutions"
+        ],
         "description": "Create new solution manager",
         "operationId": "IotSecuritySolution_Create",
         "parameters": [
@@ -209,7 +223,9 @@
             "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution_example.json"
           }
         },
-        "tags": [ "IoT Security Solutions" ],
+        "tags": [
+          "IoT Security Solutions"
+        ],
         "description": "update existing Security Solution tags or user defined resources. To update other fields use the CreateOrUpdate method",
         "operationId": "IotSecuritySolution_Update",
         "parameters": [
@@ -250,7 +266,9 @@
             "$ref": "./examples/IoTSecuritySolutions/DeleteIoTSecuritySolution_example.json"
           }
         },
-        "tags": [ "IoT Security Solutions" ],
+        "tags": [
+          "IoT Security Solutions"
+        ],
         "description": "Create new solution manager",
         "operationId": "IotSecuritySolution_Delete",
         "parameters": [
@@ -335,7 +353,9 @@
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         },
-        { "$ref": "#/definitions/TagsResource" }
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
       ]
     },
     "IoTSecuritySolutionProperties": {
@@ -406,7 +426,9 @@
         "iotHubs": {
           "type": "array",
           "description": "IoT Hub resource IDs",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         },
         "userDefinedResources": {
           "$ref": "#/definitions/UserDefinedResourcesProperties"
@@ -414,7 +436,9 @@
         "autoDiscoveredResources": {
           "type": "array",
           "description": "List of resources that were automatically discovered as relevant to the security solution.",
-          "items": { "type": "string" },
+          "items": {
+            "type": "string"
+          },
           "readOnly": true
         },
         "recommendationsConfiguration":{
@@ -565,7 +589,11 @@
           "$ref": "#/definitions/RecommendationConfigurationList"
         }
       },
-      "allOf": [ { "$ref": "#/definitions/TagsResource" } ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
+      ]
     }
   },
   "parameters": {
