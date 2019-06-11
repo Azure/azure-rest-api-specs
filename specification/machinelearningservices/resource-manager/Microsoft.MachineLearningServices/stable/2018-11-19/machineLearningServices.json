@@ -835,6 +835,55 @@
       }
     }
   },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/addNodeUser": {
+    "post": {
+      "tags": [
+        "MachineLearningComputes"
+      ],
+      "operationId": "MachineLearningCompute_AddNodeUser",
+      "description": "Adds user to the specified list of nodes in the cluster.",
+      "x-ms-examples": {
+        "AML Compute Add Node User": { "$ref": "./examples/amlComputeAddNodeUser.json" }
+      },
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroupNameParameter"
+        },
+        {
+          "$ref": "#/parameters/WorkspaceNameParameter"
+        },
+        {
+          "$ref": "#/parameters/ComputeNameParameter"
+        },
+        {
+          "$ref": "#/parameters/APIVersionParameter"
+        },
+        {
+          "$ref": "#/parameters/NodeUserAccountCreateParameter"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "User account addition initiated.",
+          "headers": {
+            "Azure-AsyncOperation": {
+              "description": "URI to poll for asynchronous operation status.",
+              "type": "string"
+            }
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/MachineLearningServiceError"
+          }
+        }
+      }
+    }
+  },
   "parameters": {
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
@@ -908,6 +957,16 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "NodeUserAccountCreateParameter": {
+      "in": "body",
+      "name": "parameters",
+      "description": "Payload with Machine Learning compute node's user account definition.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/NodeUserAccountProperties"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "ComputeTypeParameter": {
       "in": "query",
       "name": "compute-type",
@@ -931,7 +990,7 @@
         "modelAsString": true
       },
       "x-ms-parameter-location": "method"
-}
+    }
   },
   "definitions": {
     "Operation": {
@@ -1173,6 +1232,12 @@
           "title": "Number of vPUs",
           "description": "The number of vCPUs supported by the virtual machine size.",
           "readOnly": true
+        },
+        "gpus": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of GPUs",
+          "description": "The number of GPUs supported by the virtual machine size."
         },
         "osVhdSizeMB": {
           "type": "integer",
@@ -1612,6 +1677,22 @@
                   "description": "Counts of various node states on the compute.",
                   "readOnly": true,
                   "$ref": "#/definitions/NodeStateCounts"
+                },
+                "sshPortPublicAccess": {
+                  "type": "string",
+                  "default": "NotSpecified",
+                  "title": "Close Public Ssh port.",
+                  "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.",
+                  "readOnly": true,
+                  "enum": [
+                    "Enabled",
+                    "Disabled",
+                    "NotSpecified" 
+                  ],
+                  "x-ms-enum": {
+                    "name": "sshPortPublicAccess",
+                    "modelAsString": true
+                  }
                 }
               }
             }
@@ -1994,10 +2075,16 @@
           "title": "Node ID.",
           "description": "ID of the compute node."
         },
-        "ipAddress": {
+        "PrivateIpAddress": {
           "readOnly": true,
           "type": "string",
-          "title": "IP address.",
+          "title": "Private IP address.",
+          "description": "Private IP address of the compute node."
+        },
+        "PublicIpAddress": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Public IP address.",
           "description": "Public IP address of the compute node."
         },
         "port": {
@@ -2006,6 +2093,29 @@
           "format": "int32",
           "title": "Port.",
           "description": "SSH port number of the node."
+        },
+        "nodeState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "idle",
+            "running",
+            "preparing",
+            "unusable",
+            "leaving",
+            "preempted"
+          ],
+          "description": "State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.",
+          "x-ms-enum": {
+            "name": "NodeState",
+            "modelAsString": true
+          }
+        },
+        "runId": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Run ID",
+          "description": "ID of the Experiment running on the node, if any else null"
         }
       },
       "x-ms-discriminator-value": "AmlCompute"
@@ -2124,6 +2234,60 @@
         "name": "ComputeType",
         "modelAsString": true
       }
+    },
+    "NodeUserAccountProperties": {
+      "type" : "object",
+      "description": "User credentials for compute node",
+      "properties": {
+        "nodeUserAccountSetting": {
+          "description": "Settings for user account to be created on a node. The account can be used to establish SSH connection to the node.",
+          "$ref": "#/definitions/NodeUserAccountSetting"
+        },
+        "nodeIdList": {
+          "description": "List of Ids of the nodes on which user account needs to be created",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "NodeUserAccountSetting": {
+      "properties": {
+        "nodeUserName": {
+          "type": "string",
+          "title": "User name.",
+          "description": "Name of the user account which can be used to SSH to node."
+        },
+        "nodeUserSshPublicKey": {
+          "type": "string",
+          "title": "SSH public key.",
+          "description": "SSH public key of the administrator user account."
+        },
+        "nodeUserPassword": {
+          "type": "string",
+          "title": "Password.",
+          "description": "Password of the administrator user account."
+        },
+        "isAdmin": {
+          "type": "boolean",
+          "title": "Is Admin",
+          "default": true,
+          "description": "Indicated whether the user account should have admin privileges"
+        },
+        "expiryIndays": {
+          "type": "integer",
+          "format": "int32",
+          "default": 1,
+          "minimum": 1,
+          "maximum": 90,
+          "description": "The number of days after which the node user account should expire"
+        }
+      },
+      "required": [
+        "nodeUserName"
+      ],
+      "description": "Settings for user account that gets created on each on the nodes of a compute."
     },
     "MachineLearningServiceError": {
       "type": "object",
