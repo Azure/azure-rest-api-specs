@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/FrontDoorWebApplicationFirewallPolicies": {
       "get": {
         "tags": [
-          "ListWebApplicationFirewalPolicies"
+          "ListWebApplicationFirewallPolicies"
         ],
         "description": "Lists all of the protection policies within a resource group.",
         "operationId": "Policies_List",
@@ -134,7 +134,7 @@
         "tags": [
           "CreateOrUpdateWebApplicationFirewallPolicy"
         ],
-        "description": "Creates or update policy with specified ruleset name within a resource group.",
+        "description": "Creates or update policy with specified rule set name within a resource group.",
         "operationId": "Policies_CreateOrUpdate",
         "parameters": [
           {
@@ -238,7 +238,7 @@
           "Delete protection policy": {
             "$ref": "./examples/WafPolicyDelete.json"
           }
-        },        
+        },
         "x-ms-long-running-operation": true
       }
     }
@@ -303,7 +303,7 @@
       }
     },
     "WebApplicationFirewallPolicyListResult": {
-      "description": "Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list WebApplicationFirewallPolicies. It contains a list of WebApplicationFirewallPolicy objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -323,7 +323,7 @@
       "description": "Defines contents of a web application firewall global configuration",
       "properties": {
         "enabledState": {
-          "description": "describes if the policy is in enabled state or disabled state", 
+          "description": "describes if the policy is in enabled state or disabled state",
           "type": "string",
           "enum": [
             "Disabled",
@@ -332,7 +332,7 @@
           "x-ms-enum": {
             "name": "enabledState",
             "modelAsString": true
-          }          
+          }
         },
         "mode": {
           "description": "Describes if it is in detection mode  or prevention mode at policy level",
@@ -362,12 +362,12 @@
     },
     "CustomRule": {
       "description": "Defines contents of a web application rule",
-      "required": [  
-        "priority",  
-        "ruleType",  
-        "matchConditions",  
-        "action"  
-      ], 	  
+      "required": [
+        "priority",
+        "ruleType",
+        "matchConditions",
+        "action"
+      ],
       "properties": {
         "name": {
           "type": "string",
@@ -378,11 +378,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
-        },        
+        },
         "priority": {
           "description": "Describes priority of the rule. Rules with a lower value will be evaluated before rules with a higher value",
           "type": "integer"
-        },        
+        },
         "ruleType": {
           "description": "Describes type of rule",
           "type": "string",
@@ -400,7 +400,7 @@
           "type": "integer"
         },
         "rateLimitThreshold": {
-          "description": "Defines rate limit thresold",
+          "description": "Defines rate limit threshold",
           "type": "integer"
         },
         "matchConditions": {
@@ -451,9 +451,9 @@
     },
     "MatchCondition": {
       "description": "Define match conditions",
-      "required": [  
-        "matchVariable",  
-        "operator", 
+      "required": [
+        "matchVariable",
+        "operator",
         "matchValue"
       ],
       "properties": {
@@ -534,7 +534,7 @@
           "type": "integer"
         },
         "version": {
-          "description": "defines version of the ruleset",
+          "description": "defines version of the rule set",
           "type": "integer"
         },
         "ruleSetType": {
@@ -571,10 +571,10 @@
       "required": [
         "ruleGroupOverride",
         "action"
-      ], 
+      ],
       "properties": {
         "ruleGroupOverride": {
-          "description": "Describes overrideruleGroup",
+          "description": "Describes override rule group",
           "type": "string",
           "enum": [
             "SqlInjection",
@@ -601,7 +601,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates Front Door service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {

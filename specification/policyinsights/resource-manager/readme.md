@@ -66,7 +66,7 @@ input-file:
 - Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
 - Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
 - Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
-- Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
 ```
 
 
@@ -166,12 +166,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights/azure/mgmt/policyinsights
+  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights/azure/mgmt/policyinsights
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights
+  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
 ```
 
 ## Go

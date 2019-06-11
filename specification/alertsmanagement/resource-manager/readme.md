@@ -2,11 +2,12 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for AlerManagement.
-
+This is the AutoRest configuration file for AlertManagement.
 
 ---
+
 ## Getting Started
+
 To build the SDK for AlertManagement, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -14,19 +15,39 @@ To build the SDK for AlertManagement, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
 ### Basic Information
+
 These are the global settings for the AlertManagement API.
 
 ``` yaml
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2018-05
+tag: package-2019-03
+```
+
+
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-03'
+input-file:
+  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
+  - Microsoft.AlertsManagement/stable/2019-03-01/SmartDetectorAlertRulesApi.json
+```
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
 ```
 
 ### Tag: package-2018-05
@@ -48,6 +69,7 @@ input-file:
 ```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -92,15 +114,17 @@ python:
   package-name: azure-mgmt-alertsmanagement
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
+  output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement/azure/mgmt/alertsmanagement
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-alertsmanagement
+  output-folder: $(python-sdks-folder)/alertsmanagement/azure-mgmt-alertsmanagement
 ```
 
 ## Go
@@ -121,5 +145,3 @@ java:
   payload-flattening-threshold: 1
   output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-alertsmanagement
 ```
-
-

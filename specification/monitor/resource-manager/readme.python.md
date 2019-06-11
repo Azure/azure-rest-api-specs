@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.monitor
   package-name: azure-mgmt-monitor
-  package-version: 0.5.0
+  package-version: 0.6.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-monitor/azure/mgmt/monitor
+  output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor/azure/mgmt/monitor
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-monitor
+  output-folder: $(python-sdks-folder)/monitor/azure-mgmt-monitor
 ```

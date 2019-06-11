@@ -28,15 +28,231 @@ These are the global settings for the Network API.
 title: NetworkManagementClient
 description: Network Client
 openapi-type: arm
-tag: package-2018-10
+tag: package-2019-04
 ```
 
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-04'
+input-file:
+  - Microsoft.Network/stable/2019-04-01/applicationGateway.json
+  - Microsoft.Network/stable/2019-04-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2019-04-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-04-01/availablePrivateEndpointTypes.json
+  - Microsoft.Network/stable/2019-04-01/azureFirewall.json
+  - Microsoft.Network/stable/2019-04-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2019-04-01/bastionHost.json
+  - Microsoft.Network/stable/2019-04-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2019-04-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2019-04-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2019-04-01/endpointService.json
+  - Microsoft.Network/stable/2019-04-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2019-04-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2019-04-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2019-04-01/expressRoutePort.json
+  - Microsoft.Network/stable/2019-04-01/privateEndpoint.json
+  - Microsoft.Network/stable/2019-04-01/privateLinkService.json
+  - Microsoft.Network/stable/2019-04-01/loadBalancer.json
+  - Microsoft.Network/stable/2019-04-01/natGateway.json
+  - Microsoft.Network/stable/2019-04-01/network.json
+  - Microsoft.Network/stable/2019-04-01/networkInterface.json
+  - Microsoft.Network/stable/2019-04-01/networkProfile.json
+  - Microsoft.Network/stable/2019-04-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2019-04-01/networkWatcher.json
+  - Microsoft.Network/stable/2019-04-01/operation.json
+  - Microsoft.Network/stable/2019-04-01/publicIpAddress.json
+  - Microsoft.Network/stable/2019-04-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2019-04-01/routeFilter.json
+  - Microsoft.Network/stable/2019-04-01/routeTable.json
+  - Microsoft.Network/stable/2019-04-01/serviceCommunity.json
+  - Microsoft.Network/stable/2019-04-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2019-04-01/serviceTags.json
+  - Microsoft.Network/stable/2019-04-01/usage.json
+  - Microsoft.Network/stable/2019-04-01/virtualNetwork.json
+  - Microsoft.Network/stable/2019-04-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2019-04-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2019-04-01/virtualWan.json
+  - Microsoft.Network/stable/2019-04-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2019-04-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2019-04-01/webapplicationfirewall.json
+```
+### Tag: package-2019-02
+
+These settings apply only when `--tag=package-2019-02` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-02'
+input-file:
+  - Microsoft.Network/stable/2019-02-01/applicationGateway.json
+  - Microsoft.Network/stable/2019-02-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2019-02-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-02-01/azureFirewall.json
+  - Microsoft.Network/stable/2019-02-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2019-02-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2019-02-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2019-02-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2019-02-01/endpointService.json
+  - Microsoft.Network/stable/2019-02-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2019-02-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2019-02-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2019-02-01/expressRoutePort.json
+  - Microsoft.Network/stable/2019-02-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2019-02-01/loadBalancer.json
+  - Microsoft.Network/stable/2019-02-01/natGateway.json
+  - Microsoft.Network/stable/2019-02-01/network.json
+  - Microsoft.Network/stable/2019-02-01/networkInterface.json
+  - Microsoft.Network/stable/2019-02-01/networkProfile.json
+  - Microsoft.Network/stable/2019-02-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2019-02-01/networkWatcher.json
+  - Microsoft.Network/stable/2019-02-01/operation.json
+  - Microsoft.Network/stable/2019-02-01/publicIpAddress.json
+  - Microsoft.Network/stable/2019-02-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2019-02-01/routeFilter.json
+  - Microsoft.Network/stable/2019-02-01/routeTable.json
+  - Microsoft.Network/stable/2019-02-01/serviceCommunity.json
+  - Microsoft.Network/stable/2019-02-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2019-02-01/usage.json
+  - Microsoft.Network/stable/2019-02-01/virtualNetwork.json
+  - Microsoft.Network/stable/2019-02-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2019-02-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2019-02-01/virtualWan.json
+  - Microsoft.Network/stable/2019-02-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2019-02-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2019-02-01/webapplicationfirewall.json
+```
+
+### Tag: package-2018-12
+
+These settings apply only when `--tag=package-2018-12` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12'
+input-file:
+  - Microsoft.Network/stable/2018-12-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-12-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-12-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-12-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-12-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-12-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2018-12-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-12-01/endpointService.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-12-01/expressRoutePort.json
+  - Microsoft.Network/stable/2018-12-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-12-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-12-01/network.json
+  - Microsoft.Network/stable/2018-12-01/networkInterface.json
+  - Microsoft.Network/stable/2018-12-01/networkProfile.json
+  - Microsoft.Network/stable/2018-12-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-12-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-12-01/operation.json
+  - Microsoft.Network/stable/2018-12-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-12-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-12-01/routeFilter.json
+  - Microsoft.Network/stable/2018-12-01/routeTable.json
+  - Microsoft.Network/stable/2018-12-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-12-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-12-01/usage.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-12-01/virtualWan.json
+  - Microsoft.Network/stable/2018-12-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2018-12-01/vmssPublicIpAddress.json
+  - Microsoft.Network/stable/2018-12-01/webapplicationfirewall.json
+```
+
+### Tag: package-2018-12-only
+
+These settings apply only when `--tag=package-2018-12-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-12-only'
+input-file:
+  - Microsoft.Network/stable/2018-12-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-12-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-12-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-12-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-12-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-12-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-12-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2018-12-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-12-01/endpointService.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-12-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-12-01/expressRoutePort.json
+  - Microsoft.Network/stable/2018-12-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-12-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-12-01/network.json
+  - Microsoft.Network/stable/2018-12-01/networkInterface.json
+  - Microsoft.Network/stable/2018-12-01/networkProfile.json
+  - Microsoft.Network/stable/2018-12-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-12-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-12-01/operation.json
+  - Microsoft.Network/stable/2018-12-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-12-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-12-01/routeFilter.json
+  - Microsoft.Network/stable/2018-12-01/routeTable.json
+  - Microsoft.Network/stable/2018-12-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-12-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-12-01/usage.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-12-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-12-01/virtualWan.json
+```
+
+### Tag: package-2018-11
+
+These settings apply only when `--tag=package-2018-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11'
+input-file:
+  - Microsoft.Network/stable/2018-11-01/applicationGateway.json
+  - Microsoft.Network/stable/2018-11-01/applicationSecurityGroup.json
+  - Microsoft.Network/stable/2018-11-01/availableDelegations.json
+  - Microsoft.Network/stable/2018-11-01/azureFirewall.json
+  - Microsoft.Network/stable/2018-11-01/azureFirewallFqdnTag.json
+  - Microsoft.Network/stable/2018-11-01/checkDnsAvailability.json
+  - Microsoft.Network/stable/2018-11-01/ddosCustomPolicy.json
+  - Microsoft.Network/stable/2018-11-01/ddosProtectionPlan.json
+  - Microsoft.Network/stable/2018-11-01/endpointService.json
+  - Microsoft.Network/stable/2018-11-01/expressRouteCircuit.json
+  - Microsoft.Network/stable/2018-11-01/expressRouteCrossConnection.json
+  - Microsoft.Network/stable/2018-11-01/expressRouteGateway.json
+  - Microsoft.Network/stable/2018-11-01/expressRoutePort.json
+  - Microsoft.Network/stable/2018-11-01/interfaceEndpoint.json
+  - Microsoft.Network/stable/2018-11-01/loadBalancer.json
+  - Microsoft.Network/stable/2018-11-01/network.json
+  - Microsoft.Network/stable/2018-11-01/networkInterface.json
+  - Microsoft.Network/stable/2018-11-01/networkProfile.json
+  - Microsoft.Network/stable/2018-11-01/networkSecurityGroup.json
+  - Microsoft.Network/stable/2018-11-01/networkWatcher.json
+  - Microsoft.Network/stable/2018-11-01/operation.json
+  - Microsoft.Network/stable/2018-11-01/publicIpAddress.json
+  - Microsoft.Network/stable/2018-11-01/publicIpPrefix.json
+  - Microsoft.Network/stable/2018-11-01/routeFilter.json
+  - Microsoft.Network/stable/2018-11-01/routeTable.json
+  - Microsoft.Network/stable/2018-11-01/serviceCommunity.json
+  - Microsoft.Network/stable/2018-11-01/serviceEndpointPolicy.json
+  - Microsoft.Network/stable/2018-11-01/usage.json
+  - Microsoft.Network/stable/2018-11-01/virtualNetwork.json
+  - Microsoft.Network/stable/2018-11-01/virtualNetworkGateway.json
+  - Microsoft.Network/stable/2018-11-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2018-11-01/virtualWan.json
+  - Microsoft.Network/stable/2018-11-01/vmssNetworkInterface.json
+  - Microsoft.Network/stable/2018-11-01/vmssPublicIpAddress.json
+```
 
 ### Tag: package-2018-10
 
 These settings apply only when `--tag=package-2018-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-10'
+``` yaml $(tag) == 'package-2018-10'
 input-file:
   - Microsoft.Network/stable/2018-10-01/applicationGateway.json
   - Microsoft.Network/stable/2018-10-01/applicationSecurityGroup.json
@@ -72,6 +288,7 @@ input-file:
   - Microsoft.Network/stable/2018-10-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2018-10-01/vmssPublicIpAddress.json
 ```
+
 ### Tag: package-2018-08
 
 These settings apply only when `--tag=package-2018-08` is specified on the command line.
@@ -682,7 +899,13 @@ directive:
     from: azureFirewallFqdnTag.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
+    from: bastionHost.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
     from: checkDnsAvailability.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: ddosCustomPolicy.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: ddosProtectionPlan.json
@@ -704,6 +927,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: loadBalancer.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: natGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkInterface.json
@@ -748,7 +974,10 @@ directive:
     from: virtualNetworkGateway.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
-    from: interfaceEndpoint.json
+    from: privateEndpoint.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: privateLinkService.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: networkProfile.json
@@ -790,6 +1019,51 @@ directive:
   - suppress: BodyTopLevelProperties
     from: virtualNetworkGateway.json
     reason: shipped. fixing this causes breaking change in resource
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: webapplicationfirewall.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: PostOperationIdContainsUrlVerb
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/getBackendHealthOnDemand"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: PostOperationIdContainsUrlVerb
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/applicationGateways/{applicationGatewayName}/backendhealth"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkInterfaces/{networkInterfaceName}/effectiveRouteTable"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/securityGroupView"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/connectionMonitors/{connectionMonitorName}/query"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkWatchers/{networkWatcherName}/networkConfigurationDiagnostic"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{virtualNetworkName}/CheckIPAddressAvailability"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getBgpPeerStatus"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getLearnedRoutes"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getAdvertisedRoutes"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/getVpnClientConnectionHealth"].post.operationId
+    reason: Customized verb is used for API
+  - suppress: ListInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"].get.operationId
+    reason: Customized verb is used for API
+  - suppress: GetInOperationName
+    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/supportedSecurityProviders"].get.operationId
+    reason: Customized verb is used for API
 ```
 
 ---
@@ -804,8 +1078,11 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-network
+      - python ./scripts/trim_aio.py ./sdk/network/azure-mgmt-network
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -842,90 +1119,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.network
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-network
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-08
-  - tag: package-2018-07
-  - tag: package-2018-06
-  - tag: package-2018-04
-  - tag: package-2017-10
-```
-
-### Tag: package-2018-08 and java
-
-These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.network.v2018_08_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-07 and java
-
-These settings apply only when `--tag=package-2018-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.network.v2018_07_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_07_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-06 and java
-
-These settings apply only when `--tag=package-2018-06 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.network.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_06_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2018-04 and java
-
-These settings apply only when `--tag=package-2018-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.network.v2018_04_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2018_04_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-10 and java
-
-These settings apply only when `--tag=package-2017-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.network.v2017_10_01
-  output-folder: $(azure-libraries-for-java-folder)/network/resource-manager/v2017_10_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)

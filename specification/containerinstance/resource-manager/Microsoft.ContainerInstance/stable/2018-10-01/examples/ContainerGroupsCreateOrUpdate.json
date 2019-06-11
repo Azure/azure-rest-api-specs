@@ -8,7 +8,7 @@
       "id": "/subscriptions/subid/resourceGroups/demo/providers/Microsoft.ContainerInstance/containerGroups/demo1",
       "location": "west us",
       "name": "demo1",
-      "identity": { 
+      "identity": {
         "type": "SystemAssigned, UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity-name": {}
@@ -71,7 +71,9 @@
           "id": "test-network-profile-id"
         },
         "dnsConfig": {
-          "nameServers": [ "1.1.1.1" ],
+          "nameServers": [
+            "1.1.1.1"
+          ],
           "searchDomains": "cluster.local svc.cluster.local",
           "options": "ndots:2"
         },
@@ -102,8 +104,7 @@
           },
           {
             "name": "volume3",
-            "secret":
-            {
+            "secret": {
               "secretKey1": "SecretValue1InBase64",
               "secretKey2": "SecretValue2InBase64"
             }
@@ -169,7 +170,9 @@
             }
           },
           "dnsConfig": {
-            "nameServers": [ "1.1.1.1" ],
+            "nameServers": [
+              "1.1.1.1"
+            ],
             "searchDomains": "cluster.local svc.cluster.local",
             "options": "ndots:2"
           },
@@ -258,7 +261,9 @@
             }
           ],
           "dnsConfig": {
-            "nameServers": [ "1.1.1.1" ]
+            "nameServers": [
+              "1.1.1.1"
+            ]
           },
           "imageRegistryCredentials": [],
           "ipAddress": {
@@ -289,7 +294,7 @@
             },
             {
               "name": "volume3",
-              "secret":{}
+              "secret": {}
             }
           ]
         },

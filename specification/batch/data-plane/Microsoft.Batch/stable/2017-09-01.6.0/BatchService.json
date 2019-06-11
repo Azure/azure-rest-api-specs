@@ -11571,11 +11571,11 @@
                 },
                 {
                   "value": "task",
-                  "description": "The certificate should be visibile to the user accounts under which job tasks are run."
+                  "description": "The certificate should be visible to the user accounts under which job tasks are run."
                 },
                 {
                   "value": "remoteuser",
-                  "description": "The certificate should be visibile to the user accounts under which users remotely access the node.",
+                  "description": "The certificate should be visible to the user accounts under which users remotely access the node.",
                   "name": "remoteUser"
                 }
               ]
@@ -12888,7 +12888,7 @@
           "items": {
             "$ref": "#/definitions/DataDisk"
           },
-          "title": "The configuration for data disks attached to the comptue nodes in the pool.",
+          "title": "The configuration for data disks attached to the compute nodes in the pool.",
           "description": "This property must be specified if the compute nodes in the pool need to have empty data disks attached to them. This cannot be updated. Each node gets its own disk (the disk is not a file share). Existing disks cannot be attached, each attached disk is empty. When the node is removed from the pool, the disk and all data associated with it is also deleted. The disk is not formatted after being attached, it must be formatted before use - for more information see https://docs.microsoft.com/en-us/azure/virtual-machines/linux/classic/attach-disk#initialize-a-new-data-disk-in-linux and https://docs.microsoft.com/en-us/azure/virtual-machines/windows/attach-disk-ps#add-an-empty-data-disk-to-a-virtual-machine."
         },
         "licenseType": {
@@ -14145,7 +14145,7 @@
         "state": {
           "type": "string",
           "title": "The current state of the compute node.",
-          "description": "The low-priority node has been preempted. Tasks which were running on the node when it was pre-empted will be rescheduled when another node becomes available.",
+          "description": "The low-priority node has been preempted. Tasks which were running on the node when it was preempted will be rescheduled when another node becomes available.",
           "enum": [
             "idle",
             "rebooting",
@@ -14218,7 +14218,7 @@
               },
               {
                 "value": "preempted",
-                "description": "The low-priority node has been preempted. Tasks which were running on the node when it was pre-empted will be rescheduled when another node becomes available."
+                "description": "The low-priority node has been preempted. Tasks which were running on the node when it was preempted will be rescheduled when another node becomes available."
               }
             ]
           }

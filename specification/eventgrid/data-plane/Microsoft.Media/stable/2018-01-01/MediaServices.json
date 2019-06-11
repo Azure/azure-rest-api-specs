@@ -366,6 +366,29 @@
       "type": "object",
       "description": "The event data for a Job output asset."
     },
+    "MediaJobOutputProgressEventData": {
+      "x-ms-discriminator-value": "#Microsoft.Media.JobOutputProgress",
+      "description": "Job Output Progress Event Data.",
+      "type": "object",
+      "properties": {
+        "label": {
+          "type": "string",
+          "description": "Gets the Job output label."
+        },
+        "progress": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Gets the Job output progress."
+        },
+        "jobCorrelationData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Gets the Job correlation data."
+        }
+      }
+    },
     "MediaJobOutputStateChangeEventData": {
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Media.JobOutputStateChange event.",
       "type": "object",
@@ -830,7 +853,7 @@
         }
       },
       "type": "object",
-      "description": "Ingest fragment dropped event event data."
+      "description": "Ingest fragment dropped event data."
     },
     "MediaLiveEventIngestHeartbeatEventData": {
       "properties": {
@@ -901,7 +924,7 @@
         }
       },
       "type": "object",
-      "description": "Ingest fragment dropped event event data."
+      "description": "Ingest fragment dropped event data."
     },
     "MediaLiveEventTrackDiscontinuityDetectedEventData": {
       "properties": {

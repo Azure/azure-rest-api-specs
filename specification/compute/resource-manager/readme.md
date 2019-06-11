@@ -9,7 +9,7 @@ The compute RP comprises of small services where each service has its own tag.
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one compute client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) compute client library package rather than installing individual packages for each sub service.
 
 
 ---
@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2018-10-01
+tag: package-2019-03-01
 
 directive:
   - where:
@@ -111,6 +111,10 @@ directive:
     suppress:
       - RequiredPropertiesMissingInResourceModel
   - where:
+      - $.definitions.ProximityPlacementGroupUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
       - $.definitions.VirtualMachineExtensionUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
@@ -177,7 +181,62 @@ directive:
     suppress:
       - DefinitionsPropertiesNamesCamelCase
 
+  - where:
+      - $.definitions.ContainerService
+    suppress:
+      - TrackedResourcePatchOperation
+    reason:
+      - ACS service is deprecated so a PATCH endpoint won't be implemented
+
 ```
+### Tag: package-2019-03-01
+
+These settings apply only when `--tag=package-2019-03-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-01'
+input-file:
+- Microsoft.Compute/stable/2019-03-01/compute.json
+- Microsoft.Compute/stable/2019-03-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2018-09-30/disk.json
+- Microsoft.Compute/stable/2019-03-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
+### Tag: package-2019-04-01-only
+
+These settings apply only when `--tag=package-2019-04-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04-01-only'
+input-file:
+- Microsoft.Compute/stable/2019-04-01/skus.json
+```
+
+### Tag: package-2019-03-01-only
+
+These settings apply only when `--tag=package-2019-03-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-01-only'
+input-file:
+- Microsoft.Compute/stable/2019-03-01/compute.json
+- Microsoft.Compute/stable/2019-03-01/runCommands.json
+- Microsoft.Compute/stable/2019-03-01/gallery.json
+```
+
+### Tag: package-2018-10-01-Disks
+
+These settings apply only when `--tag=package-2018-10-01-Disks` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-10-01-Disks'
+input-file:
+- Microsoft.Compute/stable/2018-10-01/compute.json
+- Microsoft.Compute/stable/2018-10-01/runCommands.json
+- Microsoft.Compute/stable/2017-09-01/skus.json
+- Microsoft.Compute/stable/2018-09-30/disk.json
+- Microsoft.Compute/stable/2018-06-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
 ### Tag: package-2018-10-01
 
 These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
@@ -200,6 +259,15 @@ These settings apply only when `--tag=package-2018-10-01-only` is specified on t
 input-file:
 - Microsoft.Compute/stable/2018-10-01/compute.json
 - Microsoft.Compute/stable/2018-10-01/runCommands.json
+```
+
+### Tag: package-2018-09-30-only
+
+These settings apply only when `--tag=package-2018-09-30-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-30-only'
+input-file:
+- Microsoft.Compute/stable/2018-09-30/disk.json
 ```
 
 ### Tag: package-2018-06-exclude-gallery
@@ -437,7 +505,7 @@ input-file:
 
 ### Tag: package-container-service-2015-11-preview
 
-These setings apply only when `--tag=package-container-service-2015-11-preview` is specified on the command line.
+These settings apply only when `--tag=package-container-service-2015-11-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-container-service-2015-11-preview'
 input-file:
@@ -565,4 +633,15 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/compute/resource-manager/v2017_03_30
 regenerate-manager: true
 generate-interface: true
+```
+
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Compute/stable/2017-12-01/compute.json
+- Microsoft.Compute/stable/2017-03-30/disk.json
 ```

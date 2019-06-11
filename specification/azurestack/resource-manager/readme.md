@@ -9,7 +9,7 @@ The Azure Stack RP comprises of small services where each service has its own ta
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one Azure Stack client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) Azure Stack client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) Azure Stack client library package rather than installing individual packages for each sub service.
 
 
 ---

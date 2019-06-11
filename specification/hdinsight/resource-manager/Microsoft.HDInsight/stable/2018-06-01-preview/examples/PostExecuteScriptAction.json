@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "clusterName": "cluster1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "subid",
+    "parameters": {
+      "scriptActions": [
+        {
+          "name": "Test",
+          "uri": "http://testurl.com/install.ssh",
+          "roles": [
+            "headnode",
+            "workernode"
+          ],
+          "parameters": ""
+        }
+      ],
+      "persistOnSuccess": false
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.HDInsight/pathToOperationResult"
+      }
+    },
+    "200": {}
+  }
+}

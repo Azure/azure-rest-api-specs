@@ -1,10 +1,11 @@
 {
-  "parameters" : {
-    "api-version" : "2018-01-01",
-    "subscriptionId" : "subid",
-    "resourceGroupName" : "rg1",
-    "loadBalancerName" : "lb",
+  "parameters": {
+    "api-version": "2018-01-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "loadBalancerName": "lb",
     "parameters": {
+      "location": "eastus",
       "properties": {
         "frontendIPConfigurations": [
           {
@@ -48,15 +49,15 @@
       }
     }
   },
-  "responses" : {
-    "200" : {
-      "body" : {
+  "responses": {
+    "200": {
+      "body": {
         "name": "lb",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "type": "Microsoft.Network/loadBalancers",
-        "location": "westus",
+        "location": "eastus",
         "sku": {
-            "name": "Basic"
+          "name": "Basic"
         },
         "properties": {
           "provisioningState": "Succeeded",
@@ -105,14 +106,14 @@
         }
       }
     },
-    "201" : {
-      "body" : {
+    "201": {
+      "body": {
         "name": "lb",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
         "type": "Microsoft.Network/loadBalancers",
-        "location": "westus",
+        "location": "eastus",
         "sku": {
-            "name": "Basic"
+          "name": "Basic"
         },
         "properties": {
           "provisioningState": "Succeeded",

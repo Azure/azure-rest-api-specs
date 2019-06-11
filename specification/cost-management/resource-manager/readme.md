@@ -5,7 +5,9 @@
 This is the AutoRest configuration file for Cost Management.
 
 ---
+
 ## Getting Started
+
 To build the SDK for Cost Management, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -13,20 +15,50 @@ To build the SDK for Cost Management, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Basic Information
+
 These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-05
+tag: package-preview-2019-04
 azure-validator: true
 ```
 
 ---
+
+
+### Tag: package-preview-2019-04
+
+These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-04'
+input-file:
+  - Microsoft.CostManagement/preview/2019-04-01-preview/costmanagement.json
+```
+### Tag: package-2019-01
+
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-01'
+input-file:
+  - Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
+```
+
+### Tag: package-preview-2019-03
+
+These settings apply only when `--tag=package-preview-2019-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-preview-2019-03'
+input-file:
+  - Microsoft.CostManagement/preview/2019-03-01-preview/costmanagement.json
+```
+
 ### Tag: package-2018-05
 
 These settings apply only when `--tag=package-2018-05` is specified on the command line.
@@ -37,12 +69,53 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: R2059
     from: costmanagement.json
     where: $.paths
     reason: We are extending Microsoft.Billing RP in some scenarios
+  - suppress: R3023
+    from: costmanagement.json
+    where: $.paths
+    reason: operations API for Microsoft.Billing are defined in Microsoft.Billing    
+  - suppress: XmsResourceInPutResponse
+    from: costmanagement.json
+    where: '$.paths["/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}"].put'
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.ChargeValue
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.EffectiveMonth
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.CustomChargeProperties.properties.EndMonth
+    reason: 'older PR, not forecast.'
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: costmanagement.json
+    where: $.definitions.ShowbackRulesKind.properties.RuleType
+    reason: 'older PR, not forecast.'
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.Notification.properties.enabled
+    reason: 'false alarm '
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.CheckNameAvailabilityResult.properties.nameAvailable
+    reason: 'false alarm '  
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.KpiProperties.properties.enabled
+    reason: 'false alarm ' 
+  - suppress: EnumInsteadOfBoolean
+    from: costmanagement.json
+    where: $.definitions.ViewProperties.properties.accumulated
+    reason: 'false alarm ' 
 ```
 
 ### Tag: package-2018-08-preview
@@ -54,7 +127,6 @@ input-file:
 - Microsoft.CostManagement/preview/2018-08-01-preview/costmanagement.json
 ```
 
-
 ### Tag: package-2018-12-preview
 
 These settings apply only when `--tag=package-2018-12-preview` is specified on the command line.
@@ -64,8 +136,17 @@ input-file:
 - Microsoft.CostManagement/preview/2018-12-01-preview/costmanagement.json
 ```
 
+### Tag: package-2019-01
+
+These settings apply only when `--tag=package-2019-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-01'
+input-file:
+- Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
+```
 
 ---
+
 # Code Generation
 
 ## Swagger to SDK
@@ -114,15 +195,17 @@ python:
   package-version: 1.2.0
   clear-output-folder: true
 ```
+
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-costmanagement/azure/mgmt/costmanagement
+  output-folder: $(python-sdks-folder)/costmanagement/azure-mgmt-costmanagement/azure/mgmt/costmanagement
 ```
+
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-costmanagement
+  output-folder: $(python-sdks-folder)/costmanagement/azure-mgmt-costmanagement
 ```
 
 ## Go
@@ -149,6 +232,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-costmanagement
 batch:
   - tag: package-2018-05
   - tag: package-2018-08-preview
+  - tag: package-2019-01
 ```
 
 ### Tag: package-2018-05 and java
@@ -186,6 +270,19 @@ Please also specify `--azure-libraries-for-java=<path to the root directory of y
 java:
   namespace: com.microsoft.azure.management.costmanagement.v2018_12_01_preview
   output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2018_12_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-01 and java
+
+These settings apply only when `--tag=package-2019-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.costmanagement.v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/costmanagement/resource-manager/v2019_01_01
 regenerate-manager: true
 generate-interface: true
 ```

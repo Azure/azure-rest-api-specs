@@ -69,7 +69,9 @@
           }
         }
       },
-      "required": [ "taskType" ],
+      "required": [
+        "taskType"
+      ],
       "discriminator": "taskType"
     },
     "ProjectTask": {
@@ -179,6 +181,54 @@
         }
       ]
     },
+    "ConnectToSourcePostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToSource.PostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates connection to PostgreSQL server and source server requirements for online migration",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToSourcePostgreSqlSyncTask.json#/definitions/ConnectToSourcePostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToSourcePostgreSqlSyncTask.json#/definitions/ConnectToSourcePostgreSqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ConnectToSourceOracleSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToSource.Oracle.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates Oracle database connection",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToSourceOracleSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToSourceOracleSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToTargetSqlDbTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.SqlDb",
       "type": "object",
@@ -217,6 +267,54 @@
           "type": "array",
           "items": {
             "$ref": "./ConnectToTargetSqlDbTask.json#/definitions/ConnectToTargetSqlDbTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.AzureDbForPostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates connection to Azure Database For PostgreSQL server and target server requirements for online migration",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToTargetAzureDbForPostgreSqlSyncTask.json#/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToTargetAzureDbForPostgreSqlSyncTask.json#/definitions/ConnectToTargetAzureDbForPostgreSqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.Oracle.AzureDbForPostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates connection to Azure Database For PostgreSQL server and target server requirements for online migration for Oracle source.",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ConnectToTargetOracleAzureDbForPostgreSqlSyncTaskOutput"
           },
           "readOnly": true
         }
@@ -299,6 +397,30 @@
         }
       ]
     },
+    "ConnectToTargetSqlMISyncTaskProperties": {
+      "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI.Sync.LRS",
+      "type": "object",
+      "description": "Properties for the task that validates connection to Azure SQL Database Managed Instance",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ConnectToTargetSqlMiSyncTask.json#/definitions/ConnectToTargetSqlMISyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ConnectToTargetSqlMiSyncTask.json#/definitions/ConnectToTargetSqlMISyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToTargetAzureDbForMySqlTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureDbForMySql",
       "type": "object",
@@ -359,6 +481,30 @@
           "type": "array",
           "items": {
             "$ref": "./MigrateSqlServerSqlMITask.json#/definitions/MigrateSqlServerSqlMITaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "MigrateSqlServerSqlMISyncTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
+      "type": "object",
+      "description": "Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance sync scenario",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./MigrateSqlServerSqlMiSyncTask.json#/definitions/MigrateSqlServerSqlMISyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./MigrateSqlServerSqlMiSyncTask.json#/definitions/MigrateSqlServerSqlMISyncTaskOutput"
           },
           "readOnly": true
         }
@@ -465,6 +611,30 @@
         }
       ]
     },
+    "MigrateOracleAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "Migrate.Oracle.Sql.Sync",
+      "type": "object",
+      "description": "Properties for the task that migrates Oracle to Azure Database for PostgreSQL for online migrations",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/MigrateOracleAzureDbPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/MigrateOracleAzureDbPostgreSqlSyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ValidateMigrationInputSqlServerSqlDbSyncTaskProperties": {
       "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.SqlDb.Sync",
       "type": "object",
@@ -513,6 +683,30 @@
         }
       ]
     },
+    "ValidateMigrationInputSqlServerSqlMISyncTaskProperties": {
+      "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS",
+      "type": "object",
+      "description": "Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance sync scenario",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./ValidateMigrationInputSqlServerSqlMiSyncTask.json#/definitions/ValidateMigrationInputSqlServerSqlMISyncTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./ValidateMigrationInputSqlServerSqlMiSyncTask.json#/definitions/ValidateMigrationInputSqlServerSqlMISyncTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ValidateMongoDbTaskProperties": {
       "x-ms-discriminator-value": "Validate.MongoDb",
       "type": "object",
@@ -526,6 +720,29 @@
           "description": "An array containing a single MongoDbMigrationProgress object",
           "items": {
             "$ref": "./MongoDbTasks.json#/definitions/MongoDbMigrationProgress"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "ValidateOracleAzureDbForPostgreSqlSyncTaskProperties": {
+      "x-ms-discriminator-value": "Validate.Oracle.AzureDbPostgreSql.Sync",
+      "type": "object",
+      "description": "Properties for the task that validates a migration for Oracle to Azure Database for PostgreSQL for online migrations",
+      "properties": {
+        "input": {
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/MigrateOracleAzureDbPostgreSqlSyncTaskInput"
+        },
+        "output": {
+          "type": "array",
+          "description": "An array containing a single validation error response object",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/ValidateOracleAzureDbPostgreSqlSyncTaskOutput"
           },
           "readOnly": true
         }
