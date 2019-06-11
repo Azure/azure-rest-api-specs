@@ -59,7 +59,12 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Lists all available Resource SKUs": {
+            "$ref": "./examples/ListAvailableResourceSkus.json"
+          }
         }
       }
     }
@@ -315,16 +320,12 @@
             "$ref": "#/definitions/ResourceSku"
           },
           "description": "The list of skus available for the subscription."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The uri to fetch the next page of Compute Skus. Call ListNext() with this to fetch the next page of VMSS Skus."
         }
       },
       "required": [
         "value"
       ],
-      "description": "The Compute List Skus operation response."
+      "description": "The List Resource Skus operation response."
     }
   },
   "parameters": {
