@@ -32,7 +32,7 @@ output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-05-01/$(namespac
 These settings apply only when `--tag=package-2018-11-19 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag)=='package-2018-03-preview' && $(go)
+```yaml $(tag)=='package-2018-11-19' && $(go)
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2018-11-19/$(namespace)
 ```
 
