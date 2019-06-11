@@ -118,6 +118,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 
 # Needed when there is more than one input file
@@ -207,6 +208,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -289,6 +291,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -452,6 +455,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 # Needed when there is more than one input file
 override-info:

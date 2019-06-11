@@ -793,6 +793,10 @@
           "$ref": "#/definitions/SourceTriggerDescriptor",
           "description": "The source trigger that caused the run."
         },
+        "timerTrigger": {
+          "$ref": "#/definitions/TimerTriggerDescriptor",
+          "description": "The timer trigger that caused the run."
+        },
         "platform": {
           "$ref": "#/definitions/PlatformProperties",
           "description": "The platform properties against which the run will happen."
@@ -918,6 +922,19 @@
         },
         "providerType": {
           "description": "The source control provider type.",
+          "type": "string"
+        }
+      }
+    },
+    "TimerTriggerDescriptor": {
+      "type": "object",
+      "properties": {
+        "timerTriggerName": {
+          "description": "The timer trigger name that caused the run.",
+          "type": "string"
+        },
+        "scheduleOccurrence": {
+          "description": "The occurrence that triggered the run.",
           "type": "string"
         }
       }

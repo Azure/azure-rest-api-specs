@@ -33,8 +33,8 @@
       }
     }
   },
-  "paths" : {
-    "/providers/Microsoft.MixedReality/operations" : {
+  "paths": {
+    "/providers/Microsoft.MixedReality/operations": {
       "get": {
         "operationId": "Operations_List",
         "tags": [
@@ -42,7 +42,9 @@
         ],
         "description": "Exposing Available Operations",
         "x-ms-examples": {
-          "OperationPage": { "$ref": "./examples/proxy/ExposingAvailableOperations.json" }
+          "OperationPage": {
+            "$ref": "./examples/proxy/ExposingAvailableOperations.json"
+          }
         },
         "parameters": [
           {
@@ -68,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/locations/{location}/checkNameAvailability" : {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/locations/{location}/checkNameAvailability": {
       "post": {
         "operationId": "CheckNameAvailabilityLocal",
         "tags": [
@@ -76,7 +78,9 @@
         ],
         "description": "Check Name Availability for local uniqueness",
         "x-ms-examples": {
-          "CheckLocalNameAvailability": { "$ref": "./examples/proxy/CheckNameAvailabilityForLocalUniqueness.json" }
+          "CheckLocalNameAvailability": {
+            "$ref": "./examples/proxy/CheckNameAvailabilityForLocalUniqueness.json"
+          }
         },
         "parameters": [
           {
@@ -109,11 +113,14 @@
       }
     }
   },
-  "definitions" : {
-    "CheckNameAvailabilityRequest" : {
+  "definitions": {
+    "CheckNameAvailabilityRequest": {
       "description": "Check Name Availability Request",
       "type": "object",
-      "required" : ["name", "type"],
+      "required": [
+        "name",
+        "type"
+      ],
       "properties": {
         "name": {
           "description": "Resource Name To Verify",
@@ -125,18 +132,20 @@
         }
       }
     },
-    "CheckNameAvailabilityResponse" : {
+    "CheckNameAvailabilityResponse": {
       "description": "Check Name Availability Response",
       "type": "object",
-      "required" : ["nameAvailable"],
+      "required": [
+        "nameAvailable"
+      ],
       "properties": {
         "nameAvailable": {
           "description": "if name Available",
-          "$ref" : "#/definitions/NameAvailability"
+          "$ref": "#/definitions/NameAvailability"
         },
         "reason": {
           "description": "Resource Name To Verify",
-          "$ref" : "#/definitions/NameUnavailableReason"
+          "$ref": "#/definitions/NameUnavailableReason"
         },
         "message": {
           "description": "detail message",
@@ -161,7 +170,12 @@
     "OperationDisplay": {
       "description": "The object that represents the operation.",
       "type": "object",
-      "required" : ["provider", "resource", "operation", "description"],
+      "required": [
+        "provider",
+        "resource",
+        "operation",
+        "description"
+      ],
       "properties": {
         "provider": {
           "description": "Service provider: Microsoft.ResourceProvider",
@@ -185,24 +199,24 @@
       "description": "Whether or not the name is available.",
       "type": "string",
       "enum": [
-          "true",
-          "false"
+        "true",
+        "false"
       ],
       "x-ms-enum": {
-          "name": "NameAvailability",
-          "modelAsString": true
+        "name": "NameAvailability",
+        "modelAsString": true
       }
     },
     "NameUnavailableReason": {
       "description": "reason of name unavailable.",
       "type": "string",
       "enum": [
-          "Invalid",
-          "AlreadyExists"
+        "Invalid",
+        "AlreadyExists"
       ],
       "x-ms-enum": {
-          "name": "NameUnavailableReason",
-          "modelAsString": true
+        "name": "NameUnavailableReason",
+        "modelAsString": true
       }
     },
     "OperationPage": {
@@ -223,12 +237,12 @@
     }
   },
   "parameters": {
-    "checkNameAvailabilityParameter" : {
+    "checkNameAvailabilityParameter": {
       "name": "checkNameAvailability",
       "description": "Check Name Availability Request.",
       "in": "body",
       "schema": {
-          "$ref": "#/definitions/CheckNameAvailabilityRequest"
+        "$ref": "#/definitions/CheckNameAvailabilityRequest"
       },
       "required": true,
       "x-ms-parameter-location": "method"
