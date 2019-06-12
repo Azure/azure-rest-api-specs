@@ -25,7 +25,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.4'
+tag: '6.5'
 ```
 
 ### Suppression
@@ -95,6 +95,17 @@ input-file:
 
 ```
 
+### Tag: 6.5
+
+These settings apply only when `--tag=6.5` is specified on the command line.
+
+``` yaml $(tag) == '6.5'
+input-file:
+- Microsoft.ServiceFabric/stable/6.5/servicefabric.json
+
+```
+
+
 ---
 # Code Generation
 
@@ -125,7 +136,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.servicefabric
   package-name: azure-servicefabric
-  package-version: 6.4.0.0
+  package-version: 6.5.0.0
   add-credentials: true
   clear-output-folder: true
 ```
