@@ -1,0 +1,83 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"title": "Immersive Reader API v1.0",
+		"version": "1.0"
+	},
+	"x-ms-parameterized-host": {
+		"hostTemplate": "{Endpoint}/immersivereader/v1.0",
+		"useSchemePrefix": false,
+		"parameters": [{
+				"$ref": "#/parameters/Endpoint"
+			}
+		]
+	},
+	"securityDefinitions": {
+		"apiKeyHeader": {
+			"type": "apiKey",
+			"name": "Ocp-Apim-Subscription-Key",
+			"in": "header"
+		}
+	},
+	"security": [{
+			"apiKeyHeader": []
+		}
+	],
+	"paths": {
+		"/getcontentmodelforreader": {
+			"post": {
+				"description": "Creates an Immersive Reader session",
+				"operationId": "post-getcontentmodelforreader",
+				"summary": "/getcontentmodelforreader - POST",
+				"parameters": [{
+						"name": "MS-Int-AppId",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "X-CorrelationId",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "X-MS-DeviceId",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "X-UserSessionId",
+						"in": "header",
+						"required": true,
+						"type": "string"
+					}, {
+						"name": "body",
+						"in": "body",
+						"schema": {}
+					}
+				],
+				"consumes": [
+					"application/json"
+				],
+				"produces": [
+					"application/json"
+				],				
+				"responses": {
+					"200": {
+						"description": "OK"
+					}
+				}
+			}
+		}
+	},
+	"parameters": {
+		"Endpoint": {
+			"name": "Endpoint",
+			"description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+			"x-ms-parameter-location": "client",
+			"required": true,
+			"type": "string",
+			"in": "path",
+			"x-ms-skip-url-encoding": true
+		}
+	}
+}
