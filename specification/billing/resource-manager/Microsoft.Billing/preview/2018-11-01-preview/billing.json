@@ -148,7 +148,7 @@
           },
           "202": {
             "description": "Accepted. Billing account update is in progress."
-            },
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3856,25 +3856,25 @@
         }
       }
     },
-    "ValidateAddressResponse": {    
-    "type":"object",
-    "description" :" Result of the address validation",
-    "properties" : {
-      "status": {
-        "description": "status of the address validation.",
-        "$ref": "#/definitions/AddressValidationStatus"
-      },
-      "suggestedAddresses": {
-        "description": "list of suggested addresses.",
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/Address"
+    "ValidateAddressResponse": {
+      "type": "object",
+      "description": " Result of the address validation",
+      "properties": {
+        "status": {
+          "description": "status of the address validation.",
+          "$ref": "#/definitions/AddressValidationStatus"
+        },
+        "suggestedAddresses": {
+          "description": "list of suggested addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "validationMessage": {
+          "description": "Validation error message.",
+          "type": "string"
         }
-      },
-      "validationMessage" : {
-        "description": "Validation error message.",
-        "type": "string"
-       }
       }
     },
     "AddressValidationStatus": {
@@ -3888,7 +3888,7 @@
         "name": "addressValidationStatus",
         "modelAsString": true
       }
-    }, 
+    },
     "InitiateTransferProperties": {
       "type": "object",
       "description": "Request parameters to initiate transfer.",
@@ -4949,6 +4949,7 @@
           "description": "The billing profile id.",
           "type": "string"
         }
+      }
     },
     "InvoiceSectionListResult": {
       "description": "Result of listing invoice sections.",
