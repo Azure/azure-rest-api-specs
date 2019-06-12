@@ -483,6 +483,55 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks": {
+      "get": {
+        "summary": "Get service level tasks for a service",
+        "description": "The services resource is the top-level resource that represents the Database Migration Service. This method returns a list of service level tasks owned by a service resource. Some tasks may have a status of Unknown, which indicates that an error occurred while querying the status of that task.",
+        "tags": [
+          "Service resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "ServiceTasks_List",
+        "x-ms-examples": {
+          "ServiceTasks_List": { "$ref": "./examples/ServiceTasks_List.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          },
+          {
+            "$ref": "#/parameters/taskType"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "responses": {
+          "200": {
+            "description": "Got service tasks",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/TaskList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/checkNameAvailability": {
       "post": {
         "summary": "Check nested resource name validity and availability",
@@ -785,6 +834,163 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/subscriptionId"
+        },
+        {
+          "$ref": "#/parameters/groupName"
+        },
+        {
+          "$ref": "#/parameters/serviceName"
+        },
+        {
+          "$ref": "#/parameters/taskName"
+        },
+        {
+          "$ref": "#/parameters/apiVersion"
+        }
+      ],
+      "put": {
+        "summary": "Create or update service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PUT method creates a new service task or updates an existing one, although since service tasks have no mutable custom properties, there is little reason to update an existing one.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "PUT"
+        ],
+        "operationId": "ServiceTasks_CreateOrUpdate",
+        "x-ms-examples": {
+          "Tasks_CreateOrUpdate": { "$ref": "./examples/ServiceTasks_CreateOrUpdate.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectTask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service task updated",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "201": {
+            "description": "Service task created",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "get": {
+        "summary": "Get service task information",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The GET method retrieves information about a service task.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "GET"
+        ],
+        "operationId": "ServiceTasks_Get",
+        "x-ms-examples": {
+          "Tasks_Get": { "$ref": "./examples/ServiceTasks_Get.json" }
+        },
+        "parameters": [
+          {
+            "name": "$expand",
+            "description": "Expand the response",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A service task resource",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The DELETE method deletes a service task, canceling it first if it's running.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "DELETE"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/deleteRunningTasks"
+          }
+        ],
+        "operationId": "ServiceTasks_Delete",
+        "x-ms-examples": {
+          "Tasks_Delete": { "$ref": "./examples/ServiceTasks_Delete.json" }
+        },
+        "responses": {
+          "200": {
+            "description": "Service Task resource deleted"
+          },
+          "204": {
+            "description": "Not found"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "summary": "Create or update service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. The PATCH method updates an existing service task, but since service tasks have no mutable custom properties, there is little reason to do so.",
+        "tags": [
+          "Service Task resource",
+          "Standard operation",
+          "PATCH"
+        ],
+        "operationId": "ServiceTasks_Update",
+        "x-ms-examples": {
+          "Tasks_Update": { "$ref": "./examples/ServiceTasks_Update.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/projectTask"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Task resource updated",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/projects/{projectName}/tasks/{taskName}/cancel": {
       "post": {
         "summary": "Cancel a task",
@@ -823,6 +1029,52 @@
         "responses": {
           "200": {
             "description": "Task canceled",
+            "schema": {
+              "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "./definitions/Common.json#/definitions/ApiError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{groupName}/providers/Microsoft.DataMigration/services/{serviceName}/serviceTasks/{taskName}/cancel": {
+      "post": {
+        "summary": "Cancel a service task",
+        "description": "The service tasks resource is a nested, proxy-only resource representing work performed by a DMS instance. This method cancels a service task if it's currently queued or running.",
+        "tags": [
+          "Service Task resource",
+          "Custom operation",
+          "POST"
+        ],
+        "operationId": "ServiceTasks_Cancel",
+        "x-ms-examples": {
+          "Tasks_Cancel": { "$ref": "./examples/ServiceTasks_Cancel.json" }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/groupName"
+          },
+          {
+            "$ref": "#/parameters/serviceName"
+          },
+          {
+            "$ref": "#/parameters/taskName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Service Task canceled",
             "schema": {
               "$ref": "./definitions/Tasks.json#/definitions/ProjectTask"
             }

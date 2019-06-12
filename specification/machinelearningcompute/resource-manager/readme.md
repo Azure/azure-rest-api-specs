@@ -79,7 +79,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MachineLearningCompute
-  output-folder: $(csharp-sdks-folder)/MachineLearningCompute/Management.MachineLearningCompute/Generated
+  output-folder: $(csharp-sdks-folder)/machinelearningcompute/Microsoft.Azure.Management.MachineLearningCompute/src/Generated
   clear-output-folder: true
 ```
 

@@ -245,6 +245,51 @@
           }
         }
       },
+      "delete": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "HanaInstances_Delete",
+        "x-ms-long-running-operation": true,
+        "summary": "Deletes a SAP HANA instance.",
+        "description": "Deletes a SAP HANA instance with the specified subscription, resource group, and instance name.",
+        "x-ms-examples": {
+          "Get properties of a HANA instance": {
+            "$ref": "./examples/HanaInstances_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/HanaInstanceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Deleted HanaInstance"
+          },
+          "202": {
+            "description": "Deleting HanaInstance"
+          },
+          "204": {
+            "description": "No HanaInstance to delete"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "HanaOnAzure"
@@ -403,7 +448,6 @@
           "description": "Resource type"
         },
         "location": {
-          "readOnly": true,
           "type": "string",
           "description": "Resource location"
         },
@@ -500,7 +544,6 @@
           "description": "Hardware revision of a HANA instance"
         },
         "partnerNodeId": {
-          "readOnly": true,
           "type": "string",
           "description": "ARM ID of another HanaInstance that will share a network with this HanaInstance"
         },
@@ -617,7 +660,6 @@
     "OSProfile": {
       "properties": {
         "computerName": {
-          "readOnly": true,
           "type": "string",
           "description": "Specifies the host OS name of the HANA instance."
         },
@@ -632,7 +674,6 @@
           "description": "Specifies version of operating system."
         },
         "sshPublicKey": {
-          "readOnly": true,
           "type": "string",
           "description": "Specifies the SSH public key used to access the operating system."
         }
@@ -659,7 +700,6 @@
     "IpAddress": {
       "properties": {
         "ipAddress": {
-          "readOnly": true,
           "type": "string",
           "description": "Specifies the IP address of the network interface."
         }

@@ -86,7 +86,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ManagementGroups
-  output-folder: $(csharp-sdks-folder)/ManagementGroups/Management.ManagementGroups/Generated
+  output-folder: $(csharp-sdks-folder)/managementgroups/Microsoft.Azure.Management.ManagementGroups/src/Generated
   clear-output-folder: true
 ```
 
