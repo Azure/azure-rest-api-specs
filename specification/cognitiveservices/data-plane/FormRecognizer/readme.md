@@ -49,7 +49,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.FormRecognizer
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Vision.FormRecognizer/src/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Vision.FormRecognizer/src/Generated
   title: "FormRecognizerClient"
   clear-output-folder: true
 ```
