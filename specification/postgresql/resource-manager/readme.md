@@ -79,7 +79,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PostgreSQL
-  output-folder: $(csharp-sdks-folder)/PostgreSQL/Management.PostgreSQL/Generated
+  output-folder: $(csharp-sdks-folder)/postgresql/Microsoft.Azure.Management.PostgreSQL/src/Generated
   clear-output-folder: true
 ```
 

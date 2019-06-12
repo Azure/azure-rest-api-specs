@@ -79,7 +79,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ManagedServices
-  output-folder: $(csharp-sdks-folder)/ManagedServices/Management.ManagedServices/Generated
+  output-folder: $(csharp-sdks-folder)/managedservices/Microsoft.Azure.Management.ManagedServices/src/Generated
   clear-output-folder: true
 ```
 

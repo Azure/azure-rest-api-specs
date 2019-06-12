@@ -164,7 +164,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ContainerRegistry
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/ContainerRegistry/Management.ContainerRegistry/Generated
+  output-folder: $(csharp-sdks-folder)/containerregistry/Microsoft.Azure.Management.ContainerRegistry/src/Generated
   clear-output-folder: true
 ```
 
