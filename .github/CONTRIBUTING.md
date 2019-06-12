@@ -2,7 +2,7 @@
 First, thank you for contributing to Azure specs repository! Swagger specs are the basis for generating Azure SDKs in multiple different languages, Azure CLIs for interacting with the services, and can provide documentation for these services.
 
 ## Basics
-If you're a spec author looking for information about all of of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
+If you're a spec author looking for information about all of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
 
 ## Table of Contents
 [Before starting](#before-starting)
@@ -63,7 +63,7 @@ As JSON files, specs can be modified in any text editor that you choose. We have
 ### Tools for validating Swagger
 There are some tools that can help you make sure your spec conforms to guidelines. The more of these issues that are caught before the PR is sent, the quicker the turnaround to merging the PR will be. 
 
-- _**Recommended**_ Please take a look at the [validation tools for swagger checklist] (https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) section. 
+- _**Recommended**_ Please take a look at the [validation tools for swagger checklist](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/swagger-checklist.md#validation-tools-for-swagger-checklist) section. 
 - The [OpenAPI Initiative Swagger editor](http://editor.swagger.io/#/) will help find basic issues in a Swagger file. However, we apply a higher bar than this validator - just because this site doesn't show errors doesn't mean the spec is ready to merge. 
 - Similarly, this online [schema validator](https://json-schema-validator.herokuapp.com/) can help find basic errors. Again, we apply a higher bar than this validator - just because this site doesn't show errors doesn't mean the spec is ready to merge. 
   * In the upper left box, paste the [swagger schema from here](https://github.com/swagger-api/swagger-spec/blob/master/schemas/v2.0/schema.json)
@@ -86,7 +86,7 @@ Use the git tools you have available to you, such as amend, rebase, etc.
 
 
 ## Review process
-We review spec PRs to maintain a high bar of quality for all products that will be generated from these specs (including SDKs in all languages, CLIs and documentation). It's critical that spec files are both sytactically and semantically correct, as well as conform to common patterns that make it possible to generate SDKs and CLIs that are usable for customers. Since specs are the base input for all of these products, the review process starts with PRs to this repository. Please refer to [Swagger Review Process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Review-Process) for more details.
+We review spec PRs to maintain a high bar of quality for all products that will be generated from these specs (including SDKs in all languages, CLIs and documentation). It's critical that spec files are both syntactically and semantically correct, as well as conform to common patterns that make it possible to generate SDKs and CLIs that are usable for customers. Since specs are the base input for all of these products, the review process starts with PRs to this repository. Please refer to [Swagger Review Process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Review-Process) for more details.
 
 The expectation is that every spec in a PR will be correct JSON, syntactically correct, will semantically agree with the service it applies to, and will follow the recommended patterns.
 
@@ -95,7 +95,7 @@ A spec file must be valid JSON, according to the [JSON specification](https://to
 
 #### Semantic correctness
 Your spec file must correctly represent your service. Even if a spec passes all of the rules listed above, it might not accurately describe the service that it is intended to describe. This could include 
-- Incorrect schemas for responses or requests (both missing and superfluous properities)
+- Incorrect schemas for responses or requests (both missing and superfluous properties)
 - Missing operations
 - Missing parameters (especially required ones)
 - etc (this list is not comprehensive)

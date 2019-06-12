@@ -1,0 +1,119 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "contosoresources",
+    "accountName": "contosomedia",
+    "transformName": "ExampleTransform"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "job1",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/ExampleTransform/jobs/job1",
+            "type": "Microsoft.Media/mediaservices/transforms/jobs",
+            "properties": {
+              "created": "2018-05-31T21:08:32.1913235Z",
+              "state": "Queued",
+              "description": null,
+              "input": {
+                "@odata.type": "#Microsoft.Media.JobInputs",
+                "label": null,
+                "inputs": [
+                  {
+                    "@odata.type": "#Microsoft.Media.JobInputAsset",
+                    "label": null,
+                    "files": [],
+                    "assetName": "job1 input"
+                  }
+                ]
+              },
+              "lastModified": "2018-05-31T21:08:32.1913235Z",
+              "outputs": [
+                {
+                  "@odata.type": "#Microsoft.Media.JobOutputAsset",
+                  "error": null,
+                  "state": "Queued",
+                  "progress": 0,
+                  "assetName": "job1 output"
+                }
+              ],
+              "priority": "Low",
+              "correlationData": {}
+            }
+          },
+          {
+            "name": "job2",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/ExampleTransform/jobs/job2",
+            "type": "Microsoft.Media/mediaservices/transforms/jobs",
+            "properties": {
+              "created": "2018-05-31T21:08:32.1933236Z",
+              "state": "Processing",
+              "description": null,
+              "input": {
+                "@odata.type": "#Microsoft.Media.JobInputs",
+                "label": null,
+                "inputs": [
+                  {
+                    "@odata.type": "#Microsoft.Media.JobInputAsset",
+                    "label": null,
+                    "files": [],
+                    "assetName": "job2 input"
+                  }
+                ]
+              },
+              "lastModified": "2018-05-31T21:08:32.1933236Z",
+              "outputs": [
+                {
+                  "@odata.type": "#Microsoft.Media.JobOutputAsset",
+                  "error": null,
+                  "state": "Processing",
+                  "progress": 50,
+                  "assetName": "job2 output"
+                }
+              ],
+              "priority": "Low",
+              "correlationData": {}
+            }
+          },
+          {
+            "name": "job3",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia/transforms/ExampleTransform/jobs/job3",
+            "type": "Microsoft.Media/mediaservices/transforms/jobs",
+            "properties": {
+              "created": "2018-05-31T21:08:32.1943231Z",
+              "state": "Finished",
+              "description": null,
+              "input": {
+                "@odata.type": "#Microsoft.Media.JobInputs",
+                "label": null,
+                "inputs": [
+                  {
+                    "@odata.type": "#Microsoft.Media.JobInputAsset",
+                    "label": null,
+                    "files": [],
+                    "assetName": "job3 input"
+                  }
+                ]
+              },
+              "lastModified": "2018-05-31T21:08:32.1943231Z",
+              "outputs": [
+                {
+                  "@odata.type": "#Microsoft.Media.JobOutputAsset",
+                  "error": null,
+                  "state": "Finished",
+                  "progress": 100,
+                  "assetName": "job3 output"
+                }
+              ],
+              "priority": "Low",
+              "correlationData": {}
+            }
+          }
+        ]
+      }
+    }
+  }
+}

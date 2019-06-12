@@ -1,0 +1,100 @@
+{
+  "parameters": {
+    "resourceGroupName": "demo_resource_group",
+    "jobName": "demo_job",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-03-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles",
+        "cluster": {
+          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/clusters/demo_cluster"
+        },
+        "nodeCount": 1,
+        "customToolkitSettings": {
+          "commandLine": "echo hi | tee $AZ_BATCHAI_OUTPUT_OUTPUTS/hi.txt"
+        },
+        "inputDirectories": [
+          {
+            "id": "INPUT",
+            "path": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/input"
+          }
+        ],
+        "priority": 0,
+        "containerSettings": {
+          "imageSourceRegistry": {
+            "image": "ubuntu"
+          }
+        },
+        "outputDirectories": [
+          {
+            "pathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/",
+            "type": "custom",
+            "id": "OUTPUTS",
+            "pathSuffix": "files",
+            "createNew": true
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.BatchAI/locations/eastus/operationresults/7e69f371-db62-4183-bba0-5ee577d43bd7?api-version=2018-03-01",
+        "Retry-After": 15
+      }
+    },
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/jobs/demo_job",
+        "name": "demo_job",
+        "type": "Microsoft.BatchAI/Job",
+        "properties": {
+          "priority": 0,
+          "cluster": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/clusters/demo_cluster"
+          },
+          "nodeCount": 1,
+          "containerSettings": {
+            "imageSourceRegistry": {
+              "image": "ubuntu"
+            }
+          },
+          "toolType": "custom",
+          "customToolkitSettings": {
+            "commandLine": "echo hi | tee $AZ_BATCHAI_OUTPUT_OUTPUTS/hi.txt"
+          },
+          "stdOutErrPathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles",
+          "inputDirectories": [
+            {
+              "id": "INPUT",
+              "path": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/input"
+            }
+          ],
+          "outputDirectories": [
+            {
+              "id": "OUTPUTS",
+              "pathPrefix": "$AZ_BATCHAI_MOUNT_ROOT/azfiles/",
+              "pathSuffix": "files",
+              "type": "custom",
+              "createNew": true
+            }
+          ],
+          "constraints": {
+            "maxWallClockTime": "P7D"
+          },
+          "creationTime": "2017-09-27T23:36:52.611Z",
+          "provisioningState": "succeeded",
+          "provisioningStateTransitionTime": "2017-09-27T23:36:53.701Z",
+          "executionState": "running",
+          "executionStateTransitionTime": "2017-09-27T23:36:56.395Z",
+          "executionInfo": {
+            "startTime": "2017-09-27T23:36:54.115Z"
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "local",
+    "api-version": "2015-11-01",
+    "offer": "sampleoffer1",
+    "resourceGroupName": "RG1",
+    "planLink": {
+      "properties": {
+        "planName": "sampleplan1",
+        "planLinkType": "Addon"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/offers/sampleoffer1",
+        "name": "sampleoffer1",
+        "type": "Microsoft.Subscriptions.Admin/offers",
+        "location": "local",
+        "tags": {},
+        "properties": {
+          "name": "sampleoffer1",
+          "displayName": "sampleoffer1",
+          "state": "Public",
+          "subscriptionCount": 2,
+          "maxSubscriptionsPerAccount": 0,
+          "basePlanIds": [
+            "/subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/RG1/providers/Microsoft.Subscriptions.Admin/plans/cnur5364tenantplan110"
+          ],
+          "addonPlans": [
+            {
+              "planId": "/subscriptions/36a6bf33-6df4-4acd-a30e-7b92c1c7b322/resourceGroups/TestRG-66c416e8-ad7c-4686-847e-5f84772d3217/providers/Microsoft.Subscriptions.Admin/plans/sampleplan1",
+              "maxAcquisitionCount": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,420 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on Email Templates associated with your Azure API Management deployment.",
+    "version": "2017-03-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{apimBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "apimBaseUrl",
+        "description": "The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "paths": {
+    "/templates": {
+      "get": {
+        "tags": [
+          "EmailTemplate"
+        ],
+        "operationId": "EmailTemplate_List",
+        "description": "Lists a collection of properties defined within a service instance.",
+        "x-ms-examples": {
+          "ApiManagementListTemplates": {
+            "$ref": "./examples/ApiManagementListTemplates.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field          | Supported operators    | Supported functions                         |\n|----------------|------------------------|---------------------------------------------|\n| id             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A Collection of the Email Template for the specified API Management service instance.",
+            "schema": {
+              "$ref": "#/definitions/EmailTemplateCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/templates/{templateName}": {
+      "get": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "operationId": "EmailTemplate_Get",
+        "description": "Gets the details of the email template specified by its identifier.",
+        "x-ms-examples": {
+          "ApiManagementGetTemplates": {
+            "$ref": "./examples/ApiManagementGetTemplates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the specified Email template.",
+            "schema": {
+              "$ref": "#/definitions/EmailTemplateContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "operationId": "EmailTemplate_CreateOrUpdate",
+        "description": "Updates an Email Template.",
+        "x-ms-examples": {
+          "ApiManagementPutTemplates": {
+            "$ref": "./examples/ApiManagementPutTemplates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmailTemplateUpdateParameters"
+            },
+            "description": "Email Template update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Email Template was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/EmailTemplateContract"
+            }
+          },
+          "200": {
+            "description": "Email Template was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/EmailTemplateContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "operationId": "EmailTemplate_Update",
+        "description": "Updates the specific Email Template.",
+        "x-ms-examples": {
+          "ApiManagementPatchTemplates": {
+            "$ref": "./examples/ApiManagementPatchTemplates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EmailTemplateUpdateParameters"
+            },
+            "description": "Update parameters."
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Email Template was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "EmailTemplates"
+        ],
+        "operationId": "EmailTemplate_Delete",
+        "description": "Reset the Email Template to default template provided by the API Management service instance.",
+        "x-ms-examples": {
+          "ApiManagementDeleteTemplates": {
+            "$ref": "./examples/ApiManagementDeleteTemplates.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/TemplateNameParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the Email Template to delete. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Email Template was successfully reset to default."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "EmailTemplateCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailTemplateContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of entities"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged email template list representation."
+    },
+    "EmailTemplateContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the Template Contract."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/EmailTemplateContractProperties"
+        }
+      ],
+      "description": "Email Template details."
+    },
+    "EmailTemplateContractProperties": {
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Subject of the Template.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "body": {
+          "type": "string",
+          "description": "Email Template Body. This should be a valid XDocument",
+          "minLength": 1
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the Template."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Email Template."
+        },
+        "isDefault": {
+          "type": "boolean",
+          "description": "Whether the template is the default template provided by Api Management or has been edited.",
+          "readOnly": true
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailTemplateParametersContractProperties"
+          },
+          "description": "Email Template Parameter values."
+        }
+      },
+      "required": [
+        "body",
+        "subject"
+      ],
+      "description": "Email Template Contract properties."
+    },
+    "EmailTemplateUpdateParameters": {
+      "properties": {
+        "subject": {
+          "type": "string",
+          "description": "Subject of the Template.",
+          "minLength": 1,
+          "maxLength": 1000
+        },
+        "title": {
+          "type": "string",
+          "description": "Title of the Template."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the Email Template."
+        },
+        "body": {
+          "type": "string",
+          "description": "Email Template Body. This should be a valid XDocument",
+          "minLength": 1
+        },
+        "parameters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EmailTemplateParametersContractProperties"
+          },
+          "description": "Email Template Parameter values."
+        }
+      },
+      "description": "Email Template Update Contract properties."
+    },
+    "EmailTemplateParametersContractProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Template parameter name.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9-._]+$"
+        },
+        "title": {
+          "type": "string",
+          "description": "Template parameter title.",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "description": {
+          "type": "string",
+          "description": "Template parameter description.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Za-z0-9-._]+$"
+        }
+      },
+      "description": "Email Template Parameter contract."
+    }
+  },
+  "parameters": {
+    "TemplateNameParameter": {
+      "name": "templateName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "applicationApprovedNotificationMessage",
+        "accountClosedDeveloper",
+        "quotaLimitApproachingDeveloperNotificationMessage",
+        "newDeveloperNotificationMessage",
+        "emailChangeIdentityDefault",
+        "inviteUserNotificationMessage",
+        "newCommentNotificationMessage",
+        "confirmSignUpIdentityDefault",
+        "newIssueNotificationMessage",
+        "purchaseDeveloperNotificationMessage",
+        "passwordResetIdentityDefault",
+        "passwordResetByAdminNotificationMessage",
+        "rejectDeveloperNotificationMessage",
+        "requestDeveloperNotificationMessage"
+      ],
+      "x-ms-enum": {
+        "name": "TemplateName",
+        "modelAsString": true
+      },
+      "description": "Email Template Name Identifier.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

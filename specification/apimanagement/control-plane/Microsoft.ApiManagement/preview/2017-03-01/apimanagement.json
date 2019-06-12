@@ -1,0 +1,506 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ApiManagementClient",
+    "description": "Use these REST APIs for performing operations on entities like API, Product, and Subscription associated with your Azure API Management deployment.",
+    "version": "2017-03-01"
+  },
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{apimBaseUrl}",
+    "useSchemePrefix": false,
+    "positionInOperation": "first",
+    "parameters": [
+      {
+        "name": "apimBaseUrl",
+        "description": "The management endpoint of the API Management service, for example https://myapimservice.management.azure-api.net.",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "paths": {
+    "/policies": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "operationId": "Policy_List",
+        "description": "Lists all the Global Policy definitions of the Api Management service.",
+        "x-ms-examples": {
+          "ApiManagementListPolicies": {
+            "$ref": "./examples/ApiManagementListPolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Policy scope.",
+            "enum": [
+              "Tenant",
+              "Product",
+              "Api",
+              "Operation",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "PolicyScopeContract",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an array of Policy Contracts.",
+            "schema": {
+              "$ref": "#/definitions/PolicyCollection"
+            }
+          }
+        }
+      }
+    },
+    "/policies/{policyId}": {
+      "get": {
+        "tags": [
+          "Policy"
+        ],
+        "operationId": "Policy_Get",
+        "description": "Get the Global policy definition of the Api Management service.",
+        "x-ms-examples": {
+          "ApiManagementGetPolicies": {
+            "$ref": "./examples/ApiManagementGetPolicies.json"
+          }
+        },
+        "produces": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Returns the Policy Contracts.",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policy"
+        ],
+        "operationId": "Policy_CreateOrUpdate",
+        "description": "Creates or updates the global policy configuration of the Api Management service.",
+        "x-ms-examples": {
+          "ApiManagementPutPolicies": {
+            "$ref": "./examples/ApiManagementPutPolicies.json"
+          }
+        },
+        "consumes": [
+          "application/json",
+          "application/vnd.ms-azure-apim.policy+xml",
+          "application/vnd.ms-azure-apim.policy.raw+xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            },
+            "required": true,
+            "description": "The policy contents to apply."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Global policy configuration was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          },
+          "200": {
+            "description": "Global policy configuration of the Api Management service was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/PolicyContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Policy"
+        ],
+        "operationId": "Policy_Delete",
+        "description": "Deletes the global policy configuration of the Api Management Service.",
+        "x-ms-examples": {
+          "ApiManagementDeletePolicies": {
+            "$ref": "./examples/ApiManagementDeletePolicies.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/PolicyIdParameter"
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": true,
+            "description": "The entity state (Etag) version of the policy to be deleted. A value of \"*\" can be used for If-Match to unconditionally apply the operation.",
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully deleted the policy configuration at the Global level."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/policySnippets": {
+      "get": {
+        "tags": [
+          "PolicySnippets"
+        ],
+        "operationId": "PolicySnippets_List",
+        "description": "Lists all policy snippets.",
+        "x-ms-examples": {
+          "ApiManagementListPolicySnippets": {
+            "$ref": "./examples/ApiManagementListPolicySnippets.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "scope",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Policy scope.",
+            "enum": [
+              "Tenant",
+              "Product",
+              "Api",
+              "Operation",
+              "All"
+            ],
+            "x-ms-enum": {
+              "name": "PolicyScopeContract",
+              "modelAsString": false
+            }
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "responses": {
+          "200": {
+            "description": "Returns an array of Policy Contracts.",
+            "schema": {
+              "$ref": "#/definitions/PolicySnippetsCollection"
+            }
+          }
+        }
+      }
+    },
+    "/regions": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Regions_List",
+        "description": "Lists all azure regions in which the service exists.",
+        "x-ms-examples": {
+          "ApiManagementListRegions": {
+            "$ref": "./examples/ApiManagementListRegions.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Lists of Regions in which the service is deployed.",
+            "schema": {
+              "$ref": "#/definitions/RegionListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": ""
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorFieldContract": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Property level error code."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of property-level error."
+        },
+        "target": {
+          "type": "string",
+          "description": "Property name."
+        }
+      },
+      "description": "Error Field contract."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response."
+        },
+        "message": {
+          "type": "string",
+          "description": "Human-readable representation of the error."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          },
+          "description": "The list of invalid fields send in request, in case of validation error."
+        }
+      },
+      "description": "Error Body contract."
+    },
+    "PolicyCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyContract"
+          },
+          "description": "Policy Contract value."
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of records"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "The response of the list policy operation."
+    },
+    "PolicyContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Policy identifier."
+        },
+        "policyContent": {
+          "type": "string",
+          "description": "Json escaped Xml Encoded contents of the Policy."
+        }
+      },
+      "required": [
+        "policyContent"
+      ],
+      "description": "Policy contract Properties."
+    },
+    "PolicySnippetsCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicySnippetContract"
+          },
+          "description": "Policy snippet value."
+        }
+      },
+      "description": "The response of the list policy snippets operation."
+    },
+    "PolicySnippetContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Snippet name.",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "description": "Snippet content.",
+          "readOnly": true
+        },
+        "toolTip": {
+          "type": "string",
+          "description": "Snippet toolTip.",
+          "readOnly": true
+        },
+        "scope": {
+          "type": "integer",
+          "description": "Binary OR value of the Snippet scope.",
+          "readOnly": true
+        }
+      },
+      "description": "Policy snippet."
+    },
+    "RegionContract": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Region name.",
+          "readOnly": true
+        },
+        "isMasterRegion": {
+          "description": "whether Region is the master region.",
+          "type": "boolean"
+        },
+        "isDeleted": {
+          "description": "whether Region is deleted.",
+          "type": "boolean"
+        }
+      },
+      "description": "Region profile."
+    },
+    "RegionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionContract"
+          },
+          "description": "Lists of Regions."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Lists Regions operation response details."
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Version of the API to be used with the client request."
+    },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to skip.",
+      "minimum": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to return.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyIdParameter": {
+      "name": "policyId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "policy"
+      ],
+      "description": "The identifier of the Policy.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "PolicyIdName"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2018-06-30",
+    "managementGroupId": "managementGroupForTest",
+    "billingPeriodName": "201807"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/managementGroupForTest/providers/Microsoft.Billing/billingPeriods/201807/providers/Microsoft.Consumption/aggregatedcostId1",
+        "name": "aggregatedcostId1",
+        "type": "Microsoft.Consumption/aggregatedcost",
+        "properties": {
+          "billingPeriodId": "/providers/Microsoft.Management/managementGroups/managementGroupForTest/providers/Microsoft.Billing/billingPeriods/201807",
+          "azureCharges": 250.9876,
+          "marketplaceCharges": 150.786,
+          "chargesBilledSeparately": 120.345,
+          "currency": "USD",
+          "children": [
+            {
+              "id": "/providers/Microsoft.Management/managementGroups/managementGroupChildForTest/providers/Microsoft.Billing/billingPeriods/201807/providers/Microsoft.Consumption/aggregatedcostId2",
+              "name": "aggregatedcostId2",
+              "type": "Microsoft.Consumption/aggregatedcost",
+              "properties": {
+                "billingPeriodId": "/providers/Microsoft.Management/managementGroups/managementGroupChildForTest/providers/Microsoft.Billing/billingPeriods/201807",
+                "azureCharges": 150.0,
+                "marketplaceCharges": 50.786,
+                "chargesBilledSeparately": 30.345,
+                "currency": "USD",
+                "children": []
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

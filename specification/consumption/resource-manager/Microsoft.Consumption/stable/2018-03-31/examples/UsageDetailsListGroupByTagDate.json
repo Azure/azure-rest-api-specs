@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2018-03-31",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "$apply": "groupby((tags,properties/usageStart))"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301/providers/Microsoft.Consumption/usageDetails/usageDetailsId1",
+            "name": "usageDetailsId1",
+            "type": "Microsoft.Consumption/usageDetails",
+            "tags": {
+              "description": "Azure VCAP STA - RDS Server"
+            },
+            "properties": {
+              "billingPeriodId": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301",
+              "usageStart": "2018-03-01T00:00:00.0000000Z",
+              "usageEnd": "2018-03-01T23:59:59.0000000Z",
+              "usageQuantity": 11.11111,
+              "pretaxCost": 0,
+              "currency": "USD"
+            }
+          },
+          {
+            "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301/providers/Microsoft.Consumption/usageDetails/usageDetailsId1",
+            "name": "usageDetailsId1",
+            "type": "Microsoft.Consumption/usageDetails",
+            "tags": {
+              "description": "Azure VCAP STA - RDS Server"
+            },
+            "properties": {
+              "billingPeriodId": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Billing/billingPeriods/20180301",
+              "usageStart": "2018-03-02T00:00:00.0000000Z",
+              "usageEnd": "2018-03-02T23:59:59.0000000Z",
+              "usageQuantity": 1.11111111111,
+              "pretaxCost": 0,
+              "currency": "USD"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

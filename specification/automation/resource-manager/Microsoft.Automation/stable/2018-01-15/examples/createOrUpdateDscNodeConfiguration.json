@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "automationAccountName": "myAutomationAccount20",
+    "api-version": "2018-01-15",
+    "nodeConfigurationName": "configName.nodeConfigName",
+    "parameters": {
+      "name": "configName.nodeConfigName",
+      "properties": {
+        "source": {
+          "hash": {
+            "algorithm": "sha256",
+            "value": "6DE256A57F01BFA29B88696D5E77A383D6E61484C7686E8DB955FA10ACE9FFE5"
+          },
+          "type": "embeddedContent",
+          "value": "\r\ninstance of MSFT_RoleResource as $MSFT_RoleResource1ref\r\n{\r\nResourceID = \"[WindowsFeature]IIS\";\r\n Ensure = \"Present\";\r\n SourceInfo = \"::3::32::WindowsFeature\";\r\n Name = \"Web-Server\";\r\n ModuleName = \"PsDesiredStateConfiguration\";\r\n\r\nModuleVersion = \"1.0\";\r\r\n ConfigurationName = \"configName\";\r\r\n};\r\ninstance of OMI_ConfigurationDocument\r\n\r\r\n                    {\r\n Version=\"2.0.0\";\r\n \r\r\n                        MinimumCompatibleVersion = \"1.0.0\";\r\n \r\r\n                        CompatibleVersionAdditionalProperties= {\"Omi_BaseResource:ConfigurationName\"};\r\n \r\r\n                        Author=\"weijiel\";\r\n \r\r\n                        GenerationDate=\"03/30/2017 13:40:25\";\r\n \r\r\n                        GenerationHost=\"TEST-BACKEND\";\r\n \r\r\n                        Name=\"configName\";\r\n\r\r\n                    };\r\n",
+          "version": "1.0"
+        },
+        "incrementNodeConfigurationBuild": true,
+        "configuration": {
+          "name": "configName"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "201": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Automation/automationAccounts/myAutomationAccount20/nodeConfigurations/configName.nodeConfigName",
+        "name": "configName.nodeConfigName",
+        "type": "Microsoft.Automation/AutomationAccounts/nodeConfigurations",
+        "properties": {
+          "lastModifiedTime": "2018-03-25T01:29:17.1205764+00:00",
+          "creationTime": "2018-03-25T01:29:17.1205764+00:00",
+          "configuration": {
+            "name": "configName"
+          },
+          "source": null,
+          "nodeCount": 0,
+          "incrementNodeConfigurationBuild": false
+        }
+      }
+    }
+  }
+}

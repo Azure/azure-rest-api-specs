@@ -1,0 +1,227 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure IoT Hub events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure IoT Hub events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "IotHubDeviceCreatedEventData": {
+      "description": "Event data for Microsoft.Devices.DeviceCreated event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceLifeCycleEventProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "IotHubDeviceDeletedEventData": {
+      "description": "Event data for Microsoft.Devices.DeviceDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceLifeCycleEventProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "IotHubDeviceConnectedEventData": {
+      "description": "Event data for Microsoft.Devices.DeviceConnected event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceConnectionStateEventProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "IotHubDeviceDisconnectedEventData": {
+      "description": "Event data for Microsoft.Devices.DeviceDisconnected event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceConnectionStateEventProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "IotHubDeviceTelemetryEventData": {
+      "description": "Event data for Microsoft.Devices.DeviceTelemetry event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeviceTelemetryEventProperties"
+        }
+      ],
+      "properties": {}
+    },
+    "DeviceLifeCycleEventProperties": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device life cycle event (DeviceCreated, DeviceDeleted).",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '."
+        },
+        "hubName": {
+          "type": "string",
+          "description": "Name of the IoT Hub where the device was created or deleted."
+        },
+        "twin": {
+          "description": "Information about the device twin, which is the cloud representation of application device metadata.",
+          "$ref": "#/definitions/DeviceTwinInfo"
+        }
+      }
+    },
+    "DeviceConnectionStateEventProperties": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device connection state event (DeviceConnected, DeviceDisconnected).",
+      "properties": {
+        "deviceId": {
+          "type": "string",
+          "description": "The unique identifier of the device. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '."
+        },
+        "moduleId": {
+          "type": "string",
+          "description": "The unique identifier of the module. This case-sensitive string can be up to 128 characters long, and supports ASCII 7-bit alphanumeric characters plus the following special characters: - : . + % _ &#35; * ? ! ( ) , = @ ; $ '."
+        },
+        "hubName": {
+          "type": "string",
+          "description": "Name of the IoT Hub where the device was created or deleted."
+        },
+        "deviceConnectionStateEventInfo": {
+          "description": "Information about the device connection state event.",
+          "$ref": "#/definitions/DeviceConnectionStateEventInfo"
+        }
+      }
+    },
+    "DeviceTelemetryEventProperties": {
+      "type": "object",
+      "description": "Schema of the Data property of an EventGridEvent for a device telemetry event (DeviceTelemetry).",
+      "properties": {
+        "body": {
+          "type": "object",
+          "description": "The content of the message from the device."
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Application properties are user-defined strings that can be added to the message. These fields are optional."
+        },
+        "systemProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "System properties help identify contents and source of the messages."
+        }
+      }
+    },
+    "DeviceTwinInfo": {
+      "type": "object",
+      "description": "Information about the device twin, which is the cloud representation of application device metadata.",
+      "properties": {
+        "authenticationType": {
+          "type": "string",
+          "description": "Authentication type used for this device: either SAS, SelfSigned, or CertificateAuthority."
+        },
+        "cloudToDeviceMessageCount": {
+          "type": "number",
+          "description": "Count of cloud to device messages sent to this device."
+        },
+        "connectionState": {
+          "type": "string",
+          "description": "Whether the device is connected or disconnected."
+        },
+        "deviceId": {
+          "type": "string",
+          "description": "The unique identifier of the device twin."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A piece of information that describes the content of the device twin. Each etag is guaranteed to be unique per device twin."
+        },
+        "lastActivityTime": {
+          "type": "string",
+          "description": "The ISO8601 timestamp of the last activity."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Properties JSON element.",
+          "properties": {
+            "desired": {
+              "description": "A portion of the properties that can be written only by the application back-end, and read by the device.",
+              "$ref": "#/definitions/DeviceTwinProperties"
+            },
+            "reported": {
+              "description": "A portion of the properties that can be written only by the device, and read by the application back-end.",
+              "$ref": "#/definitions/DeviceTwinProperties"
+            }
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Whether the device twin is enabled or disabled."
+        },
+        "statusUpdateTime": {
+          "type": "string",
+          "description": "The ISO8601 timestamp of the last device twin status update."
+        },
+        "version": {
+          "type": "number",
+          "description": "An integer that is incremented by one each time the device twin is updated."
+        },
+        "x509Thumbprint": {
+          "type": "object",
+          "description": "The thumbprint is a unique value for the x509 certificate, commonly used to find a particular certificate in a certificate store. The thumbprint is dynamically generated using the SHA1 algorithm, and does not physically exist in the certificate.",
+          "properties": {
+            "primaryThumbprint": {
+              "type": "string",
+              "description": "Primary thumbprint for the x509 certificate."
+            },
+            "secondaryThumbprint": {
+              "type": "string",
+              "description": "Secondary thumbprint for the x509 certificate."
+            }
+          }
+        }
+      }
+    },
+    "DeviceTwinProperties": {
+      "type": "object",
+      "description": "A portion of the properties that can be written only by the application back-end, and read by the device.",
+      "properties": {
+        "metadata": {
+          "description": "Metadata information for the properties JSON document.",
+          "$ref": "#/definitions/DeviceTwinMetadata",
+          "x-ms-client-name": "$metadata"
+        },
+        "version": {
+          "type": "number",
+          "description": "Version of device twin properties.",
+          "x-ms-client-name": "$version"
+        }
+      }
+    },
+    "DeviceTwinMetadata": {
+      "type": "object",
+      "description": "Metadata information for the properties JSON document.",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "description": "The ISO8601 timestamp of the last time the properties were updated.",
+          "x-ms-client-name": "$lastUpdated"
+        }
+      }
+    },
+    "DeviceConnectionStateEventInfo": {
+      "type": "object",
+      "description": "Information about the device connection state event.",
+      "properties": {
+        "sequenceNumber": {
+          "type": "string",
+          "description": "Sequence number is string representation of a hexadecimal number. string compare can be used to identify the larger number because both in ASCII and HEX numbers come after alphabets. If you are converting the string to hex, then the number is a 256 bit number."
+        }
+      }
+    }
+  }
+}

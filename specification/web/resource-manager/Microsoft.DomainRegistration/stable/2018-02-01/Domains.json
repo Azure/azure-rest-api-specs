@@ -1,0 +1,1459 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-02-01",
+    "title": "Domains API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/checkDomainAvailability": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Check if a domain is available for registration.",
+        "description": "Check if a domain is available for registration.",
+        "operationId": "Domains_CheckAvailability",
+        "parameters": [
+          {
+            "name": "identifier",
+            "in": "body",
+            "description": "Name of the domain.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/NameIdentifier"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainAvailablilityCheckResult"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/domains": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Get all domains in a subscription.",
+        "description": "Get all domains in a subscription.",
+        "operationId": "Domains_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/generateSsoRequest": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Generate a single sign-on request for the domain management portal.",
+        "description": "Generate a single sign-on request for the domain management portal.",
+        "operationId": "Domains_GetControlCenterSsoRequest",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainControlCenterSsoRequest"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DomainRegistration/listDomainRecommendations": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Get domain name recommendations based on keywords.",
+        "description": "Get domain name recommendations based on keywords.",
+        "operationId": "Domains_ListRecommendations",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "Search parameters for domain name recommendations.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainRecommendationSearchParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NameIdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Get all domains in a resource group.",
+        "description": "Get all domains in a resource group.",
+        "operationId": "Domains_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Get a domain.",
+        "description": "Get a domain.",
+        "operationId": "Domains_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Creates or updates a domain.",
+        "description": "Creates or updates a domain.",
+        "operationId": "Domains_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
+          },
+          {
+            "name": "domain",
+            "in": "body",
+            "description": "Domain registration information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Domain purchase is in progress.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "200": {
+            "description": "Domain purchase was successful.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Delete a domain.",
+        "description": "Delete a domain.",
+        "operationId": "Domains_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "forceHardDeleteDomain",
+            "in": "query",
+            "description": "Specify <code>true</code> to delete the domain immediately. The default is <code>false</code> which deletes the domain after 24 hours.",
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted domain."
+          },
+          "204": {
+            "description": "Domain does not exist in Azure database probably because it has already been deleted"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Creates or updates a domain.",
+        "description": "Creates or updates a domain.",
+        "operationId": "Domains_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9][a-zA-Z0-9\\.-]+"
+          },
+          {
+            "name": "domain",
+            "in": "body",
+            "description": "Domain registration information.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainPatchResource"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Domain purchase is in progress.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "200": {
+            "description": "Domain purchase was successful.",
+            "schema": {
+              "$ref": "#/definitions/Domain"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Lists domain ownership identifiers.",
+        "description": "Lists domain ownership identifiers.",
+        "operationId": "Domains_ListOwnershipIdentifiers",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainOwnershipIdentifierCollection"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/domainOwnershipIdentifiers/{name}": {
+      "get": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Get ownership identifier for domain",
+        "description": "Get ownership identifier for domain",
+        "operationId": "Domains_GetOwnershipIdentifier",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainOwnershipIdentifier"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Creates an ownership identifier for a domain or updates identifier details for an existing identifer",
+        "description": "Creates an ownership identifier for a domain or updates identifier details for an existing identifer",
+        "operationId": "Domains_CreateOrUpdateOwnershipIdentifier",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domainOwnershipIdentifier",
+            "in": "body",
+            "description": "A JSON representation of the domain ownership properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainOwnershipIdentifier"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainOwnershipIdentifier"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Delete ownership identifier for domain",
+        "description": "Delete ownership identifier for domain",
+        "operationId": "Domains_DeleteOwnershipIdentifier",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully deleted domain ownership identifier."
+          },
+          "204": {
+            "description": "Domain ownership identifier does not exist."
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Creates an ownership identifier for a domain or updates identifier details for an existing identifer",
+        "description": "Creates an ownership identifier for a domain or updates identifier details for an existing identifer",
+        "operationId": "Domains_UpdateOwnershipIdentifier",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of identifier.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "domainOwnershipIdentifier",
+            "in": "body",
+            "description": "A JSON representation of the domain ownership properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DomainOwnershipIdentifier"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DomainOwnershipIdentifier"
+            }
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DomainRegistration/domains/{domainName}/renew": {
+      "post": {
+        "tags": [
+          "Domains"
+        ],
+        "summary": "Renew a domain.",
+        "description": "Renew a domain.",
+        "operationId": "Domains_Renew",
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "domainName",
+            "in": "path",
+            "description": "Name of the domain.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Domain renewal was successful."
+          },
+          "202": {
+            "description": "Domain renewal in progress."
+          },
+          "204": {
+            "description": "Domain does not exist."
+          },
+          "400": {
+            "description": "Malformed domain renewal request."
+          },
+          "500": {
+            "description": "Domain renewal request failed."
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Address": {
+      "description": "Address information for domain registration.",
+      "required": [
+        "address1",
+        "city",
+        "country",
+        "postalCode",
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "address1": {
+          "description": "First line of an Address.",
+          "type": "string"
+        },
+        "address2": {
+          "description": "The second line of the Address. Optional.",
+          "type": "string"
+        },
+        "city": {
+          "description": "The city for the address.",
+          "type": "string"
+        },
+        "country": {
+          "description": "The country for the address.",
+          "type": "string"
+        },
+        "postalCode": {
+          "description": "The postal code for the address.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The state or province for the address.",
+          "type": "string"
+        }
+      }
+    },
+    "Contact": {
+      "description": "Contact information for domain registration. If 'Domain Privacy' option is not selected then the contact information is made publicly available through the Whois \ndirectories as per ICANN requirements.",
+      "required": [
+        "email",
+        "nameFirst",
+        "nameLast",
+        "phone"
+      ],
+      "type": "object",
+      "properties": {
+        "addressMailing": {
+          "$ref": "#/definitions/Address",
+          "description": "Mailing address."
+        },
+        "email": {
+          "description": "Email address.",
+          "type": "string"
+        },
+        "fax": {
+          "description": "Fax number.",
+          "type": "string"
+        },
+        "jobTitle": {
+          "description": "Job title.",
+          "type": "string"
+        },
+        "nameFirst": {
+          "description": "First name.",
+          "type": "string"
+        },
+        "nameLast": {
+          "description": "Last name.",
+          "type": "string"
+        },
+        "nameMiddle": {
+          "description": "Middle name.",
+          "type": "string"
+        },
+        "organization": {
+          "description": "Organization contact belongs to.",
+          "type": "string"
+        },
+        "phone": {
+          "description": "Phone number.",
+          "type": "string"
+        }
+      }
+    },
+    "Domain": {
+      "description": "Information about a domain.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Domain resource specific properties",
+          "required": [
+            "contactAdmin",
+            "contactBilling",
+            "contactRegistrant",
+            "contactTech",
+            "consent"
+          ],
+          "properties": {
+            "contactAdmin": {
+              "$ref": "#/definitions/Contact",
+              "description": "Administrative contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactBilling": {
+              "$ref": "#/definitions/Contact",
+              "description": "Billing contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactRegistrant": {
+              "$ref": "#/definitions/Contact",
+              "description": "Registrant contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactTech": {
+              "$ref": "#/definitions/Contact",
+              "description": "Technical contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "registrationStatus": {
+              "description": "Domain registration status.",
+              "enum": [
+                "Active",
+                "Awaiting",
+                "Cancelled",
+                "Confiscated",
+                "Disabled",
+                "Excluded",
+                "Expired",
+                "Failed",
+                "Held",
+                "Locked",
+                "Parked",
+                "Pending",
+                "Reserved",
+                "Reverted",
+                "Suspended",
+                "Transferred",
+                "Unknown",
+                "Unlocked",
+                "Unparked",
+                "Updated",
+                "JsonConverterFailed"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "DomainStatus",
+                "modelAsString": false
+              }
+            },
+            "provisioningState": {
+              "description": "Domain provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "nameServers": {
+              "description": "Name servers.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "privacy": {
+              "description": "<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "Domain creation timestamp.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationTime": {
+              "format": "date-time",
+              "description": "Domain expiration timestamp.",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastRenewedTime": {
+              "format": "date-time",
+              "description": "Timestamp when the domain was renewed last time.",
+              "type": "string",
+              "readOnly": true
+            },
+            "autoRenew": {
+              "description": "<code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.",
+              "default": true,
+              "type": "boolean"
+            },
+            "readyForDnsRecordManagement": {
+              "description": "<code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "managedHostNames": {
+              "description": "All hostnames derived from the domain and assigned to Azure resources.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostName"
+              },
+              "readOnly": true
+            },
+            "consent": {
+              "$ref": "#/definitions/DomainPurchaseConsent",
+              "description": "Legal agreement consent.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "domainNotRenewableReasons": {
+              "description": "Reasons why domain is not renewable.",
+              "type": "array",
+              "items": {
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "dnsType": {
+              "description": "Current DNS type",
+              "enum": [
+                "AzureDns",
+                "DefaultDomainRegistrarDns"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DnsType",
+                "modelAsString": false
+              }
+            },
+            "dnsZoneId": {
+              "description": "Azure DNS Zone to use",
+              "type": "string"
+            },
+            "targetDnsType": {
+              "description": "Target DNS type (would be used for migration)",
+              "enum": [
+                "AzureDns",
+                "DefaultDomainRegistrarDns"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DnsType",
+                "modelAsString": false
+              }
+            },
+            "authCode": {
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DomainAvailablilityCheckResult": {
+      "description": "Domain availability check result.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the domain.",
+          "type": "string"
+        },
+        "available": {
+          "description": "<code>true</code> if domain can be purchased using CreateDomain API; otherwise, <code>false</code>.",
+          "type": "boolean"
+        },
+        "domainType": {
+          "description": "Valid values are Regular domain: Azure will charge the full price of domain registration, SoftDeleted: Purchasing this domain will simply restore it and this operation will not cost anything.",
+          "enum": [
+            "Regular",
+            "SoftDeleted"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "DomainType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "DomainCollection": {
+      "description": "Collection of domains.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Domain"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DomainControlCenterSsoRequest": {
+      "description": "Single sign-on request information for domain management.",
+      "type": "object",
+      "properties": {
+        "url": {
+          "description": "URL where the single sign-on request is to be made.",
+          "type": "string",
+          "readOnly": true
+        },
+        "postParameterKey": {
+          "description": "Post parameter key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "postParameterValue": {
+          "description": "Post parameter value. Client should use 'application/x-www-form-urlencoded' encoding for this value.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DomainOwnershipIdentifier": {
+      "description": "Domain ownership Identifier.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DomainOwnershipIdentifier resource specific properties",
+          "properties": {
+            "ownershipId": {
+              "description": "Ownership Id.",
+              "type": "string"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DomainOwnershipIdentifierCollection": {
+      "description": "Collection of domain ownership identifiers.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DomainOwnershipIdentifier"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DomainPatchResource": {
+      "description": "ARM resource for a domain.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "DomainPatchResource resource specific properties",
+          "required": [
+            "contactAdmin",
+            "contactBilling",
+            "contactRegistrant",
+            "contactTech",
+            "consent"
+          ],
+          "properties": {
+            "contactAdmin": {
+              "$ref": "#/definitions/Contact",
+              "description": "Administrative contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactBilling": {
+              "$ref": "#/definitions/Contact",
+              "description": "Billing contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactRegistrant": {
+              "$ref": "#/definitions/Contact",
+              "description": "Registrant contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "contactTech": {
+              "$ref": "#/definitions/Contact",
+              "description": "Technical contact.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "registrationStatus": {
+              "description": "Domain registration status.",
+              "enum": [
+                "Active",
+                "Awaiting",
+                "Cancelled",
+                "Confiscated",
+                "Disabled",
+                "Excluded",
+                "Expired",
+                "Failed",
+                "Held",
+                "Locked",
+                "Parked",
+                "Pending",
+                "Reserved",
+                "Reverted",
+                "Suspended",
+                "Transferred",
+                "Unknown",
+                "Unlocked",
+                "Unparked",
+                "Updated",
+                "JsonConverterFailed"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "DomainStatus",
+                "modelAsString": false
+              }
+            },
+            "provisioningState": {
+              "description": "Domain provisioning state.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "InProgress",
+                "Deleting"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": false
+              }
+            },
+            "nameServers": {
+              "description": "Name servers.",
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "privacy": {
+              "description": "<code>true</code> if domain privacy is enabled for this domain; otherwise, <code>false</code>.",
+              "type": "boolean"
+            },
+            "createdTime": {
+              "format": "date-time",
+              "description": "Domain creation timestamp.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationTime": {
+              "format": "date-time",
+              "description": "Domain expiration timestamp.",
+              "type": "string",
+              "readOnly": true
+            },
+            "lastRenewedTime": {
+              "format": "date-time",
+              "description": "Timestamp when the domain was renewed last time.",
+              "type": "string",
+              "readOnly": true
+            },
+            "autoRenew": {
+              "description": "<code>true</code> if the domain should be automatically renewed; otherwise, <code>false</code>.",
+              "default": true,
+              "type": "boolean"
+            },
+            "readyForDnsRecordManagement": {
+              "description": "<code>true</code> if Azure can assign this domain to App Service apps; otherwise, <code>false</code>. This value will be <code>true</code> if domain registration status is active and \n it is hosted on name servers Azure has programmatic access to.",
+              "type": "boolean",
+              "readOnly": true
+            },
+            "managedHostNames": {
+              "description": "All hostnames derived from the domain and assigned to Azure resources.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/HostName"
+              },
+              "readOnly": true
+            },
+            "consent": {
+              "$ref": "#/definitions/DomainPurchaseConsent",
+              "description": "Legal agreement consent.",
+              "x-ms-mutability": [
+                "create"
+              ]
+            },
+            "domainNotRenewableReasons": {
+              "description": "Reasons why domain is not renewable.",
+              "type": "array",
+              "items": {
+                "enum": [
+                  "RegistrationStatusNotSupportedForRenewal",
+                  "ExpirationNotInRenewalTimeRange",
+                  "SubscriptionNotActive"
+                ],
+                "type": "string"
+              },
+              "readOnly": true
+            },
+            "dnsType": {
+              "description": "Current DNS type",
+              "enum": [
+                "AzureDns",
+                "DefaultDomainRegistrarDns"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DnsType",
+                "modelAsString": false
+              }
+            },
+            "dnsZoneId": {
+              "description": "Azure DNS Zone to use",
+              "type": "string"
+            },
+            "targetDnsType": {
+              "description": "Target DNS type (would be used for migration)",
+              "enum": [
+                "AzureDns",
+                "DefaultDomainRegistrarDns"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "DnsType",
+                "modelAsString": false
+              }
+            },
+            "authCode": {
+              "type": "string",
+              "x-ms-mutability": [
+                "create",
+                "read"
+              ]
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "DomainPurchaseConsent": {
+      "description": "Domain purchase consent object, representing acceptance of applicable legal agreements.",
+      "type": "object",
+      "properties": {
+        "agreementKeys": {
+          "description": "List of applicable legal agreement keys. This list can be retrieved using ListLegalAgreements API under <code>TopLevelDomain</code> resource.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "agreedBy": {
+          "description": "Client IP address.",
+          "type": "string"
+        },
+        "agreedAt": {
+          "format": "date-time",
+          "description": "Timestamp when the agreements were accepted.",
+          "type": "string"
+        }
+      }
+    },
+    "DomainRecommendationSearchParameters": {
+      "description": "Domain recommendation search parameters.",
+      "type": "object",
+      "properties": {
+        "keywords": {
+          "description": "Keywords to be used for generating domain recommendations.",
+          "type": "string"
+        },
+        "maxDomainRecommendations": {
+          "format": "int32",
+          "description": "Maximum number of recommendations.",
+          "type": "integer"
+        }
+      }
+    },
+    "HostName": {
+      "description": "Details of a hostname derived from a domain.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the hostname.",
+          "type": "string"
+        },
+        "siteNames": {
+          "description": "List of apps the hostname is assigned to. This list will have more than one app only if the hostname is pointing to a Traffic Manager.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "azureResourceName": {
+          "description": "Name of the Azure resource the hostname is assigned to. If it is assigned to a Traffic Manager then it will be the Traffic Manager name otherwise it will be the app name.",
+          "type": "string"
+        },
+        "azureResourceType": {
+          "description": "Type of the Azure resource the hostname is assigned to.",
+          "enum": [
+            "Website",
+            "TrafficManager"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "AzureResourceType",
+            "modelAsString": false
+          }
+        },
+        "customHostNameDnsRecordType": {
+          "description": "Type of the DNS record.",
+          "enum": [
+            "CName",
+            "A"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CustomHostNameDnsRecordType",
+            "modelAsString": false
+          }
+        },
+        "hostNameType": {
+          "description": "Type of the hostname.",
+          "enum": [
+            "Verified",
+            "Managed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HostNameType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "NameIdentifierCollection": {
+      "description": "Collection of domain name identifiers.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../Microsoft.Web/stable/2018-02-01/CommonDefinitions.json#/definitions/NameIdentifier"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "Your Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000).",
+      "required": true,
+      "type": "string"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Name of the resource group to which the resource belongs.",
+      "required": true,
+      "type": "string",
+      "maxLength": 90,
+      "minLength": 1,
+      "pattern": "^[-\\w\\._\\(\\)]+[^\\.]$",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "API Version",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

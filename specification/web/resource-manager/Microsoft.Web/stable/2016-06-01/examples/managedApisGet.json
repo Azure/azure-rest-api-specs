@@ -1,0 +1,65 @@
+{
+  "parameters": {
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "location": "northcentralus",
+    "apiName": "testManagedApi",
+    "api-version": "2016-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "name": "testManagedApi",
+          "connectionParameters": {
+            "token": {
+              "type": "oauthSetting",
+              "oAuthSettings": {
+                "identityProvider": "oauth2",
+                "clientId": "testClientID",
+                "scopes": [
+                  "read",
+                  "write"
+                ],
+                "redirectUrl": "https://logic-apis-northcentralus.consent.azure-apim.net/redirect",
+                "properties": {
+                  "IsFirstParty": "False"
+                },
+                "customParameters": {
+                  "authorizationUrl": {
+                    "value": "https://tempuri.org/authorize/"
+                  },
+                  "tokenUrl": {
+                    "value": "https://tempuri.org/token/"
+                  },
+                  "refreshUrl": {
+                    "value": "https://tempuri.org/refresh/"
+                  }
+                }
+              }
+            }
+          },
+          "metadata": {
+            "source": "marketplace",
+            "brandColor": "#C9C9C9"
+          },
+          "runtimeUrls": [
+            "https://tempuri.org/testManagedApi"
+          ],
+          "generalInformation": {
+            "iconUrl": "testIcon.png",
+            "displayName": "testManagedApi",
+            "description": "",
+            "releaseTag": "Preview"
+          },
+          "capabilities": [
+            "actions"
+          ]
+        },
+        "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/providers/Microsoft.Web/locations/northcentralus/managedApis/testManagedApi",
+        "name": "testManagedApi",
+        "type": "Microsoft.Web/locations/managedApis",
+        "location": "northcentralus"
+      }
+    }
+  }
+}
