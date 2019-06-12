@@ -76,9 +76,26 @@
                             ],
            "locationInfo":  [
                                 {
-                                    "location":  "westus"
+                                    "location":  "westus",
+                                    "zones": [
+                                       "westus-AZ01"
+                                    ],
+                                    "zoneDetails":  [
+                                      {
+                                        "name": "westus-AZ01",
+                                        "capabilities": [
+                                            {
+                                                "name":  "UltraSSDAvailable",
+                                                "value":  "True"
+                                            }
+                                        ]
+                                      }
+                                    ]
                                 }
                             ],
+           "requiredFeatures":  [
+                                    "Microsoft.Compute/VMSKUPreview"
+                                ],
            "name":  "Standard_A0",
            "tier":  "Standard",
            "size":  "A0",
@@ -153,9 +170,16 @@
                             ],
            "locationInfo":  [
                                 {
-                                    "location":  "westus"
+                                    "location":  "westus",
+                                    "zones": [
+                                       "westus-AZ02",
+                                       "westus-AZ01"
+                                    ]
                                 }
                             ],
+           "requiredFeatures":  [
+                                    "Microsoft.Compute/VMSKUPreview"
+                                ],
            "name":  "Standard_A1",
            "tier":  "Standard",
            "size":  "A1",
