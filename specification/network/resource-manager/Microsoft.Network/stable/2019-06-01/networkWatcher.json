@@ -3470,7 +3470,7 @@
           "type": "string",
           "description": "The name of connection monitor test."
         },
-        "testFrequencySeconds": {
+        "testFrequencySec": {
           "type": "integer",
           "description": "An interval between tests in seconds."
         },
@@ -3500,9 +3500,9 @@
           "$ref": "#/definitions/ConnectionMonitorICMPConfiguration",
           "description": "Describes ICMP configuration of connection monitor test."
         },
-        "healthThreshold": {
-          "$ref": "#/definitions/ConnectionMonitorHealthThreshold",
-          "description": "Describes health threshold of connection monitor test."
+        "successThreshold": {
+          "$ref": "#/definitions/ConnectionMonitorSuccessThreshold",
+          "description": "Describes success threshold of connection monitor test group."
         }
       },
       "required": [
@@ -3565,9 +3565,9 @@
             "$ref": "#/definitions/HTTPHeader"
           }
         },
-        "validStatusCodes": {
+        "validStatusCodeRanges": {
           "type": "array",
-          "description": "List of valid status codes.",
+          "description": "List of valid status code ranges.",
           "items": {
             "type": "string"
           }
@@ -3575,18 +3575,18 @@
       },
       "description": "Describes the HTTP configuration."
     },
-    "ConnectionMonitorHealthThreshold": {
+    "ConnectionMonitorSuccessThreshold": {
       "properties": {
         "checksFailedPercent": {
           "type": "integer",
           "description": "Percentage of failed checks."
         },
-        "roundTripTimeMicroseconds": {
-          "type": "integer",
-          "description": "Maximum roundtrip time in microseconds."
+        "roundTripTimeMs": {
+          "type": "number",
+          "description": "Maximum roundtrip time in miliseconds."
         }
       },
-      "description": "Describes the test health threshold."
+      "description": "Describes the success threshold for test group."
     },
     "ConnectionMonitorEndpointFilter": {
       "properties": {
