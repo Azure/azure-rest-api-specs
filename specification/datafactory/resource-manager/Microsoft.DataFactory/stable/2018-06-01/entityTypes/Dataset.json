@@ -1327,6 +1327,36 @@
         "path"
       ]
     },
+    "SapHanaTableDataset": {
+      "x-ms-discriminator-value": "SapHanaTable",
+      "description": "SAP HANA Table properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP HANA Table properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapHanaTableDatasetTypeProperties"
+        }
+      }
+    },
+    "SapHanaTableDatasetTypeProperties": {
+      "description": "SAP HANA Table properties.",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of SAP HANA. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of SAP HANA. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SapOpenHubTableDataset": {
       "x-ms-discriminator-value": "SapOpenHubTable",
       "description": "Sap Business Warehouse Open Hub Destination Table properties.",

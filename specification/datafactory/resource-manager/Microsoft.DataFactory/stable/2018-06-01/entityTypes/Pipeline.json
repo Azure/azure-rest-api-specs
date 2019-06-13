@@ -981,6 +981,25 @@
         }
       }
     },
+    "SapHanaSource": {
+      "description": "A copy activity source for SAP HANA source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SAP HANA Sql query. Type: string (or Expression with resultType string)."
+        },
+        "packetSize": {
+          "type": "object",
+          "description": "The packet size of data read from SAP HANA. Type: integer(or Expression with resultType integer)."
+        }
+      }
+    },
     "SapOpenHubSource": {
       "description": "A copy activity source for SAP Business Warehouse Open Hub Destination source.",
       "type": "object",
