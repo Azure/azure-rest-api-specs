@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers": {
       "get": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_ListByService",
         "description": "Lists a collection of authorization servers defined within a service instance.",
@@ -58,7 +58,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field | Supported operators    | Supported functions                         |\n|-------|------------------------|---------------------------------------------|\n| id    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -77,20 +77,26 @@
           "200": {
             "description": "A Collection of the Authorization Server entities for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerCollection"
+              "$ref": "./definitions.json#/definitions/AuthorizationServerCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/AuthorizationServerContract"
+        "x-ms-odata": "./definitions.json#/definitions/AuthorizationServerContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}": {
       "head": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the authorizationServer specified by its identifier.",
@@ -107,7 +113,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -136,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_Get",
         "description": "Gets the details of the authorization server specified by its identifier.",
@@ -153,7 +159,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -166,7 +172,7 @@
           "200": {
             "description": "Gets the details of the specified authorization server.",
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerContract"
+              "$ref": "./definitions.json#/definitions/AuthorizationServerContract"
             },
             "headers": {
               "ETag": {
@@ -185,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_CreateOrUpdate",
         "description": "Creates new authorization server or updates an existing authorization server.",
@@ -202,14 +208,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerContract"
+              "$ref": "./definitions.json#/definitions/AuthorizationServerContract"
             },
             "description": "Create or update parameters."
           },
@@ -226,14 +232,26 @@
         "responses": {
           "201": {
             "description": "Authorization server was successfully registered.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerContract"
+              "$ref": "./definitions.json#/definitions/AuthorizationServerContract"
             }
           },
           "200": {
             "description": "Authorization server is already registered.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerContract"
+              "$ref": "./definitions.json#/definitions/AuthorizationServerContract"
             }
           },
           "default": {
@@ -246,7 +264,7 @@
       },
       "patch": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_Update",
         "description": "Updates the details of the authorization server specified by its identifier.",
@@ -263,14 +281,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AuthorizationServerUpdateContract"
+              "$ref": "./definitions.json#/definitions/AuthorizationServerUpdateContract"
             },
             "description": "OAuth2 Server settings Update parameters."
           },
@@ -298,7 +316,7 @@
       },
       "delete": {
         "tags": [
-          "AuthorizationServers"
+          "AuthorizationServer"
         ],
         "operationId": "AuthorizationServer_Delete",
         "description": "Deletes specific authorization server instance.",
@@ -315,7 +333,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/AuthenticationServerIdParameter"
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -344,339 +362,6 @@
       }
     }
   },
-  "definitions": {
-    "AuthorizationServerCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AuthorizationServerContract"
-          },
-          "description": "Page values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged OAuth2 Authorization Servers list representation."
-    },
-    "AuthorizationServerContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AuthorizationServerContractProperties",
-          "description": "Properties of the External OAuth authorization server Contract."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "External OAuth authorization server settings."
-    },
-    "AuthorizationServerContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "User-friendly authorization server name.",
-          "minLength": 1,
-          "maxLength": 50
-        },
-        "clientRegistrationEndpoint": {
-          "type": "string",
-          "description": "Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced."
-        },
-        "authorizationEndpoint": {
-          "type": "string",
-          "description": "OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2."
-        },
-        "grantTypes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "authorizationCode",
-              "implicit",
-              "resourceOwnerPassword",
-              "clientCredentials"
-            ],
-            "x-ms-enum": {
-              "name": "GrantType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "authorizationCode",
-                  "description": "Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1."
-                },
-                {
-                  "value": "implicit",
-                  "description": "Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2."
-                },
-                {
-                  "value": "resourceOwnerPassword",
-                  "description": "Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3."
-                },
-                {
-                  "value": "clientCredentials",
-                  "description": "Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4."
-                }
-              ]
-            }
-          },
-          "description": "Form of an authorization grant, which the client uses to request the access token.",
-          "externalDocs": {
-            "url": "http://tools.ietf.org/html/rfc6749#section-4"
-          }
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client or app id registered with this authorization server."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AuthorizationServerContractBaseProperties"
-        }
-      ],
-      "required": [
-        "displayName",
-        "clientRegistrationEndpoint",
-        "authorizationEndpoint",
-        "clientId",
-        "grantTypes"
-      ],
-      "description": "External OAuth authorization server settings Properties."
-    },
-    "AuthorizationServerUpdateContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AuthorizationServerUpdateContractProperties",
-          "description": "Properties of the External OAuth authorization server update Contract."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "External OAuth authorization server settings."
-    },
-    "AuthorizationServerUpdateContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "User-friendly authorization server name.",
-          "minLength": 1,
-          "maxLength": 50
-        },
-        "clientRegistrationEndpoint": {
-          "type": "string",
-          "description": "Optional reference to a page where client or app registration for this authorization server is performed. Contains absolute URL to entity being referenced."
-        },
-        "authorizationEndpoint": {
-          "type": "string",
-          "description": "OAuth authorization endpoint. See http://tools.ietf.org/html/rfc6749#section-3.2."
-        },
-        "grantTypes": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "authorizationCode",
-              "implicit",
-              "resourceOwnerPassword",
-              "clientCredentials"
-            ],
-            "x-ms-enum": {
-              "name": "GrantType",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "authorizationCode",
-                  "description": "Authorization Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.1."
-                },
-                {
-                  "value": "implicit",
-                  "description": "Implicit Code Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.2."
-                },
-                {
-                  "value": "resourceOwnerPassword",
-                  "description": "Resource Owner Password Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.3."
-                },
-                {
-                  "value": "clientCredentials",
-                  "description": "Client Credentials Grant flow as described https://tools.ietf.org/html/rfc6749#section-4.4."
-                }
-              ]
-            }
-          },
-          "description": "Form of an authorization grant, which the client uses to request the access token.",
-          "externalDocs": {
-            "url": "http://tools.ietf.org/html/rfc6749#section-4"
-          }
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client or app id registered with this authorization server."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/AuthorizationServerContractBaseProperties"
-        }
-      ],
-      "description": "External OAuth authorization server Update settings contract."
-    },
-    "AuthorizationServerContractBaseProperties": {
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the authorization server. Can contain HTML formatting tags."
-        },
-        "authorizationMethods": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "HEAD",
-              "OPTIONS",
-              "TRACE",
-              "GET",
-              "POST",
-              "PUT",
-              "PATCH",
-              "DELETE"
-            ],
-            "x-ms-enum": {
-              "name": "AuthorizationMethod",
-              "modelAsString": false
-            }
-          },
-          "description": "HTTP verbs supported by the authorization endpoint. GET must be always present. POST is optional."
-        },
-        "clientAuthenticationMethod": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Basic",
-              "Body"
-            ],
-            "x-ms-enum": {
-              "name": "ClientAuthenticationMethod",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Basic",
-                  "description": "Basic Client Authentication method."
-                },
-                {
-                  "value": "Body",
-                  "description": "Body based Authentication method."
-                }
-              ]
-            }
-          },
-          "description": "Method of authentication supported by the token endpoint of this authorization server. Possible values are Basic and/or Body. When Body is specified, client credentials and other parameters are passed within the request body in the application/x-www-form-urlencoded format."
-        },
-        "tokenBodyParameters": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TokenBodyParameterContract"
-          },
-          "description": "Additional parameters required by the token endpoint of this authorization server represented as an array of JSON objects with name and value string properties, i.e. {\"name\" : \"name value\", \"value\": \"a value\"}."
-        },
-        "tokenEndpoint": {
-          "type": "string",
-          "description": "OAuth token endpoint. Contains absolute URI to entity being referenced.",
-          "externalDocs": {
-            "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
-          }
-        },
-        "supportState": {
-          "type": "boolean",
-          "description": "If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.",
-          "externalDocs": {
-            "url": "http://tools.ietf.org/html/rfc6749#section-3.1"
-          }
-        },
-        "defaultScope": {
-          "type": "string",
-          "description": "Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.",
-          "externalDocs": {
-            "url": "http://tools.ietf.org/html/rfc6749#section-3.3"
-          }
-        },
-        "bearerTokenSendingMethods": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "authorizationHeader",
-              "query"
-            ],
-            "x-ms-enum": {
-              "name": "BearerTokenSendingMethod",
-              "modelAsString": true
-            }
-          },
-          "description": "Specifies the mechanism by which access token is passed to the API. ",
-          "externalDocs": {
-            "url": "http://tools.ietf.org/html/rfc6749#section-4"
-          }
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client or app secret registered with this authorization server."
-        },
-        "resourceOwnerUsername": {
-          "type": "string",
-          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner username."
-        },
-        "resourceOwnerPassword": {
-          "type": "string",
-          "description": "Can be optionally specified when resource owner password grant type is supported by this authorization server. Default resource owner password."
-        }
-      },
-      "description": "External OAuth authorization server Update settings contract."
-    },
-    "TokenBodyParameterContract": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "body parameter name."
-        },
-        "value": {
-          "type": "string",
-          "description": "body parameter value."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ],
-      "description": "OAuth acquire token request body parameter (www-url-form-encoded)."
-    }
-  },
-  "parameters": {
-    "AuthenticationServerIdParameter": {
-      "name": "authsid",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the authorization server.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "definitions": {},
+  "parameters": {}
 }

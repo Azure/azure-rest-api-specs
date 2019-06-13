@@ -141,6 +141,36 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments/{assignmentName}/WhoIsBlueprint": {
+      "post": {
+        "operationId": "Assignments_WhoIsBlueprint",
+        "description": "Get Blueprints service SPN objectId",
+        "x-ms-examples": {
+          "WhoIsBlueprint_Action": {
+            "$ref": "./examples/WhoIsBlueprint_Action.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/AssignmentNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Blueprints service SPN objectId",
+            "schema": {
+              "$ref": "#/definitions/WhoIsBlueprintContract"
+            }
+          }
+        }
+      }
+    },
     "/{scope}/providers/Microsoft.Blueprint/blueprintAssignments": {
       "get": {
         "tags": [
@@ -195,7 +225,9 @@
         "properties"
       ],
       "allOf": [
-        { "$ref": "#/definitions/TrackedResource" }
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
       ]
     },
     "AssignmentList": {
@@ -221,7 +253,7 @@
       "description": "User-assigned managed identity.",
       "properties": {
         "principalId": {
-          "type":  "string",
+          "type": "string",
           "description": "Azure Active Directory principal ID associated with this Identity."
         },
         "clientId": {
@@ -271,10 +303,11 @@
     "AssignmentStatus": {
       "description": "The status of a blueprint assignment. This field is readonly.",
       "type": "object",
-      "properties": {
-      },
+      "properties": {},
       "allOf": [
-        { "$ref": "#/definitions/BlueprintResourceStatusBase" }
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
       ]
     },
     "AssignmentLockSettings": {
@@ -286,11 +319,19 @@
           "description": "Lock mode.",
           "enum": [
             "None",
-            "AllResources"
+            "AllResourcesReadOnly",
+            "AllResourcesDoNotDelete"
           ],
           "x-ms-enum": {
             "name": "AssignmentLockMode",
             "modelAsString": true
+          }
+        },
+        "excludedPrincipals": {
+          "type": "array",
+          "description": "List of AAD principals excluded from blueprint locks. Up to 5 principals are permitted.",
+          "items": {
+            "type": "string"
           }
         }
       }
@@ -379,9 +420,13 @@
           "description": "Actual value."
         }
       },
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretReferenceParameterValue": {
@@ -393,9 +438,13 @@
           "$ref": "#/definitions/SecretValueReference"
         }
       },
-      "required": [ "reference" ],
+      "required": [
+        "reference"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretValueReference": {
@@ -411,7 +460,7 @@
           "type": "string"
         },
         "secretVersion": {
-          "description": "If multiple versions, the version of the secret.",
+          "description": "The version of the secret to use. If left blank, the latest version of the secret is used.",
           "type": "string"
         }
       },
@@ -429,7 +478,9 @@
           "type": "string"
         }
       },
-      "required": [ "id" ]
+      "required": [
+        "id"
+      ]
     },
     "ResourceGroupValueCollection": {
       "description": "A dictionary which maps resource group placeholders to the resource groups which will be created.",
@@ -462,12 +513,19 @@
         "location": {
           "type": "string",
           "description": "The location of this blueprint assignment.",
-          "x-ms-mutability": [ "read", "create" ]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
-      "required": [ "location" ],
+      "required": [
+        "location"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/AzureResourceBase" }
+        {
+          "$ref": "#/definitions/AzureResourceBase"
+        }
       ]
     },
     "AzureResourceBase": {
@@ -515,13 +573,24 @@
       "properties": {
         "timeCreated": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Creation time of this blueprint definition."
         },
         "lastModified": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Last modified time of this blueprint definition."
+        }
+      }
+    },
+    "WhoIsBlueprintContract": {
+      "description": "Response schema for querying the Azure Blueprints service principal in the tenant.",
+      "properties": {
+        "objectId": {
+          "type": "string",
+          "description": "AAD object Id of the Azure Blueprints service principal in the tenant."
         }
       }
     }
@@ -532,7 +601,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'). For blueprint assignments management group scope is reserved for future use.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },

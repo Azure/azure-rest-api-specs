@@ -95,7 +95,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DeploymentManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DeploymentManager/Management/Generated
+  output-folder: $(csharp-sdks-folder)/deploymentmanager/Microsoft.Azure.Management.DeploymentManager/src/Generated
   clear-output-folder: true
 ```
 
@@ -116,16 +116,17 @@ python:
   package-name: azure-mgmt-deploymentmanager
   package-version: 0.9.0
   clear-output-folder: true
+  override-client-name: DeploymentManagerClient
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-deploymentmanager/azure/mgmt/deploymentmanager
+  output-folder: $(python-sdks-folder)/deploymentmanager/azure-mgmt-deploymentmanager/azure/mgmt/deploymentmanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-deploymentmanager
+  output-folder: $(python-sdks-folder)/deploymentmanager/azure-mgmt-deploymentmanager
 ```
 
 ## Go

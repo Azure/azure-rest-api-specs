@@ -66,7 +66,9 @@
         ],
         "operationId": "AdminKeys_Get",
         "x-ms-examples": {
-          "SearchGetAdminKeys": { "$ref": "./examples/SearchGetAdminKeys.json" }
+          "SearchGetAdminKeys": {
+            "$ref": "./examples/SearchGetAdminKeys.json"
+          }
         },
         "description": "Gets the primary and secondary admin API keys for the specified Azure Search service.",
         "externalDocs": {
@@ -112,7 +114,9 @@
         ],
         "operationId": "AdminKeys_Regenerate",
         "x-ms-examples": {
-          "SearchRegenerateAdminKey": { "$ref": "./examples/SearchRegenerateAdminKey.json" }
+          "SearchRegenerateAdminKey": {
+            "$ref": "./examples/SearchRegenerateAdminKey.json"
+          }
         },
         "description": "Regenerates either the primary or secondary admin API key. You can only regenerate one key at a time.",
         "externalDocs": {
@@ -173,7 +177,9 @@
         ],
         "operationId": "QueryKeys_Create",
         "x-ms-examples": {
-          "SearchCreateQueryKey": { "$ref": "./examples/SearchCreateQueryKey.json" }
+          "SearchCreateQueryKey": {
+            "$ref": "./examples/SearchCreateQueryKey.json"
+          }
         },
         "description": "Generates a new query key for the specified Search service. You can create up to 50 query keys per service.",
         "externalDocs": {
@@ -229,7 +235,9 @@
         },
         "operationId": "QueryKeys_ListBySearchService",
         "x-ms-examples": {
-          "SearchListQueryKeysBySearchService": { "$ref": "./examples/SearchListQueryKeysBySearchService.json" }
+          "SearchListQueryKeysBySearchService": {
+            "$ref": "./examples/SearchListQueryKeysBySearchService.json"
+          }
         },
         "description": "Returns the list of query API keys for the given Azure Search service.",
         "externalDocs": {
@@ -275,7 +283,9 @@
         ],
         "operationId": "QueryKeys_Delete",
         "x-ms-examples": {
-          "SearchDeleteQueryKey": { "$ref": "./examples/SearchDeleteQueryKey.json" }
+          "SearchDeleteQueryKey": {
+            "$ref": "./examples/SearchDeleteQueryKey.json"
+          }
         },
         "description": "Deletes the specified query key. Unlike admin keys, query keys are not regenerated. The process for regenerating a query key is to delete and then recreate it.",
         "externalDocs": {
@@ -331,7 +341,12 @@
         ],
         "operationId": "Services_CreateOrUpdate",
         "x-ms-examples": {
-          "SearchCreateOrUpdateService": { "$ref": "./examples/SearchCreateOrUpdateService.json" }
+          "SearchCreateOrUpdateService": {
+            "$ref": "./examples/SearchCreateOrUpdateService.json"
+          },
+          "SearchCreateOrUpdateServiceWithIdentity": {
+            "$ref": "./examples/SearchCreateOrUpdateServiceWithIdentity.json"
+          }
         },
         "description": "Creates or updates a Search service in the given resource group. If the Search service already exists, all properties will be updated with the given values.",
         "externalDocs": {
@@ -395,7 +410,12 @@
         ],
         "operationId": "Services_Update",
         "x-ms-examples": {
-          "SearchUpdateService": { "$ref": "./examples/SearchUpdateService.json" }
+          "SearchUpdateService": {
+            "$ref": "./examples/SearchUpdateService.json"
+          },
+          "SearchUpdateServiceToRemoveIdentity": {
+            "$ref": "./examples/SearchUpdateServiceToRemoveIdentity.json"
+          }
         },
         "description": "Updates an existing Search service in the given resource group.",
         "externalDocs": {
@@ -452,7 +472,9 @@
         ],
         "operationId": "Services_Get",
         "x-ms-examples": {
-          "SearchGetService": { "$ref": "./examples/SearchGetService.json" }
+          "SearchGetService": {
+            "$ref": "./examples/SearchGetService.json"
+          }
         },
         "description": "Gets the Search service with the given name in the given resource group.",
         "externalDocs": {
@@ -496,7 +518,9 @@
         ],
         "operationId": "Services_Delete",
         "x-ms-examples": {
-          "SearchDeleteService": { "$ref": "./examples/SearchDeleteService.json" }
+          "SearchDeleteService": {
+            "$ref": "./examples/SearchDeleteService.json"
+          }
         },
         "description": "Deletes a Search service in the given resource group, along with its associated resources.",
         "externalDocs": {
@@ -548,7 +572,9 @@
         },
         "operationId": "Services_ListByResourceGroup",
         "x-ms-examples": {
-          "SearchListServicesByResourceGroup": { "$ref": "./examples/SearchListServicesByResourceGroup.json" }
+          "SearchListServicesByResourceGroup": {
+            "$ref": "./examples/SearchListServicesByResourceGroup.json"
+          }
         },
         "description": "Gets a list of all Search services in the given resource group.",
         "externalDocs": {
@@ -584,6 +610,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Search/searchServices": {
+      "get": {
+        "tags": [
+          "Services"
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "operationId": "Services_ListBySubscription",
+        "x-ms-examples": {
+          "SearchListServicesBySubscription": {
+            "$ref": "./examples/SearchListServicesBySubscription.json"
+          }
+        },
+        "description": "Gets a list of all Search services in the given subscription.",
+        "externalDocs": {
+          "url": "https://aka.ms/search-manage"
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation succeeded. The response contains the list of all Search service definitions for the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/SearchServiceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error occurred during the operation.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Search/checkNameAvailability": {
       "post": {
         "tags": [
@@ -595,7 +666,9 @@
         },
         "operationId": "Services_CheckNameAvailability",
         "x-ms-examples": {
-          "SearchCheckNameAvailability": { "$ref": "./examples/SearchCheckNameAvailability.json" }
+          "SearchCheckNameAvailability": {
+            "$ref": "./examples/SearchCheckNameAvailability.json"
+          }
         },
         "parameters": [
           {
@@ -739,13 +812,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The SKU of the Search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': Offers maximum capacity per search unit with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity').",
+          "description": "The SKU of the Search service. Valid values include: 'free': Shared service. 'basic': Dedicated service with up to 3 replicas. 'standard': Dedicated service with up to 12 partitions and 12 replicas. 'standard2': Similar to standard, but with more capacity per search unit. 'standard3': The largest Standard offering with up to 12 partitions and 12 replicas (or up to 3 partitions with more indexes if you also set the hostingMode property to 'highDensity'). 'storage_optimized_l1': Supports 1TB per partition, up to 12 partitions. 'storage_optimized_l2': Supports 2TB per partition, up to 12 partitions.'",
           "enum": [
             "free",
             "basic",
             "standard",
             "standard2",
-            "standard3"
+            "standard3",
+            "storage_optimized_l1",
+            "storage_optimized_l2"
           ],
           "x-ms-enum": {
             "name": "SkuName",
@@ -758,7 +833,7 @@
         "url": "https://azure.microsoft.com/documentation/articles/search-sku-tier/"
       }
     },
-    "SearchService" : {
+    "SearchService": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
@@ -925,30 +1000,30 @@
       "x-ms-external": true
     },
     "CloudErrorBody": {
-        "type": "object",
-        "description": "Describes a particular API error with an error code and a message.",
-        "properties": {
-            "code": {
-              "type": "string",
-              "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
-            },
-            "message": {
-              "type": "string",
-              "description": "A message that describes the error in detail and provides debugging information."
-            },
-            "target": {
-              "type": "string",
-              "description": "The target of the particular error (for example, the name of the property in error)."
-            },
-            "details": {
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/CloudErrorBody"
-                },
-                "description": "Contains nested errors that are related to this error."
-            }
+      "type": "object",
+      "description": "Describes a particular API error with an error code and a message.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An error code that describes the error condition more precisely than an HTTP status code. Can be used to programmatically handle specific error cases."
         },
-        "x-ms-external": true
+        "message": {
+          "type": "string",
+          "description": "A message that describes the error in detail and provides debugging information."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the particular error (for example, the name of the property in error)."
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          },
+          "description": "Contains nested errors that are related to this error."
+        }
+      },
+      "x-ms-external": true
     },
     "Operation": {
       "description": "Describes a REST API operation.",
@@ -1021,6 +1096,7 @@
           "type": "string",
           "description": "The identity type.",
           "enum": [
+            "None",
             "SystemAssigned"
           ],
           "x-ms-enum": {
@@ -1061,7 +1137,9 @@
       "format": "uuid",
       "description": "A client-generated GUID value that identifies this request. If specified, this will be included in response information as a way to track the request.",
       "x-ms-client-request-id": true,
-      "x-ms-parameter-grouping": { "name": "search-management-request-options" },
+      "x-ms-parameter-grouping": {
+        "name": "search-management-request-options"
+      },
       "x-ms-parameter-location": "method"
     },
     "SubscriptionIdParameter": {

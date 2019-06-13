@@ -1678,15 +1678,15 @@
       }
     },
     "CertificateBodyDescription": {
-       "description": "The JSON-serialized X509 Certificate.",
-       "type": "object",
-       "properties": {
-         "certificate": {
-           "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
-           "type": "string"
-         }
-       }
-     },
+      "description": "The JSON-serialized X509 Certificate.",
+      "type": "object",
+      "properties": {
+        "certificate": {
+          "description": "base-64 representation of the X509 leaf certificate .cer file or just .pem file content.",
+          "type": "string"
+        }
+      }
+    },
     "CertificateDescription": {
       "description": "The X509 Certificate.",
       "type": "object",
@@ -1920,7 +1920,7 @@
           "readOnly": true
         },
         "eventHubEndpoints": {
-          "description": "The Event Hub-compatible endpoint properties. The possible keys to this dictionary are events and operationsMonitoringEvents. Both of these keys have to be present in the dictionary while making create or update calls for the IoT hub.",
+          "description": "The Event Hub-compatible endpoint properties. The only possible keys to this dictionary is events. This key has to be present in the dictionary while making create or update calls for the IoT hub.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/EventHubProperties"
@@ -1954,9 +1954,6 @@
           "description": "IoT hub comments.",
           "type": "string"
         },
-        "operationsMonitoringProperties": {
-          "$ref": "#/definitions/OperationsMonitoringProperties"
-        },
         "deviceStreams": {
           "description": "The device streams properties of iothub.",
           "type": "object",
@@ -1979,6 +1976,35 @@
           "type": "string",
           "x-ms-enum": {
             "name": "Capabilities",
+            "modelAsString": true
+          }
+        },
+        "locations": {
+          "description": "Primary and secondary location for iot hub",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHubLocationDescription"
+          }
+        }
+      }
+    },
+    "IotHubLocationDescription": {
+      "description": "Public representation of one of the locations where a resource is provisioned.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Azure Geo Regions",
+          "type": "string"
+        },
+        "role": {
+          "description": "Specific Role assigned to this location",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubReplicaRoleType",
             "modelAsString": true
           }
         }
@@ -2130,29 +2156,6 @@
         }
       }
     },
-    "OperationsMonitoringProperties": {
-      "description": "The operations monitoring properties for the IoT hub. The possible keys to the dictionary are Connections, DeviceTelemetry, C2DCommands, DeviceIdentityOperations, FileUploadOperations, Routes, D2CTwinOperations, C2DTwinOperations, TwinQueries, JobsOperations, DirectMethods.",
-      "type": "object",
-      "properties": {
-        "events": {
-          "type": "object",
-          "additionalProperties": {
-            "enum": [
-              "None",
-              "Error",
-              "Information",
-              "Error, Information"
-            ],
-            "description": "The operations monitoring level.",
-            "type": "string",
-            "x-ms-enum": {
-              "name": "OperationMonitoringLevel",
-              "modelAsString": true
-            }
-          }
-        }
-      }
-    },
     "IpFilterRule": {
       "description": "The IP filter rules for the IoT hub.",
       "type": "object",
@@ -2270,7 +2273,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, operationsMonitoringEvents, fileNotifications, $default. Endpoint names must be unique across endpoint types. The name need not be the same as the actual queue name.",
+          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types. The name need not be the same as the actual queue name.",
           "type": "string",
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
@@ -2297,7 +2300,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, operationsMonitoringEvents, fileNotifications, $default. Endpoint names must be unique across endpoint types.  The name need not be the same as the actual topic name.",
+          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.  The name need not be the same as the actual topic name.",
           "type": "string",
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
@@ -2324,7 +2327,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, operationsMonitoringEvents, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
+          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
           "type": "string",
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
@@ -2351,7 +2354,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, operationsMonitoringEvents, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
+          "description": "The name that identifies this endpoint. The name can only include alphanumeric characters, periods, underscores, hyphens and has a maximum length of 64 characters. The following names are reserved:  events, fileNotifications, $default. Endpoint names must be unique across endpoint types.",
           "type": "string",
           "pattern": "^[A-Za-z0-9-._]{1,64}$"
         },
@@ -2698,7 +2701,7 @@
           "type": "string"
         },
         "healthStatus": {
-          "description": "Health status",
+          "description": "Health statuses have following meanings. The 'healthy' status shows that the endpoint is accepting messages as expected. The 'unhealthy' status shows that the endpoint is not accepting messages as expected and IoT Hub is retrying to send data to this endpoint. The status of an unhealthy endpoint will be updated to healthy when IoT Hub has established an eventually consistent state of health. The 'dead' status shows that the endpoint is not accepting messages, after IoT Hub retried sending messages for the retrial period. See IoT Hub metrics to identify errors and monitor issues with endpoints. The 'unknown' status shows that the IoT Hub has not established a connection with the endpoint. No messages have been delivered to or rejected from this endpoint",
           "enum": [
             "unknown",
             "healthy",
@@ -3158,11 +3161,11 @@
         },
         "properties": {
           "properties": {
-            "desired" : {
+            "desired": {
               "description": "Twin desired properties",
               "type": "object"
             },
-            "reported" : {
+            "reported": {
               "description": "Twin desired properties",
               "type": "object"
             }

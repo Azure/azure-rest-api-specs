@@ -53,7 +53,7 @@
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          }          
+          }
         ],
         "responses": {
           "200": {
@@ -101,11 +101,11 @@
             "schema": {
               "$ref": "#/definitions/IdentityProviderContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -203,7 +203,7 @@
           }
         ],
         "responses": {
-           "204": {
+          "204": {
             "description": "The existing identity provider configuration was successfully updated."
           },
           "default": {
@@ -342,25 +342,25 @@
     }
   },
   "parameters": {
-		"IdentityProviderNameParameter": {
-		  "name": "identityProviderName",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "enum": [
-			"facebook",
-			"google",
-			"microsoft",
-			"twitter",
-			"aad",
-			"aadB2C"
-		  ],
-		  "x-ms-enum": {
-			"name": "IdentityProviderNameType",
-			"modelAsString": true
-		  },
-		  "description": "Identity Provider Type identifier.",
-		  "x-ms-parameter-location": "method"
-		}
+    "IdentityProviderNameParameter": {
+      "name": "identityProviderName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "facebook",
+        "google",
+        "microsoft",
+        "twitter",
+        "aad",
+        "aadB2C"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProviderNameType",
+        "modelAsString": true
+      },
+      "description": "Identity Provider Type identifier.",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

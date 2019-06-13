@@ -1,55 +1,55 @@
 {
-    "parameters": {
-        "serviceName": "apimService1",
-        "resourceGroupName": "rg1",
-        "api-version": "2017-03-01",
-        "subscriptionId": "subid"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [
-                    {
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Google",
-                        "type": "Microsoft.ApiManagement/service/identityProviders",
-                        "name": "Google",
-                        "properties": {
-                            "clientId": "googleId",
-                            "clientSecret": "googlesecret",
-                            "type": "google"
-                        }
-                    },
-                    {
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Aad",
-                        "type": "Microsoft.ApiManagement/service/identityProviders",
-                        "name": "Aad",
-                        "properties": {
-                            "clientId": "aadapplicationid",
-                            "clientSecret": "aadapplicationkey",
-                            "type": "aad",
-                            "allowedTenants": [
-                                "samiraad.onmicrosoft.com"
-                            ]
-                        }
-                    },
-                    {
-                        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
-                        "type": "Microsoft.ApiManagement/service/identityProviders",
-                        "name": "AadB2C",
-                        "properties": {
-                            "clientId": "aadb2clientId",
-                            "clientSecret": "aadb2cClientKey",
-                            "type": "aadB2C",
-                            "allowedTenants": [
-                                "samirtestbc.onmicrosoft.com"
-                            ],
-                            "signupPolicyName": "B2C_1_Signup_Default",
-                            "signinPolicyName": "B2C_1_Signin_Default"
-                        }
-                    }
-                ],
-                "nextLink": ""
+  "parameters": {
+    "serviceName": "apimService1",
+    "resourceGroupName": "rg1",
+    "api-version": "2017-03-01",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Google",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "name": "Google",
+            "properties": {
+              "clientId": "googleId",
+              "clientSecret": "googlesecret",
+              "type": "google"
             }
-        }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Aad",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "name": "Aad",
+            "properties": {
+              "clientId": "aadapplicationid",
+              "clientSecret": "aadapplicationkey",
+              "type": "aad",
+              "allowedTenants": [
+                "samiraad.onmicrosoft.com"
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "name": "AadB2C",
+            "properties": {
+              "clientId": "aadb2clientId",
+              "clientSecret": "aadb2cClientKey",
+              "type": "aadB2C",
+              "allowedTenants": [
+                "samirtestbc.onmicrosoft.com"
+              ],
+              "signupPolicyName": "B2C_1_Signup_Default",
+              "signinPolicyName": "B2C_1_Signin_Default"
+            }
+          }
+        ],
+        "nextLink": ""
+      }
     }
+  }
 }

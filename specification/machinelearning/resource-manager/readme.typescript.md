@@ -10,11 +10,11 @@ typescript:
 batch:
   - package-commitmentPlans: true
     package-name: "@azure/arm-commitmentplans"
-    output-folder: $(typescript-sdks-folder)/packages/@azure/arm-commitmentplans
+    output-folder: $(typescript-sdks-folder)/sdk/machinelearning/arm-commitmentplans
   - package-webservices: true
     package-name: "@azure/arm-webservices"
-    output-folder: $(typescript-sdks-folder)/packages/@azure/arm-webservices
+    output-folder: $(typescript-sdks-folder)/sdk/machinelearning/arm-webservices
   - package-workspaces: true
     package-name: "@azure/arm-workspaces"
-    output-folder: $(typescript-sdks-folder)/packages/@azure/arm-workspaces
+    output-folder: $(typescript-sdks-folder)/sdk/machinelearning/arm-workspaces
 ```
