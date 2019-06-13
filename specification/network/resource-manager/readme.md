@@ -1006,6 +1006,9 @@ directive:
   - suppress: RequiredPropertiesMissingInResourceModel
     from: serviceCommunity.json
     reason: name, id and type properties are inherited from the upper level
+  - suppress: AvoidNestedProperties
+    where: $.definitions.ServiceTagInformation.properties.properties
+    reason: No x-ms-client-flatten by design
   - suppress: RequiredPropertiesMissingInResourceModel
     from: usage.json
     reason: name, id and type properties are inherited from the upper level
