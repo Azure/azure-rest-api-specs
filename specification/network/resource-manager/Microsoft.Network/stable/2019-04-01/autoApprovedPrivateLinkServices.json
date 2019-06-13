@@ -1,0 +1,93 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2019-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/autoApprovedPrivateLinkServices": {
+      "get": {
+        "operationId": "AutoApprovedPrivateLinkServices_Get",
+        "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location of the domain name."
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
+            "schema": {
+              "$ref": "#/definitions/AutoApprovedPrivateLinkServicesResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get list of private link service id that can be linked to a private end point with auto approved": {
+            "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoApprovedPrivateLinkServicesResult": {
+      "properties": {
+        "autoApprovedPrivateLinkService": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of private link service id that can be linked to a private end point with auto approved."
+        }
+      },
+      "description": "An array of private link service id that can be linked to a private end point with auto approved."
+    }
+  }
+}
