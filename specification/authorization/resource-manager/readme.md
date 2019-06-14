@@ -56,6 +56,7 @@ These settings apply only when `--tag=package-2015-07-authorization-only` is spe
 ``` yaml $(tag) == 'package-2015-07-authorization-only'
 input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
 ```
 
 ### Tag: package-2015-06-01-preview
