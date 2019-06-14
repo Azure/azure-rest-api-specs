@@ -35,7 +35,7 @@
         }
     },
     "paths": {
-	    "/applications": {
+        "/applications": {
             "get": {
                 "operationId": "GalleryApplications_List",
                 "description": "Get list of the gallery applications.",
@@ -68,8 +68,8 @@
                 }
             }
         },
-		"/applications/app": {
-		    "get": {
+        "/applications/app": {
+            "get": {
                 "operationId": "GalleryApplication_Get",
                 "description": "Get application package.",
                 "parameters": [
@@ -107,7 +107,7 @@
                     }
                 }
             }
-		},
+        },
         "/instance": {
             "get": {
                 "operationId": "Instances_GetMetadata",
@@ -381,7 +381,7 @@
                     "type": "object",
                     "description": "This contains the data about the storage disks associated with the VM.",
                     "$ref": "#/definitions/StorageProfile"
-                },				
+                },              
                 "subscriptionId": {
                     "type": "string",
                     "description": "This is the Azure subscription for the VM."
@@ -551,27 +551,27 @@
             "description": "This contains the data about the storage disks associated with the VM.",
             "properties": {
                 "imageReference": {
-				    "type": "object",
+                    "type": "object",
                     "$ref": "#/definitions/ImageReference",
                     "description": "Image information"
                 },
                 "osDisk": {
-				    "type": "object",
+                    "type": "object",
                     "$ref": "#/definitions/OsDisk",
                     "description": "OS disk information"
                 },
                 "dataDisks": {
-					"type":"array",
-					"description": "Data disk information",
-					"items": {
-						"type": "object",
-						"description": "This contains information about the data disk.",
-						"$ref": "#/definitions/DataDisk"
-					}
+                    "type":"array",
+                    "description": "Data disk information",
+                    "items": {
+                        "type": "object",
+                        "description": "This contains information about the data disk.",
+                        "$ref": "#/definitions/DataDisk"
+                    }
                 }
             }
         },
-		"ImageReference": {
+        "ImageReference": {
             "type": "object",
             "description": "This contains information about the OS image.",
             "properties": {
@@ -587,17 +587,17 @@
                     "type": "string",
                     "description": "This is the image publisher."
                 },
-				"sku": {
+                "sku": {
                     "type": "string",
                     "description": "This is the image SKU."
                 },
-				"version": {
+                "version": {
                     "type": "string",
                     "description": "This is the version of the platform or marketplace image."
                 }
             }
         },
-		"OsDisk": {
+        "OsDisk": {
             "type": "object",
             "description": "This contains information about the OS disk used by the VM.",
             "properties": {
@@ -613,35 +613,35 @@
                     "type": "string",
                     "description": "This is the size of the disk in GB."
                 },
-				"encryptionSettings": {
+                "encryptionSettings": {
                     "type": "object",
                     "description": "This is the encryption settings for the disk.",
-					"$ref": "#/definitions/EncryptionSettings"
+                    "$ref": "#/definitions/EncryptionSettings"
                 },
-				"image": {
+                "image": {
                     "type": "object",
                     "description": "This is the source user image virtual hard disk.",
-					"$ref": "#/definitions/DiskImage"
+                    "$ref": "#/definitions/DiskImage"
                 },
-				"managedDisk": {
+                "managedDisk": {
                     "type": "object",
                     "description": "This is managed disk parameters.",
-					"$ref": "#/definitions/ManagedDisk"
+                    "$ref": "#/definitions/ManagedDisk"
                 },
-				"name": {
+                "name": {
                     "type": "string",
                     "description": "This is the disk name."
                 },
-				"osType": {
+                "osType": {
                     "type": "string",
                     "description": "This is the type of OS included in the disk."
                 },
-				"vhd": {
+                "vhd": {
                     "type": "object",
                     "description": "This is the virtual hard disk.",
-					"$ref": "#/definitions/VirtualHardDisk"
+                    "$ref": "#/definitions/VirtualHardDisk"
                 },
-				"writeAcceleratorEnabled": {
+                "writeAcceleratorEnabled": {
                     "type": "string",
                     "description": "This specifies whether or not writeAccelerator is enabled on the disk."
                 }
@@ -663,84 +663,84 @@
                     "type": "string",
                     "description": "This is the size of the disk in GB."
                 },
-				"image": {
+                "image": {
                     "type": "object",
                     "description": "This is the source user image virtual hard disk.",
-					"$ref": "#/definitions/DiskImage"
+                    "$ref": "#/definitions/DiskImage"
                 },
-				"lun": {
-				    "type": "string",
-					"description": "This is the logical unit number of the disk."
-				},
-				"managedDisk": {
+                "lun": {
+                    "type": "string",
+                    "description": "This is the logical unit number of the disk."
+                },
+                "managedDisk": {
                     "type": "object",
                     "description": "This is managed disk parameters.",
-					"$ref": "#/definitions/ManagedDisk"
+                    "$ref": "#/definitions/ManagedDisk"
                 },
-				"name": {
+                "name": {
                     "type": "string",
                     "description": "This is the disk name."
                 },
-				"vhd": {
+                "vhd": {
                     "type": "object",
                     "description": "This is the virtual hard disk.",
-					"$ref": "#/definitions/VirtualHardDisk"
+                    "$ref": "#/definitions/VirtualHardDisk"
                 },
-				"writeAcceleratorEnabled": {
+                "writeAcceleratorEnabled": {
                     "type": "string",
                     "description": "This specifies whether or not writeAccelerator is enabled on the disk."
                 }
             }
         },
-		"EncryptionSettings": {
-		    "type": "object",
-			"description": "This is the encryption settings for the disk.",
-			"properties": {
-			    "enabled": {
-				    "type": "string",
+        "EncryptionSettings": {
+            "type": "object",
+            "description": "This is the encryption settings for the disk.",
+            "properties": {
+                "enabled": {
+                    "type": "string",
                     "description": "This specifies whether or not disk encryption is enabled on the VM."
-				}
-			}
-		},
-		"DiskImage": {
-		    "type": "object",
-			"description": "This is the source user image virtual hard disk.",
-			"properties": {
-			    "uri": {
-				    "type": "string",
+                }
+            }
+        },
+        "DiskImage": {
+            "type": "object",
+            "description": "This is the source user image virtual hard disk.",
+            "properties": {
+                "uri": {
+                    "type": "string",
                     "description": "This is the VHD's uri."
-				}
-			}
-		},
-		"ManagedDisk": {
-		    "type": "object",
-			"description": "This is managed disk parameters.",
-			"properties": {
-			    "id": {
-				    "type": "string",
+                }
+            }
+        },
+        "ManagedDisk": {
+            "type": "object",
+            "description": "This is managed disk parameters.",
+            "properties": {
+                "id": {
+                    "type": "string",
                     "description": "This is the resource ID."
-				},
-				"storageAccountType": {
-				    "type": "string",
+                },
+                "storageAccountType": {
+                    "type": "string",
                     "description": "This is the storage account type for the managed disk."
-				}
-			}
-		},
-		"VirtualHardDisk": {
-		    "type": "object",
-			"description": "This is the virtual hard disk.",
-			"properties": {
-			    "uri": {
-				    "type": "string",
+                }
+            }
+        },
+        "VirtualHardDisk": {
+            "type": "object",
+            "description": "This is the virtual hard disk.",
+            "properties": {
+                "uri": {
+                    "type": "string",
                     "description": "This is the VHD's uri"
-				}
-			}
-		},
-		"ApplicationResponse": {
-		    "type": "string",
-			"description": "This is a binary string containing the application."
-		},
-		"GalleryApplications": {
+                }
+            }
+        },
+        "ApplicationResponse": {
+            "type": "string",
+            "description": "This is a binary string containing the application."
+        },
+        "GalleryApplications": {
             "type": "object",
             "description": "This is the response from the GalleryApplications_List operation.",
             "properties": {
@@ -755,7 +755,7 @@
                 }
             }
         },
-		"GalleryApplication": {
+        "GalleryApplication": {
             "type": "object",
             "description": "This contains information about the gallery application.",
             "properties": {
@@ -773,7 +773,7 @@
                 }
             }
         },
-		"PackageFile": {
+        "PackageFile": {
             "type": "object",
             "description": "Package properties of the gallery application.",
             "properties": {
