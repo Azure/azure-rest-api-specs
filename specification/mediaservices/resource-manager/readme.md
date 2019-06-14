@@ -34,7 +34,7 @@ opt-in-extensible-enums: true
 
 These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2019-05'
+``` yaml $(tag) == 'package-2019-05-preview'
 input-file:
   - Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
   - Microsoft.Media/preview/2019-05-01-preview/Accounts.json
