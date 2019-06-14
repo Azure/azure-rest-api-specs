@@ -11,10 +11,11 @@
           "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
         }
       },
+      "location": "eastus",
       "properties": {
         "sku": {
-          "name": "Standard_Medium",
-          "tier": "Standard",
+          "name": "Standard_v2",
+          "tier": "Standard_v2",
           "capacity": 3
         },
         "gatewayIPConfigurations": [
@@ -224,7 +225,7 @@
                     "requestHeaderConfigurations": [
                       {
                         "headerName": "X-Forwarded-For",
-                        "headerValue": "{var_remote-addr}"
+                        "headerValue": "{var_add_x_forwarded_for_proxy}"
                       }
                     ],
                     "responseHeaderConfigurations": [
