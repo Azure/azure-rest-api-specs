@@ -45,17 +45,11 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
-```
-
-### Tag: package-2015-07-authorization-only
-
-These settings apply only when `--tag=package-2015-07-authorization-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-07-authorization-only'
-input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization.json
 ```
 
 ### Tag: package-2015-06-01-preview
