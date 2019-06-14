@@ -253,5 +253,8 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ``` yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
