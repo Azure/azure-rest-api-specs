@@ -82,7 +82,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Relay
-  output-folder: $(csharp-sdks-folder)/Relay/Management.Relay/Generated
+  output-folder: $(csharp-sdks-folder)/relay/Microsoft.Azure.Management.Relay/src/Generated
   clear-output-folder: true
 ```
 

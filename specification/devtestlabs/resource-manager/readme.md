@@ -90,7 +90,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DevTestLabs
-  output-folder: $(csharp-sdks-folder)/DevTestLabs/Management.DevTestLabs/Generated
+  output-folder: $(csharp-sdks-folder)/devtestlabs/Microsoft.Azure.Management.DevTestLabs/src/Generated
   clear-output-folder: true
 ```
 
@@ -113,12 +113,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-devtestlabs/azure/mgmt/devtestlabs
+  output-folder: $(python-sdks-folder)/devtestlabs/azure-mgmt-devtestlabs/azure/mgmt/devtestlabs
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-devtestlabs
+  output-folder: $(python-sdks-folder)/devtestlabs/azure-mgmt-devtestlabs
 ```
 
 ## Go

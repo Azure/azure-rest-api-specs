@@ -1,0 +1,27 @@
+{
+    "operationId": "InvokeContainerApi",
+    "description": "This example shows how to call container API with HTTP GET for a code package deployed on a node.",
+    "parameters": {
+        "api-version": "6.2",
+        "nodeName": "Node01",
+        "applicationId": "samples/winnodejs",
+        "ServiceManifestName": "NodeServicePackage",
+        "CodePackageName": "NodeService.Code",
+        "CodePackageInstanceId": "131668159770315380",
+        "ContainerApiRequestBody": {
+            "UriPath": "/containers/{id}/logs?stdout=true&stderr=true"
+        }
+    },
+    "responses": {
+        "200": {
+            "headers": {},
+            "body": {
+                "ContainerApiResult": {
+                    "Status": 200,
+                    "Content-Type": "text/plain; charset=utf-8",
+                    "Body": "vEthernet (Container NIC ec5c19b2) 172.17.201.44\n"
+                }
+            }
+        }
+    }
+}

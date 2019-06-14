@@ -70,7 +70,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/availableClusters": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/availableClusterRegions": {
       "get": {
         "tags": [
           "Event Hubs Clusters"
@@ -1316,6 +1316,11 @@
               "readOnly": true,
               "type": "string",
               "description": "The metric ID of the cluster resource. Provided by the service and not modifiable by the user."
+            },
+            "status": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Status of the Cluster resource"
             }
           },
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations."
@@ -1341,9 +1346,11 @@
       "description": "The response of the List Available Clusters operation."
     },
     "AvailableCluster": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "integer"
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location fo the Available Cluster"
+        }
       },
       "description": "Pre-provisioned and readily available Event Hubs Cluster count per region."
     },
@@ -1483,7 +1490,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "description": "id parameter"
         }
       },
       "description": "The full ARM ID of an Event Hubs Namespace"

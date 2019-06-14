@@ -118,6 +118,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 
 # Needed when there is more than one input file
@@ -207,6 +208,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -289,6 +291,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -452,6 +455,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -674,13 +678,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sql/azure/mgmt/sql
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql/azure/mgmt/sql
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sql
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql
 ```
 
 ### Go
