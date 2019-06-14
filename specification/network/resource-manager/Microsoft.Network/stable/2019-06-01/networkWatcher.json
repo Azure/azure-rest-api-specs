@@ -1526,7 +1526,7 @@
           "Create connection monitor": {
             "$ref": "./examples/NetworkWatcherConnectionMonitorCreate.json"
           },
-          "Create multi endpoints connection monitor": {
+          "Create a multi-endpoint connection monitor": {
             "$ref": "./examples/NetworkWatcherMultiEndpointsConnectionMonitorCreate.json"
           }
         },
@@ -3412,27 +3412,27 @@
         },
         "address": {
           "type": "string",
-          "description": "Address of connection monitor endpoint. Can be FQDN or IP address."
+          "description": "Address of connection monitor endpoint. Can be a domain name or an IP address."
         },
         "filter": {
           "$ref": "#/definitions/ConnectionMonitorEndpointFilter",
-          "description": "Additional information about connection monitor endpoint."
+          "description": "Additional scope information for a connection monitor endpoint."
         }
       },
       "required": [
         "name"
       ],
-      "description": "Describes the connection monitor endpoint."
+      "description": "Describes a connection monitor endpoint."
     },
     "ConnectionMonitorTestGroup": {
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of connection monitor test group."
+          "description": "The name of the connection monitor test group."
         },
         "enabled": {
           "type": "boolean",
-          "description": "A value indicating whether test group is enabled."
+          "description": "A value indicating whether the test group is enabled."
         },
         "testConfigurations": {
           "type": "array",
@@ -3468,11 +3468,11 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of connection monitor test."
+          "description": "The name of the connection monitor test."
         },
         "testFrequencySec": {
           "type": "integer",
-          "description": "An interval between tests in seconds."
+          "description": "The interval between tests in seconds."
         },
         "protocol": {
           "type": "string",
@@ -3490,51 +3490,51 @@
         },
         "httpConfiguration": {
           "$ref": "#/definitions/ConnectionMonitorHTTPConfiguration",
-          "description": "Describes HTTP configuration of connection monitor test."
+          "description": "Describes HTTP configuration of the connection monitor test."
         },
         "tcpConfiguration": {
           "$ref": "#/definitions/ConnectionMonitorTCPConfiguration",
-          "description": "Describes TCP configuration of connection monitor test."
+          "description": "Describes TCP configuration of the connection monitor test."
         },
         "icmpConfiguration": {
           "$ref": "#/definitions/ConnectionMonitorICMPConfiguration",
-          "description": "Describes ICMP configuration of connection monitor test."
+          "description": "Describes ICMP configuration of the connection monitor test."
         },
         "successThreshold": {
           "$ref": "#/definitions/ConnectionMonitorSuccessThreshold",
-          "description": "Describes success threshold of connection monitor test group."
+          "description": "Describes the threshold at which the connection monitor test configuration is considered successful."
         }
       },
       "required": [
         "name",
         "protocol"
       ],
-      "description": "Describes the connection monitor test configuration."
+      "description": "Describes a connection monitor test configuration."
     },
     "ConnectionMonitorTCPConfiguration": {
       "properties": {
         "disableTraceRoute": {
           "type": "boolean",
-          "description": "A value indication whether trace route is disabled."
+          "description": "A value indicating whether traceroute is disabled."
         },
         "port": {
           "type": "integer",
-          "description": "The port to run the TCP probe."
+          "description": "The destination port on which a TCP test is to be performed."
         }
       },
       "required": [
         "port"
       ],
-      "description": "Describes the TCP configuration."
+      "description": "Describes a configuration for a TCP test."
     },
     "ConnectionMonitorICMPConfiguration": {
       "properties": {
         "disableTraceRoute": {
           "type": "boolean",
-          "description": "A value indication whether trace route is disabled."
+          "description": "A value indicating whether traceroute is disabled."
         }
       },
-      "description": "Describes the ICMP configuration."
+      "description": "Describes a configuration for an ICMP test."
     },
     "ConnectionMonitorHTTPConfiguration": {
       "properties": {
@@ -3552,28 +3552,28 @@
         },
         "port": {
           "type": "integer",
-          "description": "The port to run the HTTP probe."
+          "description": "The destination port on which a HTTP test is to be performed."
         },
         "path": {
           "type": "string",
-          "description": "The path to add to provided URI."
+          "description": "The path to add to the provided URI."
         },
         "requestHeaders": {
           "type": "array",
-          "description": "List of HTTP headers.",
+          "description": "The HTTP request headers.",
           "items": {
             "$ref": "#/definitions/HTTPHeader"
           }
         },
         "validStatusCodeRanges": {
           "type": "array",
-          "description": "List of valid status code ranges.",
+          "description": "A list of acceptable HTTP status code ranges. For instance: [ \"100\", \"200-205\", \"3xx\" ]",
           "items": {
             "type": "string"
           }
         }
       },
-      "description": "Describes the HTTP configuration."
+      "description": "Describes a configuration for a HTTP test."
     },
     "ConnectionMonitorSuccessThreshold": {
       "properties": {
@@ -3583,10 +3583,10 @@
         },
         "roundTripTimeMs": {
           "type": "number",
-          "description": "Maximum roundtrip time in miliseconds."
+          "description": "Maximum roundtrip time in milliseconds."
         }
       },
-      "description": "Describes the success threshold for test group."
+      "description": "Describes the threshold at which a connection monitor test configuration is considered successful."
     },
     "ConnectionMonitorEndpointFilter": {
       "properties": {
@@ -3599,21 +3599,20 @@
             "name": "ConnectionMonitorEndpointFilterType",
             "modelAsString": true
           },
-          "description": "Type of connection monitor endpoint filter."
+          "description": "The type of connection monitor endpoint filter. The accepted value is \"Include\"."
         },
         "items": {
           "type": "array",
-          "description": "List of connection monitor endpoint items.",
+          "description": "A list of connection monitor endpoint items that define this filter.",
           "items": {
             "$ref": "#/definitions/ConnectionMonitorEndpointItem"
           }
         }
       },
       "required": [
-        "type",
         "items"
       ],
-      "description": "Describes the connection monitor endpoint filter."
+      "description": "Describes a connection monitor endpoint filter."
     },
     "ConnectionMonitorEndpointItem": {
       "properties": {
@@ -3626,18 +3625,18 @@
             "name": "ConnectionMonitorEndpointItemType",
             "modelAsString": true
           },
-          "description": "Type of connection monitor endpoint item."
+          "description": "The type of the connection monitor endpoint item. The accepted value is \"AgentAddress\"."
         },
         "address": {
           "type": "string",
-          "description": "Address of connection monitor endpoint item."
+          "description": "The address of the connection monitor endpoint item."
         }
       },
       "required": [
         "type",
         "address"
       ],
-      "description": "Describes the connection monitor endpoint item."
+      "description": "Describes a connection monitor endpoint item."
     },
     "ConnectionMonitorListResult": {
       "properties": {
