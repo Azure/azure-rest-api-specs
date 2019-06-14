@@ -1,0 +1,918 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-07-01-privatepreview",
+    "title": "Monitor Configuration API",
+    "description": "APIs for workload monitoring",
+    "contact": {
+      "name": "Microsoft",
+      "email": "wlmengg@microsoft.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/providers/Microsoft.MonitorConfiguration/operations": {
+      "get": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Gets the details of all operations possible on the resource provider.",
+        "operationId": "Operations_List",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MonitorConfiguration/monitorConfigurations/{monitorConfigurationName}": {
+      "get": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Get a monitor configuration.",
+        "operationId": "MonitorConfigurations_Get",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/monitorConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Monitor configuration is found.",
+            "schema": {
+              "$ref": "#/definitions/MonitorConfiguration"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitorConfigurations_Get": {
+            "$ref": "./examples/MonitorConfigurations_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Create or update MonitorConfiguration resource.",
+        "operationId": "MonitorConfigurations_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/monitorConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/monitorConfigurationParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Existing monitor configuration was updated.",
+            "schema": {
+              "$ref": "#/definitions/MonitorConfiguration"
+            }
+          },
+          "202": {
+            "description": "Request accepted. Operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "MonitorConfigurations_CreateOrUpdate": {
+            "$ref": "./examples/MonitorConfigurations_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Delete a monitor configuration.",
+        "operationId": "MonitorConfigurations_Delete",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/monitorConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "204": {
+            "description": "Deleted the monitor configuration."
+          }
+        },
+        "x-ms-examples": {
+          "MonitorConfigurations_Delete": {
+            "$ref": "./examples/MonitorConfigurations_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Patch a monitor configuration.",
+        "operationId": "MonitorConfigurations_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/monitorConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/monitorConfigurationParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Existing monitor configuration was updated.",
+            "schema": {
+              "$ref": "#/definitions/MonitorConfiguration"
+            }
+          },
+          "202": {
+            "description": "Request accepted. Operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "MonitorConfigurations_Update": {
+            "$ref": "./examples/MonitorConfigurations_Update.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MonitorConfiguration/monitorConfigurations": {
+      "get": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Get all monitor configurations under a resource group for a subscription.",
+        "operationId": "MonitorConfigurations_ListByResourceGroup",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one monitor configuration is found.",
+            "schema": {
+              "$ref": "#/definitions/MonitorConfigurationsCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitorConfigurations_ListByResourceGroup": {
+            "$ref": "./examples/MonitorConfigurations_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MonitorConfiguration/monitorConfigurations": {
+      "get": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Get all monitor configurations under a subscription.",
+        "operationId": "MonitorConfigurations_ListBySubscription",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one monitor configuration is found.",
+            "schema": {
+              "$ref": "#/definitions/MonitorConfigurationsCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitorConfigurations_ListBySubscription": {
+            "$ref": "./examples/MonitorConfigurations_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.MonitorConfiguration/assignments/{assignmentName}": {
+      "get": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Get specified monitor configuration assignment under a scope. Scope can be either of\r\n1. Subscription in the format: /subscriptions/{subscriptionId}\r\n2. Resource group in the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}\r\n3. ARM resource in format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}",
+        "operationId": "MonitorConfigurationAssignments_GetForScope",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/assignmentName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Monitor configuration assignment is found.",
+            "schema": {
+              "$ref": "#/definitions/Assignment"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitorConfigurationAssignments_GetForScope": {
+            "$ref": "./examples/MonitorConfigurationAssignments_GetForScope.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Create monitor configuration assignment on a scope. Scope can be either of\r\n1. Subscription in the format: /subscriptions/{subscriptionId}\r\n2. Resource group in the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}\r\n3. ARM resource in format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}",
+        "operationId": "MonitorConfigurationAssignments_CreateOnScope",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/assignmentName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/assignmentCreateParameters"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Assignment done.",
+            "schema": {
+              "$ref": "#/definitions/Assignment"
+            }
+          },
+          "202": {
+            "description": "Request accepted.Operation will complete asynchronously."
+          }
+        },
+        "x-ms-examples": {
+          "MonitorConfigurationAssignments_CreateOnScope": {
+            "$ref": "./examples/MonitorConfigurationAssignments_CreateOnScope.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Delete monitor configuration assignment from a scope. Scope can be either of\r\n1. Subscription in the format: /subscriptions/{subscriptionId}\r\n2. Resource group in the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}\r\n3. ARM resource in format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}",
+        "operationId": "MonitorConfigurationAssignments_DeleteFromScope",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/assignmentName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "202": {
+            "description": "Request accepted.Operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Assignment removed."
+          }
+        },
+        "x-ms-examples": {
+          "MonitorConfigurationAssignments_DeleteFromScope": {
+            "$ref": "./examples/MonitorConfigurationAssignments_DeleteFromScope.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/{scope}/providers/Microsoft.MonitorConfiguration/assignments": {
+      "get": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Get monitor configuration assignments for a scope. Scope can be either of\r\n1. Subscription in the format: /subscriptions/{subscriptionId}\r\n2. Resource group in the format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}\r\n3. ARM resource in format: /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{providerNamespace}/{resourceType}/{resourceName}",
+        "operationId": "MonitorConfigurationAssignments_ListByScope",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/scope"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Monitor configuration assignment is found.",
+            "schema": {
+              "$ref": "#/definitions/AssignmentCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitorConfigurationAssignments_ListByScope": {
+            "$ref": "./examples/MonitorConfigurationAssignments_ListByScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MonitorConfiguration/monitorConfigurations/{monitorConfigurationName}/assignments": {
+      "get": {
+        "tags": [
+          "MonitorConfiguration"
+        ],
+        "summary": "Get assignments of a monitor configuration.",
+        "operationId": "MonitorConfigurationAssignments_ListByConfiguration",
+        "consumes": [
+
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/monitorConfigurationName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Assignments of monitor configuration found.",
+            "schema": {
+              "$ref": "#/definitions/AssignmentCollection"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitorConfigurationAssignments_ListByConfiguration": {
+            "$ref": "./examples/MonitorConfigurationAssignments_ListByConfiguration.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "OperationListResult": {
+      "description": "Container for a list of operations supported by the resource provider.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation supported by the resource provider.",
+      "type": "object",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "The properties of the resource operation."
+        },
+        "name": {
+          "description": "The name of the resource operation.",
+          "type": "string"
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of an operation supported by the resource provider.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the resource provider.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "This operation name.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "The provider name.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "The resource name.",
+          "type": "string"
+        }
+      }
+    },
+    "MonitorConfigurationCreateOrUpdateParameters": {
+      "description": "The resource model definition for MonitorConfigurationCreateOrUpdateParameters resource.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object"
+        },
+        "location": {
+          "description": "The geo-location where the resource lives.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitorConfigurationProperties",
+          "description": "MonitorConfiguration resource properties.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MonitorConfigurationProperties": {
+      "description": "Model for properties of MonitorConfiguration resource.",
+      "type": "object",
+      "properties": {
+        "schemaVersion": {
+          "description": "Schema version.",
+          "type": "string"
+        },
+        "targetResourceTypes": {
+          "description": "Target resource types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "configurationType": {
+          "description": "Type of monitor configuration.",
+          "enum": [
+            "BaseOS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "configurationType",
+            "modelAsString": true
+          }
+        },
+        "monitoringEngine": {
+          "description": "Service handling the configuration.",
+          "enum": [
+            "VMHealth"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "monitoringEngine",
+            "modelAsString": true
+          }
+        },
+        "healthRules": {
+          "description": "Collection of health rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthRule"
+          }
+        },
+        "healthRollups": {
+          "description": "Collection of health rollups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthRollup"
+          }
+        }
+      }
+    },
+    "HealthRule": {
+      "description": "Model for health rule.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the health rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the health rule.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Health rule properties.",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "HealthRollup": {
+      "description": "Model for health rollup.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the health rollup.",
+          "type": "string"
+        },
+        "description": {
+          "description": "Description of the health rollup.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Health rollup properties.",
+          "type": "object",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MonitorConfiguration": {
+      "description": "The resource model definition for MonitorConfiguration resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MonitorConfigurationProperties",
+          "description": "MonitorConfiguration resource properties.",
+          "x-ms-client-flatten": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object"
+        },
+        "location": {
+          "description": "The geo-location where the resource lives.",
+          "type": "string"
+        },
+        "id": {
+          "description": "Fully qualified resource Id for the resource. Ex -\r\n/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "MonitorConfigurationsCollection": {
+      "description": "Model for collection of MonitorConfiguration resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of MonitorConfiguration resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorConfiguration"
+          }
+        },
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string"
+        }
+      }
+    },
+    "AssignmentCreateParameters": {
+      "description": "Model for AssignmentCreateParameters properties.",
+      "type": "object",
+      "properties": {
+        "monitorConfigurationId": {
+          "description": "Id of assigned monitor configuration.",
+          "type": "string"
+        }
+      }
+    },
+    "Assignment": {
+      "description": "Model for Assignments resource type.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/AssignmentProperties",
+          "description": "Assignment properties.",
+          "x-ms-client-flatten": true
+        },
+        "id": {
+          "description": "Fully qualified resource Id for the resource. Ex -\r\n/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "AssignmentProperties": {
+      "description": "Model for Assignment properties.",
+      "type": "object",
+      "properties": {
+        "scope": {
+          "description": "Scope of assignment.",
+          "type": "string"
+        },
+        "monitorConfigurationId": {
+          "description": "Id of assigned monitor configuration.",
+          "type": "string"
+        }
+      }
+    },
+    "AssignmentCollection": {
+      "description": "Model for collection of assignments.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of assignments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Assignment"
+          }
+        },
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$skiptoken": {
+      "name": "$skiptoken",
+      "in": "query",
+      "description": "The page-continuation token to use with a paged version of this API",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The ID of the target subscription.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "client"
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The name of the resource group.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "monitorConfigurationName": {
+      "name": "monitorConfigurationName",
+      "in": "path",
+      "description": "The name of monitor configuration.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "monitorConfigurationParameters": {
+      "name": "monitorConfigurationParameters",
+      "in": "body",
+      "description": "Monitor configuration definition.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/MonitorConfigurationCreateOrUpdateParameters"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "scope": {
+      "name": "scope",
+      "in": "path",
+      "description": "Scope for assignment.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "assignmentName": {
+      "name": "assignmentName",
+      "in": "path",
+      "description": "Name for monitor configuration assignment.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "assignmentCreateParameters": {
+      "name": "assignmentCreateParameters",
+      "in": "body",
+      "description": "Assignment create parameters.",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AssignmentCreateParameters"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}
