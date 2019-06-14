@@ -93,7 +93,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MarketplaceOrdering
-  output-folder: $(csharp-sdks-folder)/Management.MarketplaceOrdering/Generated
+  output-folder: $(csharp-sdks-folder)/marketplaceordering/Microsoft.Azure.Management.MarketplaceOrdering/src/Generated
   clear-output-folder: true
 ```
 
