@@ -79,7 +79,7 @@ These settings apply only when `--tag=package-2017-10-01-preview-only` is specif
 
 ``` yaml $(tag) == 'package-2017-10-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview-only
@@ -121,7 +121,7 @@ input-file:
 - Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
 - Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
 - Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
+- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview
