@@ -74,7 +74,8 @@ These settings apply only when `--tag=package-2015-07-01-preview` is specified o
 ``` yaml $(tag) == 'package-2015-07-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
 - Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
 ```
 
@@ -123,7 +124,8 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
 - Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RACalls.json
 ```
