@@ -40,14 +40,11 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 input-file:
   - Microsoft.Network/stable/2019-06-01/applicationGateway.json
   - Microsoft.Network/stable/2019-06-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2019-06-01/autoApprovedPrivateLinkServices.json
   - Microsoft.Network/stable/2019-06-01/availableDelegations.json
-  - Microsoft.Network/stable/2019-06-01/availablePrivateEndpointTypes.json
   - Microsoft.Network/stable/2019-06-01/azureFirewall.json
   - Microsoft.Network/stable/2019-06-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2019-06-01/bastionHost.json
   - Microsoft.Network/stable/2019-06-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2019-06-01/checkPrivateLinkServiceVisibility.json
   - Microsoft.Network/stable/2019-06-01/ddosCustomPolicy.json
   - Microsoft.Network/stable/2019-06-01/ddosProtectionPlan.json
   - Microsoft.Network/stable/2019-06-01/endpointService.json
@@ -89,14 +86,11 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
   - Microsoft.Network/stable/2019-04-01/applicationGateway.json
   - Microsoft.Network/stable/2019-04-01/applicationSecurityGroup.json
-  - Microsoft.Network/stable/2019-04-01/autoApprovedPrivateLinkServices.json
   - Microsoft.Network/stable/2019-04-01/availableDelegations.json
-  - Microsoft.Network/stable/2019-04-01/availablePrivateEndpointTypes.json
   - Microsoft.Network/stable/2019-04-01/azureFirewall.json
   - Microsoft.Network/stable/2019-04-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2019-04-01/bastionHost.json
   - Microsoft.Network/stable/2019-04-01/checkDnsAvailability.json
-  - Microsoft.Network/stable/2019-04-01/checkPrivateLinkServiceVisibility.json
   - Microsoft.Network/stable/2019-04-01/ddosCustomPolicy.json
   - Microsoft.Network/stable/2019-04-01/ddosProtectionPlan.json
   - Microsoft.Network/stable/2019-04-01/endpointService.json
