@@ -1182,6 +1182,36 @@
         }
       }
     },
+    "TeradataTableDatasetTypeProperties": {
+      "description": "Teradata dataset properties.",
+      "properties": {
+        "database": {
+          "type": "object",
+          "description": "The database name of Teradata. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of Teradata. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "TeradataTableDataset": {
+      "x-ms-discriminator-value": "TeradataTable",
+      "description": "The Teradata database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Teradata dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TeradataTableDatasetTypeProperties"
+        }
+      }
+    },
     "AzureMySqlTableDataset": {
       "x-ms-discriminator-value": "AzureMySqlTable",
       "description": "The Azure MySQL database dataset.",
