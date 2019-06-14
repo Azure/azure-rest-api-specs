@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
@@ -107,7 +107,7 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
@@ -236,7 +236,7 @@ Creating this tag to pick proper resources from the hybrid profile.
 ``` yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
