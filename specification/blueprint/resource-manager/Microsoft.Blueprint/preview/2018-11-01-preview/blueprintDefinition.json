@@ -47,6 +47,9 @@
           },
           "ManagementGroupBlueprint": {
             "$ref": "./examples/managementGroupBPDef/Blueprint_Create.json"
+          },
+          "ResourceGroupWithTags": {
+            "$ref": "./examples/ResourceGroupWithTags.json"
           }
         },
         "parameters": [
@@ -550,22 +553,22 @@
         "description": "Get an artifact for a published blueprint definition.",
         "x-ms-examples": {
           "Sub-ARMTemplateArtifact": {
-            "$ref": "./examples/subscriptionBPDef/ARMTemplateArtifact_Get.json"
+            "$ref": "./examples/subscriptionBPDef/SealedARMTemplateArtifact_Get.json"
           },
           "Sub-PolicyAssignmentArtifact": {
-            "$ref": "./examples/subscriptionBPDef/PolicyAssignmentArtifact_Get.json"
+            "$ref": "./examples/subscriptionBPDef/SealedPolicyAssignmentArtifact_Get.json"
           },
           "Sub-RoleAssignmentArtifact": {
-            "$ref": "./examples/subscriptionBPDef/RoleAssignmentArtifact_Get.json"
+            "$ref": "./examples/subscriptionBPDef/SealedRoleAssignmentArtifact_Get.json"
           },
           "MG-ARMTemplateArtifact": {
-            "$ref": "./examples/managementGroupBPDef/ARMTemplateArtifact_Get.json"
+            "$ref": "./examples/managementGroupBPDef/SealedARMTemplateArtifact_Get.json"
           },
           "MG-PolicyAssignmentArtifact": {
-            "$ref": "./examples/managementGroupBPDef/PolicyAssignmentArtifact_Get.json"
+            "$ref": "./examples/managementGroupBPDef/SealedPolicyAssignmentArtifact_Get.json"
           },
           "MG-RoleAssignmentArtifact": {
-            "$ref": "./examples/managementGroupBPDef/RoleAssignmentArtifact_Get.json"
+            "$ref": "./examples/managementGroupBPDef/SealedRoleAssignmentArtifact_Get.json"
           }
         },
         "parameters": [
@@ -824,7 +827,17 @@
           ],
           "x-ms-enum": {
             "name": "BlueprintTargetScope",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "subscription",
+                "description": "The blueprint targets a subscription during blueprint assignment."
+              },
+              {
+                "value": "managementGroup",
+                "description": "The blueprint targets a management group during blueprint assignment. This is reserved for future use."
+              }
+            ]
           }
         },
         "parameters": {
@@ -847,7 +860,9 @@
       "type": "object",
       "x-ms-external": true,
       "allOf": [
-        { "$ref": "#/definitions/SharedBlueprintProperties" }
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
       ],
       "properties": {
         "versions": {
@@ -868,7 +883,9 @@
       "type": "object",
       "x-ms-external": true,
       "allOf": [
-        { "$ref": "#/definitions/SharedBlueprintProperties" }
+        {
+          "$ref": "#/definitions/SharedBlueprintProperties"
+        }
       ],
       "properties": {
         "blueprintName": {
@@ -885,10 +902,11 @@
     "BlueprintStatus": {
       "description": "The status of the blueprint. This field is readonly.",
       "type": "object",
-      "properties": {
-      },
+      "properties": {},
       "allOf": [
-        { "$ref": "#/definitions/BlueprintResourceStatusBase" }
+        {
+          "$ref": "#/definitions/BlueprintResourceStatusBase"
+        }
       ]
     },
     "TemplateArtifactProperties": {
@@ -1067,9 +1085,13 @@
           "description": "Actual value."
         }
       },
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretReferenceParameterValue": {
@@ -1081,9 +1103,13 @@
           "$ref": "#/definitions/SecretValueReference"
         }
       },
-      "required": [ "reference" ],
+      "required": [
+        "reference"
+      ],
       "allOf": [
-        { "$ref": "#/definitions/ParameterValueBase" }
+        {
+          "$ref": "#/definitions/ParameterValueBase"
+        }
       ]
     },
     "SecretValueReference": {
@@ -1117,7 +1143,9 @@
           "type": "string"
         }
       },
-      "required": [ "id" ]
+      "required": [
+        "id"
+      ]
     },
     "ParameterDefinitionCollection": {
       "description": "A dictionary hold parameter name and its metadata.",
@@ -1325,11 +1353,13 @@
       "properties": {
         "timeCreated": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Creation time of this blueprint definition."
         },
         "lastModified": {
           "type": "string",
+          "format": "date-time",
           "readOnly": true,
           "description": "Last modified time of this blueprint definition."
         }
@@ -1337,12 +1367,12 @@
     }
   },
   "parameters": {
-    "ScopeParameter":{
+    "ScopeParameter": {
       "name": "scope",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}').",
+      "description": "The scope of the resource. Valid scopes are: management group (format: '/providers/Microsoft.Management/managementGroups/{managementGroup}'), subscription (format: '/subscriptions/{subscriptionId}'). For blueprint assignments management group scope is reserved for future use.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
