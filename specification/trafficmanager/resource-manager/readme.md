@@ -195,7 +195,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.TrafficManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/TrafficManager/Management.TrafficManager/Generated
+  output-folder: $(csharp-sdks-folder)/trafficmanager/Microsoft.Azure.Management.TrafficManager/src/Generated
   clear-output-folder: true
 ```
 
@@ -218,12 +218,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-trafficmanager/azure/mgmt/trafficmanager
+  output-folder: $(python-sdks-folder)/trafficmanager/azure-mgmt-trafficmanager/azure/mgmt/trafficmanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-trafficmanager
+  output-folder: $(python-sdks-folder)/trafficmanager/azure-mgmt-trafficmanager
 ```
 
 ## Go

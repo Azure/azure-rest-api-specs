@@ -102,7 +102,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.EventHub
-  output-folder: $(csharp-sdks-folder)/EventHub/Management.EventHub/Generated
+  output-folder: $(csharp-sdks-folder)/eventhub/Microsoft.Azure.Management.EventHub/src/Generated
   clear-output-folder: true
 ```
 

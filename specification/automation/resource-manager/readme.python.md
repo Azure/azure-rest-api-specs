@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.automation
   package-name: azure-mgmt-automation
-  package-version: 0.1.0
+  package-version: 0.1.1
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-automation/azure/mgmt/automation
+  output-folder: $(python-sdks-folder)/automation/azure-mgmt-automation/azure/mgmt/automation
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-automation
+  output-folder: $(python-sdks-folder)/automation/azure-mgmt-automation
 ```
