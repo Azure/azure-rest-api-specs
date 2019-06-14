@@ -45,10 +45,10 @@ These settings apply only when `--tag=package-2015-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2015-07'
 input-file:
-- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
 ```
 
@@ -59,18 +59,6 @@ These settings apply only when `--tag=package-2015-06-01-preview` is specified o
 ``` yaml $(tag) == 'package-2015-06-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-```
-
-### Tag: package-2015-07-01-preview
-
-These settings apply only when `--tag=package-2015-07-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-07-01-preview'
-input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview-only
@@ -118,9 +106,9 @@ These settings apply only when `--tag=package-2017-10-01-preview` is specified o
 ``` yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
@@ -131,7 +119,7 @@ These settings apply only when `--tag=package-2018-01-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
@@ -144,7 +132,7 @@ These settings apply only when `--tag=package-2018-07-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-07-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
@@ -158,7 +146,7 @@ These settings apply only when `--tag=package-2018-09-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-09-01-preview'
 input-file:
 - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
 - Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
@@ -247,8 +235,8 @@ Creating this tag to pick proper resources from the hybrid profile.
 
 ``` yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
-- Microsoft.Authorization/preview/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ProviderOperationsCall.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2015-07-01/authorization-RoleAssignmentsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCall.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
