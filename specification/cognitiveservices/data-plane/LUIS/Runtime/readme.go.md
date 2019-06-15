@@ -13,7 +13,6 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: runtime_2_0
   - tag: runtime_3_0_preview
 ```
 
