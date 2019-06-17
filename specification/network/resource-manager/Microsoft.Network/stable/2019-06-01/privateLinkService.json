@@ -465,7 +465,7 @@
         "tags": [
           "PrivateLinkServices"
         ],
-        "operationId": "AutoApprovedPrivateLinkServices_Get",
+        "operationId": "AutoApprovedPrivateLinkServices_List",
         "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
         "parameters": [
           {
@@ -501,6 +501,9 @@
           "Get list of private link service id that can be linked to a private end point with auto approved": {
             "$ref": "./examples/AutoApprovedPrivateLinkServicesGet.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -724,15 +727,29 @@
     },
     "AutoApprovedPrivateLinkServicesResult": {
       "properties": {
-        "autoApprovedPrivateLinkService": {
+        "value": {
           "type": "array",
           "items": {
-            "type": "string"
+            "$ref": "#/definitions/AutoApprovedPrivateLinkService"
           },
-          "description": "An array of private link service id that can be linked to a private end point with auto approved."
+          "description": "An array of auto approved private link service."
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URL to get the next set of results."
         }
       },
       "description": "An array of private link service id that can be linked to a private end point with auto approved."
+    },
+    "AutoApprovedPrivateLinkService": {
+      "properties": {
+        "privateLinkService": {
+          "type": "string",
+          "description": "The id of the private link service resource."
+        }
+      },
+      "description": "The information of an AutoApprovedPrivateLinkService."
     }
   }
 }
