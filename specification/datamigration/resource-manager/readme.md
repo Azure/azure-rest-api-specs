@@ -202,7 +202,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataMigration
-  output-folder: $(csharp-sdks-folder)/DataMigration/Management.DataMigration/Generated
+  output-folder: $(csharp-sdks-folder)/datamigration/Microsoft.Azure.Management.DataMigration/src/Generated
   clear-output-folder: true
 ```
 

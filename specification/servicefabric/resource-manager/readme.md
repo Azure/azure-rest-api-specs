@@ -130,7 +130,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceFabric
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/ServiceFabric/Management.ServiceFabric/Generated
+  output-folder: $(csharp-sdks-folder)/servicefabric/Microsoft.Azure.Management.ServiceFabric/src/Generated
   clear-output-folder: true
 ```
 
