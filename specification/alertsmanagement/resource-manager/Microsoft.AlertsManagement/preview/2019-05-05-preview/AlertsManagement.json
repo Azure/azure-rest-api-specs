@@ -1172,7 +1172,7 @@
       }
     },
     "alertsSummaryGroupBy": {
-      "description": "This parameter allows the result set to be grouped by input fields. For example, groupby=severity,alertstate.",
+      "description": "This parameter allows the result set to be grouped by input fields (Maximum 2 comma separated fields supported). For example, groupby=severity or groupby=severity,alertstate.",
       "name": "groupby",
       "type": "string",
       "in": "query",
@@ -1507,7 +1507,7 @@
         },
         "monitorCondition": {
           "type": "string",
-          "description": "Can be 'Fired' or 'Resolved', which represents whether the underlying conditions have crossed the defined alert rule thresholds.",
+          "description": "Condition of the rule at the monitor service. It represents whether the underlying conditions have crossed the defined alert rule thresholds.",
           "readOnly": true,
           "enum": [
             "Fired",
