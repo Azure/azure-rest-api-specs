@@ -744,7 +744,7 @@
           "200": {
             "description": "The operation was successful.",
             "schema": {
-              "$ref": "#/definitions/UpdateWorkspaceQuotas"
+              "$ref": "#/definitions/UpdateWorkspaceQuotasResult"
             }
           },
           "default": {
@@ -762,8 +762,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/listQuotas": {
-      "post": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+      "get": {
         "tags": [
           "Quota"
         ],
@@ -1082,9 +1082,8 @@
     },
     "QuotaUpdateParameters": {
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "The properties for update quota.",
+        "value": {
+          "description": "The list for update quota.",
           "readOnly": true,
           "type": "array",
           "items": {
@@ -1093,6 +1092,24 @@
         }
       },
       "description": "Quota update parameters."
+    },
+    "UpdateWorkspaceQuotasResult": {
+      "properties": {
+        "value": {
+          "description": "The list of workspace quota update result.",
+          "items": {
+            "$ref": "#/definitions/UpdateWorkspaceQuotas"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of workspace quota update result. Call ListNext() with this to fetch the next page of Workspace Quota update result.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "description": "The result of update workspace quota."
     },
     "UpdateWorkspaceQuotas": {
       "properties": {

@@ -3,18 +3,20 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "location": "eastus",
     "api-version": "2019-05-01",
-    "parameters": [
-      {
-        "vmFamily": "demo_vmFamily1",
-        "workspaceId": "demo_workspaceId1",
-        "quota": 100
-      },
-      {
-        "vmFamily": "demo_vmFamily2",
-        "workspaceId": "demo_workspaceId2",
-        "quota": 200
-      }
-    ]
+    "parameters": {
+      "value": [
+        {
+          "vmFamily": "demo_vmFamily1",
+          "workspaceId": "demo_workspaceId1",
+          "quota": 100
+        },
+        {
+          "vmFamily": "demo_vmFamily2",
+          "workspaceId": "demo_workspaceId2",
+          "quota": 200
+        }
+      ]
+    }
   },
   "responses": {
     "200": {
@@ -27,7 +29,7 @@
             "status": "Success"
           },
           {
-            "vmfamily": "demo_vmFamily2",
+            "vmFamily": "demo_vmFamily2",
             "workspaceId": "demo_workspaceId2",
             "quota": 200,
             "status": "Success"
