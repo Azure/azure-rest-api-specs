@@ -142,7 +142,6 @@
                         "name": "creationParams",
                         "in": "body",
                         "description": "Client supplied parameters.",
-                        "required": true,
                         "schema": {
                             "$ref": "#/definitions/AttestationServiceCreationParams"
                         },
@@ -461,7 +460,6 @@
             }
         },
         "AttestationServiceCreationParams": {
-            "type": "object",
             "description": "Client supplied parameters passed to attestation service.",  
             "properties": {
                 "attestationPolicy": {
@@ -497,7 +495,6 @@
             "name": "resourceGroupName",
             "in": "path",
             "description": "Name of the resource group to which the resource belongs.",
-            "required": true,
             "type": "string",
             "maxLength": 90,
             "minLength": 1,
@@ -507,7 +504,6 @@
         "SubscriptionIdParameter": {
             "name": "subscriptionId",
             "in": "path",
-            "required": true,
             "type": "string",
             "description": "Subscription credentials that uniquely identify the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call."
         },
