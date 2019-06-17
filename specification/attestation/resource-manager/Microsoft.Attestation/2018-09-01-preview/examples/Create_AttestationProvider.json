@@ -3,12 +3,13 @@
         "resourceGroupName": "sample-resource-group",
         "serviceName": "sampleservicename",
         "subscriptionId": "00000000-0000-0000-0000-000000000000",
-        "api-version": "2018-09-01-preview"
+        "api-version": "2018-09-01-preview",
+        "name": "providerName1"
     },
     "responses": {
         "201": {
             "body": {
-                "id": "subscriptions/6c96b33e-f5b8-40a6-9011-5cb1c58b0915/resourceGroups/testrg/providers/Microsoft.Attestation/attestationProviders/codes1",
+                "id": "subscriptions/subscriptionID/resourceGroups/resourceGroupID/providers/Microsoft.Attestation/attestationProviders/codes1",
                 "name": "codes1",
                 "type": "Microsoft.Attestation/attestationProviders",
                 "properties": {
@@ -16,11 +17,13 @@
                 }
             }
         },
-        "409": {
+        "200": {
             "body": {
-                "error": {
-                    "code": "DuplicateTenant",
-                    "message": "The given service URI 'sampleservicename' is already in use. Please try again with a different name."
+                "id": "subscriptions/subscriptionID/resourceGroups/resourceGroupID/providers/Microsoft.Attestation/attestationProviders/codes1",
+                "name": "codes1",
+                "type": "Microsoft.Attestation/attestationProviders",
+                "properties": {
+                    "status": "Ready"
                 }
             }
         }
