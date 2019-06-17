@@ -651,27 +651,27 @@
         "fileExtension": {
           "type": "object",
           "description": "The file extension used to create the files. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "fileExtension"
+      ]
+    },
+    "ParquetSource": {
+      "description": "A copy activity Parquet source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/ConnectorReadSetting",
+          "description": "Parquet store settings."
+        }
       }
     },
-    "required": [
-      "fileExtension"
-    ]
-   },
-   "ParquetSource": {
-    "description": "A copy activity Parquet source.",
-    "type": "object",
-    "allOf": [
-      {
-        "$ref": "#/definitions/CopySource"
-      }
-    ],
-    "properties": {
-      "storeSettings": {
-        "$ref": "#/definitions/ConnectorReadSetting",
-        "description": "Parquet store settings."
-      }
-    }
-  },
     "DelimitedTextSource": {
       "description": "A copy activity DelimitedText source.",
       "type": "object",
