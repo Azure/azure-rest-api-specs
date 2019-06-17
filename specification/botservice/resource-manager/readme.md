@@ -130,7 +130,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.BotService
-  output-folder: $(csharp-sdks-folder)/BotService/Microsoft.Azure.Management.BotService/Generated
+  output-folder: $(csharp-sdks-folder)/botservice/Microsoft.Azure.Management.BotService/src/Generated
   clear-output-folder: true
 ```
 

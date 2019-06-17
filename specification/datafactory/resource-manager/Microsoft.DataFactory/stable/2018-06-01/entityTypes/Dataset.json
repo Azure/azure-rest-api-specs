@@ -61,6 +61,139 @@
         "linkedServiceName"
       ]
     },
+    "DatasetLocation": {
+      "description": "Dataset location.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "Type of dataset storage location."
+        },
+        "folderPath": {
+          "type": "object",
+          "description": "Specify the folder path of dataset. Type: string (or Expression with resultType string)"
+        },
+        "fileName": {
+          "type": "object",
+          "description": "Specify the file name of dataset. Type: string (or Expression with resultType string)."
+        }
+      },
+      "additionalProperties": {
+        "type": "object"
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "AzureBlobStorageLocation": {
+      "description": "The location of azure blob dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "container": {
+          "type": "object",
+          "description": "Specify the container of azure blob. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureBlobFSLocation": {
+      "description": "The location of azure blobFS dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "fileSystem": {
+          "type": "object",
+          "description": "Specify the fileSystem of azure blobFS. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureDataLakeStoreLocation": {
+      "description": "The location of azure data lake store dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "AmazonS3Location": {
+      "description": "The location of amazon S3 dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "Specify the bucketName of amazon S3. Type: string (or Expression with resultType string)"
+        },
+        "version": {
+          "type": "object",
+          "description": "Specify the version of amazon S3. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "FileServerLocation": {
+      "description": "The location of file server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "FtpServerLocation": {
+      "description": "The location of ftp server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "SftpLocation": {
+      "description": "The location of SFTP dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "HttpServerLocation": {
+      "description": "The location of http server.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "relativeUrl": {
+          "type": "object",
+          "description": "Specify the relativeUrl of http server. Type: string (or Expression with resultType string)"
+        }
+      }
+    },
+    "HdfsLocation": {
+      "description": "The location of HDFS.",
+      "type": "object",
+       "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
     "DatasetDataElement": {
       "description": "Columns that define the structure of the dataset.",
       "type": "object",
@@ -197,7 +330,7 @@
     },
     "JsonFormatFilePattern": {
       "description": "JSON format file pattern. A property of JsonFormat.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "setOfObjects",
         "arrayOfObjects"
@@ -313,7 +446,7 @@
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "Optimal",
         "Fastest"
@@ -381,6 +514,124 @@
       },
       "required": [
         "bucketName"
+      ]
+    },
+    "ParquetDataset": {
+      "x-ms-discriminator-value": "Parquet",
+      "description": "Parquet dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Parquet dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ParquetDatasetTypeProperties"
+        }
+      }
+    },
+    "ParquetDatasetTypeProperties": {
+      "description": "Parquet dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the parquet storage."
+        },
+        "compressionCodec": {
+          "type": "object",
+          "enum": [
+            "none",
+            "gzip",
+            "snappy",
+            "lzo"
+          ],
+          "x-ms-enum": {
+            "name": "compressionCodec",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "DelimitedTextDataset": {
+      "x-ms-discriminator-value": "DelimitedText",
+      "description": "Delimited text dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Delimited text dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DelimitedTextDatasetTypeProperties"
+        }
+      }
+    },
+    "DelimitedTextDatasetTypeProperties": {
+      "description": "DelimitedText dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the delimited text storage."
+        },
+        "columnDelimiter": {
+          "type": "object",
+          "description": "The column delimiter. Type: string (or Expression with resultType string)."
+        },
+        "rowDelimiter": {
+          "type": "object",
+          "description": "The row delimiter. Type: string (or Expression with resultType string)."
+        },
+        "encodingName": {
+          "type": "object",
+          "description": "The code page name of the preferred encoding. If miss, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
+        },
+        "compressionCodec": {
+          "type": "object",
+          "enum": [
+            "bzip2",
+            "gzip",
+            "deflate",
+            "zipDeflate",
+            "snappy",
+            "lz4"
+          ],
+          "x-ms-enum": {
+            "name": "compressionCodec",
+            "modelAsString": true
+          }
+        },
+        "compressionLevel": {
+          "description": "The data compression method used for DelimitedText.",
+          "$ref": "#/definitions/CompressionLevel"
+        },
+        "quoteChar": {
+          "type": "object",
+          "description": "The quote character. Type: string (or Expression with resultType string)."
+        },
+        "escapeChar": {
+          "type": "object",
+          "description": "The escape character. Type: string (or Expression with resultType string)."
+        },
+        "firstRowAsHeader": {
+          "type": "object",
+          "description": "When used as input, treat the first row of data as headers. When used as output,write the headers into the output as the first row of data. The default value is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "nullValue": {
+          "type": "object",
+          "description": "The null value string. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "location"
       ]
     },
     "AzureBlobDataset": {
@@ -489,10 +740,7 @@
           "type": "object",
           "description": "The table name of the Azure SQL database. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "tableName"
-      ]
+      }
     },
     "AzureSqlDWTableDataset": {
       "x-ms-discriminator-value": "AzureSqlDWTable",
@@ -518,10 +766,7 @@
           "type": "object",
           "description": "The table name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "tableName"
-      ]
+      }
     },
     "CassandraTableDataset": {
       "x-ms-discriminator-value": "CassandraTable",
@@ -1074,13 +1319,43 @@
       "description": "Sap ECC OData resource dataset properties.",
       "properties": {
         "path": {
-          "type": "string",
+          "type": "object",
           "description": "The path of the SAP ECC OData entity. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
         "path"
       ]
+    },
+    "SapHanaTableDataset": {
+      "x-ms-discriminator-value": "SapHanaTable",
+      "description": "SAP HANA Table properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP HANA Table properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapHanaTableDatasetTypeProperties"
+        }
+      }
+    },
+    "SapHanaTableDatasetTypeProperties": {
+      "description": "SAP HANA Table properties.",
+      "properties": {
+        "schema": {
+          "type": "object",
+          "description": "The schema name of SAP HANA. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of SAP HANA. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "SapOpenHubTableDataset": {
       "x-ms-discriminator-value": "SapOpenHubTable",
@@ -1146,10 +1421,7 @@
           "type": "object",
           "description": "The table name of the SQL Server dataset. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "tableName"
-      ]
+      }
     },
     "RestResourceDataset": {
       "x-ms-discriminator-value": "RestResource",
@@ -1192,6 +1464,38 @@
           "description": "The pagination rules to compose next page requests. Type: string (or Expression with resultType string)."
         }
       }
+    },
+    "SapTableResourceDataset": {
+      "x-ms-discriminator-value": "SapTableResource",
+      "description": "SAP Table Resource properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "SAP Table Resource properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapTableResourceDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SapTableResourceDatasetTypeProperties": {
+      "description": "SAP Table Resource properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The name of the SAP Table. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "tableName"
+      ]
     },
     "WebTableDataset": {
       "x-ms-discriminator-value": "WebTable",
@@ -1850,7 +2154,7 @@
       "description": "Dynamics AX OData resource dataset properties.",
       "properties": {
         "path": {
-          "type": "string",
+          "type": "object",
           "description": "The path of the Dynamics AX OData entity. Type: string (or Expression with resultType string)."
         }
       },

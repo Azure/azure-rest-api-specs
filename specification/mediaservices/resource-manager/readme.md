@@ -26,9 +26,24 @@ These are the global settings for the MediaServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07
+tag: package-2019-05-preview
 opt-in-extensible-enums: true
+```
 
+### Tag: package-2019-05-preview
+
+These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-preview'
+input-file:
+  - Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
+  - Microsoft.Media/preview/2019-05-01-preview/Accounts.json
+  - Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
+  - Microsoft.Media/preview/2019-05-01-preview/Common.json
+  - Microsoft.Media/preview/2019-05-01-preview/ContentKeyPolicies.json
+  - Microsoft.Media/preview/2019-05-01-preview/Encoding.json
+  - Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/preview/2019-05-01-preview/streamingservice.json
 ```
 
 ### Tag: package-2018-07
@@ -117,7 +132,7 @@ csharp:
   payload-flattening-threshold: 2
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Media
-  output-folder: $(csharp-sdks-folder)/Media/Management.Media/Generated
+  output-folder: $(csharp-sdks-folder)/mediaservices/Microsoft.Azure.Management.Media/src/Generated
   clear-output-folder: true
 ```
 
@@ -237,5 +252,9 @@ directive:
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: Encoding.json
     where: $.definitions.JobProperties
-    reason: Input is not required when updating a job.
+    reason: Input not required for Job update
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: Encoding.json
+    where: $.definitions.JobProperties
+    reason: Output not required for job update
 ```

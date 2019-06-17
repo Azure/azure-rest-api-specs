@@ -62,7 +62,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Knowledge.QnAMaker/src/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Knowledge.QnAMaker/src/Generated
   clear-output-folder: true
 ```
 
