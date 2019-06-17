@@ -122,7 +122,6 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 
 
-
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
