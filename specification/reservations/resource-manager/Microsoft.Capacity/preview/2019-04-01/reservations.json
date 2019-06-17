@@ -357,13 +357,20 @@
             "$ref" : "./examples/GetReservationDetails.json"
           }
         },
-        "parameters" : [ {
-          "$ref" : "#/parameters/ReservationIdParameter"
-        }, {
-          "$ref" : "#/parameters/ReservationOrderIdParameter"
-        }, {
-          "$ref" : "#/parameters/ApiVersionParameter"
-        } ],
+        "parameters": [
+            {
+                "$ref": "#/parameters/ReservationIdParameter"
+            },
+            {
+                "$ref": "#/parameters/ReservationOrderIdParameter"
+            },
+            {
+                "$ref": "#/parameters/ApiVersionParameter"
+            },
+            {
+                "$ref" : "#/parameters/AppendRenewPropertiesParameter"
+            }
+        ],
         "tags" : [ "Reservation" ],
         "responses" : {
           "200" : {
@@ -670,40 +677,60 @@
         }
       }
     },
-    "ReservationResponse" : {
-      "type" : "object",
-      "x-ms-azure-resource" : true,
-      "properties" : {
-        "location" : {
-          "type" : "string",
-          "readOnly" : true,
-          "description" : "The Azure Region where the reserved resource lives."
-        },
-        "etag" : {
-          "type" : "integer"
-        },
-        "id" : {
-          "type" : "string",
-          "readOnly" : true,
-          "description" : "Identifier of the reservation"
-        },
-        "name" : {
-          "type" : "string",
-          "readOnly" : true,
-          "description" : "Name of the reservation"
-        },
-        "sku" : {
-          "$ref" : "#/definitions/SkuName"
-        },
-        "properties" : {
-          "$ref" : "#/definitions/ReservationProperties"
-        },
-        "type" : {
-          "type" : "string",
-          "readOnly" : true,
-          "description" : "Type of resource. \"Microsoft.Capacity/reservationOrders/reservations\""
+    "ReservationResponse": {
+        "type": "object",
+        "x-ms-azure-resource": true,
+        "properties": {
+            "location": {
+                "type": "string",
+                "readOnly": true,
+                "description": "The Azure Region where the reserved resource lives."
+            },
+            "etag": {
+                "type": "integer"
+            },
+            "id": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Identifier of the reservation"
+            },
+            "name": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Name of the reservation"
+            },
+            "sku": {
+                "$ref": "#/definitions/SkuName"
+            },
+            "properties": {
+                "$ref": "#/definitions/ReservationProperties"
+            },
+            "type": {
+                "type": "string",
+                "readOnly": true,
+                "description": "Type of resource. \"Microsoft.Capacity/reservationOrders/reservations\""
+            }
         }
-      }
+    },
+    "RenewPropertiesResponse": {
+        "type": "object",
+        "properties": {
+            "purchaseProperties": {
+                "$ref": "#/definitions/PurchaseRequest"
+            },
+            "lockedPriceTotal": {
+                "type": "object",
+                "description": "Locked currency & amount for new reservation purchase at the time of renewal. Price is locked 30 days before expiry date time if renew is true.",
+                "properties": {
+                    "currencyCode": {
+                        "type": "string"
+                    },
+                    "amount": {
+                        "type": "string"
+                    }
+                }
+            }
+        }
     },
     "CalculatePriceResponse" : {
       "type" : "object",
@@ -810,8 +837,25 @@
         "splitProperties" : {
           "$ref" : "#/definitions/ReservationSplitProperties"
         },
-        "mergeProperties" : {
-          "$ref" : "#/definitions/ReservationMergeProperties"
+        "mergeProperties": {
+            "$ref": "#/definitions/ReservationMergeProperties"
+        },
+        "billingScopeId": {
+            "$ref": "#/definitions/BillingScopeId"
+        },
+        "renew": {
+            "$ref": "#/definitions/Renew"
+        },
+        "renewSource": {
+            "type": "string",
+            "description": "Reservation Id of the reservation from which this reservation is renewed. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}."
+        },
+        "renewDestination": {
+            "type": "string",
+            "description": "Reservation Id of the reservation which is purchased because of renew. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}."
+        },
+        "renewProperties": {
+            "$ref": "#/definitions/RenewPropertiesResponse"
         }
       }
     },
@@ -869,8 +913,11 @@
         "appliedScopeType" : {
           "$ref" : "#/definitions/AppliedScopeType"
         },
-        "appliedScopes" : {
-          "$ref" : "#/definitions/AppliedScopes"
+        "appliedScopes": {
+            "$ref": "#/definitions/AppliedScopes"
+        },
+        "renew": {
+            "$ref": "#/definitions/Renew"
         },
         "reservedResourceProperties" : {
           "type" : "object",
@@ -895,9 +942,15 @@
         "instanceFlexibility" : {
           "$ref" : "#/definitions/InstanceFlexibility"
         },
-        "name" : {
-          "type" : "string",
-          "description" : "Name of the Reservation"
+        "name": {
+            "type": "string",
+            "description": "Name of the Reservation"
+        },
+        "renew": {
+            "$ref": "#/definitions/Renew"
+        },
+        "renewRequestProperties": {
+            "$ref": "#/definitions/PurchaseRequest"
         }
       }
     },
@@ -1156,9 +1209,15 @@
         "maxItems" : 1
       }
     },
-    "BillingScopeId" : {
-      "type" : "string",
-      "description" : "Subscription that will be charged for purchasing Reservation"
+    "BillingScopeId": {
+        "type": "string",
+        "description": "Subscription that will be charged for purchasing Reservation"
+    },
+    "Renew": {
+        "type": "boolean",
+        "default": false,
+        "required":  false,
+        "description":  "Setting this to true will automatically purchase a new reservation on the expiration date time."
     },
     "ReservationQuantity" : {
       "type" : "integer",
@@ -1224,12 +1283,20 @@
         "$ref" : "#/definitions/SplitRequest"
       }
     },
-    "ApiVersionParameter" : {
-      "name" : "api-version",
-      "in" : "query",
-      "description" : "Supported version for this document is 2019-04-01",
-      "required" : true,
-      "type" : "string"
+    "ApiVersionParameter": {
+        "name": "api-version",
+        "in": "query",
+        "description": "Supported version for this document is 2019-04-01",
+        "required": true,
+        "type": "string"
+    },
+    "AppendRenewPropertiesParameter": {
+        "name": "append",
+        "x-ms-parameter-location" : "method",
+        "in": "query",
+        "description": "Supported value of this query is renewProperties",
+        "required": false,
+        "type":  "string"
     },
     "SubscriptionIdParameter" : {
       "name" : "subscriptionId",
