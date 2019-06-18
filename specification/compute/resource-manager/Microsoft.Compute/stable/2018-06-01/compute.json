@@ -2238,6 +2238,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Lists all available virtual machine sizes to which the specified virtual machine can be resized": {
+            "$ref": "./examples/ListAvailableVmSizes_VirtualMachines.json"
+          }
         }
       }
     },
@@ -5269,10 +5274,10 @@
       "properties": {
         "tempDisk": {
           "type": "boolean",
-          "description": "Specifies whether to reimage temp disk. Default value: false."
+          "description": "Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk."
         }
       },
-      "description": "Parameters for Reimaging Virtual Machine. Default value for OSDisk : true."
+      "description": "Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged"
     },
     "VirtualMachineCaptureParameters": {
       "properties": {
