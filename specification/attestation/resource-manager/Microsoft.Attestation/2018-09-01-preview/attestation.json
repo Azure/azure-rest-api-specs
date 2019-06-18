@@ -354,13 +354,12 @@
             "description": "Attestation service response message.",
             "required": [
                 "properties"
-            ],           
+            ],
             "allOf": [
                 {
-                    "$ref": "#/definitions/Resource"
+                  "$ref": "../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
                 }
             ],
-            "x-ms-azure-resource": true,
             "properties": {
                 "properties": {
                     "type": "object",
@@ -467,27 +466,6 @@
                     "description":"Name of attestation policy."   
                 }
             }
-        },
-        "Resource": {
-            "properties": {
-                "id": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The id of the ARM resource, e.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Attestation/attestationProviders/{providerName}\""
-                },
-                "name": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "The name of the  attestation service."
-                },
-                "type": {
-                    "readOnly": true,
-                    "type": "string",
-                    "description": "Microsoft.Attestation/attestationProviders"
-                }
-            },
-            "description": "Attestation resource",
-            "x-ms-azure-resource": true
         }
     },
     "parameters": {
