@@ -3612,6 +3612,177 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/recurringCharges": {
+      "get": {
+        "tags": [
+          "RecurringCharges"
+        ],
+        "operationId": "RecurringCharges_ListByBillingAccountName",
+        "description": "Lists recurring charges by billing account name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "RecurringChargesListByBillingAccount": {
+            "$ref": "./examples/RecurringChargesListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RecurringChargesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/recurringCharges": {
+      "get": {
+        "tags": [
+          "RecurringCharges"
+        ],
+        "operationId": "RecurringCharges_ListByBillingProfileName",
+        "description": "Lists recurring charges by invoice section name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "RecurringChargesListByBillingProfile": {
+            "$ref": "./examples/RecurringChargesListByBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RecurringChargesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/recurringCharges": {
+      "get": {
+        "tags": [
+          "RecurringCharges"
+        ],
+        "operationId": "RecurringCharges_ListByInvoiceSectionName",
+        "description": "Lists recurring charges by invoice section name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "RecurringChargesListByInvoiceSection": {
+            "$ref": "./examples/RecurringChargesListByInvoiceSection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RecurringChargesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/recurringCharges/{recurringChargeName}": {
+      "get": {
+        "tags": [
+          "RecurringCharges"
+        ],
+        "operationId": "RecurringCharges_Get",
+        "description": "Get a single recurring charge by name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "RecurringCharge": {
+            "$ref": "./examples/RecurringCharge.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/recurringChargeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RecurringChargeSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5151,6 +5322,170 @@
         }
       }
     },
+    "RecurringChargesListResult": {
+      "description": "Result of listing recurring charges. It contains a list of available recurring charges in reverse chronological order by charge date.",
+      "properties": {
+        "value": {
+          "description": "The list of recurring charges.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RecurringChargeSummary"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RecurringChargeSummary": {
+      "description": "A recurring charge resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RecurringChargeSummaryProperties",
+          "title": "Recurring charge properties"
+        }
+      }
+    },
+    "RecurringChargeSummaryProperties": {
+      "description": "The properties of the recurring charge.",
+      "properties": {
+        "availabilityId": {
+          "description": "Availability Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "Billing frequency.",
+          "type": "string",
+          "enum": [
+            "OneTime",
+            "Monthly",
+            "UsageBased"
+          ],
+          "x-ms-enum": {
+            "name": "BillingFrequency",
+            "modelAsString": true
+          }
+        },
+        "billingProfileId": {
+          "description": "Billing profile id to which this charge belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing profile name to which this charge belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "displayName": {
+          "description": "The display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "endDate": {
+          "description": "end date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice section id to which this charge belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice section name to which this charge belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastCharge": {
+          "description": "Last charge.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "lastChargeDate": {
+          "description": "The date of the last charge.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "nextCharge": {
+          "description": "Next charge.",
+          "readOnly": true,
+          "$ref": "#/definitions/Amount"
+        },
+        "nextChargeDate": {
+          "description": "The date of the next charge.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "parentProductId": {
+          "description": "Parent product Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productType": {
+          "description": "The type of product.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productTypeId": {
+          "description": "The product type id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuId": {
+          "description": "Sku Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuDescription": {
+          "description": "Sku description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchaseDate": {
+          "description": "The date of purchase.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The purchased quantity.",
+          "type": "number",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Latest status.",
+          "type": "string",
+          "enum": [
+            "Active",
+            "AutoRenew",
+            "Cancelled",
+            "Deleted",
+            "Disabled",
+            "Expired",
+            "Expiring",
+            "PastDue"
+          ],
+          "x-ms-enum": {
+            "name": "StatusType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ValidateProductTransferEligibilityResult": {
       "type": "object",
       "description": "Result of the product transfer eligibility validation.",
@@ -6095,7 +6430,7 @@
     "productNameParameter": {
       "name": "productName",
       "in": "path",
-      "description": "Invoice Id.",
+      "description": "Product Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -6140,6 +6475,14 @@
       "name": "agreementName",
       "in": "path",
       "description": "Agreement Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "recurringChargeNameParameter": {
+      "name": "recurringChargeName",
+      "in": "path",
+      "description": "Recurring charge Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
