@@ -426,6 +426,103 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/sapMonitors/{sapMonitorName}": {
+      "get": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "SapMonitors_Get",
+        "summary": "Gets properties of a SAP monitor.",
+        "description": "Gets properties of a SAP monitor for the specified subscription, resource group, and resource name.",
+        "x-ms-examples": {
+          "Get properties of a SAP monitor": {
+            "$ref": "./examples/SapMonitors_Get.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapMonitorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SapMonitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "HanaOnAzure"
+        ],
+        "operationId": "SapMonitors_Create",
+        "x-ms-long-running-operation": true,
+        "summary": "Creates a SAP monitor.",
+        "description": "Creates a SAP monitor for the specified subscription, resource group, and resource name.",
+        "x-ms-examples": {
+          "Get properties of a HANA instance": {
+            "$ref": "./examples/SapMonitors_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapMonitorNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SapMonitorParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created SapMonitor",
+            "schema": {
+              "$ref": "#/definitions/SapMonitor"
+            }
+          },
+          "201": {
+            "description": "Creating SapMonitor",
+            "schema": {
+              "$ref": "#/definitions/SapMonitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -821,6 +918,65 @@
         }
       },
       "description": "Details needed to monitor a Hana Instance"
+    },
+    "SapMonitor": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SapMonitorProperties",
+          "description": "SAP monitor properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "SAP monitor info on Azure (ARM properties and SAP monitor properties)"
+    },
+    "SapMonitorProperties": {
+      "properties": {
+        "hanaSubnet": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the SAP monitor unique ID."
+        },
+        "hanaHostname": {
+          "type": "string",
+          "description": "Hostname of the HANA instance."
+        },
+        "hanaDbName": {
+          "type": "string",
+          "description": "Database name of the HANA instance."
+        },
+        "hanaDbSqlPort": {
+          "type": "integer",
+          "description": "Database port of the HANA instance."
+        },
+        "hanaDbUsername": {
+          "type": "string",
+          "description": "Database username of the HANA instance."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Accepted",
+            "Creating",
+            "Updating",
+            "Failed",
+            "Succeeded",
+            "Deleting",
+            "Migrating"
+          ],
+          "x-ms-enum": {
+            "name": "HanaProvisioningStatesEnum",
+            "modelAsString": true
+          },
+          "description": "State of provisioning of the HanaInstance"
+        }
+      },
+      "description": "Describes the properties of a SAP monitor."
     }
   },
   "parameters": {
@@ -845,6 +1001,14 @@
       "required": true,
       "type": "string",
       "description": "Name of the SAP HANA on Azure instance.",
+      "x-ms-parameter-location": "method"
+    },
+    "SapMonitorNameParameter": {
+      "name": "sapMonitorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the SAP monitor resource.",
       "x-ms-parameter-location": "method"
     },
     "ApiVersionParameter": {
@@ -882,6 +1046,16 @@
         "$ref": "#/definitions/HanaInstance"
       },
       "description": "Request body representing a HanaInstance",
+      "x-ms-parameter-location": "method"
+    },
+    "SapMonitorParameter": {
+      "name": "sapMonitorParameter",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/SapMonitor"
+      },
+      "description": "Request body representing a SAP Monitor",
       "x-ms-parameter-location": "method"
     }
   }
