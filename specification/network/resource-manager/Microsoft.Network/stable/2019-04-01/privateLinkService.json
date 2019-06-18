@@ -345,7 +345,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful."
+            "description": "Update successful. The operation returns the resulting PrivateEndpointConnection resource",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           },
           "default": {
             "description": "Error",
@@ -428,7 +431,7 @@
         "tags": [
           "PrivateLinkServices"
         ],
-        "operationId": "CheckPrivateLinkServiceVisibility",
+        "operationId": "PrivateLinkServices_CheckPrivateLinkServiceVisibility",
         "description": "Checks the subscription is visible to private link service",
         "parameters": [
           {
@@ -465,7 +468,7 @@
         "tags": [
           "PrivateLinkServices"
         ],
-        "operationId": "AutoApprovedPrivateLinkServices_List",
+        "operationId": "PrivateLinkServices_ListAutoApprovedPrivateLinkServices",
         "description": "Returns all of the private link service ids that can be linked to a Private Endpoint with auto approved in this subscription in this region.",
         "parameters": [
           {
