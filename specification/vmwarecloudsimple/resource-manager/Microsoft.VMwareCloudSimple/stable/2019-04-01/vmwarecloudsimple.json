@@ -37,7 +37,7 @@
     }
   },
   "paths": {
-    "/providers/microsoft.vmwarecloudsimple/operations": {
+    "/providers/Microsoft.VMwareCloudSimple/operations": {
       "get": {
         "description": "Return list of operations",
         "consumes": [
@@ -80,7 +80,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/dedicatedcloudnodes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes": {
       "get": {
         "description": "Returns list of dedicate cloud nodes within subscription",
         "consumes": [
@@ -128,9 +128,6 @@
               "$ref": "#/definitions/DedicatedCloudNodeListResponse"
             }
           },
-          "404": {
-            "description": "If subscription is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -148,7 +145,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/dedicatedcloudservices": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices": {
       "get": {
         "description": "Returns list of dedicated cloud service within within subscription",
         "consumes": [
@@ -196,9 +193,6 @@
               "$ref": "#/definitions/DedicatedCloudServiceListResponse"
             }
           },
-          "404": {
-            "description": "If subscription is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -216,7 +210,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/availabilities": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/availabilities": {
       "get": {
         "description": "Returns list of available resources in region",
         "produces": [
@@ -251,9 +245,6 @@
               "$ref": "#/definitions/SkuAvailabilityListResponse"
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -271,7 +262,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/operationresults/{operationId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/operationResults/{operationId}": {
       "get": {
         "description": "Return an async operation",
         "tags": [
@@ -321,9 +312,6 @@
           "204": {
             "description": "No Content"
           },
-          "404": {
-            "description": "Operation not found"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -348,7 +336,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds": {
       "get": {
         "description": "Returns list of private clouds in particular region",
         "consumes": [
@@ -380,9 +368,6 @@
               "$ref": "#/definitions/PrivateCloudList"
             }
           },
-          "404": {
-            "description": "If subscription is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -400,7 +385,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds/{pcName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}": {
       "get": {
         "description": "Returns private cloud by its name",
         "consumes": [
@@ -435,9 +420,6 @@
               "$ref": "#/definitions/PrivateCloud"
             }
           },
-          "404": {
-            "description": "If subscription or resource is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -452,7 +434,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds/{pcName}/resourcepools": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools": {
       "get": {
         "description": "Returns list of resource pools in region for private cloud",
         "produces": [
@@ -484,9 +466,6 @@
               "$ref": "#/definitions/ResourcePoolsListResponse"
             }
           },
-          "404": {
-            "description": "If subscription is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -504,7 +483,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds/{pcName}/resourcepools/{resourcePoolName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools/{resourcePoolName}": {
       "get": {
         "description": "Returns resource pool templates by its name",
         "produces": [
@@ -543,9 +522,6 @@
               "$ref": "#/definitions/ResourcePool"
             }
           },
-          "404": {
-            "description": "If subscription or resource pool is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -560,7 +536,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds/{pcName}/virtualmachinetemplates": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates": {
       "get": {
         "description": "Returns list of virtual machine templates in region for private cloud",
         "produces": [
@@ -599,9 +575,6 @@
               "$ref": "#/definitions/VirtualMachineTemplateListResponse"
             }
           },
-          "404": {
-            "description": "If resource pool, subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -619,7 +592,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds/{pcName}/virtualmachinetemplates/{virtualMachineTemplateName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates/{virtualMachineTemplateName}": {
       "get": {
         "description": "Returns virtual machine templates by its name",
         "consumes": [
@@ -661,9 +634,6 @@
               "$ref": "#/definitions/VirtualMachineTemplate"
             }
           },
-          "404": {
-            "description": "If subscription or resource group or resource is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -678,7 +648,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds/{pcName}/virtualnetworks": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks": {
       "get": {
         "description": "Return list of virtual networks in location for private cloud",
         "produces": [
@@ -717,9 +687,6 @@
               "$ref": "#/definitions/VirtualNetworkListResponse"
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -737,7 +704,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/privateclouds/{pcName}/virtualnetworks/{virtualNetworkName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks/{virtualNetworkName}": {
       "get": {
         "description": "Return virtual network by its name",
         "consumes": [
@@ -779,9 +746,6 @@
               "$ref": "#/definitions/VirtualNetwork"
             }
           },
-          "404": {
-            "description": "If subscription or resource group or resource is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -796,7 +760,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/locations/{regionId}/usages": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/usages": {
       "get": {
         "description": "Returns list of usage in region",
         "produces": [
@@ -831,9 +795,6 @@
               "$ref": "#/definitions/UsageListResponse"
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -851,7 +812,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/microsoft.vmwarecloudsimple/virtualmachines": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/virtualMachines": {
       "get": {
         "description": "Returns list virtual machine within subscription",
         "consumes": [
@@ -899,9 +860,6 @@
               "$ref": "#/definitions/VirtualMachineListResponse"
             }
           },
-          "404": {
-            "description": "If subscription is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -919,7 +877,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/dedicatedcloudnodes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes": {
       "get": {
         "description": "Returns list of dedicate cloud nodes within resource group",
         "consumes": [
@@ -970,9 +928,6 @@
               "$ref": "#/definitions/DedicatedCloudNodeListResponse"
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -990,7 +945,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/dedicatedcloudnodes/{dedicatedCloudNodeName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/{dedicatedCloudNodeName}": {
       "get": {
         "description": "Returns dedicated cloud node",
         "consumes": [
@@ -1026,9 +981,6 @@
             "schema": {
               "$ref": "#/definitions/DedicatedCloudNode"
             }
-          },
-          "404": {
-            "description": "If subscription or resource group or resource is not found 404 will be returned"
           },
           "default": {
             "description": "BadRequest",
@@ -1105,9 +1057,6 @@
               }
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1154,9 +1103,6 @@
         "responses": {
           "204": {
             "description": "no content. resource does not exist and the request is well formed"
-          },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
           },
           "default": {
             "description": "BadRequest",
@@ -1225,9 +1171,6 @@
               "$ref": "#/definitions/DedicatedCloudNode"
             }
           },
-          "404": {
-            "description": "If subscription or resource group or a resource is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1242,7 +1185,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/dedicatedcloudservices": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices": {
       "get": {
         "description": "Returns list of dedicated cloud service within resource group",
         "consumes": [
@@ -1293,9 +1236,6 @@
               "$ref": "#/definitions/DedicatedCloudServiceListResponse"
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1313,7 +1253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/dedicatedcloudservices/{dedicatedCloudServiceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/{dedicatedCloudServiceName}": {
       "get": {
         "description": "Returns Dedicate Cloud Service",
         "consumes": [
@@ -1351,9 +1291,6 @@
             "schema": {
               "$ref": "#/definitions/DedicatedCloudService"
             }
-          },
-          "404": {
-            "description": "If subscription or resource group or resource is not found 404 will be returned"
           },
           "default": {
             "description": "BadRequest",
@@ -1416,9 +1353,6 @@
               "$ref": "#/definitions/DedicatedCloudService"
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1463,9 +1397,6 @@
         "responses": {
           "204": {
             "description": "no content. resource does not exist and the request is well formed"
-          },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
           },
           "default": {
             "description": "BadRequest",
@@ -1534,9 +1465,6 @@
               "$ref": "#/definitions/DedicatedCloudService"
             }
           },
-          "404": {
-            "description": "If subscription or resource group or a resource is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1551,7 +1479,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/virtualmachines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines": {
       "get": {
         "description": "Returns list of virtual machine within resource group",
         "consumes": [
@@ -1602,9 +1530,6 @@
               "$ref": "#/definitions/VirtualMachineListResponse"
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1622,7 +1547,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/virtualmachines/{virtualMachineName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}": {
       "get": {
         "description": "Get virtual machine",
         "consumes": [
@@ -1660,9 +1585,6 @@
             "schema": {
               "$ref": "#/definitions/VirtualMachine"
             }
-          },
-          "404": {
-            "description": "If subscription or resource group or resource is not found 404 will be returned"
           },
           "default": {
             "description": "BadRequest",
@@ -1744,9 +1666,6 @@
               }
             }
           },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1809,9 +1728,6 @@
           },
           "204": {
             "description": "no content. resource does not exist and the request is well formed"
-          },
-          "404": {
-            "description": "If subscription or resource group is not found 404 will be returned"
           },
           "default": {
             "description": "BadRequest",
@@ -1880,9 +1796,6 @@
               "$ref": "#/definitions/VirtualMachine"
             }
           },
-          "404": {
-            "description": "If subscription or resource group or a resource is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1898,7 +1811,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/virtualmachines/{virtualMachineName}/start": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}/start": {
       "post": {
         "description": "Power on virtual machine",
         "consumes": [
@@ -1948,9 +1861,6 @@
               }
             }
           },
-          "404": {
-            "description": "If subscription or resource group or Virtual Machine is not found 404 will be returned"
-          },
           "default": {
             "description": "BadRequest",
             "schema": {
@@ -1972,7 +1882,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.vmwarecloudsimple/virtualmachines/{virtualMachineName}/stop": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}/stop": {
       "post": {
         "description": "Power off virtual machine, options: shutdown, poweroff, and suspend",
         "consumes": [
@@ -2045,9 +1955,6 @@
                 "type": "integer"
               }
             }
-          },
-          "404": {
-            "description": "If subscription or resource group or Virtual Machine is not found 404 will be returned"
           },
           "default": {
             "description": "BadRequest",
@@ -2338,7 +2245,8 @@
         },
         "created": {
           "description": "date time the resource was created",
-          "format": "date-time"
+          "format": "date-time",
+          "readOnly": true
         },
         "nodesCount": {
           "description": "count of nodes to create",
@@ -2423,10 +2331,6 @@
           "pattern": "^[-a-zA-Z0-9]+$",
           "readOnly": true
         },
-        "plan": {
-          "description": "The plan",
-          "$ref": "#/definitions/Plan"
-        },
         "properties": {
           "description": "The properties of Dedicated Node Service",
           "x-ms-client-flatten": true,
@@ -2495,23 +2399,6 @@
         }
       }
     },
-    "MoveResourceRequestBody": {
-      "description": "Move resource request",
-      "properties": {
-        "resources": {
-          "description": "array of resources to move",
-          "type": "array",
-          "items": {
-            "description": "/subscriptions/{id}/resourceGroups/{source}/providers/{namespace}/{type}/{name}",
-            "type": "string"
-          }
-        },
-        "targetResourceGroup": {
-          "description": "/subscriptions/{targetSubscriptionId}/resourceGroups/{targetResourceGroupName}",
-          "type": "string"
-        }
-      }
-    },
     "OperationError": {
       "description": "Operation error model",
       "properties": {
@@ -2567,23 +2454,6 @@
         "tags": {
           "description": "The tags key:value pairs",
           "$ref": "#/definitions/Tags"
-        }
-      }
-    },
-    "Plan": {
-      "description": "The purchase plan for CloudSimple resources",
-      "properties": {
-        "name": {
-          "description": "Plan name",
-          "type": "string"
-        },
-        "product": {
-          "description": "Plan product",
-          "type": "string"
-        },
-        "publisher": {
-          "description": "Plan publisher",
-          "type": "string"
         }
       }
     },
@@ -3078,10 +2948,6 @@
           "type": "string",
           "pattern": "^[-a-zA-Z0-9]+$",
           "readOnly": true
-        },
-        "plan": {
-          "description": "Virtual machine plan",
-          "$ref": "#/definitions/Plan"
         },
         "properties": {
           "description": "Virtual machine properties",
