@@ -34,7 +34,20 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-04
+tag: package-2019-06
+```
+
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-06-01/location.json
+  - Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
 ```
 
 ### Tag: package-2019-04
@@ -126,11 +139,20 @@ input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
 ```
 
+### Tag: package-2019-06-01-only
+
+These settings apply only when `--tag=package-2019-06-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
+```
+
 ### Tag: package-2019-04-30-only
 
 These settings apply only when `--tag=package-2019-04-30-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04-30-only'
+``` yaml $(tag) == 'package-2019-04-30-only'
 input-file:
 - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
 ```
@@ -139,7 +161,7 @@ input-file:
 
 These settings apply only when `--tag=package-2019-04-01-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-04-01-only'
+``` yaml $(tag) == 'package-2019-04-01-only'
 input-file:
 - Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
 ```
