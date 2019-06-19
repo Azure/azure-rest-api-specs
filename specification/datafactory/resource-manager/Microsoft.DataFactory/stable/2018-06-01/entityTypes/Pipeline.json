@@ -117,7 +117,8 @@
       "properties": {
         "activity": {
           "description": "Activity name.",
-          "type": "string"
+          "type": "string",
+          "minLength": 1
         },
         "dependencyConditions": {
           "type": "array",
@@ -824,6 +825,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the source data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "Specifies whether to disable collecting data source metrics. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
@@ -1051,7 +1056,8 @@
             "PartitionOnInt",
             "PartitionOnCalendarYear",
             "PartitionOnCalendarMonth",
-            "PartitionOnCalendarDate"
+            "PartitionOnCalendarDate",
+            "PartitionOnTime"
           ],
           "x-ms-enum": {
             "name": "TabularPartitionOption",
@@ -2158,6 +2164,10 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
+        },
+        "disableMetricsCollection": {
+          "type": "object",
+          "description": "Specifies whether to disable collecting data source metrics. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "additionalProperties": {
