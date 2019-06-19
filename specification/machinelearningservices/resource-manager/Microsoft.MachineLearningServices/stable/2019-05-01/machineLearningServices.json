@@ -772,7 +772,7 @@
           "200": {
             "description": "The operation was successful. The response contains the list of IP addresses.",
             "schema": {
-              "$ref": "#/definitions/AmlComputeNodesInformation"
+              "$ref": "#/definitions/ComputeNodesInformation"
             }
           },
           "default": {
@@ -1965,6 +1965,14 @@
         "computeType": {
           "description": "The type of compute",
           "$ref": "#/definitions/ComputeType"
+        },
+        "nodes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AmlComputeNodeInformation"
+          },
+          "description": "The collection of returned AmlCompute nodes details."
         },
         "nextLink": {
           "readOnly": true,
