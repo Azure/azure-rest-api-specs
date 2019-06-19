@@ -6,8 +6,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 ```yaml $(typescript)
 typescript:
   azure-arm: true
-  package-name: "vmwarecloudsimple"
-  output-folder: "$(typescript-sdks-folder)/packages/vmwarecloudsimple"
+  package-name: "@azure/arm-vmwarecloudsimple"
+  output-folder: "$(typescript-sdks-folder)/sdk/vmwarecloudsimple/arm-vmwarecloudsimple"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
