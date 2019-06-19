@@ -219,14 +219,14 @@
       },
       "patch": {
         "x-ms-examples": {
-          "Create an iot security solution": {
+          "Update an iot security solution": {
             "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution_example.json"
           }
         },
         "tags": [
           "IoT Security Solutions"
         ],
-        "description": "update exists Security Solution tags. to update other fields use the CreateOrUpdate method",
+        "description": "update existing Security Solution tags or user defined resources. To update other fields use the CreateOrUpdate method",
         "operationId": "IotSecuritySolution_Update",
         "parameters": [
           {
@@ -242,13 +242,7 @@
             "$ref": "#/parameters/SolutionName"
           },
           {
-            "name": "securitySolutionTags",
-            "in": "body",
-            "required": true,
-            "description": "Updated tag information to set into the iot hub instance.",
-            "schema": {
-              "$ref": "#/definitions/TagsResource"
-            }
+            "$ref": "#/parameters/UpdateIotSecuritySolution"
           }
         ],
         "responses": {
@@ -435,12 +429,170 @@
           "items": {
             "type": "string"
           }
+        },
+        "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties"
+        },
+        "autoDiscoveredResources": {
+          "type": "array",
+          "description": "List of resources that were automatically discovered as relevant to the security solution.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recommendationsConfiguration":{
+          "$ref": "#/definitions/RecommendationConfigurationList"
         }
       },
       "required": [
         "iotHubs",
         "workspace",
         "displayName"
+      ]
+    },
+    "UserDefinedResourcesProperties": {
+      "type": "object",
+      "description": "Properties of the solution's user defined resources.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "description": "Azure Resource Graph query which represents the security solution's user defined resources. Required to start with \"where type != \"Microsoft.Devices/IotHubs\"\""
+        },
+        "querySubscriptions": {
+          "type": "array",
+          "description": "List of Azure subscription ids on which the user defined resources query should be executed.",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+          }
+        }
+      },
+      "required": [
+        "query",
+        "querySubscriptions"
+      ]
+    },
+    "RecommendationConfigurationProperties": {
+      "type": "object",
+      "description": "Recommendation configuration",
+      "properties": {
+        "recommendationType": {
+          "type": "string",
+          "description": "The recommendation type.",
+          "enum": [
+            "OpenPortsOnDevice",
+            "PermissiveFirewallPolicy ",
+            "PermissiveFirewallRuleInput",
+            "PermissiveFirewallRuleOut",
+            "OperationSystemNotValid",
+            "UnutilizedMessagesFromAgent",
+            "SecurityTwinConfigurationNotOptimal",
+            "SecurityTwinConfigurationConflict",
+            "IdenticalAuthenticationCredentials",
+            "DenyDefaultIpPolicy",
+            "TooLargeIPRange",
+            "EnableDiagnosticsLog "
+          ],
+          "x-ms-enum": {
+            "name": "ruleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "OpenPortsOnDevice",
+                "description": "A listening endpoint was found on the device."
+              },
+              {
+                "value": "PermissiveFirewallPolicy",
+                "description": "Allowed firewall policy found (INPUT/OUTPUT). Firewall policy should deny all traffic by default, and define rules to allow necessary communication to/from the device."
+              },
+              {
+                "value": "PermissiveFirewallRuleInput",
+                "description": "A rule in the firewall in the input chain has been found that contains a permissive pattern for a wide range of IP addresses or ports."
+              },
+              {
+                "value": "PermissiveFirewallRuleOut",
+                "description": "A rule in the firewall in the output chain has been found that contains a permissive pattern for a wide range of IP addresses or ports."
+              },
+              {
+                "value": "OperationSystemNotValid",
+                "description": "Device doesn't comply with CIS Linux benchmarks."
+              },
+              {
+                "value": "UnutilizedMessagesFromAgent",
+                "description": "10% or more of security messages were smaller than 4kb during the last 24 hours."
+              },
+              {
+                "value": "SecurityTwinConfigurationNotOptimal",
+                "description": "Security twin configuration is not optimal."
+              },
+              {
+                "value": "SecurityTwinConfigurationConflict",
+                "description": "Conflicts were identified in the security twin configuration."
+              },
+              {
+                "value": "IdenticalAuthenticationCredentials",
+                "description": "IoT Hub authentication credentials are used by multiple devices. This may indicate an illegitimate device impersonating a legitimate device. Duplicate credential use increases the risk of device impersonation by a malicious actor."
+              },
+              {
+                "value": "DenyDefaultIpPolicy",
+                "description": "IP filter configuration should have rules defined for allowed traffic, and should by default, deny all other traffic by default."
+              },
+              {
+                "value": "TooLargeIPRange",
+                "description": "An allow IP filter rule source IP range is too large. Overly permissive rules can expose your IoT hub to malicious actors."
+              },
+              {
+                "value": "EnableDiagnosticsLog",
+                "description": "Enable logs and retain them for up to a year. Retaining logs enables you to recreate activity trails for investigation purposes when a security incident occurs or your network is compromised."
+              }
+            ]
+          }
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "TurnedOff",
+            "TurnedOn"
+          ],
+          "default": "TurnedOn",
+          "description": "Recommendation status. The recommendation is not generated when the status is turned off",
+          "x-ms-enum": {
+            "name": "RecommendationConfigStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "recommendationType",
+        "status"
+      ]
+    },
+    "RecommendationConfigurationList": {
+      "type": "array",
+      "description": "List of recommendation configuration",
+      "items": {
+        "$ref": "#/definitions/RecommendationConfigurationProperties"
+      }
+    },
+    "UpdateIotSecuritySolutionData": {
+      "type": "object",
+      "properties": {
+        "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties"
+        },
+        "RecommendationsConfiguration": {
+          "$ref": "#/definitions/RecommendationConfigurationList"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
       ]
     }
   },
@@ -470,6 +622,17 @@
       "description": "filter the Security Solution with OData syntax. supporting filter by iotHubs",
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "UpdateIotSecuritySolution": {
+      "name": "updateIotSecuritySolutionData",
+      "in": "body",
+      "required": true,
+      "description": "The security solution data",
+      "x-ms-parameter-location": "method",
+      "type": "object",
+      "schema": {
+        "$ref": "#/definitions/UpdateIotSecuritySolutionData"
+      }
     }
   }
 }
