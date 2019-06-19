@@ -3613,19 +3613,19 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/recurringCharges": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/recurringProducts": {
       "get": {
         "tags": [
-          "RecurringCharges"
+          "RecurringProducts"
         ],
-        "operationId": "RecurringCharges_ListByBillingAccountName",
-        "description": "Lists recurring charges by billing account name.",
+        "operationId": "RecurringProducts_ListByBillingAccountName",
+        "description": "Lists recurring products by billing account name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "RecurringChargesListByBillingAccount": {
-            "$ref": "./examples/RecurringChargesListByBillingAccount.json"
+          "RecurringProductsListByBillingAccount": {
+            "$ref": "./examples/RecurringProductsListByBillingAccount.json"
           }
         },
         "parameters": [
@@ -3640,7 +3640,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RecurringChargesListResult"
+              "$ref": "#/definitions/RecurringProductsListResult"
             }
           },
           "default": {
@@ -3655,19 +3655,19 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/recurringCharges": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/recurringProducts": {
       "get": {
         "tags": [
-          "RecurringCharges"
+          "RecurringProducts"
         ],
-        "operationId": "RecurringCharges_ListByBillingProfileName",
-        "description": "Lists recurring charges by invoice section name.",
+        "operationId": "RecurringProducts_ListByBillingProfileName",
+        "description": "Lists recurring products by invoice section name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "RecurringChargesListByBillingProfile": {
-            "$ref": "./examples/RecurringChargesListByBillingProfile.json"
+          "RecurringProductsListByBillingProfile": {
+            "$ref": "./examples/RecurringProductsListByBillingProfile.json"
           }
         },
         "parameters": [
@@ -3685,7 +3685,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RecurringChargesListResult"
+              "$ref": "#/definitions/RecurringProductsListResult"
             }
           },
           "default": {
@@ -3697,19 +3697,19 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/recurringCharges": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/recurringProducts": {
       "get": {
         "tags": [
-          "RecurringCharges"
+          "RecurringProducts"
         ],
-        "operationId": "RecurringCharges_ListByInvoiceSectionName",
-        "description": "Lists recurring charges by invoice section name.",
+        "operationId": "RecurringProducts_ListByInvoiceSectionName",
+        "description": "Lists recurring products by invoice section name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "RecurringChargesListByInvoiceSection": {
-            "$ref": "./examples/RecurringChargesListByInvoiceSection.json"
+          "RecurringProductsListByInvoiceSection": {
+            "$ref": "./examples/RecurringProductsListByInvoiceSection.json"
           }
         },
         "parameters": [
@@ -3727,7 +3727,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RecurringChargesListResult"
+              "$ref": "#/definitions/RecurringProductsListResult"
             }
           },
           "default": {
@@ -3739,19 +3739,19 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/recurringCharges/{recurringChargeName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/recurringProducts/{recurringProductName}": {
       "get": {
         "tags": [
-          "RecurringCharges"
+          "RecurringProducts"
         ],
-        "operationId": "RecurringCharges_Get",
-        "description": "Get a single recurring charge by name.",
+        "operationId": "RecurringProducts_Get",
+        "description": "Get a single recurring product by name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "RecurringCharge": {
-            "$ref": "./examples/RecurringCharge.json"
+          "RecurringProduct": {
+            "$ref": "./examples/RecurringProduct.json"
           }
         },
         "parameters": [
@@ -3762,7 +3762,7 @@
             "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
-            "$ref": "#/parameters/recurringChargeNameParameter"
+            "$ref": "#/parameters/recurringProductNameParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -3772,7 +3772,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RecurringChargeSummary"
+              "$ref": "#/definitions/RecurringProductSummary"
             }
           },
           "default": {
@@ -5322,15 +5322,15 @@
         }
       }
     },
-    "RecurringChargesListResult": {
-      "description": "Result of listing recurring charges. It contains a list of available recurring charges in reverse chronological order by charge date.",
+    "RecurringProductsListResult": {
+      "description": "Result of listing recurring products. It contains a list of available recurring products in reverse chronological order by charge date.",
       "properties": {
         "value": {
-          "description": "The list of recurring charges.",
+          "description": "The list of recurring products.",
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RecurringChargeSummary"
+            "$ref": "#/definitions/RecurringProductSummary"
           }
         },
         "nextLink": {
@@ -5340,8 +5340,8 @@
         }
       }
     },
-    "RecurringChargeSummary": {
-      "description": "A recurring charge resource.",
+    "RecurringProductSummary": {
+      "description": "A recurring product resource.",
       "type": "object",
       "allOf": [
         {
@@ -5351,13 +5351,13 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RecurringChargeSummaryProperties",
-          "title": "Recurring charge properties"
+          "$ref": "#/definitions/RecurringProductSummaryProperties",
+          "title": "Recurring product properties"
         }
       }
     },
-    "RecurringChargeSummaryProperties": {
-      "description": "The properties of the recurring charge.",
+    "RecurringProductSummaryProperties": {
+      "description": "The properties of the recurring product.",
       "properties": {
         "availabilityId": {
           "description": "Availability Id.",
@@ -6479,10 +6479,10 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "recurringChargeNameParameter": {
-      "name": "recurringChargeName",
+    "recurringProductNameParameter": {
+      "name": "recurringProductName",
       "in": "path",
-      "description": "Recurring charge Id.",
+      "description": "Recurring product Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
