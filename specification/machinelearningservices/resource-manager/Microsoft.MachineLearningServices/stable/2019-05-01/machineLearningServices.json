@@ -782,9 +782,6 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
           "Get compute nodes information for a compute": {
             "$ref": "./examples/amlComputeListNodes.json"
@@ -1966,14 +1963,6 @@
           "description": "The type of compute",
           "$ref": "#/definitions/ComputeType"
         },
-        "nodes": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AmlComputeNodesInformation"
-          },
-          "description": "The collection of returned AmlCompute nodes details."
-        },
         "nextLink": {
           "readOnly": true,
           "type": "string",
@@ -1993,7 +1982,7 @@
         {
           "type": "object",
           "properties": {
-            "properties": {
+            "nodes": {
               "readOnly": true,
               "items": {
                 "$ref": "#/definitions/AmlComputeNodeInformation"
