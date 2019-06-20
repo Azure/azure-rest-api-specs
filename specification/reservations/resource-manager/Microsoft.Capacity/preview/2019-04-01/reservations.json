@@ -6,9 +6,15 @@
     "version": "2019-04-01"
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "produces": [ "application/json" ],
-  "consumes": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -44,7 +50,9 @@
             "$ref": "#/parameters/LocationIdParameter"
           }
         ],
-        "tags": [ "Catalog" ],
+        "tags": [
+          "Catalog"
+        ],
         "responses": {
           "200": {
             "description": "List of available resources",
@@ -82,7 +90,9 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
-        "tags": [ "AppliedReservation" ],
+        "tags": [
+          "AppliedReservation"
+        ],
         "responses": {
           "200": {
             "description": "Applicable `Reservation`s.",
@@ -117,7 +127,9 @@
             "$ref": "#/parameters/PurchaseParameter"
           }
         ],
-        "tags": [ "Reservation, Calculate" ],
+        "tags": [
+          "Reservation, Calculate"
+        ],
         "responses": {
           "200": {
             "description": "Detailed price info for purchasing `ReservationOrder`",
@@ -152,7 +164,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [ "Reservation" ],
+        "tags": [
+          "Reservation"
+        ],
         "responses": {
           "200": {
             "description": "List of `ReservationOrder`s",
@@ -194,7 +208,9 @@
             "$ref": "#/parameters/PurchaseParameter"
           }
         ],
-        "tags": [ "Reservation, Purchase" ],
+        "tags": [
+          "Reservation, Purchase"
+        ],
         "responses": {
           "200": {
             "description": "The resource has been created",
@@ -233,7 +249,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [ "Reservation" ],
+        "tags": [
+          "Reservation"
+        ],
         "responses": {
           "200": {
             "description": "Get the details of the `ReservationOrder`.",
@@ -272,7 +290,9 @@
             "$ref": "#/parameters/SplitParameter"
           }
         ],
-        "tags": [ "Reservation, Split" ],
+        "tags": [
+          "Reservation, Split"
+        ],
         "responses": {
           "200": {
             "description": "List of `Reservation`s created after the split operation.",
@@ -317,7 +337,9 @@
             "$ref": "#/parameters/MergeParameter"
           }
         ],
-        "tags": [ "Reservation, Merge" ],
+        "tags": [
+          "Reservation, Merge"
+        ],
         "responses": {
           "200": {
             "description": "Returns the `Reservation` created after the merge.",
@@ -361,7 +383,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [ "Reservation" ],
+        "tags": [
+          "Reservation"
+        ],
         "responses": {
           "200": {
             "description": "List `Reservation`s within a single `ReservationOrder`.",
@@ -402,7 +426,9 @@
             "$ref": "#/parameters/ExpandRenewPropertiesParameter"
           }
         ],
-        "tags": [ "Reservation" ],
+        "tags": [
+          "Reservation" 
+        ],
         "responses": {
           "200": {
             "description": "Get `Reservation` details.",
@@ -442,7 +468,10 @@
             "$ref": "#/parameters/PatchParameter"
           }
         ],
-        "tags": [ "Reservation", "ApplyScope" ],
+        "tags": [
+          "Reservation",
+          "ApplyScope"
+        ],
         "responses": {
           "200": {
             "description": "Returns the updated `Reservation`.",
@@ -486,7 +515,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [ "Reservation" ],
+        "tags": [
+          "Reservation"
+        ],
         "responses": {
           "200": {
             "description": "List of all the revisions for the `Reservation`.",
@@ -521,7 +552,9 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [ "Operation" ],
+        "tags": [
+          "Operation"
+        ],
         "responses": {
           "200": {
             "description": "List all the operations.",
@@ -542,7 +575,17 @@
   "definitions": {
     "ReservationStatusCode": {
       "type": "string",
-      "enum": [ "None", "Pending", "Active", "PurchaseError", "PaymentInstrumentError", "Split", "Merged", "Expired", "Succeeded" ],
+      "enum": [
+        "None",
+        "Pending",
+        "Active",
+        "PurchaseError",
+        "PaymentInstrumentError",
+        "Split",
+        "Merged",
+        "Expired",
+        "Succeeded"
+      ],
       "x-ms-enum": {
         "name": "ReservationStatusCode",
         "modelAsString": true
@@ -550,7 +593,63 @@
     },
     "ErrorResponseCode": {
       "type": "string",
-      "enum": [ "NotSpecified", "InternalServerError", "ServerTimeout", "AuthorizationFailed", "BadRequest", "ClientCertificateThumbprintNotSet", "InvalidRequestContent", "OperationFailed", "HttpMethodNotSupported", "InvalidRequestUri", "MissingTenantId", "InvalidTenantId", "InvalidReservationOrderId", "InvalidReservationId", "ReservationIdNotInReservationOrder", "ReservationOrderNotFound", "InvalidSubscriptionId", "InvalidAccessToken", "InvalidLocationId", "UnauthenticatedRequestsThrottled", "InvalidHealthCheckType", "Forbidden", "BillingScopeIdCannotBeChanged", "AppliedScopesNotAssociatedWithCommerceAccount", "PatchValuesSameAsExisting", "RoleAssignmentCreationFailed", "ReservationOrderCreationFailed", "ReservationOrderNotEnabled", "CapacityUpdateScopesFailed", "UnsupportedReservationTerm", "ReservationOrderIdAlreadyExists", "RiskCheckFailed", "CreateQuoteFailed", "ActivateQuoteFailed", "NonsupportedAccountId", "PaymentInstrumentNotFound", "MissingAppliedScopesForSingle", "NoValidReservationsToReRate", "ReRateOnlyAllowedForEA", "OperationCannotBePerformedInCurrentState", "InvalidSingleAppliedScopesCount", "InvalidFulfillmentRequestParameters", "NotSupportedCountry", "InvalidRefundQuantity", "PurchaseError", "BillingCustomerInputError", "BillingPaymentInstrumentSoftError", "BillingPaymentInstrumentHardError", "BillingTransientError", "BillingError", "FulfillmentConfigurationError", "FulfillmentOutOfStockError", "FulfillmentTransientError", "FulfillmentError", "CalculatePriceFailed" ],
+      "enum": [
+        "NotSpecified",
+        "InternalServerError",
+        "ServerTimeout",
+        "AuthorizationFailed",
+        "BadRequest",
+        "ClientCertificateThumbprintNotSet",
+        "InvalidRequestContent",
+        "OperationFailed",
+        "HttpMethodNotSupported",
+        "InvalidRequestUri",
+        "MissingTenantId",
+        "InvalidTenantId",
+        "InvalidReservationOrderId",
+        "InvalidReservationId",
+        "ReservationIdNotInReservationOrder",
+        "ReservationOrderNotFound",
+        "InvalidSubscriptionId",
+        "InvalidAccessToken",
+        "InvalidLocationId",
+        "UnauthenticatedRequestsThrottled",
+        "InvalidHealthCheckType",
+        "Forbidden",
+        "BillingScopeIdCannotBeChanged",
+        "AppliedScopesNotAssociatedWithCommerceAccount",
+        "PatchValuesSameAsExisting",
+        "RoleAssignmentCreationFailed",
+        "ReservationOrderCreationFailed",
+        "ReservationOrderNotEnabled",
+        "CapacityUpdateScopesFailed",
+        "UnsupportedReservationTerm",
+        "ReservationOrderIdAlreadyExists",
+        "RiskCheckFailed",
+        "CreateQuoteFailed",
+        "ActivateQuoteFailed",
+        "NonsupportedAccountId",
+        "PaymentInstrumentNotFound",
+        "MissingAppliedScopesForSingle",
+        "NoValidReservationsToReRate",
+        "ReRateOnlyAllowedForEA",
+        "OperationCannotBePerformedInCurrentState",
+        "InvalidSingleAppliedScopesCount",
+        "InvalidFulfillmentRequestParameters",
+        "NotSupportedCountry",
+        "InvalidRefundQuantity",
+        "PurchaseError",
+        "BillingCustomerInputError",
+        "BillingPaymentInstrumentSoftError",
+        "BillingPaymentInstrumentHardError",
+        "BillingTransientError",
+        "BillingError",
+        "FulfillmentConfigurationError",
+        "FulfillmentOutOfStockError",
+        "FulfillmentTransientError",
+        "FulfillmentError",
+        "CalculatePriceFailed"
+      ],
       "x-ms-enum": {
         "name": "ErrorResponseCode",
         "modelAsString": true
@@ -673,7 +772,10 @@
     "ReservationTerm": {
       "type": "string",
       "description": "Represent the term of Reservation.",
-      "enum": [ "P1Y", "P3Y" ],
+      "enum": [
+        "P1Y",
+        "P3Y"
+      ],
       "x-ms-enum": {
         "name": "ReservationTerm",
         "modelAsString": true
@@ -1232,7 +1334,10 @@
     "InstanceFlexibility": {
       "type": "string",
       "description": "Turning this on will apply the reservation discount to other VMs in the same VM size group. Only specify for VirtualMachines reserved resource type.",
-      "enum": [ "On", "Off" ],
+      "enum": [
+        "On",
+        "Off"
+      ],
       "x-ms-enum": {
         "name": "InstanceFlexibility",
         "modelAsString": true
@@ -1241,7 +1346,10 @@
     "AppliedScopeType": {
       "type": "string",
       "description": "Type of the Applied Scope.",
-      "enum": [ "Single", "Shared" ],
+      "enum": [
+        "Single",
+        "Shared"
+      ],
       "x-ms-enum": {
         "name": "AppliedScopeType",
         "modelAsString": true
@@ -1273,7 +1381,12 @@
     "ReservedResourceType": {
       "type": "string",
       "description": "The type of the resource that is being reserved.",
-      "enum": [ "VirtualMachines", "SqlDatabases", "SuseLinux", "CosmosDb" ],
+      "enum": [
+        "VirtualMachines",
+        "SqlDatabases",
+        "SuseLinux",
+        "CosmosDb"
+      ],
       "x-ms-enum": {
         "name": "ReservedResourceType",
         "modelAsString": true
