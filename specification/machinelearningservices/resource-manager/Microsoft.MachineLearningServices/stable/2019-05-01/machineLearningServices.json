@@ -491,102 +491,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a cluster": {
-            "$ref": "./examples/UpdateQuota.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
-      "get": {
-        "tags": [
-          "Quota"
-        ],
-        "operationId": "Quotas_List",
-        "description": "Gets the currently assigned Workspace Quotas based on VMFamily.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location for which resource usage is queried.",
-            "pattern": "^[-\\w\\._]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ListWorkspaceQuotas"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List workspace quotas by VMFamily": {
-            "$ref": "./examples/ListWorkspaceQuotasByVMFamily.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/updateQuotas": {
-      "post": {
-        "tags": [
-          "Quota"
-        ],
-        "operationId": "Quotas_Update",
-        "description": "Update quota for each VM family in workspace.",
-        "parameters": [
-          {
-            "name": "location",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The location for update quota is queried.",
-            "pattern": "^[-\\w\\._]+$"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/QuotaUpdateParameters"
-            },
-            "description": "Quota update parameters."
-          },
-          {
-            "$ref": "#/parameters/APIVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The operation was successful.",
-            "schema": {
-              "$ref": "#/definitions/UpdateWorkspaceQuotasResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/MachineLearningServiceError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Create a cluster": {
-            "$ref": "./examples/UpdateQuota.json"
+            "$ref": "./examples/updateQuota.json"
           }
         }
       }
@@ -1440,15 +1345,15 @@
     },
     "QuotaBaseProperties": {
       "properties": {
-        "vmFamily": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "title": "Virtual Machine family name",
-          "description": "The family name of the virtual machine size."
+          "description": "Specifies the resource ID."
         },
-        "resourceId": {
+        "type": {
+          "readOnly": true,
           "type": "string",
-          "title": "AML resource Id.",
-          "description": "Fully qualified resource identifier."
+          "description": "Specifies the resource type."
         },
         "quota": {
           "type": "integer",
@@ -1492,15 +1397,15 @@
     },
     "UpdateWorkspaceQuotas": {
       "properties": {
-        "vmFamily": {
+        "id": {
+          "readOnly": true,
           "type": "string",
-          "title": "Virtual Machine family name.",
-          "description": "The family name of the virtual machine size."
+          "description": "Specifies the resource ID."
         },
-        "resourceId": {
+        "type": {
+          "readOnly": true,
           "type": "string",
-          "title": "AML resource Id.",
-          "description": "Fully qualified resource identifier."
+          "description": "Specifies the resource type."
         },
         "quota": {
           "type": "integer",
