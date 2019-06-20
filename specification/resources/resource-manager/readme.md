@@ -41,7 +41,7 @@ tag: package-policy-2018-05
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-05
+tag: package-resources-2019-0510
 ```
 
 ``` yaml $(package-subscriptions)
@@ -56,15 +56,6 @@ tag: package-links-2016-09
 tag: package-2019-05
 ```
 
-
-### Tag: package-2019-05
-
-These settings apply only when `--tag=package-2019-05` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-05'
-input-file:
-  - Microsoft.Resources/stable/2019-05-10/resources.json
-```
 ### Tag: package-features-2015-12
 
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
@@ -190,6 +181,15 @@ These settings apply only when `--tag=package-resources-2019-05` is specified on
 ``` yaml $(tag) == 'package-resources-2019-05'
 input-file:
 - Microsoft.Resources/stable/2019-05-01/resources.json
+```
+
+### Tag: package-resources-2019-0510
+
+These settings apply only when `--tag=package-resources-2019-0510` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-0510'
+input-file:
+- Microsoft.Resources/stable/2019-05-10/resources.json
 ```
 
 ### Tag: package-resources-2019-03
@@ -451,6 +451,7 @@ batch:
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2019-0510
   - tag: package-resources-2019-05
   - tag: package-resources-2019-03
   - tag: package-resources-2018-02
@@ -539,6 +540,19 @@ directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
   transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-resources-2019-0510 and java
+
+These settings apply only when `--tag=package-resources-2019-0510 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-0510' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_05_10
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_05_10
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-resources-2019-05 and java
