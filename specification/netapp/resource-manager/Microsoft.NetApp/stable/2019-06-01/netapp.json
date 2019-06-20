@@ -322,6 +322,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK - account updated",
+            "schema": {
+              "$ref": "#/definitions/netAppAccount"
+            }
+          },
           "202": {
             "description": "Accepted -- Create or update request accepted; operation will complete asynchronously"
           },
@@ -2079,7 +2085,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },    
+    },
     "ResourceGroup": {
       "name": "resourceGroupName",
       "in": "path",
