@@ -137,14 +137,6 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "TimezoneByCoordinatesQuery": {
-      "name": "query",
-      "in": "query",
-      "description": "The applicable query specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
     "TimezoneAcceptLanguage": {
       "name": "Accept-Language",
       "in": "header",
@@ -295,7 +287,7 @@
     "/timezone/byCoordinates/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Time Zone by Coordinates__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair.",
+        "description": "__Time Zone by Coordinates__\n\n**Applies to**: S0 and S1 pricing tiers.\n\n\nThis API returns current, historical, and future time zone information for a specified latitude-longitude pair. In addition, the API provides sunset and sunrise times for a given location.",
         "operationId": "Timezone_GetTimezoneByCoordinates",
         "x-ms-examples": {
           "GetTimezoneByCoordinates": {
@@ -331,7 +323,11 @@
             "$ref": "#/parameters/JsonFormat"
           },
           {
-            "$ref": "#/parameters/TimezoneByCoordinatesQuery"
+            "name": "query",
+            "in": "query",
+            "description": "Coordinates of the point for which time zone information is requested. The applicable query is specified as a comma separated string composed by latitude followed by longitude e.g. \"47.641268,-122.125679\".",
+            "required": true,
+            "type": "string"
           }
         ],
         "responses": {
@@ -613,6 +609,7 @@
     },
     "Country": {
       "type": "object",
+      "description": "A country record.",
       "properties": {
         "Name": {
           "description": "Country Name",
@@ -620,7 +617,7 @@
           "readOnly": true
         },
         "Code": {
-          "description": "Country Code",
+          "description": "ISO-3166 2-letter country code for the country.",
           "type": "string",
           "readOnly": true
         }
@@ -646,13 +643,13 @@
           "readOnly": true
         },
         "UtcStart": {
-          "description": "UtcStart property",
+          "description": "Start date, start time for this transition period",
           "type": "string",
           "readOnly": true,
           "format": "date-time"
         },
         "UtcEnd": {
-          "description": "UtcEnd property",
+          "description": "End date, end time for this transition period",
           "type": "string",
           "readOnly": true,
           "format": "date-time"
@@ -663,21 +660,21 @@
       "description": "This object is returned from a successful Timezone By ID call",
       "type": "object",
       "properties": {
-        "version": {
+        "Version": {
           "description": "Version property",
           "type": "string",
           "readOnly": true
         },
-        "referenceUtcTimestamp": {
+        "ReferenceUtcTimestamp": {
           "description": "Reference Utc Timestamp property",
           "type": "string",
           "readOnly": true,
           "format": "date-time"
         },
-        "timeZones": {
-          "$ref": "#/definitions/TimeZones"
+        "TimeZones": {
+          "$ref": "#/definitions/TimeZonesById"
         },
-        "count": {
+        "Count": {
           "description": "Count property",
           "type": "number",
           "readOnly": true
@@ -688,21 +685,21 @@
       "description": "This object is returned from a successful Timezone By Coordinates call",
       "type": "object",
       "properties": {
-        "version": {
+        "Version": {
           "description": "Version property",
           "type": "string",
           "readOnly": true
         },
-        "referenceUtcTimestamp": {
+        "ReferenceUtcTimestamp": {
           "description": "Reference Utc Timestamp property",
           "type": "string",
           "readOnly": true,
           "format": "date-time"
         },
-        "timeZones": {
-          "$ref": "#/definitions/TimeZones"
+        "TimeZones": {
+          "$ref": "#/definitions/TimeZonesByCoordinates"
         },
-        "count": {
+        "Count": {
           "description": "Count property",
           "type": "number",
           "readOnly": true
@@ -789,15 +786,23 @@
         }
       }
     },
-    "TimeZones": {
-      "description": "TimeZones array",
+    "TimeZonesById": {
+      "description": "TimeZoneById array",
       "type": "array",
       "readOnly": true,
       "items": {
-        "$ref": "#/definitions/Timezone"
+        "$ref": "#/definitions/TimezoneById"
       }
     },
-    "Timezone": {
+    "TimeZonesByCoordinates": {
+      "description": "TimeZoneByCoordinates array",
+      "type": "array",
+      "readOnly": true,
+      "items": {
+        "$ref": "#/definitions/TimeZoneByCoordinates"
+      }
+    },
+    "TimezoneById": {
       "type": "object",
       "properties": {
         "Id": {
@@ -806,7 +811,7 @@
           "readOnly": true
         },
         "Aliases": {
-          "description": "Aliases array",
+          "description": "An array of time zone ID aliases.  Only returned when [options]=*zoneinfo* or *all*.\n\nNote: may be null.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -815,7 +820,7 @@
           }
         },
         "Countries": {
-          "description": "Countries array",
+          "description": "An array of country records. Only returned when [options]=*zoneinfo* or *all*.",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -823,91 +828,192 @@
           }
         },
         "Names": {
-          "type": "object",
-          "properties": {
-            "ISO6391LanguageCode": {
-              "description": "The ISO 639-1 language code of the Names",
-              "type": "string",
-              "readOnly": true
-            },
-            "Generic": {
-              "description": "Generic Name",
-              "type": "string",
-              "readOnly": true
-            },
-            "Standard": {
-              "description": "Standard Name",
-              "type": "string",
-              "readOnly": true
-            },
-            "Daylight": {
-              "description": "Daylight Name",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/Names"
         },
         "ReferenceTime": {
-          "description": "Reference Time object",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "Tag": {
-              "description": "Tag property",
-              "type": "string",
-              "readOnly": true
-            },
-            "StandardOffset": {
-              "description": "Standard Offset property",
-              "type": "string",
-              "readOnly": true
-            },
-            "DaylightSavings": {
-              "description": "Daylight Savings property",
-              "type": "string",
-              "readOnly": true
-            },
-            "WallTime": {
-              "description": "Wall Time property",
-              "type": "string",
-              "readOnly": true
-            },
-            "PosixTzValidYear": {
-              "description": "Posix Timezone Valid Year property",
-              "type": "integer",
-              "readOnly": true
-            },
-            "PosixTz": {
-              "description": "Posix timezone property",
-              "type": "string",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/ReferenceTimeById"
         },
         "RepresentativePoint": {
-          "description": "Representative point property",
-          "type": "object",
-          "readOnly": true,
-          "properties": {
-            "Latitude": {
-              "description": "Latitude property",
-              "type": "number",
-              "readOnly": true
-            },
-            "Longitude": {
-              "description": "Longitude property",
-              "type": "number",
-              "readOnly": true
-            }
-          }
+          "$ref": "#/definitions/RepresentativePoint"
         },
         "TimeTransitions": {
-          "description": "TimeTransitions array",
+          "description": "Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.",
           "type": "array",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/TimeTransition"
           }
+        }
+      }
+    },
+    "TimeZoneByCoordinates": {
+      "type": "object",
+      "properties": {
+        "Id": {
+          "description": "Id property",
+          "type": "string",
+          "readOnly": true
+        },
+        "Aliases": {
+          "description": "An array of time zone ID aliases.  Only returned when [options]=*zoneinfo* or *all*.\n\nNote: may be null.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "readOnly": true
+          }
+        },
+        "Countries": {
+          "description": "An array of country records. Only returned when [options]=*zoneinfo* or *all*.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Country"
+          }
+        },
+        "Names": {
+          "$ref": "#/definitions/Names"
+        },
+        "ReferenceTime": {
+          "$ref": "#/definitions/ReferenceTimeByCoordinates"
+        },
+        "RepresentativePoint": {
+          "$ref": "#/definitions/RepresentativePoint"
+        },
+        "TimeTransitions": {
+          "description": "Time zone DST transitions from [transitionsFrom] until timestamp + 1 year.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/TimeTransition"
+          }
+        }
+      }
+    },
+    "Names": {
+      "type": "object",
+      "description": "Timezone names object.",
+      "properties": {
+        "ISO6391LanguageCode": {
+          "description": "The ISO 639-1 language code of the Names",
+          "type": "string",
+          "readOnly": true
+        },
+        "Generic": {
+          "description": "Generic Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "Standard": {
+          "description": "Standard Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "Daylight": {
+          "description": "Daylight Name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReferenceTimeById": {
+      "description": "Details in effect at the local time.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "Tag": {
+          "description": "Time zone name in effect at the reference timestamp (i.e. PST or PDT depending whether Daylight Savings Time is in effect).",
+          "type": "string",
+          "readOnly": true
+        },
+        "StandardOffset": {
+          "description": "UTC offset in effect at the `ReferenceUTCTimestamp`.",
+          "type": "string",
+          "readOnly": true
+        },
+        "DaylightSavings": {
+          "description": "Time saving in minutes in effect at the `ReferenceUTCTimestamp`.",
+          "type": "string",
+          "readOnly": true
+        },
+        "WallTime": {
+          "description": "Current wall time at the given time zone as shown in the `Tag` property.",
+          "type": "string",
+          "readOnly": true
+        },
+        "PosixTzValidYear": {
+          "description": "The year this POSIX string is valid for. Note: A POSIX string will only be valid in the given year. ",
+          "type": "integer",
+          "readOnly": true
+        },
+        "PosixTz": {
+          "description": "POSIX string used to set the time zone environment variable.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReferenceTimeByCoordinates": {
+      "description": "Details in effect at the local time.",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "Tag": {
+          "description": "Time zone name in effect at the reference timestamp (i.e. PST or PDT depending whether Daylight Savings Time is in effect).",
+          "type": "string",
+          "readOnly": true
+        },
+        "StandardOffset": {
+          "description": "UTC offset in effect at the `ReferenceUTCTimestamp`.",
+          "type": "string",
+          "readOnly": true
+        },
+        "DaylightSavings": {
+          "description": "Time saving in minutes in effect at the `ReferenceUTCTimestamp`.",
+          "type": "string",
+          "readOnly": true
+        },
+        "WallTime": {
+          "description": "Current wall time at the given time zone as shown in the `Tag` property.",
+          "type": "string",
+          "readOnly": true
+        },
+        "PosixTzValidYear": {
+          "description": "The year this POSIX string is valid for. Note: A POSIX string will only be valid in the given year. ",
+          "type": "integer",
+          "readOnly": true
+        },
+        "PosixTz": {
+          "description": "POSIX string used to set the time zone environment variable.",
+          "type": "string",
+          "readOnly": true
+        },
+        "SunRise": {
+          "description": "Sunrise at the given time zone as shown in the `Tag` property.",
+          "type": "string",
+          "readOnly": true
+        },
+        "SunSet": {
+          "description": "Sunset at the given time zone as shown in the `Tag` property.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RepresentativePoint": {
+      "description": "Representative point property",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "Latitude": {
+          "description": "Latitude property",
+          "type": "number",
+          "readOnly": true
+        },
+        "Longitude": {
+          "description": "Longitude property",
+          "type": "number",
+          "readOnly": true
         }
       }
     }

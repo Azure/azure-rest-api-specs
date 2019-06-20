@@ -912,7 +912,7 @@
           },
           {
             "name": "modeType",
-            "description": "The mode of travel for the requested route as comma separated list. If not specified, all modes will be allowed. All modes might not be available in all metro areas.",
+            "description": "The mode of travel for the requested route; as comma separated list. If not specified, all modes will be allowed. All modes might not be available in all metro areas. If valid trip is not found, empty result will be returned.",
             "required": false,
             "type": "string",
             "in": "query",
@@ -999,14 +999,14 @@
           },
           {
             "name": "agency",
-            "description": "In case you prefer only routes from a specific set of agencies to be returned; as a comma separated list. By default the agencyType=agencyId.",
+            "description": "Specifies whether to prefer routes from a specific set of agencies if possible; as a comma separated list. If valid trip isn’t found with the preferred agency, or only one with very long trips or with large number of transfers, itineraries with other agencies will be returned.",
             "in": "query",
             "required": false,
             "type": "string"
           },
           {
             "name": "agencyType",
-            "description": "Specifies the agency identifier to request routes from a specific set of agencies to be returned.",
+            "description": "Specifies the agency identifier to request routes from preferred agencies. By default the agencyType=agencyId.",
             "in": "query",
             "required": false,
             "type": "string",
@@ -1101,6 +1101,31 @@
                 {
                   "value": "leastTransfers",
                   "description": "Route with least transfers."
+                }
+              ]
+            }
+          },
+          {
+            "name": "bikeType",
+            "description": "Bike type of the bike. Specifies which type of bikes will be used. If not specified, all will be allowed.",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "privateBike",
+              "dockedBike"
+            ],
+            "x-ms-enum": {
+              "name": "BikeType",
+              "modelAsString": false,
+              "values": [
+                {
+                  "value": "privateBike",
+                  "description": "Use private bike."
+                },
+                {
+                  "value": "dockedBike",
+                  "description": "Use docked bike share bike."
                 }
               ]
             }
