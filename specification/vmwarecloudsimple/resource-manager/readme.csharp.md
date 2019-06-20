@@ -7,9 +7,8 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 1
+  payload-flattening-threshold: 2
   clear-output-folder: true
-  client-side-validation: false
-  namespace: Microsoft.VMwareCloudSimple
-  output-folder: $(csharp-sdks-folder)/vmwarecloudsimple/management/Microsoft.VMwareCloudSimple/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.VMwareCloudSimple
+  output-folder: $(csharp-sdks-folder)/VMwareCloudSimple/Management.VMwareCloudSimple/Generated
 ```
