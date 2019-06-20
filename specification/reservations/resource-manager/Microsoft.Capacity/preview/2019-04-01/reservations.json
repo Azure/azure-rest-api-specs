@@ -368,7 +368,7 @@
                 "$ref": "#/parameters/ApiVersionParameter"
             },
             {
-                "$ref" : "#/parameters/AppendRenewPropertiesParameter"
+                "$ref" : "#/parameters/ExpandRenewPropertiesParameter"
             }
         ],
         "tags" : [ "Reservation" ],
@@ -943,14 +943,19 @@
           "$ref" : "#/definitions/InstanceFlexibility"
         },
         "name": {
-            "type": "string",
-            "description": "Name of the Reservation"
+          "type": "string",
+          "description": "Name of the Reservation"
         },
         "renew": {
-            "$ref": "#/definitions/Renew"
+          "$ref": "#/definitions/Renew"
         },
-        "renewRequestProperties": {
-            "$ref": "#/definitions/PurchaseRequest"
+        "renewProperties": {
+          "type": "object",
+          "properties": {
+            "purchaseProperties": {
+                "$ref": "#/definitions/PurchaseRequest"
+            }
+          }
         }
       }
     },
@@ -1289,8 +1294,8 @@
         "required": true,
         "type": "string"
     },
-    "AppendRenewPropertiesParameter": {
-        "name": "append",
+    "ExpandRenewPropertiesParameter": {
+        "name": "expand",
         "x-ms-parameter-location" : "method",
         "in": "query",
         "description": "Supported value of this query is renewProperties",
