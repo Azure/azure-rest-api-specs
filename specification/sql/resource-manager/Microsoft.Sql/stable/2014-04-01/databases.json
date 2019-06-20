@@ -1,1042 +1,1042 @@
 {
-  "swagger":"2.0",
-  "info":{
-      "title":"Azure SQL Database",
-      "description":"Provides create, read, update and delete functionality for Azure SQL Databases.",
-      "version":"2014-04-01"
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database",
+    "description": "Provides create, read, update and delete functionality for Azure SQL Databases.",
+    "version": "2014-04-01"
   },
-  "host":"management.azure.com",
-  "schemes":[
-      "https"
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
   ],
-  "consumes":[
-      "application/json"
+  "consumes": [
+    "application/json"
   ],
-  "produces":[
-      "application/json"
+  "produces": [
+    "application/json"
   ],
-  "paths":{
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause":{
-          "post":{
-              "tags":[
-                  "DatabaseActivation"
-              ],
-              "operationId":"Databases_Pause",
-              "description":"Pauses a data warehouse.",
-              "x-ms-examples":{
-                  "Pause a data warehouse":{
-                      "$ref":"./examples/DatabasePause.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the data warehouse to pause."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK"
-                  },
-                  "202":{
-                      "description":"Accepted"
-                  }
-              },
-              "x-ms-long-running-operation":true
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/pause": {
+      "post": {
+        "tags": [
+          "DatabaseActivation"
+        ],
+        "operationId": "Databases_Pause",
+        "description": "Pauses a data warehouse.",
+        "x-ms-examples": {
+          "Pause a data warehouse": {
+            "$ref": "./examples/DatabasePause.json"
           }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume":{
-          "post":{
-              "tags":[
-                  "DatabaseActivation"
-              ],
-              "operationId":"Databases_Resume",
-              "description":"Resumes a data warehouse.",
-              "x-ms-examples":{
-                  "Resume a data warehouse":{
-                      "$ref":"./examples/DatabaseResume.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the data warehouse to resume."
-                  }
-              ],
-              "responses":{
-                  "202":{
-                      "description":"Accepted"
-                  },
-                  "200":{
-                      "description":"OK"
-                  }
-              },
-              "x-ms-long-running-operation":true
-          }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}":{
-          "put":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_CreateOrUpdate",
-              "description":"Creates a new database or updates an existing database.",
-              "x-ms-examples":{
-                  "Create a database min":{
-                      "$ref":"./examples/DatabaseCreateOrUpdateMin.json"
-                  },
-                  "Create a database max":{
-                      "$ref":"./examples/DatabaseCreateMax.json"
-                  },
-                  "Create a database as a copy":{
-                      "$ref":"./examples/DatabaseCreateCopy.json"
-                  },
-                  "Create a database as an online secondary":{
-                      "$ref":"./examples/DatabaseCreateOnlineSecondary.json"
-                  },
-                  "Create a database as a non-readable secondary":{
-                      "$ref":"./examples/DatabaseCreateNonReadableSecondary.json"
-                  },
-                  "Create a database as a point in time restore":{
-                      "$ref":"./examples/DatabaseCreatePointInTimeRestore.json"
-                  },
-                  "Create a database as a dropped database restore to deletion time":{
-                      "$ref":"./examples/DatabaseCreateDroppedDatabaseRestore.json"
-                  },
-                  "Create a database as a dropped database restore to a specific point in time":{
-                      "$ref":"./examples/DatabaseCreateDroppedDatabaseRestoreToPointInTime.json"
-                  },
-                  "Create a database as a geo restore":{
-                      "$ref":"./examples/DatabaseCreateGeoRestore.json"
-                  },
-                  "Create a database from a long term retention backup":{
-                      "$ref":"./examples/DatabaseCreateLongTermRetentionRestore.json"
-                  },
-                  "Update a database's elastic pool'":{
-                      "$ref":"./examples/DatabaseUpdateElasticPool.json"
-                  },
-                  "Update a database max":{
-                      "$ref":"./examples/DatabaseUpdateMaxPut.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to be operated on (updated or created)."
-                  },
-                  {
-                      "name":"parameters",
-                      "in":"body",
-                      "required":true,
-                      "schema":{
-                          "$ref":"#/definitions/Database"
-                      },
-                      "description":"The required parameters for creating or updating a database."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/Database"
-                      }
-                  },
-                  "201":{
-                      "description":"Created",
-                      "schema":{
-                          "$ref":"#/definitions/Database"
-                      }
-                  },
-                  "202":{
-                      "description":"Accepted"
-                  }
-              },
-              "x-ms-long-running-operation":true
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
           },
-          "patch":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_Update",
-              "description":"Updates an existing database.",
-              "x-ms-examples":{
-                  "Update a database max":{
-                      "$ref":"./examples/DatabaseUpdateMaxPatch.json"
-                  },
-                  "Update a database min":{
-                      "$ref":"./examples/DatabaseUpdateMin.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to be updated."
-                  },
-                  {
-                      "name":"parameters",
-                      "in":"body",
-                      "required":true,
-                      "schema":{
-                          "$ref":"#/definitions/DatabaseUpdate"
-                      },
-                      "description":"The required parameters for updating a database."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/Database"
-                      }
-                  },
-                  "202":{
-                      "description":"Accepted"
-                  }
-              },
-              "x-ms-long-running-operation":true
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
           },
-          "delete":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_Delete",
-              "description":"Deletes a database.",
-              "x-ms-examples":{
-                  "Delete a database":{
-                      "$ref":"./examples/DatabaseDelete.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to be deleted."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK"
-                  },
-                  "204":{
-                      "description":"NoContent"
-                  }
-              }
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
-          "get":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_Get",
-              "description":"Gets a database.",
-              "x-ms-examples":{
-                  "Get a database":{
-                      "$ref":"./examples/DatabaseGet.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to be retrieved."
-                  },
-                  {
-                      "$ref":"#/parameters/DatabaseExpandParameter"
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/Database"
-                      }
-                  }
-              }
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data warehouse to pause."
           }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases":{
-          "get":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_ListByServer",
-              "description":"Returns a list of databases in a server.",
-              "x-ms-examples":{
-                  "List databases by server":{
-                      "$ref":"./examples/DatabaseList.json"
-                  },
-                  "List databases by server with filter":{
-                      "$ref":"./examples/DatabaseListWithFilter.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/DatabaseExpandParameter"
-                  },
-                  {
-                      "name":"$filter",
-                      "in":"query",
-                      "required":false,
-                      "type":"string",
-                      "description":"An OData filter expression that describes a subset of databases to return."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/DatabaseListResult"
-                      }
-                  }
-              },
-              "x-ms-pageable":{
-                  "nextLinkName":null
-              }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
           }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases/{databaseName}":{
-          "get":{
-              "tags":[
-                  "ElasticPools"
-              ],
-              "operationId":"Databases_GetByElasticPool",
-              "description":"Gets a database inside of an elastic pool.",
-              "x-ms-examples":{
-                  "Get a database in an elastic pool":{
-                      "$ref":"./examples/DatabaseGetByElasticPool.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"elasticPoolName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the elastic pool to be retrieved."
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to be retrieved."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/Database"
-                      }
-                  }
-              }
-          }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases":{
-          "get":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_ListByElasticPool",
-              "description":"Returns a list of databases in an elastic pool.",
-              "x-ms-examples":{
-                  "Gets databases in an elastic pool":{
-                      "$ref":"./examples/DatabaseListByElasticPool.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"elasticPoolName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the elastic pool to be retrieved."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/DatabaseListResult"
-                      }
-                  }
-              },
-              "x-ms-pageable":{
-                  "nextLinkName":null
-              }
-          }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases/{databaseName}":{
-          "get":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_GetByRecommendedElasticPool",
-              "description":"Gets a database inside of a recommended elastic pool.",
-              "x-ms-examples":{
-                  "Get a database in a recommended elastic pool":{
-                      "$ref":"./examples/DatabaseGetByRecommendedElasticPool.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"recommendedElasticPoolName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the elastic pool to be retrieved."
-                  },
-                  {
-                      "name":"databaseName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the database to be retrieved."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/Database"
-                      }
-                  }
-              }
-          }
-      },
-      "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases":{
-          "get":{
-              "tags":[
-                  "Databases"
-              ],
-              "operationId":"Databases_ListByRecommendedElasticPool",
-              "description":"Returns a list of databases inside a recommended elastic pool.",
-              "x-ms-examples":{
-                  "Gets databases in an elastic pool":{
-                      "$ref":"./examples/DatabaseListByRecommendedElasticPool.json"
-                  }
-              },
-              "parameters":[
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                  },
-                  {
-                      "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                  },
-                  {
-                      "$ref":"#/parameters/ServerNameParameter"
-                  },
-                  {
-                      "name":"recommendedElasticPoolName",
-                      "in":"path",
-                      "required":true,
-                      "type":"string",
-                      "description":"The name of the recommended elastic pool to be retrieved."
-                  }
-              ],
-              "responses":{
-                  "200":{
-                      "description":"OK",
-                      "schema":{
-                          "$ref":"#/definitions/DatabaseListResult"
-                      }
-                  }
-              },
-              "x-ms-pageable":{
-                  "nextLinkName":null
-              }
-          }
+        },
+        "x-ms-long-running-operation": true
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/resume": {
+      "post": {
+        "tags": [
+          "DatabaseActivation"
+        ],
+        "operationId": "Databases_Resume",
+        "description": "Resumes a data warehouse.",
+        "x-ms-examples": {
+          "Resume a data warehouse": {
+            "$ref": "./examples/DatabaseResume.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the data warehouse to resume."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "200": {
+            "description": "OK"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}": {
+      "put": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_CreateOrUpdate",
+        "description": "Creates a new database or updates an existing database.",
+        "x-ms-examples": {
+          "Create a database min": {
+            "$ref": "./examples/DatabaseCreateOrUpdateMin.json"
+          },
+          "Create a database max": {
+            "$ref": "./examples/DatabaseCreateMax.json"
+          },
+          "Create a database as a copy": {
+            "$ref": "./examples/DatabaseCreateCopy.json"
+          },
+          "Create a database as an online secondary": {
+            "$ref": "./examples/DatabaseCreateOnlineSecondary.json"
+          },
+          "Create a database as a non-readable secondary": {
+            "$ref": "./examples/DatabaseCreateNonReadableSecondary.json"
+          },
+          "Create a database as a point in time restore": {
+            "$ref": "./examples/DatabaseCreatePointInTimeRestore.json"
+          },
+          "Create a database as a dropped database restore to deletion time": {
+            "$ref": "./examples/DatabaseCreateDroppedDatabaseRestore.json"
+          },
+          "Create a database as a dropped database restore to a specific point in time": {
+            "$ref": "./examples/DatabaseCreateDroppedDatabaseRestoreToPointInTime.json"
+          },
+          "Create a database as a geo restore": {
+            "$ref": "./examples/DatabaseCreateGeoRestore.json"
+          },
+          "Create a database from a long term retention backup": {
+            "$ref": "./examples/DatabaseCreateLongTermRetentionRestore.json"
+          },
+          "Update a database's elastic pool'": {
+            "$ref": "./examples/DatabaseUpdateElasticPool.json"
+          },
+          "Update a database max": {
+            "$ref": "./examples/DatabaseUpdateMaxPut.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be operated on (updated or created)."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Database"
+            },
+            "description": "The required parameters for creating or updating a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Update",
+        "description": "Updates an existing database.",
+        "x-ms-examples": {
+          "Update a database max": {
+            "$ref": "./examples/DatabaseUpdateMaxPatch.json"
+          },
+          "Update a database min": {
+            "$ref": "./examples/DatabaseUpdateMin.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be updated."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DatabaseUpdate"
+            },
+            "description": "The required parameters for updating a database."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Delete",
+        "description": "Deletes a database.",
+        "x-ms-examples": {
+          "Delete a database": {
+            "$ref": "./examples/DatabaseDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Get",
+        "description": "Gets a database.",
+        "x-ms-examples": {
+          "Get a database": {
+            "$ref": "./examples/DatabaseGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be retrieved."
+          },
+          {
+            "$ref": "#/parameters/DatabaseExpandParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_ListByServer",
+        "description": "Returns a list of databases in a server.",
+        "x-ms-examples": {
+          "List databases by server": {
+            "$ref": "./examples/DatabaseList.json"
+          },
+          "List databases by server with filter": {
+            "$ref": "./examples/DatabaseListWithFilter.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseExpandParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "An OData filter expression that describes a subset of databases to return."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "operationId": "Databases_GetByElasticPool",
+        "description": "Gets a database inside of an elastic pool.",
+        "x-ms-examples": {
+          "Get a database in an elastic pool": {
+            "$ref": "./examples/DatabaseGetByElasticPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be retrieved."
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_ListByElasticPool",
+        "description": "Returns a list of databases in an elastic pool.",
+        "x-ms-examples": {
+          "Gets databases in an elastic pool": {
+            "$ref": "./examples/DatabaseListByElasticPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases/{databaseName}": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_GetByRecommendedElasticPool",
+        "description": "Gets a database inside of a recommended elastic pool.",
+        "x-ms-examples": {
+          "Get a database in a recommended elastic pool": {
+            "$ref": "./examples/DatabaseGetByRecommendedElasticPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "recommendedElasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be retrieved."
+          },
+          {
+            "name": "databaseName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the database to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/databases": {
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_ListByRecommendedElasticPool",
+        "description": "Returns a list of databases inside a recommended elastic pool.",
+        "x-ms-examples": {
+          "Gets databases in an elastic pool": {
+            "$ref": "./examples/DatabaseListByRecommendedElasticPool.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "recommendedElasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the recommended elastic pool to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DatabaseListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
   },
-  "definitions":{
-      "DatabaseProperties":{
-          "properties":{
-              "collation":{
-                  "type":"string",
-                  "description":"The collation of the database. If createMode is not Default, this value is ignored.",
-                  "x-ms-mutability":[
-                      "create",
-                      "read"
-                  ]
-              },
-              "creationDate":{
-                  "readOnly":true,
-                  "type":"string",
-                  "format":"date-time",
-                  "description":"The creation date of the database (ISO8601 format)."
-              },
-              "containmentState":{
-                  "readOnly":true,
-                  "type":"integer",
-                  "format":"int64",
-                  "description":"The containment state of the database."
-              },
-              "currentServiceObjectiveId":{
-                  "readOnly":true,
-                  "type":"string",
-                  "format":"uuid",
-                  "description":"The current service level objective ID of the database. This is the ID of the service level objective that is currently active."
-              },
-              "databaseId":{
-                  "readOnly":true,
-                  "type":"string",
-                  "format":"uuid",
-                  "description":"The ID of the database."
-              },
-              "earliestRestoreDate":{
-                  "readOnly":true,
-                  "type":"string",
-                  "format":"date-time",
-                  "description":"This records the earliest start date and time that restore is available for this database (ISO8601 format)."
-              },
-              "createMode":{
-                  "type":"string",
-                  "description":"Specifies the mode of database creation.\n\nDefault: regular database creation.\n\nCopy: creates a database as a copy of an existing database. sourceDatabaseId must be specified as the resource ID of the source database.\n\nOnlineSecondary/NonReadableSecondary: creates a database as a (readable or nonreadable) secondary replica of an existing database. sourceDatabaseId must be specified as the resource ID of the existing primary database.\n\nPointInTimeRestore: Creates a database by restoring a point in time backup of an existing database. sourceDatabaseId must be specified as the resource ID of the existing database, and restorePointInTime must be specified.\n\nRecovery: Creates a database by restoring a geo-replicated backup. sourceDatabaseId must be specified as the recoverable database resource ID to restore.\n\nRestore: Creates a database by restoring a backup of a deleted database. sourceDatabaseId must be specified. If sourceDatabaseId is the database's original resource ID, then sourceDatabaseDeletionDate must be specified. Otherwise sourceDatabaseId must be the restorable dropped database resource ID and sourceDatabaseDeletionDate is ignored. restorePointInTime may also be specified to restore from an earlier point in time.\n\nRestoreLongTermRetentionBackup: Creates a database by restoring from a long term retention vault. recoveryServicesRecoveryPointResourceId must be specified as the recovery point resource ID.\n\nCopy, NonReadableSecondary, OnlineSecondary and RestoreLongTermRetentionBackup are not supported for DataWarehouse edition.",
-                  "enum":[
-                      "Copy",
-                      "Default",
-                      "NonReadableSecondary",
-                      "OnlineSecondary",
-                      "PointInTimeRestore",
-                      "Recovery",
-                      "Restore",
-                      "RestoreLongTermRetentionBackup"
-                  ],
-                  "x-ms-enum":{
-                      "name":"CreateMode",
-                      "modelAsString":true
-                  },
-                  "x-ms-mutability":[
-                      "create"
-                  ]
-              },
-              "sourceDatabaseId":{
-                  "type":"string",
-                  "description":"Conditional. If createMode is Copy, NonReadableSecondary, OnlineSecondary, PointInTimeRestore, Recovery, or Restore, then this value is required. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as the new database being created.",
-                  "x-ms-mutability":[
-                      "create"
-                  ]
-              },
-              "sourceDatabaseDeletionDate":{
-                  "type":"string",
-                  "format":"date-time",
-                  "description":"Conditional. If createMode is Restore and sourceDatabaseId is the deleted database's original resource id when it existed (as opposed to its current restorable dropped database id), then this value is required. Specifies the time that the database was deleted.",
-                  "x-ms-mutability":[
-                      "create"
-                  ]
-              },
-              "restorePointInTime":{
-                  "type":"string",
-                  "format":"date-time",
-                  "description":"Conditional. If createMode is PointInTimeRestore, this value is required. If createMode is Restore, this value is optional. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value.",
-                  "x-ms-mutability":[
-                      "create"
-                  ]
-              },
-              "recoveryServicesRecoveryPointResourceId":{
-                  "type":"string",
-                  "description":"Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.",
-                  "x-ms-mutability":[
-                      "create"
-                  ]
-              },
-              "edition":{
-                  "type":"string",
-                  "description":"The edition of the database. The DatabaseEditions enumeration contains all the valid editions. If createMode is NonReadableSecondary or OnlineSecondary, this value is ignored.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:\r\n\r\n```azurecli\r\naz sql db list-editions -l <location> -o table\r\n````\r\n\r\n```powershell\r\nGet-AzSqlServerServiceObjective -Location <location>\r\n````\r\n",
-                  "enum":[
-                      "Web",
-                      "Business",
-                      "Basic",
-                      "Standard",
-                      "Premium",
-                      "PremiumRS",
-                      "Free",
-                      "Stretch",
-                      "DataWarehouse",
-                      "System",
-                      "System2",
-                      "GeneralPurpose",
-                      "BusinessCritical",
-                      "Hyperscale"
-                  ],
-                  "x-ms-enum":{
-                      "name":"DatabaseEdition",
-                      "modelAsString":true
-                  }
-              },
-              "maxSizeBytes":{
-                  "type":"string",
-                  "description":"The max size of the database expressed in bytes. If createMode is not Default, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
-              },
-              "requestedServiceObjectiveId":{
-                  "type":"string",
-                  "format":"uuid",
-                  "description":"The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the service objective ids that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API."
-              },
-              "requestedServiceObjectiveName":{
-                  "type":"string",
-                  "enum":[
-                      "System",
-                      "System0",
-                      "System1",
-                      "System2",
-                      "System3",
-                      "System4",
-                      "System2L",
-                      "System3L",
-                      "System4L",
-                      "Free",
-                      "Basic",
-                      "S0",
-                      "S1",
-                      "S2",
-                      "S3",
-                      "S4",
-                      "S6",
-                      "S7",
-                      "S9",
-                      "S12",
-                      "P1",
-                      "P2",
-                      "P3",
-                      "P4",
-                      "P6",
-                      "P11",
-                      "P15",
-                      "PRS1",
-                      "PRS2",
-                      "PRS4",
-                      "PRS6",
-                      "DW100",
-                      "DW200",
-                      "DW300",
-                      "DW400",
-                      "DW500",
-                      "DW600",
-                      "DW1000",
-                      "DW1200",
-                      "DW1000c",
-                      "DW1500",
-                      "DW1500c",
-                      "DW2000",
-                      "DW2000c",
-                      "DW3000",
-                      "DW2500c",
-                      "DW3000c",
-                      "DW6000",
-                      "DW5000c",
-                      "DW6000c",
-                      "DW7500c",
-                      "DW10000c",
-                      "DW15000c",
-                      "DW30000c",
-                      "DS100",
-                      "DS200",
-                      "DS300",
-                      "DS400",
-                      "DS500",
-                      "DS600",
-                      "DS1000",
-                      "DS1200",
-                      "DS1500",
-                      "DS2000",
-                      "ElasticPool"
-                  ],
-                  "x-ms-enum":{
-                      "modelAsString":true,
-                      "name":"ServiceObjectiveName"
-                  },
-                  "description":"The name of the configured service level objective of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of serviceLevelObjective property. \r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:\r\n\r\n```azurecli\r\naz sql db list-editions -l <location> -o table\r\n````\r\n\r\n```powershell\r\nGet-AzSqlServerServiceObjective -Location <location>\r\n````\r\n"
-              },
-              "serviceLevelObjective":{
-                  "readOnly":true,
-                  "type":"string",
-                  "enum":[
-                      "System",
-                      "System0",
-                      "System1",
-                      "System2",
-                      "System3",
-                      "System4",
-                      "System2L",
-                      "System3L",
-                      "System4L",
-                      "Free",
-                      "Basic",
-                      "S0",
-                      "S1",
-                      "S2",
-                      "S3",
-                      "S4",
-                      "S6",
-                      "S7",
-                      "S9",
-                      "S12",
-                      "P1",
-                      "P2",
-                      "P3",
-                      "P4",
-                      "P6",
-                      "P11",
-                      "P15",
-                      "PRS1",
-                      "PRS2",
-                      "PRS4",
-                      "PRS6",
-                      "DW100",
-                      "DW200",
-                      "DW300",
-                      "DW400",
-                      "DW500",
-                      "DW600",
-                      "DW1000",
-                      "DW1200",
-                      "DW1000c",
-                      "DW1500",
-                      "DW1500c",
-                      "DW2000",
-                      "DW2000c",
-                      "DW3000",
-                      "DW2500c",
-                      "DW3000c",
-                      "DW6000",
-                      "DW5000c",
-                      "DW6000c",
-                      "DW7500c",
-                      "DW10000c",
-                      "DW15000c",
-                      "DW30000c",
-                      "DS100",
-                      "DS200",
-                      "DS300",
-                      "DS400",
-                      "DS500",
-                      "DS600",
-                      "DS1000",
-                      "DS1200",
-                      "DS1500",
-                      "DS2000",
-                      "ElasticPool"
-                  ],
-                  "x-ms-enum":{
-                      "modelAsString":true,
-                      "name":"ServiceObjectiveName"
-                  },
-                  "description":"The current service level objective of the database."
-              },
-              "status":{
-                  "readOnly":true,
-                  "type":"string",
-                  "description":"The status of the database."
-              },
-              "elasticPoolName":{
-                  "type":"string",
-                  "description":"The name of the elastic pool the database is in. If elasticPoolName and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveName is ignored. Not supported for DataWarehouse edition."
-              },
-              "defaultSecondaryLocation":{
-                  "readOnly":true,
-                  "type":"string",
-                  "description":"The default secondary region for this database."
-              },
-              "serviceTierAdvisors":{
-                  "readOnly":true,
-                  "type":"array",
-                  "items":{
-                      "$ref":"./sql.core.json#/definitions/ServiceTierAdvisor"
-                  },
-                  "description":"The list of service tier advisors for this database. Expanded property"
-              },
-              "transparentDataEncryption":{
-                  "readOnly":true,
-                  "type":"array",
-                  "items":{
-                      "$ref":"./sql.core.json#/definitions/TransparentDataEncryption"
-                  },
-                  "description":"The transparent data encryption info for this database."
-              },
-              "recommendedIndex":{
-                  "readOnly":true,
-                  "type":"array",
-                  "items":{
-                      "$ref":"./sql.core.json#/definitions/RecommendedIndex"
-                  },
-                  "description":"The recommended indices for this database."
-              },
-              "failoverGroupId":{
-                  "readOnly":true,
-                  "type":"string",
-                  "description":"The resource identifier of the failover group containing this database."
-              },
-              "readScale":{
-                  "type":"string",
-                  "enum":[
-                      "Enabled",
-                      "Disabled"
-                  ],
-                  "description":"Conditional. If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition.",
-                  "x-ms-enum":{
-                      "name":"ReadScale"
-                  }
-              },
-              "sampleName":{
-                  "type":"string",
-                  "enum":[
-                      "AdventureWorksLT"
-                  ],
-                  "description":"Indicates the name of the sample schema to apply when creating this database. If createMode is not Default, this value is ignored. Not supported for DataWarehouse edition.",
-                  "x-ms-enum":{
-                      "modelAsString":true,
-                      "name":"SampleName"
-                  },
-                  "x-ms-mutability":[
-                      "create"
-                  ]
-              },
-              "zoneRedundant":{
-                  "description":"Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.",
-                  "type":"boolean"
-              }
-          },
-          "description":"Represents the properties of a database."
-      },
-      "Database":{
-          "properties":{
-              "kind":{
-                  "readOnly":true,
-                  "type":"string",
-                  "description":"Kind of database.  This is metadata used for the Azure portal experience."
-              },
-              "properties":{
-                  "$ref":"#/definitions/DatabaseProperties",
-                  "description":"The properties representing the resource.",
-                  "x-ms-client-flatten":true
-              }
-          },
-          "allOf":[
-              {
-                  "$ref":"../../../common/v1/types.json#/definitions/TrackedResource"
-              }
+  "definitions": {
+    "DatabaseProperties": {
+      "properties": {
+        "collation": {
+          "type": "string",
+          "description": "The collation of the database. If createMode is not Default, this value is ignored.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "creationDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of the database (ISO8601 format)."
+        },
+        "containmentState": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "description": "The containment state of the database."
+        },
+        "currentServiceObjectiveId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The current service level objective ID of the database. This is the ID of the service level objective that is currently active."
+        },
+        "databaseId": {
+          "readOnly": true,
+          "type": "string",
+          "format": "uuid",
+          "description": "The ID of the database."
+        },
+        "earliestRestoreDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "This records the earliest start date and time that restore is available for this database (ISO8601 format)."
+        },
+        "createMode": {
+          "type": "string",
+          "description": "Specifies the mode of database creation.\n\nDefault: regular database creation.\n\nCopy: creates a database as a copy of an existing database. sourceDatabaseId must be specified as the resource ID of the source database.\n\nOnlineSecondary/NonReadableSecondary: creates a database as a (readable or nonreadable) secondary replica of an existing database. sourceDatabaseId must be specified as the resource ID of the existing primary database.\n\nPointInTimeRestore: Creates a database by restoring a point in time backup of an existing database. sourceDatabaseId must be specified as the resource ID of the existing database, and restorePointInTime must be specified.\n\nRecovery: Creates a database by restoring a geo-replicated backup. sourceDatabaseId must be specified as the recoverable database resource ID to restore.\n\nRestore: Creates a database by restoring a backup of a deleted database. sourceDatabaseId must be specified. If sourceDatabaseId is the database's original resource ID, then sourceDatabaseDeletionDate must be specified. Otherwise sourceDatabaseId must be the restorable dropped database resource ID and sourceDatabaseDeletionDate is ignored. restorePointInTime may also be specified to restore from an earlier point in time.\n\nRestoreLongTermRetentionBackup: Creates a database by restoring from a long term retention vault. recoveryServicesRecoveryPointResourceId must be specified as the recovery point resource ID.\n\nCopy, NonReadableSecondary, OnlineSecondary and RestoreLongTermRetentionBackup are not supported for DataWarehouse edition.",
+          "enum": [
+            "Copy",
+            "Default",
+            "NonReadableSecondary",
+            "OnlineSecondary",
+            "PointInTimeRestore",
+            "Recovery",
+            "Restore",
+            "RestoreLongTermRetentionBackup"
           ],
-          "description":"Represents a database."
-      },
-      "DatabaseUpdate":{
-          "properties":{
-              "tags":{
-                  "type":"object",
-                  "additionalProperties":{
-                      "type":"string"
-                  },
-                  "description":"Resource tags."
-              },
-              "properties":{
-                  "$ref":"#/definitions/DatabaseProperties",
-                  "description":"The properties representing the resource.",
-                  "x-ms-client-flatten":true
-              }
+          "x-ms-enum": {
+            "name": "CreateMode",
+            "modelAsString": true
           },
-          "allOf":[
-              {
-                  "$ref":"../../../common/v1/types.json#/definitions/Resource"
-              }
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceDatabaseId": {
+          "type": "string",
+          "description": "Conditional. If createMode is Copy, NonReadableSecondary, OnlineSecondary, PointInTimeRestore, Recovery, or Restore, then this value is required. Specifies the resource ID of the source database. If createMode is NonReadableSecondary or OnlineSecondary, the name of the source database must be the same as the new database being created.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "sourceDatabaseDeletionDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Conditional. If createMode is Restore and sourceDatabaseId is the deleted database's original resource id when it existed (as opposed to its current restorable dropped database id), then this value is required. Specifies the time that the database was deleted.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "restorePointInTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Conditional. If createMode is PointInTimeRestore, this value is required. If createMode is Restore, this value is optional. Specifies the point in time (ISO8601 format) of the source database that will be restored to create the new database. Must be greater than or equal to the source database's earliestRestoreDate value.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "recoveryServicesRecoveryPointResourceId": {
+          "type": "string",
+          "description": "Conditional. If createMode is RestoreLongTermRetentionBackup, then this value is required. Specifies the resource ID of the recovery point to restore from.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "edition": {
+          "type": "string",
+          "description": "The edition of the database. The DatabaseEditions enumeration contains all the valid editions. If createMode is NonReadableSecondary or OnlineSecondary, this value is ignored.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:\r\n\r\n```azurecli\r\naz sql db list-editions -l <location> -o table\r\n````\r\n\r\n```powershell\r\nGet-AzSqlServerServiceObjective -Location <location>\r\n````\r\n",
+          "enum": [
+            "Web",
+            "Business",
+            "Basic",
+            "Standard",
+            "Premium",
+            "PremiumRS",
+            "Free",
+            "Stretch",
+            "DataWarehouse",
+            "System",
+            "System2",
+            "GeneralPurpose",
+            "BusinessCritical",
+            "Hyperscale"
           ],
-          "description":"Represents a database update."
-      },
-      "DatabaseListResult":{
-          "properties":{
-              "value":{
-                  "type":"array",
-                  "items":{
-                      "$ref":"#/definitions/Database"
-                  },
-                  "description":"The list of databases housed in the server."
-              }
-          },
-          "required":[
-              "value"
-          ],
-          "description":"Represents the response to a list database request."
-      }
-  },
-  "parameters":{
-      "ServerNameParameter":{
-          "name":"serverName",
-          "in":"path",
-          "required":true,
-          "type":"string",
-          "description":"The name of the server.",
-          "x-ms-parameter-location":"method"
-      },
-      "DatabaseExpandParameter":{
-          "name":"$expand",
-          "in":"query",
-          "required":false,
-          "type":"string",
-          "description":"A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
-          "x-ms-parameter-location":"method"
-      },
-      "TransparentDataEncryptionNameParameter":{
-          "name":"transparentDataEncryptionName",
-          "in":"path",
-          "required":true,
-          "type":"string",
-          "enum":[
-              "current"
-          ],
-          "description":"The name of the transparent data encryption configuration.",
-          "x-ms-enum":{
-              "modelAsString":true,
-              "name":"TransparentDataEncryptionName"
-          },
-          "x-ms-parameter-location":"method"
-      }
-  },
-  "securityDefinitions":{
-      "azure_auth":{
-          "type":"oauth2",
-          "description":"Azure Active Directory OAuth2 Flow",
-          "flow":"implicit",
-          "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
-          "scopes":{
-              "user_impersonation":"impersonate your user account"
+          "x-ms-enum": {
+            "name": "DatabaseEdition",
+            "modelAsString": true
           }
+        },
+        "maxSizeBytes": {
+          "type": "string",
+          "description": "The max size of the database expressed in bytes. If createMode is not Default, this value is ignored. To see possible values, query the capabilities API (/subscriptions/{subscriptionId}/providers/Microsoft.Sql/locations/{locationID}/capabilities) referred to by operationId: \"Capabilities_ListByLocation.\""
+        },
+        "requestedServiceObjectiveId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The configured service level objective ID of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of currentServiceObjectiveId property. If requestedServiceObjectiveId and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveId overrides the value of requestedServiceObjectiveName.\r\n\r\nThe list of SKUs may vary by region and support offer. To determine the service objective ids that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API."
+        },
+        "requestedServiceObjectiveName": {
+          "type": "string",
+          "enum": [
+            "System",
+            "System0",
+            "System1",
+            "System2",
+            "System3",
+            "System4",
+            "System2L",
+            "System3L",
+            "System4L",
+            "Free",
+            "Basic",
+            "S0",
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S6",
+            "S7",
+            "S9",
+            "S12",
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P6",
+            "P11",
+            "P15",
+            "PRS1",
+            "PRS2",
+            "PRS4",
+            "PRS6",
+            "DW100",
+            "DW200",
+            "DW300",
+            "DW400",
+            "DW500",
+            "DW600",
+            "DW1000",
+            "DW1200",
+            "DW1000c",
+            "DW1500",
+            "DW1500c",
+            "DW2000",
+            "DW2000c",
+            "DW3000",
+            "DW2500c",
+            "DW3000c",
+            "DW6000",
+            "DW5000c",
+            "DW6000c",
+            "DW7500c",
+            "DW10000c",
+            "DW15000c",
+            "DW30000c",
+            "DS100",
+            "DS200",
+            "DS300",
+            "DS400",
+            "DS500",
+            "DS600",
+            "DS1000",
+            "DS1200",
+            "DS1500",
+            "DS2000",
+            "ElasticPool"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveName"
+          },
+          "description": "The name of the configured service level objective of the database. This is the service level objective that is in the process of being applied to the database. Once successfully updated, it will match the value of serviceLevelObjective property. \r\n\r\nThe list of SKUs may vary by region and support offer. To determine the SKUs (including the SKU name, tier/edition, family, and capacity) that are available to your subscription in an Azure region, use the `Capabilities_ListByLocation` REST API or one of the following commands:\r\n\r\n```azurecli\r\naz sql db list-editions -l <location> -o table\r\n````\r\n\r\n```powershell\r\nGet-AzSqlServerServiceObjective -Location <location>\r\n````\r\n"
+        },
+        "serviceLevelObjective": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "System",
+            "System0",
+            "System1",
+            "System2",
+            "System3",
+            "System4",
+            "System2L",
+            "System3L",
+            "System4L",
+            "Free",
+            "Basic",
+            "S0",
+            "S1",
+            "S2",
+            "S3",
+            "S4",
+            "S6",
+            "S7",
+            "S9",
+            "S12",
+            "P1",
+            "P2",
+            "P3",
+            "P4",
+            "P6",
+            "P11",
+            "P15",
+            "PRS1",
+            "PRS2",
+            "PRS4",
+            "PRS6",
+            "DW100",
+            "DW200",
+            "DW300",
+            "DW400",
+            "DW500",
+            "DW600",
+            "DW1000",
+            "DW1200",
+            "DW1000c",
+            "DW1500",
+            "DW1500c",
+            "DW2000",
+            "DW2000c",
+            "DW3000",
+            "DW2500c",
+            "DW3000c",
+            "DW6000",
+            "DW5000c",
+            "DW6000c",
+            "DW7500c",
+            "DW10000c",
+            "DW15000c",
+            "DW30000c",
+            "DS100",
+            "DS200",
+            "DS300",
+            "DS400",
+            "DS500",
+            "DS600",
+            "DS1000",
+            "DS1200",
+            "DS1500",
+            "DS2000",
+            "ElasticPool"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ServiceObjectiveName"
+          },
+          "description": "The current service level objective of the database."
+        },
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The status of the database."
+        },
+        "elasticPoolName": {
+          "type": "string",
+          "description": "The name of the elastic pool the database is in. If elasticPoolName and requestedServiceObjectiveName are both updated, the value of requestedServiceObjectiveName is ignored. Not supported for DataWarehouse edition."
+        },
+        "defaultSecondaryLocation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The default secondary region for this database."
+        },
+        "serviceTierAdvisors": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./sql.core.json#/definitions/ServiceTierAdvisor"
+          },
+          "description": "The list of service tier advisors for this database. Expanded property"
+        },
+        "transparentDataEncryption": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./sql.core.json#/definitions/TransparentDataEncryption"
+          },
+          "description": "The transparent data encryption info for this database."
+        },
+        "recommendedIndex": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./sql.core.json#/definitions/RecommendedIndex"
+          },
+          "description": "The recommended indices for this database."
+        },
+        "failoverGroupId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource identifier of the failover group containing this database."
+        },
+        "readScale": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "Conditional. If the database is a geo-secondary, readScale indicates whether read-only connections are allowed to this database or not. Not supported for DataWarehouse edition.",
+          "x-ms-enum": {
+            "name": "ReadScale"
+          }
+        },
+        "sampleName": {
+          "type": "string",
+          "enum": [
+            "AdventureWorksLT"
+          ],
+          "description": "Indicates the name of the sample schema to apply when creating this database. If createMode is not Default, this value is ignored. Not supported for DataWarehouse edition.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "SampleName"
+          },
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "zoneRedundant": {
+          "description": "Whether or not this database is zone redundant, which means the replicas of this database will be spread across multiple availability zones.",
+          "type": "boolean"
+        }
+      },
+      "description": "Represents the properties of a database."
+    },
+    "Database": {
+      "properties": {
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of database.  This is metadata used for the Azure portal experience."
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "description": "The properties representing the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Represents a database."
+    },
+    "DatabaseUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "description": "The properties representing the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Represents a database update."
+    },
+    "DatabaseListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Database"
+          },
+          "description": "The list of databases housed in the server."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Represents the response to a list database request."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
+      "x-ms-parameter-location": "method"
+    },
+    "TransparentDataEncryptionNameParameter": {
+      "name": "transparentDataEncryptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "current"
+      ],
+      "description": "The name of the transparent data encryption configuration.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TransparentDataEncryptionName"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
       }
+    }
   }
 }

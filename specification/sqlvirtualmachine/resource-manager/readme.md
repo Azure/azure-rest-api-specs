@@ -92,13 +92,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sqlvirtualmachine
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine
 ```
 
 ### Go

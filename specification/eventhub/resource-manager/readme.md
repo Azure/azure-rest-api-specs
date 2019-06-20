@@ -82,6 +82,8 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+    after_scripts:
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-eventhub
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -102,7 +104,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.EventHub
-  output-folder: $(csharp-sdks-folder)/EventHub/Management.EventHub/Generated
+  output-folder: $(csharp-sdks-folder)/eventhub/Microsoft.Azure.Management.EventHub/src/Generated
   clear-output-folder: true
 ```
 

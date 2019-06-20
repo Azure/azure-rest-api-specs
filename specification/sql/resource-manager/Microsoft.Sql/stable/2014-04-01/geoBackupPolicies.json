@@ -24,7 +24,9 @@
         "operationId": "GeoBackupPolicies_CreateOrUpdate",
         "description": "Updates a database geo backup policy.",
         "x-ms-examples": {
-          "Update geo backup policy": { "$ref": "./examples/GeoBackupPoliciesCreateOrUpdate.json" }
+          "Update geo backup policy": {
+            "$ref": "./examples/GeoBackupPoliciesCreateOrUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -81,7 +83,9 @@
         "operationId": "GeoBackupPolicies_Get",
         "description": "Gets a geo backup policy.",
         "x-ms-examples": {
-          "Get geo backup policy": { "$ref": "./examples/GeoBackupPoliciesGet.json" }
+          "Get geo backup policy": {
+            "$ref": "./examples/GeoBackupPoliciesGet.json"
+          }
         },
         "parameters": [
           {
@@ -125,7 +129,9 @@
         "operationId": "GeoBackupPolicies_ListByDatabase",
         "description": "Returns a list of geo backup policies.",
         "x-ms-examples": {
-          "List geo backup policies": { "$ref": "./examples/GeoBackupPoliciesList.json" }
+          "List geo backup policies": {
+            "$ref": "./examples/GeoBackupPoliciesList.json"
+          }
         },
         "parameters": [
           {
@@ -168,7 +174,10 @@
         "state": {
           "type": "string",
           "description": "The state of the geo backup policy.",
-          "enum": ["Disabled", "Enabled"],
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
           "x-ms-enum": {
             "modelAsString": false,
             "name": "GeoBackupPolicyState"
@@ -180,7 +189,9 @@
           "readOnly": true
         }
       },
-      "required": ["state"],
+      "required": [
+        "state"
+      ],
       "description": "The properties of the geo backup policy."
     },
     "GeoBackupPolicy": {
@@ -195,10 +206,10 @@
           "type": "string",
           "description": "Kind of geo backup policy.  This is metadata used for the Azure portal experience."
         },
-        "location":{
-          "type":"string",
+        "location": {
+          "type": "string",
           "readOnly": true,
-          "description":"Backup policy location."
+          "description": "Backup policy location."
         }
       },
       "required": [
@@ -238,9 +249,11 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": ["Default"],
+      "enum": [
+        "Default"
+      ],
       "description": "The name of the geo backup policy.",
-      "x-ms-enum":{
+      "x-ms-enum": {
         "modelAsString": true,
         "name": "GeoBackupPolicyName"
       },

@@ -27,6 +27,76 @@
     ]
   },
   "paths": {
+    "/endpointSettings": {
+      "get": {
+        "summary": "Gets endpoint settings for an endpoint.",
+        "operationId": "EndpointSettings_GetSettings",
+        "parameters": [],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with endpoint settings info in it.",
+            "schema": {
+              "$ref": "#/definitions/EndpointSettingsDTO"
+            },
+            "x-nullable": true
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulGetEpSettings.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "EndpointKeys"
+        ],
+        "summary": "Updates endpoint settings for an endpoint.",
+        "operationId": "EndpointSettings_UpdateSettings",
+        "parameters": [
+          {
+            "$ref": "#/parameters/EndpointSettingsPayload"
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Response with endpointSettings update status.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Successful query": {
+            "$ref": "./examples/SuccessfulSetEpSettings.json"
+          }
+        }
+      }
+    },
     "/endpointkeys": {
       "get": {
         "summary": "Gets endpoint keys for an endpoint",
@@ -1183,6 +1253,32 @@
         }
       }
     },
+    "EndpointSettingsDTO": {
+      "type": "object",
+      "description": "Endpoint settings.",
+      "additionalProperties": false,
+      "properties": {
+        "activeLearning": {
+          "description": "Active Learning settings of the endpoint.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/ActiveLearningSettingsDTO"
+            }
+          ]
+        }
+      }
+    },
+    "ActiveLearningSettingsDTO": {
+      "type": "object",
+      "description": "Active Learning settings of the endpoint.",
+      "additionalProperties": false,
+      "properties": {
+        "enable": {
+          "type": "string",
+          "description": "True/False string providing Active Learning"
+        }
+      }
+    },
     "WordAlterationsDTO": {
       "type": "object",
       "description": "Collection of word alterations.",
@@ -1344,6 +1440,17 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "EndpointSettingsPayload": {
+      "name": "endpointSettingsPayload",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EndpointSettingsDTO"
+      },
+      "x-nullable": true,
+      "description": "Post body of the request.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
