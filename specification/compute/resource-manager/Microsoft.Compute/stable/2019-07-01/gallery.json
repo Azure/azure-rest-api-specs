@@ -3,7 +3,7 @@
   "info": {
     "title": "SharedImageGalleryServiceClient",
     "description": "Shared Image Gallery Service Client.",
-    "version": "2019-03-01"
+    "version": "2019-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -451,8 +451,11 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Create or update a simple gallery Image Version.": {
+          "Create or update a simple Gallery Image Version (Managed Image as source).": {
             "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersion.json"
+          },
+          "Create or update a simple Gallery Image Version using snapshots as a source.": {
+            "$ref": "./examples/CreateOrUpdateASimpleGalleryImageVersionWithSnapshotsAsSource.json"
           }
         }
       },
@@ -1038,7 +1041,6 @@
           ]
         },
         "storageProfile": {
-          "readOnly": true,
           "$ref": "#/definitions/GalleryImageVersionStorageProfile"
         },
         "replicationStatus": {
@@ -1047,7 +1049,7 @@
         }
       },
       "required": [
-        "publishingProfile"
+        "storageProfile"
       ],
       "description": "Describes the properties of a gallery Image Version."
     },
@@ -1059,14 +1061,8 @@
             "$ref": "#/definitions/TargetRegion"
           },
           "description": "The target regions where the Image Version is going to be replicated to. This property is updatable."
-        },
-        "source": {
-          "$ref": "#/definitions/GalleryArtifactSource"
         }
       },
-      "required": [
-        "source"
-      ],
       "description": "Describes the basic gallery artifact publishing profile."
     },
     "TargetRegion": {
@@ -1097,29 +1093,6 @@
         "name"
       ],
       "description": "Describes the target region information."
-    },
-    "GalleryArtifactSource": {
-      "properties": {
-        "managedImage": {
-          "$ref": "#/definitions/ManagedArtifact"
-        }
-      },
-      "required": [
-        "managedImage"
-      ],
-      "description": "The source image from which the Image Version is going to be created."
-    },
-    "ManagedArtifact": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The managed artifact id."
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "description": "The managed artifact."
     },
     "GalleryImageVersionPublishingProfile": {
       "properties": {
@@ -1163,14 +1136,27 @@
       ],
       "description": "The publishing profile of a gallery Image Version."
     },
+    "GalleryArtifactVersionSource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id of the gallery artifact version source. Can specify a disk uri, snapshot uri, or user image."
+        }
+      },
+      "required": [
+        "id"
+      ],
+      "description": "The gallery artifact version source."
+    },
     "GalleryImageVersionStorageProfile": {
       "properties": {
+        "source": {
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
+        },
         "osDiskImage": {
-          "readOnly": true,
           "$ref": "#/definitions/GalleryOSDiskImage"
         },
         "dataDiskImages": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/GalleryDataDiskImage"
@@ -1178,7 +1164,37 @@
           "description": "A list of data disk images."
         }
       },
-      "description": "This is the storage profile of a gallery Image Version."
+      "description": "This is the storage profile of a Gallery Image Version."
+    },
+    "GalleryDiskImage": {
+      "properties": {
+        "sizeInGB": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "This property indicates the size of the VHD to be created."
+        },
+        "hostCaching": {
+          "type": "string",
+          "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
+          "enum": [
+            "None",
+            "ReadOnly",
+            "ReadWrite"
+          ],
+          "x-ms-enum": {
+            "name": "HostCaching",
+            "modelAsString": false
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/GalleryArtifactVersionSource"
+        }
+      },
+      "required": [
+        "source"
+      ],
+      "description": "This is the disk image base class."
     },
     "GalleryOSDiskImage": {
       "allOf": [
@@ -1191,7 +1207,6 @@
     "GalleryDataDiskImage": {
       "properties": {
         "lun": {
-          "readOnly": true,
           "type": "integer",
           "format": "int32",
           "description": "This property specifies the logical unit number of the data disk. This value is used to identify data disks within the Virtual Machine and therefore must be unique for each data disk attached to the Virtual Machine."
@@ -1202,32 +1217,10 @@
           "$ref": "#/definitions/GalleryDiskImage"
         }
       ],
+      "required": [
+        "lun"
+      ],
       "description": "This is the data disk image."
-    },
-    "GalleryDiskImage": {
-      "properties": {
-        "sizeInGB": {
-          "readOnly": true,
-          "type": "integer",
-          "format": "int32",
-          "description": "This property indicates the size of the VHD to be created."
-        },
-        "hostCaching": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The host caching of the disk. Valid values are 'None', 'ReadOnly', and 'ReadWrite'",
-          "enum": [
-            "None",
-            "ReadOnly",
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "HostCaching",
-            "modelAsString": false
-          }
-        }
-      },
-      "description": "This is the disk image base class."
     },
     "ReplicationStatus": {
       "properties": {

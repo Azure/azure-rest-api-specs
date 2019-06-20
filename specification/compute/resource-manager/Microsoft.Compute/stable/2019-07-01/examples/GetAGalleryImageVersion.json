@@ -19,14 +19,14 @@
               "name": "East US",
               "regionalReplicaCount": 2
             }
-          ],
-          "source": {
-            "managedImage": {
-              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-            }
-          }
+          ]
         }
-      }
+      },
+      "storageProfile": {
+        "source": {
+          "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+        },
+      },
     }
   },
   "responses": {
@@ -46,16 +46,14 @@
                 "storageAccountType": "Standard_LRS"
               }
             ],
-            "source": {
-              "managedImage": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-              }
-            },
             "replicaCount": 1,
             "publishedDate": "2018-01-01T00:00:00Z",
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
+            "source": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
+            },
             "osDiskImage": {
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
