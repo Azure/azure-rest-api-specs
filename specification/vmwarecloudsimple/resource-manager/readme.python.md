@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-vmwarecloudsimple/azure/mgmt/vmwarecloudsimple
+  output-folder: $(python-sdks-folder)/compute/azure-mgmt-vmwarecloudsimple/azure/mgmt/vmwarecloudsimple
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-vmwarecloudsimple
+  output-folder: $(python-sdks-folder)/compute/azure-mgmt-vmwarecloudsimple
 ```
