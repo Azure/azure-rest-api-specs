@@ -53,7 +53,7 @@ tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-2019-05
+tag: package-managedapplications-2016-09
 ```
 
 ### Tag: package-features-2015-12
