@@ -1313,6 +1313,24 @@
       ],
       "description": "Network rule set"
     },
+    "AzureFilesIdentityBasedAuthentication": {
+      "properties": {
+        "directoryServiceOptions": {
+          "type": "string",
+          "description": "Indicates the directory service used.",
+          "enum": [
+            "None",
+            "AADDS"
+          ],
+          "x-ms-enum": {
+            "name": "DirectoryServiceOptions",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": ["directoryServiceOptions"],
+      "description": "Settings for Azure Files identity based authentication."
+    },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
         "customDomain": {
@@ -1340,15 +1358,14 @@
             "modelAsString": false
           }
         },
-        "azureFilesAadIntegration": {
-          "type": "boolean",
-          "x-ms-client-name": "EnableAzureFilesAadIntegration",
-          "description": "Enables Azure Files AAD Integration for SMB if sets to true."
+        "azureFilesIdentityBasedAuthentication": {
+          "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
+          "description": "Provides the identity based authentication settings for Azure Files."
         },
         "supportsHttpsTrafficOnly": {
           "type": "boolean",
           "x-ms-client-name": "EnableHttpsTrafficOnly",
-          "description": "Allows https traffic only to storage service if sets to true."
+          "description": "Allows https traffic only to storage service if sets to true. The default value is true since API version 2019-04-01."
         },
         "isHnsEnabled": {
           "type": "boolean",
@@ -1598,10 +1615,9 @@
             "modelAsString": false
           }
         },
-        "azureFilesAadIntegration": {
-          "type": "boolean",
-          "x-ms-client-name": "EnableAzureFilesAadIntegration",
-          "description": "Enables Azure Files AAD Integration for SMB if sets to true."
+        "azureFilesIdentityBasedAuthentication": {
+          "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
+          "description": "Provides the identity based authentication settings for Azure Files."
         },
         "supportsHttpsTrafficOnly": {
           "type": "boolean",
@@ -1762,10 +1778,9 @@
             "modelAsString": false
           }
         },
-        "azureFilesAadIntegration": {
-          "type": "boolean",
-          "x-ms-client-name": "EnableAzureFilesAadIntegration",
-          "description": "Enables Azure Files AAD Integration for SMB if sets to true."
+        "azureFilesIdentityBasedAuthentication": {
+          "$ref": "#/definitions/AzureFilesIdentityBasedAuthentication",
+          "description": "Provides the identity based authentication settings for Azure Files."
         },
         "supportsHttpsTrafficOnly": {
           "type": "boolean",

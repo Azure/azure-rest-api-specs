@@ -1,46 +1,48 @@
 {
-	"parameters": {
-		"api-version": "2017-08-31-preview",
-		"groupId": "10000000-E001-0000-0000-000000000000",
-		"$expand": "children"
-	},
-	"responses": {
-		"200": {
-			"body": {
-					"id": "/providers/Microsoft.Management/managementGroups/10000000-E001-0000-0000-000000000000",
-					"type": "/providers/Microsoft.Management/managementGroups",
-					"name": "10000000-E001-0000-0000-000000000000",
-					"properties": {
-						"tenantId": "10000000-0000-0000-0000-000000000000",
-						"displayName": "Enrollment 1, under Tenant 1",
-						"details": {
-							"version": 1,
-							"updatedTime": "2017-02-13T00:00:00Z",
-							"updatedBy": "*",
-							"managementGroupType": "Enrollment"
-						},
-						"children": [{
-							"childType": "Department",
-							"childId": "/providers/Microsoft.Management/managementGroups/10000000-D001-0000-0000-000000000000",
-							"displayName": "Department 1 under Enrollment 1"
-						},
-						{
-							"childType": "Department",
-							"childId": "/providers/Microsoft.Management/managementGroups/10000000-D002-0000-0000-000000000000",
-							"displayName": "Department 2 under Enrollment 1"
-						},
-						{
-							"childType": "Account",
-							"childId": "/providers/Microsoft.Management/managementGroups/10000000-A004-0000-0000-000000000000",
-							"displayName": "Account 4, under Enrollment 1"
-						},
-						{
-							"childType": "Account",
-							"childId": "/providers/Microsoft.Management/managementGroups/10000000-A005-0000-0000-000000000000",
-							"displayName": "Account 5, under Enrollment 1"
-						}]
-					}
-			}
-		}
-	}
+  "parameters": {
+    "api-version": "2017-08-31-preview",
+    "groupId": "10000000-E001-0000-0000-000000000000",
+    "$expand": "children"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/providers/Microsoft.Management/managementGroups/10000000-E001-0000-0000-000000000000",
+        "type": "/providers/Microsoft.Management/managementGroups",
+        "name": "10000000-E001-0000-0000-000000000000",
+        "properties": {
+          "tenantId": "10000000-0000-0000-0000-000000000000",
+          "displayName": "Enrollment 1, under Tenant 1",
+          "details": {
+            "version": 1,
+            "updatedTime": "2017-02-13T00:00:00Z",
+            "updatedBy": "*",
+            "managementGroupType": "Enrollment"
+          },
+          "children": [
+            {
+              "childType": "Department",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-D001-0000-0000-000000000000",
+              "displayName": "Department 1 under Enrollment 1"
+            },
+            {
+              "childType": "Department",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-D002-0000-0000-000000000000",
+              "displayName": "Department 2 under Enrollment 1"
+            },
+            {
+              "childType": "Account",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-A004-0000-0000-000000000000",
+              "displayName": "Account 4, under Enrollment 1"
+            },
+            {
+              "childType": "Account",
+              "childId": "/providers/Microsoft.Management/managementGroups/10000000-A005-0000-0000-000000000000",
+              "displayName": "Account 5, under Enrollment 1"
+            }
+          ]
+        }
+      }
+    }
+  }
 }

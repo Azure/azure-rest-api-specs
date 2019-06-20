@@ -362,7 +362,11 @@
             "maxItems": 3,
             "items": {
               "type": "string",
-              "enum": ["translation", "transliteration", "dictionary"]
+              "enum": [
+                "translation",
+                "transliteration",
+                "dictionary"
+              ]
             }
           },
           {
@@ -442,7 +446,10 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": ["plain", "html"]
+            "enum": [
+              "plain",
+              "html"
+            ]
           },
           {
             "name": "category",
@@ -457,7 +464,11 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "enum": ["NoAction", "Marked", "Deleted"]
+            "enum": [
+              "NoAction",
+              "Marked",
+              "Deleted"
+            ]
           },
           {
             "name": "profanityMarker",
@@ -589,7 +600,7 @@
             "description": "A client-generated GUID to uniquely identify the request. Note that you can omit this header if you include the trace ID in the query string using a query parameter named ClientTraceId.",
             "in": "header",
             "required": false,
-             "type": "string"
+            "type": "string"
           },
           {
             "name": "texts",
@@ -628,7 +639,6 @@
     }
   },
   "definitions": {
-
     "LanguagesResult": {
       "type": "object",
       "description": "Example of a successful languages request",
@@ -871,7 +881,6 @@
         }
       }
     },
-
     "TranslateResultAll": {
       "type": "array",
       "description": "Example of a successful translate request, including all optional parameters.",
@@ -899,50 +908,50 @@
                 },
                 "transliteration": {
                   "type": "object",
-                    "properties": {
-                      "text": {
-                        "type": "string"
-                      },
-                      "script": {
-                        "type": "string"
-                      }
+                  "properties": {
+                    "text": {
+                      "type": "string"
+                    },
+                    "script": {
+                      "type": "string"
                     }
+                  }
                 },
                 "to": {
                   "type": "string"
                 },
                 "alignment": {
                   "type": "object",
-                    "properties": {
-                      "proj": {
-                        "type": "string"
-                      }
+                  "properties": {
+                    "proj": {
+                      "type": "string"
                     }
+                  }
                 },
                 "sentLen": {
                   "type": "object",
-                    "properties": {
-                      "srcSentLen": {
-                        "type": "array",
-                        "items": {
-                          "properties": {
-                            "integer": {
-                              "type": "integer"
-                            }
+                  "properties": {
+                    "srcSentLen": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "integer": {
+                            "type": "integer"
                           }
                         }
-                      },
-                      "transSentLen": {
-                        "type": "array",
-                        "items": {
-                          "properties": {
-                            "integer": {
-                              "type": "integer"
-                            }
+                      }
+                    },
+                    "transSentLen": {
+                      "type": "array",
+                      "items": {
+                        "properties": {
+                          "integer": {
+                            "type": "integer"
                           }
                         }
                       }
                     }
+                  }
                 }
               }
             }
@@ -950,7 +959,6 @@
         }
       }
     },
-
     "BreakSentenceResult": {
       "type": "array",
       "description": "Example of a successful break sentence request",
