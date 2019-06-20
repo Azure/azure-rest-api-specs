@@ -435,8 +435,10 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": null
+        "x-ms-examples": {
+          "List VM Sizes": {
+            "$ref": "./examples/ListVMSizesResult.json"
+          }
         }
       }
     },
@@ -671,7 +673,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "200": {
             "description": "Compute update initiated.",
             "schema": {
               "$ref": "#/definitions/ComputeResource"
@@ -770,7 +772,7 @@
           "200": {
             "description": "The operation was successful. The response contains the list of IP addresses.",
             "schema": {
-              "$ref": "#/definitions/ComputeNodesInformation"
+              "$ref": "#/definitions/AmlComputeNodesInformation"
             }
           },
           "default": {
@@ -1102,6 +1104,7 @@
       "description": "The Usage Names."
     },
     "Usage": {
+      "type":"object",
       "properties": {
         "unit": {
           "readOnly": true,
