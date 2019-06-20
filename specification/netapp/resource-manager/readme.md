@@ -35,7 +35,7 @@ tag: package-netapp-2019-06-01
 
 These settings apply only when `--tag=package-netapp-2019-06-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-netapp-2019-05-01'
+``` yaml $(tag) == 'package-netapp-2019-06-01'
 input-file:
 - Microsoft.NetApp/stable/2019-06-01/netapp.json
 ```
