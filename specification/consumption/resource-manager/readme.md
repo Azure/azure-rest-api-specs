@@ -194,7 +194,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Consumption
-  output-folder: $(csharp-sdks-folder)/Consumption/Management.Consumption/Generated
+  output-folder: $(csharp-sdks-folder)/consumption/Microsoft.Azure.Management.Consumption/src/Generated
   clear-output-folder: true
 ```
 

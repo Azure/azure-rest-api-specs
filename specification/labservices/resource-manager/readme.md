@@ -71,7 +71,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.LabServices
-  output-folder: $(csharp-sdks-folder)/LabServices/Management.LabServices/Generated
+  output-folder: $(csharp-sdks-folder)/labservices/Microsoft.Azure.Management.LabServices/src/Generated
   clear-output-folder: true
 ```
 
