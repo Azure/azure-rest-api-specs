@@ -937,10 +937,6 @@
     "TeradataLinkedServiceTypeProperties": {
       "description": "Teradata linked service properties.",
       "properties": {
-        "connectionString": {
-          "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
-          "type": "object"
-        },
         "server": {
           "type": "object",
           "description": "Server name for connection. Type: string (or Expression with resultType string)."
@@ -969,7 +965,10 @@
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
-      }
+      },
+      "required": [
+        "server"
+      ]
     },
     "AzureMLLinkedService": {
       "x-ms-discriminator-value": "AzureML",
