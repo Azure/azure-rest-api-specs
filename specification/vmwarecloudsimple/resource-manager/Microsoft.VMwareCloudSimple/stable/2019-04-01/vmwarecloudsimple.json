@@ -443,7 +443,7 @@
           "resourcePool"
         ],
         "summary": "Implements get of resource pools list",
-        "operationId": "resourcepoolsByPC_List",
+        "operationId": "resourcePoolsByPC_List",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -492,7 +492,7 @@
           "resourcePool"
         ],
         "summary": "Implements get of resource pool",
-        "operationId": "resourcepoolByPC_get",
+        "operationId": "resourcePoolByPC_get",
         "parameters": [
           {
             "$ref": "#/parameters/api-version"
@@ -2312,7 +2312,7 @@
       ],
       "properties": {
         "id": {
-          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/dedicatedcloudservices/{dedicatedCloudServiceName}",
+          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/dedicatedCloudServices/{dedicatedCloudServiceName}",
           "type": "string",
           "readOnly": true
         },
@@ -2693,7 +2693,7 @@
           "type": "string"
         },
         "description": {
-          "description": "dedicatedcloudnode example: 8 x Ten-Core Intel® Xeon® Processor E5-2640 v4 2.40GHz 25MB Cache (90W); 12 x 64GB PC4-19200 2400MHz DDR4 ECC Registered DIMM, ...",
+          "description": "dedicatedCloudNode example: 8 x Ten-Core Intel® Xeon® Processor E5-2640 v4 2.40GHz 25MB Cache (90W); 12 x 64GB PC4-19200 2400MHz DDR4 ECC Registered DIMM, ...",
           "type": "string"
         },
         "family": {
@@ -2701,7 +2701,7 @@
           "type": "string"
         },
         "name": {
-          "description": "The name of the SKU for VMWare Cloudsimple Node",
+          "description": "The name of the SKU for VMWare CloudSimple Node",
           "type": "string"
         },
         "tier": {
@@ -2717,19 +2717,19 @@
       ],
       "properties": {
         "dedicatedAvailabilityZoneId": {
-          "description": "CSOS Availability Zone id",
+          "description": "CloudSimple Availability Zone id",
           "type": "string"
         },
         "dedicatedAvailabilityZoneName": {
-          "description": "CSOS Availability Zone Name",
+          "description": "CloudSimple Availability Zone Name",
           "type": "string"
         },
         "dedicatedPlacementGroupId": {
-          "description": "CSOS Placement Group Id",
+          "description": "CloudSimple Placement Group Id",
           "type": "string"
         },
         "dedicatedPlacementGroupName": {
-          "description": "CSOS Placement Group name",
+          "description": "CloudSimple Placement Group name",
           "type": "string"
         },
         "limit": {
@@ -3334,14 +3334,14 @@
       ],
       "properties": {
         "ipAddresses": {
-          "description": "NIC's ip address",
+          "description": "NIC ip address",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "macAddress": {
-          "description": "NIC's MAC address",
+          "description": "NIC MAC address",
           "type": "string"
         },
         "network": {
@@ -3349,7 +3349,7 @@
           "$ref": "#/definitions/VirtualNetwork"
         },
         "nicType": {
-          "description": "NIC's type",
+          "description": "NIC type",
           "type": "string",
           "enum": [
             "E1000",
@@ -3369,11 +3369,11 @@
           "type": "boolean"
         },
         "virtualNicId": {
-          "description": "NIC's id",
+          "description": "NIC id",
           "type": "string"
         },
         "virtualNicName": {
-          "description": "NIC's name",
+          "description": "NIC name",
           "type": "string",
           "readOnly": true
         }
