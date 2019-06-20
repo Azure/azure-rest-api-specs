@@ -1,33 +1,27 @@
 ## Python
 
 These settings apply only when `--python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
 
 ```yaml $(python)
+python-mode: create
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
+  namespace: azure.mgmt.vmwarecloudsimple
   package-name: azure-mgmt-vmwarecloudsimple
+  package-version: 0.1.0
   clear-output-folder: true
-  no-namespace-folders: true
 ```
-
-### Python multi-api
-
-Generate all API versions currently shipped for this package
-
-```yaml $(python) && $(multiapi)
-batch:
-  - tag: package-2019-04-01
- ```
-
-### Tag: package-2019-04-01 and python
-
-These settings apply only when `--tag=package-2019-04-01 --python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-
-``` yaml $(tag) == 'package-2019-04-01' && $(python)
+``` yaml $(python) && $(python-mode) == 'update'
 python:
-  namespace: azure.mgmt.vmwarecloudsimple.v2019_04_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-vmwarecloudsimple/azure/mgmt/vmwarecloudsimple/v2019_04_01
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-vmwarecloudsimple/azure/mgmt/vmwarecloudsimple
+```
+``` yaml $(python) && $(python-mode) == 'create'
+python:
+  basic-setup-py: true
+  output-folder: $(python-sdks-folder)/azure-mgmt-vmwarecloudsimple
 ```
