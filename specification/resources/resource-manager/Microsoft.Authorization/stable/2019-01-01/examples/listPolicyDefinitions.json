@@ -88,6 +88,38 @@
             "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
             "type": "Microsoft.Authorization/policyDefinitions",
             "name": "ResourceNaming"
+          },
+          {
+            "properties": {
+              "mode": "Microsoft.KeyVault.Data",
+              "displayName": "Aduit KeyVault certificates that expire with in specified number of days",
+              "description": "Audit certificates that are stored in Azure Key Vault, that expire with in 'X' number of days.",
+              "metadata": {
+                "category": "KeyVault DataPlane"
+              },
+              "parameters": {
+                "daysToExpire": {
+                  "type": "Integer",
+                  "metadata": {
+                    "displayName": "Days to expire",
+                    "description": "The number of days for a certificate to expire."
+                  }
+                }
+              },
+              "policyRule": {
+                "if": {
+                  "field": "Microsoft.KeyVault.Data/vaults/certificates/attributes/expiresOn",
+                  "lessOrEquals": "[addDays(utcNow(), parameters('daysToExpire'))]"
+                },
+                "then": {
+                  "effect": "audit"
+                }
+              },
+              "policyType": "Custom"
+            },
+            "id": "/subscriptions/ae640e6b-ba3e-4256-9d62-2993eecfa6f2/providers/Microsoft.Authorization/policyDefinitions/AuditSoonToExpireCerts",
+            "type": "Microsoft.Authorization/policyDefinitions",
+            "name": "AuditSoonToExpireCerts"
           }
         ]
       }
