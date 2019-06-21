@@ -87,8 +87,8 @@
                         "in": "path",
                         "required": true,
                         "type": "string",
-                        "pattern": "^[a-z0-9]{3,24}$",
-                        "description": "Name of the attestation service instance"
+                        "pattern": "^[a-zA-Z0-9-]{3,24}$",
+                        "description": "Name of the attestation service"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -96,7 +96,7 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "The status of the specified attestation service instance",
+                        "description": "Get the status of attestation Provider",
                         "schema": {
                             "$ref": "#/definitions/AttestationProvider"
                         }
@@ -514,8 +514,7 @@
             "in": "query",
             "required": true,
             "type": "string",
-            "description": "Client API version.",
-            "enum": ["2018-09-01-preview"]
+            "description": "Client API version."
         }
     }
   }
