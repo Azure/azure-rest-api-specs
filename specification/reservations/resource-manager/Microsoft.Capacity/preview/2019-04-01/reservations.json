@@ -421,10 +421,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandRenewPropertiesParameter"
           }
         ],
         "tags": [
-          "Reservation"
+          "Reservation" 
         ],
         "responses": {
           "200": {
@@ -853,6 +856,26 @@
         }
       }
     },
+    "RenewPropertiesResponse": {
+      "type": "object",
+      "properties": {
+        "purchaseProperties": {
+          "$ref": "#/definitions/PurchaseRequest"
+        },
+        "lockedPriceTotal": {
+          "type": "object",
+          "description": "Locked currency & amount for new reservation purchase at the time of renewal. Price is locked 30 days before expiry date time if renew is true.",
+          "properties": {
+            "currencyCode": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
     "CalculatePriceResponse": {
       "type": "object",
       "properties": {
@@ -960,6 +983,23 @@
         },
         "mergeProperties": {
           "$ref": "#/definitions/ReservationMergeProperties"
+        },
+        "billingScopeId": {
+          "$ref": "#/definitions/BillingScopeId"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "renewSource": {
+          "type": "string",
+          "description": "Reservation Id of the reservation from which this reservation is renewed. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}."
+        },
+        "renewDestination": {
+          "type": "string",
+          "description": "Reservation Id of the reservation which is purchased because of renew. Format of the resource Id is /providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}."
+        },
+        "renewProperties": {
+          "$ref": "#/definitions/RenewPropertiesResponse"
         }
       }
     },
@@ -1020,6 +1060,9 @@
         "appliedScopes": {
           "$ref": "#/definitions/AppliedScopes"
         },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
         "reservedResourceProperties": {
           "type": "object",
           "description": "Properties specific to each reserved resource type. Not required if not applicable.",
@@ -1046,6 +1089,17 @@
         "name": {
           "type": "string",
           "description": "Name of the Reservation"
+        },
+        "renew": {
+          "$ref": "#/definitions/Renew"
+        },
+        "renewProperties": {
+          "type": "object",
+          "properties": {
+            "purchaseProperties": {
+              "$ref": "#/definitions/PurchaseRequest"
+            }
+          }
         }
       }
     },
@@ -1314,6 +1368,11 @@
       "type": "string",
       "description": "Subscription that will be charged for purchasing Reservation"
     },
+    "Renew": {
+      "type": "boolean",
+      "default": false,
+      "description": "Setting this to true will automatically purchase a new reservation on the expiration date time."
+    },
     "ReservationQuantity": {
       "type": "integer",
       "format": "int32",
@@ -1388,6 +1447,14 @@
       "in": "query",
       "description": "Supported version for this document is 2019-04-01",
       "required": true,
+      "type": "string"
+    },
+    "ExpandRenewPropertiesParameter": {
+      "name": "expand",
+      "x-ms-parameter-location": "method",
+      "in": "query",
+      "description": "Supported value of this query is renewProperties",
+      "required": false,
       "type": "string"
     },
     "SubscriptionIdParameter": {
