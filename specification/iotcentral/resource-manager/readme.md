@@ -74,7 +74,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.IotCentral
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/IotCentral/Management.IotCentral/Generated
+  output-folder: $(csharp-sdks-folder)/iotcentral/Microsoft.Azure.Management.IotCentral/src/Generated
   clear-output-folder: true
 ```
 

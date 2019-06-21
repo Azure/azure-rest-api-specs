@@ -1,434 +1,434 @@
 {
-    "swagger":"2.0",
-    "info":{
-        "title":"Azure SQL Database",
-        "description":"Provides create, read, update and delete functionality for Azure SQL Database elastic pools.",
-        "version":"2014-04-01"
-    },
-    "host":"management.azure.com",
-    "schemes":[
-        "https"
-    ],
-    "consumes":[
-        "application/json"
-    ],
-    "produces":[
-        "application/json"
-    ],
-    "paths":{
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}":{
-            "put":{
-                "tags":[
-                    "ElasticPools"
-                ],
-                "operationId":"ElasticPools_CreateOrUpdate",
-                "description":"Creates a new elastic pool or updates an existing elastic pool.",
-                "x-ms-examples":{
-                    "Create elastic pool max":{
-                        "$ref":"./examples/ElasticPoolCreateOrUpdateMax.json"
-                    },
-                    "Create elastic pool min":{
-                        "$ref":"./examples/ElasticPoolCreateOrUpdateMin.json"
-                    }
-                },
-                "parameters":[
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name":"elasticPoolName",
-                        "in":"path",
-                        "required":true,
-                        "type":"string",
-                        "description":"The name of the elastic pool to be operated on (updated or created)."
-                    },
-                    {
-                        "name":"parameters",
-                        "in":"body",
-                        "required":true,
-                        "schema":{
-                            "$ref":"#/definitions/ElasticPool"
-                        },
-                        "description":"The required parameters for creating or updating an elastic pool."
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "schema":{
-                            "$ref":"#/definitions/ElasticPool"
-                        }
-                    },
-                    "201":{
-                        "description":"Created",
-                        "schema":{
-                            "$ref":"#/definitions/ElasticPool"
-                        }
-                    },
-                    "202":{
-                        "description":"Accepted"
-                    }
-                },
-                "x-ms-long-running-operation":true
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database",
+    "description": "Provides create, read, update and delete functionality for Azure SQL Database elastic pools.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools/{elasticPoolName}": {
+      "put": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "operationId": "ElasticPools_CreateOrUpdate",
+        "description": "Creates a new elastic pool or updates an existing elastic pool.",
+        "x-ms-examples": {
+          "Create elastic pool max": {
+            "$ref": "./examples/ElasticPoolCreateOrUpdateMax.json"
+          },
+          "Create elastic pool min": {
+            "$ref": "./examples/ElasticPoolCreateOrUpdateMin.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be operated on (updated or created)."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
             },
-            "patch":{
-                "tags":[
-                    "ElasticPools"
-                ],
-                "operationId":"ElasticPools_Update",
-                "description":"Updates an existing elastic pool.",
-                "x-ms-examples":{
-                    "Update elastic pool max":{
-                        "$ref":"./examples/ElasticPoolUpdateMax.json"
-                    },
-                    "Update elastic pool min":{
-                        "$ref":"./examples/ElasticPoolUpdateMin.json"
-                    }
-                },
-                "parameters":[
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name":"elasticPoolName",
-                        "in":"path",
-                        "required":true,
-                        "type":"string",
-                        "description":"The name of the elastic pool to be updated."
-                    },
-                    {
-                        "name":"parameters",
-                        "in":"body",
-                        "required":true,
-                        "schema":{
-                            "$ref":"#/definitions/ElasticPoolUpdate"
-                        },
-                        "description":"The required parameters for updating an elastic pool."
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "schema":{
-                            "$ref":"#/definitions/ElasticPool"
-                        }
-                    },
-                    "202":{
-                        "description":"Accepted"
-                    }
-                },
-                "x-ms-long-running-operation":true
-            },
-            "delete":{
-                "tags":[
-                    "ElasticPools"
-                ],
-                "operationId":"ElasticPools_Delete",
-                "description":"Deletes the elastic pool.",
-                "x-ms-examples":{
-                    "Delete elastic pool":{
-                        "$ref":"./examples/ElasticPoolDelete.json"
-                    }
-                },
-                "parameters":[
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name":"elasticPoolName",
-                        "in":"path",
-                        "required":true,
-                        "type":"string",
-                        "description":"The name of the elastic pool to be deleted."
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK"
-                    },
-                    "204":{
-                        "description":"Accepted"
-                    }
-                }
-            },
-            "get":{
-                "tags":[
-                    "ElasticPools"
-                ],
-                "operationId":"ElasticPools_Get",
-                "description":"Gets an elastic pool.",
-                "x-ms-examples":{
-                    "Get elastic pool":{
-                        "$ref":"./examples/ElasticPoolGet.json"
-                    }
-                },
-                "parameters":[
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/ServerNameParameter"
-                    },
-                    {
-                        "name":"elasticPoolName",
-                        "in":"path",
-                        "required":true,
-                        "type":"string",
-                        "description":"The name of the elastic pool to be retrieved."
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "schema":{
-                            "$ref":"#/definitions/ElasticPool"
-                        }
-                    }
-                }
+            "description": "The required parameters for creating or updating an elastic pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
             }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools":{
-            "get":{
-                "tags":[
-                    "ElasticPools"
-                ],
-                "operationId":"ElasticPools_ListByServer",
-                "description":"Returns a list of elastic pools in a server.",
-                "x-ms-examples":{
-                    "List elastic pools":{
-                        "$ref":"./examples/ElasticPoolList.json"
-                    }
-                },
-                "parameters":[
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ApiVersionParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-                    },
-                    {
-                        "$ref":"../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-                    },
-                    {
-                        "$ref":"#/parameters/ServerNameParameter"
-                    }
-                ],
-                "responses":{
-                    "200":{
-                        "description":"OK",
-                        "schema":{
-                            "$ref":"#/definitions/ElasticPoolListResult"
-                        }
-                    }
-                },
-                "x-ms-pageable":{
-                    "nextLinkName":null
-                }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
             }
-        }
-    },
-    "definitions":{
-        "ElasticPoolProperties":{
-            "properties":{
-                "creationDate":{
-                    "readOnly":true,
-                    "type":"string",
-                    "format":"date-time",
-                    "description":"The creation date of the elastic pool (ISO8601 format)."
-                },
-                "state":{
-                    "readOnly":true,
-                    "type":"string",
-                    "enum":[
-                        "Creating",
-                        "Ready",
-                        "Disabled"
-                    ],
-                    "description":"The state of the elastic pool.",
-                    "x-ms-enum":{
-                        "modelAsString":true,
-                        "name":"ElasticPoolState"
-                    }
-                },
-                "edition":{
-                    "type":"string",
-                    "description":"The edition of the elastic pool.",
-                    "enum":[
-                        "Basic",
-                        "Standard",
-                        "Premium",
-                        "GeneralPurpose",
-                        "BusinessCritical"
-                    ],
-                    "x-ms-enum":{
-                        "name":"ElasticPoolEdition",
-                        "modelAsString":true
-                    },
-                    "x-ms-mutability":[
-                        "create",
-                        "read"
-                    ]
-                },
-                "dtu":{
-                    "type":"integer",
-                    "format":"int32",
-                    "description":"The total shared DTU for the database elastic pool."
-                },
-                "databaseDtuMax":{
-                    "type":"integer",
-                    "format":"int32",
-                    "description":"The maximum DTU any one database can consume."
-                },
-                "databaseDtuMin":{
-                    "type":"integer",
-                    "format":"int32",
-                    "description":"The minimum DTU all databases are guaranteed."
-                },
-                "storageMB":{
-                    "type":"integer",
-                    "format":"int32",
-                    "description":"Gets storage limit for the database elastic pool in MB."
-                },
-                "zoneRedundant":{
-                    "description":"Whether or not this database elastic pool is zone redundant, which means the replicas of this database will be spread across multiple availability zones.",
-                    "type":"boolean"
-                }
-            },
-            "description":"Represents the properties of an elastic pool."
+          },
+          "202": {
+            "description": "Accepted"
+          }
         },
-        "ElasticPool":{
-            "properties":{
-                "properties":{
-                    "$ref":"#/definitions/ElasticPoolProperties",
-                    "description":"The properties representing the resource.",
-                    "x-ms-client-flatten":true
-                },
-                "kind":{
-                    "readOnly":true,
-                    "type":"string",
-                    "description":"Kind of elastic pool.  This is metadata used for the Azure portal experience."
-                }
-            },
-            "allOf":[
-                {
-                    "$ref":"../../../common/v1/types.json#/definitions/TrackedResource"
-                }
-            ],
-            "description":"Represents a database elastic pool."
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "operationId": "ElasticPools_Update",
+        "description": "Updates an existing elastic pool.",
+        "x-ms-examples": {
+          "Update elastic pool max": {
+            "$ref": "./examples/ElasticPoolUpdateMax.json"
+          },
+          "Update elastic pool min": {
+            "$ref": "./examples/ElasticPoolUpdateMin.json"
+          }
         },
-        "ElasticPoolUpdate":{
-            "properties":{
-                "tags":{
-                    "type":"object",
-                    "additionalProperties":{
-                        "type":"string"
-                    },
-                    "description":"Resource tags."
-                },
-                "properties":{
-                    "$ref":"#/definitions/ElasticPoolProperties",
-                    "description":"The properties representing the resource.",
-                    "x-ms-client-flatten":true
-                }
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be updated."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ElasticPoolUpdate"
             },
-            "allOf":[
-                {
-                    "$ref":"../../../common/v1/types.json#/definitions/Resource"
-                }
-            ],
-            "description":"Represents an elastic pool update."
-        },
-        "ElasticPoolListResult":{
-            "properties":{
-                "value":{
-                    "type":"array",
-                    "items":{
-                        "$ref":"#/definitions/ElasticPool"
-                    },
-                    "description":"The list of elastic pools hosted in the server."
-                }
-            },
-            "required":[
-                "value"
-            ],
-            "description":"Represents the response to a list elastic pool request."
-        }
-    },
-    "parameters":{
-        "ServerNameParameter":{
-            "name":"serverName",
-            "in":"path",
-            "required":true,
-            "type":"string",
-            "description":"The name of the server.",
-            "x-ms-parameter-location":"method"
-        },
-        "DatabaseExpandParameter":{
-            "name":"$expand",
-            "in":"query",
-            "required":false,
-            "type":"string",
-            "description":"A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
-            "x-ms-parameter-location":"method"
-        },
-        "TransparentDataEncryptionNameParameter":{
-            "name":"transparentDataEncryptionName",
-            "in":"path",
-            "required":true,
-            "type":"string",
-            "enum":[
-                "current"
-            ],
-            "description":"The name of the transparent data encryption configuration.",
-            "x-ms-enum":{
-                "modelAsString":true,
-                "name":"TransparentDataEncryptionName"
-            },
-            "x-ms-parameter-location":"method"
-        }
-    },
-    "securityDefinitions":{
-        "azure_auth":{
-            "type":"oauth2",
-            "description":"Azure Active Directory OAuth2 Flow",
-            "flow":"implicit",
-            "authorizationUrl":"https://login.microsoftonline.com/common/oauth2/authorize",
-            "scopes":{
-                "user_impersonation":"impersonate your user account"
+            "description": "The required parameters for updating an elastic pool."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
             }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "operationId": "ElasticPools_Delete",
+        "description": "Deletes the elastic pool.",
+        "x-ms-examples": {
+          "Delete elastic pool": {
+            "$ref": "./examples/ElasticPoolDelete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be deleted."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Accepted"
+          }
         }
+      },
+      "get": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "operationId": "ElasticPools_Get",
+        "description": "Gets an elastic pool.",
+        "x-ms-examples": {
+          "Get elastic pool": {
+            "$ref": "./examples/ElasticPoolGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "elasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the elastic pool to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ElasticPool"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/elasticPools": {
+      "get": {
+        "tags": [
+          "ElasticPools"
+        ],
+        "operationId": "ElasticPools_ListByServer",
+        "description": "Returns a list of elastic pools in a server.",
+        "x-ms-examples": {
+          "List elastic pools": {
+            "$ref": "./examples/ElasticPoolList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ElasticPoolListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
     }
+  },
+  "definitions": {
+    "ElasticPoolProperties": {
+      "properties": {
+        "creationDate": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The creation date of the elastic pool (ISO8601 format)."
+        },
+        "state": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "Creating",
+            "Ready",
+            "Disabled"
+          ],
+          "description": "The state of the elastic pool.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "ElasticPoolState"
+          }
+        },
+        "edition": {
+          "type": "string",
+          "description": "The edition of the elastic pool.",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium",
+            "GeneralPurpose",
+            "BusinessCritical"
+          ],
+          "x-ms-enum": {
+            "name": "ElasticPoolEdition",
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "dtu": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total shared DTU for the database elastic pool."
+        },
+        "databaseDtuMax": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum DTU any one database can consume."
+        },
+        "databaseDtuMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum DTU all databases are guaranteed."
+        },
+        "storageMB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Gets storage limit for the database elastic pool in MB."
+        },
+        "zoneRedundant": {
+          "description": "Whether or not this database elastic pool is zone redundant, which means the replicas of this database will be spread across multiple availability zones.",
+          "type": "boolean"
+        }
+      },
+      "description": "Represents the properties of an elastic pool."
+    },
+    "ElasticPool": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ElasticPoolProperties",
+          "description": "The properties representing the resource.",
+          "x-ms-client-flatten": true
+        },
+        "kind": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Kind of elastic pool.  This is metadata used for the Azure portal experience."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "description": "Represents a database elastic pool."
+    },
+    "ElasticPoolUpdate": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/ElasticPoolProperties",
+          "description": "The properties representing the resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "Represents an elastic pool update."
+    },
+    "ElasticPoolListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElasticPool"
+          },
+          "description": "The list of elastic pools hosted in the server."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Represents the response to a list elastic pool request."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    },
+    "DatabaseExpandParameter": {
+      "name": "$expand",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "A comma separated list of child objects to expand in the response. Possible properties: serviceTierAdvisors, transparentDataEncryption.",
+      "x-ms-parameter-location": "method"
+    },
+    "TransparentDataEncryptionNameParameter": {
+      "name": "transparentDataEncryptionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "current"
+      ],
+      "description": "The name of the transparent data encryption configuration.",
+      "x-ms-enum": {
+        "modelAsString": true,
+        "name": "TransparentDataEncryptionName"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
 }
