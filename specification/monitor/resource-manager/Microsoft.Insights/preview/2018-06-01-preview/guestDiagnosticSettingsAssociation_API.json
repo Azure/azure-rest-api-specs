@@ -43,7 +43,7 @@
                 "tags": [
                     "GuestDiagnosticsSettingsAssociation"
                 ],
-                "operationId": "guestDiagnosticsSettingsAssociation_CreateOrUpdate",
+                "operationId": "GuestDiagnosticsSettingsAssociation_CreateOrUpdate",
                 "x-ms-examples": {
                     "Create or update an guest diagnostic settings association": {
                         "$ref": "./examples/createOrUpdateGuestDiagnosticSettingsAssociation.json"
@@ -94,13 +94,13 @@
                         }
                     }
                 }
-            },        
+            },
             "get": {
                 "description": "Gets guest diagnostics association settings.",
                 "tags": [
                     "GuestDiagnosticsSettingsAssociation"
                  ],
-                "operationId": "guestDiagnosticsSettingsAssociation_Get",
+                "operationId": "GuestDiagnosticsSettingsAssociation_Get",
                 "x-ms-examples": {
                     "Create or update an guest diagnostic settings association": {
                         "$ref": "./examples/getGuestDiagnosticSettingsAssociation.json"
@@ -147,7 +147,7 @@
                         "$ref": "./examples/deleteGuestDiagnosticSettingsAssociation.json"
                     }
                 },
-                "operationId": "GuestDiagnosticsSettingsAssociation_Delete",                
+                "operationId": "GuestDiagnosticsSettingsAssociation_Delete",
                 "parameters": [
                     {
                         "name": "resourceUri",
@@ -181,7 +181,7 @@
             },
             "patch": {
                 "description": "Updates an existing guestDiagnosticsSettingsAssociation Resource. To update other fields use the CreateOrUpdate method",
-                "operationId": "guestDiagnosticsSettingsAssociation_Update",
+                "operationId": "GuestDiagnosticsSettingsAssociation_Update",
                 "parameters": [
                     {
                         "name": "resourceUri",
@@ -229,7 +229,7 @@
         "/subscriptions/{subscriptionId}/providers/microsoft.insights/guestDiagnosticSettingsAssociations": {
             "get": {
                 "description": "Get a list of all guest diagnostic settings association in a subscription.",
-                "operationId": "guestDiagnosticsSettingsAssociation_List",                
+                "operationId": "GuestDiagnosticsSettingsAssociation_List",
                 "x-ms-pageable": {
                     "nextLinkName": null
                 },
@@ -260,7 +260,7 @@
         "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettingsAssociations": {
             "get": {
                 "description": "Get a list of all guest diagnostic settings association in a resource group.",
-                "operationId": "guestDiagnosticsSettingsAssociation_ListByResourceGroup",                
+                "operationId": "GuestDiagnosticsSettingsAssociation_ListByResourceGroup",
                 "x-ms-pageable": {
                     "nextLinkName": null
                 },
@@ -291,7 +291,7 @@
                 }
             }
         }
-    },    
+    },
     "definitions": {
         "ErrorResponse": {
             "description": "Describes the format of Error response.",
@@ -343,11 +343,11 @@
             "description": "A guest diagnostic settings association.",
             "properties": {
                 "guestDiagnosticSettingsName": {
-                    "type": "string",                    
+                    "type": "string",
                     "description": "The guest diagnostic settings name."
-                }                
+                }
             },
-            "required": [             
+            "required": [
                 "guestDiagnosticSettingsName"
             ]
         },
@@ -407,7 +407,7 @@
             ],
             "x-ms-azure-resource": true,
             "description": "An azure resource object"
-        }      
+        }
     },
     "parameters": {
         "SubscriptionIdParameter": {
@@ -439,6 +439,6 @@
             "required": true,
             "type": "string",
             "description": "Client Api Version."
-        }      
+        }
     }
   }
