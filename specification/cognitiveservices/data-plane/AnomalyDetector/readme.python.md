@@ -12,15 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.cognitiveservices.anomalydetector
   package-name: azure-cognitiveservices-anomalydetector
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-anomalydetector/azure/cognitiveservices/anomalydetector
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-anomalydetector/azure/cognitiveservices/anomalydetector
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-anomalydetector
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-anomalydetector
 ```

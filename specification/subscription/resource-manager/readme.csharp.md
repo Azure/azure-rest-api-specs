@@ -34,9 +34,24 @@ batch:
      ApiVersionName: Api2018_03_01
 ```
 
+### Profile: hybrid_2018_03_01
+
+These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+
 ```yaml $(profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(profile).Subscription
 output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscription/Generated
 batch:
   - tag: package-2017-11-preview
 ```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Subscription
+output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscription/Generated
+batch:
+ - tag: package-2016-06-01
+ ```

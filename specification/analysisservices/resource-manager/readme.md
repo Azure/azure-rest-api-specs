@@ -96,7 +96,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Analysis
-  output-folder: $(csharp-sdks-folder)/AnalysisServices/Management.Analysis/Generated
+  output-folder: $(csharp-sdks-folder)/analysisservices/Microsoft.Azure.Management.AnalysisServices/src/Generated
   clear-output-folder: true
 ```
 

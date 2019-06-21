@@ -1,40 +1,40 @@
 {
-    "parameters": {
-        "api-version": "2017-06-01-preview",
-        "subscriptionId": "00000000-0000-0000-0000-000000000000",
-        "resourceGroupName": "myResourceGroup",
-        "clusterName": "myCluster"
-    },
-    "responses": {
-        "200": {
-            "headers": {
-                "azure-asyncoperation": "http://azure.async.operation/status"
-            },
-            "body": {
-                "storageAccount": {
-                    "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myCluster998989",
-                    "primaryKey": "aaaaNNNNNNNNNNNN==",
-                    "secondaryKey": "bbbbXXXXXXXXXXXXXXX=="
-                },
-                "containerRegistry": {
-                    "loginServer": "myclusterghijkl.azurecr.io",
-                    "password": "ccccKKKKKKKK=",
-                    "password2": "bddddTTTTTTTTTTT"
-                },
-                "containerService": {
-                    "acsKubeConfig": "AAAAAAAAAAAAAACCCCCCCCCCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAA===",
-                    "imagePullSecretName": "myclusterghijklacrkey"
-                },
-                "appInsights": {
-                    "appId": "abcdefghijklmnop",
-                    "apiKey": "ppppppppppppppppppTTTTTTTT"
-                }
-            }
+  "parameters": {
+    "api-version": "2017-06-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "clusterName": "myCluster"
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      },
+      "body": {
+        "storageAccount": {
+          "resourceId": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Storage/storageAccounts/myCluster998989",
+          "primaryKey": "aaaaNNNNNNNNNNNN==",
+          "secondaryKey": "bbbbXXXXXXXXXXXXXXX=="
         },
-        "202": {
-            "headers": {
-                "Location": "http://async-operation-URI"
-            }
+        "containerRegistry": {
+          "loginServer": "myclusterghijkl.azurecr.io",
+          "password": "ccccKKKKKKKK=",
+          "password2": "bddddTTTTTTTTTTT"
+        },
+        "containerService": {
+          "acsKubeConfig": "AAAAAAAAAAAAAACCCCCCCCCCCCCCCCCCCCCCCCCAAAAAAAAAAAAAAAAA===",
+          "imagePullSecretName": "myclusterghijklacrkey"
+        },
+        "appInsights": {
+          "appId": "abcdefghijklmnop",
+          "apiKey": "ppppppppppppppppppTTTTTTTT"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "http://async-operation-URI"
+      }
     }
+  }
 }
