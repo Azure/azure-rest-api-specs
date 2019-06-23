@@ -924,6 +924,111 @@
         }
       }
     },
+    "Db2Source": {
+      "description": "A copy activity source for Db2 databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OdbcSource": {
+      "description": "A copy activity source for ODBC databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MySqlSource": {
+      "description": "A copy activity source for MySQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlSource": {
+      "description": "A copy activity source for PostgreSQL databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapBwSource": {
+      "description": "A copy activity source for SapBW server via MDX.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "MDX query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SybaseSource": {
+      "description": "A copy activity source for Sybase databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "ODataSource": {
+      "description": "A copy activity source for OData source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "OData query. For example, \"$top=1\". Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SalesforceSource": {
       "description": "A copy activity Salesforce source.",
       "type": "object",
@@ -1054,7 +1159,7 @@
             "PartitionOnCalendarDate"
           ],
           "x-ms-enum": {
-            "name": "TabularPartitionOption",
+            "name": "SapTablePartitionOption",
             "modelAsString": true
           }
         },
@@ -1337,7 +1442,7 @@
             "DynamicRange"
           ],
           "x-ms-enum": {
-            "name": "TabularPartitionOption",
+            "name": "OraclePartitionOption",
             "modelAsString": true
           }
         },
@@ -1395,7 +1500,7 @@
             "DynamicRange"
           ],
           "x-ms-enum": {
-            "name": "TabularPartitionOption",
+            "name": "TeradataPartitionOption",
             "modelAsString": true
           }
         },
@@ -2019,6 +2124,41 @@
         "query": {
           "type": "object",
           "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for Netezza read in parallel.",
+          "type": "object",
+          "enum": [
+            "None",
+            "DataSlice",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "NetezzaPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for Netezza source partitioning.",
+          "$ref": "#/definitions/NetezzaPartitionSettings"
+        }
+      }
+    },
+    "NetezzaPartitionSettings": {
+      "description": "The settings that will be leveraged for Netezza source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specificed in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specificed in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
