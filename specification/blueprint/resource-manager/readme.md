@@ -76,7 +76,7 @@ csharp:
   namespace: Microsoft.Azure.Management.Blueprint
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/Blueprint/Management.Blueprint/Generated
+  output-folder: $(csharp-sdks-folder)/blueprint/Microsoft.Azure.Management.Blueprint/src/Generated
   clear-output-folder: true
 ```
 

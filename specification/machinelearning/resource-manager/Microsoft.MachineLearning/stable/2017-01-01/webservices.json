@@ -20,9 +20,11 @@
       "get": {
         "description": "Lists all the available REST API operations.",
         "operationId": "Operations_List",
-        "parameters": [{
-          "$ref": "#/parameters/APIVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -208,7 +210,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/CreateRegionalBlob":{
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearning/webServices/{webServiceName}/CreateRegionalBlob": {
       "post": {
         "tags": [
           "WebServices"
@@ -494,7 +496,7 @@
         "properties"
       ]
     },
-	"PatchedWebService": {
+    "PatchedWebService": {
       "type": "object",
       "description": "Instance of an Patched Azure ML web service resource.",
       "allOf": [
@@ -554,7 +556,7 @@
         },
         "keys": {
           "$ref": "#/definitions/WebServiceKeys",
-          "description":  "Contains the web service provisioning keys. If you do not specify provisioning keys, the Azure Machine Learning system generates them for you. Note: The keys are not returned from calls to GET operations."
+          "description": "Contains the web service provisioning keys. If you do not specify provisioning keys, the Azure Machine Learning system generates them for you. Note: The keys are not returned from calls to GET operations."
         },
         "readOnly": {
           "type": "boolean",
@@ -566,8 +568,8 @@
           "readOnly": true
         },
         "exposeSampleData": {
-            "type": "boolean",
-            "description": "When set to true, sample data is included in the web service's swagger definition. The default value is true."
+          "type": "boolean",
+          "description": "When set to true, sample data is included in the web service's swagger definition. The default value is true."
         },
         "realtimeConfiguration": {
           "$ref": "#/definitions/RealtimeConfiguration",

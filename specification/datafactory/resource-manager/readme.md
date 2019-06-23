@@ -77,7 +77,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataFactory
-  output-folder: $(csharp-sdks-folder)/DataFactory/Management.DataFactory/Generated
+  output-folder: $(csharp-sdks-folder)/datafactory/Microsoft.Azure.Management.DataFactory/src/Generated
   clear-output-folder: true
 ```
 
