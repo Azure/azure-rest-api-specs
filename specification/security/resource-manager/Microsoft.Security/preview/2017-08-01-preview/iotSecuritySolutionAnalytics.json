@@ -425,24 +425,14 @@
           }
         },
         "topAlertedDevices": {
-          "description": "The list of devices with the most attacked.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/IoTSecurityDeviceAlerts",
-            "description": "top 3 devices with most attacked alerts."
-          }
+          "description": "The list of top 3 devices with the most attacked.",
+          "type": "object",
+          "$ref": "#/definitions/IoTSecurityDeviceAlertsList"
         },
         "mostPrevalentDevices": {
-          "description": "The list of most prevalent devices.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "object",
-            "$ref": "#/definitions/IoTSecurityDeviceAlerts",
-            "description": "most prevalent devices."
-          }
+          "description": "The list of most prevalent 3 devices.",
+          "type": "object",
+          "$ref": "#/definitions/IoTSecurityDeviceAlertsList"
         }
       }
     },
@@ -510,11 +500,6 @@
       "type": "object",
       "description": "Security Solution Aggregated Alert information",
       "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource location."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Security Solution  Aggregated Alert data",
@@ -625,11 +610,6 @@
       "type": "object",
       "description": "Security Solution Recommendation Information",
       "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource location."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Security Solution data",
