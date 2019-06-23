@@ -226,7 +226,7 @@
           "IoT Security Solutions Analytics"
         ],
         "description": "Security Analytics of a security solution",
-        "operationId": "IoTSecuritySolutionsAnalyticsAggregatedAlertDismiss_Post",
+        "operationId": "IoTSecuritySolutionsAnalyticsAggregatedAlert_Dismiss",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -379,12 +379,7 @@
       "type": "object",
       "description": "Security Analytics of a security solution",
       "properties": {
-        "location": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The resource location."
-        },
-        "properties": {
+         "properties": {
           "x-ms-client-flatten": true,
           "description": "Security Solution  Aggregated Alert data",
           "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModelProperties"
@@ -393,9 +388,6 @@
       "allOf": [
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/TagsResource"
         }
       ]
     },
@@ -462,10 +454,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "readOnly": true,
           "description": "List of aggregated alerts data",
           "items": {
-            "$ref": "#/definitions/IoTSecurityAggregatedAlert"
+            "$ref": "#/definitions/IoTSecurityAggregatedAlertList"
           }
         },
         "nextLink": {
@@ -483,10 +474,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "readOnly": true,
           "description": "List of aggregated alerts data",
           "items": {
-            "$ref": "#/definitions/IoTSecurityAggregatedRecommendation"
+            "$ref": "#/definitions/IoTSecurityAggregatedRecommendationList"
           }
         },
         "nextLink": {
@@ -504,7 +494,6 @@
       "properties": {
         "value": {
           "type": "array",
-          "readOnly": true,
           "description": "List of aggregated alerts data",
           "items": {
             "$ref": "#/definitions/IoTSecurityDeviceAlerts"
