@@ -1,20 +1,20 @@
 {
   "parameters": {
     "api-version": "2017-08-01-preview",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "resourceGroupName": "MyGroup",
+    "subscriptionId": "075423e9-7d33-4166-8bdf-3920b04e3735",
+    "resourceGroupName": "IoTEdgeResources",
     "solutionName": "default",
     "aggregatedRecommendationName": "recommendationtype1"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/recommendationtype1",
-        "name": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/resourceGroups/MyGroup/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/recommendationtype1",
+        "id": "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/IoTEdgeResources/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/IoT_OpenPorts",
+        "name": "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/IoTEdgeResources/providers/Microsoft.Security/IoTSecuritySolutions/Locations/eastus/default/IoT_OpenPorts",
         "type": "Microsoft.Security/IoTSecurityAggregatedRecommendation",
         "tags": {},
         "properties": {
-          "recommendationName": "recommendationtype1",
+          "recommendationName": "IoT_OpenPorts",
           "recommendationDisplayName": "Permissive firewall policy in one of the chains was found",
           "description": "An allowed firewall policy was found in main firewall Chains (INPUT/OUTPUT). The policy should Deny all traffic by default define rules to allow necessary communication to/from the device",
           "recommendationTypeId": "{20ff7fc3-e762-44dd-bd96-b71116dcdc23}",
@@ -22,7 +22,7 @@
           "reportedSeverity": "Low",
           "healthyDevices": 10000,
           "unhealthyDevices": 200,
-          "logAnalyticsQuery": "SecurityRecommendation | where tolower(AssessedResourceId) == tolower('/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/IoTEdgeResources/providers/Microsoft.Devices/IotHubs/t-ofdadu-hub') and tolower(RecommendationName) == tolower('IoT_PermissiveFirewallPolicy')"
+          "logAnalyticsQuery": "SecurityRecommendation | where tolower(AssessedResourceId) == tolower('/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/IoTEdgeResources/providers/Microsoft.Devices/IotHubs/t-ofdadu-hub') and tolower(RecommendationName) == tolower('IoT_OpenPorts')"
         }
       }
     }

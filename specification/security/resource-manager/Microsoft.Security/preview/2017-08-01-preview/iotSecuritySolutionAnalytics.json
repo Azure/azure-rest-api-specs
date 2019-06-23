@@ -3,7 +3,7 @@
   "info": {
     "title": "Security Center",
     "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2019-05-01-preview"
+    "version": "2017-08-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -45,7 +45,7 @@
           "IoT Security Solutions Analytics"
         ],
         "description": "Security Analytics of a security solution",
-        "operationId": "IoTSecuritySolutionsAnalytics_Get",
+        "operationId": "IoTSecuritySolutionsAnalytics_GetAll",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -76,7 +76,49 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedAlert": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default": {
+      "get": {
+        "x-ms-examples": {
+          "Get Security Solutions Analytics": {
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAnalytics_example.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions Analytics"
+        ],
+        "description": "Security Analytics of a security solution",
+        "operationId": "IoTSecuritySolutionsAnalytics_GetDefault",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedAlerts": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -128,8 +170,7 @@
         }
       }
     },
-
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedAlert/{aggregatedAlertName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedAlerts/{aggregatedAlertName}": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -174,8 +215,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedAlert/{aggregatedAlertName}/Dismiss": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedAlerts/{aggregatedAlertName}/dismiss": {
+      "post": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
             "$ref": "./examples/IoTSecuritySolutionsAnalytics/PutIoTSecuritySolutionsSecurityAggregatedAlertDismiss_example.json"
@@ -217,7 +258,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedRecommendation/{aggregatedRecommendationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedRecommendations/{aggregatedRecommendationName}": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -262,7 +303,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/Analytics/current/AggregatedRecommendation": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels/default/aggregatedRecommendations": {
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
@@ -335,7 +376,31 @@
       }
     },
     "IoTSecuritySolutionAnalyticsModel": {
+      "type": "object",
       "description": "Security Analytics of a security solution",
+      "properties": {
+        "location": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource location."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security Solution  Aggregated Alert data",
+          "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModelProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
+      ]
+    },
+    "IoTSecuritySolutionAnalyticsModelProperties": {
+      "description": "Security Analytics of a security solution properties",
       "properties": {
         "metrics": {
           "type": "object",
@@ -351,6 +416,7 @@
         "devicesMetrics": {
           "description": "The list of devices metrics by the aggregated date.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "properties": {
               "date": {
@@ -369,6 +435,7 @@
         "topAlertedDevices": {
           "description": "The list of devices with the most attacked.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "object",
             "$ref": "#/definitions/IoTSecurityDeviceAlerts",
@@ -378,6 +445,7 @@
         "mostPrevalentDevices": {
           "description": "The list of most prevalent devices.",
           "type": "array",
+          "readOnly": true,
           "items": {
             "type": "object",
             "$ref": "#/definitions/IoTSecurityDeviceAlerts",
@@ -394,6 +462,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "description": "List of aggregated alerts data",
           "items": {
             "$ref": "#/definitions/IoTSecurityAggregatedAlert"
@@ -414,6 +483,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "description": "List of aggregated alerts data",
           "items": {
             "$ref": "#/definitions/IoTSecurityAggregatedRecommendation"
@@ -434,6 +504,7 @@
       "properties": {
         "value": {
           "type": "array",
+          "readOnly": true,
           "description": "List of aggregated alerts data",
           "items": {
             "$ref": "#/definitions/IoTSecurityDeviceAlerts"
@@ -452,6 +523,7 @@
       "properties": {
         "location": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource location."
         },
         "properties": {
@@ -464,9 +536,10 @@
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         },
-        { "$ref": "#/definitions/TagsResource" }
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
       ]
-
     },
     "IoTSecurityAggregatedAlertProperties": {
       "type": "object",
@@ -565,6 +638,7 @@
       "properties": {
         "location": {
           "type": "string",
+          "readOnly": true,
           "description": "The resource location."
         },
         "properties": {
@@ -577,7 +651,9 @@
         {
           "$ref": "../../../common/v1/types.json#/definitions/Resource"
         },
-        { "$ref": "#/definitions/TagsResource" }
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
       ]
     },
     "IoTSecurityAggregatedRecommendationProperties": {
@@ -600,7 +676,8 @@
         },
         "recommendationTypeId": {
           "description": "The recommendation-type GUID.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "detectedBy": {
           "readOnly": true,
