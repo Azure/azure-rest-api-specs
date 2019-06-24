@@ -870,7 +870,7 @@
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
-          },
+          },          
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
@@ -936,7 +936,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },
+          },          
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -999,7 +999,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },
+          },          
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -1656,7 +1656,7 @@
           "CustomDomains_EnableCustomHttpsUsingYourOwnCertificate": {
             "$ref": "./examples/CustomDomains_EnableCustomHttpsUsingBYOC.json"
           },
-          "CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate": {
+          "CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate" :{
             "$ref": "./examples/CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate.json"
           }
         },
@@ -2220,7 +2220,7 @@
           "required": [
             "rules"
           ],
-          "properties": {
+          "properties":{
             "description": {
               "description": "User-friendly description of the policy.",
               "type": "string"
@@ -2233,6 +2233,7 @@
               }
             }
           }
+
         }
       }
     },
@@ -2240,6 +2241,7 @@
       "description": "A rule that specifies a set of actions and conditions",
       "type": "object",
       "required": [
+        "name",
         "order",
         "actions"
       ],
@@ -2268,7 +2270,7 @@
         }
       }
     },
-    "DeliveryRuleCondition": {
+    "DeliveryRuleCondition":{
       "description": "A condition for the delivery rule.",
       "discriminator": "name",
       "required": [
@@ -2527,7 +2529,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleRemoteAddressConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -2574,7 +2576,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestMethodConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -2592,8 +2594,7 @@
           "type": "boolean"
         },
         "matchValues": {
-          "description": "The match value for the condition of the delivery rule",
-          "type": "array",
+          "description": "The match value for the condition of the delivery rule","type": "array",
           "items": {
             "type": "string",
             "enum": [
@@ -2621,7 +2622,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleQueryStringConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -2661,7 +2662,7 @@
           }
         }
       }
-    },
+    },  
     "PostArgsMatchConditionParameters": {
       "description": "Defines the parameters for PostArgs match conditions",
       "required": [
@@ -2675,7 +2676,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRulePostArgsConditionParameters"
-          ]
+          ]  
         },
         "selector": {
           "description": "Name of PostArg to be matched",
@@ -2732,7 +2733,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestUriConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -2786,7 +2787,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestHeaderConditionParameters"
-          ]
+          ]  
         },
         "selector": {
           "description": "Name of Header to be matched",
@@ -2843,7 +2844,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestBodyConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -2896,7 +2897,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleRequestSchemeConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -2934,7 +2935,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlPathMatchConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -2988,7 +2989,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFileExtensionMatchConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -3028,7 +3029,7 @@
           }
         }
       }
-    },
+    },   
     "UrlFileNameMatchConditionParameters": {
       "description": "Defines the parameters for UrlFilename match conditions",
       "required": [
@@ -3041,7 +3042,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFilenameConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -3081,7 +3082,7 @@
           }
         }
       }
-    },
+    }, 
     "IsDeviceMatchConditionParameters": {
       "description": "Defines the parameters for IsDevice match conditions",
       "required": [
@@ -3094,7 +3095,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleIsDeviceConditionParameters"
-          ]
+          ]  
         },
         "operator": {
           "description": "Describes operator to be matched",
@@ -3130,7 +3131,7 @@
           }
         }
       }
-    },
+    },  
     "DeliveryRuleAction": {
       "description": "An action for the delivery rule.",
       "discriminator": "name",
@@ -3145,7 +3146,8 @@
             "CacheExpiration",
             "ModifyRequestHeader",
             "ModifyResponseHeader",
-            "UrlRedirect"
+            "UrlRedirect",
+            "UrlSigning"
           ],
           "x-ms-enum": {
             "name": "DeliveryRuleAction",
@@ -3162,7 +3164,7 @@
           "$ref": "#/definitions/DeliveryRuleAction"
         }
       ],
-      "required": [
+      "required":[
         "parameters"
       ],
       "properties": {
@@ -3183,7 +3185,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleUrlRedirectActionParameters"
-          ]
+          ]  
         },
         "redirectType": {
           "description": "The redirect type the rule will use when redirecting traffic.",
@@ -3199,7 +3201,7 @@
             "modelAsString": true
           }
         },
-        "destinationProtocol": {
+        "destinationProtocol":{
           "description": "Protocol to use for the redirect. The default value is MatchRequest",
           "type": "string",
           "enum": [
@@ -3213,14 +3215,14 @@
           }
         },
         "customPath": {
-          "description": "The full path to redirect. Path cannot be empty and must start with /. Leave empty to use the incoming path as destination path.",
+            "description": "The full path to redirect. Path cannot be empty and must start with /. Leave empty to use the incoming path as destination path.",
+            "type": "string"
+        },
+        "customHostname":{
+          "description": "Host to redirect. Leave empty to use use the incoming host as the destination host.",
           "type": "string"
         },
-        "customHostname": {
-          "description": "Host to redirect. Leave empty to use the incoming host as the destination host.",
-          "type": "string"
-        },
-        "customQueryString": {
+        "customQueryString":{
           "description": "The set of query strings to be placed in the redirect URL. Setting this value would replace any existing query string; leave empty to preserve the incoming query string. Query string must be in <key>=<value> format. ? and & will be added automatically so do not include them.",
           "type": "string"
         },
@@ -3230,6 +3232,110 @@
         }
       }
     },
+    "DeliveryRuleUrlSigningAction": {
+      "description": "Defines the Url Signing action for the delivery rule.",
+      "x-ms-discriminator-value": "UrlSigning",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleAction"
+        }
+      ],
+      "required":[
+        "parameters"  
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the action.",
+          "$ref": "#/definitions/UrlSigningParameters"
+        }
+      }
+    },
+    "UrlSigningParameters": {
+      "description": "Defines the parameters for the Url Signing action.",
+      "required": [
+        "keys",
+        "hmacAlgorithm",
+        "queryStringParams",
+        "useIpInHash"
+      ],
+        "keys": {
+          "description": "Keys to be used for verifying the hash",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UrlSigningKey"
+          }
+        },
+        "hmacAlgorithm": {
+          "description" : "Algorithm to use for URL signing",
+          "type" : "string",
+          "enum" : [
+            "SHA256",
+            "SHA1"
+            ]
+        },
+        "queryStringParams": {
+          "description" : "Defines which query string parameters in the url to be considered for expiry, key id etc. ",
+          "type" : "array",
+          "items" : {
+            "$ref": "#/definitions/UrlSigningQueryStringParamIdentifier"
+          }
+        },
+        "useIpInHash" : {
+          "description": "Indicates whether ip should be considered as part of the hash",
+          "type": "boolean"
+        }
+      }
+    },
+    "UrlSigningKey": {
+      "description" : "Url signing key properties",
+      "required" : [
+        "keyId",
+        "keyVaultName",
+        "keyName",
+        "keyVersion"
+        ],
+        "properties": {
+          "keyId": {
+            "description": "Logical reference to the key. Used in the URL to reference which key is used for producing the hash",
+            "type": "string"
+          },
+          "keyVaultName": {
+            "description": "Name of the key vault where the key is stored",
+            "type": "string"
+          },
+          "keyName": {
+            "description": "Name of the key",
+            "type": "string"
+          },
+          "keyVersion": {
+            "description": "Version of the key",
+            "type": "string"
+          }
+        }
+    },
+    "UrlSigningQueryStringParamIdentifier" : {
+      "description" : "Defines how to identify a query string parameter for a specific purpose e.g. expiry",
+      "required" : [
+        "paramIndicator",
+        "paramName"
+        ],
+        "properties": {
+          "paramIndicator" : {
+            "description" : "Indicates the purpose of the query string parameter",
+            "type" : "string",
+            "enum": [
+              "expiry",
+              "keyId",
+              "hash",
+              "ip"
+              ]
+          },
+          "paramName": {
+            "description" : "Query string parameter name",
+            "type" : "string"
+          }
+        }
+    },
     "DeliveryRuleRequestHeaderAction": {
       "description": "Defines the request header action for the delivery rule.",
       "x-ms-discriminator-value": "ModifyRequestHeader",
@@ -3238,8 +3344,8 @@
           "$ref": "#/definitions/DeliveryRuleAction"
         }
       ],
-      "required": [
-        "parameters"
+      "required":[
+        "parameters"  
       ],
       "properties": {
         "parameters": {
@@ -3249,23 +3355,23 @@
       }
     },
     "DeliveryRuleResponseHeaderAction": {
-      "description": "Defines the response header action for the delivery rule.",
-      "x-ms-discriminator-value": "ModifyResponseHeader",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DeliveryRuleAction"
+        "description": "Defines the response header action for the delivery rule.",
+        "x-ms-discriminator-value": "ModifyResponseHeader",
+        "allOf": [
+          {
+            "$ref": "#/definitions/DeliveryRuleAction"
+          }
+        ],
+        "required":[
+          "parameters"
+        ],
+        "properties": {
+          "parameters": {
+            "description": "Defines the parameters for the action.",
+            "$ref": "#/definitions/HeaderActionParameters"
+          }
         }
-      ],
-      "required": [
-        "parameters"
-      ],
-      "properties": {
-        "parameters": {
-          "description": "Defines the parameters for the action.",
-          "$ref": "#/definitions/HeaderActionParameters"
-        }
-      }
-    },
+      },
     "HeaderActionParameters": {
       "description": "Defines the parameters for the request header action.",
       "required": [
@@ -3278,7 +3384,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleHeaderActionParameters"
-          ]
+          ]  
         },
         "headerAction": {
           "description": "Action to perform",
@@ -3298,9 +3404,9 @@
           "type": "string"
         },
         "value": {
-          "description": "Value for the specified action",
-          "type": "string"
-        }
+            "description": "Value for the specified action",
+            "type": "string"
+          }
       }
     },
     "DeliveryRuleCacheExpirationAction": {
@@ -3311,7 +3417,7 @@
           "$ref": "#/definitions/DeliveryRuleAction"
         }
       ],
-      "required": [
+      "required":[
         "parameters"
       ],
       "properties": {
@@ -3333,7 +3439,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters"
-          ]
+          ]  
         },
         "cacheBehavior": {
           "description": "Caching behavior for the requests",
@@ -3341,7 +3447,7 @@
           "enum": [
             "BypassCache",
             "Override",
-            "SetIfMissing"
+            "SetIfMissing"  
           ],
           "x-ms-enum": {
             "name": "cacheBehavior",
@@ -3767,7 +3873,7 @@
           "$ref": "#/definitions/CdnCertificateSourceParameters"
         }
       }
-    },
+    }, 
     "CdnCertificateSourceParameters": {
       "description": "Defines the parameters for using CDN managed certificate for securing custom domain.",
       "required": [
@@ -3779,7 +3885,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters"
-          ]
+          ]  
         },
         "certificateType": {
           "description": "Type of certificate used",
@@ -3812,7 +3918,7 @@
           "$ref": "#/definitions/KeyVaultCertificateSourceParameters"
         }
       }
-    },
+    }, 
     "KeyVaultCertificateSourceParameters": {
       "description": "Describes the parameters for using a user's KeyVault certificate for securing custom domain.",
       "required": [
@@ -3830,7 +3936,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters"
-          ]
+          ]  
         },
         "subscriptionId": {
           "description": "Subscription Id of the user's Key Vault containing the SSL certificate",
@@ -3856,7 +3962,7 @@
           "description": "Describes the action that shall be taken when the certificate is updated in Key Vault.",
           "type": "string",
           "enum": [
-            "NoAction"
+             "NoAction"
           ],
           "x-ms-enum": {
             "name": "UpdateRule",
@@ -3867,7 +3973,7 @@
           "description": "Describes the action that shall be taken when the certificate is removed from Key Vault.",
           "type": "string",
           "enum": [
-            "NoAction"
+             "NoAction"
           ],
           "x-ms-enum": {
             "name": "DeleteRule",
@@ -4270,8 +4376,7 @@
             "Custom_Verizon",
             "Standard_Akamai",
             "Standard_ChinaCdn",
-            "Standard_Microsoft",
-            "Premium_ChinaCdn"
+            "Standard_Microsoft"
           ],
           "type": "string",
           "x-ms-enum": {
