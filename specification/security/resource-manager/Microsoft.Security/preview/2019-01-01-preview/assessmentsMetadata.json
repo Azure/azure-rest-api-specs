@@ -92,16 +92,21 @@
         "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata": {
       "get": {
         "x-ms-examples": {
-          "List security assessments": {
+          "List security assessment metadata for subscription": {
             "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_example.json"
           }
         },
         "tags": ["Assessments Metadata"],
         "description": "Get metadata information on all assessment types in a specific subscription",
-        "operationId": "AssessmentsMetadata_List",
-        "parameters": [{
+        "operationId": "AssessmentsMetadata_Subscription_List",
+        "parameters": [
+          {
           "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-        }],
+         },
+         {
+           "$ref": "#/parameters/SubscriptionId"
+         }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -124,18 +129,21 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata/{assessmentsMetadataName}": {
       "get": {
         "x-ms-examples": {
-          "Get security recommendation task from security data location": {
+          "Get security assessment metadata for subscription": {
             "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_example.json"
           }
         },
         "tags": ["Assessments Metadata"],
         "description": "Get metadata information on an assessment type in a specific subscription",
-        "operationId": "AssessmentsMetadata_Get",
+        "operationId": "AssessmentsMetadata_Subscription_Get",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
             "$ref": "#/parameters/AssessmentsMetadataName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
           }
         ],
         "responses": {
@@ -291,6 +299,14 @@
       "required": true,
       "type": "string",
       "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Azure subscription ID. Regex pattern: ^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
       "x-ms-parameter-location": "method"
     }
   }
