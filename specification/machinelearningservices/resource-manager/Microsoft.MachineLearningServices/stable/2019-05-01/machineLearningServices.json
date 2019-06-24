@@ -488,7 +488,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Create a cluster": {
             "$ref": "./examples/updateQuota.json"
@@ -1353,11 +1352,11 @@
           "type": "string",
           "description": "Specifies the resource type."
         },
-        "quota": {
+        "limit": {
           "type": "integer",
-          "format": "int32",
-          "title": "Quota.",
-          "description": "The workspace level quota."
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
         }
       },
       "description": "The properties for Quota update or retrieval."
@@ -1404,11 +1403,11 @@
           "type": "string",
           "description": "Specifies the resource type."
         },
-        "quota": {
+        "limit": {
           "type": "integer",
-          "format": "int32",
-          "title": "Quota.",
-          "description": "The quota of the resource."
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
         },
         "status": {
           "type": "string",
@@ -1460,17 +1459,24 @@
           "description": "Name of the resource.",
           "readOnly": true
         },
-        "quota": {
+        "limit": {
           "readOnly": true,
           "type": "integer",
-          "format": "int32",
-          "title": "Quota",
-          "description": "Quota assigned to the resource."
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
         },
         "unit": {
           "readOnly": true,
           "type": "string",
-          "description": "The units used to represent the quota."
+          "description": "An enum describing the unit of quota measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUnit",
+            "modelAsString": true
+          }
         }
       },
       "description": "The quota assigned to a resource."
