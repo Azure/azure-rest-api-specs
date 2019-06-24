@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Managed Services.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for ManagedServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,20 +15,37 @@ To build the SDK for ManagedServices, simply [Install AutoRest](https://aka.ms/a
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-06-preview
+tag: package-2019-06
 ```
 
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.ManagedServices/stable/2019-06-01/managedservices.json
+```
+### Tag: package-2019-04-preview
+
+These settings apply only when `--tag=package-2019-04-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04-preview'
+input-file:
+- Microsoft.ManagedServices/preview/2019-04-01-preview/managedservices.json
+```
 
 ### Tag: package-2018-06-preview
 
@@ -40,8 +57,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -60,7 +77,6 @@ swagger-to-sdk:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_billing']
 ```
 
-
 ## C#
 
 These settings apply only when `--csharp` is specified on the command line.
@@ -71,7 +87,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ManagedServices
-  output-folder: $(csharp-sdks-folder)/ManagedServices/Management.ManagedServices/Generated
+  output-folder: $(csharp-sdks-folder)/managedservices/Microsoft.Azure.Management.ManagedServices/src/Generated
   clear-output-folder: true
 ```
 
