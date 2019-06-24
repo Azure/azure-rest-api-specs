@@ -1,21 +1,23 @@
 {
   "parameters": {
-    "api-version": "2019-01-01",
-    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
-    "resourceGroupName": "myRg",
-    "solutionName": "default",
-    "updateIotSecuritySolutionData": {
-      "tags": {
-        "foo": "bar"
-      },
-      "userDefinedResources": {
-        "query": "where type != \"microsoft.devices/iothubs\" | where name contains \"v2\"",
-        "querySubscriptions": [
-          "075423e9-7d33-4166-8bdf-3920b04e3735"
-        ]
-      }
-    }
-  },
+	"api-version": "2019-01-01",
+	"subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+	"resourceGroupName": "myRg",
+	"solutionName": "default",
+	"updateIotSecuritySolutionData": {
+		"tags": {
+			"foo": "bar"
+		},
+		"properties": {
+			"userDefinedResources": {
+				"query": "where type != \"microsoft.devices/iothubs\" | where name contains \"v2\"",
+				"querySubscriptions": [
+					"075423e9-7d33-4166-8bdf-3920b04e3735"
+				]
+			}
+		}
+	}
+},
   "responses": {
     "200": {
       "body": {
