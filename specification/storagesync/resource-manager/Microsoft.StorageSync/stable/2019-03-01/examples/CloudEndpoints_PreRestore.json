@@ -1,46 +1,47 @@
 {
+  "parameters": {
+    "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
+    "resourceGroupName": "SampleResourceGroup_1",
+    "storageSyncServiceName": "SampleStorageSyncService_1",
+    "syncGroupName": "SampleSyncGroup_1",
+    "cloudEndpointName": "SampleCloudEndpoint_1",
+    "api-version": "2019-03-01",
     "parameters": {
-        "subscriptionId": "52b8da2f-61e0-4a1f-8dde-336911f367fb",
-        "resourceGroupName": "SampleResourceGroup_1",
-        "storageSyncServiceName": "SampleStorageSyncService_1",
-        "syncGroupName": "SampleSyncGroup_1",
-        "cloudEndpointName": "SampleCloudEndpoint_1",
-        "api-version": "2019-03-01",
-        "parameters": {
-            "azureFileShareUri": "https://hfsazbackupdevintncus2.file.core.test-cint.azure-test.net/sampleFileShare",
-            "restoreFileSpec": [
-                {
-                    "path": "text1.txt",
-                    "isdir" : false
-                },
-                {
-                    "path": "MyDir",
-                    "isdir" : true
-                },
-                {
-                    "path": "MyDir/SubDir",
-                    "isdir" : false
-                },
-                {
-                    "path": "MyDir/SubDir/File1.pdf",
-                    "isdir" : false
-                }]            
-        }
-    },
-    "responses": {
-        "200": {
-            "headers": {
-                "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
-                "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
-            }
+      "azureFileShareUri": "https://hfsazbackupdevintncus2.file.core.test-cint.azure-test.net/sampleFileShare",
+      "restoreFileSpec": [
+        {
+          "path": "text1.txt",
+          "isdir": false
         },
-        "202": {
-            "headers": {
-                "x-ms-location": "https: //management.azure.com/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/HfsMabFS1/syncGroups/HfsMabDS1/cloudEndpoints/HfsMabCE1/operationresults/d67cfb91-1b13-4710-8226-83467bb5b66d?api-version=2019-03-01&resourcetype=preBackupResourceType&ifxctx3=005909ad-d156-4514-a26e-dd1cc566db64",
-                "Retry-After": "10",
-                "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
-                "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
-            }
+        {
+          "path": "MyDir",
+          "isdir": true
+        },
+        {
+          "path": "MyDir/SubDir",
+          "isdir": false
+        },
+        {
+          "path": "MyDir/SubDir/File1.pdf",
+          "isdir": false
         }
+      ]
     }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      }
+    },
+    "202": {
+      "headers": {
+        "x-ms-location": "https: //management.azure.com/subscriptions/3a048283-338f-4002-a9dd-a50fdadcb392/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/HfsMabFS1/syncGroups/HfsMabDS1/cloudEndpoints/HfsMabCE1/operationresults/d67cfb91-1b13-4710-8226-83467bb5b66d?api-version=2019-03-01&resourcetype=preBackupResourceType&ifxctx3=005909ad-d156-4514-a26e-dd1cc566db64",
+        "Retry-After": "10",
+        "x-ms-request-id": "74e55a4d-1c6f-46de-9a8d-278e53a47403",
+        "x-ms-correlation-request-id": "d166ca76-dad2-49df-b409-d2acfd42d730"
+      }
+    }
+  }
 }
