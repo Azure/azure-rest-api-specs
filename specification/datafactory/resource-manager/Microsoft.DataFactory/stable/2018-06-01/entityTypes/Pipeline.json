@@ -1044,7 +1044,7 @@
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Query",
             "QueryAll"
@@ -1150,7 +1150,7 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for SAP table read in parallel.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "None",
             "PartitionOnInt",
@@ -1435,7 +1435,7 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for oracle read in parallel.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "None",
             "PhysicalPartitionsOfTable",
@@ -1493,7 +1493,7 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for teradata read in parallel.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "None",
             "Hash",
@@ -1553,7 +1553,7 @@
         },
         "consistencyLevel": {
           "description": "The consistency level specifies how many Cassandra servers must respond to a read request before returning data to the client application. Cassandra checks the specified number of Cassandra servers for data to satisfy the read request. Must be one of cassandraSourceReadConsistencyLevels. The default value is 'ONE'. It is case-insensitive.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "ALL",
             "EACH_QUORUM",
@@ -2127,7 +2127,7 @@
         },
         "partitionOption": {
           "description": "The partition mechanism that will be used for Netezza read in parallel.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "None",
             "DataSlice",
@@ -2368,7 +2368,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is 'Insert'.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Update"
@@ -2392,7 +2392,7 @@
     },
     "CopyBehaviorType": {
       "description": "All available types of copy behavior.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "PreserveHierarchy",
         "FlattenHierarchy",
@@ -2792,7 +2792,7 @@
       "properties": {
         "writeBehavior": {
           "description": "Specify the write behavior when upserting documents into Azure Search Index.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Merge",
             "Upload"
@@ -2830,7 +2830,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Upsert"
           ],
@@ -2882,7 +2882,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Upsert"
