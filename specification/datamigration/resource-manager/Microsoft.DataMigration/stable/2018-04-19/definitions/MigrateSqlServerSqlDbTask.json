@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "Azure Database Migration Service Resource Provider",
@@ -56,7 +56,9 @@
           "type": "string"
         }
       },
-      "required": [ "resultType" ],
+      "required": [
+        "resultType"
+      ],
       "discriminator": "resultType"
     },
     "MigrateSqlServerSqlDbTaskOutputMigrationLevel": {
@@ -376,23 +378,89 @@
       "x-ms-discriminator-value": "MigrationValidationOutput",
       "type": "object",
       "description": "Validation result for Sql Server to Azure Sql DB migration.",
-      "$ref": "./MigrationValidation.json#/definitions/MigrationValidationResult",
       "allOf": [
         {
           "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
         }
-      ]
+      ],
+      "properties": {
+        "migrationId": {
+          "type": "string",
+          "description": "Migration Identifier",
+          "readOnly": true
+        },
+        "summaryResults": {
+          "type": "object",
+          "description": "Validation summary results for each database",
+          "additionalProperties": {
+            "$ref": "./MigrationValidation.json#/definitions/MigrationValidationDatabaseSummaryResult"
+          }
+        },
+        "status": {
+          "$ref": "./MigrationValidation.json#/definitions/ValidationStatus",
+          "description": "Current status of validation at the migration level. Status from the database validation result status will be aggregated here.",
+          "readOnly": true
+        }
+      }
     },
     "MigrateSqlServerSqlDbTaskOutputDatabaseLevelValidationResult": {
       "x-ms-discriminator-value": "MigrationDatabaseLevelValidationOutput",
       "type": "object",
       "description": "Database validation result for Sql Server to Azure Sql DB migration.",
-      "$ref": "./MigrationValidation.json#/definitions/MigrationValidationDatabaseLevelResult",
       "allOf": [
         {
           "$ref": "#/definitions/MigrateSqlServerSqlDbTaskOutput"
         }
-      ]
+      ],
+      "properties": {
+        "migrationId": {
+          "type": "string",
+          "description": "Migration Identifier",
+          "readOnly": true
+        },
+        "sourceDatabaseName": {
+          "type": "string",
+          "description": "Name of the source database",
+          "readOnly": true
+        },
+        "targetDatabaseName": {
+          "type": "string",
+          "description": "Name of the target database",
+          "readOnly": true
+        },
+        "startedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation start time",
+          "readOnly": true
+        },
+        "endedOn": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Validation end time",
+          "readOnly": true
+        },
+        "dataIntegrityValidationResult": {
+          "description": "Provides data integrity validation result between the source and target tables that are migrated.",
+          "$ref": "./MigrationValidation.json#/definitions/DataIntegrityValidationResult",
+          "readOnly": true
+        },
+        "schemaValidationResult": {
+          "description": "Provides schema comparison result between source and target database",
+          "$ref": "./MigrationValidation.json#/definitions/SchemaComparisonValidationResult",
+          "readOnly": true
+        },
+        "queryAnalysisValidationResult": {
+          "description": "Results of some of the query execution result between source and target database",
+          "$ref": "./MigrationValidation.json#/definitions/QueryAnalysisValidationResult",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "./MigrationValidation.json#/definitions/ValidationStatus",
+          "description": "Current status of validation at the database level",
+          "readOnly": true
+        }
+      }
     }
   }
 }

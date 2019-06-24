@@ -6,11 +6,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-customvision-training
-  package-version: 1.0.0-preview
   output-folder: $(node-sdks-folder)/lib/services/customVision/training
   override-client-name: TrainingAPIClient
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true
-  generate-readme-md: false
+  generate-readme-md: true
 ```

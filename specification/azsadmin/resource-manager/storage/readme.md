@@ -22,27 +22,27 @@ These are the global settings for the Storage API.
 
 ``` yaml
 title: StorageAdminClient
-description: Storag Admin Client
+description: Storage Admin Client
 openapi-type: arm
-tag: package-2016-05-01
+tag: package-2015-12-01
 ```
 
-### Tag: package-2016-05-01
+### Tag: package-2015-12-01
 
-These settings apply only when `--tag=package-2016-05-01` is specified on the command line.
+These settings apply only when `--tag=package-2015-12-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2016-05-01'
+``` yaml $(tag) == 'package-2015-12-01'
 input-file:
-    - "Microsoft.Storage.Admin/preview/2016-05-01/storage.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/acquisitions.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/blobServices.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/containers.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/farms.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/queueServices.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/quotas.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/shares.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/storageaccounts.json"
-    - "Microsoft.Storage.Admin/preview/2016-05-01/tableServices.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/storage.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/blobServices.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/containers.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/farms.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/queueServices.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/quotas.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/shares.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/storageaccounts.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/tableServices.json"
 ```
 
 ---

@@ -9,7 +9,6 @@ nodejs:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: azure-arm-cdn
-  package-version: 4.0.0
   output-folder: $(node-sdks-folder)/lib/services/cdnManagement
   generate-license-txt: true
   generate-package-json: true

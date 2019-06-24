@@ -16,6 +16,31 @@
     "application/json"
   ],
   "paths": {
+    "/providers/Microsoft.MachineLearning/operations": {
+      "get": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Lists all of the available Azure Machine Learning Studio Commitment Plan RP REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearning/skus": {
       "get": {
         "tags": [
@@ -271,7 +296,7 @@
         },
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "$skipToken",
@@ -340,7 +365,7 @@
         },
         "parameters": [
           {
-           "$ref": "#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -548,7 +573,7 @@
     },
     "SkuCapability": {
       "type": "object",
-      "description": "Describes The SKU capabilites object.",
+      "description": "Describes The SKU capabilities object.",
       "properties": {
         "name": {
           "type": "string",
@@ -947,6 +972,61 @@
           "format": "date-time",
           "type": "string",
           "description": "The date of usage, in ISO 8601 format."
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of REST API operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of operations.",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "An API operation.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The API operation info."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The API operation info.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "description": "The service provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource on which the operation is performed.",
+          "type": "string",
+          "readOnly": true
         }
       }
     }

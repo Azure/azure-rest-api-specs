@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -282,7 +282,7 @@
     "CompressionLevel": {
       "title": "Microsoft.Azure.Management.DataFactories.Models.CompressionLevel",
       "description": "All available compression levels.",
-      "type": "string",
+      "type": "object",
       "enum": [
         "Optimal",
         "Fastest"
@@ -923,7 +923,7 @@
       "description": "Sap ECC OData resource dataset properties.",
       "properties": {
         "path": {
-          "type": "string",
+          "type": "object",
           "description": "The path of the SAP ECC OData entity. Type: string (or Expression with resultType string)."
         }
       },
@@ -931,7 +931,7 @@
         "path"
       ]
     },
-	"SqlServerTableDataset": {
+    "SqlServerTableDataset": {
       "x-ms-discriminator-value": "SqlServerTable",
       "description": "The on-premises SQL Server dataset.",
       "type": "object",
@@ -1080,341 +1080,313 @@
         }
       }
     },
-    "AmazonMWSObjectDataset" : {
-      "x-ms-discriminator-value": "AmazonMWSObject", 
-      "description": "Amazon Marketplace Web Service dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "AmazonMWSObjectDataset": {
+      "x-ms-discriminator-value": "AmazonMWSObject",
+      "description": "Amazon Marketplace Web Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "AzurePostgreSqlTableDataset" : {
+    "AzurePostgreSqlTableDataset": {
       "x-ms-discriminator-value": "AzurePostgreSqlTable",
-      "description": "Azure PostgreSQL dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+      "description": "Azure PostgreSQL dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "ConcurObjectDataset" : {
-      "x-ms-discriminator-value": "ConcurObject", 
-      "description": "Concur Serivce dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "ConcurObjectDataset": {
+      "x-ms-discriminator-value": "ConcurObject",
+      "description": "Concur Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "CouchbaseTableDataset" : {
+    "CouchbaseTableDataset": {
       "x-ms-discriminator-value": "CouchbaseTable",
-      "description": "Couchbase server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+      "description": "Couchbase server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "DrillTableDataset" : {
+    "DrillTableDataset": {
       "x-ms-discriminator-value": "DrillTable",
-      "description": "Drill server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+      "description": "Drill server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "EloquaObjectDataset" : {
-      "x-ms-discriminator-value": "EloquaObject", 
-      "description": "Eloqua server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "EloquaObjectDataset": {
+      "x-ms-discriminator-value": "EloquaObject",
+      "description": "Eloqua server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "GoogleBigQueryObjectDataset" : {
-      "x-ms-discriminator-value": "GoogleBigQueryObject", 
-      "description": "Google BigQuery service dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "GoogleBigQueryObjectDataset": {
+      "x-ms-discriminator-value": "GoogleBigQueryObject",
+      "description": "Google BigQuery service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "GreenplumTableDataset" : {
+    "GreenplumTableDataset": {
       "x-ms-discriminator-value": "GreenplumTable",
-      "description": "Greenplum Database dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+      "description": "Greenplum Database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "HBaseObjectDataset" : {
-      "x-ms-discriminator-value": "HBaseObject", 
-      "description": "HBase server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "HBaseObjectDataset": {
+      "x-ms-discriminator-value": "HBaseObject",
+      "description": "HBase server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "HiveObjectDataset" : {
-      "x-ms-discriminator-value": "HiveObject", 
-      "description": "Hive Server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "HiveObjectDataset": {
+      "x-ms-discriminator-value": "HiveObject",
+      "description": "Hive Server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "HubspotObjectDataset" : {
-      "x-ms-discriminator-value": "HubspotObject", 
-      "description": "Hubspot Serivce dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "HubspotObjectDataset": {
+      "x-ms-discriminator-value": "HubspotObject",
+      "description": "Hubspot Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "ImpalaObjectDataset" : {
-      "x-ms-discriminator-value": "ImpalaObject", 
-      "description": "Impala server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "ImpalaObjectDataset": {
+      "x-ms-discriminator-value": "ImpalaObject",
+      "description": "Impala server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "JiraObjectDataset" : {
-      "x-ms-discriminator-value": "JiraObject", 
-      "description": "Jira Serivce dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "JiraObjectDataset": {
+      "x-ms-discriminator-value": "JiraObject",
+      "description": "Jira Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "MagentoObjectDataset" : {
-      "x-ms-discriminator-value": "MagentoObject", 
-      "description": "Magento server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "MagentoObjectDataset": {
+      "x-ms-discriminator-value": "MagentoObject",
+      "description": "Magento server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "MariaDBTableDataset" : {
+    "MariaDBTableDataset": {
       "x-ms-discriminator-value": "MariaDBTable",
-      "description": "MariaDB server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+      "description": "MariaDB server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "MarketoObjectDataset" : {
-      "x-ms-discriminator-value": "MarketoObject", 
-      "description": "Marketo server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "MarketoObjectDataset": {
+      "x-ms-discriminator-value": "MarketoObject",
+      "description": "Marketo server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "PaypalObjectDataset" : {
-      "x-ms-discriminator-value": "PaypalObject", 
-      "description": "Paypal Serivce dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "PaypalObjectDataset": {
+      "x-ms-discriminator-value": "PaypalObject",
+      "description": "Paypal Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "PhoenixObjectDataset" : {
-      "x-ms-discriminator-value": "PhoenixObject", 
-      "description": "Phoenix server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "PhoenixObjectDataset": {
+      "x-ms-discriminator-value": "PhoenixObject",
+      "description": "Phoenix server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "PrestoObjectDataset" : {
-      "x-ms-discriminator-value": "PrestoObject", 
-      "description": "Presto server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "PrestoObjectDataset": {
+      "x-ms-discriminator-value": "PrestoObject",
+      "description": "Presto server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "QuickBooksObjectDataset" : {
-      "x-ms-discriminator-value": "QuickBooksObject", 
-      "description": "QuickBooks server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "QuickBooksObjectDataset": {
+      "x-ms-discriminator-value": "QuickBooksObject",
+      "description": "QuickBooks server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "ServiceNowObjectDataset" : {
-      "x-ms-discriminator-value": "ServiceNowObject", 
-      "description": "ServiceNow server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "ServiceNowObjectDataset": {
+      "x-ms-discriminator-value": "ServiceNowObject",
+      "description": "ServiceNow server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "ShopifyObjectDataset" : {
-      "x-ms-discriminator-value": "ShopifyObject", 
-      "description": "Shopify Serivce dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "ShopifyObjectDataset": {
+      "x-ms-discriminator-value": "ShopifyObject",
+      "description": "Shopify Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "SparkObjectDataset" : {
-      "x-ms-discriminator-value": "SparkObject", 
-      "description": "Spark Server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "SparkObjectDataset": {
+      "x-ms-discriminator-value": "SparkObject",
+      "description": "Spark Server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "SquareObjectDataset" : {
-      "x-ms-discriminator-value": "SquareObject", 
-      "description": "Square Serivce dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "SquareObjectDataset": {
+      "x-ms-discriminator-value": "SquareObject",
+      "description": "Square Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "XeroObjectDataset" : {
-      "x-ms-discriminator-value": "XeroObject", 
-      "description": "Xero Serivce dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "XeroObjectDataset": {
+      "x-ms-discriminator-value": "XeroObject",
+      "description": "Xero Service dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "ZohoObjectDataset" : {
-      "x-ms-discriminator-value": "ZohoObject", 
-      "description": "Zoho server dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+    "ZohoObjectDataset": {
+      "x-ms-discriminator-value": "ZohoObject",
+      "description": "Zoho server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "NetezzaTableDataset" : {
+    "NetezzaTableDataset": {
       "x-ms-discriminator-value": "NetezzaTable",
-      "description": "Netezza dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+      "description": "Netezza dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
-    "VerticaTableDataset" : {
+    "VerticaTableDataset": {
       "x-ms-discriminator-value": "VerticaTable",
-      "description": "Vertica dataset.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-            "$ref": "#/definitions/Dataset" 
-        } 
-      ], 
-      "properties": { 
-      }
+      "description": "Vertica dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {}
     },
     "SalesforceMarketingCloudObjectDataset": {
       "x-ms-discriminator-value": "SalesforceMarketingCloudObject",
@@ -1422,11 +1394,10 @@
       "type": "object",
       "allOf": [
         {
-            "$ref": "#/definitions/Dataset"
+          "$ref": "#/definitions/Dataset"
         }
       ],
-      "properties": {
-      }
+      "properties": {}
     },
     "ResponsysObjectDataset": {
       "x-ms-discriminator-value": "ResponsysObject",
@@ -1434,11 +1405,10 @@
       "type": "object",
       "allOf": [
         {
-            "$ref": "#/definitions/Dataset"
+          "$ref": "#/definitions/Dataset"
         }
       ],
-      "properties": {
-      }
+      "properties": {}
     }
   }
 }

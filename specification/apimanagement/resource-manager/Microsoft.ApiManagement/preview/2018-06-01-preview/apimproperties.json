@@ -61,7 +61,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field | Supported operators    | Supported functions                                   |\n|-------|------------------------|-------------------------------------------------------|\n| tags  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all |\n| name  | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith           |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|tags | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith, any, all|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -80,14 +80,20 @@
           "200": {
             "description": "A Collection of the Property entities for the specified API Management service instance.",
             "schema": {
-              "$ref": "#/definitions/PropertyCollection"
+              "$ref": "./definitions.json#/definitions/PropertyCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/PropertyContract"
+        "x-ms-odata": "./definitions.json#/definitions/PropertyContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/properties/{propId}": {
@@ -110,7 +116,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -123,10 +129,10 @@
           "200": {
             "description": "Specified Property entity exists and current entity state version is present in the ETag header.",
             "headers": {
-               "ETag": {
-                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                 "type": "string"
-               }
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -137,7 +143,7 @@
           }
         }
       },
-	  "get": {
+      "get": {
         "tags": [
           "Property"
         ],
@@ -156,7 +162,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -169,7 +175,7 @@
           "200": {
             "description": "The response body contains the specified Property entity.",
             "schema": {
-              "$ref": "#/definitions/PropertyContract"
+              "$ref": "./definitions.json#/definitions/PropertyContract"
             },
             "headers": {
               "ETag": {
@@ -205,14 +211,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PropertyContract"
+              "$ref": "./definitions.json#/definitions/PropertyContract"
             },
             "description": "Create parameters."
           },
@@ -230,13 +236,25 @@
           "201": {
             "description": "Property was successfully created.",
             "schema": {
-              "$ref": "#/definitions/PropertyContract"
+              "$ref": "./definitions.json#/definitions/PropertyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "Property was successfully updated.",
             "schema": {
-              "$ref": "#/definitions/PropertyContract"
+              "$ref": "./definitions.json#/definitions/PropertyContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -266,14 +284,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PropertyUpdateParameters"
+              "$ref": "./definitions.json#/definitions/PropertyUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -304,7 +322,7 @@
           "Property"
         ],
         "operationId": "Property_Delete",
-        "description": "Deletes specific property from the the API Management service instance.",
+        "description": "Deletes specific property from the API Management service instance.",
         "x-ms-examples": {
           "ApiManagementDeleteProperty": {
             "$ref": "./examples/ApiManagementDeleteProperty.json"
@@ -318,7 +336,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/PropertyIdParameter"
+            "$ref": "./apimanagement.json#/parameters/PropertyIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -347,126 +365,6 @@
       }
     }
   },
-  "definitions": {
-    "PropertyCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PropertyContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Property list representation."
-    },
-    "PropertyContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PropertyContractProperties",
-          "description": "Property entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Property details."
-    },
-    "PropertyContractProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
-          "minLength": 1,
-          "maxLength": 256,
-          "pattern": "^[A-Za-z0-9-._]+$"
-        },
-        "value": {
-          "type": "string",
-          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
-          "minLength": 1,
-          "maxLength": 4096
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PropertyEntityBaseParameters"
-        }
-      ],
-      "required": [
-        "displayName",
-        "value"
-      ],
-      "description": "Property Contract properties."
-    },
-    "PropertyUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PropertyUpdateParameterProperties",
-          "description": "Property entity Update contract properties."
-        }
-      },
-      "description": "Property update Parameters."
-    },
-    "PropertyUpdateParameterProperties": {
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
-          "minLength": 1,
-          "maxLength": 256,
-          "pattern": "^[A-Za-z0-9-._]+$"
-        },
-        "value": {
-          "type": "string",
-          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
-          "minLength": 1,
-          "maxLength": 4096
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/PropertyEntityBaseParameters"
-        }
-      ],
-      "description": "Property Contract properties."
-    },
-    "PropertyEntityBaseParameters": {
-      "properties": {
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "maxItems": 32,
-          "description": "Optional tags that when provided can be used to filter the property list."
-        },
-        "secret": {
-          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false.",
-          "type": "boolean"
-        }
-      },
-      "description": "Property Entity Base Parameters set."
-    }
-  },
-  "parameters": {
-    "PropertyIdParameter": {
-      "name": "propId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Identifier of the property.",
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "definitions": {},
+  "parameters": {}
 }

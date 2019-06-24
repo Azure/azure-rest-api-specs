@@ -8,14 +8,19 @@
     "api-version": "2017-03-01-preview",
     "parameters": {
       "properties": {
-          "state": "Enabled",
-          "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
-          "storageEndpoint": "https://mystorage.blob.core.windows.net",
-          "retentionDays": 6,
-          "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
-          "isStorageSecondaryKeyInUse": false,
-        "auditActionsAndGroups": [ "DATABASE_LOGOUT_GROUP", "DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public" ],
-        "predicateExpression":  "statement = 'select 1'"
+        "state": "Enabled",
+        "storageAccountAccessKey": "sdlfkjabc+sdlfkjsdlkfsjdfLDKFTERLKFDFKLjsdfksjdflsdkfD2342309432849328476458/3RSD==",
+        "storageEndpoint": "https://mystorage.blob.core.windows.net",
+        "retentionDays": 6,
+        "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+        "isStorageSecondaryKeyInUse": false,
+        "auditActionsAndGroups": [
+          "DATABASE_LOGOUT_GROUP",
+          "DATABASE_ROLE_MEMBER_CHANGE_GROUP",
+          "UPDATE on database::TestDatabaseName by public"
+        ],
+        "predicateExpression": "statement = 'select 1'",
+        "isAzureMonitorTargetEnabled": true
       }
     }
   },
@@ -26,13 +31,18 @@
         "name": "default",
         "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings",
         "properties": {
-            "state":"Enabled",
-            "storageEndpoint": "https://mystorage.blob.core.windows.net",
-            "retentionDays": 0,
-            "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
-            "isStorageSecondaryKeyInUse": false,
-            "auditActionsAndGroups": [ "DATABASE_LOGOUT_GROUP", "DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public" ],
-            "predicateExpression":  "statement = 'select 1'"
+          "state": "Enabled",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net",
+          "retentionDays": 0,
+          "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+          "isStorageSecondaryKeyInUse": false,
+          "auditActionsAndGroups": [
+            "DATABASE_LOGOUT_GROUP",
+            "DATABASE_ROLE_MEMBER_CHANGE_GROUP",
+            "UPDATE on database::TestDatabaseName by public"
+          ],
+          "predicateExpression": "statement = 'select 1'",
+          "isAzureMonitorTargetEnabled": true
         }
       }
     },
@@ -42,13 +52,18 @@
         "name": "default",
         "type": "Microsoft.Sql/servers/databases/extendedAuditingSettings",
         "properties": {
-            "state":"Enabled",
-            "storageEndpoint": "https://mystorage.blob.core.windows.net",
-            "retentionDays": 0,
-            "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
-            "isStorageSecondaryKeyInUse": false,
-            "auditActionsAndGroups": [ "DATABASE_LOGOUT_GROUP", "DATABASE_ROLE_MEMBER_CHANGE_GROUP", "UPDATE on database::TestDatabaseName by public" ],
-            "predicateExpression":  "statement = 'select 1'"
+          "state": "Enabled",
+          "storageEndpoint": "https://mystorage.blob.core.windows.net",
+          "retentionDays": 0,
+          "storageAccountSubscriptionId": "00000000-1234-0000-5678-000000000000",
+          "isStorageSecondaryKeyInUse": false,
+          "auditActionsAndGroups": [
+            "DATABASE_LOGOUT_GROUP",
+            "DATABASE_ROLE_MEMBER_CHANGE_GROUP",
+            "UPDATE on database::TestDatabaseName by public"
+          ],
+          "predicateExpression": "statement = 'select 1'",
+          "isAzureMonitorTargetEnabled": true
         }
       }
     }

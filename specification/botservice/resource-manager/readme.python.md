@@ -12,16 +12,16 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.botservice
   package-name: azure-mgmt-botservice
-  package-version: 0.1.0
+  package-version: 0.2.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-botservice/azure/mgmt/botservice
+  output-folder: $(python-sdks-folder)/botservice/azure-mgmt-botservice/azure/mgmt/botservice
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-botservice
+  output-folder: $(python-sdks-folder)/botservice/azure-mgmt-botservice
 ```

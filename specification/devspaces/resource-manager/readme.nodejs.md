@@ -7,9 +7,10 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 nodejs:
   azure-arm: true
   package-name: azure-arm-devspaces
-  package-version: 1.0.0-preview
   output-folder: $(node-sdks-folder)/lib/services/devspacesManagement
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true
+input-file:
+- Microsoft.DevSpaces/stable/2019-04-01/devspaces.json
 ```

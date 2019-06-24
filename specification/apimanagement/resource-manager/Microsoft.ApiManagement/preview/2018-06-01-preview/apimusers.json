@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users": {
       "get": {
         "tags": [
-          "Users"
+          "User"
         ],
         "operationId": "User_ListByService",
         "description": "Lists a collection of registered users in the specified service instance.",
@@ -58,13 +58,18 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field            | Supported operators    | Supported functions               |\n|------------------|------------------------|-----------------------------------|\n| id               | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| firstName        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| lastName         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| email            | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state            | eq                     | N/A                               |\n| registrationDate | ge, le, eq, ne, gt, lt | N/A                               |\n| note             | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|firstName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|lastName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|email | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|state | eq |    |\n|registrationDate | ge, le, eq, ne, gt, lt |    |\n|note | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|groups |     |    |\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "name": "expandGroups",
+            "in": "query",
+            "type": "boolean"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -77,7 +82,7 @@
           "200": {
             "description": "Lists a collection of User entities.",
             "schema": {
-              "$ref": "#/definitions/UserCollection"
+              "$ref": "./definitions.json#/definitions/UserCollection"
             }
           },
           "default": {
@@ -90,13 +95,13 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/UserContract"
+        "x-ms-odata": "./definitions.json#/definitions/UserContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}": {
       "head": {
         "tags": [
-          "Users"
+          "User"
         ],
         "operationId": "User_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the user specified by its identifier.",
@@ -113,7 +118,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -142,7 +147,7 @@
       },
       "get": {
         "tags": [
-          "Users"
+          "User"
         ],
         "operationId": "User_Get",
         "description": "Gets the details of the user specified by its identifier.",
@@ -159,7 +164,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -172,7 +177,7 @@
           "200": {
             "description": "Gets the specified user entity.",
             "schema": {
-              "$ref": "#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
             },
             "headers": {
               "ETag": {
@@ -191,13 +196,13 @@
       },
       "put": {
         "tags": [
-          "Users"
+          "User"
         ],
         "operationId": "User_CreateOrUpdate",
         "description": "Creates or Updates a user.",
         "x-ms-examples": {
-          "ApiManagementCreateUserBasic": {
-            "$ref": "./examples/ApiManagementCreateUserBasic.json"
+          "ApiManagementCreateUser": {
+            "$ref": "./examples/ApiManagementCreateUser.json"
           }
         },
         "parameters": [
@@ -208,14 +213,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserCreateParameters"
+              "$ref": "./definitions.json#/definitions/UserCreateParameters"
             },
             "description": "Create or update parameters."
           },
@@ -233,13 +238,25 @@
           "201": {
             "description": "User was successfully created.",
             "schema": {
-              "$ref": "#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
+            },
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
             }
           },
           "200": {
             "description": "User was successfully updated.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/UserContract"
+              "$ref": "./definitions.json#/definitions/UserContract"
             }
           },
           "default": {
@@ -252,13 +269,13 @@
       },
       "patch": {
         "tags": [
-          "Users"
+          "User"
         ],
         "operationId": "User_Update",
         "description": "Updates the details of the user specified by its identifier.",
         "x-ms-examples": {
-          "ApiManagementUpdateUserBasic": {
-            "$ref": "./examples/ApiManagementUpdateUserBasic.json"
+          "ApiManagementUpdateUser": {
+            "$ref": "./examples/ApiManagementUpdateUser.json"
           }
         },
         "parameters": [
@@ -269,14 +286,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserUpdateParameters"
+              "$ref": "./definitions.json#/definitions/UserUpdateParameters"
             },
             "description": "Update parameters."
           },
@@ -295,7 +312,7 @@
             "description": "The user details were successfully updated."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 405 Administrator user cannot be modified\n\n * 4XX Error response giving details why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
@@ -304,7 +321,7 @@
       },
       "delete": {
         "tags": [
-          "Users"
+          "User"
         ],
         "operationId": "User_Delete",
         "description": "Deletes specific user.",
@@ -321,7 +338,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "name": "deleteSubscriptions",
@@ -363,7 +380,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/generateSsoUrl": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/generateSsoUrl": {
       "post": {
         "tags": [
           "Users"
@@ -371,8 +388,8 @@
         "operationId": "User_GenerateSsoUrl",
         "description": "Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.",
         "x-ms-examples": {
-          "ApiManagementUsersGenerateSsoUrl": {
-            "$ref": "./examples/ApiManagementUsersGenerateSsoUrl.json"
+          "ApiManagementUserGenerateSsoUrl": {
+            "$ref": "./examples/ApiManagementUserGenerateSsoUrl.json"
           }
         },
         "parameters": [
@@ -383,7 +400,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -397,7 +414,7 @@
             "description": "The response body contains the single sign-on URL.",
             "schema": {
               "x-ms-client-flatten": true,
-              "$ref": "#/definitions/GenerateSsoUrlResult"
+              "$ref": "./definitions.json#/definitions/GenerateSsoUrlResult"
             }
           },
           "default": {
@@ -409,10 +426,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/groups": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/groups": {
       "get": {
         "tags": [
-          "UserGroups"
+          "UserGroup"
         ],
         "operationId": "UserGroup_List",
         "description": "Lists all user groups.",
@@ -429,14 +446,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions                         |\n|-------------|------------------------|---------------------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name        | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|description | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -455,7 +472,7 @@
           "200": {
             "description": "Lists a collection of Group entities.",
             "schema": {
-              "$ref": "./apimgroups.json#/definitions/GroupCollection"
+              "$ref": "./definitions.json#/definitions/GroupCollection"
             }
           },
           "default": {
@@ -468,13 +485,13 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimgroups.json#/definitions/GroupContract"
+        "x-ms-odata": "./definitions.json#/definitions/GroupContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/subscriptions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/subscriptions": {
       "get": {
         "tags": [
-          "UserSubscriptions"
+          "UserSubscription"
         ],
         "operationId": "UserSubscription_List",
         "description": "Lists the collection of subscriptions of the specified user.",
@@ -491,14 +508,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field        | Supported operators    | Supported functions                         |\n|--------------|------------------------|---------------------------------------------|\n| id           | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| name         | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| userId       | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| productId    | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith |\n| state        | eq                     |                                             |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|displayName | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|stateComment | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|ownerId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|scope | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|userId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n|productId | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
@@ -517,7 +534,7 @@
           "200": {
             "description": "Lists a collection of Subscription entities.",
             "schema": {
-              "$ref": "./apimsubscriptions.json#/definitions/SubscriptionCollection"
+              "$ref": "./definitions.json#/definitions/SubscriptionCollection"
             }
           },
           "default": {
@@ -530,19 +547,19 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "./apimsubscriptions.json#/definitions/SubscriptionContract"
+        "x-ms-odata": "./definitions.json#/definitions/SubscriptionContract"
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/identities": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/identities": {
       "get": {
         "tags": [
-          "UserIdentities"
+          "UserIdentity"
         ],
         "operationId": "UserIdentities_List",
-        "description": "Lists all user identities.",
+        "description": "List of all user identities.",
         "x-ms-examples": {
-          "ApiManagementListUsersIdentities": {
-            "$ref": "./examples/ApiManagementListUsersIdentities.json"
+          "ApiManagementListUserIdentities": {
+            "$ref": "./examples/ApiManagementListUserIdentities.json"
           }
         },
         "parameters": [
@@ -553,7 +570,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -562,14 +579,11 @@
             "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "responses": {
           "200": {
             "description": "Lists of User Identities.",
             "schema": {
-              "$ref": "#/definitions/UserIdentityCollection"
+              "$ref": "./definitions.json#/definitions/UserIdentityCollection"
             }
           },
           "default": {
@@ -578,19 +592,22 @@
               "$ref": "./apimanagement.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{uid}/token": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/token": {
       "post": {
         "tags": [
-          "Users"
+          "UserToken"
         ],
         "operationId": "User_GetSharedAccessToken",
         "description": "Gets the Shared Access Authorization Token for the User.",
         "x-ms-examples": {
-          "ApiManagementUsersGetToken": {
-            "$ref": "./examples/ApiManagementUsersGetToken.json"
+          "ApiManagementUserToken": {
+            "$ref": "./examples/ApiManagementUserToken.json"
           }
         },
         "parameters": [
@@ -601,14 +618,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/UserIdParameter"
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UserTokenParameters"
+              "$ref": "./definitions.json#/definitions/UserTokenParameters"
             },
             "description": "Create Authorization Token parameters."
           },
@@ -624,8 +641,50 @@
             "description": "The response body contains the authorization token for the user.",
             "schema": {
               "x-ms-client-flatten": true,
-              "$ref": "#/definitions/UserTokenResult"
+              "$ref": "./definitions.json#/definitions/UserTokenResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/users/{userId}/confirmations/password/send": {
+      "post": {
+        "tags": [
+          "UserConfirmationPasswordSend"
+        ],
+        "operationId": "UserConfirmationPassword_Send",
+        "description": "Sends confirmation",
+        "x-ms-examples": {
+          "ApiManagementUserConfirmationPasswordSend": {
+            "$ref": "./examples/ApiManagementUserConfirmationPasswordSend.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/UserIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Notification successfully sent"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -637,325 +696,6 @@
       }
     }
   },
-  "definitions": {
-    "GenerateSsoUrlResult": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Redirect Url containing the SSO URL value."
-        }
-      },
-      "description": "Generate SSO Url operations response details."
-    },
-    "UserCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Users list representation."
-    },
-    "UserContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserContractProperties",
-          "description": "User entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "User details."
-    },
-    "UserContractProperties": {
-      "properties": {
-        "firstName": {
-          "type": "string",
-          "description": "First name."
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name."
-        },
-        "email": {
-          "type": "string",
-          "description": "Email address."
-        },
-        "registrationDate": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date of user registration. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        },
-        "groups": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "./apimgroups.json#/definitions/GroupContractProperties"
-          },
-          "description": "Collection of groups user is part of."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserEntityBaseParameters"
-        }
-      ],
-      "description": "User profile."
-    },
-    "UserCreateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserCreateParameterProperties",
-          "description": "User entity create contract properties."
-        }
-      },
-      "description": "User create details."
-    },
-    "UserCreateParameterProperties": {
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "Email address. Must not be empty and must be unique within the service instance.",
-          "minLength": 1,
-          "maxLength": 254
-        },
-        "firstName": {
-          "type": "string",
-          "description": "First name.",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name.",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "password": {
-          "type": "string",
-          "description": "User Password. If no value is provided, a default password is generated."
-        },
-        "confirmation": {
-          "type": "string",
-          "description": "Determines the type of confirmation e-mail that will be sent to the newly created user.",
-          "enum": [
-            "signup",
-            "invite"
-          ],
-          "x-ms-enum": {
-            "name": "Confirmation",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "signup",
-                "description": "Send an e-mail to the user confirming they have successfully signed up."
-              },
-              {
-                "value": "invite",
-                "description": "Send an e-mail inviting the user to sign-up and complete registration."
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserEntityBaseParameters"
-        }
-      ],
-      "required": [
-        "email",
-        "firstName",
-        "lastName"
-      ],
-      "description": "Parameters supplied to the Create User operation."
-    },
-    "UserEntityBaseParameters": {
-      "properties": {
-        "state": {
-          "type": "string",
-          "description": "Account state. Specifies whether the user is active or not. Blocked users are unable to sign into the developer portal or call any APIs of subscribed products. Default state is Active.",
-          "enum": [
-            "active",
-            "blocked",
-            "pending",
-            "deleted"
-          ],
-          "default": "active",
-          "x-ms-enum": {
-            "name": "UserState",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "active",
-                "description": "User state is active."
-              },
-              {
-                "value": "blocked",
-                "description": "User is blocked. Blocked users cannot authenticate at developer portal or call API."
-              },
-              {
-                "value": "pending",
-                "description": "User account is pending. Requires identity confirmation before it can be made active."
-              },
-              {
-                "value": "deleted",
-                "description": "User account is closed. All identities and related entities are removed."
-              }
-            ]
-          }
-        },
-        "note": {
-          "type": "string",
-          "description": "Optional note about a user set by the administrator."
-        },
-        "identities": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserIdentityContract"
-          },
-          "description": "Collection of user identities."
-        }
-      },
-      "description": "User Entity Base Parameters set."
-    },
-    "UserIdentityCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/UserIdentityContract"
-          },
-          "description": "User Identity values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "List of Users Identity list representation."
-    },
-    "UserIdentityContract": {
-      "properties": {
-        "provider": {
-          "type": "string",
-          "description": "Identity provider name."
-        },
-        "id": {
-          "type": "string",
-          "description": "Identifier value within provider."
-        }
-      },
-      "description": "User identity details."
-    },
-    "UserTokenParameters": {
-      "properties": {
-        "keyType": {
-          "type": "string",
-          "description": "The Key to be used to generate token for user.",
-          "enum": [
-            "primary",
-            "secondary"
-          ],
-          "default": "primary",
-          "x-ms-enum": {
-            "name": "KeyType",
-            "modelAsString": false
-          }
-        },
-        "expiry": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        }
-      },
-      "required": [
-        "keyType",
-        "expiry"
-      ],
-      "description": "Parameters supplied to the Get User Token operation."
-    },
-    "UserTokenResult": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "description": "Shared Access Authorization token for the User."
-        }
-      },
-      "description": "Get User Token response details."
-    },
-    "UserUpdateParameters": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UserUpdateParametersProperties",
-          "description": "User entity update contract properties."
-        }
-      },
-      "description": "User update parameters."
-    },
-    "UserUpdateParametersProperties": {
-      "properties": {
-        "email": {
-          "type": "string",
-          "description": "Email address. Must not be empty and must be unique within the service instance.",
-          "minLength": 1,
-          "maxLength": 254
-        },
-        "password": {
-          "type": "string",
-          "description": "User Password."
-        },
-        "firstName": {
-          "type": "string",
-          "description": "First name.",
-          "minLength": 1,
-          "maxLength": 100
-        },
-        "lastName": {
-          "type": "string",
-          "description": "Last name.",
-          "minLength": 1,
-          "maxLength": 100
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/UserEntityBaseParameters"
-        }
-      ],
-      "description": "Parameters supplied to the Update User operation."
-    }
-  },
-  "parameters": {
-    "UserIdParameter": {
-      "name": "uid",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "User identifier. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "definitions": {},
+  "parameters": {}
 }

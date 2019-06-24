@@ -84,7 +84,9 @@
           }
         },
         "x-ms-examples": {
-          "Query at management group scope": { "$ref": "./examples/PolicyEvents_QueryManagementGroupScope.json" }
+          "Query at management group scope": {
+            "$ref": "./examples/PolicyEvents_QueryManagementGroupScope.json"
+          }
         }
       }
     },
@@ -139,12 +141,24 @@
           }
         },
         "x-ms-examples": {
-          "Query at subscription scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionScope.json" },
-          "Time range; sort, select and limit": { "$ref": "./examples/PolicyEvents_TimeRangeSortSelectTop.json" },
-          "Filter and group with aggregate": { "$ref": "./examples/PolicyEvents_FilterAndGroupByWithAggregate.json" },
-          "Filter and group without aggregate": { "$ref": "./examples/PolicyEvents_FilterAndGroupByWithoutAggregate.json" },
-          "Filter and aggregate only": { "$ref": "./examples/PolicyEvents_FilterAndAggregateOnly.json" },
-          "Filter and multiple groups": { "$ref": "./examples/PolicyEvents_FilterAndMultipleGroups.json" }
+          "Query at subscription scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionScope.json"
+          },
+          "Time range; sort, select and limit": {
+            "$ref": "./examples/PolicyEvents_TimeRangeSortSelectTop.json"
+          },
+          "Filter and group with aggregate": {
+            "$ref": "./examples/PolicyEvents_FilterAndGroupByWithAggregate.json"
+          },
+          "Filter and group without aggregate": {
+            "$ref": "./examples/PolicyEvents_FilterAndGroupByWithoutAggregate.json"
+          },
+          "Filter and aggregate only": {
+            "$ref": "./examples/PolicyEvents_FilterAndAggregateOnly.json"
+          },
+          "Filter and multiple groups": {
+            "$ref": "./examples/PolicyEvents_FilterAndMultipleGroups.json"
+          }
         }
       }
     },
@@ -202,7 +216,9 @@
           }
         },
         "x-ms-examples": {
-          "Query at resource group scope": { "$ref": "./examples/PolicyEvents_QueryResourceGroupScope.json" }
+          "Query at resource group scope": {
+            "$ref": "./examples/PolicyEvents_QueryResourceGroupScope.json"
+          }
         }
       }
     },
@@ -257,10 +273,18 @@
           }
         },
         "x-ms-examples": {
-          "Query at resource scope": { "$ref": "./examples/PolicyEvents_QueryResourceScope.json" },
-          "Query at subscription level resource scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelResourceScope.json" },
-          "Query at nested resource scope": { "$ref": "./examples/PolicyEvents_QueryNestedResourceScope.json" },
-          "Query at subscription level nested resource scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelNestedResourceScope.json" }
+          "Query at resource scope": {
+            "$ref": "./examples/PolicyEvents_QueryResourceScope.json"
+          },
+          "Query at subscription level resource scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelResourceScope.json"
+          },
+          "Query at nested resource scope": {
+            "$ref": "./examples/PolicyEvents_QueryNestedResourceScope.json"
+          },
+          "Query at subscription level nested resource scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelNestedResourceScope.json"
+          }
         }
       }
     },
@@ -321,7 +345,9 @@
           }
         },
         "x-ms-examples": {
-          "Query at subscription level policy set definition scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicySetDefinitionScope.json" }
+          "Query at subscription level policy set definition scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicySetDefinitionScope.json"
+          }
         }
       }
     },
@@ -382,7 +408,9 @@
           }
         },
         "x-ms-examples": {
-          "Query at subscription level policy definition scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyDefinitionScope.json" }
+          "Query at subscription level policy definition scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyDefinitionScope.json"
+          }
         }
       }
     },
@@ -443,7 +471,9 @@
           }
         },
         "x-ms-examples": {
-          "Query at subscription level policy assignment scope": { "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyAssignmentScope.json" }
+          "Query at subscription level policy assignment scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyAssignmentScope.json"
+          }
         }
       }
     },
@@ -507,7 +537,9 @@
           }
         },
         "x-ms-examples": {
-          "Query at resource group level policy assignment scope": { "$ref": "./examples/PolicyEvents_QueryResourceGroupLevelPolicyAssignmentScope.json" }
+          "Query at resource group level policy assignment scope": {
+            "$ref": "./examples/PolicyEvents_QueryResourceGroupLevelPolicyAssignmentScope.json"
+          }
         }
       }
     },
@@ -541,10 +573,12 @@
           }
         },
         "x-ms-examples": {
-          "Get metadata": { "$ref": "./examples/PolicyEvents_GetMetadata.json" }
+          "Get metadata": {
+            "$ref": "./examples/PolicyEvents_GetMetadata.json"
+          }
         }
-      } 
-    } 
+      }
+    }
   },
   "definitions": {
     "PolicyEventsQueryResults": {
@@ -675,7 +709,7 @@
           "type": "string"
         },
         "managementGroupIds": {
-          "description": "Comma seperated list of management group IDs, which represent the hierarchy of the management groups the resource is under.",
+          "description": "Comma separated list of management group IDs, which represent the hierarchy of the management groups the resource is under.",
           "type": "string"
         },
         "policyDefinitionReferenceId": {
@@ -703,11 +737,13 @@
           "properties": {
             "code": {
               "description": "Service specific error code which serves as the substatus for the HTTP error code.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             },
             "message": {
               "description": "Description of the error.",
-              "type": "string"
+              "type": "string",
+              "readOnly": true
             }
           }
         }

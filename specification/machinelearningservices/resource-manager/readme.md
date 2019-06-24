@@ -1,5 +1,5 @@
 # MachineLearningServices
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Machine Learning Services.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Machine Learning Services.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for EventHub, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,16 +19,31 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
-### Basic Information 
+### Basic Information
 These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2019-05-01
 ```
 
+### Tag: package-2019-05-01
+
+These settings apply only when `--tag=package-2019-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-01'
+input-file:
+- Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
+```
+
+### Tag: package-2018-11-19
+
+These settings apply only when `--tag=package-2018-11-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11-19'
+input-file:
+- Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+```
 
 ### Tag: package-2018-03-preview
 
@@ -52,10 +67,12 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -99,31 +116,7 @@ python:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: services
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2018-03-preview
-```
-
-### Tag: package-2018-03-preview and go
-
-These settings apply only when `--tag=package-2018-03-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-03-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/machinelearning/mgmt/2018-03-01-preview/services
-```
-
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -143,7 +136,35 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/ser
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-05-01
+  - tag: package-2018-11-19
   - tag: package-2018-03-preview
+```
+
+### Tag: package-2019-05-01 and java
+
+These settings apply only when `--tag=package-2019-05-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-05-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-11-19 and java
+
+These settings apply only when `--tag=package-2018-11-19 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-11-19' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
+  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_11_19
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-03-preview and java
@@ -158,5 +179,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-

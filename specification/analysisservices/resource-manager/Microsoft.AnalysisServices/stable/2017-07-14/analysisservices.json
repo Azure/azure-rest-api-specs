@@ -9,7 +9,9 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
+  "schemes": [
+    "https"
+  ],
   "consumes": [
     "application/json"
   ],
@@ -38,7 +40,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}": {
       "get": {
         "description": "Gets details about the specified Analysis Services server.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_GetDetails",
         "parameters": [
           {
@@ -64,13 +68,17 @@
         "responses": {
           "200": {
             "description": "OK. The operation was successful.",
-            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
           }
         }
       },
       "put": {
         "description": "Provisions the specified Analysis Services server based on the configuration specified in the request.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_Create",
         "parameters": [
           {
@@ -90,7 +98,9 @@
             "name": "serverParameters",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AnalysisServicesServer" },
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            },
             "description": "Contains the information used to provision the Analysis Services server."
           },
           {
@@ -103,18 +113,24 @@
         "responses": {
           "200": {
             "description": "OK. The operation completed successfully.",
-            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
           },
           "201": {
             "description": "InProgress. The operation is still completing.",
-            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
           }
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "description": "Deletes the specified Analysis Services server.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_Delete",
         "parameters": [
           {
@@ -152,7 +168,9 @@
       },
       "patch": {
         "description": "Updates the current state of the specified Analysis Services server.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_Update",
         "parameters": [
           {
@@ -172,7 +190,9 @@
             "name": "serverUpdateParameters",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/AnalysisServicesServerUpdateParameters" },
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServerUpdateParameters"
+            },
             "description": "Request object that contains the updated information for the server."
           },
           {
@@ -185,11 +205,15 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
           },
           "202": {
             "description": "Accepted",
-            "schema": { "$ref": "#/definitions/AnalysisServicesServer" }
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServer"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -197,8 +221,10 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/suspend": {
       "post": {
-        "description": "Supends operation of the specified Analysis Services server instance.",
-        "tags": [ "Servers" ],
+        "description": "Suspends operation of the specified Analysis Services server instance.",
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_Suspend",
         "parameters": [
           {
@@ -235,7 +261,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/resume": {
       "post": {
         "description": "Resumes operation of the specified Analysis Services server instance.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_Resume",
         "parameters": [
           {
@@ -272,7 +300,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Gets all the Analysis Services servers for the given resource group.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_ListByResourceGroup",
         "parameters": [
           {
@@ -288,7 +318,9 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesServers" }
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServers"
+            }
           }
         },
         "x-ms-pageable": {
@@ -299,7 +331,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/servers": {
       "get": {
         "description": "Lists all the Analysis Services servers for the given subscription.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_List",
         "parameters": [
           {
@@ -312,7 +346,9 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/AnalysisServicesServers" }
+            "schema": {
+              "$ref": "#/definitions/AnalysisServicesServers"
+            }
           }
         },
         "x-ms-pageable": {
@@ -324,7 +360,9 @@
       "get": {
         "description": "Lists eligible SKUs for Analysis Services resource provider.",
         "x-ms-examples": {
-          "List eligible SKUs for a new server": { "$ref": "./examples/listSkusForNew.json" }
+          "List eligible SKUs for a new server": {
+            "$ref": "./examples/listSkusForNew.json"
+          }
         },
         "operationId": "Servers_ListSkusForNew",
         "parameters": [
@@ -338,7 +376,9 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/SkuEnumerationForNewResourceResult" }
+            "schema": {
+              "$ref": "#/definitions/SkuEnumerationForNewResourceResult"
+            }
           }
         }
       }
@@ -347,9 +387,13 @@
       "get": {
         "description": "Lists eligible SKUs for an Analysis Services resource.",
         "x-ms-examples": {
-          "List eligible SKUs for an existing server": { "$ref": "./examples/listSkusForExisting.json" }
+          "List eligible SKUs for an existing server": {
+            "$ref": "./examples/listSkusForExisting.json"
+          }
         },
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_ListSkusForExisting",
         "parameters": [
           {
@@ -375,7 +419,9 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/SkuEnumerationForExistingResourceResult" }
+            "schema": {
+              "$ref": "#/definitions/SkuEnumerationForExistingResourceResult"
+            }
           }
         }
       }
@@ -383,7 +429,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/listGatewayStatus": {
       "post": {
         "description": "Return the gateway status of the specified Analysis Services server instance.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_ListGatewayStatus",
         "parameters": [
           {
@@ -409,11 +457,15 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": { "$ref": "#/definitions/GatewayListStatusLive" }
+            "schema": {
+              "$ref": "#/definitions/GatewayListStatusLive"
+            }
           },
           "default": {
             "description": "Default response as an error",
-            "schema": { "$ref": "#/definitions/GatewayListStatusError" }
+            "schema": {
+              "$ref": "#/definitions/GatewayListStatusError"
+            }
           }
         }
       }
@@ -421,7 +473,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AnalysisServices/servers/{serverName}/dissociateGateway": {
       "post": {
         "description": "Dissociates a Unified Gateway associated with the server.",
-        "tags": [ "Servers" ],
+        "tags": [
+          "Servers"
+        ],
         "operationId": "Servers_DissociateGateway",
         "parameters": [
           {
@@ -454,7 +508,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/checkNameAvailability": {
       "post": {
         "x-ms-examples": {
-          "Get details of a server": { "$ref": "./examples/checkNameAvailability.json" }
+          "Get details of a server": {
+            "$ref": "./examples/checkNameAvailability.json"
+          }
         },
         "tags": [
           "Servers"
@@ -473,8 +529,7 @@
             "name": "serverParameters",
             "in": "body",
             "required": true,
-            "schema":
-            { 
+            "schema": {
               "$ref": "#/definitions/CheckServerNameAvailabilityParameters"
             },
             "description": "Contains the information used to provision the Analysis Services server."
@@ -499,7 +554,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.AnalysisServices/locations/{location}/operationresults/{operationId}": {
       "get": {
         "x-ms-examples": {
-          "Get details of a server": { "$ref": "./examples/operationResults.json" }
+          "Get details of a server": {
+            "$ref": "./examples/operationResults.json"
+          }
         },
         "tags": [
           "Servers"
@@ -614,7 +671,9 @@
         },
         "tags": {
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Key-value pairs of additional resource provisioning properties."
         }
       },
@@ -646,7 +705,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/AnalysisServicesServer" },
+          "items": {
+            "$ref": "#/definitions/AnalysisServicesServer"
+          },
           "description": "An array of Analysis Services resources."
         }
       },
@@ -664,7 +725,9 @@
         },
         "tags": {
           "type": "object",
-          "additionalProperties": { "type": "string" },
+          "additionalProperties": {
+            "type": "string"
+          },
           "description": "Key-value pairs of additional provisioning properties."
         },
         "properties": {
@@ -680,7 +743,7 @@
       "properties": {
         "state": {
           "type": "string",
-           "enum": [
+          "enum": [
             "Deleting",
             "Succeeded",
             "Failed",
@@ -703,7 +766,7 @@
         },
         "provisioningState": {
           "type": "string",
-           "enum": [
+          "enum": [
             "Deleting",
             "Succeeded",
             "Failed",
@@ -874,7 +937,7 @@
       }
     },
     "CheckServerNameAvailabilityResult": {
-      "description": "The checking result of server name availibility.",
+      "description": "The checking result of server name availability.",
       "type": "object",
       "properties": {
         "nameAvailable": {
@@ -928,7 +991,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/ResourceSku" },
+          "items": {
+            "$ref": "#/definitions/ResourceSku"
+          },
           "description": "The collection of available SKUs for new resources"
         }
       }
@@ -939,7 +1004,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/SkuDetailsForExistingResource" },
+          "items": {
+            "$ref": "#/definitions/SkuDetailsForExistingResource"
+          },
           "description": "The collection of available SKUs for existing resources"
         }
       }
@@ -989,9 +1056,9 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[-\\w\\._\\(\\)]+$", 
-      "minLength": 1, 
-      "maxLength": 90 ,
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
       "x-ms-parameter-location": "method",
       "description": "The name of the Azure Resource group of which a given Analysis Services server is part. This name must be at least 1 character in length, and no more than 90."
     }

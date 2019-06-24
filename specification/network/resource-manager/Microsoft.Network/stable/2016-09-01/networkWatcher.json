@@ -640,6 +640,9 @@
         ],
         "operationId": "PacketCaptures_GetStatus",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Query the status of a running packet capture session.",
         "parameters": [
           {
@@ -1075,7 +1078,10 @@
         },
         "associationType": {
           "type": "string",
-          "enum": [ "Associated", "Contains" ],
+          "enum": [
+            "Associated",
+            "Contains"
+          ],
           "x-ms-enum": {
             "name": "AssociationType",
             "modelAsString": true
@@ -1152,7 +1158,10 @@
       "properties": {
         "access": {
           "type": "string",
-          "enum": [ "Allow", "Deny" ],
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
           "x-ms-enum": {
             "name": "Access",
             "modelAsString": true
@@ -1515,11 +1524,11 @@
           "items": {
             "type": "string",
             "enum": [
-            "InternalError",
-            "AgentStopped",
-            "CaptureFailed",
-            "LocalFileFailed",
-            "StorageFailed"
+              "InternalError",
+              "AgentStopped",
+              "CaptureFailed",
+              "LocalFileFailed",
+              "StorageFailed"
             ],
             "x-ms-enum": {
               "name": "PcError",

@@ -115,11 +115,11 @@
             "schema": {
               "$ref": "#/definitions/PropertyContract"
             },
-            "headers": {              
+            "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
-              }              
+              }
             }
           },
           "default": {
@@ -163,8 +163,8 @@
           }
         ],
         "responses": {
-           "201": {
-            "description": "Property was successfully created."            
+          "201": {
+            "description": "Property was successfully created."
           },
           "204": {
             "description": "Property was successfully updated."
@@ -233,7 +233,7 @@
           "Property"
         ],
         "operationId": "Property_Delete",
-        "description": "Deletes specific property from the the API Management service instance.",
+        "description": "Deletes specific property from the API Management service instance.",
         "parameters": [
           {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
@@ -265,7 +265,7 @@
           "405": {
             "description": "The specified property cannot be deleted because it is in use in a policy. You must remove all references to this property before it can be deleted.",
             "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"              
+              "$ref": "./apimanagement.json#/definitions/ErrorBodyContract"
             }
           },
           "default": {
@@ -279,141 +279,141 @@
     }
   },
   "definitions": {
-		"PropertyCollection": {
-		  "properties": {
-			"value": {
-			  "type": "array",
-			  "items": {
-				"$ref": "#/definitions/PropertyContract"
-			  },
-			  "description": "Page values."
-			},
-			"count": {
-			  "type": "integer",
-			  "format": "int64",
-			  "description": "Total record count number across all pages."
-			},
-			"nextLink": {
-			  "type": "string",
-			  "description": "Next page link if any."
-			}
-		  },
-		  "description": "Paged Property list representation."
-		},
-		"PropertyContract": {
-		  "properties": {
-			"id": {
-			  "type": "string",
-			  "description": "Uniquely identifies the property within the current API Management service instance. The value is a valid relative URL in the format of /properties/{propId} where {propId} is a property identifier.",
-			  "readOnly": true
-			},
-			"name": {
-			  "type": "string",
-			  "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
-			  "minLength": 1,
-			  "maxLength": 256,
-			  "pattern": "^[A-Z0-9-._]+$"
-			},
-			"value": {
-			  "type": "string",
-			  "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
-			  "minLength": 1,
-			  "maxLength": 4096
-			},
-			"tags": {
-			  "type": "array",
-			  "items": {
-				"type": "string"
-			  },
-			  "maxItems": 32,
-			  "description": "Optional tags that when provided can be used to filter the property list."
-			},
-			"secret": {
-			  "type": "boolean",
-			  "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
-			}
-		  },
-		  "required": [
-			"name",
-			"value"
-		  ],
-		  "description": "Property details."
-		},
-		"PropertyCreateParameters": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
-			  "minLength": 1,
-			  "maxLength": 256,
-			  "pattern": "^[A-Z0-9-._]+$"
-			},
-			"value": {
-			  "type": "string",
-			  "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
-			  "minLength": 1,
-			  "maxLength": 4096
-			},
-			"tags": {
-			  "type": "array",
-			  "items": {
-				"type": "string"
-			  },
-			  "maxItems": 32,
-			  "description": "Optional tags that when provided can be used to filter the property list."
-			},
-			"secret": {
-			  "type": "boolean",
-			  "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
-			}
-		  },
-		  "required": [
-			"name",
-			"value"
-		  ],
-		  "description": "Parameters supplied to the Create Property operation."
-		},
-		"PropertyUpdateParameters": {
-		  "properties": {
-			"name": {
-			  "type": "string",
-			  "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
-			  "minLength": 1,
-			  "maxLength": 256,
-			  "pattern": "^[A-Z0-9-._]+$"
-			},
-			"value": {
-			  "type": "string",
-			  "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
-			  "minLength": 1,
-			  "maxLength": 4096
-			},
-			"tags": {
-			  "type": "array",
-			  "items": {
-				"type": "string"
-			  },
-			  "maxItems": 32,
-			  "description": "Optional tags that when provided can be used to filter the property list."
-			},
-			"secret": {
-			  "type": "boolean",
-			  "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
-			}
-		  },
-		  "description": "Parameters supplied to the Update Property operation."
-		}
+    "PropertyCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PropertyContract"
+          },
+          "description": "Page values."
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Total record count number across all pages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Next page link if any."
+        }
+      },
+      "description": "Paged Property list representation."
+    },
+    "PropertyContract": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Uniquely identifies the property within the current API Management service instance. The value is a valid relative URL in the format of /properties/{propId} where {propId} is a property identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Z0-9-._]+$"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "Optional tags that when provided can be used to filter the property list."
+        },
+        "secret": {
+          "type": "boolean",
+          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "Property details."
+    },
+    "PropertyCreateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Z0-9-._]+$"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "Optional tags that when provided can be used to filter the property list."
+        },
+        "secret": {
+          "type": "boolean",
+          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ],
+      "description": "Parameters supplied to the Create Property operation."
+    },
+    "PropertyUpdateParameters": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
+          "minLength": 1,
+          "maxLength": 256,
+          "pattern": "^[A-Z0-9-._]+$"
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "minLength": 1,
+          "maxLength": 4096
+        },
+        "tags": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "maxItems": 32,
+          "description": "Optional tags that when provided can be used to filter the property list."
+        },
+        "secret": {
+          "type": "boolean",
+          "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false."
+        }
+      },
+      "description": "Parameters supplied to the Update Property operation."
+    }
   },
   "parameters": {
-		"PropertyIdParameter": {
-		  "name": "propId",
-		  "in": "path",
-		  "required": true,
-		  "type": "string",
-		  "description": "Identifier of the property.",
-		  "maxLength": 256,
-		  "pattern": "^[^*#&+:<>?]+$",
-		  "x-ms-parameter-location": "method"
-		}
+    "PropertyIdParameter": {
+      "name": "propId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Identifier of the property.",
+      "maxLength": 256,
+      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    }
   }
 }

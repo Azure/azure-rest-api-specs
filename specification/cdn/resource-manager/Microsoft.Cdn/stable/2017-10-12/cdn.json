@@ -337,7 +337,7 @@
         "tags": [
           "Profiles"
         ],
-        "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemnetal portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
+        "description": "Generates a dynamic SSO URI used to sign in to the CDN supplemental portal. Supplemental portal is used to configure advanced feature capabilities that are not yet available in the Azure portal, such as core reports in a standard profile; rules engine, advanced HTTP reports, and real-time stats and alerts in a premium profile. The SSO URI changes approximately every 10 minutes.",
         "operationId": "Profiles_GenerateSsoUri",
         "x-ms-examples": {
           "Profiles_GenerateSsoUri": {
@@ -870,7 +870,7 @@
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
@@ -936,7 +936,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -983,7 +983,7 @@
           {
             "name": "contentFilePaths",
             "in": "body",
-            "description": "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictires/city.png' which loads a single file ",
+            "description": "The path to the content to be loaded. Path should be a full URL, e.g. ‘/pictures/city.png' which loads a single file ",
             "required": true,
             "schema": {
               "$ref": "#/definitions/LoadParameters"
@@ -999,7 +999,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -1382,7 +1382,7 @@
         "tags": [
           "CustomDomains"
         ],
-        "description": "Gets an exisitng custom domain within an endpoint.",
+        "description": "Gets an existing custom domain within an endpoint.",
         "operationId": "CustomDomains_Get",
         "x-ms-examples": {
           "CustomDomains_Get": {
@@ -1653,8 +1653,11 @@
         "description": "Enable https delivery of the custom domain.",
         "operationId": "CustomDomains_EnableCustomHttps",
         "x-ms-examples": {
-          "CustomDomains_EnableCustomHttps": {
-            "$ref": "./examples/CustomDomains_EnableCustomHttps.json"
+          "CustomDomains_EnableCustomHttpsUsingYourOwnCertificate": {
+            "$ref": "./examples/CustomDomains_EnableCustomHttpsUsingBYOC.json"
+          },
+          "CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate": {
+            "$ref": "./examples/CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate.json"
           }
         },
         "parameters": [
@@ -1681,6 +1684,15 @@
             "description": "Name of the custom domain within an endpoint.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "customDomainHttpsParameters",
+            "in": "body",
+            "description": "The configuration specifying how to enable HTTPS for the custom domain - using CDN managed certificate or user's own certificate. If not specified, enabling ssl uses CDN managed certificate by default.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/CustomDomainHttpsParameters"
+            }
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2001,7 +2013,7 @@
       }
     },
     "ProfileListResult": {
-      "description": "Result of the request to list profiles. It contains a list of profile objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list profiles. It contains a list of profile objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2083,7 +2095,7 @@
       ],
       "properties": {
         "hostName": {
-          "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. consoto.azureedge.net",
+          "description": "The host name of the endpoint structured as {endpointName}.{DNSZone}, e.g. contoso.azureedge.net",
           "type": "string",
           "readOnly": true
         },
@@ -2119,7 +2131,7 @@
       }
     },
     "EndpointListResult": {
-      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the the next set of results.",
+      "description": "Result of the request to list endpoints. It contains a list of endpoint objects and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -2161,7 +2173,7 @@
           "type": "string"
         },
         "originPath": {
-          "description": "A directory path on the origin that CDN can use to retreive content from, e.g. contoso.cloudapp.net/originpath.",
+          "description": "A directory path on the origin that CDN can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
           "type": "string"
         },
         "contentTypesToCompress": {
@@ -2196,7 +2208,7 @@
           "type": "string"
         },
         "geoFilters": {
-          "description": "List of rules defining the user's geo access within a CDN endpoint. Each geo filter defines an acess rule to a specified path or content, e.g. block APAC for path /pictures/",
+          "description": "List of rules defining the user's geo access within a CDN endpoint. Each geo filter defines an access rule to a specified path or content, e.g. block APAC for path /pictures/",
           "type": "array",
           "items": {
             "$ref": "#/definitions/GeoFilter"
@@ -2208,7 +2220,7 @@
           "required": [
             "rules"
           ],
-          "properties":{
+          "properties": {
             "description": {
               "description": "User-friendly description of the policy.",
               "type": "string"
@@ -2221,7 +2233,6 @@
               }
             }
           }
-
         }
       }
     },
@@ -2253,7 +2264,7 @@
         }
       }
     },
-    "DeliveryRuleCondition":{
+    "DeliveryRuleCondition": {
       "description": "A condition for the delivery rule.",
       "discriminator": "name",
       "required": [
@@ -2300,7 +2311,7 @@
           "type": "string",
           "enum": [
             "Microsoft.Azure.Cdn.Models.DeliveryRuleUrlPathConditionParameters"
-          ]  
+          ]
         },
         "path": {
           "description": "A URL path for the condition of the delivery rule",
@@ -2345,7 +2356,7 @@
           "type": "string",
           "enum": [
             "Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFileExtensionConditionParameters"
-          ]  
+          ]
         },
         "extensions": {
           "description": "A list of extensions for the condition of the delivery rule.",
@@ -2380,7 +2391,7 @@
           "$ref": "#/definitions/DeliveryRuleAction"
         }
       ],
-      "required":[
+      "required": [
         "parameters"
       ],
       "properties": {
@@ -2402,7 +2413,7 @@
           "type": "string",
           "enum": [
             "Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters"
-          ]  
+          ]
         },
         "cacheBehavior": {
           "description": "Caching behavior for the requests that include query strings.",
@@ -2421,7 +2432,7 @@
           ]
         },
         "cacheDuration": {
-          "description": "The duration for which the the content needs to be cached. Allowed format is [d.]hh:mm:ss",
+          "description": "The duration for which the content needs to be cached. Allowed format is [d.]hh:mm:ss",
           "type": "string",
           "x-nullable": true
         }
@@ -2657,7 +2668,7 @@
       }
     },
     "CustomDomain": {
-      "description": "Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.consoto.com.",
+      "description": "Friendly domain name mapping to the endpoint hostname that the customer provides for branding purposes, e.g. www.contoso.com.",
       "type": "object",
       "allOf": [
         {
@@ -2762,6 +2773,166 @@
         "hostName": {
           "description": "The host name of the custom domain. Must be a domain name.",
           "type": "string"
+        }
+      }
+    },
+    "CustomDomainHttpsParameters": {
+      "description": "The JSON object that contains the properties to secure a custom domain.",
+      "discriminator": "certificateSource",
+      "required": [
+        "certificateSource",
+        "protocolType"
+      ],
+      "properties": {
+        "certificateSource": {
+          "description": "Defines the source of the SSL certificate.",
+          "enum": [
+            "AzureKeyVault",
+            "Cdn"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CertificateSource",
+            "modelAsString": true
+          }
+        },
+        "protocolType": {
+          "description": "Defines the TLS extension protocol that is used for secure delivery.",
+          "enum": [
+            "ServerNameIndication",
+            "IPBased"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ProtocolType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CdnManagedHttpsParameters": {
+      "description": "Defines the certificate source parameters using CDN managed certificate for enabling SSL.",
+      "x-ms-discriminator-value": "Cdn",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomDomainHttpsParameters"
+        }
+      ],
+      "required": [
+        "certificateSourceParameters"
+      ],
+      "properties": {
+        "certificateSourceParameters": {
+          "description": "Defines the certificate source parameters using CDN managed certificate for enabling SSL.",
+          "$ref": "#/definitions/CdnCertificateSourceParameters"
+        }
+      }
+    },
+    "CdnCertificateSourceParameters": {
+      "description": "Defines the parameters for using CDN managed certificate for securing custom domain.",
+      "required": [
+        "@odata.type",
+        "certificateType"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters"
+          ]
+        },
+        "certificateType": {
+          "description": "Type of certificate used",
+          "enum": [
+            "Shared",
+            "Dedicated"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CertificateType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "UserManagedHttpsParameters": {
+      "description": "Defines the certificate source parameters using user's keyvault certificate for enabling SSL.",
+      "x-ms-discriminator-value": "AzureKeyVault",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomDomainHttpsParameters"
+        }
+      ],
+      "required": [
+        "certificateSourceParameters"
+      ],
+      "properties": {
+        "certificateSourceParameters": {
+          "description": "Defines the certificate source parameters using user's keyvault certificate for enabling SSL.",
+          "$ref": "#/definitions/KeyVaultCertificateSourceParameters"
+        }
+      }
+    },
+    "KeyVaultCertificateSourceParameters": {
+      "description": "Describes the parameters for using a user's KeyVault certificate for securing custom domain.",
+      "required": [
+        "@odata.type",
+        "subscriptionId",
+        "resourceGroupName",
+        "vaultName",
+        "secretName",
+        "secretVersion",
+        "updateRule",
+        "deleteRule"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters"
+          ]
+        },
+        "subscriptionId": {
+          "description": "Subscription Id of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "resourceGroupName": {
+          "description": "Resource group of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "vaultName": {
+          "description": "The name of the user's Key Vault containing the SSL certificate",
+          "type": "string"
+        },
+        "secretName": {
+          "description": "The name of Key Vault Secret (representing the full certificate PFX) in Key Vault.",
+          "type": "string"
+        },
+        "secretVersion": {
+          "description": "The version(GUID) of Key Vault Secret in Key Vault.",
+          "type": "string"
+        },
+        "updateRule": {
+          "description": "Describes the action that shall be taken when the certificate is updated in Key Vault.",
+          "type": "string",
+          "enum": [
+            "NoAction"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateRule",
+            "modelAsString": true
+          }
+        },
+        "deleteRule": {
+          "description": "Describes the action that shall be taken when the certificate is removed from Key Vault.",
+          "type": "string",
+          "enum": [
+            "NoAction"
+          ],
+          "x-ms-enum": {
+            "name": "DeleteRule",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3067,7 +3238,7 @@
       "type": "object",
       "properties": {
         "baseIpAddress": {
-          "description": "Ip adress itself.",
+          "description": "Ip address itself.",
           "type": "string"
         },
         "prefixLength": {
@@ -3158,7 +3329,9 @@
             "Premium_Verizon",
             "Custom_Verizon",
             "Standard_Akamai",
-            "Standard_ChinaCdn"
+            "Standard_ChinaCdn",
+            "Premium_ChinaCdn",
+            "Standard_Microsoft"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3185,7 +3358,7 @@
       }
     },
     "ErrorResponse": {
-      "description": "Error reponse indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
+      "description": "Error response indicates CDN service is not able to process the incoming request. The reason is provided in the error message.",
       "type": "object",
       "properties": {
         "code": {

@@ -1,4 +1,4 @@
-﻿{
+{
   "swagger": "2.0",
   "info": {
     "title": "DataFactoryManagementClient",
@@ -386,8 +386,8 @@
           "description": "The port of on-premises Dynamics server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0."
         },
         "serviceUri": {
-           "type": "object",
-           "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
+          "type": "object",
+          "description": "The URL to the Microsoft Dynamics server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
         },
         "organizationName": {
           "type": "object",
@@ -1482,7 +1482,7 @@
         "url"
       ]
     },
-	"AmazonS3LinkedService": {
+    "AmazonS3LinkedService": {
       "x-ms-discriminator-value": "AmazonS3",
       "description": "Linked service for Amazon S3.",
       "type": "object",
@@ -1961,35 +1961,35 @@
         "server"
       ]
     },
-    "AmazonMWSLinkedService": { 
-      "x-ms-discriminator-value": "AmazonMWS", 
-      "description": "Amazon Marketplace Web Service linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Amazon Marketplace Web Service linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/AmazonMWSLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "AmazonMWSLinkedServiceTypeProperties": { 
-      "description": "Amazon Marketplace Web Service linked service properties.", 
+    "AmazonMWSLinkedService": {
+      "x-ms-discriminator-value": "AmazonMWS",
+      "description": "Amazon Marketplace Web Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon Marketplace Web Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonMWSLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AmazonMWSLinkedServiceTypeProperties": {
+      "description": "Amazon Marketplace Web Service linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Amazon MWS server, (i.e. mws.amazonservices.com)",
           "type": "object"
         },
         "marketplaceID": {
-          "description": "The Amazon Marketplace ID you want to retrieve data from. To retrive data from multiple Marketplace IDs, seperate them with a comma (,). (i.e. A2EUQ1WTGCTBG2)",
+          "description": "The Amazon Marketplace ID you want to retrieve data from. To retrieve data from multiple Marketplace IDs, separate them with a comma (,). (i.e. A2EUQ1WTGCTBG2)",
           "type": "object"
         },
         "sellerID": {
@@ -2020,8 +2020,8 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -2030,29 +2030,29 @@
         "marketplaceID",
         "sellerID",
         "accessKeyId"
-      ] 
+      ]
     },
-    "AzurePostgreSqlLinkedService": { 
-      "x-ms-discriminator-value": "AzurePostgreSql", 
-      "description": "Azure PostgreSQL linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Azure PostgreSQL linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/AzurePostgreSqlLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "AzurePostgreSqlLinkedServiceTypeProperties": { 
+    "AzurePostgreSqlLinkedService": {
+      "x-ms-discriminator-value": "AzurePostgreSql",
+      "description": "Azure PostgreSQL linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure PostgreSQL linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzurePostgreSqlLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzurePostgreSqlLinkedServiceTypeProperties": {
       "description": "Azure PostgreSQL linked service properties.",
       "properties": {
         "connectionString": {
@@ -2063,30 +2063,30 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      } 
+      }
     },
-    "ConcurLinkedService": { 
-      "x-ms-discriminator-value": "Concur", 
-      "description": "Concur Serivce linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Concur Serivce linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/ConcurLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "ConcurLinkedServiceTypeProperties": { 
-      "description": "Concur Serivce linked service properties.", 
+    "ConcurLinkedService": {
+      "x-ms-discriminator-value": "Concur",
+      "description": "Concur Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Concur Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ConcurLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ConcurLinkedServiceTypeProperties": {
+      "description": "Concur Service linked service properties.",
       "properties": {
         "clientId": {
           "description": "Application client_id supplied by Concur App Management.",
@@ -2112,37 +2112,37 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "clientId",
         "username"
-      ] 
+      ]
     },
-    "CouchbaseLinkedService": { 
-      "x-ms-discriminator-value": "Couchbase", 
-      "description": "Couchbase server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Couchbase server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/CouchbaseLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "CouchbaseLinkedServiceTypeProperties": { 
+    "CouchbaseLinkedService": {
+      "x-ms-discriminator-value": "Couchbase",
+      "description": "Couchbase server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Couchbase server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CouchbaseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CouchbaseLinkedServiceTypeProperties": {
       "description": "Couchbase server linked service properties.",
       "properties": {
         "connectionString": {
@@ -2153,29 +2153,29 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      } 
+      }
     },
-    "DrillLinkedService": { 
-      "x-ms-discriminator-value": "Drill", 
-      "description": "Drill server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Drill server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/DrillLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "DrillLinkedServiceTypeProperties": { 
+    "DrillLinkedService": {
+      "x-ms-discriminator-value": "Drill",
+      "description": "Drill server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Drill server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DrillLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DrillLinkedServiceTypeProperties": {
       "description": "Drill server linked service properties.",
       "properties": {
         "connectionString": {
@@ -2186,30 +2186,30 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      } 
+      }
     },
-    "EloquaLinkedService": { 
-      "x-ms-discriminator-value": "Eloqua", 
-      "description": "Eloqua server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Eloqua server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/EloquaLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "EloquaLinkedServiceTypeProperties": { 
-      "description": "Eloqua server linked service properties.", 
+    "EloquaLinkedService": {
+      "x-ms-discriminator-value": "Eloqua",
+      "description": "Eloqua server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Eloqua server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EloquaLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "EloquaLinkedServiceTypeProperties": {
+      "description": "Eloqua server linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Eloqua server. (i.e. eloqua.example.com)",
@@ -2235,38 +2235,38 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "endpoint",
         "username"
-      ] 
+      ]
     },
-    "GoogleBigQueryLinkedService": { 
-      "x-ms-discriminator-value": "GoogleBigQuery", 
-      "description": "Google BigQuery service linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Google BigQuery service linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/GoogleBigQueryLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "GoogleBigQueryLinkedServiceTypeProperties": { 
-      "description": "Google BigQuery service linked service properties.", 
+    "GoogleBigQueryLinkedService": {
+      "x-ms-discriminator-value": "GoogleBigQuery",
+      "description": "Google BigQuery service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Google BigQuery service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleBigQueryLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleBigQueryLinkedServiceTypeProperties": {
+      "description": "Google BigQuery service linked service properties.",
       "properties": {
         "project": {
           "description": "The default BigQuery project to query against.",
@@ -2320,37 +2320,37 @@
           "description": "Specifies whether to use a CA certificate from the system trust store or from a specified PEM file. The default value is false.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "project",
         "authenticationType"
-      ] 
+      ]
     },
-    "GreenplumLinkedService": { 
-      "x-ms-discriminator-value": "Greenplum", 
-      "description": "Greenplum Database linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Greenplum Database linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/GreenplumLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "GreenplumLinkedServiceTypeProperties": { 
+    "GreenplumLinkedService": {
+      "x-ms-discriminator-value": "Greenplum",
+      "description": "Greenplum Database linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Greenplum Database linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GreenplumLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GreenplumLinkedServiceTypeProperties": {
       "description": "Greenplum Database linked service properties.",
       "properties": {
         "connectionString": {
@@ -2361,30 +2361,30 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      } 
+      }
     },
-    "HBaseLinkedService": { 
-      "x-ms-discriminator-value": "HBase", 
-      "description": "HBase server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "HBase server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/HBaseLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "HBaseLinkedServiceTypeProperties": { 
-      "description": "HBase server linked service properties.", 
+    "HBaseLinkedService": {
+      "x-ms-discriminator-value": "HBase",
+      "description": "HBase server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "HBase server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HBaseLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "HBaseLinkedServiceTypeProperties": {
+      "description": "HBase server linked service properties.",
       "properties": {
         "host": {
           "description": "The IP address or host name of the HBase server. (i.e. 192.168.222.160)",
@@ -2434,38 +2434,38 @@
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host",
         "authenticationType"
-      ] 
+      ]
     },
-    "HiveLinkedService": { 
-      "x-ms-discriminator-value": "Hive", 
-      "description": "Hive Server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Hive Server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/HiveLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "HiveLinkedServiceTypeProperties": { 
-      "description": "Hive Server linked service properties.", 
+    "HiveLinkedService": {
+      "x-ms-discriminator-value": "Hive",
+      "description": "Hive Server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Hive Server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HiveLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "HiveLinkedServiceTypeProperties": {
+      "description": "Hive Server linked service properties.",
       "properties": {
         "host": {
           "description": "IP address or host name of the Hive server, separated by ';' for multiple hosts (only when serviceDiscoveryMode is enable).",
@@ -2559,38 +2559,38 @@
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host",
         "authenticationType"
-      ] 
+      ]
     },
-    "HubspotLinkedService": { 
-      "x-ms-discriminator-value": "Hubspot", 
-      "description": "Hubspot Serivce linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Hubspot Serivce linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/HubspotLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "HubspotLinkedServiceTypeProperties": { 
-      "description": "Hubspot Serivce linked service properties.", 
+    "HubspotLinkedService": {
+      "x-ms-discriminator-value": "Hubspot",
+      "description": "Hubspot Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Hubspot Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/HubspotLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "HubspotLinkedServiceTypeProperties": {
+      "description": "Hubspot Service linked service properties.",
       "properties": {
         "clientId": {
           "description": "The client ID associated with your Hubspot application.",
@@ -2620,37 +2620,37 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "clientId"
-      ] 
+      ]
     },
-    "ImpalaLinkedService": { 
-      "x-ms-discriminator-value": "Impala", 
-      "description": "Impala server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Impala server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/ImpalaLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "ImpalaLinkedServiceTypeProperties": { 
-      "description": "Impala server linked service properties.", 
+    "ImpalaLinkedService": {
+      "x-ms-discriminator-value": "Impala",
+      "description": "Impala server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Impala server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ImpalaLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ImpalaLinkedServiceTypeProperties": {
+      "description": "Impala server linked service properties.",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Impala server. (i.e. 192.168.222.160)",
@@ -2701,38 +2701,38 @@
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host",
         "authenticationType"
-      ] 
+      ]
     },
-    "JiraLinkedService": { 
-      "x-ms-discriminator-value": "Jira", 
-      "description": "Jira Serivce linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Jira Serivce linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/JiraLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "JiraLinkedServiceTypeProperties": { 
-      "description": "Jira Serivce linked service properties.", 
+    "JiraLinkedService": {
+      "x-ms-discriminator-value": "Jira",
+      "description": "Jira Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Jira Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JiraLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "JiraLinkedServiceTypeProperties": {
+      "description": "Jira Service linked service properties.",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Jira service. (e.g. jira.example.com)",
@@ -2762,38 +2762,38 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host",
         "username"
-      ] 
+      ]
     },
-    "MagentoLinkedService": { 
-      "x-ms-discriminator-value": "Magento", 
-      "description": "Magento server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Magento server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/MagentoLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "MagentoLinkedServiceTypeProperties": { 
-      "description": "Magento server linked service properties.", 
+    "MagentoLinkedService": {
+      "x-ms-discriminator-value": "Magento",
+      "description": "Magento server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Magento server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MagentoLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MagentoLinkedServiceTypeProperties": {
+      "description": "Magento server linked service properties.",
       "properties": {
         "host": {
           "description": "The URL of the Magento instance. (i.e. 192.168.222.110/magento3)",
@@ -2815,36 +2815,36 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host"
-      ] 
+      ]
     },
-    "MariaDBLinkedService": { 
-      "x-ms-discriminator-value": "MariaDB", 
-      "description": "MariaDB server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "MariaDB server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/MariaDBLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "MariaDBLinkedServiceTypeProperties": { 
+    "MariaDBLinkedService": {
+      "x-ms-discriminator-value": "MariaDB",
+      "description": "MariaDB server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MariaDB server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MariaDBLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MariaDBLinkedServiceTypeProperties": {
       "description": "MariaDB server linked service properties.",
       "properties": {
         "connectionString": {
@@ -2855,30 +2855,30 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      } 
+      }
     },
-    "MarketoLinkedService": { 
-      "x-ms-discriminator-value": "Marketo", 
-      "description": "Marketo server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Marketo server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/MarketoLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "MarketoLinkedServiceTypeProperties": { 
-      "description": "Marketo server linked service properties.", 
+    "MarketoLinkedService": {
+      "x-ms-discriminator-value": "Marketo",
+      "description": "Marketo server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Marketo server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MarketoLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MarketoLinkedServiceTypeProperties": {
+      "description": "Marketo server linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Marketo server. (i.e. 123-ABC-321.mktorest.com)",
@@ -2904,38 +2904,38 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "endpoint",
         "clientId"
-      ] 
+      ]
     },
-    "PaypalLinkedService": { 
-      "x-ms-discriminator-value": "Paypal", 
-      "description": "Paypal Serivce linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Paypal Serivce linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/PaypalLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "PaypalLinkedServiceTypeProperties": { 
-      "description": "Paypal Serivce linked service properties.", 
+    "PaypalLinkedService": {
+      "x-ms-discriminator-value": "Paypal",
+      "description": "Paypal Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Paypal Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PaypalLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "PaypalLinkedServiceTypeProperties": {
+      "description": "Paypal Service linked service properties.",
       "properties": {
         "host": {
           "description": "The URL of the PayPal instance. (i.e. api.sandbox.paypal.com)",
@@ -2961,38 +2961,38 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host",
         "clientId"
-      ] 
+      ]
     },
-    "PhoenixLinkedService": { 
-      "x-ms-discriminator-value": "Phoenix", 
-      "description": "Phoenix server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Phoenix server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/PhoenixLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "PhoenixLinkedServiceTypeProperties": { 
-      "description": "Phoenix server linked service properties.", 
+    "PhoenixLinkedService": {
+      "x-ms-discriminator-value": "Phoenix",
+      "description": "Phoenix server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Phoenix server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PhoenixLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "PhoenixLinkedServiceTypeProperties": {
+      "description": "Phoenix server linked service properties.",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Phoenix server. (i.e. 192.168.222.160)",
@@ -3047,38 +3047,38 @@
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host",
         "authenticationType"
-      ] 
+      ]
     },
-    "PrestoLinkedService": { 
-      "x-ms-discriminator-value": "Presto", 
-      "description": "Presto server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Presto server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/PrestoLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "PrestoLinkedServiceTypeProperties": { 
-      "description": "Presto server linked service properties.", 
+    "PrestoLinkedService": {
+      "x-ms-discriminator-value": "Presto",
+      "description": "Presto server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Presto server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrestoLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "PrestoLinkedServiceTypeProperties": {
+      "description": "Presto server linked service properties.",
       "properties": {
         "host": {
           "description": "The IP address or host name of the Presto server. (i.e. 192.168.222.160)",
@@ -3140,8 +3140,8 @@
           "description": "The local time zone used by the connection. Valid values for this option are specified in the IANA Time Zone Database. The default value is the system time zone.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -3150,29 +3150,29 @@
         "serverVersion",
         "catalog",
         "authenticationType"
-      ] 
+      ]
     },
-    "QuickBooksLinkedService": { 
-      "x-ms-discriminator-value": "QuickBooks", 
-      "description": "QuickBooks server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "QuickBooks server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/QuickBooksLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "QuickBooksLinkedServiceTypeProperties": { 
+    "QuickBooksLinkedService": {
+      "x-ms-discriminator-value": "QuickBooks",
+      "description": "QuickBooks server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "QuickBooks server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/QuickBooksLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "QuickBooksLinkedServiceTypeProperties": {
       "description": "QuickBooks server linked service properties.",
       "properties": {
         "endpoint": {
@@ -3215,30 +3215,30 @@
         "consumerSecret",
         "accessToken",
         "accessTokenSecret"
-      ] 
+      ]
     },
-    "ServiceNowLinkedService": { 
-      "x-ms-discriminator-value": "ServiceNow", 
-      "description": "ServiceNow server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "ServiceNow server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/ServiceNowLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "ServiceNowLinkedServiceTypeProperties": { 
-      "description": "ServiceNow server linked service properties.", 
+    "ServiceNowLinkedService": {
+      "x-ms-discriminator-value": "ServiceNow",
+      "description": "ServiceNow server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ServiceNow server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceNowLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ServiceNowLinkedServiceTypeProperties": {
+      "description": "ServiceNow server linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the ServiceNow server. (i.e. <instance>.service-now.com)",
@@ -3284,38 +3284,38 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "endpoint",
         "authenticationType"
-      ] 
+      ]
     },
-    "ShopifyLinkedService": { 
-      "x-ms-discriminator-value": "Shopify", 
-      "description": "Shopify Serivce linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Shopify Serivce linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/ShopifyLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "ShopifyLinkedServiceTypeProperties": { 
-      "description": "Shopify Serivce linked service properties.", 
+    "ShopifyLinkedService": {
+      "x-ms-discriminator-value": "Shopify",
+      "description": "Shopify Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Shopify Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ShopifyLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ShopifyLinkedServiceTypeProperties": {
+      "description": "Shopify Service linked service properties.",
       "properties": {
         "host": {
           "description": "The endpoint of the Shopify server. (i.e. mystore.myshopify.com)",
@@ -3337,37 +3337,37 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host"
-      ] 
+      ]
     },
-    "SparkLinkedService": { 
-      "x-ms-discriminator-value": "Spark", 
-      "description": "Spark Server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Spark Server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/SparkLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "SparkLinkedServiceTypeProperties": { 
-      "description": "Spark Server linked service properties.", 
+    "SparkLinkedService": {
+      "x-ms-discriminator-value": "Spark",
+      "description": "Spark Server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Spark Server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SparkLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SparkLinkedServiceTypeProperties": {
+      "description": "Spark Server linked service properties.",
       "properties": {
         "host": {
           "description": "IP address or host name of the Spark server",
@@ -3449,8 +3449,8 @@
           "description": "Specifies whether to allow self-signed certificates from the server. The default value is false.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -3458,30 +3458,30 @@
         "host",
         "port",
         "authenticationType"
-      ] 
+      ]
     },
-    "SquareLinkedService": { 
-      "x-ms-discriminator-value": "Square", 
-      "description": "Square Serivce linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Square Serivce linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/SquareLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "SquareLinkedServiceTypeProperties": { 
-      "description": "Square Serivce linked service properties.", 
+    "SquareLinkedService": {
+      "x-ms-discriminator-value": "Square",
+      "description": "Square Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Square Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SquareLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SquareLinkedServiceTypeProperties": {
+      "description": "Square Service linked service properties.",
       "properties": {
         "host": {
           "description": "The URL of the Square instance. (i.e. mystore.mysquare.com)",
@@ -3511,8 +3511,8 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
@@ -3520,30 +3520,30 @@
         "host",
         "clientId",
         "redirectUri"
-      ] 
+      ]
     },
-    "XeroLinkedService": { 
-      "x-ms-discriminator-value": "Xero", 
-      "description": "Xero Serivce linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Xero Serivce linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/XeroLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "XeroLinkedServiceTypeProperties": { 
-      "description": "Xero Serivce linked service properties.", 
+    "XeroLinkedService": {
+      "x-ms-discriminator-value": "Xero",
+      "description": "Xero Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Xero Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/XeroLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "XeroLinkedServiceTypeProperties": {
+      "description": "Xero Service linked service properties.",
       "properties": {
         "host": {
           "description": "The endpoint of the Xero server. (i.e. api.xero.com)",
@@ -3569,37 +3569,37 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "host"
-      ] 
+      ]
     },
-    "ZohoLinkedService": { 
-      "x-ms-discriminator-value": "Zoho", 
-      "description": "Zoho server linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Zoho server linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/ZohoLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "ZohoLinkedServiceTypeProperties": { 
-      "description": "Zoho server linked service properties.", 
+    "ZohoLinkedService": {
+      "x-ms-discriminator-value": "Zoho",
+      "description": "Zoho server linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Zoho server linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ZohoLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ZohoLinkedServiceTypeProperties": {
+      "description": "Zoho server linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Zoho server. (i.e. crm.zoho.com/crm/private)",
@@ -3621,36 +3621,36 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true.",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "endpoint"
-      ] 
+      ]
     },
-    "VerticaLinkedService": { 
-      "x-ms-discriminator-value": "Vertica", 
-      "description": "Vertica linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Vertica linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/VerticaLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "VerticaLinkedServiceTypeProperties": { 
+    "VerticaLinkedService": {
+      "x-ms-discriminator-value": "Vertica",
+      "description": "Vertica linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Vertica linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VerticaLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "VerticaLinkedServiceTypeProperties": {
       "description": "Vertica linked service properties.",
       "properties": {
         "connectionString": {
@@ -3661,29 +3661,29 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      } 
+      }
     },
-    "NetezzaLinkedService": { 
-      "x-ms-discriminator-value": "Netezza", 
-      "description": "Netezza linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Netezza linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/NetezzaLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "NetezzaLinkedServiceTypeProperties": { 
+    "NetezzaLinkedService": {
+      "x-ms-discriminator-value": "Netezza",
+      "description": "Netezza linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Netezza linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetezzaLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "NetezzaLinkedServiceTypeProperties": {
       "description": "Netezza linked service properties.",
       "properties": {
         "connectionString": {
@@ -3694,30 +3694,30 @@
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
-      } 
+      }
     },
-    "SalesforceMarketingCloudLinkedService": { 
-      "x-ms-discriminator-value": "SalesforceMarketingCloud", 
-      "description": "Salesforce Marketing Cloud linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Salesforce Marketing Cloud linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/SalesforceMarketingCloudLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "SalesforceMarketingCloudLinkedServiceTypeProperties": { 
-      "description": "Salesforce Marketing Cloud linked service properties.", 
+    "SalesforceMarketingCloudLinkedService": {
+      "x-ms-discriminator-value": "SalesforceMarketingCloud",
+      "description": "Salesforce Marketing Cloud linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Marketing Cloud linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceMarketingCloudLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceMarketingCloudLinkedServiceTypeProperties": {
+      "description": "Salesforce Marketing Cloud linked service properties.",
       "properties": {
         "clientId": {
           "description": "The client ID associated with the Salesforce Marketing Cloud application. Type: string (or Expression with resultType string).",
@@ -3739,14 +3739,14 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "clientId"
-      ] 
+      ]
     },
     "HDInsightOnDemandLinkedService": {
       "x-ms-discriminator-value": "HDInsightOnDemand",
@@ -4005,7 +4005,7 @@
           "type": "object",
           "description": "The Spark version of new cluster. Type: string (or Expression with resultType string)."
         },
-        "newClusterNumOfWorker": { 
+        "newClusterNumOfWorker": {
           "type": "object",
           "description": "Number of worker nodes that new cluster should have. A string formatted Int32, like '1' means numOfWorker is 1 or '1:10' means auto-scale from 1 as min and 10 as max. Type: string (or Expression with resultType string)."
         },
@@ -4031,28 +4031,28 @@
         "accessToken"
       ]
     },
-    "ResponsysLinkedService": { 
-      "x-ms-discriminator-value": "Responsys", 
-      "description": "Responsys linked service.", 
-      "type": "object", 
-      "allOf": [ 
-        { 
-          "$ref": "#/definitions/LinkedService" 
-        } 
-      ], 
-      "properties": { 
-        "typeProperties": { 
-          "description": "Responsys linked service properties.", 
-          "x-ms-client-flatten": true, 
-          "$ref": "#/definitions/ResponsysLinkedServiceTypeProperties" 
-        } 
-      }, 
-      "required": [ 
-        "typeProperties" 
-      ] 
-    }, 
-    "ResponsysLinkedServiceTypeProperties": { 
-      "description": "Responsys linked service properties.", 
+    "ResponsysLinkedService": {
+      "x-ms-discriminator-value": "Responsys",
+      "description": "Responsys linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Responsys linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResponsysLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ResponsysLinkedServiceTypeProperties": {
+      "description": "Responsys linked service properties.",
       "properties": {
         "endpoint": {
           "description": "The endpoint of the Responsys server.",
@@ -4078,15 +4078,15 @@
           "description": "Specifies whether to verify the identity of the server when connecting over SSL. The default value is true. Type: boolean (or Expression with resultType boolean).",
           "type": "object"
         },
-        "encryptedCredential": { 
-          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).", 
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
           "type": "object"
         }
       },
       "required": [
         "endpoint",
         "clientId"
-      ] 
+      ]
     }
   }
 }

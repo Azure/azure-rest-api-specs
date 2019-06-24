@@ -6,9 +6,7 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   package-name: azure-cognitiveservices-videosearch
-  package-version: 1.0.0
   output-folder: $(node-sdks-folder)/lib/services/videoSearch
-  override-client-name: VideoSearchAPIClient
   azure-arm: false
   generate-license-txt: true
   generate-package-json: true

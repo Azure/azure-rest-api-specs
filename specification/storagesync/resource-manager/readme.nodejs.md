@@ -6,9 +6,8 @@ Please also specify `--node-sdks-folder=<path to root folder of your azure-sdk-f
 ``` yaml $(nodejs)
 nodejs:
   azure-arm: true
-  package-name: azure-arm-storagesyncmanagement
-  package-version: 1.1.0
-  output-folder: $(node-sdks-folder)/lib/services/storagesyncmanagement
+  package-name: azure-arm-storagesync
+  output-folder: $(node-sdks-folder)/lib/services/storagesyncManagement
   generate-license-txt: true
   generate-package-json: true
   generate-readme-md: true

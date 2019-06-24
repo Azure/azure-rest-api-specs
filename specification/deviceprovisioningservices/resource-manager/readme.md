@@ -1,5 +1,5 @@
 # Device Provisioning Services
-    
+
 > see https://aka.ms/autorest
 
 This is the AutoRest configuration file for Device Provisioning Services.
@@ -7,7 +7,7 @@ This is the AutoRest configuration file for Device Provisioning Services.
 
 
 ---
-## Getting Started 
+## Getting Started
 To build the SDK for DeviceProvisioningServices, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -19,7 +19,7 @@ To see additional help and options, run:
 
 ## Configuration
 
-### Basic Information 
+### Basic Information
 These are the global settings for the API.
 
 ``` yaml
@@ -68,10 +68,12 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 
-## C# 
+## C#
 
 These settings apply only when `--csharp` is specified on the command line.
 Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
@@ -81,7 +83,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DeviceProvisioningServices
-  output-folder: $(csharp-sdks-folder)/DeviceProvisioningServices/Management.DeviceProvisioningServices/Generated
+  output-folder: $(csharp-sdks-folder)/deviceprovisioningservices/Microsoft.Azure.Management.DeviceProvisioningServices/src/Generated
   clear-output-folder: true
 ```
 
@@ -104,61 +106,17 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothubprovisioningservices/azure/mgmt/iothubprovisioningservices
+  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices/azure/mgmt/iothubprovisioningservices
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothubprovisioningservices
+  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices
 ```
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: iothub
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-11
-  - tag: package-2017-08
-  - tag: package-2018-01
-```
-
-
-### Tag: package-2018-01 and go
-
-These settings apply only when `--tag=package-2018-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2018-01' && $(go)
-output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2018-01-22/iothub
-```
-
-### Tag: package-2017-11 and go
-
-These settings apply only when `--tag=package-2017-11 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-11' && $(go)
-output-folder: $(go-sdk-folder)/services/provisioningservices/mgmt/2017-11-15/iothub
-```
-
-### Tag: package-2017-08 and go
-
-These settings apply only when `--tag=package-2017-08 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-08' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/provisioningservices/preview/mgmt/2017-08-21-preview/iothub
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

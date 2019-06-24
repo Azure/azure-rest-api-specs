@@ -108,6 +108,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
@@ -130,32 +131,9 @@ csharp:
   clear-output-folder: true
 ```
 
-## Python
+## Go
 
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.recoveryservicesbackup
-  package-name: azure-mgmt-recoveryservicesbackup
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-recoveryservicesbackup
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -190,52 +168,4 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/recoveryservices.backup/resource-manager/v2016_06_01
 regenerate-manager: true
 generate-interface: true
-```
-
-
-## Go
-
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: backup
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-07
-  - tag: package-2016-12
-  - tag: package-2016-06
-```
-
-### Tag: package-2017-07 and go
-
-These settings apply only when `--tag=package-2017-07 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-07' && $(go)
-output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2017-07-01/backup
-```
-
-### Tag: package-2016-12 and go
-
-These settings apply only when `--tag=package-2016-12 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-12' && $(go)
-output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2016-12-01/backup
-```
-
-### Tag: package-2016-06 and go
-
-These settings apply only when `--tag=package-2016-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2016-06' && $(go)
-output-folder: $(go-sdk-folder)/services/recoveryservices/mgmt/2016-06-01/backup
 ```

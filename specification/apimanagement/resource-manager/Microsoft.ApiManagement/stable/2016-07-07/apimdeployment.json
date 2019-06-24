@@ -342,7 +342,7 @@
           }
         ],
         "responses": {
-           "200": {
+          "200": {
             "description": "Service was successfully deleted."
           },
           "204": {
@@ -388,8 +388,8 @@
         }
       }
     },
-	  "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service/": {
-     "get": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/service/": {
+      "get": {
         "tags": [
           "ApiManagementService"
         ],
@@ -646,7 +646,7 @@
         },
         "subnetResourceId": {
           "type": "string",
-          "description": "The name of the subnet Resource ID. This has format /subscriptions/{subid}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/{virtual network name}/subnets/{subnet name}."
+          "description": "The name of the subnet Resource ID. This has format /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/Microsoft.{Network|ClassicNetwork}/VirtualNetworks/{virtual network name}/subnets/{subnet name}."
         },
         "location": {
           "type": "string",
@@ -738,7 +738,7 @@
         },
         "vpnType": {
           "type": "string",
-          "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that the API Management service deployment is set up inside a Virtual Network having an Intranet Facing Endpoint only. When vpnConfiguration is specified, vpnType must be specified.",
+          "description": "The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that the API Management service deployment is set up inside a Virtual Network having an Intranet Facing Endpoint only. When vpnConfiguration is specified, vpnType must be specified.",
           "default": "None",
           "enum": [
             "None",
@@ -870,7 +870,7 @@
         },
         "vpnType": {
           "type": "string",
-          "description": "The type of VPN in which API Managemet service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
+          "description": "The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.",
           "default": "None",
           "enum": [
             "None",
@@ -946,10 +946,10 @@
         }
       },
       "allOf": [
-          {
-            "$ref" : "#/definitions/ApiManagementServiceBaseParameters"
-          }
-       ],
+        {
+          "$ref": "#/definitions/ApiManagementServiceBaseParameters"
+        }
+      ],
       "required": [
         "sku",
         "properties",

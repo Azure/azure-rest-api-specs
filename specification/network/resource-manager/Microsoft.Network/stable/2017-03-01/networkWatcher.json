@@ -640,6 +640,9 @@
         ],
         "operationId": "PacketCaptures_GetStatus",
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "description": "Query the status of a running packet capture session.",
         "parameters": [
           {
@@ -1130,7 +1133,10 @@
         },
         "associationType": {
           "type": "string",
-          "enum": [ "Associated", "Contains" ],
+          "enum": [
+            "Associated",
+            "Contains"
+          ],
           "x-ms-enum": {
             "name": "AssociationType",
             "modelAsString": true
@@ -1207,7 +1213,10 @@
       "properties": {
         "access": {
           "type": "string",
-          "enum": [ "Allow", "Deny" ],
+          "enum": [
+            "Allow",
+            "Deny"
+          ],
           "x-ms-enum": {
             "name": "Access",
             "modelAsString": true
@@ -1570,11 +1579,11 @@
           "items": {
             "type": "string",
             "enum": [
-            "InternalError",
-            "AgentStopped",
-            "CaptureFailed",
-            "LocalFileFailed",
-            "StorageFailed"
+              "InternalError",
+              "AgentStopped",
+              "CaptureFailed",
+              "LocalFileFailed",
+              "StorageFailed"
             ],
             "x-ms-enum": {
               "name": "PcError",
@@ -1832,7 +1841,12 @@
         "connectionStatus": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Unknown", "Connected", "Disconnected", "Degraded" ],
+          "enum": [
+            "Unknown",
+            "Connected",
+            "Disconnected",
+            "Degraded"
+          ],
           "x-ms-enum": {
             "name": "ConnectionStatus",
             "modelAsString": true
@@ -1913,7 +1927,11 @@
         "origin": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Local", "Inbound", "Outbound" ],
+          "enum": [
+            "Local",
+            "Inbound",
+            "Outbound"
+          ],
           "x-ms-enum": {
             "name": "Origin",
             "modelAsString": true
@@ -1923,7 +1941,10 @@
         "severity": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Error", "Warning" ],
+          "enum": [
+            "Error",
+            "Warning"
+          ],
           "x-ms-enum": {
             "name": "Severity",
             "modelAsString": true
@@ -1933,7 +1954,17 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "enum": [ "Unknown", "AgentStopped", "GuestFirewall", "DnsResolution", "SocketBind", "NetworkSecurityRule", "UserDefinedRoute", "PortThrottled", "Platform" ],
+          "enum": [
+            "Unknown",
+            "AgentStopped",
+            "GuestFirewall",
+            "DnsResolution",
+            "SocketBind",
+            "NetworkSecurityRule",
+            "UserDefinedRoute",
+            "PortThrottled",
+            "Platform"
+          ],
           "x-ms-enum": {
             "name": "IssueType",
             "modelAsString": true

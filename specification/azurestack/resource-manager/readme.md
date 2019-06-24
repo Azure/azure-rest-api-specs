@@ -9,7 +9,7 @@ The Azure Stack RP comprises of small services where each service has its own ta
 Hence, each sub-service has its own swagger spec.
 
 All of them are tied together using this configuration and are packaged together into one Azure Stack client library.
-This makes it easier for customers to download one (nuget/npm/pip/maven/gem) Azure Stack client library package rather than installing individual packages for each sub service.
+This makes it easier for customers to download one (NuGet/npm/pip/maven/gem) Azure Stack client library package rather than installing individual packages for each sub service.
 
 
 ---
@@ -73,6 +73,8 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-node
 ```
 
 ## C#
@@ -93,44 +95,7 @@ csharp:
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  clear-output-folder: true
-  namespace: azurestack
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-06-01
-```
-
-### Tag: package-2017-06-01 and go
-
-These settings apply only when `--tag=package-2017-06-01 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag)=='package-2017-06-01' && $(go)
-output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2017-06-01/$(namespace)
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-
-``` yaml $(python)
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  package-name: azure-mgmt-azurestack
-  no-namespace-folders: true
-  clear-output-folder: true
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 

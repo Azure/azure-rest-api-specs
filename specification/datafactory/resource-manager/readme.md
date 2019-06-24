@@ -62,6 +62,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
 ```
 
@@ -76,7 +77,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataFactory
-  output-folder: $(csharp-sdks-folder)/DataFactory/Management.DataFactory/Generated
+  output-folder: $(csharp-sdks-folder)/datafactory/Microsoft.Azure.Management.DataFactory/src/Generated
   clear-output-folder: true
 ```
 
@@ -93,58 +94,24 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   namespace: azure.mgmt.datafactory
-  package-name: azure-mgmt-dafactory
+  package-name: azure-mgmt-datafactory
   package-version: 1.0.0
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datafactory/azure/mgmt/datafactory
+  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory/azure/mgmt/datafactory
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datafactory
+  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory
 ```
-
 
 ## Go
 
-These settings apply only when `--go` is specified on the command line.
-
-``` yaml $(go)
-go:
-  license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: datafactory
-  clear-output-folder: true
-```
-
-### Go multi-api
-
-``` yaml $(go) && $(multiapi)
-batch:
-  - tag: package-2017-09-preview
-  - tag: package-2018-06
-```
-
-### Tag: package-2017-09-preview and go
-
-These settings apply only when `--tag=package-2017-09-preview --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2017-09-preview' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/datafactory/mgmt/2017-09-01-preview/datafactory
-```
-
-### Tag: package-2018-06 and go
-
-These settings apply only when `--tag=package-2018-06 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'package-2018-06' && $(go)
-output-folder: $(go-sdk-folder)/services/datafactory/mgmt/2018-06-01/datafactory
-```
+See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
@@ -221,7 +188,7 @@ directive:
     from: datafactory.json
     reason:
       - Flattening does not work well with polymorphic models.
-      - TriggerResource.properties is an arbitary dictionary and cannot be flattened.
+      - TriggerResource.properties is an arbitrary dictionary and cannot be flattened.
   - suppress: R2018  # XmsEnumValidation
     where:
       - $.definitions.Expression.properties.type
@@ -289,7 +256,7 @@ directive:
       - $.definitions.SelfHostedIntegrationRuntimeNode.properties.isActiveDispatcher
       - $.definitions.IntegrationRuntimeConnectionInfo.properties.isIdentityCertExprired
     reason:
-      - toBeExportedForShoebox is property we send to Azure Monitor which requries the boolean type
+      - toBeExportedForShoebox is property we send to Azure Monitor which requires the boolean type
       - The other properties are simple and self explanatory
 
 ```

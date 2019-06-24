@@ -2038,7 +2038,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of diagnostics for an API.",
+            "description": "Paged Result response of diagnostics for an API.",
             "schema": {
               "$ref": "./apimdiagnostics.json#/definitions/DiagnosticCollection"
             }
@@ -2342,7 +2342,7 @@
           "ApiDiagnosticLoggers"
         ],
         "operationId": "ApiDiagnosticLogger_ListByService",
-        "description": "Lists all loggers assosiated with the specified Diagnostic of an API.",
+        "description": "Lists all loggers associated with the specified Diagnostic of an API.",
         "x-ms-examples": {
           "ApiManagementListApiDiagnosticLoggers": {
             "$ref": "./examples/ApiManagementListApiDiagnosticLoggers.json"
@@ -2383,7 +2383,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of loggers assigned to the specified Diagnostic.",
+            "description": "Paged Result response of loggers assigned to the specified Diagnostic.",
             "schema": {
               "$ref": "./apimloggers.json#/definitions/LoggerCollection"
             }
@@ -2426,7 +2426,7 @@
           {
             "$ref": "./apimdiagnostics.json#/parameters/DiagnosticIdParameter"
           },
-		      {
+          {
             "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
           },
           {
@@ -2448,12 +2448,12 @@
           }
         }
       },
-	    "put": {
+      "put": {
         "tags": [
           "ApiDiagnosticLoggers"
         ],
         "operationId": "ApiDiagnosticLogger_CreateOrUpdate",
-        "description": "Attaches a logger to a dignostic for an API.",
+        "description": "Attaches a logger to a diagnostic for an API.",
         "x-ms-examples": {
           "ApiManagementCreateApiDiagnosticLogger": {
             "$ref": "./examples/ApiManagementCreateApiDiagnosticLogger.json"
@@ -2556,7 +2556,7 @@
           "ApiIssues"
         ],
         "operationId": "ApiIssues_ListByService",
-        "description": "Lists all issues assosiated with the specified API.",
+        "description": "Lists all issues associated with the specified API.",
         "x-ms-examples": {
           "ApiManagementListApiIssues": {
             "$ref": "./examples/ApiManagementListApiIssues.json"
@@ -2594,7 +2594,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of issues for the API.",
+            "description": "Paged Result response of issues for the API.",
             "schema": {
               "$ref": "#/definitions/IssueCollection"
             }
@@ -2839,7 +2839,7 @@
           "ApiIssueComments"
         ],
         "operationId": "ApiIssueComments_ListByService",
-        "description": "Lists all comments for the Issue assosiated with the specified API.",
+        "description": "Lists all comments for the Issue associated with the specified API.",
         "x-ms-examples": {
           "ApiManagementListApiIssueComments": {
             "$ref": "./examples/ApiManagementListApiIssueComments.json"
@@ -2880,7 +2880,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of issue comments for the API.",
+            "description": "Paged Result response of issue comments for the API.",
             "schema": {
               "$ref": "#/definitions/IssueCommentCollection"
             }
@@ -3137,7 +3137,7 @@
           "ApiIssueAttachments"
         ],
         "operationId": "ApiIssueAttachments_ListByService",
-        "description": "Lists all comments for the Issue assosiated with the specified API.",
+        "description": "Lists all comments for the Issue associated with the specified API.",
         "x-ms-examples": {
           "ApiManagementListApiIssueAttachments": {
             "$ref": "./examples/ApiManagementListApiIssueAttachments.json"
@@ -3178,7 +3178,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of issue comments for the API.",
+            "description": "Paged Result response of issue comments for the API.",
             "schema": {
               "$ref": "#/definitions/IssueAttachmentCollection"
             }
@@ -3681,8 +3681,8 @@
           },
           "description": "Describes on which protocols the operations in this API can be invoked."
         },
-        "apiVersionSet" : {
-          "$ref" : "./apimversionsets.json#/definitions/ApiVersionSetContract"
+        "apiVersionSet": {
+          "$ref": "./apimversionsets.json#/definitions/ApiVersionSetContract"
         }
       },
       "allOf": [
@@ -3837,25 +3837,25 @@
     "ApiRevisionContractProperties": {
       "properties": {
         "apiId": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "description": "Identifier of the API Revision."
         },
         "apiRevision": {
-          "type":"string",
+          "type": "string",
           "minLength": 1,
           "maxLength": 100,
           "readOnly": true,
           "description": "Revision number of API."
         },
         "createdDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API Revision was created. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
         "updatedDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API Revision were updated. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
@@ -3884,28 +3884,28 @@
       },
       "description": "Summary of revision metadata."
     },
-    "ApiRevisionInfoContract" : {
-        "description": "Object used to create an API Revision or Version based on an existing API Revision",
-        "properties": {
-          "sourceApiId": {
-            "type": "string",
-            "description": "Resource identifier of API to be used to create the revision from."
-          },
-          "apiVersionName": {
-            "type": "string",
-            "maxLength": 100,
-            "description": "Version identifier for the new API Version."
-          },
-          "apiRevisionDescription": {
-            "type": "string",
-            "maxLength": 256,
-            "description": "Description of new API Revision."
-          },
-          "apiVersionSet" : {
-            "description": "Version set details",
-            "$ref" : "./apimversionsets.json#/definitions/ApiVersionSetContractProperties"
-          }
+    "ApiRevisionInfoContract": {
+      "description": "Object used to create an API Revision or Version based on an existing API Revision",
+      "properties": {
+        "sourceApiId": {
+          "type": "string",
+          "description": "Resource identifier of API to be used to create the revision from."
+        },
+        "apiVersionName": {
+          "type": "string",
+          "maxLength": 100,
+          "description": "Version identifier for the new API Version."
+        },
+        "apiRevisionDescription": {
+          "type": "string",
+          "maxLength": 256,
+          "description": "Description of new API Revision."
+        },
+        "apiVersionSet": {
+          "description": "Version set details",
+          "$ref": "./apimversionsets.json#/definitions/ApiVersionSetContractProperties"
         }
+      }
     },
     "ApiReleaseCollection": {
       "properties": {
@@ -3948,13 +3948,13 @@
           "description": "Identifier of the API the release belongs to."
         },
         "createdDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API was released. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard."
         },
         "updatedDateTime": {
-          "type":"string",
+          "type": "string",
           "readOnly": true,
           "format": "date-time",
           "description": "The time the API release was updated."
@@ -4377,7 +4377,7 @@
           "description": "Text describing the issue."
         },
         "createdDate": {
-          "type":"string",
+          "type": "string",
           "format": "date-time",
           "description": "Date and time when the issue was created."
         },
@@ -4474,7 +4474,7 @@
           "description": "Comment text."
         },
         "createdDate": {
-          "type":"string",
+          "type": "string",
           "format": "date-time",
           "description": "Date and time when the comment was created."
         },
@@ -4529,7 +4529,7 @@
           "description": "Filename by which the binary data will be saved."
         },
         "contentFormat": {
-          "type":"string",
+          "type": "string",
           "description": "Either 'link' if content is provided via an HTTP link or the MIME type of the Base64-encoded binary data provided in the 'content' property."
         },
         "content": {

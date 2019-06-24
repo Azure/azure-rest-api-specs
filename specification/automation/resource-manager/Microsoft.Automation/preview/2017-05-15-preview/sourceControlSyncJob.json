@@ -323,21 +323,21 @@
           "readOnly": true,
           "description": "The end time of the job."
         },
-        "startType": {
+        "syncType": {
           "type": "string",
-          "description": "The type of start for the sync job.",
+          "description": "The sync type.",
           "enum": [
-            "AutoSync",
-            "ManualSync"
+            "PartialSync",
+            "FullSync"
           ],
           "x-ms-enum": {
-            "name": "startType",
+            "name": "syncType",
             "modelAsString": true
           }
         },
         "exception": {
           "type": "string",
-          "description": "The exceptions that occured while running the sync job."
+          "description": "The exceptions that occurred while running the sync job."
         }
       },
       "description": "Definition of source control sync job properties."
@@ -407,15 +407,15 @@
           "readOnly": true,
           "description": "The end time of the job."
         },
-        "startType": {
+        "syncType": {
           "type": "string",
-          "description": "The type of start for the sync job.",
+          "description": "The sync type.",
           "enum": [
-            "AutoSync",
-            "ManualSync"
+            "PartialSync",
+            "FullSync"
           ],
           "x-ms-enum": {
-            "name": "startType",
+            "name": "syncType",
             "modelAsString": true
           }
         }

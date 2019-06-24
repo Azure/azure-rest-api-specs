@@ -1,0 +1,1843 @@
+{
+  "parameters": {
+    "subscriptionId": "a7f23fdb-e626-4f95-89aa-3a360a90861e",
+    "resourceGroupName": "viv_rg",
+    "resourceNamespace": "Microsoft.Compute",
+    "resourceType": "virtualMachines",
+    "resourceName": "Canary-WLI-2",
+    "api-version": "2018-08-31-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "description": "Monitors the health of the Windows service for the Windows Firewall",
+              "monitorId": "052f9b7d-7bf0-7f61-966b-f372e207ef4e",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.FirewallServiceHealth",
+              "monitorDisplayName": "Windows Firewall Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Qt6xxb",
+              "signalType": "Metrics",
+              "signalName": "Windows Firewall Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='052f9b7d-7bf0-7f61-966b-f372e207ef4e'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='052f9b7d-7bf0-7f61-966b-f372e207ef4e'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter PhysicalDisk\\Current Disk Queue Length",
+              "monitorId": "062d163a-0742-73d9-1d9d-a582c82127e4",
+              "monitorName": "Microsoft.Windows.Server.10.0.PhysicalDisk.CurrentDiskQueueLength",
+              "monitorDisplayName": "Current Disk Queue Length",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "d4a60d0b-5d4e-d1b2-e215-2027a73ab38e",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.PhysicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 32.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/P2e17v",
+              "signalType": "Metrics",
+              "signalName": "Current Disk Queue Length (Physical Disk)"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='062d163a-0742-73d9-1d9d-a582c82127e4'",
+            "name": "ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='062d163a-0742-73d9-1d9d-a582c82127e4'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "This monitor checks percentage of used network adapter read bandwidth.",
+              "monitorId": "07cacb31-615d-5c7a-e118-fd55c17b5a2c",
+              "monitorName": "Microsoft.Windows.Server.10.0.NetworkAdapter.PercentBandwidthUsedReads",
+              "monitorDisplayName": "Percent Bandwidth Used Read",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "794a5028-be4c-caf5-3063-d4a75999f3c4",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.NetworkAdapter",
+              "componentTypeDisplayName": "Windows Server 2016 Network Adapter",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 60.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Dz7ed6",
+              "signalType": "Metrics",
+              "signalName": "Percent Bandwidth Used Read"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='07cacb31-615d-5c7a-e118-fd55c17b5a2c'",
+            "name": "ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='07cacb31-615d-5c7a-e118-fd55c17b5a2c'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter LogicalDisk\\% Idle Time",
+              "monitorId": "08ec2bb4-32be-2fae-2d5a-6b65feb200a6",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.PercentIdleTime",
+              "monitorDisplayName": "Logical Disk Percent Idle Time",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThanOrEqual",
+                  "threshold": 20.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/T5soxw",
+              "signalType": "Metrics",
+              "signalName": "Logical Disk Percent Idle Time"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='08ec2bb4-32be-2fae-2d5a-6b65feb200a6'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='08ec2bb4-32be-2fae-2d5a-6b65feb200a6'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the number of free MBytes remaining on a logical disk.",
+              "monitorId": "1bbf53b8-2557-a521-f7c1-1023de57367a",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.MBFreeSpace",
+              "monitorDisplayName": "Windows Server 2016 Logical Disk Free Space (MB) Low",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.FreeSpaceMonitorRollup",
+              "parentMonitorDisplayName": "Windows Server 2016 Logical Disk - Free Space Rollup Monitor",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 2000.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 1000.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Tgp5nn",
+              "signalType": "Metrics",
+              "signalName": "Windows Server 2016 Logical Disk Free Space (MB) Low"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='1bbf53b8-2557-a521-f7c1-1023de57367a'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='1bbf53b8-2557-a521-f7c1-1023de57367a'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter LogicalDisk\\Current Disk Queue Length",
+              "monitorId": "22e3b675-109e-9292-952e-7554604e3605",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.CurrentDiskQueueLength",
+              "monitorDisplayName": "Current Disk Queue Length (Logical Disk)",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 32.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/S8n12t",
+              "signalType": "Metrics",
+              "signalName": "Current Disk Queue Length (Logical Disk)"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='22e3b675-109e-9292-952e-7554604e3605'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='22e3b675-109e-9292-952e-7554604e3605'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the network adapter connection's health.",
+              "monitorId": "31124bfe-42b5-e042-3bd4-73e4e9c0c293",
+              "monitorName": "Microsoft.Windows.Server.10.0.NetworkAdapter.NetworkAdapterConnectionHealth",
+              "monitorDisplayName": "Network Adapter Connection Health",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "794a5028-be4c-caf5-3063-d4a75999f3c4",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.NetworkAdapter",
+              "componentTypeDisplayName": "Windows Server 2016 Network Adapter",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Phljt5",
+              "signalType": "Metrics",
+              "signalName": "Network Adapter Connection Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='31124bfe-42b5-e042-3bd4-73e4e9c0c293'",
+            "name": "ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='31124bfe-42b5-e042-3bd4-73e4e9c0c293'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the health of the Windows service for the Windows Event Log",
+              "monitorId": "33f2143c-d677-6d10-c676-2f2bac54bbbd",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.EventLogServiceHealth",
+              "monitorDisplayName": "Windows Event Log Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Uapbve",
+              "signalType": "Metrics",
+              "signalName": "Windows Event Log Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='33f2143c-d677-6d10-c676-2f2bac54bbbd'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='33f2143c-d677-6d10-c676-2f2bac54bbbd'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the health of the Windows service for the DNS Client",
+              "monitorId": "37232a87-988f-6256-3033-ea0c102c2d43",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.DNSClientServiceHealth",
+              "monitorDisplayName": "DNS Client Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/X383qq",
+              "signalType": "Metrics",
+              "signalName": "DNS Client Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='37232a87-988f-6256-3033-ea0c102c2d43'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='37232a87-988f-6256-3033-ea0c102c2d43'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the DPC Time Percentage.",
+              "monitorId": "3c184dff-8813-38f9-e965-2a9561425180",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.TotalDPCTime",
+              "monitorDisplayName": "Total DPC Time Percentage",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 95.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Jdgd2d",
+              "signalType": "Metrics",
+              "signalName": "Total DPC Time Percentage"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='3c184dff-8813-38f9-e965-2a9561425180'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='3c184dff-8813-38f9-e965-2a9561425180'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter Memory\\MemoryPagesPerSecond",
+              "monitorId": "41eccc60-5578-2eea-e104-8bf7022ed5af",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.MemoryPagesPerSecond",
+              "monitorDisplayName": "Memory Pages Per Second",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 5000.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Lk8j8w",
+              "signalType": "Metrics",
+              "signalName": "Memory Pages Per Second"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='41eccc60-5578-2eea-e104-8bf7022ed5af'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='41eccc60-5578-2eea-e104-8bf7022ed5af'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the health of the Windows service for the Server",
+              "monitorId": "4585a2f7-87c5-54e7-2b76-81af1073aec8",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.ServerServiceHealth",
+              "monitorDisplayName": "Server Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Guptf8",
+              "signalType": "Metrics",
+              "signalName": "Server Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='4585a2f7-87c5-54e7-2b76-81af1073aec8'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='4585a2f7-87c5-54e7-2b76-81af1073aec8'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the percentage of free space remaining on a logical disk.",
+              "monitorId": "49BED621-2883-4951-A6EC-8083E362E662",
+              "monitorName": "Microsoft.Windows.Server.10.0.SystemLogicalDisk.PercentageFreeSpace",
+              "monitorDisplayName": "Windows Server 2016 System Logical Disk Free Space (%) Low",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.FreeSpaceMonitorRollup",
+              "parentMonitorDisplayName": "Windows Server 2016 Logical Disk - Free Space Rollup Monitor",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 10.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 5.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Ba4v8t",
+              "signalType": "Metrics",
+              "signalName": "Windows Server 2016 System Logical Disk Free Space (%) Low"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='49BED621-2883-4951-A6EC-8083E362E662'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='49BED621-2883-4951-A6EC-8083E362E662'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the disk write latency (average disk seconds per write)",
+              "monitorId": "584e5846-a4a3-a17a-26fd-25014f727ee9",
+              "monitorName": "Microsoft.Windows.Server.10.0.PhysicalDisk.AvgDiskSecPerWrite",
+              "monitorDisplayName": "Average Disk Seconds Per Write",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "d4a60d0b-5d4e-d1b2-e215-2027a73ab38e",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.PhysicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 40.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/O5d8h4",
+              "signalType": "Metrics",
+              "signalName": "Avg. Physical Disk sec/Write"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='584e5846-a4a3-a17a-26fd-25014f727ee9'",
+            "name": "ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='584e5846-a4a3-a17a-26fd-25014f727ee9'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "\"Monitors the health of the Windows service for the Computer Browser. Please note that this monitor is not running on Nano Server (the state of the monitor will be always \"\"Healthy\"\").\"",
+              "monitorId": "65ca6ac7-9a2f-b749-6d5c-5e84d9239eb7",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.ComputerbrowserServiceHealth",
+              "monitorDisplayName": "Computer Browser Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/M2spjr",
+              "signalType": "Metrics",
+              "signalName": "Computer Browser Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='65ca6ac7-9a2f-b749-6d5c-5e84d9239eb7'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='65ca6ac7-9a2f-b749-6d5c-5e84d9239eb7'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the health of the Windows service for RPC",
+              "monitorId": "6799aaae-533c-9a8d-331f-ea833db85d1d",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.RPCServiceHealth",
+              "monitorDisplayName": "RPC Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Vfzs25",
+              "signalType": "Metrics",
+              "signalName": "RPC Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='6799aaae-533c-9a8d-331f-ea833db85d1d'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='6799aaae-533c-9a8d-331f-ea833db85d1d'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "This monitor checks percentage of used network adapter write bandwidth.",
+              "monitorId": "728733ca-14e2-9ddc-8ec8-5de911bdf35f",
+              "monitorName": "Microsoft.Windows.Server.10.0.NetworkAdapter.PercentBandwidthUsedWrites",
+              "monitorDisplayName": "Percent Bandwidth Used Write",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "794a5028-be4c-caf5-3063-d4a75999f3c4",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.NetworkAdapter",
+              "componentTypeDisplayName": "Windows Server 2016 Network Adapter",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 60.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Mh37pp",
+              "signalType": "Metrics",
+              "signalName": "Percent Bandwidth Used Write"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='728733ca-14e2-9ddc-8ec8-5de911bdf35f'",
+            "name": "ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='728733ca-14e2-9ddc-8ec8-5de911bdf35f'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter Memory\\% Committed Bytes in Use",
+              "monitorId": "75472fe7-e406-32a6-4198-0502ecee1bfe",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.PercentCommittedBytesInUse",
+              "monitorDisplayName": "Percentage of Committed Memory in Use",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 80.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Sv5zbp",
+              "signalType": "Metrics",
+              "signalName": "Percentage of Committed Memory in Use"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='75472fe7-e406-32a6-4198-0502ecee1bfe'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='75472fe7-e406-32a6-4198-0502ecee1bfe'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the available memory level.",
+              "monitorId": "7af5bcb4-31e9-5ec9-268f-178c265a6c2c",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.MemoryAvailableMBytes",
+              "monitorDisplayName": "Available Megabytes of Memory",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 100.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Kml1z1",
+              "signalType": "Metrics",
+              "signalName": "Available Megabytes of Memory"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='7af5bcb4-31e9-5ec9-268f-178c265a6c2c'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='7af5bcb4-31e9-5ec9-268f-178c265a6c2c'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter LogicalDisk\\Avg Disk Sec Per Transfer",
+              "monitorId": "850400b6-9fd2-d927-bc47-9934dfe28845",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.AvgDiskSecPerTransfer",
+              "monitorDisplayName": "Average Logical Disk Seconds Per Transfer",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 40.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Ahcs1r",
+              "signalType": "Metrics",
+              "signalName": "Average Logical Disk Seconds Per Transfer"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='850400b6-9fd2-d927-bc47-9934dfe28845'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='850400b6-9fd2-d927-bc47-9934dfe28845'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter Memory\\Free System Page Table Entries",
+              "monitorId": "887e162a-74f4-2951-64e5-87dd5f076342",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.MemoryFreeSystemPageTableEntries",
+              "monitorDisplayName": "Free System Page Table Entries",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThanOrEqual",
+                  "threshold": 5000.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Rdkgoc",
+              "signalType": "Metrics",
+              "signalName": "Free System Page Table Entries"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='887e162a-74f4-2951-64e5-87dd5f076342'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='887e162a-74f4-2951-64e5-87dd5f076342'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the disk read and write latency (average disk seconds per transfer).",
+              "monitorId": "8966cbe8-38d2-57be-5937-3d43e38a3df5",
+              "monitorName": "Microsoft.Windows.Server.10.0.PhysicalDisk.AvgDiskSecPerTransfer",
+              "monitorDisplayName": "Average Disk Seconds Per Transfer",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "d4a60d0b-5d4e-d1b2-e215-2027a73ab38e",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.PhysicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 40.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Dlgcp3",
+              "signalType": "Metrics",
+              "signalName": "Average Physical Disk Seconds Per Transfer"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='8966cbe8-38d2-57be-5937-3d43e38a3df5'",
+            "name": "ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='8966cbe8-38d2-57be-5937-3d43e38a3df5'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the total CPU utilization of this virtual machine by correlating the Processor Information\\% Processor Time\\_Total and the System\\Processor Queue Length performance counters.",
+              "monitorId": "8a16058b-d31e-c156-3460-2c6cae7bfc49",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.TotalCPUUtilization",
+              "monitorDisplayName": "Total CPU Utilization Percentage",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 95.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Funkhc",
+              "signalType": "Metrics",
+              "signalName": "Total CPU Utilization Percentage"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='8a16058b-d31e-c156-3460-2c6cae7bfc49'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='8a16058b-d31e-c156-3460-2c6cae7bfc49'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors total CPU (Processor Information) utilization.",
+              "monitorId": "94df5e8c-989a-f595-86b0-0baba4662bfb",
+              "monitorName": "Microsoft.Windows.Server.10.0.Processor.CPUUtilization",
+              "monitorDisplayName": "CPU Percentage Utilization",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.Processor.PerformanceRollup",
+              "parentMonitorDisplayName": "Windows Server 2016 Processor Performance Rollup Monitor",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "933c8d32-3668-6c84-8855-11f301d04589",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.Processor",
+              "componentTypeDisplayName": "Windows Server 2016 Processor",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 10.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/P89tpb",
+              "signalType": "Metrics",
+              "signalName": "CPU Percentage Utilization"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='933c8d32-3668-6c84-8855-11f301d04589',MonitorId='94df5e8c-989a-f595-86b0-0baba4662bfb'",
+            "name": "ComponentTypeId='933c8d32-3668-6c84-8855-11f301d04589',MonitorId='94df5e8c-989a-f595-86b0-0baba4662bfb'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the Percent DPC Time",
+              "monitorId": "98b42982-883a-bf96-5cde-9c6ec34a15e1",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalProcessor.PercentDPCTime",
+              "monitorDisplayName": "Logical CPU DPC Time Percentage",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "62b5c5f8-2990-5cc1-5da3-d2bb1694a50f",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalProcessor",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Processor",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 15.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Je0sif",
+              "signalType": "Metrics",
+              "signalName": "Logical CPU DPC Time Percentage"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='62b5c5f8-2990-5cc1-5da3-d2bb1694a50f',MonitorId='98b42982-883a-bf96-5cde-9c6ec34a15e1'",
+            "name": "ComponentTypeId='62b5c5f8-2990-5cc1-5da3-d2bb1694a50f',MonitorId='98b42982-883a-bf96-5cde-9c6ec34a15e1'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter LogicalDisk\\Avg Disk Sec Per Write",
+              "monitorId": "99dbb2f7-9335-40c1-562e-0bee9e43b029",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.AvgDiskSecPerWrite",
+              "monitorDisplayName": "Average Disk Seconds Per Write (Logical Disk)",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 40.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/X1b8r7",
+              "signalType": "Metrics",
+              "signalName": "Average Disk Seconds Per Write (Logical Disk)"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='99dbb2f7-9335-40c1-562e-0bee9e43b029'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='99dbb2f7-9335-40c1-562e-0bee9e43b029'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors whether the file system has reported an error with the file system or corruption on the logical disk.",
+              "monitorId": "9a7e3dbb-0f5d-34e5-69cf-2909fbe5502c",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.AvailabilityHealth",
+              "monitorDisplayName": "File system error or corruption",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/AA1lnq6",
+              "signalType": "Metrics",
+              "signalName": "File system error or corruption"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='9a7e3dbb-0f5d-34e5-69cf-2909fbe5502c'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='9a7e3dbb-0f5d-34e5-69cf-2909fbe5502c'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the health of the Windows service for the Windows Remote Management",
+              "monitorId": "9a86ee3f-d133-b183-a400-6ad3a3834c86",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.WindowsRemoteManagementServiceHealth",
+              "monitorDisplayName": "Windows Remote Management Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Pphn10",
+              "signalType": "Metrics",
+              "signalName": "Windows Remote Management Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='9a86ee3f-d133-b183-a400-6ad3a3834c86'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='9a86ee3f-d133-b183-a400-6ad3a3834c86'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the number of free MBytes remaining on a system logical disk.",
+              "monitorId": "F7799110-7D89-42D4-B404-3EC8FAF24C07",
+              "monitorName": "Microsoft.Windows.Server.10.0.SystemLogicalDisk.MBFreeSpace",
+              "monitorDisplayName": "Windows Server 2016 System Logical Disk Free Space (MB) Low",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.FreeSpaceMonitorRollup",
+              "parentMonitorDisplayName": "Windows Server 2016 Logical Disk - Free Space Rollup Monitor",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 500.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 300.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Tgp5nn",
+              "signalType": "Metrics",
+              "signalName": "Windows Server 2016 System Logical Disk Free Space (MB) Low"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='F7799110-7D89-42D4-B404-3EC8FAF24C07'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='F7799110-7D89-42D4-B404-3EC8FAF24C07'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "This monitor checks percentage of total used network adapter bandwidth..",
+              "monitorId": "b12539ea-7122-af29-6af6-0047432bab6a",
+              "monitorName": "Microsoft.Windows.Server.10.0.NetworkAdapter.PercentBandwidthUsedTotal",
+              "monitorDisplayName": "Percent Bandwidth Used Total",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "794a5028-be4c-caf5-3063-d4a75999f3c4",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.NetworkAdapter",
+              "componentTypeDisplayName": "Windows Server 2016 Network Adapter",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 75.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Vfb5r6",
+              "signalType": "Metrics",
+              "signalName": "Percent Bandwidth Used Total"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='b12539ea-7122-af29-6af6-0047432bab6a'",
+            "name": "ComponentTypeId='794a5028-be4c-caf5-3063-d4a75999f3c4',MonitorId='b12539ea-7122-af29-6af6-0047432bab6a'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter PhysicalDisk\\% Idle Time",
+              "monitorId": "c2396f9e-22eb-9a72-0149-ea3b9a219e64",
+              "monitorName": "Microsoft.Windows.Server.10.0.PhysicalDisk.PercentIdleTime",
+              "monitorDisplayName": "Disk Percent Idle Time",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "d4a60d0b-5d4e-d1b2-e215-2027a73ab38e",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.PhysicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThanOrEqual",
+                  "threshold": 20.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Szk5fs",
+              "signalType": "Metrics",
+              "signalName": "Physical Disk Percent Idle Time"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='c2396f9e-22eb-9a72-0149-ea3b9a219e64'",
+            "name": "ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='c2396f9e-22eb-9a72-0149-ea3b9a219e64'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the average seconds per read operation to disk.",
+              "monitorId": "c688a072-2a8f-6409-1895-a0cc363cb326",
+              "monitorName": "Microsoft.Windows.Server.10.0.PhysicalDisk.AvgDiskSecPerRead",
+              "monitorDisplayName": "Average Disk Seconds Per Read",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "d4a60d0b-5d4e-d1b2-e215-2027a73ab38e",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.PhysicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 40.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Lptpaz",
+              "signalType": "Metrics",
+              "signalName": "Average Physical Disk Seconds Per Read"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='c688a072-2a8f-6409-1895-a0cc363cb326'",
+            "name": "ComponentTypeId='d4a60d0b-5d4e-d1b2-e215-2027a73ab38e',MonitorId='c688a072-2a8f-6409-1895-a0cc363cb326'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the health of the Windows service for the DHCP Client",
+              "monitorId": "c9db5e55-f3c8-7366-6b98-bc727e726a4b",
+              "monitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.DHCPClientServiceHealth",
+              "monitorDisplayName": "DHCP Client Service Health",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.OperatingSystem.CoreServicesRollup",
+              "parentMonitorDisplayName": "Core Windows Services Rollup",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2dd80822-b238-41ed-2b0c-ccc3f8d0ad92",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.OperatingSystem",
+              "componentTypeDisplayName": "Windows Server 2016 Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 4.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 4.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Su32xw",
+              "signalType": "Metrics",
+              "signalName": "DHCP Client Service Health"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='c9db5e55-f3c8-7366-6b98-bc727e726a4b'",
+            "name": "ComponentTypeId='2dd80822-b238-41ed-2b0c-ccc3f8d0ad92',MonitorId='c9db5e55-f3c8-7366-6b98-bc727e726a4b'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "\"This monitor runs on a periodic basis to check the fragmentation levels of all logical drives.  If fragmentation levels are found to be above threshold then by default the state of the monitor will change to \"\"Warning\"\" and an alert will be generated. \"",
+              "monitorId": "d0280a80-6d34-03fa-70f0-ced62db76f8a",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.DefragAnalysis",
+              "monitorDisplayName": "Logical Disk Fragmentation Level",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 10.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/AA1pjnb",
+              "signalType": "Metrics",
+              "signalName": "Logical Disk Fragmentation Level"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='d0280a80-6d34-03fa-70f0-ced62db76f8a'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='d0280a80-6d34-03fa-70f0-ced62db76f8a'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors total Logical CPU utilization.",
+              "monitorId": "e32efaa3-7dcb-5ff2-804a-6dd9e688b136",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalProcessor.CPUUtilization",
+              "monitorDisplayName": "Logical CPU Percentage Utilization",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "62b5c5f8-2990-5cc1-5da3-d2bb1694a50f",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalProcessor",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Processor",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 95.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Jha5zu",
+              "signalType": "Metrics",
+              "signalName": "Logical CPU Percentage Utilization"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='62b5c5f8-2990-5cc1-5da3-d2bb1694a50f',MonitorId='e32efaa3-7dcb-5ff2-804a-6dd9e688b136'",
+            "name": "ComponentTypeId='62b5c5f8-2990-5cc1-5da3-d2bb1694a50f',MonitorId='e32efaa3-7dcb-5ff2-804a-6dd9e688b136'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitors the Percent DPC Time",
+              "monitorId": "e80001dc-3aa8-e5c8-f782-5b4ef144fd5c",
+              "monitorName": "Microsoft.Windows.Server.10.0.Processor.PercentDPCTime",
+              "monitorDisplayName": "CPU DPC Time Percentage",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.Processor.PerformanceRollup",
+              "parentMonitorDisplayName": "Windows Server 2016 Processor Performance Rollup Monitor",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "933c8d32-3668-6c84-8855-11f301d04589",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.Processor",
+              "componentTypeDisplayName": "Windows Server 2016 Processor",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThanOrEqual",
+                  "threshold": 10.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Py15w0",
+              "signalType": "Metrics",
+              "signalName": "CPU DPC Time Percentage"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='933c8d32-3668-6c84-8855-11f301d04589',MonitorId='e80001dc-3aa8-e5c8-f782-5b4ef144fd5c'",
+            "name": "ComponentTypeId='933c8d32-3668-6c84-8855-11f301d04589',MonitorId='e80001dc-3aa8-e5c8-f782-5b4ef144fd5c'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the percentage of free space remaining on a logical disk.",
+              "monitorId": "e84049e2-1e8e-d630-2c90-f9201ec1f1d9",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.PercentageFreeSpace",
+              "monitorDisplayName": "Windows Server 2016 Logical Disk Free Space (%) Low",
+              "parentMonitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.FreeSpaceMonitorRollup",
+              "parentMonitorDisplayName": "Windows Server 2016 Logical Disk - Free Space Rollup Monitor",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 10.0
+                },
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 5.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Ba4v8t",
+              "signalType": "Metrics",
+              "signalName": "Windows Server 2016 Logical Disk Free Space (%) Low"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='e84049e2-1e8e-d630-2c90-f9201ec1f1d9'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='e84049e2-1e8e-d630-2c90-f9201ec1f1d9'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Monitor the performance counter LogicalDisk\\Avg Disk Sec Per Read",
+              "monitorId": "f69b8b3f-3ba6-adf0-cdec-7c01b385d13c",
+              "monitorName": "Microsoft.Windows.Server.10.0.LogicalDisk.AvgDiskSecPerRead",
+              "monitorDisplayName": "Average Logical Disk Seconds Per Read",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "75582e9b-cae6-397b-6764-f7cf6cc620b0",
+              "componentTypeName": "Microsoft.Windows.Server.10.0.LogicalDisk",
+              "componentTypeDisplayName": "Windows Server 2016 Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 40.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/No0zcd",
+              "signalType": "Metrics",
+              "signalName": "Average Logical Disk Seconds Per Read"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'",
+            "name": "ComponentTypeId='75582e9b-cae6-397b-6764-f7cf6cc620b0',MonitorId='f69b8b3f-3ba6-adf0-cdec-7c01b385d13c'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Disk Avg. Disk sec/Write Monitor",
+              "monitorId": "5304e4ed-54c3-ab52-62fa-e07da44cb840",
+              "monitorName": "Microsoft.Linux.Universal.PhysicalDisk.AverageDiskWriteTime.Monitor",
+              "monitorDisplayName": "Disk Avg. Disk sec/Write",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "fe9c24c5-fcff-0157-6f73-3befd029e937",
+              "componentTypeName": "Microsoft.Linux.Universal.PhysicalDisk",
+              "componentTypeDisplayName": "Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 50.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Pxy3uy",
+              "signalType": "Metrics",
+              "signalName": "Avg. Disk sec/Write"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='5304e4ed-54c3-ab52-62fa-e07da44cb840'",
+            "name": "ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='5304e4ed-54c3-ab52-62fa-e07da44cb840'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Processor Percent DPC Time Monitor",
+              "monitorId": "99a75b34-dbf4-2b33-c0c2-0fdd888f23b7",
+              "monitorName": "Microsoft.Linux.Universal.Processor.PercentDPCTime.Monitor",
+              "monitorDisplayName": "Processor Percent DPC Time",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "e4ef3661-5e63-98a7-48a7-7aed8844ae5a",
+              "componentTypeName": "Microsoft.Linux.Universal.Processor",
+              "componentTypeDisplayName": "Processor",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 15.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Cyaftj",
+              "signalType": "Metrics",
+              "signalName": "% DPC Time"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='e4ef3661-5e63-98a7-48a7-7aed8844ae5a',MonitorId='99a75b34-dbf4-2b33-c0c2-0fdd888f23b7'",
+            "name": "ComponentTypeId='e4ef3661-5e63-98a7-48a7-7aed8844ae5a',MonitorId='99a75b34-dbf4-2b33-c0c2-0fdd888f23b7'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Operating System Available Megabytes Swap Space Monitor",
+              "monitorId": "9cf88dc3-2ef7-8824-e79f-f42b761651f6",
+              "monitorName": "Microsoft.Linux.Universal.OperatingSystem.AvailableMBytesSwap.Monitor",
+              "monitorDisplayName": "Operating System Available Megabytes Swap Space",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "8f687817-8bf0-3b8e-b424-6b75ea2168b4",
+              "componentTypeName": "Microsoft.Linux.Universal.OperatingSystem",
+              "componentTypeDisplayName": "Universal Linux Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 2500.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Igz0hf",
+              "signalType": "Metrics",
+              "signalName": "Available MBytes Swap"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='9cf88dc3-2ef7-8824-e79f-f42b761651f6'",
+            "name": "ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='9cf88dc3-2ef7-8824-e79f-f42b761651f6'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Operating System Total Percent DPC Time Monitor",
+              "monitorId": "a8bc2cc6-dd99-5fbb-27c7-7ad2eac0e2ad",
+              "monitorName": "Microsoft.Linux.Universal.OperatingSystem.TotalPercentDPCTime.Monitor",
+              "monitorDisplayName": "Operating System Total Percent DPC Time",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "8f687817-8bf0-3b8e-b424-6b75ea2168b4",
+              "componentTypeName": "Microsoft.Linux.Universal.OperatingSystem",
+              "componentTypeDisplayName": "Universal Linux Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 15.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Eiazxh",
+              "signalType": "Metrics",
+              "signalName": "% DPC Time"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='a8bc2cc6-dd99-5fbb-27c7-7ad2eac0e2ad'",
+            "name": "ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='a8bc2cc6-dd99-5fbb-27c7-7ad2eac0e2ad'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Disk Avg. Disk sec/Transfer Monitor",
+              "monitorId": "ab6dbe24-4877-43fe-ed57-00275eceb655",
+              "monitorName": "Microsoft.Linux.Universal.PhysicalDisk.AverageDiskTransferTime.Monitor",
+              "monitorDisplayName": "Disk Avg. Disk sec/Transfer",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "fe9c24c5-fcff-0157-6f73-3befd029e937",
+              "componentTypeName": "Microsoft.Linux.Universal.PhysicalDisk",
+              "componentTypeDisplayName": "Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 50.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Ctv9vl",
+              "signalType": "Metrics",
+              "signalName": "Avg. Disk sec/Transfer"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='ab6dbe24-4877-43fe-ed57-00275eceb655'",
+            "name": "ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='ab6dbe24-4877-43fe-ed57-00275eceb655'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Operating System Available Megabytes Memory Monitor",
+              "monitorId": "b6e2320f-b09c-1075-ed42-d2044b12dc8c",
+              "monitorName": "Microsoft.Linux.Universal.OperatingSystem.AvailableMBytes.Monitor",
+              "monitorDisplayName": "Operating System Available Megabytes Memory",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "8f687817-8bf0-3b8e-b424-6b75ea2168b4",
+              "componentTypeName": "Microsoft.Linux.Universal.OperatingSystem",
+              "componentTypeDisplayName": "Universal Linux Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 2500.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Jxnrt6",
+              "signalType": "Metrics",
+              "signalName": "Available MBytes Memory"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='b6e2320f-b09c-1075-ed42-d2044b12dc8c'",
+            "name": "ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='b6e2320f-b09c-1075-ed42-d2044b12dc8c'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Disk Health Monitor",
+              "monitorId": "c1c43ce8-1334-0673-2b67-0c778c1777d1",
+              "monitorName": "Microsoft.Linux.Universal.PhysicalDisk.DiskHealth.Monitor",
+              "monitorDisplayName": "Disk Health",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "fe9c24c5-fcff-0157-6f73-3befd029e937",
+              "componentTypeName": "Microsoft.Linux.Universal.PhysicalDisk",
+              "componentTypeDisplayName": "Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 1.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/AA1prgm",
+              "signalType": "Metrics",
+              "signalName": "Physical Disk Online"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='c1c43ce8-1334-0673-2b67-0c778c1777d1'",
+            "name": "ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='c1c43ce8-1334-0673-2b67-0c778c1777d1'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Disk Avg. Disk sec/Read Monitor",
+              "monitorId": "c6767c76-e3a1-9325-0af3-77480268b100",
+              "monitorName": "Microsoft.Linux.Universal.PhysicalDisk.AverageDiskReadTime.Monitor",
+              "monitorDisplayName": "Disk Avg. Disk sec/Read",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "fe9c24c5-fcff-0157-6f73-3befd029e937",
+              "componentTypeName": "Microsoft.Linux.Universal.PhysicalDisk",
+              "componentTypeDisplayName": "Physical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 50.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/T5y9gd",
+              "signalType": "Metrics",
+              "signalName": "Avg. Disk sec/Read"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='c6767c76-e3a1-9325-0af3-77480268b100'",
+            "name": "ComponentTypeId='fe9c24c5-fcff-0157-6f73-3befd029e937',MonitorId='c6767c76-e3a1-9325-0af3-77480268b100'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Logical Disk Free Space Monitor",
+              "monitorId": "ca5b387a-6b11-ddaa-f87e-61ba59c92009",
+              "monitorName": "Microsoft.Linux.Universal.LogicalDisk.FreeSpace.Monitor",
+              "monitorDisplayName": "Logical Disk Free Space",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "8de0f51c-45f9-e595-eb0e-8d353bc06097",
+              "componentTypeName": "Microsoft.Linux.Universal.LogicalDisk",
+              "componentTypeDisplayName": "Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 100.0
+                },
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 200.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/H2eso6",
+              "signalType": "Metrics",
+              "signalName": "Free Megabytes"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='ca5b387a-6b11-ddaa-f87e-61ba59c92009'",
+            "name": "ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='ca5b387a-6b11-ddaa-f87e-61ba59c92009'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Processor Percent Processor Time Monitor",
+              "monitorId": "cf7aa0a0-ac57-0dc6-1251-b0225783f735",
+              "monitorName": "Microsoft.Linux.Universal.Processor.PercentProcessorTime.Monitor",
+              "monitorDisplayName": "Processor Percent Processor Time",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "e4ef3661-5e63-98a7-48a7-7aed8844ae5a",
+              "componentTypeName": "Microsoft.Linux.Universal.Processor",
+              "componentTypeDisplayName": "Processor",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 95.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Yadryt",
+              "signalType": "Metrics",
+              "signalName": "% Processor Time"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='e4ef3661-5e63-98a7-48a7-7aed8844ae5a',MonitorId='cf7aa0a0-ac57-0dc6-1251-b0225783f735'",
+            "name": "ComponentTypeId='e4ef3661-5e63-98a7-48a7-7aed8844ae5a',MonitorId='cf7aa0a0-ac57-0dc6-1251-b0225783f735'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Logical Disk % Free Space Monitor",
+              "monitorId": "d2d5f441-8445-c966-40e2-7678f5b56ea5",
+              "monitorName": "Microsoft.Linux.Universal.LogicalDisk.PercentFreeSpace.Monitor",
+              "monitorDisplayName": "Logical Disk % Free Space",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "8de0f51c-45f9-e595-eb0e-8d353bc06097",
+              "componentTypeName": "Microsoft.Linux.Universal.LogicalDisk",
+              "componentTypeDisplayName": "Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 5.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Cdk17d",
+              "signalType": "Metrics",
+              "signalName": "% Free Space"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='d2d5f441-8445-c966-40e2-7678f5b56ea5'",
+            "name": "ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='d2d5f441-8445-c966-40e2-7678f5b56ea5'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Logical Disk Health Monitor",
+              "monitorId": "d8651e54-d2f0-358c-4b51-10434cc525c7",
+              "monitorName": "Microsoft.Linux.Universal.LogicalDisk.DiskHealth.Monitor",
+              "monitorDisplayName": "Logical Disk Health",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "8de0f51c-45f9-e595-eb0e-8d353bc06097",
+              "componentTypeName": "Microsoft.Linux.Universal.LogicalDisk",
+              "componentTypeDisplayName": "Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 1.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Ji6sk2",
+              "signalType": "Metrics",
+              "signalName": "Logical Disk Online"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='d8651e54-d2f0-358c-4b51-10434cc525c7'",
+            "name": "ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='d8651e54-d2f0-358c-4b51-10434cc525c7'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Operating System Total Percent Processor Time Monitor",
+              "monitorId": "e0a59c91-0156-ee90-d5c2-1b9042c15f81",
+              "monitorName": "Microsoft.Linux.Universal.OperatingSystem.TotalPercentProcessorTime.Monitor",
+              "monitorDisplayName": "Operating System Total Percent Processor Time",
+              "parentMonitorName": "System.Health.PerformanceState",
+              "parentMonitorDisplayName": "Performance",
+              "monitorType": "Unit",
+              "monitorCategory": "PerformanceHealth",
+              "componentTypeId": "8f687817-8bf0-3b8e-b424-6b75ea2168b4",
+              "componentTypeName": "Microsoft.Linux.Universal.OperatingSystem",
+              "componentTypeDisplayName": "Universal Linux Operating System",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "GreaterThan",
+                  "threshold": 95.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Lfg682",
+              "signalType": "Metrics",
+              "signalName": "% Processor Time"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='e0a59c91-0156-ee90-d5c2-1b9042c15f81'",
+            "name": "ComponentTypeId='8f687817-8bf0-3b8e-b424-6b75ea2168b4',MonitorId='e0a59c91-0156-ee90-d5c2-1b9042c15f81'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Universal Linux Logical Disk % Free Inodes Monitor",
+              "monitorId": "f12a45f0-8f3a-7fb6-8282-e737564ede6f",
+              "monitorName": "Microsoft.Linux.Universal.LogicalDisk.PercentFreeInodes.Monitor",
+              "monitorDisplayName": "Logical Disk % Free Inodes",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "8de0f51c-45f9-e595-eb0e-8d353bc06097",
+              "componentTypeName": "Microsoft.Linux.Universal.LogicalDisk",
+              "componentTypeDisplayName": "Logical Disk",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Error",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 5.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Xd9mqf",
+              "signalType": "Metrics",
+              "signalName": "% Free Inodes"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='f12a45f0-8f3a-7fb6-8282-e737564ede6f'",
+            "name": "ComponentTypeId='8de0f51c-45f9-e595-eb0e-8d353bc06097',MonitorId='f12a45f0-8f3a-7fb6-8282-e737564ede6f'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          },
+          {
+            "properties": {
+              "description": "Network Adapter Health",
+              "monitorId": "f5ba8972-426f-5ab7-1fa3-b124b54fec57",
+              "monitorName": "Microsoft.Linux.Universal.NetworkAdapter.Health.Monitor",
+              "monitorDisplayName": "Network Adapter Health",
+              "parentMonitorName": "System.Health.AvailabilityState",
+              "parentMonitorDisplayName": "Availability",
+              "monitorType": "Unit",
+              "monitorCategory": "AvailabilityHealth",
+              "componentTypeId": "2888a81f-fe53-37ad-4d5f-cec1c78b430d",
+              "componentTypeName": "Microsoft.Linux.Universal.NetworkAdapter",
+              "componentTypeDisplayName": "Network Adapter",
+              "monitorState": "Enabled",
+              "criteria": [
+                {
+                  "healthState": "Warning",
+                  "comparisonOperator": "LessThan",
+                  "threshold": 1.0
+                }
+              ],
+              "alertGeneration": "Enabled",
+              "frequency": 10,
+              "lookbackDuration": 20,
+              "documentationURL": "https://aka.ms/Wcjqpq",
+              "signalType": "Metrics",
+              "signalName": "Enabled state"
+            },
+            "etag": null,
+            "id": "/subscriptions/a7f23fdb-e626-4f95-89aa-3a360a90861e/resourcegroups/viv_rg/providers/Microsoft.WorkloadMonitor/workloadInsights/Canary-WLI-2/monitors/ComponentTypeId='2888a81f-fe53-37ad-4d5f-cec1c78b430d',MonitorId='f5ba8972-426f-5ab7-1fa3-b124b54fec57'",
+            "name": "ComponentTypeId='2888a81f-fe53-37ad-4d5f-cec1c78b430d',MonitorId='f5ba8972-426f-5ab7-1fa3-b124b54fec57'",
+            "type": "Microsoft.WorkloadMonitor/workloadInsights/monitors"
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}

@@ -64,7 +64,7 @@
               "format": "file"
             },
             "required": true,
-            "description": "The file contents to include when appending to the file."
+            "description": "The file contents to include when appending to the file.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "appendMode",
@@ -110,8 +110,7 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
@@ -176,8 +175,7 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
@@ -226,8 +224,7 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
@@ -270,21 +267,22 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
-    },
-    "/webhdfs/v1/{destinationPath}": {
+    }
+  },
+  "x-ms-paths": {
+    "/webhdfs/v1/{destinationPath}?op=CONCAT": {
       "post": {
         "tags": [
           "FileSystem"
         ],
         "operationId": "FileSystem_Concat",
-        "description": "Concatenates the list of source files into the destination file, removing all source files upon success.",
+        "description": "Concatenates the list of source files into the destination file, removing all source files upon success.  This operation has been deprecated, please use operation FileSystem_MsConcat instead.",
         "parameters": [
           {
             "name": "destinationPath",
@@ -302,7 +300,7 @@
               "type": "string"
             },
             "collectionFormat": "csv",
-            "description": "A list of comma seperated Data Lake Store paths (starting with '/') of the files to concatenate, in the order in which they should be concatenated."
+            "description": "A list of comma separated Data Lake Store paths (starting with '/') of the files to concatenate, in the order in which they should be concatenated."
           },
           {
             "name": "op",
@@ -324,15 +322,15 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
-        }
+        },
+        "deprecated": true
       }
     },
-    "/webhdfs/v1/{msConcatDestinationPath}": {
+    "/webhdfs/v1/{msConcatDestinationPath}?op=MSCONCAT": {
       "post": {
         "tags": [
           "FileSystem"
@@ -387,15 +385,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{listFilePath}": {
+    "/webhdfs/v1/{listFilePath}?op=MSLISTSTATUS": {
       "get": {
         "tags": [
           "FileSystem"
@@ -423,14 +420,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the item or lexographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
+            "description": "Gets or sets the item or lexicographical index after which to begin returning results. For example, a file list of 'a','b','d' and listAfter='b' will return 'd', and a listAfter='c' will also return 'd'. Optional."
           },
           {
             "name": "listBefore",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Gets or sets the item or lexographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
+            "description": "Gets or sets the item or lexicographical index before which to begin returning results. For example, a file list of 'a','b','d' and listBefore='d' will return 'a','b', and a listBefore='c' will also return 'a','b'. Optional."
           },
           {
             "name": "op",
@@ -455,15 +452,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/va/{getContentSummaryFilePath}": {
+    "/webhdfs/va/{getContentSummaryFilePath}?op=GETCONTENTSUMMARY": {
       "get": {
         "tags": [
           "FileSystem"
@@ -501,15 +497,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{getFilePath}": {
+    "/webhdfs/v1/{getFilePath}?op=MSGETFILESTATUS": {
       "get": {
         "tags": [
           "FileSystem"
@@ -547,15 +542,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{flushFilePath}": {
+    "/webhdfs/v1/{flushFilePath}?op=APPEND;append=true;flush=true": {
       "post": {
         "tags": [
           "FileSystem"
@@ -613,15 +607,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{directFilePath}": {
+    "/webhdfs/v1/{directFilePath}?op=APPEND": {
       "post": {
         "tags": [
           "FileSystem"
@@ -647,7 +640,7 @@
               "format": "file"
             },
             "required": true,
-            "description": "The file contents to include when appending to the file."
+            "description": "The file contents to include when appending to the file.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "offset",
@@ -687,8 +680,7 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
@@ -719,7 +711,7 @@
               "format": "file"
             },
             "required": false,
-            "description": "The file contents to include when creating the file. This parameter is optional, resulting in an empty file if not specified."
+            "description": "The file contents to include when creating the file. This parameter is optional, resulting in an empty file if not specified.  The maximum content size is 4MB.  For content larger than 4MB you must append the content in 4MB chunks."
           },
           {
             "name": "overwrite",
@@ -758,8 +750,7 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
@@ -826,15 +817,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{setAclFilePath}": {
+    "/webhdfs/v1/{setAclFilePath}?op=SETACL": {
       "put": {
         "tags": [
           "FileSystem"
@@ -876,15 +866,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{modifyAclFilePath}": {
+    "/webhdfs/v1/{modifyAclFilePath}?op=MODIFYACLENTRIES": {
       "put": {
         "tags": [
           "FileSystem"
@@ -926,15 +915,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{removeAclFilePath}": {
+    "/webhdfs/v1/{removeAclFilePath}?op=REMOVEACLENTRIES": {
       "put": {
         "tags": [
           "FileSystem"
@@ -976,15 +964,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{defaultAclFilePath}": {
+    "/webhdfs/v1/{defaultAclFilePath}?op=REMOVEDEFAULTACL": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1019,15 +1006,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{aclFilePath}": {
+    "/webhdfs/v1/{aclFilePath}?op=REMOVEACL": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1062,8 +1048,7 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
@@ -1106,15 +1091,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{filePath}": {
+    "/webhdfs/v1/{filePath}?op=DELETE": {
       "delete": {
         "tags": [
           "FileSystem"
@@ -1159,15 +1143,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{renameFilePath}": {
+    "/webhdfs/v1/{renameFilePath}?op=RENAME": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1212,15 +1195,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{setOwnerFilePath}": {
+    "/webhdfs/v1/{setOwnerFilePath}?op=SETOWNER": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1269,15 +1251,14 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
         }
       }
     },
-    "/webhdfs/v1/{setPermissionFilePath}": {
+    "/webhdfs/v1/{setPermissionFilePath}?op=SETPERMISSION": {
       "put": {
         "tags": [
           "FileSystem"
@@ -1319,8 +1300,7 @@
           },
           "default": {
             "description": "An unexpected error from the server.",
-            "schema":
-            {
+            "schema": {
               "$ref": "#/definitions/AdlsError"
             }
           }
@@ -1397,7 +1377,7 @@
           "type": "integer",
           "readOnly": true,
           "format": "int64",
-          "description": "the number of bytes used by the contet."
+          "description": "the number of bytes used by the content."
         },
         "spaceConsumed": {
           "type": "integer",
@@ -1527,82 +1507,82 @@
     },
     "AdlsIllegalArgumentException": {
       "x-ms-discriminator-value": "IllegalArgumentException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating that one more arguments is incorrect. Thrown when a 400 error response code is returned (bad request)."
     },
     "AdlsUnsupportedOperationException": {
       "x-ms-discriminator-value": "UnsupportedOperationException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating that the requested operation is not supported. Thrown when a 400 error response code is returned (bad request)."
     },
     "AdlsSecurityException": {
       "x-ms-discriminator-value": "SecurityException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating that access is denied. Thrown when a 401 error response code is returned (Unauthorized)."
     },
     "AdlsIOException": {
       "x-ms-discriminator-value": "IOException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating there was an IO (read or write) error. Thrown when a 403 error response code is returned (forbidden)."
     },
     "AdlsFileNotFoundException": {
       "x-ms-discriminator-value": "FileNotFoundException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating the file or folder could not be found. Thrown when a 404 error response code is returned (not found)."
     },
     "AdlsFileAlreadyExistsException": {
       "x-ms-discriminator-value": "FileAlreadyExistsException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating the file or folder already exists. Thrown when a 403 error response code is returned (forbidden)."
     },
     "AdlsBadOffsetException": {
       "x-ms-discriminator-value": "BadOffsetException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating the append or read is from a bad offset. Thrown when a 400 error response code is returned for append and open operations (Bad request)."
     },
     "AdlsRuntimeException": {
       "x-ms-discriminator-value": "RuntimeException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown when an unexpected error occurs during an operation. Thrown when a 500 error response code is returned (Internal server error)."
     },
     "AdlsAccessControlException": {
       "x-ms-discriminator-value": "AccessControlException",
-      "allOf": [ 
-        { 
-          "$ref":  "#/definitions/AdlsRemoteException" 
-        } 
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdlsRemoteException"
+        }
       ],
       "description": "A WebHDFS exception thrown indicating that access is denied due to insufficient permissions. Thrown when a 403 error response code is returned (forbidden)."
     },

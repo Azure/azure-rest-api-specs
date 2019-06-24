@@ -75,7 +75,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of diagnostics.",
+            "description": "Paged Result response of diagnostics.",
             "schema": {
               "$ref": "#/definitions/DiagnosticCollection"
             }
@@ -364,7 +364,7 @@
           "DiagnosticLoggers"
         ],
         "operationId": "DiagnosticLogger_ListByService",
-        "description": "Lists all loggers assosiated with the specified Diagnostic of the API Management service instance.",
+        "description": "Lists all loggers associated with the specified Diagnostic of the API Management service instance.",
         "x-ms-examples": {
           "ApiManagementListDiagnosticLoggers": {
             "$ref": "./examples/ApiManagementListDiagnosticLoggers.json"
@@ -402,7 +402,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Paged Result reponse of loggers assigned to the specified Diagnostic.",
+            "description": "Paged Result response of loggers assigned to the specified Diagnostic.",
             "schema": {
               "$ref": "./apimloggers.json#/definitions/LoggerCollection"
             }
@@ -442,7 +442,7 @@
           {
             "$ref": "#/parameters/DiagnosticIdParameter"
           },
-		  {
+          {
             "$ref": "./apimloggers.json#/parameters/LoggerIdParameter"
           },
           {
@@ -464,12 +464,12 @@
           }
         }
       },
-	  "put": {
+      "put": {
         "tags": [
           "DiagnosticLoggers"
         ],
         "operationId": "DiagnosticLogger_CreateOrUpdate",
-        "description": "Attaches a logger to a dignostic.",
+        "description": "Attaches a logger to a diagnostic.",
         "x-ms-examples": {
           "ApiManagementCreateDiagnosticLogger": {
             "$ref": "./examples/ApiManagementCreateDiagnosticLogger.json"

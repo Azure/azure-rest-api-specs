@@ -40,7 +40,7 @@
             "schema": {
               "$ref": "#/definitions/WebService"
             }
-          },                
+          },
           {
             "$ref": "#/parameters/APIVersionParameter"
           },
@@ -69,7 +69,7 @@
           "WebServices"
         ],
         "operationId": "WebServices_Get",
-        "description": "Gets the Web Service Definiton as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.",
+        "description": "Gets the Web Service Definition as specified by a subscription, resource group, and name. Note that the storage credentials and web service keys are not returned by this call. To get the web service access keys, call List Keys.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -79,7 +79,7 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },        
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
@@ -147,7 +147,7 @@
           },
           {
             "$ref": "#/parameters/APIVersionParameter"
-          },        
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
@@ -266,7 +266,7 @@
           }
         }
       }
-    }    
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {
@@ -397,7 +397,7 @@
         },
         "keys": {
           "$ref": "#/definitions/WebServiceKeys",
-          "description":  "Contains the web service provisioning keys. If you do not specify provisioning keys, the Azure Machine Learning system generates them for you. Note: The keys are not returned from calls to GET operations."
+          "description": "Contains the web service provisioning keys. If you do not specify provisioning keys, the Azure Machine Learning system generates them for you. Note: The keys are not returned from calls to GET operations."
         },
         "readOnly": {
           "type": "boolean",
@@ -409,8 +409,8 @@
           "readOnly": true
         },
         "exposeSampleData": {
-            "type": "boolean",
-            "description": "When set to true, sample data is included in the web service's swagger definition. The default value is true."
+          "type": "boolean",
+          "description": "When set to true, sample data is included in the web service's swagger definition. The default value is true."
         },
         "realtimeConfiguration": {
           "$ref": "#/definitions/RealtimeConfiguration",
@@ -463,7 +463,7 @@
           "description": "Specifies the package type. Valid values are Graph (Specifies a web service published through the Machine Learning Studio) and Code (Specifies a web service published using code such as Python). Note: Code is not supported at this time.",
           "enum": [
             "Graph"
-          ]        
+          ]
         }
       }
     },
@@ -589,7 +589,7 @@
         }
       },
       "required": [
-        "id"        
+        "id"
       ]
     },
     "ServiceInputOutputSpecification": {
@@ -815,7 +815,7 @@
       "properties": {
         "uri": {
           "type": "string",
-          "description": "The URI where the asset is accessible from, (e.g. aml://abc for system assets or https://xyz for user asets",
+          "description": "The URI where the asset is accessible from, (e.g. aml://abc for system assets or https://xyz for user assets",
           "format": "url"
         },
         "credentials": {
