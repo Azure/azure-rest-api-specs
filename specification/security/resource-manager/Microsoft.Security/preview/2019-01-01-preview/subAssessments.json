@@ -159,32 +159,34 @@
 					"description": "User friendly display name of the sub-assessment"
 				},
 				"status": {
-					"$ref": "#/definitions/SubAssessementStatus"
+					"$ref": "#/definitions/SubAssessmentStatus"
+					
 				},
 				"remediation": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Data on how to remediate this sub-assessment"
+					"description": "Information on how to remediate this sub-assessment"
 				},
 				"impact": {
 					"readOnly": true,
 					"type": "string",
 					"description": "Description of the impact of resolving this sub-assessment"
 				},
-				"catagory": {
+				"category": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Catagory of the sub-assessment"
+					"description": "Category of the sub-assessment"
 				},
 				"description": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Description"
+					"description": "Human readable description of the assessment status"
 				},
 				"timeGenerated": {
 					"readOnly": true,
 					"type": "string",
-					"description": "The date and time the sub-assessemnt was generated. The format is ISO-8601 (UTC)"
+					"format": "date-time",
+					"description": "The date and time the sub-assessement was generated"
 				},
 				"resourceDetails": {
 					"$ref": "#/definitions/ResourceDetails"
@@ -192,20 +194,20 @@
 				"extendedData": {
 					"$ref": "#/definitions/ExtendedData"
 				}
-			},
+			}
 		},
 		"ResourceDetails": {
 			"type": "object",
 			"description": "Details of the resource that was assessed",
-			"discriminator": "assessedResourceSource",
+			"discriminator": "source",
 			"properties": {
-				"assessedResourceSource": {
+				"source": {
 					"readOnly": true,
 					"type": "string",
 					"description": "The platform where the assessed resource resides",
 					"enum": ["Azure", "OnPremise"],
 					"x-ms-enum": {
-						"name": "AssessedResourceSource",
+						"name": "Source",
 						"modelAsString": true,
 						"values": [
 							{
@@ -227,27 +229,27 @@
 				"assessedResourceType": {
 					"readOnly": true,
 					"type": "string",
-					"description": "",
-					"enum": ["SqlServer", "ContainerRegistryVulnerabilityAssessment", "ServerVulnerabilityAssessment"],
+					"description": "Sub-assessement resource type",
+					"enum": ["SqlServerSubAssessment", "ContainerRegistryVulnerabilitySubAssessment", "ServerVulnerabilitySubAssessment"],
 					"x-ms-enum": {
 						"name": "AssessedResourceType",
 						"modelAsString": true,
 						"values": [
 							{
-								"value": "SqlServer"
+								"value": "SqlServerSubAssessment"
 							},
 							{
-								"value": "ContainerRegistryVulnerabilityAssessment"
+								"value": "ContainerRegistryVulnerabilitySubAssessment"
 							},
 							{
-								"value": "ServerVulnerabilityAssessment"
+								"value": "ServerVulnerabilitySubAssessment"
 							}
 						]
 					}
 				}
 			}
 		},
-		"SubAssessementStatus": {
+		"SubAssessmentStatus": {
 			"type": "object",
 			"description": "Status of the sub-assessment",
 			"properties": {
@@ -288,19 +290,19 @@
 							}
 						]
 					},
-					"description": "The sub-assessement severity level"
+					"description": "The sub-assessment severity level"
 				},
 				"cause": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Code of the cause of the assessment status. Optional field in case the severity level requires additional data."
+					"description": "The cause of the assessment status. Optional field in case the severity level requires additional data."
 				}
 			}
 		},
 		"SqlServerSubAssessmentProperties": {
 			"type": "object",
 			"description": "Details of the resource that was assessed",
-			"x-ms-discriminator-value": "SqlServer",
+			"x-ms-discriminator-value": "SqlServerSubAssessment",
 			"allOf": [{
 				"$ref": "#/definitions/ExtendedData"
 			}],
@@ -333,10 +335,10 @@
 				}
 			}
 		},
-		"ContainerRegistryVulnerabilityAssessment": {
+		"ContainerRegistryVulnerabilitySubAssessmentProperties": {
 			"type": "object",
 			"description": "Additional context fields for container registry Vulnerability assessment",
-			"x-ms-discriminator-value": "ContainerRegistryVulnerabilityAssessment",
+			"x-ms-discriminator-value": "ContainerRegistryVulnerabilitySubAssessment",
 			"allOf": [{
 				"$ref": "#/definitions/ExtendedData"
 			}],
@@ -344,13 +346,13 @@
 				"type": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Vulnerability Type. e.g: Vulnerability, Potential Vulnerability, Information Gathered, Vulnerability"
 				},
 				"cvss": {
 					"readOnly": true,
 					"type": "object",
-					"description": "Array of CVSS. Key is CVSS version",
-					"additionalproperties":
+					"description": "Dictionary from cvss version to cvss details object",
+					"additionalProperties":
 					{
 						"$ref": "#/definitions/CVSS"
 					}
@@ -358,12 +360,12 @@
 				"patchable": {
 					"readOnly": true,
 					"type": "boolean",
-					"description": ""
+					"description": "Indicates whether a patch is available or not"
 				},
-				"CVE": {
+				"cve": {
 					"readOnly": true,
 					"type": "array",
-					"description": "",
+					"description": "List of CVEs",
 					"items": {
 						"$ref": "#/definitions/CVE"
 					}
@@ -371,12 +373,12 @@
 				"threat": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Threat name"
 				},
 				"remediationLink": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Link for additional remediation explanation"
 				},
 				"vendorReferences": {
 					"readOnly": true,
@@ -388,21 +390,21 @@
 				"repositoryName": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Name of the repository which the vurnerable image belongs to"
+					"description": "Name of the repository which the vulnerable image belongs to"
 				},
 				"imageName": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Name of the vurnerable image"
+					"description": "Name of the vulnerable image"
 				},
 				"imageDigest": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Digest of the vurnerable image"
+					"description": "Digest of the vulnerable image"
 				}
 			}
 		},
-		"ServerVulnerabilityAssessment": {
+		"ServerVulnerabilitySubAssessmentProperties": {
 			"type": "object",
 			"description": "Additional context fields for server vulnerability assessment",
 			"x-ms-discriminator-value": "ServerVulnerabilityAssessment",
@@ -413,13 +415,13 @@
 				"type": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Vulnerability Type. e.g: Vulnerability, Potential Vulnerability, Information Gathered, Vulnerability"
 				},
 				"cvss": {
 					"readOnly": true,
 					"type": "object",
-					"description": "Array of CVSS. Key is CVSS version",
-					"additionalproperties":
+					"description": "Dictionary from cvss version to cvss details object",
+					"additionalProperties":
 					{
 						"$ref": "#/definitions/CVSS"
 					}
@@ -427,12 +429,12 @@
 				"patchable": {
 					"readOnly": true,
 					"type": "boolean",
-					"description": ""
+					"description": "Indicates whether a patch is available or not"
 				},
-				"CVE": {
+				"cve": {
 					"readOnly": true,
 					"type": "array",
-					"description": "",
+					"description": "List of CVEs",
 					"items": {
 						"$ref": "#/definitions/CVE"
 					}
@@ -440,12 +442,12 @@
 				"threat": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Threat name"
 				},
 				"remediationLink": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Link for additional remediation explanation"
 				},
 				"vendorReferences": {
 					"readOnly": true,
@@ -463,7 +465,7 @@
 				"base": {
 					"readOnly": true,
 					"type": "number",
-					"description": ""
+					"description": "CVSS base"
 				}
 			}
 		},
@@ -474,12 +476,12 @@
 				"title": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "CVE title"
 				},
 				"link": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Link url"
 				}
 			}
 		},
@@ -490,12 +492,12 @@
 				"title": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Link title"
 				},
 				"link": {
 					"readOnly": true,
 					"type": "string",
-					"description": ""
+					"description": "Link url"
 				}
 			}
 		}
