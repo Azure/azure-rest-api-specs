@@ -2222,21 +2222,12 @@
     "DedicatedCloudNodeProperties": {
       "description": "Properties of dedicated cloud node",
       "required": [
-        "placementGroupId",
-        "availabilityZoneId",
+        "dedicatedPlacementGroupId",
+        "dedicatedAvailabilityZoneId",
         "purchaseId",
         "nodesCount"
       ],
       "properties": {
-        "availabilityZoneId": {
-          "description": "Availability Zone id, e.g. \"az1\"",
-          "type": "string"
-        },
-        "availabilityZoneName": {
-          "description": "Availability Zone name, e.g. \"Availability Zone 1\"",
-          "type": "string",
-          "readOnly": true
-        },
         "cloudRackName": {
           "description": "VMWare Cloud Rack Name",
           "type": "string",
@@ -2247,18 +2238,27 @@
           "format": "date-time",
           "readOnly": true
         },
+        "dedicatedAvailabilityZoneId": {
+          "description": "CloudSimple Availability Zone id, e.g. \"az1\"",
+          "type": "string"
+        },
+        "dedicatedAvailabilityZoneName": {
+          "description": "CloudSimple Availability Zone name, e.g. \"Availability Zone 1\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "dedicatedPlacementGroupId": {
+          "description": "CloudSimple Placement Group id, e.g. \"n1\"",
+          "type": "string"
+        },
+        "dedicatedPlacementGroupName": {
+          "description": "CloudSimple Placement Name, e.g. \"Placement Group 1\"",
+          "type": "string",
+          "readOnly": true
+        },
         "nodesCount": {
           "description": "count of nodes to create",
           "type": "integer"
-        },
-        "placementGroupId": {
-          "description": "Placement Group id, e.g. \"n1\"",
-          "type": "string"
-        },
-        "placementGroupName": {
-          "description": "Placement Name, e.g. \"Placement Group 1\"",
-          "type": "string",
-          "readOnly": true
         },
         "privateCloudId": {
           "description": "Private Cloud Id",
@@ -2369,11 +2369,7 @@
         "gatewaySubnet"
       ],
       "properties": {
-        "gatewaySubnet": {
-          "description": "gateway Subnet for the account. It will collect the subnet address and always treat it as /28",
-          "type": "string"
-        },
-        "isAccountOnboarded": {
+        "accountOnboardingState": {
           "description": "indicates whether account onboarded or not in a given region",
           "type": "string",
           "enum": [
@@ -2387,6 +2383,10 @@
             "name": "OnboardingStatus"
           },
           "readOnly": true
+        },
+        "gatewaySubnet": {
+          "description": "gateway Subnet for the account. It will collect the subnet address and always treat it as /28",
+          "type": "string"
         },
         "nodes": {
           "description": "total nodes purchased",
@@ -2508,14 +2508,6 @@
     "PrivateCloudProperties": {
       "description": "Properties of private",
       "properties": {
-        "availabilityZoneId": {
-          "description": "Availability Zone id, e.g. \"az1\"",
-          "type": "string"
-        },
-        "availabilityZoneName": {
-          "description": "Availability Zone name, e.g. \"Availability Zone 1\"",
-          "type": "string"
-        },
         "clustersNumber": {
           "description": "Number of clusters",
           "type": "integer"
@@ -2528,6 +2520,22 @@
           "description": "When private cloud was created",
           "type": "string",
           "format": "date-time"
+        },
+        "dedicatedAvailabilityZoneId": {
+          "description": "CloudSimple Availability Zone id, e.g. \"az1\"",
+          "type": "string"
+        },
+        "dedicatedAvailabilityZoneName": {
+          "description": "CloudSimple Availability Zone name, e.g. \"Availability Zone 1\"",
+          "type": "string"
+        },
+        "dedicatedPlacementGroupId": {
+          "description": "CloudSimple Placement Group id, e.g. \"n1\"",
+          "type": "string"
+        },
+        "dedicatedPlacementGroupName": {
+          "description": "CloudSimple Placement Group name",
+          "type": "string"
         },
         "dnsServers": {
           "description": "Array of DNS servers",
@@ -2542,14 +2550,6 @@
         },
         "nsxType": {
           "description": "Nsx Type, e.g. \"Advanced\"",
-          "type": "string"
-        },
-        "placementGroupId": {
-          "description": "Placement Group id, e.g. \"n1\"",
-          "type": "string"
-        },
-        "placementGroupName": {
-          "description": "Placement Group name",
           "type": "string"
         },
         "privateCloudId": {
