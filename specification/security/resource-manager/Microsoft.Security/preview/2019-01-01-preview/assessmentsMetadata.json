@@ -88,6 +88,71 @@
           }
         }
       }
+    },
+        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata": {
+      "get": {
+        "x-ms-examples": {
+          "List security assessments": {
+            "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_example.json"
+          }
+        },
+        "tags": ["Assessments Metadata"],
+        "description": "Get metadata information on all assessment types",
+        "operationId": "AssessmentsMetadata_List",
+        "parameters": [{
+          "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+        }],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata/{assessmentsMetadataName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get security recommendation task from security data location": {
+            "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_example.json"
+          }
+        },
+        "tags": ["Assessments Metadata"],
+        "description": "Get metadata information on an assessment type",
+        "operationId": "AssessmentsMetadata_Get",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AssessmentsMetadataName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAssessmentMetadata"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -210,6 +275,11 @@
           "readOnly": true,
           "type": "boolean",
           "description": "True if this assessment is in preview release status"
+        },
+          "BuiltIn": {
+          "readOnly": true,
+          "type": "boolean",
+          "description": "True if this assessment is an built in Azure Security Center assessment"
         }
       }
     }
