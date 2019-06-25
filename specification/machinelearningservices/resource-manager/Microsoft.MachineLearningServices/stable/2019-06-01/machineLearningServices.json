@@ -1184,6 +1184,13 @@
           "description": "The number of vCPUs supported by the virtual machine size.",
           "readOnly": true
         },
+        "gpus": {
+          "type": "integer",
+          "format": "int32",
+          "title": "Number of gPUs",
+          "description": "The number of gPUs supported by the virtual machine size.",
+          "readOnly": true
+        },
         "osVhdSizeMB": {
           "type": "integer",
           "format": "int32",
@@ -1572,6 +1579,22 @@
                     "title": "Subnet.",
                     "description": "Virtual network subnet resource ID the compute nodes belong to.",
                     "$ref": "#/definitions/ResourceId"
+                },
+                "remoteLoginPortPublicAccess": {
+                  "type": "string",
+                  "default": "NotSpecified",
+                  "title": "Close remote Login Access Port",
+                  "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on all nodes of the cluster. Enabled - Indicates that the public ssh port is open on all nodes of the cluster. NotSpecified - Indicates that the public ssh port is closed on all nodes of the cluster if VNet is defined, else is open all public nodes. It can be default only during cluster creation time, after creation it will be either enabled or disabled.",
+                  "readOnly": true,
+                  "enum": [
+                    "Enabled",
+                    "Disabled",
+                    "NotSpecified"
+                  ],
+                  "x-ms-enum": {
+                    "name": "remoteLoginPortPublicAccess",
+                    "modelAsString": true
+                  }
                 },
                 "allocationState": {
                   "type": "string",
@@ -2004,10 +2027,16 @@
           "title": "Node ID.",
           "description": "ID of the compute node."
         },
-        "ipAddress": {
+        "privateAddress": {
           "readOnly": true,
           "type": "string",
-          "title": "IP address.",
+          "title": "Private IP address.",
+          "description": "Private IP address of the compute node."
+        },
+        "publicAddress": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Public IP address.",
           "description": "Public IP address of the compute node."
         },
         "port": {
@@ -2016,6 +2045,29 @@
           "format": "int32",
           "title": "Port.",
           "description": "SSH port number of the node."
+        },
+        "nodeState": {
+          "readOnly": true,
+          "type": "string",
+          "enum": [
+            "idle",
+            "running",
+            "preparing",
+            "unusable",
+            "leaving",
+            "preempted"
+          ],
+          "description": "State of the compute node. Values are idle, running, preparing, unusable, leaving and preempted.",
+          "x-ms-enum": {
+            "name": "nodeState",
+            "modelAsString": true
+          }
+        },
+        "runId": {
+          "readOnly": true,
+          "type": "string",
+          "title": "Run ID.",
+          "description": "ID of the Experiment running on the node, if any else null."
         }
       },
       "x-ms-discriminator-value": "AmlCompute"
