@@ -230,6 +230,17 @@ input-file:
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
 ```
 
+### Tag: package-2018-09-01-only
+
+These settings apply only when `--tag=package-2018-09-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-09-01-only'
+input-file:
+- Microsoft.Insights/stable/2018-09-01/actionGroups_API.json
+- Microsoft.Insights/stable/2018-09-01/baseline_API.json
+- Microsoft.Insights/stable/2018-09-01/calculateBaseline_API.json
+```
+
 ### Tag: package-2018-01-01-only
 
 These settings apply only when `--tag=package-2018-01-01-only` is specified on the command line.
@@ -257,6 +268,15 @@ These settings apply only when `--tag=package-2018-04-16-only` is specified on t
 ``` yaml $(tag) == 'package-2018-04-16-only'
 input-file:
 - Microsoft.Insights/stable/2018-04-16/scheduledQueryRule_API.json
+```
+
+### Tag: package-2015-07-01-only
+
+These settings apply only when `--tag=package-2015-07-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-07-01-only'
+input-file:
+- Microsoft.Insights/stable/2015-07-01/serviceDiagnosticsSettings_API.json
 ```
 
 ### Tag: package-2015-04-01-only
@@ -302,6 +322,15 @@ These settings apply only when `--tag=package-2017-04-01-only` is specified on t
 input-file:
 - Microsoft.Insights/stable/2017-04-01/actionGroups_API.json
 - Microsoft.Insights/stable/2017-04-01/activityLogAlerts_API.json
+```
+
+### Tag: package-2017-03-01-preview-only
+
+These settings apply only when `--tag=package-2017-03-01-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2017-03-01-preview-only'
+input-file:
+- Microsoft.Insights/preview/2017-03-01-preview/activityLogAlerts_API.json
 ```
 
 ### Tag: package-2017-05-01-preview-only
