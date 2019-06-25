@@ -20,7 +20,7 @@
           "multipart/form-data"
         ],
         "produces": [
-          "application/json"
+          "application/octet-stream"
         ],
         "parameters": [
           {
@@ -73,9 +73,10 @@
         ],
         "responses": {
           "200": {
-            "description": "A run was successfully started.",
+            "description": "File Response",
             "schema": {
-              "$ref": "#/definitions/FileStreamResult"
+              "format": "byte",
+              "type": "file"
             }
           },
           "default": {
@@ -185,10 +186,7 @@
         "description": "Starts an experiment run on the remote compute target using the provided definition.json file to define the run.\r\n            The code for the run is retrieved using the snapshotId in definition.json.",
         "operationId": "Execution_StartSnapshotRun",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -271,10 +269,7 @@
         "description": "Cancels a run within an experiment.",
         "operationId": "Execution_CancelRun",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -414,143 +409,6 @@
     }
   },
   "definitions": {
-    "IFormFile": {
-      "type": "object",
-      "properties": {
-        "contentType": {
-          "type": "string",
-          "readOnly": true
-        },
-        "contentDisposition": {
-          "type": "string",
-          "readOnly": true
-        },
-        "headers": {
-          "type": "object",
-          "additionalProperties": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "readOnly": true
-        },
-        "length": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "fileName": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "FileStreamResult": {
-      "type": "object",
-      "properties": {
-        "fileStream": {
-          "$ref": "#/definitions/Stream"
-        },
-        "contentType": {
-          "type": "string",
-          "readOnly": true
-        },
-        "fileDownloadName": {
-          "type": "string"
-        },
-        "lastModified": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "entityTag": {
-          "$ref": "#/definitions/EntityTagHeaderValue"
-        }
-      }
-    },
-    "Stream": {
-      "type": "object",
-      "properties": {
-        "canRead": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canSeek": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canTimeout": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "canWrite": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "length": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "position": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "readTimeout": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "writeTimeout": {
-          "format": "int32",
-          "type": "integer"
-        }
-      }
-    },
-    "EntityTagHeaderValue": {
-      "type": "object",
-      "properties": {
-        "tag": {
-          "$ref": "#/definitions/StringSegment",
-          "readOnly": true
-        },
-        "isWeak": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "StringSegment": {
-      "type": "object",
-      "properties": {
-        "buffer": {
-          "type": "string",
-          "readOnly": true
-        },
-        "offset": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "length": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "value": {
-          "type": "string",
-          "readOnly": true
-        },
-        "hasValue": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
     "RunStatus": {
       "description": "Contains the details of a run.",
       "type": "object",
@@ -574,6 +432,15 @@
           "$ref": "#/definitions/RunConfiguration",
           "description": "Fully specified configuration information for the run. Even when that information\r\nis contained in configuration files within the project folder, the client collapses\r\nit all and inlines it into the run definition when submitting a run."
         },
+        "attribution": {
+          "type": "string"
+        },
+        "telemetryValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
         "snapshotId": {
           "format": "uuid",
           "description": "Snapshots are user project folders that have been uploaded to the cloud for subsequent\r\nexecution. This field is required when executing against cloud-based compute targets\r\nunless the run submission was against the API endpoint that takes a zipped project folder\r\ninline with the request.",
@@ -592,15 +459,6 @@
           "description": "Specifies the runsource property for this run. The default value is \"experiment\" if not specified.",
           "type": "string",
           "example": "experiment"
-        },
-        "attribution": {
-          "type": "string"
-        },
-        "telemetryValues": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
         }
       }
     },
@@ -815,6 +673,11 @@
         "spark": {
           "$ref": "#/definitions/SparkSection",
           "description": "The configuration for a Spark environment."
+        },
+        "inferencingStackVersion": {
+          "description": "The Inferencing stack version.",
+          "type": "string",
+          "example": "latest"
         }
       }
     },
@@ -972,9 +835,14 @@
       "type": "object",
       "properties": {
         "baseImage": {
-          "description": "Base image used for Docker-based runs.",
+          "description": "Base image used for Docker-based runs. Mutually exclusive with BaseDockerfile.",
           "type": "string",
           "example": "ubuntu:latest"
+        },
+        "baseDockerfile": {
+          "description": "Base Dockerfile used for Docker-based runs. Mutually exclusive with BaseImage.",
+          "type": "string",
+          "example": "FROM ubuntu:latest\r\nRUN echo \"Hello world!\""
         },
         "enabled": {
           "description": "Set True to perform this run inside a Docker container.",

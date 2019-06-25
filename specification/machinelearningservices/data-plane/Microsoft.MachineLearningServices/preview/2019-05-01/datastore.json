@@ -105,10 +105,7 @@
         "description": "Create or update a Datastore in the given workspace.",
         "operationId": "DataStores_Create",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -285,10 +282,7 @@
         "description": "Update or create a Datastore in the given workspace.",
         "operationId": "DataStores_Update",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -523,11 +517,11 @@
   },
   "definitions": {
     "PaginatedDataStoreList": {
-      "description": "A paginated list of items and an optional link to the next page of items.",
+      "description": "A paginated list of DataStores.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of items in this page.",
+          "description": "An array of objects of type DataStore.",
           "uniqueItems": false,
           "type": "array",
           "items": {

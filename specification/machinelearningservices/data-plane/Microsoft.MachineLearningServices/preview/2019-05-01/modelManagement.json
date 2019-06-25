@@ -6,7 +6,7 @@
     "description": "These APIs allow end users to manage Azure Machine Learning Models, Images, Profiles, and Services."
   },
   "paths": {
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets": {
       "get": {
         "tags": [
           "Asset"
@@ -62,13 +62,6 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "tags",
             "in": "query",
             "description": "A list of Asset tags.",
@@ -95,13 +88,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -151,10 +137,7 @@
         "description": "Create an Asset from the provided payload.",
         "operationId": "Assets_Create",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -168,13 +151,6 @@
             "schema": {
               "$ref": "#/definitions/Asset"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -214,7 +190,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets/{id}": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/assets/{id}": {
       "get": {
         "tags": [
           "Asset"
@@ -231,13 +207,6 @@
             "name": "id",
             "in": "path",
             "description": "The Asset Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
             "required": true,
             "type": "string"
           },
@@ -298,13 +267,6 @@
             "type": "string"
           },
           {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "subscriptionId",
             "in": "path",
             "description": "The Azure subscription Id.",
@@ -349,10 +311,7 @@
         "description": "Patch a specific Asset.",
         "operationId": "Assets_Patch",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -377,13 +336,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -423,7 +375,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{id}": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{id}": {
       "get": {
         "tags": [
           "Image"
@@ -450,13 +402,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -515,13 +460,6 @@
             "type": "string"
           },
           {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "subscriptionId",
             "in": "path",
             "description": "The Azure subscription Id.",
@@ -566,10 +504,7 @@
         "description": "Patch a specific Image.",
         "operationId": "Images_Patch",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -594,13 +529,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -640,7 +568,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images": {
       "get": {
         "tags": [
           "Image"
@@ -664,13 +592,6 @@
             "name": "tag",
             "in": "query",
             "description": "The object tag.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "The object version.",
             "required": false,
             "type": "string"
           },
@@ -710,13 +631,6 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "tags",
             "in": "query",
             "description": "A list of Image tags.",
@@ -751,13 +665,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The object version.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -807,10 +714,7 @@
         "description": "Create an Image from the provided payload.",
         "operationId": "Images_Create",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -824,13 +728,6 @@
             "schema": {
               "$ref": "#/definitions/ImageRequestBase"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -867,19 +764,16 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/generateDockerBuildContext": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/generateDockerBuildContext": {
       "post": {
         "tags": [
           "Image"
         ],
-        "summary": "Retrieve a Docker file and build context.",
+        "summary": "Retreive a Docker file and build context.",
         "description": "The Docker file and build context allows for locally debugging the Docker file.",
         "operationId": "Images_GenerateDockerBuildContext",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -893,13 +787,6 @@
             "schema": {
               "$ref": "#/definitions/ImageRequestBase"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -939,7 +826,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models/{id}": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models/{id}": {
       "get": {
         "tags": [
           "Model"
@@ -956,13 +843,6 @@
             "name": "id",
             "in": "path",
             "description": "The model id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
             "required": true,
             "type": "string"
           },
@@ -1023,13 +903,6 @@
             "type": "string"
           },
           {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "subscriptionId",
             "in": "path",
             "description": "The Azure subscription Id.",
@@ -1074,10 +947,7 @@
         "description": "Updates an existing model with the specified patch.",
         "operationId": "MLModels_Patch",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1102,13 +972,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -1148,7 +1011,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models": {
       "get": {
         "tags": [
           "Model"
@@ -1172,13 +1035,6 @@
             "name": "tag",
             "in": "query",
             "description": "The object tag.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "The object version.",
             "required": false,
             "type": "string"
           },
@@ -1207,13 +1063,6 @@
             "name": "$skipToken",
             "in": "query",
             "description": "The continuation token to retrieve the next page.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
             "required": false,
             "type": "string"
           },
@@ -1251,13 +1100,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The object version.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -1307,10 +1149,7 @@
         "description": "Register the model provided.",
         "operationId": "MLModels_Register",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1324,13 +1163,6 @@
             "schema": {
               "$ref": "#/definitions/Model"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -1370,7 +1202,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models/{id}/metrics": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/models/{id}/metrics": {
       "get": {
         "tags": [
           "Model"
@@ -1402,13 +1234,6 @@
             "in": "query",
             "description": "The end date from which to retrieve metrics.",
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
             "type": "string"
           },
           {
@@ -1449,7 +1274,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/operations/{id}": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/operations/{id}": {
       "get": {
         "tags": [
           "Operations"
@@ -1466,13 +1291,6 @@
             "name": "id",
             "in": "path",
             "description": "The operation id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
             "required": true,
             "type": "string"
           },
@@ -1514,7 +1332,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{imageId}/profiles/{id}": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{imageId}/profiles/{id}": {
       "get": {
         "tags": [
           "Profile"
@@ -1538,13 +1356,6 @@
             "name": "id",
             "in": "path",
             "description": "The Profile Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
             "required": true,
             "type": "string"
           },
@@ -1586,7 +1397,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{imageId}/profiles": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/images/{imageId}/profiles": {
       "get": {
         "tags": [
           "Profile"
@@ -1649,13 +1460,6 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "orderBy",
             "in": "query",
             "description": "The option to order the response.",
@@ -1668,13 +1472,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -1724,10 +1521,7 @@
         "description": "Create a Profile for an Image.",
         "operationId": "Profiles_Create",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1748,13 +1542,6 @@
             "schema": {
               "$ref": "#/definitions/ProfileRequestBase"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -1791,7 +1578,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}": {
       "get": {
         "tags": [
           "Service"
@@ -1818,13 +1605,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -1883,13 +1663,6 @@
             "type": "string"
           },
           {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "subscriptionId",
             "in": "path",
             "description": "The Azure subscription Id.",
@@ -1937,10 +1710,7 @@
         "description": "Patch a specific Service.",
         "operationId": "Services_Patch",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1965,13 +1735,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -2011,7 +1774,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services": {
       "get": {
         "tags": [
           "Service"
@@ -2088,13 +1851,6 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": false,
-            "type": "string"
-          },
-          {
             "name": "tags",
             "in": "query",
             "description": "A list of tags.",
@@ -2129,13 +1885,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -2185,10 +1934,7 @@
         "description": "Create a Service with the specified payload.",
         "operationId": "Services_Create",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -2202,13 +1948,6 @@
             "schema": {
               "$ref": "#/definitions/CreateServiceRequest"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -2245,7 +1984,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}/listkeys": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}/listkeys": {
       "post": {
         "tags": [
           "Service",
@@ -2263,13 +2002,6 @@
             "name": "id",
             "in": "path",
             "description": "The Service Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
             "required": true,
             "type": "string"
           },
@@ -2311,7 +2043,7 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}/regenerateKeys": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}/regenerateKeys": {
       "post": {
         "tags": [
           "Service",
@@ -2321,10 +2053,7 @@
         "description": "Regenerate and return the Service keys.",
         "operationId": "Services_RegenerateServiceKeys",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -2345,13 +2074,6 @@
             "schema": {
               "$ref": "#/definitions/RegenerateServiceKeysRequest"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -2394,7 +2116,66 @@
         }
       }
     },
-    "/modelmanagement/v{version}/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/register": {
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/{id}/token": {
+      "post": {
+        "tags": [
+          "Service",
+          "Token"
+        ],
+        "summary": "Generate Service Access Token.",
+        "description": "Gets access token that can be used for calling service.",
+        "operationId": "Services_GetServiceToken",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "description": "The Service Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "description": "The name of resource group in which the workspace is located.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workspace",
+            "in": "path",
+            "description": "The name of the workspace.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AuthToken"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ModelErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/modelmanagement/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.MachineLearningServices/workspaces/{workspace}/services/register": {
       "post": {
         "tags": [
           "Service"
@@ -2403,10 +2184,7 @@
         "description": "Register a service using the provided payload.",
         "operationId": "Services_Register",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -2420,13 +2198,6 @@
             "schema": {
               "$ref": "#/definitions/RegisterServiceRequest"
             }
-          },
-          {
-            "name": "version",
-            "in": "path",
-            "description": "The version of the Microsoft.MachineLearning resource provider API to use.",
-            "required": true,
-            "type": "string"
           },
           {
             "name": "subscriptionId",
@@ -2548,11 +2319,11 @@
       }
     },
     "PaginatedAssetList": {
-      "description": "A paginated list of objects.",
+      "description": "A paginated list of Assets.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "An array of objects of type T.",
+          "description": "An array of objects of type Asset.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2589,7 +2360,8 @@
     },
     "ImageResponseBase": {
       "required": [
-        "imageResponseBaseTypeDiscriminator"
+        "imageType",
+        "imageFlavor"
       ],
       "type": "object",
       "properties": {
@@ -2647,11 +2419,14 @@
           "description": "The time the image was last modified.",
           "type": "string"
         },
+        "autoDelete": {
+          "description": "Whether the image will be automatically deleted with the last service using it.",
+          "type": "boolean"
+        },
         "imageType": {
           "description": "The type of the image.",
           "enum": [
-            "Docker",
-            "FPGA"
+            "Docker"
           ],
           "type": "string",
           "example": "Docker",
@@ -2723,12 +2498,11 @@
           "description": "The Uri to the image build logs.",
           "type": "string"
         },
-        "imageResponseBaseTypeDiscriminator": {
-          "description": "Property used by Swagger for polymorphic object generation.",
+        "operationId": {
+          "description": "The ID of the asynchronous operation for this image.",
           "type": "string"
         }
-      },
-      "discriminator": "imageResponseBaseTypeDiscriminator"
+      }
     },
     "ModelErrorResponse": {
       "description": "The Model Management Service Error object.",
@@ -2897,11 +2671,11 @@
       }
     },
     "PaginatedImageList": {
-      "description": "A paginated list of objects.",
+      "description": "A paginated list of Images.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "An array of objects of type T.",
+          "description": "An array of objects of type Image.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2917,7 +2691,8 @@
     "ImageRequestBase": {
       "description": "Request to create an Azure Machine Learning Image.",
       "required": [
-        "imageRequestBaseTypeDiscriminator"
+        "imageType",
+        "imageFlavor"
       ],
       "type": "object",
       "properties": {
@@ -2925,6 +2700,11 @@
           "description": "The name of the image.",
           "type": "string",
           "example": "myimage:3"
+        },
+        "autoDelete": {
+          "description": "Whether the image will be automatically deleted with the last service using it.",
+          "type": "boolean",
+          "example": "true"
         },
         "description": {
           "description": "The image description.",
@@ -2934,8 +2714,7 @@
         "imageType": {
           "description": "The type of the image.",
           "enum": [
-            "Docker",
-            "FPGA"
+            "Docker"
           ],
           "type": "string",
           "example": "Docker",
@@ -2992,13 +2771,8 @@
           "additionalProperties": {
             "type": "string"
           }
-        },
-        "imageRequestBaseTypeDiscriminator": {
-          "description": "Property used by Swagger for polymorphic object generation.",
-          "type": "string"
         }
-      },
-      "discriminator": "imageRequestBaseTypeDiscriminator"
+      }
     },
     "DockerBuildContextResponse": {
       "type": "object",
@@ -3044,11 +2818,11 @@
       }
     },
     "PaginatedModelList": {
-      "description": "A paginated list of objects.",
+      "description": "A paginated list of Models.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "An array of objects of type T.",
+          "description": "An array of objects of type Model.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -3148,14 +2922,15 @@
         "operationDetails": {
           "$ref": "#/definitions/AsyncOperationDetails",
           "description": "The async operation details."
+        },
+        "parentRequestId": {
+          "description": "The request id that created this operation",
+          "type": "string"
         }
       }
     },
     "AsyncOperationDetails": {
       "description": "The async operation details.",
-      "required": [
-        "asyncOperationDetailsTypeDiscriminator"
-      ],
       "type": "object",
       "properties": {
         "subOperationType": {
@@ -3165,13 +2940,8 @@
         "subOperationState": {
           "description": "The suboperation state.",
           "type": "string"
-        },
-        "asyncOperationDetailsTypeDiscriminator": {
-          "description": "Property used by Swagger for polymorphic object generation.",
-          "type": "string"
         }
-      },
-      "discriminator": "asyncOperationDetailsTypeDiscriminator"
+      }
     },
     "ProfileResponseBase": {
       "description": "The profile response.",
@@ -3251,11 +3021,11 @@
       }
     },
     "PaginatedProfileList": {
-      "description": "A paginated list of objects.",
+      "description": "A paginated list of Profiles.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "An array of objects of type T.",
+          "description": "An array of objects of type Profile.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -3303,7 +3073,7 @@
     "ServiceResponseBase": {
       "description": "The base service response. The correct inherited response based on computeType will be returned (ex. ACIServiceResponse)",
       "required": [
-        "serviceResponseBaseTypeDiscriminator"
+        "computeType"
       ],
       "type": "object",
       "properties": {
@@ -3341,6 +3111,10 @@
             "type": "string"
           }
         },
+        "operationId": {
+          "description": "The ID of the latest asynchronous operation for this service.",
+          "type": "string"
+        },
         "state": {
           "description": "The current state of the service.",
           "enum": [
@@ -3374,7 +3148,6 @@
           "description": "The compute environment type for the service.",
           "enum": [
             "ACS",
-            "FPGA",
             "ACI",
             "AKS",
             "AMLCOMPUTE",
@@ -3392,7 +3165,8 @@
           "description": "The deployment type for the service.",
           "enum": [
             "GRPCRealtimeEndpoint",
-            "HttpRealtimeEndpoint"
+            "HttpRealtimeEndpoint",
+            "Batch"
           ],
           "type": "string",
           "example": "HttpRealtimeEndpoint",
@@ -3400,20 +3174,16 @@
             "name": "DeploymentType",
             "modelAsString": true
           }
-        },
-        "serviceResponseBaseTypeDiscriminator": {
-          "description": "Property used by Swagger for polymorphic object generation.",
-          "type": "string"
         }
       },
-      "discriminator": "serviceResponseBaseTypeDiscriminator"
+      "discriminator": "computeType"
     },
     "PaginatedServiceList": {
-      "description": "A paginated list of objects.",
+      "description": "A paginated list of Services.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "An array of objects of type T.",
+          "description": "An array of objects of type Service.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -3429,7 +3199,7 @@
     "CreateServiceRequest": {
       "description": "The base class for creating a service.",
       "required": [
-        "createServiceRequestTypeDiscriminator"
+        "computeType"
       ],
       "type": "object",
       "properties": {
@@ -3491,7 +3261,6 @@
           "description": "The compute environment type for the service.",
           "enum": [
             "ACS",
-            "FPGA",
             "ACI",
             "AKS",
             "AMLCOMPUTE",
@@ -3509,7 +3278,8 @@
           "description": "The deployment type for the service.",
           "enum": [
             "GRPCRealtimeEndpoint",
-            "HttpRealtimeEndpoint"
+            "HttpRealtimeEndpoint",
+            "Batch"
           ],
           "type": "string",
           "example": "HttpRealtimeEndpoint",
@@ -3522,16 +3292,16 @@
           "description": "The Image Id.",
           "type": "string"
         },
+        "imageRequest": {
+          "$ref": "#/definitions/ImageRequestBase",
+          "description": "The Image request."
+        },
         "location": {
           "description": "The location of the service.",
           "type": "string"
-        },
-        "createServiceRequestTypeDiscriminator": {
-          "description": "Property used by Swagger for polymorphic object generation.",
-          "type": "string"
         }
       },
-      "discriminator": "createServiceRequestTypeDiscriminator"
+      "discriminator": "computeType"
     },
     "ServiceCreationDependentEntities": {
       "description": "The dependent entities for the service.",
@@ -3579,8 +3349,30 @@
         }
       }
     },
+    "AuthToken": {
+      "description": "Service Token",
+      "type": "object",
+      "properties": {
+        "accessToken": {
+          "description": "Access token.",
+          "type": "string"
+        },
+        "tokenType": {
+          "description": "Access token type.",
+          "type": "string"
+        },
+        "expiryOn": {
+          "format": "int64",
+          "description": "Access token expiry time expressed in POSIX time.",
+          "type": "integer"
+        }
+      }
+    },
     "RegisterServiceRequest": {
       "description": "The base class for registering a service.",
+      "required": [
+        "computeType"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -3609,7 +3401,6 @@
           "description": "The type of compute environment used by the service.",
           "enum": [
             "ACS",
-            "FPGA",
             "ACI",
             "AKS",
             "AMLCOMPUTE",
@@ -3621,8 +3412,23 @@
             "name": "ComputeEnvironmentType",
             "modelAsString": true
           }
+        },
+        "deploymentType": {
+          "description": "The deployment type for the service.",
+          "enum": [
+            "GRPCRealtimeEndpoint",
+            "HttpRealtimeEndpoint",
+            "Batch"
+          ],
+          "type": "string",
+          "example": "HttpRealtimeEndpoint",
+          "x-ms-enum": {
+            "name": "DeploymentType",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "discriminator": "computeType"
     },
     "DockerImageResponse": {
       "type": "object",
@@ -3701,6 +3507,19 @@
             "modelAsString": true
           }
         },
+        "osType": {
+          "description": "The target operating system.",
+          "enum": [
+            "Linux",
+            "Windows"
+          ],
+          "type": "string",
+          "example": "linux",
+          "x-ms-enum": {
+            "name": "OSType",
+            "modelAsString": true
+          }
+        },
         "runtimeType": {
           "description": "The target runtime type.",
           "enum": [
@@ -3731,20 +3550,6 @@
     },
     "FPGADockerImageResponse": {
       "description": "The FPGA Docker Image response.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ImageResponseBase"
-        },
-        {
-          "type": "object",
-          "properties": {}
-        }
-      ],
-      "properties": {}
-    },
-    "FPGAImageResponse": {
-      "description": "The FPGA Image response.",
       "type": "object",
       "allOf": [
         {
@@ -3836,19 +3641,6 @@
       ],
       "properties": {}
     },
-    "FPGAImageRequest": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ImageRequestBase"
-        },
-        {
-          "type": "object",
-          "properties": {}
-        }
-      ],
-      "properties": {}
-    },
     "ACIServiceResponse": {
       "description": "The response for an AKS service.",
       "type": "object",
@@ -3915,6 +3707,10 @@
               "description": "The public IP address for the service.",
               "type": "string"
             },
+            "publicFqdn": {
+              "description": "The public Fqdn for the service.",
+              "type": "string"
+            },
             "swaggerUri": {
               "description": "The Uri for sending swagger requests.",
               "type": "string"
@@ -3929,7 +3725,8 @@
           }
         }
       ],
-      "properties": {}
+      "properties": {},
+      "x-ms-discriminator-value": "ACI"
     },
     "ContainerResourceRequirements": {
       "description": "The resource requirements for the container (cpu and memory).",
@@ -4023,7 +3820,7 @@
         }
       }
     },
-    "AmlComputeBatchServiceResponse": {
+    "BatchServiceResponse": {
       "type": "object",
       "allOf": [
         {
@@ -4042,6 +3839,12 @@
             "computeName": {
               "type": "string"
             },
+            "environmentName": {
+              "type": "string"
+            },
+            "environmentVersion": {
+              "type": "string"
+            },
             "scoringUri": {
               "type": "string"
             },
@@ -4054,11 +3857,19 @@
             "entryScript": {
               "type": "string"
             },
-            "snapshotId": {
+            "inputFormat": {
               "type": "string"
             },
-            "enableGpu": {
-              "type": "boolean"
+            "outputAction": {
+              "type": "string"
+            },
+            "miniBatchSize": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "errorThreshold": {
+              "format": "double",
+              "type": "number"
             },
             "nodeCount": {
               "format": "int32",
@@ -4071,56 +3882,8 @@
           }
         }
       ],
-      "properties": {}
-    },
-    "FPGAServiceResponse": {
-      "description": "The response for a FPGA service.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResponseBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "imageId": {
-              "description": "The Id of the Image.",
-              "type": "string"
-            },
-            "imageDetails": {
-              "$ref": "#/definitions/FPGAImageResponse",
-              "description": "The Image details."
-            },
-            "numReplicas": {
-              "format": "int32",
-              "description": "The number of replicas in the web service.",
-              "type": "integer"
-            },
-            "ipAddress": {
-              "description": "The IP address of the service.",
-              "type": "string"
-            },
-            "port": {
-              "format": "int32",
-              "description": "The port of the service.",
-              "type": "integer"
-            },
-            "sslEnabled": {
-              "description": "Whether or not SSL is enabled.",
-              "type": "boolean"
-            },
-            "sslCertificate": {
-              "description": "The SSL certificate.",
-              "type": "string"
-            },
-            "sslKey": {
-              "description": "The SSL key.",
-              "type": "string"
-            }
-          }
-        }
-      ],
-      "properties": {}
+      "properties": {},
+      "x-ms-discriminator-value": "AMLCOMPUTE"
     },
     "IotServiceResponse": {
       "type": "object",
@@ -4149,11 +3912,21 @@
               "items": {
                 "$ref": "#/definitions/IotModuleSettings"
               }
+            },
+            "authEnabled": {
+              "type": "boolean"
+            },
+            "imageDetails": {
+              "$ref": "#/definitions/ImageResponseBase"
+            },
+            "imageId": {
+              "type": "string"
             }
           }
         }
       ],
-      "properties": {}
+      "properties": {},
+      "x-ms-discriminator-value": "IOT"
     },
     "IotModuleSettings": {
       "type": "object",
@@ -4181,12 +3954,63 @@
         }
       }
     },
+    "K8SEndpointResponse": {
+      "description": "The response for an AKS Endpoint.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResponseBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "computeName": {
+              "description": "The name of the compute resource.",
+              "type": "string"
+            },
+            "namespace": {
+              "description": "The Kubernetes namespace of the deployment.",
+              "type": "string"
+            },
+            "appInsightsEnabled": {
+              "description": "Whether or not Application Insights is enabled.",
+              "type": "boolean"
+            },
+            "authEnabled": {
+              "description": "Whether or not authentication is enabled.",
+              "type": "boolean"
+            },
+            "aadAuthEnabled": {
+              "description": "Whether or not AAD authentication is enabled.",
+              "type": "boolean"
+            },
+            "swaggerUri": {
+              "description": "The Uri for sending swagger requests.",
+              "type": "string"
+            },
+            "scoringUri": {
+              "description": "The Uri for sending scoring requests.",
+              "type": "string"
+            },
+            "variants": {
+              "description": "All the variants that belongs to this endpoint.",
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AKSServiceResponse"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {}
+    },
     "AKSServiceResponse": {
       "description": "The response for an AKS service.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ServiceResponseBase"
+          "$ref": "#/definitions/K8SVariantResponse"
         },
         {
           "type": "object",
@@ -4271,6 +4095,10 @@
               "description": "Whether or not authentication is enabled.",
               "type": "boolean"
             },
+            "aadAuthEnabled": {
+              "description": "Whether or not AAD authentication is enabled.",
+              "type": "boolean"
+            },
             "swaggerUri": {
               "description": "The Uri for sending swagger requests.",
               "type": "string"
@@ -4285,7 +4113,8 @@
           }
         }
       ],
-      "properties": {}
+      "properties": {},
+      "x-ms-discriminator-value": "AKS"
     },
     "AutoScaler": {
       "description": "The Auto Scaler properties.",
@@ -4380,6 +4209,42 @@
         }
       }
     },
+    "K8SVariantResponse": {
+      "description": "The response for an AKS variant.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResponseBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "isDefault": {
+              "description": "Is this the default variant.",
+              "type": "boolean"
+            },
+            "trafficPercentile": {
+              "format": "float",
+              "description": "The amount of traffic variant receives.",
+              "type": "number"
+            },
+            "type": {
+              "description": "The type of the variant.",
+              "enum": [
+                "Control",
+                "Treatment"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "VariantType",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ],
+      "properties": {}
+    },
     "ACIServiceCreateRequest": {
       "type": "object",
       "allOf": [
@@ -4449,10 +4314,11 @@
           }
         }
       ],
-      "properties": {}
+      "properties": {},
+      "x-ms-discriminator-value": "ACI"
     },
-    "FPGAServiceCreateRequest": {
-      "description": "The request to create a FPGA service.",
+    "CreateEndpointRequest": {
+      "description": "The request to create an Endpoint in the AKS.",
       "type": "object",
       "allOf": [
         {
@@ -4461,79 +4327,32 @@
         {
           "type": "object",
           "properties": {
-            "numReplicas": {
-              "format": "int32",
-              "description": "The number of replicas in the web service.",
-              "type": "integer"
+            "computeName": {
+              "description": "The name of the compute resource.",
+              "type": "string"
             },
-            "sslEnabled": {
-              "description": "Whether or not SSL is enabled.",
+            "appInsightsEnabled": {
+              "description": "Whether or not Application Insights is enabled.",
               "type": "boolean"
             },
-            "sslCertificate": {
-              "description": "The SSL certificate.",
+            "authEnabled": {
+              "description": "Whether or not authentication is enabled.",
+              "type": "boolean"
+            },
+            "aadAuthEnabled": {
+              "description": "Whether or not AAD authentication is enabled.",
+              "type": "boolean"
+            },
+            "namespace": {
+              "description": "Kubernetes namespace for the service.",
               "type": "string"
             },
-            "sslKey": {
-              "description": "The SSL key.",
-              "type": "string"
-            },
-            "creationMode": {
-              "format": "int32",
-              "description": "The service creation mode.",
-              "enum": [
-                "Image",
-                "RegisteredModel",
-                "ModelFiles",
-                "Environment"
-              ],
-              "type": "integer",
-              "x-ms-enum": {
-                "name": "ServiceCreationSource",
-                "modelAsString": true
-              }
-            }
-          }
-        }
-      ],
-      "properties": {}
-    },
-    "CreateIotServiceRequest": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CreateServiceRequest"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "iotDeviceId": {
-              "type": "string"
-            },
-            "routes": {
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "iotEdgeUserModule": {
+            "variants": {
+              "description": "The service tag list.",
               "uniqueItems": false,
               "type": "array",
               "items": {
-                "$ref": "#/definitions/IotModuleSettings"
-              }
-            },
-            "iotEdgeModule": {
-              "$ref": "#/definitions/IotBaseModuleSettings"
-            },
-            "computeName": {
-              "type": "string"
-            },
-            "acrCredentials": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/RegistryInfo"
+                "$ref": "#/definitions/AKSServiceCreateRequest"
               }
             },
             "creationMode": {
@@ -4555,36 +4374,13 @@
         }
       ],
       "properties": {}
-    },
-    "IotBaseModuleSettings": {
-      "type": "object",
-      "properties": {
-        "moduleName": {
-          "type": "string"
-        },
-        "propertiesDesired": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "createOptions": {
-          "type": "string"
-        },
-        "environmentVariables": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
     },
     "AKSServiceCreateRequest": {
       "description": "The request to create an AKS service.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CreateServiceRequest"
+          "$ref": "#/definitions/CreateEndpointVariantRequest"
         },
         {
           "type": "object",
@@ -4644,6 +4440,62 @@
               "$ref": "#/definitions/LivenessProbeRequirements",
               "description": "The liveness probe requirements."
             },
+            "aadAuthEnabled": {
+              "description": "Whether or not AAD authentication is enabled.",
+              "type": "boolean"
+            },
+            "creationMode": {
+              "format": "int32",
+              "description": "The service creation mode.",
+              "enum": [
+                "Image",
+                "RegisteredModel",
+                "ModelFiles",
+                "Environment"
+              ],
+              "type": "integer",
+              "x-ms-enum": {
+                "name": "ServiceCreationSource",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AKS"
+    },
+    "CreateEndpointVariantRequest": {
+      "description": "The Variant properties.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "isDefault": {
+              "description": "Is this the default variant.",
+              "type": "boolean"
+            },
+            "trafficPercentile": {
+              "format": "float",
+              "description": "The amount of traffic variant receives.",
+              "type": "number"
+            },
+            "type": {
+              "description": "The type of the variant.",
+              "enum": [
+                "Control",
+                "Treatment"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "VariantType",
+                "modelAsString": true
+              }
+            },
             "creationMode": {
               "format": "int32",
               "description": "The service creation mode.",
@@ -4663,6 +4515,91 @@
         }
       ],
       "properties": {}
+    },
+    "CreateIotServiceRequest": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CreateServiceRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "iotDeviceId": {
+              "type": "string"
+            },
+            "routes": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              }
+            },
+            "iotEdgeUserModule": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/IotModuleSettings"
+              }
+            },
+            "iotEdgeModule": {
+              "$ref": "#/definitions/IotBaseModuleSettings"
+            },
+            "computeName": {
+              "type": "string"
+            },
+            "acrCredentials": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RegistryInfo"
+              }
+            },
+            "authEnabled": {
+              "type": "boolean"
+            },
+            "creationMode": {
+              "format": "int32",
+              "description": "The service creation mode.",
+              "enum": [
+                "Image",
+                "RegisteredModel",
+                "ModelFiles",
+                "Environment"
+              ],
+              "type": "integer",
+              "x-ms-enum": {
+                "name": "ServiceCreationSource",
+                "modelAsString": true
+              }
+            }
+          }
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "IOT"
+    },
+    "IotBaseModuleSettings": {
+      "type": "object",
+      "properties": {
+        "moduleName": {
+          "type": "string"
+        },
+        "propertiesDesired": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "createOptions": {
+          "type": "string"
+        },
+        "environmentVariables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
     },
     "CreateServiceInMirRequest": {
       "description": "The request to create a service on MIR resource.",
@@ -4732,6 +4669,71 @@
         }
       ],
       "properties": {}
+    },
+    "RegisterBatchServiceRequest": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RegisterServiceRequest"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "modelIds": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "computeName": {
+              "type": "string"
+            },
+            "environmentName": {
+              "type": "string"
+            },
+            "environmentVersion": {
+              "type": "string"
+            },
+            "scoringUri": {
+              "type": "string"
+            },
+            "appInsightsEnabled": {
+              "type": "boolean"
+            },
+            "modelDataCollection": {
+              "$ref": "#/definitions/ModelDataCollection"
+            },
+            "entryScript": {
+              "type": "string"
+            },
+            "inputFormat": {
+              "type": "string"
+            },
+            "outputAction": {
+              "type": "string"
+            },
+            "miniBatchSize": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "errorThreshold": {
+              "format": "double",
+              "type": "number"
+            },
+            "nodeCount": {
+              "format": "int32",
+              "type": "integer"
+            },
+            "processCountPerNode": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "AMLCOMPUTE"
     }
   },
   "securityDefinitions": {

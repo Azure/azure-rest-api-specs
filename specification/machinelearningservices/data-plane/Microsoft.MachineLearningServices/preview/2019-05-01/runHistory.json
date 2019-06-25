@@ -17,10 +17,7 @@
         "description": "Post event data to a specific Run Id.",
         "operationId": "Events_BatchPost",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -90,10 +87,7 @@
         "description": "Post event data to a specific Run Id.",
         "operationId": "Events_Post",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -387,10 +381,7 @@
         "description": "Get all experiments in a specific workspace with the specified query filters.",
         "operationId": "Experiments_GetByQuery",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -643,10 +634,7 @@
         "description": "Add or Modify a batch of Runs for a given experiment.",
         "operationId": "Runs_BatchAddOrModify",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -780,10 +768,7 @@
         "description": "Add a new Run or Modify an existing Run.",
         "operationId": "Runs_Patch",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -861,10 +846,7 @@
         "description": "Delete list of Tags from a specific Run Id.",
         "operationId": "Runs_DeleteTags",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1059,10 +1041,7 @@
         "description": "Get all Runs for a specific Experiment with the specified query filters.",
         "operationId": "Runs_GetByQuery",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1707,10 +1686,7 @@
         "description": "Create a batch of empty Artifacts in a specific Run.",
         "operationId": "RunArtifacts_BatchCreateEmptyArtifacts",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1787,10 +1763,7 @@
         "description": "Post a Metric to a specific Run Id.",
         "operationId": "RunMetrics_Post",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -1864,10 +1837,7 @@
         "description": "Post Metrics to a specific Run Id.",
         "operationId": "RunMetrics_BatchPost",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -2164,10 +2134,7 @@
         "description": "Get all Run Metrics for the specific Experiment with the specified query filters.",
         "operationId": "RunMetrics_GetByQuery",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
           "application/json"
@@ -2500,11 +2467,11 @@
       }
     },
     "PaginatedExperimentList": {
-      "description": "A paginated list of items and an optional link to the next page of items.",
+      "description": "A paginated list of Experiments.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of items in this page.",
+          "description": "An array of objects of type Experiment.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2522,11 +2489,11 @@
       }
     },
     "PaginatedRunList": {
-      "description": "A paginated list of items and an optional link to the next page of items.",
+      "description": "A paginated list of Runs.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of items in this page.",
+          "description": "An array of objects of type Run.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2955,11 +2922,11 @@
       }
     },
     "PaginatedArtifactList": {
-      "description": "A paginated list of items and an optional link to the next page of items.",
+      "description": "A paginated list of Artifacts.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of items in this page.",
+          "description": "An array of objects of type Artifact.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -2997,6 +2964,70 @@
         "createdTime": {
           "format": "date-time",
           "type": "string"
+        },
+        "dataPath": {
+          "$ref": "#/definitions/DataPath"
+        }
+      }
+    },
+    "DataPath": {
+      "type": "object",
+      "properties": {
+        "dataStoreName": {
+          "type": "string"
+        },
+        "relativePath": {
+          "type": "string"
+        },
+        "sqlDataPath": {
+          "$ref": "#/definitions/SqlDataPath"
+        }
+      }
+    },
+    "SqlDataPath": {
+      "type": "object",
+      "properties": {
+        "sqlTableName": {
+          "type": "string"
+        },
+        "sqlQuery": {
+          "type": "string"
+        },
+        "sqlStoredProcedureName": {
+          "type": "string"
+        },
+        "sqlStoredProcedureParams": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        }
+      }
+    },
+    "StoredProcedureParameter": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "value": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "String",
+            "Int",
+            "Decimal",
+            "Guid",
+            "Boolean",
+            "Date"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StoredProcedureParameterType",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -3018,11 +3049,11 @@
       }
     },
     "PaginatedArtifactContentInformationList": {
-      "description": "A paginated list of items and an optional link to the next page of items.",
+      "description": "A paginated list of ArtifactContentInformations.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of items in this page.",
+          "description": "An array of objects of type ArtifactContentInformation.",
           "uniqueItems": false,
           "type": "array",
           "items": {
@@ -3224,11 +3255,11 @@
       }
     },
     "PaginatedRunMetricList": {
-      "description": "A paginated list of items and an optional link to the next page of items.",
+      "description": "A paginated list of RunMetrics.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of items in this page.",
+          "description": "An array of objects of type RunMetric.",
           "uniqueItems": false,
           "type": "array",
           "items": {
