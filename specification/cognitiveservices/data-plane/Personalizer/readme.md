@@ -32,7 +32,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
-  - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_personalizer']
@@ -46,7 +45,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Personalizer
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Personalizer/src/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Personalizer/src/Generated
   sync-methods: all
   clear-output-folder: true
 

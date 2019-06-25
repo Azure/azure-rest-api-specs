@@ -83,7 +83,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DeviceProvisioningServices
-  output-folder: $(csharp-sdks-folder)/DeviceProvisioningServices/Management.DeviceProvisioningServices/Generated
+  output-folder: $(csharp-sdks-folder)/deviceprovisioningservices/Microsoft.Azure.Management.DeviceProvisioningServices/src/Generated
   clear-output-folder: true
 ```
 
@@ -106,12 +106,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothubprovisioningservices/azure/mgmt/iothubprovisioningservices
+  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices/azure/mgmt/iothubprovisioningservices
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-iothubprovisioningservices
+  output-folder: $(python-sdks-folder)/iothub/azure-mgmt-iothubprovisioningservices
 ```
 
 ## Go

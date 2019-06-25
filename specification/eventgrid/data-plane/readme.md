@@ -54,6 +54,7 @@ input-file:
 - Microsoft.Media/stable/2018-01-01/MediaServices.json
 - Microsoft.Maps/stable/2018-01-01/Maps.json
 - Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
+- Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
 ```
 
 ---
@@ -91,34 +92,6 @@ csharp:
   clear-output-folder: true
 ```
 
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  add-credentials: true
-  namespace: azure.eventgrid
-  package-name: azure-eventgrid
-  package-version: 1.0.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-eventgrid/azure/eventgrid
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-eventgrid
-```
 
 ## Go
 
