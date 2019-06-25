@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-05-01-preview",
+    "version": "2018-06-01-preview",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -16,6 +16,52 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/instancePools/{instancePoolName}/managedInstances": {
+      "get": {
+        "tags": [
+          "ManagedInstances"
+        ],
+        "description": "Gets a list of all managed instances in an instance pool.",
+        "operationId": "ManagedInstances_ListByInstancePool",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "name": "instancePoolName",
+            "in": "path",
+            "description": "The instance pool name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of managed instances.",
+            "schema": {
+              "$ref": "#/definitions/ManagedInstanceListResult"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 404 InstancePoolNotFound - An instance pool cannot be found"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed instances by instance pool": {
+            "$ref": "./examples/ManagedInstanceListByInstancePool.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/managedInstances": {
       "get": {
         "tags": [
