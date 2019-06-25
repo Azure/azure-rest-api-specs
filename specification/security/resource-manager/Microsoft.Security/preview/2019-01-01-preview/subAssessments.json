@@ -170,7 +170,7 @@
 				"impact": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Description of the impact of resolving this sub-assessment"
+					"description": "Description of the impact of this sub-assessment"
 				},
 				"category": {
 					"readOnly": true,
@@ -186,7 +186,7 @@
 					"readOnly": true,
 					"type": "string",
 					"format": "date-time",
-					"description": "The date and time the sub-assessement was generated"
+					"description": "The date and time the sub-assessment was generated"
 				},
 				"resourceDetails": {
 					"$ref": "#/definitions/ResourceDetails"
@@ -205,7 +205,7 @@
 					"readOnly": true,
 					"type": "string",
 					"description": "The platform where the assessed resource resides",
-					"enum": ["Azure", "OnPremise"],
+					"enum": ["Azure", "Aws"],
 					"x-ms-enum": {
 						"name": "Source",
 						"modelAsString": true,
@@ -214,10 +214,45 @@
 								"value": "Azure"
 							},
 							{
-								"value": "OnPrem"
+								"value": "Aws"
 							}
 						]
 					}
+				}
+			}
+		},
+		"AzureResourceDetails": {
+			"type": "object",
+			"description": "Details of the resource that was assessed",
+			"x-ms-discriminator-value": "Azure",
+			"allOf": [{
+				"$ref": "#/definitions/ResourceDetails"
+			}],
+			"properties": {
+				"id": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Azure resource ID of the assessed resource"
+				}
+			}
+		},
+		"AwsResourceDetails": {
+			"type": "object",
+			"description": "Details of the resource that was assessed",
+			"x-ms-discriminator-value": "Aws",
+			"allOf": [{
+				"$ref": "#/definitions/ResourceDetails"
+			}],
+			"properties": {
+				"accountId": {
+					"readOnly": true,
+					"type": "string",
+					"description": "AWS account ID"
+				},
+				"awsResourceId": {
+					"readOnly": true,
+					"type": "string",
+					"description": "AWS resource ID. can be ARN or other"
 				}
 			}
 		},
@@ -229,7 +264,7 @@
 				"assessedResourceType": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Sub-assessement resource type",
+					"description": "Sub-assessment resource type",
 					"enum": ["SqlServerSubAssessment", "ContainerRegistryVulnerabilitySubAssessment", "ServerVulnerabilitySubAssessment"],
 					"x-ms-enum": {
 						"name": "AssessedResourceType",
