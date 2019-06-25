@@ -284,10 +284,22 @@
           "type": "boolean",
           "description": "True if this assessment is in preview release status"
         },
-          "BuiltIn": {
+          "assessmentType": {
           "readOnly": true,
-          "type": "boolean",
-          "description": "True if this assessment is an built in Azure Security Center assessment"
+          "type": "string",
+          "description": "BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment based on custom Azure Policy definition"
+          "enum": ["BuiltIn", "Custom"],
+          "x-ms-enum": {
+            "name": "assessmentType",
+            "modelAsString": true,
+            "values": [{
+                "value": "BuiltIn"
+              },
+              {
+                "value": "Custom"
+              }
+            ]
+          }
         }
       }
     }
