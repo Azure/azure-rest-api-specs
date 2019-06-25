@@ -526,7 +526,11 @@
         },
         "priority": {
           "description": "Defines in what order this rule be evaluated in the overall list of custom rules",
-          "type": "integer"
+          "type": "integer",
+          "maximum": 1000,
+          "exclusiveMaximum": false,
+          "minimum": 0,
+          "exclusiveMinimum": false          
         },
         "matchConditions": {
           "description": "List of match conditions.",
