@@ -38,7 +38,7 @@
       "get": {
         "x-ms-examples": {
           "Get Security Solutions Analytics": {
-            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAnalytics_example.json"
+            "$ref": "./examples/IoTSecuritySolutionsAnalytics/GetIoTSecuritySolutionsSecurityAnalyticsList_example.json"
           }
         },
         "tags": [
@@ -64,7 +64,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModel"
+              "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModelList"
             }
           },
           "default": {
@@ -379,7 +379,7 @@
       "type": "object",
       "description": "Security Analytics of a security solution",
       "properties": {
-         "properties": {
+        "properties": {
           "x-ms-client-flatten": true,
           "description": "Security Solution  Aggregated Alert data",
           "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModelProperties"
@@ -400,7 +400,7 @@
           "description": "Security Analytics of a security solution",
           "readOnly": true
         },
-        "unhealthyDevices": {
+        "unhealthyDeviceCount": {
           "type": "integer",
           "readOnly": true,
           "description": "number of unhealthy devices"
@@ -433,6 +433,26 @@
           "description": "The list of most prevalent 3 devices.",
           "type": "object",
           "$ref": "#/definitions/IoTSecurityDeviceAlertsList"
+        }
+      }
+    },
+    "IoTSecuritySolutionAnalyticsModelList": {
+      "description": "List of Security Analytics of a security solution",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Security Analytics of a security solution",
+          "items": {
+            "$ref": "#/definitions/IoTSecuritySolutionAnalyticsModel"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
         }
       }
     },
@@ -631,12 +651,12 @@
       "properties": {
         "recommendationName": {
           "type": "string",
-          "description": "Name of the alert type"
+          "description": "Name of the recommendation"
         },
         "recommendationDisplayName": {
           "readOnly": true,
           "type": "string",
-          "description": "Display name of the alert type"
+          "description": "Display name of the resommendation type"
         },
         "description": {
           "readOnly": true,
@@ -651,7 +671,7 @@
         "detectedBy": {
           "readOnly": true,
           "type": "string",
-          "description": "Name of the vendor that discovered the incident"
+          "description": "Name of the vendor that discovered the issue"
         },
         "reportedSeverity": {
           "readOnly": true,
@@ -687,7 +707,7 @@
           "type": "integer",
           "description": "the number of the healthy devices within the solution"
         },
-        "unhealthyDevices": {
+        "unhealthyDeviceCount": {
           "readOnly": true,
           "type": "integer",
           "description": "the number of the unhealthy devices within the solution"
@@ -749,7 +769,7 @@
       "name": "aggregatedRecommendationName",
       "in": "path",
       "required": true,
-      "description": "Identifier of the aggregated alert",
+      "description": "Identifier of the aggregated recommendation",
       "type": "string",
       "x-ms-parameter-location": "method"
     }
