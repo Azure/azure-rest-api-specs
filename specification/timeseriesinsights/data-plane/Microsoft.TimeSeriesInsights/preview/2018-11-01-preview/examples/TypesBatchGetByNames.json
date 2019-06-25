@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "parameters": {
+      "get": {
+        "names": [
+          "DefaultType",
+          "TemperatureSensor"
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "get": [
+          {
+            "timeSeriesType": {
+              "id": "1be09af9-f089-4d6b-9f0b-48018b5f7393",
+              "name": "DefaultType",
+              "description": "Default type",
+              "variables": {
+                "EventCount": {
+                  "kind": "aggregate",
+                  "filter": null,
+                  "aggregation": {
+                    "tsx": "count()"
+                  }
+                }
+              }
+            },
+            "error": null
+          },
+          {
+            "timeSeriesType": {
+              "id": "c1cb7a33-ed9b-4cf1-9958-f3162fed8ee8",
+              "name": "TemperatureSensor",
+              "description": "This is a temperature sensor.",
+              "variables": {
+                "AverageTemperature": {
+                  "kind": "numeric",
+                  "value": {
+                    "tsx": "$event.Temperature.Double"
+                  },
+                  "filter": null,
+                  "aggregation": {
+                    "tsx": "avg($value)"
+                  }
+                }
+              }
+            },
+            "error": null
+          }
+        ]
+      }
+    }
+  }
+}

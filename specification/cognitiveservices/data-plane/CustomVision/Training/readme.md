@@ -79,7 +79,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Vision.CustomVision.Training
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/CustomVision/Training/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Vision.CustomVision.Training/src/Generated
   clear-output-folder: true
 ```
 
@@ -102,12 +102,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision/azure/cognitiveservices/vision/customvision/training
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-customvision/azure/cognitiveservices/vision/customvision/training
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-customvision
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-customvision
 ```
 
 ## Go

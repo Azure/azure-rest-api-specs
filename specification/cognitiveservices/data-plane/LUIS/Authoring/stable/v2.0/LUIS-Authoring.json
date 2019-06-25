@@ -738,6 +738,12 @@
             "schema": {
               "$ref": "#/definitions/GuidResponse"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [
@@ -1313,55 +1319,55 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/models/{modelId}/examples": {
-     "get": {
-       "description": "Gets the example utterances for the given intent or entity model in a version of the application.",
-       "operationId": "Model_Examples",
-       "parameters": [
-         {
-           "$ref": "#/parameters/AppIdInPath"
-         },
-         {
-           "$ref": "#/parameters/VersionIdInPath"
-         },
-         {
+      "get": {
+        "description": "Gets the example utterances for the given intent or entity model in a version of the application.",
+        "operationId": "Model_Examples",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "modelId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The ID (GUID) of the model.",
             "x-ms-parameter-location": "method"
-           },
-         {
-           "$ref": "#/parameters/SkipInPath"
-         },
-         {
-           "$ref": "#/parameters/TakeInPath"
-         }
-       ],
-       "responses": {
-         "200": {
-           "description": "A list of example utterances for the model.",
-           "schema": {
-             "$ref": "#/definitions/ExamplesPerModelResponseObject"
-           }
-         },
-         "default": {
-           "description": "Error Response.",
-           "schema": {
-             "$ref": "#/definitions/ErrorResponse"
-           }
-         }
-       },
-       "produces": [
-         "application/json"
-       ],
-       "x-ms-examples": {
-         "Successful Get Examples Per Model Request": {
-           "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
-         }
-       }
-     }
-   },
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of example utterances for the model.",
+            "schema": {
+              "$ref": "#/definitions/ExamplesPerModelResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Examples Per Model Request": {
+            "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
       "get": {
         "description": "Gets information about the intent model in a version of the application.",
@@ -2189,7 +2195,7 @@
             "description": "The sublist ID.",
             "required": true,
             "type": "integer",
-            "format":  "int64"
+            "format": "int64"
           }
         ],
         "responses": {
@@ -2764,7 +2770,7 @@
           {
             "name": "versionCloneObject",
             "in": "body",
-            "required":  true,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
@@ -7813,7 +7819,7 @@
         }
       }
     }
-  }, 
+  },
   "definitions": {
     "EntityLabelObject": {
       "description": "Defines the entity type and position of the extracted entity within the example.",
@@ -8712,7 +8718,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description":  "The utterance. For example, \"What's the weather like in seattle?\""
+          "description": "The utterance. For example, \"What's the weather like in seattle?\""
         },
         "tokenizedText": {
           "type": "array",
@@ -8937,7 +8943,8 @@
         "Prebuilt Entity Extractor",
         "Intent Classifier",
         "Pattern.Any Entity Extractor",
-        "Regular Expression Entity Extractor"
+        "Closed List Entity Extractor",
+        "Regex Entity Extractor"
       ]
     },
     "HierarchicalEntityExtractor": {
@@ -9976,14 +9983,14 @@
         "$ref": "#/definitions/PatternRuleInfo"
       }
     },
-    "ExamplesPerModelResponseObject":{
+    "ExamplesPerModelResponseObject": {
       "description": "A list of example utterances per model.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LabelTextObject"
       }
     },
-    "LabelTextObject":{
+    "LabelTextObject": {
       "description": "An object containing the example utterance's text.",
       "type": "object",
       "properties": {

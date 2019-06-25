@@ -41,7 +41,6 @@ model-validator: true
 message-format: json
 ```
 
-
 ### Tag: package-2019-04
 
 These settings apply only when `--tag=package-2019-04` is specified on the command line.
@@ -50,13 +49,15 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
   - Microsoft.ResourceGraph/stable/2019-04-01/resourcegraph.json
 ```
+
 ### Tag: package-2018-09-preview
 
 These settings apply only when `--tag=package-2018-09-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
-- Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2018-09-01-preview/resourcegraph.json
+  - Microsoft.ResourceGraph/preview/2018-09-01-preview/graphquery.json
 ```
 
 # Code Generation
@@ -84,7 +85,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ResourceGraph
-  output-folder: $(csharp-sdks-folder)/ResourceGraph/Management/Management.ResourceGraph/Generated
+  output-folder: $(csharp-sdks-folder)/resourcegraph/Microsoft.Azure.Management.ResourceGraph/src/Generated
   clear-output-folder: true
 ```
 
@@ -95,3 +96,20 @@ See configuration in [readme.java.md](./readme.java.md)
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: ListInOperationName
+    from: resourcegraph.json
+    where: '$.paths["/providers/Microsoft.ResourceGraph/resourceChanges"].post.operationId'
+    reason: |-
+      1. Is this rule applicable? R1003 ListInOperationName says: "Per ARM SDK guidelines, each 'GET' operation on a resource should have "list" in the name...". However, this is POST, not GET.
+
+      2. If the rule is applicable anyway, how should we fix it? Renaming it to ResourceChanges_List causes another warning:
+              "OperationId should contain the verb: 'resourcechanges' in:'ResourceChanges_List'. Consider updating the operationId"
+      Renaming it to ResourceChanges_ListResourceChanges causes yet another warning:
+              "Per the Noun_Verb convention for Operation Ids, the noun 'ResourceChanges' should not appear after the underscore."
+      Renaming it to ResourceChanges_Listresourcechanges seems to get rid of warnings, but the result looks very strange.
+```

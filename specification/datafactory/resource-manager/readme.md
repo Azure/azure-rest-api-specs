@@ -77,7 +77,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataFactory
-  output-folder: $(csharp-sdks-folder)/DataFactory/Management.DataFactory/Generated
+  output-folder: $(csharp-sdks-folder)/datafactory/Microsoft.Azure.Management.DataFactory/src/Generated
   clear-output-folder: true
 ```
 
@@ -101,12 +101,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datafactory/azure/mgmt/datafactory
+  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory/azure/mgmt/datafactory
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datafactory
+  output-folder: $(python-sdks-folder)/datafactory/azure-mgmt-datafactory
 ```
 
 ## Go

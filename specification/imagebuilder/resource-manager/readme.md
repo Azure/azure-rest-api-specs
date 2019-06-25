@@ -90,19 +90,19 @@ python:
   namespace: azure.mgmt.imagebuilder
   package-name: azure-mgmt-imagebuilder
   clear-output-folder: true
-  package-version: 0.1.0
+  package-version: 0.2.1
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-imagebuilder/azure/mgmt/imagebuilder
+  output-folder: $(python-sdks-folder)/compute/azure-mgmt-imagebuilder/azure/mgmt/imagebuilder
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-imagebuilder
+  output-folder: $(python-sdks-folder)/compute/azure-mgmt-imagebuilder
 ```
 
 ## Go

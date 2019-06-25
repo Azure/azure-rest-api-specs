@@ -3,39 +3,8 @@
     "api-version": "2018-11-01-preview",
     "billingAccountName": "{billingAccountName}",
     "parameters": {
-      "displayName": "invoiceSectionName1",
-      "billingProfiles": [
-        {
-          "id": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/BillingProfileId1",
-          "name": "BillingProfileId1",
-          "type": "Microsoft.Billing/billingProfiles",
-          "properties": {
-            "displayName": "BillingProfileName1",
-            "poNumber": "ABC12345",
-            "billingAddress": {
-              "addressLine1": "Test Address",
-              "addressLine2": "Test Address",
-              "addressLine3": "Test Address",
-              "city": "City",
-              "postalCode": "00000",
-              "region": "WA",
-              "country": "US"
-            },
-            "isClassic": false,
-            "currency": "USD",
-            "enabledAzureSKUs": [
-              {
-                "skuId": "0001",
-                "skuDescription": "Microsoft Azure Dev/Test"
-              },
-              {
-                "skuId": "0002",
-                "skuDescription": "Microsoft Azure Standard"
-              }
-            ]
-          }
-        }
-      ]
+      "displayName": "invoiceSection1",
+      "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000"
     }
   },
   "responses": {
@@ -52,7 +21,7 @@
         "name": "invoiceSectionId1",
         "type": "Microsoft.Billing/invoiceSections",
         "properties": {
-          "displayName": "invoiceSectionName1"
+          "displayName": "invoiceSection1"
         }
       }
     }
