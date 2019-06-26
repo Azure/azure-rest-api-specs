@@ -297,18 +297,22 @@
           "items": {
             "$ref": "#/definitions/MetricSettings"
           },
-          "description": "the list of metric settings."
+          "description": "The list of metric settings."
         },
         "logs": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/LogSettings"
           },
-          "description": "the list of logs settings."
+          "description": "The list of logs settings."
         },
         "workspaceId": {
           "type": "string",
-          "description": "The workspace ID (resource ID of a Log Analytics workspace) for a Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+          "description": "The full ARM resource ID of the Log Analytics workspace to which you would like to send Diagnostic Logs. Example: /subscriptions/4b9e8510-67ab-4e9a-95a9-e2f1e570ea9c/resourceGroups/insights-integration/providers/Microsoft.OperationalInsights/workspaces/viruela2"
+        },
+        "logAnalyticsDestinationType": {
+          "type": "string",
+          "description": "A string indicating whether the export to Log Analytics should use the default destination type, i.e. AzureDiagnostics, or use a destination type constructed as follows: <normalized service identity>_<normalized category name>. Possible values are: Dedicated and null (null is default.)"
         }
       },
       "description": "The diagnostic settings."
