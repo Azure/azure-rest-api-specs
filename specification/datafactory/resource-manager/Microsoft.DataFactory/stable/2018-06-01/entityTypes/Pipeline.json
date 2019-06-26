@@ -205,7 +205,7 @@
         "type": "object"
       }
     },
-    "ConnectorReadSetting": {
+    "StoreReadSettings": {
       "description": "Connector read setting.",
       "type": "object",
       "properties": {
@@ -225,12 +225,12 @@
         "type"
       ]
     },
-    "AzureBlobStorageReadSetting": {
+    "AzureBlobStorageReadSettings": {
       "description": "Azure blob read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -260,12 +260,12 @@
         }
       }
     },
-    "AzureBlobFSReadSetting": {
+    "AzureBlobFSReadSettings": {
       "description": "Azure blobFS read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -295,12 +295,12 @@
         }
       }
     },
-    "AzureDataLakeStoreReadSetting": {
+    "AzureDataLakeStoreReadSettings": {
       "description": "Azure data lake store read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -330,12 +330,12 @@
         }
       }
     },
-    "AmazonS3ReadSetting": {
+    "AmazonS3ReadSettings": {
       "description": "Azure data lake store read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -369,12 +369,12 @@
         }
       }
     },
-    "FileServerReadSetting": {
+    "FileServerReadSettings": {
       "description": "File server read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -404,12 +404,12 @@
         }
       }
     },
-    "FtpReadSetting": {
+    "FtpReadSettings": {
       "description": "Ftp read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -431,12 +431,12 @@
         }
       }
     },
-    "SftpReadSetting": {
+    "SftpReadSettings": {
       "description": "Sftp read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -462,12 +462,12 @@
         }
       }
     },
-    "HttpReadSetting": {
+    "HttpReadSettings": {
       "description": "Sftp read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -489,12 +489,12 @@
         }
       }
     },
-    "HdfsReadSetting": {
+    "HdfsReadSettings": {
       "description": "HDFS read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorReadSetting"
+          "$ref": "#/definitions/StoreReadSettings"
         }
       ],
       "properties": {
@@ -528,7 +528,7 @@
         }
       }
     },
-    "ConnectorWriteSetting": {
+    "StoreWriteSettings": {
       "description": "Connector write settings.",
       "type": "object",
       "properties": {
@@ -552,43 +552,43 @@
         "type"
       ]
     },
-    "AzureBlobStorageWriteSetting": {
+    "AzureBlobStorageWriteSettings": {
       "description": "Azure blob write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorWriteSetting"
+          "$ref": "#/definitions/StoreWriteSettings"
         }
       ]
     },
-    "AzureBlobFSWriteSetting": {
+    "AzureBlobFSWriteSettings": {
       "description": "Azure blobFS write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorWriteSetting"
+          "$ref": "#/definitions/StoreWriteSettings"
         }
       ]
     },
-    "AzureDataLakeStoreWriteSetting": {
+    "AzureDataLakeStoreWriteSettings": {
       "description": "Azure data lake store write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorWriteSetting"
+          "$ref": "#/definitions/StoreWriteSettings"
         }
       ]
     },
-    "FileServerWriteSetting": {
+    "FileServerWriteSettings": {
       "description": "File server write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ConnectorWriteSetting"
+          "$ref": "#/definitions/StoreWriteSettings"
         }
       ]
     },
-    "FormatReadSetting": {
+    "FormatReadSettings": {
       "description": "Format read settings.",
       "type": "object",
       "properties": {
@@ -604,12 +604,12 @@
         "type"
       ]
     },
-    "DelimitedTextReadSetting": {
+    "DelimitedTextReadSettings": {
       "description": "Delimited text read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FormatReadSetting"
+          "$ref": "#/definitions/FormatReadSettings"
         }
       ],
       "properties": {
@@ -619,7 +619,7 @@
         }
       }
     },
-    "FormatWriteSetting": {
+    "FormatWriteSettings": {
       "description": "Format write settings.",
       "type": "object",
       "properties": {
@@ -635,12 +635,12 @@
         "type"
       ]
     },
-    "DelimitedTextWriteSetting": {
+    "DelimitedTextWriteSettings": {
       "description": "Delimited text write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FormatWriteSetting"
+          "$ref": "#/definitions/FormatWriteSettings"
         }
       ],
       "properties": {
@@ -667,7 +667,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/ConnectorReadSetting",
+          "$ref": "#/definitions/StoreReadSettings",
           "description": "Parquet store settings."
         }
       }
@@ -682,11 +682,11 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/ConnectorReadSetting",
+          "$ref": "#/definitions/StoreReadSettings",
           "description": "DelimitedText store settings."
         },
         "formatSettings": {
-          "$ref": "#/definitions/DelimitedTextReadSetting",
+          "$ref": "#/definitions/DelimitedTextReadSettings",
           "description": "DelimitedText format settings."
         }
       }
@@ -701,11 +701,11 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/ConnectorWriteSetting",
+          "$ref": "#/definitions/StoreWriteSettings",
           "description": "DelimitedText store settings."
         },
         "formatSettings": {
-          "$ref": "#/definitions/DelimitedTextWriteSetting",
+          "$ref": "#/definitions/DelimitedTextWriteSettings",
           "description": "DelimitedText format settings."
         }
       }
@@ -939,7 +939,7 @@
         },
         "readBehavior": {
           "description": "The read behavior for the operation. Default is Query.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Query",
             "QueryAll"
@@ -1042,47 +1042,6 @@
         "customRfcReadTableFunctionModule": {
           "type": "object",
           "description": "Specifies the custom RFC function module that will be used to read data from SAP Table. Type: string (or Expression with resultType string)."
-        },
-        "partitionOption": {
-          "description": "The partition mechanism that will be used for SAP table read in parallel.",
-          "type": "object",
-          "enum": [
-            "None",
-            "PartitionOnInt",
-            "PartitionOnCalendarYear",
-            "PartitionOnCalendarMonth",
-            "PartitionOnCalendarDate"
-          ],
-          "x-ms-enum": {
-            "name": "TabularPartitionOption",
-            "modelAsString": true
-          }
-        },
-        "partitionSettings": {
-          "description": "The settings that will be leveraged for SAP table source partitioning.",
-          "$ref": "#/definitions/SapTablePartitionSettings"
-        }
-      }
-    },
-    "SapTablePartitionSettings": {
-      "description": "The settings that will be leveraged for SAP table source partitioning.",
-      "type": "object",
-      "properties": {
-        "partitionColumnName": {
-          "type": "object",
-          "description": "The name of the column that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
-        },
-        "partitionUpperBound": {
-          "type": "object",
-          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
-        },
-        "partitionLowerBound": {
-          "type": "object",
-          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
-        },
-        "maxPartitionsNumber": {
-          "type": "object",
-          "description": "The maximum value of partitions the table will be split into. Type: integer (or Expression with resultType string)."
         }
       }
     },
@@ -1327,99 +1286,6 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
-        },
-        "partitionOption": {
-          "description": "The partition mechanism that will be used for oracle read in parallel.",
-          "type": "object",
-          "enum": [
-            "None",
-            "PhysicalPartitionsOfTable",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "TabularPartitionOption",
-            "modelAsString": true
-          }
-        },
-        "partitionSettings": {
-          "description": "The settings that will be leveraged for oracle source partitioning.",
-          "$ref": "#/definitions/OraclePartitionSettings"
-        }
-      }
-    },
-    "OraclePartitionSettings": {
-      "description": "The settings that will be leveraged for oracle source partitioning.",
-      "type": "object",
-      "properties": {
-        "partitionNames": {
-          "type": "object",
-          "items": {
-            "type": "object",
-            "description": "Type: string (or Expression with resultType string)."
-          },
-          "description": "Names of the physical partitions of oracle table. "
-        },
-        "partitionColumnName": {
-          "type": "object",
-          "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
-        },
-        "partitionUpperBound": {
-          "type": "object",
-          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
-        },
-        "partitionLowerBound": {
-          "type": "object",
-          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
-        }
-      }
-    },
-    "TeradataSource": {
-      "description": "A copy activity Teradata source.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/CopySource"
-        }
-      ],
-      "properties": {
-        "query": {
-          "type": "object",
-          "description": "Teradata query. Type: string (or Expression with resultType string)."
-        },
-        "partitionOption": {
-          "description": "The partition mechanism that will be used for teradata read in parallel.",
-          "type": "object",
-          "enum": [
-            "None",
-            "Hash",
-            "DynamicRange"
-          ],
-          "x-ms-enum": {
-            "name": "TabularPartitionOption",
-            "modelAsString": true
-          }
-        },
-        "partitionSettings": {
-          "description": "The settings that will be leveraged for teradata source partitioning.",
-          "$ref": "#/definitions/TeradataPartitionSettings"
-        }
-      }
-    },
-    "TeradataPartitionSettings": {
-      "description": "The settings that will be leveraged for teradata source partitioning.",
-      "type": "object",
-      "properties": {
-        "partitionColumnName": {
-          "type": "object",
-          "description": "The name of the column in integer type that will be used for proceeding range or hash partitioning. Type: string (or Expression with resultType string)."
-        },
-        "partitionUpperBound": {
-          "type": "object",
-          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
-        },
-        "partitionLowerBound": {
-          "type": "object",
-          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1448,7 +1314,7 @@
         },
         "consistencyLevel": {
           "description": "The consistency level specifies how many Cassandra servers must respond to a read request before returning data to the client application. Cassandra checks the specified number of Cassandra servers for data to satisfy the read request. Must be one of cassandraSourceReadConsistencyLevels. The default value is 'ONE'. It is case-insensitive.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "ALL",
             "EACH_QUORUM",
@@ -2228,7 +2094,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is 'Insert'.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Update"
@@ -2252,7 +2118,7 @@
     },
     "CopyBehaviorType": {
       "description": "All available types of copy behavior.",
-      "type": "object",
+      "type": "string",
       "enum": [
         "PreserveHierarchy",
         "FlattenHierarchy",
@@ -2300,7 +2166,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/ConnectorWriteSetting",
+          "$ref": "#/definitions/StoreWriteSettings",
           "description": "Parquet store settings."
         }
       }
@@ -2652,7 +2518,7 @@
       "properties": {
         "writeBehavior": {
           "description": "Specify the write behavior when upserting documents into Azure Search Index.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Merge",
             "Upload"
@@ -2690,7 +2556,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Upsert"
           ],
@@ -2742,7 +2608,7 @@
       "properties": {
         "writeBehavior": {
           "description": "The write behavior for the operation. Default is Insert.",
-          "type": "object",
+          "type": "string",
           "enum": [
             "Insert",
             "Upsert"
