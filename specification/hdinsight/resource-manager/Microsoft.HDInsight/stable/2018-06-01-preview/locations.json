@@ -164,6 +164,7 @@
       "readOnly": true
     },
     "BillingResponseListResult": {
+      "type": "object",
       "description": "The response for the operation to get regional billingSpecs for a subscription.",
       "properties": {
         "vmSizes": {
@@ -190,11 +191,20 @@
       }
     },
     "VmSizeCompatibilityFilterV2": {
+      "type": "object",
       "description": "This class represent a single filter object that defines a multidimensional set. The dimensions of this set are Regions, ClusterFlavors, NodeTypes and ClusterVersions. The constraint should be defined based on the following: FilterMode (Exclude vs Include), VMSizes (the vm sizes in affect of exclusion/inclusion) and the ordering of the Filters. Later filters override previous settings if conflicted.",
       "properties": {
         "filterMode": {
           "description": "The filtering mode. Effectively this can enabling or disabling the VM sizes in a particular set.",
-          "type": "string"
+          "type": "string",
+            "enum": [
+              "Exclude",
+              "Include"
+            ],
+            "x-ms-enum": {
+              "name": "FilterMode",
+              "modelAsString": true
+            }
         },
         "regions": {
           "description": "The list of regions under the effect of the filter.",
@@ -228,7 +238,15 @@
           "description": "The OSType affected, Windows or Linux.",
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "Windows",
+              "Linux"
+            ],
+            "x-ms-enum": {
+              "name": "OSType",
+              "modelAsString": false
+            }
           }
         },
         "vmSizes": {
@@ -241,6 +259,7 @@
       }
     },
     "BillingResources": {
+      "type": "object",
       "description": "The billing resources.",
       "properties": {
         "region": {
@@ -264,6 +283,7 @@
       }
     },
     "BillingMeters": {
+      "type": "object",
       "description": "The billing meters.",
       "properties": {
         "meterParameter": {
@@ -281,6 +301,7 @@
       }
     },
     "DiskBillingMeters": {
+      "type": "object",
       "description": "The disk billing meters.",
       "properties": {
         "diskRpMeter": {
@@ -293,7 +314,15 @@
         },
         "tier": {
           "description": "The managed disk billing tier, Standard or Premium.",
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "Tier",
+            "modelAsString": false
+          }
         }
       }
     }
