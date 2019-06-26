@@ -74,6 +74,11 @@
               "$ref": "#/definitions/alertsMetaData"
             }
           }
+        },
+        "x-ms-examples": {
+          "MonitorServiceList": {
+            "$ref": "./examples/AlertsMetaData_MonitorService.json"
+          }
         }
       }
     },
@@ -1303,12 +1308,10 @@
       "required": true,
       "x-ms-parameter-location": "method",
       "enum": [
-        "New",
-        "Acknowledged",
-        "Closed"
+        "monitorServiceList"
       ],
       "x-ms-enum": {
-        "name": "AlertState",
+        "name": "identifier",
         "modelAsString": true
       }
     }
