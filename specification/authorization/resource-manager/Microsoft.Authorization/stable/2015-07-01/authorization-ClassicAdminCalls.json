@@ -10,12 +10,10 @@
     "https"
   ],
   "consumes": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "produces": [
-    "application/json",
-    "text/json"
+    "application/json"
   ],
   "security": [
     {
@@ -45,11 +43,7 @@
         "description": "Gets service administrator, account administrator, and co-administrators for the subscription.",
         "parameters": [
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for this operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -103,6 +97,7 @@
           "description": "The type of the administrator."
         },
         "properties": {
+          "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClassicAdministratorProperties",
           "description": "Properties for the classic administrator."
         }
@@ -133,6 +128,13 @@
       "required": true,
       "type": "string",
       "description": "The ID of the target subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
     }
   }
 }
