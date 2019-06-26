@@ -2349,18 +2349,11 @@
     "alertsMetaDataProperties": {
       "type": "object",
       "description": "alert meta data property bag",
-      "discriminator": "identifier",
+      "discriminator": "metadataIdentifier",
       "properties": {
-        "identifier": {
+        "metadataIdentifier": {
           "type": "string",
-          "description": "Identification of the information to be retrieved by API call",
-          "enum": [
-            "MonitorServiceList"
-          ],
-          "x-ms-enum": {
-            "name": "identifier",
-            "modelAsString": true
-          }
+          "description": "Identification of the information to be retrieved by API call"
         },
         "data": {
           "type": "array",
