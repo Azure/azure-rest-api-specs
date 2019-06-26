@@ -2347,10 +2347,13 @@
       }
     },
     "alertsMetaDataProperties": {
-      "type": "object",
       "description": "alert meta data property bag",
       "discriminator": "metadataIdentifier",
+      "required": [
+        "metadataIdentifier"
+      ],
       "properties": {
+        "description": "Alert meta data properties",
         "metadataIdentifier": {
           "type": "string",
           "description": "Identification of the information to be retrieved by API call",
@@ -2363,11 +2366,10 @@
           }
         },
         "data": {
-          "type": "array",
-          "description": "List of alert meta data information",
           "items": {
             "$ref": "#/definitions/alertsMetaDataValue"
-          }
+          },
+          "type": "array"
         }
       }
     },
