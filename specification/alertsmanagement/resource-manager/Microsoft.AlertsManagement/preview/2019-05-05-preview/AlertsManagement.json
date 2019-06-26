@@ -52,6 +52,31 @@
         }
       }
     },
+    "/providers/Microsoft.AlertsManagement/alertsMetaData": {
+      "get": {
+        "operationId": "Alerts_MetaData",
+        "description": "List alerts meta data information based on value of identifier parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/identifier"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully listed alert meta data.",
+            "schema": {
+              "$ref": "#/definitions/alertsMetaData"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
@@ -390,7 +415,7 @@
             }
           }
         },
-		"x-ms-pageable": {
+        "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
@@ -1269,6 +1294,23 @@
       "in": "query",
       "required": false,
       "x-ms-parameter-location": "method"
+    },
+    "identifier": {
+      "description": "Identification of the information to be retrieved by API call.",
+      "name": "identifier",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "enum": [
+        "New",
+        "Acknowledged",
+        "Closed"
+      ],
+      "x-ms-enum": {
+        "name": "AlertState",
+        "modelAsString": true
+      }
     }
   },
   "definitions": {
@@ -2127,7 +2169,7 @@
     },
     "ActionRuleProperties": {
       "description": "Action rule properties defining scope, conditions, suppression logic for action rule",
-      "discriminator" : "type",
+      "discriminator": "type",
       "required": [
         "type"
       ],
@@ -2293,6 +2335,36 @@
           "description": "tags to be updated"
         }
       }
+    },
+    "alertsMetaData": {
+      "description": "alert meta data information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/alertsMetaDataProperties"
+        }
+      }
+    },
+    "alertsMetaDataProperties": {
+      "type": "object",
+      "description": "alert meta data property bag",
+      "discriminator": "identifier",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "Identification of the information to be retrieved by API call"
+        },
+        "data": {
+          "type": "array",
+          "description": "List of alert meta data information",
+          "items": {
+            "$ref": "#/definitions/alertsMetaDataValue"
+          }
+        }
+      }
+    },
+    "alertsMetaDataValue": {
+      "type": "object",
+      "description": "alert meta data value"
     }
   }
 }
