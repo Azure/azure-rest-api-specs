@@ -10,6 +10,7 @@
       "body": {
         "name": "lb",
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb",
+        "etag": "W/\"00000000-0000-0000-0000-00000000\"",
         "type": "Microsoft.Network/loadBalancers",
         "location": "westus",
         "sku": {
@@ -17,10 +18,13 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
+          "resourceGuid": "00000000-0000-0000-0000-00000000",
           "frontendIPConfigurations": [
             {
               "name": "fe-lb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/frontendIPConfigurations/fe-lb",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "type": "Microsoft.Network/loadBalancers/frontendIPConfigurations",
               "properties": {
                 "provisioningState": "Succeeded",
                 "privateIPAddress": "10.0.1.4",
@@ -46,6 +50,8 @@
             {
               "name": "be-lb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/backendAddressPools/be-lb",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "type": "Microsoft.Network/loadBalancers/backendAddressPools",
               "properties": {
                 "provisioningState": "Succeeded",
                 "loadBalancingRules": [
@@ -60,6 +66,8 @@
             {
               "name": "rulelb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/loadBalancingRules/rulelb",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "type": "Microsoft.Network/loadBalancers/loadBalancingRules",
               "properties": {
                 "provisioningState": "Succeeded",
                 "frontendIPConfiguration": {
@@ -86,6 +94,8 @@
             {
               "name": "probe-lb",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/probes/probe-lb",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "type": "Microsoft.Network/loadBalancers/probes",
               "properties": {
                 "provisioningState": "Succeeded",
                 "protocol": "Http",
@@ -105,6 +115,8 @@
             {
               "name": "in-nat-rule",
               "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/loadBalancers/lb/inboundNatRules/in-nat-rule",
+              "etag": "W/\"00000000-0000-0000-0000-00000000\"",
+              "type": "Microsoft.Network/loadBalancers/inboundNatRules",
               "properties": {
                 "provisioningState": "Succeeded",
                 "frontendIPConfiguration": {
@@ -119,7 +131,6 @@
               }
             }
           ],
-          "outboundRules": [],
           "inboundNatPools": []
         }
       }

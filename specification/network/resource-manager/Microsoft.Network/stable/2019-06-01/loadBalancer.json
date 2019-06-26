@@ -196,6 +196,9 @@
           },
           "Create load balancer with inbound nat pool": {
             "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json"
+          },
+          "Create load balancer with outbound rules": {
+            "$ref": "./examples/LoadBalancerCreateWithOutboundRules.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1197,6 +1200,11 @@
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        },
         "zones": {
           "type": "array",
           "items": {
@@ -1235,6 +1243,14 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Gets outbound rules that use this backend address pool."
         },
+        "outboundRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Gets outbound rules that use this backend address pool."
+        },
         "provisioningState": {
           "type": "string",
           "description": "Get provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
@@ -1256,6 +1272,11 @@
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1348,6 +1369,11 @@
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1424,6 +1450,11 @@
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1492,6 +1523,11 @@
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1566,6 +1602,11 @@
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1640,6 +1681,11 @@
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
