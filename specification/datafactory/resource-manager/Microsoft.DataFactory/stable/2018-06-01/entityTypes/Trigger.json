@@ -585,6 +585,50 @@
       "required": [
         "typeProperties"
       ]
+    },
+    "ChainingTrigger": {
+      "description": "Trigger that schedules pipeline runs based on dependent pipelines successful completion.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "properties": {
+        "pipeline": {
+          "$ref": "../datafactory.json#/definitions/TriggerPipelineReference",
+          "description": "Pipeline for which runs are created when all dependent pipelines complete successfully."
+        },
+        "typeProperties": {
+          "description": "Chaining Trigger properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "dependsOn": {
+              "type": "array",
+              "items": {
+                "$ref": "../datafactory.json#/definitions/PipelineReference"
+              },
+              "description": "Dependent Pipelines."
+            },
+            "retryPolicy": {
+              "$ref": "#/definitions/RetryPolicy",
+              "description": "Retry policy that will be applied for failed pipeline runs."
+            },
+            "runDimension": {
+              "description": "Run Dimenstion property that needs to be emitted by dependent pipelines.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "runDimension",
+            "dependsOn"
+          ]
+        }
+      },
+      "required": [
+        "pipeline",
+        "typeProperties"
+      ]
     }
   }
 }
