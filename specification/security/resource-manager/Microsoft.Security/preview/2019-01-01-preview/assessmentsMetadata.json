@@ -6,12 +6,22 @@
     "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [{
-    "azure_auth": ["user_impersonation"]
-  }],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -31,12 +41,16 @@
             "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_example.json"
           }
         },
-        "tags": ["Assessments Metadata"],
+        "tags": [
+          "Assessments Metadata"
+        ],
         "description": "Get metadata information on all assessment types",
         "operationId": "AssessmentsMetadata_List",
-        "parameters": [{
-          "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-        }],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -63,10 +77,13 @@
             "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_example.json"
           }
         },
-        "tags": ["Assessments Metadata"],
+        "tags": [
+          "Assessments Metadata"
+        ],
         "description": "Get metadata information on an assessment type",
         "operationId": "AssessmentsMetadata_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -89,23 +106,25 @@
         }
       }
     },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/assessmentsMetadata": {
       "get": {
         "x-ms-examples": {
           "List security assessment metadata for subscription": {
             "$ref": "./examples/AssessmentsMetadata/ListAssessmentsMetadata_example.json"
           }
         },
-        "tags": ["Assessments Metadata"],
+        "tags": [
+          "Assessments Metadata"
+        ],
         "description": "Get metadata information on all assessment types in a specific subscription",
         "operationId": "AssessmentsMetadata_Subscription_List",
         "parameters": [
           {
-          "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-         },
-         {
-           "$ref": "#/parameters/SubscriptionId"
-         }
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          }
         ],
         "responses": {
           "200": {
@@ -133,10 +152,13 @@
             "$ref": "./examples/AssessmentsMetadata/GetAssessmentsMetadata_example.json"
           }
         },
-        "tags": ["Assessments Metadata"],
+        "tags": [
+          "Assessments Metadata"
+        ],
         "description": "Get metadata information on an assessment type in a specific subscription",
         "operationId": "AssessmentsMetadata_Subscription_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
@@ -191,9 +213,11 @@
           "$ref": "#/definitions/SecurityAssessmentMetadataProperties"
         }
       },
-      "allOf": [{
-        "$ref": "../../../common/v1/types.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "SecurityAssessmentMetadataProperties": {
       "type": "object",
@@ -225,11 +249,18 @@
           "items": {
             "type": "string",
             "description": "The category of resource that is at risk when the assessment is unhealthy",
-            "enum": ["Compute", "Network", "Data", "IdentityAndAccess", "IoT"],
+            "enum": [
+              "Compute",
+              "Network",
+              "Data",
+              "IdentityAndAccess",
+              "IoT"
+            ],
             "x-ms-enum": {
               "name": "category",
               "modelAsString": true,
-              "values": [{
+              "values": [
+                {
                   "value": "Compute"
                 },
                 {
@@ -259,11 +290,17 @@
           "items": {
             "type": "string",
             "description": "The required Azure Security Center pricing bundle name. One of the bundles must be Standard. Empty list is a free assessment.",
-            "enum": ["VirtualMachines", "SqlServers", "AppServices", "StorageAccounts"],
+            "enum": [
+              "VirtualMachines",
+              "SqlServers",
+              "AppServices",
+              "StorageAccounts"
+            ],
             "x-ms-enum": {
               "name": "requiredPricingBundle",
               "modelAsString": true,
-              "values": [{
+              "values": [
+                {
                   "value": "VirtualMachines"
                 },
                 {
@@ -284,15 +321,19 @@
           "type": "boolean",
           "description": "True if this assessment is in preview release status"
         },
-          "assessmentType": {
+        "assessmentType": {
           "readOnly": true,
           "type": "string",
           "description": "BuiltIn if the assessment based on built-in Azure Policy definition, Custom if the assessment based on custom Azure Policy definition",
-          "enum": ["BuiltIn", "Custom"],
+          "enum": [
+            "BuiltIn",
+            "Custom"
+          ],
           "x-ms-enum": {
             "name": "assessmentType",
             "modelAsString": true,
-            "values": [{
+            "values": [
+              {
                 "value": "BuiltIn"
               },
               {
