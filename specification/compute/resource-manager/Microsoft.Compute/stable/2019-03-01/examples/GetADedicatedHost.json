@@ -3,8 +3,8 @@
     "subscriptionId": "{subscriptionId}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2018-10-01",
-    "HostGroupName": "myDedicatedHostGroup",
-	"HostName": "myHost"
+    "hostGroupName": "myDedicatedHostGroup",
+    "hostName": "myHost"
   },
   "responses": {
     "200": {
@@ -12,53 +12,52 @@
         "value": [
           {
             "properties": {
-				"platformFaultDomain": 1,
-				"autoReplaceOnFailure": true,
-				"hostId": "{GUID}",
-				"hostGroup": { "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup"},  
-				"provisioningTime": "2019-06-27T01:02:38.3138469+00:00",
-				"virtualMachines": [
-					{ "id": "/subscriptions/subId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1" }
-				],
-				"provisioningState": "Succeeded",
-				"instanceView": {
-				  "assetId": "eb3f58b8-b4e8-4882-b69f-301a01812407",
-				  "capacity": {
-					"totalCores": 30.0,
-					"totalVCpus": 60.0
-				  },
-				  "availableCapacity": {
-					"availableVCpus": 40.0,
-					"allocatableVMs": [
-					  {
-						"vmSize": "Standard_A1",
-						"count": 10
-					  }
-					]
-				  },
-				  "statuses": [
-					{
-					  "code": "ProvisioningState/succeeded",
-					  "level": "Info",
-					  "displayStatus": "Provisioning succeeded"
-					},
-					{
-					  "code": "HealthState/available",
-					  "level": "Info",
-					  "displayStatus": "Host available"
-					}
-				  ]
-				}
-			  },
+              "platformFaultDomain": 1,
+              "autoReplaceOnFailure": true,
+              "hostId": "{GUID}",
+              "provisioningTime": "2019-06-27T01:02:38.3138469+00:00",
+              "virtualMachines": [
+                {
+                  "id": "/subscriptions/subId/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/vm1"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "instanceView": {
+                "assetId": "eb3f58b8-b4e8-4882-b69f-301a01812407",
+                "capacity": {
+                  "totalCores": 30,
+                  "totalVCpus": 60
+                },
+                "availableCapacity": {
+                  "availableVCpus": 40,
+                  "allocatableVMs": [
+                    {
+                      "vmSize": "Standard_A1",
+                      "count": 10
+                    }
+                  ]
+                },
+                "statuses": [
+                  {
+                    "code": "ProvisioningState/succeeded",
+                    "level": "Info",
+                    "displayStatus": "Provisioning succeeded"
+                  },
+                  {
+                    "code": "HealthState/available",
+                    "level": "Info",
+                    "displayStatus": "Host available"
+                  }
+                ]
+              }
             },
-            "type": "Microsoft.Compute/Host",
             "location": "westus",
-			"tags": {
-				"department": "HR"
-			},
-			"sku": {
-				"name": "DSv3-Type1"
-			},
+            "tags": {
+              "department": "HR"
+            },
+            "sku": {
+              "name": "DSv3-Type1"
+            },
             "name": "myHost"
           }
         ]
