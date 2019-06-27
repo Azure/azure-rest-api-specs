@@ -1971,21 +1971,6 @@
             "$ref": "#/definitions/IpFilterRule"
           }
         },
-        "provisioningState": {
-          "description": "The provisioning state.",
-          "type": "string",
-          "readOnly": true
-        },
-        "state": {
-          "description": "The hub state.",
-          "type": "string",
-          "readOnly": true
-        },
-        "hostName": {
-          "description": "The name of the host.",
-          "type": "string",
-          "readOnly": true
-        },
         "eventHubEndpoints": {
           "description": "The Event Hub-compatible endpoint properties. The only possible keys to this dictionary is events. This key has to be present in the dictionary while making create or update calls for the IoT hub.",
           "type": "object",
@@ -2046,7 +2031,7 @@
             "modelAsString": true
           }
         },
-        "Locations": {
+        "locations": {
           "description": "Primary and secondary location for iot hub",
           "type": "array",
            "items": {
@@ -2076,20 +2061,6 @@
             "modelAsString": true
           }
         },
-        "tier": {
-          "description": "The billing tier for the IoT hub.",
-          "enum": [
-            "Free",
-            "Standard",
-            "Basic"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "IotHubSkuTier",
-            "modelAsString": false
-          }
-        },
         "capacity": {
           "format": "int64",
           "description": "The number of provisioned IoT Hub units. See: https://docs.microsoft.com/azure/azure-subscription-service-limits#iot-hub-limits.",
@@ -2113,24 +2084,6 @@
           "format": "int32",
           "description": "The number of partitions for receiving device-to-cloud messages in the Event Hub-compatible endpoint. See: https://docs.microsoft.com/azure/iot-hub/iot-hub-devguide-messaging#device-to-cloud-messages.",
           "type": "integer"
-        },
-        "partitionIds": {
-          "description": "The partition ids in the Event Hub-compatible endpoint.",
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "path": {
-          "description": "The Event Hub-compatible name.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endpoint": {
-          "description": "The Event Hub-compatible endpoint.",
-          "type": "string",
-          "readOnly": true
         }
       }
     },
@@ -2605,18 +2558,15 @@
       "description": "The common properties of an Azure resource.",
       "properties": {
         "id": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource identifier."
         },
         "name": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource name.",
           "pattern": "^(?![0-9]+$)(?!-)[a-zA-Z0-9-]{2,49}[a-zA-Z0-9]$"
         },
         "type": {
-          "readOnly": true,
           "type": "string",
           "description": "The resource type."
         },
