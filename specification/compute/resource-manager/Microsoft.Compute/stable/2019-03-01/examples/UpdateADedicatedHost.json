@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2018-10-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "autoReplaceOnFailure": false,
+        "licenseType": "Windows_Server_Hybrid"
+      }
+    },
+    "hostGroupName": "myDedicatedHostGroup",
+    "hostName": "myDedicatedHost"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "platformFaultDomain": 1,
+          "autoReplaceOnFailure": false,
+          "licenseType": "Windows_Server_Hybrid",
+          "hostId": "{GUID}"
+        },
+        "location": "westus",
+        "tags": {
+          "department": "HR"
+        },
+        "name": "myDedicatedHost",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup/hosts/myDedicatedHost",
+        "sku": {
+          "name": "DSv3-Type1"
+        }
+      }
+    }
+  }
+}
