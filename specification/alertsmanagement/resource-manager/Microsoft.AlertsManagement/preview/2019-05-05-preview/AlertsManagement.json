@@ -2357,7 +2357,7 @@
           "type": "string",
           "description": "Identification of the information to be retrieved by API call",
           "enum": [
-            "MonitorServiceList"
+            "MonitorService"
           ],
           "x-ms-enum": {
             "name": "metadataIdentifier",
@@ -2376,6 +2376,31 @@
     "alertsMetaDataValue": {
       "type": "object",
       "description": "alert meta data value"
+    },
+    "MonitorService": {
+      "title": "Monitor service details",
+      "description": "Monitor service details",
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertsMetaDataValue"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Monitor service name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Monitor service display name"
+        }
+      }
     }
   }
 }
