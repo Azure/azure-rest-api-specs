@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2018-10-01",
+    "availabilitySetName": "myDedicatedHostGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+			  "platformFaultDomainCount": 3,
+              "hosts": [
+                { "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost1" },
+                { "id": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/myDedicatedHostGroup/myHostGroup/Hosts/myHost2" }
+              ]
+            },
+            "type": "Microsoft.Compute/HostGroups",
+            "location": "westus",
+            "tags": {
+              "{tagName}": "{tagValue}"
+            },
+            "zones": [ "3" ],
+            "name": "myDedicatedHostGroup"
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2018-10-01",
+    "hostGroupName": "myDedicatedHostGroup",
+    "parameters": {
+      "location": "westus",
+      "zones": [ "1" ],
+      "tags": {
+        "department": "finance"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myDedicatedHostGroup",
+        "location": "westus",
+        "type": "Microsoft.Compute/HostGroups",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/HostGroups/myDedicatedHostGroup",
+        "tags": {
+          "department": "finance"
+        },
+		"zones": [ "1" ],
+		"properties": {
+			"platformFaultDomainCount": 3,
+			"hosts": [ ]
+		}
+      }
+    }
+  }
+}
