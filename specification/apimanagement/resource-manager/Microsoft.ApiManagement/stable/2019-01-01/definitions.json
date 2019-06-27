@@ -1786,6 +1786,33 @@
         "enableHttpCorrelationHeaders": {
           "type": "boolean",
           "description": "Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true."
+        },
+        "httpCorrelationProtocol": {
+          "type": "string",
+          "enum": [
+            "None",
+            "Legacy",
+            "W3C"
+          ],
+          "x-ms-enum": {
+            "name": "HttpCorrelationProtocol",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "Do not read and inject correlation headers."
+              },
+              {
+                "value": "Legacy",
+                "description": "Inject Request-Id and Request-Context headers with request correlation data. See https://github.com/dotnet/corefx/blob/master/src/System.Diagnostics.DiagnosticSource/src/HttpCorrelationProtocol.md."
+              },
+              {
+                "value": "W3C",
+                "description": "Inject Trace Context headers. See https://w3c.github.io/trace-context."
+              }
+            ]
+          },
+          "description": "Sets correlation protocol to use for Application Insights diagnostics."
         }
       },
       "required": [
