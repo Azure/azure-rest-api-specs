@@ -2348,21 +2348,10 @@
     },
     "alertsMetaDataProperties": {
       "description": "alert meta data property bag",
-      "discriminator": "metadataIdentifier",
-      "required": [
-        "metadataIdentifier"
-      ],
       "properties": {
         "metadataIdentifier": {
           "type": "string",
-          "description": "Identification of the information to be retrieved by API call",
-          "enum": [
-            "MonitorServiceList"
-          ],
-          "x-ms-enum": {
-            "name": "metadataIdentifier",
-            "modelAsString": true
-          }
+          "description": "Identification of the information to be retrieved by API call"
         },
         "data": {
           "description": "Array of operations",
@@ -2376,31 +2365,6 @@
     "alertsMetaDataValue": {
       "type": "object",
       "description": "alert meta data value"
-    },
-    "MonitorServiceList": {
-      "title": "Monitor service details",
-      "description": "Monitor service details",
-      "required": [
-        "name"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/alertsMetaDataValue"
-        },
-        {
-          "type": "object"
-        }
-      ],
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Monitor service name"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Monitor service display name"
-        }
-      }
     }
   }
 }
