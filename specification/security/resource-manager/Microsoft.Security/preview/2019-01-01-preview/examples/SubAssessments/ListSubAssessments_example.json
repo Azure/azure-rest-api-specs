@@ -1,7 +1,8 @@
 {
 	"parameters": {
 		"api-version": "2019-01-01-preview",
-		"scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23"
+		"scope": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+		"assessmentName": "21300918-b2e3-0346-785f-c77ff57d243b"
 	},
 	"responses": {
 		"200": {
@@ -14,8 +15,10 @@
 						"displayName": "'Back Orifice' Backdoor",
 						"id": "1001",
 						"status": {
+							"code": "Unhealthy",
+							"cause": "",
 							"severity": "High",
-							"cause": ""
+							"description": "The resource is unhealthy"
 						},
 						"resourceDetails": {
 							"source": "Azure",
@@ -26,7 +29,7 @@
 						"category": "Backdoors and trojan horses",
 						"description": "The backdoor 'Back Orifice' was detected on this system.  The presence of this backdoor indicates that your system has already been compromised.  Unauthorized users can access your host at any time. Unauthorized users can take complete control of the host and manipulate data.  They can steal the data or even wipe out the host.",
 						"timeGenerated": "2019-06-23T12:20:08.7644808Z",
-						"extendedData": {
+						"additionalData": {
 							"assessedResourceType": "ContainerRegistryVulnerabilitySubAssessment",
 							"imageName": "myImage",
 							"imageDigest": "c186fc44-3154-4ce2-ba18-b719d895c3b0",

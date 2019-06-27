@@ -191,8 +191,8 @@
 				"resourceDetails": {
 					"$ref": "#/definitions/ResourceDetails"
 				},
-				"extendedData": {
-					"$ref": "#/definitions/ExtendedData"
+				"additionalData": {
+					"$ref": "#/definitions/AdditionalData"
 				}
 			}
 		},
@@ -256,7 +256,7 @@
 				}
 			}
 		},
-		"ExtendedData": {
+		"AdditionalData": {
 			"type": "object",
 			"description": "Details of the sub-assessment",
 			"discriminator": "assessedResourceType",
@@ -265,13 +265,13 @@
 					"readOnly": true,
 					"type": "string",
 					"description": "Sub-assessment resource type",
-					"enum": ["SqlServerSubAssessment", "ContainerRegistryVulnerabilitySubAssessment", "ServerVulnerabilitySubAssessment"],
+					"enum": ["SqlServerVulnerabilitySubAssessment", "ContainerRegistryVulnerabilitySubAssessment", "ServerVulnerabilitySubAssessment"],
 					"x-ms-enum": {
 						"name": "AssessedResourceType",
 						"modelAsString": true,
 						"values": [
 							{
-								"value": "SqlServerSubAssessment"
+								"value": "SqlServerVulnerabilitySubAssessment"
 							},
 							{
 								"value": "ContainerRegistryVulnerabilitySubAssessment"
@@ -288,6 +288,40 @@
 			"type": "object",
 			"description": "Status of the sub-assessment",
 			"properties": {
+				"code": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Programmatic code for the status of the assessment",
+					"enum": ["Healthy", "Unhealthy", "NotApplicable"],
+					"x-ms-enum": {
+						"name": "SubAssessmentStatusCode",
+						"modelAsString": true,
+						"values": [
+							{
+								"value": "Healthy",
+								"description": "The resource is healthy"
+							},
+							{
+								"value": "Unhealthy",
+								"description": "The resource has a security issue that needs to be addressed"
+							},
+							{
+								"value": "NotApplicable",
+								"description": "Assessment for this resource did not happen"
+							}
+						]
+					}
+				},
+				"cause": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Programmatic code for the cause of the assessment status"
+				},
+				"description": {
+					"readOnly": true,
+					"type": "string",
+					"description": "Human readable description of the assessment status"
+				}
 				"severity": {
 					"readOnly": true,
 					"type": "string",
@@ -299,21 +333,9 @@
 					"Medium",
 					"High"],
 					"x-ms-enum": {
-						"name": "risk",
+						"name": "severity",
 						"modelAsString": true,
 						"values": [
-							{
-								"value": "Unknown"
-							},
-							{
-								"value": "Healthy"
-							},
-							{
-								"value": "OffByPolicy"
-							},
-							{
-								"value": "NotApplicable"
-							},
 							{
 								"value": "Low"
 							},
@@ -326,22 +348,22 @@
 						]
 					},
 					"description": "The sub-assessment severity level"
-				},
-				"cause": {
-					"readOnly": true,
-					"type": "string",
-					"description": "The cause of the assessment status. Optional field in case the severity level requires additional data."
 				}
 			}
 		},
-		"SqlServerSubAssessmentProperties": {
+		"SqlServerVulnerabilitySubAssessmentProperties": {
 			"type": "object",
 			"description": "Details of the resource that was assessed",
-			"x-ms-discriminator-value": "SqlServerSubAssessment",
+			"x-ms-discriminator-value": "SqlServerVulnerabilitySubAssessment",
 			"allOf": [{
-				"$ref": "#/definitions/ExtendedData"
+				"$ref": "#/definitions/AdditionalData"
 			}],
 			"properties": {
+				"type": {
+					"readOnly": true,
+					"type": "string",
+					"description": "The resource type the sub assessment refers to in its resource details"
+				},
 				"query": {
 					"readOnly": true,
 					"type": "string",
@@ -375,7 +397,7 @@
 			"description": "Additional context fields for container registry Vulnerability assessment",
 			"x-ms-discriminator-value": "ContainerRegistryVulnerabilitySubAssessment",
 			"allOf": [{
-				"$ref": "#/definitions/ExtendedData"
+				"$ref": "#/definitions/AdditionalData"
 			}],
 			"properties": {
 				"type": {
@@ -444,13 +466,13 @@
 			"description": "Additional context fields for server vulnerability assessment",
 			"x-ms-discriminator-value": "ServerVulnerabilityAssessment",
 			"allOf": [{
-				"$ref": "#/definitions/ExtendedData"
+				"$ref": "#/definitions/AdditionalData"
 			}],
 			"properties": {
 				"type": {
 					"readOnly": true,
 					"type": "string",
-					"description": "Vulnerability Type. e.g: Vulnerability, Potential Vulnerability, Information Gathered, Vulnerability"
+					"description": "Vulnerability Type. e.g: Vulnerability, Potential Vulnerability, Information Gathered"
 				},
 				"cvss": {
 					"readOnly": true,
