@@ -4928,6 +4928,267 @@
       ],
       "description": "The List Proximity Placement Group operation response."
     },
+    "DedicatedHostGroupProperties": {
+      "properties": {
+        "platformFaultDomainCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of fault domains that the host group can span. Supported values 1,2,3."
+        },
+        "hosts": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all dedicated hosts in the dedicated host group."
+        }
+      },
+      "description": "Dedicated Host Group Properties."
+    },
+    "DedicatedHostGroup": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostGroupProperties"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforce each host in the group is in the same zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the dedicated host group that the dedicated hosts should be assigned to. <br><br> Currently, a Dedicated host can only be added to Dedicated Host Group at creation time. An existing Dedicated Host cannot be added to a dedicated host group."
+    },
+    "DedicatedHostGroupUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostGroupProperties"
+        },
+        "zones": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforce each host in the group is in the same zone."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the dedicated host group that the dedicated host should be assigned to. Only tags may be updated."
+    },
+    "DedicatedHostGroupListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHostGroup"
+          },
+          "description": "The list of dedicated host groups"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Dedicated Host Groups. Call ListNext() with this URI to fetch the next page of Dedicated Host Groups."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Dedicated Host Group with resource group response."
+    },
+    "DedicatedHostLicenseType": {
+      "type": "string",
+      "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**",
+      "enum": [
+        "None",
+        "Windows_Server_Hybrid",
+        "Windows_Server_Perpetual"
+      ],
+      "x-ms-enum": {
+        "name": "DedicatedHostLicenseTypes",
+        "modelAsString": false
+      }
+    },
+    "DedicatedHostCapacity": {
+      "properties": {
+        "totalCores": {
+          "type": "number",
+          "format": "double",
+          "description": "The total number of cores."
+        },
+        "totalVCpus": {
+          "type": "number",
+          "format": "double",
+          "description": "The total number of CPUs."
+        }
+      },
+      "description": "Dedicated host total capacity."
+    },
+    "DedicatedHostAllocatableVM": {
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "VM size in terms of which the unutilized capacity is represented."
+        },
+        "count": {
+          "type": "number",
+          "format": "long",
+          "description": "Maximum number of VMs of size vmSize that can fit in the dedicated host's remaining capacity."
+        }
+      },
+      "description": "Represents the dedicated host unutilized capacity in terms of a specific VM size."
+    },
+    "DedicatedHostAvailableCapacity": {
+      "properties": {
+        "availableVCpus": {
+          "type": "number",
+          "format": "double",
+          "description": "The total number of CPUs."
+        },
+        "allocatableVMs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHostAllocatableVM"
+          },
+          "description": "The unutilized capacity of the dedicated host represented in terms of each VM size that is allowed to be deployed to the dedicated host."
+        }
+      },
+      "description": "Dedicated host unutilized capacity."
+    },
+    "DedicatedHostInstanceView": {
+      "properties": {
+        "assetId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the unique of the dedicated physical machine on which the dedicated host resides."
+        },
+        "capacity": {
+          "$ref": "#/definitions/DedicatedHostCapacity",
+          "description": "The total capacity of the dedicated host."
+        },
+        "availableCapacity": {
+          "$ref": "#/definitions/DedicatedHostAvailableCapacity",
+          "description": "Unutilized capacity of the dedicated host."
+        },
+        "statuses": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InstanceViewStatus"
+          },
+          "description": "The resource status information."
+        }
+      },
+      "description": "The instance view of a dedicated host."
+    },
+    "DedicatedHostProperties": {
+      "properties": {
+        "platformFaultDomain": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Fault domain of the host within a group. Supported values 0,1,2."
+        },
+        "autoReplaceOnFailure": {
+          "type": "boolean",
+          "description": "Whether the host should be replaced automatically in case of a failure. The value is defaulted to true when not provided."
+        },
+        "hostId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique id generated and assigned to the dedicated host by the platform."
+        },
+        "virtualMachines": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubResourceReadOnly"
+          },
+          "readOnly": true,
+          "description": "A list of references to all virtual machines in the Dedicated Host."
+        },
+        "licenseType": {
+          "$ref": "#/definitions/DedicatedHostLicenseType",
+          "description": "Specifies the software license type that will be applied to the VMs deployed on the dedicated host. <br><br> Possible values are: <br><br> **None** <br><br> **Windows_Server_Hybrid** <br><br> **Windows_Server_Perpetual** <br><br> Default: **None**"
+        },
+        "provisioningTime": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The date when the host was first created."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state, which only appears in the response."
+        },
+        "instanceView": {
+          "$ref": "#/definitions/DedicatedHostInstanceView",
+          "readOnly": true,
+          "description": "The dedicated host instance view."
+        },
+      },
+      "description": "Properties of the dedicated host."
+    },
+    "DedicatedHost": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostProperties"
+        },
+        "sku": {
+          "$ref": "#/definitions/Sku",
+          "description": "Sku of the dedicated host for Hardware Generation and VM family, The only name is required to be set. See DedicatedHostSkuTypes for possible set of values."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Specifies information about the Dedicated host."
+    },
+    "DedicatedHostUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedHostProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the dedicated host. Only tags, autoReplaceOnFailure and licenseType may be updated."
+    },
+    "DedicatedHostListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHost"
+          },
+          "description": "The list of dedicated hosts"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of Dedicated hosts. Call ListNext() with this URI to fetch the next page of Dedicated hosts."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The List Dedicated Host operation response."
+    },
     "VirtualMachineSize": {
       "properties": {
         "name": {
@@ -6495,6 +6756,10 @@
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "host": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the dedicated host that the virtual machine resides in. <br><br>Minimum api-version: 2018-10-01."
         },
         "provisioningState": {
           "readOnly": true,
