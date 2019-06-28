@@ -21,7 +21,6 @@ These settings apply only when `--tag=release_1_0` is specified on the command l
 input-file: 
   - preview/v1.0/FormRecognizer.json
   - preview/v1.0/FormRecognizerReceipt.json
-  - preview/v1.0/FormRecognizerReceiptOcr.json
 ```
 
 ## Swagger to SDK
