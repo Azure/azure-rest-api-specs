@@ -126,7 +126,14 @@ directive:
       - $.definitions.ImageUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
-
+  - where:
+      - $.definitions.DedicatedHostGroupUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.DedicatedHostUpdate
+    suppress:
+      - RequiredPropertiesMissingInResourceModel	  
 
   - where:
       - $.definitions.VirtualMachineScaleSetVM
