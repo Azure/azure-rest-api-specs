@@ -90,7 +90,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DevTestLabs
-  output-folder: $(csharp-sdks-folder)/DevTestLabs/Management.DevTestLabs/Generated
+  output-folder: $(csharp-sdks-folder)/devtestlabs/Microsoft.Azure.Management.DevTestLabs/src/Generated
   clear-output-folder: true
 ```
 

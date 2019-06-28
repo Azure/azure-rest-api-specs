@@ -98,15 +98,21 @@
         },
         "x-ms-odata": "#/definitions/MetadataValue",
         "x-ms-examples": {
-          "Get Metric for data": { "$ref": "./examples/GetMetric.json" },
-          "Get Metric for metadata": { "$ref": "./examples/GetMetricMetadata.json" }
+          "Get Metric for data": {
+            "$ref": "./examples/GetMetric.json"
+          },
+          "Get Metric for metadata": {
+            "$ref": "./examples/GetMetricMetadata.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -131,7 +137,11 @@
         "Percent",
         "MilliSeconds",
         "ByteSeconds",
-        "Unspecified"
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
       ],
       "x-ms-enum": {
         "name": "Unit",
@@ -139,7 +149,9 @@
       }
     },
     "MetricValue": {
-      "required": [ "timeStamp" ],
+      "required": [
+        "timeStamp"
+      ],
       "properties": {
         "timeStamp": {
           "type": "string",
@@ -235,7 +247,10 @@
           "description": "the value of the collection."
         }
       },
-      "required": [ "timespan", "value" ],
+      "required": [
+        "timespan",
+        "value"
+      ],
       "description": "The response to a metrics query."
     },
     "Metric": {
@@ -265,7 +280,13 @@
           "description": "the time series returned when a data query is performed."
         }
       },
-      "required": [ "id", "type", "name", "unit", "timeseries" ],
+      "required": [
+        "id",
+        "type",
+        "name",
+        "unit",
+        "timeseries"
+      ],
       "description": "The result data of a query."
     },
     "TimeSeriesElement": {

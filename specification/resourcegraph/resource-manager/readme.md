@@ -85,7 +85,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ResourceGraph
-  output-folder: $(csharp-sdks-folder)/ResourceGraph/Management/Management.ResourceGraph/Generated
+  output-folder: $(csharp-sdks-folder)/resourcegraph/Microsoft.Azure.Management.ResourceGraph/src/Generated
   clear-output-folder: true
 ```
 

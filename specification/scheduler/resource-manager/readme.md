@@ -88,7 +88,7 @@ csharp:
   azure-arm: true
   license-header: NONE
   namespace: Microsoft.Azure.Management.Scheduler
-  output-folder: $(csharp-sdks-folder)/Scheduler/Management.Scheduler/Generated
+  output-folder: $(csharp-sdks-folder)/scheduler/Microsoft.Azure.Management.Scheduler/src/Generated
   clear-output-folder: true
 ```
 

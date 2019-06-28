@@ -25,8 +25,25 @@ To see additional help and options, run:
 These are the global settings for the Cdn API.
 
 ``` yaml
+title: CdnManagementClient
+description: Cdn Management Client
 openapi-type: arm
-tag: package-2019-04
+tag: package-2019-06
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/preview/2019-06-15-preview/cdn.json
+- Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
 ```
 
 ### Tag: package-2019-04

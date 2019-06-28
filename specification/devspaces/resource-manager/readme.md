@@ -86,7 +86,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DevSpaces
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DevSpaces/Management.DevSpaces/Generated
+  output-folder: $(csharp-sdks-folder)/devspaces/Microsoft.Azure.Management.DevSpaces/src/Generated
   clear-output-folder: true
 ```
 

@@ -6,12 +6,20 @@
     "version": "2015-06-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -34,7 +42,9 @@
           }
         },
         "description": "Gets a list of external security solutions for the subscription.",
-        "tags": ["ExternalSecuritySolutions"],
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
         "operationId": "ExternalSecuritySolutions_List",
         "parameters": [
           {
@@ -71,7 +81,9 @@
           }
         },
         "description": "Gets a list of external Security Solutions for the subscription and location.",
-        "tags": ["ExternalSecuritySolutions"],
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
         "operationId": "ExternalSecuritySolutions_ListByHomeRegion",
         "parameters": [
           {
@@ -111,7 +123,9 @@
           }
         },
         "description": "Gets a specific external Security Solution.",
-        "tags": ["ExternalSecuritySolutions"],
+        "tags": [
+          "ExternalSecuritySolutions"
+        ],
         "operationId": "ExternalSecuritySolutions_Get",
         "parameters": [
           {
@@ -232,7 +246,11 @@
         "kind": {
           "type": "string",
           "description": "The kind of the external solution",
-          "enum": ["CEF", "ATA", "AAD"],
+          "enum": [
+            "CEF",
+            "ATA",
+            "AAD"
+          ],
           "x-ms-enum": {
             "name": "ExternalSecuritySolutionKind",
             "modelAsString": true,
@@ -284,7 +302,11 @@
         "connectivityState": {
           "type": "string",
           "title": "The connectivity state of the external AAD solution ",
-          "enum": ["Discovered", "NotLicensed", "Connected"],
+          "enum": [
+            "Discovered",
+            "NotLicensed",
+            "Connected"
+          ],
           "x-ms-enum": {
             "name": "AadConnectivityState",
             "modelAsString": true,

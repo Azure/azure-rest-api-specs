@@ -174,7 +174,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.CostManagement
-  output-folder: $(csharp-sdks-folder)/CostManagement/Management.CostManagement/Generated
+  output-folder: $(csharp-sdks-folder)/cost-management/Microsoft.Azure.Management.CostManagement/src/Generated
   clear-output-folder: true
 ```
 
@@ -286,3 +286,4 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
