@@ -6209,10 +6209,12 @@
       "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
     },
     "BillingProfile": {
-      "maxPrice": {
+      "properties": {
+        "maxPrice": {
           "type": "number",
           "format": "double",
-		  "description": "Specifies the maximum price you are willing to pay for a low priority VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current low priority price for the VM size. Also, the prices are compared at the time of create/update of low priority VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current low priority price. <br><br> The maxPrice will also be used for evicting a low priority VM/VMSS if the current low priority price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: $0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the low priority VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01."
+          "description": "Specifies the maximum price you are willing to pay for a low priority VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current low priority price for the VM size. Also, the prices are compared at the time of create/update of low priority VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current low priority price. <br><br> The maxPrice will also be used for evicting a low priority VM/VMSS if the current low priority price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: $0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the low priority VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01."
+        }
       },
       "description": "Specifies the billing related details of a low priority VM or VMSS. <br><br>Minimum api-version: 2019-03-01."
     },
