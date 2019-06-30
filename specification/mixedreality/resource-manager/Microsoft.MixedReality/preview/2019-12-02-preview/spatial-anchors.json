@@ -33,16 +33,19 @@
       }
     }
   },
-  "paths" : {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialAnchorsAccounts" : {
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
       "get": {
         "operationId": "SpatialAnchorsAccounts_ListBySubscription",
         "tags": [
-          "Resource", "Proxy"
+          "Resource",
+          "Proxy"
         ],
         "description": "List Spatial Anchors Accounts by Subscription",
         "x-ms-examples": {
-          "SpatialAnchorsAccountPageBySubscription": { "$ref": "./examples/spatial-anchors/GetBySubscription.json" }
+          "SpatialAnchorsAccountPageBySubscription": {
+            "$ref": "./examples/spatial-anchors/GetBySubscription.json"
+          }
         },
         "parameters": [
           {
@@ -71,7 +74,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts": {
       "get": {
         "operationId": "SpatialAnchorsAccounts_ListByResourceGroup",
         "tags": [
@@ -79,7 +82,9 @@
         ],
         "description": "List Resources by Resource Group",
         "x-ms-examples": {
-          "ResourceGet": { "$ref": "./examples/spatial-anchors/GetByResourceGroup.json" }
+          "ResourceGet": {
+            "$ref": "./examples/spatial-anchors/GetByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -111,7 +116,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}": {
       "delete": {
         "operationId": "SpatialAnchorsAccounts_Delete",
         "tags": [
@@ -119,7 +124,9 @@
         ],
         "description": "Delete a Spatial Anchors Account.",
         "x-ms-examples": {
-          "ResourceDelete": { "$ref": "./examples/spatial-anchors/Delete.json" }
+          "ResourceDelete": {
+            "$ref": "./examples/spatial-anchors/Delete.json"
+          }
         },
         "parameters": [
           {
@@ -157,7 +164,9 @@
         ],
         "description": "Retrieve a Spatial Anchors Account.",
         "x-ms-examples": {
-          "ResourceGet": { "$ref": "./examples/spatial-anchors/Get.json" }
+          "ResourceGet": {
+            "$ref": "./examples/spatial-anchors/Get.json"
+          }
         },
         "parameters": [
           {
@@ -195,7 +204,9 @@
         ],
         "description": "Updating a Spatial Anchors Account",
         "x-ms-examples": {
-          "ResourceCreateOrUpdate": { "$ref": "./examples/spatial-anchors/Patch.json" }
+          "ResourceCreateOrUpdate": {
+            "$ref": "./examples/spatial-anchors/Patch.json"
+          }
         },
         "parameters": [
           {
@@ -236,7 +247,9 @@
         ],
         "description": "Creating or Updating a Spatial Anchors Account.",
         "x-ms-examples": {
-          "ResourceCreate": { "$ref": "./examples/spatial-anchors/Put.json" }
+          "ResourceCreate": {
+            "$ref": "./examples/spatial-anchors/Put.json"
+          }
         },
         "parameters": [
           {
@@ -277,7 +290,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/keys" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/spatialAnchorsAccounts/{accountName}/keys": {
       "get": {
         "operationId": "SpatialAnchorsAccounts_GetKeys",
         "tags": [
@@ -285,7 +298,9 @@
         ],
         "description": "Get Both of the 2 Keys of a Spatial Anchors Account",
         "x-ms-examples": {
-          "ResourceGetKey": { "$ref": "./examples/spatial-anchors/GetKeys.json" }
+          "ResourceGetKey": {
+            "$ref": "./examples/spatial-anchors/GetKeys.json"
+          }
         },
         "parameters": [
           {
@@ -323,7 +338,9 @@
         ],
         "description": "Regenerate specified Key of a Spatial Anchors Account",
         "x-ms-examples": {
-          "ResourceRegenerateKey": { "$ref": "./examples/spatial-anchors/RegenerateKey.json" }
+          "ResourceRegenerateKey": {
+            "$ref": "./examples/spatial-anchors/RegenerateKey.json"
+          }
         },
         "parameters": [
           {
@@ -359,12 +376,16 @@
       }
     }
   },
-  "definitions" : {
-    "SpatialAnchorsAccount" : {
-      "allOf" : [{ "$ref" : "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"}],
+  "definitions": {
+    "SpatialAnchorsAccount": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
       "description": "SpatialAnchorsAccount Response.",
       "type": "object",
-      "properties" :{
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Property bag.",
@@ -396,7 +417,7 @@
       "description": "Spatial Anchors Account parameter.",
       "in": "body",
       "schema": {
-          "$ref": "#/definitions/SpatialAnchorsAccount"
+        "$ref": "#/definitions/SpatialAnchorsAccount"
       },
       "required": true,
       "x-ms-parameter-location": "method"

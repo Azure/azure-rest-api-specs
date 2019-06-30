@@ -112,7 +112,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorageSync
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/StorageSync/Management.StorageSync/Generated
+  output-folder: $(csharp-sdks-folder)/storagesync/Microsoft.Azure.Management.StorageSync/src/Generated
   clear-output-folder: true
 ```
 
@@ -137,13 +137,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-storagesync/azure/mgmt/storagesync
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync/azure/mgmt/storagesync
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-storagesync
+  output-folder: $(python-sdks-folder)/storage/azure-mgmt-storagesync
 ```
 
 ## Go

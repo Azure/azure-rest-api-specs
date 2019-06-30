@@ -146,6 +146,6 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.SignalR
-  output-folder: $(csharp-sdks-folder)/SignalR/Management.SignalR/Generated
+  output-folder: $(csharp-sdks-folder)/signalr/Microsoft.Azure.Management.SignalR/src/Generated
   clear-output-folder: true
 ```

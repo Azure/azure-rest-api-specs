@@ -98,8 +98,11 @@ input-file:
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MigrationValidation.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/MongoDbTasks.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/GetTdeCertificatesSqlTask.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/OracleAzureDbPostgreSqlSyncTask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Projects.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ServiceFeatureOCITask.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Services.json
+- Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ServiceTasks.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/Tasks.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/TasksCommon.json
 - Microsoft.DataMigration/preview/2018-07-15-preview/definitions/ValidateMigrationInputSqlServerSqlMITask.json
@@ -199,7 +202,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataMigration
-  output-folder: $(csharp-sdks-folder)/DataMigration/Management.DataMigration/Generated
+  output-folder: $(csharp-sdks-folder)/datamigration/Microsoft.Azure.Management.DataMigration/src/Generated
   clear-output-folder: true
 ```
 

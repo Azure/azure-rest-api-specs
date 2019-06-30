@@ -83,7 +83,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DeviceProvisioningServices
-  output-folder: $(csharp-sdks-folder)/DeviceProvisioningServices/Management.DeviceProvisioningServices/Generated
+  output-folder: $(csharp-sdks-folder)/deviceprovisioningservices/Microsoft.Azure.Management.DeviceProvisioningServices/src/Generated
   clear-output-folder: true
 ```
 

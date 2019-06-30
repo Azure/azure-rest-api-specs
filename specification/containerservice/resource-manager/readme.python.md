@@ -18,6 +18,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2019-06-01-only
   - tag: package-2019-04-30-only
   - tag: package-2019-04-01-only
   - tag: package-2019-02-only
@@ -25,6 +26,17 @@ batch:
   - tag: package-2018-08-preview-only
   - tag: package-2018-03-only
   - tag: package-2017-07-only-extended
+```
+
+### Tag: package-2019-06-01-only and python
+
+These settings apply only when `--tag=package-2019-06-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-06-01-only' && $(python)
+python:
+  namespace: azure.mgmt.containerservice.v2019_06_01
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_06_01
 ```
 
 ### Tag: package-2019-04-30-only and python
@@ -35,7 +47,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-04-30-only' && $(python)
 python:
   namespace: azure.mgmt.containerservice.v2019_04_30
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_04_30
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_04_30
 ```
 
 ### Tag: package-2019-04-01-only and python
@@ -46,7 +58,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-04-01-only' && $(python)
 python:
   namespace: azure.mgmt.containerservice.v2019_04_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_04_01
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_04_01
 ```
 
 ### Tag: package-2019-02-only and python
@@ -57,7 +69,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-02-only' && $(python)
 python:
   namespace: azure.mgmt.containerservice.v2019_02_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_02_01
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2019_02_01
 ```
 
 ### Tag: package-2018-09-preview-only and python
@@ -68,7 +80,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-09-preview-only' && $(python)
 python:
   namespace: azure.mgmt.containerservice.v2018_09_30_preview
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_09_30_preview
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_09_30_preview
 ```
 
 ### Tag: package-2018-08-preview-only and python
@@ -79,7 +91,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-08-preview-only' && $(python)
 python:
   namespace: azure.mgmt.containerservice.v2018_08_01_preview
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_08_01_preview
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_08_01_preview
 ```
 
 ### Tag: package-2018-03-only and python
@@ -90,7 +102,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-03-only' && $(python)
 python:
   namespace: azure.mgmt.containerservice.v2018_03_31
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_03_31
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2018_03_31
 ```
 
 ### Tag: package-2017-07-only-extended and python
@@ -101,5 +113,5 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2017-07-only-extended' && $(python)
 python:
   namespace: azure.mgmt.containerservice.v2017_07_01
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerservice/azure/mgmt/containerservice/v2017_07_01
+  output-folder: $(python-sdks-folder)/containerservice/azure-mgmt-containerservice/azure/mgmt/containerservice/v2017_07_01
 ```
