@@ -36,7 +36,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-06-preview' && $(python)
 python:
   namespace: azure.mgmt.containerregistry.v2019_06_01_preview
-  output-folder: $(python-sdks-folder)/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_06_01_preview
+  output-folder: $(python-sdks-folder)/containerregistry/azure-mgmt-containerregistry/azure/mgmt/containerregistry/v2019_06_01_preview
 ```
 
 ### Tag: package-2019-05 and python
