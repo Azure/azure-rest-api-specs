@@ -20,15 +20,22 @@
               "regionalReplicaCount": 2
             }
           ]
-        },
-        "storageProfile": {
-          "source": {
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-          }
         }
+      },
+      "storageProfile": {
+        "osDiskImage": {
+          "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}",
+          "hostCaching": "ReadOnly"
+        },
+        "dataDiskImages": [
+          {
+            "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
+            "lun": 1,
+            "hostCaching": "None"
+          }
+        ]
       }
-    },
-    "$expand": "ReplicationStatus"
+    }
   },
   "responses": {
     "200": {
@@ -52,35 +59,17 @@
             "storageAccountType": "Standard_LRS"
           },
           "storageProfile": {
-            "source": {
-              "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}"
-            },
             "osDiskImage": {
+              "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{snapshotName}",
               "sizeInGB": 10,
               "hostCaching": "ReadOnly"
             },
             "dataDiskImages": [
               {
+                "source": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/snapshots/{diskSnapshotName}",
                 "lun": 1,
                 "sizeInGB": 10,
                 "hostCaching": "None"
-              }
-            ]
-          },
-          "replicationStatus": {
-            "aggregatedState": "Completed",
-            "summary": [
-              {
-                "region": "West US",
-                "state": "Completed",
-                "details": "",
-                "progress": 100
-              },
-              {
-                "region": "East US",
-                "state": "Completed",
-                "details": "",
-                "progress": 100
               }
             ]
           },
