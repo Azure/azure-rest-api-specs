@@ -10,23 +10,33 @@
       },
       "location": "West US",
       "properties": {
-        "virtualWan": { "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/VirtualWans/virtualWan1" },
-        "deviceProperties": {
-          "deviceVendor": "vendor1",
-          "deviceModel": "model01",
-          "linkSpeedInMbps": 200
-        },
-        "ipAddress": "10.0.0.0",
-        "addressSpace": {
-          "addressPrefixes": [
-            "10.0.0.0/16"
-          ]
-        },
-        "bgpProperties": {
-          "bgpPeeringAddress": "192.168.0.0",
-          "asn": 1234
+          "virtualWan": {
+			"id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWANs/wan1"
+		  },
+          "addressSpace": {
+            "addressPrefixes": [
+              "10.0.0.0/16"
+            ]
+          },
+		  "isSecuritySite": false,
+		  "vpnSiteLinks": [
+				{
+					"name": "vpnSiteLink1",
+					"id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/vpnSiteLink1",
+					"properties": {
+						"ipAddress": "50.50.50.56",
+						"linkProperties": {
+							"linkProviderName": "vendor1",
+							"linkSpeedInMbps": 0
+						}
+						"bgpProperties": {
+							"bgpPeeringAddress": "192.168.0.0",
+							"asn": 1234
+						  }
+					}
+				}
+			]
         }
-      }
     }
   },
   "responses": {
@@ -42,22 +52,38 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "virtualWan": { "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/VirtualWans/virtualWan1" },
+          "virtualWan": {
+			"id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWANs/wan1"
+		  },
           "deviceProperties": {
-            "deviceVendor": "vendor1",
-            "deviceModel": "model01",
-            "linkSpeedInMbps": 200
+            "linkSpeedInMbps": 0
           },
-          "ipAddress": "10.1.0.0",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
-          "bgpProperties": {
-            "bgpPeeringAddress": "192.168.0.0",
-            "asn": 1234
-          }
+		  "isSecuritySite": false,
+		  "vpnSiteLinks": [
+				{
+					"name": "vpnSiteLink1",
+					"id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/vpnSiteLink1",
+					"etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+					"properties": {
+						"provisioningState": "Succeeded",
+						"ipAddress": "50.50.50.56",
+						"linkProperties": {
+							"linkProviderName": "vendor1"
+							"linkSpeedInMbps": 0
+						}
+						"bgpProperties": {
+							"bgpPeeringAddress": "192.168.0.0",
+							"asn": 1234
+						  }
+					},
+					"type": "Microsoft.Network/vpnSites/vpnSiteLinks"
+				}
+			]
         }
       }
     },
@@ -73,22 +99,38 @@
         },
         "properties": {
           "provisioningState": "Succeeded",
-          "virtualWan": { "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/VirtualWans/virtualWan1"},
+          "virtualWan": {
+			"id" : "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWANs/wan1"
+		  },
           "deviceProperties": {
-            "deviceVendor": "vendor1",
-            "deviceModel": "model01",
-            "linkSpeedInMbps": 200
+            "linkSpeedInMbps": 0
           },
-          "ipAddress": "10.1.0.0",
           "addressSpace": {
             "addressPrefixes": [
               "10.0.0.0/16"
             ]
           },
-          "bgpProperties": {
-            "bgpPeeringAddress": "192.168.0.0",
-            "asn": 1234
-          }
+		  "isSecuritySite": false,
+		  "vpnSiteLinks": [
+				{
+					"name": "vpnSiteLink1",
+					"id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/vpnSiteLink1",
+					"etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+					"properties": {
+						"provisioningState": "Succeeded",
+						"ipAddress": "50.50.50.56",
+						"linkProperties": {
+							"linkProviderName": "vendor1"
+							"linkSpeedInMbps": 0
+						}
+						"bgpProperties": {
+							"bgpPeeringAddress": "192.168.0.0",
+							"asn": 1234
+						  }
+					},
+					"type": "Microsoft.Network/vpnSites/vpnSiteLinks"
+				}
+			]
         }
       }
     }
