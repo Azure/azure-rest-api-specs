@@ -399,7 +399,7 @@
     "Avoid": {
       "name": "avoid",
       "in": "query",
-      "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times. Possible values: (tollRoads avoids toll roads), (motorways avoids motorways), (ferries avoids ferries), (unpavedRoads avoids unpaved roads), (carpools avoids routes that require use of carpool (HOV/ High Occupancy Vehicle) lanes), (alreadyUsedRoads avoids using the same road multiple times. Most useful in conjunction with routeType=thrilling). In calculateReachableRange requests, the value alreadyUsedRoads must not be used.",
+      "description": "Specifies something that the route calculation should try to avoid when determining the route. Can be specified multiple times in one request, for example, '&avoid=motorways&avoid=tollRoads&avoid=ferries'. In calculateReachableRange requests, the value alreadyUsedRoads must not be used.",
       "required": false,
       "type": "string",
       "enum": [
@@ -432,7 +432,7 @@
           },
           {
             "value": "carpools",
-            "description": "Avoids carpools"
+            "description": "Avoids routes that require the use of carpool (HOV/High Occupancy Vehicle) lanes."
           },
           {
             "value": "alreadyUsedRoads",
@@ -1388,7 +1388,7 @@
           },
           {
             "name": "routeDirectionsRequestBody",
-            "description": "Used for reconstructing a route and for calculating zero or more alternative routes to this reference route.  The provided sequence of coordinates is used as input for route reconstruction. The alternative routes  are calculated between the origin and destination points specified in the base path parameter locations.  If both minDeviationDistance and minDeviationTime are set to zero, then these origin and destination points  are expected to be at (or very near) the beginning and end of the reference route, respectively. Intermediate  locations (waypoints) are not supported when using coordinateList.\n\nSetting at least one of minDeviationDistance or minDeviationTime to a value greater than zero has the  following consequences:\n\n*  The origin point of the calculateRoute request must be on (or very near) the input reference route. If  this is not the case, an error is returned. However, the origin point does not need to be at the beginning of  the input reference route (it can be thought of as the current vehicle position on the reference route).\n*  The reference route, returned as the first route in the calculateRoute response, will start at the origin  point specified in the calculateRoute request. The initial part of the input reference route up until the  origin point will be excluded from the response.\n*  The values of minDeviationDistance and minDeviationTime determine how far alternative routes will be  guaranteed to follow the reference route from the origin point onwards.\n*  The route must use departAt.\n*  The vehicleHeading is ignored.",
+            "description": "Used for reconstructing a route and for calculating zero or more alternative routes to this reference route.  The provided sequence of coordinates is used as input for route reconstruction. The alternative routes  are calculated between the origin and destination points specified in the base path parameter locations.  If both minDeviationDistance and minDeviationTime are set to zero, then these origin and destination points  are expected to be at (or very near) the beginning and end of the reference route, respectively. Intermediate  locations (waypoints) are not supported when using supportingPoints.\n\nSetting at least one of minDeviationDistance or minDeviationTime to a value greater than zero has the  following consequences:\n\n*  The origin point of the calculateRoute request must be on (or very near) the input reference route. If  this is not the case, an error is returned. However, the origin point does not need to be at the beginning of  the input reference route (it can be thought of as the current vehicle position on the reference route).\n*  The reference route, returned as the first route in the calculateRoute response, will start at the origin  point specified in the calculateRoute request. The initial part of the input reference route up until the  origin point will be excluded from the response.\n*  The values of minDeviationDistance and minDeviationTime determine how far alternative routes will be  guaranteed to follow the reference route from the origin point onwards.\n*  The route must use departAt.\n*  The vehicleHeading is ignored.",
             "in": "body",
             "required": true,
             "schema": {
@@ -1588,7 +1588,7 @@
     "/route/directions/batch/{format}": {
       "post": {
         "x-publish": true,
-        "description": "**Route Directions Batch API**\n\n\n**Applies to**: S1 pricing tier.\n\n\n\nThe Route Directions Batch API allows the caller to batch up to 700 [Route Directions API](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _route directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 3 _route directions_ queries:\n\n\n```json\n{\n    \"batchItems\": [\n        {\"query\": \"?query=One, Microsoft Way, Redmond, WA 98052&limit=1\"},\n        {\"query\": \"?query=350 5th Ave, New York, NY 10118&limit=1\"},\n        {\"query\": \"?query=400 Broad St, Seattle, WA 98109\"}\n    ]\n}\n```\n\nA _route directions_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _route directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#uri-parameters). The string values in the _route directions_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.\n\n\nThe maximum number of queries that can be specified in the batch is **700** and the batch should contain at least **1** query.\n\n\nPlease note that the Route Directions Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Route Directions Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n    \n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n\n\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n\n\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n\nHere's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n\n\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests`i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. Also, the `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item in `batchItems` contains `statusCode` and `response` fields. Each `response` in `batchItems` is of one of the following types:\n\n  - [`RouteDirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#routedirectionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\nHere's a sample Batch Response with 1 _successful_ and 1 _failed_ result:\n\n\n```json            \n{\n    \"summary\": {\n        \"successfulRequests\": 1,\n        \"totalRequests\": 2\n    },\n    \"batchItems\": [\n        {\n            \"statusCode\": 200,\n            \"response\": {\n                \"routes\": [\n                    {\n                        \"summary\": {\n                            \"lengthInMeters\": 1758,\n                            \"travelTimeInSeconds\": 387,\n                            \"trafficDelayInSeconds\": 0,\n                            \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                            \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                        },\n                        \"legs\": [\n                            {\n                                \"summary\": {\n                                    \"lengthInMeters\": 1758,\n                                    \"travelTimeInSeconds\": 387,\n                                    \"trafficDelayInSeconds\": 0,\n                                    \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                                    \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                                },\n                                \"points\": [\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.34892\n                                    },\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.3485\n                                    },\n                                    {\n                                        \"latitude\": 47.62095,\n                                        \"longitude\": -122.3476\n                                    }\n                                ]\n                            }\n                        ],\n                        \"sections\": [\n                            {\n                                \"startPointIndex\": 0,\n                                \"endPointIndex\": 40,\n                                \"sectionType\": \"TRAVEL_MODE\",\n                                \"travelMode\": \"bicycle\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        },\n        {\n            \"statusCode\": 400,\n            \"response\":\n            {\n                \"error\":\n                {\n                    \"code\": \"400 BadRequest\",\n                    \"message\": \"Bad request: one or more parameters were incorrectly specified or are mutually exclusive.\"\n                }\n            }\n        }\n    ]\n}\n```\n\n\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `404 Not Found` response.",
+        "description": "**Route Directions Batch API**\n\n\n**Applies to**: S1 pricing tier.\n\n\n\nThe Route Directions Batch API allows the caller to batch up to 700 [Route Directions API](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections) queries/requests using just a single API call.\n### Submit Batch Request\nTo send the _route directions_ queries you will use a `POST` request where the request body will contain the `batchItems` array in `json` format and the `Content-Type` header will be set to `application/json`. Here's a sample request body containing 3 _route directions_ queries:\n\n\n```json\n{\n    \"batchItems\": [\n        { \"query\": \"?query=47.620659,-122.348934:47.610101,-122.342015&travelMode=bicycle&routeType=eco&traffic=false\" },\n        { \"query\": \"?query=40.759856,-73.985108:40.771136,-73.973506&travelMode=pedestrian&routeType=shortest\" },\n        { \"query\": \"?query=48.923159,-122.557362:32.621279,-116.840362\" }\n    ]\n}\n```\n\nA _route directions_ query in a batch is just a partial URL _without_ the protocol, base URL, path, api-version and subscription-key. It can accept any of the supported _route directions_ [URI parameters](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#uri-parameters). The string values in the _route directions_ query must be properly escaped (e.g. \" character should be escaped with \\\\ ) and it should also be properly URL-encoded.\n\n\nThe maximum number of queries that can be specified in the batch is **700** and the batch should contain at least **1** query.\n\n\nPlease note that the Route Directions Batch API is a long-running request. Here's a typical sequence of operations:\n1. Client sends a Route Directions Batch `POST` request to Azure Maps\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request has been accepted.\n    \n    > HTTP `Error` - There was an error processing your Batch request. This could either be a `400 Bad Request` or any other `Error` status code.\n\n3. If the batch request was accepted successfully, the `Location` header in the response contains the URL to download the results of the batch request.\n4. Client issues a `GET` request on the _download URL_ obtained in Step 3 to download the batch results.\n\n\n\n### Download Batch Results\nTo download the batch results you will issue a `GET` request to the batch download endpoint. This _download URL_ can be obtained from the `Location` header of a successful `POST` batch request and looks like the following:\n\n\n```\nhttps://atlas.microsoft.com/batch/{batch-id}?api-version=1.0&subscription-key={subscription-key}\n```\n\nHere's the typical sequence of operations for downloading the batch results:\n1. Client sends a `GET` request using the _download URL_.\n2. The server will respond with one of the following:\n    \n    > HTTP `202 Accepted` - Batch request was accepted but is still being processed. Please try again in some time.\n\n    > HTTP `200 OK` - Batch request successfully processed. The response body contains all the batch results.\n\n\n\n### Batch Response Model\nWhen downloading the results of a batch request, if the batch has finished processing, the response body contains the batch response. This batch response contains a `summary` component that indicates the `totalRequests` that were part of the original batch request and `successfulRequests`i.e. queries which were executed successfully. The batch response also includes a `batchItems` array which contains a response for each and every query in the batch request. Also, the `batchItems` will contain the results in the exact same order the original queries were sent in the batch request. Each item in `batchItems` contains `statusCode` and `response` fields. Each `response` in `batchItems` is of one of the following types:\n\n  - [`RouteDirectionsResponse`](https://docs.microsoft.com/en-us/rest/api/maps/route/getroutedirections#routedirectionsresponse) - If the query completed successfully.\n\n  - `Error` - If the query failed. The response will contain a `code` and a `message` in this case.\n\n\nHere's a sample Batch Response with 1 _successful_ and 1 _failed_ result:\n\n\n```json            \n{\n    \"summary\": {\n        \"successfulRequests\": 1,\n        \"totalRequests\": 2\n    },\n    \"batchItems\": [\n        {\n            \"statusCode\": 200,\n            \"response\": {\n                \"routes\": [\n                    {\n                        \"summary\": {\n                            \"lengthInMeters\": 1758,\n                            \"travelTimeInSeconds\": 387,\n                            \"trafficDelayInSeconds\": 0,\n                            \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                            \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                        },\n                        \"legs\": [\n                            {\n                                \"summary\": {\n                                    \"lengthInMeters\": 1758,\n                                    \"travelTimeInSeconds\": 387,\n                                    \"trafficDelayInSeconds\": 0,\n                                    \"departureTime\": \"2018-07-17T00:49:56+00:00\",\n                                    \"arrivalTime\": \"2018-07-17T00:56:22+00:00\"\n                                },\n                                \"points\": [\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.34892\n                                    },\n                                    {\n                                        \"latitude\": 47.62094,\n                                        \"longitude\": -122.3485\n                                    },\n                                    {\n                                        \"latitude\": 47.62095,\n                                        \"longitude\": -122.3476\n                                    }\n                                ]\n                            }\n                        ],\n                        \"sections\": [\n                            {\n                                \"startPointIndex\": 0,\n                                \"endPointIndex\": 40,\n                                \"sectionType\": \"TRAVEL_MODE\",\n                                \"travelMode\": \"bicycle\"\n                            }\n                        ]\n                    }\n                ]\n            }\n        },\n        {\n            \"statusCode\": 400,\n            \"response\":\n            {\n                \"error\":\n                {\n                    \"code\": \"400 BadRequest\",\n                    \"message\": \"Bad request: one or more parameters were incorrectly specified or are mutually exclusive.\"\n                }\n            }\n        }\n    ]\n}\n```\n\n\n### Data Retention Period\nPlease, be aware that batch results are available for download for **14** days, after which the request for results download will return `404 Not Found` response.",
         "operationId": "Route_PostRouteDirectionsBatchPreview",
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -1753,6 +1753,142 @@
         }
       }
     },
+    "GeoJSONMultiPolygon": {
+      "description": "A valid `GeoJSON GeoJSONMultiPolygon` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.",
+      "allOf": [
+        {
+          "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
+          "type": "object"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the object. Value should always be equal to \"MultiPolygon\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Contains a list of valid `GeoJSON` Polygon objects.",
+              "type": "array",
+              "items": {
+                "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+                "allOf": [
+                  {
+                    "$ref": "#/definitions/GeoJSONMultiPolygon/allOf/0"
+                  },
+                  {
+                    "type": "object",
+                    "properties": {
+                      "type": {
+                        "description": "Specifies the `type` for the object. Value should always be equal to \"Polygon\".",
+                        "type": "string"
+                      },
+                      "coordinates": {
+                        "description": "Coordinates for the `Polygon` geometry type.",
+                        "type": "array",
+                        "items": {
+                          "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+                          "type": "array",
+                          "items": {
+                            "$ref": "#/definitions/GeoJSONPosition"
+                          }
+                        }
+                      }
+                    },
+                    "required": [
+                      "coordinates"
+                    ]
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "GeoJSONGeometryCollection": {
+      "description": "A valid `GeoJSON GeometryCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.8) for details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONMultiPolygon/allOf/0"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "geometries": {
+              "description": "Contains a list of valid `GeoJSON` geometry objects.",
+              "type": "array",
+              "items": {
+                "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
+                    "type": "string",
+                    "enum": [
+                      "Point",
+                      "MultiPoint",
+                      "LineString",
+                      "MultiLineString",
+                      "Polygon",
+                      "MultiPolygon",
+                      "GeometryCollection"
+                    ],
+                    "x-ms-enum": {
+                      "name": "GeoJSONGeometryType",
+                      "modelAsString": false,
+                      "values": [
+                        {
+                          "value": "Point",
+                          "description": "`GeoJSON Point` geometry."
+                        },
+                        {
+                          "value": "MultiPoint",
+                          "description": "`GeoJSON MultiPoint` geometry."
+                        },
+                        {
+                          "value": "LineString",
+                          "description": "`GeoJSON LineString` geometry."
+                        },
+                        {
+                          "value": "MultiLineString",
+                          "description": "`GeoJSON MultiLineString` geometry."
+                        },
+                        {
+                          "value": "Polygon",
+                          "description": "`GeoJSON Polygon` geometry."
+                        },
+                        {
+                          "value": "MultiPolygon",
+                          "description": "`GeoJSON MultiPolygon` geometry."
+                        },
+                        {
+                          "value": "GeometryCollection",
+                          "description": "`GeoJSON GeometryCollection` geometry."
+                        }
+                      ]
+                    }
+                  },
+                  "coordinates": {
+                    "description": "Coordinates for the geometry type. Depending on the geometry type, this might be a 1D, 2D or a 3D array.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/GeoJSONPosition"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "required": [
+            "geometries"
+          ]
+        }
+      ]
+    },
     "BatchRequestBody": {
       "description": "This type represents the request body for the Batch service.",
       "type": "object",
@@ -1793,13 +1929,34 @@
     },
     "RouteDirectionsRequestBody": {
       "type": "object",
-      "description": "Sequence of coordinates used as input for route reconstruction.",
+      "description": "Post body parameters for Route directions.",
       "properties": {
-        "coordinateList": {
-          "description": "An array of GeoJSON points representing coordinates",
+        "supportingPoints": {
+          "description": "A GeoJSON Geometry collection representing sequence of coordinates used as input for route reconstruction",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GeoJSONPoint"
+            "$ref": "#/definitions/GeoJSONGeometryCollection"
+          }
+        },
+        "avoidVignette": {
+          "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries in which all toll roads with vignettes are to be avoided, e.g. \"AUS,CHE\". Toll roads with vignettes in countries not in the list are unaffected. Note: It is an error to specify both <avoidVignette> and <allowVignette>.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "allowVignette": {
+          "description": "This is a list of 3-character, ISO 3166-1, alpha-3 country codes of countries in which toll roads with vignettes are allowed, e.g. \"AUS,CHE\". Specifying <allowVignette> with some countries X is equivalent to specifying <avoidVignette> with all countries but X. Specifying <allowVignette> with an empty list is the same as avoiding all toll roads with vignettes. Note: It is an error to specify both <avoidVignette> and <allowVignette>.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "avoidAreas": {
+          "description": "A GeoJSON MultiPolygon representing list of areas to avoid. Only rectangle polygons are supported. The maximum size of a rectangle is about 160x160 km. It cannot cross the 180th meridian. It must be between -80 and +80 degrees of latitude.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/GeoJSONMultiPolygon"
           }
         }
       }

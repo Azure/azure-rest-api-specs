@@ -445,6 +445,27 @@
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
+    },
+    "OpeningHours": {
+      "name": "openingHours",
+      "description": "Opening hours for a POI (Points of Interest). The availability of opening hours will vary based on the data available.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "enum": [
+        "nextSevenDays"
+      ],
+      "x-ms-enum": {
+        "name": "OpeningHours",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "nextSevenDays",
+            "description": "Shows the opening hours for next week, starting with the current day in the local time of the POI."
+          }
+        ]
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -610,6 +631,9 @@
           },
           {
             "$ref": "#/parameters/View"
+          },
+          {
+            "$ref": "#/parameters/OpeningHours"
           }
         ],
         "responses": {
@@ -716,6 +740,9 @@
           },
           {
             "$ref": "#/parameters/View"
+          },
+          {
+            "$ref": "#/parameters/OpeningHours"
           }
         ],
         "responses": {
@@ -905,6 +932,9 @@
           },
           {
             "$ref": "#/parameters/View"
+          },
+          {
+            "$ref": "#/parameters/OpeningHours"
           }
         ],
         "responses": {
@@ -1471,6 +1501,9 @@
           },
           {
             "$ref": "#/parameters/View"
+          },
+          {
+            "$ref": "#/parameters/OpeningHours"
           }
         ],
         "responses": {
@@ -1549,6 +1582,9 @@
           },
           {
             "$ref": "#/parameters/View"
+          },
+          {
+            "$ref": "#/parameters/OpeningHours"
           },
           {
             "name": "searchAlongRouteRequestBody",
@@ -2516,6 +2552,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Position property in the form of \"{latitude},{longitude}\""
+        },
+        "matchType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Information on the type of match.\n\nOne of:\n  * AddressPoint\n  * HouseNumberRange\n  * Street"
         }
       }
     },
@@ -2944,6 +2985,14 @@
           "items": {
             "$ref": "#/definitions/SearchResultPoiClassification"
           }
+        },
+        "brands": {
+          "description": "Brands array",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/SearchResultPoiBrand"
+          }
         }
       }
     },
@@ -2977,6 +3026,17 @@
         },
         "name": {
           "description": "Name property",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "SearchResultPoiBrand": {
+      "description": "The name of the brand for the POI being returned",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the brand",
           "type": "string",
           "readOnly": true
         }
@@ -3082,6 +3142,11 @@
         },
         "countrySubdivisionName": {
           "description": "Country Subdividion Name property",
+          "type": "string",
+          "readOnly": true
+        },
+        "localName": {
+          "description": "An address component which represents the name of a geographic area or locality that groups a number of addressable objects for addressing purposes, without being an administrative unit. This field is used to build the `freeformAddress` property.",
           "type": "string",
           "readOnly": true
         }
