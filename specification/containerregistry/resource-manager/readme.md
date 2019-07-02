@@ -39,6 +39,15 @@ input-file:
 - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
+### Tag: package-2019-06-preview-only
+
+These settings apply only when `--tag=package-2019-06-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-preview-only'
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
