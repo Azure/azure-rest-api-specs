@@ -265,19 +265,19 @@
 					"readOnly": true,
 					"type": "string",
 					"description": "Sub-assessment resource type",
-					"enum": ["SqlServerVulnerabilitySubAssessment", "ContainerRegistryVulnerabilitySubAssessment", "ServerVulnerabilitySubAssessment"],
+					"enum": ["SqlServerVulnerability", "ContainerRegistryVulnerability", "ServerVulnerability"],
 					"x-ms-enum": {
 						"name": "AssessedResourceType",
 						"modelAsString": true,
 						"values": [
 							{
-								"value": "SqlServerVulnerabilitySubAssessment"
+								"value": "SqlServerVulnerability"
 							},
 							{
-								"value": "ContainerRegistryVulnerabilitySubAssessment"
+								"value": "ContainerRegistryVulnerability"
 							},
 							{
-								"value": "ServerVulnerabilitySubAssessment"
+								"value": "ServerVulnerability"
 							}
 						]
 					}
@@ -321,7 +321,7 @@
 					"readOnly": true,
 					"type": "string",
 					"description": "Human readable description of the assessment status"
-				}
+				},
 				"severity": {
 					"readOnly": true,
 					"type": "string",
@@ -351,10 +351,10 @@
 				}
 			}
 		},
-		"SqlServerVulnerabilitySubAssessmentProperties": {
+		"SqlServerVulnerabilityProperties": {
 			"type": "object",
 			"description": "Details of the resource that was assessed",
-			"x-ms-discriminator-value": "SqlServerVulnerabilitySubAssessment",
+			"x-ms-discriminator-value": "SqlServerVulnerability",
 			"allOf": [{
 				"$ref": "#/definitions/AdditionalData"
 			}],
@@ -392,10 +392,10 @@
 				}
 			}
 		},
-		"ContainerRegistryVulnerabilitySubAssessmentProperties": {
+		"ContainerRegistryVulnerabilityProperties": {
 			"type": "object",
 			"description": "Additional context fields for container registry Vulnerability assessment",
-			"x-ms-discriminator-value": "ContainerRegistryVulnerabilitySubAssessment",
+			"x-ms-discriminator-value": "ContainerRegistryVulnerability",
 			"allOf": [{
 				"$ref": "#/definitions/AdditionalData"
 			}],
@@ -461,7 +461,7 @@
 				}
 			}
 		},
-		"ServerVulnerabilitySubAssessmentProperties": {
+		"ServerVulnerabilityProperties": {
 			"type": "object",
 			"description": "Additional context fields for server vulnerability assessment",
 			"x-ms-discriminator-value": "ServerVulnerabilityAssessment",
