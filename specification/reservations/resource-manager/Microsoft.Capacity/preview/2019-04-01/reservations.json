@@ -862,9 +862,21 @@
         "purchaseProperties": {
           "$ref": "#/definitions/PurchaseRequest"
         },
-        "lockedPriceTotal": {
+        "pricingCurrencyTotal": {
           "type": "object",
-          "description": "Locked currency & amount for new reservation purchase at the time of renewal. Price is locked 30 days before expiry date time if renew is true.",
+          "description": "Pricing currency total for new reservation purchase at the time of renewal. This is locked price. Price is locked 30 days before expiry date time if renew is true.",
+          "properties": {
+            "currencyCode": {
+              "type": "string"
+            },
+            "amount": {
+              "type": "string"
+            }
+          }
+        },
+        "billingCurrencyTotal": {
+          "type": "object",
+          "description": "Billing currency total for new reservation purchase at the time of renewal. This is what the user will pay. Price is locked 30 days before expiry date time if renew is true.",
           "properties": {
             "currencyCode": {
               "type": "string"
