@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "applicationDefinitionName": "myManagedApplicationDef",
+    "managedApplicationName": "myManagedApplicationDef",
     "api-version": "2019-03-01"
   },
   "responses": {
@@ -14,6 +14,7 @@
         "type": "Microsoft.Solutions/applicationDefinitions",
         "location": "East US 2",
         "managedBy": null,
+        "resourceGroup": "rg",
         "tags": null,
         "identity": null,
         "sku": null,
@@ -38,11 +39,10 @@
           ],
           "description": "myManagedApplicationDef description",
           "displayName": "myManagedApplicationDef",
-          "lockLevel": "None",
+          "lockLevel": null,
           "packageFileUri": "https://path/to/packagezipfile"
         }
       }
-    },
-    "404": {}
+    }
   }
 }

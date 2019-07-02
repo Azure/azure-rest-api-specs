@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg",
+    "managedApplicationName": "myManagedApplication",
+    "api-version": "2019-03-01",
+    "parameters": {
+      "properties": {
+        "Approver": "johnSmith@Contoso.com",
+        "Metadata": {
+          "OriginRequestId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/jitRequests"
+        },
+        "Status":"Elevate",
+        "SubStatus": "Approved"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "parameters": {
+          "properties": {
+            "Approver": "johnSmith@Contoso.com",
+            "Metadata": {
+              "OriginRequestId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/jitRequests"
+            },
+            "Status":"Elevate",
+            "SubStatus": "Approved"
+          }
+        }
+      }
+    }
+  }
+}

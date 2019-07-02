@@ -771,6 +771,15 @@
             "maxLength": 64
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitUpdateAccessDefinition"
+            },
+            "description": "Parameters supplied to the update managed application access."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -821,7 +830,7 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },          
+          },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
           }
@@ -832,9 +841,6 @@
             "schema": {
               "$ref": "#/definitions/JitRequestDefinition"
             }
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -869,6 +875,15 @@
             "description": "The name of the JIT request."
           },
           {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/JitRequestDefinition"
+            },
+            "description": "Parameters supplied to the update JIT request."
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },          
           {
@@ -888,7 +903,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
@@ -1013,7 +1029,7 @@
             }
           }
         } 
-      }   
+      }
     }
   },
   "x-ms-paths": {
@@ -1739,7 +1755,7 @@
       "required": [
         "Type",
         "Duration",
-        "StartTime"
+        "Starttime"
       ],
       "description": "The JIT scheduling policies."
     },
@@ -1801,7 +1817,8 @@
           "description": "The approver name."
         },
         "Metadata": {
-
+          "$ref": "#/definitions/JitRequestMetadata",
+          "description": "The JIT meta data."
         },
         "Status": {
           "$ref": "#/definitions/JITStatusUpdate",

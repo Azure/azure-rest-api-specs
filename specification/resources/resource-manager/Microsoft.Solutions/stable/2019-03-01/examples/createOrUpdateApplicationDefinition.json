@@ -2,7 +2,7 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "applicationDefinitionName": "myManagedApplicationDef",
+    "managedApplicationDefinitionName": "myManagedApplicationDef",
     "api-version": "2019-03-01",
     "parameters": {
       "properties": {
@@ -21,43 +21,6 @@
     }
   },
   "responses": {
-    "200": {
-      "headers": {},
-      "body": {
-        "name": "myManagedApplicationDef",
-        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myManagedApplicationDef",
-        "type": "Microsoft.Solutions/applicationDefinitions",
-        "location": "East US 2",
-        "managedBy": null,
-        "tags": null,
-        "identity": null,
-        "sku": null,
-        "properties": {
-          "artifacts": [
-            {
-              "name": "CreateUiDefinition",
-              "type": "Custom",
-              "uri": "https://path/to/managedApplicationCreateUiDefinition.json"
-            },
-            {
-              "name": "ManagedApplicationResourceTemplate",
-              "type": "Template",
-              "uri": "https://path/to/mainTemplate.json"
-            }
-          ],
-          "authorizations": [
-            {
-              "principalId": "validprincipalguid",
-              "roleDefinitionId": "validroleguid"
-            }
-          ],
-          "description": "myManagedApplicationDef description",
-          "displayName": "myManagedApplicationDef",
-          "lockLevel": "None",
-          "packageFileUri": "https://path/to/packagezipfile"
-        }
-      }
-    },
     "201": {
       "headers": {},
       "body": {
@@ -66,6 +29,7 @@
         "type": "Microsoft.Solutions/applicationDefinitions",
         "location": "East US 2",
         "managedBy": null,
+        "resourceGroup": "rg",
         "tags": null,
         "identity": null,
         "sku": null,
@@ -90,7 +54,7 @@
           ],
           "description": "myManagedApplicationDef description",
           "displayName": "myManagedApplicationDef",
-          "lockLevel": "None",
+          "lockLevel": null,
           "packageFileUri": "https://path/to/packagezipfile"
         }
       }
