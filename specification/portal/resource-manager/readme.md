@@ -38,14 +38,6 @@ These settings apply only when `--tag=package-preview-2015-08` is specified on t
 input-file:
   - Microsoft.Portal/preview/2015-08-01-preview/portal.json
 ```
-### Tag: package-2015-11-01-preview
-
-These settings apply only when `--tag=package-2015-11-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-11-01-preview'
-input-file:
-  - Microsoft.Portal/preview/2015-11-01-preview/portal.json
-```
 
 ---
 
