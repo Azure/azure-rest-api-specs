@@ -450,7 +450,9 @@
         "operationId": "Usages_ListByLocation",
         "description": "Gets the current usage count and the limit for the resources of the location under the subscription.",
         "x-ms-examples": {
-          "UsageList": { "$ref": "./examples/StorageAccountListLocationUsage.json"}
+          "UsageList": {
+            "$ref": "./examples/StorageAccountListLocationUsage.json"
+          }
         },
         "parameters": [
           {
@@ -465,7 +467,7 @@
             "required": true,
             "type": "string",
             "description": "The location of the Azure Storage resource."
-          }         
+          }
         ],
         "responses": {
           "200": {
@@ -1195,8 +1197,8 @@
         },
         "isHnsEnabled": {
           "type": "boolean",
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1459,8 +1461,8 @@
         },
         "isHnsEnabled": {
           "type": "boolean",
-           "x-ms-client-name": "IsHnsEnabled",
-           "description": "Account HierarchicalNamespace enabled if sets to true."
+          "x-ms-client-name": "IsHnsEnabled",
+          "description": "Account HierarchicalNamespace enabled if sets to true."
         },
         "geoReplicationStats": {
           "$ref": "#/definitions/GeoReplicationStats",

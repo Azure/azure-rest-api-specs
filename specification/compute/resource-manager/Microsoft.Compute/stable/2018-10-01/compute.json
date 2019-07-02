@@ -2238,6 +2238,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Lists all available virtual machine sizes to which the specified virtual machine can be resized": {
+            "$ref": "./examples/ListAvailableVmSizes_VirtualMachines.json"
+          }
         }
       }
     },
@@ -4761,7 +4766,7 @@
       "properties": {
         "proximityPlacementGroupType": {
           "type": "string",
-          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** <br><br> **Ultra**",
+          "description": "Specifies the type of the proximity placement group. <br><br> Possible values are: <br><br> **Standard** : Co-locate resources within an Azure region or Availability Zone. <br><br> **Ultra** : For future use.",
           "enum": [
             "Standard",
             "Ultra"
@@ -5284,7 +5289,7 @@
       "properties": {
         "tempDisk": {
           "type": "boolean",
-          "description": "Specifies whether to reimage temp disk. Default value: false."
+          "description": "Specifies whether to reimage temp disk. Default value: false. Note: This temp disk reimage parameter is only supported for VM/VMSS with Ephemeral OS disk."
         }
       },
       "description": "Parameters for Reimaging Virtual Machine. NOTE: Virtual Machine OS disk will always be reimaged"
@@ -7674,7 +7679,7 @@
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
         },
-        "doNotRunExtensionsOnOverprovisionedVMs":{
+        "doNotRunExtensionsOnOverprovisionedVMs": {
           "type": "boolean",
           "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
         },

@@ -123,7 +123,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.IotHub
-  output-folder: $(csharp-sdks-folder)/IotHub/Management.IotHub/Generated
+  output-folder: $(csharp-sdks-folder)/iothub/Microsoft.Azure.Management.IotHub/src/Generated
   clear-output-folder: true
 ```
 

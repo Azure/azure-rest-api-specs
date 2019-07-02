@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-frontdoor/azure/mgmt/frontdoor
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-frontdoor/azure/mgmt/frontdoor
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-frontdoor
+  output-folder: $(python-sdks-folder)/network/azure-mgmt-frontdoor
 ```
