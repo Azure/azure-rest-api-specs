@@ -30,4 +30,4 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-12-preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/$(namespace)/2018-12-31-preview/$(namespace)
-
+```
