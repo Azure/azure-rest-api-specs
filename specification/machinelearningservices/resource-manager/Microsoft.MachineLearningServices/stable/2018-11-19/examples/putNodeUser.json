@@ -1,0 +1,43 @@
+{
+    "parameters": {
+        "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+        "resourceGroupName": "testrg123",
+        "workspaceName": "workspaces123",
+        "computeName": "compute123",
+        "api-version": "2018-11-19",
+        "nodeName": "tvm-3601533753_2-20170719t162906z",
+        "userName": "user123",
+        "parameters": {
+            "properties": {
+                "userName": "user123",
+                "userPassword": "user_password",
+                "userSshPublicKey": "ssh-rsa AAAAB3NzaC1yc...",
+                "expiryIndays": 1,
+                "accountType": "Admin",
+                "createdBy": "abc"
+            }
+        }
+    },
+    "responses": {
+        "200": {
+            "body": {
+                "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/testrg123/providers/Microsoft.MachineLearningServices/workspaces/workspaces123/computes/compute123/nodes/tvm-3601533753_2-20170719t162906z/users/user123",
+                "type": "Microsoft.MachineLearningServices/workspaces/computes/nodes/users",
+                "name": "user123",
+                "location": "eastus2euap",
+                "properties": {
+                    "userName": "user123",
+                    "expiryIndays": 1,
+                    "accountType": "Admin",
+                    "createdBy": "abc"
+                }
+            }
+        },
+        "202": {
+            "headers": {
+                "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.BatchAI/locations/eastus/operationresults/7e69f371-db62-4183-bba0-5ee577d43bd7?api-version=2018-05-01",
+                "Retry-After": 15
+            }
+        }
+    }
+}

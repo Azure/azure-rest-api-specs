@@ -742,8 +742,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/nodes": {
+      "get": {
         "tags": [
           "MachineLearningComputes"
         ],
@@ -833,52 +833,197 @@
           }
         }
       }
-    }
-  },
-  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/addNodeUser": {
-    "post": {
-      "tags": [
-        "MachineLearningComputes"
-      ],
-      "operationId": "MachineLearningCompute_AddNodeUser",
-      "description": "Adds user to the specified list of nodes in the cluster.",
-      "x-ms-examples": {
-        "AML Compute Add Node User": { "$ref": "./examples/amlComputeAddNodeUser.json" }
-      },
-      "parameters": [
-        {
-          "$ref": "#/parameters/SubscriptionIdParameter"
-        },
-        {
-          "$ref": "#/parameters/ResourceGroupNameParameter"
-        },
-        {
-          "$ref": "#/parameters/WorkspaceNameParameter"
-        },
-        {
-          "$ref": "#/parameters/ComputeNameParameter"
-        },
-        {
-          "$ref": "#/parameters/APIVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/NodeUserAccountCreateParameter"
-        }
-      ],
-      "responses": {
-        "202": {
-          "description": "User account addition initiated.",
-          "headers": {
-            "Azure-AsyncOperation": {
-              "description": "URI to poll for asynchronous operation status.",
-              "type": "string"
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}//computes/{computeName}/nodes/{nodeName}/nodeUsers/{nodeUserName}": {
+      "put": {
+        "tags": [
+          "NodeUser"
+        ],
+        "operationId": "NodeUser_Create",
+        "description": "Creates a NodeUser in the given Node.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserDefinitionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the User entity.",
+            "schema": {
+              "$ref": "#/definitions/NodeUser"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the request failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
             }
           }
         },
-        "default": {
-          "description": "Error response describing why the operation failed.",
-          "schema": {
-            "$ref": "#/definitions/MachineLearningServiceError"
+        "x-ms-examples": {
+          "Put an AML Compute Node User": { "$ref": "./examples/putAMLComputeNodeUser.json" }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NodeUser"
+        ],
+        "operationId": "NodeUser_Delete",
+        "description": "Deletes a User on the node.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NodeUser"
+        ],
+        "operationId": "NodeUser_Get",
+        "description": "Gets information about a Node's user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/UserNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains information about the Cluster.",
+            "schema": {
+              "$ref": "#/definitions/NodeUser"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get an AML Compute Node User": { "$ref": "./examples/getAMLComputeNodeUser.json" }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/users": {
+      "get": {
+        "tags": [
+          "MachineLearningComputes"
+        ],
+        "operationId": "MachineLearningCompute_ListNodes",
+        "description": "Get the details (e.g IP address, port etc) of all the compute nodes in the compute.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ComputeNameParameter"
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NodeNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful. The response contains the list of nodes and corresponding user accounts .",
+            "schema": {
+              "$ref": "#/definitions/NodeUserAccountsInformation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get compute nodes information for a compute": {
+            "$ref": "./examples/computeUsers.json"
           }
         }
       }
@@ -911,6 +1056,22 @@
     "ComputeNameParameter": {
       "name": "computeName",
       "description": "Name of the Azure Machine Learning compute.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "NodeNameParameter": {
+      "name": "nodeName",
+      "description": "Name of the Azure Machine Learning compute node.",
+      "in": "path",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "UserNameParameter": {
+      "name": "userName",
+      "description": "Name of the Azure Machine Learning compute node's user account.",
       "in": "path",
       "type": "string",
       "required": true,
@@ -957,13 +1118,13 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "NodeUserAccountCreateParameter": {
+    "UserDefinitionParameter": {
       "in": "body",
       "name": "parameters",
-      "description": "Payload with Machine Learning compute node's user account definition.",
+      "description": "Payload with Machine Learning compute node's user definition.",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/NodeUserAccountProperties"
+        "$ref": "#/definitions/NodeUser"
       },
       "x-ms-parameter-location": "method"
     },
@@ -1448,6 +1609,59 @@
           "description": "A continuation link (absolute URI) to the next page of results in the list."
         }
       }
+    },
+    "NodeUser": {
+      "type": "object",
+      "description": "Machine Learning compute node's user object.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "accountType": {
+              "type": "string",
+              "default": "NonAdmin",
+              "title": "User Account Type",
+              "description": "The type of user access",
+              "enum": [
+                "Admin",
+                "NonAdmin"
+              ],
+              "x-ms-enum": {
+                "name": "accountType",
+                "modelAsString": true
+              }
+            },
+            "userPublicKey": {
+              "type": "string",
+              "title": "SSH public key.",
+              "description": "public key of the administrator user account.",
+            },
+            "userPassword": {
+              "type": "string",
+              "title": "Password.",
+              "description": "The date and time when the compute was created."
+            },
+            "expiryInDays": {
+              "type": "integer",
+              "description": "The number of days after which the node user account should expire.",
+              "default": 1,
+              "minimum": 1,
+              "maximum": 90
+            },
+            "createdBy": {
+              "type": "string",
+              "title": "CreatedBy",
+              "description": "AAD name of the requester/creator of the user account",
+            }
+          },
+          "required": [
+            "userName"
+          ]
+        }
+      ]
     },
     "ComputeResource": {
       "type": "object",
@@ -2025,6 +2239,42 @@
       },
       "description": "AmlCompute update parameters."
     },
+    "NodeUserAccountsInformation": {
+      "description": "Compute node's user accounts information.",
+      "type": "object",
+      "properties": {
+        "nodesUserAccountsInformation": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeUserAccountInformation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The continuation token."
+        }
+      }
+    },
+    "NodeUserAccountInformation": {
+      "description": "Compute node's user accounts information.",
+      "type": "object",
+      "properties": {
+        "nodeId" :{
+          "readOnly": true,
+          "type": "string",
+          "description": "fully qualified node ID"
+        },
+        "userAccounts": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NodeUser"
+          },
+          "description": "The collection of returned AmlCompute node's user accounts."
+        }
+      }
+    },
     "ComputeNodesInformation": {
       "type": "object",
       "description": "Compute nodes information related to a Machine Learning compute. Might differ for every type of compute.",
@@ -2234,60 +2484,6 @@
         "name": "ComputeType",
         "modelAsString": true
       }
-    },
-    "NodeUserAccountProperties": {
-      "type" : "object",
-      "description": "User credentials for compute node",
-      "properties": {
-        "nodeUserAccountSetting": {
-          "description": "Settings for user account to be created on a node. The account can be used to establish SSH connection to the node.",
-          "$ref": "#/definitions/NodeUserAccountSetting"
-        },
-        "nodeIdList": {
-          "description": "List of Ids of the nodes on which user account needs to be created",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "NodeUserAccountSetting": {
-      "properties": {
-        "nodeUserName": {
-          "type": "string",
-          "title": "User name.",
-          "description": "Name of the user account which can be used to SSH to node."
-        },
-        "nodeUserSshPublicKey": {
-          "type": "string",
-          "title": "SSH public key.",
-          "description": "SSH public key of the administrator user account."
-        },
-        "nodeUserPassword": {
-          "type": "string",
-          "title": "Password.",
-          "description": "Password of the administrator user account."
-        },
-        "isAdmin": {
-          "type": "boolean",
-          "title": "Is Admin",
-          "default": true,
-          "description": "Indicated whether the user account should have admin privileges"
-        },
-        "expiryIndays": {
-          "type": "integer",
-          "format": "int32",
-          "default": 1,
-          "minimum": 1,
-          "maximum": 90,
-          "description": "The number of days after which the node user account should expire"
-        }
-      },
-      "required": [
-        "nodeUserName"
-      ],
-      "description": "Settings for user account that gets created on each on the nodes of a compute."
     },
     "MachineLearningServiceError": {
       "type": "object",
