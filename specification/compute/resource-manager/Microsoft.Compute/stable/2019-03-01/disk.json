@@ -3,7 +3,7 @@
   "info": {
     "title": "DiskResourceProviderClient",
     "description": "The Disk Resource Provider Client.",
-    "version": "2018-09-30"
+    "version": "2019-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -970,6 +970,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The disk provisioning state."
+        },
+        "incremental": {
+          "type": "boolean",
+          "description": "Whether a snapshot is incremental. Incremental snapshots on the same disk occupy less space than full snapshots and can be diffed."
         }
       },
       "required": [
@@ -1148,13 +1152,17 @@
         "sourceResourceId": {
           "type": "string",
           "description": "If createOption is Copy, this is the ARM id of the source snapshot or disk."
-        }
+        },
+        "sourceUniqueId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The Id of the source this Incremental Snapshot was created from. Null for non Incremental Snapshots."
+        },
+        "required": [
+          "createOption"
+        ],
+        "description": "Data used when creating a disk."
       },
-      "required": [
-        "createOption"
-      ],
-      "description": "Data used when creating a disk."
-    },
     "ImageDiskReference": {
       "properties": {
         "id": {
