@@ -1,0 +1,406 @@
+paths:
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/applicationWhitelistings':
+    get:
+      description: Gets a list of application control groups for the subscription.
+      tags:
+        - applicationWhitelistings
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/apiVersion'
+        - $ref: '#/parameters/includePathRecommendations'
+        - $ref: '#/parameters/summary'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AppWhitelistingGroups'
+        '400':
+          description: Bad Request - The subscription is not permitted
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+  '/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/applicationWhitelistings/{groupName}':
+    get:
+      description: Gets an application control group.
+      tags:
+        - applicationWhitelistings
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/ascLocation'
+        - $ref: '#/parameters/groupName'
+        - $ref: '#/parameters/apiVersion'
+      responses:
+        '200':
+          description: OK
+          schema:
+            $ref: '#/definitions/AppWhitelistingGroup'
+        '400':
+          description: Bad Request - The subscription is not permitted
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '404':
+          description: Not Found - The group was not found
+    put:
+      tags:
+        - applicationWhitelistings
+      description: Update an application control group
+      consumes:
+        - application/json
+      parameters:
+        - $ref: '#/parameters/subscriptionId'
+        - $ref: '#/parameters/ascLocation'
+        - $ref: '#/parameters/groupName'
+        - $ref: '#/parameters/apiVersion'
+        - in: body
+          name: body
+          description: The updated group data
+          required: true
+          schema:
+            $ref: '#/definitions/AppWhitelistingPutGroupData'
+      responses:
+        '200':
+          description: OK
+        '400':
+          description: >-
+            Bad Request - The subscription is not permitted / Invalid input /
+            Group not found
+          schema:
+            $ref: '#/definitions/ErrorResponse'
+        '409':
+          description: Conflict - The group is already performing an action
+parameters:
+  subscriptionId:
+    name: subscriptionId
+    in: path
+    description: Azure subscription ID
+    required: true
+    type: string
+    x-oad-type: parameter
+  resourceGroupName:
+    name: resourceGroupName
+    in: path
+    description: >-
+      The name of the resource group within the user's subscription. The name is
+      case insensitive
+    required: true
+    type: string
+    x-oad-type: parameter
+  apiVersion:
+    name: apiVersion
+    in: query
+    description: API version for the operation
+    required: true
+    type: string
+    enum:
+      - 2015-06-01-preview
+    x-oad-type: parameter
+  ascLocation:
+    name: ascLocation
+    in: path
+    description: >-
+      The location where ASC stores the data of the group.
+    required: true
+    type: string
+    enum:
+      - centralus
+      - westeurope
+  groupName:
+    name: groupName
+    in: path
+    description: Name of an application control group
+    required: true
+    type: string
+  includePathRecommendations:
+    name: includePathRecommendations
+    in: query
+    description: Include the recommended policy (path/publisher rules)
+    type: boolean
+    required: false
+    enum:
+      - false
+      - true
+  summary:
+    name: summary
+    in: query
+    description: Return output in a summarized form
+    type: boolean
+    required: false
+    enum:
+      - false
+      - true
+definitions:
+  AppWhitelistingGroups:
+    properties:
+      value:
+        type: array
+        items:
+          $ref: '#/definitions/AppWhitelistingGroup'
+  AppWhitelistingGroup:
+    type: object
+    description: >-
+      Represents a group of machines and set of processes that are Recommended by
+      Azure Security Center to be whitelisted
+    properties:
+      type:
+        $ref: '#/definitions/AppWhitelistingResourceType'
+      location:
+        $ref: '#/definitions/AscLocation'
+      id:
+        $ref: '#/definitions/GroupResourceId'
+      name:
+        type: string
+        description: The name of the group
+        example: GROUP1
+      properties:
+        $ref: '#/definitions/AppWhitelistingGroupData'
+  AppWhitelistingGroupData:
+    type: object
+    description: >-
+      Represents the data of the group of machines and set of rules that are
+      recommended by Azure Security Center to be whitelisted
+    properties:
+      enforcementMode:
+        $ref: '#/definitions/EnforcementMode'
+      configurationStatus:
+        $ref: '#/definitions/ConfigurationStatus'
+      recommendationStatus:
+        $ref: '#/definitions/RecommendationStatus'
+      issues:
+        $ref: '#/definitions/AppWhitelistingIssuesSummaries'
+      sourceSystem:
+        $ref: '#/definitions/SourceSystem'
+      vmRecommendations:
+        $ref: '#/definitions/VmRecommendations'
+      pathRecommendations:
+        $ref: '#/definitions/PathRecommendations'
+  AppWhitelistingPutGroupData:
+    type: object
+    description: The altered data of the recommended group policy
+    properties:
+      enforcementMode:
+        $ref: '#/definitions/EnforcementMode'
+      vmRecommendations:
+        $ref: '#/definitions/VmRecommendations'
+      pathRecommendations:
+        $ref: '#/definitions/PathRecommendations'
+  ConfigurationStatus:
+    type: string
+    description: The configuration status of the group / machine / rule on the machine
+    enum:
+      - Configured
+      - NotConfigured
+      - InProgress
+      - Failed
+      - NoStatus
+  EnforcementMode:
+    type: string
+    description: The whitelisting enforcement mode of the group
+    enum:
+      - Audit
+      - Enforce
+  RecommendationStatus:
+    type: string
+    description: The recommendation status of the group / machine
+    enum:
+      - Recommended
+      - NotRecommended
+      - NotAvailable
+      - NoStatus
+  RecommendationAction:
+    type: string
+    description: The recommendation action of the machine / process
+    enum:
+      - Recommended
+      - Add
+      - Remove
+  RecommendationType:
+    type: string
+    description: The type of the path to be whitelisted (currently only File is supported)
+    enum:
+      - File
+  AppWhitelistingIssue:
+    type: string
+    description: An issue that machines within a group can have
+    enum:
+      - ViolationsAudited
+      - ViolationsBlocked
+      - MsiAndScriptViolationsAudited
+      - MsiAndScriptViolationsBlocked
+      - ExecutableViolationsAudited
+      - RulesViolatedManually
+  FileType:
+    type: string
+    description: The type of the file
+    enum:
+      - Exe
+      - Dll
+      - Msi
+      - Script
+      - Unknown
+  SourceSystem:
+    type: string
+    description: The source type of the group
+    enum:
+      - Azure_AppLocker
+      - Azure_AuditD
+      - NonAzure_AppLocker
+      - NonAzure_AuditD
+      - None
+  AppWhitelistingIssueSummary:
+    type: object
+    description: Represents a summary of the issues of the group
+    properties:
+      issue:
+        $ref: '#/definitions/AppWhitelistingIssue'
+      numberOfVms:
+        type: number
+        description: The number of machines in the group that have this issue
+  AppWhitelistingIssuesSummaries:
+    properties:
+      value:
+        type: array
+        items:
+          $ref: '#/definitions/AppWhitelistingIssueSummary'
+  VmRecommendations:
+    properties:
+      value:
+        type: array
+        items:
+          $ref: '#/definitions/VmRecommendation'
+  VmRecommendation:
+    type: object
+    description: Represents a machine that is part of a group
+    properties:
+      configurationStatus:
+        $ref: '#/definitions/ConfigurationStatus'
+      recommendationAction:
+        $ref: '#/definitions/RecommendationAction'
+      resourceId:
+        $ref: '#/definitions/VmResourceId'
+  PublisherInfo:
+    type: object
+    description: Represents the publisher information of a process/rule
+    properties:
+      publisherName:
+        type: string
+        description: The Subject field of the x.509 certificate used to sign the code, using the following fields -  O = Organization, L = Locality, S = State or Province, and C = Country
+        example: 'O=GOOGLE INC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US'
+      productName:
+        type: string
+        description: The product name taken from the file's version resource
+        example: 'GOOGLE CHROME'
+      binaryName:
+        type: string
+        description: The "OriginalName" field taken from the file's version resource
+        example: 'CHROME.EXE'
+      version:
+        type: string
+        description: The binary file version taken from the file's version resource
+        example: '66.0.3359.139'
+  UserRecommendation:
+    type: object
+    description: Represents a user that is recommended to be whitelisted for a certain rule
+    properties:
+      userName:
+        type: string
+        description: Represents a user that is recommended to be whitelisted for a certain rule
+        example: LOCAL SYSTEM
+      recommendationAction:
+        $ref: '#/definitions/RecommendationAction'
+  PathRecommendations:
+    properties:
+      value:
+        type: array
+        items:
+          $ref: '#/definitions/PathRecommendation'
+  PathRecommendation:
+    type: object
+    description: Represents a path that is recommended to be whitelisted and its properties
+    properties:
+      path:
+        type: string
+        description: The full path to whitelist
+        example: 'C:\Windows\System32\calc.exe'
+      action:
+        $ref: '#/definitions/RecommendationAction'
+      type:
+        $ref: '#/definitions/RecommendationType'
+      publisherInfo:
+        $ref: '#/definitions/PublisherInfo'
+      common:
+        type: boolean
+        description: Whether the path is commonly run on the machine
+      userSids:
+        type: array
+        items:
+          type: string
+          description: A security identifier
+          example: S-1-5-18
+      usernames:
+        type: array
+        items:
+          $ref: '#/definitions/UserRecommendation'
+      fileType:
+        $ref: '#/definitions/FileType'
+      configurationStatus:
+        $ref: '#/definitions/ConfigurationStatus'
+  AscLocation:
+    type: string
+    description: >-
+      The location where ASC stores the data of the group. can be retrieved from
+      Get locations
+    example: centralus
+  GroupResourceId:
+    type: string
+    description: The azure resource id of the application control group
+    example: >-
+      /subscriptions/12345678-1234-1234-1234-123456789123/providers/Microsoft.Security/applicationWhitelistings/GROUP1
+  VmResourceId:
+    type: string
+    description: The full azure resource id of the machine
+    example: >-
+      /subscriptions/12345678-1234-1234-1234-123456789123/resourcegroups/group/providers/microsoft.compute/virtualmachines/vm
+  AppWhitelistingResourceType:
+    type: string
+    description: The resource type of the application control resources
+    example: Microsoft.Security/applicationWhitelistings
+  ErrorResponse:
+    type: object
+    properties:
+      code:
+        type: string
+        description: Short constant description of the error
+        example: NonSupportedPricingTier
+      message:
+        type: string
+        description: Detailed description of the error and resolution suggestions
+        example: >-
+          Subscription 12345678-1234-1234-1234-123456789123 is not in the
+          Standard or Standard Trial subscription plan. Please upgrade to use
+          this feature.
+    required:
+      - code
+      - message
+security:
+  - azure_auth:
+      - user_impersonation
+securityDefinitions:
+  azure_auth:
+    description: Azure Active Directory OAuth2 Flow
+    flow: implicit
+    authorizationUrl: 'https://login.microsoftonline.com/common/oauth2/authorize'
+    scopes:
+      user_impersonation: impersonate your user account
+    type: oauth2
+info:
+  title: Security Center
+  version: 2015-06-01-preview
+  description: API spec for Microsoft.Security (Azure Security Center) resource provider
+host: management.azure.com
+basePath: /
+schemes:
+  - https
+consumes:
+  - application/json
+produces:
+  - application/json
+swagger: '2.0'
