@@ -468,7 +468,7 @@
           {
             "name": "api-version",
             "in": "query",
-            "description": "The version of the ServiceFabric resouce provider api",
+            "description": "The version of the ServiceFabric resource provider api",
             "required": true,
             "type": "string"
           }
@@ -624,7 +624,7 @@
         },
         "MaxPercentUnhealthyServices": {
           "type": "integer",
-          "description": "The maximum maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.\n",
+          "description": "The maximum allowed percentage of unhealthy services. Allowed values are Byte values from zero to 100.\n\nThe percentage represents the maximum tolerated percentage of services that can be unhealthy before the application is considered in error.\nIf the percentage is respected but there is at least one unhealthy service, the health is evaluated as Warning.\nThis is calculated by dividing the number of unhealthy services of the specific service type over the total number of services of the specific service type.\nThe computation rounds up to tolerate one failure on small numbers of services. Default percentage is zero.\n",
           "default": 0
         }
       }
@@ -1751,7 +1751,7 @@
         },
         "upgradeReplicaSetCheckTimeout": {
           "type": "string",
-          "description": "The maximum amount of time to block processing of an upgrade domain and revent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
+          "description": "The maximum amount of time to block processing of an upgrade domain and prevent loss of availability when there are unexpected issues. When this timeout expires, processing of the upgrade domain will proceed regardless of availability loss issues. The timeout is reset at the start of each upgrade domain. The timeout can be in either hh:mm:ss or in d.hh:mm:ss.ms format."
         },
         "healthCheckWaitDuration": {
           "type": "string",
@@ -1908,7 +1908,7 @@
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "ephemeralPorts": {
-          "description": "The range of empheral ports that nodes in this node type should be configured with.",
+          "description": "The range of ephemeral ports that nodes in this node type should be configured with.",
           "$ref": "#/definitions/EndpointRangeDescription"
         },
         "isPrimary": {

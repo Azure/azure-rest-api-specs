@@ -1,0 +1,846 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ManagedServicesClient",
+    "version": "2019-06-01",
+    "description": "Specification for ManagedServices."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.ManagedServices/registrationDefinitions/{registrationDefinitionId}": {
+      "get": {
+        "tags": [
+          "RegistrationDefinitions"
+        ],
+        "operationId": "RegistrationDefinitions_Get",
+        "description": "Gets the registration definition details.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the complete registration definition with plan details.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registration Definition": {
+            "$ref": "./examples/GetRegistrationDefinition.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RegistrationDefinitions"
+        ],
+        "operationId": "RegistrationDefinitions_Delete",
+        "description": "Deletes the registration definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - The registration definition is deleted."
+          },
+          "204": {
+            "description": "No Content- The registration definition does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registration Definition": {
+            "$ref": "./examples/DeleteRegistrationDefinition.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RegistrationDefinitions"
+        ],
+        "operationId": "RegistrationDefinitions_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates a registration definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/registrationDefinitionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "The parameters required to create new registration definition.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationDefinition"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Returns information about the updated registration definition.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationDefinition"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the created registration definition.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put Registration Definition": {
+            "$ref": "./examples/PutRegistrationDefinition.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ManagedServices/registrationAssignments/{registrationAssignmentId}": {
+      "get": {
+        "tags": [
+          "RegistrationAssignments"
+        ],
+        "operationId": "RegistrationAssignments_Get",
+        "description": "Gets the details of specified registration assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationAssignmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandRegistrationDefinition"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the registration assignment.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registration Assignment": {
+            "$ref": "./examples/GetRegistrationAssignment.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RegistrationAssignments"
+        ],
+        "operationId": "RegistrationAssignments_Delete",
+        "x-ms-long-running-operation": true,
+        "description": "Deletes the specified registration assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationAssignmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - The registration assignment is deleted."
+          },
+          "202": {
+            "description": "Accepted - The registration assignment deletion operation is accepted."
+          },
+          "204": {
+            "description": "No Content- The registration assignment does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Registration Assignment": {
+            "$ref": "./examples/DeleteRegistrationAssignment.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RegistrationAssignments"
+        ],
+        "operationId": "RegistrationAssignments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates a registration assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistrationAssignmentIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "requestBody",
+            "in": "body",
+            "required": true,
+            "description": "The parameters required to create new registration assignment.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationAssignment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Ok - Returns information about the updated registration assignment.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationAssignment"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the created registration assignment.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationAssignment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Put Registration Assignment": {
+            "$ref": "./examples/PutRegistrationAssignment.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ManagedServices/registrationDefinitions": {
+      "get": {
+        "tags": [
+          "RegistrationDefinitions"
+        ],
+        "operationId": "RegistrationDefinitions_List",
+        "description": "Gets a list of the registration definitions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the registration definitions.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Registration Definitions": {
+            "$ref": "./examples/GetRegistrationDefinitions.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ManagedServices/registrationAssignments": {
+      "get": {
+        "tags": [
+          "RegistrationAssignments"
+        ],
+        "operationId": "RegistrationAssignments_List",
+        "description": "Gets a list of the registration assignments.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ExpandRegistrationDefinition"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the registration assignments.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationAssignmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Registration Assignments": {
+            "$ref": "./examples/GetRegistrationAssignments.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of the operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registration Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegistrationDefinition": {
+      "properties": {
+        "properties": {
+          "description": "Properties of a registration definition.",
+          "$ref": "#/definitions/RegistrationDefinitionProperties"
+        },
+        "plan": {
+          "description": "Plan details for the managed services.",
+          "$ref": "#/definitions/Plan"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified path of the registration definition."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the registration definition."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "description": "Registration definition."
+    },
+    "RegistrationDefinitionProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the registration definition."
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Authorization"
+          },
+          "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+        },
+        "registrationDefinitionName": {
+          "type": "string",
+          "description": "Name of the registration definition."
+        },
+        "managedByTenantId": {
+          "type": "string",
+          "description": "Id of the managedBy tenant."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current state of the registration definition.",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "managedByTenantName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the managedBy tenant."
+        }
+      },
+      "required": [
+        "managedByTenantId",
+        "authorizations"
+      ],
+      "type": "object",
+      "description": "Properties of a registration definition."
+    },
+    "RegistrationDefinitionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegistrationDefinition"
+          },
+          "description": "List of registration definitions."
+        },
+        "nextLink": {
+          "description": "Link to next page of registration definitions.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "List of registration definitions."
+    },
+    "RegistrationAssignment": {
+      "properties": {
+        "properties": {
+          "description": "Properties of a registration assignment.",
+          "$ref": "#/definitions/RegistrationAssignmentProperties"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The fully qualified path of the registration assignment."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the registration assignment."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "description": "Registration assignment."
+    },
+    "RegistrationAssignmentProperties": {
+      "properties": {
+        "registrationDefinitionId": {
+          "type": "string",
+          "description": "Fully qualified path of the registration definition."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Current state of the registration assignment.",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "registrationDefinition": {
+          "readOnly": true,
+          "properties": {
+            "properties": {
+              "properties": {
+                "description": {
+                  "type": "string",
+                  "description": "Description of the registration definition."
+                },
+                "authorizations": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/Authorization"
+                  },
+                  "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+                },
+                "registrationDefinitionName": {
+                  "type": "string",
+                  "description": "Name of the registration definition."
+                },
+                "provisioningState": {
+                  "type": "string",
+                  "description": "Current state of the registration definition.",
+                  "enum": [
+                    "NotSpecified",
+                    "Accepted",
+                    "Running",
+                    "Ready",
+                    "Creating",
+                    "Created",
+                    "Deleting",
+                    "Deleted",
+                    "Canceled",
+                    "Failed",
+                    "Succeeded",
+                    "Updating"
+                  ],
+                  "x-ms-enum": {
+                    "name": "ProvisioningState",
+                    "modelAsString": true
+                  }
+                },
+                "manageeTenantId": {
+                  "type": "string",
+                  "description": "Id of the home tenant."
+                },
+                "manageeTenantName": {
+                  "type": "string",
+                  "description": "Name of the home tenant."
+                },
+                "managedByTenantId": {
+                  "type": "string",
+                  "description": "Id of the managedBy tenant."
+                },
+                "managedByTenantName": {
+                  "type": "string",
+                  "description": "Name of the managedBy tenant."
+                }
+              },
+              "description": "Properties of registration definition inside registration assignment."
+            },
+            "plan": {
+              "description": "Plan details for the managed services.",
+              "$ref": "#/definitions/Plan"
+            },
+            "id": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Fully qualified path of the registration definition."
+            },
+            "type": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Type of the resource (Microsoft.ManagedServices/registrationDefinitions)."
+            },
+            "name": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Name of the registration definition."
+            }
+          },
+          "type": "object",
+          "description": "Registration definition inside registration assignment."
+        }
+      },
+      "required": [
+        "registrationDefinitionId"
+      ],
+      "type": "object",
+      "description": "Properties of a registration assignment."
+    },
+    "RegistrationAssignmentList": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegistrationAssignment"
+          },
+          "description": "List of registration assignments."
+        },
+        "nextLink": {
+          "description": "Link to next page of registration assignments.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "List of registration assignments."
+    },
+    "Plan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "The product code."
+        },
+        "version": {
+          "type": "string",
+          "description": "The plan's version."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product",
+        "version"
+      ],
+      "type": "object",
+      "description": "Plan details for the managed services."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "readOnly": true,
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft.ManagedServices"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed: Registration definition, registration assignment etc."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation type: Read, write, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          }
+        }
+      },
+      "type": "object",
+      "description": "Object that describes a single Microsoft.ManagedServices operation."
+    },
+    "OperationList": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.ManagedServices operations."
+        }
+      },
+      "type": "object",
+      "description": "List of the operations."
+    },
+    "Authorization": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id of the security group/service principal/user that would be assigned permissions to the projected subscription"
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition identifier. This role will define all the permissions that the security group/service principal/user must have on the projected subscription. This role cannot be an owner role."
+        }
+      },
+      "required": [
+        "principalId",
+        "roleDefinitionId"
+      ],
+      "type": "object",
+      "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code."
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message indicating why the operation failed."
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "type": "object",
+          "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+        }
+      },
+      "description": "Error response."
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "description": "Scope of the resource."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    },
+    "RegistrationAssignmentIdParameter": {
+      "name": "registrationAssignmentId",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "Guid of the registration assignment."
+    },
+    "registrationDefinitionIdParameter": {
+      "name": "registrationDefinitionId",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "Guid of the registration definition."
+    },
+    "ExpandRegistrationDefinition": {
+      "name": "$expandRegistrationDefinition",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "type": "boolean",
+      "description": "Tells whether to return registration definition details also along with registration assignment details."
+    }
+  }
+}
