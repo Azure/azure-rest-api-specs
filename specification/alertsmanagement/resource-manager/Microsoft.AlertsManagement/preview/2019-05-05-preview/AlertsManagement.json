@@ -2385,15 +2385,21 @@
           "description": "Array of operations",
           "type": "array",
           "items": {
-            "name": {
-              "type": "string",
-              "description": "Monitor service name"
-            },
-            "displayName": {
-              "type": "string",
-              "description": "Monitor service display name"
-            }
+            "$ref": "#/definitions/MonitorServiceDetails"
           }
+        }
+      }
+    },
+    "MonitorServiceDetails": {
+      "description": "Details of a monitor service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Monitor service name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Monitor service display name"
         }
       }
     }
