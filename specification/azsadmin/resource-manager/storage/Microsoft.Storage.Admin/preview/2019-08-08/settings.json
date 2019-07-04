@@ -1,0 +1,125 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-08-08-preview",
+    "title": "StorageManagementClient",
+    "description": "The Admin Storage Management Client."
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/settings": {
+      "post": {
+        "x-ms-examples": {
+          "Update srp settings.": {
+            "$ref": "./examples/Settings/Update.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Update storge resource provider settings.",
+        "operationId": "Update_Settings",
+        "parameters": [
+          {
+            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "description": "Parameters used to update storge resource provider settings",
+            "name": "settingsObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "settings.json#/definitions/settings"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The new storge resource provider setting is updated.",
+            "schema": {
+              "$ref": "settings.json#/definitions/settings"
+            }
+          }
+        }
+      },
+      "get": {
+        "x-ms-examples": {
+          "Returns the storage resource provider settings.": {
+            "$ref": "./examples/Settings/Get.json"
+          }
+        },
+        "tags": [
+          "Settings"
+        ],
+        "description": "Returns the storage resource provider settings.",
+        "operationId": "StorageSettings_Get",
+        "parameters": [
+          {
+            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The farm has been returned.",
+            "schema": {
+              "$ref": "settings.json#/definitions/settings"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "settings": {
+      "description": "Storage resource provider settings",
+      "type": "object",
+      "properties": {
+        "retentionPeriodForDeletedStorageAccountsInDays": {
+          "description": "Set the retention days for deleted storage accounts.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
