@@ -79,9 +79,6 @@
 							"$ref": "#/definitions/AppWhitelistingGroup"
 						}
 					},
-					"404": {
-						"description": "Not Found - The group was not found"
-					},
 					"default": {
 						"description": "Error response describing why the operation failed.",
 						"schema": {
@@ -128,10 +125,10 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK"
-					},
-					"409": {
-						"description": "Conflict - The group is already performing an action"
+						"description": "OK",
+						"schema": {
+						  "$ref": "#/definitions/AppWhitelistingGroupData"
+						}
 					},
 					"default": {
 						"description": "Error response describing why the operation failed.",
@@ -154,7 +151,7 @@
 		"includePathRecommendations": {
 			"name": "includePathRecommendations",
 			"in": "query",
-			"description": "Include the recommended policy (path/publisher rules)",
+			"description": "Include the policy rules",
 			"type": "boolean",
 			"required": false,
 			"enum": [
@@ -176,6 +173,7 @@
 	},
 	"definitions": {
 		"AppWhitelistingGroups": {
+			"type": "object",
 			"properties": {
 				"value": {
 					"type": "array",
