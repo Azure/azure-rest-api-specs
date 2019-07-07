@@ -3,8 +3,16 @@
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/applicationWhitelistings": {
 			"get": {
 				"description": "Gets a list of application control groups for the subscription.",
+				"x-ms-examples": {
+				  "Gets a list of application control groups for the subscription": {
+					"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsSubscription_example.json"
+				  }
+				},
 				"tags": [
 					"applicationWhitelistings"
+				],
+				"produces": [
+				  "application/json"
 				],
 				"parameters": [
 					{
@@ -39,8 +47,16 @@
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{AscLocation}/applicationWhitelistings/{groupName}": {
 			"get": {
 				"description": "Gets an application control group.",
+				"x-ms-examples": {
+				  "Gets a configured application control group": {
+					"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsGroup_example.json"
+				  }
+				},
 				"tags": [
 					"applicationWhitelistings"
+				],
+				"produces": [
+				  "application/json"
 				],
 				"parameters": [
 					{
@@ -78,6 +94,11 @@
 				"tags": [
 					"applicationWhitelistings"
 				],
+				"x-ms-examples": {
+				  "Update an application control group by adding a new file": {
+					"$ref": "./examples/ApplicationWhitelistings/PutApplicationWhitelistings_example.json"
+				  }
+				},
 				"description": "Update an application control group",
 				"consumes": [
 					"application/json"
