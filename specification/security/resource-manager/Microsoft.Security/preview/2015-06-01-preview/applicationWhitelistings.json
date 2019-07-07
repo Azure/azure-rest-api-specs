@@ -2,9 +2,9 @@
 	"paths": {
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/applicationWhitelistings": {
 			"get": {
-				"description": "Gets a list of application control groups for the subscription.",
+				"description": "Gets a list of application control VM/server groups for the subscription.",
 				"x-ms-examples": {
-				  "Gets a list of application control groups for the subscription": {
+				  "Gets a list of application control VM/server groups for the subscription": {
 					"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsSubscription_example.json"
 				  }
 				},
@@ -22,10 +22,10 @@
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
 					},
 					{
-						"$ref": "#/parameters/includePathRecommendations"
+						"$ref": "#/parameters/IncludePathRecommendations"
 					},
 					{
-						"$ref": "#/parameters/summary"
+						"$ref": "#/parameters/Summary"
 					}
 				],
 				"responses": {
@@ -46,9 +46,9 @@
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/applicationWhitelistings/{groupName}": {
 			"get": {
-				"description": "Gets an application control group.",
+				"description": "Gets an application control VM/server group.",
 				"x-ms-examples": {
-				  "Gets a configured application control group": {
+				  "Gets a configured application control VM/server group": {
 					"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsGroup_example.json"
 				  }
 				},
@@ -66,7 +66,7 @@
 						"$ref": "../../../common/v1/types.json#/parameters/AscLocation"
 					},
 					{
-						"$ref": "#/parameters/groupName"
+						"$ref": "#/parameters/GroupName"
 					},
 					{
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -92,11 +92,11 @@
 					"applicationWhitelistings"
 				],
 				"x-ms-examples": {
-				  "Update an application control group by adding a new file": {
+				  "Update an application control VM/server group by adding a new file": {
 					"$ref": "./examples/ApplicationWhitelistings/PutApplicationWhitelistings_example.json"
 				  }
 				},
-				"description": "Update an application control group",
+				"description": "Update an application control VM/server group",
 				"consumes": [
 					"application/json"
 				],
@@ -108,7 +108,7 @@
 						"$ref": "../../../common/v1/types.json#/parameters/AscLocation"
 					},
 					{
-						"$ref": "#/parameters/groupName"
+						"$ref": "#/parameters/GroupName"
 					},
 					{
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -135,15 +135,15 @@
 		}
 	},
 	"parameters": {
-		"groupName": {
+		"GroupName": {
 			"name": "groupName",
 			"in": "path",
-			"description": "Name of an application control group",
+			"description": "Name of an application control VM/server group",
 			"required": true,
 			"type": "string",
 			"x-ms-parameter-location": "method"
 		},
-		"includePathRecommendations": {
+		"IncludePathRecommendations": {
 			"name": "includePathRecommendations",
 			"in": "query",
 			"description": "Include the policy rules",
@@ -154,7 +154,7 @@
 				true
 			]
 		},
-		"summary": {
+		"Summary": {
 			"name": "summary",
 			"in": "query",
 			"description": "Return output in a summarized form",
@@ -168,7 +168,7 @@
 		"AppWhitelistingGroupDataPutDataBody": {
 			"in": "body",
 			"name": "body",
-			"description": "The updated group data",
+			"description": "The updated VM/server group data",
 			"required": true,
 			"schema": {
 				"$ref": "#/definitions/AppWhitelistingPutGroupData"
@@ -179,7 +179,7 @@
 	"definitions": {
 		"AppWhitelistingGroups": {
 			"type": "object",
-			"description": "Represents a list of groups of machines and set of rules that are Recommended by Azure Security Center to be whitelisted",
+			"description": "Represents a list of VM/server groups and set of rules that are Recommended by Azure Security Center to be allowed",
 			"properties": {
 				"value": {
 					"type": "array",
@@ -191,7 +191,7 @@
 		},
 		"AppWhitelistingGroup": {
 			"type": "object",
-			"description": "Represents a group of machines and set of rules that are Recommended by Azure Security Center to be whitelisted",
+			"description": "Represents a VM/server group and set of rules that are Recommended by Azure Security Center to be allowed",
 			"properties": {
 				"type": {
 					"$ref": "#/definitions/AppWhitelistingResourceType"
@@ -204,7 +204,7 @@
 				},
 				"name": {
 					"type": "string",
-					"description": "The name of the group",
+					"description": "The name of the VM/server group",
 					"example": "GROUP1"
 				},
 				"properties": {
@@ -214,7 +214,7 @@
 		},
 		"AppWhitelistingGroupData": {
 			"type": "object",
-			"description": "Represents the data of the group of machines and set of rules that are recommended by Azure Security Center to be whitelisted",
+			"description": "Represents the data of the VM/server group and set of rules that are recommended by Azure Security Center to be allowed",
 			"properties": {
 				"enforcementMode": {
 					"$ref": "#/definitions/EnforcementMode"
@@ -241,7 +241,7 @@
 		},
 		"AppWhitelistingPutGroupData": {
 			"type": "object",
-			"description": "The altered data of the recommended group policy",
+			"description": "The altered data of the recommended VM/server group policy",
 			"properties": {
 				"enforcementMode": {
 					"$ref": "#/definitions/EnforcementMode"
@@ -256,7 +256,7 @@
 		},
 		"ConfigurationStatus": {
 			"type": "string",
-			"description": "The configuration status of the group / machine / rule on the machine",
+			"description": "The configuration status of the VM/server group or machine or rule on the machine",
 			"enum": [
 				"Configured",
 				"NotConfigured",
@@ -267,7 +267,7 @@
 		},
 		"EnforcementMode": {
 			"type": "string",
-			"description": "The whitelisting enforcement mode of the group",
+			"description": "The application control policy enforcement mode of the VM/server group",
 			"enum": [
 				"Audit",
 				"Enforce"
@@ -275,7 +275,7 @@
 		},
 		"RecommendationStatus": {
 			"type": "string",
-			"description": "The recommendation status of the group / machine",
+			"description": "The recommendation status of the VM/server group or VM/server",
 			"enum": [
 				"Recommended",
 				"NotRecommended",
@@ -285,7 +285,7 @@
 		},
 		"RecommendationAction": {
 			"type": "string",
-			"description": "The recommendation action of the machine / process",
+			"description": "The recommendation action of the VM/server or rule",
 			"enum": [
 				"Recommended",
 				"Add",
@@ -294,7 +294,7 @@
 		},
 		"RecommendationType": {
 			"type": "string",
-			"description": "The type of the rule to be whitelisted",
+			"description": "The type of the rule to be allowed",
 			"enum": [
 				"File",
 				"FileHash",
@@ -306,7 +306,7 @@
 		},
 		"AppWhitelistingIssue": {
 			"type": "string",
-			"description": "An issue that machines within a group can have",
+			"description": "An alert that VMs/servers within a group can have",
 			"enum": [
 				"ViolationsAudited",
 				"ViolationsBlocked",
@@ -329,7 +329,7 @@
 		},
 		"SourceSystem": {
 			"type": "string",
-			"description": "The source type of the group",
+			"description": "The source type of the VM/server group",
 			"enum": [
 				"Azure_AppLocker",
 				"Azure_AuditD",
@@ -340,14 +340,14 @@
 		},
 		"AppWhitelistingIssueSummary": {
 			"type": "object",
-			"description": "Represents a summary of the issues of the group",
+			"description": "Represents a summary of the alerts of the VM/server group",
 			"properties": {
 				"issue": {
 					"$ref": "#/definitions/AppWhitelistingIssue"
 				},
 				"numberOfVms": {
 					"type": "number",
-					"description": "The number of machines in the group that have this issue"
+					"description": "The number of machines in the VM/server group that have this alert"
 				}
 			}
 		},
@@ -365,7 +365,7 @@
 		},
 		"VmRecommendation": {
 			"type": "object",
-			"description": "Represents a machine that is part of a group",
+			"description": "Represents a machine that is part of a VM/server group",
 			"properties": {
 				"configurationStatus": {
 					"$ref": "#/definitions/ConfigurationStatus"
@@ -406,11 +406,11 @@
 		},
 		"UserRecommendation": {
 			"type": "object",
-			"description": "Represents a user that is recommended to be whitelisted for a certain rule",
+			"description": "Represents a user that is recommended to be allowed for a certain rule",
 			"properties": {
-				"userName": {
+				"username": {
 					"type": "string",
-					"description": "Represents a user that is recommended to be whitelisted for a certain rule",
+					"description": "Represents a user that is recommended to be allowed for a certain rule",
 					"example": "LOCAL SYSTEM"
 				},
 				"recommendationAction": {
@@ -426,7 +426,7 @@
 		},
 		"PathRecommendation": {
 			"type": "object",
-			"description": "Represents a path that is recommended to be whitelisted and its properties",
+			"description": "Represents a path that is recommended to be allowed and its properties",
 			"properties": {
 				"path": {
 					"type": "string",
@@ -470,7 +470,7 @@
 		},
 		"GroupResourceId": {
 			"type": "string",
-			"description": "The azure resource id of the application control group",
+			"description": "The azure resource id of the application control VM/server group",
 			"example": "/subscriptions/12345678-1234-1234-1234-123456789123/providers/Microsoft.Security/applicationWhitelistings/GROUP1"
 		},
 		"VmResourceId": {
