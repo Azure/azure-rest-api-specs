@@ -290,9 +290,14 @@
 		},
 		"RecommendationType": {
 			"type": "string",
-			"description": "The type of the path to be whitelisted (currently only File is supported)",
+			"description": "The type of the rule to be whitelisted",
 			"enum": [
-				"File"
+				"File",
+				"FileHash",
+				"PublisherSignature",
+				"ProductSignature",
+				"BinarySignature",
+				"VersionAndAboveSignature"
 			]
 		},
 		"AppWhitelistingIssue": {
