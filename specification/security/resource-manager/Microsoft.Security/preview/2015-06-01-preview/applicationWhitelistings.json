@@ -44,7 +44,7 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{AscLocation}/applicationWhitelistings/{groupName}": {
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/applicationWhitelistings/{groupName}": {
 			"get": {
 				"description": "Gets an application control group.",
 				"x-ms-examples": {
@@ -114,13 +114,7 @@
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
 					},
 					{
-						"in": "body",
-						"name": "body",
-						"description": "The updated group data",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/AppWhitelistingPutGroupData"
-						}
+						"$ref": "#/parameters/AppWhitelistingGroupDataPutDataBody"		
 					}
 				],
 				"responses": {
@@ -146,7 +140,8 @@
 			"in": "path",
 			"description": "Name of an application control group",
 			"required": true,
-			"type": "string"
+			"type": "string",
+			"x-ms-parameter-location": "method"
 		},
 		"includePathRecommendations": {
 			"name": "includePathRecommendations",
@@ -169,11 +164,22 @@
 				false,
 				true
 			]
+		},
+		"AppWhitelistingGroupDataPutDataBody": {
+			"in": "body",
+			"name": "body",
+			"description": "The updated group data",
+			"required": true,
+			"schema": {
+				"$ref": "#/definitions/AppWhitelistingPutGroupData"
+			}
+			"x-ms-parameter-location": "method"
 		}
 	},
 	"definitions": {
 		"AppWhitelistingGroups": {
 			"type": "object",
+			"description": "Represents a list of groups of machines and set of rules that are Recommended by Azure Security Center to be whitelisted",
 			"properties": {
 				"value": {
 					"type": "array",
@@ -185,7 +191,7 @@
 		},
 		"AppWhitelistingGroup": {
 			"type": "object",
-			"description": "Represents a group of machines and set of processes that are Recommended by Azure Security Center to be whitelisted",
+			"description": "Represents a group of machines and set of rules that are Recommended by Azure Security Center to be whitelisted",
 			"properties": {
 				"type": {
 					"$ref": "#/definitions/AppWhitelistingResourceType"
@@ -346,6 +352,7 @@
 			}
 		},
 		"AppWhitelistingIssuesSummaries": {
+			"type": "object",
 			"properties": {
 				"value": {
 					"type": "array",
@@ -356,6 +363,7 @@
 			}
 		},
 		"VmRecommendations": {
+			"type": "object",
 			"properties": {
 				"value": {
 					"type": "array",
@@ -421,6 +429,7 @@
 			}
 		},
 		"PathRecommendations": {
+			"type": "object",
 			"properties": {
 				"value": {
 					"type": "array",
