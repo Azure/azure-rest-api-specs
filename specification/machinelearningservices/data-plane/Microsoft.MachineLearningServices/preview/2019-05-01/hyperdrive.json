@@ -31,7 +31,7 @@
           {
             "in": "formData",
             "name": "config",
-            "description": "The configuration file with experiment JSON content.",
+            "description": "The configuration file with experiment JSON content. A text file that is a JSON-serialized '#/definitions/HyperDriveCreateExperiment' object.",
             "type": "file",
             "required": true
           }
@@ -116,181 +116,76 @@
       "properties": {
         "code": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Error response code."
         },
         "message": {
-          "type": "string"
+          "type": "string",
+          "description": "Error message."
         }
       },
       "required": [
         "code",
         "message"
       ],
-      "type": "object"
+      "type": "object",
+      "description": "Response in case of an error."
     },
     "HyperDriveCancelExperimentResponse": {
       "properties": {
         "code": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code."
         },
         "result": {
-          "type": "string"
+          "type": "string",
+          "description": "Message indicating operation success."
         }
       },
       "required": [
         "code",
         "result"
       ],
-      "type": "object"
+      "type": "object",
+      "description": "Response for HyperDrive_CancelExperiment in case of success."
     },
-    "HyperDriveExperiment": {
-      "properties": {
-        "all_jobs_generated": {
-          "type": "boolean"
-        },
-        "cancellation_requested": {
-          "type": "boolean"
-        },
-        "created": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "created_by_user_id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "description": {
-          "type": "string"
-        },
-        "experiment_id": {
-          "type": "object"
-        },
-        "experiment_uri": {
-          "type": "string"
-        },
-        "generator_config": {
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "parameter_space": {
-              "type": "object"
-            },
-            "properties": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "name",
-            "parameter_space"
-          ],
-          "type": "object"
-        },
-        "max_concurrent_jobs": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "max_duration_minutes": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "max_total_jobs": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "modified": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "name": {
-          "type": "string"
-        },
-        "platform": {
-          "type": "string"
-        },
-        "platform_config": {
-          "type": "object"
-        },
-        "policy_config": {
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "properties": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "name"
-          ],
-          "type": "object"
-        },
-        "primary_metric_config": {
-          "properties": {
-            "goal": {
-              "type": "string"
-            },
-            "name": {
-              "type": "string"
-            }
-          },
-          "required": [
-            "goal",
-            "name"
-          ],
-          "type": "object"
-        },
-        "status": {
-          "type": "string"
-        },
-        "study_id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "study_uri": {
-          "type": "string"
-        },
-        "hyperdrive_run_id": {
-          "type": "string"
-        }
-      },
-      "required": [
-        "all_jobs_generated",
-        "cancellation_requested",
-        "created",
-        "created_by_user_id",
-        "experiment_id",
-        "generator_config",
-        "modified",
-        "name",
-        "platform",
-        "platform_config",
-        "policy_config",
-        "primary_metric_config",
-        "status",
-        "study_id",
-        "hyperdrive_run_id"
-      ],
-      "type": "object"
-    },
-    "HyperDriveCreateExperiment": {
+    "HyperDriveExperimentBase": {
+      "description": "Base object for both request and response of HyperDrive_CreateExperiment api.",
       "properties": {
         "description": {
           "maxLength": 511,
           "type": "string",
-          "x-nullable": true
+          "x-nullable": true,
+          "description": "The description for Hyperdrive run."
         },
         "generator_config": {
+          "description": "Hyperparameter space and the sampling method configuration.",
           "properties": {
             "name": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "RANDOM",
+                "GRID",
+                "BAYESIANOPTIMIZATION"
+              ],
+              "description": "Hyperparameter sampling method.",
+              "x-ms-enum": {
+                "name": "Name",
+                "modelAsString": true
+              }
             },
             "parameter_space": {
-              "type": "object"
-            },
-            "properties": {
-              "type": "object"
+              "type": "object",
+              "additionalProperties":{
+                "type": "array",
+                "items": {},
+                "minItems": 2,
+                "maxItems": 2,
+                "description": "The first element in the array is a string identifying the parameter expression type like choice, uniform etc. The second element is a parameter expressions corresponding to the type. Please refer '#/definitions/ChoiceParameterExpression', '#/definitions/UniformParameterExpression' etc.",
+                "example": ["choice", [[1, 2, 3, 4]]]
+              },
+              "description": "Dictionary specifying hyperparameter space."
             }
           },
           "required": [
@@ -303,51 +198,65 @@
           "format": "int32",
           "maximum": 100,
           "minimum": 1,
-          "type": "integer"
+          "type": "integer",
+          "description": "Maximum number of runs to run concurrently."
         },
         "max_duration_minutes": {
           "format": "int32",
           "maximum": 43200,
           "minimum": 1,
-          "type": "integer"
+          "type": "integer",
+          "description": "Maximum duration of the Hyperdrive run."
         },
         "max_total_jobs": {
           "format": "int32",
           "maximum": 1000,
           "minimum": 1,
-          "type": "integer"
+          "type": "integer",
+          "description": "Maximum number of runs."
         },
         "name": {
           "maxLength": 255,
-          "type": "string"
+          "type": "string",
+          "description": "Name of the Hyperdrive run."
         },
         "platform": {
-          "type": "string"
+          "type": "string",
+          "enum": [
+            "AML"
+          ],
+          "description": "Platform of the Hyperdrive run.",
+          "x-ms-enum": {
+            "name": "Platform",
+            "modelAsString": true
+          }
         },
         "platform_config": {
-          "type": "object"
+          "type": "object",
+          "description": "Platform config object specifying the run definition structure."
         },
         "policy_config": {
-          "properties": {
-            "name": {
-              "type": "string"
-            },
-            "properties": {
-              "type": "object"
-            }
-          },
-          "required": [
-            "name"
-          ],
-          "type": "object"
+          "description": "Early termination policy configuration.",
+          "$ref": "#/definitions/HyperDrivePolicyConfigBase"
         },
         "primary_metric_config": {
+          "description": "Name of the primary metric and goal of optimizing.",
           "properties": {
             "goal": {
-              "type": "string"
+              "type": "string",
+              "enum": [
+                "MAXIMIZE",
+                "MINIMIZE"
+              ],
+              "description": "Determines if the primary metric has to be minimized/maximized.",
+              "x-ms-enum": {
+                "name": "Goal",
+                "modelAsString": true
+              }
             },
             "name": {
-              "type": "string"
+              "type": "string",
+              "description": "Name of the primary metric reported by runs."
             }
           },
           "required": [
@@ -360,11 +269,8 @@
           "format": "int32",
           "minimum": 0,
           "type": "integer",
-          "x-nullable": true
-        },
-        "user": {
-          "maxLength": 255,
-          "type": "string"
+          "x-nullable": true,
+          "description": "Study Id of the Hyperdrive run."
         }
       },
       "required": [
@@ -373,18 +279,371 @@
         "platform",
         "platform_config",
         "policy_config",
-        "primary_metric_config",
-        "user"
+        "primary_metric_config"
       ],
       "type": "object"
     },
+    "HyperDriveExperiment": {
+      "type": "object",
+      "description": "Part of response for HyperDrive_CreateExperiment in case of success. Contains details about the created hyperdrive run.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HyperDriveExperimentBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "all_jobs_generated": {
+              "type": "boolean",
+              "description": "Indicates if all runs have been generated."
+            },
+            "cancellation_requested": {
+              "type": "boolean",
+              "description": "Indicates if cancellation has been requested for this Hyperdrive run."
+            },
+            "created": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Hyperdrive run creation time."
+            },
+            "created_by_user_id": {
+              "format": "int32",
+              "type": "integer",
+              "description": "Id of the user who created the Hyperdrive run."
+            },
+            "experiment_id": {
+              "type": "string",
+              "description": "Hyperdrive run id."
+            },
+            "experiment_uri": {
+              "type": "string",
+              "description": "Hyperdrive run Uri."
+            },
+            "modified": {
+              "format": "date-time",
+              "type": "string",
+              "description": "Hyperdrive run modification time."
+            },
+            "status": {
+              "type": "string",
+              "description": "Hyperdrive run status."
+            },
+            "study_uri": {
+              "type": "string",
+              "description": "Study Uri of the Hyperdrive run."
+            },
+            "hyperdrive_run_id": {
+              "type": "string",
+              "description": "Hyperdrive run id."
+            }
+          },
+          "required": [
+            "all_jobs_generated",
+            "cancellation_requested",
+            "created",
+            "created_by_user_id",
+            "experiment_id",
+            "modified",
+            "status",
+            "study_id",
+            "hyperdrive_run_id"
+          ]
+        }
+      ],
+      "properties": {}
+    },
+    "HyperDriveCreateExperiment": {
+      "type": "object",
+      "description": "Part of request for HyperDrive_CreateExperiment. Contains configuration details required to create hyperdrive run.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HyperDriveExperimentBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "user": {
+              "maxLength": 255,
+              "type": "string",
+              "description": "User who is creating the Hyperdrive run."
+            }
+          },
+          "required": [
+            "user"
+          ]
+        }
+      ],
+      "properties": {}
+    },
+    "HyperDrivePolicyConfigBase": {
+      "description": "Early termination policy configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Bandit",
+            "MedianStopping",
+            "TruncationSelection"
+          ],
+          "description": "Type of early termination policy.",
+          "x-ms-enum": {
+            "name": "Name",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "discriminator": "name"
+    },
+    "DefaultPolicy": {
+      "type": "object",
+      "description": "No early termination is applied in the case of DefaultPolicy",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HyperDrivePolicyConfigBase"
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Default"
+    },
+    "BanditPolicy": {
+      "type": "object",
+      "description": "Bandit Policy configuration. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.banditpolicy?view=azure-ml-py for more information.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HyperDrivePolicyConfigBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "Policy configuration properties.",
+              "properties": {
+                "evaluation_interval": {
+                  "format": "int32",
+                  "type": "integer",
+                  "description": "Evaluation interval of the policy."
+                },
+                "delay_evaluation": {
+                  "format": "int32",
+                  "type": "integer",
+                  "description": "Value indicating the number of sequences for which the first evaluation is delayed."
+                },
+                "slack_factor": {
+                  "format": "float",
+                  "type": "number",
+                  "description": "Slack factor."
+                },
+                "slack_amount": {
+                  "format": "float",
+                  "type": "number",
+                  "description": "Slack amount."
+                }
+              }
+            }
+          }
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "Bandit"
+    },
+    "MedianStoppingPolicy": {
+      "type": "object",
+      "description": "Median stopping policy configuration. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.medianstoppingpolicy?view=azure-ml-py for more information.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HyperDrivePolicyConfigBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "Policy configuration properties.",
+              "properties": {
+                "evaluation_interval": {
+                  "format": "int32",
+                  "type": "integer",
+                  "description": "Evaluation interval of the policy."
+                },
+                "delay_evaluation": {
+                  "format": "int32",
+                  "type": "integer",
+                  "description": "Value indicating the number of sequences for which the first evaluation is delayed."
+                }
+              }
+            }
+          }
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "MedianStopping"
+    },
+    "TruncationSelectionPolicy": {
+      "type": "object",
+      "description": "Truncation selection policy configuration. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.truncationselectionpolicy?view=azure-ml-py for more information.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/HyperDrivePolicyConfigBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "description": "Policy configuration properties.",
+              "properties": {
+                "evaluation_interval": {
+                  "format": "int32",
+                  "type": "integer",
+                  "description": "Evaluation interval of the policy."
+                },
+                "delay_evaluation": {
+                  "format": "int32",
+                  "type": "integer",
+                  "description": "Value indicating the number of sequences for which the first evaluation is delayed."
+                },
+                "truncation_percentage": {
+                  "format": "int32",
+                  "type": "integer",
+                  "description": "Truncation percentage value."
+                },
+                "exclude_finished_jobs": {
+                  "type": "boolean",
+                  "description": "Boolean indicating if metrics from finished jobs should be excluded in the policy decision process."
+                }
+              }
+            }
+          }
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "TruncationSelection"
+    },
+    "ChoiceParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "array",
+        "items": {}
+      },
+      "minItems": 1,
+      "maxItems": 1,
+      "description": "Specifies the parameter expression in the format [[list of choices]]. The values of choices can be string, float or int.",
+      "example": [[1, 2, 3, 4]]
+    },
+    "LogNormalParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Specifies the parameter expression in the format [mu, sigma]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#lognormal-mu--sigma- for more information.",
+      "example": [0.01, 0.05]
+    },
+    "LogUniformParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Specifies the parameter expression in the format [min_value, max_value]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#loguniform-min-value--max-value- for more information.",
+      "example": [0.01, 0.05]
+    },
+    "NormalParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Specifies the parameter expression in the format [mu, sigma]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#normal-mu--sigma- for more information.",
+      "example": [0.01, 0.05]
+    },
+    "QLogNormalParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Specifies the parameter expression in the format [mu(float), sigma(float), q(int)]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#qlognormal-mu--sigma--q- for more information.",
+      "example": [0.01, 0.05, 3]
+    },
+    "QLogUniformParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Specifies the parameter expression in the format [min_value(float), max_value(float), q(int)]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#qloguniform-min-value--max-value--q- for more information.",
+      "example": [0.01, 0.05, 3]
+    },
+    "QNormalParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Specifies the parameter expression in the format [mu(float), sigma(float), q(int)]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#qnormal-mu--sigma--q- for more information.",
+      "example": [0.01, 0.05, 3]
+    },
+    "QUniformParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 3,
+      "maxItems": 3,
+      "description": "Specifies the parameter expression in the format [min_value(float), max_value(float), q(int)]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#quniform-min-value--max-value--q- for more information.",
+      "example": [0.01, 0.05, 3]
+    },
+    "RandIntParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "integer"
+      },
+      "minItems": 1,
+      "maxItems": 1,
+      "description": "Specifies the parameter expression in the format [upper]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#randint-upper- for more information.",
+      "example": [5]
+    },
+    "UniformParameterExpression": {
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "float"
+      },
+      "minItems": 2,
+      "maxItems": 2,
+      "description": "Specifies the parameter expression in the format [min_value, max_value]. Please refer https://docs.microsoft.com/en-us/python/api/azureml-train-core/azureml.train.hyperdrive.parameter_expressions?view=azure-ml-py#uniform-min-value--max-value- for more information.",
+      "example": [0.01, 0.05]
+    },
     "HyperDriveExperimentResponse": {
+      "description": "Response for HyperDrive_CreateExperiment in case of success.",
       "properties": {
         "code": {
           "format": "int32",
-          "type": "integer"
+          "type": "integer",
+          "description": "Response code."
         },
         "result": {
+          "description": "Details about created Hyperdrive run.",
           "$ref": "#/definitions/HyperDriveExperiment"
         }
       },

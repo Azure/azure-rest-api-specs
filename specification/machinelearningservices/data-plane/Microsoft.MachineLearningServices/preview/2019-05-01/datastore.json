@@ -15,12 +15,21 @@
         ],
         "summary": "Get Datastores list.",
         "description": "Get the list of Datastores attached to the workspace.",
-        "operationId": "DataStores_List",
+        "operationId": "List",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
           {
             "name": "dataStoreNames",
             "in": "query",
@@ -56,27 +65,6 @@
             "required": false,
             "type": "boolean",
             "default": true
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -103,7 +91,7 @@
         ],
         "summary": "Create or update a Datastore.",
         "description": "Create or update a Datastore in the given workspace.",
-        "operationId": "DataStores_Create",
+        "operationId": "Create",
         "consumes": [
           "application/json"
         ],
@@ -111,6 +99,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
           {
             "name": "dto",
             "in": "body",
@@ -135,27 +132,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -176,32 +152,20 @@
         ],
         "summary": "Delete all Datastores.",
         "description": "Delete all Datastores in the workspace.",
-        "operationId": "DataStores_DeleteAll",
+        "operationId": "DeleteAll",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/workspaceNameParameter"
           }
         ],
         "responses": {
@@ -224,37 +188,25 @@
         ],
         "summary": "Get Datastore details.",
         "description": "Get details of a Datastore with a specific name.",
-        "operationId": "DataStores_Get",
+        "operationId": "Get",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "The Datastore name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -280,7 +232,7 @@
         ],
         "summary": "Update or create a Datastore.",
         "description": "Update or create a Datastore in the given workspace.",
-        "operationId": "DataStores_Update",
+        "operationId": "Update",
         "consumes": [
           "application/json"
         ],
@@ -288,6 +240,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
           {
             "name": "name",
             "in": "path",
@@ -319,27 +280,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -360,37 +300,25 @@
         ],
         "summary": "Delete a Datastore.",
         "description": "Delete a Datastore with a specific name.",
-        "operationId": "DataStores_Delete",
+        "operationId": "Delete",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "The Datastore name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -415,37 +343,25 @@
         ],
         "summary": "Set a default Datastore.",
         "description": "Set a default Datastore in the workspace.",
-        "operationId": "DataStores_SetDefault",
+        "operationId": "SetDefault",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "The Datastore name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -470,32 +386,20 @@
         ],
         "summary": "Get the default Datastore.",
         "description": "Get the default Datastore in the workspace.",
-        "operationId": "DataStores_GetDefault",
+        "operationId": "GetDefault",
         "consumes": [],
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/workspaceNameParameter"
           }
         ],
         "responses": {
@@ -554,7 +458,8 @@
             "AzureSqlDatabase",
             "AzurePostgreSql",
             "DBFS",
-            "AzureDataLakeGen2"
+            "AzureDataLakeGen2",
+            "GlusterFs"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -588,6 +493,10 @@
         "azurePostgreSqlSection": {
           "$ref": "#/definitions/AzurePostgreSql",
           "description": "Data specific to azure PostgreSQL"
+        },
+        "glusterFsSection": {
+          "$ref": "#/definitions/GlusterFs",
+          "description": "Data specific to GlusterFS"
         }
       }
     },
@@ -648,6 +557,10 @@
         "sasToken": {
           "description": "SAS Token for the container (Deprecated)",
           "type": "string"
+        },
+        "areWorkspaceManagedIdentitiesAllowed": {
+          "description": "Indicate if we are using Workspace ManagedIdentities/MSI token",
+          "type": "boolean"
         },
         "subscriptionId": {
           "format": "uuid",
@@ -806,6 +719,19 @@
         },
         "resourceGroup": {
           "description": "Resource Group Name",
+          "type": "string"
+        }
+      }
+    },
+    "GlusterFs": {
+      "type": "object",
+      "properties": {
+        "serverAddress": {
+          "description": "The server address of one of the servers that hosts the GlusterFS. Can be either the IP address\r\nor server name.",
+          "type": "string"
+        },
+        "volumeName": {
+          "description": "The name of the created GlusterFS volume.",
           "type": "string"
         }
       }
@@ -1007,6 +933,31 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure Subscription ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Name of the resource group in which the workspace is located.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

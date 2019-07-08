@@ -24,26 +24,13 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
             "name": "experimentName",
@@ -109,26 +96,13 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
             "name": "experimentName",
@@ -193,26 +167,13 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
             "name": "experimentName",
@@ -276,26 +237,13 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
             "name": "experimentName",
@@ -349,26 +297,13 @@
         ],
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string",
-            "format": "uuid"
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/resourceGroupNameParameter"
           },
           {
-            "name": "workspaceName",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/workspaceNameParameter"
           },
           {
             "name": "experimentName",
@@ -729,8 +664,16 @@
         },
         "vmPriority": {
           "description": "VM priority of the Cluster to be created. Allowed values are dedicated and lowpriority.",
+          "enum": [
+            "Dedicated",
+            "Lowpriority"
+          ],
           "type": "string",
-          "example": "dedicated"
+          "example": "dedicated",
+          "x-ms-enum": {
+            "name": "VmPriority",
+            "modelAsString": true
+          }
         },
         "retainCluster": {
           "description": "Setting to true will prevent the cluster from being deleted upon completion of the run.",
@@ -1101,6 +1044,31 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "client"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure Subscription ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "The Name of the resource group in which the workspace is located.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceNameParameter": {
+      "name": "workspaceName",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {

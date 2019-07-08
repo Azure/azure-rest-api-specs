@@ -20,16 +20,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "runId",
             "in": "query",
             "description": "The run Id associated with the Assets.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "projectId",
-            "in": "query",
-            "description": "The project Id.",
             "required": false,
             "type": "string"
           },
@@ -88,27 +90,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -144,6 +125,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "asset",
             "in": "body",
             "description": "The Asset to be created.",
@@ -151,27 +141,6 @@
             "schema": {
               "$ref": "#/definitions/Asset"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -204,30 +173,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Asset Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -260,30 +217,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Id of the Asset to delete.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -318,6 +263,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Id of the Asset to patch.",
@@ -336,27 +290,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -389,6 +322,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Image Id.",
@@ -402,27 +344,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -453,30 +374,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Image Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -511,6 +420,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Image Id.",
@@ -529,27 +447,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -581,6 +478,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
           {
             "name": "name",
             "in": "query",
@@ -665,27 +571,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -721,6 +606,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "imageRequest",
             "in": "body",
             "description": "The payload containing image request details.",
@@ -728,27 +622,6 @@
             "schema": {
               "$ref": "#/definitions/ImageRequestBase"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -780,6 +653,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "imageRequest",
             "in": "body",
             "description": "The Image request.",
@@ -787,27 +669,6 @@
             "schema": {
               "$ref": "#/definitions/ImageRequestBase"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -840,30 +701,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The model id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -896,30 +745,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The model id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -954,6 +791,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The model id.",
@@ -972,27 +818,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1024,6 +849,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
           {
             "name": "name",
             "in": "query",
@@ -1100,27 +934,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1156,6 +969,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "model",
             "in": "body",
             "description": "The payload that is used to register the model.",
@@ -1163,27 +985,6 @@
             "schema": {
               "$ref": "#/definitions/Model"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1216,6 +1017,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Model Id.",
@@ -1234,27 +1044,6 @@
             "in": "query",
             "description": "The end date from which to retrieve metrics.",
             "required": false,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
             "type": "string"
           }
         ],
@@ -1288,30 +1077,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The operation id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -1346,6 +1123,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "imageId",
             "in": "path",
             "description": "The Image Id.",
@@ -1356,27 +1142,6 @@
             "name": "id",
             "in": "path",
             "description": "The Profile Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -1410,6 +1175,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
           {
             "name": "imageId",
             "in": "path",
@@ -1472,27 +1246,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1528,6 +1281,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "imageId",
             "in": "path",
             "description": "The Image Id.",
@@ -1542,27 +1304,6 @@
             "schema": {
               "$ref": "#/definitions/ProfileRequestBase"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1592,6 +1333,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Service Id.",
@@ -1605,27 +1355,6 @@
             "required": false,
             "type": "boolean",
             "default": false
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1656,30 +1385,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Service Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -1717,6 +1434,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Service Id.",
@@ -1735,27 +1461,6 @@
                 "$ref": "#/definitions/JsonPatchOperation"
               }
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1787,6 +1492,15 @@
           "application/json"
         ],
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
           {
             "name": "imageId",
             "in": "query",
@@ -1885,27 +1599,6 @@
               "UpdatedAtDesc",
               "UpdatedAtAsc"
             ]
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1941,6 +1634,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "request",
             "in": "body",
             "description": "The payload that is used to create the Service.",
@@ -1948,27 +1650,6 @@
             "schema": {
               "$ref": "#/definitions/CreateServiceRequest"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -1999,30 +1680,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Service Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -2060,6 +1729,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Service Id.",
@@ -2074,27 +1752,6 @@
             "schema": {
               "$ref": "#/definitions/RegenerateServiceKeysRequest"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -2131,30 +1788,18 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "id",
             "in": "path",
             "description": "The Service Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
             "required": true,
             "type": "string"
           }
@@ -2191,6 +1836,15 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceParameter"
+          },
+          {
             "name": "request",
             "in": "body",
             "description": "The payload describing the service to register.",
@@ -2198,27 +1852,6 @@
             "schema": {
               "$ref": "#/definitions/RegisterServiceRequest"
             }
-          },
-          {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription Id.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceGroup",
-            "in": "path",
-            "description": "The name of resource group in which the workspace is located.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "workspace",
-            "in": "path",
-            "description": "The name of the workspace.",
-            "required": true,
-            "type": "string"
           }
         ],
         "responses": {
@@ -2241,6 +1874,9 @@
   "definitions": {
     "Asset": {
       "description": "The Asset definition.",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -2289,10 +1925,6 @@
           "description": "The RunId associated with this Asset.",
           "type": "string"
         },
-        "projectid": {
-          "description": "The project Id.",
-          "type": "string"
-        },
         "meta": {
           "description": "A dictionary containing metadata about the Asset.",
           "type": "object",
@@ -2303,7 +1935,8 @@
         "createdTime": {
           "format": "date-time",
           "description": "The time the Asset was created in UTC.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2597,12 +2230,14 @@
         "createdTime": {
           "format": "date-time",
           "description": "The Model creation time (UTC).",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "modifiedTime": {
           "format": "date-time",
           "description": "The Model last modified time (UTC).",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "unpack": {
           "description": "Indicates whether we need to unpack the Model during docker Image creation.",
@@ -2795,25 +2430,19 @@
       "description": "The Docker build context response.",
       "type": "object",
       "properties": {
-        "content": {
-          "description": "The content.",
-          "type": "string"
-        },
-        "encoding": {
-          "description": "The encoding type.",
+        "entryType": {
+          "description": "Type of the context entry.",
           "enum": [
-            "Base64"
+            "Inline",
+            "Remote"
           ],
           "type": "string",
-          "example": "Base64",
+          "readOnly": true,
+          "example": "Inline",
           "x-ms-enum": {
-            "name": "DockerBuildContextResponseEntryEncoding",
+            "name": "DockerBuildContextResponseEntryType",
             "modelAsString": true
           }
-        },
-        "path": {
-          "description": "The path to the file.",
-          "type": "string"
         }
       }
     },
@@ -3040,6 +2669,9 @@
     },
     "ProfileRequestBase": {
       "description": "The request for creating a profile.",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "properties": {
         "name": {
@@ -3199,6 +2831,7 @@
     "CreateServiceRequest": {
       "description": "The base class for creating a service.",
       "required": [
+        "name",
         "computeType"
       ],
       "type": "object",
@@ -3296,6 +2929,10 @@
           "$ref": "#/definitions/ImageRequestBase",
           "description": "The Image request."
         },
+        "environmentImageRequest": {
+          "$ref": "#/definitions/EnvironmentImageRequest",
+          "description": "The Environment, models and assets needed for inferencing."
+        },
         "location": {
           "description": "The location of the service.",
           "type": "string"
@@ -3322,6 +2959,185 @@
         },
         "secondaryKey": {
           "description": "The secondary key.",
+          "type": "string"
+        }
+      }
+    },
+    "EnvironmentImageRequest": {
+      "description": "Request to create a Docker image based on Environment.",
+      "type": "object",
+      "properties": {
+        "driverProgram": {
+          "description": "The name of the driver file.",
+          "type": "string"
+        },
+        "assets": {
+          "description": "The list of assets.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ImageAsset"
+          }
+        },
+        "modelIds": {
+          "description": "The list of model Ids.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": "[mymodel:1, mymodel:2]"
+        },
+        "environment": {
+          "$ref": "#/definitions/ModelEnvironmentDefinition",
+          "description": "The details of the AZURE ML environment."
+        }
+      }
+    },
+    "ImageAsset": {
+      "description": "An Image asset.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "The Asset Id.",
+          "type": "string"
+        },
+        "mimeType": {
+          "description": "The mime type.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The Url of the Asset.",
+          "type": "string"
+        },
+        "unpack": {
+          "description": "Whether the Asset is unpacked.",
+          "type": "boolean"
+        }
+      }
+    },
+    "ModelEnvironmentDefinition": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "version": {
+          "type": "string"
+        },
+        "python": {
+          "$ref": "#/definitions/ModelPythonSection"
+        },
+        "environmentVariables": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "docker": {
+          "$ref": "#/definitions/ModelDockerSection"
+        },
+        "spark": {
+          "$ref": "#/definitions/ModelSparkSection"
+        },
+        "inferencingStackVersion": {
+          "type": "string"
+        }
+      }
+    },
+    "ModelPythonSection": {
+      "type": "object",
+      "properties": {
+        "interpreterPath": {
+          "type": "string"
+        },
+        "userManagedDependencies": {
+          "type": "boolean"
+        },
+        "condaDependencies": {
+          "type": "object"
+        },
+        "baseCondaEnvironment": {
+          "type": "string"
+        }
+      }
+    },
+    "ModelDockerSection": {
+      "type": "object",
+      "properties": {
+        "baseImage": {
+          "type": "string"
+        },
+        "enabled": {
+          "type": "boolean"
+        },
+        "sharedVolumes": {
+          "type": "boolean"
+        },
+        "gpuSupport": {
+          "type": "boolean"
+        },
+        "shmSize": {
+          "type": "string"
+        },
+        "arguments": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "baseImageRegistry": {
+          "$ref": "#/definitions/ContainerRegistry"
+        }
+      }
+    },
+    "ModelSparkSection": {
+      "type": "object",
+      "properties": {
+        "repositories": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "packages": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SparkMavenPackage"
+          }
+        },
+        "precachePackages": {
+          "type": "boolean"
+        }
+      }
+    },
+    "ContainerRegistry": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string"
+        },
+        "username": {
+          "type": "string"
+        },
+        "password": {
+          "type": "string"
+        }
+      }
+    },
+    "SparkMavenPackage": {
+      "type": "object",
+      "properties": {
+        "group": {
+          "type": "string"
+        },
+        "artifact": {
+          "type": "string"
+        },
+        "version": {
           "type": "string"
         }
       }
@@ -3363,7 +3179,12 @@
         },
         "expiryOn": {
           "format": "int64",
-          "description": "Access token expiry time expressed in POSIX time.",
+          "description": "Access token expiry time (UTC).",
+          "type": "integer"
+        },
+        "refreshAfter": {
+          "format": "int64",
+          "description": "Refresh access token after time (UTC).",
           "type": "integer"
         }
       }
@@ -3371,6 +3192,7 @@
     "RegisterServiceRequest": {
       "description": "The base class for registering a service.",
       "required": [
+        "name",
         "computeType"
       ],
       "type": "object",
@@ -3467,28 +3289,6 @@
         }
       ],
       "properties": {}
-    },
-    "ImageAsset": {
-      "description": "An Image asset.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "The Asset Id.",
-          "type": "string"
-        },
-        "mimeType": {
-          "description": "The mime type.",
-          "type": "string"
-        },
-        "url": {
-          "description": "The Url of the Asset.",
-          "type": "string"
-        },
-        "unpack": {
-          "description": "Whether the Asset is unpacked.",
-          "type": "boolean"
-        }
-      }
     },
     "TargetRuntime": {
       "description": "The target runtime.",
@@ -3721,6 +3521,10 @@
               "additionalProperties": {
                 "type": "object"
               }
+            },
+            "environment": {
+              "$ref": "#/definitions/ModelEnvironmentDefinition",
+              "description": "Details on the Environment."
             }
           }
         }
@@ -4109,6 +3913,10 @@
               "additionalProperties": {
                 "type": "object"
               }
+            },
+            "environment": {
+              "$ref": "#/definitions/ModelEnvironmentDefinition",
+              "description": "Details on the Environment."
             }
           }
         }
@@ -4246,6 +4054,9 @@
       "properties": {}
     },
     "ACIServiceCreateRequest": {
+      "required": [
+        "name"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4319,6 +4130,9 @@
     },
     "CreateEndpointRequest": {
       "description": "The request to create an Endpoint in the AKS.",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4377,6 +4191,9 @@
     },
     "AKSServiceCreateRequest": {
       "description": "The request to create an AKS service.",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4467,6 +4284,9 @@
     },
     "CreateEndpointVariantRequest": {
       "description": "The Variant properties.",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4517,6 +4337,9 @@
       "properties": {}
     },
     "CreateIotServiceRequest": {
+      "required": [
+        "name"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4603,6 +4426,9 @@
     },
     "CreateServiceInMirRequest": {
       "description": "The request to create a service on MIR resource.",
+      "required": [
+        "name"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4671,6 +4497,9 @@
       "properties": {}
     },
     "RegisterBatchServiceRequest": {
+      "required": [
+        "name"
+      ],
       "type": "object",
       "allOf": [
         {
@@ -4734,6 +4563,33 @@
       ],
       "properties": {},
       "x-ms-discriminator-value": "AMLCOMPUTE"
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure Subscription ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupParameter": {
+      "name": "resourceGroup",
+      "in": "path",
+      "description": "The Name of the resource group in which the workspace is located.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "workspaceParameter": {
+      "name": "workspace",
+      "in": "path",
+      "description": "The name of the workspace.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
     }
   },
   "securityDefinitions": {
