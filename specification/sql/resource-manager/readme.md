@@ -73,7 +73,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/servers.json
@@ -120,6 +119,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 
@@ -167,7 +167,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/servers.json
@@ -212,6 +211,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 
@@ -254,7 +254,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/servers.json
@@ -298,6 +297,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 
@@ -465,6 +465,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/usages.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 

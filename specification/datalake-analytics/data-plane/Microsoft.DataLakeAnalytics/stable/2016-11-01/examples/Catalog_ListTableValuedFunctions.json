@@ -1,30 +1,32 @@
 {
-    "parameters": {
-        "api-version": "2016-11-01",
-        "accountName": "contosoadla",
-        "adlaCatalogDnsSuffix": "azuredatalakeanalytics.net",
-        "databaseName": "master",
-        "schemaName": "dbo",
-        "$filter": "test_filter",
-        "$top": 1,
-        "$skip": 1,
-        "$select": "test_select",
-        "$orderby": "test_orderby",
-        "$count": false
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "nextLink":"https://contosoadla.datalakeanalytics.net/catalog/usql/databases/master/schema/dbo/statistics?api-version=2016-11-01&%24skiptoken=<token>",
-                "value": [{
-                    "computeAccountName": "contosoadla",             
-                    "version": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
-                    "databaseName": "master",
-                    "schemaName": "dbo",
-                    "tvfName": "test_tvf_name",
-                    "definition": "test_definition"
-                }]
-            }
-        }
+  "parameters": {
+    "api-version": "2016-11-01",
+    "accountName": "contosoadla",
+    "adlaCatalogDnsSuffix": "azuredatalakeanalytics.net",
+    "databaseName": "master",
+    "schemaName": "dbo",
+    "$filter": "test_filter",
+    "$top": 1,
+    "$skip": 1,
+    "$select": "test_select",
+    "$orderby": "test_orderby",
+    "$count": false
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://contosoadla.datalakeanalytics.net/catalog/usql/databases/master/schema/dbo/statistics?api-version=2016-11-01&%24skiptoken=<token>",
+        "value": [
+          {
+            "computeAccountName": "contosoadla",
+            "version": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+            "databaseName": "master",
+            "schemaName": "dbo",
+            "tvfName": "test_tvf_name",
+            "definition": "test_definition"
+          }
+        ]
+      }
     }
+  }
 }
