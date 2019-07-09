@@ -26,13 +26,13 @@ These are the global settings for the portal.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2015-08
+tag: package-2015-08-01-preview
 ```
 
 
-### Tag: package-preview-2015-08
+### Tag: package-2015-08-01-preview
 
-These settings apply only when `--tag=package-preview-2015-08` is specified on the command line.
+These settings apply only when `--tag=package-2015-08-01-preview` is specified on the command line.
 
 ```yaml $(tag) == 'package-preview-2015-08'
 input-file:
