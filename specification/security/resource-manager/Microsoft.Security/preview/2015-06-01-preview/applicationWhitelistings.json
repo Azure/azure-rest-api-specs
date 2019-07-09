@@ -183,30 +183,27 @@
 		},
 		"AppWhitelistingGroup": {
 			"type": "object",
-			"description": "Represents a VM/server group and set of rules that are Recommended by Azure Security Center to be allowed",
 			"properties": {
-				"type": {
-					"$ref": "#/definitions/AppWhitelistingResourceType"
-				},
-				"location": {
-					"$ref": "../../../common/v1/types.json#/parameters/AscLocation"
-				},
-				"id": {
-					"$ref": "#/definitions/GroupResourceId"
-				},
-				"name": {
-					"type": "string",
-					"description": "The name of the VM/server group",
-					"example": "GROUP1"
-				},
 				"properties": {
+					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/AppWhitelistingGroupData"
 				}
-			}
+			},
+			"required": [
+				"properties"
+			],
+			"allOf": [
+				{
+					"$ref": "../../../common/v1/types.json#/definitions/Resource"
+				},
+				{
+					"$ref": "../../../common/v1/types.json#/definitions/Location"
+				}
+			]
 		},
 		"AppWhitelistingGroupData": {
 			"type": "object",
-			"description": "Represents the data of the VM/server group and set of rules that are recommended by Azure Security Center to be allowed",
+			"description": "Represents a VM/server group and set of rules that are Recommended by Azure Security Center to be allowed",
 			"properties": {
 				"enforcementMode": {
 					"$ref": "#/definitions/EnforcementMode"
