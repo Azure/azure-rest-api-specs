@@ -50,10 +50,82 @@ directive:
     from: cosmos-db.json
     where: $.definitions.DatabaseAccountCreateUpdateParameters
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.SqlDatabase
+    reason: The SqlDatabase doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.Container
+    reason: The Container doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.MongoDBDatabase
+    reason: The MongoDBDatabase doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.MongoDBCollection
+    reason: The MongoDBCollection doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.Table
+    reason: The Table doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.CassandraKeyspace
+    reason: The CassandraKeyspace doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.CassandraTable
+    reason: The CassandraTable doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabase
+    reason: The GremlinDatabase doesn't support Patch operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
+    where: $.definitions.GremlinGraph
+    reason: The GremlinGraph doesn't support Patch operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
-    reason: The Metrics API has has a property name with a leading underscore character
+    reason: The Metrics API has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._rid
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._ts
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._self
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.ExtendedResourceProperties.properties._etag
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.SqlDatabaseProperties.properties._colls
+    reason: The database has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.SqlDatabaseProperties.properties._users
+    reason: The database has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabaseProperties.properties._rid
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabaseProperties.properties._ts
+    reason: The resource has a property name with a leading underscore character
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: cosmos-db.json
+    where: $.definitions.GremlinDatabaseProperties.properties._etag
+    reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P10
@@ -103,70 +175,10 @@ swagger-to-sdk:
 ```
 
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.cosmosdb
-  package-name: azure-mgmt-cosmosdb
-  package-version: 0.3.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-cosmosdb/azure/mgmt/cosmosdb
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-cosmosdb
-```
-
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.cosmosdb
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-cosmosdb
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2015-04
-```
-
-### Tag: package-2015-04 and java
-
-These settings apply only when `--tag=package-2015-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.cosmosdb.v2015_04_08
-  output-folder: $(azure-libraries-for-java-folder)/cosmosdb/resource-manager/v2015_04_08
-regenerate-manager: true
-generate-interface: true
-```
-
-
+See configuration in [readme.java.md](./readme.java.md)

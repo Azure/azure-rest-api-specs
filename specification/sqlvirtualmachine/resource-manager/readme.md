@@ -54,6 +54,7 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
 ```
 
 
@@ -92,15 +93,19 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine/azure/mgmt/sqlvirtualmachine
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sqlvirtualmachine
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sqlvirtualmachine
 ```
 
 ### Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+### Java
+
+See configuration in [readme.java.md](./readme.java.md)

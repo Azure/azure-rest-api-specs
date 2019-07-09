@@ -73,7 +73,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/servers.json
@@ -81,6 +80,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -97,6 +97,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+- Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
@@ -115,7 +116,12 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
-
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
+- Microsoft.Sql/preview/2018-06-01-preview/usages.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+- Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
+- Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -161,7 +167,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/servers.json
@@ -169,6 +174,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -186,6 +192,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+- Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -201,6 +208,12 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
+- Microsoft.Sql/preview/2018-06-01-preview/usages.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+- Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
+- Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -241,7 +254,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
 - Microsoft.Sql/preview/2015-05-01-preview/encryptionProtectors.json
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
-- Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
 - Microsoft.Sql/preview/2015-05-01-preview/servers.json
@@ -249,6 +261,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
@@ -265,6 +278,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/restorePoints.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+- Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
 - Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -280,6 +294,12 @@ input-file:
 - Microsoft.Sql/preview/2017-10-01-preview/recoverableManagedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
+- Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
+- Microsoft.Sql/preview/2018-06-01-preview/usages.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+- Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
+- Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -327,6 +347,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2017-03-01-preview/blobAuditing.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessmentBaselines.json
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
@@ -337,6 +358,7 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
+- Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
@@ -390,6 +412,7 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
 - Microsoft.Sql/preview/2015-05-01-preview/usages.json
+- Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
 - Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
@@ -436,8 +459,15 @@ These can be regenerated by running the following PowerShell script from this re
 
 ``` yaml $(tag) == 'package-pure-2018-06-preview'
 input-file:
+ - ./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/usages.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 
 # Needed when there is more than one input file
 override-info:
@@ -509,6 +539,7 @@ input-file:
  - ./Microsoft.Sql/preview/2017-03-01-preview/serverSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
+ - ./Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
 
 # Needed when there is more than one input file
 override-info:
@@ -541,6 +572,7 @@ input-file:
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/usages.json
+ - ./Microsoft.Sql/preview/2015-05-01-preview/virtualclusters.json
  - ./Microsoft.Sql/preview/2015-05-01-preview/virtualNetworkRules.json
 
 # Needed when there is more than one input file
@@ -658,13 +690,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sql/azure/mgmt/sql
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql/azure/mgmt/sql
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-sql
+  output-folder: $(python-sdks-folder)/sql/azure-mgmt-sql
 ```
 
 ### Go

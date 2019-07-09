@@ -40,8 +40,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOperations": {
-            "$ref": "./examples/ListOperations.json"
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
@@ -86,8 +86,8 @@
           }
         },
         "x-ms-examples": {
-          "CheckNameAvailability": {
-            "$ref": "./examples/CheckNameAvailability.json"
+          "SignalR_CheckNameAvailability": {
+            "$ref": "./examples/SignalR_CheckNameAvailability.json"
           }
         }
       }
@@ -119,8 +119,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListBySubscription": {
-            "$ref": "./examples/ListBySubscription.json"
+          "SignalR_ListBySubscription": {
+            "$ref": "./examples/SignalR_ListBySubscription.json"
           }
         }
       }
@@ -155,8 +155,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListByResourceGroup": {
-            "$ref": "./examples/ListByResourceGroup.json"
+          "SignalR_ListByResourceGroup": {
+            "$ref": "./examples/SignalR_ListByResourceGroup.json"
           }
         }
       }
@@ -191,8 +191,8 @@
           }
         },
         "x-ms-examples": {
-          "ListKeys": {
-            "$ref": "./examples/ListKeys.json"
+          "SignalR_ListKeys": {
+            "$ref": "./examples/SignalR_ListKeys.json"
           }
         }
       }
@@ -236,14 +236,17 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples": {
-          "RegenerateKey": {
-            "$ref": "./examples/RegenerateKey.json"
+          "SignalR_RegenerateKey": {
+            "$ref": "./examples/SignalR_RegenerateKey.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/SignalR/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}": {
       "get": {
         "tags": [
           "SignalR"
@@ -266,15 +269,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Success. The response describe the corresponding SignalR service.",
+            "description": "Success. The response describes the corresponding SignalR service.",
             "schema": {
               "$ref": "#/definitions/SignalRResource"
             }
           }
         },
         "x-ms-examples": {
-          "Get": {
-            "$ref": "./examples/Get.json"
+          "SignalR_Get": {
+            "$ref": "./examples/SignalR_Get.json"
           }
         }
       },
@@ -315,13 +318,13 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the exiting SignalR service is now updating  and contains a Location header to query the operation result.."
+            "description": "Accepted. The response indicates the exiting SignalR service is now updating and contains a Location header to query the operation result.."
           }
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "CreateOrUpdate": {
-            "$ref": "./examples/CreateOrUpdate.json"
+          "SignalR_CreateOrUpdate": {
+            "$ref": "./examples/SignalR_CreateOrUpdate.json"
           }
         }
       },
@@ -355,8 +358,8 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Delete": {
-            "$ref": "./examples/Delete.json"
+          "SignalR_Delete": {
+            "$ref": "./examples/SignalR_Delete.json"
           }
         }
       },
@@ -402,8 +405,48 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Update": {
-            "$ref": "./examples/Update.json"
+          "SignalR_Update": {
+            "$ref": "./examples/SignalR_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/restart": {
+      "post": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to restart a SignalR service.",
+        "operationId": "SignalR_Restart",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/SignalRServiceName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the restart operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the operation is successful and no content will be returned."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalR_Restart": {
+            "$ref": "./examples/SignalR_Restart.json"
           }
         }
       }
@@ -442,8 +485,8 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListUsagesByLocation": {
-            "$ref": "./examples/ListUsagesByLocation.json"
+          "Usages_List": {
+            "$ref": "./examples/Usages_List.json"
           }
         }
       }
@@ -740,18 +783,18 @@
       "x-ms-azure-resource": true
     },
     "ResourceSku": {
-      "description": "The billing information of the resource.(e.g. basic vs. standard)",
+      "description": "The billing information of the SignalR resource.",
       "required": [
         "name"
       ],
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the SKU. This is typically a letter + number code, such as A0 or P3.  Required (if sku is specified)",
+          "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1",
           "type": "string"
         },
         "tier": {
-          "description": "Optional tier of this particular SKU. `Basic` is deprecated, use `Standard` instead for Basic tier.",
+          "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead.",
           "enum": [
             "Free",
             "Basic",
@@ -765,16 +808,16 @@
           }
         },
         "size": {
-          "description": "Optional, string. When the name field is the combination of tier and some other value, this would be the standalone code.",
+          "description": "Optional string. For future use.",
           "type": "string"
         },
         "family": {
-          "description": "Optional, string. If the service has different generations of hardware, for the same SKU, then that can be captured here.",
+          "description": "Optional string. For future use.",
           "type": "string"
         },
         "capacity": {
           "format": "int32",
-          "description": "Optional, integer. If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not \r\npossible for the resource this may be omitted.",
+          "description": "Optional, integer. The unit count of SignalR resource. 1 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free: 1\r\n    Standard: 1,2,5,10,20,50,100",
           "type": "integer"
         }
       }
@@ -820,13 +863,13 @@
         },
         "publicPort": {
           "format": "int32",
-          "description": "The publicly accessibly port of the SignalR service which is designed for browser/client side usage.",
+          "description": "The publicly accessible port of the SignalR service which is designed for browser/client side usage.",
           "type": "integer",
           "readOnly": true
         },
         "serverPort": {
           "format": "int32",
-          "description": "The publicly accessibly port of the SignalR service which is designed for customer server side usage.",
+          "description": "The publicly accessible port of the SignalR service which is designed for customer server side usage.",
           "type": "integer",
           "readOnly": true
         },
@@ -843,6 +886,47 @@
         "hostNamePrefix": {
           "description": "Prefix for the hostName of the SignalR service. Retained for future use.\r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.service.signalr.net.",
           "type": "string"
+        },
+        "features": {
+          "description": "List of SignalR featureFlags. e.g. ServiceMode.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, SignalR service will use its globally default value. \r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRFeature"
+          }
+        }
+      }
+    },
+    "SignalRFeature": {
+      "description": "Feature of a SignalR resource, which controls the SignalR runtime behavior.",
+      "required": [
+        "flag",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "flag": {
+          "description": "Kind of feature. Required.",
+          "enum": [
+            "ServiceMode"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "FeatureFlags",
+            "modelAsString": true
+          }
+        },
+        "value": {
+          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/en-us/azure/azure-signalr/ for allowed values.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "properties": {
+          "description": "Optional properties related to this feature.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -992,11 +1076,7 @@
       "in": "query",
       "description": "Client Api Version.",
       "required": true,
-      "type": "string",
-      "enum": [
-        "2018-03-01-preview",
-        "2018-10-01"
-      ]
+      "type": "string"
     },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",

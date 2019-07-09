@@ -52,26 +52,26 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Lists a collection of the quota counter values.",
             "schema": {
-              "$ref": "#/definitions/QuotaCounterCollection"
+              "$ref": "./definitions.json#/definitions/QuotaCounterCollection"
             }
           },
           "default": {
@@ -101,14 +101,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QuotaCounterValueContractProperties"
+              "$ref": "./definitions.json#/definitions/QuotaCounterValueContractProperties"
             },
             "description": "The value of the quota counter to be applied to all quota counter periods."
           },
@@ -150,29 +150,29 @@
         },
         "parameters": [
           {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
-            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaPeriodKeyParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "The response body contains the Quota counter details for the specified period.",
             "schema": {
-              "$ref": "#/definitions/QuotaCounterContract"
+              "$ref": "./definitions.json#/definitions/QuotaCounterContract"
             }
           },
           "default": {
@@ -202,17 +202,17 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/QuotaCounterKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaCounterKeyParameter"
           },
           {
-            "$ref": "#/parameters/QuotaPeriodKeyParameter"
+            "$ref": "./apimanagement.json#/parameters/QuotaPeriodKeyParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QuotaCounterValueContractProperties"
+              "$ref": "./definitions.json#/definitions/QuotaCounterValueContractProperties"
             },
             "description": "The value of the Quota counter to be applied on the specified period."
           },
@@ -237,105 +237,6 @@
       }
     }
   },
-  "definitions": {
-    "QuotaCounterCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaCounterContract"
-          },
-          "description": "Quota counter values."
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Total record count number across all pages."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Quota Counter list representation."
-    },
-    "QuotaCounterContract": {
-      "properties": {
-        "counterKey": {
-          "type": "string",
-          "description": "The Key value of the Counter. Must not be empty.",
-          "minLength": 1
-        },
-        "periodKey": {
-          "type": "string",
-          "description": "Identifier of the Period for which the counter was collected. Must not be empty.",
-          "minLength": 1
-        },
-        "periodStartTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date of the start of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        },
-        "periodEndTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The date of the end of Counter Period. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.\n"
-        },
-        "value": {
-          "$ref": "#/definitions/QuotaCounterValueContractProperties",
-          "description": "Quota Value Properties"
-        }
-      },
-      "required": [
-        "counterKey",
-        "periodKey",
-        "periodStartTime",
-        "periodEndTime"
-      ],
-      "description": "Quota counter details."
-    },
-    "QuotaCounterValueContract": {
-      "properties": {
-        "value": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/QuotaCounterValueContractProperties",
-          "description": "Quota counter Value Properties."
-        }
-      },
-      "description": "Quota counter value details."
-    },
-    "QuotaCounterValueContractProperties": {
-      "properties": {
-        "callsCount": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Number of times Counter was called."
-        },
-        "kbTransferred": {
-          "type": "number",
-          "format": "double",
-          "description": "Data Transferred in KiloBytes."
-        }
-      },
-      "description": "Quota counter value details."
-    }
-  },
-  "parameters": {
-    "QuotaCounterKeyParameter": {
-      "name": "quotaCounterKey",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Quota counter key identifier.This is the result of expression defined in counter-key attribute of the quota-by-key policy.For Example, if you specify counter-key=\"boo\" in the policy, then it’s accessible by \"boo\" counter key. But if it’s defined as counter-key=\"@(\"b\"+\"a\")\" then it will be accessible by \"ba\" key",
-      "x-ms-parameter-location": "method"
-    },
-    "QuotaPeriodKeyParameter": {
-      "name": "quotaPeriodKey",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Quota period key identifier.",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "definitions": {},
+  "parameters": {}
 }

@@ -2425,7 +2425,6 @@
           "AggregatedCostByManagementGroupFilterByDate": {
             "$ref": "./examples/AggregatedCostByManagementGroupFilterByDate.json"
           }
-
         },
         "parameters": [
           {
@@ -2691,6 +2690,53 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/ChargeSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/tenants": {
+      "get": {
+        "tags": [
+          "Tenants"
+        ],
+        "x-ms-examples": {
+          "TenantPropertiesGet": {
+            "$ref": "./examples/TenantsGet.json"
+          }
+        },
+        "operationId": "Tenants_Get",
+        "description": "Gets a Tenant Properties.",
+        "parameters": [
+          {
+            "name": "billingAccountId",
+            "in": "path",
+            "description": "Billing Account Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "billingProfileId",
+            "in": "path",
+            "description": "Billing Profile Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TenantListResult"
             }
           },
           "default": {
@@ -3085,6 +3131,65 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/MarketplaceProperties",
           "title": "Marketplace properties"
+        }
+      }
+    },
+    "Tenant": {
+      "description": "An tenant detail resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TenantProperties",
+          "title": "Usage detail properties"
+        }
+      }
+    },
+    "TenantProperties": {
+      "description": "The properties of the tenants.",
+      "properties": {
+        "billingProfileName": {
+          "description": "The Billing Profile name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountId": {
+          "description": "The Billing AccountId.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "The TenantId.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountName": {
+          "description": "The Billing Account Name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "TenantListResult": {
+      "description": "A Tenant properties Resource",
+      "properties": {
+        "value": {
+          "description": "The list of tenant details.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Tenant"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -4195,19 +4300,19 @@
             "$ref": "#/definitions/ManagementGroupAggregatedCostResult"
           }
         },
-		"includedSubscriptions": {
+        "includedSubscriptions": {
           "description": "List of subscription Guids included in the calculation of aggregated cost",
-		  "type": "array",
+          "type": "array",
           "items": {
             "type": "string"
-           }
+          }
         },
-		"excludedSubscriptions": {
+        "excludedSubscriptions": {
           "description": "List of subscription Guids excluded from the calculation of aggregated cost",
-		  "type": "array",
+          "type": "array",
           "items": {
             "type": "string"
-           }
+          }
         }
       }
     },
@@ -4535,13 +4640,13 @@
         ]
       }
     },
-	"managementGroupIdParameter": {
+    "managementGroupIdParameter": {
       "name": "managementGroupId",
       "in": "path",
       "description": "Azure Management Group ID.",
       "required": true,
       "type": "string",
-	  "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method"
     }
   }
 }

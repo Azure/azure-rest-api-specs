@@ -7,7 +7,9 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/batch"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/batch"
+  output-folder: "$(typescript-sdks-folder)/sdk/batch/batch"
   payload-flattening-threshold: 1
-  generate-metadata: true
+  generate-license-txt: true
+  generate-package-json: false
+  generate-readme-md: false
 ```

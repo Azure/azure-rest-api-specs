@@ -5,12 +5,12 @@
 Configuration for generating LUIS Runtime SDK.
 
 ``` yaml
-tag: runtime_2_0
+tag: runtime_3_0_preview
 add-credentials: true
 openapi-type: data-plane
 ```
 
-The current release for the Runtime Endpoint is `runtime_2_0`.
+The current release for the Runtime Endpoint is `runtime_3_0_preview`.
 
 # Releases
 
@@ -23,6 +23,18 @@ input-file: stable/v2.0/LUIS-Runtime.json
 # remove Resolve2 from code-generation (since the POST and GET operations are functionally identical)
 directive:
   remove-operation: Prediction_Resolve2
+```
+
+## Runtime 3.0-preview
+These settings apply only when `--tag=runtime_3_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'runtime_3_0_preview'
+input-file: preview/v3.0/LUIS-Runtime.json
+
+# remove the GET APIs from code-generation (since the POST and GET operations are functionally identical)
+directive:
+  - remove-operation: Prediction_GetSlotPredictionGET
+  - remove-operation: Prediction_GetVersionPredictionGET
 ```
 
 ---
@@ -42,7 +54,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
 ```
 
-### Runtime 2.0 - CSharp Settings
+### CSharp
 These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
@@ -50,7 +62,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.LUIS.Runtime
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/LUIS/Runtime/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Language.LUIS.Runtime/src/Generated
   clear-output-folder: true
 
 # csharp has support for modelAsExtensible now; replace modelAsString with that.

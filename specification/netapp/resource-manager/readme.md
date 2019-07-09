@@ -25,10 +25,29 @@ To see additional help and options, run:
 These are the global settings for the Azure NetApp Files API.
 
 ``` yaml
+title: NetAppManagementClient
+description: Microsoft NetApp Azure Resource Provider specification
 openapi-type: arm
-tag: package-2017-08-15
+tag: package-netapp-2019-06-01
 ```
 
+### Tag: package-netapp-2019-06-01
+
+These settings apply only when `--tag=package-netapp-2019-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2019-06-01'
+input-file:
+- Microsoft.NetApp/stable/2019-06-01/netapp.json
+```
+
+### Tag: package-netapp-2019-05-01
+
+These settings apply only when `--tag=package-netapp-2019-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-netapp-2019-05-01'
+input-file:
+- Microsoft.NetApp/stable/2019-05-01/netapp.json
+```
 
 ### Tag: package-2017-08-15
 
@@ -53,6 +72,9 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-java
 ```
 
 
@@ -63,3 +85,15 @@ See configuration in [readme.csharp.md](./readme.csharp.md)
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
+
+## JavaScript/TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)

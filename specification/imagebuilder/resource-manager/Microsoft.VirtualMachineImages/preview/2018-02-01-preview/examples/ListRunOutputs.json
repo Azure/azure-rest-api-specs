@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "imageTemplateName": "myImageTemplate",
+    "api-version": "2018-02-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs/myManagedImageOutput",
+            "name": "myManagedImageOutput",
+            "properties": {
+              "artifactId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/output_managed_image",
+              "provisioningState": "Succeeded"
+            },
+            "type": "Microsoft.VirtualMachineImages/imageTemplates/runOutputs"
+          },
+          {
+            "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs/mySharedImageOutput",
+            "name": "mySharedImageOutput",
+            "properties": {
+              "artifactId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/galleries/Gallery1/images/SharedImageOutput/imageversions/1.2.3",
+              "provisioningState": "Succeeded"
+            },
+            "type": "Microsoft.VirtualMachineImages/imageTemplates/runOutputs"
+          }
+        ],
+        "nextLink": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VirtualMachineImages/imageTemplates/myImageTemplate/runOutputs?api-version=2018-02-01-preview&$skipToken=3"
+      }
+    }
+  }
+}

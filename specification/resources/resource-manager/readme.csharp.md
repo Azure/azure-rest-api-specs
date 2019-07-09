@@ -12,7 +12,7 @@ csharp:
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !(profile)
+``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.ResourceManager  
 output-folder: $(csharp-sdks-folder)/Resource/Management.ResourceManager/Generated
 
@@ -71,6 +71,32 @@ batch:
     ApiVersionName: Api2018_05_01
   - policyD-2016-12-01: true
     ApiVersionName: Api2018_05_01
+
+  - resources-2019-05-01: true
+    ApiVersionName: Api2019_05_01
+  - links-2016-09-01: true
+    ApiVersionName: Api2019_05_01
+  - subscription-2016-06-01: true
+    ApiVersionName: Api2019_05_01
+  - locks-2016-09-01: true
+    ApiVersionName: Api2019_05_01
+  - policyA-2016-12-01: true
+    ApiVersionName: Api2019_05_01
+  - policyD-2016-12-01: true
+    ApiVersionName: Api2019_05_01
+
+  - resources-2019-05-10: true
+    ApiVersionName: Api2019_05_10
+  - links-2016-09-01: true
+    ApiVersionName: Api2019_05_10
+  - subscription-2016-06-01: true
+    ApiVersionName: Api2019_05_10
+  - locks-2016-09-01: true
+    ApiVersionName: Api2019_05_10
+  - policyA-2016-12-01: true
+    ApiVersionName: Api2019_05_10
+  - policyD-2016-12-01: true
+    ApiVersionName: Api2019_05_10
 ```
 
 
@@ -261,9 +287,149 @@ input-file:
 - Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
 ```
 
-```yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
-output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
+``` yaml $(Separator)
+###########################################################################
+###########################################################################
+```
+
+
+``` yaml $(resources-2019-05-01)
+tag: pkg-2019-05-Az-res
+```
+
+``` yaml $(links-2016-09-01)
+tag: pkg-2019-05-Az-lnk
+```
+
+``` yaml $(subscription-2016-06-01)
+tag: pkg-2019-05-Az-sub
+```
+
+``` yaml $(locks-2016-09-01)
+tag: pkg-2019-05-Az-loc
+```
+
+``` yaml $(policyA-2016-12-01)
+tag: pkg-2019-05-Az-polA
+```
+
+``` yaml $(policyD-2016-12-01)
+tag: pkg-2019-05-Az-polD
+```
+
+
+## Tag: Packages for Azure Stack
+### 1) pkg-2019-05-AzStk-res
+``` yaml $(tag) == 'pkg-2019-05-Az-res'
+input-file:
+- Microsoft.Resources/stable/2019-05-01/resources.json
+```
+
+### 2) pkg-2019-05-AzStk-lnk
+``` yaml $(tag) == 'pkg-2019-05-Az-lnk'
+input-file:
+- Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### 3) pkg-2019-05-AzStk-sub
+``` yaml $(tag) == 'pkg-2019-05-Az-sub'
+input-file:
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+```
+
+### 4) pkg-2019-05-AzStk-loc
+``` yaml $(tag) == 'pkg-2019-05-Az-loc'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+```
+
+### 5) pkg-2019-05-AzStk-polA
+``` yaml $(tag) == 'pkg-2019-05-Az-polA'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+```
+
+### 6) pkg-2019-05-AzStk-polD
+``` yaml $(tag) == 'pkg-2019-05-Az-polD'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
+
+``` yaml $(Separator)
+###########################################################################
+###########################################################################
+```
+
+
+``` yaml $(resources-2019-05-10)
+tag: pkg-2019-0510-Az-res
+```
+
+``` yaml $(links-2016-09-01)
+tag: pkg-2019-0510-Az-lnk
+```
+
+``` yaml $(subscription-2016-06-01)
+tag: pkg-2019-0510-Az-sub
+```
+
+``` yaml $(locks-2016-09-01)
+tag: pkg-2019-0510-Az-loc
+```
+
+``` yaml $(policyA-2016-12-01)
+tag: pkg-2019-0510-Az-polA
+```
+
+``` yaml $(policyD-2016-12-01)
+tag: pkg-2019-0510-Az-polD
+```
+
+
+## Tag: Packages for Azure Stack
+### 1) pkg-2019-0510-AzStk-res
+``` yaml $(tag) == 'pkg-2019-0510-Az-res'
+input-file:
+- Microsoft.Resources/stable/2019-05-10/resources.json
+```
+
+### 2) pkg-2019-0510-AzStk-lnk
+``` yaml $(tag) == 'pkg-2019-0510-Az-lnk'
+input-file:
+- Microsoft.Resources/stable/2016-09-01/links.json
+```
+
+### 3) pkg-2019-0510-AzStk-sub
+``` yaml $(tag) == 'pkg-2019-0510-Az-sub'
+input-file:
+- Microsoft.Resources/stable/2016-06-01/subscriptions.json
+```
+
+### 4) pkg-2019-0510-AzStk-loc
+``` yaml $(tag) == 'pkg-2019-0510-Az-loc'
+input-file:
+- Microsoft.Authorization/stable/2016-09-01/locks.json
+```
+
+### 5) pkg-2019-0510-AzStk-polA
+``` yaml $(tag) == 'pkg-2019-0510-Az-polA'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+```
+
+### 6) pkg-2019-0510-AzStk-polD
+``` yaml $(tag) == 'pkg-2019-0510-Az-polD'
+input-file:
+- Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+```
+
+### Profile: hybrid_2018_03_01
+
+These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+
+```yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
   - tag: package-features-2015-12
@@ -275,12 +441,30 @@ batch:
   - tag: package-subscriptions-2016-06
 ```
 
-``` yaml $(profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).ResourceManager  
-output-folder: $(csharp-sdks-folder)/$(profile)/Resource/Management.ResourceManager/Generated
+### Profile: profile_2017_03_09
+
+These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
+
+``` yaml $(csharp-profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
 
 batch:
  - tag: package-resources-2016-02
  - tag: package-links-2016-09
  - tag: package-subscriptions-2016-06
+ ```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).ResourceManager  
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Resource/Management.ResourceManager/Generated
+
+batch:
+ - tag: package-policy-2016-12
+ - tag: package-locks-2016-09
+ - tag: package-resources-2018-05
  ```

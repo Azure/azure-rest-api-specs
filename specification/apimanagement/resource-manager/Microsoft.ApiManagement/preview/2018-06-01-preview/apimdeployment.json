@@ -390,10 +390,17 @@
           "200": {
             "description": "Service was successfully deleted."
           },
+          "202": {
+            "description": "The service delete request was Accepted.",
+            "schema": {
+              "$ref": "#/definitions/ApiManagementServiceResource"
+            }
+          },
           "204": {
-            "description": "Service is already deleted."
+            "description": "The service does not exist."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service": {

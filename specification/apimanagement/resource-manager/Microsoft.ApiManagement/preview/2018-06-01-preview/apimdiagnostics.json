@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics": {
       "get": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_ListByService",
         "description": "Lists all diagnostics of the API Management service instance.",
@@ -54,30 +54,30 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
-          },
-          {
             "name": "$filter",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n| id          | ge, le, eq, ne, gt, lt | substringof, startswith, endswith |"
+            "description": "| Field       | Supported operators    | Supported functions               |\n|-------------|------------------------|-----------------------------------|\n\r\n|name | ge, le, eq, ne, gt, lt | substringof, contains, startswith, endswith|\n"
           },
           {
             "$ref": "./apimanagement.json#/parameters/TopQueryParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Paged Result response of diagnostics.",
             "schema": {
-              "$ref": "#/definitions/DiagnosticCollection"
+              "$ref": "./definitions.json#/definitions/DiagnosticCollection"
             }
           },
           "default": {
@@ -90,13 +90,13 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
-        "x-ms-odata": "#/definitions/DiagnosticContract"
+        "x-ms-odata": "./definitions.json#/definitions/DiagnosticContract"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/diagnostics/{diagnosticId}": {
       "head": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_GetEntityTag",
         "description": "Gets the entity state (Etag) version of the Diagnostic specified by its identifier.",
@@ -113,7 +113,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -124,7 +124,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Operation completed successfully.",
+            "description": "Gets the entity tag of the diagnostic",
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
@@ -142,7 +142,7 @@
       },
       "get": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_Get",
         "description": "Gets the details of the Diagnostic specified by its identifier.",
@@ -159,7 +159,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
@@ -171,14 +171,14 @@
         "responses": {
           "200": {
             "description": "The response body contains the specified Diagnostic entity.",
-            "schema": {
-              "$ref": "#/definitions/DiagnosticContract"
-            },
             "headers": {
               "ETag": {
                 "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
                 "type": "string"
               }
+            },
+            "schema": {
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             }
           },
           "default": {
@@ -191,7 +191,7 @@
       },
       "put": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_CreateOrUpdate",
         "description": "Creates a new Diagnostic or updates an existing one.",
@@ -208,14 +208,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             },
             "description": "Create parameters."
           },
@@ -232,14 +232,26 @@
         "responses": {
           "201": {
             "description": "Diagnostic was successfully created.",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             }
           },
           "200": {
-            "description": "Diagnostic was successfully updated.",
+            "description": "Diagnostic successfully updated",
+            "headers": {
+              "ETag": {
+                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                "type": "string"
+              }
+            },
             "schema": {
-              "$ref": "#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             }
           },
           "default": {
@@ -252,7 +264,7 @@
       },
       "patch": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_Update",
         "description": "Updates the details of the Diagnostic specified by its identifier.",
@@ -269,14 +281,14 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DiagnosticContract"
+              "$ref": "./definitions.json#/definitions/DiagnosticContract"
             },
             "description": "Diagnostic Update parameters."
           },
@@ -304,7 +316,7 @@
       },
       "delete": {
         "tags": [
-          "Diagnostics"
+          "Diagnostic"
         ],
         "operationId": "Diagnostic_Delete",
         "description": "Deletes the specified Diagnostic.",
@@ -321,7 +333,7 @@
             "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
           },
           {
-            "$ref": "#/parameters/DiagnosticIdParameter"
+            "$ref": "./apimanagement.json#/parameters/DiagnosticIdParameter"
           },
           {
             "$ref": "./apimanagement.json#/parameters/IfMatchRequiredParameter"
@@ -350,164 +362,6 @@
       }
     }
   },
-  "definitions": {
-    "DiagnosticCollection": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DiagnosticContract"
-          },
-          "description": "Page values."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "Next page link if any."
-        }
-      },
-      "description": "Paged Diagnostic list representation."
-    },
-    "DiagnosticContract": {
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DiagnosticContractProperties",
-          "description": "Diagnostic entity contract properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "./apimanagement.json#/definitions/Resource"
-        }
-      ],
-      "description": "Diagnostic details."
-    },
-    "SamplingSettings": {
-      "properties": {
-        "samplingType": {
-          "type": "string",
-          "description": "Sampling type.",
-          "enum": [
-            "fixed"
-          ],
-          "x-ms-enum": {
-            "name": "SamplingType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "fixed",
-                "description": "Fixed-rate sampling."
-              }
-            ]
-          }
-        },
-        "percentage": {
-          "type": "number",
-          "format": "double",
-          "minimum": 0,
-          "maximum": 100,
-          "description": "Rate of sampling for fixed-rate sampling."
-        }
-      },
-      "description": "Sampling settings for Diagnostic."
-    },
-    "PipelineDiagnosticSettings": {
-      "properties": {
-        "request": {
-          "$ref": "#/definitions/HttpMessageDiagnostic",
-          "description": "Diagnostic settings for request."
-        },
-        "response": {
-          "$ref": "#/definitions/HttpMessageDiagnostic",
-          "description": "Diagnostic settings for response."
-        }
-      },
-      "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Gateway."
-    },
-    "HttpMessageDiagnostic": {
-      "properties": {
-        "headers": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Array of HTTP Headers to log."
-        },
-        "body": {
-          "$ref": "#/definitions/BodyDiagnosticSettings",
-          "description": "Body logging settings."
-        }
-      },
-      "description": "Http message diagnostic settings."
-    },
-    "BodyDiagnosticSettings": {
-      "properties": {
-        "bytes": {
-          "type": "integer",
-          "format": "int32",
-          "maximum": 8192,
-          "description": "Number of request body bytes to log."
-        }
-      },
-      "description": "Body logging settings."
-    },
-    "DiagnosticContractProperties": {
-      "properties": {
-        "alwaysLog": {
-          "type": "string",
-          "enum": [
-            "allErrors"
-          ],
-          "x-ms-enum": {
-            "name": "AlwaysLog",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "allErrors",
-                "description": "Always log all erroneous request regardless of sampling settings."
-              }
-            ]
-          },
-          "description": "Specifies for what type of messages sampling settings should not apply."
-        },
-        "loggerId": {
-          "type": "string",
-          "description": "Resource Id of a target logger."
-        },
-        "sampling": {
-          "$ref": "#/definitions/SamplingSettings",
-          "description": "Sampling settings for Diagnostic."
-        },
-        "frontend": {
-          "$ref": "#/definitions/PipelineDiagnosticSettings",
-          "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Gateway."
-        },
-        "backend": {
-          "$ref": "#/definitions/PipelineDiagnosticSettings",
-          "description": "Diagnostic settings for incoming/outgoing HTTP messages to the Backend"
-        },
-        "enableHttpCorrelationHeaders": {
-          "type": "boolean",
-          "description": "Whether to process Correlation Headers coming to Api Management Service. Only applicable to Application Insights diagnostics. Default is true."
-        }
-      },
-      "required": [
-        "loggerId"
-      ],
-      "description": "Diagnostic Entity Properties"
-    }
-  },
-  "parameters": {
-    "DiagnosticIdParameter": {
-      "name": "diagnosticId",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Diagnostic identifier. Must be unique in the current API Management service instance.",
-      "minLength": 1,
-      "maxLength": 80,
-      "pattern": "(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)",
-      "x-ms-parameter-location": "method"
-    }
-  }
+  "definitions": {},
+  "parameters": {}
 }

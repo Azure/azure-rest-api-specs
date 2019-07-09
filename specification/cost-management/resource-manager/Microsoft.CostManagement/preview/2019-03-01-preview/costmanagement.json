@@ -674,7 +674,6 @@
           "ResourceGroupForecast": {
             "$ref": "./examples/ResourceGroupForecast.json"
           }
-
         },
         "parameters": [
           {
@@ -1047,7 +1046,7 @@
         "tags": [
           "Query"
         ],
-        "operationId": "Query_UsageByManagmentGroup",
+        "operationId": "Query_UsageByManagementGroup",
         "description": "Lists the usage data for management group.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -1101,7 +1100,7 @@
         "tags": [
           "Forecast"
         ],
-        "operationId": "Forecast_UsageByManagmentGroup",
+        "operationId": "Forecast_UsageByManagementGroup",
         "description": "Lists the usage data for management group.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -1117,6 +1116,57 @@
           },
           {
             "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ReportConfigDefinition"
+            },
+            "description": "Parameters supplied to the CreateOrUpdate Report Config operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/QueryResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/providers/Microsoft.CostManagement/externalBillingAccounts/{externalBillingAccountName}/Forecast": {
+      "post": {
+        "tags": [
+          "Forecast"
+        ],
+        "operationId": "Forecast_UsageByExternalBillingAccount",
+        "description": "Forecast the usage data for external billing account.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
+        },
+        "x-ms-examples": {
+          "ExternalBillingAccountForecast": {
+            "$ref": "./examples/ExternalBillingAccountForecast.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/externalBillingAccountNameParameter"
           },
           {
             "name": "parameters",
@@ -1330,7 +1380,7 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "CloudConnector_Patch": {
+          "CloudConnector_Update": {
             "$ref": "./examples/CloudConnectorPatch.json"
           }
         },
@@ -1419,6 +1469,9 @@
         "x-ms-examples": {
           "ExternalBillingAccount_Get": {
             "$ref": "./examples/ExternalBillingAccountGet.json"
+          },
+          "ExternalBillingAccount_Get_Expand": {
+            "$ref": "./examples/ExternalBillingAccountGetExpand.json"
           }
         },
         "parameters": [
@@ -1427,6 +1480,13 @@
           },
           {
             "$ref": "#/parameters/externalBillingAccountNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1539,6 +1599,9 @@
         "x-ms-examples": {
           "ExternalSubscription_Get": {
             "$ref": "./examples/ExternalSubscriptionGet.json"
+          },
+          "ExternalSubscription_Get_Expand": {
+            "$ref": "./examples/ExternalSubscriptionGetExpand.json"
           }
         },
         "parameters": [
@@ -1547,6 +1610,13 @@
           },
           {
             "$ref": "#/parameters/externalSubscriptionNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the collectionInfo property. By default, collectionInfo is not included.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -1586,6 +1656,13 @@
           },
           {
             "$ref": "#/parameters/managementGroupIdParameter"
+          },
+          {
+            "name": "$recurse",
+            "description": "The $recurse=true query string parameter allows returning externalSubscriptions associated with the specified managementGroup, or any of its descendants.",
+            "in": "query",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -1612,14 +1689,14 @@
         "tags": [
           "ExternalSubscriptions"
         ],
-        "operationId": "ExternalSubscription_UpdateByManagementGroup",
-        "description": "Associates ExternalSubscription with the management group",
+        "operationId": "ExternalSubscription_UpdateManagementGroup",
+        "description": "Updates the management group of an ExternalSubscription",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
           "ManagementGroupExternalSubscription_Put": {
-            "$ref": "./examples/ManagementGroupExternalSubscriptionPut.json"
+            "$ref": "./examples/ManagementGroupExternalSubscriptionUpdate.json"
           }
         },
         "parameters": [
@@ -1646,44 +1723,126 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.CostManagement/getEntities": {
-      "post": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules": {
+      "get": {
         "tags": [
-          "Entities"
+          "ShowbackRules"
         ],
-        "operationId": "Entities_ListByManagementGroup",
-        "description": "List all entities (Management Groups, Subscriptions, ExternalSubscriptions, etc.) focusing on a particular group for the authenticated user.",
+        "operationId": "ShowbackRules_List",
+        "description": "Get list all Showback Rules.",
+        "x-ms-examples": {
+          "ShowbackRules_List": {
+            "$ref": "./examples/ShowbackRulesList.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/managementGroupIdParameter"
-          },
-          {
-            "$ref": "#/parameters/EntityViewParameter"
+            "$ref": "#/parameters/billingAccountIdParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EntityListResult"
+              "$ref": "#/definitions/ShowbackRuleListResult"
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.CostManagement/showbackRules/{ruleName}": {
+      "get": {
+        "tags": [
+          "ShowbackRules"
+        ],
+        "operationId": "ShowbackRule_GetBillingAccountId",
+        "description": "Gets the showback rule by rule name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
         "x-ms-examples": {
-          "GetEntities": {
-            "$ref": "./examples/ManagementGroupGetEntities.json"
+          "ShowbackRules": {
+            "$ref": "./examples/ShowbackRuleGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ShowbackRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ShowbackRules"
+        ],
+        "operationId": "ShowbackRule_CreateUpdateRule",
+        "description": "Create/Update showback rule for billing account.",
+        "x-ms-examples": {
+          "ShowbackRules": {
+            "$ref": "./examples/ShowbackRulePut.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ruleNameParameter"
+          },
+          {
+            "name": "showbackRule",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ShowbackRule"
+            },
+            "description": "Showback rule to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ShowbackRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2255,12 +2414,20 @@
           ],
           "description": "Connector DisplayName"
         },
-        "providerAccountId": {
+        "providerBillingAccountId": {
           "type": "string",
           "x-ms-mutability": [
             "read"
           ],
-          "description": "Connector providerAccountId (determined from credentials)",
+          "description": "Connector providerBillingAccountId, determined from credentials (eg AWS Consolidated account number)",
+          "readOnly": true
+        },
+        "providerBillingAccountDisplayName": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "The display name of the providerBillingAccountId as defined on the external provider",
           "readOnly": true
         },
         "credentialsKey": {
@@ -2311,7 +2478,8 @@
           "enum": [
             "active",
             "error",
-            "suspended"
+            "expired",
+            "warning"
           ],
           "x-ms-enum": {
             "name": "ConnectorStatus",
@@ -2319,11 +2487,18 @@
           },
           "type": "string",
           "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
+            "read"
           ],
-          "description": "Connector status"
+          "description": "Connector status",
+          "readOnly": true
+        },
+        "externalBillingAccountId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Associated ExternalBillingAccountId",
+          "readOnly": true
         },
         "defaultManagementGroupId": {
           "type": "string",
@@ -2500,12 +2675,26 @@
           "description": "ExternalBillingAccount DisplayName",
           "readOnly": true
         },
+        "providerBillingAccountId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Provider BillingAccountId (eg AWS Consolidated Account number)",
+          "readOnly": true
+        },
         "connectorId": {
           "type": "string",
           "x-ms-mutability": [
             "read"
           ],
           "description": "Underlying ConnectorId",
+          "readOnly": true
+        },
+        "collectionInfo": {
+          "$ref": "#/definitions/ConnectorCollectionInfo",
+          "description": "Collection information",
+          "x-nullable": true,
           "readOnly": true
         }
       }
@@ -2575,6 +2764,22 @@
           "description": "Assigned ManagementGroupId",
           "readOnly": true
         },
+        "providerBillingAccountId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Provider BillingAccountId (eg AWS Consolidated Account number)",
+          "readOnly": true
+        },
+        "providerAccountId": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read"
+          ],
+          "description": "Provider AccountId (eg AWS Linked Account number)",
+          "readOnly": true
+        },
         "externalBillingAccountId": {
           "type": "string",
           "x-ms-mutability": [
@@ -2582,147 +2787,26 @@
           ],
           "description": "Parent ExternalBillingAccountId",
           "readOnly": true
+        },
+        "collectionInfo": {
+          "$ref": "#/definitions/ConnectorCollectionInfo",
+          "description": "Collection information",
+          "x-nullable": true,
+          "readOnly": true
         }
       }
     },
-    "EntityListResult": {
-      "description": "Describes the result of the request to view entities.",
+    "ExternalSubscriptionIdListRequest": {
       "properties": {
         "value": {
-          "description": "The list of entities.",
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityInfo"
-          }
-        },
-        "count": {
-          "description": "Total count of records that match the filter",
-          "type": "integer",
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "The URL to use for getting the next set of results.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EntityInfo": {
-      "description": "The entity.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The fully qualified ID for the entity.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. For example, /providers/Microsoft.Management/managementGroups",
-          "readOnly": true,
-          "x-nullable": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the entity. For example, 00000000-0000-0000-0000-000000000000",
-          "readOnly": true
-        },
-        "kind": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The kind of the resource",
-          "x-nullable": true
-        },
-        "properties": {
-          "title": "Properties",
-          "x-ms-client-flatten": true,
-          "x-nullable": true,
-          "$ref": "#/definitions/EntityInfoProperties"
-        }
-      }
-    },
-    "EntityInfoProperties": {
-      "description": "The generic properties of an entity.",
-      "type": "object",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The AAD Tenant ID associated with the entity. For example, 00000000-0000-0000-0000-000000000000",
-          "x-nullable": true
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The friendly name of the management group.",
-          "x-nullable": true
-        },
-        "parent": {
-          "title": "Parent",
-          "$ref": "#/definitions/EntityParentGroupInfo",
-          "x-nullable": true
-        },
-        "permissions": {
-          "title": "Permissions",
-          "x-nullable": true,
-          "$ref": "#/definitions/Permissions"
-        },
-        "inheritedPermissions": {
-          "title": "Inherited Permissions",
-          "x-nullable": true,
-          "$ref": "#/definitions/Permissions"
-        },
-        "numberOfDescendants": {
-          "title": "Number of Descendants",
-          "type": "integer",
-          "x-nullable": true
-        },
-        "numberOfChildren": {
-          "title": "Number of Children",
-          "description": "Number of children is the number of Groups and Subscriptions that are exactly one level underneath the current Group.",
-          "type": "integer",
-          "x-nullable": true
-        },
-        "numberOfChildGroups": {
-          "title": "Number of Child Groups",
-          "description": "Number of child groups is the number of Groups that are exactly one level underneath the current Group.",
-          "type": "integer",
-          "x-nullable": true
-        },
-        "parentDisplayNameChain": {
-          "type": "array",
-          "description": "The parent display name chain from the root group to the immediate parent",
-          "x-nullable": true,
           "items": {
             "type": "string"
-          }
-        },
-        "parentNameChain": {
-          "type": "array",
-          "description": "The parent name chain from the root group to the immediate parent",
-          "x-nullable": true,
-          "items": {
-            "type": "string"
-          }
+          },
+          "description": "The list of ExternalSubscriptionIds."
         }
-      }
-    },
-    "EntityParentGroupInfo": {
-      "description": "(Optional) The ID of the parent management group.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The fully qualified ID for the parent management group.  For example, /providers/Microsoft.Management/managementGroups/0000000-0000-0000-0000-000000000000"
-        }
-      }
-    },
-    "Permissions": {
-      "type": "string",
-      "enum": [
-        "noaccess",
-        "view",
-        "edit",
-        "delete"
-      ],
-      "description": "The users specific permissions to this item."
+      },
+      "description": "The list of ExternalSubscriptionIds operation request."
     },
     "OperationListResult": {
       "description": "Result of listing cost management operations. It contains a list of operations and a URL link to get the next set of results.",
@@ -2769,6 +2853,224 @@
               "type": "string",
               "readOnly": true
             }
+          }
+        }
+      }
+    },
+    "ShowbackRuleListResult": {
+      "description": "Result of listing showback rules. It contains a list of available rules in the scope provided.",
+      "properties": {
+        "value": {
+          "description": "The list of showback rules.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ShowbackRule"
+          }
+        }
+      }
+    },
+    "ShowbackRule": {
+      "type": "object",
+      "description": "The showback rule model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Rule type"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ShowbackRuleProperties",
+          "description": "Showback rule properties"
+        }
+      }
+    },
+    "ShowbackRuleProperties": {
+      "required": [
+        "ruleType"
+      ],
+      "description": "The properties of a showback rule.",
+      "discriminator": "ruleType",
+      "properties": {
+        "description": {
+          "description": "Description of a showback rule.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The current status of the showback rule.",
+          "type": "string",
+          "enum": [
+            "NotActive",
+            "Active"
+          ],
+          "x-ms-enum": {
+            "name": "ShowbackRuleStatus",
+            "modelAsString": true
+          }
+        },
+        "version": {
+          "description": "The current version of showback rule.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "scopes": {
+          "description": "List of authorized assigned scopes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Scope"
+          }
+        },
+        "creationTime": {
+          "format": "date-time",
+          "description": "The time when the showback rule was created.",
+          "type": "string",
+          "readOnly": true
+        },
+        "deprecationTime": {
+          "description": "The current time when showback rule was deprecate.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "modificationTime": {
+          "description": "The current status when showback rule was modified.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "ruleType": {
+          "type": "string",
+          "description": "The rule type of the showback rule solution.",
+          "enum": [
+            "CustomPrice",
+            "CostAllocation"
+          ],
+          "x-ms-enum": {
+            "name": "RuleType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "Scope": {
+      "type": "object",
+      "description": "The Scope model definition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Scope id"
+        },
+        "name": {
+          "type": "string",
+          "description": "Scope name"
+        },
+        "type": {
+          "type": "string",
+          "description": "Scope type"
+        },
+        "childScope": {
+          "$ref": "#/definitions/Scope"
+        }
+      }
+    },
+    "Markup": {
+      "type": "object",
+      "description": "The Markup model definition",
+      "properties": {
+        "percentage": {
+          "type": "string"
+        }
+      }
+    },
+    "CustomPriceDetailsKind": {
+      "properties": {
+        "details": {
+          "x-ms-client-flatten": true,
+          "description": "The Custom price properties to validate.",
+          "$ref": "#/definitions/CustomPriceDetails"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShowbackRuleProperties"
+        }
+      ],
+      "description": "Represents Custom price showback rule model",
+      "x-ms-discriminator-value": "CustomPrice"
+    },
+    "CustomPriceDetails": {
+      "description": "Represents Custom price showback rule model",
+      "properties": {
+        "pricesheet": {
+          "type": "string"
+        },
+        "benefits": {
+          "description": "Array of benefits.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "None",
+              "All",
+              "AHUB",
+              "Reservations"
+            ],
+            "x-ms-enum": {
+              "name": "FunctionType",
+              "modelAsString": true
+            }
+          }
+        },
+        "markups": {
+          "description": "List of markups.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Markup"
+          }
+        }
+      }
+    },
+    "CostAllocationDetailsKind": {
+      "properties": {
+        "details": {
+          "x-ms-client-flatten": true,
+          "description": "The CostAllocation properties to validate.",
+          "$ref": "#/definitions/CostAllocationDetails"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ShowbackRuleProperties"
+        }
+      ],
+      "description": "Represents CostAllocation showback rule model",
+      "x-ms-discriminator-value": "CostAllocation"
+    },
+    "CostAllocationDetails": {
+      "description": "Represents CostAllocation showback rule model",
+      "properties": {
+        "policy": {
+          "description": "Cost allocation policy.",
+          "type": "string",
+          "enum": [
+            "Proportional",
+            "Evenly",
+            "Fixed"
+          ],
+          "x-ms-enum": {
+            "name": "CostAllocationPolicy",
+            "modelAsString": true
           }
         }
       }
@@ -2853,20 +3155,13 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "EntityViewParameter": {
-      "name": "$view",
-      "in": "query",
-      "required": false,
+    "ruleNameParameter": {
+      "name": "ruleName",
+      "in": "path",
+      "description": "Showback rule name",
+      "required": true,
       "type": "string",
-      "enum": [
-        "FullHierarchy",
-        "GroupsOnly",
-        "SubscriptionsOnly",
-        "ExternalSubscriptionsOnly",
-        "Audit"
-      ],
-      "x-ms-parameter-location": "method",
-      "description": "The view parameter allows clients to filter the type of data that is returned by the getEntities call."
+      "x-ms-parameter-location": "method"
     }
   }
 }
