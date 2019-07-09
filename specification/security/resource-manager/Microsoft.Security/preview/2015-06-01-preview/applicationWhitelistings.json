@@ -1,18 +1,52 @@
 {
+	"swagger": "2.0",
+	"info": {
+		"title": "Security Center",
+		"description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+		"version": "2015-06-01-preview"
+	},
+	"host": "management.azure.com",
+	"schemes": [
+		"https"
+	],
+	"consumes": [
+		"application/json"
+	],
+	"produces": [
+		"application/json"
+	],
+	"security": [
+		{
+			"azure_auth": [
+				"user_impersonation"
+			]
+		}
+	],
+	"securityDefinitions": {
+		"azure_auth": {
+			"type": "oauth2",
+			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+			"flow": "implicit",
+			"description": "Azure Active Directory OAuth2 Flow",
+			"scopes": {
+				"user_impersonation": "impersonate your user account"
+			}
+		}
+	},
 	"paths": {
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/applicationWhitelistings": {
 			"get": {
 				"description": "Gets a list of application control VM/server groups for the subscription.",
 				"x-ms-examples": {
-				  "Gets a list of application control VM/server groups for the subscription": {
-					"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsSubscription_example.json"
-				  }
+					"Gets a list of application control VM/server groups for the subscription": {
+						"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsSubscription_example.json"
+					}
 				},
 				"tags": [
 					"applicationWhitelistings"
 				],
 				"produces": [
-				  "application/json"
+					"application/json"
 				],
 				"parameters": [
 					{
@@ -48,15 +82,15 @@
 			"get": {
 				"description": "Gets an application control VM/server group.",
 				"x-ms-examples": {
-				  "Gets a configured application control VM/server group": {
-					"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsGroup_example.json"
-				  }
+					"Gets a configured application control VM/server group": {
+						"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsGroup_example.json"
+					}
 				},
 				"tags": [
 					"applicationWhitelistings"
 				],
 				"produces": [
-				  "application/json"
+					"application/json"
 				],
 				"parameters": [
 					{
@@ -92,9 +126,9 @@
 					"applicationWhitelistings"
 				],
 				"x-ms-examples": {
-				  "Update an application control VM/server group by adding a new file": {
-					"$ref": "./examples/ApplicationWhitelistings/PutApplicationWhitelistings_example.json"
-				  }
+					"Update an application control VM/server group by adding a new file": {
+						"$ref": "./examples/ApplicationWhitelistings/PutApplicationWhitelistings_example.json"
+					}
 				},
 				"description": "Update an application control VM/server group",
 				"consumes": [
@@ -114,14 +148,14 @@
 						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
 					},
 					{
-						"$ref": "#/parameters/AppWhitelistingGroupDataPutDataBody"		
+						"$ref": "#/parameters/AppWhitelistingGroupDataPutDataBody"
 					}
 				],
 				"responses": {
 					"200": {
 						"description": "OK",
 						"schema": {
-						  "$ref": "#/definitions/AppWhitelistingGroupData"
+							"$ref": "#/definitions/AppWhitelistingGroupData"
 						}
 					},
 					"default": {
@@ -132,48 +166,6 @@
 					}
 				}
 			}
-		}
-	},
-	"parameters": {
-		"GroupName": {
-			"name": "groupName",
-			"in": "path",
-			"description": "Name of an application control VM/server group",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		},
-		"IncludePathRecommendations": {
-			"name": "includePathRecommendations",
-			"in": "query",
-			"description": "Include the policy rules",
-			"type": "boolean",
-			"required": false,
-			"enum": [
-				false,
-				true
-			]
-		},
-		"Summary": {
-			"name": "summary",
-			"in": "query",
-			"description": "Return output in a summarized form",
-			"type": "boolean",
-			"required": false,
-			"enum": [
-				false,
-				true
-			]
-		},
-		"AppWhitelistingGroupDataPutDataBody": {
-			"in": "body",
-			"name": "body",
-			"description": "The updated VM/server group data",
-			"required": true,
-			"schema": {
-				"$ref": "#/definitions/AppWhitelistingPutGroupData"
-			},
-			"x-ms-parameter-location": "method"
 		}
 	},
 	"definitions": {
@@ -484,39 +476,46 @@
 			"example": "Microsoft.Security/applicationWhitelistings"
 		}
 	},
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
+	"parameters": {
+		"GroupName": {
+			"name": "groupName",
+			"in": "path",
+			"description": "Name of an application control VM/server group",
+			"required": true,
+			"type": "string",
+			"x-ms-parameter-location": "method"
+		},
+		"IncludePathRecommendations": {
+			"name": "includePathRecommendations",
+			"in": "query",
+			"description": "Include the policy rules",
+			"type": "boolean",
+			"required": false,
+			"enum": [
+				false,
+				true
 			]
-		}
-	],
-	"securityDefinitions": {
-		"azure_auth": {
-			"description": "Azure Active Directory OAuth2 Flow",
-			"flow": "implicit",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
+		},
+		"Summary": {
+			"name": "summary",
+			"in": "query",
+			"description": "Return output in a summarized form",
+			"type": "boolean",
+			"required": false,
+			"enum": [
+				false,
+				true
+			]
+		},
+		"AppWhitelistingGroupDataPutDataBody": {
+			"in": "body",
+			"name": "body",
+			"description": "The updated VM/server group data",
+			"required": true,
+			"schema": {
+				"$ref": "#/definitions/AppWhitelistingPutGroupData"
 			},
-			"type": "oauth2"
+			"x-ms-parameter-location": "method"
 		}
-	},
-	"info": {
-		"title": "Security Center",
-		"version": "2015-06-01-preview",
-		"description": "API spec for Microsoft.Security (Azure Security Center) resource provider"
-	},
-	"host": "management.azure.com",
-	"basePath": "/",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"swagger": "2.0"
+	}
 }
