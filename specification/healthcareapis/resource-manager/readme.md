@@ -28,16 +28,16 @@ These are the global settings for the HANA on Azure API.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-2018-08
+tag: package-2018-08-preview
 azure-arm: true
 ```
 
 
 ### Tag: package-2018-08-preview
 
-These settings apply only when `--tag=package-2018-08` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-08'
+``` yaml $(tag) == 'package-2018-08-preview'
 input-file:
 - Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
 ```
@@ -108,15 +108,15 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-healthcareapis
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-08
+  - tag: package-2018-08-preview
 ```
 
-### Tag: package-2018-08 and java
+### Tag: package-2018-08-preview and java
 
-These settings apply only when `--tag=package-2018-08 --java` is specified on the command line.
+These settings apply only when `--tag=package-2018-08-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2018-08' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2018-08-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.healthcareapis.v2018_08_20_preview
   output-folder: $(azure-libraries-for-java-folder)/healthcareapis/resource-manager/v2018_08_20_preview
