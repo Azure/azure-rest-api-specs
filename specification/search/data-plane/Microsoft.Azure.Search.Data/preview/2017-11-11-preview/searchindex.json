@@ -41,7 +41,9 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/Count-Documents"
         },
         "x-ms-examples": {
-          "SearchIndexCountDocuments": { "$ref": "./examples/SearchIndexCountDocuments.json" }
+          "SearchIndexCountDocuments": {
+            "$ref": "./examples/SearchIndexCountDocuments.json"
+          }
         },
         "description": "Queries the number of documents in the Azure Search index.",
         "parameters": [
@@ -74,7 +76,9 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/Search-Documents"
         },
         "x-ms-examples": {
-          "SearchIndexSearchDocumentsGet": { "$ref": "./examples/SearchIndexSearchDocumentsGet.json" }
+          "SearchIndexSearchDocumentsGet": {
+            "$ref": "./examples/SearchIndexSearchDocumentsGet.json"
+          }
         },
         "description": "Searches for documents in the Azure Search index.",
         "parameters": [
@@ -182,8 +186,8 @@
               "full"
             ],
             "x-ms-enum": {
-             "name": "QueryType",
-             "modelAsString": false
+              "name": "QueryType",
+              "modelAsString": false
             },
             "x-nullable": false,
             "description": "A value that specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax.",
@@ -235,10 +239,10 @@
               "all"
             ],
             "x-ms-enum": {
-             "name": "SearchMode",
-             "modelAsString": false
+              "name": "SearchMode",
+              "modelAsString": false
             },
-            "x-nullable": false,            
+            "x-nullable": false,
             "description": "A value that specifies whether any or all of the search terms must be matched in order to count the document as a match.",
             "x-ms-parameter-grouping": {
               "name": "SearchParameters"
@@ -304,7 +308,9 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/Search-Documents"
         },
         "x-ms-examples": {
-          "SearchIndexSearchDocumentsPost": { "$ref": "./examples/SearchIndexSearchDocumentsPost.json" }
+          "SearchIndexSearchDocumentsPost": {
+            "$ref": "./examples/SearchIndexSearchDocumentsPost.json"
+          }
         },
         "description": "Searches for documents in the Azure Search index.",
         "parameters": [
@@ -341,12 +347,14 @@
         "tags": [
           "Documents"
         ],
-        "operationId": "Documents_Get",        
+        "operationId": "Documents_Get",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/lookup-document"
         },
         "x-ms-examples": {
-          "SearchIndexGetDocument": { "$ref": "./examples/SearchIndexGetDocument.json" }
+          "SearchIndexGetDocument": {
+            "$ref": "./examples/SearchIndexGetDocument.json"
+          }
         },
         "description": "Retrieves a document from the Azure Search index.",
         "parameters": [
@@ -392,9 +400,11 @@
         "operationId": "Documents_SuggestGet",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/suggestions"
-        },        
+        },
         "x-ms-examples": {
-          "SearchIndexSuggestDocumentsGet": { "$ref": "./examples/SearchIndexSuggestDocumentsGet.json" }
+          "SearchIndexSuggestDocumentsGet": {
+            "$ref": "./examples/SearchIndexSuggestDocumentsGet.json"
+          }
         },
         "description": "Suggests documents in the Azure Search index that match the given partial query text.",
         "parameters": [
@@ -536,7 +546,9 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/suggestions"
         },
         "x-ms-examples": {
-          "SearchIndexSuggestDocumentsPost": { "$ref": "./examples/SearchIndexSuggestDocumentsPost.json" }
+          "SearchIndexSuggestDocumentsPost": {
+            "$ref": "./examples/SearchIndexSuggestDocumentsPost.json"
+          }
         },
         "description": "Suggests documents in the Azure Search index that match the given partial query text.",
         "parameters": [
@@ -577,8 +589,10 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/addupdate-or-delete-documents"
         },
         "x-ms-examples": {
-          "SearchIndexIndexDocuments": { "$ref": "./examples/SearchIndexIndexDocuments.json" }
-        },        
+          "SearchIndexIndexDocuments": {
+            "$ref": "./examples/SearchIndexIndexDocuments.json"
+          }
+        },
         "description": "Sends a batch of document write actions to the Azure Search index.",
         "parameters": [
           {
@@ -624,7 +638,9 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
         },
         "x-ms-examples": {
-          "SearchIndexAutocompleteDocumentsGet": { "$ref": "./examples/SearchIndexAutocompleteDocumentsGet.json" }
+          "SearchIndexAutocompleteDocumentsGet": {
+            "$ref": "./examples/SearchIndexAutocompleteDocumentsGet.json"
+          }
         },
         "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",
         "parameters": [
@@ -660,10 +676,19 @@
               "oneTermWithContext"
             ],
             "x-ms-enum": {
-             "name": "AutocompleteMode",
-             "modelAsString": false
+              "name": "AutocompleteMode",
+              "modelAsString": false
             },
             "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms.",
+            "x-ms-parameter-grouping": {
+              "name": "AutocompleteParameters"
+            }
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "type": "string",
+            "description": "An OData expression that filters the documents used to produce completed terms for the Autocomplete result.",
             "x-ms-parameter-grouping": {
               "name": "AutocompleteParameters"
             }
@@ -735,7 +760,7 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/AutocompleteResult",
-                "description": "The result of Autocomplete query."
+              "description": "The result of Autocomplete query."
             }
           }
         }
@@ -751,7 +776,9 @@
           "url": "https://docs.microsoft.com/rest/api/searchservice/autocomplete"
         },
         "x-ms-examples": {
-          "SearchIndexAutocompleteDocumentsPost": { "$ref": "./examples/SearchIndexAutocompleteDocumentsPost.json" }
+          "SearchIndexAutocompleteDocumentsPost": {
+            "$ref": "./examples/SearchIndexAutocompleteDocumentsPost.json"
+          }
         },
         "description": "Autocompletes incomplete query terms based on input text and matching terms in the Azure Search index.",
         "parameters": [
@@ -777,7 +804,7 @@
             "description": "",
             "schema": {
               "$ref": "#/definitions/AutocompleteResult",
-                "description": "The result of Autocomplete query."
+              "description": "The result of Autocomplete query."
             }
           }
         }
@@ -884,29 +911,29 @@
     },
     "SearchResult": {
       "properties": {
-         "@search.score": {
-            "type": "number",
-            "format": "double",
-            "readOnly": true,
-            "x-ms-client-name": "Score",
-            "x-nullable": false,
-            "description": "The relevance score of the document compared to other documents returned by the query."
-         },
-         "@search.highlights": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            },
-            "readOnly": true,
-            "x-ms-client-name": "Highlights",
-            "description": "Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query."
-         }
-       },
-       "additionalProperties": true,
-       "description": "Contains a document found by a search query, plus associated metadata."
+        "@search.score": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "x-ms-client-name": "Score",
+          "x-nullable": false,
+          "description": "The relevance score of the document compared to other documents returned by the query."
+        },
+        "@search.highlights": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "readOnly": true,
+          "x-ms-client-name": "Highlights",
+          "description": "Text fragments from the document that indicate the matching search terms, organized by each applicable field; null if hit highlighting was not enabled for the query."
+        }
+      },
+      "additionalProperties": true,
+      "description": "Contains a document found by a search query, plus associated metadata."
     },
     "IndexBatch": {
       "properties": {
@@ -919,7 +946,9 @@
           "x-ms-client-name": "Actions"
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Contains a batch of document write actions to send to the Azure Search index."
     },
     "IndexAction": {
@@ -932,7 +961,9 @@
             "mergeOrUpload",
             "delete"
           ],
-          "x-ms-enum": { "name": "IndexActionType" },
+          "x-ms-enum": {
+            "name": "IndexActionType"
+          },
           "x-ms-client-name": "ActionType",
           "x-nullable": false,
           "description": "The operation to perform on a document in an indexing batch."
@@ -975,7 +1006,7 @@
         "value": {
           "x-ms-client-name": "Results",
           "type": "array",
-          "readOnly":  true,
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/IndexingResult"
           },
@@ -1017,7 +1048,7 @@
       ],
       "x-ms-enum": {
         "name": "AutocompleteMode",
-        "modelAsString" : false
+        "modelAsString": false
       },
       "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context in producing autocomplete terms."
     },
@@ -1181,6 +1212,13 @@
           "$ref": "#/definitions/AutocompleteMode",
           "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms."
         },
+        "filter": {
+          "externalDocs": {
+            "url": "https://docs.microsoft.com/rest/api/searchservice/OData-Expression-Syntax-for-Azure-Search"
+          },
+          "type": "string",
+          "description": "An OData expression that filters the documents used to produce completed terms for the Autocomplete result."
+        },
         "fuzzy": {
           "type": "boolean",
           "description": "A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will autocomplete terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.",
@@ -1215,11 +1253,11 @@
       },
       "description": "Parameters for fuzzy matching, and other autocomplete query behaviors."
     },
-    "AutocompleteResult" : {
-     "properties": {
+    "AutocompleteResult": {
+      "properties": {
         "value": {
           "type": "array",
-          "readOnly":  true,
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/AutocompleteItem"
           },
@@ -1227,7 +1265,7 @@
           "x-ms-client-name": "Results"
         }
       },
-    "description": "The result of Autocomplete query."
+      "description": "The result of Autocomplete query."
     },
     "AutocompleteItem": {
       "properties": {
@@ -1261,7 +1299,9 @@
       "format": "uuid",
       "description": "The tracking ID sent with the request to help with debugging.",
       "x-ms-client-request-id": true,
-      "x-ms-parameter-grouping": { "name": "search-request-options" },
+      "x-ms-parameter-grouping": {
+        "name": "search-request-options"
+      },
       "x-ms-parameter-location": "method"
     },
     "SearchServiceNameParameter": {

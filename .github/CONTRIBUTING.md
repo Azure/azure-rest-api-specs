@@ -1,4 +1,8 @@
-# Contributing to azure-rest-api-specs
+### *This is an outdated document. Please refer the new [wiki](https://github.com/Azure/adx-documentation-pr/wiki) for up to date details.* 
+([`Link your GitHub account`](https://repos.opensource.microsoft.com/) to the 'Azure' organization for access.)
+
+<br><br>
+## Contributing to azure-rest-api-specs
 First, thank you for contributing to Azure specs repository! Swagger specs are the basis for generating Azure SDKs in multiple different languages, Azure CLIs for interacting with the services, and can provide documentation for these services.
 
 ## Basics

@@ -66,7 +66,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.HDInsight.Job
-  output-folder: $(csharp-sdks-folder)/HDInsight/DataPlane/Microsoft.Azure.HDInsight.Job/Generated
+  output-folder: $(csharp-sdks-folder)/hdinsight/Microsoft.Azure.HDInsight.Job/src/Generated
   clear-output-folder: true
 ```
 

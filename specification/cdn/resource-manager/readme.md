@@ -25,8 +25,34 @@ To see additional help and options, run:
 These are the global settings for the Cdn API.
 
 ``` yaml
+title: CdnManagementClient
+description: Cdn Management Client
 openapi-type: arm
-tag: package-2017-10
+tag: package-2019-06
+```
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06'
+input-file:
+- Microsoft.Cdn/preview/2019-06-15-preview/cdn.json
+- Microsoft.Cdn/preview/2019-06-15-preview/cdnwebapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
+### Tag: package-2019-04
+
+These settings apply only when `--tag=package-2019-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-04'
+input-file:
+- Microsoft.Cdn/stable/2019-04-15/cdn.json
 ```
 
 ### Tag: package-2017-10
@@ -93,8 +119,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
-    after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_cdn']
 ```
 
 

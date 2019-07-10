@@ -172,7 +172,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         }
       },
       "patch": {
@@ -303,7 +303,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Delete an Image Template.": {
@@ -349,7 +349,7 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via":"azure-async-operation"
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Create image(s) from existing imageTemplate.": {
@@ -481,7 +481,7 @@
     }
   },
   "definitions": {
-    "ImageTemplateListResult" : {
+    "ImageTemplateListResult": {
       "properties": {
         "value": {
           "type": "array",
@@ -563,13 +563,13 @@
       "allOf": [
         {
           "$ref": "#/definitions/ImageTemplateSource"
-        } 
+        }
       ],
       "properties": {
         "imageId": {
           "type": "string",
           "description": "ARM resource id of the managed image in customer subscription"
-        } 
+        }
       },
       "required": [
         "imageId"
@@ -592,7 +592,7 @@
       ]
     },
     "ImageTemplateShellCustomizer": {
-      "description": "Runs a shell script during the customization phase (Linux)",
+      "description": "Runs a shell script during the customization phase (Linux). Corresponds to Packer shell provisioner. Exactly one of 'script' or 'inline' can be specified.",
       "x-ms-discriminator-value": "Shell",
       "allOf": [
         {
@@ -603,6 +603,13 @@
         "script": {
           "type": "string",
           "description": "The shell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "inline": {
+          "type": "array",
+          "description": "Array of shell commands to execute",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -630,7 +637,7 @@
       }
     },
     "ImageTemplatePowerShellCustomizer": {
-      "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner",
+      "description": "Runs the specified PowerShell on the VM (Windows). Corresponds to Packer powershell provisioner. Exactly one of 'script' or 'inline' can be specified.",
       "x-ms-discriminator-value": "PowerShell",
       "allOf": [
         {
@@ -642,8 +649,16 @@
           "type": "string",
           "description": "The PowerShell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
         },
-        "validExitCodes" : {
+        "inline": {
           "type": "array",
+          "description": "Array of PowerShell commands to execute",
+          "items": {
+            "type": "string"
+          }
+        },
+        "validExitCodes": {
+          "type": "array",
+          "description": "Valid exit codes for the PowerShell script. [Default: 0]",
           "items": {
             "type": "integer"
           }
@@ -767,7 +782,7 @@
           "description": "Error code of the provisioning failure"
         },
         "message": {
-          "type":"string",
+          "type": "string",
           "description": "Verbose error message about the provisioning failure"
         }
       }
@@ -857,9 +872,9 @@
           "type": "string",
           "description": "The resource id of the artifact."
         },
-        "artifactLocation": {
+        "artifactUri": {
           "type": "string",
-          "description": "The URL location of the artifact."
+          "description": "The location URI of the artifact."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -942,7 +957,10 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [ "create", "read" ]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "type": "object",

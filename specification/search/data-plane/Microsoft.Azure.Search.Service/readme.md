@@ -24,7 +24,16 @@ These are the global settings for SearchServiceClient.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2017-11-preview
+tag: package-2019-05
+```
+
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+- stable/2019-05-06/searchservice.json
 ```
 
 ### Tag: package-2017-11-preview
@@ -100,7 +109,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Search
   clear-output-folder: true
-  output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Service/Generated
+  output-folder: $(csharp-sdks-folder)/search/Microsoft.Azure.Search.Service/src/Generated
 
 directive: 
   # TODO: Remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.

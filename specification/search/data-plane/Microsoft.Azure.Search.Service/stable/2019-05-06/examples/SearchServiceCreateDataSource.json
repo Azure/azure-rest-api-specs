@@ -1,0 +1,53 @@
+{
+  "parameters": {
+    "searchServiceName": "myservice",
+    "searchDnsSuffix": "search.windows.net",
+    "api-version": "2019-05-06",
+    "dataSource": {
+      "name": "mydocdbdatasource",
+      "description": "My Cosmos DB data source.",
+      "type": "cosmosdb",
+      "credentials": {
+        "connectionString": "AccountEndpoint=https://myDocDbEndpoint.documents.azure.com;AccountKey=myDocDbAuthKey;Database=myDocDbDatabaseId"
+      },
+      "container": {
+        "name": "myDocDbCollectionId",
+        "query": "SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts"
+      },
+      "dataChangeDetectionPolicy": {
+        "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
+        "highWaterMarkColumnName": "_ts"
+      },
+      "dataDeletionDetectionPolicy": {
+        "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+        "softDeleteColumnName": "isDeleted",
+        "softDeleteMarkerValue": "true"
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "name": "mydocdbdatasource",
+        "description": "My Cosmos DB data source.",
+        "type": "cosmosdb",
+        "credentials": {
+          "connectionString": null
+        },
+        "container": {
+          "name": "myDocDbCollectionId",
+          "query": "SELECT c.id, c.userId, tag, c._ts FROM c JOIN tag IN c.tags WHERE c._ts >= @HighWaterMark ORDER BY c._ts"
+        },
+        "dataChangeDetectionPolicy": {
+          "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
+          "highWaterMarkColumnName": "_ts"
+        },
+        "dataDeletionDetectionPolicy": {
+          "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+          "softDeleteColumnName": "isDeleted",
+          "softDeleteMarkerValue": "true"
+        }
+      }
+    }
+  }
+}

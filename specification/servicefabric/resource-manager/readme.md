@@ -28,7 +28,7 @@ These are the global settings for the ServiceFabricManagementClient API.
 title: ServiceFabricManagementClient
 description: Service Fabric Management Client
 openapi-type: arm
-tag: package-2018-02
+tag: package-2019-03
 
 directive:
   - suppress: ListInOperationName
@@ -59,6 +59,15 @@ directive:
     reason: There are open issues (bugs) in the validator affecting some of the examples and since there is no way to selectively disable the validation for a particular example or paths, all of the example validation is being turned off.
 
 ```
+### Tag: package-2019-03
+
+These settings apply only when `--tag=package-2019-03` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03'
+input-file:
+- Microsoft.ServiceFabric/preview/2019-03-01-preview/cluster.json
+- Microsoft.ServiceFabric/preview/2019-03-01-preview/application.json
+```
 
 ### Tag: package-2018-02
 
@@ -88,6 +97,14 @@ input-file:
 - Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
 ```
 
+### Tag: package-2018-02-only
+
+These settings apply only when `--tag=package-2018-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-only'
+input-file:
+- Microsoft.ServiceFabric/stable/2018-02-01/cluster.json
+```
 
 ---
 # Code Generation
@@ -121,36 +138,10 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceFabric
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/ServiceFabric/Management.ServiceFabric/Generated
+  output-folder: $(csharp-sdks-folder)/servicefabric/Microsoft.Azure.Management.ServiceFabric/src/Generated
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.servicefabric
-  package-name: azure-mgmt-servicefabric
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicefabric/azure/mgmt/servicefabric
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicefabric
-```
 
 ## Go
 
@@ -158,50 +149,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.servicefabric
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicefabric
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-07
-  - tag: package-2016-09
-```
-
-### Tag: package-2017-07 and java
-
-These settings apply only when `--tag=package-2017-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.servicefabric.v2017_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicefabric/resource-manager/v2017_07_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-09 and java
-
-These settings apply only when `--tag=package-2016-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.servicefabric.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/servicefabric/resource-manager/v2016_09_01
-regenerate-manager: true
-generate-interface: true
-```
-
-
+See configuration in [readme.java.md](./readme.java.md)

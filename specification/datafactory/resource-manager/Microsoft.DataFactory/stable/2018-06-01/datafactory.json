@@ -204,6 +204,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_GetFeatureValueByFactory",
+        "x-ms-examples": {
+          "ExposureControl_GetFeatureValueByFactory": {
+            "$ref": "./examples/ExposureControl_GetFeatureValueByFactory.json"
+          }
+        },
+        "description": "Get exposure control feature for specific factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "The exposure control request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -2864,7 +2915,7 @@
         ],
         "operationId": "RerunTriggers_Start",
         "x-ms-examples": {
-          "Triggers_Start": {
+          "RerunTriggers_Start": {
             "$ref": "./examples/RerunTriggers_Start.json"
           }
         },
@@ -2910,7 +2961,7 @@
         ],
         "operationId": "RerunTriggers_Stop",
         "x-ms-examples": {
-          "Triggers_Stop": {
+          "RerunTriggers_Stop": {
             "$ref": "./examples/RerunTriggers_Stop.json"
           }
         },
@@ -2956,7 +3007,7 @@
         ],
         "operationId": "RerunTriggers_Cancel",
         "x-ms-examples": {
-          "Triggers_Cancel": {
+          "RerunTriggers_Cancel": {
             "$ref": "./examples/RerunTriggers_Cancel.json"
           }
         },
@@ -3002,7 +3053,7 @@
         ],
         "operationId": "RerunTriggers_ListByTrigger",
         "x-ms-examples": {
-          "RerunTriggers_List": {
+          "RerunTriggers_ListByTrigger": {
             "$ref": "./examples/RerunTriggers_ListByTrigger.json"
           }
         },
@@ -3762,15 +3813,15 @@
     "UserAccessPolicy": {
       "description": "Get Data Plane read only token request definition.",
       "properties": {
-        "permissions" : {
+        "permissions": {
           "description": "The string with permissions for Data Plane access. Currently only 'r' is supported which grants read only access.",
           "type": "string"
         },
-        "accessResourcePath" : {
+        "accessResourcePath": {
           "description": "The resource path to get access relative to factory. Currently only empty string is supported which corresponds to the factory resource.",
           "type": "string"
         },
-        "profileName" : {
+        "profileName": {
           "description": "The name of the profile. Currently only the default is supported. The default value is DefaultProfile.",
           "type": "string"
         },
@@ -3787,7 +3838,7 @@
     "AccessPolicyResponse": {
       "description": "Get Data Plane read only token response definition.",
       "properties": {
-        "policy" : {
+        "policy": {
           "description": "The user access policy.",
           "$ref": "#/definitions/UserAccessPolicy"
         },
@@ -4742,10 +4793,10 @@
       "type": "object",
       "description": "The request payload of get SSIS object metadata.",
       "properties": {
-          "metadataPath": {
-              "type": "string",
-              "description": "Metadata path."
-          }
+        "metadataPath": {
+          "type": "string",
+          "description": "Metadata path."
+        }
       }
     },
     "SsisObjectMetadataStatusResponse": {

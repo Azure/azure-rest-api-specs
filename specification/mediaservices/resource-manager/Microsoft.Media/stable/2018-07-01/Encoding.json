@@ -973,7 +973,7 @@
             ],
             "modelAsString": true
           },
-          "description": "The type of insights to be extracted. If not set then based on the content the type will selected.  If the content is audio only then only audio insights are extracted and if it is video only."
+          "description": "Defines the type of insights that you want the service to generate. The allowed values are 'AudioInsightsOnly', 'VideoInsightsOnly', and 'AllInsights'. The default is AllInsights. If you set this to AllInsights and the input is audio only, then only audio insights are generated. Similarly if the input is video only, then only video insights are generated. It is recommended that you not use AudioInsightsOnly if you expect some of your inputs to be video only; or use VideoInsightsOnly if you expect some of your inputs to be audio only. Your Jobs in such conditions would error out."
         }
       },
       "type": "object",
@@ -1156,6 +1156,14 @@
           },
           "description": "List of files. Required for JobInputHttp. Maximum of 4000 characters each."
         },
+        "start": {
+          "$ref": "#/definitions/ClipTime",
+          "description": "Defines a point on the timeline of the input media at which processing will start. Defaults to the beginning of the input media."
+        },
+        "end": {
+          "$ref": "#/definitions/ClipTime",
+          "description": "Defines a point on the timeline of the input media at which processing will end. Defaults to the end of the input media."
+        },
         "label": {
           "type": "string",
           "description": "A label that is assigned to a JobInputClip, that is used to satisfy a reference used in the Transform. For example, a Transform can be authored so as to take an image file with the label 'xyz' and apply it as an overlay onto the input video before it is encoded. When submitting a Job, exactly one of the JobInputs should be the image file, and it should have the label 'xyz'."
@@ -1163,6 +1171,40 @@
       },
       "type": "object",
       "description": "Represents input files for a Job."
+    },
+    "ClipTime": {
+      "discriminator": "@odata.type",
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "description": "The discriminator for derived types."
+        }
+      },
+      "type": "object",
+      "required": [
+        "@odata.type"
+      ],
+      "description": "Base class for specifying a clip time. Use sub classes of this class to specify the time position in the media."
+    },
+    "AbsoluteClipTime": {
+      "x-ms-discriminator-value": "#Microsoft.Media.AbsoluteClipTime",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClipTime"
+        }
+      ],
+      "properties": {
+        "time": {
+          "type": "string",
+          "format": "duration",
+          "description": "The time position on the timeline of the input media. It is usually specified as an ISO8601 period. e.g PT30S for 30 seconds."
+        }
+      },
+      "type": "object",
+      "required": [
+        "time"
+      ],
+      "description": "Specifies the clip time as an absolute time position in the media file.  The absolute time can point to a different position depending on whether the media file starts from a timestamp of zero or not."
     },
     "JobInputs": {
       "x-ms-discriminator-value": "#Microsoft.Media.JobInputs",
@@ -1726,7 +1768,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Specifies the the key by which the result collection should be ordered."
+            "description": "Specifies the key by which the result collection should be ordered."
           }
         ],
         "x-ms-pageable": {
@@ -2009,7 +2051,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Specifies the the key by which the result collection should be ordered."
+            "description": "Specifies the key by which the result collection should be ordered."
           }
         ],
         "x-ms-pageable": {

@@ -1,8 +1,10 @@
 {
   "parameters": {
     "api-version": "2019-01-01",
+    "billingAccountId": "100",
     "departmentId": "1234",
-    "exportName": "TestExport"
+    "exportName": "TestExport",
+    "scope": "providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}"
   },
   "responses": {
     "200": {
@@ -19,7 +21,7 @@
               "rootFolderPath": "ad-hoc"
             }
           },
-          "definition":{
+          "definition": {
             "type": "Usage",
             "timeframe": "Custom",
             "timePeriod": {
@@ -53,7 +55,7 @@
                   "name": "Environment"
                 }
               ],
-              "filter":{
+              "filter": {
                 "and": [
                   {
                     "dimension": {
@@ -75,7 +77,7 @@
                       ]
                     }
                   }
-                ]                
+                ]
               }
             }
           }

@@ -30,6 +30,18 @@ tag: package-2018-02
 ```
 
 
+### Tag: package-2018-02-14-preview
+
+These settings apply only when `--tag=package-2018-02-14-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-14-preview'
+input-file:
+- Microsoft.KeyVault/preview/2018-02-14-preview/keyvault.json
+- Microsoft.KeyVault/preview/2018-02-14-preview/providers.json
+- Microsoft.KeyVault/preview/2018-02-14-preview/secrets.json
+```
+
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -92,51 +104,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-namespace: com.microsoft.azure.management.keyvault
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-keyvault
-```
-
-### Java multi-api
-
-```yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2016-10
-  - tag: package-2015-06
-```
-
-### Tag: package-2016-10 and java
-
-These settings apply only when `--tag=package-2016-10 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-10' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.keyvault.v2016_10_01
-  output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2016_10_01
-regenerate-manager: true
-generate-interface: true
-directive:
-  from: keyvault.json
-  where: $.paths["/subscriptions/{subscriptionId}/resources"].get
-  transform: $['operationId'] = 'Vaults_ListResource'
-```
-
-### Tag: package-2015-06 and java
-
-These settings apply only when `--tag=package-2015-06 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.keyvault.v2015_06_01
-  output-folder: $(azure-libraries-for-java-folder)/keyvault/resource-manager/v2015_06_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)

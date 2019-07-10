@@ -181,6 +181,14 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create a deployment that will redeploy the last successful deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentLastSuccessful.json"
+          },
+          "Create a deployment that will redeploy another deployment on failure": {
+            "$ref": "./examples/PutDeploymentWithOnErrorDeploymentSpecificDeployment.json"
+          }
+        },
         "x-ms-long-running-operation": true
       },
       "get": {
@@ -2673,11 +2681,11 @@
           "items": {
             "type": "string"
           },
-          "description": "The IDs of the resources. The only supported string currently is '*' (all resources). Future updates will support exporting specific resources."
+          "description": "The IDs of the resources to filter the export by. To export all resources, supply an array with single entry '*'."
         },
         "options": {
           "type": "string",
-          "description": "The export template options. Supported values include 'IncludeParameterDefaultValue', 'IncludeComments' or 'IncludeParameterDefaultValue, IncludeComments"
+          "description": "The export template options. A CSV-formatted list containing zero or more of the following: 'IncludeParameterDefaultValue', 'IncludeComments', 'SkipResourceNameParameterization', 'SkipAllParameterization'"
         }
       },
       "description": "Export resource group template request parameters."
