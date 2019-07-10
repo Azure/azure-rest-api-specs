@@ -22,7 +22,7 @@
     "useSchemePrefix": false,
     "parameters": [
       {
-        "$ref": "FormRecognizerReceiptOcr.json#/parameters/Endpoint"
+        "$ref": "#/parameters/Endpoint"
       }
     ]
   },
@@ -32,11 +32,12 @@
   "paths": {
     "/prebuilt/receipt/asyncBatchAnalyze": {
       "post": {
-        "description": "Batch Read Receipt operation. The response contains a field called 'Operation-Location', which contains the URL that you must use for your 'Get Read Receipt Result' operation.",
-        "operationId": "BatchReadReceipt",
+        "description": "Extract field text and semantic values from a given receipt document.",
+        "operationId": "AnalyzeReceipt",
+        "summary": "Analyze Receipt",
         "parameters": [
           {
-            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageUrl"
+            "$ref": "#/parameters/ImageUrl"
           }
         ],
         "consumes": [
@@ -47,37 +48,76 @@
         ],
         "responses": {
           "202": {
-            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The 'Operation-Location' URL will expire in 48 hours.",
+            "description": "The service has accepted the request for processing.  The client can query the operation status and retrieve the analysis result using the 'Operation-Location' URL header specified in the response. Note that the 'Operation-Location' URL expires in 48 hours.\n<table class=\"element table\"><thead/><tbody><tr><td><b>Operation-Location</b></td><td>URL to query and retrieve the analysis result.  This URL expires in 48 hours.\n<br>\nExample: https://cognitiveservice/formrecognizer/v1.0-preview/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb</tbody></table>",
             "headers": {
               "Operation-Location": {
-                "description": "URL to query for status of the operation. The URL will expire in 48 hours. ",
-                "type": "string"
+                "type": "string",
+                "description": "URL to query and retrieve the analysis result. This URL expires in 48 hours."
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+          "400": {
+            "description": "Bad request error. Detailed error code and message are specified in the JSON response:\n<table class=\"element table\"><thead><tr><th>Error Code</th><th>Description</th></tr></thead><tbody><tr><td>BadArgument</td><td>Bad or unrecognizable request JSON or binary file.</td></tr><tr><td>InvalidImageURL</td><td>Image URL is badly formatted.</td></tr><tr><td>FailedToDownloadImage</td><td>Failed to download image from input URL.</td></tr><tr><td>InvalidImage</td><td>The input data is not a valid image or password protected.</td></tr><tr><td>UnsupportedImageFormat</td><td>Image format unsupported. Supported formats include JPEG, PNG, BMP, PDF and TIFF.</td></tr><tr><td>InvalidImageSize</td><td>The input image is too large. It should not be larger than 20MB.</td></tr><tr><td>InvalidImageDimension</td><td>The input image dimension is out of range. The minimum image dimension is 50 x 50 pixels and the maximum is 10000 x 10000 pixels. The maximum PDF dimension is 17 x 17 inches.</td></tr></tbody></table>",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "BadArgument",
+                  "message": "Invalid input."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported media type error. 'Content-Type' does not match the POST content.\n<li>For image URL, 'Content-Type' should be application/json.</li><li>For binary image data, 'Content-Type' should be application/octet-stream.</li></ul><br/>",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "BadArgument",
+                  "message": "Unsupported media type."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "Unspecified",
+                  "message": "Internal server error."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transient fault while querying Windows Azure storage services.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "StorageException",
+                  "message": "Transient fault occurred while querying Windows Azure storage services. Please try again later."
+                }
+              }
             }
           }
         },
         "x-ms-examples": {
-          "Successful 'Batch Read Receipt' request": {
-            "$ref": "./examples/SuccessfulBatchReadReceiptWithUrl.json"
+          "Successful 'Analyze Receipt' request": {
+            "$ref": "./examples/SuccessfulAnalyzeReceiptWithUrl.json"
           }
         }
       }
     },
     "/prebuilt/receipt/operations/{operationId}": {
       "get": {
-        "description": "This interface is used for getting the analysis results of a 'Batch Read Receipt' operation. The URL to this interface should be retrieved from the 'Operation-Location' field returned from the 'Batch Read Receipt' operation.",
-        "operationId": "GetReadReceiptResult",
+        "description": "Query the status and retrieve the result of an 'Analyze Receipt' operation. The URL to this interface can be obtained from the 'Operation-Location' header in the 'Analyze Receipt' response.",
+        "operationId": "GetReceiptResult",
+        "summary": "Get Receipt Result",
         "parameters": [
           {
             "name": "operationId",
             "in": "path",
-            "description": "Id of read operation returned in the response of a 'Batch Read Receipt' operation.",
+            "description": "Id returned by the 'Analyze Receipt' operation.",
             "required": true,
             "type": "string"
           }
@@ -87,21 +127,51 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the read operation status.",
+            "description": "JSON fields in the response body:<table class=\"element table\"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>status</td><th>String</th><td>'Analyze Receipt' operation status. Possible values:<ul><li><b>NotStarted</b>: The receipt analysis process has not started.</li><li><b>Running</b>: The receipt is being analyzed.</li><li><b>Failed</b>: The receipt analysis process has failed.</li><li><b>Succeeded</b>: The receipt analysis process has succeeded.</li></ul>If the status is <b>Succeeded</b>, the response JSON will include the receipt understanding and text recognition results. The receipt understanding result is organized as a dictionary of named field values, where each value contains the extracted text, normalized value, and corresponding OCR word elements. The text recognition result is organized as a hierarchy of Lines and Words, with text, bounding box and confidence information. </td></tr><tr><td>recognitionResults</td><th>[Object]</th><td>An array of objects, each representing the OCR result for a page in the input document. </td></tr><tr><td>understandingResults</td><th>[Object]</th><td>An array of objects, each representing a receipt detected in the input document. </td></tr><tr><td>pages</td><th>[Integer]</th><td>List of pages where the receipt is found. Currently, only single-page receipts are supported.</td></tr><tr><td>fields</td><th>Object</th><td>Dictionary of analyzed field values. If a field is not detected, the corresponding field value will be set to null.</td></tr><tr><td>valueType</td><th>String</th><td>Data type of the field value. Currently, possible types include \\\"stringValue\\\" and \\\"numberValue\\\".</td></tr><tr><td>value</td><th>String/Number</th><td>Semantic value of the recognized field. If the text value cannot be converted, value will be set to \"\" for stringValue or null for numberValue.</td></tr><tr><td>text</td><th>String</th><td>Extracted field text in understandingResults, or a recognized word/line in recognitionResults.</td></tr><tr><td>elements</td><th>[Object]</th><td>List of references to OCR words comprising the detected field value.</td></tr><tr><td>$ref</td><th>String</th><td>JSON pointer to an OCR word element. For example, \"#/recognitionResults/0/lines/1/words/2\" refers to 3rd word in the 2nd line of the 1st page in the document.</td></tr><tr><td>lines</td><th>[Object]</th><td>An array of objects, each representing a line of recognized text. The maximum number of lines returned is 300 per page.<br />The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order.</td></tr><tr><td>words</td><th>[Object]</th><td>An array of objects, each representing a recognized word.</td></tr><tr><td>boundingBox</td><th>[Number]</th><td>The bounding box of a recognized line or word, depending on the parent object. It is represented by an array of eight numbers corresponding to four points, clockwise from the top-left corner. For image, the (x, y) coordinates are measured in pixels from the top-left corner of the image. For PDF, the (x, y) coordinates are measured in inches from the top-left corner of the each page.</td></tr><tr><td>confidence</td><th>String</th><td>This flag appears when the recognition of a word is of low confidence.</td></tr><tr><td>width</td><th>Number</th><td>The width of the image/PDF in pixels/inches, respectively.</td></tr><tr><td>height</td><th>Number</th><td>The height of the image/PDF in pixels/inches, respectively.</td></tr><tr><td>clockwiseOrientation</td><th>Number</th><td>The orientation of the image in clockwise direction, measured in degrees between [0, 360).</td></tr><tr><td>page</td><th>Integer</th><td>The 1-based page number of the recognition result.</td></tr><tr><td>unit</td><th>String</th><td>The unit used by the width, height and boundingBox properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".</td></tr></tbody></table>",
             "schema": {
-              "$ref": "#/definitions/readReceiptResult"
+              "$ref": "#/definitions/analyzeReceiptResult"
+            },
+            "examples": {
+              "application/json": "{\n  \"status\": \"Succeeded\",\n  \"recognitionResults\": [\n    {\n      \"page\": 1,\n      \"clockwiseOrientation\": 1.28,\n      \"width\": 3024,\n      \"height\": 4032,\n      \"unit\": \"pixel\",\n      \"lines\": [\n        {\n          \"boundingBox\": [\n            772,\n            506,\n            1773,\n            517,\n            1771,\n            732,\n            769,\n            721\n          ],\n          \"text\": \"Walmart\",\n          \"words\": [\n            {\n              \"boundingBox\": [\n                786,\n                515,\n                1766,\n                517,\n                1768,\n                736,\n                793,\n                720\n              ],\n              \"text\": \"Walmart\"\n            }\n          ]\n        },\n        ...\n      ]\n    }\n  ],\n  \"understandingResults\": [\n    {\n      \"pages\": [\n        1\n      ],\n      \"fields\": {\n        \"MerchantName\": {\n          \"valueType\": \"stringValue\",\n          \"value\": \"Walmart\",\n          \"text\": \"Walmart\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/0/words/0\"\n            }\n          ]\n        },\n        \"MerchantPhoneNumber\": {\n          \"valueType\": \"stringValue\",\n          \"value\": \"+13605710300\",\n          \"text\": \"( 360 ) 571 - 0300\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/0\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/1\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/2\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/3\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/4\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/5\"\n            }\n          ]\n        },\n        \"TransactionDate\": {\n          \"valueType\": \"stringValue\",\n          \"value\": \"2012-03-06\",\n          \"text\": \"03/06/12\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/31/words/0\"\n            }\n          ]\n        },\n        \"Total\": {\n          \"valueType\": \"numberValue\",\n          \"value\": 18.33,\n          \"text\": \"18.33\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/18/words/0\"\n            }\n          ]\n        },\n        ...\n      }\n    }\n  ]\n}"
             }
           },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+          "404": {
+            "description": "Invalid or expired operation ID.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "BadArgument",
+                  "message": "Operation ID is invalid or expired."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "Unspecified",
+                  "message": "Internal server error."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transient fault while querying Windows Azure storage services.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "StorageException",
+                  "message": "Transient fault occurred while querying Windows Azure storage services. Please try again later."
+                }
+              }
             }
           }
         },
         "x-ms-examples": {
-          "Successful 'Get Read Receipt Result' request": {
-            "$ref": "./examples/SuccessfulReadReceiptResult.json"
+          "Successful 'Get Receipt Result' request": {
+            "$ref": "./examples/SuccessfulGetReceiptResult.json"
           }
         }
       }
@@ -110,11 +180,12 @@
   "x-ms-paths": {
     "/prebuilt/receipt/asyncBatchAnalyze?overload=stream": {
       "post": {
-        "description": "Read Receipt operation. When you use the 'Batch Read Receipt' interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'Get Read Receipt Result' operation.",
-        "operationId": "BatchReadReceiptInStream",
+        "description": "Extract field text and semantic values from a given receipt document.",
+        "operationId": "AnalyzeReceiptInStream",
+        "summary": "Analyze Receipt",
         "parameters": [
           {
-            "$ref": "FormRecognizerReceiptOcr.json#/parameters/ImageStream"
+            "$ref": "#/parameters/ImageStream"
           }
         ],
         "consumes": [
@@ -125,47 +196,205 @@
         ],
         "responses": {
           "202": {
-            "description": "The service has accepted the request and will start processing later. It will return 'Accepted' immediately and include an 'Operation-Location' header. Client side should further query the operation status using the URL specified in this header. The 'Operation-Location' URL will expire in 48 hours.",
+            "description": "The service has accepted the request for processing.  The client can query the operation status and retrieve the analysis result using the 'Operation-Location' URL header specified in the response. Note that the 'Operation-Location' URL expires in 48 hours.\n<table class=\"element table\"><thead/><tbody><tr><td><b>Operation-Location</b></td><td>URL to query and retrieve the analysis result.  This URL expires in 48 hours.\n<br>\nExample: https://cognitiveservice/formrecognizer/v1.0-preview/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb</tbody></table>",
             "headers": {
               "Operation-Location": {
-                "description": "URL to query for status of the operation. The URL will expire in 48 hours. ",
-                "type": "string"
+                "type": "string",
+                "description": "URL to query and retrieve the analysis result. This URL expires in 48 hours."
               }
             }
           },
-          "default": {
-            "description": "Error response.",
-            "schema": {
-              "$ref": "FormRecognizerReceiptOcr.json#/definitions/ComputerVisionError"
+          "400": {
+            "description": "Bad request error. Detailed error code and message are specified in the JSON response:\n<table class=\"element table\"><thead><tr><th>Error Code</th><th>Description</th></tr></thead><tbody><tr><td>BadArgument</td><td>Bad or unrecognizable request JSON or binary file.</td></tr><tr><td>InvalidImageURL</td><td>Image URL is badly formatted.</td></tr><tr><td>FailedToDownloadImage</td><td>Failed to download image from input URL.</td></tr><tr><td>InvalidImage</td><td>The input data is not a valid image or password protected.</td></tr><tr><td>UnsupportedImageFormat</td><td>Image format unsupported. Supported formats include JPEG, PNG, BMP, PDF and TIFF.</td></tr><tr><td>InvalidImageSize</td><td>The input image is too large. It should not be larger than 20MB.</td></tr><tr><td>InvalidImageDimension</td><td>The input image dimension is out of range. The minimum image dimension is 50 x 50 pixels and the maximum is 10000 x 10000 pixels. The maximum PDF dimension is 17 x 17 inches.</td></tr></tbody></table>",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "BadArgument",
+                  "message": "Invalid input."
+                }
+              }
+            }
+          },
+          "415": {
+            "description": "Unsupported media type error. 'Content-Type' does not match the POST content.\n<li>For image URL, 'Content-Type' should be application/json.</li><li>For binary image data, 'Content-Type' should be application/octet-stream.</li></ul><br/>",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "BadArgument",
+                  "message": "Unsupported media type."
+                }
+              }
+            }
+          },
+          "500": {
+            "description": "Internal server error.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "Unspecified",
+                  "message": "Internal server error."
+                }
+              }
+            }
+          },
+          "503": {
+            "description": "Transient fault while querying Windows Azure storage services.",
+            "examples": {
+              "application/json": {
+                "error": {
+                  "code": "StorageException",
+                  "message": "Transient fault occurred while querying Windows Azure storage services. Please try again later."
+                }
+              }
             }
           }
         },
         "x-ms-examples": {
-          "Successful 'Batch Read Receipt' request": {
-            "$ref": "./examples/SuccessfulBatchReadReceiptWithStream.json"
+          "Successful 'Analyze Receipt' request": {
+            "$ref": "./examples/SuccessfulAnalyzeReceiptWithStream.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "readReceiptResult": {
+    "OperationStatus": {
+      "type": "string",
+      "description": "Analysis operation status. Possible values:<ul><li><b>NotStarted</b>: The receipt analysis process has not started.</li><li><b>Running</b>: The receipt is being analyzed.</li><li><b>Failed</b>: The receipt analysis process has failed.</li><li><b>Succeeded</b>: The receipt analysis process has succeeded.</li></ul>",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatusCodes",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
+    "TextRecognitionResult": {
+      "description": "Text recognition result from a page in the input document.",
       "type": "object",
-      "description": "Analysis result of the 'Batch Read Receipt' operation.",
+      "required": [
+        "lines"
+      ],
       "properties": {
-        "status": {
-          "description": "Status of the read operation.",
-          "$ref": "FormRecognizerReceiptOcr.json#/definitions/OperationStatus"
+        "page": {
+          "description": "The 1-based page number of the recognition result.",
+          "type": "integer"
         },
-        "recognitionResults": {
-          "description": "Text recognition result of the 'Batch Read Receipt' operation.",
+        "clockwiseOrientation": {
+          "description": "The orientation of the image in clockwise direction, measured in degrees between [0, 360).",
+          "type": "number"
+        },
+        "width": {
+          "description": "The width of the image/PDF in pixels/inches, respectively.",
+          "type": "number"
+        },
+        "height": {
+          "description": "The height of the image/PDF in pixels/inches, respectively.",
+          "type": "number"
+        },
+        "unit": {
+          "description": "The unit used by the width, height and boundingBox properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".",
+          "type": "string",
+          "enum": [
+            "pixel",
+            "inch"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultDimensionUnit",
+            "modelAsString": false
+          },
+          "x-nullable": true
+        },
+        "lines": {
+          "description": "A list of recognized text lines. The maximum number of lines returned is 300 per page.\n\nThe lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order.",
           "type": "array",
           "items": {
-            "$ref": "FormRecognizerReceiptOcr.json#/definitions/TextRecognitionResult"
+            "$ref": "#/definitions/Line"
+          }
+        }
+      }
+    },
+    "Line": {
+      "description": "An object representing a recognized text line.",
+      "type": "object",
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of a recognized line.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the line.",
+          "type": "string"
+        },
+        "words": {
+          "description": "List of words in the text line.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Word"
+          }
+        }
+      }
+    },
+    "Word": {
+      "description": "An object representing a recognized word.",
+      "type": "object",
+      "required": [
+        "boundingBox",
+        "text"
+      ],
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of a recognized word.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the word.",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "type": "string",
+          "enum": [
+            "High",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultConfidenceClass",
+            "modelAsString": false
+          },
+          "x-nullable": true
+        }
+      }
+    },
+    "BoundingBox": {
+      "description": "Quadrangle bounding box, with coordinates specified relative to the original image. The eight numbers represent the four points, clockwise from the top-left corner. For image, the (x, y) coordinates are measured in pixels. For PDF, the (x, y) coordinates are measured in inches.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "x-nullable": false
+      }
+    },
+    "analyzeReceiptResult": {
+      "type": "object",
+      "description": "Result of the 'Analyze Receipt' operation.",
+      "properties": {
+        "status": {
+          "description": "Status of the analysis operation.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "recognitionResults": {
+          "description": "An array of objects, each representing the OCR result for a page in the input document.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextRecognitionResult"
           }
         },
         "understandingResults": {
-          "description": "Semantic understanding result of the 'Batch Read Receipt' operation.",
+          "description": "An array of objects, each representing a receipt detected in the input document.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/understandingResult"
@@ -177,7 +406,7 @@
       "description": "A set of extracted fields corresponding to a semantic object, such as a receipt, in the input document.",
       "properties": {
         "pages": {
-          "description": "List of pages where the document is found.",
+          "description": "List of pages where the receipt is found.",
           "type": "array",
           "items": {
             "type": "integer",
@@ -185,7 +414,7 @@
           }
         },
         "fields": {
-          "description": "Dictionary of recognized field values.",
+          "description": "Dictionary of analyzed field values. If a field is not detected, the corresponding field value will be set to null.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/fieldValue"
@@ -194,9 +423,10 @@
       }
     },
     "elementReference": {
-      "description": "Reference to an OCR word.",
+      "description": "Reference to an OCR word element.",
       "properties": {
         "$ref": {
+          "description": "JSON pointer to an OCR word element. For example, \"#/recognitionResults/0/lines/1/words/2\" refers to 3rd word in the 2nd line of the 1st page in the document.",
           "type": "string"
         }
       }
@@ -214,7 +444,7 @@
           "type": "string"
         },
         "text": {
-          "description": "OCR text content of the recognized field.",
+          "description": "Extracted text content of the recognized field.",
           "type": "string"
         },
         "elements": {
@@ -252,6 +482,51 @@
           "description": "Numeric value of the recognized field.",
           "type": "number"
         }
+      }
+    },
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    },
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
       }
     }
   }
