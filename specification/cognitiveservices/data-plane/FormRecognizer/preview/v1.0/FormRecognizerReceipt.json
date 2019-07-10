@@ -48,55 +48,11 @@
         ],
         "responses": {
           "202": {
-            "description": "The service has accepted the request for processing.  The client can query the operation status and retrieve the analysis result using the 'Operation-Location' URL header specified in the response. Note that the 'Operation-Location' URL expires in 48 hours.\n<table class=\"element table\"><thead/><tbody><tr><td><b>Operation-Location</b></td><td>URL to query and retrieve the analysis result.  This URL expires in 48 hours.\n<br>\nExample: https://cognitiveservice/formrecognizer/v1.0-preview/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb</tbody></table>",
+            "description": "The service has accepted the request for processing.  The client can query the operation status and retrieve the analysis result using the 'Operation-Location' URL header specified in the response. Note that the 'Operation-Location' URL expires in 48 hours.",
             "headers": {
               "Operation-Location": {
                 "type": "string",
                 "description": "URL to query and retrieve the analysis result. This URL expires in 48 hours."
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request error. Detailed error code and message are specified in the JSON response:\n<table class=\"element table\"><thead><tr><th>Error Code</th><th>Description</th></tr></thead><tbody><tr><td>BadArgument</td><td>Bad or unrecognizable request JSON or binary file.</td></tr><tr><td>InvalidImageURL</td><td>Image URL is badly formatted.</td></tr><tr><td>FailedToDownloadImage</td><td>Failed to download image from input URL.</td></tr><tr><td>InvalidImage</td><td>The input data is not a valid image or password protected.</td></tr><tr><td>UnsupportedImageFormat</td><td>Image format unsupported. Supported formats include JPEG, PNG, BMP, PDF and TIFF.</td></tr><tr><td>InvalidImageSize</td><td>The input image is too large. It should not be larger than 20MB.</td></tr><tr><td>InvalidImageDimension</td><td>The input image dimension is out of range. The minimum image dimension is 50 x 50 pixels and the maximum is 10000 x 10000 pixels. The maximum PDF dimension is 17 x 17 inches.</td></tr></tbody></table>",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "BadArgument",
-                  "message": "Invalid input."
-                }
-              }
-            }
-          },
-          "415": {
-            "description": "Unsupported media type error. 'Content-Type' does not match the POST content.\n<li>For image URL, 'Content-Type' should be application/json.</li><li>For binary image data, 'Content-Type' should be application/octet-stream.</li></ul><br/>",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "BadArgument",
-                  "message": "Unsupported media type."
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error.",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "Unspecified",
-                  "message": "Internal server error."
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Transient fault while querying Windows Azure storage services.",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "StorageException",
-                  "message": "Transient fault occurred while querying Windows Azure storage services. Please try again later."
-                }
               }
             }
           }
@@ -127,45 +83,9 @@
         ],
         "responses": {
           "200": {
-            "description": "JSON fields in the response body:<table class=\"element table\"><thead><tr><th>Field</th><th>Type</th><th>Description</th></tr></thead><tbody><tr><td>status</td><th>String</th><td>'Analyze Receipt' operation status. Possible values:<ul><li><b>NotStarted</b>: The receipt analysis process has not started.</li><li><b>Running</b>: The receipt is being analyzed.</li><li><b>Failed</b>: The receipt analysis process has failed.</li><li><b>Succeeded</b>: The receipt analysis process has succeeded.</li></ul>If the status is <b>Succeeded</b>, the response JSON will include the receipt understanding and text recognition results. The receipt understanding result is organized as a dictionary of named field values, where each value contains the extracted text, normalized value, and corresponding OCR word elements. The text recognition result is organized as a hierarchy of Lines and Words, with text, bounding box and confidence information. </td></tr><tr><td>recognitionResults</td><th>[Object]</th><td>An array of objects, each representing the OCR result for a page in the input document. </td></tr><tr><td>understandingResults</td><th>[Object]</th><td>An array of objects, each representing a receipt detected in the input document. </td></tr><tr><td>pages</td><th>[Integer]</th><td>List of pages where the receipt is found. Currently, only single-page receipts are supported.</td></tr><tr><td>fields</td><th>Object</th><td>Dictionary of analyzed field values. If a field is not detected, the corresponding field value will be set to null.</td></tr><tr><td>valueType</td><th>String</th><td>Data type of the field value. Currently, possible types include \\\"stringValue\\\" and \\\"numberValue\\\".</td></tr><tr><td>value</td><th>String/Number</th><td>Semantic value of the recognized field. If the text value cannot be converted, value will be set to \"\" for stringValue or null for numberValue.</td></tr><tr><td>text</td><th>String</th><td>Extracted field text in understandingResults, or a recognized word/line in recognitionResults.</td></tr><tr><td>elements</td><th>[Object]</th><td>List of references to OCR words comprising the detected field value.</td></tr><tr><td>$ref</td><th>String</th><td>JSON pointer to an OCR word element. For example, \"#/recognitionResults/0/lines/1/words/2\" refers to 3rd word in the 2nd line of the 1st page in the document.</td></tr><tr><td>lines</td><th>[Object]</th><td>An array of objects, each representing a line of recognized text. The maximum number of lines returned is 300 per page.<br />The lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order.</td></tr><tr><td>words</td><th>[Object]</th><td>An array of objects, each representing a recognized word.</td></tr><tr><td>boundingBox</td><th>[Number]</th><td>The bounding box of a recognized line or word, depending on the parent object. It is represented by an array of eight numbers corresponding to four points, clockwise from the top-left corner. For image, the (x, y) coordinates are measured in pixels from the top-left corner of the image. For PDF, the (x, y) coordinates are measured in inches from the top-left corner of the each page.</td></tr><tr><td>confidence</td><th>String</th><td>This flag appears when the recognition of a word is of low confidence.</td></tr><tr><td>width</td><th>Number</th><td>The width of the image/PDF in pixels/inches, respectively.</td></tr><tr><td>height</td><th>Number</th><td>The height of the image/PDF in pixels/inches, respectively.</td></tr><tr><td>clockwiseOrientation</td><th>Number</th><td>The orientation of the image in clockwise direction, measured in degrees between [0, 360).</td></tr><tr><td>page</td><th>Integer</th><td>The 1-based page number of the recognition result.</td></tr><tr><td>unit</td><th>String</th><td>The unit used by the width, height and boundingBox properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".</td></tr></tbody></table>",
+            "description": "Returns the operation status along with the recognition and understanding results when succeeded.",
             "schema": {
               "$ref": "#/definitions/analyzeReceiptResult"
-            },
-            "examples": {
-              "application/json": "{\n  \"status\": \"Succeeded\",\n  \"recognitionResults\": [\n    {\n      \"page\": 1,\n      \"clockwiseOrientation\": 1.28,\n      \"width\": 3024,\n      \"height\": 4032,\n      \"unit\": \"pixel\",\n      \"lines\": [\n        {\n          \"boundingBox\": [\n            772,\n            506,\n            1773,\n            517,\n            1771,\n            732,\n            769,\n            721\n          ],\n          \"text\": \"Walmart\",\n          \"words\": [\n            {\n              \"boundingBox\": [\n                786,\n                515,\n                1766,\n                517,\n                1768,\n                736,\n                793,\n                720\n              ],\n              \"text\": \"Walmart\"\n            }\n          ]\n        },\n        ...\n      ]\n    }\n  ],\n  \"understandingResults\": [\n    {\n      \"pages\": [\n        1\n      ],\n      \"fields\": {\n        \"MerchantName\": {\n          \"valueType\": \"stringValue\",\n          \"value\": \"Walmart\",\n          \"text\": \"Walmart\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/0/words/0\"\n            }\n          ]\n        },\n        \"MerchantPhoneNumber\": {\n          \"valueType\": \"stringValue\",\n          \"value\": \"+13605710300\",\n          \"text\": \"( 360 ) 571 - 0300\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/0\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/1\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/2\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/3\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/4\"\n            },\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/2/words/5\"\n            }\n          ]\n        },\n        \"TransactionDate\": {\n          \"valueType\": \"stringValue\",\n          \"value\": \"2012-03-06\",\n          \"text\": \"03/06/12\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/31/words/0\"\n            }\n          ]\n        },\n        \"Total\": {\n          \"valueType\": \"numberValue\",\n          \"value\": 18.33,\n          \"text\": \"18.33\",\n          \"elements\": [\n            {\n              \"$ref\": \"#/recognitionResults/0/lines/18/words/0\"\n            }\n          ]\n        },\n        ...\n      }\n    }\n  ]\n}"
-            }
-          },
-          "404": {
-            "description": "Invalid or expired operation ID.",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "BadArgument",
-                  "message": "Operation ID is invalid or expired."
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error.",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "Unspecified",
-                  "message": "Internal server error."
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Transient fault while querying Windows Azure storage services.",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "StorageException",
-                  "message": "Transient fault occurred while querying Windows Azure storage services. Please try again later."
-                }
-              }
             }
           }
         },
@@ -196,55 +116,11 @@
         ],
         "responses": {
           "202": {
-            "description": "The service has accepted the request for processing.  The client can query the operation status and retrieve the analysis result using the 'Operation-Location' URL header specified in the response. Note that the 'Operation-Location' URL expires in 48 hours.\n<table class=\"element table\"><thead/><tbody><tr><td><b>Operation-Location</b></td><td>URL to query and retrieve the analysis result.  This URL expires in 48 hours.\n<br>\nExample: https://cognitiveservice/formrecognizer/v1.0-preview/prebuilt/receipt/operations/54f0b076-4e38-43e5-81bd-b85b8835fdfb</tbody></table>",
+            "description": "The service has accepted the request for processing.  The client can query the operation status and retrieve the analysis result using the 'Operation-Location' URL header specified in the response. Note that the 'Operation-Location' URL expires in 48 hours.",
             "headers": {
               "Operation-Location": {
                 "type": "string",
                 "description": "URL to query and retrieve the analysis result. This URL expires in 48 hours."
-              }
-            }
-          },
-          "400": {
-            "description": "Bad request error. Detailed error code and message are specified in the JSON response:\n<table class=\"element table\"><thead><tr><th>Error Code</th><th>Description</th></tr></thead><tbody><tr><td>BadArgument</td><td>Bad or unrecognizable request JSON or binary file.</td></tr><tr><td>InvalidImageURL</td><td>Image URL is badly formatted.</td></tr><tr><td>FailedToDownloadImage</td><td>Failed to download image from input URL.</td></tr><tr><td>InvalidImage</td><td>The input data is not a valid image or password protected.</td></tr><tr><td>UnsupportedImageFormat</td><td>Image format unsupported. Supported formats include JPEG, PNG, BMP, PDF and TIFF.</td></tr><tr><td>InvalidImageSize</td><td>The input image is too large. It should not be larger than 20MB.</td></tr><tr><td>InvalidImageDimension</td><td>The input image dimension is out of range. The minimum image dimension is 50 x 50 pixels and the maximum is 10000 x 10000 pixels. The maximum PDF dimension is 17 x 17 inches.</td></tr></tbody></table>",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "BadArgument",
-                  "message": "Invalid input."
-                }
-              }
-            }
-          },
-          "415": {
-            "description": "Unsupported media type error. 'Content-Type' does not match the POST content.\n<li>For image URL, 'Content-Type' should be application/json.</li><li>For binary image data, 'Content-Type' should be application/octet-stream.</li></ul><br/>",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "BadArgument",
-                  "message": "Unsupported media type."
-                }
-              }
-            }
-          },
-          "500": {
-            "description": "Internal server error.",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "Unspecified",
-                  "message": "Internal server error."
-                }
-              }
-            }
-          },
-          "503": {
-            "description": "Transient fault while querying Windows Azure storage services.",
-            "examples": {
-              "application/json": {
-                "error": {
-                  "code": "StorageException",
-                  "message": "Transient fault occurred while querying Windows Azure storage services. Please try again later."
-                }
               }
             }
           }
@@ -260,7 +136,7 @@
   "definitions": {
     "OperationStatus": {
       "type": "string",
-      "description": "Analysis operation status. Possible values:<ul><li><b>NotStarted</b>: The receipt analysis process has not started.</li><li><b>Running</b>: The receipt is being analyzed.</li><li><b>Failed</b>: The receipt analysis process has failed.</li><li><b>Succeeded</b>: The receipt analysis process has succeeded.</li></ul>",
+      "description": "Analysis operation status: NotStarted, Running, Failed, Succeeded.",
       "enum": [
         "NotStarted",
         "Running",
