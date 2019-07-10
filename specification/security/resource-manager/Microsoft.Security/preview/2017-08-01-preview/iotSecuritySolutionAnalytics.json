@@ -749,7 +749,7 @@
               }
             ]
           },
-          "description": "Estimated severity of this alert"
+          "description": "Estimated severity of this recommendation"
         },
         "healthyDevices": {
           "readOnly": true,
@@ -821,13 +821,16 @@
               }
             ]
           },
-          "alertsCount": {
-            "readOnly": true,
-            "type": "integer",
-            "description": "the number of alerts raised for this alert type"
-          }
+          "description": "Estimated severity of this alert"
+        },
+
+        "alertsCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "the number of alerts raised for this alert type"
         }
-      },
+      }
+    },
     "IoTSecurityDeviceRecommendation": {
       "type": "object",
       "description": "Statistic information about the number of recommendations per recommendation type",
@@ -864,13 +867,15 @@
               }
             ]
           },
-          "devicesCount": {
-            "readOnly": true,
-            "type": "integer",
-            "description": "the number of device with this recommendation"
-          }
+          "description": "Estimated severity of this recommendation"
+        },
+        "devicesCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "the number of device with this recommendation"
         }
-      },
+      }
+    },
     "TagsResource": {
       "properties": {
         "tags": {
