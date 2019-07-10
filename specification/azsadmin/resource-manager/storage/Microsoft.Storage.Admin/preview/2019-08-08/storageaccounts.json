@@ -132,7 +132,14 @@
             "schema": {
               "$ref": "storageaccounts.json#/definitions/UndeleteStorageAccount"
             }
+          },
+          "202": {
+            "description": "Accepted -- undelete operation trigged; operation will complete asynchronously."
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -162,8 +169,12 @@
         "responses": {
           "200": {
             "description": "OK -- Garbage collection has completed."
+          },
+          "202": {
+            "description": "Accepted -- on demand gc operation triggered; operation will complete asynchronously."
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
