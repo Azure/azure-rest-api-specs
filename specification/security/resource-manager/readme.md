@@ -134,6 +134,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
 
 # Needed when there is more than one input file
 override-info:
