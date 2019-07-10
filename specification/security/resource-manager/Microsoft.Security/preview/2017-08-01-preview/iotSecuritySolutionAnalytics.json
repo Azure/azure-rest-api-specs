@@ -427,12 +427,17 @@
         "topAlertedDevices": {
           "description": "The list of top 3 devices with the most attacked.",
           "type": "object",
-          "$ref": "#/definitions/IoTSecurityDeviceAlertsList"
+          "$ref": "#/definitions/IoTSecurityAlertedDevicesList"
         },
-        "mostPrevalentDevices": {
-          "description": "The list of most prevalent 3 devices.",
+        "mostPrevalentDeviceAlerts": {
+          "description": "The list of most prevalent 3 alerts.",
           "type": "object",
           "$ref": "#/definitions/IoTSecurityDeviceAlertsList"
+        },
+        "mostPrevalentDeviceRecommendations": {
+          "description": "The list of most prevalent 3 recommendations.",
+          "type": "object",
+          "$ref": "#/definitions/IoTSecurityDeviceRecommendationsList"
         }
       }
     },
@@ -496,7 +501,7 @@
         }
       }
     },
-    "IoTSecurityDeviceAlertsList": {
+    "IoTSecurityAlertedDevicesList": {
       "description": "List of devices with the count of raised alerts",
       "required": [
         "value"
@@ -506,7 +511,47 @@
           "type": "array",
           "description": "List of aggregated alerts data",
           "items": {
-            "$ref": "#/definitions/IoTSecurityDeviceAlerts"
+            "$ref": "#/definitions/IoTSecurityAlertedDevice"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "IoTSecurityDeviceAlertsList": {
+      "description": "List of alerts with the count of raised alerts",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of top alerts data",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityDeviceAlert"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "IoTSecurityDeviceRecommendationsList": {
+      "description": "List of recommendations with the count of devices",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of aggregated recommendation data",
+          "items": {
+            "$ref": "#/definitions/IoTSecurityDeviceRecommendation"
           }
         },
         "nextLink": {
@@ -719,7 +764,7 @@
         }
       }
     },
-    "IoTSecurityDeviceAlerts": {
+    "IoTSecurityAlertedDevice": {
       "type": "object",
       "description": "Statistic information about the number of alerts per device during the last period",
       "properties": {
@@ -732,6 +777,38 @@
           "readOnly": true,
           "type": "integer",
           "description": "the number of alerts raised for this device"
+        }
+      }
+    },
+    "IoTSecurityDeviceAlert": {
+      "type": "object",
+      "description": "Statistic information about the number of alerts per alert type during the last period",
+      "properties": {
+        "alertDisplayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Display name of the alert"
+        },
+        "alertsCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "the number of alerts raised for this alert type"
+        }
+      }
+    },
+    "IoTSecurityDeviceRecommendation": {
+      "type": "object",
+      "description": "Statistic information about the number of recommendations per recommendation type",
+      "properties": {
+        "recommendationDisplayName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Display name of the recommendation"
+        },
+        "devicesCount": {
+          "readOnly": true,
+          "type": "integer",
+          "description": "the number of device with this recommendation"
         }
       }
     },
