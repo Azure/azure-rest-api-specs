@@ -257,6 +257,13 @@
         "authorizationSource": {
           "type": "string",
           "description": "The authorization source of the request. Valid values are one or more combinations of Legacy, RoleBased, Bypassed, Direct and Management. For example, 'Legacy, RoleBased'."
+        },
+        "managedByTenants": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedByTenant"
+          },
+          "description": "An array containing the tenants managing the subscription."
         }
       },
       "description": "Subscription information."
@@ -289,6 +296,12 @@
         }
       },
       "description": "Subscription policies."
+    },
+    "ManagedByTenant": {
+      "tenantId": {
+        "type": "string",
+        "description": "The tenant ID of the managing tenant. This is a GUID."
+      }
     },
     "SubscriptionListResult": {
       "properties": {
