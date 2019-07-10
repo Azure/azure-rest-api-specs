@@ -777,6 +777,7 @@
           "type": "string",
           "description": "Name of the alert type"
         },
+
         "alertsCount": {
           "readOnly": true,
           "type": "integer",
@@ -793,13 +794,40 @@
           "type": "string",
           "description": "Display name of the alert"
         },
-        "alertsCount": {
+        "reportedSeverity": {
           "readOnly": true,
-          "type": "integer",
-          "description": "the number of alerts raised for this alert type"
+          "type": "string",
+          "enum": [
+            "Informational",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "reportedSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Informational"
+              },
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          },
+          "alertsCount": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "the number of alerts raised for this alert type"
+          }
         }
-      }
-    },
+      },
     "IoTSecurityDeviceRecommendation": {
       "type": "object",
       "description": "Statistic information about the number of recommendations per recommendation type",
@@ -809,13 +837,40 @@
           "type": "string",
           "description": "Display name of the recommendation"
         },
-        "devicesCount": {
+        "reportedSeverity": {
           "readOnly": true,
-          "type": "integer",
-          "description": "the number of device with this recommendation"
+          "type": "string",
+          "enum": [
+            "Informational",
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "reportedSeverity",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Informational"
+              },
+              {
+                "value": "Low"
+              },
+              {
+                "value": "Medium"
+              },
+              {
+                "value": "High"
+              }
+            ]
+          },
+          "devicesCount": {
+            "readOnly": true,
+            "type": "integer",
+            "description": "the number of device with this recommendation"
+          }
         }
-      }
-    },
+      },
     "TagsResource": {
       "properties": {
         "tags": {
