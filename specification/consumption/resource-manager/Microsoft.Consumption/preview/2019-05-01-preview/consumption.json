@@ -180,9 +180,6 @@
           {
             "$ref": "#/parameters/metricParameter"
           },
-		  {
-            "$ref": "#/parameters/languageParameter"
-		  },
           {
             "name": "$filter",
             "description": "May be used to filter usageDetails by properties/resourceGroup, properties/resourceName, properties/resourceId, properties/chargeType, properties/reservationId, properties/publisherType or tags. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:). PublisherType Filter accepts two values azure and marketplace and it is currently supported for Web Direct Offer Type",
@@ -3173,14 +3170,6 @@
           }
         ]
       }
-    },
-	  "languageParameter": {
-      "name": "ln",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Language in which the CSV file for download will be generated.",
-	    "x-ms-parameter-location": "method"
     }
   }
 }
