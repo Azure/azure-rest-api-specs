@@ -52,6 +52,7 @@ These settings apply only when `--tag=package-composite-v1` is specified on the 
 ```yaml $(tag) == 'package-composite-v1'
 input-file:
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/assessmentsMetadata.json
 - Microsoft.Security/preview/2017-08-01-preview/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
@@ -84,6 +85,7 @@ These settings apply only when `--tag=package-composite-v2` is specified on the 
 ```yaml $(tag) == 'package-composite-v2'
 input-file:
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/assessmentsMetadata.json
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
@@ -134,6 +136,7 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
 - Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
 - Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/assessmentsMetadata.json
 - Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
 
 # Needed when there is more than one input file
