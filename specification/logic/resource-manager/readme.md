@@ -25,7 +25,7 @@ These are the global settings for the Logic API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-07-preview
+tag: package-2019-05
 
 directive:
   - where:
@@ -37,6 +37,15 @@ directive:
     suppress:
       - CollectionObjectPropertiesNaming
 
+```
+
+### Tag: package-2019-05
+
+These settings apply only when `--package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+- Microsoft.Logic/preview/2019-05-01/logic.json
 ```
 
 ### Tag: package-2018-07-preview
