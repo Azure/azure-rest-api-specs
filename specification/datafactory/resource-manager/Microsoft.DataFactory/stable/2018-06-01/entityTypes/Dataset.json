@@ -742,6 +742,40 @@
         }
       }
     },
+    "AzureSqlMITableDataset": {
+      "x-ms-discriminator-value": "AzureSqlMITable",
+      "description": "The Azure SQL Managed Instance dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure SQL Managed Instance dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureSqlMITableDatasetTypeProperties"
+        }
+      }
+    },
+    "AzureSqlMITableDatasetTypeProperties": {
+      "description": "Azure SQL Managed Instance dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Azure SQL Managed Instance. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Azure SQL Managed Instance dataset. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "AzureSqlDWTableDataset": {
       "x-ms-discriminator-value": "AzureSqlDWTable",
       "description": "The Azure SQL Data Warehouse dataset.",
@@ -865,6 +899,58 @@
     },
     "DynamicsEntityDatasetTypeProperties": {
       "description": "Dynamics entity dataset properties.",
+      "properties": {
+        "entityName": {
+          "type": "object",
+          "description": "The logical name of the entity. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "DynamicsCrmEntityDataset": {
+      "x-ms-discriminator-value": "DynamicsCrmEntity",
+      "description": "The Dynamics CRM entity dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dynamics CRM entity dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DynamicsCrmEntityDatasetTypeProperties"
+        }
+      }
+    },
+    "DynamicsCrmEntityDatasetTypeProperties": {
+      "description": "Dynamics CRM entity dataset properties.",
+      "properties": {
+        "entityName": {
+          "type": "object",
+          "description": "The logical name of the entity. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "CommonDataServiceForAppsEntityDataset": {
+      "x-ms-discriminator-value": "CommonDataServiceForAppsEntity",
+      "description": "The Common Data Service for Apps entity dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Common Data Service for Apps entity dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CommonDataServiceForAppsEntityDatasetTypeProperties"
+        }
+      }
+    },
+    "CommonDataServiceForAppsEntityDatasetTypeProperties": {
+      "description": "Common Data Service for Apps entity dataset properties.",
       "properties": {
         "entityName": {
           "type": "object",
