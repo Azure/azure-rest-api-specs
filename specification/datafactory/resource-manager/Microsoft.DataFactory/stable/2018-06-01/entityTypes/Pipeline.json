@@ -2186,6 +2186,21 @@
         }
       }
     },
+    "BinarySink": {
+      "description": "A copy activity Binary sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Binary store settings."
+        }
+      }
+    },
     "BlobSink": {
       "description": "A copy activity Azure Blob sink.",
       "type": "object",
