@@ -624,7 +624,7 @@
           },
           {
             "name": "$expand",
-            "description": "May be used to expand enabledAzureSkus, serviceProviders.",
+            "description": "May be used to expand enabledAzureSkus, resellers.",
             "in": "query",
             "required": false,
             "type": "string"
@@ -5069,11 +5069,11 @@
             "$ref": "#/definitions/EnabledAzureSKUs"
           }
         },
-        "serviceProviders": {
-          "description": "The service providers which are allowed to provide service to this customer.",
+        "resellers": {
+          "description": "The resellers which are allowed to provide service to this customer.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ServiceProvider"
+            "$ref": "#/definitions/Reseller"
           }
         }
       }
@@ -5155,16 +5155,16 @@
         }
       }
     },
-    "ServiceProvider": {
-      "description": "Details about a service provider.",
+    "Reseller": {
+      "description": "Details about a reseller.",
       "properties": {
-        "serviceProviderId": {
-          "description": "The service provider id.",
+        "resellerId": {
+          "description": "The reseller id.",
           "type": "string",
           "readOnly": true
         },
         "description": {
-          "description": "A description of the service provider.",
+          "description": "A description of the reseller.",
           "type": "string",
           "readOnly": true
         }
@@ -5729,12 +5729,12 @@
           "type": "string",
           "readOnly": true
         },
-        "serviceProviderId": {
-          "description": "The service provider id.",
+        "resellerId": {
+          "description": "The reseller id.",
           "type": "string"
         },
-        "serviceProviderDescription": {
-          "description": "The service provider description.",
+        "description": {
+          "description": "The name of the reseller.",
           "type": "string",
           "readOnly": true
         }
