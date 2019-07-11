@@ -2525,26 +2525,22 @@
     "MCASDataConnectorDataTypes": {
       "type": "object",
       "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
-      "properties": {
-        "alerts": {
-          "type": "object",
-          "description": "Alerts data type connection.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataConnectorDataTypeCommon"
-            }
-          ]
-        },
-        "discoveryLogs": {
-          "type": "object",
-          "description": "Discovery log data type connection.",
-          "allOf": [
-            {
-              "$ref": "#/definitions/DataConnectorDataTypeCommon"
-            }
-          ]
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
+        }],
+        "properties":
+        {
+          "discoveryLogs": {
+            "type": "object",
+            "description": "Discovery log data type connection.",
+            "allOf": [
+              {
+                "$ref": "#/definitions/DataConnectorDataTypeCommon"
+              }
+            ]
+          }
         }
-      }
     },
     "AATPDataConnector": {
       "x-ms-discriminator-value": "AzureAdvancedThreatProtection",
