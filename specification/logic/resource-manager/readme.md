@@ -200,8 +200,22 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-logic
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-05
   - tag: package-2018-07-preview
   - tag: package-2016-06
+```
+
+### Tag: package-2019-05 and java
+
+These settings apply only when `--tag=package-2019-05 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-05' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.logic.v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/logic/resource-manager/v2019_05_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-07-preview and java
