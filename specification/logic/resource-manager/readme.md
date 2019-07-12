@@ -44,8 +44,9 @@ directive:
 These settings apply only when `--package-2019-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-05'
+-azure-validator: true
 input-file:
-- Microsoft.Logic/preview/2019-05-01/logic.json
+- Microsoft.Logic/stable/2019-05-01/logic.json
 ```
 
 ### Tag: package-2018-07-preview
