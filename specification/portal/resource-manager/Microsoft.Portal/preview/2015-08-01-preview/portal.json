@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-11-01-preview",
+    "version": "2015-08-01-preview",
     "title": "portal",
     "description": "Allows creation and deletion of Azure Shared Dashboards.",
     "x-ms-code-generation-settings": {
@@ -379,6 +379,7 @@
   },
   "definitions": {
     "DashboardListResult": {
+      "type": "object",
       "properties": {
         "value": {
           "type": "array",
@@ -395,6 +396,7 @@
       "description": "List of dashboards."
     },
     "DashboardParts": {
+      "type": "object",
       "description": "A dashboard part.",
       "required": [
         "position"
@@ -445,6 +447,7 @@
       }
     },
     "DashboardLens": {
+      "type": "object",
       "description": "A dashboard lens.",
       "required": [
         "order",
@@ -472,6 +475,7 @@
       }
     },
     "DashboardProperties": {
+      "type": "object",
       "description": "The shared dashboard properties.",
       "properties": {
         "lenses": {
@@ -491,6 +495,7 @@
       }
     },
     "Dashboard": {
+      "type": "object",
       "description": "The shared dashboard resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
@@ -536,6 +541,7 @@
       }
     },
     "PatchableDashboard": {
+      "type": "object",
       "description": "The shared dashboard resource definition.",
       "x-ms-azure-resource": true,
       "x-ms-client-flatten": true,
@@ -555,6 +561,7 @@
       }
     },
     "ResourceProviderOperationList": {
+      "type": "object",
       "description": "Results of the request to list operations.",
       "readOnly": true,
       "properties": {
@@ -572,6 +579,7 @@
       }
     },
     "ResourceProviderOperation": {
+      "type": "object",
       "description": "Supported operations of this resource provider.",
       "readOnly": true,
       "properties": {
@@ -607,6 +615,7 @@
       }
     },
     "ErrorResponse": {
+      "type": "object",
       "description": "Error response.",
       "properties": {
         "error": {
@@ -616,6 +625,7 @@
       }
     },
     "ErrorDefinition": {
+      "type": "object",
       "description": "Error definition.",
       "properties": {
         "code": {
