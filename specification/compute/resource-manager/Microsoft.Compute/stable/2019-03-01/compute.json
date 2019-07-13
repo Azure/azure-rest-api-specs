@@ -5454,7 +5454,9 @@
         "platformFaultDomainCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of fault domains that the host group can span. Supported values 1,2,3."
+          "minimum": 1, 
+          "maximum": 3, 
+          "description": "Number of fault domains that the host group can span."
         },
         "hosts": {
           "type": "array",
@@ -5601,7 +5603,9 @@
         "platformFaultDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Fault domain of the dedicated host within a dedicated host group. Supported values 0,1,2."
+          "minimum": 0, 
+          "maximum": 2, 
+          "description": "Fault domain of the dedicated host within a dedicated host group."
         },
         "autoReplaceOnFailure": {
           "type": "boolean",
