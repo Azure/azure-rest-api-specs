@@ -646,7 +646,315 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
+    
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}": {
+      "get": {
+        "operationId": "VpnServerConfigurations_Get",
+        "x-ms-examples": {
+          "VpnServerConfigurationGet": {
+            "$ref": "./examples/VpnServerConfigurationGet.json"
+          }
+        },
+        "description": "Retrieves the details of a VpnServerConfiguration.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnServerConfiguration."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration being retrieved."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VpnServerConfiguration retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VpnServerConfigurations_CreateOrUpdate",
+        "x-ms-examples": {
+          "VpnServerConfigurationCreate": {
+            "$ref": "./examples/VpnServerConfigurationPut.json"
+          }
+        },
+        "description": "Creates a VpnServerConfiguration resource if it doesn't exist else updates the existing VpnServerConfiguration.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnServerConfiguration."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration being created or updated."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "VpnServerConfigurationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            },
+            "description": "Parameters supplied to create or update VpnServerConfiguration."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VpnServerConfiguration created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VpnServerConfiguration created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "patch": {
+        "tags": [
+          "VpnServerConfigurations"
+        ],
+        "operationId": "VpnServerConfigurations_UpdateTags",
+        "x-ms-examples": {
+          "VpnServerConfigurationUpdate": {
+            "$ref": "./examples/VpnServerConfigurationUpdateTags.json"
+          }
+        },
+        "description": "Updates VpnServerConfiguration tags.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnServerConfiguration."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration being updated."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "VpnServerConfigurationParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to update VpnServerConfiguration tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VpnServerConfiguration updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VpnServerConfiguration updated.",
+            "schema": {
+              "$ref": "#/definitions/VpnServerConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "VpnServerConfigurations_Delete",
+        "x-ms-examples": {
+          "VpnServerConfigurationDelete": {
+            "$ref": "./examples/VpnServerConfigurationDelete.json"
+          }
+        },
+        "description": "Deletes a VpnServerConfiguration.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnServerConfiguration."
+          },
+          {
+            "name": "vpnServerConfigurationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VpnServerConfiguration being deleted."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. VpnServerConfiguration deleted."
+          },
+          "202": {
+            "description": "Request received successfully. VpnServerConfiguration deletion is in progress."
+          },
+          "204": {
+            "description": "No VpnServerConfigurations exist by the name provided."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations": {
+      "get": {
+        "operationId": "VpnServerConfigurations_ListByResourceGroup",
+        "x-ms-examples": {
+          "VpnServerConfigurationListByResourceGroup": {
+            "$ref": "./examples/VpnServerConfigurationListByResourceGroup.json"
+          }
+        },
+        "description": "Lists all the vpnServerConfigurations in a resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VpnServerConfiguration."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the vpnServerConfigurations in the resource group.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnServerConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/vpnServerConfigurations": {
+      "get": {
+        "operationId": "VpnServerConfigurations_List",
+        "x-ms-examples": {
+          "VpnServerConfigurationList": {
+            "$ref": "./examples/VpnServerConfigurationList.json"
+          }
+        },
+        "description": "Lists all the VpnServerConfigurations in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VpnServerConfigurations in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/ListVpnServerConfigurationsResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },	
+	
+	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
       "post": {
         "operationId": "VpnSitesConfiguration_Download",
         "x-ms-examples": {
@@ -2593,7 +2901,330 @@
       ],
       "description": "List of Vpn-Sites."
     },
-    "VirtualHubProperties": {
+    "VpnServerConfigVpnClientRootCertificatePropertiesFormat": {
+      "properties": {
+        "publicCertData": {
+          "type": "string",
+          "description": "The certificate public data."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the VpnServerConfiguration VPN client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "required": [
+        "publicCertData"
+      ],
+      "description": "Properties of VPN client root certificate of VpnServerConfiguration."
+    },
+    "VpnServerConfigVpnClientRootCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnServerConfigVpnClientRootCertificatePropertiesFormat",
+          "description": "Properties of the VpnServerConfiguration VPN client root certificate."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "VPN client root certificate of VpnServerConfiguration."
+    },
+    "VpnServerConfigRadiusServerRootCertificatePropertiesFormat": {
+      "properties": {
+        "publicCertData": {
+          "type": "string",
+          "description": "The certificate public data."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the VpnServerConfiguration Radius Server root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "required": [
+        "publicCertData"
+      ],
+      "description": "Properties of Radius Server root certificate of VpnServerConfiguration."
+    },
+    "VpnServerConfigRadiusServerRootCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnServerConfigRadiusServerRootCertificatePropertiesFormat",
+          "description": "Properties of the VpnServerConfiguration Radius Server root certificate."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Radius Server root certificate of VpnServerConfiguration."
+    },
+    "VpnServerConfigVpnClientRevokedCertificatePropertiesFormat": {
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "The revoked VPN client certificate thumbprint."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the VPN client revoked certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of the revoked VPN client certificate of VpnServerConfiguration."
+    },
+    "VpnServerConfigVpnClientRevokedCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnServerConfigVpnClientRevokedCertificatePropertiesFormat",
+          "description": "Properties of the vpn client revoked certificate."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "VPN client revoked certificate of VpnServerConfiguration."
+    },
+    "VpnServerConfigRadiusClientRootCertificatePropertiesFormat": {
+      "properties": {
+        "thumbprint": {
+          "type": "string",
+          "description": "The Radius client root certificate thumbprint."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the Radius client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        }
+      },
+      "description": "Properties of the Radius client root certificate of VpnServerConfiguration."
+    },
+    "VpnServerConfigRadiusClientRootCertificate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnServerConfigRadiusClientRootCertificatePropertiesFormat",
+          "description": "Properties of the Radius client root certificate."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Radius client root certificate of VpnServerConfiguration."
+    },
+    "AadAuthenticationParameters": {
+      "properties": {
+        "aadTenant": {
+          "type": "string",
+          "description": "AAD Vpn authentication parameter AAD tenant."
+        },
+        "aadAudience": {
+          "type": "string",
+          "description": "AAD Vpn authentication parameter AAD audience."
+        },
+        "aadIssuer": {
+          "type": "string",
+          "description": "AAD Vpn authentication parameter AAD issuer."
+        },
+      },
+      "description": "AAD Vpn authentication type related parameters."
+    },
+    "VpnServerConfigurationProperties": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the VpnServerConfiguration that is unique within a resource group."
+        },
+        "vpnProtocols": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "VPN protocol enabled for the VpnServerConfiguration.",
+            "enum": [
+              "IkeV2",
+              "OpenVPN"
+            ],
+            "x-ms-enum": {
+              "name": "VpnGatewayTunnelingProtocol",
+              "modelAsString": true
+            }
+          },
+          "description": "VPN protocols for the VpnServerConfiguration."
+        },
+        "vpnAuthenticationTypes": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "VPN authentication types enabled for the VpnServerConfiguration.",
+            "enum": [
+              "Certificate",
+              "Radius",
+              "AAD"			  
+            ],
+            "x-ms-enum": {
+              "name": "VpnAuthenticationType",
+              "modelAsString": true
+            }
+          },
+          "description": "VPN authentication types for the VpnServerConfiguration."
+        },		
+        "VpnServerConfigVpnClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigVpnClientRootCertificate"
+          },
+          "description": "VPN client root certificate of VpnServerConfiguration."
+        },
+        "VpnServerConfigVpnClientRevokedCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigVpnClientRevokedCertificate"
+          },
+          "description": "VPN client revoked certificate of VpnServerConfiguration."
+        },
+        "VpnServerConfigRadiusServerRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigRadiusServerRootCertificate"
+          },
+          "description": "Radius Server root certificate of VpnServerConfiguration."
+        },
+        "VpnServerConfigRadiusClientRootCertificates": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfigRadiusClientRootCertificate"
+          },
+          "description": "Radius client root certificate of VpnServerConfiguration."
+        },
+        "vpnClientIpsecPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "./virtualNetworkGateway.json#/definitions/IpsecPolicy"
+          },
+          "description": "VpnClientIpsecPolicies for VpnServerConfiguration."
+        },
+        "radiusServerAddress": {
+          "type": "string",
+          "description": "The radius server address property of the VpnServerConfiguration resource for point to site client connection."
+        },
+        "radiusServerSecret": {
+          "type": "string",
+          "description": "The radius secret property of the VpnServerConfiguration resource for point to site client connection."
+        },
+        "aadAuthenticationParameters": {
+          "$ref": "#/definitions/AadAuthenticationParameters",
+          "description": "The set of aad vpn authentication parameters."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The provisioning state of the VpnServerConfiguration resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        },
+        "p2SVpnGateways": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "List of references to P2SVpnGateways."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "description": "Parameters for VpnServerConfiguration."
+    },
+    "VpnServerConfiguration": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VpnServerConfigurationProperties",
+          "description": "Properties of the P2SVpnServer configuration."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "VpnServerConfiguration Resource."
+    },
+    "ListVpnServerConfigurationsResult": {
+      "description": "Result of the request to list all VpnServerConfigurations. It contains a list of VpnServerConfigurations and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VpnServerConfiguration"
+          },
+          "description": "List of VpnServerConfigurations."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+	"VirtualHubProperties": {
       "properties": {
         "virtualWan": {
           "$ref": "./network.json#/definitions/SubResource",
@@ -3258,7 +3889,7 @@
             }
           },
           "description": "VPN protocols for the P2SVpnServerConfiguration."
-        },
+        },		
         "p2SVpnServerConfigVpnClientRootCertificates": {
           "type": "array",
           "items": {
