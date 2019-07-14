@@ -928,10 +928,10 @@
           "Get an AwsCloudTrail data connector.": {
             "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
           },
-          "Get an AATP data connector.": {
+          "Get an AzureAdvancedThreatProtection data connector.": {
             "$ref": "./examples/dataConnectors/GetAzureAdvancedThreatProtectionById.json"
           },
-          "Get a MDATP data connector": {
+          "Get a MicrosoftDefenderAdvancedThreatProtection data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
           }
         },
@@ -2542,10 +2542,10 @@
           }
         }
     },
-    "AATPDataConnector": {
+    "AzureAdvancedThreatProtectionDataConnector": {
       "x-ms-discriminator-value": "AzureAdvancedThreatProtection",
       "type": "object",
-      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
+      "description": "Represents Azure Advanced Threat Protection data connector.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
@@ -2554,7 +2554,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+          "description": "Azure Advanced Threat Protection data connector properties.",
           "$ref": "#/definitions/AATPDataConnectorProperties"
         }
       }
@@ -2571,10 +2571,10 @@
         }
       ]
     },
-    "MDATPDataConnector": {
+    "MicrosoftDefenderAdvancedThreatProtectionDataConnector": {
       "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection",
       "type": "object",
-      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
+      "description": "Represents Microsoft Defender Advanced Threat Protection data connector.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
@@ -2583,7 +2583,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+          "description": "Microsoft Defender Advanced Threat Protection data connector properties.",
           "$ref": "#/definitions/MDATPDataConnectorProperties"
         }
       }
