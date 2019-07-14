@@ -32,6 +32,14 @@ tag: package-2019-03
 ```
 
 
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
+```
 ### Tag: package-2019-03
 
 These settings apply only when `--tag=package-2019-03` is specified on the command line.

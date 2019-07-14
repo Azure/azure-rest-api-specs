@@ -474,6 +474,10 @@
           "items": {
             "$ref": "#/definitions/JitNetworkAccessPortRule"
           }
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "description": "Public IP address of the Azure Firewall that is linked to this policy, if applicable"
         }
       }
     },
@@ -641,6 +645,10 @@
               }
             ]
           }
+        },
+        "mappedPort": {
+          "type": "integer",
+          "description": "The port which is mapped to this port's `number` in the Azure Firewall, if applicable"
         }
       },
       "required": [

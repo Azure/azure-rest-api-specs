@@ -373,6 +373,54 @@
         }
       ]
     },
+    "GetUserTablesOracleTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTablesOracle",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of Oracle schemas",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesOracleTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesOracleTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "GetUserTablesPostgreSqlTaskProperties": {
+      "x-ms-discriminator-value": "GetUserTablesPostgreSql",
+      "type": "object",
+      "description": "Properties for the task that collects user tables for the given list of databases",
+      "properties": {
+        "input": {
+          "description": "Task input",
+          "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskInput"
+        },
+        "output": {
+          "description": "Task output. This is ignored if submitted.",
+          "type": "array",
+          "items": {
+            "$ref": "./OracleAzureDbPostgreSqlSyncTask.json#/definitions/GetUserTablesPostgreSqlTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
     "ConnectToTargetSqlMITaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI",
       "type": "object",
