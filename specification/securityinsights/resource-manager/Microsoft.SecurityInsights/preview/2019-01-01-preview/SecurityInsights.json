@@ -928,10 +928,10 @@
           "Get an AwsCloudTrail data connector.": {
             "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
           },
-          "Get an AzureAdvancedThreatProtection data connector.": {
+          "Get an AATP data connector.": {
             "$ref": "./examples/dataConnectors/GetAzureAdvancedThreatProtectionById.json"
           },
-          "Get a MicrosoftDefenderAdvancedThreatProtection data connector": {
+          "Get a MDATP data connector": {
             "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
           }
         },
@@ -2542,10 +2542,10 @@
           }
         }
     },
-    "AzureAdvancedThreatProtectionDataConnector": {
+    "AATPDataConnector": {
       "x-ms-discriminator-value": "AzureAdvancedThreatProtection",
       "type": "object",
-      "description": "Represents Azure Advanced Threat Protection data connector.",
+      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
@@ -2554,14 +2554,14 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Azure Advanced Threat Protection data connector properties.",
-          "$ref": "#/definitions/AzureAdvancedThreatProtectionDataConnectorProperties"
+          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+          "$ref": "#/definitions/AATPDataConnectorProperties"
         }
       }
     },
-    "AzureAdvancedThreatProtectionDataConnectorProperties": {
+    "AATPDataConnectorProperties": {
       "type": "object",
-      "description": "Azure Advanced Threat Protection data connector properties.",
+      "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
@@ -2571,10 +2571,10 @@
         }
       ]
     },
-    "MicrosoftDefenderAdvancedThreatProtectionDataConnector": {
+    "MDATPDataConnector": {
       "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection",
       "type": "object",
-      "description": "Represents Microsoft Defender Advanced Threat Protection data connector.",
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnector"
@@ -2583,14 +2583,14 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Microsoft Defender Advanced Threat Protection data connector properties.",
-          "$ref": "#/definitions/MicrosoftDefenderAdvancedThreatProtectionDataConnectorProperties"
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+          "$ref": "#/definitions/MDATPDataConnectorProperties"
         }
       }
     },
-    "MicrosoftDefenderAdvancedThreatProtectionDataConnectorProperties": {
+    "MDATPDataConnectorProperties": {
       "type": "object",
-      "description": "Microsoft Defender Advanced Threat Protection data connector properties.",
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
