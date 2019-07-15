@@ -109,7 +109,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Search
   clear-output-folder: true
-  output-folder: $(csharp-sdks-folder)/Search/DataPlane/Microsoft.Azure.Search.Service/Generated
+  output-folder: $(csharp-sdks-folder)/search/Microsoft.Azure.Search.Service/src/Generated
 
 directive: 
   # TODO: Remove this workaround once AutoRest fixes the incorrect code generation when using a parameterized host and both client and operation groups paths.
