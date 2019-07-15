@@ -75,3 +75,21 @@ csharp:
   clear-output-folder: true
   add-credentials: true
 ```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: containerregistry.json
+    where: $.definitions.AccessToken.properties.access_token
+    reason: Property name is used in compliance with Docker's own specs for compatibility purposes. Specifics https://docs.docker.com/registry/spec/auth/oauth/
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: containerregistry.json
+    where: $.definitions.RefreshToken.properties.refresh_token
+    reason: Property name is used in compliance with Docker's own specs for compatibility purposes. Specifics https://docs.docker.com/registry/spec/auth/oauth/
+  - suppress: LROStatusCodesReturnTypeSchema
+    reason: No content is returned by put Manifest in compliance with Docker's own specs for compatibility purposes. Specifics https://docs.docker.com/registry/spec/api/#put-manifest
+    from: containerregistry.json
+    where: $.paths["/v2/{name}/manifests/{reference}"].put.responses["201"]
+```
