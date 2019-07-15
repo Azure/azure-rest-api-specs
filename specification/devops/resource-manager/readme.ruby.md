@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2019-07-01-preview --ruby` is spec
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2019-07-01-preview' && $(ruby)
-namespace: Microsoft.DevOps
-output-folder: $(ruby-sdks-folder)/devops
+namespace: Azure::DevOps::Mgmt::V2019_07_01_preview
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_devops/lib
 ```

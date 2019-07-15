@@ -10,6 +10,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.DevOps
-  output-folder: $(csharp-sdks-folder)/devops/management/Microsoft.DevOps/GeneratedProtocol
+  namespace: Microsoft.Azure.Management.DevOps
+  output-folder: $(csharp-sdks-folder)/devops/Microsoft.Azure.Management.DevOps/src/Generated
 ```

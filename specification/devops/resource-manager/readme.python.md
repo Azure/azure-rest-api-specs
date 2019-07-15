@@ -8,8 +8,8 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.DevOps
-  package-name: devops
+  namespace: azure.mgmt.devops
+  package-name: azure-mgmt-devops
   package-version: 2019-07-01-preview
   clear-output-folder: true
 ```
@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt/devops
+  output-folder: $(python-sdks-folder)/devops/azure-mgmt-devops/azure/mgmt/devops
 ```
