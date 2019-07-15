@@ -316,6 +316,58 @@
         "connectionString"
       ]
     },
+    "AzureSqlMILinkedService": {
+      "x-ms-discriminator-value": "AzureSqlMI",
+      "description": "Azure SQL Managed Instance linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure SQL Managed Instance linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureSqlMILinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureSqlMILinkedServiceTypeProperties": {
+      "description": "Azure SQL Managed Instance linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The ID of the service principal used to authenticate against Azure SQL Managed Instance. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The key of the service principal used to authenticate against Azure SQL Managed Instance."
+        },
+        "tenant": {
+          "type": "object",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
     "AzureBatchLinkedService": {
       "x-ms-discriminator-value": "AzureBatch",
       "description": "Azure Batch linked service.",
@@ -512,6 +564,170 @@
         },
         "password": {
           "description": "Password to access the Dynamics instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "deploymentType",
+        "authenticationType",
+        "username"
+      ]
+    },
+    "DynamicsCrmLinkedService": {
+      "x-ms-discriminator-value": "DynamicsCrm",
+      "description": "Dynamics CRM linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Dynamics CRM linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DynamicsCrmLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "DynamicsCrmLinkedServiceTypeProperties": {
+      "description": "Dynamics CRM linked service properties.",
+      "properties": {
+        "deploymentType": {
+          "x-ms-enum": {
+            "name": "DynamicsDeploymentType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Online",
+            "OnPremisesWithIfd"
+          ],
+          "type": "string",
+          "description": "The deployment type of the Dynamics CRM instance. 'Online' for Dynamics CRM Online and 'OnPremisesWithIfd' for Dynamics CRM on-premises with Ifd. Type: string (or Expression with resultType string)."
+        },
+        "hostName": {
+          "type": "object",
+          "description": "The host name of the on-premises Dynamics CRM server. The property is required for on-prem and not allowed for online. Type: string (or Expression with resultType string)."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port of on-premises Dynamics CRM server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0."
+        },
+        "serviceUri": {
+          "type": "object",
+          "description": "The URL to the Microsoft Dynamics CRM server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
+        },
+        "organizationName": {
+          "type": "object",
+          "description": "The organization name of the Dynamics CRM instance. The property is required for on-prem and required for online when there are more than one Dynamics CRM instances associated with the user. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "DynamicsAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Office365",
+            "Ifd"
+          ],
+          "type": "string",
+          "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "User name to access the Dynamics CRM instance. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to access the Dynamics CRM instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "deploymentType",
+        "authenticationType",
+        "username"
+      ]
+    },
+    "CommonDataServiceForAppsLinkedService": {
+      "x-ms-discriminator-value": "CommonDataServiceForApps",
+      "description": "Common Data Service for Apps linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Common Data Service for Apps linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CommonDataServiceForAppsLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CommonDataServiceForAppsLinkedServiceTypeProperties": {
+      "description": "Common Data Service for Apps linked service properties.",
+      "properties": {
+        "deploymentType": {
+          "x-ms-enum": {
+            "name": "DynamicsDeploymentType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Online",
+            "OnPremisesWithIfd"
+          ],
+          "type": "string",
+          "description": "The deployment type of the Common Data Service for Apps instance. 'Online' for Common Data Service for Apps Online and 'OnPremisesWithIfd' for Common Data Service for Apps on-premises with Ifd. Type: string (or Expression with resultType string)."
+        },
+        "hostName": {
+          "type": "object",
+          "description": "The host name of the on-premises Common Data Service for Apps server. The property is required for on-prem and not allowed for online. Type: string (or Expression with resultType string)."
+        },
+        "port": {
+          "type": "object",
+          "description": "The port of on-premises Common Data Service for Apps server. The property is required for on-prem and not allowed for online. Default is 443. Type: integer (or Expression with resultType integer), minimum: 0."
+        },
+        "serviceUri": {
+          "type": "object",
+          "description": "The URL to the Microsoft Common Data Service for Apps server. The property is required for on-line and not allowed for on-prem. Type: string (or Expression with resultType string)."
+        },
+        "organizationName": {
+          "type": "object",
+          "description": "The organization name of the Common Data Service for Apps instance. The property is required for on-prem and required for online when there are more than one Common Data Service for Apps instances associated with the user. Type: string (or Expression with resultType string)."
+        },
+        "authenticationType": {
+          "x-ms-enum": {
+            "name": "DynamicsAuthenticationType",
+            "modelAsString": true
+          },
+          "enum": [
+            "Office365",
+            "Ifd"
+          ],
+          "type": "string",
+          "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "User name to access the Common Data Service for Apps instance. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to access the Common Data Service for Apps instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
         "encryptedCredential": {

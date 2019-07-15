@@ -862,15 +862,27 @@
         "purchaseProperties": {
           "$ref": "#/definitions/PurchaseRequest"
         },
-        "lockedPriceTotal": {
+        "pricingCurrencyTotal": {
           "type": "object",
-          "description": "Locked currency & amount for new reservation purchase at the time of renewal. Price is locked 30 days before expiry date time if renew is true.",
+          "description": "Amount that Microsoft uses for record. Used during refund for calculating refund limit. Tax is not included. This is locked price 30 days before expiry.",
           "properties": {
             "currencyCode": {
               "type": "string"
             },
             "amount": {
+              "type": "number"
+            }
+          }
+        },
+        "billingCurrencyTotal": {
+          "type": "object",
+          "description": "Currency and amount that customer will be charged in customer's local currency for renewal purchase. Tax is not included.",
+          "properties": {
+            "currencyCode": {
               "type": "string"
+            },
+            "amount": {
+              "type": "number"
             }
           }
         }
@@ -1385,7 +1397,11 @@
         "VirtualMachines",
         "SqlDatabases",
         "SuseLinux",
-        "CosmosDb"
+        "CosmosDb",
+        "RedHat",
+        "SqlDataWarehouse",
+        "VMwareCloudSimple",
+        "RedHatOsa"
       ],
       "x-ms-enum": {
         "name": "ReservedResourceType",
