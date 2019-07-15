@@ -2839,11 +2839,16 @@
         "name": {
           "type": "string",
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ChildResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "VpnSiteLink Resource."
@@ -3264,11 +3269,16 @@
           "type": "string",
           "readOnly": true,
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type."
         }
       },
       "allOf": [
         {
-          "$ref": "./network.json#/definitions/ChildResource"
+          "$ref": "./network.json#/definitions/SubResource"
         }
       ],
       "description": "VpnSiteLinkConnection Resource."
