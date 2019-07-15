@@ -196,6 +196,9 @@
           },
           "Create load balancer with inbound nat pool": {
             "$ref": "./examples/LoadBalancerCreateWithInboundNatPool.json"
+          },
+          "Create load balancer with outbound rules": {
+            "$ref": "./examples/LoadBalancerCreateWithOutboundRules.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -1191,11 +1194,16 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "The name of the resource that is unique within the set of frontend IP configurations used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         },
         "zones": {
           "type": "array",
@@ -1235,6 +1243,14 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Gets outbound rules that use this backend address pool."
         },
+        "outboundRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "Gets outbound rules that use this backend address pool."
+        },
         "provisioningState": {
           "type": "string",
           "description": "Get provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
@@ -1251,11 +1267,16 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Gets name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1343,11 +1364,16 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "The name of the resource that is unique within the set of load balancing rules used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1419,11 +1445,16 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Gets name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1487,11 +1518,16 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "Gets name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1561,11 +1597,16 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "The name of the resource that is unique within the set of inbound NAT pools used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1624,7 +1665,7 @@
         "frontendIPConfigurations",
         "protocol"
       ],
-      "description": "Outbound pool of the load balancer."
+      "description": "Outbound rule of the load balancer."
     },
     "OutboundRule": {
       "properties": {
@@ -1635,11 +1676,16 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+          "description": "The name of the resource that is unique within the set of outbound rules used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
         }
       },
       "allOf": [
@@ -1647,7 +1693,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Outbound pool of the load balancer."
+      "description": "Outbound rule of the load balancer."
     },
     "LoadBalancerPropertiesFormat": {
       "properties": {
