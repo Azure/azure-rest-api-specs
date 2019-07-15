@@ -33,10 +33,11 @@ tag: package-2019-07
 
 These settings apply only when `--tag=package-2019-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-08'
+``` yaml $(tag) == 'package-2019-07'
 input-file:
 - Microsoft.ContainerRegistry/preview/2019-07-15/containerregistry.json
 ```
+
 
 ### Tag: package-2018-08
 
