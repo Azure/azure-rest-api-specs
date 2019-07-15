@@ -714,7 +714,62 @@
         }
       }
     },
-    "/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails": {
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationsummaries": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsSummaries_ListByReservationOrderAndReservation",
+        "description": "Lists the reservations summaries for daily or monthly grain.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationSummariesDailyWithReservationId": {
+            "$ref": "./examples/ReservationSummariesDailyWithBillingAccountId.json"
+          },
+          "ReservationSummariesMonthlyWithReservationId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingAccountId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          },
+          {
+            "$ref": "#/parameters/grainParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationSummariesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },    
+	"/providers/Microsoft.Capacity/reservationorders/{reservationOrderId}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservedInstances"
@@ -815,7 +870,56 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/reservationRecommendations": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationdetails": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationsDetails_ListByReservationOrder",
+        "description": "Lists the reservations details for provided date range.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationDetails": {
+            "$ref": "./examples/ReservationDetailsByBillingAccountId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/BillingAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/reservationRecommendations": {
       "get": {
         "tags": [
           "ReservationRecommendations"
@@ -867,7 +971,56 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingPeriodId}/providers/microsoft.consumption/ReservationRecommendations": {
+      "get": {
+        "tags": [
+          "ReservationRecommendations"
+        ],
+        "operationId": "ReservationRecommendations_List",
+        "description": "List of recommendations for purchasing reserved instances on billing account scope",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationRecommendations": {
+            "$ref": "./examples/ReservationRecommendationsByBillingAccountList.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "May be used to filter reservationRecommendations by properties/scope and properties/lookBackPeriod.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationRecommendationsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default": {
       "get": {
         "tags": [
           "PriceSheet"
