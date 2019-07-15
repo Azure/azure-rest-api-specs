@@ -1,11 +1,11 @@
-{
+﻿{
     "swagger": "2.0",
     "info": {
-        "version": "3.0",
+        "version": "3.1",
         "title": "Custom Vision Training Client"
     },
     "host": "southcentralus.api.cognitive.microsoft.com",
-    "basePath": "/customvision/v3.0/training",
+    "basePath": "/customvision/v3.1/training",
     "schemes": [
         "https"
     ],
@@ -457,7 +457,11 @@
                 "summary": "Delete images from the set of training images.",
                 "operationId": "DeleteImages",
                 "consumes": [],
-                "produces": [],
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml"
+                ],
                 "parameters": [
                     {
                         "name": "projectId",
@@ -472,7 +476,7 @@
                         "name": "imageIds",
                         "in": "query",
                         "description": "Ids of the images to be deleted. Limited to 256 images per batch.",
-                        "required": true,
+                        "required": false,
                         "type": "array",
                         "items": {
                             "type": "string",
@@ -484,10 +488,27 @@
                         "minItems": 0
                     },
                     {
+                        "name": "allImages",
+                        "in": "query",
+                        "description": "Flag to specify delete all images, specify this flag or a list of images. Using this flag will return a 202 response to indicate the images are being deleted.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
+                        "name": "allIterations",
+                        "in": "query",
+                        "description": "Removes these images from all iterations, not just the current workspace. Using this flag will return a 202 response to indicate the images are being deleted.",
+                        "required": false,
+                        "type": "boolean"
+                    },
+                    {
                         "$ref": "#/parameters/ApiKey"
                     }
                 ],
                 "responses": {
+                    "202": {
+                        "description": "Accepted"
+                    },
                     "204": {
                         "description": "No Content"
                     },
@@ -501,6 +522,62 @@
                 "x-ms-examples": {
                     "Successful DeleteImages request": {
                         "$ref": "./examples/DeleteImages.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/images/{imageId}/regionproposals": {
+            "post": {
+                "tags": [
+                    "ImageRegionProposalApi"
+                ],
+                "summary": "Get region proposals for an image. Returns empty array if no proposals are found.",
+                "description": "This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.",
+                "operationId": "GetImageRegionProposals",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "imageId",
+                        "in": "path",
+                        "description": "The image id.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ImageRegionProposal"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response",
+                        "schema": {
+                            "$ref": "#/definitions/CustomVisionError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful GetImageRegionProposals request": {
+                        "$ref": "./examples/GetImageRegionProposals.json"
                     }
                 }
             }
@@ -819,6 +896,154 @@
                 "x-ms-examples": {
                     "Successful DeleteImageRegions request": {
                         "$ref": "./examples/DeleteImageRegions.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/images/suggested": {
+            "post": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Get untagged images whose suggested tags match given tags. Returns empty array if no images are found.",
+                "description": "This API will fetch untagged images filtered by suggested tags Ids. It returns an empty array if no images are found.",
+                "operationId": "QuerySuggestedImages",
+                "consumes": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "iterationId",
+                        "in": "query",
+                        "description": "IterationId to use for the suggested tags and regions.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "query",
+                        "in": "body",
+                        "description": "Contains properties we need to query suggested images.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/SuggestedTagAndRegionQueryToken"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/SuggestedTagAndRegionQuery"
+                        }
+                    },
+                    "default": {
+                        "description": "Error response",
+                        "schema": {
+                            "$ref": "#/definitions/CustomVisionError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful QuerySuggestedImages request": {
+                        "$ref": "./examples/QuerySuggestedImages.json"
+                    }
+                }
+            }
+        },
+        "/projects/{projectId}/images/suggested/count": {
+            "post": {
+                "tags": [
+                    "ImageApi"
+                ],
+                "summary": "Get count of images whose suggested tags match given tags and their probabilities are greater than or equal to the given threshold. Returns count as 0 if none found.",
+                "description": "This API takes in tagIds to get count of untagged images per suggested tags for a given threshold.",
+                "operationId": "QuerySuggestedImageCount",
+                "consumes": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml",
+                    "application/x-www-form-urlencoded"
+                ],
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "iterationId",
+                        "in": "query",
+                        "description": "IterationId to use for the suggested tags and regions.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "query",
+                        "in": "body",
+                        "description": "Model that contains tagIds, threshold and projectType to query by.",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/TagFilter"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "object",
+                            "additionalProperties": {
+                                "format": "int32",
+                                "type": "integer"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error response",
+                        "schema": {
+                            "$ref": "#/definitions/CustomVisionError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful QuerySuggestedImageCount request": {
+                        "$ref": "./examples/QuerySuggestedImageCount.json"
                     }
                 }
             }
@@ -1343,62 +1568,6 @@
                 }
             }
         },
-        "/projects/{projectId}/images/{imageId}/regionproposals": {
-            "post": {
-                "tags": [
-                    "ImageRegionProposalApi"
-                ],
-                "summary": "Get region proposals for an image. Returns empty array if no proposals are found.",
-                "description": "This API will get region proposals for an image along with confidences for the region. It returns an empty array if no proposals are found.",
-                "operationId": "GetImageRegionProposals",
-                "consumes": [],
-                "produces": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "name": "projectId",
-                        "in": "path",
-                        "description": "The project id.",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "name": "imageId",
-                        "in": "path",
-                        "description": "The image id.",
-                        "required": true,
-                        "type": "string",
-                        "format": "uuid",
-                        "x-nullable": false
-                    },
-                    {
-                        "$ref": "#/parameters/ApiKey"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/ImageRegionProposal"
-                        }
-                    },
-                    "default": {
-                        "description": "Error response",
-                        "schema": {
-                            "$ref": "#/definitions/CustomVisionError"
-                        }
-                    }
-                },
-                "x-ms-examples": {
-                    "Successful GetImageRegionProposals request": {
-                        "$ref": "./examples/GetImageRegionProposals.json"
-                    }
-                }
-            }
-        },
         "/projects/{projectId}/iterations": {
             "get": {
                 "tags": [
@@ -1739,7 +1908,9 @@
                             "Windows",
                             "ONNX10",
                             "ONNX12",
-                            "ARM"
+                            "ARM",
+                            "TensorFlowNormal",
+                            "TensorFlowLite"
                         ]
                     },
                     {
@@ -2291,6 +2462,14 @@
                         "format": "uuid"
                     },
                     {
+                        "name": "store",
+                        "in": "query",
+                        "description": "Optional. Specifies whether or not to store the result of this prediction. The default is true, to store.",
+                        "required": false,
+                        "type": "boolean",
+                        "default": true
+                    },
+                    {
                         "name": "imageData",
                         "in": "formData",
                         "description": "Binary image data. Supported formats are JPEG, GIF, PNG, and BMP. Supports images up to 6MB.",
@@ -2366,6 +2545,14 @@
                         "required": false,
                         "type": "string",
                         "format": "uuid"
+                    },
+                    {
+                        "name": "store",
+                        "in": "query",
+                        "description": "Optional. Specifies whether or not to store the result of this prediction. The default is true, to store.",
+                        "required": false,
+                        "type": "boolean",
+                        "default": true
                     },
                     {
                         "$ref": "#/parameters/ApiKey"
@@ -2704,6 +2891,82 @@
                 }
             }
         },
+        "/projects/{projectId}/tagsandregions/suggestions": {
+            "post": {
+                "tags": [
+                    "SuggestTagsAndRegionsApi"
+                ],
+                "summary": "Suggest tags and regions for an array/batch of untagged images. Returns empty array if no tags are found.",
+                "description": "This API will get suggested tags and regions for an array/batch of untagged images along with confidences for the tags. It returns an empty array if no tags are found.\r\nThere is a limit of 64 images in the batch.",
+                "operationId": "SuggestTagsAndRegions",
+                "consumes": [],
+                "produces": [
+                    "application/json",
+                    "application/xml",
+                    "text/xml"
+                ],
+                "parameters": [
+                    {
+                        "name": "projectId",
+                        "in": "path",
+                        "description": "The project id.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "iterationId",
+                        "in": "query",
+                        "description": "IterationId to use for tag and region suggestion.",
+                        "required": true,
+                        "type": "string",
+                        "format": "uuid",
+                        "x-nullable": false
+                    },
+                    {
+                        "name": "imageIds",
+                        "in": "query",
+                        "description": "Array of image ids tag suggestion are needed for. Use GetUntaggedImages API to get imageIds.",
+                        "required": true,
+                        "type": "array",
+                        "items": {
+                            "type": "string",
+                            "format": "uuid",
+                            "x-nullable": false
+                        },
+                        "collectionFormat": "csv",
+                        "maxItems": 64,
+                        "minItems": 0
+                    },
+                    {
+                        "$ref": "#/parameters/ApiKey"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/SuggestedTagAndRegion"
+                            }
+                        }
+                    },
+                    "default": {
+                        "description": "Error response",
+                        "schema": {
+                            "$ref": "#/definitions/CustomVisionError"
+                        }
+                    }
+                },
+                "x-ms-examples": {
+                    "Successful SuggestTagsAndRegions request": {
+                        "$ref": "./examples/SuggestTagsAndRegions.json"
+                    }
+                }
+            }
+        },
         "/projects/{projectId}/train": {
             "post": {
                 "tags": [
@@ -2851,6 +3114,7 @@
                         "BadRequestProjectUnknownClassification",
                         "BadRequestProjectUnsupportedDomainTypeChange",
                         "BadRequestProjectUnsupportedExportPlatform",
+                        "BadRequestProjectImagePreprocessingSettings",
                         "BadRequestIterationName",
                         "BadRequestIterationNameNotUnique",
                         "BadRequestIterationDescription",
@@ -3042,8 +3306,7 @@
                 "downloadUri": {
                     "description": "URI used to download the model.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "flavor": {
                     "description": "Flavor of the export.",
@@ -3052,7 +3315,9 @@
                         "Windows",
                         "ONNX10",
                         "ONNX12",
-                        "ARM"
+                        "ARM",
+                        "TensorFlowNormal",
+                        "TensorFlowLite"
                     ],
                     "type": "string",
                     "readOnly": true,
@@ -3105,20 +3370,17 @@
                 "resizedImageUri": {
                     "description": "The URI to the (resized) image used for training.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "thumbnailUri": {
                     "description": "The URI to the thumbnail of the original image.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "originalImageUri": {
                     "description": "The URI to the original uploaded image.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "tags": {
                     "description": "Tags associated with this image.",
@@ -3175,8 +3437,7 @@
                 "image": {
                     "$ref": "#/definitions/Image",
                     "description": "The image.",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 }
             }
         },
@@ -3233,8 +3494,7 @@
                 "contents": {
                     "format": "byte",
                     "type": "string",
-                    "readOnly": false,
-                    "x-nullable": false
+                    "readOnly": false
                 },
                 "tagIds": {
                     "type": "array",
@@ -3344,13 +3604,11 @@
                 },
                 "imageUri": {
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "thumbnailUri": {
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "tags": {
                     "type": "array",
@@ -3410,6 +3668,21 @@
                         "x-nullable": false
                     },
                     "readOnly": true
+                }
+            }
+        },
+        "ImageProcessingSettings": {
+            "description": "Represents image preprocessing settings used by image augmentation.",
+            "type": "object",
+            "properties": {
+                "augmentationMethods": {
+                    "description": "Gets or sets enabled image transforms. The key corresponds to the transform name. If value is set to true, then correspondent transform is enabled. Otherwise this transform will not be used.\r\nAugmentation will be uniformly distributed among enabled transforms.",
+                    "type": "object",
+                    "additionalProperties": {
+                        "type": "boolean"
+                    },
+                    "readOnly": false,
+                    "x-nullable": true
                 }
             }
         },
@@ -3943,17 +4216,24 @@
                     "readOnly": true,
                     "x-nullable": false
                 },
+                "trainingTimeInMinutes": {
+                    "format": "int32",
+                    "description": "Gets the training time for the iteration.",
+                    "type": "integer",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
                 "publishName": {
                     "description": "Name of the published model.",
                     "type": "string",
                     "readOnly": true,
-                    "x-nullable": true
+                    "x-nullable": false
                 },
                 "originalPublishResourceId": {
                     "description": "Resource Provider Id this iteration was originally published to.",
                     "type": "string",
                     "readOnly": true,
-                    "x-nullable": true
+                    "x-nullable": false
                 }
             }
         },
@@ -4040,14 +4320,16 @@
             }
         },
         "PredictionQueryResult": {
+            "description": "Query result of the prediction images that were sent to your prediction endpoint.",
             "type": "object",
             "properties": {
                 "token": {
                     "$ref": "#/definitions/PredictionQueryToken",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "description": "Prediction Query Token.",
+                    "readOnly": false
                 },
                 "results": {
+                    "description": "Result of an prediction request.",
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/StoredImagePrediction",
@@ -4172,13 +4454,12 @@
                     "description": "Gets or sets the description of the project.",
                     "type": "string",
                     "readOnly": false,
-                    "x-nullable": false
+                    "x-nullable": true
                 },
                 "settings": {
                     "$ref": "#/definitions/ProjectSettings",
                     "description": "Gets or sets the project settings.",
-                    "readOnly": false,
-                    "x-nullable": false
+                    "readOnly": false
                 },
                 "created": {
                     "format": "date-time",
@@ -4197,11 +4478,10 @@
                 "thumbnailUri": {
                     "description": "Gets the thumbnail url representing the image.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "drModeEnabled": {
-                    "description": "Gets if the DR mode is on.",
+                    "description": "Gets if the Disaster Recovery (DR) mode is on, indicating the project is temporarily read-only.",
                     "type": "boolean",
                     "readOnly": true,
                     "x-nullable": true
@@ -4247,6 +4527,23 @@
                         "type": "string",
                         "x-nullable": false
                     },
+                    "readOnly": false
+                },
+                "useNegativeSet": {
+                    "description": "Indicates if negative set is being used.",
+                    "type": "boolean",
+                    "readOnly": true,
+                    "x-nullable": true
+                },
+                "detectionParameters": {
+                    "description": "Detection parameters in use, if any.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "imageProcessingSettings": {
+                    "$ref": "#/definitions/ImageProcessingSettings",
+                    "description": "Gets or sets image preprocessing settings.",
                     "readOnly": false
                 }
             }
@@ -4309,32 +4606,28 @@
                 },
                 "boundingBox": {
                     "$ref": "#/definitions/BoundingBox",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 }
             }
         },
         "StoredImagePrediction": {
-            "description": "result of an image classification request.",
+            "description": "Result of an image prediction request.",
             "type": "object",
             "properties": {
                 "resizedImageUri": {
                     "description": "The URI to the (resized) prediction image.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "thumbnailUri": {
                     "description": "The URI to the thumbnail of the original prediction image.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "originalImageUri": {
                     "description": "The URI to the original prediction image.",
                     "type": "string",
-                    "readOnly": true,
-                    "x-nullable": false
+                    "readOnly": true
                 },
                 "domain": {
                     "format": "uuid",
@@ -4382,6 +4675,218 @@
                 }
             }
         },
+        "StoredSuggestedTagAndRegion": {
+            "description": "Result of a suggested tags and regions request of the untagged image.",
+            "type": "object",
+            "properties": {
+                "width": {
+                    "format": "int32",
+                    "description": "Width of the resized image.",
+                    "type": "integer",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "height": {
+                    "format": "int32",
+                    "description": "Height of the resized image.",
+                    "type": "integer",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "resizedImageUri": {
+                    "description": "The URI to the (resized) prediction image.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "thumbnailUri": {
+                    "description": "The URI to the thumbnail of the original prediction image.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "originalImageUri": {
+                    "description": "The URI to the original prediction image.",
+                    "type": "string",
+                    "readOnly": true
+                },
+                "domain": {
+                    "format": "uuid",
+                    "description": "Domain used for the prediction.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "id": {
+                    "format": "uuid",
+                    "description": "Prediction Id.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "project": {
+                    "format": "uuid",
+                    "description": "Project Id.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "iteration": {
+                    "format": "uuid",
+                    "description": "Iteration Id.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "created": {
+                    "format": "date-time",
+                    "description": "Date this prediction was created.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "predictions": {
+                    "description": "List of predictions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Prediction",
+                        "x-nullable": false
+                    },
+                    "readOnly": true
+                },
+                "predictionUncertainty": {
+                    "format": "double",
+                    "description": "Uncertainty (entropy) of suggested tags or regions per image.",
+                    "type": "number",
+                    "readOnly": true,
+                    "x-nullable": false
+                }
+            }
+        },
+        "SuggestedTagAndRegion": {
+            "description": "Result of a suggested tags and regions request.",
+            "type": "object",
+            "properties": {
+                "id": {
+                    "format": "uuid",
+                    "description": "Prediction Id.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "project": {
+                    "format": "uuid",
+                    "description": "Project Id.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "iteration": {
+                    "format": "uuid",
+                    "description": "Iteration Id.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "created": {
+                    "format": "date-time",
+                    "description": "Date this prediction was created.",
+                    "type": "string",
+                    "readOnly": true,
+                    "x-nullable": false
+                },
+                "predictions": {
+                    "description": "List of predictions.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/Prediction",
+                        "x-nullable": false
+                    },
+                    "readOnly": true
+                },
+                "predictionUncertainty": {
+                    "format": "double",
+                    "description": "Uncertainty (entropy) of suggested tags or regions per image.",
+                    "type": "number",
+                    "readOnly": true,
+                    "x-nullable": false
+                }
+            }
+        },
+        "SuggestedTagAndRegionQuery": {
+            "description": "The array of result images and token containing session and continuation Ids for the next query.",
+            "type": "object",
+            "properties": {
+                "token": {
+                    "$ref": "#/definitions/SuggestedTagAndRegionQueryToken",
+                    "description": "Contains properties we need to fetch suggested tags for.",
+                    "readOnly": false
+                },
+                "results": {
+                    "description": "Result of a suggested tags and regions request of the untagged image.",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/StoredSuggestedTagAndRegion",
+                        "x-nullable": false
+                    },
+                    "readOnly": true
+                }
+            }
+        },
+        "SuggestedTagAndRegionQueryToken": {
+            "description": "Contains properties we need to fetch suggested tags for. For the first call, Session and continuation set to null.\r\nThen on subsequent calls, uses the session/continuation from the previous SuggestedTagAndRegionQuery result to fetch additional results.",
+            "type": "object",
+            "properties": {
+                "tagIds": {
+                    "description": "Existing TagIds in project to filter suggested tags on.",
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "readOnly": false
+                },
+                "threshold": {
+                    "format": "double",
+                    "description": "Confidence threshold to filter suggested tags on.",
+                    "type": "number",
+                    "readOnly": false,
+                    "x-nullable": false
+                },
+                "session": {
+                    "description": "SessionId for database query. Initially set to null but later used to paginate.",
+                    "type": "string",
+                    "readOnly": false,
+                    "x-nullable": false
+                },
+                "continuation": {
+                    "description": "Continuation Id for database pagination. Initially null but later used to paginate.",
+                    "type": "string",
+                    "readOnly": false,
+                    "x-nullable": false
+                },
+                "maxCount": {
+                    "format": "int32",
+                    "description": "Maximum number of results you want to be returned in the response.",
+                    "type": "integer",
+                    "readOnly": false,
+                    "x-nullable": false
+                },
+                "sortBy": {
+                    "description": "OrderBy. Ordering mechanism for your results.",
+                    "enum": [
+                        "UncertaintyAscending",
+                        "UncertaintyDescending"
+                    ],
+                    "type": "string",
+                    "readOnly": false,
+                    "x-nullable": false,
+                    "x-ms-enum": {
+                        "name": "SortBy",
+                        "modelAsString": true
+                    }
+                }
+            }
+        },
         "Tag": {
             "description": "Represents a Tag.",
             "required": [
@@ -4408,7 +4913,7 @@
                     "description": "Gets or sets the description of the tag.",
                     "type": "string",
                     "readOnly": false,
-                    "x-nullable": false
+                    "x-nullable": true
                 },
                 "type": {
                     "description": "Gets or sets the type of the tag.",
@@ -4429,6 +4934,29 @@
                     "description": "Gets the number of images with this tag.",
                     "type": "integer",
                     "readOnly": true,
+                    "x-nullable": false
+                }
+            }
+        },
+        "TagFilter": {
+            "description": "Model that query for counting of images whose suggested tags match given tags and their probability are greater than or equal to the given threshold.",
+            "type": "object",
+            "properties": {
+                "tagIds": {
+                    "description": "Existing TagIds in project to get suggested tags count for.",
+                    "type": "array",
+                    "items": {
+                        "format": "uuid",
+                        "type": "string",
+                        "x-nullable": false
+                    },
+                    "readOnly": false
+                },
+                "threshold": {
+                    "format": "double",
+                    "description": "Confidence threshold to filter suggested tags on.",
+                    "type": "number",
+                    "readOnly": false,
                     "x-nullable": false
                 }
             }
