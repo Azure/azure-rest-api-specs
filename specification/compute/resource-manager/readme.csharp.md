@@ -19,7 +19,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.Compute
-output-folder: $(csharp-sdks-folder)/Compute/Management.Compute/Generated
+output-folder: $(csharp-sdks-folder)/compute/Microsoft.Azure.Management.Compute/src/Generated
 ```
 
 ## Batch settings
