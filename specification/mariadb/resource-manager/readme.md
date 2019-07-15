@@ -51,6 +51,16 @@ input-file:
 ```
 
 
+### Tag: package-2018-06-01-privatepreview
+
+These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-06-01-privatepreview'
+input-file:
+- Microsoft.DBforMariaDB/preview/2018-06-01-privatepreview/mariadb.json
+```
+
+
 ---
 # Code Generation
 
@@ -104,12 +114,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms/azure/mgmt/rdbms/mariadb
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms/azure/mgmt/rdbms/mariadb
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-rdbms
+  output-folder: $(python-sdks-folder)/rdbms/azure-mgmt-rdbms
 ```
 
 ## Go
@@ -118,34 +128,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.mariadb
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mariadb
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2018-06-01
-```
-
-### Tag: package-2018-06-01 and java
-
-These settings apply only when `--tag=package-2018-06-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-06-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.mariadb.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/mariadb/resource-manager/v2018_06_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)

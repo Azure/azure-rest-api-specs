@@ -1,0 +1,36 @@
+{
+  "operationId": "GetServiceTypeInfoList",
+  "description": "This example shows how to get information about service types that are supported by a provisioned application type in a Service Fabric cluster.",
+  "parameters": {
+    "api-version": "6.0",
+    "applicationTypeName": "Application2Type",
+    "ApplicationTypeVersion": "1.0.0"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "ServiceTypeDescription": {
+            "IsStateful": true,
+            "ServiceTypeName": "Actor1ActorServiceType",
+            "PlacementConstraints": "",
+            "HasPersistedState": true,
+            "Kind": "Stateful",
+            "Extensions": [
+              {
+                "Key": "__GeneratedServiceType__",
+                "Value": "<GeneratedNames xmlns=\"http://schemas.microsoft.com/2015/03/fabact-no-schema\">\r\n            <DefaultService Name=\"Actor1ActorService\" />\r\n            <ReplicatorEndpoint Name=\"Actor1ActorServiceReplicatorEndpoint\" />\r\n            <ReplicatorConfigSection Name=\"Actor1ActorServiceReplicatorConfig\" />\r\n            <ReplicatorSecurityConfigSection Name=\"Actor1ActorServiceReplicatorSecurityConfig\" />\r\n            <StoreConfigSection Name=\"Actor1ActorServiceLocalStoreConfig\" />\r\n            <ServiceEndpointV2 Name=\"Actor1ActorServiceEndpointV2\" />\r\n          </GeneratedNames>"
+              }
+            ],
+            "LoadMetrics": [],
+            "ServicePlacementPolicies": []
+          },
+          "ServiceManifestVersion": "1.0.0",
+          "ServiceManifestName": "Actor1Pkg",
+          "IsServiceGroup": false
+        }
+      ]
+    }
+  }
+}

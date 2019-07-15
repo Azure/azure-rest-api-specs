@@ -1,0 +1,222 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "1.0-preview",
+    "title": "Form Recognizer Client",
+    "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively."
+  },
+  "definitions": {
+    "OperationStatus": {
+      "type": "string",
+      "description": "Status code of the text operation.",
+      "enum": [
+        "Not Started",
+        "Running",
+        "Failed",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "TextOperationStatusCodes",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
+    "TextRecognitionResult": {
+      "description": "An object representing a recognized text region",
+      "type": "object",
+      "required": [
+        "lines"
+      ],
+      "properties": {
+        "page": {
+          "description": "The 1-based page number of the recognition result.",
+          "type": "integer"
+        },
+        "clockwiseOrientation": {
+          "description": "The orientation of the image in degrees in the clockwise direction. Range between [0, 360).",
+          "type": "number"
+        },
+        "width": {
+          "description": "The width of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+        "height": {
+          "description": "The height of the image in pixels or the PDF in inches.",
+          "type": "number"
+        },
+        "unit": {
+          "description": "The unit used in the Width, Height and BoundingBox. For images, the unit is 'pixel'. For PDF, the unit is 'inch'.",
+          "type": "string",
+          "enum": [
+            "pixel",
+            "inch"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultDimensionUnit",
+            "modelAsString": false
+          },
+          "x-nullable": true
+        },
+        "lines": {
+          "description": "A list of recognized text lines.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Line"
+          }
+        }
+      }
+    },
+    "Line": {
+      "description": "An object representing a recognized text line.",
+      "type": "object",
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of a recognized line.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the line.",
+          "type": "string"
+        },
+        "words": {
+          "description": "List of words in the text line.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Word"
+          }
+        }
+      }
+    },
+    "Word": {
+      "description": "An object representing a recognized word.",
+      "type": "object",
+      "required": [
+        "boundingBox",
+        "text"
+      ],
+      "properties": {
+        "boundingBox": {
+          "description": "Bounding box of a recognized word.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "text": {
+          "description": "The text content of the word.",
+          "type": "string"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "type": "string",
+          "enum": [
+            "High",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "TextRecognitionResultConfidenceClass",
+            "modelAsString": false
+          },
+          "x-nullable": true
+        }
+      }
+    },
+    "BoundingBox": {
+      "description": "Quadrangle bounding box, with coordinates in original image. The eight numbers represent the four points (x-coordinate, y-coordinate from the left-top corner of the image) of the detected rectangle from the left-top corner in the clockwise direction. For images, coordinates are in pixels. For PDF, coordinates are in inches.",
+      "type": "array",
+      "items": {
+        "type": "integer",
+        "x-nullable": false
+      }
+    },
+    "ComputerVisionError": {
+      "description": "Details about the API request error.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error code.",
+          "enum": [
+            "InvalidImageFormat",
+            "UnsupportedMediaType",
+            "InvalidImageUrl",
+            "NotSupportedFeature",
+            "NotSupportedImage",
+            "Timeout",
+            "InternalServerError",
+            "InvalidImageSize",
+            "BadArgument",
+            "DetectFaceError",
+            "NotSupportedLanguage",
+            "InvalidThumbnailSize",
+            "InvalidDetails",
+            "InvalidModel",
+            "CancelledRequest",
+            "NotSupportedVisualFeature",
+            "FailedToProcess",
+            "Unspecified",
+            "StorageException"
+          ],
+          "x-ms-enum": {
+            "name": "ComputerVisionErrorCodes",
+            "modelAsString": true
+          }
+        },
+        "message": {
+          "description": "A message explaining the error reported by the service.",
+          "type": "string"
+        },
+        "requestId": {
+          "description": "A unique request identifier.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageUrl": {
+      "type": "object",
+      "required": [
+        "url"
+      ],
+      "properties": {
+        "url": {
+          "description": "Publicly reachable URL of an image.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ImageUrl": {
+      "name": "ImageUrl",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-flatten": true,
+      "description": "A JSON document with a URL pointing to the image that is to be analyzed.",
+      "schema": {
+        "$ref": "#/definitions/ImageUrl"
+      }
+    },
+    "ImageStream": {
+      "name": "Image",
+      "in": "body",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "description": "An image stream.",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      }
+    },
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  },
+  "paths": {}
+}
