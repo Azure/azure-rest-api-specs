@@ -37,7 +37,7 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2018-05
+tag: package-policy-2019-01
 ```
 
 ``` yaml $(package-resources)
@@ -81,6 +81,20 @@ These settings apply only when `--tag=package-locks-2015-01` is specified on the
 ``` yaml $(tag) == 'package-locks-2015-01'
 input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
+```
+
+### Tag: package-policy-2019-01
+These settings apply only when `--tag=package-policy-2019-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2019-01'
+input-file:
+- Microsoft.Authorization/stable/2019-01-01/policyAssignments.json
+- Microsoft.Authorization/stable/2019-01-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2019-01-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2018-05
@@ -448,6 +462,7 @@ Generate all API versions currently shipped for this package
 batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
+  - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
@@ -486,6 +501,24 @@ java:
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Locks"}'
+```
+
+### Tag: package-policy-2019-01 and java
+
+These settings apply only when `--tag=package-policy-2019-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2019-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.policy.v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2019_01_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "Policy"}'
+directive:
+  from: policyAssignments.json
+  where: $.definitions.PolicyAssignmentProperties.properties.scope
+  transform: $['x-ms-client-name'] = 'scopeProperty'
 ```
 
 ### Tag: package-policy-2018-05 and java
