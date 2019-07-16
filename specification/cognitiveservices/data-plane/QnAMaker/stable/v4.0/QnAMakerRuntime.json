@@ -2,9 +2,21 @@
   "swagger": "2.0",
   "info": {
     "version": "4.0",
-    "title": "QnAMaker Runtime Client",
+    "title": "QnAMaker Client",
     "description": "An API for QnAMaker runtime"
   },
+  "securityDefinitions": {
+    "auth_key": {
+      "type": "apiKey",
+      "name": "Authorization",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "auth_key": []
+    }
+  ],
   "x-ms-parameterized-host": {
     "hostTemplate": "{RuntimeEndpoint}/qnamaker",
     "useSchemePrefix": false,
@@ -28,9 +40,6 @@
           },
           {
             "$ref": "#/parameters/GenerateAnswerPayload"
-          },
-          {
-            "$ref": "#/parameters/EndpointKeyHeader"
           }
         ],
         "consumes": [
@@ -73,9 +82,6 @@
           },
           {
             "$ref": "#/parameters/TrainPayload"
-          },
-          {
-            "$ref": "#/parameters/EndpointKeyHeader"
           }
         ],
         "consumes": [
@@ -384,7 +390,7 @@
           "type": "array",
           "description": "Represents Search Result list.",
           "items": {
-              "$ref": "#/definitions/QnASearchResult"
+            "$ref": "#/definitions/QnASearchResult"
           }
         }
       }
@@ -422,8 +428,8 @@
           "type": "array",
           "description": "List of metadata.",
           "items": {
-              "$ref": "#/definitions/MetadataDTO"
-            }
+            "$ref": "#/definitions/MetadataDTO"
+          }
         },
         "context": {
           "type": "object",
@@ -513,13 +519,6 @@
       "x-nullable": true,
       "description": "Post body of the request.",
       "x-ms-parameter-location": "method"
-    },
-    "EndpointKeyHeader": {
-      "name": "Authorization",
-      "in": "header",
-      "description": "Authorization header with Primary/Secondary Endpoint Key of Runtime (for example: EndpointKey 8739caf6-8d95-4395-a020-904ae576f7c4)",
-      "required": true,
-      "type": "string"
     }
   }
 }
