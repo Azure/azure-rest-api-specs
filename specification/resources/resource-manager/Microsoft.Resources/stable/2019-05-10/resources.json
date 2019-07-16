@@ -1136,6 +1136,42 @@
         }
       }
     },
+    "/providers/{resourceProviderNamespace}": {
+      "get": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "Providers_GetAtTenant",
+        "description": "Gets the specified resource provider at the tenant level.",
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter. For example, to include property aliases in response, use $expand=resourceTypes/aliases."
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the resource provider.",
+            "schema": {
+              "$ref": "#/definitions/Provider"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/resources": {
       "get": {
         "tags": [
