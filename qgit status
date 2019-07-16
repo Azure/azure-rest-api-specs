@@ -1,0 +1,98 @@
+[1mdiff --git a/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/virtualWan.json b/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/virtualWan.json[m
+[1mindex 693d6958e..4047b0a1c 100644[m
+[1m--- a/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/virtualWan.json[m
+[1m+++ b/specification/network/resource-manager/Microsoft.Network/stable/2019-06-01/virtualWan.json[m
+[36m@@ -3072,14 +3072,13 @@[m
+     },[m
+     "VpnServerConfigVpnClientRootCertificatePropertiesFormat": {[m
+       "properties": {[m
+[32m+[m[32m        "name": {[m
+[32m+[m[32m          "type": "string",[m
+[32m+[m[32m          "description": "The certificate name."[m
+[32m+[m[32m        },[m[41m	  [m
+         "publicCertData": {[m
+           "type": "string",[m
+           "description": "The certificate public data."[m
+[31m-        },[m
+[31m-        "provisioningState": {[m
+[31m-          "readOnly": true,[m
+[31m-          "type": "string",[m
+[31m-          "description": "The provisioning state of the VpnServerConfiguration VPN client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."[m
+         }[m
+       },[m
+       "required": [[m
+[36m@@ -3115,14 +3114,13 @@[m
+     },[m
+     "VpnServerConfigRadiusServerRootCertificatePropertiesFormat": {[m
+       "properties": {[m
+[32m+[m[32m        "name": {[m
+[32m+[m[32m          "type": "string",[m
+[32m+[m[32m          "description": "The certificate name."[m
+[32m+[m[32m        },[m[41m	  [m
+         "publicCertData": {[m
+           "type": "string",[m
+           "description": "The certificate public data."[m
+[31m-        },[m
+[31m-        "provisioningState": {[m
+[31m-          "readOnly": true,[m
+[31m-          "type": "string",[m
+[31m-          "description": "The provisioning state of the VpnServerConfiguration Radius Server root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."[m
+         }[m
+       },[m
+       "required": [[m
+[36m@@ -3158,14 +3156,13 @@[m
+     },[m
+     "VpnServerConfigVpnClientRevokedCertificatePropertiesFormat": {[m
+       "properties": {[m
+[32m+[m[32m        "name": {[m
+[32m+[m[32m          "type": "string",[m
+[32m+[m[32m          "description": "The certificate name."[m
+[32m+[m[32m        },[m[41m		  [m
+         "thumbprint": {[m
+           "type": "string",[m
+           "description": "The revoked VPN client certificate thumbprint."[m
+[31m-        },[m
+[31m-        "provisioningState": {[m
+[31m-          "readOnly": true,[m
+[31m-          "type": "string",[m
+[31m-          "description": "The provisioning state of the VPN client revoked certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."[m
+         }[m
+       },[m
+       "description": "Properties of the revoked VPN client certificate of VpnServerConfiguration."[m
+[36m@@ -3195,14 +3192,13 @@[m
+     },[m
+     "VpnServerConfigRadiusClientRootCertificatePropertiesFormat": {[m
+       "properties": {[m
+[32m+[m[32m        "name": {[m
+[32m+[m[32m          "type": "string",[m
+[32m+[m[32m          "description": "The certificate name."[m
+[32m+[m[32m        },[m[41m	  [m
+         "thumbprint": {[m
+           "type": "string",[m
+           "description": "The Radius client root certificate thumbprint."[m
+[31m-        },[m
+[31m-        "provisioningState": {[m
+[31m-          "readOnly": true,[m
+[31m-          "type": "string",[m
+[31m-          "description": "The provisioning state of the Radius client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."[m
+         }[m
+       },[m
+       "description": "Properties of the Radius client root certificate of VpnServerConfiguration."[m
+[36m@@ -3285,7 +3281,7 @@[m
+             }[m
+           },[m
+           "description": "VPN authentication types for the VpnServerConfiguration."[m
+[31m-        },		[m
+[32m+[m[32m        },[m
+         "vpnServerConfigVpnClientRootCertificates": {[m
+           "type": "array",[m
+           "items": {[m
+[36m@@ -3342,7 +3338,7 @@[m
+           "type": "array",[m
+           "readOnly": true,[m
+           "items": {[m
+[31m-            "$ref": "./network.json#/definitions/SubResource"[m
+[32m+[m		[32m    "$ref": "#/definitions/P2SVpnGateway"[m
+           },[m
+           "description": "List of references to P2SVpnGateways."[m
+         },[m

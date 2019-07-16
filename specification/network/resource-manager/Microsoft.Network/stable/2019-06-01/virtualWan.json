@@ -3072,19 +3072,15 @@
     },
     "VpnServerConfigVpnClientRootCertificatePropertiesFormat": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The certificate name."
+        },  
         "publicCertData": {
           "type": "string",
           "description": "The certificate public data."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the VpnServerConfiguration VPN client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "required": [
-        "publicCertData"
-      ],
       "description": "Properties of VPN client root certificate of VpnServerConfiguration."
     },
     "VpnServerConfigVpnClientRootCertificate": {
@@ -3115,19 +3111,15 @@
     },
     "VpnServerConfigRadiusServerRootCertificatePropertiesFormat": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The certificate name."
+        },	  
         "publicCertData": {
           "type": "string",
           "description": "The certificate public data."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the VpnServerConfiguration Radius Server root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
-      "required": [
-        "publicCertData"
-      ],
       "description": "Properties of Radius Server root certificate of VpnServerConfiguration."
     },
     "VpnServerConfigRadiusServerRootCertificate": {
@@ -3158,14 +3150,13 @@
     },
     "VpnServerConfigVpnClientRevokedCertificatePropertiesFormat": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The certificate name."
+        },		  
         "thumbprint": {
           "type": "string",
           "description": "The revoked VPN client certificate thumbprint."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the VPN client revoked certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
       "description": "Properties of the revoked VPN client certificate of VpnServerConfiguration."
@@ -3195,14 +3186,13 @@
     },
     "VpnServerConfigRadiusClientRootCertificatePropertiesFormat": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The certificate name."
+        },	  
         "thumbprint": {
           "type": "string",
           "description": "The Radius client root certificate thumbprint."
-        },
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the Radius client root certificate resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
         }
       },
       "description": "Properties of the Radius client root certificate of VpnServerConfiguration."
@@ -3285,7 +3275,7 @@
             }
           },
           "description": "VPN authentication types for the VpnServerConfiguration."
-        },		
+        },
         "vpnServerConfigVpnClientRootCertificates": {
           "type": "array",
           "items": {
@@ -3342,7 +3332,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "./network.json#/definitions/SubResource"
+		    "$ref": "#/definitions/P2SVpnGateway"
           },
           "description": "List of references to P2SVpnGateways."
         },
