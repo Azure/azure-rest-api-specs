@@ -2095,80 +2095,7 @@
       "properties": {
         "legType": {
           "description": "The travel mode of the leg.",
-          "type": "string",
-          "enum": [
-            "Tram",
-            "Subway",
-            "Rail",
-            "Bus",
-            "Ferry",
-            "CableCar",
-            "Gondola",
-            "Funicular",
-            "Walk",
-            "Bicycle",
-            "Wait",
-            "PathWayWalk",
-            "WaitOnVehicle"
-          ],
-          "x-ms-enum": {
-            "name": "EntityType",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "Tram",
-                "description": "Tram"
-              },
-              {
-                "value": "Subway",
-                "description": "Subway"
-              },
-              {
-                "value": "Rail",
-                "description": "Rail"
-              },
-              {
-                "value": "Bus",
-                "description": "Bus"
-              },
-              {
-                "value": "Ferry",
-                "description": "Ferry"
-              },
-              {
-                "value": "CableCar",
-                "description": "Cable car"
-              },
-              {
-                "value": "Gondola",
-                "description": "Gondola"
-              },
-              {
-                "value": "Funicular",
-                "description": "Funicular"
-              },
-              {
-                "value": "Walk",
-                "description": "Pedestrian walk"
-              },
-              {
-                "value": "Bicycle",
-                "description": "Bicycle"
-              },
-              {
-                "value": "Wait",
-                "description": "a Leg describing a wait for the next public transit leg"
-              },
-              {
-                "value": "PathWayWalk",
-                "description": "a Leg describing a walk within a compound, e.g. Central Station"
-              },
-              {
-                "value": "WaitOnVehicle",
-                "description": "It’s necessary to wait for the next leg on the same vehicle (i.e. the bus will only change its line number)"
-              }
-            ]
-          }
+          "$ref": "#/definitions/LegType"
         },
         "legStartTime": {
           "description": "Start time for the leg in ISO 8601 format, e.g. 1996-12-19T19:39:57-08:00.",
@@ -2199,22 +2126,8 @@
       "type": "object",
       "properties": {
         "legType": {
-          "type": "string",
-          "enum": [
-            "Walk",
-            "Bicycle",
-            "Tram",
-            "Subway",
-            "Rail",
-            "Bus",
-            "Ferry",
-            "CableCar",
-            "Gondola",
-            "Funicular",
-            "PathWayWalk",
-            "Wait",
-            "waitOnVehicle"
-          ]
+          "description": "The travel mode of the leg.",
+          "$ref": "#/definitions/LegType"
         },
         "legStartTime": {
           "description": "Start time for the leg.",
@@ -2262,6 +2175,82 @@
           "description": "Indicates whether it’s necessary to wait for the next leg on the same vehicle (i.e. the bus will only change its line number).",
           "type": "string"
         }
+      }
+    },
+    "LegType": {
+      "type": "string",
+      "enum": [
+        "Walk",
+        "Bicycle",
+        "Tram",
+        "Subway",
+        "Rail",
+        "Bus",
+        "Ferry",
+        "Cable",
+        "Gondola",
+        "Funicular",
+        "PathWayWalk",
+        "Wait",
+        "WaitOnVehicle"
+      ],
+      "x-ms-enum": {
+        "name": "LegType",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "Walk",
+            "description": "Pedestrian walk"
+          },
+          {
+            "value": "Bicycle",
+            "description": "Bicycle"
+          },
+          {
+            "value": "Tram",
+            "description": "Tram"
+          },
+          {
+            "value": "Subway",
+            "description": "Subway"
+          },
+          {
+            "value": "Rail",
+            "description": "Rail"
+          },
+          {
+            "value": "Bus",
+            "description": "Bus"
+          },
+          {
+            "value": "Ferry",
+            "description": "Ferry"
+          },
+          {
+            "value": "Cable",
+            "description": "Cable"
+          },
+          {
+            "value": "Gondola",
+            "description": "Gondola"
+          },
+          {
+            "value": "Funicular",
+            "description": "Funicular"
+          },
+          {
+            "value": "PathWayWalk",
+            "description": "a Leg describing a walk within a compound, e.g. Central Station"
+          },
+          {
+            "value": "Wait",
+            "description": "a Leg describing a wait for the next public transit leg"
+          },
+          {
+            "value": "WaitOnVehicle",
+            "description": "It’s necessary to wait for the next leg on the same vehicle (i.e. the bus will only change its line number)"
+          }
+        ]
       }
     },
     "LegPoint": {
