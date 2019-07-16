@@ -750,7 +750,6 @@
         }
       }
     },
-    
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/vpnServerConfigurations/{vpnServerConfigurationName}": {
       "get": {
         "operationId": "VpnServerConfigurations_Get",
@@ -860,70 +859,6 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
-      },
-      "patch": {
-        "tags": [
-          "VpnServerConfigurations"
-        ],
-        "operationId": "VpnServerConfigurations_UpdateTags",
-        "x-ms-examples": {
-          "VpnServerConfigurationUpdate": {
-            "$ref": "./examples/VpnServerConfigurationUpdateTags.json"
-          }
-        },
-        "description": "Updates VpnServerConfiguration tags.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group name of the VpnServerConfiguration."
-          },
-          {
-            "name": "vpnServerConfigurationName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the VpnServerConfiguration being updated."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "VpnServerConfigurationParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update VpnServerConfiguration tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. Returns the details of the VpnServerConfiguration updated.",
-            "schema": {
-              "$ref": "#/definitions/VpnServerConfiguration"
-            }
-          },
-          "201": {
-            "description": "Request received successfully. Returns the details of the VpnServerConfiguration updated.",
-            "schema": {
-              "$ref": "#/definitions/VpnServerConfiguration"
-            }
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "VpnServerConfigurations_Delete",
@@ -1054,67 +989,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },	
-	
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/vpnConfiguration": {
-      "post": {
-        "operationId": "VpnSitesConfiguration_Download",
-        "x-ms-examples": {
-          "VpnSitesConfigurationDownload": {
-            "$ref": "./examples/VpnSitesConfigurationDownload.json"
-          }
-        },
-        "description": "Gives the sas-url to download the configurations for vpn-sites in a resource group.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group name."
-          },
-          {
-            "name": "virtualWANName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the VirtualWAN for which configuration of all vpn-sites is needed."
-          },
-          {
-            "name": "request",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GetVpnSitesConfigurationRequest"
-            },
-            "description": "Parameters supplied to download vpn-sites configuration."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. Follow the location header for sas-url to output blob."
-          },
-          "202": {
-            "description": "Accepted and the operation will complete asynchronously. Follow the location header for sas-url to output blob."
-          },
-          "default": {
-            "description": "Error.",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       }
     },
