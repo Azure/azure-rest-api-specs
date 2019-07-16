@@ -18,22 +18,37 @@
             },
             "properties": {
               "provisioningState": "Succeeded",
-              "virtualWan": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWANs/wan1",
-              "deviceProperties": {
-                "deviceVendor": "vendor1",
-                "deviceModel": "model01",
-                "linkSpeedInMbps": 200
+              "virtualWan": {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualWANs/wan1"
               },
-              "ipAddress": "10.0.0.0",
+              "deviceProperties": {
+                "linkSpeedInMbps": 0
+              },
               "addressSpace": {
                 "addressPrefixes": [
                   "10.0.0.0/16"
                 ]
               },
-              "bgpProperties": {
-                "bgpPeeringAddress": "192.168.0.0",
-                "asn": 1234
-              }
+              "isSecuritySite": false,
+              "vpnSiteLinks": [
+                {
+                  "name": "vpnSiteLink1",
+				  "type": "Microsoft.Network/vpnSites/vpnSiteLinks",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/vpnSiteLink1",
+                  "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "ipAddress": "50.50.50.56",
+                    "linkProperties": {
+                      "linkSpeedInMbps": 0
+                    },
+                    "bgpProperties": {
+                      "bgpPeeringAddress": "192.168.0.0",
+                      "asn": 1234
+                    }
+                  }
+                }
+              ]
             }
           },
           {
@@ -62,7 +77,8 @@
               "bgpProperties": {
                 "bgpPeeringAddress": "192.168.0.0",
                 "asn": 1234
-              }
+              },
+              "isSecuritySite": false
             }
           }
         ]

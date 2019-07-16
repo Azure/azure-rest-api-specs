@@ -20,7 +20,19 @@
               "remoteVpnSite": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
               },
-              "sharedKey": "key"
+              "vpnLinkConnections": [
+                {
+                  "name": "Connection-Link1",
+                  "properties": {
+                    "vpnSiteLink": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                    },
+                    "connectionBandwidth": 200,
+                    "vpnConnectionProtocolType": "IKEv2",
+                    "sharedKey": "key"
+                  }
+                }
+              ]
             }
           }
         ],
@@ -36,7 +48,7 @@
       "name": "gateway1",
       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1",
       "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-      "location": "westcentralus",
+      "location": "West US",
       "type": "Microsoft.Network/vpnGateways",
       "properties": {
         "provisioningState": "Succeeded",
@@ -53,20 +65,39 @@
               "remoteVpnSite": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
               },
-              "connectionStatus": "Connected",
+              "enableInternetSecurity": false,
               "ingressBytesTransferred": 0,
               "egressBytesTransferred": 0,
-              "routingWeight": 0,
-              "connectionBandwidth": 100,
-              "sharedKey": "key",
-              "enableBgp": false,
-              "useLocalAzureIpAddress": false,
-              "ipsecPolicies": []
+              "vpnLinkConnections": [
+                {
+                  "name": "Connection-Link1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/VpnSiteLinkConnections/Connection-Link1",
+                  "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                  "type": "Microsoft.Network/vpnGateways/vpnConnections/VpnSiteLinkConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "vpnSiteLink": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                    },
+                    "connectionBandwidth": 200,
+                    "ipsecPolicies": [],
+                    "vpnConnectionProtocolType": "IKEv2",
+                    "sharedKey": "key",
+                    "ingressBytesTransferred": 0,
+                    "egressBytesTransferred": 0,
+                    "enableBgp": false,
+                    "enableRateLimiting": false,
+                    "useLocalAzureIpAddress": false,
+                    "usePolicyBasedTrafficSelectors": false,
+                    "routingWeight": 0
+                  }
+                }
+              ]
             }
           }
         ],
         "bgpSettings": {
-          "asn": 65515,
+          "asn": 65514,
           "bgpPeeringAddress": "10.0.1.30",
           "peerWeight": 0
         }
@@ -76,7 +107,7 @@
       "name": "gateway1",
       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1",
       "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
-      "location": "westcentralus",
+      "location": "West US",
       "type": "Microsoft.Network/vpnGateways",
       "properties": {
         "provisioningState": "Succeeded",
@@ -93,20 +124,39 @@
               "remoteVpnSite": {
                 "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
               },
-              "connectionStatus": "Connected",
+              "enableInternetSecurity": false,
               "ingressBytesTransferred": 0,
               "egressBytesTransferred": 0,
-              "routingWeight": 0,
-              "connectionBandwidth": 100,
-              "sharedKey": "key",
-              "enableBgp": false,
-              "useLocalAzureIpAddress": false,
-              "ipsecPolicies": []
+              "vpnLinkConnections": [
+                {
+                  "name": "Connection-Link1",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1/VpnSiteLinkConnections/Connection-Link1",
+                  "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+                  "type": "Microsoft.Network/vpnGateways/vpnConnections/VpnSiteLinkConnections",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "vpnSiteLink": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1/vpnSiteLinks/siteLink1"
+                    },
+                    "connectionBandwidth": 200,
+                    "ipsecPolicies": [],
+                    "vpnConnectionProtocolType": "IKEv2",
+                    "sharedKey": "key",
+                    "ingressBytesTransferred": 0,
+                    "egressBytesTransferred": 0,
+                    "enableBgp": false,
+                    "enableRateLimiting": false,
+                    "useLocalAzureIpAddress": false,
+                    "usePolicyBasedTrafficSelectors": false,
+                    "routingWeight": 0
+                  }
+                }
+              ]              
             }
           }
         ],
         "bgpSettings": {
-          "asn": 65515,
+          "asn": 65514,
           "bgpPeeringAddress": "10.0.1.30",
           "peerWeight": 0
         }
