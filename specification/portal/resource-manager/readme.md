@@ -26,15 +26,23 @@ These are the global settings for the portal.
 
 ``` yaml
 openapi-type: arm
-tag: package-2015-08-01-preview
+tag: package-preview-2019-01
 ```
 
 
+### Tag: package-preview-2019-01
+
+These settings apply only when `--tag=package-preview-2019-01` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-01'
+input-file:
+  - Microsoft.Portal/preview/2019-01-01-preview/portal.json
+```
 ### Tag: package-2015-08-01-preview
 
 These settings apply only when `--tag=package-2015-08-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2015-08-01-preview'
+``` yaml $(tag) == 'package-2015-08-01-preview'
 input-file:
   - Microsoft.Portal/preview/2015-08-01-preview/portal.json
 ```
