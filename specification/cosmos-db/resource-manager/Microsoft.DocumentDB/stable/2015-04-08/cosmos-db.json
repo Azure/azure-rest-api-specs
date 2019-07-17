@@ -1935,6 +1935,184 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}/storedProcedures": {
+      "get": {
+        "operationId": "DatabaseAccounts_ListSqlStoredProcedures",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureList": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureList.json"
+          }
+        },
+        "description": "Lists the SQL stored procedures under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL stored procedure properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedureListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}/storedprocedures/{storedProcedureName}": {
+      "get": {
+        "operationId": "DatabaseAccounts_GetSqlStoredProcedure",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureGet": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureGet.json"
+          }
+        },
+        "description": "Gets the SQL StoredProcedure under an existing Azure Cosmos DB database account.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storedProcedureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The SQL StoredProcedure property was retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedure"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "DatabaseAccounts_CreateUpdateSqlStoredProcedure",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureCreateUpdate": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureCreateUpdate.json"
+          }
+        },
+        "description": "Create or update an Azure Cosmos DB SQL StoredProcedure",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storedProcedureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "createUpdateSqlStoredProcedureParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedureCreateUpdateParameters"
+            },
+            "description": "The parameters to provide for the current SQL StoredProcedure."
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL StoredProcedure create or update operation will complete asynchronously."
+          },
+          "200": {
+            "description": "The SQL StoredProcedure create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SqlStoredProcedure"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DatabaseAccounts_DeleteSqlStoredProcedure",
+        "x-ms-examples": {
+          "CosmosDBSqlStoredProcedureDelete": {
+            "$ref": "./examples/CosmosDBSqlStoredProcedureDelete.json"
+          }
+        },
+        "description": "Deletes an existing Azure Cosmos DB SQL StoredProcedure.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/databaseNameParameter"
+          },
+          {
+            "$ref": "#/parameters/containerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/storedProcedureNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The SQL stored procedure delete operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The SQL stored procedure delete operation was completed successfully."
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases": {
       "get": {
         "operationId": "DatabaseAccounts_ListMongoDBDatabases",
@@ -3689,6 +3867,19 @@
       },
       "description": "The List operation response, that contains the containers and their properties."
     },
+    "SqlStoredProcedureListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SqlStoredProcedure"
+          },
+          "description": "List of stored procedures and their properties."
+        }
+      },
+      "description": "The List operation response, that contains the stored procedures and their properties."
+    },
     "MongoDBDatabaseListResult": {
       "properties": {
         "value": {
@@ -4034,6 +4225,34 @@
       "allOf": [
         {
           "$ref": "#/definitions/SqlContainerResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
+        }
+      ]
+    },
+    "SqlStoredProcedure": {
+      "description": "An Azure Cosmos DB stored procedure.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "The properties of an Azure Cosmos DB stored procedure",
+          "$ref": "#/definitions/SqlStoredProcedureProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "SqlStoredProcedureProperties": {
+      "description": "The properties of an Azure Cosmos DB stored procedure",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SqlStoredProcedureResource"
         },
         {
           "$ref": "#/definitions/ExtendedResourceProperties"
@@ -4661,6 +4880,38 @@
         "options"
       ]
     },
+    "SqlStoredProcedureCreateUpdateParameters": {
+      "description": "Parameters to create and update Cosmos DB stored procedure.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update Azure Cosmos DB stored procedure.",
+          "$ref": "#/definitions/SqlStoredProcedureCreateUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SqlStoredProcedureCreateUpdateProperties": {
+      "description": "Properties to create and update Azure Cosmos DB stored procedure.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The standard JSON format of a stored procedure",
+          "$ref": "#/definitions/SqlStoredProcedureResource"
+        },
+        "options": {
+          "description": "A key-value pair of options to be applied for the request. This corresponds to the headers sent with the request.",
+          "$ref": "#/definitions/CreateUpdateOptions"
+        }
+      },
+      "required": [
+        "resource",
+        "options"
+      ]
+    },
     "MongoDBDatabaseCreateUpdateParameters": {
       "description": "Parameters to create and update Cosmos DB MongoDB database.",
       "type": "object",
@@ -4943,6 +5194,20 @@
       "required": [
         "id"
       ]
+    },
+    "SqlStoredProcedureResource": {
+      "type": "object",
+      "description": "Cosmos DB Gremlin graph resource object",
+      "properties": {
+        "id":{
+          "type":"string",
+          "description":"Name of the Sql Stored Procedure"
+        },
+        "body":{
+          "type": "string",
+          "description": "Body of the Stored Procedure"
+        }
+      }
     },
     "GremlinGraphResource": {
       "type": "object",
@@ -5981,6 +6246,14 @@
       "type": "string",
       "x-ms-parameter-location": "method",
       "description": "Cosmos DB container name."
+    },
+    "storedProcedureNameParameter":{
+      "name": "storedProcedureName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB SQL StoredProcedure name"
     },
     "tableNameParameter": {
       "name": "tableName",
