@@ -1352,20 +1352,26 @@
     },
     "AzurePrivateCloudResponse": {
       "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
         "location": {
           "type": "string",
           "example": "West US"
         },
         "name": {
           "type": "string",
-          "example": "myprivateCloud"
+          "example": "myprivateCloud",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/PrivateCloud"
         },
         "type": {
           "type": "string",
-          "example": "Microsoft.VMwareVirtustream/privateClouds"
+          "example": "Microsoft.VMwareVirtustream/privateClouds",
+          "readOnly": true
         },
         "tags": {
           "type": "object"
@@ -1386,20 +1392,26 @@
     },
     "AzureClusterResponse": {
       "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
         "location": {
           "type": "string",
           "example": "West US"
         },
         "name": {
           "type": "string",
-          "example": "mycluster"
+          "example": "mycluster",
+          "readOnly": true
         },
         "properties": {
           "$ref": "#/definitions/Cluster"
         },
         "type": {
           "type": "string",
-          "example": "Microsoft.VMwareVirtustream/privateClouds/clusters"
+          "example": "Microsoft.VMwareVirtustream/privateClouds/clusters",
+          "readOnly": true
         }
       },
       "x-ms-azure-resource": true
