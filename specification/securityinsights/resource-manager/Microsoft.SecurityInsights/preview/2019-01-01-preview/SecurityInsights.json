@@ -2612,6 +2612,265 @@
         }
       }
     },
+    "Entity": {
+      "type": "object",
+      "description": "Specific entity.",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/EntityKind"
+        }
+      ]
+    },
+    "EntityKind": {
+      "type": "object",
+      "description": "Describes an entity with kind.",
+      "properties": {
+        "kind": {
+          "description": "The kind of the entity.",
+					"$ref": "#/definitions/EntityInnerKind"
+        }
+      }
+    },
+    "AccountEntity": {
+      "x-ms-discriminator-value": "Account",
+      "type": "object",
+      "description": "Represents an account entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Account entity properties",
+          "$ref": "#/definitions/AccountEntityProperties"
+        }
+      }
+    },
+    "AccountEntityProperties": {
+      "type": "object",
+      "description": "Account entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the account. This field should hold only the name without any domain added to it, i.e. administrator."
+        },
+        "ntDomain": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The NetBIOS domain name as it appears in the alert format – domain\\username. Examples: NT AUTHORITY."
+        },
+        "upnSuffix": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com."
+        },
+        "sid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The account security identifier, e.g. S-1-5-18."
+        },
+        "aadTenantId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure Active Directory tenant id."
+        },
+        "aadUserId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure Active Directory user id."
+        },
+        "puid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Azure Active Directory Passport User ID."
+        },
+        "isDomainJoined": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Determines whether this is a domain account."
+        },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the account."
+        },
+        "objectGuid": {
+          "type": "string",
+          "readOnly": true,
+          "format": "uuid",
+          "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory."
+        },
+        "hostEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Host entity id that contains the account in case it is a local account (not domain joined)"
+        }
+      }
+    },
+    "HostEntity": {
+      "x-ms-discriminator-value": "Host",
+      "type": "object",
+      "description": "Represents a host entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Host entity properties",
+          "$ref": "#/definitions/HostEntityProperties"
+        }
+      }
+    },
+    "HostEntityProperties": {
+      "type": "object",
+      "description": "Host entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "dnsDomain": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The DNS domain that this host belongs to. Should contain the compete DNS suffix for the domain"
+        },
+        "ntDomain": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The NT domain that this host belongs to."
+        },
+        "hostName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The hostname without the domain suffix."
+        },
+        "netBiosName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The host name (pre-windows2000)."
+        },
+        "azureID": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The azure resource id of the VM."
+        },
+        "omsAgentID": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The OMS agent id, if the host has OMS agent installed."
+        },
+        "osFamily": {
+          "type": "string",
+          "enum": [
+            "Linux",
+            "Windows",
+            "Android",
+            "IOS"
+          ],
+          "x-ms-enum": {
+            "name": "OSFamily",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Linux",
+                "description": "Host with Linux operating system."
+              },
+              {
+                "value": "Windows",
+                "description": "Host with Windows operating system."
+              },
+              {
+                "value": "Android",
+                "description": "Host with Android operating system."
+              },
+              {
+                "value": "IOS",
+                "description": "Host with IOS operating system."
+              }
+            ]
+          },
+          "description": "The operating system type."
+        },
+        "osVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A free text representation of the operating system. This field is meant to hold specific versions the are more fine grained than OSFamily or future values not supported by OSFamily enumeration"
+        },
+        "isDomainJoined": {
+          "type": "boolean",
+          "readOnly": true,
+          "description": "Determines whether this host belongs to a domain."
+        }
+      }
+    },
+    "FileEntity": {
+      "x-ms-discriminator-value": "File",
+      "type": "object",
+      "description": "Represents a file entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "File entity properties",
+          "$ref": "#/definitions/FileEntityProperties"
+        }
+      }
+    },
+    "FileEntityProperties": {
+      "type": "object",
+      "description": "File entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "directory": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The full path to the file."
+        },
+        "fileName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The file name without path (some alerts might not include path)."
+        },
+        "hostEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Host entity id which the file belongs to"
+        },
+        "fileHashEntityIds": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "file hash id",
+            "type": "string"
+          },
+          "description": "The file hash entity identifiers associated with this file"
+        }
+      }
+    },
     "OfficeConsentList": {
       "description": "List of all the office365 consents.",
       "properties": {
@@ -3089,29 +3348,6 @@
         ]
       }
     },
-    "Entity": {
-      "type": "object",
-      "description": "Specific entity.",
-      "discriminator": "kind",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/EntityKind"
-        }
-      ]
-    },
-    "EntityKind": {
-      "type": "object",
-      "description": "Describes an entity with kind.",
-      "properties": {
-        "kind": {
-          "description": "The kind of the entity.",
-					"$ref": "#/definitions/EntityInnerKind"
-        }
-      }
-    },
     "EntityInnerKind": {
       "type": "string",
       "description": "The kind of the entity",
@@ -3220,242 +3456,6 @@
           },
           "readOnly": true,
           "description": "A bag of custom fields that should be part of the entity and will be presented to the user."
-        }
-      }
-    },
-    "AccountEntity": {
-      "x-ms-discriminator-value": "Account",
-      "type": "object",
-      "description": "Represents an account entity.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Account entity properties",
-          "$ref": "#/definitions/AccountEntityProperties"
-        }
-      }
-    },
-    "AccountEntityProperties": {
-      "type": "object",
-      "description": "Account entity property bag.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "properties": {
-        "accountName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The name of the account. This field should hold only the name without any domain added to it, i.e. administrator."
-        },
-        "ntDomain": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The NetBIOS domain name as it appears in the alert format – domain\\username. Examples: NT AUTHORITY."
-        },
-        "upnSuffix": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The user principal name suffix for the account, in some cases it is also the domain name. Examples: contoso.com."
-        },
-        "sid": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The account security identifier, e.g. S-1-5-18."
-        },
-        "aadTenantId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Azure Active Directory tenant id."
-        },
-        "aadUserId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Azure Active Directory user id."
-        },
-        "puid": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Azure Active Directory Passport User ID."
-        },
-        "isDomainJoined": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Determines whether this is a domain account."
-        },
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The display name of the account."
-        },
-        "objectGuid": {
-          "type": "string",
-          "readOnly": true,
-          "format": "uuid",
-          "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory."
-        },
-        "hostEntityId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Host entity id that contains the account in case it is a local account (not domain joined)"
-        }
-      }
-    },
-    "HostEntity": {
-      "x-ms-discriminator-value": "Host",
-      "type": "object",
-      "description": "Represents a host entity.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Host entity properties",
-          "$ref": "#/definitions/HostEntityProperties"
-        }
-      }
-    },
-    "HostEntityProperties": {
-      "type": "object",
-      "description": "Host entity property bag.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "properties": {
-        "dnsDomain": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The DNS domain that this host belongs to. Should contain the compete DNS suffix for the domain"
-        },
-        "ntDomain": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The NT domain that this host belongs to."
-        },
-        "hostName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The hostname without the domain suffix."
-        },
-        "netBiosName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The host name (pre-windows2000)."
-        },
-        "azureID": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The azure resource id of the VM."
-        },
-        "omsAgentID": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The OMS agent id, if the host has OMS agent installed."
-        },
-        "osFamily": {
-          "type": "string",
-          "enum": [
-            "Linux",
-            "Windows",
-            "Android",
-            "IOS"
-          ],
-          "x-ms-enum": {
-            "name": "OSFamily",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "Linux",
-                "description": "Host with Linux operating system."
-              },
-              {
-                "value": "Windows",
-                "description": "Host with Windows operating system."
-              },
-              {
-                "value": "Android",
-                "description": "Host with Android operating system."
-              },
-              {
-                "value": "IOS",
-                "description": "Host with IOS operating system."
-              }
-            ]
-          },
-          "description": "The operating system type."
-        },
-        "osVersion": {
-          "type": "string",
-          "readOnly": true,
-          "description": "A free text representation of the operating system. This field is meant to hold specific versions the are more fine grained than OSFamily or future values not supported by OSFamily enumeration"
-        },
-        "isDomainJoined": {
-          "type": "boolean",
-          "readOnly": true,
-          "description": "Determines whether this host belongs to a domain."
-        }
-      }
-    },
-    "FileEntity": {
-      "x-ms-discriminator-value": "File",
-      "type": "object",
-      "description": "Represents a file entity.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "File entity properties",
-          "$ref": "#/definitions/FileEntityProperties"
-        }
-      }
-    },
-    "FileEntityProperties": {
-      "type": "object",
-      "description": "File entity property bag.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "properties": {
-        "directory": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The full path to the file."
-        },
-        "fileName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The file name without path (some alerts might not include path)."
-        },
-        "hostEntityId": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The Host entity id which the file belongs to"
-        },
-        "fileHashEntityIds": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "description": "file hash id",
-            "type": "string"
-          },
-          "description": "The file hash entity identifiers associated with this file"
         }
       }
     },
