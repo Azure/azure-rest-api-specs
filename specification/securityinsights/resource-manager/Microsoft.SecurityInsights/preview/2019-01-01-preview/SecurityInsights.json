@@ -2623,14 +2623,7 @@
         {
           "$ref": "#/definitions/EntityKind"
         }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Entity properties",
-          "$ref": "#/definitions/EntityProperties"
-        }
-      }
+      ]
     },
     "EntityKind": {
       "type": "object",
@@ -2734,9 +2727,9 @@
         ]
       }
     },
-    "EntityProperties": {
+    "EntityCommonProperties": {
       "type": "object",
-      "description": "Entity property bag.",
+      "description": "Entity commom property bag.",
       "properties": {
         "friendlyName": {
           "type": "string",
@@ -2773,6 +2766,11 @@
     "AccountEntityProperties": {
       "type": "object",
       "description": "Account entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "accountName": {
           "type": "string",
@@ -2852,6 +2850,11 @@
     "HostEntityProperties": {
       "type": "object",
       "description": "Host entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "dnsDomain": {
           "type": "string",
@@ -2947,6 +2950,11 @@
     "FileEntityProperties": {
       "type": "object",
       "description": "File entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "directory": {
           "type": "string",
@@ -2994,6 +3002,11 @@
     "SecurityAlertProperties": {
       "type": "object",
       "description": "SecurityAlert entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "systemAlertId": {
           "type": "string",
@@ -3342,6 +3355,11 @@
     "FileHashEntityProperties": {
       "type": "object",
       "description": "FileHash entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "hashValue": {
           "type": "string",
@@ -3408,6 +3426,11 @@
     "MalwareEntityProperties": {
       "type": "object",
       "description": "Malware entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "malwareName": {
           "type": "string",
@@ -3459,6 +3482,11 @@
     "SecurityGroupEntityProperties": {
       "type": "object",
       "description": "SecurityGroup entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "distinguishedName": {
           "type": "string",
@@ -3498,6 +3526,11 @@
     "AzureResourceEntityProperties": {
       "type": "object",
       "description": "AzureResource entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "resourceId": {
           "type": "string",
@@ -3526,6 +3559,11 @@
     "CloudApplicationEntityProperties": {
       "type": "object",
       "description": "CloudApplication entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "appId": {
           "type": "integer",
@@ -3564,6 +3602,11 @@
     "ProcessEntityProperties": {
       "type": "object",
       "description": "Process entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "processId": {
           "type": "string",
@@ -3655,6 +3698,11 @@
     "DnsEntityProperties": {
       "type": "object",
       "description": "Dns entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "domainName": {
           "type": "string",
@@ -3702,6 +3750,11 @@
     "IpEntityProperties": {
       "type": "object",
       "description": "Ip entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "address": {
           "type": "string",
@@ -3823,6 +3876,11 @@
     "RegistryKeyEntityProperties": {
       "type": "object",
       "description": "RegistryKey entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "hive": {
           "type": "string",
@@ -3914,6 +3972,11 @@
     "RegistryValueEntityProperties": {
       "type": "object",
       "description": "RegistryValue entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "valueName": {
           "type": "string",
@@ -4005,6 +4068,11 @@
     "UrlEntityProperties": {
       "type": "object",
       "description": "Url entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "url": {
           "type": "string",
@@ -4033,6 +4101,11 @@
     "BookmarkEntityProperties": {
       "type": "object",
       "description": "Bookmark entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "displayName": {
           "type": "string",
