@@ -954,8 +954,23 @@
         }
       }
     },
-    "Db2Source": {
-      "description": "A copy activity source for Db2 databases.",
+    "InformixSource": {
+      "description": "A copy activity source for Informix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSource": {
+      "description": "A copy activity source for Microsoft Access.",
       "type": "object",
       "allOf": [
         {
@@ -1061,6 +1076,33 @@
     },
     "SalesforceSource": {
       "description": "A copy activity Salesforce source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "readBehavior": {
+          "description": "The read behavior for the operation. Default is Query.",
+          "type": "string",
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSourceReadBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SalesforceServiceCloudSource": {
+      "description": "A copy activity Salesforce Service Cloud source.",
       "type": "object",
       "allOf": [
         {
@@ -1528,6 +1570,56 @@
         "partitionColumnName": {
           "type": "object",
           "description": "The name of the column in integer type that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "TeradataSource": {
+      "description": "A copy activity Teradata source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Teradata query. Type: string (or Expression with resultType string)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for teradata read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Hash",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "TeradataPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for teradata source partitioning.",
+          "$ref": "#/definitions/TeradataPartitionSettings"
+        }
+      }
+    },
+    "TeradataPartitionSettings": {
+      "description": "The settings that will be leveraged for teradata source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range or hash partitioning. Type: string (or Expression with resultType string)."
         },
         "partitionUpperBound": {
           "type": "object",
@@ -2879,6 +2971,36 @@
         }
       }
     },
+    "InformixSink": {
+      "description": "A copy activity Informix sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSink": {
+      "description": "A copy activity Microsoft Access sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -2991,6 +3113,37 @@
     },
     "SalesforceSink": {
       "description": "A copy activity Salesforce sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "SalesforceServiceCloudSink": {
+      "description": "A copy activity Salesforce Service Cloud sink.",
       "type": "object",
       "allOf": [
         {

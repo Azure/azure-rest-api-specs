@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2019-04-01"
+    "version": "2019-06-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,17 +34,17 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/availableDelegations": {
       "get": {
-        "operationId": "AvailablePrivateEndpointTypes_List",
-        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+        "operationId": "AvailableDelegations_List",
+        "description": "Gets all of the available subnet delegations for this subscription in this region.",
         "parameters": [
           {
             "name": "location",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The location of the domain name."
+            "description": "The location of the subnet."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -55,15 +55,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+            "description": "Request successful. Returns all of the possible delegations for a subnet in this subscription in the region.",
             "schema": {
-              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
+              "$ref": "#/definitions/AvailableDelegationsResult"
             }
           }
         },
         "x-ms-examples": {
-          "Get available PrivateEndpoint types": {
-            "$ref": "./examples/AvailablePrivateEndpointTypesGet.json"
+          "Get available delegations": {
+            "$ref": "./examples/AvailableDelegationsSubscriptionGet.json"
           }
         },
         "x-ms-pageable": {
@@ -71,10 +71,10 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/availablePrivateEndpointTypes": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/locations/{location}/availableDelegations": {
       "get": {
-        "operationId": "AvailableResourceGroupPrivateEndpointTypes_List",
-        "description": "Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+        "operationId": "AvailableResourceGroupDelegations_List",
+        "description": "Gets all of the available subnet delegations for this resource group in this region.",
         "parameters": [
           {
             "name": "location",
@@ -99,15 +99,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. Returns all of the resource types that can be linked to a Private Endpoint in this subscription in this region.",
+            "description": "Request successful. Returns all of the possible delegations for a subnet in this subscription in the region.",
             "schema": {
-              "$ref": "#/definitions/AvailablePrivateEndpointTypesResult"
+              "$ref": "#/definitions/AvailableDelegationsResult"
             }
           }
         },
         "x-ms-examples": {
-          "Get available PrivateEndpoint types in the resource group": {
-            "$ref": "./examples/AvailablePrivateEndpointTypesResourceGroupGet.json"
+          "Get available delegations in the resource group": {
+            "$ref": "./examples/AvailableDelegationsResourceGroupGet.json"
           }
         },
         "x-ms-pageable": {
@@ -117,14 +117,14 @@
     }
   },
   "definitions": {
-    "AvailablePrivateEndpointTypesResult": {
+    "AvailableDelegationsResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AvailablePrivateEndpointType"
+            "$ref": "#/definitions/AvailableDelegation"
           },
-          "description": "An array of available privateEndpoint type."
+          "description": "An array of available delegations."
         },
         "nextLink": {
           "readOnly": true,
@@ -132,13 +132,17 @@
           "description": "The URL to get the next set of results."
         }
       },
-      "description": "An array of available PrivateEndpoint types."
+      "description": "An array of available delegations."
     },
-    "AvailablePrivateEndpointType": {
+    "AvailableDelegation": {
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the AvailableDelegation resource."
+        },
         "id": {
           "type": "string",
-          "description": "A unique identifier of the AvailablePrivateEndpoint Type resource."
+          "description": "A unique identifier of the AvailableDelegation resource."
         },
         "type": {
           "type": "string",
@@ -147,9 +151,16 @@
         "serviceName": {
           "type": "string",
           "description": "The name of the service and resource."
+        },
+        "actions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Describes the actions permitted to the service upon delegation."
         }
       },
-      "description": "The information of an AvailablePrivateEndpointType."
+      "description": "The serviceName of an AvailableDelegation indicates a possible delegation for a subnet."
     }
   }
 }

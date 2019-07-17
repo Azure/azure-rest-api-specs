@@ -127,7 +127,7 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.client_id
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
-       - $.definitions.IdentityErrorResponse.properties.error_description	   
+       - $.definitions.IdentityErrorResponse.properties.error_description
  ```
 
 ---
