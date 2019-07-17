@@ -954,8 +954,65 @@
         }
       }
     },
+    "InformixSource": {
+      "description": "A copy activity source for Informix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSource": {
+      "description": "A copy activity source for Microsoft Access.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SalesforceSource": {
       "description": "A copy activity Salesforce source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "readBehavior": {
+          "description": "The read behavior for the operation. Default is Query.",
+          "type": "string",
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSourceReadBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SalesforceServiceCloudSource": {
+      "description": "A copy activity Salesforce Service Cloud source.",
       "type": "object",
       "allOf": [
         {
@@ -2689,6 +2746,36 @@
         }
       }
     },
+    "InformixSink": {
+      "description": "A copy activity Informix sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSink": {
+      "description": "A copy activity Microsoft Access sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -2801,6 +2888,37 @@
     },
     "SalesforceSink": {
       "description": "A copy activity Salesforce sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "SalesforceServiceCloudSink": {
+      "description": "A copy activity Salesforce Service Cloud sink.",
       "type": "object",
       "allOf": [
         {
