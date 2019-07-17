@@ -1165,56 +1165,56 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/expand": {
-			"post": {
-				"x-ms-examples": {
+      "post": {
+        "x-ms-examples": {
           "Expand an entity": {
             "$ref": "./examples/entities/expand/PostExpandEntity.json"
           }
         },
-				"tags": [
-					"Entities"
-				],
-				"description": "Expands an entity.",
-				"operationId": "Entities_Expand",
-				"parameters": [
-					{
-						"$ref": "#/parameters/ApiVersion"
-					},
-					{
-						"$ref": "#/parameters/SubscriptionId"
-					},
-					{
-						"$ref": "#/parameters/ResourceGroupName"
-					},
-					{
-						"$ref": "#/parameters/OperationalInsightsResourceProvider"
-					},
-					{
-						"$ref": "#/parameters/WorkspaceName"
-					},
-					{
-						"$ref": "#/parameters/EntityId"
-					},
-					{
+        "tags": [
+          "Entities"
+        ],
+        "description": "Expands an entity.",
+        "operationId": "Entities_Expand",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
             "$ref": "#/parameters/EntityExpandRequestBody"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/EntityExpandResponse"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/CloudError"
-						}
-					}
-				}
-			}
-		},
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityExpandResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/officeConsents": {
       "get": {
         "x-ms-examples": {
@@ -2631,7 +2631,7 @@
       "properties": {
         "kind": {
           "description": "The kind of the entity.",
-					"$ref": "#/definitions/EntityInnerKind"
+          "$ref": "#/definitions/EntityInnerKind"
         }
       }
     },
@@ -2869,483 +2869,6 @@
           },
           "description": "The file hash entity identifiers associated with this file"
         }
-      }
-    },
-    "OfficeConsentList": {
-      "description": "List of all the office365 consents.",
-      "properties": {
-        "nextLink": {
-          "readOnly": true,
-          "description": "URL to fetch the next set of office consents.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of the consents.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OfficeConsent"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "OfficeConsent": {
-      "type": "object",
-      "description": "Consent for Office365 tenant that already made.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Office consent properties",
-          "$ref": "#/definitions/OfficeConsentProperties"
-        }
-      }
-    },
-    "OfficeConsentProperties": {
-      "type": "object",
-      "description": "Consent property bag.",
-      "properties": {
-        "tenantId": {
-          "type": "string",
-          "description": "The tenantId of the Office365 with the consent."
-        },
-        "tenantName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The tenant name of the Office365 with the consent."
-        }
-      }
-    },
-    "Resource": {
-      "x-ms-azure-resource": true,
-      "description": "An azure resource object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource Id"
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource type"
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Azure resource name"
-        }
-      }
-    },
-    "Settings": {
-      "type": "object",
-      "description": "The Setting.",
-      "discriminator": "kind",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/SettingsKind"
-        }
-      ],
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Etag of the alert rule."
-        }
-      }
-    },
-    "SettingsKind": {
-      "type": "object",
-      "description": "Describes an Azure resource with kind.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of the setting",
-          "enum": [
-            "UebaSettings",
-            "ToggleSettings"
-          ],
-          "x-ms-enum": {
-            "name": "SettingKind",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "UebaSettings": {
-      "x-ms-discriminator-value": "UebaSettings",
-      "type": "object",
-      "description": "Represents settings for User and Entity Behavior Analytics enablement.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "User and Entity Behavior Analytics settings properties",
-          "$ref": "#/definitions/UebaSettingsProperties"
-        }
-      }
-    },
-    "UebaSettingsProperties": {
-      "type": "object",
-      "description": "User and Entity Behavior Analytics settings property bag.",
-      "properties": {
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Determines whether User and Entity Behavior Analytics is enabled for this workspace."
-        },
-        "statusInMcas": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Determines whether User and Entity Behavior Analytics is enabled from MCAS (Microsoft Cloud App Security).",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "StatusInMcas",
-            "modelAsString": true
-          }
-        },
-        "atpLicenseStatus": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "LicenseStatus",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ToggleSettings": {
-      "x-ms-discriminator-value": "ToggleSettings",
-      "type": "object",
-      "description": "Settings with single toggle.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Settings"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "toggle properties",
-          "$ref": "#/definitions/ToggleSettingsProperties"
-        }
-      }
-    },
-    "ToggleSettingsProperties": {
-      "type": "object",
-      "description": "toggle property bag.",
-      "properties": {
-        "isEnabled": {
-          "type": "boolean",
-          "description": "Determines whether the setting is enable or disabled."
-        }
-      }
-    },
-    "Aggregations": {
-      "type": "object",
-      "description": "The aggregation.",
-      "discriminator": "kind",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/AggregationsKind"
-        }
-      ]
-    },
-    "AggregationsKind": {
-      "type": "object",
-      "description": "Describes an Azure resource with kind.",
-      "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of the setting",
-          "enum": [
-            "CasesAggregation"
-          ],
-          "x-ms-enum": {
-            "name": "AggregationsKind",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "CasesAggregation": {
-      "x-ms-discriminator-value": "CasesAggregation",
-      "type": "object",
-      "description": "Represents aggregations results for cases.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Aggregations"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Properties of aggregations results of cases.",
-          "$ref": "#/definitions/CasesAggregationProperties"
-        }
-      }
-    },
-    "CasesAggregationProperties": {
-      "type": "object",
-      "description": "Aggregative results of cases property bag.",
-      "properties": {
-        "aggregationBySeverity": {
-          "description": "Aggregations results by case severity.",
-          "$ref": "#/definitions/CasesAggregationBySeverityProperties"
-        },
-        "aggregationByStatus": {
-          "description": "Aggregations results by case status.",
-          "$ref": "#/definitions/CasesAggregationByStatusProperties"
-        }
-      }
-    },
-    "CasesAggregationBySeverityProperties": {
-      "type": "object",
-      "description": "Aggregative results of cases by severity property bag.",
-      "properties": {
-        "totalCriticalSeverity": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with severity Critical"
-        },
-        "totalHighSeverity": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with severity High"
-        },
-        "totalMediumSeverity": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with severity medium"
-        },
-        "totalLowSeverity": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with severity Low"
-        },
-        "totalInformationalSeverity": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with severity Informational"
-        }
-      }
-    },
-    "CasesAggregationByStatusProperties": {
-      "type": "object",
-      "description": "Aggregative results of cases by status property bag.",
-      "properties": {
-        "totalNewStatus": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with status New"
-        },
-        "totalInProgressStatus": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with status InProgress"
-        },
-        "totalResolvedStatus": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with status Resolved"
-        },
-        "totalDismissedStatus": {
-          "type": "integer",
-          "readOnly": true,
-          "description": "Total amount of open cases with status Dismissed"
-        }
-      }
-    },
-    "EntityQueryList": {
-      "description": "List of all the entity queries.",
-      "properties": {
-        "nextLink": {
-          "readOnly": true,
-          "description": "URL to fetch the next set of entity queries.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Array of entity queries.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityQuery"
-          }
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "EntityQuery": {
-      "type": "object",
-      "description": "Specific entity query.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Entity query properties",
-          "$ref": "#/definitions/EntityQueryProperties"
-        }
-      }
-    },
-    "EntityQueryProperties": {
-      "type": "object",
-      "description": "Describes entity query properties",
-      "properties": {
-        "queryTemplate": {
-          "type": "string",
-          "description": "The template query string to be parsed and formatted"
-        },
-        "inputEntityType": {
-          "$ref": "#/definitions/EntityInnerType",
-          "description": "The type of the query's source entity"
-        },
-        "inputFields": {
-          "type": "array",
-          "items": {
-            "description": "input field",
-            "type": "string"
-          },
-          "description": "List of the fields of the source entity that are required to run the query"
-        },
-        "outputEntityTypes": {
-          "type": "array",
-          "items": {
-            "description": "output entity type",
-            "$ref": "#/definitions/EntityInnerType"
-          },
-          "description": "List of the desired output types to be constructed from the result"
-        },
-        "dataSources": {
-          "type": "array",
-          "items": {
-            "description": "data source",
-            "type": "string"
-          },
-          "description": "List of the data sources that are required to run the query"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The query display name"
-        }
-      }
-    },
-    "EntityInnerType": {
-      "type": "string",
-      "description": "The type of the entity",
-      "enum": [
-        "Account",
-        "Host",
-        "File",
-        "AzureResource",
-        "CloudApplication",
-        "DNS",
-        "FileHash",
-        "IP",
-        "Malware",
-        "Process",
-        "RegistryKey",
-        "RegistryValue",
-        "SecurityGroup",
-        "URL",
-        "SecurityAlert",
-        "HuntingBookmark"
-      ],
-      "x-ms-enum": {
-        "name": "EntityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Account",
-            "description": "Entity represents account in the system."
-          },
-          {
-            "value": "Host",
-            "description": "Entity represents host in the system."
-          },
-          {
-            "value": "File",
-            "description": "Entity represents file in the system."
-          },
-          {
-            "value": "AzureResource",
-            "description": "Entity represents azure resource in the system."
-          },
-          {
-            "value": "CloudApplication",
-            "description": "Entity represents cloud application in the system."
-          },
-          {
-            "value": "DNS",
-            "description": "Entity represents dns in the system."
-          },
-          {
-            "value": "FileHash",
-            "description": "Entity represents file hash in the system."
-          },
-          {
-            "value": "IP",
-            "description": "Entity represents ip in the system."
-          },
-          {
-            "value": "Malware",
-            "description": "Entity represents malware in the system."
-          },
-          {
-            "value": "Process",
-            "description": "Entity represents process in the system."
-          },
-          {
-            "value": "RegistryKey",
-            "description": "Entity represents registry key in the system."
-          },
-          {
-            "value": "RegistryValue",
-            "description": "Entity represents registry value in the system."
-          },
-          {
-            "value": "SecurityGroup",
-            "description": "Entity represents security group in the system."
-          },
-          {
-            "value": "URL",
-            "description": "Entity represents url in the system."
-          },
-          {
-            "value": "SecurityAlert",
-            "description": "Entity represents security alert in the system."
-          },
-          {
-            "value": "HuntingBookmark",
-            "description": "Entity represents HuntingBookmark in the system."
-          }
-        ]
       }
     },
     "EntityInnerKind": {
@@ -4641,86 +4164,563 @@
     },
     "EntityExpandParameters": {
       "description": "The parameters required to execute an expand operation on the given entity.",
-			"properties": {
-				"expansionId": {
-					"pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
-					"type": "string",
-					"format": "uuid",
-					"description": "The Id of the expansion to perform."
-				},
-				"startTime": {
-					"type": "string",
-					"format": "date-time",
-					"description": "The start date filter, so the only expansion results returned are after this date."
-				},
-				"endTime": {
-					"type": "string",
-					"format": "date-time",
-					"description": "The end date filter, so the only expansion results returned are before this date."
-				}
-			}
+      "properties": {
+        "expansionId": {
+          "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+          "type": "string",
+          "format": "uuid",
+          "description": "The Id of the expansion to perform."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date filter, so the only expansion results returned are after this date."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date filter, so the only expansion results returned are before this date."
+        }
+      }
 		},
 		"EntityExpandResponse": {
-			"properties": {
-				"value": {
-					"type": "object",
-					"description": "The expansion result values.",
-					"properties": {
-						"entities": {
-							"type": "array",
-							"items": {
-								"$ref": "#/definitions/Entity"
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Entity"
               },
               "description": "Array of the expansion result entities."
-						}
-					}
-				},
-				"metaData": {
-					"$ref": "#/definitions/ExpansionResultsMetadata",
-					"description": "The metadata from the expansion operation results."
-				}
-			},
-			"description": "The entity expansion result operation response."
+            }
+          }
+        },
+        "metaData": {
+          "$ref": "#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        }
+      },
+      "description": "The entity expansion result operation response."
 		},
 		"ExpansionResultsMetadata": {
-			"type": "object",
-			"description": "Expansion result metadata.",
-			"properties": {
-				"aggregations": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/ExpansionResultAggregation"
-					},
-					"description": "Information of the aggregated nodes in the expansion result."
-				}
-			}
+      "type": "object",
+      "description": "Expansion result metadata.",
+      "properties": {
+        "aggregations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpansionResultAggregation"
+          },
+          "description": "Information of the aggregated nodes in the expansion result."
+        }
+      }
 		},
 		"ExpansionResultAggregation": {
-			"type": "object",
-			"description": "Information of a specific aggregation in the expansion result.",
-			"properties": {
-				"entityKind": {
-					"description": "The kind of the aggregated entity.",
-					"$ref": "#/definitions/EntityInnerKind"
-				},
-				"count": {
-					"type": "integer",
-					"description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result."
-				},
-				"aggregationType": {
-					"type": "string",
-					"description": "The common type of the aggregation. (for e.g. entity field name)"
-				},
-				"displayName": {
-					"type": "string",
-					"description": "The display name of the aggregation by type."
-				}
-			},
-			"required": [
-				"entityKind",
-				"count"
-			]
-		}
+      "type": "object",
+      "description": "Information of a specific aggregation in the expansion result.",
+      "properties": {
+        "entityKind": {
+          "description": "The kind of the aggregated entity.",
+          "$ref": "#/definitions/EntityInnerKind"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The common type of the aggregation. (for e.g. entity field name)"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the aggregation by type."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
+      ]
+		},
+    "OfficeConsentList": {
+      "description": "List of all the office365 consents.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of office consents.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of the consents.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OfficeConsent"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "OfficeConsent": {
+      "type": "object",
+      "description": "Consent for Office365 tenant that already made.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Office consent properties",
+          "$ref": "#/definitions/OfficeConsentProperties"
+        }
+      }
+    },
+    "OfficeConsentProperties": {
+      "type": "object",
+      "description": "Consent property bag.",
+      "properties": {
+        "tenantId": {
+          "type": "string",
+          "description": "The tenantId of the Office365 with the consent."
+        },
+        "tenantName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The tenant name of the Office365 with the consent."
+        }
+      }
+    },
+    "Resource": {
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        }
+      }
+    },
+    "Settings": {
+      "type": "object",
+      "description": "The Setting.",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/SettingsKind"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the alert rule."
+        }
+      }
+    },
+    "SettingsKind": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the setting",
+          "enum": [
+            "UebaSettings",
+            "ToggleSettings"
+          ],
+          "x-ms-enum": {
+            "name": "SettingKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "UebaSettings": {
+      "x-ms-discriminator-value": "UebaSettings",
+      "type": "object",
+      "description": "Represents settings for User and Entity Behavior Analytics enablement.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "User and Entity Behavior Analytics settings properties",
+          "$ref": "#/definitions/UebaSettingsProperties"
+        }
+      }
+    },
+    "UebaSettingsProperties": {
+      "type": "object",
+      "description": "User and Entity Behavior Analytics settings property bag.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Determines whether User and Entity Behavior Analytics is enabled for this workspace."
+        },
+        "statusInMcas": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Determines whether User and Entity Behavior Analytics is enabled from MCAS (Microsoft Cloud App Security).",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StatusInMcas",
+            "modelAsString": true
+          }
+        },
+        "atpLicenseStatus": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "LicenseStatus",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ToggleSettings": {
+      "x-ms-discriminator-value": "ToggleSettings",
+      "type": "object",
+      "description": "Settings with single toggle.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Settings"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "toggle properties",
+          "$ref": "#/definitions/ToggleSettingsProperties"
+        }
+      }
+    },
+    "ToggleSettingsProperties": {
+      "type": "object",
+      "description": "toggle property bag.",
+      "properties": {
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Determines whether the setting is enable or disabled."
+        }
+      }
+    },
+    "Aggregations": {
+      "type": "object",
+      "description": "The aggregation.",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/AggregationsKind"
+        }
+      ]
+    },
+    "AggregationsKind": {
+      "type": "object",
+      "description": "Describes an Azure resource with kind.",
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "The kind of the setting",
+          "enum": [
+            "CasesAggregation"
+          ],
+          "x-ms-enum": {
+            "name": "AggregationsKind",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "CasesAggregation": {
+      "x-ms-discriminator-value": "CasesAggregation",
+      "type": "object",
+      "description": "Represents aggregations results for cases.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Aggregations"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of aggregations results of cases.",
+          "$ref": "#/definitions/CasesAggregationProperties"
+        }
+      }
+    },
+    "CasesAggregationProperties": {
+      "type": "object",
+      "description": "Aggregative results of cases property bag.",
+      "properties": {
+        "aggregationBySeverity": {
+          "description": "Aggregations results by case severity.",
+          "$ref": "#/definitions/CasesAggregationBySeverityProperties"
+        },
+        "aggregationByStatus": {
+          "description": "Aggregations results by case status.",
+          "$ref": "#/definitions/CasesAggregationByStatusProperties"
+        }
+      }
+    },
+    "CasesAggregationBySeverityProperties": {
+      "type": "object",
+      "description": "Aggregative results of cases by severity property bag.",
+      "properties": {
+        "totalCriticalSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity Critical"
+        },
+        "totalHighSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity High"
+        },
+        "totalMediumSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity medium"
+        },
+        "totalLowSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity Low"
+        },
+        "totalInformationalSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity Informational"
+        }
+      }
+    },
+    "CasesAggregationByStatusProperties": {
+      "type": "object",
+      "description": "Aggregative results of cases by status property bag.",
+      "properties": {
+        "totalNewStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status New"
+        },
+        "totalInProgressStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status InProgress"
+        },
+        "totalResolvedStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status Resolved"
+        },
+        "totalDismissedStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status Dismissed"
+        }
+      }
+    },
+    "EntityQueryList": {
+      "description": "List of all the entity queries.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of entity queries.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of entity queries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityQuery"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EntityQuery": {
+      "type": "object",
+      "description": "Specific entity query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Entity query properties",
+          "$ref": "#/definitions/EntityQueryProperties"
+        }
+      }
+    },
+    "EntityQueryProperties": {
+      "type": "object",
+      "description": "Describes entity query properties",
+      "properties": {
+        "queryTemplate": {
+          "type": "string",
+          "description": "The template query string to be parsed and formatted"
+        },
+        "inputEntityType": {
+          "$ref": "#/definitions/EntityInnerType",
+          "description": "The type of the query's source entity"
+        },
+        "inputFields": {
+          "type": "array",
+          "items": {
+            "description": "input field",
+            "type": "string"
+          },
+          "description": "List of the fields of the source entity that are required to run the query"
+        },
+        "outputEntityTypes": {
+          "type": "array",
+          "items": {
+            "description": "output entity type",
+            "$ref": "#/definitions/EntityInnerType"
+          },
+          "description": "List of the desired output types to be constructed from the result"
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "description": "data source",
+            "type": "string"
+          },
+          "description": "List of the data sources that are required to run the query"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The query display name"
+        }
+      }
+    },
+    "EntityInnerType": {
+      "type": "string",
+      "description": "The type of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DNS",
+        "FileHash",
+        "IP",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "URL",
+        "SecurityAlert",
+        "HuntingBookmark"
+      ],
+      "x-ms-enum": {
+        "name": "EntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Account",
+            "description": "Entity represents account in the system."
+          },
+          {
+            "value": "Host",
+            "description": "Entity represents host in the system."
+          },
+          {
+            "value": "File",
+            "description": "Entity represents file in the system."
+          },
+          {
+            "value": "AzureResource",
+            "description": "Entity represents azure resource in the system."
+          },
+          {
+            "value": "CloudApplication",
+            "description": "Entity represents cloud application in the system."
+          },
+          {
+            "value": "DNS",
+            "description": "Entity represents dns in the system."
+          },
+          {
+            "value": "FileHash",
+            "description": "Entity represents file hash in the system."
+          },
+          {
+            "value": "IP",
+            "description": "Entity represents ip in the system."
+          },
+          {
+            "value": "Malware",
+            "description": "Entity represents malware in the system."
+          },
+          {
+            "value": "Process",
+            "description": "Entity represents process in the system."
+          },
+          {
+            "value": "RegistryKey",
+            "description": "Entity represents registry key in the system."
+          },
+          {
+            "value": "RegistryValue",
+            "description": "Entity represents registry value in the system."
+          },
+          {
+            "value": "SecurityGroup",
+            "description": "Entity represents security group in the system."
+          },
+          {
+            "value": "URL",
+            "description": "Entity represents url in the system."
+          },
+          {
+            "value": "SecurityAlert",
+            "description": "Entity represents security alert in the system."
+          },
+          {
+            "value": "HuntingBookmark",
+            "description": "Entity represents HuntingBookmark in the system."
+          }
+        ]
+      }
+    }
   },
   "parameters": {
     "SubscriptionId": {
