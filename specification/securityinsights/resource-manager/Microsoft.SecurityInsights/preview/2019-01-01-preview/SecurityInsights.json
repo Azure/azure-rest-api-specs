@@ -2095,12 +2095,33 @@
               }
             ]
           }
+        },
+        "closedReasonText": {
+          "type": "string",
+          "description": "the case close reason details"
+        },
+        "relatedAlertIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "related alert id"
+          },
+          "description": "List of related alert identifiers"
+        },
+        "caseNumber": {
+          "type": "integer",
+          "description": "a sequential number"
+        },
+        "lastComment": {
+          "type": "string",
+          "description": "the last comment in the case"
         }
       },
       "required": [
         "title",
         "severity",
-        "status"
+        "status",
+        "startTimeUtc"
       ]
     },
     "BookmarkList": {
