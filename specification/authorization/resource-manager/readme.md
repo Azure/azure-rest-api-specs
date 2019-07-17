@@ -153,6 +153,19 @@ input-file:
 - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
+### Tag: profile-hybrid-2019-03-01
+
+These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
+Creating this tag to pick proper resources from the hybrid profile.
+
+``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+input-file:
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+```
+
 ---
 # Code Generation
 
@@ -182,61 +195,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.authorization
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-authorization
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2015-07-01
-  - tag: package-2018-09-01-preview
-```
-
-### Tag: package-2018-09-01-preview and java
-
-These settings apply only when `--tag=package-2018-09-01-preview --java` is specified on he command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2018-09-01-preview' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.authorization.v2018_09_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2018_09_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2015-07-01 and java
-
-These settings apply only when `--tag=package-2015-07-01 --java` is specified on he command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-07-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.authorization.v2015_07_01
-  output-folder: $(azure-libraries-for-java-folder)/authorization/resource-manager/v2015_07_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: profile-hybrid-2019-03-01
-
-These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
-Creating this tag to pick proper resources from the hybrid profile.
-
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
-input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-```
+See configuration in [readme.java.md](./readme.java.md)

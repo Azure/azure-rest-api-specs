@@ -909,6 +909,36 @@
         }
       }
     },
+    "DynamicsCrmSource": {
+      "description": "A copy activity Dynamics CRM source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "FetchXML is a proprietary query language that is used in Microsoft Dynamics CRM (online & on-premises). Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "CommonDataServiceForAppsSource": {
+      "description": "A copy activity Common Data Service for Apps source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "FetchXML is a proprietary query language that is used in Microsoft Common Data Service for Apps (online & on-premises). Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RelationalSource": {
       "description": "A copy activity source for various relational databases.",
       "type": "object",
@@ -924,8 +954,65 @@
         }
       }
     },
+    "InformixSource": {
+      "description": "A copy activity source for Informix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSource": {
+      "description": "A copy activity source for Microsoft Access.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SalesforceSource": {
       "description": "A copy activity Salesforce source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "readBehavior": {
+          "description": "The read behavior for the operation. Default is Query.",
+          "type": "string",
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSourceReadBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SalesforceServiceCloudSource": {
+      "description": "A copy activity Salesforce Service Cloud source.",
       "type": "object",
       "allOf": [
         {
@@ -1150,6 +1237,36 @@
         }
       }
     },
+    "SqlMISource": {
+      "description": "A copy activity Azure SQL Managed Instance source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "sqlReaderQuery": {
+          "type": "object",
+          "description": "SQL reader query. Type: string (or Expression with resultType string)."
+        },
+        "sqlReaderStoredProcedureName": {
+          "type": "object",
+          "description": "Name of the stored procedure for a Azure SQL Managed Instance source. This cannot be used at the same time as SqlReaderQuery. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "Value and type setting for stored procedure parameters. Example: \"{Parameter1: {value: \"1\", type: \"int\"}}\".",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "produceAdditionalTypes": {
+          "description": "Which additional types to produce.",
+          "type": "object"
+        }
+      }
+    },
     "SqlDWSource": {
       "description": "A copy activity SQL Data Warehouse source.",
       "type": "object",
@@ -1286,6 +1403,56 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
+    "TeradataSource": {
+      "description": "A copy activity Teradata source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Teradata query. Type: string (or Expression with resultType string)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for teradata read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Hash",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "TeradataPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for teradata source partitioning.",
+          "$ref": "#/definitions/TeradataPartitionSettings"
+        }
+      }
+    },
+    "TeradataPartitionSettings": {
+      "description": "The settings that will be leveraged for teradata source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range or hash partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2334,6 +2501,40 @@
         }
       }
     },
+    "SqlMISink": {
+      "description": "A copy activity Azure SQL Managed Instance sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "sqlWriterStoredProcedureName": {
+          "type": "object",
+          "description": "SQL writer stored procedure name. Type: string (or Expression with resultType string)."
+        },
+        "sqlWriterTableType": {
+          "type": "object",
+          "description": "SQL writer table type. Type: string (or Expression with resultType string)."
+        },
+        "preCopyScript": {
+          "type": "object",
+          "description": "SQL pre-copy script. Type: string (or Expression with resultType string)."
+        },
+        "storedProcedureParameters": {
+          "description": "SQL stored procedure parameters.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/StoredProcedureParameter"
+          }
+        },
+        "storedProcedureTableTypeParameterName": {
+          "type": "object",
+          "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SqlDWSink": {
       "description": "A copy activity SQL Data Warehouse sink.",
       "type": "object",
@@ -2545,6 +2746,36 @@
         }
       }
     },
+    "InformixSink": {
+      "description": "A copy activity Informix sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSink": {
+      "description": "A copy activity Microsoft Access sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -2568,6 +2799,64 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      },
+      "required": [
+        "writeBehavior"
+      ]
+    },
+    "DynamicsCrmSink": {
+      "description": "A copy activity Dynamics CRM sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation.",
+          "type": "string",
+          "enum": [
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicsSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        }
+      },
+      "required": [
+        "writeBehavior"
+      ]
+    },
+    "CommonDataServiceForAppsSink": {
+      "description": "A copy activity Common Data Service for Apps sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation.",
+          "type": "string",
+          "enum": [
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "DynamicsSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
         }
       },
       "required": [
@@ -2599,6 +2888,37 @@
     },
     "SalesforceSink": {
       "description": "A copy activity Salesforce sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "SalesforceServiceCloudSink": {
+      "description": "A copy activity Salesforce Service Cloud sink.",
       "type": "object",
       "allOf": [
         {
