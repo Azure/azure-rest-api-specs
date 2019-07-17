@@ -984,6 +984,21 @@
         }
       }
     },
+    "Db2Source": {
+      "description": "A copy activity source for Db2 databases.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "OdbcSource": {
       "description": "A copy activity source for ODBC databases.",
       "type": "object",
