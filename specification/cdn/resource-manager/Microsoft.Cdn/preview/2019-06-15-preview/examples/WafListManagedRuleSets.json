@@ -1,53 +1,53 @@
 {
-    "parameters": {
-        "api-version": "2019-06-15-preview",
-        "subscriptionId": "subid"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [
+  "parameters": {
+    "api-version": "2019-06-15-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "DefaultRuleSet_1.0",
+            "id": "/subscriptions/subid/providers/Microsoft.Cdn/CdnWebApplicationFirewallManagedRuleSets",
+            "type": "Microsoft.Cdn/cdnwebapplicationfirewallmanagedrulesets",
+            "sku": {
+              "name": "Standard_Microsoft"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "ruleSetType": "DefaultRuleSet",
+              "ruleSetVersion": "preview-1.0",
+              "ruleGroups": [
+                {
+                  "ruleGroupName": "Group1",
+                  "description": "Description for rule group 1.",
+                  "rules": [
                     {
-                        "name": "DefaultRuleSet_1.0",
-                        "id": "/subscriptions/subid/providers/Microsoft.Cdn/CdnWebApplicationFirewallManagedRuleSets",
-                        "type": "Microsoft.Cdn/cdnwebapplicationfirewallmanagedrulesets",
-                        "sku": {
-                           "name" : "Standard_Microsoft"
-                        },
-                        "properties": {
-                            "provisioningState": "Succeeded",
-                            "ruleSetType": "DefaultRuleSet",
-                            "ruleSetVersion": "preview-1.0",
-                            "ruleGroups": [
-                                {
-                                    "ruleGroupName": "Group1",
-                                    "description": "Description for rule group 1.",
-                                    "rules": [
-                                        {
-                                            "ruleId": "GROUP1-0001",
-                                            "description": "Generic managed web application firewall rule."
-                                        },
-                                        {
-                                            "ruleId": "GROUP1-0002",
-                                            "description": "Generic managed web application firewall rule."
-                                        }
-                                    ]
-                                },
-                                {
-                                    "ruleGroupName": "Group2",
-                                    "description": "Description for rule group 2.",
-                                    "rules": [
-                                        {
-                                            "ruleId": "GROUP2-0001",
-                                            "description": "Generic managed web application firewall rule."
-                                        }
-                                    ]
-                                }
-                            ]
-                        }
+                      "ruleId": "GROUP1-0001",
+                      "description": "Generic managed web application firewall rule."
+                    },
+                    {
+                      "ruleId": "GROUP1-0002",
+                      "description": "Generic managed web application firewall rule."
                     }
-                ]
+                  ]
+                },
+                {
+                  "ruleGroupName": "Group2",
+                  "description": "Description for rule group 2.",
+                  "rules": [
+                    {
+                      "ruleId": "GROUP2-0001",
+                      "description": "Generic managed web application firewall rule."
+                    }
+                  ]
+                }
+              ]
             }
-        }
+          }
+        ]
+      }
     }
+  }
 }

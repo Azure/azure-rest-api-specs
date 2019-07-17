@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Resource.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Resource, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,13 +15,13 @@ To build the SDK for Resource, simply [Install AutoRest](https://aka.ms/autorest
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the Resource API.
 
 ``` yaml
@@ -37,11 +37,11 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
-tag: package-policy-2018-05
+tag: package-policy-2019-01
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-05
+tag: package-resources-2019-0510
 ```
 
 ``` yaml $(package-subscriptions)
@@ -53,10 +53,20 @@ tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-managedapplications-2016-09
+tag: package-2019-06
 ```
 
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.Resources/stable/2019-06-01/subscriptions.json
+```
 ### Tag: package-features-2015-12
+
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
 
 ``` yaml $(tag) == 'package-features-2015-12'
@@ -65,6 +75,7 @@ input-file:
 ```
 
 ### Tag: package-locks-2016-09
+
 These settings apply only when `--tag=package-locks-2016-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-locks-2016-09'
@@ -73,6 +84,7 @@ input-file:
 ```
 
 ### Tag: package-locks-2015-01
+
 These settings apply only when `--tag=package-locks-2015-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-locks-2015-01'
@@ -80,7 +92,23 @@ input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
 ```
 
+### Tag: package-policy-2019-01
+
+These settings apply only when `--tag=package-policy-2019-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2019-01'
+input-file:
+- Microsoft.Authorization/stable/2019-01-01/policyAssignments.json
+- Microsoft.Authorization/stable/2019-01-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2019-01-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
+```
+
 ### Tag: package-policy-2018-05
+
 These settings apply only when `--tag=package-policy-2018-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2018-05'
@@ -95,6 +123,7 @@ override-info:
 ```
 
 ### Tag: package-policy-2018-03
+
 These settings apply only when `--tag=package-policy-2018-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2018-03'
@@ -109,6 +138,7 @@ override-info:
 ```
 
 ### Tag: package-policy-2017-06
+
 These settings apply only when `--tag=package-policy-2017-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2017-06'
@@ -123,6 +153,7 @@ override-info:
 ```
 
 ### Tag: package-pure-policy-2017-06
+
 These settings apply only when `--tag=package-pure-policy-2017-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-pure-policy-2017-06'
@@ -136,6 +167,7 @@ override-info:
 ```
 
 ### Tag: package-policy-2016-12
+
 These settings apply only when `--tag=package-policy-2016-12` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2016-12'
@@ -149,6 +181,7 @@ override-info:
 ```
 
 ### Tag: package-policy-2016-04
+
 These settings apply only when `--tag=package-policy-2016-04` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2016-04'
@@ -157,6 +190,7 @@ input-file:
 ```
 
 ### Tag: package-policy-2015-10
+
 These settings apply only when `--tag=package-policy-2015-10` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2015-10'
@@ -165,6 +199,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2019-05
+
 These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2019-05'
@@ -172,7 +207,17 @@ input-file:
 - Microsoft.Resources/stable/2019-05-01/resources.json
 ```
 
+### Tag: package-resources-2019-0510
+
+These settings apply only when `--tag=package-resources-2019-0510` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-0510'
+input-file:
+- Microsoft.Resources/stable/2019-05-10/resources.json
+```
+
 ### Tag: package-resources-2019-03
+
 These settings apply only when `--tag=package-resources-2019-03` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2019-03'
@@ -181,6 +226,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2018-05
+
 These settings apply only when `--tag=package-resources-2018-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2018-05'
@@ -189,6 +235,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2018-02
+
 These settings apply only when `--tag=package-resources-2018-02` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2018-02'
@@ -197,6 +244,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2017-05
+
 These settings apply only when `--tag=package-resources-2017-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2017-05'
@@ -205,6 +253,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2016-09
+
 These settings apply only when `--tag=package-resources-2016-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2016-09'
@@ -213,6 +262,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2016-07
+
 These settings apply only when `--tag=package-resources-2016-07` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2016-07'
@@ -221,6 +271,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2016-02
+
 These settings apply only when `--tag=package-resources-2016-02` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2016-02'
@@ -229,6 +280,7 @@ input-file:
 ```
 
 ### Tag: package-resources-2015-11
+
 These settings apply only when `--tag=package-resources-2015-11` is specified on the command line.
 
 ``` yaml $(tag) == 'package-resources-2015-11'
@@ -237,6 +289,7 @@ input-file:
 ```
 
 ### Tag: package-subscriptions-2018-06
+
 These settings apply only when `--tag=package-subscriptions-2018-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-subscriptions-2018-06'
@@ -245,6 +298,7 @@ input-file:
 ```
 
 ### Tag: package-subscriptions-2016-06
+
 These settings apply only when `--tag=package-subscriptions-2016-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-subscriptions-2016-06'
@@ -253,6 +307,7 @@ input-file:
 ```
 
 ### Tag: package-subscriptions-2015-11
+
 These settings apply only when `--tag=package-subscriptions-2015-11` is specified on the command line.
 
 ``` yaml $(tag) == 'package-subscriptions-2015-11'
@@ -261,6 +316,7 @@ input-file:
 ```
 
 ### Tag: package-links-2016-09
+
 These settings apply only when `--tag=package-links-2016-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-links-2016-09'
@@ -269,6 +325,7 @@ input-file:
 ```
 
 ### Tag: package-managedapplications-2018-06
+
 These settings apply only when `--tag=package-managedapplications-2018-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-managedapplications-2018-06'
@@ -277,6 +334,7 @@ input-file:
 ```
 
 ### Tag: package-managedapplications-2017-09
+
 These settings apply only when `--tag=package-managedapplications-2017-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-managedapplications-2017-09'
@@ -285,6 +343,7 @@ input-file:
 ```
 
 ### Tag: package-managedapplications-2016-09
+
 These settings apply only when `--tag=package-managedapplications-2016-09` is specified on the command line.
 
 ``` yaml $(tag) == 'package-managedapplications-2016-09'
@@ -293,6 +352,7 @@ input-file:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: UniqueResourcePaths
@@ -362,8 +422,8 @@ directive:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -408,13 +468,15 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
 
 Generate all API versions currently shipped for this package
 
-```yaml $(java) && $(multiapi)
+``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
+  - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2019-0510
   - tag: package-resources-2019-05
   - tag: package-resources-2019-03
   - tag: package-resources-2018-02
@@ -449,6 +511,24 @@ java:
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Locks"}'
+```
+
+### Tag: package-policy-2019-01 and java
+
+These settings apply only when `--tag=package-policy-2019-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2019-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.policy.v2019_01_01
+  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2019_01_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "Policy"}'
+directive:
+  from: policyAssignments.json
+  where: $.definitions.PolicyAssignmentProperties.properties.scope
+  transform: $['x-ms-client-name'] = 'scopeProperty'
 ```
 
 ### Tag: package-policy-2018-05 and java
@@ -503,6 +583,19 @@ directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
   transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-resources-2019-0510 and java
+
+These settings apply only when `--tag=package-resources-2019-0510 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-0510' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_05_10
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_05_10
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-resources-2019-05 and java

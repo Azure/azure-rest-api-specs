@@ -1,21 +1,15 @@
-[![Repo Status](http://img.shields.io/travis/Azure/azure-rest-api-specs/master.svg?style=flat-square&label=repo-status)](https://travis-ci.org/Azure/azure-rest-api-specs)
-
 # Azure REST API Specifications
 
 ## Description
 
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
-## Basics
-If you're a spec author looking for information about all of the repositories and steps in the pipeline, go to the [adx-documentation-pr](https://github.com/Azure/adx-documentation-pr) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo. 
+## Getting started
+If you're a spec author looking for information about all of the repositories and steps in the pipeline, go to our [documentation](https://github.com/Azure/adx-documentation-pr/wiki) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo. 
 
 <b>Latest improvement:</b><i> Microsoft employees can try out our new experience at [OpenAPI Hub](https://aka.ms/openapihub) - online experience for using our validation tools and finding your workflow.</i>
 
 Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.
-
-## Getting started
-- Our [Contribution guidelines](./.github/CONTRIBUTING.md) walks you through the process of contributing to this repository.
-- The [/documentation](./documentation/) folder contains reference documentation for all aspects of Swagger and our recommended patterns. Start with the [Creating Swagger](./documentation/creating-swagger.md) page.
 
 ## Directory Structure
 
