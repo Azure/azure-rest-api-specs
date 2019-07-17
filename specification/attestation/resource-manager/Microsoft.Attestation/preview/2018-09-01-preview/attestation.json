@@ -55,9 +55,9 @@
             }
           },
           "default": {
-            "description": "Attestation service error result",
+            "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResult"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -104,7 +104,7 @@
           "default": {
             "description": "Error result from Attestation service",
             "schema": {
-              "$ref": "#/definitions/ErrorResult"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -164,7 +164,7 @@
           "default": {
             "description": "Error result from Attestation service",
             "schema": {
-              "$ref": "#/definitions/ErrorResult"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -212,7 +212,7 @@
           "default": {
             "description": "Error result from Attestation service",
             "schema": {
-              "$ref": "#/definitions/ErrorResult"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -251,7 +251,7 @@
           "default": {
             "description": "Attestation service error result",
             "schema": {
-              "$ref": "#/definitions/ErrorResult"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -294,7 +294,7 @@
           "default": {
             "description": "Attestation service error result",
             "schema": {
-              "$ref": "#/definitions/ErrorResult"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -395,56 +395,28 @@
         }
       }
     },
-    "ErrorResult": {
-      "type": "object",
-      "title": "Error",
-      "description": "Error description and code explaining why an operation failed.",
+    "CloudError": {
+      "x-ms-external": true,
       "properties": {
         "error": {
-          "type": "object",
-          "description": "Error object.",
-          "$ref": "#/definitions/ErrorResponseBody"
+          "$ref": "#/definitions/CloudErrorBody"
         }
-      }
+      },
+      "description": "An error response from Attestation."
     },
-    "ErrorResponseBody": {
-      "type": "object",
-      "title": "Error",
-      "description": "Error description and code explaining why an operation failed.",
-      "required": [
-        "message",
-        "code"
-      ],
+    "CloudErrorBody": {
+      "x-ms-external": true,
       "properties": {
-        "message": {
-          "type": "string",
-          "description": "Description of the error."
-        },
         "code": {
           "type": "string",
-          "description": "Service specific error code"
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for displaying in a user interface."
         }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "description": "Error response",
-      "properties": {
-        "error": {
-          "type": "object",
-          "description": "Error response",
-          "properties": {
-            "code": {
-              "type": "string",
-              "description": "Description of the error."
-            },
-            "message": {
-              "type": "string",
-              "description": "Service specific error code."
-            }
-          }
-        }
-      }
+      },
+      "description": "An error response from Attestation."
     },
     "AttestationProviderListResult": {
       "description": "Attestation Providers List.",
