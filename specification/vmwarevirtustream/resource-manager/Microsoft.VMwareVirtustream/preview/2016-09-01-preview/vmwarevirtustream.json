@@ -1,1439 +1,1439 @@
 {
-    "swagger": "2.0",
-    "info": {
-        "description": "API for managing Virtustream Private Clouds through Azure.",
-        "version": "2016-09-01-preview",
-        "title": "Virtustream Private Cloud Resource Provider API"
+  "swagger": "2.0",
+  "info": {
+    "description": "API for managing Virtustream Private Clouds through Azure.",
+    "version": "2016-09-01-preview",
+    "title": "Virtustream Private Cloud Resource Provider API"
+  },
+  "tags": [
+    {
+      "name": "PrivateClouds",
+      "description": ""
     },
-    "tags": [
-        {
-            "name": "PrivateClouds",
-            "description": ""
-        },
-        {
-            "name": "Clusters",
-            "description": ""
-        },
-        {
-            "name": "Subscriptions",
-            "description": ""
-        },
-        {
-            "name": "Move Resource",
-            "description": ""
-        }
-    ],
-    "schemes": [
-        "https"
-    ],
-    "parameters": {
-        "subscriptionId": {
-            "name": "subscriptionId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The unique identifier for a Microsoft Azure subscription."
-        },
-        "resourceGroupName": {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group within the Azure subscription.",
-            "x-ms-parameter-location": "method"
-        },
-        "apiVersion": {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The Version of the API to be used with the client request."
-        }
+    {
+      "name": "Clusters",
+      "description": ""
     },
-    "paths": {
-        "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds": {
-            "get": {
-                "operationId": "PrivateCloud_List",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "list private clouds",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/PrivateCloudList"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
-            "get": {
-                "operationId": "PrivateCloud_GetById",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "get a private cloud",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
-            "get": {
-                "operationId": "PrivateCloud_ListInResourceGroup",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "list private clouds in a resource group",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/PrivateCloudList"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
-            "get": {
-                "operationId": "PrivateCloud_GetByIdInResourceGroup",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "get a private cloud in a resource group",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "operationId": "PrivateCloud_Create",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "create a private cloud",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzureClusterResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted operation",
-                        "headers": {
-                            "Location": {
-                                "type": "string",
-                                "description": "Url to poll for status."
-                            },
-                            "Azure-AsyncOperation": {
-                                "type": "string",
-                                "description": "Url to poll for operation status."
-                            },
-                            "Retry-After": {
-                                "type": "string",
-                                "description": "How long to wait before polling."
-                            }
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "operationId": "PrivateCloud_Modify",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "modify a private cloud",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "operationId": "PrivateCloud_Delete",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "delete a private cloud",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": "accepted operation"
-                    },
-                    "204": {
-                        "description": "no content"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters": {
-            "get": {
-                "operationId": "Cluster_List",
-                "tags": [
-                    "Clusters"
-                ],
-                "summary": "list clusters in a private cloud",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "type": "array",
-                            "items": {
-                                "$ref": "#/definitions/AzureClusterResponse"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters/{clusterName}": {
-            "get": {
-                "operationId": "Cluster_GetByName",
-                "tags": [
-                    "Clusters"
-                ],
-                "summary": "get cluster",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzureClusterResponse"
-                        }
-                    }
-                }
-            },
-            "put": {
-                "operationId": "Cluster_Create",
-                "tags": [
-                    "Clusters"
-                ],
-                "summary": "create cluster",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AzureClusterRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzureClusterResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted operation",
-                        "headers": {
-                            "Location": {
-                                "type": "string",
-                                "description": "Url to poll for status."
-                            },
-                            "Azure-AsyncOperation": {
-                                "type": "string",
-                                "description": "Url to poll for operation status."
-                            },
-                            "Retry-After": {
-                                "type": "string",
-                                "description": "How long to wait before polling."
-                            }
-                        }
-                    }
-                }
-            },
-            "patch": {
-                "operationId": "Cluster_Modify",
-                "tags": [
-                    "Clusters"
-                ],
-                "summary": "modify cluster",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AzureClusterRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation"
-                    },
-                    "202": {
-                        "description": "accepted operation"
-                    }
-                }
-            },
-            "delete": {
-                "operationId": "Cluster_Delete",
-                "tags": [
-                    "Clusters"
-                ],
-                "summary": "delete cluster",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "name": "clusterName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the cluster."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "202": {
-                        "description": "accepted operation"
-                    },
-                    "204": {
-                        "description": "no content"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/operationresults/{operationId}": {
-            "get": {
-                "operationId": "PrivateCloud_OperationResultsGetById",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "get a private cloud in a resource group",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the private cloud."
-                    },
-                    {
-                        "name": "operationId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The ID of the private cloud order to poll."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted operation",
-                        "headers": {
-                            "Location": {
-                                "type": "string",
-                                "description": "Url to poll for status."
-                            },
-                            "Retry-After": {
-                                "type": "string",
-                                "description": "How long to wait before polling."
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/operationstatuses/{operationId}": {
-            "get": {
-                "operationId": "PrivateCloud_OperationStatusesGetById",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "get private cloud in a resource group",
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "name": "operationId",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The ID of the privateCloud order to poll."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "retrieved operation status",
-                        "schema": {
-                            "$ref": "#/definitions/AzureOperationStatus"
-                        },
-                        "headers": {
-                            "Retry-After": {
-                                "type": "string",
-                                "description": "How long to wait before polling"
-                            }
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addAuthorization/{authorizationName}": {
-            "post": {
-                "operationId": "PrivateCloud_AddAuthorization",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "adds a number of hosts to a cluster",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "name": "authorizationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the ER authorization."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteAuthorization/{authorizationName}": {
-            "post": {
-                "operationId": "PrivateCloud_DeleteAuthorization",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "adds a number of hosts to a cluster",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "name": "authorizationName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the ER authorization."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addGlobalReachConnection": {
-            "post": {
-                "operationId": "PrivateCloud_AddGlobalReachConnection",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "adds a global reach connection for the privateCloud",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/GlobalReachConnectionRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteGlobalReachConnection": {
-            "post": {
-                "operationId": "PrivateCloud_DeleteGlobalReachConnection",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "deletes a global reach connection from the private cloud",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DeleteGlobalReachConnectionRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addIdentitySource": {
-            "post": {
-                "operationId": "PrivateCloud_AddIdentitySource",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "adds an identity source for the privateCloud",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/AddIdentitySourceRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteIdentitySource": {
-            "post": {
-                "operationId": "PrivateCloud_DeleteIdentitySource",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "deletes an identity source from the private cloud",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/DeleteIdentitySourceRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/AzurePrivateCloudResponse"
-                        }
-                    },
-                    "202": {
-                        "description": "accepted"
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/getAdminCredentials": {
-            "post": {
-                "operationId": "PrivateCloud_GetAdminCredentials",
-                "tags": [
-                    "PrivateClouds"
-                ],
-                "summary": "fetches the vcenter credentials for the private cloud",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "privateCloudName",
-                        "in": "path",
-                        "required": true,
-                        "type": "string",
-                        "description": "The name of the privateCloud."
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation",
-                        "schema": {
-                            "$ref": "#/definitions/GetAdminCredentialsResponse"
-                        }
-                    }
-                }
-            }
-        },
-        "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
-            "post": {
-                "operationId": "PrivateCloud_MoveResources",
-                "tags": [
-                    "Move Resource"
-                ],
-                "summary": "move resources to another resource group",
-                "consumes": [
-                    "application/json"
-                ],
-                "parameters": [
-                    {
-                        "$ref": "#/parameters/subscriptionId"
-                    },
-                    {
-                        "$ref": "#/parameters/resourceGroupName"
-                    },
-                    {
-                        "name": "parameters",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/MoveResourceRequest"
-                        }
-                    },
-                    {
-                        "$ref": "#/parameters/apiVersion"
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "successful operation"
-                    }
-                }
-            }
-        }
+    {
+      "name": "Subscriptions",
+      "description": ""
     },
-    "definitions": {
-        "GlobalReachConnectionRequest": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
-                },
-                "key": {
-                    "type": "string",
-                    "example": "12341234-1234-1234-1234-123412341234"
-                },
-                "network": {
-                    "type": "string",
-                    "example": "10.19.10.0/29"
-                }
-            }
-        },
-        "DeleteGlobalReachConnectionRequest": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
-                }
-            }
-        },
-        "GlobalReachConnection": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect"
-                },
-                "primarySubnet": {
-                    "type": "string",
-                    "example": "10.19.10.0/30"
-                },
-                "secondarySubnet": {
-                    "type": "string",
-                    "example": "10.19.10.4/30"
-                }
-            }
-        },
-        "ExpressRouteAuthorization": {
-            "properties": {
-                "id": {
-                    "type": "string",
-                    "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "myAuth"
-                },
-                "key": {
-                    "type": "string",
-                    "example": "12341234-1234-1234-1234-123412341234"
-                }
-            }
-        },
-        "Circuit": {
-            "properties": {
-                "primarySubnet": {
-                    "type": "string",
-                    "description": "CIDR of primary subnet",
-                    "example": "10.19.3.50/30"
-                },
-                "secondarySubnet": {
-                    "type": "string",
-                    "description": "CIDR of secondary subnet",
-                    "example": "10.19.3.52/30"
-                },
-                "expressRouteID": {
-                    "type": "string",
-                    "description": "ID of privateCloud customer ER (Microsoft Colo only)",
-                    "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect"
-                },
-                "authorizations": {
-                    "type": "array",
-                    "description": "authorizations on privateCloud customer ER (Microsoft Colo only)",
-                    "items": {
-                        "$ref": "#/definitions/ExpressRouteAuthorization"
-                    }
-                },
-                "globalReachConnections": {
-                    "type": "array",
-                    "description": "global reach connections with privateCloud customer ER (Microsoft Colo only)",
-                    "items": {
-                        "$ref": "#/definitions/GlobalReachConnection"
-                    }
-                }
-            }
-        },
-        "ClusterRequest": {
-            "properties": {
-                "clusterSize": {
-                    "type": "integer",
-                    "description": "number of hosts in PrivateCloud cluster",
-                    "example": "4'"
-                }
-            }
-        },
-        "Vpc": {
-            "type": "string",
-            "example": "10.19.4.0/22"
-        },
-        "Endpoints": {
-            "properties": {
-                "nsxManager": {
-                    "type": "string",
-                    "example": "https://10.19.4.3/"
-                },
-                "vcsa": {
-                    "type": "string",
-                    "example": "https://10.19.4.2/"
-                }
-            }
-        },
-        "AddIdentitySourceRequest": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "groupName"
-                },
-                "alias": {
-                    "type": "string",
-                    "example": "groupAlias"
-                },
-                "domain": {
-                    "type": "string",
-                    "example": "groupDomain"
-                },
-                "baseUserDN": {
-                    "type": "string",
-                    "example": "ou=baseUserDN"
-                },
-                "baseGroupDN": {
-                    "type": "string",
-                    "example": "ou=baseGroupDN"
-                },
-                "primaryServer": {
-                    "type": "string",
-                    "example": "ldaps://1.1.1.1:636"
-                },
-                "secondaryServer": {
-                    "type": "string",
-                    "example": "ldaps://1.1.1.2:636"
-                },
-                "useSsl": {
-                    "type": "boolean",
-                    "example": true
-                },
-                "username": {
-                    "type": "string",
-                    "example": "user"
-                },
-                "credential": {
-                    "type": "string",
-                    "example": "password"
-                }
-            }
-        },
-        "DeleteIdentitySourceRequest": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "groupName"
-                },
-                "alias": {
-                    "type": "string",
-                    "example": "groupAlias"
-                },
-                "domain": {
-                    "type": "string",
-                    "example": "groupDomain"
-                }
-            }
-        },
-        "IdentitySource": {
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "example": "groupName"
-                },
-                "alias": {
-                    "type": "string",
-                    "example": "groupAlias"
-                },
-                "domain": {
-                    "type": "string",
-                    "example": "groupDomain"
-                },
-                "baseUserDN": {
-                    "type": "string",
-                    "example": "ou=baseUserDN"
-                },
-                "baseGroupDN": {
-                    "type": "string",
-                    "example": "ou=baseGroupDN"
-                },
-                "primaryServer": {
-                    "type": "string",
-                    "example": "ldaps://1.1.1.1:636"
-                },
-                "secondaryServer": {
-                    "type": "string",
-                    "example": "ldaps://1.1.1.2:636"
-                },
-                "useSsl": {
-                    "type": "boolean",
-                    "example": true
-                }
-            }
-        },
-        "PrivateCloud": {
-            "properties": {
-                "provisioningState": {
-                    "type": "string",
-                    "enum": [
-                        "Succeeded",
-                        "Failed",
-                        "Cancelled"
-                    ]
-                },
-                "circuit": {
-                    "$ref": "#/definitions/Circuit"
-                },
-                "cluster": {
-                    "$ref": "#/definitions/Cluster"
-                },
-                "clusters": {
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/mygroup/providers/Microsoft.VMwareVirtustream/privateClouds/myprivateCloud/clusters/mycluster"
-                    }
-                },
-                "endpoints": {
-                    "$ref": "#/definitions/Endpoints"
-                },
-                "internetEnabled": {
-                    "type": "boolean"
-                },
-                "identitySources": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/IdentitySource"
-                    }
-                },
-                "vpc": {
-                    "$ref": "#/definitions/Vpc"
-                }
-            }
-        },
-        "PrivateCloudList": {
-            "properties": {
-                "value": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/AzurePrivateCloudResponse"
-                    }
-                }
-            }
-        },
-        "Cluster": {
-            "properties": {
-                "provisioningState": {
-                    "type": "string",
-                    "enum": [
-                        "Succeeded",
-                        "Failed",
-                        "Cancelled",
-                        "Updating"
-                    ]
-                },
-                "clusterSize": {
-                    "type": "integer",
-                    "example": 4
-                },
-                "hosts": {
-                    "type": "array",
-                    "items": {
-                        "type": "string"
-                    },
-                    "example": [
-                        "fakehost09.nyc1.kubernetes.center",
-                        "fakehost10.nyc1.kubernetes.center",
-                        "fakehost11.nyc1.kubernetes.center",
-                        "fakehost12.nyc1.kubernetes.center"
-                    ]
-                }
-            }
-        },
-        "AzurePrivateCloudRequest": {
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "example": "West US"
-                },
-                "properties": {
-                    "$ref": "#/definitions/PrivateCloud"
-                },
-                "tags": {
-                    "type": "object"
-                }
-            }
-        },
-        "AzurePrivateCloudResponse": {
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "example": "West US"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "myprivateCloud"
-                },
-                "properties": {
-                    "$ref": "#/definitions/PrivateCloud"
-                },
-                "type": {
-                    "type": "string",
-                    "example": "Microsoft.VMwareVirtustream/privateClouds"
-                },
-                "tags": {
-                    "type": "object"
-                }
-            }
-        },
-        "AzureClusterRequest": {
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "example": "West US"
-                },
-                "properties": {
-                    "$ref": "#/definitions/ClusterRequest"
-                }
-            }
-        },
-        "AzureClusterResponse": {
-            "properties": {
-                "location": {
-                    "type": "string",
-                    "example": "West US"
-                },
-                "name": {
-                    "type": "string",
-                    "example": "mycluster"
-                },
-                "properties": {
-                    "$ref": "#/definitions/Cluster"
-                },
-                "type": {
-                    "type": "string",
-                    "example": "Microsoft.VMwareVirtustream/privateClouds/clusters"
-                }
-            }
-        },
-        "AzureOperationStatus": {
-            "properties": {
-                "endTime": {
-                    "type": "string",
-                    "example": "2019-01-17T16:03:39.6032542+00:00"
-                },
-                "id": {
-                    "type": "string",
-                    "example": "/subscriptions/733b60c5-5108-4fe0-ae96-211598f7497b/operations/15404093-f6c6-44e0-887a-0a1af393ed82"
-                },
-                "percentComplete": {
-                    "type": "number",
-                    "example": 100
-                },
-                "properties": {
-                    "$ref": "#/definitions/PrivateCloud"
-                },
-                "startTime": {
-                    "type": "string",
-                    "example": "2019-01-17T16:03:19.6032542+00:00"
-                },
-                "status": {
-                    "type": "string",
-                    "enum": [
-                        "Succeeded",
-                        "Failed",
-                        "Cancelled"
-                    ]
-                }
-            }
-        },
-        "GetAdminCredentialsResponse": {
-            "properties": {
-                "user": {
-                    "type": "string",
-                    "example": "user@domain.local"
-                },
-                "password": {
-                    "type": "string",
-                    "example": "password"
-                }
-            }
-        },
-        "MoveResourceRequest": {
-            "properties": {
-                "targetResourceGroup": {
-                    "type": "string",
-                    "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/mystuff"
-                },
-                "resources": {
-                    "type": "array",
-                    "items": {
-                        "type": "string",
-                        "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/theirstuff/providers/Microsoft.VMwareVirtustream/privateClouds/myprivateCloud"
-                    }
-                }
-            }
-        }
+    {
+      "name": "Move Resource",
+      "description": ""
     }
+  ],
+  "schemes": [
+    "https"
+  ],
+  "parameters": {
+    "subscriptionId": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique identifier for a Microsoft Azure subscription."
+    },
+    "resourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group within the Azure subscription.",
+      "x-ms-parameter-location": "method"
+    },
+    "apiVersion": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The Version of the API to be used with the client request."
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds": {
+      "get": {
+        "operationId": "PrivateCloud_List",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "list private clouds",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/PrivateCloudList"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
+      "get": {
+        "operationId": "PrivateCloud_GetById",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "get a private cloud",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
+      "get": {
+        "operationId": "PrivateCloud_ListInResourceGroup",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "list private clouds in a resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PrivateCloudList"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
+      "get": {
+        "operationId": "PrivateCloud_GetByIdInResourceGroup",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "get a private cloud in a resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateCloud_Create",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "create a private cloud",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzureClusterResponse"
+            }
+          },
+          "202": {
+            "description": "accepted operation",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Url to poll for status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Url to poll for operation status."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "How long to wait before polling."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "PrivateCloud_Modify",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "modify a private cloud",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "PrivateCloud_Delete",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "delete a private cloud",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "accepted operation"
+          },
+          "204": {
+            "description": "no content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters": {
+      "get": {
+        "operationId": "Cluster_List",
+        "tags": [
+          "Clusters"
+        ],
+        "summary": "list clusters in a private cloud",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AzureClusterResponse"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters/{clusterName}": {
+      "get": {
+        "operationId": "Cluster_GetByName",
+        "tags": [
+          "Clusters"
+        ],
+        "summary": "get cluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzureClusterResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "Cluster_Create",
+        "tags": [
+          "Clusters"
+        ],
+        "summary": "create cluster",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureClusterRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzureClusterResponse"
+            }
+          },
+          "202": {
+            "description": "accepted operation",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Url to poll for status."
+              },
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "Url to poll for operation status."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "How long to wait before polling."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Cluster_Modify",
+        "tags": [
+          "Clusters"
+        ],
+        "summary": "modify cluster",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AzureClusterRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          },
+          "202": {
+            "description": "accepted operation"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Cluster_Delete",
+        "tags": [
+          "Clusters"
+        ],
+        "summary": "delete cluster",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the cluster."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "accepted operation"
+          },
+          "204": {
+            "description": "no content"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/operationresults/{operationId}": {
+      "get": {
+        "operationId": "PrivateCloud_OperationResultsGetById",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "get a private cloud in a resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private cloud."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the private cloud order to poll."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          },
+          "202": {
+            "description": "accepted operation",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Url to poll for status."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "How long to wait before polling."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/operationstatuses/{operationId}": {
+      "get": {
+        "operationId": "PrivateCloud_OperationStatusesGetById",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "get private cloud in a resource group",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the privateCloud order to poll."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "retrieved operation status",
+            "schema": {
+              "$ref": "#/definitions/AzureOperationStatus"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "string",
+                "description": "How long to wait before polling"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addAuthorization/{authorizationName}": {
+      "post": {
+        "operationId": "PrivateCloud_AddAuthorization",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "adds a number of hosts to a cluster",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ER authorization."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          },
+          "202": {
+            "description": "accepted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteAuthorization/{authorizationName}": {
+      "post": {
+        "operationId": "PrivateCloud_DeleteAuthorization",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "adds a number of hosts to a cluster",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "name": "authorizationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ER authorization."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          },
+          "202": {
+            "description": "accepted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addGlobalReachConnection": {
+      "post": {
+        "operationId": "PrivateCloud_AddGlobalReachConnection",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "adds a global reach connection for the privateCloud",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GlobalReachConnectionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          },
+          "202": {
+            "description": "accepted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteGlobalReachConnection": {
+      "post": {
+        "operationId": "PrivateCloud_DeleteGlobalReachConnection",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "deletes a global reach connection from the private cloud",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteGlobalReachConnectionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          },
+          "202": {
+            "description": "accepted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addIdentitySource": {
+      "post": {
+        "operationId": "PrivateCloud_AddIdentitySource",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "adds an identity source for the privateCloud",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AddIdentitySourceRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          },
+          "202": {
+            "description": "accepted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteIdentitySource": {
+      "post": {
+        "operationId": "PrivateCloud_DeleteIdentitySource",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "deletes an identity source from the private cloud",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeleteIdentitySourceRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AzurePrivateCloudResponse"
+            }
+          },
+          "202": {
+            "description": "accepted"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/getAdminCredentials": {
+      "post": {
+        "operationId": "PrivateCloud_GetAdminCredentials",
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "fetches the vcenter credentials for the private cloud",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "privateCloudName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the privateCloud."
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/GetAdminCredentialsResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
+      "post": {
+        "operationId": "PrivateCloud_MoveResources",
+        "tags": [
+          "Move Resource"
+        ],
+        "summary": "move resources to another resource group",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MoveResourceRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GlobalReachConnectionRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
+        },
+        "key": {
+          "type": "string",
+          "example": "12341234-1234-1234-1234-123412341234"
+        },
+        "network": {
+          "type": "string",
+          "example": "10.19.10.0/29"
+        }
+      }
+    },
+    "DeleteGlobalReachConnectionRequest": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
+        }
+      }
+    },
+    "GlobalReachConnection": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect"
+        },
+        "primarySubnet": {
+          "type": "string",
+          "example": "10.19.10.0/30"
+        },
+        "secondarySubnet": {
+          "type": "string",
+          "example": "10.19.10.4/30"
+        }
+      }
+    },
+    "ExpressRouteAuthorization": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
+        },
+        "name": {
+          "type": "string",
+          "example": "myAuth"
+        },
+        "key": {
+          "type": "string",
+          "example": "12341234-1234-1234-1234-123412341234"
+        }
+      }
+    },
+    "Circuit": {
+      "properties": {
+        "primarySubnet": {
+          "type": "string",
+          "description": "CIDR of primary subnet",
+          "example": "10.19.3.50/30"
+        },
+        "secondarySubnet": {
+          "type": "string",
+          "description": "CIDR of secondary subnet",
+          "example": "10.19.3.52/30"
+        },
+        "expressRouteID": {
+          "type": "string",
+          "description": "ID of privateCloud customer ER (Microsoft Colo only)",
+          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect"
+        },
+        "authorizations": {
+          "type": "array",
+          "description": "authorizations on privateCloud customer ER (Microsoft Colo only)",
+          "items": {
+            "$ref": "#/definitions/ExpressRouteAuthorization"
+          }
+        },
+        "globalReachConnections": {
+          "type": "array",
+          "description": "global reach connections with privateCloud customer ER (Microsoft Colo only)",
+          "items": {
+            "$ref": "#/definitions/GlobalReachConnection"
+          }
+        }
+      }
+    },
+    "ClusterRequest": {
+      "properties": {
+        "clusterSize": {
+          "type": "integer",
+          "description": "number of hosts in PrivateCloud cluster",
+          "example": "4'"
+        }
+      }
+    },
+    "Vpc": {
+      "type": "string",
+      "example": "10.19.4.0/22"
+    },
+    "Endpoints": {
+      "properties": {
+        "nsxManager": {
+          "type": "string",
+          "example": "https://10.19.4.3/"
+        },
+        "vcsa": {
+          "type": "string",
+          "example": "https://10.19.4.2/"
+        }
+      }
+    },
+    "AddIdentitySourceRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "groupName"
+        },
+        "alias": {
+          "type": "string",
+          "example": "groupAlias"
+        },
+        "domain": {
+          "type": "string",
+          "example": "groupDomain"
+        },
+        "baseUserDN": {
+          "type": "string",
+          "example": "ou=baseUserDN"
+        },
+        "baseGroupDN": {
+          "type": "string",
+          "example": "ou=baseGroupDN"
+        },
+        "primaryServer": {
+          "type": "string",
+          "example": "ldaps://1.1.1.1:636"
+        },
+        "secondaryServer": {
+          "type": "string",
+          "example": "ldaps://1.1.1.2:636"
+        },
+        "useSsl": {
+          "type": "boolean",
+          "example": true
+        },
+        "username": {
+          "type": "string",
+          "example": "user"
+        },
+        "credential": {
+          "type": "string",
+          "example": "password"
+        }
+      }
+    },
+    "DeleteIdentitySourceRequest": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "groupName"
+        },
+        "alias": {
+          "type": "string",
+          "example": "groupAlias"
+        },
+        "domain": {
+          "type": "string",
+          "example": "groupDomain"
+        }
+      }
+    },
+    "IdentitySource": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "example": "groupName"
+        },
+        "alias": {
+          "type": "string",
+          "example": "groupAlias"
+        },
+        "domain": {
+          "type": "string",
+          "example": "groupDomain"
+        },
+        "baseUserDN": {
+          "type": "string",
+          "example": "ou=baseUserDN"
+        },
+        "baseGroupDN": {
+          "type": "string",
+          "example": "ou=baseGroupDN"
+        },
+        "primaryServer": {
+          "type": "string",
+          "example": "ldaps://1.1.1.1:636"
+        },
+        "secondaryServer": {
+          "type": "string",
+          "example": "ldaps://1.1.1.2:636"
+        },
+        "useSsl": {
+          "type": "boolean",
+          "example": true
+        }
+      }
+    },
+    "PrivateCloud": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ]
+        },
+        "circuit": {
+          "$ref": "#/definitions/Circuit"
+        },
+        "cluster": {
+          "$ref": "#/definitions/Cluster"
+        },
+        "clusters": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/mygroup/providers/Microsoft.VMwareVirtustream/privateClouds/myprivateCloud/clusters/mycluster"
+          }
+        },
+        "endpoints": {
+          "$ref": "#/definitions/Endpoints"
+        },
+        "internetEnabled": {
+          "type": "boolean"
+        },
+        "identitySources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IdentitySource"
+          }
+        },
+        "vpc": {
+          "$ref": "#/definitions/Vpc"
+        }
+      }
+    },
+    "PrivateCloudList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzurePrivateCloudResponse"
+          }
+        }
+      }
+    },
+    "Cluster": {
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled",
+            "Updating"
+          ]
+        },
+        "clusterSize": {
+          "type": "integer",
+          "example": 4
+        },
+        "hosts": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "fakehost09.nyc1.kubernetes.center",
+            "fakehost10.nyc1.kubernetes.center",
+            "fakehost11.nyc1.kubernetes.center",
+            "fakehost12.nyc1.kubernetes.center"
+          ]
+        }
+      }
+    },
+    "AzurePrivateCloudRequest": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "example": "West US"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateCloud"
+        },
+        "tags": {
+          "type": "object"
+        }
+      }
+    },
+    "AzurePrivateCloudResponse": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "example": "West US"
+        },
+        "name": {
+          "type": "string",
+          "example": "myprivateCloud"
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateCloud"
+        },
+        "type": {
+          "type": "string",
+          "example": "Microsoft.VMwareVirtustream/privateClouds"
+        },
+        "tags": {
+          "type": "object"
+        }
+      }
+    },
+    "AzureClusterRequest": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "example": "West US"
+        },
+        "properties": {
+          "$ref": "#/definitions/ClusterRequest"
+        }
+      }
+    },
+    "AzureClusterResponse": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "example": "West US"
+        },
+        "name": {
+          "type": "string",
+          "example": "mycluster"
+        },
+        "properties": {
+          "$ref": "#/definitions/Cluster"
+        },
+        "type": {
+          "type": "string",
+          "example": "Microsoft.VMwareVirtustream/privateClouds/clusters"
+        }
+      }
+    },
+    "AzureOperationStatus": {
+      "properties": {
+        "endTime": {
+          "type": "string",
+          "example": "2019-01-17T16:03:39.6032542+00:00"
+        },
+        "id": {
+          "type": "string",
+          "example": "/subscriptions/733b60c5-5108-4fe0-ae96-211598f7497b/operations/15404093-f6c6-44e0-887a-0a1af393ed82"
+        },
+        "percentComplete": {
+          "type": "number",
+          "example": 100
+        },
+        "properties": {
+          "$ref": "#/definitions/PrivateCloud"
+        },
+        "startTime": {
+          "type": "string",
+          "example": "2019-01-17T16:03:19.6032542+00:00"
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Succeeded",
+            "Failed",
+            "Cancelled"
+          ]
+        }
+      }
+    },
+    "GetAdminCredentialsResponse": {
+      "properties": {
+        "user": {
+          "type": "string",
+          "example": "user@domain.local"
+        },
+        "password": {
+          "type": "string",
+          "example": "password"
+        }
+      }
+    },
+    "MoveResourceRequest": {
+      "properties": {
+        "targetResourceGroup": {
+          "type": "string",
+          "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/mystuff"
+        },
+        "resources": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/theirstuff/providers/Microsoft.VMwareVirtustream/privateClouds/myprivateCloud"
+          }
+        }
+      }
+    }
+  }
 }
