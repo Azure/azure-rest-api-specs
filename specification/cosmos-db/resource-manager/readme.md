@@ -52,6 +52,10 @@ directive:
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
   - suppress: TrackedResourcePatchOperation
     from: cosmos-db.json
+    where: $.definitions.SqlStoredProcedureCreateUpdateParameters
+    reason: The DatabaseAccount request and response resources differ so the SqlStoredProcedureCreateUpdateParameters must only have a PUT operation
+  - suppress: TrackedResourcePatchOperation
+    from: cosmos-db.json
     where: $.definitions.SqlDatabase
     reason: The SqlDatabase doesn't support Patch operation
   - suppress: TrackedResourcePatchOperation
