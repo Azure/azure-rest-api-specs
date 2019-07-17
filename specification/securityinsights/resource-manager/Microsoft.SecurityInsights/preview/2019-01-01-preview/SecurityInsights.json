@@ -2772,10 +2772,10 @@
           "format": "uuid",
           "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory."
         },
-        "hostId": {
+        "hostEntityId": {
           "type": "string",
           "readOnly": true,
-          "description": "The Host that contains the account in case it is a local account (not domain joined)"
+          "description": "The Host entity id that contains the account in case it is a local account (not domain joined)"
         }
       }
     },
@@ -2910,14 +2910,14 @@
           "readOnly": true,
           "description": "The Host which the file belongs to"
         },
-        "fileHashIds": {
+        "fileHashEntityIds": {
           "type": "array",
           "readOnly": true,
           "items": {
             "description": "file hash id",
             "type": "string"
           },
-          "description": "The file hashes associated with this file"
+          "description": "The file hash entity identifiers associated with this file"
         }
       }
     },
@@ -3366,7 +3366,7 @@
           "readOnly": true,
           "description": "The malware category by the vendor, e.g. Trojan"
         },
-        "fileIds": {
+        "fileEntityIds": {
           "type": "array",
           "readOnly": true,
           "items": {
@@ -3375,7 +3375,7 @@
           },
           "description": "List of linked file entity identifiers on which the malware was found"
         },
-        "processIds": {
+        "processEntityIds": {
           "type": "array",
           "readOnly": true,
           "items": {
@@ -3555,27 +3555,27 @@
           "readOnly": true,
           "description": "The time when the process started to run"
         },
-        "imageFileId": {
+        "imageFileEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "Image file entity id"
         },
-        "accountId": {
+        "accountEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "The account entity id running the processes."
         },
-        "parentProcessId": {
+        "parentProcessEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "The parent process entity id."
         },
-        "hostId": {
+        "hostEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "The host entity id on which the process was running"
         },
-        "hostLogonSessionId": {
+        "hostLogonSessionEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "The session entity id in which the process was running"
@@ -3608,7 +3608,7 @@
           "readOnly": true,
           "description": "The name of the dns record associated with the alert"
         },
-        "ipAddressIds": {
+        "ipAddressEntityIds": {
           "type": "array",
           "readOnly": true,
           "items": {
@@ -3617,12 +3617,12 @@
           },
           "description": "Ip Entitiy identifiers for the resolved ip address."
         },
-        "dnsServerIpId": {
+        "dnsServerIpEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "An ip entity id for the dns server resolving the request"
         },
-        "hostIpAddressId": {
+        "hostIpAddressEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "An ip entity id for the dns request client"
@@ -3925,7 +3925,7 @@
             ]
           }
         },
-        "keyId": {
+        "keyEntityId": {
           "type": "string",
           "readOnly": true,
           "description": "The registry key entity id."
