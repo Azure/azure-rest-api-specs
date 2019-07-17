@@ -1773,35 +1773,7 @@
           "description": "The description of the alert rule."
         },
         "severity": {
-          "type": "string",
-          "enum": [
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
-          "x-ms-enum": {
-            "name": "AlertSeverity",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "High",
-                "description": "High severity"
-              },
-              {
-                "value": "Medium",
-                "description": "Medium severity"
-              },
-              {
-                "value": "Low",
-                "description": "Low severity"
-              },
-              {
-                "value": "Informational",
-                "description": "Informational severity"
-              }
-            ]
-          },
+          "$ref": "#/definitions/AlertSeverity",
           "description": "The severity for alerts created by this alert rule."
         },
         "enabled": {
@@ -1868,6 +1840,38 @@
         "suppressionEnabled",
         "suppressionDuration"
       ]
+    },
+    "AlertSeverity": {
+      "type": "string",
+      "description": "The severity of the alert",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "Informational"
+      ],
+      "x-ms-enum": {
+        "name": "AlertSeverity",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "High",
+            "description": "High severity"
+          },
+          {
+            "value": "Medium",
+            "description": "Medium severity"
+          },
+          {
+            "value": "Low",
+            "description": "Low severity"
+          },
+          {
+            "value": "Informational",
+            "description": "Informational severity"
+          }
+        ]
+      }
     },
     "ActionsList": {
       "description": "List all the actions.",
@@ -2635,6 +2639,117 @@
         }
       }
     },
+    "EntityInnerKind": {
+      "type": "string",
+      "description": "The kind of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DnsResolution",
+        "FileHash",
+        "Ip",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "Url",
+        "SecurityAlert",
+        "Bookmark"
+      ],
+      "x-ms-enum": {
+        "name": "EntityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Account",
+            "description": "Entity represents account in the system."
+          },
+          {
+            "value": "Host",
+            "description": "Entity represents host in the system."
+          },
+          {
+            "value": "File",
+            "description": "Entity represents file in the system."
+          },
+          {
+            "value": "AzureResource",
+            "description": "Entity represents azure resource in the system."
+          },
+          {
+            "value": "CloudApplication",
+            "description": "Entity represents cloud application in the system."
+          },
+          {
+            "value": "DnsResolution",
+            "description": "Entity represents dns resolution in the system."
+          },
+          {
+            "value": "FileHash",
+            "description": "Entity represents file hash in the system."
+          },
+          {
+            "value": "Ip",
+            "description": "Entity represents ip in the system."
+          },
+          {
+            "value": "Malware",
+            "description": "Entity represents malware in the system."
+          },
+          {
+            "value": "Process",
+            "description": "Entity represents process in the system."
+          },
+          {
+            "value": "RegistryKey",
+            "description": "Entity represents registry key in the system."
+          },
+          {
+            "value": "RegistryValue",
+            "description": "Entity represents registry value in the system."
+          },
+          {
+            "value": "SecurityGroup",
+            "description": "Entity represents security group in the system."
+          },
+          {
+            "value": "Url",
+            "description": "Entity represents url in the system."
+          },
+          {
+            "value": "SecurityAlert",
+            "description": "Entity represents security alert in the system."
+          },
+          {
+            "value": "Bookmark",
+            "description": "Entity represents bookmark in the system."
+          }
+        ]
+      }
+    },
+    "EntityCommonProperties": {
+      "type": "object",
+      "description": "Entity common property bag.",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The graph item display name which is a short humanly readable description of the graph item instance. This property is optional and might be system generated."
+        },
+        "additionalData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user."
+        }
+      }
+    },
     "AccountEntity": {
       "x-ms-discriminator-value": "Account",
       "type": "object",
@@ -2871,117 +2986,6 @@
         }
       }
     },
-    "EntityInnerKind": {
-      "type": "string",
-      "description": "The kind of the entity",
-      "enum": [
-        "Account",
-        "Host",
-        "File",
-        "AzureResource",
-        "CloudApplication",
-        "DnsResolution",
-        "FileHash",
-        "Ip",
-        "Malware",
-        "Process",
-        "RegistryKey",
-        "RegistryValue",
-        "SecurityGroup",
-        "Url",
-        "SecurityAlert",
-        "Bookmark"
-      ],
-      "x-ms-enum": {
-        "name": "EntityKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Account",
-            "description": "Entity represents account in the system."
-          },
-          {
-            "value": "Host",
-            "description": "Entity represents host in the system."
-          },
-          {
-            "value": "File",
-            "description": "Entity represents file in the system."
-          },
-          {
-            "value": "AzureResource",
-            "description": "Entity represents azure resource in the system."
-          },
-          {
-            "value": "CloudApplication",
-            "description": "Entity represents cloud application in the system."
-          },
-          {
-            "value": "DnsResolution",
-            "description": "Entity represents dns resolution in the system."
-          },
-          {
-            "value": "FileHash",
-            "description": "Entity represents file hash in the system."
-          },
-          {
-            "value": "Ip",
-            "description": "Entity represents ip in the system."
-          },
-          {
-            "value": "Malware",
-            "description": "Entity represents malware in the system."
-          },
-          {
-            "value": "Process",
-            "description": "Entity represents process in the system."
-          },
-          {
-            "value": "RegistryKey",
-            "description": "Entity represents registry key in the system."
-          },
-          {
-            "value": "RegistryValue",
-            "description": "Entity represents registry value in the system."
-          },
-          {
-            "value": "SecurityGroup",
-            "description": "Entity represents security group in the system."
-          },
-          {
-            "value": "Url",
-            "description": "Entity represents url in the system."
-          },
-          {
-            "value": "SecurityAlert",
-            "description": "Entity represents security alert in the system."
-          },
-          {
-            "value": "Bookmark",
-            "description": "Entity represents bookmark in the system."
-          }
-        ]
-      }
-    },
-    "EntityCommonProperties": {
-      "type": "object",
-      "description": "Entity common property bag.",
-      "properties": {
-        "friendlyName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The graph item display name which is a short humanly readable description of the graph item instance. This property is optional and might be system generated."
-        },
-        "additionalData": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          },
-          "readOnly": true,
-          "description": "A bag of custom fields that should be part of the entity and will be presented to the user."
-        }
-      }
-    },
     "SecurityAlert": {
       "x-ms-discriminator-value": "SecurityAlert",
       "type": "object",
@@ -3018,25 +3022,19 @@
           "readOnly": true,
           "description": "The confidence reasons",
           "items": {
-            "type": "string",
+            "type": "object",
             "description": "confidence reason item",
-            "enum": [
-              "Type",
-              "Reason"
-            ],
-            "x-ms-enum": {
-              "name": "ConfidenceReason",
-              "modelAsString": true,
-              "values": [
-                {
-                  "value": "Type",
-                  "description": "The type (category) of the reason"
-                },
-                {
-                  "value": "Reason",
-                  "description": "The reason's description"
-                }
-              ]
+            "properties": {
+              "reasonType": {
+                "type": "string",
+                "readOnly": true,
+                "description": "The type (category) of the reason"
+              },
+              "reason": {
+                "type": "string",
+                "readOnly": true,
+                "description": "The reason's description"
+              }
             }
           }
         },
@@ -3209,37 +3207,8 @@
           }
         },
         "severity": {
-          "type": "string",
-          "description": "The severity of the alert.",
-          "readOnly": true,
-          "enum": [
-            "Informational",
-            "Low",
-            "Medium",
-            "High"
-          ],
-          "x-ms-enum": {
-            "name": "Severity",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Informational",
-                "description": "Informational severity (aka Silent)"
-              },
-              {
-                "value": "Low",
-                "description": "Low severity"
-              },
-              {
-                "value": "Medium",
-                "description": "Medium severity"
-              },
-              {
-                "value": "High",
-                "description": "High severity"
-              }
-            ]
-          }
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity of the alert"
         },
         "vendorName": {
           "type": "string",
