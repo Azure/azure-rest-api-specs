@@ -389,6 +389,9 @@
             "$ref": "#/parameters/APIVersionParameter"
           },
           {
+            "$ref": "#/parameters/ExpandChildrenParameter"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -926,6 +929,13 @@
       "type": "string",
       "description": "Version of Azure Machine Learning resource provider API.",
       "required": true
+    },
+    "ExpandChildrenParameter": {
+      "name": "expandChildren",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Specifies if detailed usages of child resources are required."
     },
     "PaginationParameter": {
       "in": "query",
