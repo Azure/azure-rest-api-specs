@@ -1,220 +1,220 @@
 {
-	"parameters": {
-		"api-version": "2015-06-01-preview",
-		"subscriptionId": "3eeab341-f466-499c-a8be-85427e154baf",
-		"groupName": "ERELGROUP1",
-		"ascLocation": "centralus",
-		"body": {
-			"id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/ERELGROUP1",
-			"type": "Microsoft.Security/applicationWhitelistings",
-			"name": "ERELGROUP1",
-			"properties": {
-				"enforcementMode": "Audit",
-				"vmRecommendations": [
-					{
-						"configurationStatus": "Configured",
-						"resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16090",
-						"recommendationAction": "Recommended"
-					},
-					{
-						"configurationStatus": "Configured",
-						"resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/matanvs/providers/microsoft.compute/virtualmachines/matanvs19",
-						"recommendationAction": "Recommended"
-					}
-				],
-				"pathRecommendations": [
-					{
-						"path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
-						"type": "PublisherSignature",
-						"publisherInfo": {
-							"publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
-							"productName": "*",
-							"binaryName": "*",
-							"version": "0.0.0.0"
-						},
-						"common": true,
-						"action": "Recommended",
-						"usernames": [
-							{
-								"username": "Everyone",
-								"recommendationAction": "Recommended"
-							}
-						],
-						"userSids": [
-							"S-1-1-0"
-						],
-						"fileType": "Exe",
-						"configurationStatus": "Configured"
-					},
-					{
-						"path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
-						"type": "ProductSignature",
-						"publisherInfo": {
-							"publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
-							"productName": "MICROSOFT® COREXT",
-							"binaryName": "*",
-							"version": "0.0.0.0"
-						},
-						"common": true,
-						"action": "Recommended",
-						"usernames": [
-							{
-								"username": "NT AUTHORITY\\SYSTEM",
-								"recommendationAction": "Recommended"
-							}
-						],
-						"userSids": [
-							"S-1-1-0"
-						],
-						"fileType": "Exe",
-						"configurationStatus": "Configured"
-					},
-					{
-						"path": "%OSDRIVE%\\WINDOWSAZURE\\PACKAGES_201973_7415\\COLLECTGUESTLOGS.EXE",
-						"type": "PublisherSignature",
-						"publisherInfo": {
-							"publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
-							"productName": "*",
-							"binaryName": "*",
-							"version": "0.0.0.0"
-						},
-						"common": true,
-						"action": "Recommended",
-						"usernames": [
-							{
-								"username": "NT AUTHORITY\\SYSTEM",
-								"recommendationAction": "Recommended"
-							}
-						],
-						"userSids": [
-							"S-1-1-0"
-						],
-						"fileType": "Exe",
-						"configurationStatus": "Configured"
-					},
-					{
-						"path": "C:\\directory\\file.exe",
-						"action": "Add",
-						"type": "File",
-						"common": true
-					}
-				]
-			}
-		}
-	},
-	"responses": {
-		"200": {
-			"body": {
-				"id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/ERELGROUP1",
-				"name": "ERELGROUP1",
-				"type": "Microsoft.Security/applicationWhitelistings",
-				"location": "centralus",
-				"properties": {
-					"recommendationStatus": "Recommended",
-					"enforcementMode": "Audit",
-					"vmRecommendations": [
-						{
-							"resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16090",
-							"recommendationAction": "Recommended"
-						},
-						{
-							"resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/matanvs/providers/microsoft.compute/virtualmachines/matanvs19",
-							"recommendationAction": "Recommended"
-						}
-					],
-					"pathRecommendations": [
-						{
-							"path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
-							"type": "PublisherSignature",
-							"publisherInfo": {
-								"publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
-								"productName": "*",
-								"binaryName": "*",
-								"version": "0.0.0.0"
-							},
-							"common": true,
-							"action": "Recommended",
-							"usernames": [
-								{
-									"username": "Everyone",
-									"recommendationAction": "Recommended"
-								}
-							],
-							"userSids": [
-								"S-1-1-0"
-							],
-							"fileType": "Exe",
-							"configurationStatus": "Configured"
-						},
-						{
-							"path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
-							"type": "ProductSignature",
-							"publisherInfo": {
-								"publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
-								"productName": "MICROSOFT® COREXT",
-								"binaryName": "*",
-								"version": "0.0.0.0"
-							},
-							"common": true,
-							"action": "Recommended",
-							"usernames": [
-								{
-									"username": "NT AUTHORITY\\SYSTEM",
-									"recommendationAction": "Recommended"
-								}
-							],
-							"userSids": [
-								"S-1-1-0"
-							],
-							"fileType": "Exe",
-							"configurationStatus": "Configured"
-						},
-						{
-							"path": "%OSDRIVE%\\WINDOWSAZURE\\PACKAGES_201973_7415\\COLLECTGUESTLOGS.EXE",
-							"type": "PublisherSignature",
-							"publisherInfo": {
-								"publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
-								"productName": "*",
-								"binaryName": "*",
-								"version": "0.0.0.0"
-							},
-							"common": true,
-							"action": "Recommended",
-							"usernames": [
-								{
-									"username": "NT AUTHORITY\\SYSTEM",
-									"recommendationAction": "Recommended"
-								}
-							],
-							"userSids": [
-								"S-1-1-0"
-							],
-							"fileType": "Exe",
-							"configurationStatus": "Configured"
-						},
-						{
-							"path": "C:\\directory\\file.exe",
-							"type": "File",
-							"common": true,
-							"action": "Add",
-							"usernames": [
-								{
-									"username": "Everyone",
-									"recommendationAction": "Recommended"
-								}
-							],
-							"userSids": [
-								"S-1-1-0"
-							],
-							"fileType": "Exe",
-							"configurationStatus": "NotConfigured"
-						}
-					],
-					"configurationStatus": "InProgress",
-					"issues": [],
-					"sourceSystem": "Azure_AppLocker"
-				}
-			}
-		}
-	}
+  "parameters": {
+    "api-version": "2015-06-01-preview",
+    "subscriptionId": "3eeab341-f466-499c-a8be-85427e154baf",
+    "groupName": "ERELGROUP1",
+    "ascLocation": "centralus",
+    "body": {
+      "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/ERELGROUP1",
+      "type": "Microsoft.Security/applicationWhitelistings",
+      "name": "ERELGROUP1",
+      "properties": {
+        "enforcementMode": "Audit",
+        "vmRecommendations": [
+          {
+            "configurationStatus": "Configured",
+            "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16090",
+            "recommendationAction": "Recommended"
+          },
+          {
+            "configurationStatus": "Configured",
+            "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/matanvs/providers/microsoft.compute/virtualmachines/matanvs19",
+            "recommendationAction": "Recommended"
+          }
+        ],
+        "pathRecommendations": [
+          {
+            "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
+            "type": "PublisherSignature",
+            "publisherInfo": {
+              "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
+              "productName": "*",
+              "binaryName": "*",
+              "version": "0.0.0.0"
+            },
+            "common": true,
+            "action": "Recommended",
+            "usernames": [
+              {
+                "username": "Everyone",
+                "recommendationAction": "Recommended"
+              }
+            ],
+            "userSids": [
+              "S-1-1-0"
+            ],
+            "fileType": "Exe",
+            "configurationStatus": "Configured"
+          },
+          {
+            "path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
+            "type": "ProductSignature",
+            "publisherInfo": {
+              "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+              "productName": "MICROSOFT® COREXT",
+              "binaryName": "*",
+              "version": "0.0.0.0"
+            },
+            "common": true,
+            "action": "Recommended",
+            "usernames": [
+              {
+                "username": "NT AUTHORITY\\SYSTEM",
+                "recommendationAction": "Recommended"
+              }
+            ],
+            "userSids": [
+              "S-1-1-0"
+            ],
+            "fileType": "Exe",
+            "configurationStatus": "Configured"
+          },
+          {
+            "path": "%OSDRIVE%\\WINDOWSAZURE\\PACKAGES_201973_7415\\COLLECTGUESTLOGS.EXE",
+            "type": "PublisherSignature",
+            "publisherInfo": {
+              "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+              "productName": "*",
+              "binaryName": "*",
+              "version": "0.0.0.0"
+            },
+            "common": true,
+            "action": "Recommended",
+            "usernames": [
+              {
+                "username": "NT AUTHORITY\\SYSTEM",
+                "recommendationAction": "Recommended"
+              }
+            ],
+            "userSids": [
+              "S-1-1-0"
+            ],
+            "fileType": "Exe",
+            "configurationStatus": "Configured"
+          },
+          {
+            "path": "C:\\directory\\file.exe",
+            "action": "Add",
+            "type": "File",
+            "common": true
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/ERELGROUP1",
+        "name": "ERELGROUP1",
+        "type": "Microsoft.Security/applicationWhitelistings",
+        "location": "centralus",
+        "properties": {
+          "recommendationStatus": "Recommended",
+          "enforcementMode": "Audit",
+          "vmRecommendations": [
+            {
+              "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16090",
+              "recommendationAction": "Recommended"
+            },
+            {
+              "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/matanvs/providers/microsoft.compute/virtualmachines/matanvs19",
+              "recommendationAction": "Recommended"
+            }
+          ],
+          "pathRecommendations": [
+            {
+              "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
+              "type": "PublisherSignature",
+              "publisherInfo": {
+                "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
+                "productName": "*",
+                "binaryName": "*",
+                "version": "0.0.0.0"
+              },
+              "common": true,
+              "action": "Recommended",
+              "usernames": [
+                {
+                  "username": "Everyone",
+                  "recommendationAction": "Recommended"
+                }
+              ],
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "fileType": "Exe",
+              "configurationStatus": "Configured"
+            },
+            {
+              "path": "%OSDRIVE%\\WINDOWSAZURE\\SECAGENT\\WASECAGENTPROV.EXE",
+              "type": "ProductSignature",
+              "publisherInfo": {
+                "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+                "productName": "MICROSOFT® COREXT",
+                "binaryName": "*",
+                "version": "0.0.0.0"
+              },
+              "common": true,
+              "action": "Recommended",
+              "usernames": [
+                {
+                  "username": "NT AUTHORITY\\SYSTEM",
+                  "recommendationAction": "Recommended"
+                }
+              ],
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "fileType": "Exe",
+              "configurationStatus": "Configured"
+            },
+            {
+              "path": "%OSDRIVE%\\WINDOWSAZURE\\PACKAGES_201973_7415\\COLLECTGUESTLOGS.EXE",
+              "type": "PublisherSignature",
+              "publisherInfo": {
+                "publisherName": "CN=MICROSOFT AZURE DEPENDENCY CODE SIGN",
+                "productName": "*",
+                "binaryName": "*",
+                "version": "0.0.0.0"
+              },
+              "common": true,
+              "action": "Recommended",
+              "usernames": [
+                {
+                  "username": "NT AUTHORITY\\SYSTEM",
+                  "recommendationAction": "Recommended"
+                }
+              ],
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "fileType": "Exe",
+              "configurationStatus": "Configured"
+            },
+            {
+              "path": "C:\\directory\\file.exe",
+              "type": "File",
+              "common": true,
+              "action": "Add",
+              "usernames": [
+                {
+                  "username": "Everyone",
+                  "recommendationAction": "Recommended"
+                }
+              ],
+              "userSids": [
+                "S-1-1-0"
+              ],
+              "fileType": "Exe",
+              "configurationStatus": "NotConfigured"
+            }
+          ],
+          "configurationStatus": "InProgress",
+          "issues": [],
+          "sourceSystem": "Azure_AppLocker"
+        }
+      }
+    }
+  }
 }
