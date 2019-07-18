@@ -885,114 +885,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addGlobalReachConnection": {
-      "post": {
-        "operationId": "PrivateCloud_AddGlobalReachConnection",
-        "tags": [
-          "PrivateClouds"
-        ],
-        "summary": "adds a global reach connection for the privateCloud",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the privateCloud."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/GlobalReachConnectionRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
-            }
-          },
-          "202": {
-            "description": "accepted"
-          }
-        },
-        "x-ms-examples": {
-          "PrivateCloud_AddGlobalReachConnection": {
-            "$ref": "./examples/PrivateCloud_AddGlobalReachConnection.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteGlobalReachConnection": {
-      "post": {
-        "operationId": "PrivateCloud_DeleteGlobalReachConnection",
-        "tags": [
-          "PrivateClouds"
-        ],
-        "summary": "deletes a global reach connection from the private cloud",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the privateCloud."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DeleteGlobalReachConnectionRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
-            }
-          },
-          "202": {
-            "description": "accepted"
-          }
-        },
-        "x-ms-examples": {
-          "PrivateCloud_DeleteGlobalReachConnection": {
-            "$ref": "./examples/PrivateCloud_DeleteGlobalReachConnection.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addIdentitySource": {
       "post": {
         "operationId": "PrivateCloud_AddIdentitySource",
@@ -1201,46 +1093,6 @@
         }
       }
     },
-    "GlobalReachConnectionRequest": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
-        },
-        "key": {
-          "type": "string",
-          "example": "12341234-1234-1234-1234-123412341234"
-        },
-        "network": {
-          "type": "string",
-          "example": "10.19.10.0/29"
-        }
-      }
-    },
-    "DeleteGlobalReachConnectionRequest": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect/authorizations/myAuth"
-        }
-      }
-    },
-    "GlobalReachConnection": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "example": "/subscriptions/ed5a265b-8c15-4211-a592-abb76b1c86b9/resourceGroups/tnt10-00000000-0000-0000-0000-000000000001-eastus/providers/Microsoft.Network/expressRouteCircuits/tnt10-00000000-0000-0000-0000-000000000001-eastus-xconnect"
-        },
-        "primarySubnet": {
-          "type": "string",
-          "example": "10.19.10.0/30"
-        },
-        "secondarySubnet": {
-          "type": "string",
-          "example": "10.19.10.4/30"
-        }
-      }
-    },
     "ExpressRouteAuthorization": {
       "properties": {
         "id": {
@@ -1279,13 +1131,6 @@
           "description": "authorizations on privateCloud customer ER (Microsoft Colo only)",
           "items": {
             "$ref": "#/definitions/ExpressRouteAuthorization"
-          }
-        },
-        "globalReachConnections": {
-          "type": "array",
-          "description": "global reach connections with privateCloud customer ER (Microsoft Colo only)",
-          "items": {
-            "$ref": "#/definitions/GlobalReachConnection"
           }
         }
       }
