@@ -634,6 +634,40 @@
         "location"
       ]
     },
+    "BinaryDataset": {
+      "x-ms-discriminator-value": "Binary",
+      "description": "Binary dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Binary dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BinaryDatasetTypeProperties"
+        }
+      }
+    },
+    "BinaryDatasetTypeProperties": {
+      "description": "Binary dataset properties.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the Binary storage."
+        },
+        "compression": {
+          "description": "The data compression method used for the binary dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "AzureBlobDataset": {
       "x-ms-discriminator-value": "AzureBlob",
       "description": "The Azure Blob storage.",

@@ -833,6 +833,21 @@
         "type"
       ]
     },
+    "BinarySource": {
+      "description": "A copy activity Binary source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Binary store settings."
+        }
+      }
+    },
     "AzureTableSource": {
       "description": "A copy activity Azure Table source.",
       "type": "object",
@@ -2335,6 +2350,21 @@
         "storeSettings": {
           "$ref": "#/definitions/StoreWriteSettings",
           "description": "Parquet store settings."
+        }
+      }
+    },
+    "BinarySink": {
+      "description": "A copy activity Binary sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Binary store settings."
         }
       }
     },
