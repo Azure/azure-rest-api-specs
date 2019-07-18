@@ -1143,47 +1143,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/moveResources": {
-      "post": {
-        "operationId": "PrivateCloud_MoveResources",
-        "tags": [
-          "Move Resource"
-        ],
-        "summary": "move resources to another resource group",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/MoveResourceRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation"
-          }
-        },
-        "x-ms-examples": {
-          "PrivateCloud_MoveResources": {
-            "$ref": "./examples/PrivateCloud_MoveResources.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -1651,21 +1610,6 @@
         "password": {
           "type": "string",
           "example": "password"
-        }
-      }
-    },
-    "MoveResourceRequest": {
-      "properties": {
-        "targetResourceGroup": {
-          "type": "string",
-          "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/mystuff"
-        },
-        "resources": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "example": "/subscriptions/d7368492-0886-48ef-9846-795b25eb31ad/resourceGroups/theirstuff/providers/Microsoft.VMwareVirtustream/privateClouds/myprivateCloud"
-          }
         }
       }
     }
