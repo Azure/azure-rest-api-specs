@@ -170,26 +170,33 @@
     },
     "SubscriptionCreationParameters": {
       "description": "The parameters required to create a new subscription.",
+      "required": ["displayName","billingProfileId","skuId"],
       "properties": {
         "displayName": {
-          "description": "Required. The friendly name of the subscription.",
+          "description": "The friendly name of the subscription.",
           "type": "string"
         },
         "billingProfileId": {
-          "description": "Required. The ARM ID of the billing profile for which you want to create the subscription.",
+          "description": "The ARM ID of the billing profile for which you want to create the subscription.",
           "type": "string"
         },
         "skuId": {
-          "description": "Required. The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.",
+          "description": "The SKU ID of the Azure plan. Azure plan determines the pricing and service-level agreement of the subscription.  Use 001 for Microsoft Azure Plan and 002 for Microsoft Azure Plan for DevTest.",
           "type": "string"
         },
         "costCenter": {
-          "description": "Optional. If set, the cost center will show up on the Azure usage and charges file.",
+          "description": "If set, the cost center will show up on the Azure usage and charges file.",
           "type": "string"
         },
         "owner": {
-          "description": "Optional. If specified, the AD principal will get owner access to the subscription, along with the user who is performing the create subscription operation",
+          "description": "If specified, the AD principal will get owner access to the subscription, along with the user who is performing the create subscription operation",
           "$ref": "#/definitions/AdPrincipal"
+        },
+        "additionalParameters": {
+          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
         }
       }
     },
