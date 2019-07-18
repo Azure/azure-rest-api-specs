@@ -13,6 +13,6 @@ nodejs:
   generate-readme-md: true
 input-file:
 - Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
-- Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
+- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 - Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```

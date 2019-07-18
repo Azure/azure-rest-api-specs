@@ -60,7 +60,9 @@
           }
         },
         "x-ms-examples": {
-            "Delete log profile": { "$ref": "./examples/deleteLogProfile.json" }
+          "Delete log profile": {
+            "$ref": "./examples/deleteLogProfile.json"
+          }
         }
       },
       "get": {
@@ -95,7 +97,9 @@
           }
         },
         "x-ms-examples": {
-            "Get log profile": { "$ref": "./examples/getLogProfile.json" }
+          "Get log profile": {
+            "$ref": "./examples/getLogProfile.json"
+          }
         }
       },
       "put": {
@@ -133,49 +137,53 @@
           }
         },
         "x-ms-examples": {
-            "Create or update a log profile": { "$ref": "./examples/createOrUpdateLogProfile.json" }
+          "Create or update a log profile": {
+            "$ref": "./examples/createOrUpdateLogProfile.json"
+          }
         }
       },
       "patch": {
-          "description": "Updates an existing LogProfilesResource. To update other fields use the CreateOrUpdate method.",
-          "operationId": "LogProfiles_Update",
-          "parameters": [
-              {
-                  "$ref": "#/parameters/SubscriptionIdParameter"
-              },
-              {
-                "$ref": "#/parameters/LogProfileNameParameter"
-              },
-              {
-                  "$ref": "#/parameters/ApiVersionParameter"
-              },
-              {
-                  "name": "logProfilesResource",
-                  "in": "body",
-                  "required": true,
-                  "schema": {
-                      "$ref": "#/definitions/LogProfileResourcePatch"
-                  },
-                  "description": "Parameters supplied to the operation."
-              }
-          ],
-          "responses": {
-              "default": {
-                  "description": "Error response describing why the operation failed.",
-                  "schema": {
-                      "$ref": "#/definitions/ErrorResponse"
-                  }
-              },
-              "200": {
-                  "description": "An existing log profile was successfully updated.",
-                  "schema": {
-                      "$ref": "#/definitions/LogProfileResource"
-                  }
-              }
+        "description": "Updates an existing LogProfilesResource. To update other fields use the CreateOrUpdate method.",
+        "operationId": "LogProfiles_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
-          "x-ms-examples": {
-              "Patch a log profile": { "$ref": "./examples/patchLogProfile.json" }
+          {
+            "$ref": "#/parameters/LogProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "logProfilesResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogProfileResourcePatch"
+            },
+            "description": "Parameters supplied to the operation."
           }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "An existing log profile was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/LogProfileResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch a log profile": {
+            "$ref": "./examples/patchLogProfile.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.insights/logprofiles": {
@@ -205,7 +213,9 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-            "List log profiles": { "$ref": "./examples/listLogProfile.json" }
+          "List log profiles": {
+            "$ref": "./examples/listLogProfile.json"
+          }
         }
       }
     }
@@ -232,8 +242,8 @@
           "type": "string",
           "description": "Resource location",
           "x-ms-mutability": [
-              "create",
-              "read"
+            "create",
+            "read"
           ]
         },
         "tags": {
@@ -262,11 +272,18 @@
           "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
-      "required": [ "enabled", "days" ],
+      "required": [
+        "enabled",
+        "days"
+      ],
       "description": "Specifies the retention policy for the log."
     },
     "LogProfileProperties": {
-      "required": [ "locations", "categories", "retentionPolicy" ],
+      "required": [
+        "locations",
+        "categories",
+        "retentionPolicy"
+      ],
       "properties": {
         "storageAccountId": {
           "type": "string",
@@ -305,23 +322,25 @@
         }
       ],
       "properties": {
-       "properties": {
+        "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/LogProfileProperties",
           "description": "The log profile properties of the resource."
         }
       },
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "description": "The log profile resource."
     },
     "LogProfileResourcePatch": {
       "description": "The log profile resource for patch operations.",
       "properties": {
         "tags": {
-            "additionalProperties": {
-                "type": "string"
-            },
-            "description": "Resource tags"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -340,7 +359,9 @@
           "description": "the values of the log profiles."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents a collection of log profiles."
     },
     "ErrorResponse": {

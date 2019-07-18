@@ -17,17 +17,53 @@
         },
         {
           "id": 0,
-          "answer": "You can use our REST apis to manage your KB. See here for details: https://westus.dev.cognitive.microsoft.com/docs/services/58994a073d9e04097c7ba6fe/operations/58994a073d9e041ad42d9baa",
+          "answer": "You can use our REST apis to create a KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/create",
           "source": "Custom Editorial",
           "questions": [
-            "How do I programmatically update my KB?"
+            "How do I programmatically create a KB?"
           ],
           "metadata": [
             {
               "name": "category",
               "value": "api"
             }
-          ]
+          ],
+          "context": {
+            "isContextOnly": false,
+            "prompts": [
+              {
+                "displayOrder": 1,
+                "displayText": "Update KB",
+                "qna": {
+                  "answer": "You can use our REST apis to update your KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/update",
+                  "questions": [
+                    "How do I programmatically update my KB?"
+                  ],
+                  "metadata": [
+                    {
+                      "name": "category",
+                      "value": "api"
+                    }
+                  ],
+                  "context": {
+                    "isContextOnly": false,
+                    "prompts": [
+                      {
+                        "displayOrder": 1,
+                        "displayText": "Refresh Endpoint Keys",
+                        "qna": {
+                          "answer": "You can use our REST apis to refresh endpoint keys. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/endpointkeys/refreshkeys",
+                          "questions": [
+                            "How do I programmatically refresh endpoint keys?"
+                          ]
+                        }
+                      }
+                    ]
+                  }
+                }
+              }
+            ]
+          }
         }
       ],
       "urls": [
