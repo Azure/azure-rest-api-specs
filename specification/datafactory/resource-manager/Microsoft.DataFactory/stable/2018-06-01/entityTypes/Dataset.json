@@ -1413,6 +1413,84 @@
         }
       }
     },
+    "OdbcTableDataset": {
+      "x-ms-discriminator-value": "OdbcTable",
+      "description": "The ODBC table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ODBC table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OdbcTableDatasetTypeProperties"
+        }
+      }
+    },
+    "OdbcTableDatasetTypeProperties": {
+      "description": "ODBC table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The ODBC table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MySqlTableDataset": {
+      "x-ms-discriminator-value": "MySqlTable",
+      "description": "The MySQL table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MySQL table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MySqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "MySqlTableDatasetTypeProperties": {
+      "description": "MySql table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The MySQL table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlTableDataset": {
+      "x-ms-discriminator-value": "PostgreSqlTable",
+      "description": "The PostgreSQL table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "PostgreSQL table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostgreSqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "PostgreSqlTableDatasetTypeProperties": {
+      "description": "PostgreSQL table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "MicrosoftAccessTableDataset": {
       "x-ms-discriminator-value": "MicrosoftAccessTable",
       "description": "The Microsoft Access table dataset.",
@@ -1878,7 +1956,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/AzurePostgreSqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AzurePostgreSqlTableDatasetTypeProperties": {
+      "description": "Azure PostgreSQL dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The table name of the Azure PostgreSQL database which includes both schema and table. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
         }
       }
     },
