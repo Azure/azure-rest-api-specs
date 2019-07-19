@@ -1,7 +1,65 @@
 {
   "parameters": {
-    "subscriptionId": "{subscription-id}",
-    "api-version": "2016-09-01-preview"
+    "api-version": "2016-09-01-preview",
+    "subscriptionId": "{subscription-id}"
   },
-  "responses": {}
+  "responses": {
+    "200": [
+      {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/group1/providers/Microsoft.VMwareVirtustream/privateClouds/cloud1",
+        "kind": "sddcResource",
+        "location": "eastus2",
+        "name": "cloud1",
+        "properties": {
+          "circuit": {
+            "authorizations": [],
+            "expressRouteID": "/subscriptions/{subscription-id}/resourceGroups/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2/providers/Microsoft.Network/expressroutecircuits/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2-xconnect",
+            "expressRoutePrivatePeeringID": "/subscriptions/{subscription-id}/resourceGroups/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2/providers/Microsoft.Network/expressroutecircuits/tnt13-41a90db2-9d5e-4bd5-a77a-5ce7b58213d6-eastus2-xconnect/peerings/AzurePrivatePeering",
+            "globalReachConnections": [],
+            "primarySubnet": "192.168.53.0/30",
+            "secondarySubnet": "192.168.53.4/30",
+            "serviceKey": ""
+          },
+          "cluster": {
+            "clusterId": 1,
+            "clusterSize": 4,
+            "hosts": [
+              "fakehost18.nyc1.kubernetes.center",
+              "fakehost19.nyc1.kubernetes.center",
+              "fakehost20.nyc1.kubernetes.center",
+              "fakehost21.nyc1.kubernetes.center"
+            ],
+            "status": "fulfilled"
+          },
+          "clusters": [],
+          "endpoints": {
+            "nsxManager": "https://192.168.50.3/",
+            "vcsa": "https://192.168.50.2/"
+          },
+          "identitySources": [
+            {
+              "alias": "groupAlias",
+              "baseGroupDN": "ou=baseGroup",
+              "baseUserDN": "ou=baseUser",
+              "domain": "domain1",
+              "name": "group1",
+              "primaryServer": "ldaps://1.1.1.1:636/",
+              "secondaryServer": "ldaps://1.1.1.2:636/",
+              "useSsl": true
+            }
+          ],
+          "internetEnabled": false,
+          "provisioningState": "updating",
+          "vpc": {
+            "tenantMgmtNet": "192.168.50.0/24",
+            "tenantNet": "192.168.50.0/22",
+            "tenantProvNet": "192.168.52.0/24",
+            "tenantVmotNet": "192.168.51.0/24"
+          }
+        },
+        "tags": {},
+        "type": "Microsoft.VMwareVirtustream/privateClouds"
+      }
+    ]
+  }
 }

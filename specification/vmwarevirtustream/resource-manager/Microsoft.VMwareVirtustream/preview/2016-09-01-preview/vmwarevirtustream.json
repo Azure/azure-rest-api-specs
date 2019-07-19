@@ -127,7 +127,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/PrivateCloudList"
+                "$ref": "#/definitions/AzurePrivateCloudResponse"
               }
             }
           }
@@ -198,7 +198,10 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/PrivateCloudList"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AzurePrivateCloudResponse"
+              }
             }
           }
         },
@@ -1293,16 +1296,6 @@
         },
         "vpc": {
           "$ref": "#/definitions/Vpc"
-        }
-      }
-    },
-    "PrivateCloudList": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzurePrivateCloudResponse"
-          }
         }
       }
     },
