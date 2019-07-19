@@ -1,7 +1,28 @@
 {
   "parameters": {
+    "api-version": "2016-09-01-preview",
     "subscriptionId": "{subscription-id}",
-    "api-version": "2016-09-01-preview"
+    "operationId": "testoperationid",
   },
-  "responses": {}
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/id/locations/westus/operationstatuses/testoperationid",
+        "name": "testoperationid",
+        "startTime": "2017-01-01T13:13:13.933Z",
+        "endTime": "2017-01-01T16:13:13.933Z",
+        "status": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/id/locations/westus/operationstatuses/testoperationid",
+        "name": "testoperationid",
+        "startTime": "2017-01-01T13:13:13.933Z",
+        "status": "Running"
+      }
+    }
+  }
 }
