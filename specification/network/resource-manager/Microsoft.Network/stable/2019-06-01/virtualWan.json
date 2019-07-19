@@ -2626,6 +2626,69 @@
           "final-state-via": "location"
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed": {
+      "post": {
+        "tags": [
+          "P2SVpnGateways"
+        ],
+        "operationId": "P2sVpnGateways_GetP2sVpnConnectionHealthDetailed",
+        "description": "Gets the sas url to get the connection health detail of P2S clients of the virtual wan P2SVpnGateway in the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "gatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the P2SVpnGateway."
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/P2SVpnConnectionHealthRequest"
+            },
+            "description": "Parameters supplied to get the P2S Vpn connection health detail."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Follow the location header for sas-url to output blob."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously. Follow the location header for sas-url to output blob."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "P2SVpnGatewayGetConnectionHealthDetailed": {
+            "$ref": "./examples/P2SVpnGatewayGetConnectionHealthDetailed.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -3927,6 +3990,25 @@
         }
       },
       "description": "List of properties of a link provider."
+    },
+    "P2SVpnConnectionHealthRequest": {
+      "properties": {
+        "p2sVpnConnectionIdsOrVpnUserNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of P2S Vpn connection Ids of Vpn user names."
+        },
+        "outputBlobSasUrl": {
+          "type": "string",
+          "description": "The sas-url to download the P2S Vpn connection health detail."
+        }
+      },
+      "required": [
+        "outputBlobSasUrl"
+      ],
+      "description": "List of P2S Vpn connection health details."
     }
   }
 }
