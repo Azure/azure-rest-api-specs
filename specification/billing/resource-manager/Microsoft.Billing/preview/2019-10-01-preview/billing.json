@@ -5501,10 +5501,11 @@
       "description": "The properties of policy.",
       "properties": {
         "marketplacePurchases": {
-          "description": "The marketplace purchases allowed or not.",
+          "description": "The marketplace purchases are free, allowed or not allowed.",
           "type": "string",
           "enum": [
-            "Allowed",
+            "AllAllowed",
+            "FreeAllowed",
             "NotAllowed"
           ],
           "x-ms-enum": {
@@ -5533,18 +5534,6 @@
           ],
           "x-ms-enum": {
             "name": "ViewChargesPolicy",
-            "modelAsString": true
-          }
-        },
-        "freeMarketplacePurchases": {
-          "description": "The free marketplace purchases allowed or not.",
-          "type": "string",
-          "enum": [
-            "Allowed",
-            "NotAllowed"
-          ],
-          "x-ms-enum": {
-            "name": "FreeMarketplacePurchasesPolicy",
             "modelAsString": true
           }
         }
