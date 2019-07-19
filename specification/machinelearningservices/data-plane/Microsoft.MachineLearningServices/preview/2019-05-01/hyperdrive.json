@@ -10,7 +10,7 @@
     "https"
   ],
   "paths": {
-    "/hyperdrive/v1.0/{arm_scope}/runs": {
+    "/hyperdrive/v1.0/{armScope}/runs": {
       "post": {
         "tags": [
           "HyperDriveExperiment"
@@ -57,7 +57,7 @@
         }
       }
     },
-    "/hyperdrive/v1.0/{arm_scope}/runs/{run_id}/cancel": {
+    "/hyperdrive/v1.0/{armScope}/runs/{runId}/cancel": {
       "post": {
         "tags": [
           "HyperDriveExperiment"
@@ -76,7 +76,7 @@
             "$ref": "#/parameters/ArmScopeParameter"
           },
           {
-            "name": "run_id",
+            "name": "runId",
             "in": "path",
             "description": "Hyperdrive run id to cancel.",
             "required": true,
@@ -656,11 +656,12 @@
   },
   "parameters": {
     "ArmScopeParameter": {
-      "name": "arm_scope",
+      "name": "armScope",
       "in": "path",
       "description": "The ARM scope passed in through URL with format:\r\n            subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}.\r\n",
       "required": true,
       "type": "string",
+      "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
     },
     "dnsSuffix": {
