@@ -1266,7 +1266,10 @@
           "enum": [
             "Succeeded",
             "Failed",
-            "Cancelled"
+            "Cancelled",
+            "Pending",
+            "Building",
+            "Updating"
           ]
         },
         "circuit": {
@@ -1301,6 +1304,10 @@
     },
     "Cluster": {
       "properties": {
+        "clusterId": {
+          "type": "integer",
+          "example": 1
+        },
         "provisioningState": {
           "type": "string",
           "enum": [
@@ -1441,6 +1448,14 @@
     },
     "GetAdminCredentialsResponse": {
       "properties": {
+        "nsxUser": {
+          "type": "string",
+          "example": "user@domain.local"
+        },
+        "nsxPassword": {
+          "type": "string",
+          "example": "password"
+        },
         "user": {
           "type": "string",
           "example": "user@domain.local"
