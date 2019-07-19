@@ -1153,6 +1153,10 @@
     "TeradataLinkedServiceTypeProperties": {
       "description": "Teradata linked service properties.",
       "properties": {
+        "connectionString": {
+          "description": "Teradata ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
         "server": {
           "type": "object",
           "description": "Server name for connection. Type: string (or Expression with resultType string)."
@@ -1181,10 +1185,7 @@
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "server"
-      ]
+      }
     },
     "AzureMLLinkedService": {
       "x-ms-discriminator-value": "AzureML",
@@ -1273,6 +1274,110 @@
         "authenticationType": {
           "type": "object",
           "description": "Type of authentication used to connect to the ODBC data store. Possible values are: Anonymous and Basic. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "description": "The access credential portion of the connection string specified in driver-specific property-value format.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "userName": {
+          "type": "object",
+          "description": "User name for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "InformixLinkedService": {
+      "x-ms-discriminator-value": "Informix",
+      "description": "Informix linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Informix linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InformixLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "InformixLinkedServiceTypeProperties": {
+      "description": "Informix linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The non-access credential portion of the connection string as well as an optional encrypted credential. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "Type of authentication used to connect to the Informix as ODBC data store. Possible values are: Anonymous and Basic. Type: string (or Expression with resultType string)."
+        },
+        "credential": {
+          "description": "The access credential portion of the connection string specified in driver-specific property-value format.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "userName": {
+          "type": "object",
+          "description": "User name for Basic authentication. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password for Basic authentication.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "connectionString"
+      ]
+    },
+    "MicrosoftAccessLinkedService": {
+      "x-ms-discriminator-value": "MicrosoftAccess",
+      "description": "Microsoft Access linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Access linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MicrosoftAccessLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "MicrosoftAccessLinkedServiceTypeProperties": {
+      "description": "Microsoft Access linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "The non-access credential portion of the connection string as well as an optional encrypted credential. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "authenticationType": {
+          "type": "object",
+          "description": "Type of authentication used to connect to the Microsoft Access as ODBC data store. Possible values are: Anonymous and Basic. Type: string (or Expression with resultType string)."
         },
         "credential": {
           "description": "The access credential portion of the connection string specified in driver-specific property-value format.",
@@ -1944,6 +2049,55 @@
         "securityToken": {
           "description": "The security token is required to remotely access Salesforce instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceServiceCloudLinkedService": {
+      "x-ms-discriminator-value": "SalesforceServiceCloud",
+      "description": "Linked service for Salesforce Service Cloud.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Service Cloud linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceServiceCloudLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SalesforceServiceCloudLinkedServiceTypeProperties": {
+      "description": "Salesforce Service Cloud linked service properties.",
+      "properties": {
+        "environmentUrl": {
+          "type": "object",
+          "description": "The URL of Salesforce Service Cloud instance. Default is 'https://login.salesforce.com'. To copy data from sandbox, specify 'https://test.salesforce.com'. To copy data from custom domain, specify, for example, 'https://[domain].my.salesforce.com'. Type: string (or Expression with resultType string)."
+        },
+        "username": {
+          "type": "object",
+          "description": "The username for Basic authentication of the Salesforce instance. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "The password for Basic authentication of the Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "securityToken": {
+          "description": "The security token is required to remotely access Salesforce instance.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "extendedProperties": {
+          "type": "object",
+          "description": "Extended properties appended to the connection string. Type: string (or Expression with resultType string)."
         },
         "encryptedCredential": {
           "type": "object",

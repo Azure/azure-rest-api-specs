@@ -833,6 +833,21 @@
         "type"
       ]
     },
+    "BinarySource": {
+      "description": "A copy activity Binary source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Binary store settings."
+        }
+      }
+    },
     "AzureTableSource": {
       "description": "A copy activity Azure Table source.",
       "type": "object",
@@ -954,8 +969,65 @@
         }
       }
     },
+    "InformixSource": {
+      "description": "A copy activity source for Informix.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSource": {
+      "description": "A copy activity source for Microsoft Access.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SalesforceSource": {
       "description": "A copy activity Salesforce source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Database query. Type: string (or Expression with resultType string)."
+        },
+        "readBehavior": {
+          "description": "The read behavior for the operation. Default is Query.",
+          "type": "string",
+          "enum": [
+            "Query",
+            "QueryAll"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSourceReadBehavior",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "SalesforceServiceCloudSource": {
+      "description": "A copy activity Salesforce Service Cloud source.",
       "type": "object",
       "allOf": [
         {
@@ -1346,6 +1418,56 @@
         "queryTimeout": {
           "type": "object",
           "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
+    "TeradataSource": {
+      "description": "A copy activity Teradata source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "Teradata query. Type: string (or Expression with resultType string)."
+        },
+        "partitionOption": {
+          "description": "The partition mechanism that will be used for teradata read in parallel.",
+          "type": "string",
+          "enum": [
+            "None",
+            "Hash",
+            "DynamicRange"
+          ],
+          "x-ms-enum": {
+            "name": "TeradataPartitionOption",
+            "modelAsString": true
+          }
+        },
+        "partitionSettings": {
+          "description": "The settings that will be leveraged for teradata source partitioning.",
+          "$ref": "#/definitions/TeradataPartitionSettings"
+        }
+      }
+    },
+    "TeradataPartitionSettings": {
+      "description": "The settings that will be leveraged for teradata source partitioning.",
+      "type": "object",
+      "properties": {
+        "partitionColumnName": {
+          "type": "object",
+          "description": "The name of the column that will be used for proceeding range or hash partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionUpperBound": {
+          "type": "object",
+          "description": "The maximum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
+        },
+        "partitionLowerBound": {
+          "type": "object",
+          "description": "The minimum value of column specified in partitionColumnName that will be used for proceeding range partitioning. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2231,6 +2353,21 @@
         }
       }
     },
+    "BinarySink": {
+      "description": "A copy activity Binary sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Binary store settings."
+        }
+      }
+    },
     "BlobSink": {
       "description": "A copy activity Azure Blob sink.",
       "type": "object",
@@ -2639,6 +2776,36 @@
         }
       }
     },
+    "InformixSink": {
+      "description": "A copy activity Informix sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessSink": {
+      "description": "A copy activity Microsoft Access sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "DynamicsSink": {
       "description": "A copy activity Dynamics sink.",
       "type": "object",
@@ -2751,6 +2918,37 @@
     },
     "SalesforceSink": {
       "description": "A copy activity Salesforce sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "description": "The write behavior for the operation. Default is Insert.",
+          "type": "string",
+          "enum": [
+            "Insert",
+            "Upsert"
+          ],
+          "x-ms-enum": {
+            "name": "SalesforceSinkWriteBehavior",
+            "modelAsString": true
+          }
+        },
+        "externalIdFieldName": {
+          "type": "object",
+          "description": "The name of the external ID field for upsert operation. Default value is 'Id' column. Type: string (or Expression with resultType string)."
+        },
+        "ignoreNullValues": {
+          "type": "object",
+          "description": "The flag indicating whether or not to ignore null values from input dataset (except key fields) during write operation. Default value is false. If set it to true, it means ADF will leave the data in the destination object unchanged when doing upsert/update operation and insert defined default value when doing insert operation, versus ADF will update the data in the destination object to NULL when doing upsert/update operation and insert NULL value when doing insert operation. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
+    "SalesforceServiceCloudSink": {
+      "description": "A copy activity Salesforce Service Cloud sink.",
       "type": "object",
       "allOf": [
         {
@@ -3303,6 +3501,10 @@
           "additionalProperties": {
             "$ref": "#/definitions/SSISPropertyOverride"
           }
+        },
+        "logLocation": {
+          "description": "SSIS package execution log location.",
+          "$ref": "#/definitions/SSISLogLocation"
         }
       },
       "required": [
@@ -3317,11 +3519,46 @@
         "packagePath": {
           "description": "The SSIS package path. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS package location.",
+          "type": "string",
+          "enum": [
+            "SSISDB",
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "SsisPackageLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package location properties.",
+          "$ref": "#/definitions/SSISPackageLocationTypeProperties"
         }
       },
       "required": [
         "packagePath"
       ]
+    },
+    "SSISPackageLocationTypeProperties": {
+      "description": "SSIS package location properties.",
+      "type": "object",
+      "properties": {
+        "packagePassword": {
+          "$ref": "../datafactory.json#/definitions/SecureString",
+          "description": "Password of the package."
+        },
+        "accessCredential": {
+          "description": "The package access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "configurationPath": {
+          "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      }
     },
     "SSISConnectionManager": {
       "description": "SSIS Connection Manager.",
@@ -3382,6 +3619,72 @@
         "userName",
         "password"
       ]
+    },
+    "SSISAccessCredential": {
+      "description": "SSIS access credential.",
+      "type":"object",
+      "properties": {
+        "domain": {
+          "type": "object",
+          "description": "Domain for windows authentication."
+        },
+        "userName": {
+          "type": "object",
+          "description": "UseName for windows authentication."
+        },
+        "password": {
+          "$ref": "../datafactory.json#/definitions/SecureString",
+          "description": "Password for windows authentication."
+        }
+      },
+      "required": [
+        "domain",
+        "userName",
+        "password"
+      ]
+    },
+    "SSISLogLocation": {
+      "description": "SSIS package execution log location",
+      "type": "object",
+      "properties": {
+        "logPath": {
+          "description": "The SSIS package execution log path. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "type": {
+          "description": "The type of SSIS log location.",
+          "type": "string",
+          "enum": [
+            "File"
+          ],
+          "x-ms-enum": {
+            "name": "SsisLogLocationType",
+            "modelAsString": true
+          }
+        },
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "SSIS package execution log location properties.",
+          "$ref": "#/definitions/SSISLogLocationTypeProperties"
+        }
+      },
+      "required": [
+        "logPath","type","typeProperties"
+      ]
+    },
+    "SSISLogLocationTypeProperties": {
+      "description": "SSIS package execution log location properties.",
+      "type": "object",
+      "properties": {
+        "accessCredential": {
+          "description": "The package execution log access credential.",
+          "$ref": "#/definitions/SSISAccessCredential"
+        },
+        "logRefreshInterval": {
+          "type": "object",
+          "description": "Specifies the interval to refresh log. The default interval is 5 minutes. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
     },
     "CustomActivity": {
       "description": "Custom activity type.",
