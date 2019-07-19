@@ -3,7 +3,7 @@
   "info": {
     "description": "Volume operation endpoints and objects.",
     "title": "FabricAdminClient",
-    "version": "2018-10-01"
+    "version": "2019-05-01"
   },
   "host": "adminmanagement.local.azurestack.external",
   "schemes": [
@@ -42,7 +42,7 @@
             "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "StorageSubSystem.json#/parameters/StorageSubSystemParameter"
+            "$ref": "../2018-10-01/StorageSubSystem.json#/parameters/StorageSubSystemParameter"
           },
           {
             "$ref": "#/parameters/VolumeParameter"
@@ -90,7 +90,7 @@
             "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "StorageSubSystem.json#/parameters/StorageSubSystemParameter"
+            "$ref": "../2018-10-01/StorageSubSystem.json#/parameters/StorageSubSystemParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -156,10 +156,6 @@
           "description": "Operational status of the volume.",
           "type": "string"
         },
-        "repairStatus": {
-          "description": "Repair status of the volume. Empty if no repair job running, something like 'Running, 90%' when repairing.",
-          "type": "string"
-        },
         "description": {
           "description": "Detailed description for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.",
           "type": "string"
@@ -199,7 +195,7 @@
       "description": "Client API Version.",
       "required": true,
       "type": "string",
-      "default": "2018-10-01"
+      "default": "2019-05-01"
     },
     "VolumeParameter": {
       "name": "volume",

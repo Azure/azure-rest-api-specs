@@ -3,7 +3,7 @@
   "info": {
     "description": "Drive operation endpoints and objects.",
     "title": "FabricAdminClient",
-    "version": "2018-10-01"
+    "version": "2019-05-01"
   },
   "host": "adminmanagement.local.azurestack.external",
   "schemes": [
@@ -42,7 +42,7 @@
             "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "StorageSubSystem.json#/parameters/StorageSubSystemParameter"
+            "$ref": "../2018-10-01/StorageSubSystem.json#/parameters/StorageSubSystemParameter"
           },
           {
             "$ref": "#/parameters/DriveParameter"
@@ -90,7 +90,7 @@
             "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
           },
           {
-            "$ref": "StorageSubSystem.json#/parameters/StorageSubSystemParameter"
+            "$ref": "../2018-10-01/StorageSubSystem.json#/parameters/StorageSubSystemParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -158,20 +158,28 @@
           "description": "Intended usage of the drive.",
           "type": "string"
         },
-        "canPool": {
-          "description": "Indicate whether the drive can be added to the pool.",
-          "type": "boolean"
-        },
-        "cannotPoolReason": {
-          "description": "Specify the reasons why the drive cannot be added to the pool.",
-          "type": "string"
-        },
         "physicalLocation": {
           "description": "Indicate where the hardware is located.",
           "type": "string"
         },
         "model": {
           "description": "Model of the drive.",
+          "type": "string"
+        },
+        "firmwareVersion": {
+          "description": "The firmware version of the drive.",
+          "type": "string"
+        },
+        "isIndicationEnabled": {
+          "description": "Indicate whether the drive's identification LEDs are active or not.",
+          "type": "boolean"
+        },
+        "manufacturer": {
+          "description": "The name of the drive's manufacturer.",
+          "type": "string"
+        },
+        "storagePool": {
+          "description": "The storage pool where the drive is located.",
           "type": "string"
         },
         "mediaType": {
@@ -218,7 +226,7 @@
       "description": "Client API Version.",
       "required": true,
       "type": "string",
-      "default": "2018-10-01"
+      "default": "2019-05-01"
     },
     "DriveParameter": {
       "name": "drive",
