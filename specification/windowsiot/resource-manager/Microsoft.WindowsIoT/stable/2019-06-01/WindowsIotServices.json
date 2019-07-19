@@ -1,0 +1,679 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-06-01",
+    "title": "DeviceServices",
+    "description": "Use this API to manage the Windows IoT device services in your Azure subscription."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.WindowsIoT/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Lists all of the available Windows IoT Services REST API operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsIoT/deviceServices/{deviceName}": {
+      "get": {
+        "tags": [
+          "DeviceServices"
+        ],
+        "description": "Get the non-security related metadata of a Windows IoT Device Service.",
+        "operationId": "Services_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceService"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Services_GetProperties": {
+            "$ref": "./examples/Service_GetProperties.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "DeviceServices"
+        ],
+        "summary": "Create or update the metadata of a Windows IoT Device Service.",
+        "description": "Create or update the metadata of a Windows IoT Device Service. The usual pattern to modify a property is to retrieve the Windows IoT Device Service metadata and security metadata, and then combine them with the modified values in a new body to update the Windows IoT Device Service.",
+        "operationId": "Services_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceNameParameter"
+          },
+          {
+            "name": "deviceService",
+            "in": "body",
+            "description": "The Windows IoT Device Service metadata and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceProperties"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Windows IoT Device Service. Do not specify for creating a new Windows IoT Device Service. Required to update an existing Windows IoT Device Service."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceService"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Service_Create": {
+            "$ref": "./examples/Service_Create.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "DeviceServices"
+        ],
+        "summary": "Updates the metadata of a Windows IoT Device Service.",
+        "description": "Updates the metadata of a Windows IoT Device Service. The usual pattern to modify a property is to retrieve the Windows IoT Device Service metadata and security metadata, and then combine them with the modified values in a new body to update the Windows IoT Device Service.",
+        "operationId": "Services_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceNameParameter"
+          },
+          {
+            "name": "deviceService",
+            "in": "body",
+            "description": "The Windows IoT Device Service metadata and security metadata.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceProperties"
+            }
+          },
+          {
+            "name": "If-Match",
+            "in": "header",
+            "required": false,
+            "type": "string",
+            "description": "ETag of the Windows IoT Device Service. Do not specify for creating a brand new Windows IoT Device Service. Required to update an existing Windows IoT Device Service."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceService"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Service_Update": {
+            "$ref": "./examples/Service_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "DeviceServices"
+        ],
+        "description": "Delete a Windows IoT Device Service.",
+        "operationId": "Services_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeviceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceService"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Service_Delete": {
+            "$ref": "./examples/Service_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsIoT/deviceServices": {
+      "get": {
+        "tags": [
+          "DeviceServices"
+        ],
+        "description": "Get all the IoT hubs in a resource group.",
+        "operationId": "Services_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Service_ListByResourceGroup": {
+            "$ref": "./examples/Service_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WindowsIoT/deviceServices": {
+      "get": {
+        "tags": [
+          "DeviceServices"
+        ],
+        "description": "Get all the IoT hubs in a subscription.",
+        "operationId": "Services_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceDescriptionListResult"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Service_List": {
+            "$ref": "./examples/Service_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WindowsIoT/checkDeviceServiceNameAvailability": {
+      "post": {
+        "tags": [
+          "CheckDeviceServiceNameAvailability"
+        ],
+        "description": "Check if a Windows IoT Device Service name is available.",
+        "operationId": "Services_CheckDeviceServiceNameAvailability",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "deviceServiceCheckNameAvailabilityParameters",
+            "in": "body",
+            "description": "Set the name parameter in the DeviceServiceCheckNameAvailabilityParameters structure to the name of the Windows IoT Device Service to check.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceCheckNameAvailabilityParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DeviceServiceNameAvailabilityInfo"
+            }
+          },
+          "default": {
+            "description": "DefaultErrorResponse",
+            "schema": {
+              "$ref": "#/definitions/ErrorDetails"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Service_CheckNameAvailability": {
+            "$ref": "./examples/Service_CheckNameAvailability.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DeviceServiceProperties": {
+      "description": "The properties of a Windows IoT Device Service.",
+      "type": "object",
+      "properties": {
+        "notes": {
+          "description": "Windows IoT Device Service notes.",
+          "type": "string"
+        },
+        "startDate": {
+          "description": "Windows IoT Device Service start date,",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "Windows IoT Device Service device allocation,",
+          "type": "integer",
+          "format": "int64"
+        },
+        "billingDomainName": {
+          "description": "Windows IoT Device Service ODM AAD domain",
+          "type": "string"
+        },
+        "adminDomainName": {
+          "description": "Windows IoT Device Service OEM AAD domain",
+          "type": "string"
+        }
+      }
+    },
+    "DeviceService": {
+      "description": "The description of the Windows IoT Device Service.",
+      "type": "object",
+      "properties": {
+        "etag": {
+          "description": "The Etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal ETag convention.",
+          "type": "string"
+        },
+        "properties": {
+          "description": "The properties of a Windows IoT Device Service.",
+          "$ref": "#/definitions/DeviceServiceProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "Resource": {
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource"
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource."
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The Azure Region where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "OperationListResult": {
+      "description": "Result of the request to list Windows IoT Device Service operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "description": "List of Windows IoT Device Service operations supported by the Microsoft.WindowsIoT resource provider.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OperationEntity"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "OperationEntity": {
+      "description": "The operation supported by Azure Data Catalog Service.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Operation name: {provider}/{resource}/{operation}.",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplayInfo",
+          "description": "The operation supported by Azure Data Catalog Service."
+        }
+      }
+    },
+    "OperationDisplayInfo": {
+      "description": "The operation supported by Azure Data Catalog Service.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the operation.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The action that users can perform, based on their permission level.",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Service provider: Azure Data Catalog Service.",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource on which the operation is performed.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorDetails": {
+      "description": "The details of the error.",
+      "properties": {
+        "code": {
+          "description": "One of a server-defined set of error codes.",
+          "type": "string"
+        },
+        "message": {
+          "description": "A human-readable representation of the error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "The target of the particular error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "A human-readable representation of the error's details.",
+          "type": "string"
+        }
+      }
+    },
+    "DeviceServiceDescriptionListResult": {
+      "description": "The JSON-serialized array of DeviceService objects with a next link.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The array of DeviceService objects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeviceService"
+          }
+        },
+        "nextLink": {
+          "description": "The next link.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DeviceServiceCheckNameAvailabilityParameters": {
+      "description": "Input values.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Windows IoT Device Service to check.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "DeviceServiceNameAvailabilityInfo": {
+      "description": "The properties indicating whether a given Windows IoT Device Service name is available.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "The value which indicates whether the provided name is available.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason for unavailability.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "serviceNameUnavailabilityReason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "The detailed reason message.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The subscription identifier.",
+      "required": true,
+      "type": "string"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API.",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "description": "The name of the resource group that contains the Windows IoT Device Service.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "DeviceNameParameter": {
+      "name": "deviceName",
+      "in": "path",
+      "description": "The name of the Windows IoT Device Service.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
