@@ -1072,6 +1072,127 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/Administrators/activeDirectory": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Get",
+        "x-ms-examples": {
+          "ServerAdministratorGet": { "$ref": "./examples/ServerAdminGet.json" }
+        },
+        "description": "Gets information about a AAD server administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_CreateOrUpdate",
+        "x-ms-examples": {
+          "ServerAdministratorCreate": { "$ref": "./examples/ServerAdminCreateUpdate.json" }
+        },
+        "description": "Creates or update active directory administrator on an existing server. The update action will overwrite the existing administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            },
+            "description": "The required parameters for creating or updating an AAD server administrator."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_Delete",
+        "x-ms-examples": {
+          "ServerAdministratorsDelete": { "$ref": "./examples/ServerAdminDelete.json" }
+        },
+        "description": "Deletes AAD Administrator.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
       "get": {
         "tags": [
@@ -2272,6 +2393,40 @@
         }
       },
       "description": "An error response from the Batch service."
+    },
+    "ServerAdministratorProperties": {
+      "properties": {
+        "administratorType": {
+          "type": "string",
+          "description": "The administrator type."
+        },
+        "login": {
+          "type": "string",
+          "description": "The administrator login."
+        },
+        "sid": {
+          "type": "string",
+          "description": "The administrator sid."
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "The administrator tenantId."
+        }
+      },
+      "description": "The properties used to create a new external administrator."
+    },
+    "ServerAdministratorResource": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerAdministratorProperties",
+          "x-ms-client-flatten": false,
+          "description": "Properties of the server AAD administrator."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Represents a and external administrator to be created."
     }
   },
   "parameters": {
