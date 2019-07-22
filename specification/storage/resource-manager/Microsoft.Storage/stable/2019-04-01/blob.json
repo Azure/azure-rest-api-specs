@@ -1155,27 +1155,12 @@
       ],
       "description": "The properties of a storage account’s Blob service."
     },
-    "BlobServiceItem": {
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BlobServiceProperties",
-          "x-ms-client-flatten": true,
-          "description": "The blob service properties be listed out."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ],
-      "description": "The blob service properties be listed out."
-    },
     "BlobServiceItems": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/BlobServiceItem"
+            "$ref": "#/definitions/BlobServiceProperties"
           },
           "description": "List of blob services returned.",
           "readOnly": true
