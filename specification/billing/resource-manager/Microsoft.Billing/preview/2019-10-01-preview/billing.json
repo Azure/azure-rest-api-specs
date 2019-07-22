@@ -2176,7 +2176,13 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/updateAutoRenewRequestParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAutoRenewRequest"
+            },
+            "description": "Parameters supplied to cancel auto renew."
           }
         ],
         "responses": {
@@ -2224,7 +2230,13 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/updateAutoRenewRequestParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/UpdateAutoRenewRequest"
+            },
+            "description": "Parameters supplied to cancel auto renew."
           }
         ],
         "responses": {
@@ -6080,16 +6092,6 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    },
-    "updateAutoRenewRequestParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Update auto renew request parameters.",
-      "schema": {
-        "$ref": "#/definitions/UpdateAutoRenewRequest"
-      }
     },
     "operationIdParameter": {
       "name": "operationId",
