@@ -54,6 +54,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-js
@@ -73,7 +74,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorSimple1200Series
-  output-folder: $(csharp-sdks-folder)/StorSimple1200Series/Management.StorSimple1200Series/Generated
+  output-folder: $(csharp-sdks-folder)/storsimple1200series/Microsoft.Azure.Management.StorSimple1200Series/src/Generated
   clear-output-folder: true
 ```
 

@@ -9,6 +9,6 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.NetApp
-  output-folder: $(csharp-sdks-folder)/NetApp/Management.NetApp/Generated
+  output-folder: $(csharp-sdks-folder)/netapp/Microsoft.Azure.Management.NetApp/src/Generated
   clear-output-folder: true
 ```

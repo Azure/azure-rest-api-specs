@@ -19,7 +19,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(profile)
 namespace: Microsoft.Azure.Management.Subscription
-output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
+output-folder: $(csharp-sdks-folder)/subscription/Microsoft.Azure.Management.Subscription/src/Generated
 ```
 
 ## Batch settings

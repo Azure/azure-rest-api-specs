@@ -62,7 +62,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Addons
-  output-folder: $(csharp-sdks-folder)/Addons/Management.Addons/Generated
+  output-folder: $(csharp-sdks-folder)/addons/Microsoft.Azure.Management.Addons/src/Generated
   clear-output-folder: true
 ```
 

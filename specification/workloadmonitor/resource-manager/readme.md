@@ -54,6 +54,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -71,7 +72,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.WorkloadMonitor
-  output-folder: $(csharp-sdks-folder)/WorkloadMonitor/Management.WorkloadMonitor/Generated
+  output-folder: $(csharp-sdks-folder)/workloadmonitor/Microsoft.Azure.Management.WorkloadMonitor/src/Generated
   clear-output-folder: true
 ```
 

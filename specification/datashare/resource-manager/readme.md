@@ -50,6 +50,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
 ```
@@ -65,7 +66,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataShare
-  output-folder: $(csharp-sdks-folder)/DataShare/Management.DataShare/Generated
+  output-folder: $(csharp-sdks-folder)/datashare/Microsoft.Azure.Management.DataShare/src/Generated
   clear-output-folder: true
 ```
 
