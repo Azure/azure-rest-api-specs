@@ -884,7 +884,7 @@
             "schema": {
               "$ref": "#/definitions/DedicatedHost"
             },
-            "description": "Parameters supplied to the Create Dedicated Host ."
+            "description": "Parameters supplied to the Create Dedicated Host."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -5454,7 +5454,9 @@
         "platformFaultDomainCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of fault domains that the host group can span. Supported values 1,2,3."
+          "minimum": 1,
+          "maximum": 3,
+          "description": "Number of fault domains that the host group can span."
         },
         "hosts": {
           "type": "array",
@@ -5465,6 +5467,9 @@
           "description": "A list of references to all dedicated hosts in the dedicated host group."
         }
       },
+      "required": [
+        "platformFaultDomainCount"
+      ],
       "description": "Dedicated Host Group Properties."
     },
     "DedicatedHostGroup": {
@@ -5478,7 +5483,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforce each host in the group is in the same zone."
+          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
         }
       },
       "allOf": [
@@ -5486,7 +5491,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Specifies information about the dedicated host group that the dedicated hosts should be assigned to. <br><br> Currently, a Dedicated host can only be added to Dedicated Host Group at creation time. An existing Dedicated Host cannot be added to a dedicated host group."
+      "description": "Specifies information about the dedicated host group that the dedicated hosts should be assigned to. <br><br> Currently, a dedicated host can only be added to a dedicated host group at creation time. An existing dedicated host cannot be added to another dedicated host group."
     },
     "DedicatedHostGroupUpdate": {
       "properties": {
@@ -5499,7 +5504,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforce each host in the group is in the same zone."
+          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
         }
       },
       "allOf": [
@@ -5541,21 +5546,6 @@
         "modelAsString": false
       }
     },
-    "DedicatedHostCapacity": {
-      "properties": {
-        "totalCores": {
-          "type": "number",
-          "format": "double",
-          "description": "The total number of cores."
-        },
-        "totalVCpus": {
-          "type": "number",
-          "format": "double",
-          "description": "The total number of CPUs."
-        }
-      },
-      "description": "Dedicated host total capacity."
-    },
     "DedicatedHostAllocatableVM": {
       "properties": {
         "vmSize": {
@@ -5572,11 +5562,6 @@
     },
     "DedicatedHostAvailableCapacity": {
       "properties": {
-        "availableVCpus": {
-          "type": "number",
-          "format": "double",
-          "description": "The total number of CPUs."
-        },
         "allocatableVMs": {
           "type": "array",
           "items": {
@@ -5592,11 +5577,7 @@
         "assetId": {
           "readOnly": true,
           "type": "string",
-          "description": "Specifies the unique of the dedicated physical machine on which the dedicated host resides."
-        },
-        "capacity": {
-          "$ref": "#/definitions/DedicatedHostCapacity",
-          "description": "The total capacity of the dedicated host."
+          "description": "Specifies the unique id of the dedicated physical machine on which the dedicated host resides."
         },
         "availableCapacity": {
           "$ref": "#/definitions/DedicatedHostAvailableCapacity",
@@ -5617,16 +5598,18 @@
         "platformFaultDomain": {
           "type": "integer",
           "format": "int32",
-          "description": "Fault domain of the host within a group. Supported values 0,1,2."
+          "minimum": 0,
+          "maximum": 2,
+          "description": "Fault domain of the dedicated host within a dedicated host group."
         },
         "autoReplaceOnFailure": {
           "type": "boolean",
-          "description": "Whether the host should be replaced automatically in case of a failure. The value is defaulted to true when not provided."
+          "description": "Specifies whether the dedicated host should be replaced automatically in case of a failure. The value is defaulted to 'true' when not provided."
         },
         "hostId": {
           "readOnly": true,
           "type": "string",
-          "description": "A unique id generated and assigned to the dedicated host by the platform."
+          "description": "A unique id generated and assigned to the dedicated host by the platform. <br><br> Does not change throughout the lifetime of the host."
         },
         "virtualMachines": {
           "type": "array",
@@ -5644,7 +5627,7 @@
           "readOnly": true,
           "type": "string",
           "format": "date-time",
-          "description": "The date when the host was first created."
+          "description": "The date when the host was first provisioned."
         },
         "provisioningState": {
           "readOnly": true,
@@ -5667,13 +5650,16 @@
         },
         "sku": {
           "$ref": "#/definitions/Sku",
-          "description": "Sku of the dedicated host for Hardware Generation and VM family, The only name is required to be set. See DedicatedHostSkuTypes for possible set of values."
+          "description": "SKU of the dedicated host for Hardware Generation and VM family. Only name is required to be set. List Microsoft.Compute SKUs for a list of possible values."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
+      ],
+      "required": [
+        "sku"
       ],
       "description": "Specifies information about the Dedicated host."
     },
@@ -5702,13 +5688,13 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "The URI to fetch the next page of Dedicated hosts. Call ListNext() with this URI to fetch the next page of Dedicated hosts."
+          "description": "The URI to fetch the next page of dedicated hosts. Call ListNext() with this URI to fetch the next page of dedicated hosts."
         }
       },
       "required": [
         "value"
       ],
-      "description": "The List Dedicated Host operation response."
+      "description": "The list dedicated host operation response."
     },
     "VirtualMachineSize": {
       "properties": {
