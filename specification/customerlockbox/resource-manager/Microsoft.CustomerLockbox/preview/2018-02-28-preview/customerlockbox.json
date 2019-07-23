@@ -1,0 +1,363 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-02-28-preview",
+    "title": "Customer Lockbox",
+    "description": "Azure Customer Lockbox API Reference"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "paths": {
+    "/providers/Microsoft.CustomerLockbox/operations": {
+      "get": {
+        "tags": ["Operations"],
+        "description": "Lists all the available REST API operations.",
+        "operationId": "Operations_List",
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved operation list.",
+            "schema": {
+              "$ref": "#/definitions/ResourceProviderOperations"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}": {
+      "get": {
+        "tags": ["Requests"],
+        "description": "Get Customer Lockbox request",
+        "operationId": "Get_Request",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "The Lockbox request ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The version of the API to be used with the client request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieval of Customer Lockbox request successful.",
+            "schema": {
+              "$ref": "#/definitions/LockboxRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerLockbox/requests/{requestId}": {
+      "get": {
+        "tags": ["Requests"],
+        "description": "Get Customer Lockbox request",
+        "operationId": "Get_RequestByResourceGroup",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "The Lockbox request ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The Azure Resource Group containing the request ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The version of the API to be used with the client request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieval of Customer Lockbox request successful.",
+            "schema": {
+              "$ref": "#/definitions/LockboxRequestResponse"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}/UpdateApproval": {
+      "post": {
+        "tags": ["Requests"],
+        "description": "Update Customer Lockbox request approval status API",
+        "operationId": "Post_RequestUpdateApproval",
+        "parameters": [
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Azure subscription ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestId",
+            "in": "path",
+            "description": "The Lockbox request ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "approval",
+            "in": "body",
+            "description": "The approval object to update request status.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Approval"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "The version of the API to be used with the client request.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update of Request Status successful",
+            "schema": {
+              "$ref": "#/definitions/Approval"
+            }
+          },
+          "500": {
+            "description": "Internal server error",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceProviderOperations": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceProviderOperation"
+          }
+        }
+      }
+    },
+    "ResourceProviderOperation": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "isDataAction": {
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/Display"
+        },
+        "properties": {
+          "type": "string"
+        },
+        "origin": {
+          "enum": ["User", "System", "Default"],
+          "type": "string"
+        }
+      }
+    },
+    "Display": {
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "LockboxRequestResponse": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/LockboxRequestResponseProperties"
+        }
+      }
+    },
+    "LockboxRequestResponseProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "justification": {
+          "type": "string"
+        },
+        "status": {
+          "enum": [
+            "Initializing",
+            "Pending",
+            "Completing",
+            "Completed",
+            "Unknown"
+          ],
+          "type": "string"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "duration": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "resourceId": {
+          "type": "string"
+        },
+        "resourceType": {
+          "type": "string"
+        },
+        "supportRequest": {
+          "type": "string"
+        },
+        "supportCaseUrl": {
+          "type": "string"
+        },
+        "subscriptionId": {
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorInformation"
+        }
+      }
+    },
+    "ErrorInformation": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetails"
+          }
+        }
+      }
+    },
+    "ErrorDetails": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        }
+      }
+    },
+    "Approval": {
+      "type": "object",
+      "properties": {
+        "status": {
+          "enum": ["Approve", "Deny"],
+          "type": "string"
+        },
+        "reason": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ]
+}
