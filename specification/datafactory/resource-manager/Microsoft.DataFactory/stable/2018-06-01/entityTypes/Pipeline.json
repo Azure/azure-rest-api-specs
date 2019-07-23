@@ -4111,6 +4111,37 @@
         "dataset"
       ]
     },
+    "AzureDataExplorerCommand": {
+      "x-ms-discriminator-value": "AzureDataExplorerCommand",
+      "description": "Azure Data Explorer command activity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Data Explorer command activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureDataExplorerCommandActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureDataExplorerCommandActivityTypeProperties": {
+      "description": "Azure Data Explorer command activity properties.",
+      "properties": {
+        "command": {
+          "type": "object",
+          "description": "A control command, according to the Azure Data Explorer command syntax. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "command"
+      ]
+    },
     "LookupActivity": {
       "x-ms-discriminator-value": "Lookup",
       "description": "Lookup activity.",
