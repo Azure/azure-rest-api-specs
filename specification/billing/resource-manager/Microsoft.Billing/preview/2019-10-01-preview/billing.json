@@ -2314,7 +2314,13 @@
             "$ref": "#/parameters/invoiceSectionNameParameter"
           },
           {
-            "$ref": "#/parameters/initiateTransferRequestParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitiateTransferRequest"
+            },
+            "description": "Parameters supplied to initiate the transfer."
           }
         ],
         "responses": {
@@ -2474,7 +2480,13 @@
             "$ref": "#/parameters/transferNameParameter"
           },
           {
-            "$ref": "#/parameters/acceptTransferRequestParameter"
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptTransferRequest"
+            },
+            "description": "Parameters supplied to accept the transfer."
           }
         ],
         "responses": {
@@ -6148,26 +6160,6 @@
       "required": true,
       "type": "string",
       "description": "Transfer Name."
-    },
-    "initiateTransferRequestParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Initiate transfer parameters.",
-      "schema": {
-        "$ref": "#/definitions/InitiateTransferRequest"
-      }
-    },
-    "acceptTransferRequestParameter": {
-      "name": "body",
-      "x-ms-parameter-location": "method",
-      "in": "body",
-      "required": true,
-      "description": "Accept transfer parameters.",
-      "schema": {
-        "$ref": "#/definitions/AcceptTransferRequest"
-      }
     },
     "agreementNameParameter": {
       "name": "agreementName",
