@@ -82,7 +82,7 @@
           "Operations"
         ],
         "description": "Lists all of the available RP operations.",
-        "operationId": "ListOperations",
+        "operationId": "Operations_List",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersion"
@@ -100,15 +100,15 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "ListOperations": {
-            "$ref": "./examples/ListOperations.json"
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds": {
       "get": {
-        "operationId": "PrivateCloud_List",
+        "operationId": "PrivateClouds_List",
         "tags": [
           "PrivateClouds"
         ],
@@ -133,15 +133,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_List": {
-            "$ref": "./examples/PrivateCloud_List.json"
+          "PrivateClouds_List": {
+            "$ref": "./examples/PrivateClouds_List.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
       "get": {
-        "operationId": "PrivateCloud_GetById",
+        "operationId": "PrivateClouds_GetById",
         "tags": [
           "PrivateClouds"
         ],
@@ -170,15 +170,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_GetById": {
-            "$ref": "./examples/PrivateCloud_GetById.json"
+          "PrivateClouds_GetById": {
+            "$ref": "./examples/PrivateClouds_GetById.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
       "get": {
-        "operationId": "PrivateCloud_ListInResourceGroup",
+        "operationId": "PrivateClouds_ListInResourceGroup",
         "tags": [
           "PrivateClouds"
         ],
@@ -206,15 +206,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_ListInResourceGroup": {
-            "$ref": "./examples/PrivateCloud_ListInResourceGroup.json"
+          "PrivateClouds_ListInResourceGroup": {
+            "$ref": "./examples/PrivateClouds_ListInResourceGroup.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
       "get": {
-        "operationId": "PrivateCloud_GetByIdInResourceGroup",
+        "operationId": "PrivateClouds_GetByIdInResourceGroup",
         "tags": [
           "PrivateClouds"
         ],
@@ -246,13 +246,13 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_GetByIdInResourceGroup": {
-            "$ref": "./examples/PrivateCloud_GetByIdInResourceGroup.json"
+          "PrivateClouds_GetByIdInResourceGroup": {
+            "$ref": "./examples/PrivateClouds_GetByIdInResourceGroup.json"
           }
         }
       },
       "put": {
-        "operationId": "PrivateCloud_Create",
+        "operationId": "PrivateClouds_CreateOrUpdate",
         "tags": [
           "PrivateClouds"
         ],
@@ -312,13 +312,13 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_Create": {
-            "$ref": "./examples/PrivateCloud_Create.json"
+          "PrivateClouds_CreateOrUpdate": {
+            "$ref": "./examples/PrivateClouds_CreateOrUpdate.json"
           }
         }
       },
       "patch": {
-        "operationId": "PrivateCloud_Modify",
+        "operationId": "PrivateClouds_Update",
         "tags": [
           "PrivateClouds"
         ],
@@ -361,13 +361,13 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_Modify": {
-            "$ref": "./examples/PrivateCloud_Modify.json"
+          "PrivateClouds_Update": {
+            "$ref": "./examples/PrivateClouds_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "PrivateCloud_Delete",
+        "operationId": "PrivateClouds_Delete",
         "tags": [
           "PrivateClouds"
         ],
@@ -399,15 +399,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_Delete": {
-            "$ref": "./examples/PrivateCloud_Delete.json"
+          "PrivateClouds_Delete": {
+            "$ref": "./examples/PrivateClouds_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters": {
       "get": {
-        "operationId": "Cluster_List",
+        "operationId": "Clusters_List",
         "tags": [
           "Clusters"
         ],
@@ -442,15 +442,15 @@
           }
         },
         "x-ms-examples": {
-          "Cluster_List": {
-            "$ref": "./examples/Cluster_List.json"
+          "Clusters_List": {
+            "$ref": "./examples/Clusters_List.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters/{clusterName}": {
       "get": {
-        "operationId": "Cluster_GetByName",
+        "operationId": "Clusters_GetByName",
         "tags": [
           "Clusters"
         ],
@@ -489,13 +489,13 @@
           }
         },
         "x-ms-examples": {
-          "Cluster_GetByName": {
-            "$ref": "./examples/Cluster_GetByName.json"
+          "Clusters_GetByName": {
+            "$ref": "./examples/Clusters_GetByName.json"
           }
         }
       },
       "put": {
-        "operationId": "Cluster_Create",
+        "operationId": "Clusters_CreateOrUpdate",
         "tags": [
           "Clusters"
         ],
@@ -562,13 +562,13 @@
           }
         },
         "x-ms-examples": {
-          "Cluster_Create": {
-            "$ref": "./examples/Cluster_Create.json"
+          "Clusters_CreateOrUpdate": {
+            "$ref": "./examples/Clusters_CreateOrUpdate.json"
           }
         }
       },
       "patch": {
-        "operationId": "Cluster_Modify",
+        "operationId": "Clusters_Update",
         "tags": [
           "Clusters"
         ],
@@ -618,13 +618,13 @@
           }
         },
         "x-ms-examples": {
-          "Cluster_Modify": {
-            "$ref": "./examples/Cluster_Modify.json"
+          "Clusters_Update": {
+            "$ref": "./examples/Clusters_Update.json"
           }
         }
       },
       "delete": {
-        "operationId": "Cluster_Delete",
+        "operationId": "Clusters_Delete",
         "tags": [
           "Clusters"
         ],
@@ -663,15 +663,15 @@
           }
         },
         "x-ms-examples": {
-          "Cluster_Delete": {
-            "$ref": "./examples/Cluster_Delete.json"
+          "Clusters_Delete": {
+            "$ref": "./examples/Clusters_Delete.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/operationresults/{operationId}": {
       "get": {
-        "operationId": "PrivateCloud_OperationResultsGetById",
+        "operationId": "PrivateClouds_OperationResultsGetById",
         "tags": [
           "PrivateClouds"
         ],
@@ -723,15 +723,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_OperationResultsGetById": {
-            "$ref": "./examples/PrivateCloud_OperationResultsGetById.json"
+          "PrivateClouds_OperationResultsGetById": {
+            "$ref": "./examples/PrivateClouds_OperationResultsGetById.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/operationstatuses/{operationId}": {
       "get": {
-        "operationId": "PrivateCloud_OperationStatusesGetById",
+        "operationId": "PrivateClouds_OperationStatusesGetById",
         "tags": [
           "PrivateClouds"
         ],
@@ -776,15 +776,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_OperationStatusesGetById": {
-            "$ref": "./examples/PrivateCloud_OperationStatusesGetById.json"
+          "PrivateClouds_OperationStatusesGetById": {
+            "$ref": "./examples/PrivateClouds_OperationStatusesGetById.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addAuthorization/{authorizationName}": {
       "post": {
-        "operationId": "PrivateCloud_AddAuthorization",
+        "operationId": "PrivateClouds_AddAuthorization",
         "tags": [
           "PrivateClouds"
         ],
@@ -829,15 +829,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_AddAuthorization": {
-            "$ref": "./examples/PrivateCloud_AddAuthorization.json"
+          "PrivateClouds_AddAuthorization": {
+            "$ref": "./examples/PrivateClouds_AddAuthorization.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteAuthorization/{authorizationName}": {
       "post": {
-        "operationId": "PrivateCloud_DeleteAuthorization",
+        "operationId": "PrivateClouds_DeleteAuthorization",
         "tags": [
           "PrivateClouds"
         ],
@@ -882,15 +882,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_DeleteAuthorization": {
-            "$ref": "./examples/PrivateCloud_DeleteAuthorization.json"
+          "PrivateClouds_DeleteAuthorization": {
+            "$ref": "./examples/PrivateClouds_DeleteAuthorization.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/addIdentitySource": {
       "post": {
-        "operationId": "PrivateCloud_AddIdentitySource",
+        "operationId": "PrivateClouds_AddIdentitySource",
         "tags": [
           "PrivateClouds"
         ],
@@ -936,15 +936,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_AddIdentitySource": {
-            "$ref": "./examples/PrivateCloud_AddIdentitySource.json"
+          "PrivateClouds_AddIdentitySource": {
+            "$ref": "./examples/PrivateClouds_AddIdentitySource.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/deleteIdentitySource": {
       "post": {
-        "operationId": "PrivateCloud_DeleteIdentitySource",
+        "operationId": "PrivateClouds_DeleteIdentitySource",
         "tags": [
           "PrivateClouds"
         ],
@@ -990,15 +990,15 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_DeleteIdentitySource": {
-            "$ref": "./examples/PrivateCloud_DeleteIdentitySource.json"
+          "PrivateClouds_DeleteIdentitySource": {
+            "$ref": "./examples/PrivateClouds_DeleteIdentitySource.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/getAdminCredentials": {
       "post": {
-        "operationId": "PrivateCloud_GetAdminCredentials",
+        "operationId": "PrivateClouds_GetAdminCredentials",
         "tags": [
           "PrivateClouds"
         ],
@@ -1033,8 +1033,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateCloud_GetAdminCredentials": {
-            "$ref": "./examples/PrivateCloud_GetAdminCredentials.json"
+          "PrivateClouds_GetAdminCredentials": {
+            "$ref": "./examples/PrivateClouds_GetAdminCredentials.json"
           }
         }
       }
