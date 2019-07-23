@@ -1151,7 +1151,10 @@
             }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -1181,16 +1184,64 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           },
           "204": {
-            "description": "NoContent"
+            "description": "NoContent",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResource"
+            }
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMySQL/servers/{serverName}/administrators": {
+      "get": {
+        "tags": [
+          "ServerAdministrators"
+        ],
+        "operationId": "ServerAdministrators_ListByServer",
+        "description": "Returns a list of server Administrators.",
+        "x-ms-examples": {
+          "get a list of server administrators": {
+            "$ref": "./examples/ServerAdminList.json"
+          }
+        },
+         "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAdministratorResourceListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DBforMySQL/locations/{locationName}/performanceTiers": {
@@ -2398,41 +2449,63 @@
       "properties": {
         "administratorType": {
           "type": "string",
-          "description": "The administrator type."
+          "description": "The type of administrator.",
+          "enum": [
+            "ActiveDirectory"
+          ],
+          "x-ms-enum": {
+            "name": "AdministratorType"
+          }
         },
         "login": {
           "type": "string",
-          "description": "The administrator login."
+          "description": "The server administrator login value."
         },
         "sid": {
           "type": "string",
-          "description": "The administrator sid."
+          "description": "The server administrator Sid (Secure ID).",
+          "format": "uuid"
         },
         "tenantId": {
           "type": "string",
-          "description": "The administrator tenantId."
+          "description": "The server Active Directory Administrator tenant id.",
+          "format": "uuid"
         }
       },
-      "description": "The properties used to create a new external administrator."
+      "required": [
+        "tenantId",
+        "administratorType",
+        "login",
+        "sid"
+      ],
+      "description": "The properties of an server Administrator."
     },
     "ServerAdministratorResource": {
       "properties": {
         "properties": {
           "$ref": "#/definitions/ServerAdministratorProperties",
-          "x-ms-client-flatten": false,
+          "x-ms-client-flatten": true,
           "description": "Properties of the server AAD administrator."
         }
       },
-      "required": [
-        "properties"
-      ],
       "description": "Represents a and external administrator to be created.",
-      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
         }
       ]
+    },
+    "ServerAdministratorResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerAdministratorResource"
+          },
+          "description": "The list of server Active Directory Administrators for the server."
+        }
+      },
+      "description": "The response to a list Active Directory Administrators request."
     }
   },
   "parameters": {
