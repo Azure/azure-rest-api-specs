@@ -924,6 +924,15 @@
           },
           "Get an AAD data connector.": {
             "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
+          },
+          "Get an AwsCloudTrail data connector.": {
+            "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
+          },
+          "Get an AATP data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureAdvancedThreatProtectionById.json"
+          },
+          "Get a MDATP data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
           }
         },
         "tags": [
@@ -2224,7 +2233,10 @@
             "AzureSecurityCenter",
             "MicrosoftCloudAppSecurity",
             "ThreatIntelligence",
-            "Office365"
+            "Office365",
+            "AmazonWebServicesCloudTrail",
+            "AzureAdvancedThreatProtection",
+            "MicrosoftDefenderAdvancedThreatProtection"
           ],
           "x-ms-enum": {
             "name": "DataConnectorKind",
@@ -2244,6 +2256,15 @@
               },
               {
                 "value": "Office365"
+              },
+              {
+                "value": "AmazonWebServicesCloudTrail"
+              },
+              {
+                "value": "AzureAdvancedThreatProtection"
+              },
+              {
+                "value": "MicrosoftDefenderAdvancedThreatProtection"
               }
             ]
           }
@@ -2363,6 +2384,52 @@
         }
       }
     },
+    "AwsCloudTrailDataConnector": {
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail",
+      "type": "object",
+      "description": "Represents Amazon Web Services CloudTrail data connector.",
+      "allOf": [
+          {
+              "$ref": "#/definitions/DataConnector"
+          }
+      ],
+      "properties": {
+          "properties": {
+              "x-ms-client-flatten": true,
+              "description": "Amazon Web Services CloudTrail data connector properties.",
+              "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties"
+          }
+      }
+   },
+    "AwsCloudTrailDataConnectorProperties": {
+        "type": "object",
+        "description": "Amazon Web Services CloudTrail data connector properties.",
+        "properties": {
+            "awsRoleArn": {
+                "type": "string",
+                "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account."
+            },
+            "dataTypes": {
+                "description": "The available data types for the connector.",
+                "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes"
+            }
+        }
+    },
+    "AwsCloudTrailDataConnectorDataTypes": {
+        "type": "object",
+        "description": "The available data types for Amazon Web Services CloudTrail data connector.",
+        "properties": {
+            "logs": {
+                "type": "object",
+                "description": "Logs data type.",
+                "allOf": [
+                    {
+                        "$ref": "#/definitions/DataConnectorDataTypeCommon"
+                    }
+                ]
+            }
+        }
+    },
     "AADDataConnector": {
       "x-ms-discriminator-value": "AzureActiveDirectory",
       "type": "object",
@@ -2444,6 +2511,86 @@
     "MCASDataConnectorProperties": {
       "type": "object",
       "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }],
+        "properties": {
+          "dataTypes": {
+            "description": "The available data types for the connector.",
+            "$ref": "#/definitions/MCASDataConnectorDataTypes"
+          }
+        }
+    },
+    "MCASDataConnectorDataTypes": {
+      "type": "object",
+      "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
+        }],
+        "properties":
+        {
+          "discoveryLogs": {
+            "type": "object",
+            "description": "Discovery log data type connection.",
+            "allOf": [
+              {
+                "$ref": "#/definitions/DataConnectorDataTypeCommon"
+              }
+            ]
+          }
+        }
+    },
+    "AATPDataConnector": {
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection",
+      "type": "object",
+      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+          "$ref": "#/definitions/AATPDataConnectorProperties"
+        }
+      }
+    },
+    "AATPDataConnectorProperties": {
+      "type": "object",
+      "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ]
+    },
+    "MDATPDataConnector": {
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection",
+      "type": "object",
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+          "$ref": "#/definitions/MDATPDataConnectorProperties"
+        }
+      }
+    },
+    "MDATPDataConnectorProperties": {
+      "type": "object",
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
