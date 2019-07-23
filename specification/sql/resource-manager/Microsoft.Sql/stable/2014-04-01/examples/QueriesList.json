@@ -8,61 +8,63 @@
   },
   "responses": {
     "200": {
-      "value": [
-        {
-          "type": "Microsoft.Sql/servers/databases/topQueries",
-          "numberOfTopQueries": 1,
-          "aggregationFunction": "sum",
-          "executionType": "any",
-          "observedMetric": "cpu",
-          "observationStartTime": "2017-07-11T16:21:54.0916567Z",
-          "observationEndTime": "2017-07-12T16:21:54.0916567Z",
-          "intervalType": "PT1H",
-          "queries": [
-            {
-              "queryId": "19",
-              "intervals": [
-                {
-                  "intervalStartTime": "2017-07-11T16:00:00",
-                  "executionCount": 12,
-                  "metrics": [
-                    {
-                      "name": "cpu",
-                      "displayName": "Cpu",
-                      "unit": "percentage",
-                      "value": 0.000763888888888889
-                    },
-                    {
-                      "name": "io",
-                      "displayName": "Physical Io Reads",
-                      "unit": "percentage",
-                      "value": 0.0
-                    },
-                    {
-                      "name": "logIo",
-                      "displayName": "Log Writes",
-                      "unit": "percentage",
-                      "value": 0.0
-                    },
-                    {
-                      "name": "memory",
-                      "displayName": "Memory consumption",
-                      "unit": "KB",
-                      "value": 0.0
-                    },
-                    {
-                      "name": "duration",
-                      "displayName": "Query duration",
-                      "unit": "microseconds",
-                      "value": 3308.0
-                    }
-                  ]
-                }
-              ]
-            }
-          ]
-        }
-      ]
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.Sql/servers/databases/topQueries",
+            "numberOfTopQueries": 1,
+            "aggregationFunction": "sum",
+            "executionType": "any",
+            "observedMetric": "cpu",
+            "observationStartTime": "2017-07-11T16:21:54.0916567Z",
+            "observationEndTime": "2017-07-12T16:21:54.0916567Z",
+            "intervalType": "PT1H",
+            "queries": [
+              {
+                "queryId": "19",
+                "intervals": [
+                  {
+                    "intervalStartTime": "2017-07-11T16:00:00",
+                    "executionCount": 12,
+                    "metrics": [
+                      {
+                        "name": "cpu",
+                        "displayName": "Cpu",
+                        "unit": "percentage",
+                        "value": 0.000763888888888889
+                      },
+                      {
+                        "name": "io",
+                        "displayName": "Physical Io Reads",
+                        "unit": "percentage",
+                        "value": 0.0
+                      },
+                      {
+                        "name": "logIo",
+                        "displayName": "Log Writes",
+                        "unit": "percentage",
+                        "value": 0.0
+                      },
+                      {
+                        "name": "memory",
+                        "displayName": "Memory consumption",
+                        "unit": "KB",
+                        "value": 0.0
+                      },
+                      {
+                        "name": "duration",
+                        "displayName": "Query duration",
+                        "unit": "microseconds",
+                        "value": 3308.0
+                      }
+                    ]
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
     }
   }
 }
