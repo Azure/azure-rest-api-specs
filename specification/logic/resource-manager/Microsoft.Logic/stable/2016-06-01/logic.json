@@ -5014,7 +5014,7 @@
             "type": "string"
           },
           {
-            "name": "RosettaNetProcessConfigurationName",
+            "name": "rosettaNetProcessConfigurationName",
             "description": "The integration account RosettaNetProcessConfiguration name.",
             "in": "path",
             "required": true,
@@ -5063,8 +5063,8 @@
             "type": "string"
           },
           {
-            "name": "RosettaNetProcessConfigurationName",
-            "description": "The integration account RosettaNetProcessConfiguration name.",
+            "name": "rosettaNetProcessConfigurationName",
+            "description": "The integration account RosettaNet ProcessConfiguration name.",
             "in": "path",
             "required": true,
             "type": "string"
@@ -5073,8 +5073,8 @@
             "$ref": "#/parameters/api-version"
           },
           {
-            "name": "RosettaNetProcessConfiguration",
-            "description": "The integration account RosettaNetProcessConfiguration.",
+            "name": "rosettaNetProcessConfiguration",
+            "description": "The integration account RosettaNet ProcessConfiguration.",
             "in": "body",
             "required": true,
             "schema": {
@@ -5127,7 +5127,7 @@
             "type": "string"
           },
           {
-            "name": "RosettaNetProcessConfigurationName",
+            "name": "rosettaNetProcessConfigurationName",
             "description": "The integration account RosettaNetProcessConfiguration name.",
             "in": "path",
             "required": true,
@@ -9629,7 +9629,7 @@
           "description": "The non-repudiation is required or not."
         },
         "timeToAcknowledgeInSeconds": {
-          "type": "string",
+          "type": "integer",
           "description": "The time to acknowledge in seconds."
         }
       },
@@ -9669,6 +9669,10 @@
         "businessDocument": {
           "$ref": "#/definitions/RosettaNetPipBusinessDocument",
           "description": "The RosettaNet ProcessConfiguration business document."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description."
         }
       },
       "description": "The integration account RosettaNet ProcessConfiguration role settings."
