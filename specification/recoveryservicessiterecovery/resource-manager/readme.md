@@ -99,7 +99,7 @@ csharp:
   payload-flattening-threshold: 0
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
-  output-folder: $(csharp-sdks-folder)/recoveryservices.siterecovery/Microsoft.Azure.Management.RecoveryServices.SiteRecovery/src/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices-siterecovery/Microsoft.Azure.Management.RecoveryServices.SiteRecovery/src/Generated
   clear-output-folder: true
 ```
 

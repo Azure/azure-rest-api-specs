@@ -154,7 +154,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Batch
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Management/src/Generated
+  output-folder: $(csharp-sdks-folder)/batch/Microsoft.Azure.Management.Batch/src/Generated
   clear-output-folder: true
 ```
 

@@ -61,7 +61,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Intune
-  output-folder: $(csharp-sdks-folder)/intune/Microsoft.Azure.Intune/src/Generated
+  output-folder: $(csharp-sdks-folder)/intune/Microsoft.Azure.Management.Intune/src/Generated
   clear-output-folder: true
 ```
 

@@ -14,7 +14,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.ResourceManager  
-output-folder: $(csharp-sdks-folder)/resource/Microsoft.Azure.Management.ResourceManager/src/Generated
+output-folder: $(csharp-sdks-folder)/resources/Microsoft.Azure.Management.ResourceManager/src/Generated
 
 batch:
   - package-features: true
