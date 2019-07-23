@@ -43,15 +43,6 @@
           },
           {
             "$ref": "#/parameters/AssessmentName"
-          },
-          {
-            "$ref": "#/parameters/ODataFilter"
-          },
-          {
-            "$ref": "#/parameters/ODataSelect"
-          },
-          {
-            "$ref": "#/parameters/ODataExpand"
           }
         ],
         "responses": {
@@ -365,27 +356,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The T-SQL query that runs on your SQL database to perform the particular check"
-        },
-        "risk": {
-          "readOnly": true,
-          "type": "string",
-          "enum": ["Low",
-          "Medium",
-          "High"],
-          "x-ms-enum": {
-            "name": "risk",
-            "modelAsString": true,
-            "values": [{
-              "value": "Low"
-            },
-            {
-              "value": "Medium"
-            },
-            {
-              "value": "High"
-            }]
-          },
-          "description": "The risk level associated with the particular vulnerability assessment check"
         }
       }
     },
@@ -416,11 +386,6 @@
           "type": "boolean",
           "description": "Indicates whether a patch is available or not"
         },
-        "actionable": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Indicates whether the issue in subject is actionable or not"
-        }, 
         "cve": {
           "readOnly": true,
           "type": "array",
@@ -429,21 +394,11 @@
             "$ref": "#/definitions/CVE"
           }
         },
-        "threat": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Threat name"
-        },
         "publishedTime": {
           "readOnly": true,
           "type": "string",
           "format": "date-time",
           "description": "Published time"
-        },
-        "remediationLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Link for additional remediation explanation"
         },
         "vendorReferences": {
           "readOnly": true,
@@ -456,11 +411,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Name of the repository which the vulnerable image belongs to"
-        },
-        "imageName": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Name of the vulnerable image"
         },
         "imageDigest": {
           "readOnly": true,
@@ -496,11 +446,6 @@
           "type": "boolean",
           "description": "Indicates whether a patch is available or not"
         },
-        "actionable": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Indicates whether the issue in subject is actionable or not"
-        }, 
         "cve": {
           "readOnly": true,
           "type": "array",
@@ -519,11 +464,6 @@
           "type": "string",
           "format": "date-time",
           "description": "Published time"
-        },
-        "remediationLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Link for additional remediation explanation"
         },
         "vendorReferences": {
           "readOnly": true,
@@ -579,30 +519,6 @@
     }
   },
   "parameters": {
-    "ODataFilter": {
-      "name": "$filter",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "OData filter. Optional.",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataSelect": {
-      "name": "$select",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "OData select. Optional.",
-      "x-ms-parameter-location": "method"
-    },
-    "ODataExpand": {
-      "name": "$expand",
-      "in": "query",
-      "required": false,
-      "type": "string",
-      "description": "OData expand. Optional.",
-      "x-ms-parameter-location": "method"
-    },
     "AssessmentName": {
       "name": "assessmentName",
       "in": "path",
