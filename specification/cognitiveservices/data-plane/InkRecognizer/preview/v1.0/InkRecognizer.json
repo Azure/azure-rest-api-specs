@@ -419,36 +419,36 @@
             "description": "The id of the parent node in the tree structure of the recognition results. parent = 0 indicates that there is no dedicated parent node for this unit."
           },
           "boundingRectangle": {
-            "description": "The bounding rectangle of the recognized unit represented by the coordinates of the top left corner (x,y) along with width (w) and height (h) of the rectangle. Note that this rectangle is not rotated. So for  rotated objects such as slanted handwriting, it will cover the entire object. The unit will be matched to the one specified in the original request (mm by default.) ",
+            "description": "The bounding rectangle of the recognition unit represented by the coordinates of the top left corner (topX,topY) along with width and height of the rectangle. Note that this rectangle is not rotated. So for  rotated objects such as slanted handwriting, it will cover the entire object. The unit will be matched to the one specified in the original request (mm by default.) ",
             "type": "object",
             "properties": {
               "topX": {
                 "type": "number",
-                "description": "This represents the top left x coordinate"
+                "description": "This is the top left x coordinate"
               },
               "topY": {
                 "type": "number",
-                "description": "This represents the top left y coordinate"
+                "description": "This isthe top left y coordinate"
               },
               "width": {
                 "type": "number",
-                "description": "This represents width of the bounding rectangle"
+                "description": "This is width of the bounding rectangle"
               },
               "height": {
                 "type": "number",
-                "description": "The represents the height of the bounding rectangle"
+                "description": "The is the height of the bounding rectangle"
               }
             }
           },
           "rotatedBoundingRectangle": {
-            "description": "This property provides the rotated bounding rectangle that covers the entire recognized object along the angle of rotation of the object. Note that this is NOT the same as rotating the boundingRectangle by the rotation angle.",
+            "description": "This is the rotated bounding rectangle that covers the entire recognized object along the angle of rotation of the object. Note that this is NOT the same as rotating the boundingRectangle by the rotation angle.",
             "type": "array",
             "items": {
               "$ref": "#/definitions/pointDetailsPattern"
             }
           },
           "strokeIds": {
-            "description": "This is an array of integers representing the list of stroke Identifier integers from the input request body that belong to this recognition unit.",
+            "description": "This is an array of integers representing the list of stroke Identifiers from the input request body that belong to this recognition unit.",
             "type": "array",
             "items": {
               "type": "integer"
@@ -456,15 +456,15 @@
           },
           "recognizedText": {
             "type": "string",
-            "description": "The string represents the text that was recognized. It can be an empty string if the recognizer cannot determine the text."
+            "description": "The string contains the text that was recognized. It can be an empty string if the recognizer cannot determine the text."
           },
           "confidence": {
             "type": "number",
-            "description": "The class represents the type of the recognition unit. A recognition unit can be a leaf node or a container node. Container nodes typically have leaf nodes as children."
+            "description": "A number between 0 and 1 which indicates the confidence level in the result."
           },
           "rotationAngle": {
             "type": "number",
-            "description": "This represents the angle at which the unit is rotated in degrees with respect to the positive X axis."
+            "description": "This is the angle at which the unit is rotated in degrees with respect to the positive X axis."
           },
           "recognizedObject": {
             "$ref": "#/definitions/shapePattern"
@@ -478,7 +478,7 @@
           "id"
         ],
         "type": "object",
-        "description": "This represents the recognized entity"
+        "description": "This identifies the recognized entity"
       },
       "type": "array",
       "description": "The list of recognition units based on the analysis of the ink strokes."
@@ -527,7 +527,7 @@
       "properties": {
         "unit": {
           "type": "string",
-          "description": "This represents the physical units of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
+          "description": "This is the physical unit of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
           "enum": [
             "mm",
             "cm",
@@ -544,7 +544,7 @@
         },
         "language": {
           "type": "string",
-          "description": "This is the language used for recognizing handwriting from the ink strokes in the request. Set this to the user’s preferred language."
+          "description": "This is the language used for recognizing handwriting from the ink strokes in the request."
         },
         "recognitionUnits": {
           "$ref": "#/definitions/recognitionUnit"
@@ -638,7 +638,7 @@
         },
         "unit": {
           "type": "string",
-          "description": "This represents the physical units of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
+          "description": "This is the physical unit of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
           "enum": [
             "mm",
             "cm",
