@@ -96,6 +96,9 @@
           },
           "Create a managed disk by copying a snapshot.": {
             "$ref": "./examples/CreateAManagedDiskByCopyingASnapshot.json"
+          },
+          "Create a managed upload disk.": {
+            "$ref": "./examples/CreateAManagedUploadDisk.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -808,7 +811,6 @@
         "tier": {
           "type": "string",
           "readOnly": true,
-          "default": "Standard",
           "description": "The sku tier."
         }
       },
@@ -832,7 +834,6 @@
         "tier": {
           "type": "string",
           "readOnly": true,
-          "default": "Standard",
           "description": "The sku tier."
         }
       },
@@ -1158,11 +1159,17 @@
           "type": "string",
           "description": "The Id of the source this Incremental Snapshot was created from. Null for non Incremental Snapshots."
         },
-        "required": [
-          "createOption"
-        ],
-        "description": "Data used when creating a disk."
+        "uploadSizeBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "If createOption is Upload, this is the size of the contents of the upload including the VHD footer. This value should be between 1073741824 (1 GiB + 512 bytes for the VHD footer) and 35183298347520 bytes (32 TiB + 512 bytes for the VHD footer)."
+        }
       },
+      "required": [
+        "createOption"
+      ],
+      "description": "Data used when creating a disk."
+    },
     "ImageDiskReference": {
       "properties": {
         "id": {
