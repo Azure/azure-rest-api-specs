@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2019-05-10",
+    "version": "2019-07-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -57,6 +57,524 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      }
+    },
+    "{scope}/providers/Microsoft.Resources/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_DeleteAtScope",
+        "summary": "Deletes a deployment from the deployment history.",
+        "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "head": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CheckExistenceAtScope",
+        "description": "Checks whether the deployment exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CreateOrUpdateAtScope",
+        "summary": "Deploys resources at a given scope.",
+        "description": "You can provide the template and parameters directly in the request or link to JSON files.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Additional parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create deployment at a given scope.": {
+            "$ref": "./examples/PutDeploymentAtScope.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_GetAtScope",
+        "description": "Gets a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        }
+      }
+    },
+    "{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/cancel": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CancelAtScope",
+        "summary": "Cancels a currently running template deployment.",
+        "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/validate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ValidateAtScope",
+        "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          }
+        }
+      }
+    },
+    "{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ExportTemplateAtScope",
+        "description": "Exports the template used for specified deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the template.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExportResult"
+            }
+          }
+        }
+      }
+    },
+    "{scope}/providers/Microsoft.Resources/deployments/": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ListAtScope",
+        "description": "Get all the deployments at the given scope.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. For example, you can use $filter=provisioningState eq '{state}'."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of results to get. If null is passed, returns all deployments."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of deployments.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DeploymentExtendedFilter"
+      }
+    },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_DeleteAtTenantScope",
+        "summary": "Deletes a deployment from the deployment history.",
+        "description": "A template deployment that is currently running cannot be deleted. Deleting a template deployment removes the associated deployment operations. This is an asynchronous operation that returns a status of 202 until the template deployment is successfully deleted. The Location response header contains the URI that is used to obtain the status of the process. While the process is running, a call to the URI in the Location header returns a status of 202. When the process finishes, the URI in the Location header returns a status of 204 on success. If the asynchronous request failed, the URI in the Location header returns an error-level status code.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "204": {
+            "description": "No Content"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "head": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CheckExistenceAtTenantScope",
+        "description": "Checks whether the deployment exists.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "404": {
+            "description": "Not Found"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CreateOrUpdateAtTenantScope",
+        "summary": "Deploys resources at tenant scope.",
+        "description": "You can provide the template and parameters directly in the request or link to JSON files.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Additional parameters supplied to the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          },
+          "201": {
+            "description": "Created - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create deployment at tenant scope.": {
+            "$ref": "./examples/PutDeploymentAtTenant.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_GetAtTenantScope",
+        "description": "Gets a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment, including provisioning status.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExtended"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}/cancel": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CancelAtTenantScope",
+        "summary": "Cancels a currently running template deployment.",
+        "description": "You can cancel a deployment only if the provisioningState is Accepted or Running. After the deployment is canceled, the provisioningState is set to Canceled. Canceling a template deployment stops the currently running template deployment and leaves the resources partially deployed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}/validate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ValidateAtTenantScope",
+        "description": "Validates whether the specified template is syntactically correct and will be accepted by Azure Resource Manager..",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ExportTemplateAtTenantScope",
+        "description": "Exports the template used for specified deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the template.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentExportResult"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/deployments/": {
+      "get": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_ListAtTenantScope",
+        "description": "Get all the deployments at the tenant scope.",
+        "parameters": [
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation. For example, you can use $filter=provisioningState eq '{state}'."
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of results to get. If null is passed, returns all deployments."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of deployments.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/DeploymentExtendedFilter"
       }
     },
     "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}": {
@@ -2349,6 +2867,148 @@
         }
       }
     },
+    "{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "DeploymentOperations"
+        ],
+        "operationId": "DeploymentOperations_GetAtScope",
+        "description": "Gets a deployments operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the operation to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment operation.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentOperation"
+            }
+          }
+        }
+      }
+    },
+    "{scope}/providers/Microsoft.Resources/deployments/{deploymentName}/operations": {
+      "get": {
+        "tags": [
+          "DeploymentOperations"
+        ],
+        "operationId": "DeploymentOperations_ListAtScope",
+        "description": "Gets all deployments operations for a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Return an array of deployment operations.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentOperationsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": {
+      "get": {
+        "tags": [
+          "DeploymentOperations"
+        ],
+        "operationId": "DeploymentOperations_GetAtTenantScope",
+        "description": "Gets a deployments operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The ID of the operation to get."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the deployment operation.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentOperation"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Resources/deployments/{deploymentName}/operations": {
+      "get": {
+        "tags": [
+          "DeploymentOperations"
+        ],
+        "operationId": "DeploymentOperations_ListAtTenantScope",
+        "description": "Gets all deployments operations for a deployment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of results to return."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Return an array of deployment operations.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentOperationsListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Management/managementGroups/{groupId}/providers/Microsoft.Resources/deployments/{deploymentName}/operations/{operationId}": {
       "get": {
         "tags": [
@@ -3719,6 +4379,14 @@
     }
   },
   "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of a deployment.",
+      "x-ms-parameter-location": "method"
+    },
     "GroupIdParameter": {
       "name": "groupId",
       "in": "path",
