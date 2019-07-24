@@ -98,7 +98,7 @@ batch:
  - tag: package-policy-2015-10-01-preview
  ```
 
- ### Profile: hybrid_2019_03_01
+### Profile: hybrid_2019_03_01
 
 These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
 

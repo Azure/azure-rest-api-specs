@@ -634,6 +634,40 @@
         "location"
       ]
     },
+    "BinaryDataset": {
+      "x-ms-discriminator-value": "Binary",
+      "description": "Binary dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Binary dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BinaryDatasetTypeProperties"
+        }
+      }
+    },
+    "BinaryDatasetTypeProperties": {
+      "description": "Binary dataset properties.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the Binary storage."
+        },
+        "compression": {
+          "description": "The data compression method used for the binary dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "AzureBlobDataset": {
       "x-ms-discriminator-value": "AzureBlob",
       "description": "The Azure Blob storage.",
@@ -1268,6 +1302,36 @@
         }
       }
     },
+    "TeradataTableDataset": {
+      "x-ms-discriminator-value": "TeradataTable",
+      "description": "The Teradata database dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Teradata dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/TeradataTableDatasetTypeProperties"
+        }
+      }
+    },
+    "TeradataTableDatasetTypeProperties": {
+      "description": "Teradata dataset properties.",
+      "properties": {
+        "database": {
+          "type": "object",
+          "description": "The database name of Teradata. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of Teradata. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "AzureMySqlTableDataset": {
       "x-ms-discriminator-value": "AzureMySqlTable",
       "description": "The Azure MySQL database dataset.",
@@ -1323,6 +1387,136 @@
         }
       }
     },
+    "InformixTableDataset": {
+      "x-ms-discriminator-value": "InformixTable",
+      "description": "The Informix table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Informix table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/InformixTableDatasetTypeProperties"
+        }
+      }
+    },
+    "InformixTableDatasetTypeProperties": {
+      "description": "Informix table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The Informix table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "OdbcTableDataset": {
+      "x-ms-discriminator-value": "OdbcTable",
+      "description": "The ODBC table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ODBC table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OdbcTableDatasetTypeProperties"
+        }
+      }
+    },
+    "OdbcTableDatasetTypeProperties": {
+      "description": "ODBC table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The ODBC table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MySqlTableDataset": {
+      "x-ms-discriminator-value": "MySqlTable",
+      "description": "The MySQL table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MySQL table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MySqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "MySqlTableDatasetTypeProperties": {
+      "description": "MySql table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The MySQL table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlTableDataset": {
+      "x-ms-discriminator-value": "PostgreSqlTable",
+      "description": "The PostgreSQL table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "PostgreSQL table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostgreSqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "PostgreSqlTableDatasetTypeProperties": {
+      "description": "PostgreSQL table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MicrosoftAccessTableDataset": {
+      "x-ms-discriminator-value": "MicrosoftAccessTable",
+      "description": "The Microsoft Access table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Microsoft Access table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MicrosoftAccessTableDatasetTypeProperties"
+        }
+      }
+    },
+    "MicrosoftAccessTableDatasetTypeProperties": {
+      "description": "Microsoft Access table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The Microsoft Access table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "SalesforceObjectDataset": {
       "x-ms-discriminator-value": "SalesforceObject",
       "description": "The Salesforce object dataset.",
@@ -1346,6 +1540,32 @@
         "objectApiName": {
           "type": "object",
           "description": "The Salesforce object API name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SalesforceServiceCloudObjectDataset": {
+      "x-ms-discriminator-value": "SalesforceServiceCloudObject",
+      "description": "The Salesforce Service Cloud object dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Salesforce Service Cloud object dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SalesforceServiceCloudObjectDatasetTypeProperties"
+        }
+      }
+    },
+    "SalesforceServiceCloudObjectDatasetTypeProperties": {
+      "description": "Salesforce Service Cloud object dataset properties.",
+      "properties": {
+        "objectApiName": {
+          "type": "object",
+          "description": "The Salesforce Service Cloud object API name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1736,7 +1956,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/AzurePostgreSqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AzurePostgreSqlTableDatasetTypeProperties": {
+      "description": "Azure PostgreSQL dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The table name of the Azure PostgreSQL database which includes both schema and table. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
         }
       }
     },
