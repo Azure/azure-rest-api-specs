@@ -48,7 +48,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -123,9 +123,21 @@
     },
     "AcquisitionList": {
       "description": "The list of page BLOB acquisitions.",
-      "type": "array",
-      "items": {
-        "$ref": "acquisitions.json#/definitions/Acquisition"
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of acqusitions.",
+          "type": "array",
+          "items": {
+            "$ref": "acquisitions.json#/definitions/Acquisition"
+          },
+          "readOnly": true
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string",
+          "readOnly": true
+        }
       }
     }
   },
