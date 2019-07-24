@@ -1057,7 +1057,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoices/{invoiceName}/pricesheet/default/download": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoices/{invoiceName}/pricesheet/default/download": {
       "post": {
         "tags": [
           "PriceSheet"
@@ -1078,18 +1078,13 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "billingAccountName",
-            "in": "path",
-            "description": "Azure Billing Account ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/billingAccountNameParameter"
           },
           {
-            "name": "invoiceName",
-            "description": "The name of an invoice resource.",
-            "in": "path",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceNameParameter"
           }
         ],
         "responses": {
@@ -5673,16 +5668,18 @@
       "type": "object",
       "description": "Request parameters to update auto renew for support product.",
       "properties": {
-        "autoRenew": {
-          "description": "Request parameters to update auto renew policy a product.",
-          "type": "string",
-          "enum": [
-            "true",
-            "false"
-          ],
-          "x-ms-enum": {
-            "name": "UpdateAutoRenew",
-            "modelAsString": true
+        "properties": {
+          "autoRenew": {
+            "description": "Request parameters to update auto renew policy a product.",
+            "type": "string",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "UpdateAutoRenew",
+              "modelAsString": true
+            }
           }
         }
       }
