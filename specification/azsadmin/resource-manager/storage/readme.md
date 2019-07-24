@@ -37,6 +37,7 @@ input-file:
     - "Microsoft.Storage.Admin/preview/2019-08-08/settings.json"
     - "Microsoft.Storage.Admin/preview/2019-08-08/storageaccounts.json"
     - "Microsoft.Storage.Admin/preview/2019-08-08/operations.json"
+    - "Microsoft.Storage.Admin/preview/2019-08-08/acquisitions.json"
 ```
 
 ---
