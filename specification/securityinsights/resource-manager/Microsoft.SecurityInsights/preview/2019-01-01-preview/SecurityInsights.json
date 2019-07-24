@@ -1172,9 +1172,6 @@
           },
           "Get a url entity.": {
             "$ref": "./examples/entities/GetUrlEntityById.json"
-          },
-          "Get a bookmark entity.": {
-            "$ref": "./examples/entities/GetBookmarkEntityById.json"
           }
         },
         "tags": [
@@ -4188,87 +4185,6 @@
           "type": "string",
           "readOnly": true,
           "description": "A full URL the entity points to"
-        }
-      }
-    },
-    "BookmarkEntity": {
-      "x-ms-discriminator-value": "Bookmark",
-      "type": "object",
-      "description": "Represents a bookmark entity.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Entity"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Bookmark entity properties",
-          "$ref": "#/definitions/BookmarkEntityProperties"
-        }
-      }
-    },
-    "BookmarkEntityProperties": {
-      "type": "object",
-      "description": "Bookmark entity property bag.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/EntityCommonProperties"
-        }
-      ],
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the display name"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "the created date/time"
-        },
-        "updated": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "the last updated date/time"
-        },
-        "createdBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "information about the user that created this bookmark"
-        },
-        "updatedBy": {
-          "$ref": "#/definitions/UserInfo",
-          "description": "information about the user that last updated this bookmark"
-        },
-        "eventTime": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "the last event date/time"
-        },
-        "notes": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the user-defined notes"
-        },
-        "labels": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Label"
-          },
-          "description": "the user-defined tags"
-        },
-        "query": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the query that produced the result"
-        },
-        "queryResult": {
-          "type": "string",
-          "readOnly": true,
-          "description": "the result of the query (a single bookmarked result row)"
         }
       }
     },
