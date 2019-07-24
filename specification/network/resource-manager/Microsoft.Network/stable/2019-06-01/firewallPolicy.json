@@ -15,7 +15,8 @@
   "produces": [
     "application/json"
   ],
-  "security": [{
+  "security": [
+    {
       "azure_auth": [
         "user_impersonation"
       ]
@@ -35,26 +36,30 @@
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}": {
       "delete": {
-        "tags": [
+        "Tags": [
           "firewallPolicies"
         ],
-        "operationId": "firewallPolicies_Delete",
+        "OperationId": "firewallPolicies_Delete",
         "description": "Deletes the specified Firewall Policy.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Firewall Policy."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -80,35 +85,39 @@
         }
       },
       "get": {
-        "tags": [
+        "Tags": [
           "firewallPolicies"
         ],
-        "operationId": "firewallPolicies_Get",
+        "OperationId": "firewallPolicies_Get",
         "description": "Gets the specified Firewall Policy.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Firewall Policy."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }, {
+          },
+          {
             "name": "$expand",
             "in": "query",
             "required": false,
             "type": "string",
             "description": "Expands referenced resources."
           }
-
         ],
         "responses": {
           "200": {
@@ -125,16 +134,16 @@
         }
       },
       "patch": {
-        "tags": [
+        "Tags": [
           "firewallPolicies"
         ],
-        "operationId": "firewallPolicies_UpdateTags",
+        "OperationId": "firewallPolicies_UpdateTags",
         "x-ms-examples": {
-          "VirtualWANUpdate": {
+          "Update FirewallPolicy": {
             "$ref": "./examples/FirewallPolicyUpdateTags.json"
           }
         },
-        "description": "Updates a Firewall Policy tags.",
+        "description": "Updates a Firewall Policy Tags.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -163,18 +172,12 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to Update Firewall Policy tags."
+            "description": "Parameters supplied to Update Firewall Policy Tags."
           }
         ],
         "responses": {
           "200": {
             "description": "Request successful. Returns the details of the Firewall Policy updated.",
-            "schema": {
-              "$ref": "#/definitions/FirewallPolicy"
-            }
-          },
-          "201": {
-            "description": "Request received successfully. Returns the details of the Firewall Policy updated.",
             "schema": {
               "$ref": "#/definitions/FirewallPolicy"
             }
@@ -189,24 +192,27 @@
         "x-ms-long-running-operation": true
       },
       "put": {
-        "tags": [
+        "Tags": [
           "firewallPolicies"
         ],
-        "operationId": "firewallPolicies_CreateOrUpdate",
+        "OperationId": "firewallPolicies_CreateOrUpdate",
         "description": "Creates or updates the specified Firewall Policy.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Firewall Policy."
-          }, {
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -214,9 +220,11 @@
               "$ref": "#/definitions/FirewallPolicy"
             },
             "description": "Parameters supplied to the create or update Firewall Policy operation."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -247,20 +255,23 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies": {
       "get": {
-        "tags": [
+        "Tags": [
           "firewallPolicies"
         ],
-        "operationId": "firewallPolicies_List",
+        "OperationId": "firewallPolicies_List",
         "description": "Lists all Firewall Policies in a resource group.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -284,14 +295,16 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Network/firewallPolicies": {
       "get": {
-        "tags": [
+        "Tags": [
           "firewallPolicies"
         ],
-        "operationId": "firewallPolicies_ListAll",
+        "OperationId": "firewallPolicies_ListAll",
         "description": "Gets all the Firewall Policies in a subscription.",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -315,32 +328,37 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleGroups/{ruleGroupName}": {
       "delete": {
-        "tags": [
+        "Tags": [
           "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleGroups_Delete",
+        "OperationId": "FirewallPolicyRuleGroups_Delete",
         "description": "Deletes the specified FirewallPolicyRuleGroup.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Firewall Policy."
-          }, {
+          },
+          {
             "name": "ruleGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the FirewallPolicyRuleGroup."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -366,32 +384,37 @@
         }
       },
       "get": {
-        "tags": [
+        "Tags": [
           "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleGroups_Get",
+        "OperationId": "FirewallPolicyRuleGroups_Get",
         "description": "Gets the specified FirewallPolicyRuleGroup.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Firewall Policy."
-          }, {
+          },
+          {
             "name": "ruleGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the FirewallPolicyRuleGroup."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -410,30 +433,34 @@
         }
       },
       "put": {
-        "tags": [
+        "Tags": [
           "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleGroups_CreateOrUpdate",
+        "OperationId": "FirewallPolicyRuleGroups_CreateOrUpdate",
         "description": "Creates or updates the specified FirewallPolicyRuleGroup.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Firewall Policy."
-          }, {
+          },
+          {
             "name": "ruleGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the FirewallPolicyRuleGroup."
-          }, {
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
@@ -441,9 +468,11 @@
               "$ref": "#/definitions/FirewallPolicyRuleGroup"
             },
             "description": "Parameters supplied to the create or update FirewallPolicyRuleGroup operation."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -474,26 +503,30 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/firewallPolicies/{firewallPolicyName}/ruleGroups": {
       "get": {
-        "tags": [
+        "Tags": [
           "FirewallPolicyRuleGroups"
         ],
-        "operationId": "FirewallPolicyRuleGroups_List",
+        "OperationId": "FirewallPolicyRuleGroups_List",
         "description": "Lists all FirewallPolicyRuleGroups in a FirewallPolicy resource.",
-        "parameters": [{
+        "parameters": [
+          {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the resource group."
-          }, {
+          },
+          {
             "name": "firewallPolicyName",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The name of the Firewall Policy."
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
-          }, {
+          },
+          {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           }
         ],
@@ -530,7 +563,8 @@
           "description": "Gets a unique read-only string that changes whenever the resource is updated."
         }
       },
-      "allOf": [{
+      "allOf": [
+        {
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
@@ -600,7 +634,8 @@
           "description": "Rule Group type."
         }
       },
-      "allOf": [{
+      "allOf": [
+        {
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
@@ -640,19 +675,19 @@
       "properties": {
         "ruleType": {
           "type": "string",
-          "description": " The type of the rule, FirewallPolicyFilterRule or FirewallPolicyNatRule",
+          "description": " The type of the rule",
           "enum": [
             "FirewallPolicyNatRule",
             "FirewallPolicyFilterRule"
           ],
           "x-ms-enum": {
-            "name": "RuleType",
+            "name": "FirewallPolicyRuleType",
             "modelAsString": true
           }
         },
         "name": {
           "type": "string",
-          "description": "Name of the Rule" 
+          "description": "Name of the Rule"
         },
         "priority": {
           "type": "integer",
@@ -663,7 +698,7 @@
           "exclusiveMinimum": false,
           "description": "Priority of the Firewall Policy Rule resource."
         }
-      }     
+      }
     },
     "FirewallPolicyNatRule": {
       "properties": {
@@ -682,7 +717,6 @@
         "ruleCondition": {
           "$ref": "#/definitions/FirewallPolicyRuleCondition",
           "description": "The match conditions for incoming traffic"
-
         }
       },
       "allOf": [
@@ -732,17 +766,17 @@
         },
         "ruleConditionType": {
           "type": "string",
-          "description": "RuleConditionType - ApplicationRuleCondition or NetworkRuleCondition.",
+          "description": "Rule Condition Type",
           "enum": [
             "ApplicationRuleCondition",
             "NetworkRuleCondition"
           ],
           "x-ms-enum": {
-            "name": "RuleConditionType",
+            "name": "FirewallPolicyRuleConditionType",
             "modelAsString": true
           }
         }
-      }      
+      }
     },
     "ApplicationRuleCondition": {
       "x-ms-discriminator-value": "ApplicationRuleCondition",
@@ -756,20 +790,20 @@
           "type": "array",
           "description": "List of source IP addresses for this rule.",
           "items": {
-            "type":"string"
+            "type": "string"
           }
         },
         "destinationAddresses": {
           "type": "array",
           "description": "List of destination IP addresses or Service Tags.",
           "items": {
-            "type":"string"
+            "type": "string"
           }
         },
         "protocols": {
           "type": "array",
           "items": {
-            "$ref":"#/definitions/FirewallPolicyRuleConditionApplicationProtocol"
+            "$ref": "#/definitions/FirewallPolicyRuleConditionApplicationProtocol"
           },
           "description": "Array of Application Protocols."
         },
@@ -777,14 +811,14 @@
           "type": "array",
           "description": "List of FQDNs for this rule condition.",
           "items": {
-            "type":"string"
+            "type": "string"
           }
         },
         "fqdnTags": {
           "type": "array",
           "description": "List of FQDN Tags for this rule condition.",
           "items": {
-            "type":"string"
+            "type": "string"
           }
         }
       },
@@ -810,24 +844,24 @@
           "type": "array",
           "description": "List of source IP addresses for this rule.",
           "items": {
-            "type":"string"
+            "type": "string"
           }
         },
         "destinationAddresses": {
           "type": "array",
           "description": "List of destination IP addresses or Service Tags.",
           "items": {
-            "type":"string"
+            "type": "string"
           }
         },
         "destinationPorts": {
           "type": "array",
           "description": "List of destination ports.",
           "items": {
-            "type":"string"
+            "type": "string"
           }
         }
-      }      
+      }
     },
     "FirewallPolicyRuleConditionApplicationProtocol": {
       "properties": {
@@ -842,7 +876,7 @@
           "exclusiveMaximum": false,
           "minimum": 0,
           "exclusiveMinimum": false,
-          "description": "Port number for the protocol, cannot be greater than 64000. This field is optional."
+          "description": "Port number for the protocol, cannot be greater than 64000."
         }
       },
       "description": "Properties of the application rule protocol."
@@ -867,8 +901,8 @@
         "SNAT"
       ],
       "x-ms-enum": {
-      "name": "FirewallPolicyNatRuleActionType",
-      "modelAsString": true
+        "name": "FirewallPolicyNatRuleActionType",
+        "modelAsString": true
       }
     },
     "FirewallPolicyNatRuleAction": {
