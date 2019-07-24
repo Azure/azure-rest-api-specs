@@ -1420,33 +1420,6 @@
         }
       }
     },
-    "ManagedResource": {
-      "description": "An azure managed resource object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "Resource location",
-          "x-ms-mutability": [
-            "create",
-            "read"
-          ]
-        },
-        "tags": {
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "required": [
-        "location"
-      ]
-    },
     "alert": {
       "description": "An alert created in alert management service.",
       "allOf": [
@@ -2160,15 +2133,32 @@
       "description": "Action rule object containing target scope, conditions and suppression logic",
       "allOf": [
         {
-          "$ref": "#/definitions/ManagedResource"
+          "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
         "properties": {
           "description": "action rule properties",
           "$ref": "#/definitions/ActionRuleProperties"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     },
     "ActionRuleProperties": {
       "description": "Action rule properties defining scope, conditions, suppression logic for action rule",
