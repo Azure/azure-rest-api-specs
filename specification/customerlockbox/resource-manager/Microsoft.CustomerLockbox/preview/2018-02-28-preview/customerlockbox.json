@@ -15,12 +15,22 @@
         "tags": ["Operations"],
         "description": "Lists all the available REST API operations.",
         "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK. Successfully retrieved operation list.",
             "schema": {
               "$ref": "#/definitions/ResourceProviderOperations"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         }
       }
@@ -32,11 +42,7 @@
         "operationId": "Get_Request",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "requestId",
@@ -46,11 +52,7 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the API to be used with the client request.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -66,6 +68,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get_Request": {
+            "$ref": "./examples/Get_Request.json"
+          }
         }
       }
     },
@@ -76,11 +83,7 @@
         "operationId": "Get_RequestByResourceGroup",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "requestId",
@@ -97,11 +100,7 @@
             "type": "string"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the API to be used with the client request.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -117,6 +116,11 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get_RequestByResourceGroup": {
+            "$ref": "./examples/Get_RequestByResourceGroup.json"
+          }
         }
       }
     },
@@ -127,11 +131,7 @@
         "operationId": "Post_RequestUpdateApproval",
         "parameters": [
           {
-            "name": "subscriptionId",
-            "in": "path",
-            "description": "The Azure subscription ID.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/apiVersionParameter"
           },
           {
             "name": "requestId",
@@ -150,11 +150,7 @@
             }
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "description": "The version of the API to be used with the client request.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/api-version"
           }
         ],
         "responses": {
@@ -169,6 +165,11 @@
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Post_RequestUpdateApproval": {
+            "$ref": "./examples/Post_RequestUpdateApproval.json"
           }
         }
       }
@@ -342,6 +343,22 @@
           "type": "string"
         }
       }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API to be used with the client request.",
+      "required": true,
+      "type": "string"
     }
   },
   "securityDefinitions": {
