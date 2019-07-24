@@ -709,7 +709,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AlertsManagement/actionRules/{actionRuleName}": {
       "get": {
         "summary": "Get action rule by name",
-        "operationId": "ActionRules_Get",
+        "operationId": "ActionRules_GetByName",
         "description": "Get a specific action rule",
         "parameters": [
           {
@@ -757,7 +757,7 @@
       },
       "put": {
         "summary": "Create/update an action rule",
-        "operationId": "ActionRules_CreateOrUpdate",
+        "operationId": "ActionRules_CreateUpdate",
         "description": "Creates/Updates a specific action rule",
         "parameters": [
           {
@@ -1442,7 +1442,10 @@
           },
           "description": "Resource tags"
         }
-      }
+      },
+      "required": [
+        "location"
+      ]
     },
     "alert": {
       "description": "An alert created in alert management service.",
