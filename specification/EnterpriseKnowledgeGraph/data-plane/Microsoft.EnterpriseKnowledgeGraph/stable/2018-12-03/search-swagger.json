@@ -1,0 +1,774 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Search and Index Services",
+    "version": "v1"
+  },
+  "paths": {
+    "/api/Status": {
+      "get": {
+        "tags": [
+          "Api"
+        ],
+        "summary": "This is a REST API to retrieve system status",
+        "operationId": "Status",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/api/Summary": {
+      "get": {
+        "tags": [
+          "Api"
+        ],
+        "summary": "Summary api present overall status of current service, it may be slow.",
+        "operationId": "Summary",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "indexName",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/configurations/{name}": {
+      "put": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "UpdateConfiguration",
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "object"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "boolean"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Configurations"
+        ],
+        "operationId": "GetConfiguration",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "name",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "/entities": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "EntitySearch",
+        "operationId": "ExecFreeTextQuery",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "Natural language query",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Maximum number of entity documents to return",
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "pub:project.project or pub:business.employee",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "name": "includeEntityDocument",
+            "description": "1 to include entityDocument in response body, 0 not to include",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "enableQueryRewrite",
+            "description": "1 to rewrite query, 0 to not",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "debug",
+            "description": "1 to show debug info like index, etc., 0 to not",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentSearchResult"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Entities"
+        ],
+        "operationId": "UpdateEntitiesAsync",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "entities",
+            "type": "array",
+            "items": {
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Entities"
+        ],
+        "operationId": "DeleteEntitiesAsync",
+        "parameters": [
+          {
+            "in": "query",
+            "name": "ids",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "EntitySearch",
+        "operationId": "ExecFreeTextQuery2",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "Natural language query",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Maximum number of entity documents to return",
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          },
+          {
+            "in": "query",
+            "name": "filter",
+            "description": "pub:project.project or pub:business.employee",
+            "type": "string",
+            "default": ""
+          },
+          {
+            "in": "query",
+            "name": "includeEntityDocument",
+            "description": "1 to include entityDocument in response body, 0 not to include",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "enableQueryRewrite",
+            "description": "1 to rewrite query, 0 to not",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          },
+          {
+            "in": "query",
+            "name": "debug",
+            "description": "1 to show debug info like index, etc., 0 to not",
+            "type": "integer",
+            "format": "int32",
+            "default": 0
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DocumentSearchResult"
+            }
+          }
+        }
+      }
+    },
+    "/entities/{ids}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "summary": "ReadEntities",
+        "operationId": "ReadEntitiesAsync",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "ids",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityDocument"
+              }
+            }
+          }
+        }
+      }
+    },
+    "/entities/raw/{id}": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "operationId": "ReadRawEntitiesAsync",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/EntityBaseResult"
+            }
+          }
+        }
+      }
+    },
+    "/entities/UpdateFromBlob": {
+      "post": {
+        "tags": [
+          "Entities"
+        ],
+        "operationId": "UpdateEntitiesFromBlobAsync",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "path",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "containerName",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchIndexStatus"
+            }
+          }
+        }
+      }
+    },
+    "/entities/UpdateFromBlob/Status": {
+      "get": {
+        "tags": [
+          "Entities"
+        ],
+        "operationId": "GetUpdateEntitiesStatusAsync",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "id",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SearchIndexStatus"
+            }
+          }
+        }
+      }
+    },
+    "/entities/all": {
+      "delete": {
+        "tags": [
+          "Entities"
+        ],
+        "operationId": "DeleteAllEntitiesAsync",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/suggestions": {
+      "get": {
+        "tags": [
+          "Suggestions"
+        ],
+        "summary": "Provide suggestions from query",
+        "operationId": "GetQuerySuggestion",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "query",
+            "name": "q",
+            "description": "Natural language query",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "top",
+            "description": "Maximum number of suggestions to return",
+            "type": "integer",
+            "format": "int32",
+            "default": 10
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "DocumentSearchResult": {
+      "type": "object",
+      "properties": {
+        "debugInfo": {
+          "type": "string"
+        },
+        "recommendedQuery": {
+          "type": "string"
+        },
+        "rewrittenQuery": {
+          "type": "string"
+        },
+        "originalQuery": {
+          "type": "string"
+        },
+        "engineName": {
+          "type": "string"
+        },
+        "indexName": {
+          "type": "string"
+        },
+        "totalHits": {
+          "format": "int64",
+          "type": "integer"
+        },
+        "results": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityBaseResult"
+          }
+        },
+        "filter": {
+          "type": "string"
+        }
+      }
+    },
+    "EntityBaseResult": {
+      "type": "object",
+      "properties": {
+        "score": {
+          "format": "double",
+          "type": "number"
+        },
+        "highlights": {
+          "type": "object",
+          "additionalProperties": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "SearchableEntity": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "type": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "p0Content": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "p1Content": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "h1P0Content": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "h1P1Content": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "h2P0Content": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "h2P1Content": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "updateDateTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "staticRank": {
+          "format": "double",
+          "type": "number"
+        },
+        "version": {
+          "type": "string"
+        },
+        "isDeleted": {
+          "type": "boolean"
+        }
+      }
+    },
+    "EntityDocument": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "types": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityType"
+          },
+          "readOnly": true
+        },
+        "dominantType": {
+          "$ref": "#/definitions/EntityType"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EntityNode"
+            }
+          },
+          "readOnly": true
+        },
+        "timeStamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sourceIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EntityType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EntityNode": {
+      "type": "object",
+      "properties": {
+        "sourceIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SearchIndexStatus": {
+      "type": "object",
+      "properties": {
+        "itemsProcessed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "itemsFailed": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "status": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "integer"
+        },
+        "statusMessage": {
+          "type": "string"
+        },
+        "startTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "endTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "errorMessage": {
+          "type": "string"
+        },
+        "exceptionType": {
+          "type": "string"
+        },
+        "id": {
+          "type": "string"
+        },
+        "entityContainer": {
+          "type": "string"
+        },
+        "entityFilePattern": {
+          "type": "string"
+        },
+        "totalNodes": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "details": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+          },
+          "readOnly": true
+        },
+        "metricsOperationCount": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        },
+        "currentOperation": {
+          "type": "string"
+        }
+      }
+    },
+    "ValueTuple[String,List[String]]": {
+      "type": "object",
+      "properties": {
+        "item1": {
+          "type": "string"
+        },
+        "item2": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    }
+  }
+}
