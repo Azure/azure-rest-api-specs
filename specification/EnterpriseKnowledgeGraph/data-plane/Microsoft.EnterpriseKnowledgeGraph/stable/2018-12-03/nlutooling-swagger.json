@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "Yugen Tooling API",
     "version": "v1"
@@ -13,12 +13,10 @@
         "operationId": "UploadFile",
         "parameters": [
           {
-            "name": "category",
             "in": "path",
+            "name": "category",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
@@ -32,26 +30,23 @@
           "Config"
         ],
         "operationId": "DownloadFile",
+        "produces": [
+          "application/octet-stream"
+        ],
         "parameters": [
           {
-            "name": "category",
             "in": "path",
+            "name": "category",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/octet-stream": {
-                "schema": {
-                  "type": "string",
-                  "format": "byte"
-                }
-              }
+            "schema": {
+              "format": "byte",
+              "type": "string"
             }
           }
         }
@@ -63,33 +58,18 @@
           "Data"
         ],
         "operationId": "GetStatus",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object"
-                  }
-                }
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
               }
             }
           }
@@ -102,46 +82,25 @@
           "Data"
         ],
         "operationId": "Process",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "uniqueItems": false,
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CompositeIntent"
-                }
-              }
-            },
-            "application/json": {
-              "schema": {
-                "uniqueItems": false,
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CompositeIntent"
-                }
-              }
-            },
-            "text/json": {
-              "schema": {
-                "uniqueItems": false,
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CompositeIntent"
-                }
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "uniqueItems": false,
-                "type": "array",
-                "items": {
-                  "$ref": "#/components/schemas/CompositeIntent"
-                }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/CompositeIntent"
               }
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -155,30 +114,21 @@
           "Data"
         ],
         "operationId": "LoadProdModel",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "string"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -192,34 +142,23 @@
           "Data"
         ],
         "operationId": "TestUtteranceIntentionAndEmd",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "name": "q",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "name": "q",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/OnlineTrainingTestResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OnlineTrainingTestResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/OnlineTrainingTestResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/OnlineTrainingTestResponse"
             }
           }
         }
@@ -231,30 +170,21 @@
           "Ontology"
         ],
         "operationId": "Process",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "type": "string"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "type": "string"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success"
@@ -268,33 +198,18 @@
           "Ontology"
         ],
         "operationId": "GetStatus",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "type": "object"
-                  }
-                }
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
               }
             }
           }
@@ -302,53 +217,51 @@
       }
     }
   },
-  "components": {
-    "schemas": {
-      "CompositeIntent": {
-        "type": "object",
-        "properties": {
-          "intentName": {
+  "definitions": {
+    "CompositeIntent": {
+      "type": "object",
+      "properties": {
+        "intentName": {
+          "type": "string"
+        },
+        "nonEkgIntent": {
+          "type": "boolean"
+        },
+        "targetEntityTypeName": {
+          "type": "string"
+        },
+        "queries": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
             "type": "string"
-          },
-          "nonEkgIntent": {
-            "type": "boolean"
-          },
-          "targetEntityTypeName": {
-            "type": "string"
-          },
-          "queries": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
           }
         }
-      },
-      "OnlineTrainingTestResponse": {
-        "type": "object",
-        "properties": {
-          "sentence": {
+      }
+    },
+    "OnlineTrainingTestResponse": {
+      "type": "object",
+      "properties": {
+        "sentence": {
+          "type": "string"
+        },
+        "intention": {
+          "type": "string"
+        },
+        "intentionType": {
+          "type": "string"
+        },
+        "isEkgIntention": {
+          "type": "boolean"
+        },
+        "intentionScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "mentions": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
-          },
-          "intention": {
-            "type": "string"
-          },
-          "intentionType": {
-            "type": "string"
-          },
-          "isEkgIntention": {
-            "type": "boolean"
-          },
-          "intentionScore": {
-            "type": "number",
-            "format": "float"
-          },
-          "mentions": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
           }
         }
       }
