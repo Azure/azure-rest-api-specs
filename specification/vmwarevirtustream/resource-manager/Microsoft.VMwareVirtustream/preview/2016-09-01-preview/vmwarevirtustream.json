@@ -127,7 +127,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AzurePrivateCloudResponse"
+                "$ref": "#/definitions/PrivateCloudResponse"
               }
             }
           }
@@ -165,7 +165,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           }
         },
@@ -200,7 +200,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AzurePrivateCloudResponse"
+                "$ref": "#/definitions/PrivateCloudResponse"
               }
             }
           }
@@ -241,7 +241,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           }
         },
@@ -279,7 +279,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudRequest"
+              "$ref": "#/definitions/PrivateCloudRequest"
             }
           },
           {
@@ -290,7 +290,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           },
           "202": {
@@ -345,7 +345,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudRequest"
+              "$ref": "#/definitions/PrivateCloudRequest"
             }
           },
           {
@@ -356,7 +356,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           }
         },
@@ -436,7 +436,7 @@
             "schema": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/AzureClusterResponse"
+                "$ref": "#/definitions/ClusterResponse"
               }
             }
           }
@@ -484,7 +484,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzureClusterResponse"
+              "$ref": "#/definitions/ClusterResponse"
             }
           }
         },
@@ -529,7 +529,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureClusterRequest"
+              "$ref": "#/definitions/ClusterRequest"
             }
           },
           {
@@ -540,7 +540,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzureClusterResponse"
+              "$ref": "#/definitions/ClusterResponse"
             }
           },
           "202": {
@@ -602,7 +602,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AzureClusterRequest"
+              "$ref": "#/definitions/ClusterRequest"
             }
           },
           {
@@ -705,7 +705,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           },
           "202": {
@@ -765,7 +765,7 @@
           "200": {
             "description": "retrieved operation status",
             "schema": {
-              "$ref": "#/definitions/AzureOperationStatus"
+              "$ref": "#/definitions/OperationStatus"
             },
             "headers": {
               "Retry-After": {
@@ -821,7 +821,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           },
           "202": {
@@ -874,7 +874,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           },
           "202": {
@@ -928,7 +928,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           },
           "202": {
@@ -982,7 +982,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/AzurePrivateCloudResponse"
+              "$ref": "#/definitions/PrivateCloudResponse"
             }
           },
           "202": {
@@ -1136,7 +1136,7 @@
         }
       }
     },
-    "ClusterRequest": {
+    "ClusterDetail": {
       "properties": {
         "clusterSize": {
           "type": "integer",
@@ -1326,7 +1326,7 @@
         }
       }
     },
-    "AzurePrivateCloudRequest": {
+    "PrivateCloudRequest": {
       "properties": {
         "location": {
           "type": "string",
@@ -1340,7 +1340,7 @@
         }
       }
     },
-    "AzurePrivateCloudResponse": {
+    "PrivateCloudResponse": {
       "properties": {
         "id": {
           "type": "string",
@@ -1368,18 +1368,18 @@
       },
       "x-ms-azure-resource": true
     },
-    "AzureClusterRequest": {
+    "ClusterRequest": {
       "properties": {
         "location": {
           "type": "string",
           "example": "West US"
         },
         "properties": {
-          "$ref": "#/definitions/ClusterRequest"
+          "$ref": "#/definitions/ClusterDetail"
         }
       }
     },
-    "AzureClusterResponse": {
+    "ClusterResponse": {
       "properties": {
         "id": {
           "type": "string",
@@ -1404,7 +1404,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "AzureOperationStatus": {
+    "OperationStatus": {
       "properties": {
         "endTime": {
           "type": "string",
