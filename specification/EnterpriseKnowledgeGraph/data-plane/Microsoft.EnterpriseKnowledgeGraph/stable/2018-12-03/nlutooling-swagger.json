@@ -1,0 +1,357 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Yugen Tooling API",
+    "version": "v1"
+  },
+  "paths": {
+    "/Config/{category}": {
+      "put": {
+        "tags": [
+          "Config"
+        ],
+        "operationId": "UploadFile",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Config"
+        ],
+        "operationId": "DownloadFile",
+        "parameters": [
+          {
+            "name": "category",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/octet-stream": {
+                "schema": {
+                  "type": "string",
+                  "format": "byte"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/": {
+      "get": {
+        "tags": [
+          "Data"
+        ],
+        "operationId": "GetStatus",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/modeltraining": {
+      "post": {
+        "tags": [
+          "Data"
+        ],
+        "operationId": "Process",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "uniqueItems": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompositeIntent"
+                }
+              }
+            },
+            "application/json": {
+              "schema": {
+                "uniqueItems": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompositeIntent"
+                }
+              }
+            },
+            "text/json": {
+              "schema": {
+                "uniqueItems": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompositeIntent"
+                }
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "uniqueItems": false,
+                "type": "array",
+                "items": {
+                  "$ref": "#/components/schemas/CompositeIntent"
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/modeldeployment": {
+      "post": {
+        "tags": [
+          "Data"
+        ],
+        "operationId": "LoadProdModel",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/modeltest": {
+      "get": {
+        "tags": [
+          "Data"
+        ],
+        "operationId": "TestUtteranceIntentionAndEmd",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnlineTrainingTestResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnlineTrainingTestResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/OnlineTrainingTestResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/ontology/put_ontology": {
+      "post": {
+        "tags": [
+          "Ontology"
+        ],
+        "operationId": "Process",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/ontology": {
+      "get": {
+        "tags": [
+          "Ontology"
+        ],
+        "operationId": "GetStatus",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "type": "object"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "CompositeIntent": {
+        "type": "object",
+        "properties": {
+          "intentName": {
+            "type": "string"
+          },
+          "nonEkgIntent": {
+            "type": "boolean"
+          },
+          "targetEntityTypeName": {
+            "type": "string"
+          },
+          "queries": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "OnlineTrainingTestResponse": {
+        "type": "object",
+        "properties": {
+          "sentence": {
+            "type": "string"
+          },
+          "intention": {
+            "type": "string"
+          },
+          "intentionType": {
+            "type": "string"
+          },
+          "isEkgIntention": {
+            "type": "boolean"
+          },
+          "intentionScore": {
+            "type": "number",
+            "format": "float"
+          },
+          "mentions": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
