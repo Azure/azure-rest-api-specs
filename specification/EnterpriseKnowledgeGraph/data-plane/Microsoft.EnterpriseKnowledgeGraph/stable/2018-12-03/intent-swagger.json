@@ -1,0 +1,411 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Yugen Service",
+    "version": "v1"
+  },
+  "paths": {
+    "/version": {
+      "get": {
+        "tags": [
+          "EkgBot"
+        ],
+        "operationId": "GetVersion",
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/no_nn_emd_agent": {
+      "get": {
+        "tags": [
+          "EkgBot"
+        ],
+        "operationId": "ProcessWithEmd",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/intentions": {
+      "get": {
+        "tags": [
+          "EkgBot"
+        ],
+        "operationId": "GetIntention",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntentionResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntentionResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/IntentionResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/agent_debug": {
+      "get": {
+        "tags": [
+          "EkgBot"
+        ],
+        "operationId": "ProcessDebug",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxNumberOfEntities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          },
+          {
+            "name": "requestTimeoutInMilliseconds",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1000
+            }
+          },
+          {
+            "name": "requesterId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success"
+          }
+        }
+      }
+    },
+    "/entities": {
+      "get": {
+        "tags": [
+          "EkgBot"
+        ],
+        "operationId": "Process",
+        "parameters": [
+          {
+            "name": "q",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "maxNumberOfEntities",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 5
+            }
+          },
+          {
+            "name": "requestTimeoutInMilliseconds",
+            "in": "query",
+            "schema": {
+              "type": "integer",
+              "format": "int32",
+              "default": 1000
+            }
+          },
+          {
+            "name": "requesterId",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/PipelineResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/intention_and_emd": {
+      "post": {
+        "tags": [
+          "EkgBot"
+        ],
+        "operationId": "GetIntentionAndEmd",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarcelRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarcelRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarcelRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/MarcelRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarcelIntentResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarcelIntentResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/MarcelIntentResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "IntentionResponse": {
+        "type": "object",
+        "properties": {
+          "sentence": {
+            "type": "string"
+          },
+          "intentionLabel": {
+            "type": "string"
+          },
+          "isGraphIntention": {
+            "type": "boolean"
+          },
+          "intentionGraphType": {
+            "type": "string"
+          },
+          "intentionScore": {
+            "type": "number",
+            "format": "float"
+          },
+          "mentions": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MentionResponse"
+            }
+          }
+        }
+      },
+      "MentionResponse": {
+        "type": "object",
+        "properties": {
+          "mention": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "PipelineResponse": {
+        "type": "object",
+        "properties": {
+          "sentence": {
+            "type": "string"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "entityList": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "restatement": {
+            "type": "string"
+          }
+        }
+      },
+      "MarcelRequest": {
+        "type": "object",
+        "properties": {
+          "RootQuery": {
+            "type": "string"
+          },
+          "CurrentQuery": {
+            "type": "string"
+          },
+          "Model": {
+            "type": "string"
+          },
+          "TurnIndex": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "RequesterEntityId": {
+            "type": "string"
+          },
+          "RequesterEntityType": {
+            "type": "string"
+          },
+          "EntityType": {
+            "type": "string"
+          },
+          "MaxNumberOfEntities": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "PivotSequenceHistory": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "MarcelIntentResponse": {
+        "type": "object",
+        "properties": {
+          "Utterance": {
+            "type": "string"
+          },
+          "Intents": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/MarcelIntent"
+            }
+          }
+        }
+      },
+      "MarcelIntent": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Domain": {
+            "type": "string"
+          },
+          "Confidence": {
+            "type": "number",
+            "format": "double"
+          },
+          "Slots": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/Slot"
+            }
+          },
+          "Restatement": {
+            "type": "string"
+          }
+        }
+      },
+      "Slot": {
+        "type": "object",
+        "properties": {
+          "Name": {
+            "type": "string"
+          },
+          "Type": {
+            "type": "string"
+          },
+          "Confidence": {
+            "type": "number",
+            "format": "double"
+          },
+          "Value": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    }
+  }
+}
