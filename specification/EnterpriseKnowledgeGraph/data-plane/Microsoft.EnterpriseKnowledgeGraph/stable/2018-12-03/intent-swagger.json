@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "Yugen Service",
     "version": "v1"
@@ -26,11 +26,9 @@
         "operationId": "ProcessWithEmd",
         "parameters": [
           {
-            "name": "q",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "name": "q",
+            "type": "string"
           }
         ],
         "responses": {
@@ -46,34 +44,23 @@
           "EkgBot"
         ],
         "operationId": "GetIntention",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "name": "q",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "name": "q",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/IntentionResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IntentionResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/IntentionResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/IntentionResponse"
             }
           }
         }
@@ -87,36 +74,28 @@
         "operationId": "ProcessDebug",
         "parameters": [
           {
+            "in": "query",
             "name": "q",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
+            "in": "query",
             "name": "maxNumberOfEntities",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 5
-            }
+            "type": "integer",
+            "format": "int32",
+            "default": 5
           },
           {
+            "in": "query",
             "name": "requestTimeoutInMilliseconds",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 1000
-            }
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
           },
           {
-            "name": "requesterId",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "name": "requesterId",
+            "type": "string"
           }
         ],
         "responses": {
@@ -132,59 +111,42 @@
           "EkgBot"
         ],
         "operationId": "Process",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
+            "in": "query",
             "name": "q",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           },
           {
+            "in": "query",
             "name": "maxNumberOfEntities",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 5
-            }
+            "type": "integer",
+            "format": "int32",
+            "default": 5
           },
           {
+            "in": "query",
             "name": "requestTimeoutInMilliseconds",
-            "in": "query",
-            "schema": {
-              "type": "integer",
-              "format": "int32",
-              "default": 1000
-            }
+            "type": "integer",
+            "format": "int32",
+            "default": 1000
           },
           {
-            "name": "requesterId",
             "in": "query",
-            "schema": {
-              "type": "string"
-            }
+            "name": "requesterId",
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/PipelineResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PipelineResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/PipelineResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/PipelineResponse"
             }
           }
         }
@@ -196,213 +158,193 @@
           "EkgBot"
         ],
         "operationId": "GetIntentionAndEmd",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/MarcelRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MarcelRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/MarcelRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/MarcelRequest"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/MarcelRequest"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarcelIntentResponse"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarcelIntentResponse"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/MarcelIntentResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/MarcelIntentResponse"
             }
           }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "IntentionResponse": {
-        "type": "object",
-        "properties": {
-          "sentence": {
-            "type": "string"
-          },
-          "intentionLabel": {
-            "type": "string"
-          },
-          "isGraphIntention": {
-            "type": "boolean"
-          },
-          "intentionGraphType": {
-            "type": "string"
-          },
-          "intentionScore": {
-            "type": "number",
-            "format": "float"
-          },
-          "mentions": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MentionResponse"
-            }
+  "definitions": {
+    "IntentionResponse": {
+      "type": "object",
+      "properties": {
+        "sentence": {
+          "type": "string"
+        },
+        "intentionLabel": {
+          "type": "string"
+        },
+        "isGraphIntention": {
+          "type": "boolean"
+        },
+        "intentionGraphType": {
+          "type": "string"
+        },
+        "intentionScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "mentions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MentionResponse"
           }
         }
-      },
-      "MentionResponse": {
-        "type": "object",
-        "properties": {
-          "mention": {
-            "type": "string"
-          },
-          "type": {
+      }
+    },
+    "MentionResponse": {
+      "type": "object",
+      "properties": {
+        "mention": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string"
+        }
+      }
+    },
+    "PipelineResponse": {
+      "type": "object",
+      "properties": {
+        "sentence": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "entityList": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
             "type": "string"
           }
+        },
+        "restatement": {
+          "type": "string"
         }
-      },
-      "PipelineResponse": {
-        "type": "object",
-        "properties": {
-          "sentence": {
-            "type": "string"
-          },
-          "entityType": {
-            "type": "string"
-          },
-          "entityList": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          },
-          "restatement": {
-            "type": "string"
+      }
+    },
+    "MarcelRequest": {
+      "type": "object",
+      "properties": {
+        "RootQuery": {
+          "type": "string"
+        },
+        "CurrentQuery": {
+          "type": "string"
+        },
+        "Model": {
+          "type": "string"
+        },
+        "TurnIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "RequesterEntityId": {
+          "type": "string"
+        },
+        "RequesterEntityType": {
+          "type": "string"
+        },
+        "EntityType": {
+          "type": "string"
+        },
+        "MaxNumberOfEntities": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "PivotSequenceHistory": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "object"
           }
         }
-      },
-      "MarcelRequest": {
-        "type": "object",
-        "properties": {
-          "RootQuery": {
-            "type": "string"
-          },
-          "CurrentQuery": {
-            "type": "string"
-          },
-          "Model": {
-            "type": "string"
-          },
-          "TurnIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "RequesterEntityId": {
-            "type": "string"
-          },
-          "RequesterEntityType": {
-            "type": "string"
-          },
-          "EntityType": {
-            "type": "string"
-          },
-          "MaxNumberOfEntities": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "PivotSequenceHistory": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "object"
-            }
+      }
+    },
+    "MarcelIntentResponse": {
+      "type": "object",
+      "properties": {
+        "Utterance": {
+          "type": "string"
+        },
+        "Intents": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MarcelIntent"
           }
         }
-      },
-      "MarcelIntentResponse": {
-        "type": "object",
-        "properties": {
-          "Utterance": {
-            "type": "string"
-          },
-          "Intents": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/MarcelIntent"
-            }
+      }
+    },
+    "MarcelIntent": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Domain": {
+          "type": "string"
+        },
+        "Confidence": {
+          "format": "double",
+          "type": "number"
+        },
+        "Slots": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Slot"
           }
+        },
+        "Restatement": {
+          "type": "string"
         }
-      },
-      "MarcelIntent": {
-        "type": "object",
-        "properties": {
-          "Name": {
+      }
+    },
+    "Slot": {
+      "type": "object",
+      "properties": {
+        "Name": {
+          "type": "string"
+        },
+        "Type": {
+          "type": "string"
+        },
+        "Confidence": {
+          "format": "double",
+          "type": "number"
+        },
+        "Value": {
+          "type": "object",
+          "additionalProperties": {
             "type": "string"
-          },
-          "Domain": {
-            "type": "string"
-          },
-          "Confidence": {
-            "type": "number",
-            "format": "double"
-          },
-          "Slots": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Slot"
-            }
-          },
-          "Restatement": {
-            "type": "string"
-          }
-        }
-      },
-      "Slot": {
-        "type": "object",
-        "properties": {
-          "Name": {
-            "type": "string"
-          },
-          "Type": {
-            "type": "string"
-          },
-          "Confidence": {
-            "type": "number",
-            "format": "double"
-          },
-          "Value": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "string"
-            }
           }
         }
       }
