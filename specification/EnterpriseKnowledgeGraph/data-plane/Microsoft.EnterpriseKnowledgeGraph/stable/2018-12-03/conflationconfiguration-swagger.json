@@ -1,8 +1,8 @@
 {
-  "openapi": "3.0.0",
+  "swagger": "2.0",
   "info": {
-    "version": "v1",
-    "title": "Conflation Configuration API for Marcel"
+    "title": "Conflation Configuration API for Marcel",
+    "version": "v1"
   },
   "paths": {
     "/api/SynonymConfigurations/CreateOrUpdate": {
@@ -11,60 +11,51 @@
           "SynonymConfigurations"
         ],
         "operationId": "SynonymConfigurations_CreateOrUpdate",
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SynonymMetadata"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SynonymMetadata"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/SynonymMetadata"
-              }
-            },
-            "text/xml": {
-              "schema": {
-                "$ref": "#/components/schemas/SynonymMetadata"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "$ref": "#/components/schemas/SynonymMetadata"
-              }
-            }
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
+        "parameters": [
+          {
+            "in": "formData",
+            "name": "Type",
+            "type": "string"
           },
-          "required": true
-        },
+          {
+            "in": "formData",
+            "name": "SynonymsBase64",
+            "type": "string"
+          },
+          {
+            "in": "formData",
+            "name": "MergeSynonymSets",
+            "type": "boolean"
+          },
+          {
+            "in": "formData",
+            "name": "IsCityConflation",
+            "type": "boolean"
+          },
+          {
+            "in": "formData",
+            "name": "CityConfiguration",
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+            "schema": {
+              "type": "object"
             }
           }
         }
@@ -76,70 +67,32 @@
           "SynonymConfigurations"
         ],
         "operationId": "SynonymConfigurations_UpdateSynonymFile",
+        "consumes": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml",
+          "application/x-www-form-urlencoded"
+        ],
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
         "parameters": [
           {
-            "name": "type",
             "in": "query",
+            "name": "type",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/xml": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "text/xml": {
-              "schema": {
-                "type": "string"
-              }
-            },
-            "application/x-www-form-urlencoded": {
-              "schema": {
-                "type": "string"
-              }
-            }
-          },
-          "required": true
-        },
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+            "schema": {
+              "type": "object"
             }
           }
         }
@@ -151,40 +104,25 @@
           "SynonymConfigurations"
         ],
         "operationId": "SynonymConfigurations_DeleteConfig",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
         "parameters": [
           {
-            "name": "type",
             "in": "query",
+            "name": "type",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+            "schema": {
+              "type": "object"
             }
           }
         }
@@ -196,152 +134,115 @@
           "SynonymConfigurations"
         ],
         "operationId": "SynonymConfigurations_ListConfiguredTypes",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+            "schema": {
+              "type": "object"
             }
           }
         }
       }
     },
     "/api/SynonymConfigurations/ExportConfigs": {
-			"get": {
-				"tags": ["SynonymConfigurations"],
-				"operationId": "SynonymConfigurations_ExportConfigs",
-				"consumes": [],
-				"produces": ["application/json", "text/json", "application/xml", "text/xml"],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					}
-				}
-			}
-		},
-		"/api/SynonymConfigurations/ImportConfigs": {
-			"post": {
-				"tags": ["SynonymConfigurations"],
-				"operationId": "SynonymConfigurations_ImportConfigs",
-				"consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
-				"produces": ["application/json", "text/json", "application/xml", "text/xml"],
-				"parameters": [{
-					"name": "synonymMetaDataRequests",
-					"in": "body",
-					"required": true,
-					"schema": {
-						"type": "string"
-					}
-				}],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"type": "object"
-						}
-					}
-				}
-			}
-		},
+      "get": {
+        "tags": [
+          "SynonymConfigurations"
+        ],
+        "operationId": "SynonymConfigurations_ExportConfigs",
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/api/SynonymConfigurations/ImportConfigs": {
+      "post": {
+        "tags": [
+          "SynonymConfigurations"
+        ],
+        "operationId": "SynonymConfigurations_ImportConfigs",
+        "parameters": [
+          {
+            "name": "synonymMetaDataRequests",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
     "/api/SynonymConfigurations/Get": {
       "get": {
         "tags": [
           "SynonymConfigurations"
         ],
         "operationId": "SynonymConfigurations_Get",
+        "produces": [
+          "application/json",
+          "text/json",
+          "application/xml",
+          "text/xml"
+        ],
         "parameters": [
           {
-            "name": "type",
             "in": "query",
+            "name": "type",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "application/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              },
-              "text/xml": {
-                "schema": {
-                  "type": "object"
-                }
-              }
+            "schema": {
+              "type": "object"
             }
           }
         }
       }
     }
   },
-  "components": {
-    "schemas": {
-      "SynonymCityConfiguration": {
-        "type": "object",
-        "properties": {
-          "StatePropertyName": {
-            "type": "string"
-          },
-          "CountryPropertyName": {
-            "type": "string"
-          }
+  "definitions": {
+    "SynonymCityConfiguration": {
+      "type": "object",
+      "properties": {
+        "StatePropertyName": {
+          "type": "string"
+        },
+        "CountryPropertyName": {
+          "type": "string"
         }
-      },
-      "SynonymMetadata": {
-        "type": "object",
-        "properties": {
-          "Type": {
-            "type": "string"
-          },
-          "SynonymsBase64": {
-            "type": "string"
-          },
-          "MergeSynonymSets": {
-            "type": "boolean"
-          },
-          "IsCityConflation": {
-            "type": "boolean"
-          },
-          "CityConfiguration": {
-            "$ref": "#/components/schemas/SynonymCityConfiguration"
-          }
+      }
+    },
+    "SynonymMetadata": {
+      "type": "object",
+      "properties": {
+        "Type": {
+          "type": "string"
+        },
+        "SynonymsBase64": {
+          "type": "string"
+        },
+        "MergeSynonymSets": {
+          "type": "boolean"
+        },
+        "IsCityConflation": {
+          "type": "boolean"
+        },
+        "CityConfiguration": {
+          "$ref": "#/definitions/SynonymCityConfiguration"
         }
       }
     }
