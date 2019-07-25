@@ -1,0 +1,644 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "Microsoft.Knowledge.EKG.Converse.Api",
+    "version": "v1"
+  },
+  "paths": {
+    "/conversations": {
+      "post": {
+        "tags": [
+          "Converse"
+        ],
+        "operationId": "ExecNLQuery",
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConverseResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/diagnosticconversations": {
+      "post": {
+        "tags": [
+          "Converse"
+        ],
+        "operationId": "DiagnosticConversations",
+        "parameters": [
+          {
+            "name": "service",
+            "in": "query",
+            "schema": {
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                7
+              ],
+              "type": "integer",
+              "format": "int32"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json-patch+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            },
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConverseDebugResponse"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/keepalive": {
+      "get": {
+        "tags": [
+          "KeepAlive"
+        ],
+        "operationId": "Get",
+        "responses": {
+          "200": {
+            "description": "Success",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "string"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "ConverseRequest": {
+        "required": [
+          "utterance"
+        ],
+        "type": "object",
+        "properties": {
+          "utterance": {
+            "type": "string"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "maximumNumberOfInterpretations": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "thresholdForDisambiguation": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "maximumNumberOfDisambiguations": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "maximumNumberOfEntities": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousInterpretations": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterpretationResult"
+            }
+          },
+          "entityIdOnly": {
+            "type": "boolean"
+          },
+          "modelId": {
+            "type": "string"
+          }
+        }
+      },
+      "InterpretationResult": {
+        "type": "object",
+        "properties": {
+          "utterance": {
+            "$ref": "#/components/schemas/Utterance"
+          },
+          "sparql": {
+            "type": "string"
+          },
+          "confidence": {
+            "type": "number",
+            "format": "double"
+          },
+          "mainProjection": {
+            "type": "string"
+          },
+          "mainProjectionEntityType": {
+            "type": "string"
+          },
+          "restatement": {
+            "type": "string"
+          }
+        }
+      },
+      "Utterance": {
+        "type": "object",
+        "properties": {
+          "text": {
+            "type": "string",
+            "readOnly": true
+          },
+          "unrecognizedTerms": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "ConverseResponse": {
+        "type": "object",
+        "properties": {
+          "totalNumberOfEntitiesFound": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entityDocuments": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDocument"
+            }
+          },
+          "interpretationResult": {
+            "$ref": "#/components/schemas/InterpretationResult"
+          },
+          "restatement": {
+            "type": "string"
+          },
+          "suggestions": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDocumentSuggestionChip"
+            }
+          }
+        }
+      },
+      "EntityDocument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "readOnly": true
+          },
+          "types": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityType"
+            },
+            "readOnly": true
+          },
+          "dominantType": {
+            "$ref": "#/components/schemas/EntityType"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/components/schemas/EntityNode"
+              }
+            },
+            "readOnly": true
+          },
+          "timeStamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "sourceIds": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "EntityDocumentSuggestionChip": {
+        "type": "object",
+        "properties": {
+          "actionEntityDocument": {
+            "$ref": "#/components/schemas/EntityDocument"
+          },
+          "suggestionInterpretation": {
+            "$ref": "#/components/schemas/InterpretationResult"
+          },
+          "actionEntityId": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "EntityType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "EntityNode": {
+        "type": "object",
+        "properties": {
+          "sourceIds": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "integer",
+              "format": "int32"
+            },
+            "readOnly": true
+          }
+        }
+      },
+      "ConverseDebugResponse": {
+        "type": "object",
+        "properties": {
+          "sashoSearchResponse": {
+            "$ref": "#/components/schemas/SashoSearchResponse"
+          },
+          "yugenSearchResponse": {
+            "$ref": "#/components/schemas/YugenSearchResponse"
+          },
+          "freeTextSearchResult": {
+            "$ref": "#/components/schemas/FreeTextSearchResponse"
+          },
+          "totalNumberOfEntitiesFound": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entityDocuments": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDocument"
+            }
+          },
+          "interpretationResult": {
+            "$ref": "#/components/schemas/InterpretationResult"
+          },
+          "restatement": {
+            "type": "string"
+          },
+          "suggestions": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDocumentSuggestionChip"
+            }
+          }
+        }
+      },
+      "SashoSearchResponse": {
+        "type": "object",
+        "properties": {
+          "interpretRequest": {
+            "$ref": "#/components/schemas/InterpretRequest"
+          },
+          "interpretResponse": {
+            "$ref": "#/components/schemas/InterpretResponse"
+          },
+          "answerRequest": {
+            "$ref": "#/components/schemas/AnswerRequest"
+          },
+          "answerResponse": {
+            "$ref": "#/components/schemas/AnswerResponse"
+          },
+          "disambiguateRequest": {
+            "$ref": "#/components/schemas/DisambiguateRequest"
+          },
+          "disambiguateResponse": {
+            "$ref": "#/components/schemas/DisambiguateResponse"
+          }
+        }
+      },
+      "YugenSearchResponse": {
+        "type": "object",
+        "properties": {
+          "sentence": {
+            "type": "string"
+          },
+          "entityList": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "restatement": {
+            "type": "string"
+          }
+        }
+      },
+      "FreeTextSearchResponse": {
+        "type": "object",
+        "properties": {
+          "debugInfo": {
+            "type": "string"
+          },
+          "recommendedQuery": {
+            "type": "string"
+          },
+          "rewritedQuery": {
+            "type": "string"
+          },
+          "originalQuery": {
+            "type": "string"
+          },
+          "engineName": {
+            "type": "string"
+          },
+          "indexName": {
+            "type": "string"
+          },
+          "totalHits": {
+            "type": "integer",
+            "format": "int64"
+          },
+          "results": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDocumentSearchResult"
+            }
+          },
+          "filter": {
+            "type": "string"
+          }
+        }
+      },
+      "InterpretRequest": {
+        "required": [
+          "maximumNumberOfInterpretations",
+          "utterance"
+        ],
+        "type": "object",
+        "properties": {
+          "utterance": {
+            "type": "string"
+          },
+          "maximumNumberOfInterpretations": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "previousInterpretations": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterpretationResult"
+            }
+          },
+          "modelId": {
+            "type": "string"
+          }
+        }
+      },
+      "InterpretResponse": {
+        "type": "object",
+        "properties": {
+          "interpretations": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/InterpretationResult"
+            }
+          },
+          "numberOfInterpretations": {
+            "type": "integer",
+            "format": "int32"
+          }
+        }
+      },
+      "AnswerRequest": {
+        "required": [
+          "interpretation",
+          "maximumNumberOfEntities"
+        ],
+        "type": "object",
+        "properties": {
+          "interpretation": {
+            "$ref": "#/components/schemas/InterpretationResult"
+          },
+          "maximumNumberOfEntities": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "entityView": {
+            "enum": [
+              0,
+              1
+            ],
+            "type": "integer",
+            "format": "int32"
+          },
+          "modelId": {
+            "type": "string"
+          }
+        }
+      },
+      "AnswerResponse": {
+        "type": "object",
+        "properties": {
+          "totalNumberOfEntitiesFound": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "entityDocuments": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/EntityDocument"
+            }
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "score": {
+            "type": "number",
+            "format": "double"
+          },
+          "restatement": {
+            "type": "string"
+          }
+        }
+      },
+      "DisambiguateRequest": {
+        "required": [
+          "interpretation",
+          "maximumNumberOfActions"
+        ],
+        "type": "object",
+        "properties": {
+          "interpretation": {
+            "$ref": "#/components/schemas/InterpretationResult"
+          },
+          "maximumNumberOfActions": {
+            "maximum": 2147483647,
+            "minimum": 1,
+            "type": "integer",
+            "format": "int32"
+          },
+          "modelId": {
+            "type": "string"
+          }
+        }
+      },
+      "DisambiguateResponse": {
+        "type": "object",
+        "properties": {
+          "totalNumberOfActionsFound": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "suggestions": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SuggestionChip"
+            }
+          },
+          "chosenAction": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityDocumentSearchResult": {
+        "type": "object",
+        "properties": {
+          "entityDocument": {
+            "$ref": "#/components/schemas/EntityDocument"
+          },
+          "score": {
+            "type": "number",
+            "format": "double"
+          },
+          "highlights": {
+            "type": "object",
+            "additionalProperties": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          }
+        }
+      },
+      "SuggestionChip": {
+        "type": "object",
+        "properties": {
+          "suggestionInterpretation": {
+            "$ref": "#/components/schemas/InterpretationResult"
+          },
+          "actionEntityId": {
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      }
+    }
+  }
+}
