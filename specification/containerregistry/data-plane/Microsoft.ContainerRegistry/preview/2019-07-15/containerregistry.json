@@ -305,6 +305,272 @@
         }
       }
     },
+    "/v2/{name}/blobs/{digest}": {
+      "get": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Retrieve the blob from the registry identified by digest.",
+        "operationId": "GetBlob",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/Digest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "206": {
+            "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
+            "schema": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          "307": {
+            "description": "The blob identified by digest is available at the provided location."
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "head": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Same as GET, except only the headers are returned.",
+        "operationId": "CheckBlobExistence",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/Digest"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The blob identified by digest is available."
+          },
+          "206": {
+            "description": "The blob identified by digest is available."
+          },
+          "307": {
+            "description": "The blob identified by digest is available at the provided location."
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/v2/{name}/blobs/uploads/": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Mount a blob identified by the `mount` parameter from another repository.",
+        "operationId": "StartBlobUpload",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "name": "from",
+            "type": "string",
+            "in": "query",
+            "description": "Name of the source repository.",
+            "required": false
+          },
+          {
+            "name": "mount",
+            "description": "Digest of blob to mount from the source repository.",
+            "type": "string",
+            "in": "query",
+            "required": false
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The blob has been created in the registry and is available at the provided location.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/v2/{name}/blobs/uploads/{uuid}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ImageName"
+        },
+        {
+          "name": "uuid",
+          "description": "A uuid identifying the upload.",
+          "type": "string",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "get": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
+        "operationId": "GetBlobUploadStatus",
+        "responses": {
+          "204": {
+            "description": "The upload is known and in progress. The last received offset is available in the Range header.",
+            "headers": {
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Upload a stream of data without completing the upload.",
+        "operationId": "UploadBlobContent",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "value",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Range",
+            "in": "header",
+            "description": "Range of bytes identifying the desired block of content represented by the body. Start must the end offset retrieved via status check plus one. Note that this is a non-standard use of the `Content-Range` header.",
+            "type": "string"
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "description": "Length of the chunk being uploaded, corresponding the length of the request body.",
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.",
+        "operationId": "EndBlobUpload",
+        "parameters": [
+          {
+            "name": "digest",
+            "description": "Digest of uploaded blob. If present, the upload will be completed, in a single request, with contents of the request body as the resulting blob.",
+            "type": "string",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The upload has been completed and accepted by the registry."
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
+        "operationId": "CancelBlobUpload",
+        "responses": {
+          "204": {
+            "description": "The upload has been successfully deleted."
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
     "/acr/v1/_catalog": {
       "get": {
         "tags": [
@@ -878,6 +1144,185 @@
         "x-ms-examples": {
           "Get Access Token with username and password": {
             "$ref": "./examples/GetAccessToken.json"
+          }
+        }
+      }
+    }
+  },
+  "x-ms-paths": {
+    "/v2/{name}/blobs/uploads/?mode={monolithic}": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Upload a blob identified by the digest parameter in single request. This upload will not be resumable unless a recoverable error is returned.",
+        "operationId": "StartMonolithicBlobUpload",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "monolithic",
+            "description": "Initiate Monolithic Blob Upload",
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "digest",
+            "description": "Digest of uploaded blob. If present, the upload will be completed, in a single request, with contents of the request body as the resulting blob.",
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The blob has been created in the registry and is available at the provided location.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/v2/{name}/blobs/uploads/?mode={resumable}": {
+      "post": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Initiate a resumable blob upload with an empty request body.",
+        "operationId": "StartEmptyResumableBlobUpload",
+        "parameters": [
+          {
+            "name": "resumable",
+            "description": "Initiate Resumable Blob Upload",
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "$ref": "#/parameters/ImageName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The upload has been created. The Location header must be used to complete the upload. The response should be identical to a GET request on the contents of the returned Location header.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/v2/{name}/blobs/uploads/{uuid}?mode={chunk}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/ImageName"
+        },
+        {
+          "name": "uuid",
+          "description": "A uuid identifying the upload.",
+          "type": "string",
+          "in": "path",
+          "required": true
+        }
+      ],
+      "patch": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Upload a chunk of data to specified upload without completing the upload. The data will be uploaded to the specified Content Range.",
+        "operationId": "UploadBlobContentChunk",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "name": "chunk",
+            "description": "Initiate Chunk Blob Upload",
+            "type": "string",
+            "in": "query"
+          },
+          {
+            "name": "value",
+            "in": "body",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "Content-Range",
+            "in": "header",
+            "description": "Range of bytes identifying the desired block of content represented by the body. Start must the end offset retrieved via status check plus one. Note that this is a non-standard use of the `Content-Range` header.",
+            "type": "string",
+            "required": true
+          },
+          {
+            "name": "Content-Length",
+            "in": "header",
+            "description": "Length of the chunk being uploaded, corresponding the length of the request body.",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
           }
         }
       }
