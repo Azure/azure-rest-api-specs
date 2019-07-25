@@ -702,7 +702,6 @@
             "name": "Users",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/DbUsers"
             }
           }
         ],
@@ -791,7 +790,6 @@
             "name": "Users",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/DbUsers"
             }
           }
         ],
@@ -864,7 +862,6 @@
             "name": "MappingVersions",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/DbDataSourceMappingVersions"
             }
           },
           {
@@ -2069,7 +2066,6 @@
             "name": "MappingVersions",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/DbDataSourceMappingVersions"
             }
           },
           {
@@ -2408,7 +2404,6 @@
             "name": "MappingVersions",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/DbDataSourceMappingVersions"
             }
           },
           {
@@ -3486,7 +3481,6 @@
             "name": "SparqlAnnotations",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/SparqlAnnotationViewModel"
             }
           },
           {
@@ -3494,7 +3488,6 @@
             "name": "QueryAnnotations",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/QueryAnnotation"
             }
           }
         ],
@@ -3537,9 +3530,12 @@
         "operationId": "LinguisticModelBootstrap_AddRestatement",
         "parameters": [
           {
+            "in": "body",
             "name": "restatement",
             "required": true,
-            "type": "string"
+            "schema":{
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -3557,9 +3553,12 @@
         "operationId": "LinguisticModelBootstrap_ImportModel",
         "parameters": [
           {
+            "in": "body",
             "name": "encryptedData",
             "required": true,
-            "type": "string"
+            "schema":{
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -5594,7 +5593,6 @@
             "name": "Properties",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/SchemaPropertyDTO"
             }
           }
         ],
@@ -5672,7 +5670,6 @@
             "name": "Properties",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/SchemaPropertyDTO"
             }
           }
         ],
@@ -5750,7 +5747,6 @@
             "name": "Properties",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/SchemaPropertyDTO"
             }
           }
         ],
@@ -5828,7 +5824,6 @@
             "name": "Properties",
             "type": "array",
             "items": {
-              "$ref": "#/definitions/SchemaPropertyDTO"
             }
           }
         ],
@@ -9749,8 +9744,6 @@
           "format": "int32",
           "enum": [
             0,
-            0,
-            1,
             1
           ],
           "type": "integer"
