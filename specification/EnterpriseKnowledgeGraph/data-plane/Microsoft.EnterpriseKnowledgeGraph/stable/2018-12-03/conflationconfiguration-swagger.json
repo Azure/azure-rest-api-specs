@@ -1,250 +1,253 @@
 {
-  "swagger": "2.0",
-  "info": {
-    "title": "Conflation Configuration API for Marcel",
-    "version": "v1"
-  },
-  "paths": {
-    "/api/SynonymConfigurations/CreateOrUpdate": {
-      "post": {
-        "tags": [
-          "SynonymConfigurations"
-        ],
-        "operationId": "SynonymConfigurations_CreateOrUpdate",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "in": "formData",
-            "name": "Type",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "SynonymsBase64",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "MergeSynonymSets",
-            "type": "boolean"
-          },
-          {
-            "in": "formData",
-            "name": "IsCityConflation",
-            "type": "boolean"
-          },
-          {
-            "in": "formData",
-            "name": "CityConfiguration",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "/api/SynonymConfigurations/UpdateSynonymFile": {
-      "put": {
-        "tags": [
-          "SynonymConfigurations"
-        ],
-        "operationId": "SynonymConfigurations_UpdateSynonymFile",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "/api/SynonymConfigurations/DeleteConfig": {
-      "delete": {
-        "tags": [
-          "SynonymConfigurations"
-        ],
-        "operationId": "SynonymConfigurations_DeleteConfig",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "/api/SynonymConfigurations/ListConfiguredTypes": {
-      "get": {
-        "tags": [
-          "SynonymConfigurations"
-        ],
-        "operationId": "SynonymConfigurations_ListConfiguredTypes",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    },
-    "/api/SynonymConfigurations/ExportConfigs": {
-      "get": {
-        "tags": [
-          "SynonymConfigurations"
-        ],
-        "operationId": "SynonymConfigurations_ExportConfigs",
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/SynonymConfigurations/ImportConfigs": {
-      "post": {
-        "tags": [
-          "SynonymConfigurations"
-        ],
-        "operationId": "SynonymConfigurations_ImportConfigs",
-        "parameters": [
-          {
-            "name": "synonymMetaDataRequests",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          }
-        }
-      }
-    },
-    "/api/SynonymConfigurations/Get": {
-      "get": {
-        "tags": [
-          "SynonymConfigurations"
-        ],
-        "operationId": "SynonymConfigurations_Get",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "type",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "SynonymCityConfiguration": {
-      "type": "object",
-      "properties": {
-        "StatePropertyName": {
-          "type": "string"
-        },
-        "CountryPropertyName": {
-          "type": "string"
-        }
-      }
-    },
-    "SynonymMetadata": {
-      "type": "object",
-      "properties": {
-        "Type": {
-          "type": "string"
-        },
-        "SynonymsBase64": {
-          "type": "string"
-        },
-        "MergeSynonymSets": {
-          "type": "boolean"
-        },
-        "IsCityConflation": {
-          "type": "boolean"
-        },
-        "CityConfiguration": {
-          "$ref": "#/definitions/SynonymCityConfiguration"
-        }
-      }
-    }
-  }
+swagger: "2.0",
+info: {
+title: "Conflation Configuration API for Marcel",
+version: "v1"
+},
+paths: {
+/api/SynonymConfigurations/CreateOrUpdate: {
+post: {
+tags: [
+"SynonymConfigurations"
+],
+operationId: "SynonymConfigurations_CreateOrUpdate",
+consumes: [
+"application/json",
+"text/json",
+"application/xml",
+"text/xml",
+"application/x-www-form-urlencoded"
+],
+produces: [
+"application/json",
+"text/json",
+"application/xml",
+"text/xml"
+],
+parameters: [
+{
+in: "formData",
+name: "Type",
+type: "string"
+},
+{
+in: "formData",
+name: "SynonymsBase64",
+type: "string"
+},
+{
+in: "formData",
+name: "MergeSynonymSets",
+type: "boolean"
+},
+{
+in: "formData",
+name: "IsCityConflation",
+type: "boolean"
+},
+{
+in: "formData",
+name: "CityConfiguration",
+type: "string"
+}
+],
+responses: {
+200: {
+description: "OK",
+schema: {
+type: "object"
+}
+}
+}
+}
+},
+/api/SynonymConfigurations/UpdateSynonymFile: {
+put: {
+tags: [
+"SynonymConfigurations"
+],
+operationId: "SynonymConfigurations_UpdateSynonymFile",
+consumes: [
+"application/json",
+"text/json",
+"application/xml",
+"text/xml",
+"application/x-www-form-urlencoded"
+],
+produces: [
+"application/json",
+"text/json",
+"application/xml",
+"text/xml"
+],
+parameters: [
+{
+in: "query",
+name: "type",
+required: true,
+type: "string"
+}
+],
+responses: {
+200: {
+description: "OK",
+schema: {
+type: "object"
+}
+}
+}
+}
+},
+/api/SynonymConfigurations/DeleteConfig: {
+delete: {
+tags: [
+"SynonymConfigurations"
+],
+operationId: "SynonymConfigurations_DeleteConfig",
+produces: [
+"application/json",
+"text/json",
+"application/xml",
+"text/xml"
+],
+parameters: [
+{
+in: "query",
+name: "type",
+required: true,
+type: "string"
+}
+],
+responses: {
+200: {
+description: "OK",
+schema: {
+type: "object"
+}
+}
+}
+}
+},
+/api/SynonymConfigurations/ListConfiguredTypes: {
+get: {
+tags: [
+"SynonymConfigurations"
+],
+operationId: "SynonymConfigurations_ListConfiguredTypes",
+produces: [
+"application/json",
+"text/json",
+"application/xml",
+"text/xml"
+],
+responses: {
+200: {
+description: "OK",
+schema: {
+type: "object"
+}
+}
+}
+}
+},
+/api/SynonymConfigurations/ExportConfigs: {
+get: {
+tags: [
+"SynonymConfigurations"
+],
+operationId: "SynonymConfigurations_ExportConfigs",
+responses: {
+200: {
+description: "OK"
+}
+}
+}
+},
+/api/SynonymConfigurations/ImportConfigs: {
+post: {
+tags: [
+"SynonymConfigurations"
+],
+operationId: "SynonymConfigurations_ImportConfigs",
+parameters: [
+{
+  in: "body",
+name: "synonymMetaDataRequests",
+required: true,
+schema: {
+type: "string"
+}
+}
+],
+responses: {
+200: {
+description: "OK"
+}
+}
+}
+},
+/api/SynonymConfigurations/Get: {
+get: {
+tags: [
+"SynonymConfigurations"
+],
+operationId: "SynonymConfigurations_Get",
+produces: [
+"application/json",
+"text/json",
+"application/xml",
+"text/xml"
+],
+parameters: [
+{
+in: "query",
+name: "type",
+required: true,
+type: "string"
+}
+],
+responses: {
+200: {
+description: "OK",
+schema: {
+type: "object"
+}
+}
+}
+}
+}
+},
+definitions: {
+SynonymCityConfiguration: {
+type: "object",
+properties: {
+StatePropertyName: {
+type: "string"
+},
+CountryPropertyName: {
+type: "string"
+}
+}
+},
+SynonymMetadata: {
+type: "object",
+properties: {
+Type: {
+type: "string"
+},
+SynonymsBase64: {
+type: "string"
+},
+MergeSynonymSets: {
+type: "boolean"
+},
+IsCityConflation: {
+type: "boolean"
+},
+CityConfiguration: {
+$ref: "#/definitions/SynonymCityConfiguration"
+}
+}
+}
+}
 }
