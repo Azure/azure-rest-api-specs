@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2019-04-01",
+    "api-version": "2019-08-01",
     "parameters": {
       "properties": {
         "vmSize": "STANDARD_D4",
@@ -50,12 +50,19 @@
                   {
                     "access": "Allow",
                     "sourceAddressPrefix": "192.100.12.45",
-                    "priority": 150
+                    "priority": 150,
+                    "sourcePortRanges": [
+                      "1",
+                      "2"
+                    ]
                   },
                   {
                     "access": "Deny",
                     "sourceAddressPrefix": "*",
-                    "priority": 3500
+                    "priority": 3500,
+                    "sourcePortRanges": [
+                      "*"
+                    ]
                   }
                 ]
               }
@@ -136,12 +143,19 @@
                     {
                       "access": "Allow",
                       "sourceAddressPrefix": "192.100.12.45",
-                      "priority": 150
+                      "priority": 150,
+                      "sourcePortRanges": [
+                        "1",
+                        "2"
+                      ]
                     },
                     {
                       "access": "Deny",
                       "sourceAddressPrefix": "*",
-                      "priority": 3500
+                      "priority": 3500,
+                      "sourcePortRanges": [
+                        "*"
+                      ]
                     }
                   ]
                 }

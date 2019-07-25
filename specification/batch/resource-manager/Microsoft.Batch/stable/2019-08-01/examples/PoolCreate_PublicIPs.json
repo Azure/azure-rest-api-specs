@@ -8,6 +8,11 @@
     "parameters": {
       "properties": {
         "vmSize": "STANDARD_D4",
+        "networkConfiguration": {
+          "publicIPs": [
+            "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135"
+          ]
+        },
         "deploymentConfiguration": {
           "virtualMachineConfiguration": {
             "imageReference": {
@@ -41,6 +46,11 @@
           "maxTasksPerNode": 1,
           "taskSchedulingPolicy": {
             "nodeFillType": "Spread"
+          },
+          "networkConfiguration": {
+            "publicIPs": [
+              "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135"
+            ]
           },
           "deploymentConfiguration": {
             "virtualMachineConfiguration": {

@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2019-04-01"
+    "api-version": "2019-08-01"
   },
   "responses": {
     "200": {
@@ -56,12 +56,19 @@
                     {
                       "access": "Allow",
                       "sourceAddressPrefix": "192.100.12.45",
-                      "priority": 150
+                      "priority": 150,
+                      "sourcePortRanges" : [
+                        "123",
+                        "22"
+                      ]
                     },
                     {
                       "access": "Deny",
                       "sourceAddressPrefix": "*",
-                      "priority": 3500
+                      "priority": 3500,
+                      "sourcePortRanges": [
+                        "*"
+                      ]
                     }
                   ]
                 }
@@ -120,7 +127,7 @@
           ],
           "certificates": [
             {
-              "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/SHA1-1234567",
+              "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/sha1-1234567",
               "storeLocation": "LocalMachine",
               "storeName": "MY",
               "visibility": [

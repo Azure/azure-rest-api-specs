@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "BatchManagement",
-    "version": "2019-04-01",
+    "version": "2019-08-01",
     "x-ms-code-generation-settings": {
       "name": "BatchManagementClient"
     }
@@ -1571,6 +1571,9 @@
           "CreatePool - Custom Image": {
             "$ref": "./examples/PoolCreate_CustomImage.json"
           },
+          "CreatePool - Public IPs": {
+            "$ref": "./examples/PoolCreate_PublicIPs.json"
+          },
           "CreatePool - Full VirtualMachineConfiguration": {
             "$ref": "./examples/PoolCreate_VirtualMachineConfiguration.json"
           }
@@ -2929,6 +2932,14 @@
           "$ref": "#/definitions/ResizeOperationStatus",
           "title": "Contains details about the current or last completed resize operation.",
           "readOnly": true
+        },
+        "mountConfiguration": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MountConfiguration"
+          },
+          "title": "A list of file systems to mount on each node in the pool.",
+          "description": "This supports Azure Files, NFS, CIFS/SMB, and Blobfuse."
         }
       },
       "description": "Pool properties."
@@ -3096,7 +3107,7 @@
               "values": [
                 {
                   "value": "StartTask",
-                  "description": "The certificate should be visible to the user account under which the start task is run."
+                  "description": "The certificate should be visible to the user account under which the start task is run. Note that if AutoUser Scope is Pool for both the StartTask and a Task, this certificate will be visible to the Task as well."
                 },
                 {
                   "value": "Task",
@@ -3334,7 +3345,7 @@
         "sku": {
           "type": "string",
           "title": "The SKU of the Azure Virtual Machines Marketplace image.",
-          "description": "For example, 14.04.0-LTS or 2012-R2-Datacenter."
+          "description": "For example, 18.04-LTS or 2019-Datacenter."
         },
         "version": {
           "type": "string",
@@ -3343,8 +3354,8 @@
         },
         "id": {
           "type": "string",
-          "title": "The ARM resource identifier of the virtual machine image. Computes nodes of the pool will be created using this custom image. This is of the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName}",
-          "description": "This property is mutually exclusive with other properties. The virtual machine image must be in the same region and subscription as the Azure Batch account. For information about the firewall settings for Batch node agent to communicate with Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration ."
+          "title": "The ARM resource identifier of the Virtual Machine Image or Shared Image Gallery Image. Compute Nodes of the Pool will be created using this Image Id. This is of either the form /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/images/{imageName} for Virtual Machine Image or /subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Compute/galleries/{galleryName}/images/{imageDefinitionName}/versions/{versionId} for SIG image.",
+          "description": "This property is mutually exclusive with other properties. For Virtual Machine Image it must be in the same region and subscription as the Azure Batch account. For SIG image it must have replicas in the same region as the Azure Batch account. For information about the firewall settings for the Batch node agent to communicate with the Batch service see https://docs.microsoft.com/en-us/azure/batch/batch-api-basics#virtual-network-vnet-and-firewall-configuration."
         }
       },
       "title": "A reference to an Azure Virtual Machines Marketplace image or the Azure Image resource of a custom Virtual Machine. To get the list of all imageReferences verified by Azure Batch, see the 'List supported node agent SKUs' operation."
@@ -3377,7 +3388,7 @@
         "lun",
         "diskSizeGB"
       ],
-      "description": "Data Disk settings which will be used by the data disks associated to Compute Nodes in the pool."
+      "description": "Settings which will be used by the data disks associated to Compute Nodes in the Pool. When using attached data disks, you need to mount and format the disks from within a VM to use them."
     },
     "TaskSchedulingPolicy": {
       "properties": {
@@ -3526,7 +3537,7 @@
         "waitForSuccess": {
           "type": "boolean",
           "title": "Whether the Batch service should wait for the start task to complete successfully (that is, to exit with exit code 0) before scheduling any tasks on the compute node.",
-          "description": "If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is false."
+          "description": "If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is true."
         },
         "containerSettings": {
           "$ref": "#/definitions/TaskContainerSettings",
@@ -3553,6 +3564,28 @@
           "$ref": "#/definitions/ContainerRegistry",
           "title": "The private registry which contains the container image.",
           "description": "This setting can be omitted if was already provided at pool creation."
+        },
+        "workingDirectory": {
+          "type": "string",
+          "title": "A flag to indicate where the container task working directory is. The default is 'taskWorkingDirectory'.",
+          "enum": [
+            "TaskWorkingDirectory",
+            "ContainerImageDefault"
+          ],
+          "x-ms-enum": {
+            "name": "ContainerWorkingDirectory",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "TaskWorkingDirectory",
+                "description": "Use the standard Batch service task working directory, which will contain the Task resource files populated by Batch."
+              },
+              {
+                "value": "ContainerImageDefault",
+                "description": "Using container image defined working directory. Beware that this directory will not contain the resource files downloaded by Batch."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -3632,7 +3665,7 @@
         "scope": {
           "type": "string",
           "title": "The scope for the auto user",
-          "description": "The default value is task.",
+          "description": "The default value is Pool. If the pool is running Windows a value of Task should be specified if stricter isolation between tasks is required. For example, if the task mutates the registry in a way which could impact other tasks, or if certificates have been specified on the pool which should not be accessible by normal tasks but should be accessible by start tasks.",
           "enum": [
             "Task",
             "Pool"
@@ -3654,7 +3687,7 @@
         },
         "elevationLevel": {
           "title": "The elevation level of the auto user.",
-          "description": "nonAdmin - The auto user is a standard user without elevated access. admin - The auto user is a user with elevated access and operates with full Administrator permissions. The default value is nonAdmin.",
+          "description": "The default value is nonAdmin.",
           "$ref": "#/definitions/ElevationLevel"
         }
       },
@@ -3746,6 +3779,14 @@
           "$ref": "#/definitions/PoolEndpointConfiguration",
           "title": "The configuration for endpoints on compute nodes in the Batch pool.",
           "description": "Pool endpoint configuration is only supported on pools with the virtualMachineConfiguration property."
+        },
+        "publicIPs": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The list of public IPs which the Batch service will use when provisioning Compute Nodes.",
+          "description": "The number of IPs specified here limits the maximum size of the Pool - 50 dedicated nodes or 20 low-priority nodes can be allocated for each public IP. For example, a pool needing 150 dedicated VMs would need at least 3 public IPs specified. This is of the form: /subscriptions/{subscription}/resourceGroups/{group}/providers/Microsoft.Network/publicIPAddresses/{ip}."
         }
       },
       "description": "The network configuration for a pool."
@@ -3941,6 +3982,14 @@
           "type": "string",
           "title": "The source address prefix or tag to match for the rule.",
           "description": "Valid values are a single IP address (i.e. 10.10.10.10), IP subnet (i.e. 192.168.1.0/24), default tag, or * (for all addresses).  If any other values are provided the request fails with HTTP status code 400."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "title": "The source port ranges to match for the rule.",
+          "description": "Valid values are '*' (for all ports 0 - 65535) or arrays of ports or port ranges (i.e. 100-200). The ports should in the range of 0 to 65535 and the port ranges or ports can't overlap. If any other values are provided the request fails with HTTP status code 400. Default value will be *."
         }
       },
       "required": [
@@ -4125,6 +4174,139 @@
         }
       },
       "description": "The CheckNameAvailability operation response."
+    },
+    "MountConfiguration": {
+      "properties": {
+        "azureBlobFileSystemConfiguration": {
+          "$ref": "#/definitions/AzureBlobFileSystemConfiguration",
+          "title": "The Azure Storage container to mount using blob FUSE on each node.",
+          "description": "This property is mutually exclusive with all other properties."
+        },
+        "nfsMountConfiguration": {
+          "$ref": "#/definitions/NFSMountConfiguration",
+          "title": "The NFS file system to mount on each node.",
+          "description": "This property is mutually exclusive with all other properties."
+        },
+        "cifsMountConfiguration": {
+          "$ref": "#/definitions/CIFSMountConfiguration",
+          "title": "The CIFS/SMB file system to mount on each node.",
+          "description": "This property is mutually exclusive with all other properties."
+        },
+        "azureFileShareConfiguration": {
+          "$ref": "#/definitions/AzureFileShareConfiguration",
+          "title": "The Azure File Share to mount on each node.",
+          "description": "This is CIFS based for linux and net use for for windows, and this property is mutually exclusive with all other properties."
+        }
+      },
+      "title": "The file system to mount on each node.",
+      "description": "Each property is mutually exclusive."
+    },
+    "AzureBlobFileSystemConfiguration": {
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "title": "The Azure Storage account name."
+        },
+        "containerName": {
+          "type": "string",
+          "title": "The Azure Blob Storage container name."
+        },
+        "accountKey": {
+          "type": "string",
+          "title": "The Azure Storage account key.",
+          "description": "This property is mutually exclusive with sasKey and one must be specified."
+        },
+        "sasKey": {
+          "type": "string",
+          "title": "The Azure Storage SAS token.",
+          "description": "This property is mutually exclusive with accountKey and one must be specified."
+        },
+        "blobfuseOptions": {
+          "type": "string",
+          "title": "Additional command line options to pass to the mount command.",
+          "description": "These are 'net use' options in Windows and 'mount' options in Linux."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
+          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        }
+      },
+      "required": [ "accountName", "containerName", "relativeMountPath" ],
+      "title": "Blobfuse file system details."
+    },
+    "NFSMountConfiguration": {
+      "properties": {
+        "source": {
+          "type": "string",
+          "title": "The URI of the file system to mount."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
+          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "mountOptions": {
+          "type": "string",
+          "title": "Specifies various mount options that can be used."
+        }
+      },
+      "required": [ "source", "relativeMountPath" ],
+      "title": "NFS file system detail."
+    },
+    "CIFSMountConfiguration": {
+      "properties": {
+        "username": {
+          "type": "string",
+          "title": "The user to use for authentication against the CIFS file system."
+        },
+        "source": {
+          "type": "string",
+          "title": "The URI of the file system to mount."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
+          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "mountOptions": {
+          "type": "string",
+          "title": "Specifies various mount options that can be used."
+        },
+        "password": {
+          "type": "string",
+          "title": "The password to authenticate with."
+        }
+      },
+      "required": [ "username", "source", "password", "relativeMountPath" ],
+      "title": "CIFS file system details."
+    },
+    "AzureFileShareConfiguration": {
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "title": "The Azure Storage account name."
+        },
+        "azureFileUrl": {
+          "type": "string",
+          "title": "The Azure Files URL."
+        },
+        "accountKey": {
+          "type": "string",
+          "title": "The Azure Storage account key."
+        },
+        "relativeMountPath": {
+          "type": "string",
+          "title": "The relative path on the compute node where the file system will be mounted",
+          "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
+        },
+        "mountOptions": {
+          "type": "string",
+          "title": "Specifies various mount options that can be used."
+        }
+      },
+      "required": [ "accountName", "azureFileUrl", "accountKey", "relativeMountPath" ],
+      "title": "Azure Files details."
     }
   },
   "parameters": {

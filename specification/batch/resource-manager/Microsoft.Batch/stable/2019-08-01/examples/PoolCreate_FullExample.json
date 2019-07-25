@@ -4,7 +4,7 @@
     "resourceGroupName": "default-azurebatch-japaneast",
     "accountName": "sampleacct",
     "poolName": "testpool",
-    "api-version": "2019-04-01",
+    "api-version": "2019-08-01",
     "parameters": {
       "properties": {
         "displayName": "my-pool-name",
@@ -22,6 +22,10 @@
         },
         "networkConfiguration": {
           "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+          "publicIPs": [
+            "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
+            "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
+          ],
           "endpointConfiguration": {
             "inboundNatPools": [
               {
@@ -34,12 +38,18 @@
                   {
                     "access": "Allow",
                     "sourceAddressPrefix": "192.100.12.45",
-                    "priority": 150
+                    "priority": 150,
+                    "sourcePortRanges": [
+                      "*"
+                    ]
                   },
                   {
                     "access": "Deny",
                     "sourceAddressPrefix": "*",
-                    "priority": 3500
+                    "priority": 3500,
+                    "sourcePortRanges": [
+                      "*"
+                    ]
                   }
                 ]
               }
@@ -108,7 +118,7 @@
         ],
         "certificates": [
           {
-            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/SHA1-1234567",
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/sha1-1234567",
             "storeLocation": "LocalMachine",
             "storeName": "MY",
             "visibility": [
@@ -162,6 +172,10 @@
           },
           "networkConfiguration": {
             "subnetId": "/subscriptions/subid/resourceGroups/rg1234/providers/Microsoft.Network/virtualNetworks/network1234/subnets/subnet123",
+            "publicIPs": [
+              "/subscriptions/subid1/resourceGroups/rg13/providers/Microsoft.Network/publicIPAddresses/ip135",
+              "/subscriptions/subid2/resourceGroups/rg24/providers/Microsoft.Network/publicIPAddresses/ip268"
+            ],
             "endpointConfiguration": {
               "inboundNatPools": [
                 {
@@ -174,12 +188,18 @@
                     {
                       "access": "Allow",
                       "sourceAddressPrefix": "192.100.12.45",
-                      "priority": 150
+                      "priority": 150,
+                      "sourcePortRanges": [
+                        "*"
+                      ]
                     },
                     {
                       "access": "Deny",
                       "sourceAddressPrefix": "*",
-                      "priority": 3500
+                      "priority": 3500,
+                      "sourcePortRanges": [
+                        "*"
+                      ]
                     }
                   ]
                 }
@@ -238,7 +258,7 @@
           ],
           "certificates": [
             {
-              "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/SHA1-1234567",
+              "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/sampleacct/pools/testpool/certificates/sha1-1234567",
               "storeLocation": "LocalMachine",
               "storeName": "MY",
               "visibility": [
