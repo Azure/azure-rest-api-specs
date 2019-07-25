@@ -1,0 +1,349 @@
+{
+  "openapi": "3.0.0",
+  "info": {
+    "version": "v1",
+    "title": "Conflation Configuration API for Marcel"
+  },
+  "paths": {
+    "/api/SynonymConfigurations/CreateOrUpdate": {
+      "post": {
+        "tags": [
+          "SynonymConfigurations"
+        ],
+        "operationId": "SynonymConfigurations_CreateOrUpdate",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynonymMetadata"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SynonymMetadata"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SynonymMetadata"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "$ref": "#/components/schemas/SynonymMetadata"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "$ref": "#/components/schemas/SynonymMetadata"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SynonymConfigurations/UpdateSynonymFile": {
+      "put": {
+        "tags": [
+          "SynonymConfigurations"
+        ],
+        "operationId": "SynonymConfigurations_UpdateSynonymFile",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/xml": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "text/xml": {
+              "schema": {
+                "type": "string"
+              }
+            },
+            "application/x-www-form-urlencoded": {
+              "schema": {
+                "type": "string"
+              }
+            }
+          },
+          "required": true
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SynonymConfigurations/DeleteConfig": {
+      "delete": {
+        "tags": [
+          "SynonymConfigurations"
+        ],
+        "operationId": "SynonymConfigurations_DeleteConfig",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SynonymConfigurations/ListConfiguredTypes": {
+      "get": {
+        "tags": [
+          "SynonymConfigurations"
+        ],
+        "operationId": "SynonymConfigurations_ListConfiguredTypes",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/api/SynonymConfigurations/ExportConfigs": {
+			"get": {
+				"tags": ["SynonymConfigurations"],
+				"operationId": "SynonymConfigurations_ExportConfigs",
+				"consumes": [],
+				"produces": ["application/json", "text/json", "application/xml", "text/xml"],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+		"/api/SynonymConfigurations/ImportConfigs": {
+			"post": {
+				"tags": ["SynonymConfigurations"],
+				"operationId": "SynonymConfigurations_ImportConfigs",
+				"consumes": ["application/json", "text/json", "application/xml", "text/xml", "application/x-www-form-urlencoded"],
+				"produces": ["application/json", "text/json", "application/xml", "text/xml"],
+				"parameters": [{
+					"name": "synonymMetaDataRequests",
+					"in": "body",
+					"required": true,
+					"schema": {
+						"type": "string"
+					}
+				}],
+				"responses": {
+					"200": {
+						"description": "OK",
+						"schema": {
+							"type": "object"
+						}
+					}
+				}
+			}
+		},
+    "/api/SynonymConfigurations/Get": {
+      "get": {
+        "tags": [
+          "SynonymConfigurations"
+        ],
+        "operationId": "SynonymConfigurations_Get",
+        "parameters": [
+          {
+            "name": "type",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "application/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              },
+              "text/xml": {
+                "schema": {
+                  "type": "object"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "SynonymCityConfiguration": {
+        "type": "object",
+        "properties": {
+          "StatePropertyName": {
+            "type": "string"
+          },
+          "CountryPropertyName": {
+            "type": "string"
+          }
+        }
+      },
+      "SynonymMetadata": {
+        "type": "object",
+        "properties": {
+          "Type": {
+            "type": "string"
+          },
+          "SynonymsBase64": {
+            "type": "string"
+          },
+          "MergeSynonymSets": {
+            "type": "boolean"
+          },
+          "IsCityConflation": {
+            "type": "boolean"
+          },
+          "CityConfiguration": {
+            "$ref": "#/components/schemas/SynonymCityConfiguration"
+          }
+        }
+      }
+    }
+  }
+}
