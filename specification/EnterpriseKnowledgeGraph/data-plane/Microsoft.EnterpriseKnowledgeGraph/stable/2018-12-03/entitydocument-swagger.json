@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "Microsoft.Knowledge.EKG.EntityDocument.Api",
     "version": "v1"
@@ -11,25 +11,16 @@
           "EntityDocument"
         ],
         "operationId": "KeepAliveStatusAsync",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           },
           "401": {
@@ -44,35 +35,24 @@
           "EntityDocument"
         ],
         "operationId": "DeleteEntityDocument",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "name": "id",
             "in": "path",
+            "name": "id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "string"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "string"
-                }
-              }
+            "schema": {
+              "type": "string"
             }
           },
           "401": {
@@ -85,35 +65,24 @@
           "EntityDocument"
         ],
         "operationId": "GetEntityDocument",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "parameters": [
           {
-            "name": "id",
             "in": "path",
+            "name": "id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/EntityDocument"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EntityDocument"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EntityDocument"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EntityDocument"
             }
           },
           "401": {
@@ -128,57 +97,33 @@
           "EntityDocument"
         ],
         "operationId": "GetEntityDocuments",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SearchOptions"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SearchOptions"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/SearchOptions"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/SearchOptions"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/SearchOptions"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/components/schemas/EntityDocument"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/components/schemas/EntityDocument"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/components/schemas/EntityDocument"
-                  }
-                }
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/EntityDocument"
               }
             }
           },
@@ -194,25 +139,16 @@
           "EntityDocument"
         ],
         "operationId": "GetStats",
+        "produces": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/EntityDocumentStats"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EntityDocumentStats"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/EntityDocumentStats"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EntityDocumentStats"
             }
           },
           "500": {
@@ -225,126 +161,124 @@
       }
     }
   },
-  "components": {
-    "schemas": {
-      "EntityDocument": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true
+  "definitions": {
+    "EntityDocument": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "types": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityType"
           },
-          "types": {
+          "readOnly": true
+        },
+        "dominantType": {
+          "$ref": "#/definitions/EntityType"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
             "uniqueItems": false,
             "type": "array",
             "items": {
-              "$ref": "#/components/schemas/EntityType"
-            },
-            "readOnly": true
-          },
-          "dominantType": {
-            "$ref": "#/components/schemas/EntityType"
-          },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/EntityNode"
-              }
-            },
-            "readOnly": true
-          },
-          "timeStamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "sourceIds": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "readOnly": true
-          }
-        }
-      },
-      "EntityType": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
-      "EntityNode": {
-        "type": "object",
-        "properties": {
-          "sourceIds": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "readOnly": true
-          }
-        }
-      },
-      "SearchOptions": {
-        "type": "object",
-        "properties": {
-          "entities": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "string"
+              "$ref": "#/definitions/EntityNode"
             }
+          },
+          "readOnly": true
+        },
+        "timeStamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sourceIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "EntityType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EntityNode": {
+      "type": "object",
+      "properties": {
+        "sourceIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SearchOptions": {
+      "type": "object",
+      "properties": {
+        "entities": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
           }
         }
-      },
-      "EntityDocumentStats": {
-        "type": "object",
-        "properties": {
-          "lastUpdated": {
-            "type": "string",
-            "readOnly": true
-          },
-          "numInstancesEntityTypes": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int64"
-            },
-            "readOnly": true
-          },
-          "tripleCount": {
-            "type": "integer",
+      }
+    },
+    "EntityDocumentStats": {
+      "type": "object",
+      "properties": {
+        "lastUpdated": {
+          "type": "string",
+          "readOnly": true
+        },
+        "numInstancesEntityTypes": {
+          "type": "object",
+          "additionalProperties": {
             "format": "int64",
-            "readOnly": true
+            "type": "integer"
           },
-          "numRelationshipsInGraph": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "numEntityDocuments": {
-            "type": "integer",
-            "format": "int64",
-            "readOnly": true
-          },
-          "trinityStatus": {
-            "enum": [
-              0,
-              1
-            ],
-            "type": "integer",
-            "format": "int32",
-            "readOnly": true
-          }
+          "readOnly": true
+        },
+        "tripleCount": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numRelationshipsInGraph": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "numEntityDocuments": {
+          "format": "int64",
+          "type": "integer",
+          "readOnly": true
+        },
+        "trinityStatus": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer",
+          "readOnly": true
         }
       }
     }
