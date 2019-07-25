@@ -1,5 +1,5 @@
 {
-  "openapi": "3.0.1",
+  "swagger": "2.0",
   "info": {
     "title": "Sasho API",
     "version": "v1"
@@ -12,39 +12,29 @@
         ],
         "summary": "Answers",
         "operationId": "Answer",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AnswerRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AnswerRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/AnswerRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/AnswerRequest"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/AnswerRequest"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/AnswerResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/AnswerResponse"
             }
           }
         }
@@ -57,39 +47,29 @@
         ],
         "summary": "DiagnosticInterpretations",
         "operationId": "DiagnosticInterpret",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DiagnosticInterpretRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DiagnosticInterpretRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DiagnosticInterpretRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DiagnosticInterpretRequest"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticInterpretRequest"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DiagnosticInterpretResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/DiagnosticInterpretResponse"
             }
           }
         }
@@ -102,39 +82,29 @@
         ],
         "summary": "Disambiguations",
         "operationId": "Disambiguate",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DisambiguateRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DisambiguateRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/DisambiguateRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/DisambiguateRequest"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/DisambiguateRequest"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/DisambiguateResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/DisambiguateResponse"
             }
           }
         }
@@ -147,39 +117,29 @@
         ],
         "summary": "Interpretations",
         "operationId": "Interpret",
-        "requestBody": {
-          "content": {
-            "application/json-patch+json": {
-              "schema": {
-                "$ref": "#/components/schemas/InterpretRequest"
-              }
-            },
-            "application/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InterpretRequest"
-              }
-            },
-            "text/json": {
-              "schema": {
-                "$ref": "#/components/schemas/InterpretRequest"
-              }
-            },
-            "application/*+json": {
-              "schema": {
-                "$ref": "#/components/schemas/InterpretRequest"
-              }
+        "consumes": [
+          "application/json-patch+json",
+          "application/json",
+          "text/json",
+          "application/*+json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "schema": {
+              "$ref": "#/definitions/InterpretRequest"
             }
           }
-        },
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/InterpretResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/InterpretResponse"
             }
           }
         }
@@ -199,1216 +159,1214 @@
       }
     }
   },
-  "components": {
-    "schemas": {
-      "AnswerRequest": {
-        "required": [
-          "interpretation",
-          "maximumNumberOfEntities"
-        ],
-        "type": "object",
-        "properties": {
-          "interpretation": {
-            "$ref": "#/components/schemas/InterpretationResult"
-          },
-          "maximumNumberOfEntities": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32"
-          },
-          "entityView": {
-            "enum": [
-              0,
-              1
-            ],
-            "type": "integer",
-            "format": "int32"
-          },
-          "modelId": {
-            "type": "string"
-          }
+  "definitions": {
+    "AnswerRequest": {
+      "required": [
+        "interpretation",
+        "maximumNumberOfEntities"
+      ],
+      "type": "object",
+      "properties": {
+        "interpretation": {
+          "$ref": "#/definitions/InterpretationResult"
+        },
+        "maximumNumberOfEntities": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "entityView": {
+          "format": "int32",
+          "enum": [
+            0,
+            1
+          ],
+          "type": "integer"
+        },
+        "modelId": {
+          "type": "string"
         }
-      },
-      "InterpretationResult": {
-        "type": "object",
-        "properties": {
-          "utterance": {
-            "$ref": "#/components/schemas/Utterance"
-          },
-          "sparql": {
-            "type": "string"
-          },
-          "confidence": {
-            "type": "number",
-            "format": "double"
-          },
-          "mainProjection": {
-            "type": "string"
-          },
-          "mainProjectionEntityType": {
-            "type": "string"
-          },
-          "restatement": {
-            "type": "string"
-          }
+      }
+    },
+    "InterpretationResult": {
+      "type": "object",
+      "properties": {
+        "utterance": {
+          "$ref": "#/definitions/Utterance"
+        },
+        "sparql": {
+          "type": "string"
+        },
+        "confidence": {
+          "format": "double",
+          "type": "number"
+        },
+        "mainProjection": {
+          "type": "string"
+        },
+        "mainProjectionEntityType": {
+          "type": "string"
+        },
+        "restatement": {
+          "type": "string"
         }
-      },
-      "Utterance": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "string",
-            "readOnly": true
+      }
+    },
+    "Utterance": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "readOnly": true
+        },
+        "unrecognizedTerms": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "unrecognizedTerms": {
+          "readOnly": true
+        }
+      }
+    },
+    "AnswerResponse": {
+      "type": "object",
+      "properties": {
+        "totalNumberOfEntitiesFound": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "entityDocuments": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityDocument"
+          }
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "score": {
+          "format": "double",
+          "type": "number"
+        },
+        "restatement": {
+          "type": "string"
+        }
+      }
+    },
+    "EntityDocument": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "types": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityType"
+          },
+          "readOnly": true
+        },
+        "dominantType": {
+          "$ref": "#/definitions/EntityType"
+        },
+        "properties": {
+          "type": "object",
+          "additionalProperties": {
             "uniqueItems": false,
             "type": "array",
             "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          }
-        }
-      },
-      "AnswerResponse": {
-        "type": "object",
-        "properties": {
-          "totalNumberOfEntitiesFound": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "entityDocuments": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EntityDocument"
+              "$ref": "#/definitions/EntityNode"
             }
           },
-          "entityType": {
-            "type": "string"
+          "readOnly": true
+        },
+        "timeStamp": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "sourceIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
           },
-          "score": {
-            "type": "number",
-            "format": "double"
+          "readOnly": true
+        }
+      }
+    },
+    "EntityType": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EntityNode": {
+      "type": "object",
+      "properties": {
+        "sourceIds": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
           },
-          "restatement": {
-            "type": "string"
+          "readOnly": true
+        }
+      }
+    },
+    "DiagnosticInterpretRequest": {
+      "required": [
+        "maximumNumberOfInterpretations",
+        "utterance"
+      ],
+      "type": "object",
+      "properties": {
+        "utterance": {
+          "type": "string"
+        },
+        "maximumNumberOfInterpretations": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "modelId": {
+          "type": "string"
+        }
+      }
+    },
+    "DiagnosticInterpretResponse": {
+      "type": "object",
+      "properties": {
+        "numberOfInterpretations": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "interpretations": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticInterpretationResult"
           }
         }
-      },
-      "EntityDocument": {
-        "type": "object",
-        "properties": {
-          "id": {
-            "type": "string",
-            "readOnly": true
+      }
+    },
+    "DiagnosticInterpretationResult": {
+      "type": "object",
+      "properties": {
+        "utterance": {
+          "$ref": "#/definitions/AnnotatedUtterance"
+        },
+        "queryExpression": {
+          "$ref": "#/definitions/QueryDefinition"
+        },
+        "semantic": {
+          "$ref": "#/definitions/SemanticInterpretation"
+        },
+        "sparql": {
+          "type": "string"
+        },
+        "mentionedEntities": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NamedEntityInfo"
+          }
+        },
+        "confidence": {
+          "format": "double",
+          "type": "number"
+        },
+        "mainProjection": {
+          "type": "string"
+        },
+        "mainProjectionEntityType": {
+          "type": "string"
+        },
+        "restatement": {
+          "type": "string"
+        }
+      }
+    },
+    "AnnotatedUtterance": {
+      "type": "object",
+      "properties": {
+        "text": {
+          "type": "string",
+          "readOnly": true
+        },
+        "terms": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Term"
           },
-          "types": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EntityType"
-            },
-            "readOnly": true
+          "readOnly": true
+        },
+        "tokenSequenceInfoList": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenSequenceInfo"
           },
-          "dominantType": {
-            "$ref": "#/components/schemas/EntityType"
+          "readOnly": true
+        },
+        "tokenToTermMap": {
+          "type": "object",
+          "additionalProperties": {
+            "format": "int32",
+            "type": "integer"
           },
-          "properties": {
-            "type": "object",
-            "additionalProperties": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/components/schemas/EntityNode"
-              }
-            },
-            "readOnly": true
-          },
-          "timeStamp": {
-            "type": "string",
-            "format": "date-time"
-          },
-          "sourceIds": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "readOnly": true
+          "readOnly": true
+        }
+      }
+    },
+    "QueryDefinition": {
+      "required": [
+        "from",
+        "select"
+      ],
+      "type": "object",
+      "properties": {
+        "dataModelName": {
+          "type": "string"
+        },
+        "from": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntitySource"
+          }
+        },
+        "where": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryFilter"
+          }
+        },
+        "orderBy": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuerySortClause"
+          }
+        },
+        "select": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryExpressionContainer"
           }
         }
-      },
-      "EntityType": {
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string",
-            "readOnly": true
+      }
+    },
+    "SemanticInterpretation": {
+      "type": "object",
+      "properties": {
+        "expression": {
+          "type": "string"
+        },
+        "rootFrame": {
+          "$ref": "#/definitions/RootFrame"
+        },
+        "frameBindingInfo": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FrameBindingInfo"
           }
         }
-      },
-      "EntityNode": {
-        "type": "object",
-        "properties": {
-          "sourceIds": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "readOnly": true
+      }
+    },
+    "NamedEntityInfo": {
+      "type": "object",
+      "properties": {
+        "entityId": {
+          "type": "string"
+        },
+        "entityType": {
+          "type": "string"
+        },
+        "entityScore": {
+          "format": "float",
+          "type": "number"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "aliasScore": {
+          "format": "float",
+          "type": "number"
+        }
+      }
+    },
+    "Term": {
+      "required": [
+        "length",
+        "startCharIndex"
+      ],
+      "type": "object",
+      "properties": {
+        "startCharIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "TokenSequenceInfo": {
+      "type": "object",
+      "properties": {
+        "startTokenIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "endTokenIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isTypeDataInstance": {
+          "type": "boolean"
+        },
+        "alias": {
+          "type": "string"
+        },
+        "linguisticEntity": {
+          "type": "string"
+        }
+      }
+    },
+    "EntitySource": {
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "entitySet": {
+          "type": "string"
+        },
+        "entity": {
+          "type": "string"
+        },
+        "schema": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryFilter": {
+      "required": [
+        "condition",
+        "target"
+      ],
+      "type": "object",
+      "properties": {
+        "target": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QueryExpressionContainer"
+          }
+        },
+        "condition": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QuerySortClause": {
+      "required": [
+        "direction",
+        "expression"
+      ],
+      "type": "object",
+      "properties": {
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "direction": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2
+          ],
+          "type": "integer"
+        }
+      }
+    },
+    "QueryExpressionContainer": {
+      "type": "object",
+      "properties": {
+        "sourceRef": {
+          "$ref": "#/definitions/QuerySourceRefExpression"
+        },
+        "property": {
+          "$ref": "#/definitions/QueryPropertyExpression"
+        },
+        "and": {
+          "$ref": "#/definitions/QueryAndExpression"
+        },
+        "or": {
+          "$ref": "#/definitions/QueryOrExpression"
+        },
+        "contains": {
+          "$ref": "#/definitions/QueryContainsExpression"
+        },
+        "comparison": {
+          "$ref": "#/definitions/QueryComparisonExpression"
+        },
+        "between": {
+          "$ref": "#/definitions/QueryBetweenExpression"
+        },
+        "aggregation": {
+          "$ref": "#/definitions/QueryAggregationExpression"
+        },
+        "exists": {
+          "$ref": "#/definitions/QueryExistsExpression"
+        },
+        "datePart": {
+          "$ref": "#/definitions/QueryDatePartExpression"
+        },
+        "boolean": {
+          "$ref": "#/definitions/QueryBooleanConstantExpression"
+        },
+        "integer": {
+          "$ref": "#/definitions/QueryIntegerConstantExpression"
+        },
+        "decimal": {
+          "$ref": "#/definitions/QueryDecimalConstantExpression"
+        },
+        "string": {
+          "$ref": "#/definitions/QueryStringConstantExpression"
+        },
+        "dateTime": {
+          "$ref": "#/definitions/QueryDateTimeConstantExpression"
+        },
+        "date": {
+          "$ref": "#/definitions/QueryDateConstantExpression"
+        },
+        "time": {
+          "$ref": "#/definitions/QueryTimeConstantExpression"
+        },
+        "month": {
+          "$ref": "#/definitions/QueryMonthConstantExpression"
+        },
+        "year": {
+          "$ref": "#/definitions/QueryYearConstantExpression"
+        },
+        "decade": {
+          "$ref": "#/definitions/QueryDecadeConstantExpression"
+        },
+        "yearAndMonth": {
+          "$ref": "#/definitions/QueryYearAndMonthConstantExpression"
+        },
+        "not": {
+          "$ref": "#/definitions/QueryNotExpression"
+        },
+        "null": {
+          "$ref": "#/definitions/QueryNullConstantExpression"
+        },
+        "startsWith": {
+          "$ref": "#/definitions/QueryStartsWithExpression"
+        },
+        "dateTimeSecond": {
+          "$ref": "#/definitions/QueryDateTimeSecondConstantExpression"
+        },
+        "number": {
+          "$ref": "#/definitions/QueryNumberConstantExpression"
+        },
+        "dateAdd": {
+          "$ref": "#/definitions/QueryDateAddExpression"
+        },
+        "now": {
+          "$ref": "#/definitions/QueryNowExpression"
+        },
+        "yearAndWeek": {
+          "$ref": "#/definitions/QueryYearAndWeekConstantExpression"
+        },
+        "name": {
+          "type": "string"
+        }
+      }
+    },
+    "RootFrame": {
+      "type": "object",
+      "properties": {
+        "utterance": {
+          "type": "string"
+        },
+        "tokenSequence": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenInfo"
+          }
+        },
+        "frameType": {
+          "type": "string"
+        },
+        "labeledBracketNotation": {
+          "type": "string"
+        },
+        "childFrames": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Frame"
           }
         }
-      },
-      "DiagnosticInterpretRequest": {
-        "required": [
-          "maximumNumberOfInterpretations",
-          "utterance"
-        ],
-        "type": "object",
-        "properties": {
-          "utterance": {
-            "type": "string"
-          },
-          "maximumNumberOfInterpretations": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32"
-          },
-          "modelId": {
-            "type": "string"
+      }
+    },
+    "FrameBindingInfo": {
+      "type": "object",
+      "properties": {
+        "frameInfo": {
+          "$ref": "#/definitions/FrameInfo"
+        },
+        "entityTerm": {
+          "$ref": "#/definitions/EntityTerm"
+        }
+      }
+    },
+    "QuerySourceRefExpression": {
+      "required": [
+        "source"
+      ],
+      "type": "object",
+      "properties": {
+        "source": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryPropertyExpression": {
+      "required": [
+        "expression",
+        "property"
+      ],
+      "type": "object",
+      "properties": {
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "property": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryAndExpression": {
+      "required": [
+        "left",
+        "right"
+      ],
+      "type": "object",
+      "properties": {
+        "left": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "right": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryOrExpression": {
+      "required": [
+        "left",
+        "right"
+      ],
+      "type": "object",
+      "properties": {
+        "left": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "right": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryContainsExpression": {
+      "required": [
+        "left",
+        "right"
+      ],
+      "type": "object",
+      "properties": {
+        "left": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "right": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryComparisonExpression": {
+      "required": [
+        "comparisonKind",
+        "left",
+        "right"
+      ],
+      "type": "object",
+      "properties": {
+        "comparisonKind": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4
+          ],
+          "type": "integer"
+        },
+        "left": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "right": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryBetweenExpression": {
+      "required": [
+        "expression",
+        "lowerBound",
+        "upperBound"
+      ],
+      "type": "object",
+      "properties": {
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "lowerBound": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "upperBound": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryAggregationExpression": {
+      "required": [
+        "expression",
+        "function"
+      ],
+      "type": "object",
+      "properties": {
+        "function": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "integer"
+        },
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryExistsExpression": {
+      "required": [
+        "expression"
+      ],
+      "type": "object",
+      "properties": {
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryDatePartExpression": {
+      "required": [
+        "expression",
+        "function"
+      ],
+      "type": "object",
+      "properties": {
+        "function": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "integer"
+        },
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryBooleanConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "boolean"
+        }
+      }
+    },
+    "QueryIntegerConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "int64",
+          "type": "integer"
+        }
+      }
+    },
+    "QueryDecimalConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "double",
+          "type": "number"
+        }
+      }
+    },
+    "QueryStringConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryDateTimeConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "QueryDateConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "QueryTimeConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryMonthConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "QueryYearConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "QueryDecadeConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "QueryYearAndMonthConstantExpression": {
+      "required": [
+        "month",
+        "year"
+      ],
+      "type": "object",
+      "properties": {
+        "year": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "month": {
+          "format": "int32",
+          "type": "integer"
+        }
+      }
+    },
+    "QueryNotExpression": {
+      "required": [
+        "expression"
+      ],
+      "type": "object",
+      "properties": {
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryNullConstantExpression": {
+      "type": "object"
+    },
+    "QueryStartsWithExpression": {
+      "required": [
+        "left",
+        "right"
+      ],
+      "type": "object",
+      "properties": {
+        "left": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        },
+        "right": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryDateTimeSecondConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "QueryNumberConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        }
+      }
+    },
+    "QueryDateAddExpression": {
+      "required": [
+        "amount",
+        "expression",
+        "timeUnit"
+      ],
+      "type": "object",
+      "properties": {
+        "amount": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "timeUnit": {
+          "format": "int32",
+          "enum": [
+            0,
+            1,
+            2,
+            3,
+            4,
+            5
+          ],
+          "type": "integer"
+        },
+        "expression": {
+          "$ref": "#/definitions/QueryExpressionContainer"
+        }
+      }
+    },
+    "QueryNowExpression": {
+      "type": "object"
+    },
+    "QueryYearAndWeekConstantExpression": {
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "format": "date-time",
+          "type": "string"
+        }
+      }
+    },
+    "TokenInfo": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string"
+        },
+        "startIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "length": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "type": {
+          "type": "string"
+        },
+        "spellCorrection": {
+          "$ref": "#/definitions/SpellCorrectionSuggestion"
+        },
+        "stems": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/StemmerSuggestion"
           }
         }
-      },
-      "DiagnosticInterpretResponse": {
-        "type": "object",
-        "properties": {
-          "numberOfInterpretations": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "interpretations": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/DiagnosticInterpretationResult"
-            }
+      }
+    },
+    "Frame": {
+      "type": "object",
+      "properties": {
+        "frameType": {
+          "type": "string"
+        },
+        "labeledBracketNotation": {
+          "type": "string"
+        },
+        "childFrames": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Frame"
           }
         }
-      },
-      "DiagnosticInterpretationResult": {
-        "type": "object",
-        "properties": {
-          "utterance": {
-            "$ref": "#/components/schemas/AnnotatedUtterance"
-          },
-          "queryExpression": {
-            "$ref": "#/components/schemas/QueryDefinition"
-          },
-          "semantic": {
-            "$ref": "#/components/schemas/SemanticInterpretation"
-          },
-          "sparql": {
-            "type": "string"
-          },
-          "mentionedEntities": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/NamedEntityInfo"
-            }
-          },
-          "confidence": {
-            "type": "number",
-            "format": "double"
-          },
-          "mainProjection": {
-            "type": "string"
-          },
-          "mainProjectionEntityType": {
-            "type": "string"
-          },
-          "restatement": {
-            "type": "string"
-          }
+      }
+    },
+    "FrameInfo": {
+      "type": "object",
+      "properties": {
+        "frameType": {
+          "type": "string"
+        },
+        "stringRepresentation": {
+          "type": "string"
         }
-      },
-      "AnnotatedUtterance": {
-        "type": "object",
-        "properties": {
-          "text": {
-            "type": "string",
-            "readOnly": true
-          },
-          "terms": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Term"
-            },
-            "readOnly": true
-          },
-          "tokenSequenceInfoList": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TokenSequenceInfo"
-            },
-            "readOnly": true
-          },
-          "tokenToTermMap": {
-            "type": "object",
-            "additionalProperties": {
-              "type": "integer",
-              "format": "int32"
-            },
-            "readOnly": true
+      }
+    },
+    "EntityTerm": {
+      "type": "object",
+      "properties": {
+        "entityName": {
+          "type": "string"
+        },
+        "termValue": {
+          "type": "string"
+        },
+        "termType": {
+          "type": "string"
+        },
+        "semanticType": {
+          "type": "string"
+        },
+        "tokenSequenceMatchType": {
+          "type": "string"
+        },
+        "tokenMatches": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TokenMatch"
           }
+        },
+        "firstTokenIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "lastTokenIndex": {
+          "format": "int32",
+          "type": "integer"
         }
-      },
-      "QueryDefinition": {
-        "required": [
-          "from",
-          "select"
-        ],
-        "type": "object",
-        "properties": {
-          "dataModelName": {
-            "type": "string"
-          },
-          "from": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/EntitySource"
-            }
-          },
-          "where": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QueryFilter"
-            }
-          },
-          "orderBy": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QuerySortClause"
-            }
-          },
-          "select": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QueryExpressionContainer"
-            }
-          }
+      }
+    },
+    "SpellCorrectionSuggestion": {
+      "type": "object",
+      "properties": {
+        "suggestion": {
+          "type": "string"
+        },
+        "suggestionConfidence": {
+          "format": "double",
+          "type": "number"
         }
-      },
-      "SemanticInterpretation": {
-        "type": "object",
-        "properties": {
-          "expression": {
-            "type": "string"
-          },
-          "rootFrame": {
-            "$ref": "#/components/schemas/RootFrame"
-          },
-          "frameBindingInfo": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/FrameBindingInfo"
-            }
-          }
+      }
+    },
+    "StemmerSuggestion": {
+      "type": "object",
+      "properties": {
+        "stemValue": {
+          "type": "string"
         }
-      },
-      "NamedEntityInfo": {
-        "type": "object",
-        "properties": {
-          "entityId": {
-            "type": "string"
-          },
-          "entityType": {
-            "type": "string"
-          },
-          "entityScore": {
-            "type": "number",
-            "format": "float"
-          },
-          "alias": {
-            "type": "string"
-          },
-          "aliasScore": {
-            "type": "number",
-            "format": "float"
-          }
+      }
+    },
+    "TokenMatch": {
+      "type": "object",
+      "properties": {
+        "tokenIndex": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "matchType": {
+          "type": "string"
         }
-      },
-      "Term": {
-        "required": [
-          "length",
-          "startCharIndex"
-        ],
-        "type": "object",
-        "properties": {
-          "startCharIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "length": {
-            "type": "integer",
-            "format": "int32"
-          }
+      }
+    },
+    "DisambiguateRequest": {
+      "required": [
+        "interpretation",
+        "maximumNumberOfActions"
+      ],
+      "type": "object",
+      "properties": {
+        "interpretation": {
+          "$ref": "#/definitions/InterpretationResult"
+        },
+        "maximumNumberOfActions": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "modelId": {
+          "type": "string"
         }
-      },
-      "TokenSequenceInfo": {
-        "type": "object",
-        "properties": {
-          "startTokenIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "endTokenIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "isTypeDataInstance": {
-            "type": "boolean"
-          },
-          "alias": {
-            "type": "string"
-          },
-          "linguisticEntity": {
-            "type": "string"
+      }
+    },
+    "DisambiguateResponse": {
+      "type": "object",
+      "properties": {
+        "totalNumberOfActionsFound": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "suggestions": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SuggestionChip"
           }
+        },
+        "chosenAction": {
+          "type": "string"
         }
-      },
-      "EntitySource": {
-        "required": [
-          "name"
-        ],
-        "type": "object",
-        "properties": {
-          "name": {
-            "type": "string"
-          },
-          "entitySet": {
-            "type": "string"
-          },
-          "entity": {
-            "type": "string"
-          },
-          "schema": {
-            "type": "string"
-          }
+      }
+    },
+    "SuggestionChip": {
+      "type": "object",
+      "properties": {
+        "suggestionInterpretation": {
+          "$ref": "#/definitions/InterpretationResult"
+        },
+        "actionEntityId": {
+          "type": "string",
+          "readOnly": true
         }
-      },
-      "QueryFilter": {
-        "required": [
-          "condition",
-          "target"
-        ],
-        "type": "object",
-        "properties": {
-          "target": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/QueryExpressionContainer"
-            }
-          },
-          "condition": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
+      }
+    },
+    "InterpretRequest": {
+      "required": [
+        "maximumNumberOfInterpretations",
+        "utterance"
+      ],
+      "type": "object",
+      "properties": {
+        "utterance": {
+          "type": "string"
+        },
+        "maximumNumberOfInterpretations": {
+          "format": "int32",
+          "maximum": 2147483647,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "previousInterpretations": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InterpretationResult"
           }
+        },
+        "modelId": {
+          "type": "string"
         }
-      },
-      "QuerySortClause": {
-        "required": [
-          "direction",
-          "expression"
-        ],
-        "type": "object",
-        "properties": {
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "direction": {
-            "enum": [
-              0,
-              1,
-              2
-            ],
-            "type": "integer",
-            "format": "int32"
+      }
+    },
+    "InterpretResponse": {
+      "type": "object",
+      "properties": {
+        "interpretations": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InterpretationResult"
           }
-        }
-      },
-      "QueryExpressionContainer": {
-        "type": "object",
-        "properties": {
-          "sourceRef": {
-            "$ref": "#/components/schemas/QuerySourceRefExpression"
-          },
-          "property": {
-            "$ref": "#/components/schemas/QueryPropertyExpression"
-          },
-          "and": {
-            "$ref": "#/components/schemas/QueryAndExpression"
-          },
-          "or": {
-            "$ref": "#/components/schemas/QueryOrExpression"
-          },
-          "contains": {
-            "$ref": "#/components/schemas/QueryContainsExpression"
-          },
-          "comparison": {
-            "$ref": "#/components/schemas/QueryComparisonExpression"
-          },
-          "between": {
-            "$ref": "#/components/schemas/QueryBetweenExpression"
-          },
-          "aggregation": {
-            "$ref": "#/components/schemas/QueryAggregationExpression"
-          },
-          "exists": {
-            "$ref": "#/components/schemas/QueryExistsExpression"
-          },
-          "datePart": {
-            "$ref": "#/components/schemas/QueryDatePartExpression"
-          },
-          "boolean": {
-            "$ref": "#/components/schemas/QueryBooleanConstantExpression"
-          },
-          "integer": {
-            "$ref": "#/components/schemas/QueryIntegerConstantExpression"
-          },
-          "decimal": {
-            "$ref": "#/components/schemas/QueryDecimalConstantExpression"
-          },
-          "string": {
-            "$ref": "#/components/schemas/QueryStringConstantExpression"
-          },
-          "dateTime": {
-            "$ref": "#/components/schemas/QueryDateTimeConstantExpression"
-          },
-          "date": {
-            "$ref": "#/components/schemas/QueryDateConstantExpression"
-          },
-          "time": {
-            "$ref": "#/components/schemas/QueryTimeConstantExpression"
-          },
-          "month": {
-            "$ref": "#/components/schemas/QueryMonthConstantExpression"
-          },
-          "year": {
-            "$ref": "#/components/schemas/QueryYearConstantExpression"
-          },
-          "decade": {
-            "$ref": "#/components/schemas/QueryDecadeConstantExpression"
-          },
-          "yearAndMonth": {
-            "$ref": "#/components/schemas/QueryYearAndMonthConstantExpression"
-          },
-          "not": {
-            "$ref": "#/components/schemas/QueryNotExpression"
-          },
-          "null": {
-            "$ref": "#/components/schemas/QueryNullConstantExpression"
-          },
-          "startsWith": {
-            "$ref": "#/components/schemas/QueryStartsWithExpression"
-          },
-          "dateTimeSecond": {
-            "$ref": "#/components/schemas/QueryDateTimeSecondConstantExpression"
-          },
-          "number": {
-            "$ref": "#/components/schemas/QueryNumberConstantExpression"
-          },
-          "dateAdd": {
-            "$ref": "#/components/schemas/QueryDateAddExpression"
-          },
-          "now": {
-            "$ref": "#/components/schemas/QueryNowExpression"
-          },
-          "yearAndWeek": {
-            "$ref": "#/components/schemas/QueryYearAndWeekConstantExpression"
-          },
-          "name": {
-            "type": "string"
-          }
-        }
-      },
-      "RootFrame": {
-        "type": "object",
-        "properties": {
-          "utterance": {
-            "type": "string"
-          },
-          "tokenSequence": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TokenInfo"
-            }
-          },
-          "frameType": {
-            "type": "string"
-          },
-          "labeledBracketNotation": {
-            "type": "string"
-          },
-          "childFrames": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Frame"
-            }
-          }
-        }
-      },
-      "FrameBindingInfo": {
-        "type": "object",
-        "properties": {
-          "frameInfo": {
-            "$ref": "#/components/schemas/FrameInfo"
-          },
-          "entityTerm": {
-            "$ref": "#/components/schemas/EntityTerm"
-          }
-        }
-      },
-      "QuerySourceRefExpression": {
-        "required": [
-          "source"
-        ],
-        "type": "object",
-        "properties": {
-          "source": {
-            "type": "string"
-          }
-        }
-      },
-      "QueryPropertyExpression": {
-        "required": [
-          "expression",
-          "property"
-        ],
-        "type": "object",
-        "properties": {
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "property": {
-            "type": "string"
-          }
-        }
-      },
-      "QueryAndExpression": {
-        "required": [
-          "left",
-          "right"
-        ],
-        "type": "object",
-        "properties": {
-          "left": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "right": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryOrExpression": {
-        "required": [
-          "left",
-          "right"
-        ],
-        "type": "object",
-        "properties": {
-          "left": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "right": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryContainsExpression": {
-        "required": [
-          "left",
-          "right"
-        ],
-        "type": "object",
-        "properties": {
-          "left": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "right": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryComparisonExpression": {
-        "required": [
-          "comparisonKind",
-          "left",
-          "right"
-        ],
-        "type": "object",
-        "properties": {
-          "comparisonKind": {
-            "enum": [
-              0,
-              1,
-              2,
-              3,
-              4
-            ],
-            "type": "integer",
-            "format": "int32"
-          },
-          "left": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "right": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryBetweenExpression": {
-        "required": [
-          "expression",
-          "lowerBound",
-          "upperBound"
-        ],
-        "type": "object",
-        "properties": {
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "lowerBound": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "upperBound": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryAggregationExpression": {
-        "required": [
-          "expression",
-          "function"
-        ],
-        "type": "object",
-        "properties": {
-          "function": {
-            "enum": [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            "type": "integer",
-            "format": "int32"
-          },
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryExistsExpression": {
-        "required": [
-          "expression"
-        ],
-        "type": "object",
-        "properties": {
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryDatePartExpression": {
-        "required": [
-          "expression",
-          "function"
-        ],
-        "type": "object",
-        "properties": {
-          "function": {
-            "enum": [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            "type": "integer",
-            "format": "int32"
-          },
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryBooleanConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "boolean"
-          }
-        }
-      },
-      "QueryIntegerConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int64"
-          }
-        }
-      },
-      "QueryDecimalConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "QueryStringConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          }
-        }
-      },
-      "QueryDateTimeConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "QueryDateConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "QueryTimeConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          }
-        }
-      },
-      "QueryMonthConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "QueryYearConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "QueryDecadeConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "QueryYearAndMonthConstantExpression": {
-        "required": [
-          "month",
-          "year"
-        ],
-        "type": "object",
-        "properties": {
-          "year": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "month": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "QueryNotExpression": {
-        "required": [
-          "expression"
-        ],
-        "type": "object",
-        "properties": {
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryNullConstantExpression": {
-        "type": "object"
-      },
-      "QueryStartsWithExpression": {
-        "required": [
-          "left",
-          "right"
-        ],
-        "type": "object",
-        "properties": {
-          "left": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          },
-          "right": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryDateTimeSecondConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "QueryNumberConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          }
-        }
-      },
-      "QueryDateAddExpression": {
-        "required": [
-          "amount",
-          "expression",
-          "timeUnit"
-        ],
-        "type": "object",
-        "properties": {
-          "amount": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "timeUnit": {
-            "enum": [
-              0,
-              1,
-              2,
-              3,
-              4,
-              5
-            ],
-            "type": "integer",
-            "format": "int32"
-          },
-          "expression": {
-            "$ref": "#/components/schemas/QueryExpressionContainer"
-          }
-        }
-      },
-      "QueryNowExpression": {
-        "type": "object"
-      },
-      "QueryYearAndWeekConstantExpression": {
-        "required": [
-          "value"
-        ],
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string",
-            "format": "date-time"
-          }
-        }
-      },
-      "TokenInfo": {
-        "type": "object",
-        "properties": {
-          "value": {
-            "type": "string"
-          },
-          "startIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "length": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "type": {
-            "type": "string"
-          },
-          "spellCorrection": {
-            "$ref": "#/components/schemas/SpellCorrectionSuggestion"
-          },
-          "stems": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/StemmerSuggestion"
-            }
-          }
-        }
-      },
-      "Frame": {
-        "type": "object",
-        "properties": {
-          "frameType": {
-            "type": "string"
-          },
-          "labeledBracketNotation": {
-            "type": "string"
-          },
-          "childFrames": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/Frame"
-            }
-          }
-        }
-      },
-      "FrameInfo": {
-        "type": "object",
-        "properties": {
-          "frameType": {
-            "type": "string"
-          },
-          "stringRepresentation": {
-            "type": "string"
-          }
-        }
-      },
-      "EntityTerm": {
-        "type": "object",
-        "properties": {
-          "entityName": {
-            "type": "string"
-          },
-          "termValue": {
-            "type": "string"
-          },
-          "termType": {
-            "type": "string"
-          },
-          "semanticType": {
-            "type": "string"
-          },
-          "tokenSequenceMatchType": {
-            "type": "string"
-          },
-          "tokenMatches": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/TokenMatch"
-            }
-          },
-          "firstTokenIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "lastTokenIndex": {
-            "type": "integer",
-            "format": "int32"
-          }
-        }
-      },
-      "SpellCorrectionSuggestion": {
-        "type": "object",
-        "properties": {
-          "suggestion": {
-            "type": "string"
-          },
-          "suggestionConfidence": {
-            "type": "number",
-            "format": "double"
-          }
-        }
-      },
-      "StemmerSuggestion": {
-        "type": "object",
-        "properties": {
-          "stemValue": {
-            "type": "string"
-          }
-        }
-      },
-      "TokenMatch": {
-        "type": "object",
-        "properties": {
-          "tokenIndex": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "matchType": {
-            "type": "string"
-          }
-        }
-      },
-      "DisambiguateRequest": {
-        "required": [
-          "interpretation",
-          "maximumNumberOfActions"
-        ],
-        "type": "object",
-        "properties": {
-          "interpretation": {
-            "$ref": "#/components/schemas/InterpretationResult"
-          },
-          "maximumNumberOfActions": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32"
-          },
-          "modelId": {
-            "type": "string"
-          }
-        }
-      },
-      "DisambiguateResponse": {
-        "type": "object",
-        "properties": {
-          "totalNumberOfActionsFound": {
-            "type": "integer",
-            "format": "int32"
-          },
-          "suggestions": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/SuggestionChip"
-            }
-          },
-          "chosenAction": {
-            "type": "string"
-          }
-        }
-      },
-      "SuggestionChip": {
-        "type": "object",
-        "properties": {
-          "suggestionInterpretation": {
-            "$ref": "#/components/schemas/InterpretationResult"
-          },
-          "actionEntityId": {
-            "type": "string",
-            "readOnly": true
-          }
-        }
-      },
-      "InterpretRequest": {
-        "required": [
-          "maximumNumberOfInterpretations",
-          "utterance"
-        ],
-        "type": "object",
-        "properties": {
-          "utterance": {
-            "type": "string"
-          },
-          "maximumNumberOfInterpretations": {
-            "maximum": 2147483647,
-            "minimum": 1,
-            "type": "integer",
-            "format": "int32"
-          },
-          "previousInterpretations": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InterpretationResult"
-            }
-          },
-          "modelId": {
-            "type": "string"
-          }
-        }
-      },
-      "InterpretResponse": {
-        "type": "object",
-        "properties": {
-          "interpretations": {
-            "uniqueItems": false,
-            "type": "array",
-            "items": {
-              "$ref": "#/components/schemas/InterpretationResult"
-            }
-          },
-          "numberOfInterpretations": {
-            "type": "integer",
-            "format": "int32"
-          }
+        },
+        "numberOfInterpretations": {
+          "format": "int32",
+          "type": "integer"
         }
       }
     }
