@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "subid",
+    "resourceGroupName": "default-azurebatch-japaneast",
+    "accountName": "sampleacct",
+    "api-version": "2019-04-01",
+    "$filter": "properties/provisioningStateTransitionTime gt '2017-05-01' or properties/provisioningState eq 'Failed'",
+    "$select": "properties/format,properties/provisioningState"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/samplecct/certificates/SHA1-0A0E4F50D51BEADEAC1D35AFC5116098E7902E6E",
+            "name": "SHA1-0A0E4F50D51BEADEAC1D35AFC5116098E7902E6E",
+            "type": "Microsoft.Batch/batchAccounts/certificates",
+            "etag": "W/\"0x8D4EDD5118668F7\"",
+            "properties": {
+              "provisioningState": "Failed",
+              "format": "Pfx"
+            }
+          },
+          {
+            "id": "/subscriptions/subid/resourceGroups/default-azurebatch-japaneast/providers/Microsoft.Batch/batchAccounts/samplecct/certificates/SHA1-AEB228FFB0BF67A793D61DCE263EBD16949F15A1",
+            "name": "SHA1-AEB228FFB0BF67A793D61DCE263EBD16949F15A1",
+            "type": "Microsoft.Batch/batchAccounts/certificates",
+            "etag": "W/\"0x8D4EDD5118572E0\"",
+            "properties": {
+              "provisioningState": "Failed",
+              "format": "Cer"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
