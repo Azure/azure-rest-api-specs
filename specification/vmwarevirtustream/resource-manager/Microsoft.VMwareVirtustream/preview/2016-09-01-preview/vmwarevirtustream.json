@@ -105,6 +105,12 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -141,6 +147,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateCloudResponseList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -176,6 +188,12 @@
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/PrivateCloudResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -226,6 +244,12 @@
           },
           "202": {
             "description": "accepted operation"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -272,6 +296,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateCloudResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -307,6 +337,12 @@
           },
           "204": {
             "description": "no content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -346,6 +382,12 @@
                 "$ref": "#/definitions/ClusterResponse"
               }
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -384,6 +426,12 @@
             "description": "successful operation",
             "schema": {
               "$ref": "#/definitions/ClusterResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
             }
           }
         },
@@ -441,6 +489,12 @@
           },
           "202": {
             "description": "accepted operation"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -493,6 +547,12 @@
           },
           "202": {
             "description": "accepted operation"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -531,6 +591,12 @@
           },
           "204": {
             "description": "no content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -581,6 +647,12 @@
           },
           "202": {
             "description": "accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -631,6 +703,12 @@
           },
           "202": {
             "description": "accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -682,6 +760,12 @@
           },
           "202": {
             "description": "accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -733,6 +817,12 @@
           },
           "202": {
             "description": "accepted"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -772,6 +862,12 @@
             "schema": {
               "$ref": "#/definitions/GetAdminCredentialsResponse"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
           }
         },
         "x-ms-examples": {
@@ -783,6 +879,27 @@
     }
   },
   "definitions": {
+    "ApiError": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ApiErrorBase"
+        }
+      },
+      "description": "API error response"
+    },
+    "ApiErrorBase": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "Error code"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message"
+        }
+      },
+      "description": "Api error."
+    },
     "OperationList": {
       "description": "Pageable list of operations",
       "properties": {
