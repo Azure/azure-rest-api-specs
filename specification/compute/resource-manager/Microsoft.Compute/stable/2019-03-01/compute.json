@@ -5220,7 +5220,7 @@
     },
     "HyperVGenerationType": {
       "type": "string",
-      "description": "Specifies the HyperVGeneration Type for the Virtual Machine created from the image",
+      "description": "Specifies the HyperVGeneration Type",
       "enum": [
         "V1",
         "V2"
@@ -6030,18 +6030,6 @@
       ],
       "description": "Describes automatic OS upgrade properties on the image."
     },
-    "HyperVGeneration": {
-      "type": "string",
-      "description": "Specifies the HyperVGeneration for the VM image",
-      "enum": [
-        "V1",
-        "V2"
-      ],
-      "x-ms-enum": {
-        "name": "HyperVGeneration",
-        "modelAsString": true
-      }
-    },
     "VirtualMachineImageProperties": {
       "properties": {
         "plan": {
@@ -6060,7 +6048,7 @@
           "$ref": "#/definitions/AutomaticOSUpgradeProperties"
         },
         "hyperVGeneration": {
-          "$ref": "#/definitions/HyperVGeneration"
+          "$ref": "#/definitions/HyperVGenerationType"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
