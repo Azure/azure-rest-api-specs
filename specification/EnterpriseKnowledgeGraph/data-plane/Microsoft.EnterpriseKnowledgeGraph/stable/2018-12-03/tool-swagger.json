@@ -3271,106 +3271,6 @@
         }
       }
     },
-    "/IntentClassifierModel/{intentId}": {
-      "put": {
-        "tags": [
-          "IntentClassifierModel"
-        ],
-        "operationId": "IntentClassifierModel_Put",
-        "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
-        ],
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "in": "path",
-            "name": "intentId",
-            "required": true,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "formData",
-            "name": "Id",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "formData",
-            "name": "ModifiedDateTime",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "formData",
-            "name": "CreateDateTime",
-            "type": "string",
-            "format": "date-time"
-          },
-          {
-            "in": "formData",
-            "name": "CreatedBy",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "formData",
-            "name": "CreatedByUser",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "ModifiedBy",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "formData",
-            "name": "ModifiedByUser",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "NumberOfIntents",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "formData",
-            "name": "NumberOfAnnotations",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "formData",
-            "name": "ModelId",
-            "type": "string"
-          },
-          {
-            "in": "formData",
-            "name": "ModelState",
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/DbIntents"
-            }
-          }
-        }
-      }
-    },
     "/Intents/BulkUpload": {
       "post": {
         "tags": [
@@ -9694,7 +9594,7 @@
         "name": {
           "type": "string"
         },
-        "FriendlyName": {
+        "friendlyname": {
           "type": "string"
         },
         "description": {
@@ -9748,7 +9648,7 @@
           ],
           "type": "integer"
         },
-        "FriendlyName": {
+        "friendlyname": {
           "type": "string"
         },
         "description": {
