@@ -91,6 +91,9 @@
         ],
         "description": "Lists all of the available operations",
         "operationId": "Operations_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/apiVersion"
@@ -100,12 +103,9 @@
           "200": {
             "description": "Request has succeeded",
             "schema": {
-              "$ref": "#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationList"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Operations_List": {
@@ -117,6 +117,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
       "get": {
         "operationId": "PrivateClouds_List",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "tags": [
           "PrivateClouds"
         ],
@@ -780,11 +783,11 @@
     }
   },
   "definitions": {
-    "OperationListResult": {
-      "description": "Result of the request to list Time Series Insights operations. It contains a list of operations and a URL link to get the next set of results.",
+    "OperationList": {
+      "description": "Pageable list of operations",
       "properties": {
         "value": {
-          "description": "List of Time Series Insights operations supported by the Microsoft.TimeSeriesInsights resource provider.",
+          "description": "List of operations",
           "type": "array",
           "readOnly": true,
           "items": {
@@ -792,7 +795,7 @@
           }
         },
         "nextLink": {
-          "description": "URL to get the next set of operation list results if there are any.",
+          "description": "URL to get the next page if any",
           "type": "string",
           "readOnly": true
         }
@@ -803,7 +806,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the operation being performed on this object",
+          "description": "Name of the operation being performed on this object",
           "type": "string",
           "readOnly": true
         },
