@@ -399,7 +399,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/clusters/{clusterName}": {
       "get": {
-        "operationId": "Clusters_GetByName",
+        "operationId": "Clusters_Get",
         "tags": [
           "Clusters"
         ],
@@ -436,8 +436,8 @@
           }
         },
         "x-ms-examples": {
-          "Clusters_GetByName": {
-            "$ref": "./examples/Clusters_GetByName.json"
+          "Clusters_Get": {
+            "$ref": "./examples/Clusters_Get.json"
           }
         }
       },
@@ -1206,9 +1206,6 @@
     },
     "ClusterRequest": {
       "properties": {
-        "location": {
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ClusterDetail"
         }
@@ -1219,9 +1216,6 @@
         "id": {
           "type": "string",
           "readOnly": true
-        },
-        "location": {
-          "type": "string"
         },
         "name": {
           "type": "string",
