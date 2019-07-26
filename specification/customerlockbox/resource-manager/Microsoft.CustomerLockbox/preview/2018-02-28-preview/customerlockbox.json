@@ -42,14 +42,14 @@
         "operationId": "Get_Request",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
             "name": "requestId",
             "in": "path",
             "description": "The Lockbox request ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -83,9 +83,6 @@
         "operationId": "Get_RequestByResourceGroup",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
             "name": "requestId",
             "in": "path",
             "description": "The Lockbox request ID.",
@@ -98,6 +95,9 @@
             "description": "The Azure Resource Group containing the request ID.",
             "required": true,
             "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -131,9 +131,6 @@
         "operationId": "Post_RequestUpdateApproval",
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
             "name": "requestId",
             "in": "path",
             "description": "The Lockbox request ID.",
@@ -148,6 +145,9 @@
             "schema": {
               "$ref": "#/definitions/Approval"
             }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
