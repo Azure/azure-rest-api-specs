@@ -41,14 +41,6 @@
     {
       "name": "Clusters",
       "description": ""
-    },
-    {
-      "name": "Subscriptions",
-      "description": ""
-    },
-    {
-      "name": "Move Resource",
-      "description": ""
     }
   ],
   "parameters": {
@@ -57,14 +49,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The unique identifier for a Microsoft Azure subscription."
+      "description": "Unique identifier for the Azure subscription"
     },
     "resourceGroupName": {
       "name": "resourceGroupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the resource group within the Azure subscription.",
+      "description": "Name of the resource group within the Azure subscription",
       "x-ms-parameter-location": "method"
     },
     "apiVersion": {
@@ -72,7 +64,23 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "The Version of the API to be used with the client request."
+      "description": "Version of Azure VMware Solution by Virtustream API to be used with the client request"
+    },
+    "privateCloudName": {
+      "name": "privateCloudName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the private cloud",
+      "x-ms-parameter-location": "method"
+    },
+    "clusterName": {
+      "name": "clusterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the cluster in the private cloud",
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -81,7 +89,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available RP operations.",
+        "description": "Lists all of the available operations",
         "operationId": "Operations_List",
         "parameters": [
           {
@@ -90,7 +98,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "Request has succeeded",
             "schema": {
               "$ref": "#/definitions/OperationListResult"
             }
@@ -106,16 +114,19 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
       "get": {
         "operationId": "PrivateClouds_List",
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "list private clouds",
+        "summary": "List private clouds in a resource group",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -136,83 +147,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
-      "get": {
-        "operationId": "PrivateClouds_GetById",
-        "tags": [
-          "PrivateClouds"
-        ],
-        "summary": "get a private cloud",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/PrivateCloudResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateClouds_GetById": {
-            "$ref": "./examples/PrivateClouds_GetById.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds": {
-      "get": {
-        "operationId": "PrivateClouds_ListInResourceGroup",
-        "tags": [
-          "PrivateClouds"
-        ],
-        "summary": "list private clouds in a resource group",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/PrivateCloudResponseList"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateClouds_ListInResourceGroup": {
-            "$ref": "./examples/PrivateClouds_ListInResourceGroup.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
       "get": {
-        "operationId": "PrivateClouds_GetByIdInResourceGroup",
+        "operationId": "PrivateClouds_Get",
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "get a private cloud in a resource group",
+        "summary": "Get a private cloud",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -221,11 +162,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -240,8 +177,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateClouds_GetByIdInResourceGroup": {
-            "$ref": "./examples/PrivateClouds_GetByIdInResourceGroup.json"
+          "PrivateClouds_Get": {
+            "$ref": "./examples/PrivateClouds_Get.json"
           }
         }
       },
@@ -251,7 +188,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "create a private cloud",
+        "summary": "Create or update a private cloud",
         "consumes": [
           "application/json"
         ],
@@ -263,11 +200,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "name": "parameters",
@@ -304,7 +237,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "modify a private cloud",
+        "summary": "Update a private cloud",
         "consumes": [
           "application/json"
         ],
@@ -316,11 +249,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "name": "parameters",
@@ -354,7 +283,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "delete a private cloud",
+        "summary": "Delete a private cloud",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -363,11 +292,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -394,7 +319,7 @@
         "tags": [
           "Clusters"
         ],
-        "summary": "list clusters in a private cloud",
+        "summary": "List clusters in a private cloud",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -403,11 +328,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -437,7 +358,7 @@
         "tags": [
           "Clusters"
         ],
-        "summary": "get cluster",
+        "summary": "Get a cluster by name in a private cloud",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -446,18 +367,10 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
+            "$ref": "#/parameters/clusterName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -483,7 +396,7 @@
         "tags": [
           "Clusters"
         ],
-        "summary": "create cluster",
+        "summary": "Create or update a cluster in a private cloud",
         "consumes": [
           "application/json"
         ],
@@ -502,11 +415,7 @@
             "description": "The name of the private cloud."
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
+            "$ref": "#/parameters/clusterName"
           },
           {
             "name": "parameters",
@@ -543,7 +452,7 @@
         "tags": [
           "Clusters"
         ],
-        "summary": "modify cluster",
+        "summary": "Update a cluster in a private cloud",
         "consumes": [
           "application/json"
         ],
@@ -555,18 +464,10 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
+            "$ref": "#/parameters/clusterName"
           },
           {
             "name": "parameters",
@@ -603,7 +504,7 @@
         "tags": [
           "Clusters"
         ],
-        "summary": "delete cluster",
+        "summary": "Delete a cluster in a private cloud",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -612,18 +513,10 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the private cloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
-            "name": "clusterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the cluster."
+            "$ref": "#/parameters/clusterName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -651,7 +544,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "adds a number of hosts to a cluster",
+        "summary": "Add ExpressRoute circuit authorization",
         "consumes": [
           "application/json"
         ],
@@ -663,18 +556,14 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the privateCloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "name": "authorizationName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ER authorization."
+            "description": "Name of the ExpressRoute circuit authorization"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -705,7 +594,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "adds a number of hosts to a cluster",
+        "summary": "Delete ExpressRoute circuit authorization",
         "consumes": [
           "application/json"
         ],
@@ -717,11 +606,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the privateCloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "name": "authorizationName",
@@ -759,7 +644,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "adds an identity source for the privateCloud",
+        "summary": "Add an identity source to the private cloud",
         "consumes": [
           "application/json"
         ],
@@ -771,11 +656,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the privateCloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "name": "parameters",
@@ -814,7 +695,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "deletes an identity source from the private cloud",
+        "summary": "Delete an identity source from the private cloud",
         "consumes": [
           "application/json"
         ],
@@ -826,11 +707,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the privateCloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "name": "parameters",
@@ -868,7 +745,7 @@
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "fetches the vcenter credentials for the private cloud",
+        "summary": "Get the admin credentials for the private cloud",
         "consumes": [
           "application/json"
         ],
@@ -880,11 +757,7 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
-            "name": "privateCloudName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the privateCloud."
+            "$ref": "#/parameters/privateCloudName"
           },
           {
             "$ref": "#/parameters/apiVersion"
@@ -930,31 +803,31 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "The name of the operation being performed on this particular object.",
+          "description": "The name of the operation being performed on this object",
           "type": "string",
           "readOnly": true
         },
         "display": {
-          "description": "Contains the localized display information for this particular operation / action.",
+          "description": "Contains the localized display information for this operation",
           "readOnly": true,
           "properties": {
             "provider": {
-              "description": "The localized friendly form of the resource provider name.",
+              "description": "Localized friendly form of the resource provider name",
               "type": "string",
               "readOnly": true
             },
             "resource": {
-              "description": "The localized friendly form of the resource type related to this action/operation.",
+              "description": "Localized friendly form of the resource type related to this operation",
               "type": "string",
               "readOnly": true
             },
             "operation": {
-              "description": "The localized friendly name for the operation.",
+              "description": "Localized friendly name for the operation",
               "type": "string",
               "readOnly": true
             },
             "description": {
-              "description": "The localized friendly description for the operation.",
+              "description": "Localized friendly description for the operation",
               "type": "string",
               "readOnly": true
             }
@@ -968,12 +841,10 @@
           "type": "string"
         },
         "name": {
-          "type": "string",
-          "example": "myAuth"
+          "type": "string"
         },
         "key": {
-          "type": "string",
-          "example": "12341234-1234-1234-1234-123412341234"
+          "type": "string"
         }
       }
     },
@@ -981,21 +852,19 @@
       "properties": {
         "primarySubnet": {
           "type": "string",
-          "description": "CIDR of primary subnet",
-          "example": "10.19.3.50/30"
+          "description": "CIDR of primary subnet"
         },
         "secondarySubnet": {
           "type": "string",
-          "description": "CIDR of secondary subnet",
-          "example": "10.19.3.52/30"
+          "description": "CIDR of secondary subnet"
         },
         "expressRouteID": {
           "type": "string",
-          "description": "ID of privateCloud customer ER (Microsoft Colo only)"
+          "description": "Identifier of the ExpressRoute (Microsoft Colo only)"
         },
         "authorizations": {
           "type": "array",
-          "description": "authorizations on privateCloud customer ER (Microsoft Colo only)",
+          "description": "Authorizations for the ExpressRoute (Microsoft Colo only)",
           "items": {
             "$ref": "#/definitions/ExpressRouteAuthorization"
           }
@@ -1006,120 +875,95 @@
       "properties": {
         "clusterSize": {
           "type": "integer",
-          "description": "number of hosts in PrivateCloud cluster",
-          "example": "4'"
+          "description": "Number of hosts in the cluster"
         }
       }
     },
     "Vpc": {
-      "type": "string",
-      "example": "10.19.4.0/22"
+      "type": "string"
     },
     "Endpoints": {
       "properties": {
         "nsxManager": {
-          "type": "string",
-          "example": "https://10.19.4.3/"
+          "type": "string"
         },
         "vcsa": {
-          "type": "string",
-          "example": "https://10.19.4.2/"
+          "type": "string"
         }
       }
     },
     "AddIdentitySourceRequest": {
       "properties": {
         "name": {
-          "type": "string",
-          "example": "groupName"
+          "type": "string"
         },
         "alias": {
-          "type": "string",
-          "example": "groupAlias"
+          "type": "string"
         },
         "domain": {
-          "type": "string",
-          "example": "groupDomain"
+          "type": "string"
         },
         "baseUserDN": {
-          "type": "string",
-          "example": "ou=baseUserDN"
+          "type": "string"
         },
         "baseGroupDN": {
-          "type": "string",
-          "example": "ou=baseGroupDN"
+          "type": "string"
         },
         "primaryServer": {
-          "type": "string",
-          "example": "ldaps://1.1.1.1:636"
+          "type": "string"
         },
         "secondaryServer": {
-          "type": "string",
-          "example": "ldaps://1.1.1.2:636"
+          "type": "string"
         },
         "useSsl": {
-          "type": "boolean",
-          "example": true
+          "type": "boolean"
         },
         "username": {
-          "type": "string",
-          "example": "user"
+          "type": "string"
         },
         "credential": {
-          "type": "string",
-          "example": "password"
+          "type": "string"
         }
       }
     },
     "DeleteIdentitySourceRequest": {
       "properties": {
         "name": {
-          "type": "string",
-          "example": "groupName"
+          "type": "string"
         },
         "alias": {
-          "type": "string",
-          "example": "groupAlias"
+          "type": "string"
         },
         "domain": {
-          "type": "string",
-          "example": "groupDomain"
+          "type": "string"
         }
       }
     },
     "IdentitySource": {
       "properties": {
         "name": {
-          "type": "string",
-          "example": "groupName"
+          "type": "string"
         },
         "alias": {
-          "type": "string",
-          "example": "groupAlias"
+          "type": "string"
         },
         "domain": {
-          "type": "string",
-          "example": "groupDomain"
+          "type": "string"
         },
         "baseUserDN": {
-          "type": "string",
-          "example": "ou=baseUserDN"
+          "type": "string"
         },
         "baseGroupDN": {
-          "type": "string",
-          "example": "ou=baseGroupDN"
+          "type": "string"
         },
         "primaryServer": {
-          "type": "string",
-          "example": "ldaps://1.1.1.1:636"
+          "type": "string"
         },
         "secondaryServer": {
-          "type": "string",
-          "example": "ldaps://1.1.1.2:636"
+          "type": "string"
         },
         "useSsl": {
-          "type": "boolean",
-          "example": true
+          "type": "boolean"
         }
       }
     },
@@ -1168,8 +1012,7 @@
     "Cluster": {
       "properties": {
         "clusterId": {
-          "type": "integer",
-          "example": 1
+          "type": "integer"
         },
         "provisioningState": {
           "type": "string",
@@ -1181,8 +1024,7 @@
           ]
         },
         "clusterSize": {
-          "type": "integer",
-          "example": 4
+          "type": "integer"
         },
         "hosts": {
           "type": "array",
@@ -1195,8 +1037,7 @@
     "PrivateCloudRequest": {
       "properties": {
         "location": {
-          "type": "string",
-          "example": "West US"
+          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/PrivateCloud"
@@ -1213,8 +1054,7 @@
           "readOnly": true
         },
         "location": {
-          "type": "string",
-          "example": "West US"
+          "type": "string"
         },
         "name": {
           "type": "string",
@@ -1225,7 +1065,6 @@
         },
         "type": {
           "type": "string",
-          "example": "Microsoft.VMwareVirtustream/privateClouds",
           "readOnly": true
         },
         "tags": {
@@ -1247,8 +1086,7 @@
     "ClusterRequest": {
       "properties": {
         "location": {
-          "type": "string",
-          "example": "West US"
+          "type": "string"
         },
         "properties": {
           "$ref": "#/definitions/ClusterDetail"
@@ -1262,8 +1100,7 @@
           "readOnly": true
         },
         "location": {
-          "type": "string",
-          "example": "West US"
+          "type": "string"
         },
         "name": {
           "type": "string",
@@ -1274,7 +1111,6 @@
         },
         "type": {
           "type": "string",
-          "example": "Microsoft.VMwareVirtustream/privateClouds/clusters",
           "readOnly": true
         }
       },
@@ -1283,20 +1119,16 @@
     "GetAdminCredentialsResponse": {
       "properties": {
         "nsxUser": {
-          "type": "string",
-          "example": "user@domain.local"
+          "type": "string"
         },
         "nsxPassword": {
-          "type": "string",
-          "example": "password"
+          "type": "string"
         },
         "user": {
-          "type": "string",
-          "example": "user@domain.local"
+          "type": "string"
         },
         "password": {
-          "type": "string",
-          "example": "password"
+          "type": "string"
         }
       }
     }
