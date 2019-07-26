@@ -258,58 +258,6 @@
           }
         }
       },
-      "patch": {
-        "operationId": "PrivateClouds_Update",
-        "x-ms-long-running-operation": true,
-        "tags": [
-          "PrivateClouds"
-        ],
-        "summary": "Update a private cloud",
-        "consumes": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/privateCloudName"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PrivateCloudRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/apiVersion"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "successful operation",
-            "schema": {
-              "$ref": "#/definitions/PrivateCloudResponse"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed",
-            "schema": {
-              "$ref": "#/definitions/ApiError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "PrivateClouds_Update": {
-            "$ref": "./examples/PrivateClouds_Update.json"
-          }
-        }
-      },
       "delete": {
         "operationId": "PrivateClouds_Delete",
         "x-ms-long-running-operation": true,
