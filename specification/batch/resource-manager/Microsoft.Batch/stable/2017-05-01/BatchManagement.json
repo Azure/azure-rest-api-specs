@@ -43,8 +43,12 @@
         ],
         "operationId": "BatchAccount_Create",
         "x-ms-examples": {
-          "BatchAccountCreate_Default": { "$ref": "./examples/BatchAccountCreate_Default.json" },
-          "BatchAccountCreate_BYOS": { "$ref": "./examples/BatchAccountCreate_BYOS.json" }
+          "BatchAccountCreate_Default": {
+            "$ref": "./examples/BatchAccountCreate_Default.json"
+          },
+          "BatchAccountCreate_BYOS": {
+            "$ref": "./examples/BatchAccountCreate_BYOS.json"
+          }
         },
         "description": "Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.",
         "parameters": [
@@ -113,7 +117,9 @@
         ],
         "operationId": "BatchAccount_Update",
         "x-ms-examples": {
-          "BatchAccountUpdate": { "$ref": "./examples/BatchAccountUpdate.json" }
+          "BatchAccountUpdate": {
+            "$ref": "./examples/BatchAccountUpdate.json"
+          }
         },
         "description": "Updates the properties of an existing Batch account.",
         "parameters": [
@@ -160,7 +166,9 @@
         ],
         "operationId": "BatchAccount_Delete",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/BatchAccountDelete.json" }
+          "BatchAccountDelete": {
+            "$ref": "./examples/BatchAccountDelete.json"
+          }
         },
         "description": "Deletes the specified Batch account.",
         "parameters": [
@@ -213,7 +221,9 @@
         ],
         "operationId": "BatchAccount_Get",
         "x-ms-examples": {
-          "BatchAccountGet": { "$ref": "./examples/BatchAccountGet.json" }
+          "BatchAccountGet": {
+            "$ref": "./examples/BatchAccountGet.json"
+          }
         },
         "description": "Gets information about the specified Batch account.",
         "parameters": [
@@ -253,7 +263,9 @@
         ],
         "operationId": "BatchAccount_List",
         "x-ms-examples": {
-          "BatchAccountList": { "$ref": "./examples/BatchAccountList.json" }
+          "BatchAccountList": {
+            "$ref": "./examples/BatchAccountList.json"
+          }
         },
         "description": "Gets information about the Batch accounts associated with the subscription.",
         "parameters": [
@@ -290,7 +302,9 @@
         ],
         "operationId": "BatchAccount_ListByResourceGroup",
         "x-ms-examples": {
-          "BatchAccountListByResourceGroup": { "$ref": "./examples/BatchAccountListByResourceGroup.json" }
+          "BatchAccountListByResourceGroup": {
+            "$ref": "./examples/BatchAccountListByResourceGroup.json"
+          }
         },
         "description": "Gets information about the Batch accounts associated with the specified resource group.",
         "parameters": [
@@ -364,7 +378,9 @@
         ],
         "operationId": "BatchAccount_RegenerateKey",
         "x-ms-examples": {
-          "BatchAccountRegenerateKey": { "$ref": "./examples/BatchAccountRegenerateKey.json" }
+          "BatchAccountRegenerateKey": {
+            "$ref": "./examples/BatchAccountRegenerateKey.json"
+          }
         },
         "description": "Regenerates the specified account key for the Batch account.",
         "parameters": [
@@ -413,7 +429,9 @@
         ],
         "operationId": "BatchAccount_GetKeys",
         "x-ms-examples": {
-          "BatchAccountGetKeys": { "$ref": "./examples/BatchAccountGetKeys.json" }
+          "BatchAccountGetKeys": {
+            "$ref": "./examples/BatchAccountGetKeys.json"
+          }
         },
         "summary": "Gets the account keys for the specified Batch account.",
         "description": "This operation applies only to Batch accounts created with a poolAllocationMode of 'BatchService'. If the Batch account was created with a poolAllocationMode of 'UserSubscription', clients cannot use access to keys to authenticate, and must use Azure Active Directory instead. In this case, getting the keys will fail.",
@@ -887,7 +905,9 @@
         ],
         "operationId": "Location_GetQuotas",
         "x-ms-examples": {
-          "LocationGetQuotas": { "$ref": "./examples/LocationGetQuotas.json" }
+          "LocationGetQuotas": {
+            "$ref": "./examples/LocationGetQuotas.json"
+          }
         },
         "description": "Gets the Batch service quotas for the specified subscription at the given location.",
         "parameters": [
@@ -930,7 +950,7 @@
         "description": "Lists available operations for the Microsoft.Batch provider",
         "parameters": [
           {
-              "$ref": "#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -957,8 +977,12 @@
         "operationId": "Location_CheckNameAvailability",
         "description": "Checks whether the Batch account name is available in the specified region.",
         "x-ms-examples": {
-          "LocationCheckNameAvailability_Available": { "$ref": "./examples/LocationCheckNameAvailability_Available.json" },
-          "LocationCheckNameAvailability_AlreadyExists": { "$ref": "./examples/LocationCheckNameAvailability_AlreadyExists.json" }
+          "LocationCheckNameAvailability_Available": {
+            "$ref": "./examples/LocationCheckNameAvailability_Available.json"
+          },
+          "LocationCheckNameAvailability_AlreadyExists": {
+            "$ref": "./examples/LocationCheckNameAvailability_AlreadyExists.json"
+          }
         },
         "parameters": [
           {
@@ -1530,7 +1554,7 @@
       }
     },
     "OperationListResult": {
-     "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
+      "title": "Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -1553,7 +1577,9 @@
         },
         "type": {
           "type": "string",
-          "enum": [ "Microsoft.Batch/batchAccounts" ],
+          "enum": [
+            "Microsoft.Batch/batchAccounts"
+          ],
           "x-ms-enum": {
             "name": "Type",
             "modelAsString": false
@@ -1610,7 +1636,7 @@
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request."
-    }, 
+    },
     "ResourceGroupNameParameter": {
       "name": "resourceGroupName",
       "in": "path",
