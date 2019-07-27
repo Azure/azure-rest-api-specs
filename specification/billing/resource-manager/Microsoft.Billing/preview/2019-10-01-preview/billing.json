@@ -2033,7 +2033,7 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/transactions/{transactionName}": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/transactions/{transactionName}": {
       "get": {
         "tags": [
           "Transactions"
@@ -2060,6 +2060,20 @@
           },
           {
             "$ref": "#/parameters/transactionNameParameter"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
