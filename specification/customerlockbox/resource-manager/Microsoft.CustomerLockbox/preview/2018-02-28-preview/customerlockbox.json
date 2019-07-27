@@ -24,7 +24,10 @@
           "200": {
             "description": "OK. Successfully retrieved operation list.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderOperations"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/OperationResult"
+              }
             }
           }
         },
@@ -60,12 +63,6 @@
             "description": "Retrieval of Customer Lockbox request successful.",
             "schema": {
               "$ref": "#/definitions/LockboxRequestResponse"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -108,12 +105,6 @@
             "description": "Retrieval of Customer Lockbox request successful.",
             "schema": {
               "$ref": "#/definitions/LockboxRequestResponse"
-            }
-          },
-          "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -159,12 +150,6 @@
             "schema": {
               "$ref": "#/definitions/Approval"
             }
-          },
-          "500": {
-            "description": "Internal server error",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
           }
         },
         "x-ms-examples": {
@@ -176,17 +161,6 @@
     }
   },
   "definitions": {
-    "ResourceProviderOperations": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceProviderOperation"
-          }
-        }
-      }
-    },
     "ResourceProviderOperation": {
       "type": "object",
       "properties": {
@@ -221,6 +195,53 @@
           "type": "string"
         },
         "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationResult": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets action name",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether it is a data plane action",
+          "type": "string"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "Gets or sets Display properties"
+        },
+        "properties": {
+          "description": "Gets or sets properties",
+          "type": "string"
+        },
+        "origin": {
+          "description": "Gets or sets origin",
+          "type": "string"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Display class",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Gets or sets RP friendly name",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Gets or sets Resource type friendly name",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Gets or sets operation name",
+          "type": "string"
+        },
+        "description": {
+          "description": "Gets or sets operation description",
           "type": "string"
         }
       }
@@ -286,48 +307,6 @@
           "type": "string"
         },
         "subscriptionId": {
-          "type": "string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorInformation"
-        }
-      }
-    },
-    "ErrorInformation": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
-          "type": "string"
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetails"
-          }
-        }
-      }
-    },
-    "ErrorDetails": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string"
-        },
-        "message": {
-          "type": "string"
-        },
-        "target": {
           "type": "string"
         }
       }
