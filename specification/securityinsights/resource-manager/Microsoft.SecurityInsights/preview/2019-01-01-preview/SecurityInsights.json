@@ -792,14 +792,14 @@
       "put": {
         "x-ms-examples": {
           "Creates or updates a case comment.": {
-            "$ref": "./examples/cases/comments/CreateOrUpdateCaseComment.json"
+            "$ref": "./examples/cases/comments/CreateCaseComment.json"
           }
         },
         "tags": [
           "CaseComments"
         ],
-        "description": "Creates or updates the case comment.",
-        "operationId": "CaseComments_CreateOrUpdateComment",
+        "description": "Creates the case comment.",
+        "operationId": "CaseComments_CreateComment",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -823,7 +823,7 @@
             "$ref": "#/parameters/CaseCommentId"
           },
           {
-            "$ref": "#/parameters/CaseCommentParameters"
+            "$ref": "#/parameters/CaseCommentRequestBody"
           }
         ],
         "responses": {
@@ -2342,9 +2342,25 @@
         "userInfo"
       ]
     },
-    "CaseCommentRequestParameters": {
+    "CaseCommentRequestBody": {
       "type": "object",
-      "description": "Case comment request property bag.",
+      "description": "Represents a case comment request body",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Case comment request body properties",
+          "$ref": "#/definitions/CaseCommentRequestBodyProperties"
+        }
+      }
+    },
+    "CaseCommentRequestBodyProperties": {
+      "type": "object",
+      "description": "Case comment request body property bag.",
       "properties": {
         "message": {
           "type": "string",
@@ -3687,13 +3703,13 @@
       "description": "Case comment ID",
       "x-ms-parameter-location": "method"
     },
-    "CaseCommentParameters": {
-      "name": "caseCommentParameters",
+    "CaseCommentRequestBody": {
+      "name": "caseCommentRequestBody",
       "in": "body",
-      "description": "The case comment request",
+      "description": "The case comment request body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/CaseCommentRequestParameters"
+        "$ref": "#/definitions/CaseCommentRequestBody"
       },
       "x-ms-parameter-location": "method"
     },
