@@ -2335,7 +2335,12 @@
           "description": "Describes the user that created the comment",
           "$ref": "#/definitions/UserInfo"
         }
-      }
+      },
+      "required": [
+        "message",
+        "createdTimeUtc",
+        "userInfo"
+      ]
     },
     "CaseCommentRequestParameters": {
       "type": "object",
@@ -2345,7 +2350,10 @@
           "type": "string",
           "description": "The comment message"
         }
-      }
+      },
+      "required": [
+        "message"
+      ]
     },
     "BookmarkList": {
       "description": "List all the bookmarks.",
