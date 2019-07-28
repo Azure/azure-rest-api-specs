@@ -24,6 +24,19 @@ To see additional help and options, run:
 
 These are the global settings for the AlertManagement API.
 
+## Suppression
+``` yaml
+directive:
+  - suppress: R3025
+    reason: The rule applied incorrectly to base class.
+    where:
+      - $.definitions.ManagedResource
+  - suppress: R3026
+    reason: The rule applied incorrectly to base class.
+    where:
+      - $.definitions.ManagedResource
+```
+
 ``` yaml
 title: AlertsManagementClient
 description: AlertsManagement Client
