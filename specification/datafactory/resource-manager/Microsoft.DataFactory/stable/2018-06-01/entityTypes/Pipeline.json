@@ -1074,6 +1074,21 @@
         }
       }
     },
+    "SapBwSource": {
+      "description": "A copy activity source for SapBW server via MDX.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "MDX query. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "ODataSource": {
       "description": "A copy activity source for OData source.",
       "type": "object",

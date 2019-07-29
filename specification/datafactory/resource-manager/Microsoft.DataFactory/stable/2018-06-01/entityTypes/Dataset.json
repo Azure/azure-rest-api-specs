@@ -1593,6 +1593,44 @@
         }
       }
     },
+    "SybaseTableDataset": {
+      "x-ms-discriminator-value": "SybaseTable",
+      "description": "The Sybase table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sybase table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SybaseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "SybaseTableDatasetTypeProperties": {
+      "description": "Sybase table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The Sybase table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapBwCubeDataset": {
+      "x-ms-discriminator-value": "SapBwCube",
+      "description": "The SAP BW cube dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+      }
+    },
     "SapCloudForCustomerResourceDataset": {
       "x-ms-discriminator-value": "SapCloudForCustomerResource",
       "description": "The path of the SAP Cloud for Customer OData entity.",
