@@ -4682,6 +4682,20 @@
             "description": "The instance ID of the virtual machine."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -8531,6 +8545,10 @@
         "licenseType": {
           "type": "string",
           "description": "The license type, which is for bring your own license scenario."
+        },
+        "scheduledEventsProfile" : {
+          "$ref":"#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
