@@ -233,7 +233,14 @@
         "accessModes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "WebPage"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationHttpsEndpointAccessMode",
+              "modelAsString": true
+            }
           },
           "description": "The list of access modes for the application."
         },
@@ -253,7 +260,7 @@
         },
         "subDomainSuffix": {
           "type": "string",
-          "description": "The subDomainSuffix of the application."
+          "description": "The subdomain suffix of the application."
         },
         "disableGatewayAuth": {
           "type": "boolean",
@@ -324,7 +331,15 @@
         },
         "applicationType": {
           "type": "string",
-          "description": "The application type."
+          "description": "The application type.",
+          "enum": [
+            "CustomApplication",
+            "RServer"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          }
         },
         "applicationState": {
           "readOnly": true,
