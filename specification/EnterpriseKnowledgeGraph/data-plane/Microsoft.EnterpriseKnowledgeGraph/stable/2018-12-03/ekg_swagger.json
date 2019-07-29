@@ -161,7 +161,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/SparqlQueryResponse"
+              "$ref": "#/definitions/GraphQueryResponse"
             }
           }
         }
@@ -691,7 +691,7 @@
         "utterance": {
           "$ref": "#/definitions/Utterance"
         },
-        "sparql": {
+        "GraphQuery": {
           "type": "string"
         },
         "confidence": {
@@ -776,11 +776,11 @@
         }
       }
     },
-    "SparqlQueryResponse": {
+    "GraphQueryResponse": {
       "type": "object",
       "properties": {
-        "sparqlResponse": {
-          "$ref": "#/definitions/SparqlQueryDbResponse"
+        "GraphResponse": {
+          "$ref": "#/definitions/GraphQueryDbResponse"
         },
         "metadata": {
           "type": "object",
@@ -790,7 +790,7 @@
         }
       }
     },
-    "SparqlQueryDbResponse": {
+    "GraphQueryDbResponse": {
       "type": "object",
       "properties": {
         "head": {
