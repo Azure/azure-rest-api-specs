@@ -686,7 +686,7 @@
           "CaseComments"
         ],
         "description": "Gets all case comments.",
-        "operationId": "CaseComments_List",
+        "operationId": "Comments_ListByCase",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -750,7 +750,7 @@
           "CaseComments"
         ],
         "description": "Gets a case comment.",
-        "operationId": "CaseComments_GetCommentById",
+        "operationId": "Cases_GetComment",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -823,16 +823,10 @@
             "$ref": "#/parameters/CaseCommentId"
           },
           {
-            "$ref": "#/parameters/CaseCommentRequestBody"
+            "$ref": "#/parameters/CaseComment"
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/CaseComment"
-            }
-          },
           "201": {
             "description": "Created",
             "schema": {
@@ -2116,12 +2110,14 @@
         "lastUpdatedTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The last time the case was updated"
+          "description": "The last time the case was updated",
+          "readOnly": true
         },
         "createdTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the case was created"
+          "description": "The time the case was created",
+          "readOnly": true
         },
         "endTimeUtc": {
           "type": "string",
@@ -2149,8 +2145,9 @@
           "description": "The title of the case"
         },
         "assignedTo": {
-          "type": "string",
-          "description": "Describes a user that the case is assigned to"
+          "type": "object",
+          "description": "Describes a user that the case is assigned to",
+          "$ref": "#/definitions/UserInfo"
         },
         "severity": {
           "type": "string",
@@ -2258,19 +2255,23 @@
             "type": "string",
             "description": "related alert id"
           },
-          "description": "List of related alert identifiers"
+          "description": "List of related alert identifiers",
+          "readOnly": true
         },
         "caseNumber": {
           "type": "integer",
-          "description": "a sequential number"
+          "description": "a sequential number",
+          "readOnly": true
         },
         "lastComment": {
           "type": "string",
-          "description": "the last comment in the case"
+          "description": "the last comment in the case",
+          "readOnly": true
         },
         "totalComments": {
           "type": "integer",
-          "description": "the number of total comments in the case"
+          "description": "the number of total comments in the case",
+          "readOnly": true
         }
       },
       "required": [
@@ -2327,43 +2328,14 @@
         "createdTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the comment was created"
+          "description": "The time the comment was created",
+          "readOnly": true
         },
         "userInfo": {
           "type": "object",
           "description": "Describes the user that created the comment",
-          "$ref": "#/definitions/UserInfo"
-        }
-      },
-      "required": [
-        "message",
-        "createdTimeUtc",
-        "userInfo"
-      ]
-    },
-    "CaseCommentRequestBody": {
-      "type": "object",
-      "description": "Represents a case comment request body",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Case comment request body properties",
-          "$ref": "#/definitions/CaseCommentRequestBodyProperties"
-        }
-      }
-    },
-    "CaseCommentRequestBodyProperties": {
-      "type": "object",
-      "description": "Case comment request body property bag.",
-      "properties": {
-        "message": {
-          "type": "string",
-          "description": "The comment message"
+          "$ref": "#/definitions/UserInfo",
+          "readOnly": true
         }
       },
       "required": [
@@ -2470,13 +2442,18 @@
         },
         "email": {
           "type": "string",
-          "description": "The email of the user."
+          "description": "The email of the user.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the user."
+          "description": "The name of the user.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "objectId"
+      ]
     },
     "Label": {
       "description": "Label that will be used to tag and filter on.",
@@ -3702,13 +3679,13 @@
       "description": "Case comment ID",
       "x-ms-parameter-location": "method"
     },
-    "CaseCommentRequestBody": {
-      "name": "caseCommentRequestBody",
+    "CaseComment": {
+      "name": "caseComment",
       "in": "body",
-      "description": "The case comment request body",
+      "description": "The case comment",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/CaseCommentRequestBody"
+        "$ref": "#/definitions/CaseComment"
       },
       "x-ms-parameter-location": "method"
     },
