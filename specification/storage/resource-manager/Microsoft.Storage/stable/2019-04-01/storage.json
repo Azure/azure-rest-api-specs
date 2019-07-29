@@ -2160,7 +2160,6 @@
         "properties": {
           "$ref": "#/definitions/ManagementPolicyProperties",
           "x-ms-client-flatten": true,
-          "readOnly": true,
           "description": "Returns the Storage Account Data Policies Rules."
         }
       },
@@ -2317,9 +2316,10 @@
     "DateAfterModification": {
       "properties": {
         "daysAfterModificationGreaterThan": {
-          "type": "integer",
+          "type": "number",
+          "multipleOf": 1.0,
           "minimum": 0,
-          "description": "Integer value indicating the age in days after last modification"
+          "description": "Value indicating the age in days after last modification"
         }
       },
       "required": [
@@ -2330,9 +2330,10 @@
     "DateAfterCreation": {
       "properties": {
         "daysAfterCreationGreaterThan": {
-          "type": "integer",
+          "type": "number",
+          "multipleOf": 1.0,
           "minimum": 0,
-          "description": "Integer value indicating the age in days after creation"
+          "description": "Value indicating the age in days after creation"
         }
       },
       "required": [
