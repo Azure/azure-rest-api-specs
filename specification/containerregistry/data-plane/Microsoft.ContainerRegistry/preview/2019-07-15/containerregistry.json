@@ -324,8 +324,9 @@
           "200": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
             "schema": {
-              "type": "string",
-              "format": "binary"
+              "description": "blob binary data",
+              "type": "file",
+              "format": "file"
             },
             "headers": {
               "Content-Length": {
@@ -365,10 +366,6 @@
         "responses": {
           "200": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            },
             "headers": {
               "Content-Length": {
                 "type": "integer",
@@ -399,13 +396,17 @@
         }
       },
       "delete": {
+        "tags": [
+          "Layer"
+        ],
         "operationId": "DeleteBlob",
         "responses": {
           "200": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
             "schema": {
-              "type": "string",
-              "format": "binary"
+              "description": "blob binary data",
+              "type": "file",
+              "format": "file"
             },
             "headers": {
               "Docker-Content-Digest": {
@@ -1194,16 +1195,16 @@
         ],
         "parameters": [
           {
-            "name": "monolithic",
-            "description": "Initiate Monolithic Blob Upload",
-            "type": "string",
-            "in": "query"
-          },
-          {
             "$ref": "#/parameters/BlobQueryDigest"
           },
           {
             "$ref": "#/parameters/RawData"
+          },
+          {
+            "name": "monolithic",
+            "description": "Initiate Monolithic Blob Upload",
+            "type": "string",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1238,13 +1239,13 @@
         "operationId": "StartEmptyResumableBlobUpload",
         "parameters": [
           {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
             "name": "resumable",
             "description": "Initiate Resumable Blob Upload",
             "type": "string",
             "in": "query"
-          },
-          {
-            "$ref": "#/parameters/ImageName"
           }
         ],
         "responses": {
@@ -1298,16 +1299,16 @@
         ],
         "parameters": [
           {
-            "name": "chunk",
-            "description": "Initiate Chunk Blob Upload",
-            "type": "string",
-            "in": "query"
-          },
-          {
             "$ref": "#/parameters/RawData"
           },
           {
             "$ref": "#/parameters/Content-Range"
+          },
+          {
+            "name": "chunk",
+            "description": "Initiate Chunk Blob Upload",
+            "type": "string",
+            "in": "query"
           }
         ],
         "responses": {
@@ -1340,12 +1341,6 @@
     "/v2/{name}/blobs/{digest}?mode={part}": {
       "parameters": [
         {
-          "name": "part",
-          "description": "Acquire only part of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
-          "type": "string",
-          "in": "query"
-        },
-        {
           "$ref": "#/parameters/ImageName"
         },
         {
@@ -1353,6 +1348,12 @@
         },
         {
           "$ref": "#/parameters/Range"
+        },
+        {
+          "name": "part",
+          "description": "Acquire only part of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
+          "type": "string",
+          "in": "query"
         }
       ],
       "get": {
@@ -1366,8 +1367,8 @@
             "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
             "schema": {
               "description": "blob binary data",
-              "type": "string",
-              "format": "binary"
+              "type": "file",
+              "format": "file"
             },
             "headers": {
               "Content-Length": {
@@ -1397,11 +1398,6 @@
         "responses": {
           "206": {
             "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
-            "schema": {
-              "description": "blob binary data",
-              "type": "string",
-              "format": "binary"
-            },
             "headers": {
               "Content-Length": {
                 "type": "integer",
@@ -2410,11 +2406,9 @@
     "RawData": {
       "name": "value",
       "in": "body",
-      "description": "Bytes containing a blob or a portion of one",
-      "required": true,
       "schema": {
-        "type": "string",
-        "format": "binary"
+        "type": "object",
+        "format": "file"
       },
       "x-ms-parameter-location": "method"
     },
@@ -2455,6 +2449,7 @@
       "type": "string",
       "description": "Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.",
       "in": "header",
+      "required": true,
       "x-ms-parameter-location": "method"
     }
   }
