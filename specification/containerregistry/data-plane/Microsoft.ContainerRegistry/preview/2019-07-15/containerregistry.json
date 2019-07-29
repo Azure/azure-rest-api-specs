@@ -339,7 +339,14 @@
             }
           },
           "307": {
-            "description": "The blob identified by digest is available at the provided location."
+            "description": "The blob identified by digest is available at the provided location.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "url",
+                "description": "The location where the layer should be accessible."
+              }
+            }
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -374,7 +381,14 @@
             }
           },
           "307": {
-            "description": "The blob identified by digest is available at the provided location."
+            "description": "The blob identified by digest is available at the provided location.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "format": "url",
+                "description": "The location where the layer should be accessible."
+              }
+            }
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -420,18 +434,10 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-            "name": "from",
-            "type": "string",
-            "in": "query",
-            "description": "Name of the source repository.",
-            "required": false
+            "$ref": "#/parameters/From"
           },
           {
-            "name": "mount",
-            "description": "Digest of blob to mount from the source repository.",
-            "type": "string",
-            "in": "query",
-            "required": false
+            "$ref": "#/parameters/Mount"
           }
         ],
         "responses": {
@@ -463,11 +469,7 @@
           "$ref": "#/parameters/ImageName"
         },
         {
-          "name": "uuid",
-          "description": "A uuid identifying the upload.",
-          "type": "string",
-          "in": "path",
-          "required": true
+          "$ref": "#/parameters/Uuid"
         }
       ],
       "get": {
@@ -509,13 +511,7 @@
         ],
         "parameters": [
           {
-            "name": "value",
-            "in": "body",
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            },
-            "required": true
+            "$ref": "#/parameters/RawData"
           }
         ],
         "responses": {
@@ -555,20 +551,10 @@
         "operationId": "EndBlobUpload",
         "parameters": [
           {
-            "name": "digest",
-            "description": "Digest of uploaded blob",
-            "type": "string",
-            "in": "query",
-            "required": true
+            "$ref": "#/parameters/BlobQueryDigest"
           },
           {
-            "name": "value",
-            "in": "body",
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            },
-            "required": true
+            "$ref": "#/parameters/RawData"
           }
         ],
         "responses": {
@@ -1213,18 +1199,10 @@
             "in": "query"
           },
           {
-            "name": "digest",
-            "description": "Digest of uploaded blob. If present, the upload will be completed, in a single request, with contents of the request body as the resulting blob.",
-            "type": "string",
-            "in": "query"
+            "$ref": "#/parameters/BlobQueryDigest"
           },
           {
-            "name": "value",
-            "in": "body",
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "$ref": "#/parameters/RawData"
           }
         ],
         "responses": {
@@ -1325,26 +1303,10 @@
             "in": "query"
           },
           {
-            "name": "value",
-            "in": "body",
-            "schema": {
-              "type": "string",
-              "format": "binary"
-            }
+            "$ref": "#/parameters/RawData"
           },
           {
-            "name": "Content-Range",
-            "in": "header",
-            "description": "Range of bytes identifying the desired block of content represented by the body. Start must the end offset retrieved via status check plus one. Note that this is a non-standard use of the `Content-Range` header.",
-            "type": "string",
-            "required": true
-          },
-          {
-            "name": "Content-Length",
-            "in": "header",
-            "description": "Length of the chunk being uploaded, corresponding the length of the request body.",
-            "type": "string",
-            "required": true
+            "$ref": "#/parameters/Content-Range"
           }
         ],
         "responses": {
@@ -1377,16 +1339,19 @@
     "/v2/{name}/blobs/{digest}?mode={part}": {
       "parameters": [
         {
+          "name": "part",
+          "description": "Acquire only part of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
+          "type": "string",
+          "in": "query"
+        },
+        {
           "$ref": "#/parameters/ImageName"
         },
         {
           "$ref": "#/parameters/Digest"
         },
         {
-          "name": "Range",
-          "type": "string",
-          "description": "Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.",
-          "in": "header"
+          "$ref": "#/parameters/Range"
         }
       ],
       "get": {
@@ -2299,7 +2264,15 @@
     "Digest": {
       "name": "digest",
       "in": "path",
-      "description": "Digest of a desired BLOB",
+      "description": "Digest of a BLOB",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "BlobQueryDigest": {
+      "name": "digest",
+      "in": "query",
+      "description": "Digest of a BLOB",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -2431,6 +2404,56 @@
       "schema": {
         "$ref": "#/definitions/Manifest"
       },
+      "x-ms-parameter-location": "method"
+    },
+    "RawData": {
+      "name": "value",
+      "in": "body",
+      "description": "Bytes containing a blob or a portion of one",
+      "required": true,
+      "schema": {
+        "type": "string",
+        "format": "binary"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "From": {
+      "name": "from",
+      "type": "string",
+      "in": "query",
+      "description": "Name of the source repository.",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "Mount": {
+      "name": "mount",
+      "description": "Digest of blob to mount from the source repository.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "Uuid": {
+      "name": "uuid",
+      "description": "A uuid identifying the upload.",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "Content-Range": {
+      "name": "Content-Range",
+      "in": "header",
+      "description": "Range of bytes identifying the desired block of content represented by the body. Start must the end offset retrieved via status check plus one. Note that this is a non-standard use of the `Content-Range` header.",
+      "type": "string",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "Range": {
+      "name": "Range",
+      "type": "string",
+      "description": "Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.",
+      "in": "header",
       "x-ms-parameter-location": "method"
     }
   }
