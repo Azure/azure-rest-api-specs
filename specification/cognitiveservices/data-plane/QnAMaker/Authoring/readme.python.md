@@ -10,17 +10,17 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.knowledge.qnamaker
-  package-name: azure-cognitiveservices-knowledge-qnamaker
+  namespace: azure.cognitiveservices.qnamaker.authoring
+  package-name: azure-cognitiveservices-qnamaker
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-qnamaker/azure/cognitiveservices/qnamaker/authoring
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-qnamaker
 ```
