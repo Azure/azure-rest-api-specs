@@ -205,7 +205,7 @@
         "type": "object"
       }
     },
-    "StoreReadSettings": {
+    "StoreReadSetting": {
       "description": "Connector read setting.",
       "type": "object",
       "properties": {
@@ -225,12 +225,12 @@
         "type"
       ]
     },
-    "AzureBlobStorageReadSettings": {
+    "AzureBlobStorageReadSetting": {
       "description": "Azure blob read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -260,12 +260,12 @@
         }
       }
     },
-    "AzureBlobFSReadSettings": {
+    "AzureBlobFSReadSetting": {
       "description": "Azure blobFS read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -295,12 +295,12 @@
         }
       }
     },
-    "AzureDataLakeStoreReadSettings": {
+    "AzureDataLakeStoreReadSetting": {
       "description": "Azure data lake store read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -330,12 +330,12 @@
         }
       }
     },
-    "AmazonS3ReadSettings": {
+    "AmazonS3ReadSetting": {
       "description": "Azure data lake store read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -369,12 +369,12 @@
         }
       }
     },
-    "FileServerReadSettings": {
+    "FileServerReadSetting": {
       "description": "File server read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -404,12 +404,12 @@
         }
       }
     },
-    "FtpReadSettings": {
+    "FtpReadSetting": {
       "description": "Ftp read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -431,12 +431,12 @@
         }
       }
     },
-    "SftpReadSettings": {
+    "SftpReadSetting": {
       "description": "Sftp read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -462,12 +462,12 @@
         }
       }
     },
-    "HttpReadSettings": {
+    "HttpReadSetting": {
       "description": "Sftp read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -489,12 +489,12 @@
         }
       }
     },
-    "HdfsReadSettings": {
+    "HdfsReadSetting": {
       "description": "HDFS read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreReadSettings"
+          "$ref": "#/definitions/StoreReadSetting"
         }
       ],
       "properties": {
@@ -528,7 +528,7 @@
         }
       }
     },
-    "StoreWriteSettings": {
+    "StoreWriteSetting": {
       "description": "Connector write settings.",
       "type": "object",
       "properties": {
@@ -552,43 +552,43 @@
         "type"
       ]
     },
-    "AzureBlobStorageWriteSettings": {
+    "AzureBlobStorageWriteSetting": {
       "description": "Azure blob write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreWriteSettings"
+          "$ref": "#/definitions/StoreWriteSetting"
         }
       ]
     },
-    "AzureBlobFSWriteSettings": {
+    "AzureBlobFSWriteSetting": {
       "description": "Azure blobFS write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreWriteSettings"
+          "$ref": "#/definitions/StoreWriteSetting"
         }
       ]
     },
-    "AzureDataLakeStoreWriteSettings": {
+    "AzureDataLakeStoreWriteSetting": {
       "description": "Azure data lake store write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreWriteSettings"
+          "$ref": "#/definitions/StoreWriteSetting"
         }
       ]
     },
-    "FileServerWriteSettings": {
+    "FileServerWriteSetting": {
       "description": "File server write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/StoreWriteSettings"
+          "$ref": "#/definitions/StoreWriteSetting"
         }
       ]
     },
-    "FormatReadSettings": {
+    "FormatReadSetting": {
       "description": "Format read settings.",
       "type": "object",
       "properties": {
@@ -604,12 +604,12 @@
         "type"
       ]
     },
-    "DelimitedTextReadSettings": {
+    "DelimitedTextReadSetting": {
       "description": "Delimited text read settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FormatReadSettings"
+          "$ref": "#/definitions/FormatReadSetting"
         }
       ],
       "properties": {
@@ -619,7 +619,7 @@
         }
       }
     },
-    "FormatWriteSettings": {
+    "FormatWriteSetting": {
       "description": "Format write settings.",
       "type": "object",
       "properties": {
@@ -635,12 +635,12 @@
         "type"
       ]
     },
-    "DelimitedTextWriteSettings": {
+    "DelimitedTextWriteSetting": {
       "description": "Delimited text write settings.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/FormatWriteSettings"
+          "$ref": "#/definitions/FormatWriteSetting"
         }
       ],
       "properties": {
@@ -667,7 +667,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreReadSettings",
+          "$ref": "#/definitions/StoreReadSetting",
           "description": "Parquet store settings."
         }
       }
@@ -682,7 +682,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreReadSettings",
+          "$ref": "#/definitions/StoreReadSetting",
           "description": "DelimitedText store settings."
         },
         "formatSettings": {
@@ -701,7 +701,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreWriteSettings",
+          "$ref": "#/definitions/StoreWriteSetting",
           "description": "DelimitedText store settings."
         },
         "formatSettings": {
@@ -843,7 +843,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreReadSettings",
+          "$ref": "#/definitions/StoreReadSetting",
           "description": "Binary store settings."
         }
       }
@@ -2573,7 +2573,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreWriteSettings",
+          "$ref": "#/definitions/StoreWriteSetting",
           "description": "Parquet store settings."
         }
       }
@@ -2588,7 +2588,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreReadSettings",
+          "$ref": "#/definitions/StoreReadSetting",
           "description": "Binary store settings."
         }
       }
