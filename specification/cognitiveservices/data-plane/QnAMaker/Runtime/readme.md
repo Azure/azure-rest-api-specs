@@ -4,7 +4,7 @@
 
 Configuration for generating QnAMaker SDK.
 
-The current release is `release_4_0`.
+The current release is `runtime_release_5_0`.
 
 ``` yaml
 
