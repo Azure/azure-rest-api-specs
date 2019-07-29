@@ -7,9 +7,7 @@
     "workflow": {
       "properties": {
         "integrationAccount": {
-          "name": "test-integration-account",
-          "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/test-resource-group/providers/Microsoft.Logic/integrationAccounts/test-integration-account",
-          "type": "Microsoft.Logic/integrationAccounts"
+          "name": "test-integration-account"
         },
         "definition": {
           "$schema": "https://schema.management.azure.com/providers/Microsoft.Logic/schemas/2016-06-01/workflowdefinition.json#",
@@ -64,6 +62,7 @@
   },
   "responses": {
     "200": {
+      "body" : {
       "properties": {
         "provisioningState": "Succeeded",
         "createdTime": "2018-04-25T01:39:21.4365247Z",
@@ -120,8 +119,10 @@
           }
         }
       }
+     }
     },
     "201": {
+      "body": {
       "properties": {
         "provisioningState": "Succeeded",
         "createdTime": "2018-04-25T01:39:21.4365247Z",
@@ -177,6 +178,7 @@
             ]
           }
         }
+      }
       }
     }
   }
