@@ -634,6 +634,40 @@
         "location"
       ]
     },
+    "BinaryDataset": {
+      "x-ms-discriminator-value": "Binary",
+      "description": "Binary dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Binary dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BinaryDatasetTypeProperties"
+        }
+      }
+    },
+    "BinaryDatasetTypeProperties": {
+      "description": "Binary dataset properties.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the Binary storage."
+        },
+        "compression": {
+          "description": "The data compression method used for the binary dataset.",
+          "$ref": "#/definitions/DatasetCompression"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "AzureBlobDataset": {
       "x-ms-discriminator-value": "AzureBlob",
       "description": "The Azure Blob storage.",
@@ -738,6 +772,14 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Azure SQL database. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
           "description": "The table name of the Azure SQL database. Type: string (or Expression with resultType string)."
         }
       }
@@ -797,6 +839,14 @@
       "description": "Azure SQL Data Warehouse dataset properties.",
       "properties": {
         "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string)."
+        },
+        "table": {
           "type": "object",
           "description": "The table name of the Azure SQL Data Warehouse. Type: string (or Expression with resultType string)."
         }
@@ -1264,6 +1314,14 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the on-premises Oracle database. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
           "description": "The table name of the on-premises Oracle database. Type: string (or Expression with resultType string)."
         }
       }
@@ -1379,6 +1437,84 @@
         }
       }
     },
+    "OdbcTableDataset": {
+      "x-ms-discriminator-value": "OdbcTable",
+      "description": "The ODBC table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ODBC table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OdbcTableDatasetTypeProperties"
+        }
+      }
+    },
+    "OdbcTableDatasetTypeProperties": {
+      "description": "ODBC table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The ODBC table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "MySqlTableDataset": {
+      "x-ms-discriminator-value": "MySqlTable",
+      "description": "The MySQL table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "MySQL table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/MySqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "MySqlTableDatasetTypeProperties": {
+      "description": "MySql table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The MySQL table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "PostgreSqlTableDataset": {
+      "x-ms-discriminator-value": "PostgreSqlTable",
+      "description": "The PostgreSQL table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "PostgreSQL table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PostgreSqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "PostgreSqlTableDatasetTypeProperties": {
+      "description": "PostgreSQL table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "MicrosoftAccessTableDataset": {
       "x-ms-discriminator-value": "MicrosoftAccessTable",
       "description": "The Microsoft Access table dataset.",
@@ -1455,6 +1591,44 @@
           "type": "object",
           "description": "The Salesforce Service Cloud object API name. Type: string (or Expression with resultType string)."
         }
+      }
+    },
+    "SybaseTableDataset": {
+      "x-ms-discriminator-value": "SybaseTable",
+      "description": "The Sybase table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Sybase table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SybaseTableDatasetTypeProperties"
+        }
+      }
+    },
+    "SybaseTableDatasetTypeProperties": {
+      "description": "Sybase table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The Sybase table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "SapBwCubeDataset": {
+      "x-ms-discriminator-value": "SapBwCube",
+      "description": "The SAP BW cube dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
       }
     },
     "SapCloudForCustomerResourceDataset": {
@@ -1612,6 +1786,14 @@
       "description": "On-premises SQL Server dataset properties.",
       "properties": {
         "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the SQL Server dataset. Type: string (or Expression with resultType string)."
+        },
+        "table": {
           "type": "object",
           "description": "The table name of the SQL Server dataset. Type: string (or Expression with resultType string)."
         }
@@ -1844,7 +2026,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/AzurePostgreSqlTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AzurePostgreSqlTableDatasetTypeProperties": {
+      "description": "Azure PostgreSQL dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "The table name of the Azure PostgreSQL database which includes both schema and table. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Azure PostgreSQL database. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1895,7 +2094,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/DrillDatasetTypeProperties"
+        }
+      }
+    },
+    "DrillDatasetTypeProperties": {
+      "description": "Drill Dataset Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Drill. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Drill. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1929,7 +2145,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/GoogleBigQueryDatasetTypeProperties"
+        }
+      }
+    },
+    "GoogleBigQueryDatasetTypeProperties": {
+      "description": "Google BigQuery Dataset Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using database + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Google BigQuery. Type: string (or Expression with resultType string)."
+        },
+        "dataset": {
+          "type": "object",
+          "description": "The database name of the Google BigQuery. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1946,7 +2179,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/GreenplumDatasetTypeProperties"
+        }
+      }
+    },
+    "GreenplumDatasetTypeProperties": {
+      "description": "Greenplum Dataset Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of Greenplum. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of Greenplum. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1980,7 +2230,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/HiveDatasetTypeProperties"
+        }
+      }
+    },
+    "HiveDatasetTypeProperties": {
+      "description": "Hive Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Hive. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Hive. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2014,7 +2281,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/ImpalaDatasetTypeProperties"
+        }
+      }
+    },
+    "ImpalaDatasetTypeProperties": {
+      "description": "Impala Dataset Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Impala. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Impala. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2116,7 +2400,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/PhoenixDatasetTypeProperties"
+        }
+      }
+    },
+    "PhoenixDatasetTypeProperties": {
+      "description": "Phoenix Dataset Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Phoenix. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Phoenix. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2133,7 +2434,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/PrestoDatasetTypeProperties"
+        }
+      }
+    },
+    "PrestoDatasetTypeProperties": {
+      "description": "Presto Dataset Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Presto. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Presto. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2201,7 +2519,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/SparkDatasetTypeProperties"
+        }
+      }
+    },
+    "SparkDatasetTypeProperties": {
+      "description": "Spark Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Spark. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Spark. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2286,7 +2621,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/VerticaDatasetTypeProperties"
+        }
+      }
+    },
+    "VerticaDatasetTypeProperties": {
+      "description": "Vertica Properties",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Vertica. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Vertica. Type: string (or Expression with resultType string)."
         }
       }
     },

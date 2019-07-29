@@ -38,7 +38,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Describes the error if the operation is not successful.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -54,7 +54,7 @@
             "$ref": "./examples/cancelSubscription.json"
           }
         },
-        "description": "Cancels the subscription",
+        "description": "The operation to cancel a subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -71,7 +71,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Describes the error if the operation is not successful.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -87,7 +87,7 @@
             "$ref": "./examples/renameSubscription.json"
           }
         },
-        "description": "Renames the subscription",
+        "description": "The operation to rename a subscription",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -107,7 +107,7 @@
             }
           },
           "default": {
-            "description": "Error response describing why the operation failed.",
+            "description": "Describes the error if the operation is not successful.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
@@ -151,7 +151,7 @@
   },
   "definitions": {
     "ErrorResponse": {
-      "description": "Describes the format of Error response.",
+      "description": "Describes the error if the operation is not successful.",
       "type": "object",
       "properties": {
         "code": {
@@ -165,20 +165,20 @@
       }
     },
     "CanceledSubscriptionId": {
-      "description": "Canceled Subscription Id",
+      "description": "The ID of the canceled subscription",
       "properties": {
         "value": {
-          "description": "Canceled Subscription Id",
+          "description": "The ID of the canceled subscription",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "RenamedSubscriptionId": {
-      "description": "Renamed Subscription Id",
+      "description": "The ID of the subscriptions that is being renamed",
       "properties": {
         "value": {
-          "description": "Renamed Subscription Id",
+          "description": "The ID of the subscriptions that is being renamed",
           "type": "string",
           "readOnly": true
         }
@@ -196,7 +196,7 @@
     },
     "SubscriptionName": {
       "type": "object",
-      "description": "New name of the subscription.",
+      "description": "The new name of the subscription.",
       "properties": {
         "subscriptionName": {
           "type": "string",
