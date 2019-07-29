@@ -5,8 +5,8 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 
 ``` yaml $(typescript)
 typescript:
-  package-name: "@azure/cognitiveservices-qnamaker"
-  output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/cognitiveservices-qnamaker"
+  package-name: "@azure/cognitiveservices-qnamaker-runtime"
+  output-folder: "$(typescript-sdks-folder)/sdk/cognitiveservices/cognitiveservices-qnamaker-runtime"
   azure-arm: false
   generate-metadata: true
 ```

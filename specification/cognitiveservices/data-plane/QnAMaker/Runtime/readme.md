@@ -8,17 +8,17 @@ The current release is `release_4_0`.
 
 ``` yaml
 
-tag: runtime_release_4_0
+tag: runtime_release_5_0
 add-credentials: true
 openapi-type: data-plane
 ```
 # Runtime Releases
 
-### Runtime Release 4.0
-These settings apply only when `--tag=runtime_release_4_0` is specified on the command line.
+### Runtime Release 5.0
+These settings apply only when `--tag=runtime_release_5_0` is specified on the command line.
 
-``` yaml $(tag) == 'runtime_release_4_0'
-input-file: stable/v4.0/QnAMakerRuntime.json
+``` yaml $(tag) == 'runtime_release_5_0'
+input-file: stable/v5.0/QnAMakerRuntime.json
 ```
 
 ## Swagger to SDK
@@ -35,7 +35,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_qnamaker']
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_qnamaker_runtime']
 ```
 
 
@@ -46,8 +46,8 @@ csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/Knowledge.QnAMaker/src/Generated
+  namespace: Microsoft.Azure.CognitiveServices.QnAMaker.Runtime
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/QnAMaker.Runtime/src/Generated
   clear-output-folder: true
 ```
 
@@ -67,10 +67,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.knowledge.qnamaker
+  namespace: com.microsoft.azure.cognitiveservices.qnamaker.runtime
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/knowledge/qnamaker
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/qnamaker/runtime
   with-optional-parameters: true
   with-single-async-method: true
 ```

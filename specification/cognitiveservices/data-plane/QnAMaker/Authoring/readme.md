@@ -4,21 +4,21 @@
 
 Configuration for generating QnAMaker SDK.
 
-The current release is `release_4_0`.
+The current release is `release_5_0`.
 
 ``` yaml
 
-tag: release_4_0
+tag: release_5_0
 add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
 
-### Release 4.0
-These settings apply only when `--tag=release_4_0` is specified on the command line.
+### Release 5.0
+These settings apply only when `--tag=release_5_0` is specified on the command line.
 
-``` yaml $(tag) == 'release_4_0'
-input-file: stable/v4.0/QnAMaker.json
+``` yaml $(tag) == 'release_5_0'
+input-file: stable/v5.0/QnAMaker.json
 ```
 
 ## Swagger to SDK
@@ -35,7 +35,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-node
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_qnamaker']
+      - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_qnamaker_authoring']
 ```
 
 
@@ -46,8 +46,8 @@ csharp:
   sync-methods: None
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
-  namespace: Microsoft.Azure.CognitiveServices.Knowledge.QnAMaker
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/Knowledge.QnAMaker/src/Generated
+  namespace: Microsoft.Azure.CognitiveServices.QnAMaker.Authoring
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/QnAMaker.Authoring/src/Generated
   clear-output-folder: true
 ```
 
@@ -67,10 +67,10 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 ``` yaml $(java)
 java:
   azure-arm: true
-  namespace: com.microsoft.azure.cognitiveservices.knowledge.qnamaker
+  namespace: com.microsoft.azure.cognitiveservices.qnamaker.authoring
   license-header: MICROSOFT_MIT_NO_CODEGEN
   payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/knowledge/qnamaker
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/qnamaker/authoring
   with-optional-parameters: true
   with-single-async-method: true
 ```
