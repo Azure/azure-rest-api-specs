@@ -1,390 +1,258 @@
 {
    "swagger":"2.0",
    "info":{
-      "version":"v1",
-      "title":"Microsoft.Knowledge.EKG.Ingestion.WebApp"
+      "title":"Microsoft Enterprise Graph",
+      "version":"v1"
    },
-   "host":"localhost:20002",
-   "schemes":[
-      "http"
-   ],
    "paths":{
-      "/keepalive":{
+      "/converse/conversations":{
+         "post":{
+            "tags":[
+               "Converse"
+            ],
+            "operationId":"ExecNLQuery",
+            "consumes":[
+               "application/json-patch+json",
+               "application/json",
+               "text/json",
+               "application/*+json"
+            ],
+            "produces":[
+               "application/json"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "schema":{
+                     "$ref":"#/definitions/ConverseRequest"
+                  }
+               }
+            ],
+            "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
+               "200":{
+                  "description":"Success",
+                  "schema":{
+                     "$ref":"#/definitions/ConverseResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/entitydocument/entities/{id}":{
          "get":{
             "tags":[
-               "GraphBuild"
+               "Entitydocument"
             ],
-            "operationId":"GraphBuild_Keepalive",
-            "consumes":[
-
-            ],
+            "operationId":"GetEntityDocument",
             "produces":[
+               "text/plain",
                "application/json",
                "text/json"
             ],
             "parameters":[
                {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
+                  "in":"path",
+                  "name":"id",
                   "required":true,
                   "type":"string"
                }
             ],
             "responses":{
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
                "200":{
-                  "description":"OK",
+                  "description":"Success",
                   "schema":{
-                     "$ref":"#/definitions/IngestionPingStatusResponse"
+                     "$ref":"#/definitions/EntityDocument"
                   }
                }
             }
          }
       },
-      "/sources/{sourceId}/documents/{documentId}":{
-         "delete":{
+      "/entitydocument/entities":{
+         "post":{
             "tags":[
-               "GraphBuild"
+               "Entitydocument"
             ],
-            "summary":"Deletes requested document of the source from Graph",
-            "description":"This API deletes the document of source from the graph",
-            "operationId":"DeleteDocument",
+            "operationId":"GetEntityDocuments",
             "consumes":[
-
+               "application/json-patch+json",
+               "application/json",
+               "text/json",
+               "application/*+json"
             ],
             "produces":[
+               "text/plain",
                "application/json",
                "text/json"
             ],
             "parameters":[
                {
-                  "name":"sourceId",
-                  "in":"path",
-                  "description":"Id of  document source",
-                  "required":true,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               {
-                  "name":"documentId",
-                  "in":"path",
-                  "description":"Id of document",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"hardDelete",
-                  "in":"query",
-                  "description":"Whether to hard delete",
-                  "required":false,
-                  "type":"boolean"
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"OK",
-                  "schema":{
-                     "$ref":"#/definitions/IngestionJobResponse"
-                  }
-               }
-            }
-         }
-      },
-      "/sources/{sourceId}":{
-         "delete":{
-            "tags":[
-               "GraphBuild"
-            ],
-            "summary":"Deletes source from Graph",
-            "description":"This API deletes source and all its documents from Graph",
-            "operationId":"DeleteSource",
-            "consumes":[
-
-            ],
-            "produces":[
-               "application/json",
-               "text/json"
-            ],
-            "parameters":[
-               {
-                  "name":"sourceId",
-                  "in":"path",
-                  "description":"Id of source",
-                  "required":true,
-                  "type":"integer",
-                  "format":"int32"
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"OK",
-                  "schema":{
-                     "$ref":"#/definitions/IngestionJobResponse"
-                  }
-               }
-            }
-         }
-      },
-      "/editorial/{entityId}":{
-         "delete":{
-            "tags":[
-               "GraphBuild"
-            ],
-            "operationId":"DeleteEntity",
-            "consumes":[
-
-            ],
-            "produces":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"entityId",
-                  "in":"path",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"OK",
-                  "schema":{
-                     "type":"object"
-                  }
-               }
-            }
-         }
-      },
-      "/editorial/{entityId}/updatingOfProperty":{
-         "post":{
-            "tags":[
-               "GraphBuild"
-            ],
-            "operationId":"EditorialUpdate",
-            "consumes":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml",
-               "application/x-www-form-urlencoded"
-            ],
-            "produces":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"entityId",
-                  "in":"path",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"editorialUpdateRequest",
                   "in":"body",
-                  "required":true,
+                  "name":"body",
                   "schema":{
-                     "$ref":"#/definitions/EditorialUpdateRequest"
+                     "$ref":"#/definitions/SearchOptions"
                   }
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
                }
             ],
             "responses":{
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
                "200":{
-                  "description":"OK",
+                  "description":"Success",
                   "schema":{
-                     "type":"object"
-                  }
-               }
-            }
-         }
-      },
-      "/editorial/{entityId}/deletingOfProperty":{
-         "post":{
-            "tags":[
-               "GraphBuild"
-            ],
-            "operationId":"EditorialDelete",
-            "consumes":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml",
-               "application/x-www-form-urlencoded"
-            ],
-            "produces":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"entityId",
-                  "in":"path",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"editorialOperationRequest",
-                  "in":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/EditorialDeleteRequest"
-                  }
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"OK",
-                  "schema":{
-                     "type":"object"
-                  }
-               }
-            }
-         }
-      },
-      "/editorial/{entityId}/cleanup":{
-         "post":{
-            "tags":[
-               "GraphBuild"
-            ],
-            "operationId":"EditorialCleanUp",
-            "consumes":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml",
-               "application/x-www-form-urlencoded"
-            ],
-            "produces":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"entityId",
-                  "in":"path",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"editorialOperationRequest",
-                  "in":"body",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/EditorialCleanUpRequest"
-                  }
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"OK",
-                  "schema":{
-                     "type":"object"
-                  }
-               }
-            }
-         }
-      },
-      "/ingestion-jobs":{
-         "get":{
-            "tags":[
-               "GraphBuild"
-            ],
-            "summary":"Returns the details  of jobs submitted in time range",
-            "description":"This API  provides the details of the jobs submitted in time range",
-            "operationId":"GetAllJobsStatus",
-            "consumes":[
-
-            ],
-            "produces":[
-               "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
-            ],
-            "parameters":[
-               {
-                  "name":"startTime",
-                  "in":"query",
-                  "description":"StartTime of time range",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"endTime",
-                  "in":"query",
-                  "description":"EndTime of time range",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
-               }
-            ],
-            "responses":{
-               "200":{
-                  "description":"OK",
-                  "schema":{
-                     "type":"array",
-                     "items":{
-                        "$ref":"#/definitions/BatchInfoApiResponse"
+                     "type":"object",
+                     "additionalProperties":{
+                        "$ref":"#/definitions/EntityDocument"
                      }
                   }
                }
             }
-         },
+         }
+      },
+      "/graph/graph-query":{
          "post":{
             "tags":[
-               "GraphBuild"
+               "Graph"
             ],
-            "summary":"Posts Ingestion Job",
-            "description":"This API is used to submit new ingestion job to GraphBuildPipeline",
+            "operationId":"ExecGraphQuery",
+            "consumes":[
+               "application/json-patch+json",
+               "application/json",
+               "text/json",
+               "application/*+json"
+            ],
+            "produces":[
+               "text/plain",
+               "application/json",
+               "text/json"
+            ],
+            "parameters":[
+               {
+                  "in":"body",
+                  "name":"body",
+                  "schema":{
+                     "type":"string"
+                  }
+               }
+            ],
+            "responses":{
+               "401":{
+                  "description":"Unauthorized"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
+               "200":{
+                  "description":"Success",
+                  "schema":{
+                     "$ref":"#/definitions/SparqlQueryResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/ingestion/sources/{sourceId}/documents/{documentId}":{
+         "delete":{
+            "tags":[
+               "Ingestion"
+            ],
+            "operationId":"DeleteDocument",
+            "produces":[
+               "application/json",
+               "text/json"
+            ],
+            "parameters":[
+               {
+                  "in":"path",
+                  "name":"sourceId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int32"
+               },
+               {
+                  "in":"path",
+                  "name":"documentId",
+                  "required":true,
+                  "type":"string"
+               },
+               {
+                  "in":"query",
+                  "name":"hardDelete",
+                  "type":"boolean"
+               }
+            ],
+            "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/IngestionJobResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/ingestion/sources/{sourceId}":{
+         "delete":{
+            "tags":[
+               "Ingestion"
+            ],
+            "operationId":"DeleteSource",
+            "produces":[
+               "application/json",
+               "text/json"
+            ],
+            "parameters":[
+               {
+                  "in":"path",
+                  "name":"sourceId",
+                  "required":true,
+                  "type":"integer",
+                  "format":"int32"
+               }
+            ],
+            "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
+               "200":{
+                  "description":"OK",
+                  "schema":{
+                     "$ref":"#/definitions/IngestionJobResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/ingestion/ingestion-jobs":{
+         "post":{
+            "tags":[
+               "Ingestion"
+            ],
             "operationId":"CreateIngestionJob",
             "consumes":[
                "application/json",
@@ -399,22 +267,60 @@
             ],
             "parameters":[
                {
-                  "name":"ingestionJobRequest",
-                  "in":"body",
-                  "description":"IngestionJob Request",
-                  "required":true,
-                  "schema":{
-                     "$ref":"#/definitions/IngestionJobPostRequest"
+                  "in":"formData",
+                  "name":"Type",
+                  "type":"integer",
+                  "format":"int32",
+                  "enum":[
+                     0,
+                     1
+                  ]
+               },
+               {
+                  "in":"formData",
+                  "name":"SourceId",
+                  "type":"integer",
+                  "format":"int32"
+               },
+               {
+                  "in":"formData",
+                  "name":"BlobUrls",
+                  "type":"array",
+                  "items":{
+                     "type":"string"
                   }
                },
                {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
-                  "type":"string"
+                  "in":"formData",
+                  "name":"RawPayloads",
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/definitions/LoadRequest"
+                  }
+               },
+               {
+                  "in":"formData",
+                  "name":"ForceUpdate",
+                  "type":"boolean"
+               },
+               {
+                  "in":"formData",
+                  "name":"IngestionMode",
+                  "type":"integer",
+                  "format":"int32",
+                  "enum":[
+                     0,
+                     1
+                  ]
                }
             ],
             "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
                "200":{
                   "description":"OK",
                   "schema":{
@@ -422,19 +328,12 @@
                   }
                }
             }
-         }
-      },
-      "/ingestion-jobs/{jobId}":{
+         },
          "get":{
             "tags":[
-               "GraphBuild"
+               "Ingestion"
             ],
-            "summary":"Returns the Ingestion status of job",
-            "description":"This API  provides the details of status of the ingestion job",
-            "operationId":"GetJobStatus",
-            "consumes":[
-
-            ],
+            "operationId":"GetAllJobsStatus",
             "produces":[
                "application/json",
                "text/json",
@@ -443,41 +342,43 @@
             ],
             "parameters":[
                {
-                  "name":"jobId",
-                  "in":"path",
-                  "description":"Id of ingestion job",
+                  "in":"query",
+                  "name":"startTime",
                   "required":true,
                   "type":"string"
                },
                {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
+                  "in":"query",
+                  "name":"endTime",
                   "required":true,
                   "type":"string"
                }
             ],
             "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
                "200":{
                   "description":"OK",
                   "schema":{
                      "type":"array",
                      "items":{
-                        "$ref":"#/definitions/BatchStatusApiResponse"
+                        "$ref":"#/definitions/BatchInfoApiResponse"
                      }
                   }
                }
             }
          }
       },
-      "/editorial-jobs/{jobId}":{
+      "/ingestion/ingestion-jobs/{jobId}":{
          "get":{
             "tags":[
-               "GraphBuild"
+               "Ingestion"
             ],
-            "operationId":"GetEditorialStatus",
-            "consumes":[
-
-            ],
+            "operationId":"GetJobStatus",
             "produces":[
                "application/json",
                "text/json",
@@ -486,19 +387,19 @@
             ],
             "parameters":[
                {
-                  "name":"jobId",
                   "in":"path",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
+                  "name":"jobId",
                   "required":true,
                   "type":"string"
                }
             ],
             "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
                "200":{
                   "description":"OK",
                   "schema":{
@@ -511,48 +412,147 @@
             }
          }
       },
-      "/debug":{
+      "/intent/intentions":{
          "get":{
             "tags":[
-               "GraphBuild"
+               "Intent"
             ],
-            "operationId":"GetDebug",
-            "consumes":[
-
-            ],
+            "operationId":"GetIntention",
             "produces":[
+               "text/plain",
                "application/json",
-               "text/json",
-               "application/xml",
-               "text/xml"
+               "text/json"
             ],
             "parameters":[
                {
-                  "name":"entityId",
                   "in":"query",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"property",
-                  "in":"query",
-                  "required":true,
-                  "type":"string"
-               },
-               {
-                  "name":"X-EKG-RequestContext",
-                  "in":"header",
-                  "required":true,
+                  "name":"q",
                   "type":"string"
                }
             ],
             "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
                "200":{
-                  "description":"OK",
+                  "description":"Success",
                   "schema":{
+                     "$ref":"#/definitions/IntentionResponse"
+                  }
+               }
+            }
+         }
+      },
+      "/search/entities":{
+         "get":{
+            "tags":[
+               "Search"
+            ],
+            "operationId":"ExecFreetextQuery",
+            "produces":[
+               "text/plain",
+               "application/json",
+               "text/json"
+            ],
+            "parameters":[
+               {
+                  "in":"query",
+                  "name":"q",
+                  "type":"string"
+               },
+               {
+                  "in":"query",
+                  "name":"top",
+                  "type":"integer",
+                  "format":"int32",
+                  "default":10
+               },
+               {
+                  "in":"query",
+                  "name":"filter",
+                  "type":"string",
+                  "default":""
+               },
+               {
+                  "in":"query",
+                  "name":"includeEntityDocument",
+                  "type":"integer",
+                  "format":"int32",
+                  "default":0
+               },
+               {
+                  "in":"query",
+                  "name":"enableQueryRewrite",
+                  "type":"integer",
+                  "format":"int32",
+                  "default":0
+               },
+               {
+                  "in":"query",
+                  "name":"debug",
+                  "type":"integer",
+                  "format":"int32",
+                  "default":0
+               }
+            ],
+            "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
+               "200":{
+                  "description":"Success",
+                  "schema":{
+                     "$ref":"#/definitions/DocumentSearchResult"
+                  }
+               }
+            }
+         }
+      },
+      "/search/suggestions":{
+         "get":{
+            "tags":[
+               "Search"
+            ],
+            "operationId":"GetQuerySuggestion",
+            "produces":[
+               "text/plain",
+               "application/json",
+               "text/json"
+            ],
+            "parameters":[
+               {
+                  "in":"query",
+                  "name":"q",
+                  "type":"string"
+               },
+               {
+                  "in":"query",
+                  "name":"top",
+                  "type":"integer",
+                  "format":"int32",
+                  "default":10
+               }
+            ],
+            "responses":{
+               "401":{
+                  "description":"Unauthorized access"
+               },
+               "403":{
+                  "description":"Forbidden access"
+               },
+               "200":{
+                  "description":"Success",
+                  "schema":{
+                     "uniqueItems":false,
                      "type":"array",
                      "items":{
-                        "$ref":"#/definitions/DebugOutput"
+                        "type":"string"
                      }
                   }
                }
@@ -561,14 +561,282 @@
       }
    },
    "definitions":{
-      "IngestionPingStatusResponse":{
+      "ConverseRequest":{
+         "required":[
+            "utterance"
+         ],
          "type":"object",
          "properties":{
-            "Status":{
+            "utterance":{
                "type":"string"
             },
-            "Entries":{
-               "type":"object"
+            "entityType":{
+               "type":"string"
+            },
+            "maximumNumberOfInterpretations":{
+               "format":"int32",
+               "maximum":2147483647,
+               "minimum":1,
+               "type":"integer"
+            },
+            "thresholdForDisambiguation":{
+               "format":"int32",
+               "maximum":2147483647,
+               "minimum":1,
+               "type":"integer"
+            },
+            "maximumNumberOfDisambiguations":{
+               "format":"int32",
+               "maximum":2147483647,
+               "minimum":1,
+               "type":"integer"
+            },
+            "maximumNumberOfEntities":{
+               "format":"int32",
+               "maximum":2147483647,
+               "minimum":1,
+               "type":"integer"
+            },
+            "previousInterpretations":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/InterpretationResult"
+               }
+            },
+            "entityIdOnly":{
+               "type":"boolean"
+            },
+            "modelId":{
+               "type":"string"
+            }
+         }
+      },
+      "ConverseResponse":{
+         "type":"object",
+         "properties":{
+            "totalNumberOfEntitiesFound":{
+               "format":"int32",
+               "type":"integer"
+            },
+            "entityDocuments":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/EntityDocument"
+               }
+            },
+            "interpretationResult":{
+               "$ref":"#/definitions/InterpretationResult"
+            },
+            "restatement":{
+               "type":"string"
+            },
+            "suggestions":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/EntityDocumentSuggestionChip"
+               }
+            }
+         }
+      },
+      "EntityDocument":{
+         "type":"object",
+         "properties":{
+            "id":{
+               "type":"string",
+               "readOnly":true
+            },
+            "types":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/EntityType"
+               },
+               "readOnly":true
+            },
+            "dominantType":{
+               "$ref":"#/definitions/EntityType"
+            },
+            "properties":{
+               "type":"object",
+               "additionalProperties":{
+                  "uniqueItems":false,
+                  "type":"array",
+                  "items":{
+                     "$ref":"#/definitions/EntityNode"
+                  }
+               },
+               "readOnly":true
+            },
+            "timeStamp":{
+               "format":"date-time",
+               "type":"string"
+            },
+            "sourceIds":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "format":"int32",
+                  "type":"integer"
+               },
+               "readOnly":true
+            }
+         }
+      },
+      "InterpretationResult":{
+         "type":"object",
+         "properties":{
+            "utterance":{
+               "$ref":"#/definitions/Utterance"
+            },
+            "sparql":{
+               "type":"string"
+            },
+            "confidence":{
+               "format":"double",
+               "type":"number"
+            },
+            "mainProjection":{
+               "type":"string"
+            },
+            "mainProjectionEntityType":{
+               "type":"string"
+            },
+            "restatement":{
+               "type":"string"
+            }
+         }
+      },
+      "EntityDocumentSuggestionChip":{
+         "type":"object",
+         "properties":{
+            "actionEntityDocument":{
+               "$ref":"#/definitions/EntityDocument"
+            },
+            "suggestionInterpretation":{
+               "$ref":"#/definitions/InterpretationResult"
+            },
+            "actionEntityId":{
+               "type":"string",
+               "readOnly":true
+            }
+         }
+      },
+      "EntityType":{
+         "type":"object",
+         "properties":{
+            "name":{
+               "type":"string",
+               "readOnly":true
+            }
+         }
+      },
+      "EntityNode":{
+         "type":"object",
+         "properties":{
+            "sourceIds":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "format":"int32",
+                  "type":"integer"
+               },
+               "readOnly":true
+            }
+         }
+      },
+      "Utterance":{
+         "type":"object",
+         "properties":{
+            "text":{
+               "type":"string",
+               "readOnly":true
+            },
+            "unrecognizedTerms":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "type":"string"
+               },
+               "readOnly":true
+            }
+         }
+      },
+      "SearchOptions":{
+         "type":"object",
+         "properties":{
+            "entities":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            }
+         }
+      },
+      "SparqlQueryResponse":{
+         "type":"object",
+         "properties":{
+            "sparqlResponse":{
+               "$ref":"#/definitions/SparqlQueryDbResponse"
+            },
+            "metadata":{
+               "type":"object",
+               "additionalProperties":{
+                  "type":"object"
+               }
+            }
+         }
+      },
+      "SparqlQueryDbResponse":{
+         "type":"object",
+         "properties":{
+            "head":{
+               "$ref":"#/definitions/ResultHeader"
+            },
+            "results":{
+               "$ref":"#/definitions/Result"
+            }
+         }
+      },
+      "ResultHeader":{
+         "type":"object",
+         "properties":{
+            "vars":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "type":"string"
+               }
+            }
+         }
+      },
+      "Result":{
+         "type":"object",
+         "properties":{
+            "bindings":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "type":"object",
+                  "additionalProperties":{
+                     "$ref":"#/definitions/RdfTerm"
+                  }
+               }
+            }
+         }
+      },
+      "RdfTerm":{
+         "type":"object",
+         "properties":{
+            "type":{
+               "type":"string"
+            },
+            "value":{
+               "type":"string",
+               "readOnly":true
             }
          }
       },
@@ -580,219 +848,83 @@
             }
          }
       },
-      "EditorialUpdateRequest":{
-         "type":"object",
-         "properties":{
-            "Triples":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/TripleUpdate"
-               }
-            }
-         }
-      },
-      "TripleUpdate":{
-         "type":"object",
-         "properties":{
-            "From":{
-               "type":"string"
-            },
-            "To":{
-               "type":"string"
-            },
-            "Predicate":{
-               "type":"string"
-            }
-         }
-      },
-      "EditorialDeleteRequest":{
-         "type":"object",
-         "properties":{
-            "Triples":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/TripleDelete"
-               }
-            }
-         }
-      },
-      "TripleDelete":{
-         "type":"object",
-         "properties":{
-            "Value":{
-               "type":"string"
-            },
-            "Predicate":{
-               "type":"string"
-            }
-         }
-      },
-      "EditorialCleanUpRequest":{
-         "type":"object",
-         "properties":{
-            "Triples":{
-               "type":"array",
-               "items":{
-                  "$ref":"#/definitions/Triple"
-               }
-            }
-         }
-      },
-      "Triple":{
-         "type":"object",
-         "properties":{
-            "Predicate":{
-               "type":"string"
-            }
-         }
-      },
       "IngestionJobPostRequest":{
-         "description":"IngestionJobPostRequest",
          "type":"object",
          "properties":{
             "Type":{
+               "format":"int32",
                "enum":[
-                  "blob",
-                  "payload"
+                  0,
+                  1
                ],
-               "type":"string"
+               "type":"integer"
             },
             "SourceId":{
                "format":"int32",
-               "description":"Source Id",
                "type":"integer"
             },
             "BlobUrls":{
-               "description":"List of blob Urls having payload",
                "type":"array",
                "items":{
                   "type":"string"
                }
             },
             "RawPayloads":{
-               "description":"List of payloads in json format.Max Recommended size is 250 MB",
                "type":"array",
                "items":{
                   "$ref":"#/definitions/LoadRequest"
                }
             },
             "ForceUpdate":{
-               "description":"Whether to update document when there are no changes",
                "type":"boolean"
             },
             "IngestionMode":{
-               "description":"Mode of Ingestion",
+               "format":"int32",
                "enum":[
-                  "Batch",
-                  "Streaming"
+                  0,
+                  1
                ],
-               "type":"string"
-            }
-         }
-      },
-      "LoadRequest":{
-         "type":"object",
-         "properties":{
-            "Id":{
-               "description":"DocumentId",
-               "type":"string"
-            },
-            "PayLoad":{
-               "description":"RawPayload in Json format",
-               "type":"string"
+               "type":"integer"
             }
          }
       },
       "BatchInfoApiResponse":{
-         "description":"Status of Job",
          "type":"object",
          "properties":{
             "JobId":{
-               "description":"Job Id",
                "type":"string"
             },
             "SourceId":{
                "format":"int32",
-               "description":"Source Id",
                "type":"integer"
             },
             "BatchState":{
-               "description":"State of job",
                "type":"string"
             },
             "StartTime":{
-               "description":"Start time of job",
                "type":"string"
             },
             "LastUpdated":{
-               "description":"LastUpdated time of job",
                "type":"string"
             },
-            "OntologyVersionId":{
+            "OntologyVersoinId":{
                "format":"int32",
-               "description":"Ontology Version",
                "type":"integer"
-            },
-            "OperationType":{
-               "description":"Type of job",
-               "type":"string"
-            }
-         }
-      },
-      "BatchStatusApiResponse":{
-         "type":"object",
-         "properties":{
-            "JobId":{
-               "description":"JobId",
-               "type":"string"
-            },
-            "Stage":{
-               "description":"Stage of Ingestion",
-               "type":"string"
-            },
-            "TotalDocumentsInBatch":{
-               "format":"int32",
-               "description":"TotalDocs in batch",
-               "type":"integer"
-            },
-            "SuccessDocumentsCount":{
-               "format":"int32",
-               "description":"Count of docs processed successfully",
-               "type":"integer"
-            },
-            "FailedDocumentsCount":{
-               "format":"int32",
-               "description":"Count of docs failed",
-               "type":"integer"
-            },
-            "ExceptionMessage":{
-               "description":"Aggregated exception message",
-               "type":"string"
-            },
-            "TimeTakenInStage":{
-               "description":"Time taken for stage",
-               "type":"string"
             }
          }
       },
       "BatchStatusEntity":{
          "type":"object",
          "properties":{
-            "PartitionKey":{
-               "type":"string"
-            },
-            "RowKey":{
-               "type":"string"
-            },
-            "TotalDocumentsInBatch":{
+            "TotalDocusInBatch":{
                "format":"int32",
                "type":"integer"
             },
-            "SuccessDocumentsCount":{
+            "SuccessDocusCount":{
                "format":"int32",
                "type":"integer"
             },
-            "FailedDocumentsCount":{
+            "FailedDocusCount":{
                "format":"int32",
                "type":"integer"
             },
@@ -802,7 +934,10 @@
             "TimeTakenInStage":{
                "type":"string"
             },
-            "LastUpdateTimeStamp":{
+            "PartitionKey":{
+               "type":"string"
+            },
+            "RowKey":{
                "type":"string"
             },
             "Timestamp":{
@@ -814,108 +949,123 @@
             }
          }
       },
-      "DebugOutput":{
+      "LoadRequest":{
          "type":"object",
          "properties":{
-            "GraphUpdateDebugOutput":{
-               "$ref":"#/definitions/GraphUpdateDebugOutput"
+            "Id":{
+               "type":"string"
             },
-            "ConflationDebugOutput":{
-               "type":"object",
-               "additionalProperties":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/definitions/ConflationDebugOutput"
-                  }
-               }
-            },
-            "MappingDebugOutput":{
-               "type":"object",
-               "additionalProperties":{
-                  "type":"array",
-                  "items":{
-                     "$ref":"#/definitions/MappingDebugOutput"
-                  }
-               }
-            },
-            "UploadDebugOutput":{
-               "type":"object",
-               "additionalProperties":{
-                  "$ref":"#/definitions/UploadDebugOutput"
-               }
+            "PayLoad":{
+               "type":"string"
             }
          }
       },
-      "GraphUpdateDebugOutput":{
+      "IntentionResponse":{
          "type":"object",
          "properties":{
-            "EntityId":{
+            "sentence":{
                "type":"string"
             },
-            "Property":{
+            "intentionLabel":{
                "type":"string"
             },
-            "Value":{
+            "isGraphIntention":{
+               "type":"boolean"
+            },
+            "intentionGraphType":{
                "type":"string"
             },
-            "Sources":{
+            "intentionScore":{
+               "format":"float",
+               "type":"number"
+            },
+            "mentions":{
+               "uniqueItems":false,
                "type":"array",
                "items":{
-                  "$ref":"#/definitions/SourceDocument"
+                  "$ref":"#/definitions/MentionResponse"
                }
             }
          }
       },
-      "ConflationDebugOutput":{
+      "MentionResponse":{
          "type":"object",
          "properties":{
-            "EntityId":{
+            "mention":{
                "type":"string"
             },
-            "Property":{
-               "type":"string"
-            },
-            "Value":{
+            "type":{
                "type":"string"
             }
          }
       },
-      "MappingDebugOutput":{
+      "DocumentSearchResult":{
          "type":"object",
          "properties":{
-            "SubjectKey":{
+            "debugInfo":{
                "type":"string"
             },
-            "Property":{
+            "recommendedQuery":{
                "type":"string"
             },
-            "Value":{
-               "type":"string"
-            }
-         }
-      },
-      "UploadDebugOutput":{
-         "type":"object",
-         "properties":{
-            "DocumentId":{
+            "rewrittenQuery":{
                "type":"string"
             },
-            "Content":{
+            "originalQuery":{
                "type":"string"
-            }
-         }
-      },
-      "SourceDocument":{
-         "type":"object",
-         "properties":{
-            "SourceId":{
-               "format":"int32",
+            },
+            "engineName":{
+               "type":"string"
+            },
+            "indexName":{
+               "type":"string"
+            },
+            "totalHits":{
+               "format":"int64",
                "type":"integer"
             },
-            "DocumentId":{
+            "results":{
+               "uniqueItems":false,
+               "type":"array",
+               "items":{
+                  "$ref":"#/definitions/EntityBaseResult"
+               }
+            },
+            "filter":{
                "type":"string"
+            }
+         }
+      },
+      "EntityBaseResult":{
+         "type":"object",
+         "properties":{
+            "score":{
+               "format":"double",
+               "type":"number"
+            },
+            "highlights":{
+               "type":"object",
+               "additionalProperties":{
+                  "uniqueItems":false,
+                  "type":"array",
+                  "items":{
+                     "type":"string"
+                  }
+               }
             }
          }
       }
-   }
+   },
+   "securityDefinitions":{
+      "BearerAuth":{
+
+      }
+   },
+   "security":[
+      {
+         "BearerAuth":[
+
+         ]
+      }
+   ]
 }
