@@ -1195,6 +1195,9 @@
         ],
         "parameters": [
           {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
             "$ref": "#/parameters/BlobQueryDigest"
           },
           {
@@ -1208,7 +1211,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "202": {
             "description": "The blob has been created in the registry and is available at the provided location.",
             "headers": {
               "Location": {
@@ -2410,6 +2413,7 @@
         "type": "object",
         "format": "file"
       },
+      "required": true,
       "x-ms-parameter-location": "method"
     },
     "From": {
@@ -2417,7 +2421,7 @@
       "type": "string",
       "in": "query",
       "description": "Name of the source repository.",
-      "required": false,
+      "required": true,
       "x-ms-parameter-location": "method"
     },
     "Mount": {
@@ -2425,7 +2429,7 @@
       "description": "Digest of blob to mount from the source repository.",
       "type": "string",
       "in": "query",
-      "required": false,
+      "required": true,
       "x-ms-parameter-location": "method"
     },
     "Uuid": {
