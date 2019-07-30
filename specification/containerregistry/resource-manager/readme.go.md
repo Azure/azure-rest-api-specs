@@ -34,7 +34,7 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/$(namespace)/mgmt/2019-06-01-preview/$(namespace)
 ```
 
-### Tag: package-2018-05 and go
+### Tag: package-2019-05 and go
 
 These settings apply only when `--tag=package-2019-05 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
