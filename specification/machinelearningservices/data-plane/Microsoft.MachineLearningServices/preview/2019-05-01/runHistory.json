@@ -216,6 +216,100 @@
         }
       }
     },
+    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}": {
+      "get": {
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_GetById",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "experimentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Experiments"
+        ],
+        "operationId": "Experiments_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "experimentId",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "modifyExperimentDto",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ModifyExperiment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments": {
       "get": {
         "tags": [
@@ -357,6 +451,63 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experimentids/{experimentId}/tags": {
+      "delete": {
+        "tags": [
+          "Experiments"
+        ],
+        "summary": "Delete list of Tags in an Experiment.",
+        "description": "Delete list of Tags from a specific Experiment Id.",
+        "operationId": "Experiments_DeleteTags",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/workspaceNameParameter"
+          },
+          {
+            "name": "experimentId",
+            "in": "path",
+            "description": "The identifier of the experiment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "tags",
+            "in": "body",
+            "description": "The requested tags list to be deleted.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/DeleteTagsCommand"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Experiment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -920,104 +1071,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/history/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runcounts": {
-      "get": {
-        "tags": [
-          "Run"
-        ],
-        "summary": "Get Run counts.",
-        "description": "Get Run counts for an Experiment.",
-        "operationId": "Runs_GetCounts",
-        "consumes": [],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/workspaceNameParameter"
-          },
-          {
-            "name": "experimentName",
-            "in": "path",
-            "description": "The experiment name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Allows for filtering the collection of resources.\r\nThe expression specified is evaluated for each resource in the collection, and only items where the expression evaluates to true are included in the response.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$continuationtoken",
-            "in": "query",
-            "description": "The continuation token to use for getting the next set of resources.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "$orderby",
-            "in": "query",
-            "description": "The list of resource properties to use for sorting the requested resources.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "collectionFormat": "multi",
-            "uniqueItems": false
-          },
-          {
-            "name": "$sortorder",
-            "in": "query",
-            "description": "The sort order of the returned resources. Not used, specify asc or desc after each property name in the OrderBy parameter.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "Asc",
-              "Desc"
-            ]
-          },
-          {
-            "name": "$top",
-            "in": "query",
-            "description": "The maximum number of items in the resource collection to be included in the result.\r\nIf not specified, all items are returned.",
-            "required": false,
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "name": "$count",
-            "in": "query",
-            "description": "Whether to include a count of the matching resources along with the resources returned in the response.",
-            "required": false,
-            "type": "boolean"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RunCounts"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
         }
       }
     },
@@ -2001,10 +2054,6 @@
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse",
           "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
-        },
-        "debugInfo": {
-          "$ref": "#/definitions/DebugInfoResponse",
-          "description": "An internal representation of the error. May be null for non-AzureML services."
         }
       }
     },
@@ -2040,39 +2089,6 @@
         }
       }
     },
-    "DebugInfoResponse": {
-      "description": "Internal debugging information not intended for external clients.",
-      "type": "object",
-      "properties": {
-        "type": {
-          "description": "The type.",
-          "type": "string"
-        },
-        "message": {
-          "description": "The message.",
-          "type": "string"
-        },
-        "stackTrace": {
-          "description": "The stack trace.",
-          "type": "string"
-        },
-        "innerException": {
-          "$ref": "#/definitions/DebugInfoResponse",
-          "description": "The inner exception."
-        },
-        "data": {
-          "description": "The data associated with the error.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        },
-        "errorResponse": {
-          "$ref": "#/definitions/ErrorResponse",
-          "description": "The error response."
-        }
-      }
-    },
     "Experiment": {
       "type": "object",
       "properties": {
@@ -2088,6 +2104,40 @@
         "createdUtc": {
           "format": "date-time",
           "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "archivedTime": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "latestCreatedRunCreatedUtc": {
+          "format": "date-time",
+          "type": "string"
+        },
+        "latestCreatedRunId": {
+          "type": "string"
+        }
+      }
+    },
+    "ModifyExperiment": {
+      "type": "object",
+      "properties": {
+        "description": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "archive": {
+          "type": "boolean"
         }
       }
     },
@@ -2134,6 +2184,18 @@
         "nextLink": {
           "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
           "type": "string"
+        }
+      }
+    },
+    "DeleteTagsCommand": {
+      "type": "object",
+      "properties": {
+        "tags": {
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -2281,6 +2343,9 @@
         },
         "cancelUri": {
           "type": "string"
+        },
+        "diagnosticsUri": {
+          "type": "string"
         }
       }
     },
@@ -2292,7 +2357,7 @@
           "type": "string"
         },
         "userTenantId": {
-          "description": "A user or service principal's tenant ID.\r\nThis is PII and should never be logged.",
+          "description": "A user or service principal's tenant ID.",
           "type": "string"
         },
         "userName": {
@@ -2504,6 +2569,9 @@
         },
         "cancelUri": {
           "type": "string"
+        },
+        "diagnosticsUri": {
+          "type": "string"
         }
       }
     },
@@ -2521,52 +2589,6 @@
           "additionalProperties": {
             "$ref": "#/definitions/ErrorResponse"
           }
-        }
-      }
-    },
-    "RunCounts": {
-      "description": "Captures the number of runs in each of the possible run states.",
-      "type": "object",
-      "properties": {
-        "provisioning": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "queued": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "notStarted": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "starting": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "preparing": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "running": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "completed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "failed": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "canceled": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "notResponding": {
-          "format": "int32",
-          "type": "integer"
         }
       }
     },
@@ -2703,17 +2725,12 @@
           "type": "string"
         },
         "origin": {
-          "description": "The origin of the Artifact creation request. Available origins are 'ExperimentRun', 'LocalUpload', 'WebUpload', 'Dataset', 'ComputeRecord' and 'Unknown'.",
+          "description": "The origin of the Artifact creation request. Available origins are 'ExperimentRun', 'LocalUpload', 'WebUpload', 'Dataset', 'ComputeRecord', 'Metric', and 'Unknown'.",
           "type": "string"
         },
         "container": {
           "description": "The name of container. Artifacts can be grouped by container.",
           "type": "string"
-        },
-        "sizeInBytes": {
-          "format": "int64",
-          "description": "The size of the contents in bytes",
-          "type": "integer"
         },
         "path": {
           "description": "The path to the Artifact in a container.",
@@ -2965,25 +2982,6 @@
     }
   },
   "parameters": {
-    "dnsSuffix": {
-      "name": "dnsSuffix",
-      "in": "path",
-      "description": "The DNS suffix for the Azure Machine Learning Service endpoint.",
-      "required": true,
-      "type": "string",
-      "default": "api.azureml.ms",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "region": {
-      "name": "region",
-      "in": "path",
-      "description": "The Azure region name.",
-      "required": true,
-      "type": "string",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
@@ -3027,16 +3025,5 @@
       ]
     }
   ],
-  "tags": [],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{region}.{dnsSuffix}",
-    "parameters": [
-      {
-        "$ref": "#/parameters/region"
-      },
-      {
-        "$ref": "#/parameters/dnsSuffix"
-      }
-    ]
-  }
+  "tags": []
 }
