@@ -3,8 +3,8 @@
 These settings apply only when `--ruby` is specified on the command line.
 
 ``` yaml
-package-name: azure_cognitiveservices_qnamaker_authoring
-package-version: "0.17.0"
+package-name: azure_cognitiveservices_qnamaker
+package-version: "0.16.0"
 azure-arm: true
 ```
 
@@ -22,5 +22,5 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'release_4_0' && $(ruby)
 namespace: "Azure::CognitiveServices::Qnamaker::V4_0"
-output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker_authoring/lib
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_qnamaker/lib
 ```

@@ -5,7 +5,7 @@ These settings apply only when `--go` is specified on the command line.
 ``` yaml $(go)
 go:
   license-header: MICROSOFT_APACHE_NO_VERSION
-  namespace: runtime
+  namespace: qnamaker
   clear-output-folder: true
 ```
 
@@ -22,5 +22,5 @@ These settings apply only when `--tag=runtime_release_4_0 --go` is specified on 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag) == 'runtime_release_4_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v4.0/qnamaker/$(namespace)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v4.0/$(namespace)
 ```
