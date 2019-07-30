@@ -2144,7 +2144,7 @@
           "type": "string",
           "description": "The title of the case"
         },
-        "assignedTo": {
+        "owner": {
           "type": "object",
           "description": "Describes a user that the case is assigned to",
           "$ref": "#/definitions/UserInfo"
@@ -2224,6 +2224,8 @@
           "enum": [
             "Resolved",
             "Dismissed",
+            "TruePositive",
+            "FalsePositive",
             "Other"
           ],
           "x-ms-enum": {
@@ -2237,6 +2239,14 @@
               {
                 "value": "Dismissed",
                 "description": "Case was dismissed"
+              },
+              {
+                "value": "TruePositive",
+                "description": "Case was true positive"
+              },
+              {
+                "value": "FalsePositive",
+                "description": "Case was false positive"
               },
               {
                 "value": "Other",
