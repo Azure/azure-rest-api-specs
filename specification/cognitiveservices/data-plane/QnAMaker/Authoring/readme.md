@@ -4,21 +4,21 @@
 
 Configuration for generating QnAMaker SDK.
 
-The current release is `release_5_0`.
+The current release is `release_4_0`.
 
 ``` yaml
 
-tag: release_5_0
+tag: release_4_0
 add-credentials: true
 openapi-type: data-plane
 ```
 # Releases
 
-### Release 5.0
-These settings apply only when `--tag=release_5_0` is specified on the command line.
+### Release 4.0
+These settings apply only when `--tag=release_4_0` is specified on the command line.
 
-``` yaml $(tag) == 'release_5_0'
-input-file: stable/v5.0/QnAMaker.json
+``` yaml $(tag) == 'release_4_0'
+input-file: stable/v4.0/QnAMaker.json
 ```
 
 ## Swagger to SDK

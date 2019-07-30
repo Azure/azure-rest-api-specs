@@ -13,14 +13,14 @@ go:
 
 ``` yaml $(go) && $(multiapi)
 batch:
-  - tag: runtime_release_5_0
+  - tag: runtime_release_4_0
 ```
 
-### Tag: release_5_0 and go
+### Tag: release_4_0 and go
 
-These settings apply only when `--tag=runtime_release_5_0 --go` is specified on the command line.
+These settings apply only when `--tag=runtime_release_4_0 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'runtime_release_5_0' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v5.0/qnamaker/$(namespace)
+``` yaml $(tag) == 'runtime_release_4_0' && $(go)
+output-folder: $(go-sdk-folder)/services/cognitiveservices/v4.0/qnamaker/$(namespace)
 ```
