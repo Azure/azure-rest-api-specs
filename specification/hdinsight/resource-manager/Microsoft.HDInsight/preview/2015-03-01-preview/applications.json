@@ -233,7 +233,14 @@
         "accessModes": {
           "type": "array",
           "items": {
-            "type": "string"
+            "type": "string",
+            "enum": [
+              "WebPage"
+            ],
+            "x-ms-enum": {
+              "name": "ApplicationHttpsEndpointAccessMode",
+              "modelAsString": true
+            }
           },
           "description": "The list of access modes for the application."
         },
@@ -250,6 +257,14 @@
           "type": "integer",
           "format": "int32",
           "description": "The public port to connect to."
+        },
+        "subDomainSuffix": {
+          "type": "string",
+          "description": "The subdomain suffix of the application."
+        },
+        "disableGatewayAuth": {
+          "type": "boolean",
+          "description": "Disable gateway authentication."
         }
       }
     },
@@ -316,7 +331,15 @@
         },
         "applicationType": {
           "type": "string",
-          "description": "The application type."
+          "description": "The application type.",
+          "enum": [
+            "CustomApplication",
+            "RServer"
+          ],
+          "x-ms-enum": {
+            "name": "ApplicationType",
+            "modelAsString": true
+          }
         },
         "applicationState": {
           "readOnly": true,

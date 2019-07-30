@@ -26,7 +26,26 @@ These are the global settings for the ContainerRegistry API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-05
+tag: package-2019-06-preview
+```
+
+### Tag: package-2019-06-preview
+
+These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-preview'
+input-file:
+- Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
+- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+```
+
+### Tag: package-2019-06-preview-only
+
+These settings apply only when `--tag=package-2019-06-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-preview-only'
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
 ```
 
 ### Tag: package-2019-05
@@ -140,7 +159,7 @@ swagger-to-sdk:
     autorest_options:
       use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-containerregistry
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-containerregistry --default-api-version=2017-10-01
       - python ./scripts/trim_aio.py ./sdk/containerregistry/azure-mgmt-containerregistry
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
