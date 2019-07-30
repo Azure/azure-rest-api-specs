@@ -1006,6 +1006,10 @@
             "$ref": "#/definitions/EncryptionSettingsElement"
           },
           "description": "A collection of encryption settings, one for each disk volume."
+        },
+        "encryptionSettingsVersion": {
+          "type": "string",
+          "description": "Describes what type of encryption is used for the disks. Once this field is set, it cannot be overwritten. '1.0' or Null corresponds to extension based encryption with AAD app. '1.1' corresponds to extension based encryption without AAD app. '2.0' corresponds to host based encryption."
         }
       },
       "required": [
