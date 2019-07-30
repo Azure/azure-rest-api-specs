@@ -205,7 +205,7 @@ input-file:
 - Microsoft.Compute/stable/2019-03-01/compute.json
 - Microsoft.Compute/stable/2019-03-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2018-09-30/disk.json
+- Microsoft.Compute/stable/2019-03-01/disk.json
 - Microsoft.Compute/stable/2019-07-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
@@ -219,7 +219,7 @@ input-file:
 - Microsoft.Compute/stable/2019-03-01/compute.json
 - Microsoft.Compute/stable/2019-03-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2018-09-30/disk.json
+- Microsoft.Compute/stable/2019-03-01/disk.json
 - Microsoft.Compute/stable/2019-03-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```
