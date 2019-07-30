@@ -5,7 +5,8 @@
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
 ## Getting started
-If you're a spec author looking for information about all of the repositories and steps in the pipeline, go to our [documentation](https://github.com/Azure/adx-documentation-pr/wiki) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo. 
+
+If you're a spec author looking for information about all of the repositories and steps in the pipeline, go to our [documentation](https://github.com/Azure/adx-documentation-pr/wiki) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo.
 
 <b>Latest improvement:</b><i> Microsoft employees can try out our new experience at [OpenAPI Hub](https://aka.ms/openapihub) - online experience for using our validation tools and finding your workflow.</i>
 
@@ -30,13 +31,13 @@ The structure of the directory should strictly follow these rules:
 1. **Examples**: the example folder will contain the x-ms-examples files. it will reside under the APIs or Resources' version folders as different APIs or Resource types version can have different examples.
 
 1. **Notes**:
-    - folder names should be singular (ie, 'profile' not 'profiles' ) -- this removes ambiguity for some non-english speakers.
-    - generic folder names should be lower-case
-    - proper-name/product name/namespace folders can be PascalCased (ie, "KeyVault")
-    - files are whatever case you think is good for your soul.
-
+   - folder names should be singular (ie, 'profile' not 'profiles' ) -- this removes ambiguity for some non-english speakers.
+   - generic folder names should be lower-case
+   - proper-name/product name/namespace folders can be PascalCased (ie, "KeyVault")
+   - files are whatever case you think is good for your soul.
 
 The structure should appear like so:
+
 ```bash
 .
 \---specification
@@ -80,7 +81,9 @@ The structure should appear like so:
 Currently, the specifications are expected to be in Swagger JSON format
 
 ## Next steps
+
 The next step in the process after a spec is completed is to generate SDKs and API reference documentation. Go to the [Azure Developer Experience guide](https://github.com/Azure/adx-documentation-pr) for more information.
 
 ---
+
 _This project has adopted the [Microsoft Open Source Code of Conduct](https://opensource.microsoft.com/codeofconduct/). For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments._
