@@ -28,13 +28,13 @@ tag: package-2018-05
 ```
 
 
-### Tag: package-2017-01
+### Tag: package-2017-01-preview
 
-These settings apply only when `--tag=package-2017-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-01'
+``` yaml $(tag) == 'package-2017-01-preview'
 input-file:
-- Microsoft.Maps/stable/2017-01-01-preview/maps-management.json
+- Microsoft.Maps/preview/2017-01-01-preview/maps-management.json
 ```
 
 ### Tag: package-2018-05
@@ -104,16 +104,16 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-maps
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2017-01
+  - tag: package-2017-01-preview
   - tag: package-2018-05
 ```
 
-### Tag: package-2017-01 and java
+### Tag: package-2017-01-preview and java
 
-These settings apply only when `--tag=package-2017-01 --java` is specified on the command line.
+These settings apply only when `--tag=package-2017-01-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2017-01' && $(java) && $(multiapi)
+``` yaml $(tag) == 'package-2017-01-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.maps.v2017_01_01_preview
   output-folder: $(azure-libraries-for-java-folder)/maps/resource-manager/v2017_01_01_preview
