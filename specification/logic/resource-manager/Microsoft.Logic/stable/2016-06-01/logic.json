@@ -7221,8 +7221,7 @@
         "NotSpecified",
         "AS2",
         "X12",
-        "Edifact",
-        "RosettaNet"
+        "Edifact"
       ],
       "x-ms-enum": {
         "name": "AgreementType",
@@ -7243,137 +7242,9 @@
         "edifact": {
           "$ref": "#/definitions/EdifactAgreementContent",
           "description": "The EDIFACT agreement content."
-        },
-        "rosettanet" : {
-          "$ref": "#/definitions/RosettaNetAgreementContent",
-          "description": "The RosettaNet agreement content."
         }
       },
       "description": "The integration account agreement content."
-    },
-    "RosettaNetAgreementContent": {
-      "type": "object",
-      "required": [
-        "receiveAgreement",
-        "sendAgreement"
-      ],
-      "properties": {
-        "receiveAgreement": {
-          "$ref": "#/definitions/RosettaNetOneWayAgreement",
-          "description": "The RosettaNet one-way receive agreement."
-        },
-        "sendAgreement": {
-          "$ref": "#/definitions/RosettaNetOneWayAgreement",
-          "description": "The RosettaNet one-way send agreement."
-        }
-      },
-      "description": "The integration account RosettaNet agreement content."
-    },
-    "RosettaNetOneWayAgreement": {
-      "type": "object",
-      "required": [
-        "senderBusinessIdentity",
-        "receiverBusinessIdentity",
-        "protocolSettings"
-      ],
-      "properties": {
-        "senderBusinessIdentity": {
-          "$ref": "#/definitions/BusinessIdentity",
-          "description": "The sender business identity"
-        },
-        "receiverBusinessIdentity": {
-          "$ref": "#/definitions/BusinessIdentity",
-          "description": "The receiver business identity"
-        },
-        "protocolSettings": {
-          "$ref": "#/definitions/RosettaNetProtocolSettings",
-          "description": "The RosettaNet protocol settings."
-        }
-      },
-      "description": "The integration account RosettaNet oneway agreement."
-    },
-    "RosettaNetProtocolSettings": {
-      "type": "object",
-      "required": [
-        "signMessage",
-        "encryptMessage",
-        "signingAlgorithm",
-        "encryptionAlgorithm"
-      ],
-      "properties": {
-        "encryptMessage": {
-          "type": "boolean",
-          "description": "The value indicating whether the message has to be encrypted."
-        },
-        "signMessage": {
-          "type": "boolean",
-          "description": "The value indicating whether the message has to be signed."
-        },
-        "messageEncodingFlags": {
-          "$ref": "#/definitions/RosettaNetMessageEncodingFlags",
-          "description": "The value indicating whether encoding is used."
-        },
-        "encoding": {
-          "$ref": "#/definitions/MessageEncoding",
-          "description": "The message encoding."
-        },
-        "encryptionAlgorithm": {
-          "$ref": "#/definitions/EncryptionAlgorithm",
-          "description": "The encryption algorithm."
-        },
-        "signingAlgorithm": {
-          "$ref": "#/definitions/SigningAlgorithm",
-          "description": "The signing algorithm."
-        },
-        "endpoints": {
-          "$ref": "#/definitions/RosettaNetEndpoints",
-          "description": "The RosettaNet agreement endpoint settings."
-        },
-        "encryptionCertificateName": {
-          "type": "string",
-          "description": "The name of the encryption certificate."
-        },
-        "nonRepudiationOfOriginInDays": {
-          "type": "integer",
-          "description": "The non-repudiation of origin in days."
-        }
-      },
-      "description": "The RosettaNet agreement protocol settings."
-    },
-    "RosettaNetMessageEncodingFlags": {
-      "type": "string",
-      "enum": [
-        "NotSpecified",
-        "AllParts",
-        "Attachments"
-      ],
-      "x-ms-enum": {
-        "name": "RosettaNetMessageEncodingFlags",
-        "modelAsString": false
-      }
-    },
-    "RosettaNetEndpoints": {
-      "type": "object",
-      "required": [
-        "actionUri",
-        "acknowledgmentUri",
-        "syncUri"
-      ],
-      "properties": {
-        "actionUri": {
-          "type": "string",
-          "description": "The asynchronous action endpoint URL."
-        },
-        "acknowledgmentUri": {
-          "type": "string",
-          "description": "The asynchronous acknowledgement endpoint URL."
-        },
-        "syncUri": {
-          "type": "string",
-          "description": "The synchronous endpoint URL."
-        }
-      },
-      "description": "The RosettaNet agreement endpoints."
     },
     "AS2AgreementContent": {
       "type": "object",
@@ -9458,7 +9329,7 @@
           "description": "The changed time."
         },
         "metadata": {
-          "type": "object",
+          "type": "string",
           "description": "The metadata.",
           "properties": {}
         },
