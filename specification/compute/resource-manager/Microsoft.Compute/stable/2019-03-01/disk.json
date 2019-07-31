@@ -1033,6 +1033,11 @@
           "readOnly": true,
           "description": "The size of the disk in bytes. This field is read only."
         },
+        "uniqueId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique Guid identifying the resource."
+        },
         "encryptionSettingsCollection": {
           "$ref": "#/definitions/EncryptionSettingsCollection",
           "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
@@ -1273,7 +1278,7 @@
         "sourceUniqueId": {
           "readOnly": true,
           "type": "string",
-          "description": "The Id of the source this Incremental Snapshot was created from. Null for non Incremental Snapshots."
+          "description": "If this field is set, this is the unique id identifying the source of this resource."
         },
         "uploadSizeBytes": {
           "type": "integer",
