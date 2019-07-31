@@ -512,8 +512,8 @@
         "tags": [
           "Layer"
         ],
-        "description": "Upload a stream of data without completing the upload.",
-        "operationId": "UploadBlobContent",
+        "description": "Upload a stream of data without completing the upload. (Complete path definition)",
+        "operationId": "UploadBlobContentSpecified",
         "consumes": [
           "application/octet-stream"
         ],
@@ -562,17 +562,23 @@
           "application/octet-stream"
         ],
         "description": "Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.",
-        "operationId": "EndBlobUpload",
+        "operationId": "EndBlobUploadSpecified",
         "parameters": [
+          {
+            "$ref": "#/parameters/State"
+          },
+          {
+            "$ref": "#/parameters/NoUploadCache"
+          },
           {
             "$ref": "#/parameters/BlobQueryDigest"
           },
           {
-            "$ref": "#/parameters/RawData"
+            "$ref": "#/parameters/RawDataOptional"
           }
         ],
         "responses": {
-          "204": {
+          "201": {
             "description": "The upload has been completed and accepted by the registry.",
             "headers": {
               "Location": {
@@ -606,6 +612,103 @@
         "responses": {
           "204": {
             "description": "The upload has been successfully deleted."
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/{nextLink}": {
+      "patch": {
+        "security": [
+          {
+            "registry_auth": [],
+            "registry_oauth2": []
+          }
+        ],
+        "tags": [
+          "Layer"
+        ],
+        "description": "Upload a stream of data without completing the upload.",
+        "operationId": "UploadBlobContentFromNext",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/NextLink"
+          },
+          {
+            "$ref": "#/parameters/RawData"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Layer"
+        ],
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "description": "Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.",
+        "operationId": "EndBlobUploadFromNext",
+        "parameters": [
+          {
+            "$ref": "#/parameters/NextLink"
+          },
+          {
+            "$ref": "#/parameters/BlobQueryDigest"
+          },
+          {
+            "$ref": "#/parameters/RawDataOptional"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The upload has been completed and accepted by the registry.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Content-Digest": {
+                "description": "Digest of the targeted content for the request.",
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -1277,7 +1380,7 @@
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
             "headers": {
               "Location": {
@@ -2381,6 +2484,16 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
+    "RawDataOptional": {
+      "name": "value",
+      "in": "body",
+      "schema": {
+        "type": "object",
+        "format": "file"
+      },
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
     "From": {
       "name": "from",
       "type": "string",
@@ -2436,6 +2549,15 @@
       "type": "string",
       "required": false,
       "x-ms-parameter-location": "method"
+    },
+    "NextLink": {
+      "name": "nextLink",
+      "type": "string",
+      "description": "Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) )",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
     }
   }
 }
