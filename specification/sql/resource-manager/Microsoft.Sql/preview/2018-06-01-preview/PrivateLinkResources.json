@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-06-01-preview",
+    "version": "2.0",
     "title": "SqlManagementClient",
     "description": "The Azure SQL Database management API provides a RESTful set of web APIs that interact with Azure SQL Database services to manage your databases. The API enables users to create, retrieve, update, and delete databases, servers, and other entities."
   },
@@ -68,7 +68,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PrivateLink"
+            "$ref": "#/definitions/PrivateLinkResource"
           },
           "readOnly": true
         },
@@ -79,8 +79,8 @@
         }
       }
     },
-    "PrivateLinkProperties": {
-      "description": "Properties of a private endpoint connection proxy.",
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
       "type": "object",
       "properties": {}
     },
@@ -116,7 +116,7 @@
       ],
       "properties": {}
     },
-    "PrivateLink": {
+    "PrivateLinkResource": {
       "description": "A private link resource",
       "type": "object",
       "allOf": [
@@ -139,7 +139,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/PrivateLinkProperties",
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
