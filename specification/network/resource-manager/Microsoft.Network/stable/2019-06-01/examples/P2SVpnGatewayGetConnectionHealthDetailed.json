@@ -5,11 +5,13 @@
         "gatewayName": "p2svpngateway",
         "api-version": "2019-06-01",
         "request": {
-            "p2sConnectionConfigurationIds": [
-                "/subscriptions/subid/resourceGroups/p2s-vpn-gateway-test/providers/Microsoft.Network/p2svpnGateways/p2svpngateway/p2sConnectionConfigurations/p2sConnConfig1"
-            ],
-            "vpnUserNames" :[
-                "vpnUser1"
+            "p2sVpnConnectionHealthFilters": [
+                {
+                    "vpnUserNames":[                        
+                        "vpnUser1",
+                        "vpnUser2"                        
+                    ]                              
+                }
             ],
             "outputBlobSasUrl": "https://blobcortextesturl.blob.core.windows.net/folderforconfig/p2sconnectionhealths?sp=rw&se=2018-01-10T03%3A42%3A04Z&sv=2017-04-17&sig=WvXrT5bDmDFfgHs%2Brz%2BjAu123eRCNE9BO0eQYcPDT7pY%3D&sr=b"
         }
