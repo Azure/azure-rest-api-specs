@@ -516,6 +516,54 @@
         "bucketName"
       ]
     },
+    "AvroDataset": {
+      "x-ms-discriminator-value": "Avro",
+      "description": "Avro dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Avro dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvroDatasetTypeProperties"
+        }
+      }
+    },
+    "AvroDatasetTypeProperties": {
+      "description": "Avro dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the avro storage."
+        },
+        "avroCompressionCodec": {
+          "type": "string",
+          "enum": [
+            "none",
+            "deflate",
+            "snappy",
+            "xz",
+            "bzip2"
+          ],
+          "x-ms-enum": {
+            "name": "avroCompressionCodec",
+            "modelAsString": true
+          }
+        },
+        "avroCompressionLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "ParquetDataset": {
       "x-ms-discriminator-value": "Parquet",
       "description": "Parquet dataset.",
