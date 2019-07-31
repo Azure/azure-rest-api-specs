@@ -2400,6 +2400,23 @@
         }
       }
     },
+    "AzureMariaDBTableDataset": {
+      "x-ms-discriminator-value": "AzureMariaDBTable",
+      "description": "Azure Database for MariaDB dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
+    },
     "MarketoObjectDataset": {
       "x-ms-discriminator-value": "MarketoObject",
       "description": "Marketo server dataset.",

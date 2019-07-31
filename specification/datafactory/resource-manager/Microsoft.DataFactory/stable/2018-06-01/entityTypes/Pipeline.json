@@ -1249,7 +1249,16 @@
           "$ref": "#/definitions/CopySource"
         }
       ],
-      "properties": {}
+      "properties": {
+        "excludeLastRequest": {
+          "type": "object",
+          "description": "Whether to exclude the records of the last request. The default value is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "baseRequestId": {
+          "type": "object",
+          "description": "The ID of request for delta loading. Once it is set, only data with requestId larger than the value of this property will be retrieved. The default value is 0. Type: integer (or Expression with resultType integer )."
+        }
+      }
     },
     "SapTableSource": {
       "description": "A copy activity source for SAP Table source.",
@@ -1337,6 +1346,22 @@
         }
       ],
       "properties": {
+        "requestMethod": {
+          "type": "object",
+          "description": "The HTTP method used to call the RESTful API. The default is GET. Type: string (or Expression with resultType string)."
+        },
+        "requestBody": {
+          "type": "object",
+          "description": "The HTTP request body to the RESTful API if requestMethod is POST. Type: string (or Expression with resultType string)."
+        },
+        "additionalHeaders": {
+          "type": "object",
+          "description": "The additional HTTP headers in the request to the RESTful API. Type: string (or Expression with resultType string)."
+        },
+        "paginationRules": {
+          "type": "object",
+          "description": "The pagination rules to compose next page requests. Type: string (or Expression with resultType string)."
+        },
         "httpRequestTimeout": {
           "type": "object",
           "description": "The timeout (TimeSpan) to get an HTTP response. It is the timeout to get a response, not the timeout to read response data. Default value: 00:01:40. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
@@ -1834,7 +1859,28 @@
           "$ref": "#/definitions/CopySource"
         }
       ],
-      "properties": {}
+      "properties": {
+        "allowedGroups": {
+          "type": "object",
+          "description": "The groups containing all the users. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "userScopeFilterUri": {
+          "type": "object",
+          "description": "The user scope uri. Type: string (or Expression with resultType string)."
+        },
+        "dateFilterColumn": {
+          "type": "object",
+          "description": "The Column to apply the <paramref name=\"StartTime\"/> and <paramref name=\"EndTime\"/>. Type: string (or Expression with resultType string)."
+        },
+        "startTime": {
+          "type": "object",
+          "description": "Start time of the requested range for this dataset. Type: string (or Expression with resultType string)."
+        },
+        "endTime": {
+          "type": "object",
+          "description": "End time of the requested range for this dataset. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "AzureDataLakeStoreSource": {
       "description": "A copy activity Azure Data Lake source.",
@@ -2116,6 +2162,21 @@
     },
     "MariaDBSource": {
       "description": "A copy activity MariaDB server source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "A query to retrieve data from source. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureMariaDBSource": {
+      "description": "A copy activity Azure MariaDB source.",
       "type": "object",
       "allOf": [
         {
