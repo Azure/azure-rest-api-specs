@@ -1,19 +1,22 @@
-﻿{
+{
   "parameters": {
-    "subscriptionId": "12345678-1234-1234-1234-123456789098",
-    "api-version": "2019-05-15",
+    "subscriptionId": "12345678-1234-1234-123456789098",
+    "api-version": "2019-01-21",
     "clusterName": "kustoProd",
-    "databaseName": "KustoDatabase8",
-    "dataConnectionName": "DataConnections8",
-    "resourceGroupName": "kustorptest"
+    "databaseName": "kustorptest",
+    "resourceGroupName": "kustorptest",
+    "dataConnectionName": {
+      "name": "DataConnections7",
+      "type": "Microsoft.Kusto/clusters/databases/dataConnections"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "name": "DataConnections8",
+        "name": "DataConnections7",
         "nameAvailable": false,
-        "message": "Name 'DataConnections8' is already taken. Please specify a different name.",
-        "reason":  "AlreadyExists"
+        "message": "Name 'DataConnections7' is already taken. Please specify a different name.",
+        "reason": "AlreadyExists"
       }
     }
   }
