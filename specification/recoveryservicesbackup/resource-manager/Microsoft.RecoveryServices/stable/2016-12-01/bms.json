@@ -3126,6 +3126,10 @@
           "items": {
             "$ref": "#/definitions/SubProtectionPolicy"
           }
+        },
+        "makePolicyConsistent": {
+          "description": "Fix the policy inconsistency",
+          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "AzureWorkload"
@@ -5871,6 +5875,27 @@
             "name": "CreateMode",
             "modelAsString": true
           }
+        },
+        "deferredDeleteSyncTimeInUTC": {
+          "format": "int64",
+          "description": "Sync time for deferred deletion.",
+          "type": "integer"
+        },
+        "isScheduledForDeferredDelete": {
+          "description": "Flag to identify whether the DS is scheduled for deferred delete",
+          "type": "boolean"
+        },
+        "deferredDeleteTimeRemaining": {
+          "description": "Time remaining before the DS marked for deferred delete is permanently deleted",
+          "type": "string"
+        },
+        "IsDeferredDeleteScheduleUpcoming": {
+          "description": "Flag to identify whether the deferred deleted DS is to be purged soon",
+          "type": "boolean"
+        },
+        "isRehydrate": {
+          "description": "Flag to identify that deferred deleted DS is to be rehydrated into Pause state",
+          "type": "boolean"
         }
       },
       "discriminator": "protectedItemType"
