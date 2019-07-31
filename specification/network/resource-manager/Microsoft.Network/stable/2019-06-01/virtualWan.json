@@ -3996,7 +3996,8 @@
         "p2sVpnConnectionHealthFilters": {
           "type": "array",
           "items": {
-            "type": "p2sVpnConnectionHealthFilter"
+            "$ref": "#/definitions/P2SVpnConnectionHealthFilter",
+            "description": "A filter of P2S Vpn connection health."
           },
           "description": "List of P2S Vpn connection Ids of Vpn user names."
         },
@@ -4007,21 +4008,21 @@
       },      
       "description": "List of P2S Vpn connection health details."
     },
-    "p2sVpnConnectionHealthFilter": {
+    "P2SVpnConnectionHealthFilter": {
       "properties": {
         "p2sConnectionConfigurationId": {
           "type": "string",
-          "description": "p2s connection configuration Id"
+          "description": "P2S connection configuration Id."
         },
         "vpnUserName": {
           "type": "string",
-          "description": "Vpn User Name"
+          "description": "Vpn User Name."
         }
       },
       "required": [
         "p2sConnectionConfigurationId"
       ],
-      "description": "a filter of P2S Vpn connection health."
+      "description": "A filter of P2S Vpn connection health."
     }
   }
 }
