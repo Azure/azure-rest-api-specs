@@ -635,6 +635,25 @@
         "type"
       ]
     },
+    "AvroWriteSettings": {
+      "description": "Avro write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "recordName": {
+          "type": "string",
+          "description": "Top level record name in write result, which is required in AVRO spec."
+        },
+        "recordNamespace": {
+          "type": "string",
+          "description": "Record namespace in the write result."
+        }
+      }
+    },
     "DelimitedTextWriteSettings": {
       "description": "Delimited text write settings.",
       "type": "object",
@@ -656,6 +675,21 @@
       "required": [
         "fileExtension"
       ]
+    },
+    "AvroSource": {
+      "description": "A copy activity Avro source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Avro store settings."
+        }
+      }
     },
     "ParquetSource": {
       "description": "A copy activity Parquet source.",
@@ -2575,6 +2609,25 @@
         "azureTableInsertType": {
           "type": "object",
           "description": "Azure Table insert type. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AvroSink": {
+      "description": "A copy activity Avro sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Avro store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/AvroWriteSettings",
+          "description": "Avro format settings."
         }
       }
     },
