@@ -3993,36 +3993,28 @@
     },
     "P2SVpnConnectionHealthRequest": {
       "properties": {
-        "p2sVpnConnectionHealthFilters": {
+        "p2sConnectionConfigurationIds": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/P2SVpnConnectionHealthFilter",
-            "description": "A filter of P2S Vpn connection health."
+            "type": "string",
+            "description": "P2S connection configuration Id."
           },
-          "description": "List of P2S Vpn connection health filters."
+          "description": "List of P2S Vpn connection configuration Ids."
+        },
+        "vpnUserNames": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "Vpn User Name."
+          },
+          "description": "List of P2S Vpn user names."
         },
         "outputBlobSasUrl": {
           "type": "string",
           "description": "The sas-url to download the P2S Vpn connection health detail."
         }
       },      
-      "description": "List of P2S Vpn connection health details."
-    },
-    "P2SVpnConnectionHealthFilter": {
-      "properties": {
-        "p2sConnectionConfigurationId": {
-          "type": "string",
-          "description": "P2S connection configuration Id."
-        },
-        "vpnUserName": {
-          "type": "string",
-          "description": "Vpn User Name."
-        }
-      },
-      "required": [
-        "p2sConnectionConfigurationId"
-      ],
-      "description": "A filter of P2S Vpn connection health."
+      "description": "List of P2S Vpn connection health request."
     }
   }
 }
