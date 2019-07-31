@@ -315,6 +315,9 @@
         }
       ],
       "get": {
+        "produces": [
+          "application/octet-stream"
+        ],
         "tags": [
           "Layer"
         ],
@@ -396,6 +399,9 @@
         }
       },
       "delete": {
+        "produces": [
+          "application/octet-stream"
+        ],
         "tags": [
           "Layer"
         ],
@@ -514,10 +520,16 @@
         "parameters": [
           {
             "$ref": "#/parameters/RawData"
+          },
+          {
+            "$ref": "#/parameters/State"
+          },
+          {
+            "$ref": "#/parameters/NoUploadCache"
           }
         ],
         "responses": {
-          "204": {
+          "202": {
             "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
             "headers": {
               "Location": {
@@ -1183,56 +1195,6 @@
     }
   },
   "x-ms-paths": {
-    "/v2/{name}/blobs/uploads/?mode={monolithic}": {
-      "post": {
-        "tags": [
-          "Layer"
-        ],
-        "description": "Upload a blob identified by the digest parameter in single request. This upload will not be resumable unless a recoverable error is returned.",
-        "operationId": "StartMonolithicBlobUpload",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ImageName"
-          },
-          {
-            "$ref": "#/parameters/BlobQueryDigest"
-          },
-          {
-            "$ref": "#/parameters/RawData"
-          },
-          {
-            "name": "monolithic",
-            "description": "Initiate Monolithic Blob Upload",
-            "type": "string",
-            "in": "query"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The blob has been created in the registry and is available at the provided location.",
-            "headers": {
-              "Location": {
-                "description": "Provided location for blob",
-                "type": "string"
-              },
-              "Docker-Upload-UUID": {
-                "description": "Identifies the docker upload uuid for the current request.",
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "ACR error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AcrErrors"
-            }
-          }
-        }
-      }
-    },
     "/v2/{name}/blobs/uploads/?mode={resumable}": {
       "post": {
         "tags": [
@@ -1360,6 +1322,9 @@
         }
       ],
       "get": {
+        "produces": [
+          "application/octet-stream"
+        ],
         "tags": [
           "Layer"
         ],
@@ -2454,6 +2419,22 @@
       "description": "Format : bytes=<start>-<end>,  HTTP Range header specifying blob chunk.",
       "in": "header",
       "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "NoUploadCache": {
+      "description": "Acquired from NextLink",
+      "name": "_nouploadcache",
+      "in": "query",
+      "type": "boolean",
+      "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "State": {
+      "description": "Acquired from NextLink",
+      "name": "_state",
+      "in": "query",
+      "type": "string",
+      "required": false,
       "x-ms-parameter-location": "method"
     }
   }
