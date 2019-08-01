@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "version": "4.0",
-    "title": "QnAMaker Client",
+    "title": "QnAMaker Runtime Client",
     "description": "An API for QnAMaker runtime"
   },
   "securityDefinitions": {
@@ -33,7 +33,7 @@
           "Knowledgebases"
         ],
         "summary": "GenerateAnswer call to query the knowledgebase.",
-        "operationId": "Knowledgebase_GenerateAnswer",
+        "operationId": "Runtime_GenerateAnswer",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -75,7 +75,7 @@
           "Knowledgebases"
         ],
         "summary": "Train call to add suggestions to the knowledgebase.",
-        "operationId": "Knowledgebase_Train",
+        "operationId": "Runtime_Train",
         "parameters": [
           {
             "$ref": "#/parameters/KbId"
@@ -390,7 +390,7 @@
           "type": "array",
           "description": "Represents Search Result list.",
           "items": {
-              "$ref": "#/definitions/QnASearchResult"
+            "$ref": "#/definitions/QnASearchResult"
           }
         }
       }
@@ -428,8 +428,8 @@
           "type": "array",
           "description": "List of metadata.",
           "items": {
-              "$ref": "#/definitions/MetadataDTO"
-            }
+            "$ref": "#/definitions/MetadataDTO"
+          }
         },
         "context": {
           "type": "object",

@@ -81,7 +81,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Search
-  output-folder: $(csharp-sdks-folder)/Search/Management/Management.Search/Generated
+  output-folder: $(csharp-sdks-folder)/search/Microsoft.Azure.Management.Search/src/Generated
   clear-output-folder: true
 ```
 

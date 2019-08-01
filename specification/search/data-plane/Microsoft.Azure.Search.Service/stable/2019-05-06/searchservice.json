@@ -4899,25 +4899,19 @@
         }
       },
       "required": [
-        "uri",
-        "httpHeaders",
-        "httpMethod"
+        "uri"
       ],
       "externalDocs": {
-        "url": "https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-interface"
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-custom-skill-web-api"
       },
       "description": "A skill that can call a Web API endpoint, allowing you to extend a skillset by having it call your custom code."
     },
     "WebApiHttpHeaders": {
-      "properties": {
-        "headers": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "A dictionary of http request headers."
-        }
-      }
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "A dictionary of http request headers."
     },
     "SkillsetListResult": {
       "properties": {
@@ -5290,6 +5284,12 @@
           "format": "int32",
           "x-nullable": true,
           "description": "The maximum number of fields of type Collection(Edm.ComplexType) allowed in an index."
+        },
+        "maxComplexObjectsInCollectionsPerDocument": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum number of objects in complex collections allowed per document."
         }
       },
       "description": "Represents various service level limits."

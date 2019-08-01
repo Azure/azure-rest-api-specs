@@ -1,84 +1,113 @@
 {
   "parameters": {
-    "api-version": "2018-05-05-preview",
-    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d"
+    "api-version": "2019-05-05-preview",
+    "subscriptionId": "1e3ff1c0-771a-4119-a03b-be82a51e232d",
+    "groupby": "severity,alertState"
   },
   "responses": {
     "200": {
       "body": {
         "properties": {
-          "total": 885,
-          "smartGroupsCount": 2,
-          "summaryByState": {
-            "new": 884,
-            "acknowledged": 1,
-            "closed": 0
-          },
-          "summaryBySeverity": {
-            "sev0": {
-              "new": 286,
-              "acknowledged": 0,
-              "closed": 0
+          "groupedby": "severity",
+          "smartGroupsCount": 100,
+          "total": 14189,
+          "values": [
+            {
+              "name": "Sev0",
+              "count": 6517,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 6517
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
             },
-            "sev1": {
-              "new": 309,
-              "acknowledged": 0,
-              "closed": 0
+            {
+              "name": "Sev1",
+              "count": 3175,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 3175
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
             },
-            "sev2": {
-              "new": 0,
-              "acknowledged": 0,
-              "closed": 0
+            {
+              "name": "Sev2",
+              "count": 1120,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 1120
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
             },
-            "sev3": {
-              "new": 289,
-              "acknowledged": 1,
-              "closed": 0
+            {
+              "name": "Sev3",
+              "count": 1902,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 1902
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
             },
-            "sev4": {
-              "new": 0,
-              "acknowledged": 0,
-              "closed": 0
+            {
+              "name": "Sev4",
+              "count": 1475,
+              "groupedby": "alertState",
+              "values": [
+                {
+                  "name": "New",
+                  "count": 1475
+                },
+                {
+                  "name": "Acknowledged",
+                  "count": 0
+                },
+                {
+                  "name": "Closed",
+                  "count": 0
+                }
+              ]
             }
-          },
-          "summaryBySeverityAndMonitorCondition": {
-            "sev0": {
-              "fired": 286,
-              "resolved": 0
-            },
-            "sev1": {
-              "fired": 309,
-              "resolved": 0
-            },
-            "sev2": {
-              "fired": 0,
-              "resolved": 0
-            },
-            "sev3": {
-              "fired": 290,
-              "resolved": 0
-            },
-            "sev4": {
-              "fired": 0,
-              "resolved": 0
-            }
-          },
-          "summaryByMonitorService": {
-            "platform": 0,
-            "application Insights": 290,
-            "log Analytics": 595,
-            "zabbix": 0,
-            "scom": 0,
-            "nagios": 0,
-            "infrastructure Insights": 0,
-            "activityLog Administrative": 0,
-            "activityLog Security": 0,
-            "activityLog Recommendation": 0,
-            "activityLog Policy": 0,
-            "activityLog Autoscale": 0,
-            "serviceHealth": 0,
-            "smartDetector": 0
-          }
+          ]
         },
         "id": "/subscriptions/1e3ff1c0-771a-4119-a03b-be82a51e232d/providers/Microsoft.AlertsManagement/alertsSummary/current",
         "type": "Microsoft.AlertsManagement/alertsSummary",

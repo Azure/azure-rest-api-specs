@@ -9,12 +9,20 @@
     }
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -31,10 +39,14 @@
   "paths": {
     "/providers/microsoft.aadiam/operations": {
       "get": {
-        "tags": ["Operations"],
+        "tags": [
+          "Operations"
+        ],
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "Gets the operations": { "$ref": "./examples/listOperations.json" }
+          "Gets the operations": {
+            "$ref": "./examples/listOperations.json"
+          }
         },
         "description": "Operation to return the list of available operations.",
         "parameters": [
@@ -60,7 +72,9 @@
     },
     "/providers/microsoft.aadiam/diagnosticSettings": {
       "get": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_List",
         "description": "Gets the active diagnostic settings list for AadIam.",
         "parameters": [
@@ -86,12 +100,14 @@
           "Gets the diagnostic settings": {
             "$ref": "./examples/listDiagnosticSettings.json"
           }
-        } 
+        }
       }
     },
     "/providers/microsoft.aadiam/diagnosticSettings/{name}": {
       "get": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_Get",
         "description": "Gets the active diagnostic setting for AadIam.",
         "parameters": [
@@ -120,13 +136,17 @@
           "Gets the diagnostic setting": {
             "$ref": "./examples/getDiagnosticSetting.json"
           }
-        } 
+        }
       },
       "put": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_CreateOrUpdate",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/createOrUpdateDiagnosticSetting.json" }
+          "BatchAccountDelete": {
+            "$ref": "./examples/createOrUpdateDiagnosticSetting.json"
+          }
         },
         "description": "Creates or updates diagnostic settings for AadIam.",
         "parameters": [
@@ -162,7 +182,9 @@
         }
       },
       "delete": {
-        "tags": ["DiagnosticSettings"],
+        "tags": [
+          "DiagnosticSettings"
+        ],
         "operationId": "DiagnosticSettings_Delete",
         "description": "Deletes existing diagnostic setting for AadIam.",
         "parameters": [
@@ -191,12 +213,14 @@
           "Deletes the diagnostic setting": {
             "$ref": "./examples/deleteDiagnosticSetting.json"
           }
-        } 
+        }
       }
     },
     "/providers/microsoft.aadiam/diagnosticSettingsCategories": {
       "get": {
-        "tags": ["DiagnosticSettingsCategories"],
+        "tags": [
+          "DiagnosticSettingsCategories"
+        ],
         "operationId": "DiagnosticSettingsCategory_List",
         "description": "Lists the diagnostic settings categories for AadIam.",
         "parameters": [
@@ -222,7 +246,7 @@
           "Gets the diagnostic setting categories": {
             "$ref": "./examples/listDiagnosticSettingsCategories.json"
           }
-        } 
+        }
       }
     }
   },
@@ -261,18 +285,24 @@
           "description": "The number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
-      "required": [ "enabled", "days" ],
+      "required": [
+        "enabled",
+        "days"
+      ],
       "description": "Specifies the retention policy for the log."
     },
     "LogSettings": {
       "properties": {
         "category": {
-          "enum": ["AuditLogs", "SignInLogs"],
+          "enum": [
+            "AuditLogs",
+            "SignInLogs"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "category",
             "modelAsString": true
-         },
+          },
           "description": "Name of a Diagnostic Log category for a resource type this setting is applied to. To obtain the list of Diagnostic Log categories for a resource, first perform a GET diagnostic settings operation."
         },
         "enabled": {
@@ -284,14 +314,16 @@
           "description": "The retention policy for this log."
         }
       },
-      "required": [ "enabled" ],
+      "required": [
+        "enabled"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
     },
     "DiagnosticSettings": {
       "properties": {
         "storageAccountId": {
           "type": "string",
-          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs." 
+          "description": "The resource ID of the storage account to which you would like to send Diagnostic Logs."
         },
         "serviceBusRuleId": {
           "type": "string",
@@ -448,7 +480,9 @@
     "DiagnosticSettingsCategory": {
       "properties": {
         "categoryType": {
-          "enum": ["Logs"],
+          "enum": [
+            "Logs"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "categoryType",
