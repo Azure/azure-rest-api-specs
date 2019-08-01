@@ -2517,6 +2517,178 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/initiateTransfer": {
+      "post": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Initiates the request to transfer the legacy subscriptions or RIs.",
+        "operationId": "PartnerTransfers_Initiate",
+        "x-ms-examples": {
+          "InitiatePartnerTransfer": {
+            "$ref": "./examples/PartnerInitiateTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/InitiateTransferRequest"
+            },
+            "description": "Parameters supplied to initiate the transfer."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Initiated transfer details.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers/{transferName}": {
+      "get": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Gets the transfer details for given transfer Id.",
+        "operationId": "PartnerTransfers_Get",
+        "x-ms-examples": {
+          "TransferGet": {
+            "$ref": "./examples/PartnerGetTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of transfer.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Cancels the transfer for given transfer Id.",
+        "operationId": "PartnerTransfers_Cancel",
+        "x-ms-examples": {
+          "TransferCancel": {
+            "$ref": "./examples/PartnerCancelTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Details of canceled transfer.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetails"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/transfers": {
+      "get": {
+        "tags": [
+          "Transfers"
+        ],
+        "description": "Lists all transfer's details initiated from given invoice section.",
+        "operationId": "PartnerTransfersTransfers_List",
+        "x-ms-examples": {
+          "TransfersList": {
+            "$ref": "./examples/PartnerListTransfers.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingProfileNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of transfers initiated from this invoice section.",
+            "schema": {
+              "$ref": "#/definitions/TransferDetailsListResult"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/transfers/{transferName}/acceptTransfer": {
       "post": {
         "tags": [
@@ -3792,6 +3964,10 @@
         "recipientEmailId": {
           "type": "string",
           "description": "Email Id of recipient for transfer."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Optional reseller Id for transfer."
         }
       }
     },
@@ -3948,6 +4124,21 @@
           "description": "Target billing account Id.",
           "readOnly": true
         },
+        "resellerId": {
+          "type": "string",
+          "description": "Reseller Id for transfer.",
+          "readOnly": true
+        },
+        "resellerName": {
+          "type": "string",
+          "description": "Reseller name for transfer.",
+          "readOnly": true
+        },
+        "initiatorCustomerType": {
+          "type": "string",
+          "description": "Customer type of the initiator.",
+          "readOnly": true
+        },
         "billingProfileId": {
           "type": "string",
           "description": "Target billing profile Id.",
@@ -4029,6 +4220,21 @@
           "type": "string",
           "readOnly": true,
           "description": "Email Id of initiator of transfer."
+        },
+        "resellerId": {
+          "type": "string",
+          "description": "Reseller Id for transfer.",
+          "readOnly": true
+        },
+        "resellerName": {
+          "type": "string",
+          "description": "Reseller name for transfer.",
+          "readOnly": true
+        },
+        "initiatorCustomerType": {
+          "type": "string",
+          "description": "Customer type of the initiator.",
+          "readOnly": true
         },
         "canceledBy": {
           "type": "string",
