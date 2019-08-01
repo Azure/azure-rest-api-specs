@@ -15,47 +15,49 @@
         },
         "nodeAgentSKUId": "batch.node.ubuntu 16.04"
       },
-      "mountConfiguration": [{
-        "azureBlobFileSystemConfiguration": {
-          "accountName": "accountName",
-          "containerName": "blobContainerName",
-          "accountKey": "accountKey",
-          "relativeMountPath": "bfusepath"
+      "mountConfiguration": [
+        {
+          "azureBlobFileSystemConfiguration": {
+            "accountName": "accountName",
+            "containerName": "blobContainerName",
+            "accountKey": "accountKey",
+            "relativeMountPath": "bfusepath"
+          }
+        },
+        {
+          "azureFileShareConfiguration": {
+            "accountName": "accountName",
+            "azureFileUrl": "https://myaccount.file.core.windows.net/fileshare",
+            "accountKey": "accountKey",
+            "relativeMountPath": "filesharepath",
+            "mountOptions": "mount options ver=1.0"
+          }
+        },
+        {
+          "nfsMountConfiguration": {
+            "source": "somesource nfs url",
+            "relativeMountPath": "mountpath",
+            "mountOptions": "mount options ver=1.0"
+          }
+        },
+        {
+          "cifsMountConfiguration": {
+            "username": "accountName",
+            "password": "password",
+            "source": "//myaccount.file.core.windows.net/file",
+            "relativeMountPath": "mountpath",
+            "mountOptions": "mount options ver=1.0"
+          }
         }
-      },
-      {
-        "azureFileShareConfiguration": {
-          "accountName": "accountName",
-          "azureFileUrl": "https://myaccount.file.core.windows.net/fileshare",
-          "accountKey": "accountKey",
-          "relativeMountPath": "filesharepath",
-          "mountOptions": "mount options ver=1.0"
-        }
-      },
-      {
-        "nfsMountConfiguration": {
-          "source": "somesource nfs url",
-          "relativeMountPath": "mountpath",
-          "mountOptions": "mount options ver=1.0"
-        }
-      },
-      {
-        "cifsMountConfiguration": {
-          "username": "accountName",
-          "password": "password",
-          "source": "//myaccount.file.core.windows.net/file",
-          "relativeMountPath": "mountpath",
-          "mountOptions": "mount options ver=1.0"
-        }
-      }],
-      "resizeTimeout":"PT15M",
-      "targetDedicatedNodes":5,
-      "targetLowPriorityNodes":0,
-      "maxTasksPerNode":3,
+      ],
+      "resizeTimeout": "PT15M",
+      "targetDedicatedNodes": 5,
+      "targetLowPriorityNodes": 0,
+      "maxTasksPerNode": 3,
       "taskSchedulingPolicy": {
-        "nodeFillType":"spread"
+        "nodeFillType": "spread"
       },
-      "enableAutoScale":false
+      "enableAutoScale": false
     }
   },
   "responses": {
