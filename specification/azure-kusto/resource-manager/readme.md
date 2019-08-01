@@ -177,10 +177,10 @@ generate-interface: true
 
 ### Tag: package-2019-01-21 and java
 
-These settings apply only when `--tag=package-2019-01-21 --java` is specified on the command line.
+These settings apply only when `--tag=2019-01-21 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2019-01-21' && $(java) && $(multiapi)
+``` yaml $(tag) == '2019-01-21' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.kusto.v2019_01_21
   output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019_01_21
@@ -190,10 +190,10 @@ generate-interface: true
 
 ### Tag: package-2019-05-15 and java
 
-These settings apply only when `--tag=package-2019-05-15 --java` is specified on the command line.
+These settings apply only when `--tag=2019-05-15 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2019-05-15' && $(java) && $(multiapi)
+``` yaml $(tag) == '2019-05-15' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.kusto.v2019_05_15
   output-folder: $(azure-libraries-for-java-folder)/kusto/resource-manager/v2019_05_15
