@@ -5079,6 +5079,804 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Logic/integrationServiceEnvironments": {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironments"
+        ],
+        "operationId": "IntegrationServiceEnvironments_ListBySubscription",
+        "description": "Gets a list of integration service environments by subscription.",
+        "x-ms-examples": {
+          "List integration service environments by subscription": {
+            "$ref": "./examples/IntegrationServiceEnvironments_ListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationServiceEnvironments": {
+      "get": {
+        "tags": [
+          "IntegrationServiceEnvironments"
+        ],
+        "operationId": "IntegrationServiceEnvironments_ListByResourceGroup",
+        "description": "Gets a list of integration service environments by resource group.",
+        "x-ms-examples": {
+          "List integration service environments by resource group name": {
+            "$ref": "./examples/IntegrationServiceEnvironments_ListByResourceGroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$top",
+            "description": "The number of items to be included in the result.",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironmentListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}": {
+      "get": {
+        "tags": [
+          "IntegrationServiceEnvironments"
+        ],
+        "operationId": "IntegrationServiceEnvironments_Get",
+        "description": "Gets an integration service environment.",
+        "x-ms-examples": {
+          "Get integration service environment by name": {
+            "$ref": "./examples/IntegrationServiceEnvironments_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          }
+        }
+      },
+	    "put": {
+        "tags": [
+          "IntegrationServiceEnvironments"
+        ],
+        "operationId": "IntegrationServiceEnvironments_CreateOrUpdate",
+        "description": "Creates or updates an integration service environment.",
+        "x-ms-examples": {
+          "Create or update an integration service environment": {
+            "$ref": "./examples/IntegrationServiceEnvironments_CreateOrUpdate.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "integrationServiceEnvironment",
+            "description": "The integration service environment.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The azure async operation header to track the long running operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The azure async operation header to track the long running operation.",
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          }
+        }
+      },
+	    "patch": {
+        "tags": [
+          "IntegrationServiceEnvironments"
+        ],
+        "operationId": "IntegrationServiceEnvironments_Update",
+        "description": "Updates an integration service environment.",
+        "x-ms-examples": {
+          "Patch an integration service environment": {
+            "$ref": "./examples/IntegrationServiceEnvironments_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "integrationServiceEnvironment",
+            "description": "The integration service environment.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          }
+        }
+      },
+	    "delete": {
+        "tags": [
+          "IntegrationServiceEnvironments"
+        ],
+        "operationId": "IntegrationServiceEnvironments_Delete",
+        "description": "Deletes an integration service environment.",
+        "x-ms-examples": {
+          "Delete an integration account": {
+            "$ref": "./examples/IntegrationServiceEnvironments_Delete.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironment",
+            "description": "The integration service environment.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+	  },
+	  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/skus": {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironmentSkus"
+        ],
+        "operationId": "IntegrationServiceEnvironment_Skus",
+        "description": "Gets a list of integration service environment skus.",
+        "x-ms-examples": {
+          "List integration service environment skus": {
+            "$ref": "./examples/IntegrationServiceEnvironment_Skus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironmentSkuDefinition"
+            }
+          }
+        }
+      }
+    },
+	  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/restart": {
+      "post": {
+        "tags": [
+          "integrationServiceEnvironmentRestart"
+        ],
+        "operationId": "IntegrationServiceEnvironment_Restart",
+        "description": "Restarts an integration service environment.",
+        "x-ms-examples": {
+          "Restarts an integration service environment": {
+            "$ref": "./examples/IntegrationServiceEnvironment_Restart.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The azure async operation header to track the long running operation.",
+                "type": "string"
+              }
+            },
+            "description": "OK"
+          }
+        }
+      }
+    },
+	  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/operationStatuses/{operationId}": {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironmentOperationStatus"
+        ],
+        "operationId": "IntegrationServiceEnvironment_OperationStatus",
+        "description": "Gets an integration service environment operation status.",
+        "x-ms-examples": {
+          "Gets an integration service environment operation status": {
+            "$ref": "./examples/IntegrationServiceEnvironment_OperationStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "description": "The operation id.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureAsyncOperationResource"
+            }
+          }
+        }
+      }
+    },     
+  	"/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/health/network": {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironmentNetworkHealth"
+        ],
+        "operationId": "IntegrationServiceEnvironment_NetworkHealth",
+        "description": "Gets the integration service environment network health.",
+        "x-ms-examples": {
+          "Gets the integration service environment network health": {
+            "$ref": "./examples/IntegrationServiceEnvironment_NetworkHealth.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+			      "schema": {
+              "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkHealth"
+            }
+          }
+        }
+      }
+    },
+
+    "/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/managedApis": {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironmentManagedApis"
+        ],
+        "operationId": "IntegrationServiceEnvironment_ManagedApis",
+        "description": "Gets the integration service environment managed Apis.",
+        "x-ms-examples": {
+          "Gets the integration service environment managed Apis": {
+            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApis.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+			      "schema": {
+              "$ref": "#/definitions/ManagedApiListResult"
+            }
+          }
+        }
+      }
+    },
+    "/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/managedApis/{apiName}": {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironmentManagedApi"
+        ],
+        "operationId": "IntegrationServiceEnvironment_ManagedApi",
+        "description": "Gets the integration service environment managed Api.",
+        "x-ms-examples": {
+          "Gets the integration service environment managed Apis": {
+            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiName",
+            "description": "The api name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+			      "schema": {
+              "$ref": "#/definitions/ManagedApi"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "integrationServiceEnvironmentManagedApi"
+        ],
+        "operationId": "IntegrationServiceEnvironment_ManagedApi",
+        "description": "Puts the integration service environment managed Api.",
+        "x-ms-examples": {
+          "Gets the integration service environment managed Apis": {
+            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiName",
+            "description": "The api name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The azure async operation header to track the long running operation.",
+                "type": "string"
+              }
+            },
+			      "schema": {
+              "$ref": "#/definitions/ManagedApi"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The azure async operation header to track the long running operation.",
+                "type": "string"
+              }
+            },
+			      "schema": {
+              "$ref": "#/definitions/ManagedApi"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "integrationServiceEnvironmentManagedApi"
+        ],
+        "operationId": "IntegrationServiceEnvironment_ManagedApi",
+        "description": "Deletes the integration service environment managed Api.",
+        "x-ms-examples": {
+          "Deletes the integration service environment managed Apis": {
+          "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiName",
+            "description": "The api name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "description": "The azure async operation header to track the long running operation.",
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          }
+        }
+      }
+    },
+    "/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/managedApis/{apiName}/operationStatuses/{operationId}" : {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironmentManagedApi"
+        ],
+        "operationId": "IntegrationServiceEnvironment_ManagedApiOperations",
+        "description": "Gets the managed Api operations.",
+        "x-ms-examples": {
+          "Gets the integration service environment managed Apis": {
+            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiName",
+            "description": "The api name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureAsyncOperationResource"
+            }
+          }
+        }
+      }
+    },
+    "/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/managedApis/{apiName}/apiOperations" : {
+      "get": {
+        "tags": [
+          "integrationServiceEnvironmentManagedApi"
+        ],
+        "operationId": "IntegrationServiceEnvironment_ManagedApiOperations",
+        "description": "Gets the managed Api operations.",
+        "x-ms-examples": {
+          "Gets the integration service environment managed Apis": {
+            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "name": "resourceGroupName",
+            "description": "The resource group name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "integrationServiceEnvironmentName",
+            "description": "The integration service environment name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "apiName",
+            "description": "The api name.",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+			      "schema": {
+              "$ref": "#/definitions/ApiOperationListResult"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Logic/operations": {
       "get": {
         "tags": [
@@ -6402,6 +7200,873 @@
         }
       },
       "description": "The parameters to generate upgraded definition."
+    },
+    "ApiOperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiOperation"
+          },
+          "description": "The api operation definitions for an API."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of managed API operations."
+    },
+    "ApiOperation" : {
+      "type" : "object",
+      "description" : "The api operation.",
+      "properties" : {
+        "properties" : {
+          "$ref" : "#defintions/ApiOperationPropertiesDefinition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiOperationPropertiesDefinition" : {
+      "type" : "object",
+      "description" : "The api operations properties",
+      "properties" : {
+        "summary" : {
+          "type" : "string",
+          "description" : "The summary of the api operation."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "The description of the api operation."
+        },
+        "visibility" : {
+          "type" : "string",
+          "description" : "The visibility of the api operation."
+        },
+        "trigger" : {
+          "type" : "string",
+          "description" : "The trigger type of api operation."
+        },
+        "triggerHint" : {
+          "type" : "string",
+          "description" : "The trigger hint for the api operation."
+        },
+        "pageable" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the api operation is pageable."
+        },
+        "annotation" : {
+          "$ref" : "#definitions/ApiOperationAnnotation",
+          "description" : "The annotation of api operation."
+        },
+        "api" : {
+          "#ref" : "#definitions/ApiReference",
+          "description" : "The api reference."
+        },
+        "inputsDefinition" : {
+          "type" : "SwaggerSchema",
+          "description" : "The operation inputs definition schema."
+        },
+        "responsesDefinition": {
+          "type": "object",
+          "description" : "The operation responses definition schemas.",
+          "additionalProperties": {
+            "type" : "SwaggerSchema"
+          }
+        },
+        "isWebHook" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the API operation is webhook or not."
+        },
+        "isNotification" : {
+          "type" : "boolean",
+          "description" : "Indicates whether the API operation is notification or not."
+        }
+      }
+    },
+    "ApiReference" : {
+      "type" : "object",
+      "properties" : {
+        "displayName" : {
+          "type" : "string",
+          "description" : "The display name of the api."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "The description of the api."
+        },
+        "iconUri" : {
+          "type" : "string",
+          "description" : "The icon uri of the api."
+        },
+        "swagger" : {
+          "type" : "jtoken",
+          "description" : "The swagger of the api."
+        },
+        "brandColor" : {
+          "type" : "string",
+          "description" : "The brand color of the api."
+        },
+        "category" : {
+          "$ref": "#/definitions/ApiTier",
+          "description": "The tier."
+        },
+        "integrationServiceEnvironment" : {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration service environment reference."
+        }        
+      }
+    },
+    "ApiOperationAnnotation" : {
+      "type" : "object",
+      "properties" : {
+        "status" : {
+          "$ref" : "#definitions/StatusAnnotation"
+        },
+        "family" : {
+          "type": "string",
+          "description" : "The family."
+        },
+        "revision" : {
+          "type" : "integer",
+          "description" : "The revision."
+        }
+      }
+    },
+    "StatusAnnotation" : {
+        "type": "string",
+        "enum": [
+          "NotSpecified",
+          "Preview",
+          "Production"
+        ],
+        "x-ms-enum": {
+          "name": "StatusAnnotation",
+          "modelAsString": true
+        }
+    },
+    "ManagedApiListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedApi"
+          },
+          "description": "The managed APIs."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of managed APIs."
+    },
+    "ManagedApi" : {
+      "type": "object",
+      "description": "The managed api definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiResourceProperties",
+          "description": "The api resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiResourceProperties" : {
+      "type": "object",
+      "description": "The API resource properties.",
+      "properties": {
+        "name" : {
+          "type" : "string",
+          "description" : "The name"
+        },
+        "connectionParameters": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "jtoken"
+          },
+          "description": "The connection parameters."
+        },
+        "metadata" : {
+          "$ref": "#/definitions/ApiResourceMetadata",
+          "description": "The metadata."
+        },
+        "runtimeUrls" : {
+          "type" : "array",
+          "description" : "The runtime urls.",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "generalInformation" : {
+          "$ref": "#/definitions/ApiResourceGeneralInformation",
+          "description": "The api type."
+        },
+        "capabilities" : {
+          "type" : "array",
+          "description" : "The capabilities.",
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "backendService" : {
+          "$ref":"#/definitions/ApiResourceBackendService",
+          "description": "The backend service."
+        },
+        "policies" : {
+          "$ref" :  "#definitions/ApiResourcePolicies",
+          "description" : "The policies for the API."
+        },
+        "apiDefinitionUrl" : {
+          "type" : "string",
+          "description" : "The API definition."
+        },
+        "apiDefinitions" : {
+          "$ref" : "#definitions/ApiResourceDefinitions",
+          "description" : "The api definitions."            
+        },
+        "integrationServiceEnvironment" :{
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration service environment reference."
+        },
+        "provisioningState" : {
+          "$ref" : "#/definitions/WorkflowProvisioningState",
+          "description" : "The provisioning state."
+        },
+        "deploymentParameters" : {
+          "$ref" : "#definitions/ApiDeploymentParameters",
+          "description" : "The connector deployment parameters."
+        },
+        "swagger" : {
+          "type" : "jtoken",
+          "description" : "The swagger."
+        }
+      }
+    },
+    "ApiResourcePolicies" : {
+      "type" : "object",
+      "description" : "The API resource policies.",
+      "properties" : {
+        "content" : {
+          "type" : "string",
+          "description" : "The API level only policies XML as embedded content."
+        },
+        "contentLink" : {
+          "type" : "string",
+          "description" : "The content link to the policies."
+        }
+      }
+    },
+    "ApiResourceDefinitions" : {
+      "type" : "object",
+      "description" : "The Api resource definition.",
+      "properties" : {
+        "originalSwaggerUrl" : {
+          "type" : "string",
+          "description" : "The original swagger url."
+        },
+        "modifiedSwaggerUrl" : {
+          "type" : "string",
+          "description" : "The modified swagger url."
+        }
+      }
+    },
+    "ApiDeploymentParameters" : {
+      "type" : "object",
+      "properties" : {
+        "packageContentLink" : {
+          "$ref": "#/definitions/ContentLink",
+          "description": "The package content link."
+        }
+      }
+    },
+    "ApiResourceBackendService" : {
+      "type" : "object",
+      "properties" : {
+        "type" : "string",
+        "description" : "The service URL."
+      },
+      "description" : "The API backend service."
+    },
+    "ApiResourceMetadata" : {
+      "type": "object",
+      "description": "The api resource metadata.",
+      "properties" : {
+        "source" : {
+          "type" : "string",
+          "description" : "The source."
+        },
+        "brandColor" : {
+          "type" : "string",
+          "description" : "The brand color."
+        },
+        "hideKey" : {
+          "type" : "string",
+          "description" : "The hide key."
+        },
+        "tags" : {
+          "type" : "object",
+          "description" : "The tags.",
+          "additionalProperties" : {
+            "type" : "string"
+          }
+        },
+        "ApiType" : {
+          "$ref": "#/definitions/ApiType",
+          "description": "The api type."
+        },
+        "wsdlService" : {
+          "$ref": "#/definitions/WsdlService",
+          "description": "The WSDL service."
+        },
+        "wsdlImportMethod" : {
+          "$ref": "#/definitions/WsdlImportMethod",
+          "description": "The WSDL import method."
+        },
+        "connectionType" : {
+          "type" : "string",
+          "description" : "The connection type."
+        },
+        "provisioningState" : {
+          "$ref": "#/definitions/WorkflowProvisioningState",
+          "description": "The provisioning state."
+        }
+      }
+    },
+    "ApiType" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Rest",
+        "Soap"
+      ],
+      "x-ms-enum": {
+        "name": "ApiType",
+        "modelAsString": true
+      }
+    },
+    "WsdlService" : {
+      "type" : "object",
+      "properties" : {
+        "qualifiedName" :{
+          "type" : "string",
+          "description" : "The qualified name."
+        },
+        "EndpointQualifiedNames" : {
+          "type" : "array",
+          "description": "The list of endpoints' qualified names.",
+          "items" :{
+            "type": "string"
+          }
+        }
+      }
+    },
+    "WsdlImportMethod" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "SoapToRest",
+        "SoapPassThrough"
+      ],
+      "x-ms-enum": {
+        "name": "WsdlImportMethod",
+        "modelAsString": true
+      }
+    },
+    "ApiResourceGeneralInformation" : {
+      "type" : "object",
+      "description" : "The API general information.",
+      "properties" : {
+        "iconUrl" : {
+          "type" : "string",
+          "description" : "The icon url."
+        },
+        "displayName" : {
+          "type" : "string",
+          "description" : "The display name."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "The description."
+        },
+        "termsOfUseUrl" : {
+          "type" : "string",
+          "description" : "The terms of use url."
+        },
+        "releaseTag" : {
+          "type" : "string",
+          "description" : "The release tag."
+        },
+        "tier" : {
+          "$ref": "#/definitions/ApiTier",
+          "description": "The tier."
+        }
+      }
+    },
+    "ApiTier" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Enterprise",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "ApiTier",
+        "modelAsString": true
+      }
+    },
+    "integrationServiceEnvironmentNetworkHealth" : {
+      "type" : "object",
+      "description": "The integration service environment network health of all the subnets.",
+      "additionalProperties" : {
+        "$ref": "#/definitions/IntegrationServiceEnvironmentSubnetNetworkHealth",
+        "description": "The integration service environment subnet network health."
+      }
+    },
+    "IntegrationServiceEnvironmentSubnetNetworkHealth" : {
+      "type": "object",
+      "description": "The integration service environment subnet network health.",
+      "required": [
+        "networkDependencyHealthState"
+      ],
+      "properties": {
+        "outboundNetworkDependencies": {
+          "type" : "array",
+          "items" :{
+            "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependency",
+            "description": "The integration service environment network dependency."
+          }
+        },
+        "outboundNetworkHealth" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyHealth ",
+          "description": "The integration service environment network health."
+        },
+        "networkDependencyHealthState": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
+          "description": "The integration service environment network health state."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependencyHealth" : {
+      "type": "object",
+      "description": "The integration service environment subnet network health.",
+      "properties": {
+        "error" : {
+          "$ref": "#/definitions/ExtendedErrorInfo",
+          "description": "The error if any occured during the operation."
+        },
+        "state" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyHealthState",
+          "description": "The network dependency health state."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependencyHealthState" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Healthy",
+        "Unhealthy",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentNetworkDependencyHealthState",
+        "modelAsString": true
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependency": {
+      "type": "object",
+      "description": "The azure async operation resource.",
+      "properties" : {
+        "category": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyCategoryType",
+          "description": "The network dependency category type."
+        },
+        "displayName" : {
+          "type": "string",
+          "description": "The display name."
+        },
+        "endpoints" : {
+          "type" : "array",
+          "description" : "The endpoints.",
+          "items" : {
+            "$ref" : "#definitions/IntegrationServiceEnvironmentNetworkEndpoint",
+            "description" : "The endpoint."
+          }
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkEndpoint" : {
+      "type": "object",
+      "description": "The network endpoint.",
+      "properties" : {
+        "accessibility": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
+          "description": "The accessibility state."
+        },
+        "domainName" : {
+          "type": "string",
+          "description": "The domain name."
+        },
+        "ports" : {
+          "type" : "array",
+          "description" : "The ports.",
+          "items": {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkEndPointAccessibilityState" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Unknown",
+        "Available",
+        "NotAvailable"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
+        "modelAsString": true
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependencyCategoryType" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "AzureStorage",
+        "AzureManagement",
+        "AzureActiveDirectory",
+        "SSLCertificateVerification",
+        "DiagnosticLogsAndMetrics",
+        "IntegrationServiceEnvironmentConnectors",
+        "RedisCache",
+        "AccessEndpoints",
+        "RecoveryService",
+        "SQL",
+        "RegionalService"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentNetworkDependencyCategoryType",
+        "modelAsString": true
+      }
+    },
+    "AzureAsyncOperationResource" : {
+      "type": "object",
+      "description": "The azure async operation resource.",
+      "required": [
+        "status"
+      ],
+      "properties": {
+        "name" : {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "status": {
+          "$ref": "#/definitions/AzureAsyncOperationState",
+          "description": "The azure async operation status."
+        },
+        "error" : {
+          "$ref": "#/definitions/ExtendedErrorInfo",
+          "description": "The error if any occured during the operation."
+        }
+      }
+    },
+    "ExtendedErrorInfo" : {
+      "type": "object",
+      "description": "The extended error info.",
+      "required": [
+        "code",
+        "message"
+      ],
+      "code" : {
+        "description": "The error code.",
+        "$ref": "#/definitions/ErrorResponseCode"
+      },
+      "message" : {
+        "type": "string",
+        "description": "The error message."
+      },
+      "details" : {
+        "type": "array",
+        "description" : "The error message details.",
+        "items": {
+          "$ref": "#/definitions/ExtendedErrorInfo"
+        }
+      }
+    },
+    "ErrorResponseCode" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "IntegrationServiceEnvironmentNotFound",
+        "InternalServerError",
+        "InvalidOperationId"
+      ],
+      "x-ms-enum": {
+        "name": "ErrorResponseCode",
+        "modelAsString": true
+      }
+    },
+    "AzureAsyncOperationState": {
+      "type": "string",
+      "enum": [
+        "Failed",
+        "Succeeded",
+        "Pending",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "AzureAsyncOperationState",
+        "modelAsString": true
+      }
+    },
+    "IntegrationServiceEnvironmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationServiceEnvironment"
+          },
+          "description": "The list of integration service environments."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of integration service environments."
+    },
+    "IntegrationServiceEnvironment": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentProperties",
+          "description": "The integration service environment properties."
+        },
+        "sku": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentSku",
+          "description": "The sku."
+        }
+      },
+      "description": "The integration service environment.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "IntegrationServiceEnvironmentSku": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentSkuName",
+          "description": "The sku name."
+        },
+        "capacity": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The sku capacity."
+        }
+      },
+      "description": "The integration service environment sku."
+    },
+    "IntegrationServiceEnvironmentProperties" : {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/WorkflowProvisioningState",
+          "readOnly": true,
+          "description": "The provisioning state."
+        },
+        "state": {
+          "$ref": "#/definitions/WorkflowState",
+          "description": "The integration service environment state."
+        },
+        "integrationServiceEnvironmentId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the tracking id."
+        },
+        "endpointsConfiguration" : {
+          "$ref": "#/definitions/FlowEndpointsConfiguration",
+          "readOnly": true,
+          "description": "The endpoints configuration."
+        },
+        "networkConfiguration" : {
+          "$ref": "#/definitions/NetworkConfiguration",
+          "readOnly": true,
+          "description": "The network configuration."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentSkuName": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Premium",
+        "Developer"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentSkuName",
+        "modelAsString": true
+      }
+    },
+    "NetworkConfiguration" : {
+      "type" : "object",
+      "properties": {
+        "description": "The network configuration.",
+        "virtualNetworkAddressSpace" : {
+          "type": "string",
+          "description": "Gets the virtual network address space."
+        },
+        "accessEndpoint" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentAccessEndpoint",
+          "description": "The access endpoint."
+        },
+        "subnets" : {
+          "type" : "array",
+          "items": {
+            "$ref": "#/definitions/ResourceReference",
+            "description": "The subnets."
+          }
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentAccessEndpoint" : {
+      "type" : "object",
+      "description" : "The integration service environment access endpoint.",
+      "properties": {
+        "type" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentAccessEndpointType",
+          "description": "The access endpoint type."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentAccessEndpointType": {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "External",
+        "Internal"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentAccessEndpointType",
+        "modelAsString": true
+      }
+    },
+    "FlowEndpointsConfiguration" : {
+      "type" : "object",
+      "description": "The endpoints configuration.",
+      "properties": {
+        "workflow" : {
+          "$ref": "#/definitions/FlowEndpoints",
+          "description": "The workflow endpoints."
+        },
+        "connector" : {
+          "$ref": "#/definitions/FlowEndpoints",
+          "description": "The connector endpoints."
+        }
+      }
+    },
+    "FlowEndpoints" : {
+      "type" : "object",
+      "description": "The flow endpoints configuration.",
+      "properties": {
+        "outgoingIpAddresses" : {
+          "type": "array",
+          "description": "The outgoing ip address.",
+          "items": {
+            "$ref": "#/definitions/IpAddress",
+            "description": "The ip address."
+          }
+        },
+        "accessEndpointIpAddresses" : {
+          "type": "array",
+          "description": "The access endpoint ip address.",
+          "items": {
+            "$ref": "#/definitions/IpAddress",
+            "description": "The ip address."
+          }
+        }
+      }
+    },
+    "IpAddress" : {
+      "type" :"object",
+      "properties": {
+        "address" : {
+          "type": "string",
+          "description": "The address."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentSkuDefinition" : {
+      "type" : "object",
+      "properties": {
+        "resourceType" : {
+          "type" : "string"
+        },
+        "sku" : {
+          "type" : "object",
+          "name" : {
+            "type" : "string",
+            "decription" : "The sku name"
+          }
+        },
+        "capacity" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentSkuCapacity",
+          "description": "The sku capacity."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentSkuCapacity" : {
+      "type" : "object",
+      "description": "The integration service environment sku capacity.",
+      "properties": {
+        "minimum" : {
+          "type" : "integer",
+          "format": "int32",
+          "description" : "The minimum capacity."
+        },
+        "maximum" : {
+          "type" : "integer",
+          "format": "int32",
+          "description" : "The maximum capacity."
+        },
+        "default" : {
+          "type" : "integer",
+          "format": "int32",
+          "description" : "The default capacity."
+        },
+        "scaleType" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentSkuScaleType",
+          "description": "The sku scale type."
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentSkuScaleType" : {
+      "type": "string",
+      "enum": [
+        "Manual",
+        "Automatic",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentSkuScaleType",
+        "modelAsString": true
+      }
     },
     "IntegrationAccountSkuName": {
       "type": "string",
