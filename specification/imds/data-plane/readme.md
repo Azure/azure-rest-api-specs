@@ -130,7 +130,7 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
        - $.definitions.IdentityErrorResponse.properties.error_description
-	   
+
    - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
@@ -145,7 +145,7 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.client_id
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
-       - $.definitions.IdentityErrorResponse.properties.error_description	 	   
+       - $.definitions.IdentityErrorResponse.properties.error_description
 
    - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
@@ -162,7 +162,7 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
        - $.definitions.IdentityErrorResponse.properties.error_description
-	   
+
    - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
@@ -177,7 +177,7 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.client_id
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
-       - $.definitions.IdentityErrorResponse.properties.error_description	   
+       - $.definitions.IdentityErrorResponse.properties.error_description
  ```
 
 ---
