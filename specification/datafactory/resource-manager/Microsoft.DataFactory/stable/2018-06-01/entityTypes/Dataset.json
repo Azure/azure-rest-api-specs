@@ -1455,7 +1455,15 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
           "description": "The Amazon Redshift table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Amazon Redshift schema name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1480,6 +1488,14 @@
       "description": "Db2 table dataset properties.",
       "properties": {
         "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Db2 schema name. Type: string (or Expression with resultType string)."
+        },
+        "table": {
           "type": "object",
           "description": "The Db2 table name. Type: string (or Expression with resultType string)."
         }
@@ -1559,7 +1575,15 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
           "description": "The ODBC table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The ODBC schema name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1611,7 +1635,15 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
           "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2729,7 +2761,7 @@
       "properties": {
         "tableName": {
           "type": "object",
-          "description": "The table name of the Netezza which includes both schema and table. Type: string (or Expression with resultType string)."
+          "description": "This property will be retired. Please consider using schema + table properties instead."
         },
         "table": {
           "type": "object",
