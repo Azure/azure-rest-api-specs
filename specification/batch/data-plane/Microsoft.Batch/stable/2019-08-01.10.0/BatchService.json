@@ -5979,7 +5979,7 @@
           "Add a VirtualMachineConfiguration pool with containers": {
             "$ref": "./examples/PoolAdd_VirtualMachineConfigurationWithContainers.json"
           },
-          "Add a pool with mount drive specified": { 
+          "Add a pool with mount drive specified": {
             "$ref": "./examples/PoolAdd_MountConfiguration.json"
           }
         },
@@ -13808,7 +13808,7 @@
         },
         "stats": {
           "$ref": "#/definitions/PoolStatistics",
-         "title": "Utilization and resource usage statistics for the entire lifetime of the Pool.",
+          "title": "Utilization and resource usage statistics for the entire lifetime of the Pool.",
           "description": "This property is populated only if the CloudPool was retrieved with an expand clause including the 'stats' attribute; otherwise it is null. The statistics may not be immediately available. The Batch service performs periodic roll-up of statistics. The typical delay is about 30 minutes."
         },
         "mountConfiguration": {
@@ -16434,7 +16434,11 @@
           "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
         }
       },
-      "required": [ "accountName", "containerName", "relativeMountPath" ],
+      "required": [
+        "accountName",
+        "containerName",
+        "relativeMountPath"
+      ],
       "title": "Blobfuse file system details."
     },
     "NFSMountConfiguration": {
@@ -16453,7 +16457,10 @@
           "title": "Specifies various mount options that can be used."
         }
       },
-      "required": [ "source", "relativeMountPath" ],
+      "required": [
+        "source",
+        "relativeMountPath"
+      ],
       "title": "NFS file system detail."
     },
     "CIFSMountConfiguration": {
@@ -16480,7 +16487,12 @@
           "title": "The password to authenticate with."
         }
       },
-      "required": [ "username", "source", "password", "relativeMountPath" ],
+      "required": [
+        "username",
+        "source",
+        "password",
+        "relativeMountPath"
+      ],
       "title": "CIFS file system details."
     },
     "AzureFileShareConfiguration": {
@@ -16507,7 +16519,12 @@
           "title": "Specifies various mount options that can be used."
         }
       },
-      "required": [ "accountName", "azureFileUrl", "accountKey", "relativeMountPath" ],
+      "required": [
+        "accountName",
+        "azureFileUrl",
+        "accountKey",
+        "relativeMountPath"
+      ],
       "title": "Azure Files details."
     }
   },

@@ -4232,7 +4232,11 @@
           "description": "All file systems are mounted relative to the Batch mounts directory, accessible via the AZ_BATCH_NODE_MOUNTS_DIR environment variable."
         }
       },
-      "required": [ "accountName", "containerName", "relativeMountPath" ],
+      "required": [
+        "accountName",
+        "containerName",
+        "relativeMountPath"
+      ],
       "title": "Blobfuse file system details."
     },
     "NFSMountConfiguration": {
@@ -4251,7 +4255,10 @@
           "title": "Specifies various mount options that can be used."
         }
       },
-      "required": [ "source", "relativeMountPath" ],
+      "required": [
+        "source",
+        "relativeMountPath"
+      ],
       "title": "NFS file system detail."
     },
     "CIFSMountConfiguration": {
@@ -4278,7 +4285,12 @@
           "title": "The password to authenticate with."
         }
       },
-      "required": [ "username", "source", "password", "relativeMountPath" ],
+      "required": [
+        "username",
+        "source",
+        "password",
+        "relativeMountPath"
+      ],
       "title": "CIFS file system details."
     },
     "AzureFileShareConfiguration": {
@@ -4305,7 +4317,12 @@
           "title": "Specifies various mount options that can be used."
         }
       },
-      "required": [ "accountName", "azureFileUrl", "accountKey", "relativeMountPath" ],
+      "required": [
+        "accountName",
+        "azureFileUrl",
+        "accountKey",
+        "relativeMountPath"
+      ],
       "title": "Azure Files details."
     }
   },
