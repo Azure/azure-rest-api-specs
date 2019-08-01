@@ -15,20 +15,12 @@
       }
     ]
   },
-  "schemes": [
-    "https"
-  ],
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -45,9 +37,7 @@
   "paths": {
     "/availability": {
       "get": {
-        "tags": [
-          "Query"
-        ],
+        "tags": ["Query"],
         "operationId": "Query_GetAvailability",
         "description": "Returns the time range and distribution of event count over the event timestamp ($ts). This API can be used to provide landing experience of navigating to the environment.",
         "x-ms-examples": {
@@ -101,9 +91,7 @@
     },
     "/eventSchema": {
       "post": {
-        "tags": [
-          "Query"
-        ],
+        "tags": ["Query"],
         "operationId": "Query_GetEventSchema",
         "description": "Returns environment event schema for a given search span. Event schema is a set of property definitions. Event schema may not be contain all persisted properties when there are too many properties.",
         "x-ms-examples": {
@@ -166,9 +154,7 @@
     },
     "/timeseries/modelSettings": {
       "get": {
-        "tags": [
-          "ModelSettings"
-        ],
+        "tags": ["ModelSettings"],
         "operationId": "ModelSettings_Get",
         "description": "Returns the model settings which includes model display name, Time Series ID properties and default type ID. Every pay-as-you-go environment has a model that is automatically created.",
         "x-ms-examples": {
@@ -217,9 +203,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "ModelSettings"
-        ],
+        "tags": ["ModelSettings"],
         "operationId": "ModelSettings_Update",
         "description": "Updates time series model settings - either the model name or default type ID.",
         "x-ms-examples": {
@@ -279,9 +263,7 @@
     },
     "/timeseries/query": {
       "post": {
-        "tags": [
-          "Query"
-        ],
+        "tags": ["Query"],
         "operationId": "Query_Execute",
         "description": "Executes Time Series Query in pages of results - Get Events, Get Series or Aggregate Series.",
         "x-ms-examples": {
@@ -380,9 +362,7 @@
     },
     "/timeseries/instances": {
       "get": {
-        "tags": [
-          "TimeSeriesInstances"
-        ],
+        "tags": ["TimeSeriesInstances"],
         "operationId": "TimeSeriesInstances_Get",
         "description": "Gets time series instances in pages.",
         "x-ms-examples": {
@@ -442,9 +422,7 @@
     },
     "/timeseries/instances/$batch": {
       "post": {
-        "tags": [
-          "TimeSeriesInstances"
-        ],
+        "tags": ["TimeSeriesInstances"],
         "operationId": "TimeSeriesInstances_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series instances.",
         "x-ms-examples": {
@@ -519,9 +497,7 @@
     },
     "/timeseries/instances/suggest": {
       "post": {
-        "tags": [
-          "TimeSeriesInstances"
-        ],
+        "tags": ["TimeSeriesInstances"],
         "operationId": "TimeSeriesInstances_Suggest",
         "description": "Suggests keywords based on time series instance attributes to be later used in Search Instances.",
         "x-ms-examples": {
@@ -581,9 +557,7 @@
     },
     "/timeseries/instances/search": {
       "post": {
-        "tags": [
-          "TimeSeriesInstances"
-        ],
+        "tags": ["TimeSeriesInstances"],
         "operationId": "TimeSeriesInstances_Search",
         "description": "Partial list of hits on search for time series instances based on instance attributes.",
         "x-ms-examples": {
@@ -667,9 +641,7 @@
     },
     "/timeseries/types": {
       "get": {
-        "tags": [
-          "TimeSeriesTypes"
-        ],
+        "tags": ["TimeSeriesTypes"],
         "operationId": "TimeSeriesTypes_Get",
         "description": "Gets time series types in pages.",
         "x-ms-examples": {
@@ -729,9 +701,7 @@
     },
     "/timeseries/types/$batch": {
       "post": {
-        "tags": [
-          "TimeSeriesTypes"
-        ],
+        "tags": ["TimeSeriesTypes"],
         "operationId": "TimeSeriesTypes_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series types.",
         "x-ms-examples": {
@@ -803,9 +773,7 @@
     },
     "/timeseries/hierarchies": {
       "get": {
-        "tags": [
-          "TimeSeriesHierarchies"
-        ],
+        "tags": ["TimeSeriesHierarchies"],
         "operationId": "TimeSeriesHierarchies_Get",
         "description": "Returns time series hierarchies definitions in pages.",
         "x-ms-examples": {
@@ -865,9 +833,7 @@
     },
     "/timeseries/hierarchies/$batch": {
       "post": {
-        "tags": [
-          "TimeSeriesHierarchies"
-        ],
+        "tags": ["TimeSeriesHierarchies"],
         "operationId": "TimeSeriesHierarchies_ExecuteBatch",
         "description": "Executes a batch get, create, update, delete operation on multiple time series hierarchy definitions.",
         "x-ms-examples": {
@@ -984,9 +950,7 @@
           "$ref": "#/definitions/DateTimeRange"
         }
       },
-      "required": [
-        "searchSpan"
-      ]
+      "required": ["searchSpan"]
     },
     "EventSchema": {
       "description": "Event schema of all events within a given search span. Event schema is a set of property definitions. Properties are identified by both name and type. Different events can have properties with same name, but different type. Event schema may not be contain all persisted properties when there are too many properties.",
@@ -1049,10 +1013,7 @@
           "format": "int32"
         }
       },
-      "required": [
-        "timeSeriesId",
-        "searchSpan"
-      ]
+      "required": ["timeSeriesId", "searchSpan"]
     },
     "GetSeries": {
       "description": "Get Series query. Allows to retrieve time series of calculated variable values from events for a given Time Series ID and search span.",
@@ -1090,10 +1051,7 @@
           "format": "int32"
         }
       },
-      "required": [
-        "timeSeriesId",
-        "searchSpan"
-      ]
+      "required": ["timeSeriesId", "searchSpan"]
     },
     "AggregateSeries": {
       "description": "Aggregate Series query. Allows to calculate an aggregated time series from events for a given Time Series ID and search span.",
@@ -1131,17 +1089,14 @@
           }
         }
       },
-      "required": [
-        "timeSeriesId",
-        "searchSpan",
-        "interval"
-      ]
+      "required": ["timeSeriesId", "searchSpan", "interval"]
     },
     "TimeSeriesId": {
       "description": "A single Time Series ID value that is an array of primitive values that uniquely identifies a time series instance (e.g. a single device). Note that a single Time Series ID can be composite if multiple properties are specified as Time Series ID at environment creation time. The position and type of values must match Time Series ID properties specified on the environment and returned by Get Model Setting API. Cannot be empty.",
       "type": "array",
       "items": {
-        "description": "A single Time Series ID value that is an array of primitive values that uniquely identifies a time series instance (e.g. a single device). Note that a single Time Series ID can be composite if multiple properties are specified as Time Series ID at environment creation time. The position and type of values must match Time Series ID properties specified on the environment and returned by Get Model Setting API. Cannot be empty."
+        "description": "A single Time Series ID value that is an array of primitive values that uniquely identifies a time series instance (e.g. a single device). Note that a single Time Series ID can be composite if multiple properties are specified as Time Series ID at environment creation time. The position and type of values must match Time Series ID properties specified on the environment and returned by Get Model Setting API. Cannot be empty.",
+        "type": "string"
       },
       "minItems": 1
     },
@@ -1154,9 +1109,7 @@
           "type": "string"
         }
       },
-      "required": [
-        "tsx"
-      ]
+      "required": ["tsx"]
     },
     "DateTimeRange": {
       "description": "The range of time. Cannot be null or negative.",
@@ -1173,10 +1126,7 @@
           "format": "date-time"
         }
       },
-      "required": [
-        "from",
-        "to"
-      ]
+      "required": ["from", "to"]
     },
     "NumericVariable": {
       "description": "Numeric variable represents a single continuous numeric signal that can be reconstructed using interpolation.",
@@ -1199,11 +1149,7 @@
           }
         }
       ],
-      "required": [
-        "kind",
-        "value",
-        "aggregation"
-      ]
+      "required": ["kind", "value", "aggregation"]
     },
     "AggregateVariable": {
       "description": "Aggregate variable represents any aggregation calculation.",
@@ -1222,10 +1168,7 @@
           }
         }
       ],
-      "required": [
-        "kind",
-        "aggregation"
-      ]
+      "required": ["kind", "aggregation"]
     },
     "Variable": {
       "description": "Variables are named calculations over values from the events. Time Series Insights variable definitions contain formula and computation rules. Variables are stored in the type definition in Time Series Model and can be provided inline via Query APIs to override the stored definition.",
@@ -1241,9 +1184,7 @@
           "$ref": "#/definitions/Tsx"
         }
       },
-      "required": [
-        "kind"
-      ]
+      "required": ["kind"]
     },
     "QueryResultPage": {
       "description": "A single page of query results. If query has not finished yet, a page will have continuation token set. In this case, to get the next page of results, send the same request again with continuation token parameter. If query has completed, the continuation token is null. It is also possible to get an empty page with only continuation token set when no query results have been computed yet. If paging has completed (continuation token is null), then timestamps and properties may be empty if there is no data to return.",
@@ -1293,7 +1234,9 @@
             "values": {
               "description": "Values of a single property corresponding to the timestamps. May contain nulls. Type of values matches the type of property.",
               "type": "array",
-              "items": {}
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
@@ -1355,10 +1298,7 @@
           "additionalProperties": {}
         }
       },
-      "required": [
-        "timeSeriesId",
-        "typeId"
-      ]
+      "required": ["timeSeriesId", "typeId"]
     },
     "InstancesBatchRequest": {
       "description": "Request to perform a single operation on a batch of instances. Exactly one of \"get\", \"put\", \"update\" or \"delete\" must be set.",
@@ -1507,10 +1447,7 @@
           }
         }
       },
-      "required": [
-        "name",
-        "variables"
-      ]
+      "required": ["name", "variables"]
     },
     "TypesBatchRequest": {
       "description": "Request to perform a single operation on a batch of time series types. Exactly one of \"get\", \"put\" or \"delete\" must be set.",
@@ -1648,10 +1585,7 @@
           }
         }
       },
-      "required": [
-        "name",
-        "source"
-      ]
+      "required": ["name", "source"]
     },
     "HierarchiesBatchRequest": {
       "description": "Request to perform a single operation on a batch of hierarchies. Exactly one of \"get\", \"put\" or \"delete\" must be set.",
@@ -1795,9 +1729,7 @@
           "description": "The type of the property. Currently, only \"String\" is supported.",
           "readOnly": true,
           "type": "string",
-          "enum": [
-            "String"
-          ],
+          "enum": ["String"],
           "x-ms-enum": {
             "name": "TimeSeriesIdPropertyTypes",
             "modelAsString": true
@@ -1846,9 +1778,7 @@
           "$ref": "#/definitions/SearchInstancesHierarchiesParameters"
         }
       },
-      "required": [
-        "searchString"
-      ]
+      "required": ["searchString"]
     },
     "SearchInstancesParameters": {
       "description": "Parameters of how to return time series instances by search instances call.",
@@ -1881,10 +1811,7 @@
         "by": {
           "description": "Value to use for sorting of the time series instances before being returned by search instances call. When it is set to 'Rank', the returned instances are sorted based on the relevance. When it is set to 'DisplayName', the returned results are sorted based on the display name. Display name is the name of the instance if it exists, otherwise, display name is the time series ID. Default is 'Rank'.",
           "type": "string",
-          "enum": [
-            "Rank",
-            "DisplayName"
-          ],
+          "enum": ["Rank", "DisplayName"],
           "x-ms-enum": {
             "name": "InstancesSortBy",
             "modelAsString": true
@@ -1920,10 +1847,7 @@
         "kind": {
           "description": "Kind of the expansion of hierarchy nodes. When it is set to 'UntilChildren', the hierarchy nodes are expanded recursively until there is more than one child. When it is set to 'OneLevel', the hierarchies are expanded only at the single level matching path search instances parameter. Optional, default is 'UntilChildren'.",
           "type": "string",
-          "enum": [
-            "UntilChildren",
-            "OneLevel"
-          ],
+          "enum": ["UntilChildren", "OneLevel"],
           "x-ms-enum": {
             "name": "HierarchiesExpandKind",
             "modelAsString": true
@@ -1938,10 +1862,7 @@
         "by": {
           "description": "Value to use for hierarchy node sorting. When it is set to 'CumulativeInstanceCount', the returned hierarchies are sorted based on the total instances belonging to the hierarchy node and its child hierarchy nodes. When it is set to 'Name', the returned hierarchies are sorted based on the hierarchy name. Optional, default is 'CumulativeInstanceCount'.",
           "type": "string",
-          "enum": [
-            "CumulativeInstanceCount",
-            "Name"
-          ],
+          "enum": ["CumulativeInstanceCount", "Name"],
           "x-ms-enum": {
             "name": "HierarchiesSortBy",
             "modelAsString": true
@@ -2025,7 +1946,9 @@
           "description": "Time series ID of the time series instance that matched the search request.",
           "readOnly": true,
           "type": "array",
-          "$ref": "#/definitions/TimeSeriesId"
+          "items": {
+            "$ref": "#/definitions/TimeSeriesId"
+          }
         },
         "name": {
           "description": "Name of the time series instance that matched the search request. May be null.",
@@ -2149,9 +2072,7 @@
           "format": "int32"
         }
       },
-      "required": [
-        "searchString"
-      ]
+      "required": ["searchString"]
     },
     "InstancesSuggestResponse": {
       "description": "Response of getting suggestions for search for time series instances.",
@@ -2211,13 +2132,7 @@
     "PropertyType": {
       "description": "The type of the property that is either stored in events or computed by a calculation.",
       "type": "string",
-      "enum": [
-        "Bool",
-        "DateTime",
-        "Double",
-        "String",
-        "TimeSpan"
-      ],
+      "enum": ["Bool", "DateTime", "Double", "String", "TimeSpan"],
       "x-ms-enum": {
         "name": "PropertyTypes",
         "modelAsString": true
