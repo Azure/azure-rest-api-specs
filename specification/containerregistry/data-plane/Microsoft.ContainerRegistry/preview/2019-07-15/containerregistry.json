@@ -484,8 +484,16 @@
         "tags": [
           "Layer"
         ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/State"
+          },
+          {
+            "$ref": "#/parameters/NoUploadCache"
+          }
+        ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
-        "operationId": "GetBlobUploadStatus",
+        "operationId": "GetBlobUploadStatusSpecified",
         "responses": {
           "204": {
             "description": "The upload is known and in progress. The last received offset is available in the Range header.",
@@ -622,7 +630,12 @@
         }
       }
     },
-    "/{nextLink}": {
+    "/{nextBlobUuidLink}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/NextLink"
+        }
+      ],
       "patch": {
         "security": [
           {
@@ -639,9 +652,6 @@
           "application/octet-stream"
         ],
         "parameters": [
-          {
-            "$ref": "#/parameters/NextLink"
-          },
           {
             "$ref": "#/parameters/RawData"
           }
@@ -683,9 +693,6 @@
         "operationId": "EndBlobUploadFromNext",
         "parameters": [
           {
-            "$ref": "#/parameters/NextLink"
-          },
-          {
             "$ref": "#/parameters/BlobQueryDigest"
           },
           {
@@ -706,6 +713,42 @@
               },
               "Docker-Content-Digest": {
                 "description": "Digest of the targeted content for the request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Layer"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/State"
+          },
+          {
+            "$ref": "#/parameters/NoUploadCache"
+          }
+        ],
+        "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
+        "operationId": "GetBlobUploadStatusFromNext",
+        "responses": {
+          "204": {
+            "description": "The upload is known and in progress. The last received offset is available in the Range header.",
+            "headers": {
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
                 "type": "string"
               }
             }
@@ -2551,7 +2594,8 @@
       "x-ms-parameter-location": "method"
     },
     "NextLink": {
-      "name": "nextLink",
+      "name": "nextBlobUuidLink",
+      "x-ms-client-name": "location",
       "type": "string",
       "description": "Link acquired from upload start or previous chunk. Note, do not include initial / (must do substring(1) )",
       "in": "path",
