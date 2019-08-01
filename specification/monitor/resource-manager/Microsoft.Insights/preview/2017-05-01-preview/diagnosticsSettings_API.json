@@ -72,7 +72,7 @@
           "Gets the diagnostic setting": {
             "$ref": "./examples/getDiagnosticSetting.json"
           }
-        } 
+        }
       },
       "put": {
         "tags": [
@@ -118,7 +118,7 @@
           "Creates or Updates the diagnostic setting": {
             "$ref": "./examples/createOrUpdateDiagnosticSetting.json"
           }
-        } 
+        }
       },
       "delete": {
         "tags": [
@@ -155,7 +155,7 @@
           "Deletes the diagnostic setting": {
             "$ref": "./examples/deleteDiagnosticSetting.json"
           }
-        } 
+        }
       }
     },
     "/{resourceUri}/providers/microsoft.insights/diagnosticSettings": {
@@ -191,7 +191,7 @@
           "Gets the diagnostic setting": {
             "$ref": "./examples/listDiagnosticSettings.json"
           }
-        } 
+        }
       }
     }
   },
@@ -230,7 +230,10 @@
           "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
-      "required": [ "enabled", "days" ],
+      "required": [
+        "enabled",
+        "days"
+      ],
       "description": "Specifies the retention policy for the log."
     },
     "MetricSettings": {
@@ -253,7 +256,9 @@
           "description": "the retention policy for this category."
         }
       },
-      "required": [ "enabled" ],
+      "required": [
+        "enabled"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
     },
     "LogSettings": {
@@ -271,7 +276,9 @@
           "description": "the retention policy for this log."
         }
       },
-      "required": [ "enabled" ],
+      "required": [
+        "enabled"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
     },
     "DiagnosticSettings": {
