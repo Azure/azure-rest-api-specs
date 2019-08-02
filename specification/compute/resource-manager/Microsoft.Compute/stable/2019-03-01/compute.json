@@ -3126,6 +3126,9 @@
           },
           "Create a scale set with ephemeral os disks.": {
             "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
+          },
+          "Create a scale set with terminate scheduled events enabled.": {            
+            "$ref": "./examples/CreateAScaleSetWithTerminateScheduledEventEnabled.json"
           }
         }
       },
@@ -4680,6 +4683,20 @@
             "required": true,
             "type": "string",
             "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -8498,6 +8515,10 @@
             "name": "VirtualMachineEvictionPolicyTypes",
             "modelAsString": true
           }
+        },
+        "scheduledEventsProfile" : {
+          "$ref":"#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -8527,6 +8548,10 @@
         "licenseType": {
           "type": "string",
           "description": "The license type, which is for bring your own license scenario."
+        },
+        "scheduledEventsProfile" : {
+          "$ref":"#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -9240,6 +9265,29 @@
         }
       },
       "description": "The protection policy of a virtual machine scale set VM."
+    },
+    "ScheduledEventsProfile": {
+      "type": "object",
+      "properties": {
+        "terminateNotificationProfile":
+        {
+          "$ref":"#/definitions/TerminateNotificationProfile",
+          "description": "Specifies Terminate Scheduled Event related configurations."
+        }
+      }
+    },
+    "TerminateNotificationProfile": {
+      "type": "object",
+      "properties": {
+        "notBeforeTimeout": {
+          "type": "string",
+          "description" : "Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)"
+        },
+        "enable" : {
+          "type": "boolean",
+          "description": "Specifies whether the Terminate Scheduled event is enabled or disabled."
+        }
+      }
     },
     "VirtualMachineHealthStatus": {
       "properties": {

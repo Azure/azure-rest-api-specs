@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "version": "2018-08-20-preview",
-    "title": "HealthcareClient",
-    "description": "Use this API to manage Microsoft Healthcare services in your Azure subscription."
+    "title": "HealthcareApisClient",
+    "description": "Use this API to manage Microsoft HealthcareApis services in your Azure subscription."
   },
   "host": "management.azure.com",
   "schemes": [
@@ -649,9 +649,11 @@
         "kind": {
           "readOnly": false,
           "type": "string",
-          "description": "The kind of the service. Valid values are: fhir.",
+          "description": "The kind of the service. Valid values are: fhir, fhir-Stu3 and fhir-R4.",
           "enum": [
-            "fhir"
+            "fhir",
+            "fhir-Stu3",
+            "fhir-R4"
           ],
           "x-ms-enum": {
             "name": "kind",
