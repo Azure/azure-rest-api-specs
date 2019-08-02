@@ -147,7 +147,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-job-2017-09-preview' && $(python)
 python:
   namespace: azure.mgmt.datalake.analytics.job
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/job
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/job
 ```
 
 ### Tag: package-catalog-2016-11 and python
@@ -158,7 +158,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-catalog-2016-11' && $(python)
 python:
   namespace: azure.mgmt.datalake.analytics.catalog
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/catalog
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/catalog
 ```
 
 ## Go

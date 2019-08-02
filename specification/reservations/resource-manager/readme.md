@@ -83,7 +83,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Reservations
-  output-folder: $(csharp-sdks-folder)/Reservations/Management.Reservations/Generated
+  output-folder: $(csharp-sdks-folder)/reservations/Microsoft.Azure.Management.Reservations/src/Generated
   clear-output-folder: true
 ```
 
@@ -108,13 +108,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-reservations/azure/mgmt/reservations
+  output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations/azure/mgmt/reservations
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-reservations
+  output-folder: $(python-sdks-folder)/reservations/azure-mgmt-reservations
 ```
 
 ## Go

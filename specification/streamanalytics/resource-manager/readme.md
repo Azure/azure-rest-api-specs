@@ -77,7 +77,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StreamAnalytics
-  output-folder: $(csharp-sdks-folder)/StreamAnalytics/Management.StreamAnalytics/Generated
+  output-folder: $(csharp-sdks-folder)/streamanalytics/Microsoft.Azure.Management.StreamAnalytics/src/Generated
   clear-output-folder: true
 ```
 

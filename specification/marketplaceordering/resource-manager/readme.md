@@ -4,7 +4,7 @@
 
 The underlying APIs are available to users who would like to write their own REST calls. These APIs would allow the user to accept the terms at a subscription, offer and SKU level. These apis are invoked in the context of azure subscription.
 
-----
+---
 ***GetAzureRmMarketplaceTerms***
 
 **Request**
@@ -93,7 +93,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MarketplaceOrdering
-  output-folder: $(csharp-sdks-folder)/Management.MarketplaceOrdering/Generated
+  output-folder: $(csharp-sdks-folder)/marketplaceordering/Microsoft.Azure.Management.MarketplaceOrdering/src/Generated
   clear-output-folder: true
 ```
 
@@ -118,12 +118,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
+  output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering/azure/mgmt/marketplaceordering
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-marketplaceordering
+  output-folder: $(python-sdks-folder)/marketplaceordering/azure-mgmt-marketplaceordering
 ```
 
 Workaround invalid date-time returned by the server.

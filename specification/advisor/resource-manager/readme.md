@@ -97,12 +97,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-advisor/azure/mgmt/advisor
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor/azure/mgmt/advisor
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-advisor
+  output-folder: $(python-sdks-folder)/advisor/azure-mgmt-advisor
 ```
 
 ## Go
@@ -120,7 +120,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Advisor
-  output-folder: $(csharp-sdks-folder)/Advisor/Management.Advisor/Generated
+  output-folder: $(csharp-sdks-folder)/advisor/Microsoft.Azure.Management.Advisor/src/Generated
   clear-output-folder: true
 ```
 

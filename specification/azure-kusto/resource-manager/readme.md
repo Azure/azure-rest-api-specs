@@ -124,7 +124,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Kusto
-  output-folder: $(csharp-sdks-folder)/Kusto/Management.Kusto/Generated
+  output-folder: $(csharp-sdks-folder)/kusto/Microsoft.Azure.Management.Kusto/src/Generated
   clear-output-folder: true
 ```
 

@@ -105,7 +105,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.NotificationHubs
-  output-folder: $(csharp-sdks-folder)/NotificationHubs/Management.NotificationHubs/Generated
+  output-folder: $(csharp-sdks-folder)/notificationhubs/Microsoft.Azure.Management.NotificationHubs/src/Generated
   clear-output-folder: true
 ```
 
@@ -129,12 +129,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-notificationhubs/azure/mgmt/notificationhubs
+  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs/azure/mgmt/notificationhubs
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-notificationhubs
+  output-folder: $(python-sdks-folder)/notificationhubs/azure-mgmt-notificationhubs
 ```
 
 ## Go

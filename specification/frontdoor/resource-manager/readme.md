@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
 - Microsoft.Network/stable/2019-04-01/frontdoor.json
 - Microsoft.Network/stable/2019-04-01/network.json
-- Microsoft.Network/preview/2019-03-01-preview/webapplicationfirewall.json
+- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
 directive:
   - where:
       - $.paths
@@ -108,7 +108,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.FrontDoor
-  output-folder: $(csharp-sdks-folder)/FrontDoor/Management.FrontDoor/Generated
+  output-folder: $(csharp-sdks-folder)/frontdoor/Microsoft.Azure.Management.FrontDoor/src/Generated
   clear-output-folder: true
 ```
 

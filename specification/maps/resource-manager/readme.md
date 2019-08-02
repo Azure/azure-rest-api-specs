@@ -74,7 +74,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Maps
-  output-folder: $(csharp-sdks-folder)/Maps/Management.Maps/Generated
+  output-folder: $(csharp-sdks-folder)/maps/Microsoft.Azure.Management.Maps/src/Generated
   clear-output-folder: true
 ```
 

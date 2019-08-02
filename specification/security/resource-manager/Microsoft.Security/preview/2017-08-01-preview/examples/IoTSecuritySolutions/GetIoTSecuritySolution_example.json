@@ -21,6 +21,78 @@
           "displayName": "Solution Default",
           "iotHubs": [
             "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub"
+          ],
+          "userDefinedResources": {
+            "query": "where type != \"microsoft.devices/iothubs\" | where name contains \"iot\"",
+            "querySubscriptions": [
+              "075423e9-7d33-4166-8bdf-3920b04e3735"
+            ]
+          },
+          "autoDiscoveredResources": [
+            "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735",
+            "/subscriptions/075423e9-7d33-4166-8bdf-3920b04e3735/resourceGroups/myRg/providers/Microsoft.Devices/IotHubs/FirstIotHub"
+          ],
+          "recommendationsConfiguration": [
+            {
+              "recommendationType": "OpenPortsOnDevice",
+              "description": "Open Ports on device",
+              "status": "TurnedOff"
+            },
+            {
+              "recommendationType": "PermissiveFirewallPolicy",
+              "description": "Permissive firewall policy found in one of the chains",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "PermissiveFirewallRuleInput",
+              "description": "Permissive firewall rule in the input chain was found",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "PermissiveFirewallRuleOut",
+              "description": "Permissive firewall rule in the output chain was found",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "OperationSystemNotValid",
+              "description": "Operation system baseline validation has failed",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "UnutilizedMessagesFromAgent",
+              "description": "Agent sends unutilized messages",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "SecurityTwinConfigurationNotOptimal",
+              "description": "Security twin configuration not optimal",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "SecurityTwinConfigurationConflict",
+              "description": "Security twin configuration conflict",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "IdenticalAuthenticationCredentials",
+              "description": "Identical authentication credentials used by multiple devices",
+              "status": "TurnedOff"
+            },
+            {
+              "recommendationType": "DenyDefaultIpPolicy",
+              "description": "Default IP filter policy should be deny",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "TooLargeIPRange",
+              "description": "IP filter rule includes large IP range",
+              "status": "TurnedOn"
+            },
+            {
+              "recommendationType": "EnableDiagnosticsLog",
+              "description": "Enable diagnostics logs in IoT Hub",
+              "status": "TurnedOn"
+            }
           ]
         }
       }

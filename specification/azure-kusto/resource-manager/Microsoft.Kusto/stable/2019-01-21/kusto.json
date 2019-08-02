@@ -400,7 +400,9 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": { "$ref": "#/definitions/ListSkusResult" }
+            "schema": {
+              "$ref": "#/definitions/ListSkusResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -546,7 +548,9 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": { "$ref": "#/definitions/ListResourceSkusResult" }
+            "schema": {
+              "$ref": "#/definitions/ListResourceSkusResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1073,7 +1077,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/checkNameAvailability": {
       "post": {
         "tags": [
           "DataConnections"
@@ -2056,68 +2060,70 @@
       ],
       "description": "The result returned from a database check name availability request."
     },
-	"DataConnectionCheckNameRequest": {
-            "type": "object",
-            "properties": {
-                "name": {
-                    "type": "string",
-                    "description": "Data Connection name."
-                },
-                "type": {
-                    "type": "string",
-                    "enum": [
-                        "Microsoft.Kusto/clusters/databases/dataConnections"
-                    ],
-                    "x-ms-enum": {
-                        "name": "Type",
-                        "modelAsString": false
-                    },
-                    "description": "The type of resource, Microsoft.Kusto/clusters/databases/dataConnections."
-                }
-            },
-            "required": [
-                "name",
-                "type"
-            ],
-            "description": "The result returned from a data connections check name availability request."
+    "DataConnectionCheckNameRequest": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Data Connection name."
         },
-	"CheckNameResult": {
-		"type": "object",
-		"properties": {
-		  "nameAvailable": {
-			"type": "boolean",
-			"description": "Specifies a Boolean value that indicates if the name is available."
-		  },
-		  "name": {
-			"type": "string",
-			"description": "The name that was checked."
-		  },
-		  "message": {
-			"type": "string",
-			"description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
-		  },
-		  "reason": {
-			"type": "string",
-			"enum": [
-			  "Invalid",
-			  "AlreadyExists"
-			],
-			"x-ms-enum": {
-			  "name": "reason",
-			  "modelAsString": true
-			},
-			"description": "Message providing the reason why the given name is invalid."
-			}
-		  },
-		"description": "The result returned from a check name availability request."
-	},
+        "type": {
+          "type": "string",
+          "enum": [
+            "Microsoft.Kusto/clusters/databases/dataConnections"
+          ],
+          "x-ms-enum": {
+            "name": "Type",
+            "modelAsString": false
+          },
+          "description": "The type of resource, Microsoft.Kusto/clusters/databases/dataConnections."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ],
+      "description": "The result returned from a data connections check name availability request."
+    },
+    "CheckNameResult": {
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "type": "boolean",
+          "description": "Specifies a Boolean value that indicates if the name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name that was checked."
+        },
+        "message": {
+          "type": "string",
+          "description": "Message indicating an unavailable name due to a conflict, or a description of the naming rules that are violated."
+        },
+        "reason": {
+          "type": "string",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "x-ms-enum": {
+            "name": "reason",
+            "modelAsString": true
+          },
+          "description": "Message providing the reason why the given name is invalid."
+        }
+      },
+      "description": "The result returned from a check name availability request."
+    },
     "ListResourceSkusResult": {
       "description": "List of available SKUs for an existing Kusto Cluster.",
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/AzureResourceSku" },
+          "items": {
+            "$ref": "#/definitions/AzureResourceSku"
+          },
           "description": "The collection of available SKUs for an existing resource."
         }
       }
@@ -2128,7 +2134,9 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": { "$ref": "#/definitions/AzureSku" },
+          "items": {
+            "$ref": "#/definitions/AzureSku"
+          },
           "description": "The collection of available SKUs for new resources."
         }
       }
@@ -2267,13 +2275,13 @@
   },
   "securityDefinitions": {
     "azure_auth": {
-        "type": "oauth2",
-        "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-        "flow": "implicit",
-        "description": "Azure Active Directory OAuth2 Flow",
-        "scopes": {
-            "user_impersonation": "impersonate your user account"
-        }
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
     }
   }
 }

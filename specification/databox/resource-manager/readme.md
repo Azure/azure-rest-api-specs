@@ -70,7 +70,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataBox
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DataBox/Management.DataBox/Generated
+  output-folder: $(csharp-sdks-folder)/databox/Microsoft.Azure.Management.DataBox/src/Generated
   clear-output-folder: true
 ```
 

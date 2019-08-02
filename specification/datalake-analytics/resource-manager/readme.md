@@ -93,7 +93,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataLake.Analytics
-  output-folder: $(csharp-sdks-folder)/DataLake.Analytics/Management.DataLake.Analytics/Generated
+  output-folder: $(csharp-sdks-folder)/datalake-analytics/Microsoft.Azure.Management.DataLake.Analytics/src/Generated
   clear-output-folder: true
 ```
 
@@ -111,7 +111,7 @@ python:
   clear-output-folder: true
   no-namespace-folders: true
   namespace: azure.mgmt.datalake.analytics.account
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-analytics/azure/mgmt/datalake/analytics/account
 ```
 
 ## Go

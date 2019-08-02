@@ -53,7 +53,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.NewsSearch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Search/BingNewsSearch/BingNewsSearch/Generated/NewsSearch
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Search.BingNewsSearch/src/Generated
   sync-methods: none
 ```
 
@@ -76,12 +76,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-newssearch/azure/cognitiveservices/search/newssearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-newssearch/azure/cognitiveservices/search/newssearch
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-search-newssearch
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-search-newssearch
 ```
 
 ## Go

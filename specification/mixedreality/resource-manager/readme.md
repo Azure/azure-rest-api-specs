@@ -28,6 +28,17 @@ openapi-type: arm
 tag: package-2019-02-preview
 ```
 
+### Tag: package-2019-12-preview
+
+These settings apply only when `--tag=package-2019-12-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-12-preview'
+input-file:
+- Microsoft.MixedReality/preview/2019-12-02-preview/proxy.json
+- Microsoft.MixedReality/preview/2019-12-02-preview/remote-rendering.json
+- Microsoft.MixedReality/preview/2019-12-02-preview/spatial-anchors.json
+```
+
 ### Tag: package-2019-02-preview
 
 These settings apply only when `--tag=package-2019-02-preview` is specified on the command line.
@@ -63,7 +74,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MixedReality
-  output-folder: $(csharp-sdks-folder)/MixedReality/Management.MixedReality/Generated
+  output-folder: $(csharp-sdks-folder)/mixedreality/Microsoft.Azure.Management.MixedReality/src/Generated
   clear-output-folder: true
 ```
 
@@ -87,12 +98,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-mixedreality/azure/mgmt/mixedreality
+  output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality/azure/mgmt/mixedreality
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-mixedreality
+  output-folder: $(python-sdks-folder)/mixedreality/azure-mgmt-mixedreality
 ```
 
 ## Go

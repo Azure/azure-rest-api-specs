@@ -95,7 +95,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataLake.Store
-  output-folder: $(csharp-sdks-folder)/DataLake.Store/Management.DataLake.Store/Generated
+  output-folder: $(csharp-sdks-folder)/datalake-store/Microsoft.Azure.Management.DataLake.Store/src/Generated
   clear-output-folder: true
 ```
 
@@ -118,12 +118,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-store/azure/mgmt/datalake/store
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store/azure/mgmt/datalake/store
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-datalake-store
+  output-folder: $(python-sdks-folder)/datalake/azure-mgmt-datalake-store
 ```
 
 ## Go

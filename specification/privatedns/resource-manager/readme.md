@@ -65,7 +65,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PrivateDns
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/PrivateDns/Management.PrivateDns/Generated
+  output-folder: $(csharp-sdks-folder)/privatedns/Microsoft.Azure.Management.PrivateDns/src/Generated
   clear-output-folder: true
 ```
 

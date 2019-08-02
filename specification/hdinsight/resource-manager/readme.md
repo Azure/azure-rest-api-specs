@@ -128,7 +128,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.HDInsight
-  output-folder: $(csharp-sdks-folder)/HDInsight/Management/Management.HDInsight/Generated
+  output-folder: $(csharp-sdks-folder)/hdinsight/Microsoft.Azure.Management.HDInsight/src/Generated
   clear-output-folder: true
 ```
 

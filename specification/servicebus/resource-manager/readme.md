@@ -94,7 +94,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ServiceBus
-  output-folder: $(csharp-sdks-folder)/ServiceBus/Management.ServiceBus/Generated
+  output-folder: $(csharp-sdks-folder)/servicebus/Microsoft.Azure.Management.ServiceBus/src/Generated
   clear-output-folder: true
 ```
 
@@ -118,12 +118,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicebus/azure/mgmt/servicebus
+  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus/azure/mgmt/servicebus
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-servicebus
+  output-folder: $(python-sdks-folder)/servicebus/azure-mgmt-servicebus
 ```
 
 ## Go
@@ -132,55 +132,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.servicebus
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicebus
-directive:
-  rename-model:
-    from: PremiumMessagingRegions
-    to: PremiumMessagingRegion
-  
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2015-08
-  - tag: package-2017-04
-```
-
-### Tag: package-2015-08 and java
-
-These settings apply only when `--tag=package-2015-08 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2015-08' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.servicebus.v2015_08_01
-  output-folder: $(azure-libraries-for-java-folder)/servicebus/resource-manager/v2015_08_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2017-04 and java
-
-These settings apply only when `--tag=package-2017-04 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-04' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.servicebus.v2017_04_01
-  output-folder: $(azure-libraries-for-java-folder)/servicebus/resource-manager/v2017_04_01
-regenerate-manager: true
-generate-interface: true
-```
-
-
+See configuration in [readme.java.md](./readme.java.md)

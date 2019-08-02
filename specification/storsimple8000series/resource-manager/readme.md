@@ -73,7 +73,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.StorSimple8000Series
-  output-folder: $(csharp-sdks-folder)/StorSimple8000Series/Management.StorSimple8000Series/Generated
+  output-folder: $(csharp-sdks-folder)/storsimple8000series/Microsoft.Azure.Management.StorSimple8000Series/src/Generated
   clear-output-folder: true
 ```
 

@@ -4,16 +4,16 @@ These settings apply only when `--ruby` is specified on the command line.
 
 ```yaml
 package-name: azure_mgmt_portal
-package-version: 2015-11-01-preview
+package-version: 2015-08-01-preview
 azure-arm: true
 ```
 
-### Tag: package-2015-11-01-preview and ruby
+### Tag: package-2015-08-01-preview and ruby
 
-These settings apply only when `--tag=package-2015-11-01-preview --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2015-08-01-preview --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2015-11-01-preview' && $(ruby)
+```yaml $(tag) == 'package-2015-08-01-preview' && $(ruby)
 namespace: Microsoft.Portal
 output-folder: $(ruby-sdks-folder)/portal
 ```
