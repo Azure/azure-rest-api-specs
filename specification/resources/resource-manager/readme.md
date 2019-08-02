@@ -53,9 +53,18 @@ tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-managedapplications-2016-09
+tag: package-2019-06
 ```
 
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.Resources/stable/2019-06-01/subscriptions.json
+```
 ### Tag: package-features-2015-12
 
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
@@ -84,6 +93,7 @@ input-file:
 ```
 
 ### Tag: package-policy-2019-01
+
 These settings apply only when `--tag=package-policy-2019-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2019-01'

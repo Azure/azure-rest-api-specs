@@ -34,6 +34,45 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/capabilities": {
+      "get": {
+        "tags": [
+          "Regions"
+        ],
+        "operationId": "Locations_GetCapabilities",
+        "description": "Gets the capabilities for the specified location.",
+        "x-ms-examples": {
+          "Get the subscription capabilities for specific location": {
+            "$ref": "./examples/GetHDInsightCapabilities.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./operations.json#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "OK response definition.",
+            "schema": {
+              "$ref": "#/definitions/CapabilitiesResult"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HDInsight/locations/{location}/usages": {
       "get": {
         "tags": [
@@ -114,6 +153,203 @@
     }
   },
   "definitions": {
+    "VersionSpec": {
+      "description": "The version properties.",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "description": "The friendly name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name"
+        },
+        "isDefault": {
+          "type": "string",
+          "description": "Whether or not the version is the default version."
+        },
+        "componentVersions": {
+          "type": "object",
+          "description": "The component version property.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "VersionsCapability": {
+      "description": "The version capability.",
+      "properties": {
+        "available": {
+          "description": "The list of version capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VersionSpec"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "RegionsCapability": {
+      "description": "The regions capability.",
+      "properties": {
+        "available": {
+          "description": "The list of region capabilities.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "VmSizesCapability": {
+      "description": "The virtual machine sizes capability.",
+      "properties": {
+        "available": {
+          "description": "The list of virtual machine size capabilities.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "VmSizeCompatibilityFilter": {
+      "description": "The virtual machine type compatibility filter.",
+      "properties": {
+        "FilterMode": {
+          "description": "The mode for the filter.",
+          "type": "string"
+        },
+        "Regions": {
+          "description": "The list of regions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ClusterFlavors": {
+          "description": "The list of cluster types available.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "NodeTypes": {
+          "description": "The list of node types.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ClusterVersions": {
+          "description": "The list of cluster versions.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmsizes": {
+          "description": "The list of virtual machine sizes.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "RegionalQuotaCapability": {
+      "description": "The regional quota capacity.",
+      "properties": {
+        "region_name": {
+          "description": "The region name.",
+          "type": "string"
+        },
+        "cores_used": {
+          "description": "The number of cores used in the region.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "cores_available": {
+          "description": "The number of cores available in the region.",
+          "type": "integer",
+          "format": "int64"
+        }
+      },
+      "readOnly": true
+    },
+    "QuotaCapability": {
+      "description": "The regional quota capability.",
+      "properties": {
+        "cores_used": {
+          "description": "The number of cores used in the subscription.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_cores_allowed": {
+          "description": "The number of cores that the subscription allowed.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "regionalQuotas": {
+          "description": "The list of region quota capabilities.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RegionalQuotaCapability"
+          }
+        }
+      },
+      "readOnly": true
+    },
+    "CapabilitiesResult": {
+      "description": "The Get Capabilities operation response.",
+      "properties": {
+        "versions": {
+          "description": "The version capability.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VersionsCapability"
+          }
+        },
+        "regions": {
+          "description": "The virtual machine size compatibility features.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/RegionsCapability"
+          }
+        },
+        "vmSizes": {
+          "description": "The virtual machine sizes.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/VmSizesCapability"
+          }
+        },
+        "vmSize_filters": {
+          "description": "The virtual machine size compatibility filters.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VmSizeCompatibilityFilter"
+          }
+        },
+        "features": {
+          "description": "The capability features.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "quota": {
+          "description": "The quota capability.",
+          "$ref": "#/definitions/QuotaCapability"
+        }
+      },
+      "readOnly": true
+    },
     "LocalizedName": {
       "description": "The details about the localizable name of a type of usage.",
       "properties": {
