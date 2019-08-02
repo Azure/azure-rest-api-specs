@@ -8,7 +8,7 @@
     "https"
   ],
   "paths": {
-    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/startlocalrun": {
+    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/localrun": {
       "post": {
         "tags": [
           "Execution"
@@ -17,7 +17,7 @@
         "description": "Starts an experiment run using the provided definition.json file to define the run.\r\n            The source code and configuration is defined in a zip archive in project.zip.",
         "operationId": "Execution_StartLocalRun",
         "consumes": [
-          "application/json"
+          "multipart/form-data"
         ],
         "produces": [
           "application/octet-stream"
@@ -40,13 +40,14 @@
             "type": "string"
           },
           {
-            "name": "definition",
-            "in": "body",
-            "description": "A JSON run definition structure.",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/RunDefinition"
-            }
+            "name": "files",
+            "in": "formData",
+            "description": "Two files are required: 'project.zip':\r\n            A zip archive of a folder containing the source code to use for the run.\r\n            'definition.json': A text file that is a JSON-serialized run definition structure.",
+            "required": true,
+            "type": "array",
+            "items": {},
+            "collectionFormat": "multi",
+            "uniqueItems": false
           },
           {
             "name": "runId",
@@ -133,7 +134,7 @@
           "200": {
             "description": "A run was successfully started.",
             "schema": {
-              "$ref": "#/definitions/StartRunResult"
+              "$ref": "#/definitions/RunStatus"
             }
           },
           "default": {
@@ -203,7 +204,7 @@
           "200": {
             "description": "A snapshot run was successfully started.",
             "schema": {
-              "$ref": "#/definitions/StartRunResult"
+              "$ref": "#/definitions/RunStatus"
             }
           },
           "default": {
@@ -220,13 +221,17 @@
         }
       }
     },
-    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/runId/{runId}/diagnostics": {
+    "/execution/v1.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/experiments/{experimentName}/cancel": {
       "post": {
         "tags": [
           "Execution"
         ],
-        "operationId": "GetDiagnostics",
-        "consumes": [],
+        "summary": "Cancel a run.",
+        "description": "Cancels a run within an experiment.",
+        "operationId": "Execution_CancelRun",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -243,26 +248,37 @@
           {
             "name": "experimentName",
             "in": "path",
+            "description": "The experiment name.",
             "required": true,
             "type": "string"
           },
           {
-            "name": "runId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][\\w-]{0,255}$"
+            "name": "runDetails",
+            "in": "body",
+            "description": "The details of the run to cancel.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/ExperimentRunDetails"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Success"
+            "description": "The run was successfully cancelled.",
+            "schema": {
+              "$ref": "#/definitions/RunStatus"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Cancel a run": {
+            "$ref": "./examples/cancelRun.json"
           }
         }
       }
@@ -309,7 +325,7 @@
           "200": {
             "description": "The run was successfully cancelled.",
             "schema": {
-              "$ref": "#/definitions/StartRunResult"
+              "$ref": "#/definitions/RunStatus"
             }
           },
           "default": {
@@ -328,6 +344,22 @@
     }
   },
   "definitions": {
+    "RunStatus": {
+      "description": "Contains the details of a run.",
+      "type": "object",
+      "properties": {
+        "runId": {
+          "description": "The identifier for a run.",
+          "type": "string",
+          "example": "myexperiment_155000000001_0"
+        },
+        "target": {
+          "description": "Target refers to compute where the job is scheduled for execution.",
+          "type": "string",
+          "example": "local"
+        }
+      }
+    },
     "RunDefinition": {
       "type": "object",
       "properties": {
@@ -335,10 +367,23 @@
           "$ref": "#/definitions/RunConfiguration",
           "description": "Fully specified configuration information for the run. Even when that information\r\nis contained in configuration files within the project folder, the client collapses\r\nit all and inlines it into the run definition when submitting a run."
         },
+        "attribution": {
+          "type": "string"
+        },
+        "telemetryValues": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
         "snapshotId": {
           "format": "uuid",
           "description": "Snapshots are user project folders that have been uploaded to the cloud for subsequent\r\nexecution. This field is required when executing against cloud-based compute targets\r\nunless the run submission was against the API endpoint that takes a zipped project folder\r\ninline with the request.",
           "type": "string"
+        },
+        "sourceCodeDataReference": {
+          "$ref": "#/definitions/SourceCodeDataReference",
+          "description": "Specifies the cloud source data to use for the run."
         },
         "parentRunId": {
           "description": "Specifies that the run history entry for this execution should be scoped within\r\nan existing run as a child. Defaults to null, meaning the run has no parent.\r\nThis is intended for first-party service integration, not third-party API users.",
@@ -369,6 +414,11 @@
           },
           "example": "[\"234\"]"
         },
+        "sourceDirectoryDataStore": {
+          "description": "The attribute is used to configure the backing datastore for the project share.",
+          "type": "string",
+          "example": "my-source-store"
+        },
         "framework": {
           "description": "The supported frameworks are Python, PySpark, CNTK, TensorFlow, and PyTorch. Use Tensorflow for AmlCompute clusters, and Python for distributed training jobs.",
           "enum": [
@@ -376,7 +426,9 @@
             "PySpark",
             "Cntk",
             "TensorFlow",
-            "PyTorch"
+            "PyTorch",
+            "PySparkInteractive",
+            "R"
           ],
           "type": "string",
           "example": "Python",
@@ -391,8 +443,7 @@
             "None",
             "ParameterServer",
             "Gloo",
-            "Mpi",
-            "Nccl"
+            "Mpi"
           ],
           "type": "string",
           "example": "None",
@@ -442,6 +493,10 @@
           "$ref": "#/definitions/SparkConfiguration",
           "description": "When the platform is set to Pyspark, The spark configuration is used to set the default sparkconf for the submitted job."
         },
+        "amlCompute": {
+          "$ref": "#/definitions/AMLComputeConfiguration",
+          "description": "The attribute is used to configure details of the compute target to be created during experiment.\r\nThe configuration only takes effect when the target is set to \"amlcompute\"."
+        },
         "tensorflow": {
           "$ref": "#/definitions/TensorflowConfiguration",
           "description": "The attribute is used to configure the distributed tensorflow parameters.\r\nThis attribute takes effect only when the framework is set to TensorFlow, and the communicator to ParameterServer.\r\nAmlCompute is the only supported compute for this configuration."
@@ -453,6 +508,72 @@
         "hdi": {
           "$ref": "#/definitions/HdiConfiguration",
           "description": "This attribute takes effect only when the target is set to an Azure HDI compute.\r\nThe HDI Configuration is used to set the YARN deployment mode. It is defaulted to cluster mode."
+        },
+        "containerInstance": {
+          "$ref": "#/definitions/ContainerInstanceConfiguration"
+        },
+        "exposedPorts": {
+          "description": "Currently unused.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      }
+    },
+    "SourceCodeDataReference": {
+      "type": "object",
+      "properties": {
+        "dataStoreName": {
+          "description": "The source data datastore name.",
+          "type": "string",
+          "example": "MySourceDatastore"
+        },
+        "path": {
+          "description": "The path to the source directory or file.\r\nThe path should not include the blob container\r\nname or fileshare name.\r\nIf not set, the path defaults to the root\r\nof the file share or blob container.\r\nThe cloud file or the contents of cloud directory will be copied to the working directory of the run\r\nbefore the user code runs.",
+          "type": "string",
+          "example": "source/projects/projectAbc/"
+        }
+      }
+    },
+    "DataReferenceConfiguration": {
+      "description": "A class for managing DataReferenceConfiguration.",
+      "type": "object",
+      "properties": {
+        "dataStoreName": {
+          "description": "The name of the data store.",
+          "type": "string",
+          "example": "myblobstore"
+        },
+        "mode": {
+          "description": "Operation on the datastore, mount, download, upload.",
+          "enum": [
+            "Mount",
+            "Download",
+            "Upload"
+          ],
+          "type": "string",
+          "example": "Mount",
+          "x-ms-enum": {
+            "name": "DataStoreMode",
+            "modelAsString": true
+          }
+        },
+        "pathOnDataStore": {
+          "description": "Relative path on the datastore.",
+          "type": "string",
+          "example": "/images/validation"
+        },
+        "pathOnCompute": {
+          "description": "The path on the compute target.",
+          "type": "string"
+        },
+        "overwrite": {
+          "description": "Whether to overwrite the data if existing.",
+          "type": "boolean",
+          "example": "False"
         }
       }
     },
@@ -500,7 +621,8 @@
       "properties": {
         "outputCollection": {
           "description": "Set to true to collect outputs and store in run history.",
-          "type": "boolean"
+          "type": "boolean",
+          "example": "True"
         },
         "directoriesToWatch": {
           "description": "The list of directories to monitor and upload files from.",
@@ -511,6 +633,9 @@
           },
           "example": "[\"logs\", \"outputs\"]"
         }
+      },
+      "additionalProperties": {
+        "type": "object"
       }
     },
     "SparkConfiguration": {
@@ -521,6 +646,45 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "AMLComputeConfiguration": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the AMLCompute cluster.",
+          "type": "string",
+          "example": "my8nodeCluster"
+        },
+        "vmSize": {
+          "description": "VM size of the Cluster to be created. Allowed values are Azure vm sizes.\r\nThe list of vm sizes is available in https://docs.microsoft.com/en-us/azure/cloud-services/cloud-services-sizes-specs",
+          "type": "string",
+          "example": "Standard_D2_v2"
+        },
+        "vmPriority": {
+          "description": "VM priority of the Cluster to be created. Allowed values are dedicated and lowpriority.",
+          "enum": [
+            "Dedicated",
+            "Lowpriority"
+          ],
+          "type": "string",
+          "example": "dedicated",
+          "x-ms-enum": {
+            "name": "VmPriority",
+            "modelAsString": true
+          }
+        },
+        "retainCluster": {
+          "description": "Setting to true will prevent the cluster from being deleted upon completion of the run.",
+          "type": "boolean",
+          "example": "False"
+        },
+        "clusterMaxNodeCount": {
+          "format": "int32",
+          "description": "The maximum number of nodes that the cluster can scale up to.",
+          "type": "integer",
+          "example": "10"
         }
       }
     },
@@ -569,6 +733,28 @@
         }
       }
     },
+    "ContainerInstanceConfiguration": {
+      "type": "object",
+      "properties": {
+        "region": {
+          "description": "Defaults to the region of the workspace.",
+          "type": "string",
+          "example": "eastus2"
+        },
+        "cpuCores": {
+          "format": "double",
+          "description": "Default size corresponds to the largest container supported in all regions.\r\nDetails: https://docs.microsoft.com/en-us/azure/container-instances/container-instances-quotas",
+          "type": "number",
+          "example": "2"
+        },
+        "memoryGb": {
+          "format": "double",
+          "description": "The memory available for the container instance.",
+          "type": "number",
+          "example": "3.5"
+        }
+      }
+    },
     "PythonSection": {
       "type": "object",
       "properties": {
@@ -602,16 +788,24 @@
           "example": "FROM ubuntu:latest\r\nRUN echo \"Hello world!\""
         },
         "enabled": {
-          "description": "Set true to perform this run inside a Docker container.",
-          "type": "boolean"
+          "description": "Set True to perform this run inside a Docker container.",
+          "type": "boolean",
+          "example": "True"
         },
         "sharedVolumes": {
-          "description": "Set false to disable AzureML's usage of the Docker shared volumes feature to work around bugs in certain versions of Docker for Windows.",
-          "type": "boolean"
+          "description": "Set False if necessary to work around shared volume bugs on Windows.",
+          "type": "boolean",
+          "example": "True"
         },
         "gpuSupport": {
           "description": "Run with NVidia Docker extension to support GPUs.",
-          "type": "boolean"
+          "type": "boolean",
+          "example": "False"
+        },
+        "shmSize": {
+          "description": "The shared memory size setting for NVidia GPUs.",
+          "type": "string",
+          "example": "1g"
         },
         "arguments": {
           "description": "Extra arguments to the Docker run command.",
@@ -648,7 +842,8 @@
         },
         "precachePackages": {
           "description": "Whether to precache the packages.",
-          "type": "boolean"
+          "type": "boolean",
+          "example": "True"
         }
       }
     },
@@ -680,10 +875,11 @@
         }
       }
     },
-    "StartRunResult": {
+    "ExperimentRunDetails": {
       "description": "Contains the details of a run.",
       "required": [
-        "runId"
+        "runId",
+        "target"
       ],
       "type": "object",
       "properties": {
@@ -691,6 +887,11 @@
           "description": "The identifier for a run.",
           "type": "string",
           "example": "myexperiment_155000000001_0"
+        },
+        "target": {
+          "description": "Target refers to compute where the job is scheduled for execution.",
+          "type": "string",
+          "example": "local"
         }
       }
     },
@@ -751,6 +952,10 @@
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse",
           "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
+        },
+        "debugInfo": {
+          "$ref": "#/definitions/DebugInfoResponse",
+          "description": "An internal representation of the error. May be null for non-AzureML services."
         }
       }
     },
@@ -785,9 +990,61 @@
           "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
         }
       }
+    },
+    "DebugInfoResponse": {
+      "description": "Internal debugging information not intended for external clients.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message.",
+          "type": "string"
+        },
+        "stackTrace": {
+          "description": "The stack trace.",
+          "type": "string"
+        },
+        "innerException": {
+          "$ref": "#/definitions/DebugInfoResponse",
+          "description": "The inner exception."
+        },
+        "data": {
+          "description": "The data associated with the error.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "errorResponse": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "The error response."
+        }
+      }
     }
   },
   "parameters": {
+    "dnsSuffix": {
+      "name": "dnsSuffix",
+      "in": "path",
+      "description": "The DNS suffix for the Azure Machine Learning Service endpoint.",
+      "required": true,
+      "type": "string",
+      "default": "api.azureml.ms",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "region": {
+      "name": "region",
+      "in": "path",
+      "description": "The Azure region name.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
@@ -831,5 +1088,16 @@
       ]
     }
   ],
-  "tags": []
+  "tags": [],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{region}.{dnsSuffix}",
+    "parameters": [
+      {
+        "$ref": "#/parameters/region"
+      },
+      {
+        "$ref": "#/parameters/dnsSuffix"
+      }
+    ]
+  }
 }

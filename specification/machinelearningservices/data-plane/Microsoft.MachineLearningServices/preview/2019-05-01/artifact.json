@@ -1005,16 +1005,14 @@
             }
           }
         }
-      }
-    },
-    "/artifact/v2.0/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/artifacts/{origin}/{container}/batch/metadata:delete": {
-      "post": {
+      },
+      "delete": {
         "tags": [
           "Artifact"
         ],
         "summary": "Delete Batch of Artifact Metadata.",
         "description": "Delete a Batch of Artifact Metadata.",
-        "operationId": "Artifacts_DeleteBatchMetaData",
+        "operationId": "Artifacts_BatchDeleteMetaData",
         "consumes": [
           "application/json"
         ],
@@ -1049,7 +1047,7 @@
             "name": "artifactPaths",
             "in": "body",
             "description": "The list of Artifact paths to delete.",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/ArtifactPathList"
             }
@@ -1057,7 +1055,7 @@
           {
             "name": "hardDelete",
             "in": "query",
-            "description": "If set to true, the delete cannot be reverted at a later time.",
+            "description": "If set to true. The delete cannot be revert at later time.",
             "required": false,
             "type": "boolean",
             "default": false
@@ -1065,7 +1063,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The batch delete of Artifact metadata completed successfully."
+            "description": "The batch delete of Artifact metadata is completed successfully."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1269,12 +1267,17 @@
           "type": "string"
         },
         "origin": {
-          "description": "The origin of the Artifact creation request. Available origins are 'ExperimentRun', 'LocalUpload', 'WebUpload', 'Dataset', 'ComputeRecord', 'Metric', and 'Unknown'.",
+          "description": "The origin of the Artifact creation request. Available origins are 'ExperimentRun', 'LocalUpload', 'WebUpload', 'Dataset', 'ComputeRecord' and 'Unknown'.",
           "type": "string"
         },
         "container": {
           "description": "The name of container. Artifacts can be grouped by container.",
           "type": "string"
+        },
+        "sizeInBytes": {
+          "format": "int64",
+          "description": "The size of the contents in bytes",
+          "type": "integer"
         },
         "path": {
           "description": "The path to the Artifact in a container.",
@@ -1405,6 +1408,10 @@
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse",
           "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
+        },
+        "debugInfo": {
+          "$ref": "#/definitions/DebugInfoResponse",
+          "description": "An internal representation of the error. May be null for non-AzureML services."
         }
       }
     },
@@ -1437,6 +1444,39 @@
         "innerError": {
           "$ref": "#/definitions/InnerErrorResponse",
           "description": "A nested list of inner errors. When evaluating errors, clients MUST traverse through all of the nested “innerErrors” and choose the deepest one that they understand."
+        }
+      }
+    },
+    "DebugInfoResponse": {
+      "description": "Internal debugging information not intended for external clients.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The type.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message.",
+          "type": "string"
+        },
+        "stackTrace": {
+          "description": "The stack trace.",
+          "type": "string"
+        },
+        "innerException": {
+          "$ref": "#/definitions/DebugInfoResponse",
+          "description": "The inner exception."
+        },
+        "data": {
+          "description": "The data associated with the error.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        },
+        "errorResponse": {
+          "$ref": "#/definitions/ErrorResponse",
+          "description": "The error response."
         }
       }
     },
@@ -1498,6 +1538,25 @@
     }
   },
   "parameters": {
+    "dnsSuffix": {
+      "name": "dnsSuffix",
+      "in": "path",
+      "description": "The DNS suffix for the Azure Machine Learning Service endpoint.",
+      "required": true,
+      "type": "string",
+      "default": "api.azureml.ms",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
+    "region": {
+      "name": "region",
+      "in": "path",
+      "description": "The Azure region name.",
+      "required": true,
+      "type": "string",
+      "x-ms-skip-url-encoding": true,
+      "x-ms-parameter-location": "client"
+    },
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
@@ -1541,5 +1600,16 @@
       ]
     }
   ],
-  "tags": []
+  "tags": [],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{region}.{dnsSuffix}",
+    "parameters": [
+      {
+        "$ref": "#/parameters/region"
+      },
+      {
+        "$ref": "#/parameters/dnsSuffix"
+      }
+    ]
+  }
 }
