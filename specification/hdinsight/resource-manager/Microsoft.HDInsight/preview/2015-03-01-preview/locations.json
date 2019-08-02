@@ -175,7 +175,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "readOnly": true
     },
     "VersionsCapability": {
       "description": "The version capability.",
@@ -187,7 +188,8 @@
             "$ref": "#/definitions/VersionSpec"
           }
         }
-      }
+      },
+      "readOnly": true
     },
     "RegionsCapability": {
       "description": "The regions capability.",
@@ -199,7 +201,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "readOnly": true
     },
     "VmSizesCapability": {
       "description": "The virtual machine sizes capability.",
@@ -211,7 +214,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "readOnly": true
     },
     "VmSizeCompatibilityFilter": {
       "description": "The virtual machine type compatibility filter.",
@@ -255,7 +259,8 @@
             "type": "string"
           }
         }
-      }
+      },
+      "readOnly": true
     },
     "RegionalQuotaCapability": {
       "description": "The regional quota capacity.",
@@ -270,15 +275,26 @@
           "format": "int64"
         },
         "cores_available": {
-          "description": "The number of courses available in the region.",
+          "description": "The number of cores available in the region.",
           "type": "integer",
           "format": "int64"
         }
-      }
+      },
+      "readOnly": true
     },
     "QuotaCapability": {
       "description": "The regional quota capability.",
       "properties": {
+        "cores_used": {
+          "description": "The number of cores used in the subscription.",
+          "type": "integer",
+          "format": "int64"
+        },
+        "max_cores_allowed": {
+          "description": "The number of cores that the subscription allowed.",
+          "type": "integer",
+          "format": "int64"
+        },
         "regionalQuotas": {
           "description": "The list of region quota capabilities.",
           "type": "array",
@@ -286,7 +302,8 @@
             "$ref": "#/definitions/RegionalQuotaCapability"
           }
         }
-      }
+      },
+      "readOnly": true
     },
     "CapabilitiesResult": {
       "description": "The Get Capabilities operation response.",
@@ -330,7 +347,8 @@
           "description": "The quota capability.",
           "$ref": "#/definitions/QuotaCapability"
         }
-      }
+      },
+      "readOnly": true
     },
     "LocalizedName": {
       "description": "The details about the localizable name of a type of usage.",
