@@ -39,7 +39,12 @@
           }
         },
         "networkProfile": {
-          "loadBalancerSku": "basic"
+          "loadBalancerSku": "standard",
+          "loadBalancerProfile": {
+            "managedOutboundIPs": {
+              "count": 2
+            }
+          }
         },
         "windowsProfile": {
           "adminUsername": "azureuser",
@@ -173,12 +178,25 @@
           "enableRBAC": true,
           "enablePodSecurityPolicy": true,
           "networkProfile": {
-            "loadBalancerSku": "basic",
             "networkPlugin": "kubenet",
             "podCidr": "10.244.0.0/16",
             "serviceCidr": "10.0.0.0/16",
             "dnsServiceIP": "10.0.0.10",
-            "dockerBridgeCidr": "172.17.0.1/16"
+            "dockerBridgeCidr": "172.17.0.1/16",
+            "loadBalancerSku": "standard",
+            "loadBalancerProfile": {
+              "managedOutboundIPs": {
+                "count": 2
+              },
+              "effectiveOutboundIPs": [
+                {
+                  "id": "/subscriptions/subid1/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip1"
+                },
+                {
+                  "id": "/subscriptions/subid1/resourceGroups/MC_rg1/providers/Microsoft.Network/publicIPAddresses/mgdoutboundip2"
+                }
+              ]
+            }
           }
         }
       }
