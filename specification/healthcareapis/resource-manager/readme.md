@@ -1,4 +1,4 @@
-# HealthcareApis XXx
+# HealthcareApis
 
 > see https://aka.ms/autorest
 
