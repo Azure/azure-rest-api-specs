@@ -2242,13 +2242,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateAutoRenewRequest"
-            },
-            "description": "Parameters supplied to cancel auto renew."
+            "$ref": "#/parameters/updateAutoRenewRequestParameter"
           }
         ],
         "responses": {
@@ -2296,13 +2290,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/UpdateAutoRenewRequest"
-            },
-            "description": "Parameters supplied to cancel auto renew."
+            "$ref": "#/parameters/updateAutoRenewRequestParameter"
           }
         ],
         "responses": {
@@ -5752,20 +5740,19 @@
       }
     },
     "UpdateAutoRenewRequest": {
+      "type": "object",
       "description": "Request parameters to update auto renew for support product.",
       "properties": {
-        "properties": {
-          "autoRenew": {
-            "description": "Request parameters to update auto renew policy a product.",
-            "type": "string",
-            "enum": [
-              "true",
-              "false"
-            ],
-            "x-ms-enum": {
-              "name": "UpdateAutoRenew",
-              "modelAsString": true
-            }
+        "autoRenew": {
+          "description": "Request parameters to update auto renew policy a product.",
+          "type": "string",
+          "enum": [
+            "true",
+            "false"
+          ],
+          "x-ms-enum": {
+            "name": "UpdateAutoRenew",
+            "modelAsString": true
           }
         }
       }
@@ -6259,6 +6246,16 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
+    },
+    "updateAutoRenewRequestParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Update auto renew request parameters.",
+      "schema": {
+        "$ref": "#/definitions/UpdateAutoRenewRequest"
+      }
     }
   },
   "security": [
