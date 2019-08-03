@@ -582,45 +582,6 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
-      "post": {
-        "tags": [
-          "InvoiceSections"
-        ],
-        "x-ms-examples": {
-          "InvoiceSectionsListByBillingProfileNameWithCreateSubPermission": {
-            "$ref": "./examples/InvoiceSectionsListByBillingProfileNameWithCreateSubPermission.json"
-          }
-        },
-        "operationId": "InvoiceSections_ListByCreateSubscriptionPermission",
-        "description": "Lists all invoiceSections with create subscription permission for a user.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/InvoiceSectionListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}": {
       "get": {
         "tags": [
@@ -6476,7 +6437,7 @@
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
-    }    
+    }
   },
   "security": [
     {
