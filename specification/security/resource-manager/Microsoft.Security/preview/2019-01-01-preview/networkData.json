@@ -84,7 +84,7 @@
         }
       }
     },
-    "/{resourceId}/providers/Microsoft.Security/NetworkData/{resourceType}": {
+    "/{resourceId}/providers/Microsoft.Security/NetworkData": {
       "get": {
         "x-ms-examples": {
           "Get the network data of a resource": {
@@ -102,9 +102,6 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
-          },
-          {
-            "$ref": "#/parameters/resourceType"
           }
         ],
         "responses": {
@@ -172,8 +169,7 @@
     },
     "ConnectableResource": {
       "type": "object",
-      "description": "Details of the resource that was assessed",
-      "discriminator": "assessedResourceSource",
+      "description": "Describes the allowed connections, actual traffic and unused ports of an Azure resource",
       "properties": {
         "connectedResourceId": {
           "readOnly": true,
@@ -370,7 +366,6 @@
     "ConnectionDetails": {
       "type": "object",
       "description": "Details of the actual traffic connections",
-      "discriminator": "assessedResourceSource",
       "properties": {
         "portAndProtocol": {
           "readOnly": true,
@@ -386,13 +381,5 @@
     }
   },
   "parameters": {
-    "resourceType": {
-      "name": "resourceType",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The resource type",
-      "x-ms-parameter-location": "method"
-    }
   }
 }
