@@ -24,11 +24,34 @@ To see additional help and options, run:
 
 These are the global settings for the AlertManagement API.
 
+## Suppression
+``` yaml
+directive:
+  - suppress: R3025
+    reason: The rule applied incorrectly to base class.
+    where:
+      - $.definitions.ManagedResource
+  - suppress: R3026
+    reason: The rule applied incorrectly to base class.
+    where:
+      - $.definitions.ManagedResource
+```
+
 ``` yaml
 title: AlertsManagementClient
 description: AlertsManagement Client
 openapi-type: arm
-tag: package-2019-03
+tag: package-2019-06-preview
+```
+
+### Tag: package-2019-06-preview
+
+These settings apply only when `--tag=package-2019-06-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06-preview'
+input-file:
+  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
+  - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
 ```
 
 
@@ -40,6 +63,7 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 input-file:
   - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
 ```
+
 ### Tag: package-2019-03
 
 These settings apply only when `--tag=package-2019-03` is specified on the command line.
@@ -49,6 +73,7 @@ input-file:
   - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
   - Microsoft.AlertsManagement/stable/2019-03-01/SmartDetectorAlertRulesApi.json
 ```
+
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.

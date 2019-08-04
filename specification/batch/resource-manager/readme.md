@@ -26,9 +26,17 @@ These are the global settings for the Batch API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-04
+tag: package-2019-08
 ```
 
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-08'
+input-file:
+  - Microsoft.Batch/stable/2019-08-01/BatchManagement.json
+```
 
 ### Tag: package-2019-04
 
@@ -38,6 +46,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
   - Microsoft.Batch/stable/2019-04-01/BatchManagement.json
 ```
+
 ### Tag: package-2018-12
 
 These settings apply only when `--tag=package-2018-12` is specified on the command line.
