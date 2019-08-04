@@ -75,7 +75,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.HybridData
-  output-folder: $(csharp-sdks-folder)/HybridDataManager/Management.HybridData/Generated
+  output-folder: $(csharp-sdks-folder)/hybriddatamanager/Microsoft.Azure.Management.HybridDataManager/src/Generated
   clear-output-folder: true
 ```
 

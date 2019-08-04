@@ -120,7 +120,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Advisor
-  output-folder: $(csharp-sdks-folder)/Advisor/Management.Advisor/Generated
+  output-folder: $(csharp-sdks-folder)/advisor/Microsoft.Azure.Management.Advisor/src/Generated
   clear-output-folder: true
 ```
 

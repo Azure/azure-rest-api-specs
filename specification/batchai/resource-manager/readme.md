@@ -85,7 +85,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.BatchAI
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/BatchAI/Management.BatchAI/Generated
+  output-folder: $(csharp-sdks-folder)/batchai/Microsoft.Azure.Management.BatchAI/src/Generated
   clear-output-folder: true
 ```
 

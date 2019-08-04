@@ -65,7 +65,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PowerBIDedicated
-  output-folder: $(csharp-sdks-folder)/PowerBIDedicated/Management.PowerBIDedicated/Generated
+  output-folder: $(csharp-sdks-folder)/powerbidedicated/Microsoft.Azure.Management.PowerBIDedicated/src/Generated
   clear-output-folder: true
 ```
 

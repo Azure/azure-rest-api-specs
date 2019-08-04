@@ -74,7 +74,7 @@ csharp:
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MixedReality
-  output-folder: $(csharp-sdks-folder)/MixedReality/Management.MixedReality/Generated
+  output-folder: $(csharp-sdks-folder)/mixedreality/Microsoft.Azure.Management.MixedReality/src/Generated
   clear-output-folder: true
 ```
 

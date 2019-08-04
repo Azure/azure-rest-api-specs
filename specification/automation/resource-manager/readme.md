@@ -213,7 +213,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Automation
-  output-folder: $(csharp-sdks-folder)/Automation/Management.Automation/Generated
+  output-folder: $(csharp-sdks-folder)/automation/Microsoft.Azure.Management.Automation/src/Generated
   clear-output-folder: true
 ```
 

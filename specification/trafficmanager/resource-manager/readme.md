@@ -195,7 +195,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.TrafficManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/TrafficManager/Management.TrafficManager/Generated
+  output-folder: $(csharp-sdks-folder)/trafficmanager/Microsoft.Azure.Management.TrafficManager/src/Generated
   clear-output-folder: true
 ```
 

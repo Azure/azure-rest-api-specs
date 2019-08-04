@@ -271,7 +271,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ApiManagement
-  output-folder: $(csharp-sdks-folder)/ApiManagement/Management.ApiManagement/Generated
+  output-folder: $(csharp-sdks-folder)/apimanagement/Microsoft.Azure.Management.ApiManagement/src/Generated
   clear-output-folder: true
 ```
 

@@ -158,7 +158,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.EventGrid
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/EventGrid/Management.EventGrid/Generated
+  output-folder: $(csharp-sdks-folder)/eventgrid/Microsoft.Azure.Management.EventGrid/src/Generated
   clear-output-folder: true
 ```
 

@@ -136,7 +136,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Logic
-  output-folder: $(csharp-sdks-folder)/Logic/Management.Logic/Generated
+  output-folder: $(csharp-sdks-folder)/logic/Microsoft.Azure.Management.Logic/src/Generated
   clear-output-folder: true
 ```
 

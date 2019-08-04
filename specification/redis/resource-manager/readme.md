@@ -111,7 +111,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Redis
-  output-folder: $(csharp-sdks-folder)/RedisCache/Management.Redis/Generated
+  output-folder: $(csharp-sdks-folder)/redis/Microsoft.Azure.Management.Redis/src/Generated
   clear-output-folder: true
 ```
 

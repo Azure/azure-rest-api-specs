@@ -143,7 +143,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PolicyInsights
-  output-folder: $(csharp-sdks-folder)/PolicyInsights/Management/Management.PolicyInsights/Generated
+  output-folder: $(csharp-sdks-folder)/policyinsights/Microsoft.Azure.Management.PolicyInsights/src/Generated
   clear-output-folder: true
 ```
 

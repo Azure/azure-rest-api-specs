@@ -82,7 +82,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.CognitiveServices
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/management/Management.CognitiveServices/Generated
+  output-folder: $(csharp-sdks-folder)/cognitiveservices/Microsoft.Azure.Management.CognitiveServices/src/Generated
   clear-output-folder: true
 ```
 

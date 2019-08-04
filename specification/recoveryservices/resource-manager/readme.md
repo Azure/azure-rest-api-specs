@@ -87,7 +87,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 1
   namespace: Microsoft.Azure.Management.RecoveryServices
-  output-folder: $(csharp-sdks-folder)/RecoveryServices/Management.RecoveryServices/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices/Microsoft.Azure.Management.RecoveryServices/src/Generated
   clear-output-folder: true
 ```
 

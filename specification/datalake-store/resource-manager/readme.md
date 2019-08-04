@@ -95,7 +95,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataLake.Store
-  output-folder: $(csharp-sdks-folder)/DataLake.Store/Management.DataLake.Store/Generated
+  output-folder: $(csharp-sdks-folder)/datalake-store/Microsoft.Azure.Management.DataLake.Store/src/Generated
   clear-output-folder: true
 ```
 

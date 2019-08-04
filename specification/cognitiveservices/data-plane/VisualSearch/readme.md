@@ -47,7 +47,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.CognitiveServices.Search.VisualSearch
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/CognitiveServices.Search.BingVisualSearch/src/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Search.BingVisualSearch/src/Generated
   sync-methods: none
 ```
 

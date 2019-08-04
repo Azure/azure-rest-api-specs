@@ -26,18 +26,27 @@ These are the global settings for the Consumption API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-04
+tag: package-preview-2019-05
 ```
 
 
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
+```
 ### Tag: package-preview-2019-04
 
 These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-04'
+``` yaml $(tag) == 'package-preview-2019-04'
 input-file:
   - Microsoft.Consumption/preview/2019-04-01-preview/consumption.json
 ```
+
 ### Tag: package-preview-2018-11
 
 These settings apply only when `--tag=package-preview-2018-11` is specified on the command line.
@@ -194,7 +203,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Consumption
-  output-folder: $(csharp-sdks-folder)/Consumption/Management.Consumption/Generated
+  output-folder: $(csharp-sdks-folder)/consumption/Microsoft.Azure.Management.Consumption/src/Generated
   clear-output-folder: true
 ```
 

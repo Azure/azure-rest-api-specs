@@ -121,13 +121,13 @@ csharp:
 batch:
   - package-webservices: true
     namespace: Microsoft.Azure.Management.MachineLearning.WebServices
-    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/WebServices
+    output-folder: $(csharp-sdks-folder)/machinelearning/Microsoft.Azure.Management.MachineLearning/src/Generated/WebServices
   - package-commitmentPlans: true
     namespace: Microsoft.Azure.Management.MachineLearning.CommitmentPlans
-    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/CommitmentPlans
+    output-folder: $(csharp-sdks-folder)/machinelearning/Microsoft.Azure.Management.MachineLearning/src/Generated/CommitmentPlans
   - package-workspaces: true
     namespace: Microsoft.Azure.Management.MachineLearning.Workspaces
-    output-folder: $(csharp-sdks-folder)/MachineLearning/Management.MachineLearning/Generated/Workspaces
+    output-folder: $(csharp-sdks-folder)/machinelearning/Microsoft.Azure.Management.MachineLearning/src/Generated/Workspaces
 ```
 
 ## Go

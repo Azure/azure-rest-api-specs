@@ -924,6 +924,15 @@
           },
           "Get an AAD data connector.": {
             "$ref": "./examples/dataConnectors/GetAzureActiveDirectoryById.json"
+          },
+          "Get an AwsCloudTrail data connector.": {
+            "$ref": "./examples/dataConnectors/GetAmazonWebServicesCloudTrailById.json"
+          },
+          "Get an AATP data connector.": {
+            "$ref": "./examples/dataConnectors/GetAzureAdvancedThreatProtectionById.json"
+          },
+          "Get a MDATP data connector": {
+            "$ref": "./examples/dataConnectors/GetMicrosoftDefenderAdvancedThreatProtectionById.json"
           }
         },
         "tags": [
@@ -1459,6 +1468,102 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries": {
+      "get": {
+        "x-ms-examples": {
+          "Get all entity queries.": {
+            "$ref": "./examples/entityQueries/GetEntityQueries.json"
+          }
+        },
+        "tags": [
+          "EntityQueries"
+        ],
+        "description": "Gets all entity queries.",
+        "operationId": "EntityQueries_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityQueryList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entityQueries/{entityQueryId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an entity query.": {
+            "$ref": "./examples/entityQueries/GetEntityQueryById.json"
+          }
+        },
+        "tags": [
+          "EntityQueries"
+        ],
+        "description": "Gets an entity query.",
+        "operationId": "EntityQueries_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityQueryId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityQuery"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1904,7 +2009,7 @@
           "description": "The status of the case",
           "enum": [
             "Draft",
-            "Open",
+            "New",
             "InProgress",
             "Closed"
           ],
@@ -1917,7 +2022,7 @@
                 "description": "Case that wasn't promoted yet to active"
               },
               {
-                "value": "Open",
+                "value": "New",
                 "description": "An active case which isn't handled currently"
               },
               {
@@ -2128,7 +2233,10 @@
             "AzureSecurityCenter",
             "MicrosoftCloudAppSecurity",
             "ThreatIntelligence",
-            "Office365"
+            "Office365",
+            "AmazonWebServicesCloudTrail",
+            "AzureAdvancedThreatProtection",
+            "MicrosoftDefenderAdvancedThreatProtection"
           ],
           "x-ms-enum": {
             "name": "DataConnectorKind",
@@ -2148,6 +2256,15 @@
               },
               {
                 "value": "Office365"
+              },
+              {
+                "value": "AmazonWebServicesCloudTrail"
+              },
+              {
+                "value": "AzureAdvancedThreatProtection"
+              },
+              {
+                "value": "MicrosoftDefenderAdvancedThreatProtection"
               }
             ]
           }
@@ -2267,6 +2384,52 @@
         }
       }
     },
+    "AwsCloudTrailDataConnector": {
+      "x-ms-discriminator-value": "AmazonWebServicesCloudTrail",
+      "type": "object",
+      "description": "Represents Amazon Web Services CloudTrail data connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Amazon Web Services CloudTrail data connector properties.",
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties"
+        }
+      }
+    },
+    "AwsCloudTrailDataConnectorProperties": {
+      "type": "object",
+      "description": "Amazon Web Services CloudTrail data connector properties.",
+      "properties": {
+        "awsRoleArn": {
+          "type": "string",
+          "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account."
+        },
+        "dataTypes": {
+          "description": "The available data types for the connector.",
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes"
+        }
+      }
+    },
+    "AwsCloudTrailDataConnectorDataTypes": {
+      "type": "object",
+      "description": "The available data types for Amazon Web Services CloudTrail data connector.",
+      "properties": {
+        "logs": {
+          "type": "object",
+          "description": "Logs data type.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ]
+        }
+      }
+    },
     "AADDataConnector": {
       "x-ms-discriminator-value": "AzureActiveDirectory",
       "type": "object",
@@ -2348,6 +2511,87 @@
     "MCASDataConnectorProperties": {
       "type": "object",
       "description": "MCAS (Microsoft Cloud App Security) data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        }
+      ],
+      "properties": {
+        "dataTypes": {
+          "description": "The available data types for the connector.",
+          "$ref": "#/definitions/MCASDataConnectorDataTypes"
+        }
+      }
+    },
+    "MCASDataConnectorDataTypes": {
+      "type": "object",
+      "description": "The available data types for MCAS (Microsoft Cloud App Security) data connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
+        }
+      ],
+      "properties": {
+        "discoveryLogs": {
+          "type": "object",
+          "description": "Discovery log data type connection.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ]
+        }
+      }
+    },
+    "AATPDataConnector": {
+      "x-ms-discriminator-value": "AzureAdvancedThreatProtection",
+      "type": "object",
+      "description": "Represents AATP (Azure Advanced Threat Protection) data connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+          "$ref": "#/definitions/AATPDataConnectorProperties"
+        }
+      }
+    },
+    "AATPDataConnectorProperties": {
+      "type": "object",
+      "description": "AATP (Azure Advanced Threat Protection) data connector properties.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnectorTenantId"
+        },
+        {
+          "$ref": "#/definitions/DataConnectorWithAlertsProperties"
+        }
+      ]
+    },
+    "MDATPDataConnector": {
+      "x-ms-discriminator-value": "MicrosoftDefenderAdvancedThreatProtection",
+      "type": "object",
+      "description": "Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
+          "$ref": "#/definitions/MDATPDataConnectorProperties"
+        }
+      }
+    },
+    "MDATPDataConnectorProperties": {
+      "type": "object",
+      "description": "MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.",
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
@@ -2746,7 +2990,13 @@
         {
           "$ref": "#/definitions/SettingsKind"
         }
-      ]
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the alert rule."
+        }
+      }
     },
     "SettingsKind": {
       "type": "object",
@@ -2805,7 +3055,7 @@
           }
         },
         "atpLicenseStatus": {
-          "type": "boolean",
+          "type": "string",
           "readOnly": true,
           "description": "Determines whether the tenant has ATP (Advanced Threat Protection) license.",
           "enum": [
@@ -2873,6 +3123,172 @@
             "name": "AggregationsKind",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "CasesAggregation": {
+      "x-ms-discriminator-value": "CasesAggregation",
+      "type": "object",
+      "description": "Represents aggregations results for cases.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Aggregations"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties of aggregations results of cases.",
+          "$ref": "#/definitions/CasesAggregationProperties"
+        }
+      }
+    },
+    "CasesAggregationProperties": {
+      "type": "object",
+      "description": "Aggregative results of cases property bag.",
+      "properties": {
+        "aggregationBySeverity": {
+          "description": "Aggregations results by case severity.",
+          "$ref": "#/definitions/CasesAggregationBySeverityProperties"
+        },
+        "aggregationByStatus": {
+          "description": "Aggregations results by case status.",
+          "$ref": "#/definitions/CasesAggregationByStatusProperties"
+        }
+      }
+    },
+    "CasesAggregationBySeverityProperties": {
+      "type": "object",
+      "description": "Aggregative results of cases by severity property bag.",
+      "properties": {
+        "totalCriticalSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity Critical"
+        },
+        "totalHighSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity High"
+        },
+        "totalMediumSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity medium"
+        },
+        "totalLowSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity Low"
+        },
+        "totalInformationalSeverity": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with severity Informational"
+        }
+      }
+    },
+    "CasesAggregationByStatusProperties": {
+      "type": "object",
+      "description": "Aggregative results of cases by status property bag.",
+      "properties": {
+        "totalNewStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status New"
+        },
+        "totalInProgressStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status InProgress"
+        },
+        "totalResolvedStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status Resolved"
+        },
+        "totalDismissedStatus": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Total amount of open cases with status Dismissed"
+        }
+      }
+    },
+    "EntityQueryList": {
+      "description": "List of all the entity queries.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of entity queries.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of entity queries.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EntityQuery"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "EntityQuery": {
+      "type": "object",
+      "description": "Specific entity query.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Entity query properties",
+          "$ref": "#/definitions/EntityQueryProperties"
+        }
+      }
+    },
+    "EntityQueryProperties": {
+      "type": "object",
+      "description": "Describes entity query properties",
+      "properties": {
+        "queryTemplate": {
+          "type": "string",
+          "description": "The template query string to be parsed and formatted"
+        },
+        "inputEntityType": {
+          "type": "string",
+          "description": "The type of the query's source entity"
+        },
+        "inputFields": {
+          "type": "array",
+          "items": {
+            "description": "input field",
+            "type": "string"
+          },
+          "description": "List of the fields of the source entity that are required to run the query"
+        },
+        "outputEntityTypes": {
+          "type": "array",
+          "items": {
+            "description": "output entity type",
+            "type": "string"
+          },
+          "description": "List of the desired output types to be constructed from the result"
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "description": "data source",
+            "type": "string"
+          },
+          "description": "List of the data sources that are required to run the query"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The query display name"
         }
       }
     }
@@ -3055,6 +3471,14 @@
       "required": true,
       "type": "string",
       "description": "The aggregation name. Supports - Cases",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityQueryId": {
+      "name": "entityQueryId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "entity query ID",
       "x-ms-parameter-location": "method"
     }
   }

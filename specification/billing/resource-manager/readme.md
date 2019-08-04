@@ -97,7 +97,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Billing
-  output-folder: $(csharp-sdks-folder)/Billing/Management.Billing/Generated
+  output-folder: $(csharp-sdks-folder)/billing/Microsoft.Azure.Management.Billing/src/Generated
   clear-output-folder: true
 ```
 

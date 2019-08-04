@@ -83,7 +83,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Reservations
-  output-folder: $(csharp-sdks-folder)/Reservations/Management.Reservations/Generated
+  output-folder: $(csharp-sdks-folder)/reservations/Microsoft.Azure.Management.Reservations/src/Generated
   clear-output-folder: true
 ```
 
