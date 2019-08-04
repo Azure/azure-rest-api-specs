@@ -1,0 +1,398 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.Security/NetworkData": {
+      "get": {
+        "x-ms-examples": {
+          "List network data": {
+            "$ref": "./examples/networkData/ListNetworkData_example.json"
+          }
+        },
+        "tags": [
+          "NetworkData"
+        ],
+        "description": "Get the network data on all your scanned resources inside a scope",
+        "operationId": "NetworkData_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              true,
+              false
+            ]
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkDataList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.Security/NetworkData/{resourceType}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the network data of a resource": {
+            "$ref": "./examples/networkData/GetNetworkData_example.json"
+          }
+        },
+        "tags": [
+          "NetworkData"
+        ],
+        "description": "Get the network data on your scanned resource",
+        "operationId": "NetworkData_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "#/parameters/resourceType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NetworkDataList": {
+      "type": "object",
+      "description": "List of network data",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkData"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "NetworkData": {
+      "type": "object",
+      "description": "Network data on a resource",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/NetworkDataProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "NetworkDataProperties": {
+      "type": "object",
+      "description": "Describes the properties of the network data.",
+      "properties": {
+        "connectableResources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectableResource"
+          }
+        }
+      }
+    },
+    "ConnectableResource": {
+      "type": "object",
+      "description": "Details of the resource that was assessed",
+      "discriminator": "assessedResourceSource",
+      "properties": {
+        "connectedResourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The connectable resource id"
+        },
+        "connectionType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The connection type"
+        },
+        "allowedConnections": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The allowed connections details",
+          "properties": {
+            "calculatedDateTime": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The allowed connections calculated date time"
+            },
+            "inboundConnectedResources": {
+              "readOnly": true,
+              "type": "object",
+              "description": "The allowed connections inbound details",
+              "properties": {
+                "tcpPortsSummary": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections inbound tcp ports summary"
+                },
+                "udpPortsSummary": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections inbound udp ports summary"
+                },
+                "tcpPorts": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections inbound tcp ports"
+                },
+                "udpPorts": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections inbound udp ports"
+                }
+              }
+            },
+            "outboundConnectedResources": {
+              "readOnly": true,
+              "type": "object",
+              "description": "The allowed connections outbound details",
+              "properties": {
+                "tcpPortsSummary": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections outbound tcp ports summary"
+                },
+                "udpPortsSummary": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections outbound udp ports summary"
+                },
+                "tcpPorts": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections outbound tcp ports"
+                },
+                "udpPorts": {
+                  "readOnly": true,
+                  "type": "string",
+                  "description": "The allowed connections outbound udp ports"
+                }
+              }
+            }
+          }
+        },
+        "actualTraffic": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The actual traffic details",
+          "properties": {
+            "timeRange": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The actual traffic time range"
+            },
+            "status": {
+              "readOnly": true,
+              "type": "string",
+              "description": "The actual traffic status"
+            },
+            "inboundConnectedResources": {
+              "readOnly": true,
+              "type": "object",
+              "description": "The actual traffic inbound details",
+              "properties": {
+                "actualTrafficVolume": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The actual traffic inbound volume"
+                },
+                "connectionsDetails": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ConnectionDetails"
+                  }
+                }
+              }
+            },
+            "outboundConnectedResources": {
+              "readOnly": true,
+              "type": "object",
+              "description": "The actual traffic outbound details",
+              "properties": {
+                "actualTrafficVolume": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The actual traffic outbound volume"
+                },
+                "connectionsDetails": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/ConnectionDetails"
+                  }
+                }
+              }
+            }
+          }
+        },
+        "unusedPorts": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The unused ports details",
+          "properties": {
+            "inboundConnectedResources": {
+              "readOnly": true,
+              "type": "object",
+              "description": "The unused ports inbound details",
+              "properties": {
+                "unusedTcpPortsSummary": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused inbound tcp ports summary"
+                },
+                "unusedUdpPortsSummary": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused inbound udp ports summary"
+                },
+                "tcpPorts": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused inbound tcp ports"
+                },
+                "udpPorts": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused inbound udp ports"
+                }
+              }
+            },
+            "outboundConnectedResources": {
+              "readOnly": true,
+              "type": "object",
+              "description": "The unused ports outbound details",
+              "properties": {
+                "unusedTcpPortsSummary": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused outbound tcp ports summary"
+                },
+                "unusedUdpPortsSummary": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused outbound udp ports summary"
+                },
+                "tcpPorts": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused outbound tcp ports"
+                },
+                "udpPorts": {
+                  "readOnly": true,
+                  "type": "integer",
+                  "description": "The unused outbound udp ports"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "ConnectionDetails": {
+      "type": "object",
+      "description": "Details of the actual traffic connections",
+      "discriminator": "assessedResourceSource",
+      "properties": {
+        "portAndProtocol": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The port and the protocol of the traffic"
+        },
+        "volume": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The volume of the traffic"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "resourceType": {
+      "name": "resourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource type",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

@@ -1,0 +1,99 @@
+
+"uri" : "/subscriptions/37fb3b20-b5ac-4604-a523-445f27082302/resourceGroups/webapp7/providers/Microsoft.Compute/virtualMachines/WebApp7/providers/Microsoft.Security/networkTraffic/virtualMachines"
+
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "resourceId": "subscriptions/37fb3b20-b5ac-4604-a523-445f27082302/resourceGroups/webapp7/providers/Microsoft.Compute/virtualMachines/WebApp7"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/37fb3b20-b5ac-4604-a523-445f27082302/resourceGroups/webapp7/providers/Microsoft.Compute/virtualMachines/WebApp7/providers/Microsoft.Security/networkTraffic/virtualMachines",
+        "name": "virtualMachines",
+        "type": "Microsoft.Security/networkTraffic",
+        "properties": {
+            "connectableResources": [
+              {
+                "connectedResourceId": "subscriptions/37fb3b20-b5ac-4604-a523-445f27082302/resourceGroups/rg/providers/Microsoft.Compute/virtualMachines/vm1",
+                "type": "azure vm",
+                "allowedConnection":
+                {
+                  "calculatedDateTime": "2019-05-14T11:55:47.4222892Z",
+                  "inboundConnectedResources": 
+                    {
+                      "tcpPortsSummary": "7",
+                      "udpPortsSummary": "20",
+                      "tcpPorts": "[0-21,23-79,81-3388,3390-5984,5987-65535]",
+                      "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                    }
+                  ,
+                  "outboundConnectedResources": 
+                    {
+                      "tcpPortsSummary": "7",
+                      "udpPortsSummary": "20",
+                      "tcpPorts": "[0-21,23-79,81-3388,3390-5984,5987-65535]",
+                      "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                    }
+                },
+                "actualTraffic":
+                {
+                  "timeRange": "2019-05-30 07:33:54.216 - 2019-05-30 08:33:54.216",
+                  "status": "available",
+                  "inboundConnectedResources": 
+                    {
+                      "actualTrafficVolume": 456,
+                      "connectionDetails": [
+                        {
+                            "portAndProtocol": "tcp/80",
+                            "volume": 100
+                        },
+                        {
+                            "portAndProtocol": "udp/80",
+                            "volume": 356
+                        }
+                      ]
+                    }
+                  ,
+                  "outboundConnectedResources": 
+                    {
+                      "actualTrafficVolume": 521,
+                      "connectionDetails": [
+                        {
+                            "portAndProtocol": "tcp/80",
+                            "volume": 150
+                        },
+                        {
+                            "portAndProtocol": "udp/80",
+                            "volume": 371
+                        }
+                      ]
+                    }
+                },
+                "unusedPorts":
+                {
+                  "inboundConnectedResources": 
+                    {
+                      "unusedTcpPortsSummary": "7",
+                      "unusedUdpPortsSummary": "20",
+                      "tcpPorts": "[0-21,23-79,81-3388,3390-5984,5987-65535]",
+                      "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                    }
+                  ,
+                  "outboundConnectedResources": 
+                    {
+                      "unusedTcpPortsSummary": "7",
+                      "unusedUdpPortsSummary": "20",
+                      "tcpPorts": "[0-21,23-79,81-3388,3390-5984,5987-65535]",
+                      "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                    }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+}
+
+
