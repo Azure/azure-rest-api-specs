@@ -83,42 +83,6 @@
           "nextLinkName": "nextLink"
         }
       }
-    },
-    "/{resourceId}/providers/Microsoft.Security/NetworkData": {
-      "get": {
-        "x-ms-examples": {
-          "Get the network data of a resource": {
-            "$ref": "./examples/networkData/GetNetworkData_example.json"
-          }
-        },
-        "tags": [
-          "NetworkData"
-        ],
-        "description": "Get the network data on your scanned resource",
-        "operationId": "NetworkData_Get",
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/NetworkData"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      }
     }
   },
   "definitions": {
