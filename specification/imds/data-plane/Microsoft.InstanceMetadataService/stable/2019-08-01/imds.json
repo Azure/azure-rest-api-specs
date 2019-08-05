@@ -8,6 +8,7 @@
     "host": "169.254.169.254",
     "basePath": "/metadata",
     "schemes": [
+	    "http",
         "https"
     ],
     "consumes": [
@@ -16,24 +17,6 @@
     "produces": [
         "application/json"
     ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
-    "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        }
-    },
     "paths": {
         "/applications": {
             "get": {
