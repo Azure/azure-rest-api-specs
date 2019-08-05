@@ -4588,11 +4588,21 @@
         "source": {
           "type": "string",
           "description": "The source of the input."
+        },
+        "sourceContext": {
+          "type": "string",
+          "description": "The source context used for selecting recursive inputs."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "The recursive inputs used when creating a complex type."
         }
       },
       "required": [
-        "name",
-        "source"
+        "name"
       ],
       "description": "Input field mapping for a skill."
     },
