@@ -246,6 +246,20 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2019-08-only
+
+These settings apply only when `--tag=package-2019-08-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-08-only'
+input-file:
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ---
 
 # Code Generation
