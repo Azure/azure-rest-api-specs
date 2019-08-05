@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2018-02 --ruby` is specified on th
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ``` yaml $(tag) == 'package-2018-02' && $(ruby)
-namespace: "Azure::ServiceFabric::Mgmt::V2018_02_01_preview"
+namespace: "Azure::ServiceFabric::Mgmt::V2018_02_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_service_fabric/lib
 ```
 
