@@ -297,12 +297,14 @@
           },
           "managedRules": {
             "description": "Describes managed rules inside the policy.",
-            "$ref": "#/definitions/ManagedRuleSets"
+            "$ref": "#/definitions/ManagedRuleSetsList"
           },
           "exclusions":{
-            "description": "Describes the Exclusions that are applied on the policy.",
-            "$ref": "#/defintions/CrsExclusions"
-
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/CrsExclusionEntry"
+            },
+            "description": "Describes the Exclusions that are applied on the policy."
           },
           "applicationGateways": {
             "readOnly": true,
@@ -562,8 +564,8 @@
           }
         }
       },
-      "ManagedRuleSets": {
-        "description": "Defines ManagedRuleSets - array of managedRuleSet.",
+      "ManagedRuleSetList": {
+        "description": "Defines the list of managed rule sets for the policy.",
         "properties": {
           "ruleSets": {
             "description": "List of rules.",
@@ -641,13 +643,6 @@
             }
           }
         }
-      },
-      "CrsExclusions": {
-        "type": "array",
-        "items": {
-          "$ref": "#/definitions/CrsExclusionEntry"
-        },
-        "description": "The exclusion list."
       },
       "CrsExclusionEntry": {
         "properties": {
