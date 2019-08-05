@@ -33,9 +33,18 @@ tag: package-2019-01-01-preview
 
 These settings apply only when `--tag=package-2019-01-01-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-01-01-preview'
+``` yaml $(tag) == 'package-2019-01-01-preview'
 input-file:
   - Microsoft.Portal/preview/2019-01-01-preview/portal.json
+```
+
+### Tag: package-2018-10-01-preview
+
+These settings apply only when `--tag=package-2018-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-10-01-preview'
+input-file:
+  - Microsoft.Portal/preview/2018-10-01-preview/portal.json
 ```
 
 ### Tag: package-2015-08-01-preview
