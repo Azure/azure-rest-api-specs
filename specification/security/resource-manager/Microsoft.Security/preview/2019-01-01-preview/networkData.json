@@ -34,11 +34,14 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/NetworkData": {
+    "/{scope}/providers/Microsoft.Security/NetworkData": {
       "get": {
         "x-ms-examples": {
-          "List network data": {
-            "$ref": "./examples/networkData/ListNetworkData_example.json"
+          "subscription List network data": {
+            "$ref": "./examples/networkData/SubscriptionListNetworkData_example.json"
+          },
+          "resourceId List network data": {
+            "$ref": "./examples/networkData/ResourceIdListNetworkData_example.json"
           }
         },
         "tags": [
@@ -51,7 +54,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
           },
           {
             "name": "$expand",
@@ -84,7 +87,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Security/NetworkData": {
+    "/{scope}/providers/Microsoft.Security/NetworkData/{resourceType}": {
       "get": {
         "x-ms-examples": {
           "Get the network data of a resource": {
@@ -98,34 +101,13 @@
         "operationId": "NetworkData_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "name": "resourceNamespace",
-            "in": "path",
-            "description": "The Namespace of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The type of the resource.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "description": "Name of the resource.",
-            "required": true,
-            "type": "string"
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/resourceType"
           }
         ],
         "responses": {
@@ -406,5 +388,13 @@
     }
   },
   "parameters": {
+    "resourceType": {
+      "name": "resourceType",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The resource type",
+      "x-ms-parameter-location": "method"
+    }
   }
 }
