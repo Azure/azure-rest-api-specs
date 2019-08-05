@@ -186,12 +186,12 @@
         "connectableResources": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ConnectableResource"
+            "$ref": "#/definitions/NetworkDataConnectableResource"
           }
         }
       }
     },
-    "ConnectableResource": {
+    "NetworkDataConnectableResource": {
       "type": "object",
       "description": "Describes the allowed inbound and outbound traffic of an Azure resource",
       "properties": {
@@ -211,9 +211,10 @@
           "description": "The allowed traffic details",
           "properties": {
             "calculatedDateTime": {
-              "readOnly": true,
               "type": "string",
-              "description": "The allowed traffic calculated date time"
+              "format": "date-time",
+              "readOnly": true,
+              "description": "The UTC time on which the allowed traffic was calculated"
             },
             "inboundConnectedResources": {
               "readOnly": true,
