@@ -22,7 +22,6 @@ input-file: stable/v4.0/QnAMaker.json
 ```
 
 ``` yaml
-
 tag: runtime_release_4_0
 add-credentials: true
 openapi-type: data-plane
@@ -34,6 +33,12 @@ These settings apply only when `--tag=runtime_release_4_0` is specified on the c
 
 ``` yaml $(tag) == 'runtime_release_4_0'
 input-file: stable/v4.0/QnAMakerRuntime.json
+```
+
+``` yaml
+batch:
+  - tag: release_4_0
+  - tag: runtime_release_4_0
 ```
 
 ## Swagger to SDK

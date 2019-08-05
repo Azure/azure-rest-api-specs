@@ -37,7 +37,19 @@ These settings apply only when `--tag=package-2019-05` is specified on the comma
 ```yaml $(tag) == 'package-2019-05'
 input-file:
   - Microsoft.Consumption/stable/2019-05-01/consumption.json
+tag: package-preview-2019-05
 ```
+
+
+### Tag: package-preview-2019-05
+
+These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-05'
+input-file:
+  - Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
+```
+
 ### Tag: package-preview-2019-04
 
 These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
