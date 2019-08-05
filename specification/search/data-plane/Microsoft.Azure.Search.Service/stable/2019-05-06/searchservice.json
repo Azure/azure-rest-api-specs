@@ -4625,6 +4625,18 @@
       },
       "description": "Output field mapping for a skill."
     },
+    "ConditionalSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/en-us/azure/search/cognitive-search-skill-conditional"
+      },
+      "description": "A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output."
+    },
     "KeyPhraseExtractionSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
       "allOf": [
