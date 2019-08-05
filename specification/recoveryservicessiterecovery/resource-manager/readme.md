@@ -77,6 +77,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -98,7 +99,7 @@ csharp:
   payload-flattening-threshold: 0
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.RecoveryServices.SiteRecovery
-  output-folder: $(csharp-sdks-folder)/RecoveryServices.SiteRecovery/Management.RecoveryServices.SiteRecovery/Generated
+  output-folder: $(csharp-sdks-folder)/recoveryservices-siterecovery/Microsoft.Azure.Management.RecoveryServices.SiteRecovery/src/Generated
   clear-output-folder: true
 ```
 

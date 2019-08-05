@@ -16,36 +16,6 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/operations": {
-      "get": {
-        "description": "Lists all of the available Microsoft.Subscription API operations.",
-        "operationId": "Operations_List",
-        "x-ms-examples": {
-          "getOperations": {
-            "$ref": "./examples/getOperations.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/OperationListResult"
-            }
-          },
-          "default": {
-            "description": "Describes the error if the operation is not successful.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/cancel": {
       "post": {
         "operationId": "Subscriptions_Cancel",
@@ -151,7 +121,7 @@
   },
   "definitions": {
     "ErrorResponse": {
-      "description": "Describes the error if the operation is not successful.",
+      "description": "Describes the format of Error response.",
       "type": "object",
       "properties": {
         "code": {

@@ -69,6 +69,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -85,7 +86,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.IoTSpaces
   payload-flattening-threshold: 1
-  output-folder: $(csharp-sdks-folder)/IoTSpaces/Management.IoTSpaces/Generated
+  output-folder: $(csharp-sdks-folder)/iotspaces/Microsoft.Azure.Management.IoTSpaces/src/Generated
   clear-output-folder: true
 ```
 
