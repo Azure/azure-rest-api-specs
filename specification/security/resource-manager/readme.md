@@ -67,6 +67,7 @@ input-file:
 - Microsoft.Security/preview/2015-06-01-preview/alerts.json
 - Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
+- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
@@ -93,12 +94,15 @@ input-file:
 - Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
 - Microsoft.Security/preview/2017-08-01-preview/settings.json
 - Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
+- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
+- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
 - Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
+- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/topologies.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
@@ -119,10 +123,13 @@ input-file:
 - Microsoft.Security/stable/2018-06-01/pricings.json
 - Microsoft.Security/stable/2019-01-01/alerts.json
 - Microsoft.Security/stable/2019-01-01/settings.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
 - Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
 - Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
 - Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
+- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
 - Microsoft.Security/preview/2015-06-01-preview/locations.json
 - Microsoft.Security/preview/2015-06-01-preview/operations.json
 - Microsoft.Security/preview/2015-06-01-preview/tasks.json
@@ -141,6 +148,120 @@ override-info:
   title: SecurityCenter
 ```
 
+### Tag: package-2015-06-preview-only
+
+These settings apply only when `--tag=package-2015-06-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2015-06-preview-only'
+input-file:
+- Microsoft.Security/preview/2015-06-01-preview/adaptiveNetworkHardenings.json
+- Microsoft.Security/preview/2015-06-01-preview/alerts.json
+- Microsoft.Security/preview/2015-06-01-preview/allowedConnections.json
+- Microsoft.Security/preview/2015-06-01-preview/applicationWhitelistings.json
+- Microsoft.Security/preview/2015-06-01-preview/discoveredSecuritySolutions.json
+- Microsoft.Security/preview/2015-06-01-preview/externalSecuritySolutions.json
+- Microsoft.Security/preview/2015-06-01-preview/jitNetworkAccessPolicies.json
+- Microsoft.Security/preview/2015-06-01-preview/locations.json
+- Microsoft.Security/preview/2015-06-01-preview/operations.json
+- Microsoft.Security/preview/2015-06-01-preview/tasks.json
+- Microsoft.Security/preview/2015-06-01-preview/topologies.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2017-08-preview-only
+
+These settings apply only when `--tag=package-2017-08-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2017-08-preview-only'
+input-file:
+- Microsoft.Security/preview/2017-08-01-preview/advancedThreatProtectionSettings.json
+- Microsoft.Security/preview/2017-08-01-preview/autoProvisioningSettings.json
+- Microsoft.Security/preview/2017-08-01-preview/compliances.json
+- Microsoft.Security/preview/2017-08-01-preview/deviceSecurityGroups.json
+- Microsoft.Security/preview/2017-08-01-preview/informationProtectionPolicies.json
+- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/preview/2017-08-01-preview/iotSecuritySolutions.json
+- Microsoft.Security/preview/2017-08-01-preview/pricings.json
+- Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
+- Microsoft.Security/preview/2017-08-01-preview/settings.json
+- Microsoft.Security/preview/2017-08-01-preview/workspaceSettings.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2019-01-preview-only
+
+These settings apply only when `--tag=package-2019-01-preview-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-01-preview-only'
+input-file:
+- Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
+- Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2017-08-only
+
+These settings apply only when `--tag=package-2017-08-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2017-08-only'
+input-file:
+- Microsoft.Security/stable/2017-08-01/complianceResults.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2018-06-only
+
+These settings apply only when `--tag=package-2018-06-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-06-only'
+input-file:
+- Microsoft.Security/stable/2018-06-01/pricings.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2019-01-only
+
+These settings apply only when `--tag=package-2019-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-01-only'
+input-file:
+- Microsoft.Security/stable/2019-01-01/alerts.json
+- Microsoft.Security/stable/2019-01-01/settings.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
+### Tag: package-2019-08-only
+
+These settings apply only when `--tag=package-2019-08-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-08-only'
+input-file:
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
+- Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: SecurityCenter
+```
+
 ---
 
 # Code Generation
@@ -152,6 +273,7 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
