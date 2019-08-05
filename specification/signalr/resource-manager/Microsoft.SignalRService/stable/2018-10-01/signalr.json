@@ -893,6 +893,10 @@
           "items": {
             "$ref": "#/definitions/SignalRFeature"
           }
+        },
+        "cors": {
+          "$ref": "#/definitions/SignalRCorsSettings",
+          "description": "Cross-Origin Resource Sharing (CORS) settings."
         }
       }
     },
@@ -925,6 +929,19 @@
           "description": "Optional properties related to this feature.",
           "type": "object",
           "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SignalRCorsSettings": {
+      "description": "Cross-Origin Resource Sharing (CORS) settings.",
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use \"*\" to allow all. If omitted, allow all by default.",
+          "type": "array",
+          "items": {
             "type": "string"
           }
         }

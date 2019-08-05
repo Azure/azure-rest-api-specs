@@ -3126,6 +3126,9 @@
           },
           "Create a scale set with ephemeral os disks.": {
             "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
+          },
+          "Create a scale set with terminate scheduled events enabled.": {
+            "$ref": "./examples/CreateAScaleSetWithTerminateScheduledEventEnabled.json"
           }
         }
       },
@@ -4682,6 +4685,20 @@
             "description": "The instance ID of the virtual machine."
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation.",
+            "enum": [
+              "instanceView"
+            ],
+            "x-ms-enum": {
+              "name": "InstanceViewTypes",
+              "modelAsString": false
+            }
+          },
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
@@ -5220,7 +5237,7 @@
     },
     "HyperVGenerationType": {
       "type": "string",
-      "description": "Specifies the HyperVGeneration Type for the Virtual Machine created from the image",
+      "description": "Specifies the HyperVGeneration Type",
       "enum": [
         "V1",
         "V2"
@@ -5483,7 +5500,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
+          "description": "Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
         }
       },
       "allOf": [
@@ -5504,7 +5521,7 @@
           "items": {
             "type": "string"
           },
-          "description": "Availability Zone to use for this host group – only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
+          "description": "Availability Zone to use for this host group. Only single zone is supported. The zone can be assigned only during creation. If not provided, the group supports all zones in the region. If provided, enforces each host in the group to be in the same zone."
         }
       },
       "allOf": [
@@ -6046,6 +6063,9 @@
         },
         "automaticOSUpgradeProperties": {
           "$ref": "#/definitions/AutomaticOSUpgradeProperties"
+        },
+        "hyperVGeneration": {
+          "$ref": "#/definitions/HyperVGenerationType"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
@@ -8498,6 +8518,10 @@
             "name": "VirtualMachineEvictionPolicyTypes",
             "modelAsString": true
           }
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -8527,6 +8551,10 @@
         "licenseType": {
           "type": "string",
           "description": "The license type, which is for bring your own license scenario."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
+          "description": "Specifies Scheduled Event related configurations."
         }
       },
       "description": "Describes a virtual machine scale set virtual machine profile."
@@ -9240,6 +9268,28 @@
         }
       },
       "description": "The protection policy of a virtual machine scale set VM."
+    },
+    "ScheduledEventsProfile": {
+      "type": "object",
+      "properties": {
+        "terminateNotificationProfile": {
+          "$ref": "#/definitions/TerminateNotificationProfile",
+          "description": "Specifies Terminate Scheduled Event related configurations."
+        }
+      }
+    },
+    "TerminateNotificationProfile": {
+      "type": "object",
+      "properties": {
+        "notBeforeTimeout": {
+          "type": "string",
+          "description": "Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)"
+        },
+        "enable": {
+          "type": "boolean",
+          "description": "Specifies whether the Terminate Scheduled event is enabled or disabled."
+        }
+      }
     },
     "VirtualMachineHealthStatus": {
       "properties": {
