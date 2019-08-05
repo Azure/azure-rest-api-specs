@@ -178,6 +178,12 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
        - $.definitions.IdentityErrorResponse.properties.error_description
+	
+	- suppress: HttpsSupportedScheme
+	  reason: IMDS does not require HTTPS to query it
+	  
+	- suppress: SecurityDefinitionsStructure
+	  reason: IMDS does not support any authentication
  ```
 
 ---
