@@ -26,7 +26,16 @@ These are the global settings for the Billing API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-11-preview
+tag: package-2019-10-preview
+```
+
+### Tag: package-2019-10-preview
+
+These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-preview'
+input-file:
+- Microsoft.Billing/preview/2019-10-01-preview/billing.json
 ```
 
 ### Tag: package-2018-11-preview
@@ -124,10 +133,24 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-billing
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-10-preview
   - tag: package-2018-11-preview
   - tag: package-2018-03-preview
   - tag: package-2017-04-preview
   - tag: package-2017-02-preview
+```
+
+### Tag: package-2019-10-preview and java
+
+These settings apply only when `--tag=package-2019-10-preview --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.billing.v2019_10_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/billing/resource-manager/v2019_10_01_preview
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-11-preview and java
