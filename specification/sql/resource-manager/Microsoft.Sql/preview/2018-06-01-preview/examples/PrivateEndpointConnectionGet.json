@@ -13,13 +13,14 @@
         "name": "private-endpoint-connection-name",
         "type": "Microsoft.Sql/servers/privateEndpointConnections",
         "properties": {
-          "state": "Ready",
+          "provisioningState": "Ready",
           "privateEndpoint": {
             "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
           },
           "privateLinkServiceConnectionState": {
             "status": "Approved",
-            "description": "Auto-approved"
+            "description": "Auto-approved",
+            "actionsRequired" : "None"
           }
         }
       }

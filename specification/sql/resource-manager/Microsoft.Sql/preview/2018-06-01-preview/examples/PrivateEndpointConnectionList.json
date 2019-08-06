@@ -4,7 +4,6 @@
       "subscriptionId": "00000000-1111-2222-3333-444444444444",
       "resourceGroupName": "Default",
       "serverName": "test-svr",
-      "privateEndpointConnectionName": "private-endpoint-connection-name",
       "api-version": "2018-06-01-preview"
   },
   "responses": {
@@ -16,13 +15,14 @@
             "name": "private-endpoint-connection-name",
             "type": "Microsoft.Sql/servers/privateEndpointConnections",
             "properties": {
-              "state": "Ready",
+              "provisioningState": "Ready",
               "privateEndpoint": {
                 "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
               },
               "privateLinkServiceConnectionState": {
                 "status": "Approved",
-                "description": "Auto-approved"
+                "description": "Auto-approved",
+                "actionsRequired": "None"
               }
             }
           },
@@ -31,13 +31,14 @@
             "name": "private-endpoint-connection-name-2",
             "type": "Microsoft.Sql/servers/privateEndpointConnections",
             "properties": {
-              "state": "Ready",
+              "provisioningState": "Ready",
               "privateEndpoint": {
                 "id": "/subscriptions/55555555-6666-7777-8888-999999999999/resourceGroups/Default-Network/providers/Microsoft.Network/privateEndpoints/private-endpoint-name-2"
               },
               "privateLinkServiceConnectionState": {
                 "status": "Approved",
-                "description": "Auto-approved"
+                "description": "Auto-approved",
+                "actionsRequired": "None"
               }
             }
           }
