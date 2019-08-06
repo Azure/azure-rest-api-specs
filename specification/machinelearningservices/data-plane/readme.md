@@ -26,7 +26,7 @@ These are the global settings for the AzureMachineLearning API.
 title: Azure Machine Learning Service
 description: These APIs allow end users to manage Azure Machine Learning Services.
 openapi-type: data-plane
-tag: package-2019-05-preview
+tag: package-2019-08-preview
 use-internal-constructors: true
 add-credentials: true
 ```
@@ -48,18 +48,18 @@ directive:
     reason: Existing service; would be a breaking change	
 ```
 
-### Tag: package-2019-05-preview
+### Tag: package-2019-08-preview
 
-These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
+These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05-preview'
+``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
-  - Microsoft.MachineLearningServices/preview/2019-05-01/execution.json
-  - Microsoft.MachineLearningServices/preview/2019-05-01/modelManagement.json
-  - Microsoft.MachineLearningServices/preview/2019-05-01/runHistory.json
-  - Microsoft.MachineLearningServices/preview/2019-05-01/datastore.json
-  - Microsoft.MachineLearningServices/preview/2019-05-01/artifact.json
-  - Microsoft.MachineLearningServices/preview/2019-05-01/hyperdrive.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/execution.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/modelManagement.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/runHistory.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/datastore.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/artifact.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/hyperdrive.json
 ```
 
 
