@@ -485,52 +485,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HanaOnAzure/hanaInstances/{hanaInstanceName}/monitoring": {
-      "post": {
-        "tags": [
-          "HanaOnAzure"
-        ],
-        "operationId": "HanaInstances_EnableMonitoring",
-        "x-ms-long-running-operation": true,
-        "description": "The operation to add a monitor to an SAP HANA instance.",
-        "x-ms-examples": {
-          "Monitor a HANA instance": {
-            "$ref": "./examples/HanaInstances_EnableMonitoring.json"
-          }
-        },
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/HanaInstanceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/MonitoringParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "202": {
-            "description": "Accepted"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.HanaOnAzure/sapMonitors": {
       "get": {
         "tags": [

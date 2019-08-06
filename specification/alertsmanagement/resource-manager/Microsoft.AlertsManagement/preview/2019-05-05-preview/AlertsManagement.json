@@ -922,10 +922,11 @@
   "parameters": {
     "subscriptionId": {
       "name": "subscriptionId",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "type": "string",
       "in": "path",
-      "required": true
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
     },
     "resourceGroupName": {
       "name": "resourceGroupName",
@@ -1312,7 +1313,8 @@
       "x-ms-enum": {
         "name": "identifier",
         "modelAsString": true
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   },
   "definitions": {
