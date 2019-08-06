@@ -112,6 +112,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
@@ -127,7 +128,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.AlertsManagement
-  output-folder: $(csharp-sdks-folder)/AlertsManagement/Management.AlertsManagement/Generated
+  output-folder: $(csharp-sdks-folder)/alertsmanagement/Microsoft.Azure.Management.AlertsManagement/src/Generated
   clear-output-folder: true
 ```
 
