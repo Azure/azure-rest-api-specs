@@ -5421,7 +5421,12 @@
         "protectionState": {
           "description": "Protected, ProtectionStopped, IRPending or ProtectionError",
           "type": "string"
-        },       
+        },
+        "deferredDeleteSyncTimeInUTC": {
+          "format": "int64",
+          "description": "Sync time for deferred deletion.",
+          "type": "integer"
+        },
         "extendedInfo": {
           "$ref": "#/definitions/MabFileFolderProtectedItemExtendedInfo",
           "description": "Additional information with this backup item."
@@ -5867,10 +5872,10 @@
             "modelAsString": true
           }
         },
-        "deferredDeleteSyncTimeInUTC": {
-          "format": "int64",
-          "description": "Sync time for deferred deletion.",
-          "type": "integer"
+        "deferredDeleteTimeInUTC": {
+          "format": "date-time",
+          "description": "Time for deferred deletion in UTC",
+          "type": "string"
         },
         "isScheduledForDeferredDelete": {
           "description": "Flag to identify whether the DS is scheduled for deferred delete",
