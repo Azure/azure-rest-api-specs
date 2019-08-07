@@ -474,27 +474,12 @@
         },
         "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request."
       },
-      "FileServiceItem": {
-        "properties": {
-          "properties": {
-            "$ref": "#/definitions/FileServiceProperties",
-            "x-ms-client-flatten": true,
-            "description": "The file service properties be listed out."
-          }
-        },
-        "allOf": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/AzureEntityResource"
-          }
-        ],
-        "description": "The file service properties be listed out."
-      },
       "FileServiceItems": {
         "properties": {
           "value": {
             "type": "array",
             "items": {
-              "$ref": "#/definitions/FileServiceItem"
+              "$ref": "#/definitions/FileServiceProperties"
             },
             "description": "List of file services returned.",
             "readOnly": true
