@@ -613,13 +613,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/getAdminCredentials": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}/listAdminCredentials": {
       "post": {
-        "operationId": "PrivateClouds_GetAdminCredentials",
+        "operationId": "PrivateClouds_ListAdminCredentials",
         "tags": [
           "PrivateClouds"
         ],
-        "summary": "Get the admin credentials for the private cloud",
+        "summary": "List the admin credentials for the private cloud",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -638,7 +638,7 @@
           "200": {
             "description": "successful operation",
             "schema": {
-              "$ref": "#/definitions/GetAdminCredentialsResponse"
+              "$ref": "#/definitions/AdminCredentials"
             }
           },
           "default": {
@@ -649,8 +649,8 @@
           }
         },
         "x-ms-examples": {
-          "PrivateClouds_GetAdminCredentials": {
-            "$ref": "./examples/PrivateClouds_GetAdminCredentials.json"
+          "PrivateClouds_ListAdminCredentials": {
+            "$ref": "./examples/PrivateClouds_ListAdminCredentials.json"
           }
         }
       }
@@ -1031,7 +1031,7 @@
         }
       }
     },
-    "GetAdminCredentialsResponse": {
+    "AdminCredentials": {
       "properties": {
         "nsxUser": {
           "type": "string"
