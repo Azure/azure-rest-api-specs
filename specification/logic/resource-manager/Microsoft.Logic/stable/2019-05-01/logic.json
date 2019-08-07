@@ -5113,6 +5113,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironmentListResult"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -5161,6 +5167,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironmentListResult"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -5208,6 +5220,12 @@
             "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironment"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -5216,10 +5234,11 @@
           "IntegrationServiceEnvironments"
         ],
         "operationId": "IntegrationServiceEnvironments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
         "description": "Creates or updates an integration service environment.",
         "x-ms-examples": {
           "Create or update an integration service environment": {
-            "$ref": "./examples/IntegrationServiceEnvironments_CreateOrUpdate.json"
+            "$ref": "./examples/IntegrationServiceEnvironments_Put.json"
           }
         },
         "parameters": [
@@ -5256,26 +5275,20 @@
         "responses": {
           "200": {
             "description": "OK",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The azure async operation header to track the long running operation.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironment"
             }
           },
           "201": {
             "description": "Created",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The azure async operation header to track the long running operation.",
-                "type": "string"
-              }
-            },
             "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -5286,9 +5299,10 @@
         ],
         "operationId": "IntegrationServiceEnvironments_Update",
         "description": "Updates an integration service environment.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Patch an integration service environment": {
-            "$ref": "./examples/IntegrationServiceEnvironments_Update.json"
+            "$ref": "./examples/IntegrationServiceEnvironments_Patch.json"
           }
         },
         "parameters": [
@@ -5327,6 +5341,12 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironment"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -5367,6 +5387,15 @@
         "responses": {
           "200": {
             "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -5409,7 +5438,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/IntegrationServiceEnvironmentSkuDefinition"
+              "$ref": "#/definitions/IntegrationServiceEnvironmentSkuList"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -5422,6 +5457,7 @@
         ],
         "operationId": "IntegrationServiceEnvironment_Restart",
         "description": "Restarts an integration service environment.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Restarts an integration service environment": {
             "$ref": "./examples/IntegrationServiceEnvironment_Restart.json"
@@ -5451,13 +5487,13 @@
         ],
         "responses": {
           "200": {
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The azure async operation header to track the long running operation.",
-                "type": "string"
-              }
-            },
             "description": "OK"
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -5509,6 +5545,12 @@
             "schema": {
               "$ref": "#/definitions/AzureAsyncOperationResource"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -5553,11 +5595,16 @@
 			      "schema": {
               "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkHealth"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-
     "/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/managedApis": {
       "get": {
         "tags": [
@@ -5567,7 +5614,7 @@
         "description": "Gets the integration service environment managed Apis.",
         "x-ms-examples": {
           "Gets the integration service environment managed Apis": {
-            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApis.json"
+            "$ref": "./examples/IntegrationServiceEnvironments_ManagedApis_List.json"
           }
         },
         "parameters": [
@@ -5598,6 +5645,12 @@
 			      "schema": {
               "$ref": "#/definitions/ManagedApiListResult"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -5611,7 +5664,7 @@
         "description": "Gets the integration service environment managed Api.",
         "x-ms-examples": {
           "Gets the integration service environment managed Apis": {
-            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+            "$ref": "./examples/IntegrationServiceEnvironments_ManagedApis_Get.json"
           }
         },
         "parameters": [
@@ -5648,6 +5701,12 @@
             "description": "OK",
 			      "schema": {
               "$ref": "#/definitions/ManagedApi"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -5658,9 +5717,10 @@
         ],
         "operationId": "IntegrationServiceEnvironment_ManagedApi",
         "description": "Puts the integration service environment managed Api.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Gets the integration service environment managed Apis": {
-            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+            "$ref": "./examples/IntegrationServiceEnvironments_ManagedApis_Put.json"
           }
         },
         "parameters": [
@@ -5695,26 +5755,20 @@
         "responses": {
           "200": {
             "description": "OK",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The azure async operation header to track the long running operation.",
-                "type": "string"
-              }
-            },
 			      "schema": {
               "$ref": "#/definitions/ManagedApi"
             }
           },
           "201": {
             "description": "Created",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The azure async operation header to track the long running operation.",
-                "type": "string"
-              }
-            },
 			      "schema": {
               "$ref": "#/definitions/ManagedApi"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -5725,9 +5779,10 @@
         ],
         "operationId": "IntegrationServiceEnvironment_ManagedApi",
         "description": "Deletes the integration service environment managed Api.",
+        "x-ms-long-running-operation": true,
         "x-ms-examples": {
           "Deletes the integration service environment managed Apis": {
-          "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+          "$ref": "./examples/IntegrationServiceEnvironments_ManagedApis_Delete.json"
           }
         },
         "parameters": [
@@ -5761,16 +5816,16 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted",
-            "headers": {
-              "Azure-AsyncOperation": {
-                "description": "The azure async operation header to track the long running operation.",
-                "type": "string"
-              }
-            }
+            "description": "Accepted"
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -5784,7 +5839,7 @@
         "description": "Gets the managed Api operations.",
         "x-ms-examples": {
           "Gets the integration service environment managed Apis": {
-            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+            "$ref": "./examples/IntegrationServiceEnvironments_ManagedApis_Get_OperationStatus.json"
           }
         },
         "parameters": [
@@ -5822,6 +5877,12 @@
             "schema": {
               "$ref": "#/definitions/AzureAsyncOperationResource"
             }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -5835,7 +5896,7 @@
         "description": "Gets the managed Api operations.",
         "x-ms-examples": {
           "Gets the integration service environment managed Apis": {
-            "$ref": "./examples/IntegrationServiceEnvironment_ManagedApi.json"
+            "$ref": "./examples/IntegrationServiceEnvironments_ManagedApis_ListApiOperations.json"
           }
         },
         "parameters": [
@@ -5872,6 +5933,12 @@
             "description": "OK",
 			      "schema": {
               "$ref": "#/definitions/ApiOperationListResult"
+            }
+          },
+          "default": {
+            "description": "Logic error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -6039,6 +6106,10 @@
         "integrationAccount": {
           "$ref": "#/definitions/ResourceReference",
           "description": "The integration account."
+        },
+        "integrationServiceEnvironment": {
+          "$ref": "#/definitions/ResourceReference",
+          "description": "The integration service environment."
         },
         "definition": {
           "$ref": "#/definitions/Object",
@@ -7410,7 +7481,7 @@
         },
         "generalInformation" : {
           "$ref": "#/definitions/ApiResourceGeneralInformation",
-          "description": "The api type."
+          "description": "The api general information."
         },
         "capabilities" : {
           "type" : "array",
@@ -7443,13 +7514,9 @@
           "$ref" : "#/definitions/WorkflowProvisioningState",
           "description" : "The provisioning state."
         },
-        "deploymentParameters" : {
-          "$ref" : "#definitions/ApiDeploymentParameters",
-          "description" : "The connector deployment parameters."
-        },
-        "swagger" : {
-          "type" : "jtoken",
-          "description" : "The swagger."
+        "category" : {
+          "$ref" : "#definitions/ApiTier",
+          "description" : "The category."
         }
       }
     },
@@ -7481,20 +7548,65 @@
         }
       }
     },
-    "ApiDeploymentParameters" : {
+    "ApiDeploymentParameterMetadataSet" : {
       "type" : "object",
+      "description" : "The API deployment parameters metadata.",
       "properties" : {
-        "packageContentLink" : {
-          "$ref": "#/definitions/ContentLink",
-          "description": "The package content link."
+        "PackageContentLink" : {
+          "$ref" : "#definitions/ApiDeploymentParameterMetadata",
+          "description" : "The package content link parameter."
+        },
+        "RedisCacheConnectionString" : {
+          "$ref" : "#definitions/ApiDeploymentParameterMetadata",
+          "description" : "The package content link parameter."
         }
+      }
+    },
+    "ApiDeploymentParameterMetadata" : {
+      "type" : "object",
+      "description" : "The API deployment parameter metadata.",
+      "properties" : {
+        "type" : {
+          "type" : "string",
+          "description" : "The type."
+        },
+        "isRequired" : {
+          "type" : "boolean",
+          "description" : "Indicates whether its required."
+        },
+        "displayName" : {
+          "type" : "string",
+          "description" : "The display name."
+        },
+        "description" : {
+          "type" : "string",
+          "description" : "The description."
+        },
+        "visibility" : {
+          "#ref" : "#definitions/ApiDeploymentParameterVisibility",
+          "description" : "The visibility."
+        }
+      }
+    },
+    "ApiDeploymentParameterVisibility" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Default",
+        "Internal"
+      ],
+      "x-ms-enum": {
+        "name": "ApiDeploymentParameterVisibility",
+        "modelAsString": true
       }
     },
     "ApiResourceBackendService" : {
       "type" : "object",
       "properties" : {
-        "type" : "string",
-        "description" : "The service URL."
+        "serviceUrl" : {
+          "type" : "string",
+          "description" : "The service URL."
+        }
       },
       "description" : "The API backend service."
     },
@@ -7540,6 +7652,10 @@
         "provisioningState" : {
           "$ref": "#/definitions/WorkflowProvisioningState",
           "description": "The provisioning state."
+        },
+        "deploymentParameters" : {
+          "$ref" : "#definitions/ApiDeploymentParameterMetadataSet",
+          "description" : "The connector deployment parameters metadata."
         }
       }
     },
@@ -7771,7 +7887,7 @@
       "properties": {
         "name" : {
           "type": "string",
-          "description": "The name of the operation."
+          "description": "The id of the operation."
         },
         "status": {
           "$ref": "#/definitions/AzureAsyncOperationState",
@@ -8012,6 +8128,19 @@
         }
       }
     },
+    "IntegrationServiceEnvironmentSkuList" : {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IntegrationServiceEnvironmentSkuDefinition"
+          },
+          "description": "The list of integration service environment skus."
+        }
+      },
+      "description": "The list of integration service environment skus."      
+    },
     "IntegrationServiceEnvironmentSkuDefinition" : {
       "type" : "object",
       "properties": {
@@ -8103,7 +8232,16 @@
     },
     "IntegrationAccountProperties": {
       "type": "object",
-      "properties": {}
+      "properties": {
+        "integrationServiceEnvironment" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironment",
+          "description": "The integration service environment."
+        },
+        "state" : {
+          "#ref" : "#definitions/WorkflowState",
+          "description" : "The workflow state."
+        }
+      }
     },
     "IntegrationAccountListResult": {
       "type": "object",

@@ -2,16 +2,17 @@
   "parameters": {
     "api-version": "2019-05-01",
     "subscriptionId": "f34b22a3-2202-4fb1-b040-1332bd928c84",
-    "resourceGroupName": "testResourceGroup",
+    "resourceGroup": "testResourceGroup",
     "integrationServiceEnvironmentName": "testIntegrationServiceEnvironment"
   },
   "responses": {
     "200": {
-      "sku": {
+      "body" :{
+        "sku": {
           "name": "Developer",
           "capacity": 0
-      },
-      "properties": {
+        },
+        "properties": {
           "provisioningState": "Succeeded",
           "state": "Enabled",
           "integrationServiceEnvironmentId": "13b261d30b984753869902d7f47f4d55",
@@ -75,11 +76,12 @@
                   }
               ]
           }
-      },
-      "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
-      "name": "testIntegrationServiceEnvironment",
-      "type": "Microsoft.Logic/integrationServiceEnvironments",
-      "location": "northeurope"
+        },
+        "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+        "name": "testIntegrationServiceEnvironment",
+        "type": "Microsoft.Logic/integrationServiceEnvironments",
+        "location": "northeurope"
+      }
     }
   }
 }
