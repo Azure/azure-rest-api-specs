@@ -296,7 +296,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The existing dluster was successfully updated. Check provisioningStatus to see detailed status.",
+            "description": "The existing cluster was successfully updated. Check provisioningStatus to see detailed status.",
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
@@ -311,6 +311,22 @@
         "clusterId": {
           "type": "string",
           "description": "The ID associated with the cluster."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "The provisioning state of the workspace.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Failed",
+            "Canceled",
+            "Deleting",
+            "ProvisioningAccount"
+          ],
+          "x-ms-enum": {
+            "name": "EntityStatus",
+            "modelAsString": true
+          }
         },
         "encryptionKeyUri": {
           "type": "string",
