@@ -65,10 +65,10 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 
 ``` yaml $(csharp)
 csharp:
-  # last generated with AutoRest.0.17.3
+  # last generated with AutoRest.2.0.4144
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.Redis
+  namespace: Microsoft.Azure.Management.HealthcareApis
   output-folder: $(csharp-sdks-folder)/healthcareapis/Microsoft.Azure.Management.HealthcareApis/src/Generated
   clear-output-folder: true
 ```
