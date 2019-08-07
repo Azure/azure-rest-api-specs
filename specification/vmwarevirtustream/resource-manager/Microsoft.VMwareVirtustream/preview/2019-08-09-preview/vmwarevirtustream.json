@@ -820,7 +820,7 @@
     },
     "Endpoints": {
       "properties": {
-        "nsxManager": {
+        "nsxtManager": {
           "type": "string"
         },
         "vcsa": {
@@ -865,7 +865,7 @@
         "username": {
           "type": "string"
         },
-        "credential": {
+        "password": {
           "type": "string"
         }
       }
@@ -949,6 +949,14 @@
         "vmotionNetwork": {
           "type": "string",
           "readOnly": true
+        },
+        "vcenterPassword": {
+          "description": "Optionally, set the vCenter admin password when the private cloud is created",
+          "type": "string"
+        },
+        "nsxtPassword": {
+          "description": "Optionally, set the NSX-T Manager password when the private cloud is created",
+          "type": "string"
         }
       }
     },
@@ -1033,17 +1041,25 @@
     },
     "AdminCredentials": {
       "properties": {
-        "nsxUser": {
-          "type": "string"
+        "nsxtUsername": {
+          "description": "NSX-T Manager username",
+          "type": "string",
+          "readOnly": true
         },
-        "nsxPassword": {
-          "type": "string"
+        "nsxtPassword": {
+          "description": "NSX-T Manager password",
+          "type": "string",
+          "readOnly": true
         },
-        "user": {
-          "type": "string"
+        "vcenterUsername": {
+          "description": "vCenter admin username",
+          "type": "string",
+          "readOnly": true
         },
-        "password": {
-          "type": "string"
+        "vcenterPassword": {
+          "description": "vSphere admin password",
+          "type": "string",
+          "readOnly": true
         }
       }
     }
