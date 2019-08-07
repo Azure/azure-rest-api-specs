@@ -296,8 +296,11 @@
             }
           },
           "managedRules": {
-            "description": "Describes managed rules inside the policy.",
-            "$ref": "#/definitions/ManagedRuleSetsList"
+            "description": "Describes the list of ManagedRuleSets in the policy.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ManagedRuleSet"
+            }
           },
           "exclusions":{
             "type": "array",
@@ -560,18 +563,6 @@
             "type": "array",
             "items": {
               "$ref": "#/definitions/Transform"
-            }
-          }
-        }
-      },
-      "ManagedRuleSetList": {
-        "description": "Defines the list of managed rule sets for the policy.",
-        "properties": {
-          "ruleSets": {
-            "description": "List of rules.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ManagedRuleSet"
             }
           }
         }
