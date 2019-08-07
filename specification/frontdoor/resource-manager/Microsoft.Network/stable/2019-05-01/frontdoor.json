@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-04-01",
+    "version": "2019-05-01",
     "title": "FrontDoorManagementClient",
     "description": "Use these APIs to manage Azure Front Door resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -2107,6 +2107,31 @@
         "intervalInSeconds": {
           "description": "The number of seconds between health probes.",
           "type": "integer"
+        },
+        "healthProbeMethod": {
+          "description": "Configures which HTTP method to use to probe the backends defined under backendPools.",
+          "type": "string",
+          "enum": [
+            "GET",
+            "HEAD"
+          ],
+          "x-ms-enum": {
+            "name": "FrontDoorHealthProbeMethod",
+            "modelAsString": true
+          },
+          "default": "HEAD"
+        },
+        "enabledState": {
+          "description": "Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool.",
+          "type": "string",
+          "enum": [
+              "Enabled",
+              "Disabled"
+            ],
+          "x-ms-enum": {
+              "name": "HealthProbeEnabled",
+              "modelAsString": true
+          }
         }
       }
     },
@@ -2260,6 +2285,7 @@
     "CustomHttpsConfiguration": {
       "description": "Https settings for a domain",
       "type": "object",
+      "required": ["minimumTlsVersion", "certificateSource", "protocolType"],
       "properties": {
         "certificateSource": {
           "description": "Defines the source of the SSL certificate",
@@ -2281,6 +2307,18 @@
           "type": "string",
           "x-ms-enum": {
             "name": "FrontDoorTlsProtocolType",
+            "modelAsString": true
+          }
+        },
+        "minimumTlsVersion": {
+          "description": "The minimum TLS version required from the clients to establish an SSL handshake with Front Door.",
+          "enum": [
+            "1.0",
+            "1.2"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MinimumTLSVersion",
             "modelAsString": true
           }
         },
@@ -2445,6 +2483,12 @@
             "modelAsString": true
           },
           "default": "Enabled"
+        },
+        "sendRecvTimeoutSeconds": {
+          "description": "Send and receive timeout on forwarding request to the backend. When timeout is reached, the request fails and returns.",
+          "type": "integer",
+          "minimum": 16,
+          "exclusiveMinimum": false
         }
       }
     },

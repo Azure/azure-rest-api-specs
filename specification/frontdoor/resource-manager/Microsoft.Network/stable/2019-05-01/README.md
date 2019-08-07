@@ -1,8 +1,9 @@
-# Public Preview API specification for FrontDoor Azure Resource
+# General Availability API specification for FrontDoor Azure Resource
+> see https://aka.ms/autorest
 
 This directory contains the schema specifications for the Front Door Azure Resource.  The API will be added to support Front Door on Azure Resource Manager.
 
-The base swagger document for new features in this preview: [FrontDoor.json](./FrontDoor.json)
+The base swagger document for new features for Frontdoor: [frontdoor.json](./frontdoor.json)
 
 ## Overview
 The Front Door ARM API supports CRUD functionality on four objects in the resource schema:
@@ -16,5 +17,5 @@ This diagram is generated from the swagger spec by "[`oav`](https://github.com/A
 ![Generated UML snapshot](./assets/frontdoor.svg)
 
 ## Swagger and JSON specification reference and tools
- * [OpenAPI specification v2.0 (aka Swagger 2.0)](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
- * [Swagger.io online editor](https://editor.swagger.io/)
+- [OpenAPI specification v2.0 (aka Swagger 2.0)](https://github.com/OAI/OpenAPI-Specification/blob/master/versions/2.0.md)
+- [Swagger.io online editor](https://editor.swagger.io/)

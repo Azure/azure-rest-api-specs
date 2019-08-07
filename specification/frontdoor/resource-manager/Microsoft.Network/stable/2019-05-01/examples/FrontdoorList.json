@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-04-01",
+    "api-version": "2019-05-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1"
   },
@@ -55,7 +55,9 @@
                   "properties": {
                     "path": "/",
                     "protocol": "Http",
-                    "intervalInSeconds": 120
+                    "intervalInSeconds": 120,
+                    "enabledState": "Enabled",
+                    "healthProbeMethod": "HEAD"
                   }
                 }
               ],
@@ -130,7 +132,8 @@
                 }
               ],
               "backendPoolsSettings": {
-                "enforceCertificateNameCheck": "Enabled"
+                "enforceCertificateNameCheck": "Enabled",
+                "sendRecvTimeoutSeconds": 60
               },
               "enabledState": "Enabled",
               "resourceState": "Enabled",
