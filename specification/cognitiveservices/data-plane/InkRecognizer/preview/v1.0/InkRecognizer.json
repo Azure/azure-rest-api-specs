@@ -215,9 +215,9 @@
       "type": "string",
       "description": "The category of a recognition unit represents the type of content for that unit.",
       "enum": [
+        "root",
         "writingRegion",
         "paragraph",
-        "listItem",
         "line",
         "inkBullet",
         "inkDrawing",
@@ -233,9 +233,9 @@
       "type": "string",
       "description": "The category of recognition units that represent types that have children recognition units.",
       "enum": [
+        "root",
         "writingRegion",
         "paragraph",
-        "listItem",
         "line"
       ],
       "x-ms-enum": {
@@ -292,6 +292,94 @@
         "type": "object"
       }
     },
+    "inkPointValueAttribute": {
+      "type": "object",
+      "description": "A container for the attributes of a value contained in the ink point object.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the point attribute."
+        },
+        "logicalMinimum": {
+          "type": "number",
+          "description": "The minimum value for the attribute"
+        },
+        "logicalMaximum": {
+          "type": "number",
+          "description": "The maximum value for the attribute"
+        }
+      }
+    },
+    "inkPoint": {
+      "type": "object",
+      "description": "An object containing the properties of an point in the path of an ink stroke. The main properties are the x and y values. Other include tip pressure, x tilt etc. For the coordinate values, it is recommended to have a precision of 8 digits after the decimal to obtain most accurate recognition results. The origin (0,0) of the canvas is assumed to be at the top left corner of the canvas",
+      "properties": {
+        "x": {
+          "type": "number",
+          "description": "The x coordinate of the pen location on the writing surface."
+        },
+        "y": {
+          "type": "number",
+          "description": "The y coordinate of the pen location on the writing surface."
+        },
+        "z": {
+          "type": "number",
+          "description": "The z coordinate of the pen location on the writing space. This may not be used for recognition."
+        },
+        "tipPressure": {
+          "type": "number",
+          "description": "The force exerted against the tablet surface by the transducer, typically a stylus. This may not be used for recognition."
+        },
+        "barrelPressure": {
+          "type": "number",
+          "description": "The force exerted directly by the user on a transducer sensor, such as a pressure-sensitive button on the barrel of a stylus. This may not be used for recognition."
+        },
+        "timestamp": {
+          "type": "number",
+          "description": "The time relative to the absolute time the transducer last became active. This may not be used for recognition."
+        },
+        "xTilt": {
+          "type": "number",
+          "description": "The plane angle between the Y-Z plane and the plane containing the transducer axis and the Y axis. This may not be used for recognition."
+        },
+        "yTilt": {
+          "type": "number",
+          "description": "The angle between the X-Z and transducer-X planes. A positive Y Tilt is toward the user. This may not be used for recognition."
+        },
+        "width": {
+          "type": "number",
+          "description": "The width of the tip of the writing instrument. This is used by touch screen devices to report the width of the finger contact on the writing surface. This may not be used for recognition."
+        },
+        "height": {
+          "type": "number",
+          "description": "The height of the tip of the writing instrument. This is used by touch screen devices to report the height of the finger contact on the writing surface. This may not be used for recognition."
+        },
+        "tipSwitch": {
+          "type": "boolean",
+          "description": "A switch located on the tip of a stylus indicating contact of the stylus with a surface. This may not be used for recognition."
+        },
+        "inverted": {
+          "type": "boolean",
+          "description": "A value that indicates that the currently sensed position originates from the end of a stylus opposite the tip switch. This may not be used for recognition."
+        },
+        "barrelSwitch": {
+          "type": "boolean",
+          "description": "A non-tip button located on the barrel of a stylus. Its function is typically mapped to a system secondary button. This may not be used for recognition."
+        },
+        "eraser": {
+          "type": "boolean",
+          "description": "The control is used for erasing objects. It is typically located opposite the writing end of a stylus. This may not be used for recognition."
+        },
+        "secondaryTip": {
+          "type": "boolean",
+          "description": "A secondary switch used in conjunction with the tip switch to indicate pressure above a certain threshold applied with the stylus. This may not be used for recognition."
+        }
+      },
+      "required": [
+        "x",
+        "y"
+      ]
+    },
     "recognitionUnit": {
       "items": {
         "properties": {
@@ -331,36 +419,36 @@
             "description": "The id of the parent node in the tree structure of the recognition results. parent = 0 indicates that there is no dedicated parent node for this unit."
           },
           "boundingRectangle": {
-            "description": "The bounding rectangle of the recognized unit represented by the coordinates of the top left corner (x,y) along with width (w) and height (h) of the rectangle. Note that this rectangle is not rotated. So for  rotated objects such as slanted handwriting, it will cover the entire object. The unit will be matched to the one specified in the original request (mm by default.) ",
+            "description": "The bounding rectangle of the recognition unit represented by the coordinates of the top left corner (topX,topY) along with width and height of the rectangle. Note that this rectangle is not rotated. So for  rotated objects such as slanted handwriting, it will cover the entire object. The unit will be matched to the one specified in the original request (mm by default.) ",
             "type": "object",
             "properties": {
               "topX": {
                 "type": "number",
-                "description": "This represents the top left x coordinate"
+                "description": "This is the top left x coordinate"
               },
               "topY": {
                 "type": "number",
-                "description": "This represents the top left y coordinate"
+                "description": "This is the top left y coordinate"
               },
               "width": {
                 "type": "number",
-                "description": "This represents width of the bounding rectangle"
+                "description": "This is width of the bounding rectangle"
               },
               "height": {
                 "type": "number",
-                "description": "The represents the height of the bounding rectangle"
+                "description": "The is the height of the bounding rectangle"
               }
             }
           },
           "rotatedBoundingRectangle": {
-            "description": "This property provides the rotated bounding rectangle that covers the entire recognized object along the angle of rotation of the object. Note that this is NOT the same as rotating the boundingRectangle by the rotation angle.",
+            "description": "This is the rotated bounding rectangle that covers the entire recognized object along the angle of rotation of the object. Note that this is NOT the same as rotating the boundingRectangle by the rotation angle.",
             "type": "array",
             "items": {
               "$ref": "#/definitions/pointDetailsPattern"
             }
           },
           "strokeIds": {
-            "description": "This is an array of integers representing the list of stroke Identifier integers from the input request body that belong to this recognition unit.",
+            "description": "This is an array of integers representing the list of stroke Identifiers from the input request body that belong to this recognition unit.",
             "type": "array",
             "items": {
               "type": "integer"
@@ -368,15 +456,15 @@
           },
           "recognizedText": {
             "type": "string",
-            "description": "The string represents the text that was recognized. It can be an empty string if the recognizer cannot determine the text."
+            "description": "The string contains the text that was recognized. It can be an empty string if the recognizer cannot determine the text."
           },
           "confidence": {
             "type": "number",
-            "description": "The class represents the type of the recognition unit. A recognition unit can be a leaf node or a container node. Container nodes typically have leaf nodes as children."
+            "description": "A number between 0 and 1 which indicates the confidence level in the result."
           },
           "rotationAngle": {
             "type": "number",
-            "description": "This represents the angle at which the unit is rotated in degrees with respect to the positive X axis."
+            "description": "This is the angle at which the unit is rotated in degrees with respect to the positive X axis."
           },
           "recognizedObject": {
             "$ref": "#/definitions/shapePattern"
@@ -390,7 +478,7 @@
           "id"
         ],
         "type": "object",
-        "description": "This represents the recognized entity"
+        "description": "This identifies the recognized entity"
       },
       "type": "array",
       "description": "The list of recognition units based on the analysis of the ink strokes."
@@ -407,8 +495,10 @@
           "description": "The IETF BCP 47 language code (for ex. en-US, en-GB, hi-IN etc.) of the expected language for the handwritten content in this stroke. The response will include results from this language."
         },
         "points": {
-          "type": "string",
-          "description": "A string of comma separated floating point values that represent the x and y coordinates of points that are part of the stroke. (X1,Y1, X2,Y2…).  It is recommended to have a precision of 8 digits after the decimal to obtain most accurate recognition results. The origin (0,0) of the canvas is assumed to be at the top left corner of the canvas"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inkPoint"
+          }
         },
         "drawingAttributes": {
           "$ref": "#/definitions/drawingAttributesPattern"
@@ -437,7 +527,7 @@
       "properties": {
         "unit": {
           "type": "string",
-          "description": "This represents the physical units of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
+          "description": "This is the physical unit of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
           "enum": [
             "mm",
             "cm",
@@ -454,7 +544,7 @@
         },
         "language": {
           "type": "string",
-          "description": "This is the language used for recognizing handwriting from the ink strokes in the request. Set this to the user’s preferred language."
+          "description": "This is the language used for recognizing handwriting from the ink strokes in the request."
         },
         "recognitionUnits": {
           "$ref": "#/definitions/recognitionUnit"
@@ -526,14 +616,38 @@
             "modelAsString": true
           }
         },
+        "inputDeviceKind": {
+          "type": "string",
+          "description": "This identifies the kind of device used as the writing instrument",
+          "enum": [
+            "digitizer",
+            "pen",
+            "lightPen",
+            "touchScreen",
+            "touchPad",
+            "whiteBoard",
+            "3dDigitizer",
+            "stereoPlotter",
+            "articulatedArm",
+            "armature"
+          ],
+          "x-ms-enum": {
+            "name": "inputDevice",
+            "modelAsString": true
+          }
+        },
         "unit": {
           "type": "string",
-          "description": "This represents the physical units of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
+          "description": "This is the physical unit of the ink strokes. It is up to the application developer to decide how to convert the device specific units to physical units before calling the service. The conversion factor can be different based on the type of the device used.",
           "enum": [
             "mm",
             "cm",
             "in"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "unit",
+            "modelAsString": true
+          }
         },
         "unitMultiple": {
           "description": " This is a scaling factor to be applied to the point coordinates when interpreting them in the physical units specified.",
@@ -543,6 +657,12 @@
           "type": "string",
           "example": "en-US",
           "description": "The IETF BCP 47 language code (for ex. en-US, en-GB, hi-IN etc.) of the expected language for the handwritten content in the ink strokes. The response will include results from this language."
+        },
+        "inkPointValueAttributes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/inkPointValueAttribute"
+          }
         },
         "strokes": {
           "type": "array",

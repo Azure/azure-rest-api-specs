@@ -1131,11 +1131,47 @@
           "Get an account entity.": {
             "$ref": "./examples/entities/GetAccountEntityById.json"
           },
-          "Get an host entity.": {
+          "Get a host entity.": {
             "$ref": "./examples/entities/GetHostEntityById.json"
           },
-          "Get an file entity.": {
+          "Get a file entity.": {
             "$ref": "./examples/entities/GetFileEntityById.json"
+          },
+          "Get a security alert entity.": {
+            "$ref": "./examples/entities/GetSecurityAlertEntityById.json"
+          },
+          "Get a file hash entity.": {
+            "$ref": "./examples/entities/GetFileHashEntityById.json"
+          },
+          "Get a malware entity.": {
+            "$ref": "./examples/entities/GetMalwareEntityById.json"
+          },
+          "Get a security group entity.": {
+            "$ref": "./examples/entities/GetSecurityGroupEntityById.json"
+          },
+          "Get an azure resource entity.": {
+            "$ref": "./examples/entities/GetAzureResourceEntityById.json"
+          },
+          "Get a cloud application entity.": {
+            "$ref": "./examples/entities/GetCloudApplicationEntityById.json"
+          },
+          "Get a process entity.": {
+            "$ref": "./examples/entities/GetProcessEntityById.json"
+          },
+          "Get a dns entity.": {
+            "$ref": "./examples/entities/GetDnsEntityById.json"
+          },
+          "Get an ip entity.": {
+            "$ref": "./examples/entities/GetIpEntityById.json"
+          },
+          "Get a registry key entity.": {
+            "$ref": "./examples/entities/GetRegistryKeyEntityById.json"
+          },
+          "Get a registry value entity.": {
+            "$ref": "./examples/entities/GetRegistryValueEntityById.json"
+          },
+          "Get a url entity.": {
+            "$ref": "./examples/entities/GetUrlEntityById.json"
           }
         },
         "tags": [
@@ -1168,6 +1204,57 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/Entity"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/entities/{entityId}/expand": {
+      "post": {
+        "x-ms-examples": {
+          "Expand an entity": {
+            "$ref": "./examples/entities/expand/PostExpandEntity.json"
+          }
+        },
+        "tags": [
+          "Entities"
+        ],
+        "description": "Expands an entity.",
+        "operationId": "Entities_Expand",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/EntityId"
+          },
+          {
+            "$ref": "#/parameters/EntityExpandRequestBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/EntityExpandResponse"
             }
           },
           "default": {
@@ -1737,35 +1824,7 @@
           "description": "The description of the alert rule."
         },
         "severity": {
-          "type": "string",
-          "enum": [
-            "High",
-            "Medium",
-            "Low",
-            "Informational"
-          ],
-          "x-ms-enum": {
-            "name": "AlertSeverity",
-            "modelAsString": false,
-            "values": [
-              {
-                "value": "High",
-                "description": "High severity"
-              },
-              {
-                "value": "Medium",
-                "description": "Medium severity"
-              },
-              {
-                "value": "Low",
-                "description": "Low severity"
-              },
-              {
-                "value": "Informational",
-                "description": "Informational severity"
-              }
-            ]
-          },
+          "$ref": "#/definitions/AlertSeverity",
           "description": "The severity for alerts created by this alert rule."
         },
         "enabled": {
@@ -1832,6 +1891,38 @@
         "suppressionEnabled",
         "suppressionDuration"
       ]
+    },
+    "AlertSeverity": {
+      "type": "string",
+      "description": "The severity of the alert",
+      "enum": [
+        "High",
+        "Medium",
+        "Low",
+        "Informational"
+      ],
+      "x-ms-enum": {
+        "name": "AlertSeverity",
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "High",
+            "description": "High severity"
+          },
+          {
+            "value": "Medium",
+            "description": "Medium severity"
+          },
+          {
+            "value": "Low",
+            "description": "Low severity"
+          },
+          {
+            "value": "Informational",
+            "description": "Informational severity"
+          }
+        ]
+      }
     },
     "ActionsList": {
       "description": "List all the actions.",
@@ -2389,46 +2480,46 @@
       "type": "object",
       "description": "Represents Amazon Web Services CloudTrail data connector.",
       "allOf": [
-          {
-              "$ref": "#/definitions/DataConnector"
-          }
+        {
+          "$ref": "#/definitions/DataConnector"
+        }
       ],
       "properties": {
-          "properties": {
-              "x-ms-client-flatten": true,
-              "description": "Amazon Web Services CloudTrail data connector properties.",
-              "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties"
-          }
-      }
-   },
-    "AwsCloudTrailDataConnectorProperties": {
-        "type": "object",
-        "description": "Amazon Web Services CloudTrail data connector properties.",
         "properties": {
-            "awsRoleArn": {
-                "type": "string",
-                "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account."
-            },
-            "dataTypes": {
-                "description": "The available data types for the connector.",
-                "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes"
-            }
+          "x-ms-client-flatten": true,
+          "description": "Amazon Web Services CloudTrail data connector properties.",
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorProperties"
         }
+      }
+    },
+    "AwsCloudTrailDataConnectorProperties": {
+      "type": "object",
+      "description": "Amazon Web Services CloudTrail data connector properties.",
+      "properties": {
+        "awsRoleArn": {
+          "type": "string",
+          "description": "The Aws Role Arn (with CloudTrailReadOnly policy) that is used to access the Aws account."
+        },
+        "dataTypes": {
+          "description": "The available data types for the connector.",
+          "$ref": "#/definitions/AwsCloudTrailDataConnectorDataTypes"
+        }
+      }
     },
     "AwsCloudTrailDataConnectorDataTypes": {
-        "type": "object",
-        "description": "The available data types for Amazon Web Services CloudTrail data connector.",
-        "properties": {
-            "logs": {
-                "type": "object",
-                "description": "Logs data type.",
-                "allOf": [
-                    {
-                        "$ref": "#/definitions/DataConnectorDataTypeCommon"
-                    }
-                ]
+      "type": "object",
+      "description": "The available data types for Amazon Web Services CloudTrail data connector.",
+      "properties": {
+        "logs": {
+          "type": "object",
+          "description": "Logs data type.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
             }
+          ]
         }
+      }
     },
     "AADDataConnector": {
       "x-ms-discriminator-value": "AzureActiveDirectory",
@@ -2514,13 +2605,14 @@
       "allOf": [
         {
           "$ref": "#/definitions/DataConnectorTenantId"
-        }],
-        "properties": {
-          "dataTypes": {
-            "description": "The available data types for the connector.",
-            "$ref": "#/definitions/MCASDataConnectorDataTypes"
-          }
         }
+      ],
+      "properties": {
+        "dataTypes": {
+          "description": "The available data types for the connector.",
+          "$ref": "#/definitions/MCASDataConnectorDataTypes"
+        }
+      }
     },
     "MCASDataConnectorDataTypes": {
       "type": "object",
@@ -2528,19 +2620,19 @@
       "allOf": [
         {
           "$ref": "#/definitions/AlertsDataTypeOfDataConnector"
-        }],
-        "properties":
-        {
-          "discoveryLogs": {
-            "type": "object",
-            "description": "Discovery log data type connection.",
-            "allOf": [
-              {
-                "$ref": "#/definitions/DataConnectorDataTypeCommon"
-              }
-            ]
-          }
         }
+      ],
+      "properties": {
+        "discoveryLogs": {
+          "type": "object",
+          "description": "Discovery log data type connection.",
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnectorDataTypeCommon"
+            }
+          ]
+        }
+      }
     },
     "AATPDataConnector": {
       "x-ms-discriminator-value": "AzureAdvancedThreatProtection",
@@ -2678,34 +2770,122 @@
     },
     "EntityKind": {
       "type": "object",
-      "description": "Describes an Azure resource with kind.",
+      "description": "Describes an entity with kind.",
       "properties": {
         "kind": {
-          "type": "string",
-          "description": "The kind of the entity",
-          "enum": [
-            "Account",
-            "Host",
-            "File"
-          ],
-          "x-ms-enum": {
-            "name": "EntityKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "Account",
-                "description": "Entity represents account in the system."
-              },
-              {
-                "value": "Host",
-                "description": "Entity represents host in the system."
-              },
-              {
-                "value": "File",
-                "description": "Entity represents file in the system."
-              }
-            ]
+          "description": "The kind of the entity.",
+          "$ref": "#/definitions/EntityInnerKind"
+        }
+      }
+    },
+    "EntityInnerKind": {
+      "type": "string",
+      "description": "The kind of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DnsResolution",
+        "FileHash",
+        "Ip",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "Url",
+        "SecurityAlert",
+        "Bookmark"
+      ],
+      "x-ms-enum": {
+        "name": "EntityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Account",
+            "description": "Entity represents account in the system."
+          },
+          {
+            "value": "Host",
+            "description": "Entity represents host in the system."
+          },
+          {
+            "value": "File",
+            "description": "Entity represents file in the system."
+          },
+          {
+            "value": "AzureResource",
+            "description": "Entity represents azure resource in the system."
+          },
+          {
+            "value": "CloudApplication",
+            "description": "Entity represents cloud application in the system."
+          },
+          {
+            "value": "DnsResolution",
+            "description": "Entity represents dns resolution in the system."
+          },
+          {
+            "value": "FileHash",
+            "description": "Entity represents file hash in the system."
+          },
+          {
+            "value": "Ip",
+            "description": "Entity represents ip in the system."
+          },
+          {
+            "value": "Malware",
+            "description": "Entity represents malware in the system."
+          },
+          {
+            "value": "Process",
+            "description": "Entity represents process in the system."
+          },
+          {
+            "value": "RegistryKey",
+            "description": "Entity represents registry key in the system."
+          },
+          {
+            "value": "RegistryValue",
+            "description": "Entity represents registry value in the system."
+          },
+          {
+            "value": "SecurityGroup",
+            "description": "Entity represents security group in the system."
+          },
+          {
+            "value": "Url",
+            "description": "Entity represents url in the system."
+          },
+          {
+            "value": "SecurityAlert",
+            "description": "Entity represents security alert in the system."
+          },
+          {
+            "value": "Bookmark",
+            "description": "Entity represents bookmark in the system."
           }
+        ]
+      }
+    },
+    "EntityCommonProperties": {
+      "type": "object",
+      "description": "Entity common property bag.",
+      "properties": {
+        "friendlyName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The graph item display name which is a short humanly readable description of the graph item instance. This property is optional and might be system generated."
+        },
+        "additionalData": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          },
+          "readOnly": true,
+          "description": "A bag of custom fields that should be part of the entity and will be presented to the user."
         }
       }
     },
@@ -2729,6 +2909,11 @@
     "AccountEntityProperties": {
       "type": "object",
       "description": "Account entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "accountName": {
           "type": "string",
@@ -2770,11 +2955,21 @@
           "readOnly": true,
           "description": "Determines whether this is a domain account."
         },
+        "displayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the account."
+        },
         "objectGuid": {
           "type": "string",
           "readOnly": true,
           "format": "uuid",
           "description": "The objectGUID attribute is a single-value attribute that is the unique identifier for the object, assigned by active directory."
+        },
+        "hostEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Host entity id that contains the account in case it is a local account (not domain joined)"
         }
       }
     },
@@ -2798,6 +2993,11 @@
     "HostEntityProperties": {
       "type": "object",
       "description": "Host entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "dnsDomain": {
           "type": "string",
@@ -2893,6 +3093,11 @@
     "FileEntityProperties": {
       "type": "object",
       "description": "File entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
       "properties": {
         "directory": {
           "type": "string",
@@ -2903,8 +3108,1167 @@
           "type": "string",
           "readOnly": true,
           "description": "The file name without path (some alerts might not include path)."
+        },
+        "hostEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Host entity id which the file belongs to"
+        },
+        "fileHashEntityIds": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "file hash id",
+            "type": "string"
+          },
+          "description": "The file hash entity identifiers associated with this file"
         }
       }
+    },
+    "SecurityAlert": {
+      "x-ms-discriminator-value": "SecurityAlert",
+      "type": "object",
+      "description": "Represents a security alert entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "SecurityAlert entity properties",
+          "$ref": "#/definitions/SecurityAlertProperties"
+        }
+      }
+    },
+    "SecurityAlertProperties": {
+      "type": "object",
+      "description": "SecurityAlert entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "systemAlertId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Holds the product identifier of the alert for the product."
+        },
+        "confidenceReasons": {
+          "type": "array",
+          "readOnly": true,
+          "description": "The confidence reasons",
+          "items": {
+            "type": "object",
+            "description": "confidence reason item",
+            "properties": {
+              "reasonType": {
+                "type": "string",
+                "readOnly": true,
+                "description": "The type (category) of the reason"
+              },
+              "reason": {
+                "type": "string",
+                "readOnly": true,
+                "description": "The reason's description"
+              }
+            }
+          }
+        },
+        "confidenceScoreStatus": {
+          "type": "string",
+          "description": "The confidence score calculation status, i.e. indicating if score calculation is pending for this alert, not applicable or final.",
+          "readOnly": true,
+          "enum": [
+            "NotApplicable",
+            "InProcess",
+            "NotFinal",
+            "Final"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidenceScoreStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "NotApplicable",
+                "description": "Score will not be calculated for this alert as it is not supported by virtual analyst"
+              },
+              {
+                "value": "InProcess",
+                "description": "No score was set yet and calculation is in progress"
+              },
+              {
+                "value": "NotFinal",
+                "description": "Score is calculated and shown as part of the alert, but may be updated again at a later time following the processing of additional data"
+              },
+              {
+                "value": "Final",
+                "description": "Final score was calculated and available"
+              }
+            ]
+          }
+        },
+        "intent": {
+          "type": "string",
+          "description": "Holds the alert intent stage(s) mapping for this alert.",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "Probing",
+            "Exploitation",
+            "Persistence",
+            "PrivilegeEscalation",
+            "DefenseEvasion",
+            "CredentialAccess",
+            "Discovery",
+            "LateralMovement",
+            "Execution",
+            "Collection",
+            "Exfiltration",
+            "CommandAndControl",
+            "Impact"
+          ],
+          "x-ms-enum": {
+            "name": "KillChainIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "The default value."
+              },
+              {
+                "value": "Probing",
+                "description": "Probing could be an attempt to access a certain resource regardless of a malicious intent or a failed attempt to gain access to a target system to gather information prior to exploitation. This step is usually detected as an attempt originating from outside the network in attempt to scan the target system and find a way in."
+              },
+              {
+                "value": "Exploitation",
+                "description": "Exploitation is the stage where an attacker manage to get foothold on the attacked resource. This stage is applicable not only for compute hosts, but also for resources such as user accounts, certificates etc. Adversaries will often be able to control the resource after this stage."
+              },
+              {
+                "value": "Persistence",
+                "description": "Persistence is any access, action, or configuration change to a system that gives an adversary a persistent presence on that system. Adversaries will often need to maintain access to systems through interruptions such as system restarts, loss of credentials, or other failures that would require a remote access tool to restart or alternate backdoor for them to regain access."
+              },
+              {
+                "value": "PrivilegeEscalation",
+                "description": "Privilege escalation is the result of actions that allow an adversary to obtain a higher level of permissions on a system or network. Certain tools or actions require a higher level of privilege to work and are likely necessary at many points throughout an operation. User accounts with permissions to access specific systems or perform specific functions necessary for adversaries to achieve their objective may also be considered an escalation of privilege."
+              },
+              {
+                "value": "DefenseEvasion",
+                "description": "Defense evasion consists of techniques an adversary may use to evade detection or avoid other defenses. Sometimes these actions are the same as or variations of techniques in other categories that have the added benefit of subverting a particular defense or mitigation. "
+              },
+              {
+                "value": "CredentialAccess",
+                "description": "Credential access represents techniques resulting in access to or control over system, domain, or service credentials that are used within an enterprise environment. Adversaries will likely attempt to obtain legitimate credentials from users or administrator accounts (local system administrator or domain users with administrator access) to use within the network. With sufficient access within a network, an adversary can create accounts for later use within the environment."
+              },
+              {
+                "value": "Discovery",
+                "description": "Discovery consists of techniques that allow the adversary to gain knowledge about the system and internal network. When adversaries gain access to a new system, they must orient themselves to what they now have control of and what benefits operating from that system give to their current objective or overall goals during the intrusion. The operating system provides many native tools that aid in this post-compromise information-gathering phase."
+              },
+              {
+                "value": "LateralMovement",
+                "description": "Lateral movement consists of techniques that enable an adversary to access and control remote systems on a network and could, but does not necessarily, include execution of tools on remote systems. The lateral movement techniques could allow an adversary to gather information from a system without needing additional tools, such as a remote access tool. An adversary can use lateral movement for many purposes, including remote Execution of tools, pivoting to additional systems, access to specific information or files, access to additional credentials, or to cause an effect."
+              },
+              {
+                "value": "Execution",
+                "description": "The execution tactic represents techniques that result in execution of adversary-controlled code on a local or remote system. This tactic is often used in conjunction with lateral movement to expand access to remote systems on a network."
+              },
+              {
+                "value": "Collection",
+                "description": "Collection consists of techniques used to identify and gather information, such as sensitive files, from a target network prior to exfiltration. This category also covers locations on a system or network where the adversary may look for information to exfiltrate."
+              },
+              {
+                "value": "Exfiltration",
+                "description": "Exfiltration refers to techniques and attributes that result or aid in the adversary removing files and information from a target network. This category also covers locations on a system or network where the adversary may look for information to exfiltrate."
+              },
+              {
+                "value": "CommandAndControl",
+                "description": "The command and control tactic represents how adversaries communicate with systems under their control within a target network."
+              },
+              {
+                "value": "Impact",
+                "description": "The impact intent primary objective is to directly reduce the availability or integrity of a system, service, or network; including manipulation of data to impact a business or operational process. This would often refer to techniques such as ransom-ware, defacement, data manipulation and others."
+              }
+            ]
+          }
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The confidence score of the alert."
+        },
+        "alertDisplayName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The display name of the alert."
+        },
+        "description": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Alert description."
+        },
+        "remediationSteps": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Manual action items to take to remediate the alert.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "confidenceLevel": {
+          "type": "string",
+          "description": "The confidence level of this alert.",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "Low",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "ConfidenceLevel",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Unknown confidence, the is the default value"
+              },
+              {
+                "value": "Low",
+                "description": "Low confidence, meaning we have some doubts this is indeed malicious or part of an attack"
+              },
+              {
+                "value": "High",
+                "description": "High confidence that the alert is true positive malicious"
+              }
+            ]
+          }
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity of the alert"
+        },
+        "vendorName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the vendor that raise the alert."
+        },
+        "productName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the product which published this alert."
+        },
+        "productComponentName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of a component inside the product which generated the alert."
+        },
+        "alertType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The type name of the alert."
+        },
+        "productVersion": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The version of the product generating the alert."
+        },
+        "processingEndTime": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time the alert was made available for consumption."
+        },
+        "status": {
+          "type": "string",
+          "description": "The lifecycle status of the alert.",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "New",
+            "Resolved",
+            "Dismissed",
+            "InProgress"
+          ],
+          "x-ms-enum": {
+            "name": "AlertStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Unknown value"
+              },
+              {
+                "value": "New",
+                "description": "New alert"
+              },
+              {
+                "value": "Resolved",
+                "description": "Alert closed after handling"
+              },
+              {
+                "value": "Dismissed",
+                "description": "Alert dismissed as false positive"
+              },
+              {
+                "value": "InProgress",
+                "description": "Alert is being handled"
+              }
+            ]
+          }
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The impact end time of the alert (the time of the last event contributing to the alert)."
+        },
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The impact start time of the alert (the time of the first event contributing to the alert)."
+        },
+        "timeGenerated": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time the alert was generated."
+        },
+        "compromisedEntity": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Display name of the main entity being reported on."
+        }
+      }
+    },
+    "FileHashEntity": {
+      "x-ms-discriminator-value": "FileHash",
+      "type": "object",
+      "description": "Represents a file hash entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "FileHash entity properties",
+          "$ref": "#/definitions/FileHashEntityProperties"
+        }
+      }
+    },
+    "FileHashEntityProperties": {
+      "type": "object",
+      "description": "FileHash entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "hashValue": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The file hash value."
+        },
+        "algorithm": {
+          "type": "string",
+          "description": "The hash algorithm type.",
+          "readOnly": true,
+          "enum": [
+            "Unknown",
+            "MD5",
+            "SHA1",
+            "SHA256",
+            "SHA256AC"
+          ],
+          "x-ms-enum": {
+            "name": "FileHashAlgorithm",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Unknown",
+                "description": "Unknown hash algorithm"
+              },
+              {
+                "value": "MD5",
+                "description": "MD5 hash type"
+              },
+              {
+                "value": "SHA1",
+                "description": "SHA1 hash type"
+              },
+              {
+                "value": "SHA256",
+                "description": "SHA256 hash type"
+              },
+              {
+                "value": "SHA256AC",
+                "description": "SHA256 Authenticode hash type"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "MalwareEntity": {
+      "x-ms-discriminator-value": "Malware",
+      "type": "object",
+      "description": "Represents a malware entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "File entity properties",
+          "$ref": "#/definitions/MalwareEntityProperties"
+        }
+      }
+    },
+    "MalwareEntityProperties": {
+      "type": "object",
+      "description": "Malware entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "malwareName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The malware name by the vendor, e.g. Win32/Toga!rfn"
+        },
+        "category": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The malware category by the vendor, e.g. Trojan"
+        },
+        "fileEntityIds": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "file entity id",
+            "type": "string"
+          },
+          "description": "List of linked file entity identifiers on which the malware was found"
+        },
+        "processEntityIds": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "process entity id",
+            "type": "string"
+          },
+          "description": "List of linked process entity identifiers on which the malware was found."
+        }
+      }
+    },
+    "SecurityGroupEntity": {
+      "x-ms-discriminator-value": "SecurityGroup",
+      "type": "object",
+      "description": "Represents a security group entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "SecurityGroup entity properties",
+          "$ref": "#/definitions/SecurityGroupEntityProperties"
+        }
+      }
+    },
+    "SecurityGroupEntityProperties": {
+      "type": "object",
+      "description": "SecurityGroup entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "distinguishedName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The group distinguished name"
+        },
+        "sid": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The SID attribute is a single-value attribute that specifies the security identifier (SID) of the group"
+        },
+        "objectGuid": {
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true,
+          "description": "A single-value attribute that is the unique identifier for the object, assigned by active directory."
+        }
+      }
+    },
+    "AzureResourceEntity": {
+      "x-ms-discriminator-value": "AzureResource",
+      "type": "object",
+      "description": "Represents an azure resource entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "AzureResource entity properties",
+          "$ref": "#/definitions/AzureResourceEntityProperties"
+        }
+      }
+    },
+    "AzureResourceEntityProperties": {
+      "type": "object",
+      "description": "AzureResource entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The azure resource id of the resource"
+        }
+      }
+    },
+    "CloudApplicationEntity": {
+      "x-ms-discriminator-value": "CloudApplication",
+      "type": "object",
+      "description": "Represents a cloud application entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "CloudApplication entity properties",
+          "$ref": "#/definitions/CloudApplicationEntityProperties"
+        }
+      }
+    },
+    "CloudApplicationEntityProperties": {
+      "type": "object",
+      "description": "CloudApplication entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "appId": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "The technical identifier of the application."
+        },
+        "appName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the related cloud application."
+        },
+        "instanceName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The user defined instance name of the cloud application. It is often used to distinguish between several applications of the same type that a customer has."
+        }
+      }
+    },
+    "ProcessEntity": {
+      "x-ms-discriminator-value": "Process",
+      "type": "object",
+      "description": "Represents a process entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Process entity properties",
+          "$ref": "#/definitions/ProcessEntityProperties"
+        }
+      }
+    },
+    "ProcessEntityProperties": {
+      "type": "object",
+      "description": "Process entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "processId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The process ID"
+        },
+        "commandLine": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The command line used to create the process"
+        },
+        "elevationToken": {
+          "type": "string",
+          "enum": [
+            "Default",
+            "Full",
+            "Limited"
+          ],
+          "x-ms-enum": {
+            "name": "ElevationToken",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Default elevation token"
+              },
+              {
+                "value": "Full",
+                "description": "Full elevation token"
+              },
+              {
+                "value": "Limited",
+                "description": "Limited elevation token"
+              }
+            ]
+          },
+          "description": "The elevation token associated with the process."
+        },
+        "creationTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true,
+          "description": "The time when the process started to run"
+        },
+        "imageFileEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Image file entity id"
+        },
+        "accountEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The account entity id running the processes."
+        },
+        "parentProcessEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The parent process entity id."
+        },
+        "hostEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The host entity id on which the process was running"
+        },
+        "hostLogonSessionEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The session entity id in which the process was running"
+        }
+      }
+    },
+    "DnsEntity": {
+      "x-ms-discriminator-value": "DnsResolution",
+      "type": "object",
+      "description": "Represents a dns entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Dns entity properties",
+          "$ref": "#/definitions/DnsEntityProperties"
+        }
+      }
+    },
+    "DnsEntityProperties": {
+      "type": "object",
+      "description": "Dns entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the dns record associated with the alert"
+        },
+        "ipAddressEntityIds": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "description": "Ip entity id",
+            "type": "string"
+          },
+          "description": "Ip entity identifiers for the resolved ip address."
+        },
+        "dnsServerIpEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An ip entity id for the dns server resolving the request"
+        },
+        "hostIpAddressEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "An ip entity id for the dns request client"
+        }
+      }
+    },
+    "IpEntity": {
+      "x-ms-discriminator-value": "Ip",
+      "type": "object",
+      "description": "Represents an ip entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Ip entity properties",
+          "$ref": "#/definitions/IpEntityProperties"
+        }
+      }
+    },
+    "IpEntityProperties": {
+      "type": "object",
+      "description": "Ip entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "address": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The IP address as string, e.g. 127.0.0.1 (either in Ipv4 or Ipv6)"
+        },
+        "location": {
+          "$ref": "#/definitions/GeoLocation",
+          "description": "The geo-location context attached to the ip entity"
+        },
+        "threatIntelligence": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ThreatIntelligence"
+          },
+          "description": "A list of TI contexts attached to the ip entity."
+        }
+      }
+    },
+    "GeoLocation": {
+      "type": "object",
+      "readOnly": true,
+      "description": "The geo-location context attached to the ip entity",
+      "properties": {
+        "countryCode": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The country code according to ISO 3166 format"
+        },
+        "countryName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Country name according to ISO 3166 Alpha 2: the lowercase of the English Short Name"
+        },
+        "state": {
+          "type": "string",
+          "readOnly": true,
+          "description": "State name"
+        },
+        "city": {
+          "type": "string",
+          "readOnly": true,
+          "description": "City name"
+        },
+        "longitude": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The latitude of the identified location, expressed as a floating point number with range of - 90 to 90, with positive numbers representing North and negative numbers representing South. Latitude and longitude are derived from the city or postal code."
+        },
+        "latitude": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The longitude of the identified location, expressed as a floating point number with range of -180 to 180, with positive numbers representing East and negative numbers representing West. Latitude and longitude are derived from the city or postal code."
+        },
+        "asn": {
+          "type": "integer",
+          "readOnly": true,
+          "description": "Autonomous System Number"
+        }
+      }
+    },
+    "ThreatIntelligence": {
+      "type": "object",
+      "description": "ThreatIntelligence property bag.",
+      "properties": {
+        "providerName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the provider from whom this Threat Intelligence information was received"
+        },
+        "threatType": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Threat type (e.g. \"Botnet\")"
+        },
+        "threatName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Threat name (e.g. \"Jedobot malware\")"
+        },
+        "confidence": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "Confidence (must be between 0 and 1)"
+        },
+        "reportLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Report link"
+        },
+        "threatDescription": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Threat description (free text)"
+        }
+      }
+    },
+    "RegistryKeyEntity": {
+      "x-ms-discriminator-value": "RegistryKey",
+      "type": "object",
+      "description": "Represents a registry key entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "RegistryKey entity properties",
+          "$ref": "#/definitions/RegistryKeyEntityProperties"
+        }
+      }
+    },
+    "RegistryKeyEntityProperties": {
+      "type": "object",
+      "description": "RegistryKey entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "hive": {
+          "type": "string",
+          "description": "the hive that holds the registry key.",
+          "readOnly": true,
+          "enum": [
+            "HKEY_LOCAL_MACHINE",
+            "HKEY_CLASSES_ROOT",
+            "HKEY_CURRENT_CONFIG",
+            "HKEY_USERS",
+            "HKEY_CURRENT_USER_LOCAL_SETTINGS",
+            "HKEY_PERFORMANCE_DATA",
+            "HKEY_PERFORMANCE_NLSTEXT",
+            "HKEY_PERFORMANCE_TEXT",
+            "HKEY_A",
+            "HKEY_CURRENT_USER"
+          ],
+          "x-ms-enum": {
+            "name": "RegistryHive",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "HKEY_LOCAL_MACHINE",
+                "description": "HKEY_LOCAL_MACHINE"
+              },
+              {
+                "value": "HKEY_CLASSES_ROOT",
+                "description": "HKEY_CLASSES_ROOT"
+              },
+              {
+                "value": "HKEY_CURRENT_CONFIG",
+                "description": "HKEY_CURRENT_CONFIG"
+              },
+              {
+                "value": "HKEY_USERS",
+                "description": "HKEY_USERS"
+              },
+              {
+                "value": "HKEY_CURRENT_USER_LOCAL_SETTINGS",
+                "description": "HKEY_CURRENT_USER_LOCAL_SETTINGS"
+              },
+              {
+                "value": "HKEY_PERFORMANCE_DATA",
+                "description": "HKEY_PERFORMANCE_DATA"
+              },
+              {
+                "value": "HKEY_PERFORMANCE_NLSTEXT",
+                "description": "HKEY_PERFORMANCE_NLSTEXT"
+              },
+              {
+                "value": "HKEY_PERFORMANCE_TEXT",
+                "description": "HKEY_PERFORMANCE_TEXT"
+              },
+              {
+                "value": "HKEY_A",
+                "description": "HKEY_A"
+              },
+              {
+                "value": "HKEY_CURRENT_USER",
+                "description": "HKEY_CURRENT_USER"
+              }
+            ]
+          }
+        },
+        "key": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The registry key path."
+        }
+      }
+    },
+    "RegistryValueEntity": {
+      "x-ms-discriminator-value": "RegistryValue",
+      "type": "object",
+      "description": "Represents a registry value entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "RegistryKey entity properties",
+          "$ref": "#/definitions/RegistryValueEntityProperties"
+        }
+      }
+    },
+    "RegistryValueEntityProperties": {
+      "type": "object",
+      "description": "RegistryValue entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "valueName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The registry value name."
+        },
+        "valueData": {
+          "type": "string",
+          "readOnly": true,
+          "description": "String formatted representation of the value data."
+        },
+        "valueType": {
+          "type": "string",
+          "description": "Specifies the data types to use when storing values in the registry, or identifies the data type of a value in the registry.",
+          "readOnly": true,
+          "enum": [
+            "None",
+            "Unknown",
+            "String",
+            "ExpandString",
+            "Binary",
+            "DWord",
+            "MultiString",
+            "QWord"
+          ],
+          "x-ms-enum": {
+            "name": "RegistryValueKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "None",
+                "description": "None"
+              },
+              {
+                "value": "Unknown",
+                "description": "Unknown value type"
+              },
+              {
+                "value": "String",
+                "description": "String value type"
+              },
+              {
+                "value": "ExpandString",
+                "description": "ExpandString value type"
+              },
+              {
+                "value": "Binary",
+                "description": "Binary value type"
+              },
+              {
+                "value": "DWord",
+                "description": "DWord value type"
+              },
+              {
+                "value": "MultiString",
+                "description": "MultiString value type"
+              },
+              {
+                "value": "QWord",
+                "description": "QWord value type"
+              }
+            ]
+          }
+        },
+        "keyEntityId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The registry key entity id."
+        }
+      }
+    },
+    "UrlEntity": {
+      "x-ms-discriminator-value": "Url",
+      "type": "object",
+      "description": "Represents a url entity.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Url entity properties",
+          "$ref": "#/definitions/UrlEntityProperties"
+        }
+      }
+    },
+    "UrlEntityProperties": {
+      "type": "object",
+      "description": "Url entity property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/EntityCommonProperties"
+        }
+      ],
+      "properties": {
+        "url": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A full URL the entity points to"
+        }
+      }
+    },
+    "EntityExpandParameters": {
+      "description": "The parameters required to execute an expand operation on the given entity.",
+      "properties": {
+        "expansionId": {
+          "type": "string",
+          "format": "uuid",
+          "description": "The Id of the expansion to perform."
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start date filter, so the only expansion results returned are after this date."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end date filter, so the only expansion results returned are before this date."
+        }
+      }
+    },
+    "EntityExpandResponse": {
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "The expansion result values.",
+          "properties": {
+            "entities": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Entity"
+              },
+              "description": "Array of the expansion result entities."
+            }
+          }
+        },
+        "metaData": {
+          "$ref": "#/definitions/ExpansionResultsMetadata",
+          "description": "The metadata from the expansion operation results."
+        }
+      },
+      "description": "The entity expansion result operation response."
+    },
+    "ExpansionResultsMetadata": {
+      "type": "object",
+      "description": "Expansion result metadata.",
+      "properties": {
+        "aggregations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ExpansionResultAggregation"
+          },
+          "description": "Information of the aggregated nodes in the expansion result."
+        }
+      }
+    },
+    "ExpansionResultAggregation": {
+      "type": "object",
+      "description": "Information of a specific aggregation in the expansion result.",
+      "properties": {
+        "entityKind": {
+          "description": "The kind of the aggregated entity.",
+          "$ref": "#/definitions/EntityInnerKind"
+        },
+        "count": {
+          "type": "integer",
+          "description": "Total number of aggregations of the given kind (and aggregationType if given) in the expansion result."
+        },
+        "aggregationType": {
+          "type": "string",
+          "description": "The common type of the aggregation. (for e.g. entity field name)"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the aggregation by type."
+        }
+      },
+      "required": [
+        "entityKind",
+        "count"
+      ]
     },
     "OfficeConsentList": {
       "description": "List of all the office365 consents.",
@@ -3258,7 +4622,7 @@
           "description": "The template query string to be parsed and formatted"
         },
         "inputEntityType": {
-          "type": "string",
+          "$ref": "#/definitions/EntityInnerType",
           "description": "The type of the query's source entity"
         },
         "inputFields": {
@@ -3273,7 +4637,7 @@
           "type": "array",
           "items": {
             "description": "output entity type",
-            "type": "string"
+            "$ref": "#/definitions/EntityInnerType"
           },
           "description": "List of the desired output types to be constructed from the result"
         },
@@ -3289,6 +4653,98 @@
           "type": "string",
           "description": "The query display name"
         }
+      }
+    },
+    "EntityInnerType": {
+      "type": "string",
+      "description": "The type of the entity",
+      "enum": [
+        "Account",
+        "Host",
+        "File",
+        "AzureResource",
+        "CloudApplication",
+        "DNS",
+        "FileHash",
+        "IP",
+        "Malware",
+        "Process",
+        "RegistryKey",
+        "RegistryValue",
+        "SecurityGroup",
+        "URL",
+        "SecurityAlert",
+        "HuntingBookmark"
+      ],
+      "x-ms-enum": {
+        "name": "EntityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Account",
+            "description": "Entity represents account in the system."
+          },
+          {
+            "value": "Host",
+            "description": "Entity represents host in the system."
+          },
+          {
+            "value": "File",
+            "description": "Entity represents file in the system."
+          },
+          {
+            "value": "AzureResource",
+            "description": "Entity represents azure resource in the system."
+          },
+          {
+            "value": "CloudApplication",
+            "description": "Entity represents cloud application in the system."
+          },
+          {
+            "value": "DNS",
+            "description": "Entity represents dns in the system."
+          },
+          {
+            "value": "FileHash",
+            "description": "Entity represents file hash in the system."
+          },
+          {
+            "value": "IP",
+            "description": "Entity represents ip in the system."
+          },
+          {
+            "value": "Malware",
+            "description": "Entity represents malware in the system."
+          },
+          {
+            "value": "Process",
+            "description": "Entity represents process in the system."
+          },
+          {
+            "value": "RegistryKey",
+            "description": "Entity represents registry key in the system."
+          },
+          {
+            "value": "RegistryValue",
+            "description": "Entity represents registry value in the system."
+          },
+          {
+            "value": "SecurityGroup",
+            "description": "Entity represents security group in the system."
+          },
+          {
+            "value": "URL",
+            "description": "Entity represents url in the system."
+          },
+          {
+            "value": "SecurityAlert",
+            "description": "Entity represents security alert in the system."
+          },
+          {
+            "value": "HuntingBookmark",
+            "description": "Entity represents HuntingBookmark in the system."
+          }
+        ]
       }
     }
   },
@@ -3436,6 +4892,16 @@
       "required": true,
       "type": "string",
       "description": "entity ID",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityExpandRequestBody": {
+      "name": "parameters",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/EntityExpandParameters"
+      },
+      "description": "The parameters required to execute an expand operation on the given entity.",
       "x-ms-parameter-location": "method"
     },
     "ConsentId": {
