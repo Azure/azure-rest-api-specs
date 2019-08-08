@@ -41,7 +41,7 @@
         ],
         "summary": "Gets the current quota limit and usages for the resources provider for the specified location.",
         "description": "Gets the current quota limit and usages for the resources provider for the specified location.",
-        "operationId": "Quota_Check",
+        "operationId": "Quotas_Check",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -82,7 +82,7 @@
         ],
         "summary": "Submits a Quota Request for a resource provider at the specified location.",
         "description": "Submits Quota change request for a resource provider for the specified location. To use, first make a request to the /usages API to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the /usages to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
-        "operationId": "Quota_Request_Submit",
+        "operationId": "QuotaRequests_Create",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -122,7 +122,8 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
-        }
+        },
+		"x-ms-long-running-operation": true
       },
       "get": {
         "tags": [
@@ -130,7 +131,7 @@
         ],
         "summary": "For the specified location, gets the Quota request status by request name provided during the quota request creation for the specific resources under the subscription.",
         "description": "Gets the QuotaRequest details and status by the quota Request Name for the resources for the resource  provider at a specific location.",
-        "operationId": "QuotaRequests_Status_Check",
+        "operationId": "QuotaRequests_Get",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -152,7 +153,7 @@
           "200": {
             "description": "Ok. Returning the status for all relevant quota requests .",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestDetails"
+              "$ref": "#/definitions/QuotaRequestDetail"
             }
           },
           "default": {
@@ -163,7 +164,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -171,8 +172,8 @@
           "QuotaRequests"
         ],
         "summary": "Deletes the QuotaRequest by name for the resources for the resource  provider at a specific location.",
-        "description": "For the specified location, deletes the quota request by request name for resources under the subscription. Delete will not cancel the Quota Request in progress. It will only delete the completed requests, whican be rejected or succeeded quota requests.",
-        "operationId": "QuotaRequests_Name_Delete",
+		"description": "For the specified location, deletes the quota request by request name for resources under the subscription. Delete will not cancel the Quota Request in progress. It will only delete the completed requests, whican be rejected or succeeded quota requests.",
+        "operationId": "QuotaRequests_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
@@ -212,12 +213,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{locationId}/quotarequests": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{locationId}/quotaRequests": {
       "get": {
         "tags": [
           "QuotaRequests"
         ],
-        "summary": "For the specified location and resource Provider, gets thecurrent quota requests under the subscription over the time\n period of one year ago from now to one year back.",
+        "summary": "For the specified location and resource Provider, gets the current quota requests under the subscription over the time\n period of one year ago from now to one year back.",
         "description": "For the specified location and Resource provider gets the current quota requests under the subscription over the time period of one year ago from now to one year back. oData filter can be used to select quota requests.",
         "operationId": "QuotaRequest_status",
         "parameters": [
@@ -423,21 +424,6 @@
           "items": {
             "$ref": "#/definitions/SubRequest"
           }
-        }
-      }
-    },
-    "QuotaRequestDetails": {
-      "description": "Quota requests information.",
-      "properties": {
-        "quotaRequests": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaRequestDetail"
-          }
-        },
-        "nextLink": {
-          "description": "The uri to fetch the next page of quota limits. When there are no more pages, this is null.",
-          "type": "string"
         }
       }
     },
