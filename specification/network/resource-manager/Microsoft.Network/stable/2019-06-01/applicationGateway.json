@@ -1513,6 +1513,10 @@
         "provisioningState": {
           "type": "string",
           "description": "Path rule of URL path map resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of the FirewallPolicy resource."
         }
       },
       "description": "Properties of path rule of an application gateway."
@@ -1680,6 +1684,10 @@
         "redirectConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Redirect configuration resource of the application gateway."
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "FirewallPolicy referred for Routing Rule."
         },
         "provisioningState": {
           "type": "string",
