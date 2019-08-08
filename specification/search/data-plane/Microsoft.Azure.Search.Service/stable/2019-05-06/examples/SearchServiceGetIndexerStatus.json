@@ -43,17 +43,38 @@
               {
                 "key": "",
                 "errorMessage": "Document key cannot be missing or empty.",
-                "statusCode": 400
+                "statusCode": 400,
+                "name": null,
+                "details": null,
+                "documentationLink": null
+              },
+              {
+                "key": "document id 1",
+                "errorMessage": "Could not read the value of column 'foo' at index '0'.",
+                "statusCode": 400,
+                "name": "DocumentExtraction.AzureBlob.MyDataSource",
+                "details": "The file could not be found.",
+                "documentationLink": "https://contoso.example.org?type=error"
               }
             ],
             "warnings": [
               {
                 "key": "document id",
-                "message": "A warning doesn't stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob."
+                "message": "A warning doesn't stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob.",
+                "name": null,
+                "details": null,
+                "documentationLink": null
+              },
+              {
+                "key": "document id 2",
+                "message": "Another interesting scenario happened.",
+                "name": "Enrichment.LanguageDetectionSkill.#4",
+                "details": "The skill did something that didn't break anything, nonetheless something we didn't expect happened, so it might be worth double checking.",
+                "documentationLink": "https://contoso.example.org?type=warning"
               }
             ],
             "itemsProcessed": 1,
-            "itemsFailed": 1,
+            "itemsFailed": 2,
             "initialTrackingState": null,
             "finalTrackingState": null
           }
