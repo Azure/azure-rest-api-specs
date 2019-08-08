@@ -28,7 +28,23 @@ These are the global settings for the FrontDoor API.
 title: FrontDoorManagementClient
 description: FrontDoor Client
 openapi-type: arm
-tag: package-2019-04
+tag: package-2019-05
+```
+
+### Tag: package-2019-05
+
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05'
+input-file:
+- Microsoft.Network/stable/2019-05-01/frontdoor.json
+- Microsoft.Network/stable/2019-05-01/network.json
+- Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
 ```
 
 ### Tag: package-2019-04
@@ -90,7 +106,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-libraries-for-java
   - repo: azure-sdk-for-go
