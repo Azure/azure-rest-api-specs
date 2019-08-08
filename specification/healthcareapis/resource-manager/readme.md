@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the HANA on Azure API.
+These are the global settings for HealthcareApis service.
 
 ``` yaml
 title: HealthcareApisManagementClient
@@ -52,12 +52,26 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
 ```
+## C#
 
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  # last generated with AutoRest.2.0.4144
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.Management.HealthcareApis
+  output-folder: $(csharp-sdks-folder)/healthcareapis/Microsoft.Azure.Management.HealthcareApis/src/Generated
+  clear-output-folder: true
+```
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
