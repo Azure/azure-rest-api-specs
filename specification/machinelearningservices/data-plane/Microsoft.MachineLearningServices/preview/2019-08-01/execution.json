@@ -20,6 +20,7 @@
           "application/json"
         ],
         "produces": [
+          "application/json",
           "application/octet-stream"
         ],
         "parameters": [
@@ -339,7 +340,7 @@
           "example": "Python",
           "x-ms-enum": {
             "name": "Framework",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "communicator": {
@@ -355,7 +356,7 @@
           "example": "None",
           "x-ms-enum": {
             "name": "Communicator",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "target": {
@@ -433,7 +434,7 @@
           "example": "Mount",
           "x-ms-enum": {
             "name": "DataStoreMode",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "pathOnDataStore": {
@@ -559,7 +560,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "YarnDeployMode",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       }
@@ -602,10 +603,6 @@
         },
         "sharedVolumes": {
           "description": "Set false to disable AzureML's usage of the Docker shared volumes feature to work around bugs in certain versions of Docker for Windows.",
-          "type": "boolean"
-        },
-        "gpuSupport": {
-          "description": "Run with NVidia Docker extension to support GPUs.",
           "type": "boolean"
         },
         "arguments": {

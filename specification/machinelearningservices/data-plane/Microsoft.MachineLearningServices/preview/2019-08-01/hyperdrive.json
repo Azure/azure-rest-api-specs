@@ -663,25 +663,6 @@
       "type": "string",
       "x-ms-skip-url-encoding": true,
       "x-ms-parameter-location": "method"
-    },
-    "dnsSuffix": {
-      "name": "dnsSuffix",
-      "in": "path",
-      "description": "The DNS suffix for the Azure Machine Learning Service endpoint.",
-      "required": true,
-      "type": "string",
-      "default": "api.azureml.ms",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
-    },
-    "region": {
-      "name": "region",
-      "in": "path",
-      "description": "The Azure region name.",
-      "required": true,
-      "type": "string",
-      "x-ms-skip-url-encoding": true,
-      "x-ms-parameter-location": "client"
     }
   },
   "securityDefinitions": {
@@ -700,16 +681,5 @@
         "user_impersonation"
       ]
     }
-  ],
-  "x-ms-parameterized-host": {
-    "hostTemplate": "{region}.{dnsSuffix}",
-    "parameters": [
-      {
-        "$ref": "#/parameters/region"
-      },
-      {
-        "$ref": "#/parameters/dnsSuffix"
-      }
-    ]
-  }
+  ]
 }

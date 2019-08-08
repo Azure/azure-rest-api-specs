@@ -1727,7 +1727,7 @@
           "type": "string",
           "x-ms-enum": {
             "name": "AsyncOperationState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "createdTime": {
@@ -1965,14 +1965,6 @@
           "description": "The service description.",
           "type": "string"
         },
-        "tags": {
-          "description": "The service tag list.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
         "kvTags": {
           "description": "The service tag dictionary. Tags are mutable.",
           "type": "object",
@@ -2003,7 +1995,7 @@
           "example": "Healthy",
           "x-ms-enum": {
             "name": "WebServiceState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "createdTime": {
@@ -2034,7 +2026,7 @@
           "example": "AKS",
           "x-ms-enum": {
             "name": "ComputeEnvironmentType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "deploymentType": {
@@ -2048,7 +2040,7 @@
           "example": "HttpRealtimeEndpoint",
           "x-ms-enum": {
             "name": "DeploymentType",
-            "modelAsString": true
+            "modelAsString": false
           }
         }
       },
@@ -2120,7 +2112,7 @@
           "example": "AKS",
           "x-ms-enum": {
             "name": "ComputeEnvironmentType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "deploymentType": {
@@ -2134,7 +2126,7 @@
           "example": "HttpRealtimeEndpoint",
           "x-ms-enum": {
             "name": "DeploymentType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "imageId": {
@@ -2164,6 +2156,101 @@
           "type": "string"
         }
       }
+    },
+    "ACIServiceResponse": {
+      "description": "The response for an ACI service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResponseBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "containerResourceRequirements": {
+              "$ref": "#/definitions/ContainerResourceRequirements",
+              "description": "The container resource requirements."
+            },
+            "imageId": {
+              "description": "The Id of the Image.",
+              "type": "string"
+            },
+            "imageDetails": {
+              "$ref": "#/definitions/DockerImageResponse",
+              "description": "The Image details."
+            },
+            "scoringUri": {
+              "description": "The Uri for sending scoring requests.",
+              "type": "string"
+            },
+            "location": {
+              "description": "The location of the service.",
+              "type": "string"
+            },
+            "authEnabled": {
+              "description": "Whether or not authentication is enabled on the service.",
+              "type": "boolean"
+            },
+            "sslEnabled": {
+              "description": "Whether or not SSL is enabled.",
+              "type": "boolean"
+            },
+            "appInsightsEnabled": {
+              "description": "Whether or not Application Insights is enabled.",
+              "type": "boolean"
+            },
+            "dataCollection": {
+              "$ref": "#/definitions/ModelDataCollection",
+              "description": "Details of the data collection options specified."
+            },
+            "sslCertificate": {
+              "description": "The SSL certificate to use if SSL is enabled.",
+              "type": "string"
+            },
+            "sslKey": {
+              "description": "The SSL key for the certificate.",
+              "type": "string"
+            },
+            "cname": {
+              "description": "The CName for the service.",
+              "type": "string"
+            },
+            "publicIp": {
+              "description": "The public IP address for the service.",
+              "type": "string"
+            },
+            "publicFqdn": {
+              "description": "The public Fqdn for the service.",
+              "type": "string"
+            },
+            "swaggerUri": {
+              "description": "The Uri for sending swagger requests.",
+              "type": "string"
+            },
+            "modelConfigMap": {
+              "description": "Details on the models and configurations.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "object"
+              }
+            },
+            "environment": {
+              "$ref": "#/definitions/ModelEnvironmentDefinition",
+              "description": "Details on the Environment."
+            },
+            "models": {
+              "description": "The list of models.",
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/Model"
+              }
+            }
+          }
+        }
+      ],
+      "properties": {},
+      "x-ms-discriminator-value": "ACI"
     },
     "EnvironmentImageRequest": {
       "description": "Request to create a Docker image based on Environment.",
@@ -2391,7 +2478,7 @@
           "example": "Primary",
           "x-ms-enum": {
             "name": "KeyType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "keyValue": {
@@ -2424,101 +2511,6 @@
         }
       }
     },
-    "ACIServiceResponse": {
-      "description": "The response for an AKS service.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResponseBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "containerResourceRequirements": {
-              "$ref": "#/definitions/ContainerResourceRequirements",
-              "description": "The container resource requirements."
-            },
-            "imageId": {
-              "description": "The Id of the Image.",
-              "type": "string"
-            },
-            "imageDetails": {
-              "$ref": "#/definitions/CustomDockerImageResponse",
-              "description": "The Image details."
-            },
-            "scoringUri": {
-              "description": "The Uri for sending scoring requests.",
-              "type": "string"
-            },
-            "location": {
-              "description": "The location of the service.",
-              "type": "string"
-            },
-            "authEnabled": {
-              "description": "Whether or not authentication is enabled on the service.",
-              "type": "boolean"
-            },
-            "sslEnabled": {
-              "description": "Whether or not SSL is enabled.",
-              "type": "boolean"
-            },
-            "appInsightsEnabled": {
-              "description": "Whether or not Application Insights is enabled.",
-              "type": "boolean"
-            },
-            "dataCollection": {
-              "$ref": "#/definitions/ModelDataCollection",
-              "description": "Details of the data collection options specified."
-            },
-            "sslCertificate": {
-              "description": "The SSL certificate to use if SSL is enabled.",
-              "type": "string"
-            },
-            "sslKey": {
-              "description": "The SSL key for the certificate.",
-              "type": "string"
-            },
-            "cname": {
-              "description": "The CName for the service.",
-              "type": "string"
-            },
-            "publicIp": {
-              "description": "The public IP address for the service.",
-              "type": "string"
-            },
-            "publicFqdn": {
-              "description": "The public Fqdn for the service.",
-              "type": "string"
-            },
-            "swaggerUri": {
-              "description": "The Uri for sending swagger requests.",
-              "type": "string"
-            },
-            "modelConfigMap": {
-              "description": "Details on the models and configurations.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "object"
-              }
-            },
-            "environment": {
-              "$ref": "#/definitions/ModelEnvironmentDefinition",
-              "description": "Details on the Environment."
-            },
-            "models": {
-              "description": "The list of models.",
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Model"
-              }
-            }
-          }
-        }
-      ],
-      "properties": {},
-      "x-ms-discriminator-value": "ACI"
-    },
     "ContainerResourceRequirements": {
       "description": "The resource requirements for the container (cpu and memory).",
       "type": "object",
@@ -2547,7 +2539,7 @@
         }
       }
     },
-    "CustomDockerImageResponse": {
+    "DockerImageResponse": {
       "type": "object",
       "allOf": [
         {
@@ -2637,7 +2629,7 @@
           "example": "Amd64",
           "x-ms-enum": {
             "name": "ArchitectureType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "osType": {
@@ -2650,7 +2642,7 @@
           "example": "linux",
           "x-ms-enum": {
             "name": "OSType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "runtimeType": {
@@ -2668,7 +2660,7 @@
           "example": "Python",
           "x-ms-enum": {
             "name": "RuntimeType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "properties": {
@@ -2738,7 +2730,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/K8SVariantResponse"
+          "$ref": "#/definitions/AKSVariantResponse"
         },
         {
           "type": "object",
@@ -2908,7 +2900,7 @@
           "example": "Docker",
           "x-ms-enum": {
             "name": "ImageType",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "imageFlavor": {
@@ -2917,7 +2909,6 @@
             "WebApiContainer",
             "BatchContainer",
             "IoTContainer",
-            "BrainwavePackage",
             "AccelContainer",
             "UserProvidedContainer"
           ],
@@ -2925,7 +2916,7 @@
           "example": "WebApiContainer",
           "x-ms-enum": {
             "name": "ImageFlavor",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "creationState": {
@@ -2942,7 +2933,7 @@
           "example": "Running",
           "x-ms-enum": {
             "name": "AsyncOperationState",
-            "modelAsString": true
+            "modelAsString": false
           }
         },
         "error": {
@@ -3071,6 +3062,42 @@
           "type": "integer"
         }
       }
+    },
+    "AKSVariantResponse": {
+      "description": "The response for an AKS variant.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceResponseBase"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "isDefault": {
+              "description": "Is this the default variant.",
+              "type": "boolean"
+            },
+            "trafficPercentile": {
+              "format": "float",
+              "description": "The amount of traffic variant receives.",
+              "type": "number"
+            },
+            "type": {
+              "description": "The type of the variant.",
+              "enum": [
+                "Control",
+                "Treatment"
+              ],
+              "type": "string",
+              "x-ms-enum": {
+                "name": "VariantType",
+                "modelAsString": false
+              }
+            }
+          }
+        }
+      ],
+      "properties": {}
     },
     "BatchServiceResponse": {
       "type": "object",
@@ -3205,42 +3232,6 @@
           }
         }
       }
-    },
-    "K8SVariantResponse": {
-      "description": "The response for an AKS variant.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ServiceResponseBase"
-        },
-        {
-          "type": "object",
-          "properties": {
-            "isDefault": {
-              "description": "Is this the default variant.",
-              "type": "boolean"
-            },
-            "trafficPercentile": {
-              "format": "float",
-              "description": "The amount of traffic variant receives.",
-              "type": "number"
-            },
-            "type": {
-              "description": "The type of the variant.",
-              "enum": [
-                "Control",
-                "Treatment"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "VariantType",
-                "modelAsString": true
-              }
-            }
-          }
-        }
-      ],
-      "properties": {}
     },
     "UnknownServiceResponse": {
       "description": "The response for an unsupported Service\r\nDefines the basic service properties",
@@ -3467,7 +3458,7 @@
               "type": "string",
               "x-ms-enum": {
                 "name": "VariantType",
-                "modelAsString": true
+                "modelAsString": false
               }
             }
           }
