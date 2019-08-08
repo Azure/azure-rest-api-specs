@@ -915,8 +915,13 @@
         "diskSizeBytes": {
           "type": "integer",
           "format": "int64",
-          "readOnly":  true,
+          "readOnly": true,
           "description": "The size of the disk in bytes. This field is read only."
+        },
+        "uniqueId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Unique Guid identifying the resource."
         },
         "encryptionSettingsCollection": {
           "$ref": "#/definitions/EncryptionSettingsCollection",
@@ -1072,7 +1077,7 @@
         },
         "encryptionSettingsVersion": {
           "type": "string",
-          "description": "Describes what type of encryption is used for the disks. Once this field is set, it cannot be overwritten. '1.0' or Null corresponds to extension based encryption with AAD app. '1.1' corresponds to extension based encryption without AAD app. '2.0' corresponds to host based encryption."
+          "description": "Describes what type of encryption is used for the disks. Once this field is set, it cannot be overwritten. '1.0' corresponds to Azure Disk Encryption with AAD app.'1.1' corresponds to Azure Disk Encryption."
         }
       },
       "required": [
@@ -1155,12 +1160,6 @@
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
-        "diskSizeBytes": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly":  true,
-          "description": "The size of the disk in bytes. This field is read only."
-        },
         "encryptionSettingsCollection": {
           "$ref": "#/definitions/EncryptionSettingsCollection",
           "description": "Encryption settings collection used be Azure Disk Encryption, can contain multiple encryption settings per disk or snapshot."
@@ -1196,12 +1195,6 @@
           "type": "integer",
           "format": "int32",
           "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
-        },
-        "diskSizeBytes": {
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true,
-          "description": "The size of the disk in bytes. This field is read only."
         },
         "encryptionSettingsCollection": {
           "$ref": "#/definitions/EncryptionSettingsCollection",
