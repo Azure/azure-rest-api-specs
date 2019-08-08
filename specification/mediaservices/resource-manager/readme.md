@@ -192,6 +192,7 @@ batch:
   - tag: package-2018-03-preview
   - tag: package-2018-06-preview
   - tag: package-2018-07
+  - tag: package-2019-05-preview
 ```
 
 ### Tag: package-2015-10 and java
@@ -242,6 +243,19 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 java:
   namespace: com.microsoft.azure.management.mediaservices.v2018_07_01
   output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2018_07_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-05-preview and java
+
+These settings apply only when `--tag=package-2019-05-preview --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.mediaservices.v2019_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2019_05_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
