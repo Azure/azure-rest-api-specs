@@ -2125,12 +2125,12 @@
           "description": "Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool.",
           "type": "string",
           "enum": [
-              "Enabled",
-              "Disabled"
-            ],
+            "Enabled",
+            "Disabled"
+          ],
           "x-ms-enum": {
-              "name": "HealthProbeEnabled",
-              "modelAsString": true
+            "name": "HealthProbeEnabled",
+            "modelAsString": true
           }
         }
       }
@@ -2285,7 +2285,11 @@
     "CustomHttpsConfiguration": {
       "description": "Https settings for a domain",
       "type": "object",
-      "required": ["minimumTlsVersion", "certificateSource", "protocolType"],
+      "required": [
+        "minimumTlsVersion",
+        "certificateSource",
+        "protocolType"
+      ],
       "properties": {
         "certificateSource": {
           "description": "Defines the source of the SSL certificate",
