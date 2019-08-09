@@ -2896,63 +2896,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerun/{rerunTriggerName}": {
-      "put": {
-        "tags": [
-          "triggers"
-        ],
-        "operationId": "Triggers_CreateRerunTrigger",
-        "x-ms-examples": {
-          "RerunTriggers_Create": {
-            "$ref": "./examples/Triggers_CreateRerunTrigger.json"
-          }
-        },
-        "description": "Creates a rerun trigger for TumblingWindowTrigger",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/triggerName"
-          },
-          {
-            "$ref": "#/parameters/rerunTriggerName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "rerunTumblingWindowTriggerActionParameters",
-            "description": "Rerun tumbling window trigger action parameters.",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RerunTumblingWindowTriggerActionParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/TriggerResource"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers": {
       "get": {
         "tags": [
@@ -4442,33 +4385,6 @@
         "type": "object"
       }
     },
-    "RerunTumblingWindowTriggerActionParameters": {
-      "description": "Rerun tumbling window trigger Parameters.",
-      "type": "object",
-      "properties": {
-        "startTime": {
-          "description": "The start time for the time period for which restatement is initiated. Only UTC time is currently supported.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "endTime": {
-          "description": "The end time for the time period for which restatement is initiated. Only UTC time is currently supported.",
-          "type": "string",
-          "format": "date-time"
-        },
-        "maxConcurrency": {
-          "description": "The max number of parallel time windows (ready for execution) for which a rerun is triggered.",
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 50
-        }
-      },
-      "required": [
-        "startTime",
-        "endTime",
-        "maxConcurrency"
-      ]
-    },
     "RerunTriggerListResponse": {
       "description": "A list of rerun triggers.",
       "type": "object",
@@ -4833,17 +4749,6 @@
     "triggerName": {
       "name": "triggerName",
       "description": "The trigger name.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
-      "minLength": 1,
-      "maxLength": 260,
-      "x-ms-parameter-location": "method"
-    },
-    "rerunTriggerName": {
-      "name": "rerunTriggerName",
-      "description": "The rerun trigger name.",
       "in": "path",
       "required": true,
       "type": "string",
