@@ -7679,36 +7679,34 @@
       },
       "description": "The parameters to generate upgraded definition."
     },
-    "ApiOperationListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ApiOperation"
-          },
-          "description": "The api operation definitions for an API."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results."
-        }
-      },
-      "description": "The list of managed API operations."
+    "ApiTier" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Enterprise",
+        "Standard",
+        "Premium"
+      ],
+      "x-ms-enum": {
+        "name": "ApiTier",
+        "modelAsString": true
+      }
     },
-    "ApiOperation" : {
+    "ApiOperationAnnotation" : {
       "type" : "object",
-      "description" : "The api operation.",
       "properties" : {
-        "properties" : {
-          "$ref" : "#defintions/ApiOperationPropertiesDefinition"
+        "status" : {
+          "$ref" : "#definitions/StatusAnnotation"
+        },
+        "family" : {
+          "type": "string",
+          "description" : "The family."
+        },
+        "revision" : {
+          "type" : "integer",
+          "description" : "The revision."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      }
     },
     "ApiOperationPropertiesDefinition" : {
       "type" : "object",
@@ -7767,6 +7765,49 @@
         }
       }
     },
+    "ApiOperation" : {
+      "type" : "object",
+      "description" : "The api operation.",
+      "properties" : {
+        "properties" : {
+          "$ref" : "#defintions/ApiOperationPropertiesDefinition"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ApiOperationListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApiOperation"
+          },
+          "description": "The api operation definitions for an API."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      },
+      "description": "The list of managed API operations."
+    },
+    "StatusAnnotation" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Preview",
+        "Production"
+      ],
+      "x-ms-enum": {
+        "name": "StatusAnnotation",
+        "modelAsString": true
+      }
+  },
     "ApiReference" : {
       "type" : "object",
       "properties" : {
@@ -7800,34 +7841,6 @@
         }        
       }
     },
-    "ApiOperationAnnotation" : {
-      "type" : "object",
-      "properties" : {
-        "status" : {
-          "$ref" : "#definitions/StatusAnnotation"
-        },
-        "family" : {
-          "type": "string",
-          "description" : "The family."
-        },
-        "revision" : {
-          "type" : "integer",
-          "description" : "The revision."
-        }
-      }
-    },
-    "StatusAnnotation" : {
-        "type": "string",
-        "enum": [
-          "NotSpecified",
-          "Preview",
-          "Production"
-        ],
-        "x-ms-enum": {
-          "name": "StatusAnnotation",
-          "modelAsString": true
-        }
-    },
     "ManagedApiListResult": {
       "type": "object",
       "properties": {
@@ -7844,21 +7857,6 @@
         }
       },
       "description": "The list of managed APIs."
-    },
-    "ManagedApi" : {
-      "type": "object",
-      "description": "The managed api definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ApiResourceProperties",
-          "description": "The api resource properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
     },
     "ApiResourceProperties" : {
       "type": "object",
@@ -8136,17 +8134,123 @@
         }
       }
     },
-    "ApiTier" : {
+    "ManagedApi" : {
+      "type": "object",
+      "description": "The managed api definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ApiResourceProperties",
+          "description": "The api resource properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "IntegrationServiceEnvironmentNetworkEndPointAccessibilityState" : {
       "type": "string",
       "enum": [
         "NotSpecified",
-        "Enterprise",
-        "Standard",
-        "Premium"
+        "Unknown",
+        "Available",
+        "NotAvailable"
       ],
       "x-ms-enum": {
-        "name": "ApiTier",
+        "name": "IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
         "modelAsString": true
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkEndpoint" : {
+      "type": "object",
+      "description": "The network endpoint.",
+      "properties" : {
+        "accessibility": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
+          "description": "The accessibility state."
+        },
+        "domainName" : {
+          "type": "string",
+          "description": "The domain name."
+        },
+        "ports" : {
+          "type" : "array",
+          "description" : "The ports.",
+          "items": {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependencyCategoryType" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "AzureStorage",
+        "AzureManagement",
+        "AzureActiveDirectory",
+        "SSLCertificateVerification",
+        "DiagnosticLogsAndMetrics",
+        "IntegrationServiceEnvironmentConnectors",
+        "RedisCache",
+        "AccessEndpoints",
+        "RecoveryService",
+        "SQL",
+        "RegionalService"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentNetworkDependencyCategoryType",
+        "modelAsString": true
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependency": {
+      "type": "object",
+      "description": "The azure async operation resource.",
+      "properties" : {
+        "category": {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyCategoryType",
+          "description": "The network dependency category type."
+        },
+        "displayName" : {
+          "type": "string",
+          "description": "The display name."
+        },
+        "endpoints" : {
+          "type" : "array",
+          "description" : "The endpoints.",
+          "items" : {
+            "$ref" : "#definitions/IntegrationServiceEnvironmentNetworkEndpoint",
+            "description" : "The endpoint."
+          }
+        }
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependencyHealthState" : {
+      "type": "string",
+      "enum": [
+        "NotSpecified",
+        "Healthy",
+        "Unhealthy",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "IntegrationServiceEnvironmentNetworkDependencyHealthState",
+        "modelAsString": true
+      }
+    },
+    "IntegrationServiceEnvironmentNetworkDependencyHealth" : {
+      "type": "object",
+      "description": "The integration service environment subnet network health.",
+      "properties": {
+        "error" : {
+          "$ref": "#/definitions/ExtendedErrorInfo",
+          "description": "The error if any occurred during the operation."
+        },
+        "state" : {
+          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyHealthState",
+          "description": "The network dependency health state."
+        }
       }
     },
     "IntegrationServiceEnvironmentNetworkHealth" : {
@@ -8179,110 +8283,6 @@
           "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
           "description": "The integration service environment network health state."
         }
-      }
-    },
-    "IntegrationServiceEnvironmentNetworkDependencyHealth" : {
-      "type": "object",
-      "description": "The integration service environment subnet network health.",
-      "properties": {
-        "error" : {
-          "$ref": "#/definitions/ExtendedErrorInfo",
-          "description": "The error if any occurred during the operation."
-        },
-        "state" : {
-          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyHealthState",
-          "description": "The network dependency health state."
-        }
-      }
-    },
-    "IntegrationServiceEnvironmentNetworkDependencyHealthState" : {
-      "type": "string",
-      "enum": [
-        "NotSpecified",
-        "Healthy",
-        "Unhealthy",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "IntegrationServiceEnvironmentNetworkDependencyHealthState",
-        "modelAsString": true
-      }
-    },
-    "IntegrationServiceEnvironmentNetworkDependency": {
-      "type": "object",
-      "description": "The azure async operation resource.",
-      "properties" : {
-        "category": {
-          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependencyCategoryType",
-          "description": "The network dependency category type."
-        },
-        "displayName" : {
-          "type": "string",
-          "description": "The display name."
-        },
-        "endpoints" : {
-          "type" : "array",
-          "description" : "The endpoints.",
-          "items" : {
-            "$ref" : "#definitions/IntegrationServiceEnvironmentNetworkEndpoint",
-            "description" : "The endpoint."
-          }
-        }
-      }
-    },
-    "IntegrationServiceEnvironmentNetworkEndpoint" : {
-      "type": "object",
-      "description": "The network endpoint.",
-      "properties" : {
-        "accessibility": {
-          "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
-          "description": "The accessibility state."
-        },
-        "domainName" : {
-          "type": "string",
-          "description": "The domain name."
-        },
-        "ports" : {
-          "type" : "array",
-          "description" : "The ports.",
-          "items": {
-            "type" : "string"
-          }
-        }
-      }
-    },
-    "IntegrationServiceEnvironmentNetworkEndPointAccessibilityState" : {
-      "type": "string",
-      "enum": [
-        "NotSpecified",
-        "Unknown",
-        "Available",
-        "NotAvailable"
-      ],
-      "x-ms-enum": {
-        "name": "IntegrationServiceEnvironmentNetworkEndPointAccessibilityState",
-        "modelAsString": true
-      }
-    },
-    "IntegrationServiceEnvironmentNetworkDependencyCategoryType" : {
-      "type": "string",
-      "enum": [
-        "NotSpecified",
-        "AzureStorage",
-        "AzureManagement",
-        "AzureActiveDirectory",
-        "SSLCertificateVerification",
-        "DiagnosticLogsAndMetrics",
-        "IntegrationServiceEnvironmentConnectors",
-        "RedisCache",
-        "AccessEndpoints",
-        "RecoveryService",
-        "SQL",
-        "RegionalService"
-      ],
-      "x-ms-enum": {
-        "name": "IntegrationServiceEnvironmentNetworkDependencyCategoryType",
-        "modelAsString": true
       }
     },
     "ExtendedErrorInfo" : {
