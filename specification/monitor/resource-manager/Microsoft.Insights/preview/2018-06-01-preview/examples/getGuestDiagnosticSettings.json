@@ -1,168 +1,162 @@
 {
-    "parameters": {
-        "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
-        "resourceGroupName": "Default-ResourceGroup",
-        "diagnosticSettingsName": "productionMachineSetting",
-        "api-version": "2018-06-01-preview"
-    },
-    "responses": {
-        "200": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ResourceGroup/providers/microsoft.insights/guestDiagnosticSettings/productionMachineSetting",
-                "name": "productionMachineSetting",
-                "type": "Microsoft.Insights/guestDiagnosticSettings",
-                "location": "West US",
-                "tags": {},
-                "properties": {
-                    "osType":  "windows",
-                    "dataSources": [
-                        {
-                            "kind": "PerformanceCounter",
-                            "configuration": {
-                                "perfCounters": [
-                                    {
-                                        "name": "\\Process(_Total)\\%Processor Time",
-                                        "samplingPeriod": "PT1M"
-                                    },
-                                    {
-                                        "name": "\\Process(_Total)\\Working Set",
-                                        "samplingPeriod": "PT1M"                                
-                                    }
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        },
-                        {
-                            "kind": "ETWProviders",
-                            "configuration": {
-                                "providers": [
-                                    {
-                                        "name": "AuditLog",
-                                        "id": 1,
-                                        "filter": "filter exp"
-                                    },
-                                    {
-                                        "name": "TraceLog",
-                                        "id": 2
-                                    }
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        },
-                        {
-                            "kind": "WindowsEventLogs",
-                            "configuration": {
-                                "eventLogs": [
-                                    {
-                                        "logName": "Application",
-                                        "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"CatWoman\""
-        
-                                    },
-                                    {
-                                        "logName": "Application",
-                                        "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"BatMan\""
-                                    }
-        
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        }
-        
-                    ]
+  "parameters": {
+    "subscriptionId": "187f412d-1758-44d9-b052-169e2564721d",
+    "resourceGroupName": "Default-ResourceGroup",
+    "diagnosticSettingsName": "productionMachineSetting",
+    "api-version": "2018-06-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ResourceGroup/providers/microsoft.insights/guestDiagnosticSettings/productionMachineSetting",
+        "name": "productionMachineSetting",
+        "type": "Microsoft.Insights/guestDiagnosticSettings",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "osType": "windows",
+          "dataSources": [
+            {
+              "kind": "PerformanceCounter",
+              "configuration": {
+                "perfCounters": [
+                  {
+                    "name": "\\Process(_Total)\\%Processor Time",
+                    "samplingPeriod": "PT1M"
+                  },
+                  {
+                    "name": "\\Process(_Total)\\Working Set",
+                    "samplingPeriod": "PT1M"
+                  }
+                ]
+              },
+              "sinks": [
+                {
+                  "kind": "LogAnalytics"
                 }
-            }
-        },
-        "202": {
-            "headers": {},
-            "body": {
-                "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ResourceGroup/providers/microsoft.insights/guestDiagnosticSettings/productionMachineSetting",
-                "name": "productionMachineSetting",
-                "type": "Microsoft.Insights/guestDiagnosticSettings",
-                "location": "West US",
-                "tags": {},
-                "properties": {
-                    "osType":  "windows",
-                    "dataSources": [
-                        {
-                            "kind": "PerformanceCounter",
-                            "configuration": {
-                                "perfCounters": [
-                                    {
-                                        "name": "\\Process(_Total)\\%Processor Time",
-                                        "samplingPeriod": "PT1M"
-                                    },
-                                    {
-                                        "name": "\\Process(_Total)\\Working Set",
-                                        "samplingPeriod": "PT1M"                                
-                                    }
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        },
-                        {
-                            "kind": "ETWProviders",
-                            "configuration": {
-                                "providers": [
-                                    {
-                                        "name": "AuditLog",
-                                        "id": 1,
-                                        "filter": "filter exp"
-                                    },
-                                    {
-                                        "name": "TraceLog",
-                                        "id": 2
-                                    }
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        },
-                        {
-                            "kind": "WindowsEventLogs",
-                            "configuration": {
-                                "eventLogs": [
-                                    {
-                                        "logName": "Application",
-                                        "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"CatWoman\""
-        
-                                    },
-                                    {
-                                        "logName": "Application",
-                                        "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"BatMan\""
-                                    }
-        
-                                ]
-                            },
-                            "sinks": [
-                                {
-                                    "kind": "LogAnalytics"
-                                }
-                            ]
-                        }
-        
-                    ]
+              ]
+            },
+            {
+              "kind": "ETWProviders",
+              "configuration": {
+                "providers": [
+                  {
+                    "name": "AuditLog",
+                    "id": 1,
+                    "filter": "filter exp"
+                  },
+                  {
+                    "name": "TraceLog",
+                    "id": 2
+                  }
+                ]
+              },
+              "sinks": [
+                {
+                  "kind": "LogAnalytics"
                 }
+              ]
+            },
+            {
+              "kind": "WindowsEventLogs",
+              "configuration": {
+                "eventLogs": [
+                  {
+                    "logName": "Application",
+                    "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"CatWoman\""
+                  },
+                  {
+                    "logName": "Application",
+                    "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"BatMan\""
+                  }
+                ]
+              },
+              "sinks": [
+                {
+                  "kind": "LogAnalytics"
+                }
+              ]
             }
+          ]
         }
+      }
+    },
+    "202": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/187f412d-1758-44d9-b052-169e2564721d/resourceGroups/Default-ResourceGroup/providers/microsoft.insights/guestDiagnosticSettings/productionMachineSetting",
+        "name": "productionMachineSetting",
+        "type": "Microsoft.Insights/guestDiagnosticSettings",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "osType": "windows",
+          "dataSources": [
+            {
+              "kind": "PerformanceCounter",
+              "configuration": {
+                "perfCounters": [
+                  {
+                    "name": "\\Process(_Total)\\%Processor Time",
+                    "samplingPeriod": "PT1M"
+                  },
+                  {
+                    "name": "\\Process(_Total)\\Working Set",
+                    "samplingPeriod": "PT1M"
+                  }
+                ]
+              },
+              "sinks": [
+                {
+                  "kind": "LogAnalytics"
+                }
+              ]
+            },
+            {
+              "kind": "ETWProviders",
+              "configuration": {
+                "providers": [
+                  {
+                    "name": "AuditLog",
+                    "id": 1,
+                    "filter": "filter exp"
+                  },
+                  {
+                    "name": "TraceLog",
+                    "id": 2
+                  }
+                ]
+              },
+              "sinks": [
+                {
+                  "kind": "LogAnalytics"
+                }
+              ]
+            },
+            {
+              "kind": "WindowsEventLogs",
+              "configuration": {
+                "eventLogs": [
+                  {
+                    "logName": "Application",
+                    "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"CatWoman\""
+                  },
+                  {
+                    "logName": "Application",
+                    "filter": "SourceName == Xyz AND EventId = \"100\" AND  $Xpath/Column=\"DCName\" = \"BatMan\""
+                  }
+                ]
+              },
+              "sinks": [
+                {
+                  "kind": "LogAnalytics"
+                }
+              ]
+            }
+          ]
+        }
+      }
     }
+  }
 }

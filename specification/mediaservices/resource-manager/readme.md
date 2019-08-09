@@ -28,7 +28,22 @@ These are the global settings for the MediaServices API.
 openapi-type: arm
 tag: package-2018-07
 opt-in-extensible-enums: true
+```
 
+### Tag: package-2019-05-preview
+
+These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-preview'
+input-file:
+  - Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
+  - Microsoft.Media/preview/2019-05-01-preview/Accounts.json
+  - Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
+  - Microsoft.Media/preview/2019-05-01-preview/Common.json
+  - Microsoft.Media/preview/2019-05-01-preview/ContentKeyPolicies.json
+  - Microsoft.Media/preview/2019-05-01-preview/Encoding.json
+  - Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
+  - Microsoft.Media/preview/2019-05-01-preview/streamingservice.json
 ```
 
 ### Tag: package-2018-07
@@ -95,6 +110,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -176,6 +192,7 @@ batch:
   - tag: package-2018-03-preview
   - tag: package-2018-06-preview
   - tag: package-2018-07
+  - tag: package-2019-05-preview
 ```
 
 ### Tag: package-2015-10 and java
@@ -230,6 +247,19 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+### Tag: package-2019-05-preview and java
+
+These settings apply only when `--tag=package-2019-05-preview --java` is specified on the command line.
+Please also specify the `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-05-preview' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.mediaservices.v2019_05_01_preview
+  output-folder: $(azure-libraries-for-java-folder)/mediaservices/resource-manager/v2019_05_01_preview
+regenerate-manager: true
+generate-interface: true
+```
+
 ## Suppression
 
 ``` yaml
@@ -237,5 +267,9 @@ directive:
   - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
     from: Encoding.json
     where: $.definitions.JobProperties
-    reason: Input is not required when updating a job.
+    reason: Input not required for Job update
+  - suppress: OBJECT_MISSING_REQUIRED_PROPERTY
+    from: Encoding.json
+    where: $.definitions.JobProperties
+    reason: Output not required for job update
 ```

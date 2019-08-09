@@ -25,6 +25,7 @@ batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
+  - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2017-06
@@ -77,6 +78,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-locks-2015-01' && $(go)
 namespace: locks
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-01-01/locks
+```
+
+### Tag: package-policy-2019-01 and go
+
+These settings apply only when `--tag=package-policy-2019-01 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-policy-2019-01' && $(go)
+namespace: policy
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-01-01/policy
 ```
 
 ### Tag: package-policy-2018-05 and go

@@ -1,0 +1,44 @@
+{
+  "operationId": "GetNodeInfo",
+  "description": "This example shows how to get information about an node using it's identifier. If the node is found, information about it is returned with 200 status code. If the node is not found, empty content is returned with 204 status code.",
+  "parameters": {
+    "api-version": "6.0",
+    "nodeName": "_Node_1"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "Name": "_testnode_0",
+        "IpAddressOrFQDN": "10.0.0.4",
+        "Type": "testnode",
+        "CodeVersion": "6.3.139.9494",
+        "ConfigVersion": "5",
+        "NodeStatus": "Up",
+        "NodeUpTimeInSeconds": "18688",
+        "HealthState": "Ok",
+        "IsSeedNode": true,
+        "UpgradeDomain": "0",
+        "FaultDomain": "fd:/0",
+        "Id": {
+          "Id": "2acb9f55540659b1c95f27cc128ab326"
+        },
+        "InstanceId": "131738240209152398",
+        "NodeDeactivationInfo": {
+          "NodeDeactivationIntent": "Invalid",
+          "NodeDeactivationStatus": "None",
+          "NodeDeactivationTask": [],
+          "PendingSafetyChecks": []
+        },
+        "IsStopped": false,
+        "NodeDownTimeInSeconds": "0",
+        "NodeUpAt": "2018-06-18T19:33:52.944Z",
+        "NodeDownAt": "2018-06-18T19:33:39.514Z"
+      }
+    },
+    "204": {
+      "headers": {},
+      "body": ""
+    }
+  }
+}
