@@ -492,6 +492,18 @@
           },
           {
             "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -652,6 +664,173 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all case comments.": {
+            "$ref": "./examples/cases/comments/GetAllCaseComments.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets all case comments.",
+        "operationId": "Comments_ListByCase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/CaseComment",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments/{caseCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case comment.": {
+            "$ref": "./examples/cases/comments/GetCaseCommentById.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets a case comment.",
+        "operationId": "Cases_GetComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case comment.": {
+            "$ref": "./examples/cases/comments/CreateCaseComment.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Creates the case comment.",
+        "operationId": "CaseComments_CreateComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          },
+          {
+            "$ref": "#/parameters/CaseComment"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -2021,12 +2200,14 @@
         "lastUpdatedTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The last time the case was updated"
+          "description": "The last time the case was updated",
+          "readOnly": true
         },
         "createdTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the case was created"
+          "description": "The time the case was created",
+          "readOnly": true
         },
         "endTimeUtc": {
           "type": "string",
@@ -2053,7 +2234,7 @@
           "type": "string",
           "description": "The title of the case"
         },
-        "assignedTo": {
+        "owner": {
           "type": "object",
           "description": "Describes a user that the case is assigned to",
           "$ref": "#/definitions/UserInfo"
@@ -2133,6 +2314,8 @@
           "enum": [
             "Resolved",
             "Dismissed",
+            "TruePositive",
+            "FalsePositive",
             "Other"
           ],
           "x-ms-enum": {
@@ -2148,17 +2331,115 @@
                 "description": "Case was dismissed"
               },
               {
+                "value": "TruePositive",
+                "description": "Case was true positive"
+              },
+              {
+                "value": "FalsePositive",
+                "description": "Case was false positive"
+              },
+              {
                 "value": "Other",
                 "description": "Case was closed for another reason"
               }
             ]
           }
+        },
+        "closedReasonText": {
+          "type": "string",
+          "description": "the case close reason details"
+        },
+        "relatedAlertIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "related alert id"
+          },
+          "description": "List of related alert identifiers",
+          "readOnly": true
+        },
+        "caseNumber": {
+          "type": "integer",
+          "description": "a sequential number",
+          "readOnly": true
+        },
+        "lastComment": {
+          "type": "string",
+          "description": "the last comment in the case",
+          "readOnly": true
+        },
+        "totalComments": {
+          "type": "integer",
+          "description": "the number of total comments in the case",
+          "readOnly": true
         }
       },
       "required": [
         "title",
         "severity",
-        "status"
+        "status",
+        "startTimeUtc"
+      ]
+    },
+    "CaseCommentList": {
+      "description": "List of case comments.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of comments.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of comments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseComment"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseComment": {
+      "type": "object",
+      "description": "Represents a case comment",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Case comment properties",
+          "$ref": "#/definitions/CaseCommentProperties"
+        }
+      }
+    },
+    "CaseCommentProperties": {
+      "type": "object",
+      "description": "Case comment property bag.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The comment message"
+        },
+        "createdTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the comment was created",
+          "readOnly": true
+        },
+        "userInfo": {
+          "type": "object",
+          "description": "Describes the user that created the comment",
+          "$ref": "#/definitions/UserInfo",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "message"
       ]
     },
     "BookmarkList": {
@@ -2257,17 +2538,23 @@
         "objectId": {
           "type": "string",
           "format": "uuid",
+          "x-nullable": true,
           "description": "The object id of the user."
         },
         "email": {
           "type": "string",
-          "description": "The email of the user."
+          "description": "The email of the user.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the user."
+          "description": "The name of the user.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "objectId"
+      ]
     },
     "Label": {
       "description": "Label that will be used to tag and filter on.",
@@ -4850,6 +5137,24 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "CaseCommentId": {
+      "name": "caseCommentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Case comment ID",
+      "x-ms-parameter-location": "method"
+    },
+    "CaseComment": {
+      "name": "caseComment",
+      "in": "body",
+      "description": "The case comment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CaseComment"
+      },
+      "x-ms-parameter-location": "method"
+    },
     "BookmarkId": {
       "name": "bookmarkId",
       "in": "path",
@@ -4944,6 +5249,39 @@
       "required": true,
       "type": "string",
       "description": "entity query ID",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataFilter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Filters the results, based on a Boolean condition. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataOrderBy": {
+      "name": "$orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Sorts the results. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataTop": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Returns only the first n results. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataSkipToken": {
+      "name": "$skipToken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
       "x-ms-parameter-location": "method"
     }
   }
