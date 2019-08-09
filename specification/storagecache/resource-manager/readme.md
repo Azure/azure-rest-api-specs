@@ -26,17 +26,26 @@ These are the global settings for the StorageCache API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-06
+tag: package-2019-08
 ```
 
 
-### Tag: package-2018-02
+### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-06'
 input-file:
 - Microsoft.StorageCache/preview/2019-06-01-preview/storagecache.json
+```
+
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+- Microsoft.StorageCache/preview/2019-08-01-preview/storagecache.json
 ```
 
 ## Swagger to SDK

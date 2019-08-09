@@ -3,7 +3,7 @@
   "info": {
     "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage caches.",
     "title": "Storage Cache Mgmt Client",
-    "version": "2019-06-01-preview"
+    "version": "2019-08-01-preview"
   },
   "host": "management.azure.com",
   "basePath": "/",
@@ -213,12 +213,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        }	  
+          }
         ],
         "responses": {
           "200": {
@@ -1324,8 +1324,8 @@
       "description": "An NFS mount point for use as a StorageTarget.",
       "properties": {
         "target": {
-          "description": "Mount string of an NFS Storage Target, ie: 10.0.44.44:/exp1",
-          "pattern": "^[.0-9a-zA-Z]+:/.*$",
+          "description": "IP or name of an NFS Storage Target host, ie: 10.0.44.44",
+          "pattern": "^[-.0-9a-zA-Z]+$",
           "type": "string"
         },
         "usageModel": {
@@ -1574,6 +1574,10 @@
         "targetPath": {
             "description": "Path in storage target to which namespacePath points.",
             "type": "string"
+        },
+        "nfsExport": {
+          "description": "NFS export where targetPath exists.",
+          "type": "string"
         }
       }
     },
