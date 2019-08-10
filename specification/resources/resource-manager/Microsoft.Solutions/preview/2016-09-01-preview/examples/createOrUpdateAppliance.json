@@ -15,6 +15,29 @@
     }
   },
   "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "myAppliance",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/appliances/myAppliance",
+        "type": "Microsoft.Solutions/appliances",
+        "location": "East US 2",
+        "managedBy": null,
+        "tags": null,
+        "plan": null,
+        "identity": null,
+        "kind": "ServiceCatalog",
+        "sku": null,
+        "properties": {
+          "applianceDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myAppDef",
+          "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "outputs": null,
+          "parameters": null,
+          "provisioningState": "Created",
+          "uiDefinitionUri": "https://path/to/applianceCreateUiDefinition.json"
+        }
+      }
+    },
     "201": {
       "headers": {},
       "body": {
@@ -23,7 +46,6 @@
         "type": "Microsoft.Solutions/appliances",
         "location": "East US 2",
         "managedBy": null,
-        "resourceGroup": "rg",
         "tags": null,
         "plan": null,
         "identity": null,

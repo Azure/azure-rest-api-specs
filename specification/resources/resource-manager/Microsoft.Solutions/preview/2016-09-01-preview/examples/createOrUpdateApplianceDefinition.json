@@ -21,7 +21,7 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
       "headers": {},
       "body": {
         "name": "myApplianceDef",
@@ -29,7 +29,6 @@
         "type": "Microsoft.Solutions/applianceDefinitions",
         "location": "East US 2",
         "managedBy": null,
-        "resourceGroup": "rg",
         "tags": null,
         "identity": null,
         "sku": null,
@@ -54,7 +53,44 @@
           ],
           "description": "myApplianceDef description",
           "displayName": "myApplianceDef",
-          "lockLevel": null,
+          "lockLevel": "None",
+          "packageFileUri": "https://path/to/packagezipfile"
+        }
+      }
+    },
+    "201": {
+      "headers": {},
+      "body": {
+        "name": "myApplianceDef",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applianceDefinitions/myApplianceDef",
+        "type": "Microsoft.Solutions/applianceDefinitions",
+        "location": "East US 2",
+        "managedBy": null,
+        "tags": null,
+        "identity": null,
+        "sku": null,
+        "properties": {
+          "artifacts": [
+            {
+              "name": "CreateUiDefinition",
+              "type": "Custom",
+              "uri": "https://path/to/applianceCreateUiDefinition.json"
+            },
+            {
+              "name": "ApplianceResourceTemplate",
+              "type": "Template",
+              "uri": "https://path/to/mainTemplate.json"
+            }
+          ],
+          "authorizations": [
+            {
+              "principalId": "validprincipalguid",
+              "roleDefinitionId": "validroleguid"
+            }
+          ],
+          "description": "myApplianceDef description",
+          "displayName": "myApplianceDef",
+          "lockLevel": "None",
           "packageFileUri": "https://path/to/packagezipfile"
         }
       }
