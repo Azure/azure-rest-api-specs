@@ -174,7 +174,8 @@ input-file:
    - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
-  - suppress: DefinitionsPropertiesNamesCamelCase
+
+  -  suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
      where:
