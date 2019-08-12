@@ -60,6 +60,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -81,7 +82,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Search
-  output-folder: $(csharp-sdks-folder)/Search/Management/Management.Search/Generated
+  output-folder: $(csharp-sdks-folder)/search/Microsoft.Azure.Management.Search/src/Generated
   clear-output-folder: true
 ```
 

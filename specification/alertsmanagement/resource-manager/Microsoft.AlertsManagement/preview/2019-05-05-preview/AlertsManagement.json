@@ -52,6 +52,36 @@
         }
       }
     },
+    "/providers/Microsoft.AlertsManagement/alertsMetaData": {
+      "get": {
+        "operationId": "Alerts_MetaData",
+        "description": "List alerts meta data information based on value of identifier parameter.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/identifier"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully listed alert meta data.",
+            "schema": {
+              "$ref": "#/definitions/alertsMetaData"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonService": {
+            "$ref": "./examples/AlertsMetaData_MonitorService.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.AlertsManagement/alerts": {
       "get": {
         "operationId": "Alerts_GetAll",
@@ -390,7 +420,7 @@
             }
           }
         },
-		"x-ms-pageable": {
+        "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
@@ -892,10 +922,11 @@
   "parameters": {
     "subscriptionId": {
       "name": "subscriptionId",
-      "description": "Subscription credentials which uniquely identify Microsoft Azure subscription. The subscription ID forms part of the URI for every service call.",
-      "type": "string",
       "in": "path",
-      "required": true
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription.",
+      "minLength": 1
     },
     "resourceGroupName": {
       "name": "resourceGroupName",
@@ -1268,6 +1299,21 @@
       "type": "string",
       "in": "query",
       "required": false,
+      "x-ms-parameter-location": "method"
+    },
+    "identifier": {
+      "name": "identifier",
+      "description": "Identification of the information to be retrieved by API call.",
+      "type": "string",
+      "in": "query",
+      "required": true,
+      "enum": [
+        "MonitorServiceList"
+      ],
+      "x-ms-enum": {
+        "name": "identifier",
+        "modelAsString": true
+      },
       "x-ms-parameter-location": "method"
     }
   },
@@ -2127,7 +2173,7 @@
     },
     "ActionRuleProperties": {
       "description": "Action rule properties defining scope, conditions, suppression logic for action rule",
-      "discriminator" : "type",
+      "discriminator": "type",
       "required": [
         "type"
       ],
@@ -2291,6 +2337,71 @@
         "tags": {
           "type": "object",
           "description": "tags to be updated"
+        }
+      }
+    },
+    "alertsMetaData": {
+      "description": "alert meta data information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/alertsMetaDataProperties"
+        }
+      }
+    },
+    "alertsMetaDataProperties": {
+      "description": "alert meta data property bag",
+      "discriminator": "metadataIdentifier",
+      "required": [
+        "metadataIdentifier"
+      ],
+      "properties": {
+        "metadataIdentifier": {
+          "type": "string",
+          "description": "Identification of the information to be retrieved by API call",
+          "enum": [
+            "MonitorServiceList"
+          ],
+          "x-ms-enum": {
+            "name": "metadataIdentifier",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "MonitorServiceList": {
+      "title": "Monitor service details",
+      "description": "Monitor service details",
+      "required": [
+        "data"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/alertsMetaDataProperties"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "properties": {
+        "data": {
+          "description": "Array of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorServiceDetails"
+          }
+        }
+      }
+    },
+    "MonitorServiceDetails": {
+      "description": "Details of a monitor service",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Monitor service name"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Monitor service display name"
         }
       }
     }
