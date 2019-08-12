@@ -177,7 +177,13 @@ input-file:
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
 
-  -  suppress: DefinitionsPropertiesNamesCamelCase
+   - suppress: HttpsSupportedScheme
+     reason: IMDS does not require HTTPS to query it
+
+   - suppress: SecurityDefinitionsStructure
+     reason: IMDS does not support any authentication
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
      where:
@@ -192,12 +198,6 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
        - $.definitions.IdentityErrorResponse.properties.error_description
-
-   - suppress: HttpsSupportedScheme
-     reason: IMDS does not require HTTPS to query it
-
-   - suppress: SecurityDefinitionsStructure
-     reason: IMDS does not support any authentication
  ```
 
 ---
