@@ -65,6 +65,16 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-03'
 input-file:
+- Microsoft.ServiceFabric/stable/2019-03-01/cluster.json
+- Microsoft.ServiceFabric/stable/2019-03-01/application.json
+```
+
+### Tag: package-2019-03-preview
+
+These settings apply only when `--tag=package-2019-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-preview'
+input-file:
 - Microsoft.ServiceFabric/preview/2019-03-01-preview/cluster.json
 - Microsoft.ServiceFabric/preview/2019-03-01-preview/application.json
 ```
@@ -117,6 +127,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

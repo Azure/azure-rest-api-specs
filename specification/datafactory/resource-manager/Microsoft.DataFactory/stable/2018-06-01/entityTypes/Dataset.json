@@ -1433,6 +1433,74 @@
         }
       }
     },
+    "AmazonRedshiftTableDataset": {
+      "x-ms-discriminator-value": "AmazonRedshiftTable",
+      "description": "The Amazon Redshift table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon Redshift table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRedshiftTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AmazonRedshiftTableDatasetTypeProperties": {
+      "description": "Amazon Redshift table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The Amazon Redshift table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Amazon Redshift schema name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "Db2TableDataset": {
+      "x-ms-discriminator-value": "Db2Table",
+      "description": "The Db2 table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Db2 table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Db2TableDatasetTypeProperties"
+        }
+      }
+    },
+    "Db2TableDatasetTypeProperties": {
+      "description": "Db2 table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Db2 schema name. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The Db2 table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RelationalTableDataset": {
       "x-ms-discriminator-value": "RelationalTable",
       "description": "The relational table dataset.",
@@ -1559,7 +1627,15 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
           "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2668,7 +2744,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/NetezzaTableDatasetTypeProperties"
+        }
+      }
+    },
+    "NetezzaTableDatasetTypeProperties": {
+      "description": "Netezza dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Netezza. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Netezza. Type: string (or Expression with resultType string)."
         }
       }
     },

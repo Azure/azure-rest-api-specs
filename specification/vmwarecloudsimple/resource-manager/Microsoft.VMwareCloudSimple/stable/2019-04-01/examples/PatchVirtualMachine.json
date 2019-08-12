@@ -12,58 +12,60 @@
   },
   "responses": {
     "200": {
-      "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine",
-      "location": "westus2",
-      "name": "myVirtualMachine",
-      "properties": {
-        "amountOfRam": 4096,
-        "controllers": [
-          {
-            "id": "1000",
-            "name": "SCSI controller 0",
-            "subType": "LSI_PARALEL",
-            "type": "SCSI"
-          }
-        ],
-        "disks": [
-          {
-            "controllerId": "1000",
-            "independenceMode": "persistent",
-            "totalSize": 10485760,
-            "virtualDiskId": "2000",
-            "virtualDiskName": "Hard disk 1"
-          }
-        ],
-        "guestOS": "Other (32-bit)",
-        "guestOSType": "other",
-        "nics": [
-          {
-            "ipAddresses": null,
-            "network": {
-              "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19"
-            },
-            "nicType": "E1000",
-            "powerOnBoot": true,
-            "virtualNicId": "4000",
-            "virtualNicName": "Network adapter 1"
-          }
-        ],
-        "numberOfCores": 2,
-        "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
-        "provisioningState": "Succeeded",
-        "resourcePool": {
-          "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26"
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/Microsoft.VMwareCloudSimple/virtualMachines/myVirtualMachine",
+        "location": "westus2",
+        "name": "myVirtualMachine",
+        "properties": {
+          "amountOfRam": 4096,
+          "controllers": [
+            {
+              "id": "1000",
+              "name": "SCSI controller 0",
+              "subType": "LSI_PARALEL",
+              "type": "SCSI"
+            }
+          ],
+          "disks": [
+            {
+              "controllerId": "1000",
+              "independenceMode": "persistent",
+              "totalSize": 10485760,
+              "virtualDiskId": "2000",
+              "virtualDiskName": "Hard disk 1"
+            }
+          ],
+          "guestOS": "Other (32-bit)",
+          "guestOSType": "other",
+          "nics": [
+            {
+              "ipAddresses": null,
+              "network": {
+                "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualNetworks/dvportgroup-19"
+              },
+              "nicType": "E1000",
+              "powerOnBoot": true,
+              "virtualNicId": "4000",
+              "virtualNicName": "Network adapter 1"
+            }
+          ],
+          "numberOfCores": 2,
+          "privateCloudId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud",
+          "provisioningState": "Succeeded",
+          "resourcePool": {
+            "id": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/resourcePools/resgroup-26"
+          },
+          "templateId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34",
+          "status": "running",
+          "vSphereNetworks": null,
+          "vmId": "vm-106",
+          "vmwaretools": "10309"
         },
-        "templateId": "/subscriptions/{subscription-id}/providers/Microsoft.VMwareCloudSimple/locations/westus2/privateClouds/myPrivateCloud/virtualMachineTemplates/vm-34",
-        "status": "running",
-        "vSphereNetworks": null,
-        "vmId": "vm-106",
-        "vmwaretools": "10309"
-      },
-      "tags": {
-        "myTag": "tagValue"
-      },
-      "type": "Microsoft.VMwareCloudSimple/virtualMachines"
+        "tags": {
+          "myTag": "tagValue"
+        },
+        "type": "Microsoft.VMwareCloudSimple/virtualMachines"
+      }
     }
   }
 }
