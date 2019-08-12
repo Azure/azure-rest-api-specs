@@ -910,7 +910,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
         "diskSizeBytes": {
           "type": "integer",
@@ -976,11 +976,11 @@
               },
               {
                 "value": "ReadyToUpload",
-                "description": "The upload disk does not have an active write SAS, but the customer can request on to upload the VHD."
+                "description": "A disk is ready to be created by upload by requesting a write token."
               },
               {
                 "value": "ActiveUpload",
-                "description": "The upload disk has an active write SAS associated with it."
+                "description": "A disk is created for upload and a write token has been issued for uploading to it."
               }
             ]
           }
@@ -1030,7 +1030,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
         "diskSizeBytes": {
           "type": "integer",
@@ -1158,7 +1158,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
         "encryptionSettingsCollection": {
           "$ref": "#/definitions/EncryptionSettingsCollection",
@@ -1194,7 +1194,7 @@
         "diskSizeGB": {
           "type": "integer",
           "format": "int32",
-          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the VHD to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
+          "description": "If creationData.createOption is Empty, this field is mandatory and it indicates the size of the disk to create. If this field is present for updates or creation with other options, it indicates a resize. Resizes are only allowed if the disk is not attached to a running VM, and can only increase the disk's size."
         },
         "encryptionSettingsCollection": {
           "$ref": "#/definitions/EncryptionSettingsCollection",
@@ -1222,7 +1222,7 @@
             "values": [
               {
                 "value": "Empty",
-                "description": "Create a new disk with a given size."
+                "description": "Create an empty data disk of a size given by diskSizeGB."
               },
               {
                 "value": "Attach",
@@ -1230,23 +1230,23 @@
               },
               {
                 "value": "FromImage",
-                "description": "Create a new disk by importing from a PIR image or a customer's user image."
+                "description": "Create a new disk from a platform image specified by the given imageReference."
               },
               {
                 "value": "Import",
-                "description": "Create a new disk by importing from a customer's blob. The blob must be formatted as a VHD."
+                "description": "Create a disk by importing from a blob specified by a sourceUri in a storage account specified by storageAccountId."
               },
               {
                 "value": "Copy",
-                "description": "Create a new disk by copying from a customer's managed disk or snapshot."
+                "description": "Create a new disk or snapshot by copying from a disk or snapshot specified by the given sourceResourceId."
               },
               {
                 "value": "Restore",
-                "description": "Create a new disk by restoring from a restore point."
+                "description": "Create a new disk by copying from a backup recovery point."
               },
               {
                 "value": "Upload",
-                "description": "Create a new disk by customer upload using a write SAS to directly write the contents of their disk to the blob. The contents must be formatted as a VHD."
+                "description": "Create a new disk by obtaining a write token and using it to directly upload the contents of the disk."
               }
             ]
           },
