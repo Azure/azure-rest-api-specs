@@ -8,8 +8,8 @@
     "host": "169.254.169.254",
     "basePath": "/metadata",
     "schemes": [
-        "https",
-        "http"
+	    "http",
+        "https"
     ],
     "consumes": [
         "application/json"
@@ -17,23 +17,7 @@
     "produces": [
         "application/json"
     ],
-    "security": [
-        {
-            "azure_auth": [
-                "user_impersonation"
-            ]
-        }
-    ],
     "securityDefinitions": {
-        "azure_auth": {
-            "type": "oauth2",
-            "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-            "flow": "implicit",
-            "description": "Azure Active Directory OAuth2 Flow",
-            "scopes": {
-                "user_impersonation": "impersonate your user account"
-            }
-        },
         "basic_auth": {
             "type": "basic",
             "description":"A Basic authentication flow"
@@ -123,7 +107,7 @@
                     },
                     {
                         "$ref": "#/parameters/MetadataParameter"
-                    }
+                    }   
                 ],
                 "responses": {
                     "200": {
@@ -163,7 +147,7 @@
                     },
                     {
                         "$ref": "#/parameters/MetadataParameter"
-                    }
+                    } 
                 ],
                 "responses": {
                     "200": {
@@ -198,9 +182,6 @@
                 ],
                 "security": [
                     {
-                        "azure_auth": [
-                            "user_impersonation"
-                        ]
                     },
                     {
                         "basic_auth": []
@@ -235,7 +216,7 @@
                         "required": false
                     },
                     {
-                        "name": "msi_res_id",
+                        "name": "mi_res_id",
                         "in": "query",
                         "type": "string",
                         "description": "This identifies, by urlencoded ARM resource id, a specific explicit identity to use when authenticating to Azure AD. Mutually exclusive with client_id and object_id.",
@@ -391,7 +372,7 @@
                 "publisher": {
                     "type": "string",
                     "description": "This is the publisher of the VM image."
-                },
+                },          
                 "resourceGroupName": {
                     "type": "string",
                     "description": "This is the resource group for the VM."
@@ -403,12 +384,12 @@
                 "sku": {
                     "type": "string",
                     "description": "This is the specific SKU for the VM image."
-                },
+                },   
                 "storageProfile": {
                     "type": "object",
                     "description": "This contains the data about the storage disks associated with the VM.",
                     "$ref": "#/definitions/StorageProfile"
-                },
+                },              
                 "subscriptionId": {
                     "type": "string",
                     "description": "This is the Azure subscription for the VM."
@@ -425,7 +406,7 @@
                     "type": "string",
                     "description": "This is the unique identifier for the VM."
                 },
-                "vmScaleSetName": {
+                "vmScaleSetName": { 
                     "type": "string",
                     "description": "This is the resource name of the VMSS."
                 },
@@ -437,7 +418,7 @@
                     "type":"string",
                     "description":"This is the availability zone of the VM."
                 }
-            },
+            }, 
             "description": "Compute Metadata"
         },
         "Network": {
@@ -450,7 +431,7 @@
                         "type": "object",
                         "$ref": "#/definitions/NetworkInterface"
                     }
-                }
+                }            
             },
             "description": "Network Metadata"
         },
@@ -461,8 +442,8 @@
                 "ipv4": {
                     "type":"object",
                     "description": "This contains the IPv4 address.",
-                    "properties": {
-                        "ipAddress": {
+                    "properties": { 
+                        "ipAddress": { 
                             "type":"array",
                             "description": "This is the IP address",
                             "items": {
@@ -485,8 +466,8 @@
                 "ipv6": {
                     "type":"object",
                     "description": "This contains the IPv6 address.",
-                    "properties": {
-                        "ipAddress": {
+                    "properties": { 
+                        "ipAddress": { 
                             "type":"array",
                             "description": "This is the IP address",
                             "items": {
@@ -538,12 +519,12 @@
         "Ipv4Properties": {
             "type": "object",
             "description": "This contains the IPv4 properties.",
-            "properties": {
+            "properties": { 
                 "privateIpAddress": {
                     "type":"string",
                     "description":"This is the private IP address assigned to the interface."
                  },
-                "publicIpAddress": {
+                "publicIpAddress": { 
                     "type":"string",
                     "description":"This is the public IP address assigned to the interface."
                 }
@@ -552,7 +533,7 @@
         "Ipv6Properties": {
             "type": "object",
             "description": "This contains the IPv6 properties.",
-            "properties": {
+            "properties": { 
                 "privateIpAddress": {
                     "type":"string",
                     "description":"This is the private IPv6 address assigned to the interface."
@@ -562,12 +543,12 @@
         "SubnetProperties": {
             "type": "object",
             "description": "This contains the properties of the subnet.",
-            "properties": {
+            "properties": { 
                 "address": {
                     "type":"string",
                     "description":"This is the address range of the subnet."
                 },
-                "prefix": {
+                "prefix": { 
                     "type":"string",
                     "description":"This is the prefix of the subnet."
                 }
@@ -635,6 +616,11 @@
                 "createOption": {
                     "type": "string",
                     "description": "This is information about how the VM was created."
+                },
+                "diffDiskSettings": {
+                    "type": "object",
+                    "description": "This is the ephemeral disk settings.",
+                    "$ref": "#/definitions/DiffDiskSettings"
                 },
                 "diskSizeGB": {
                     "type": "string",
@@ -726,6 +712,16 @@
                 "enabled": {
                     "type": "string",
                     "description": "This specifies whether or not disk encryption is enabled on the VM."
+                }
+            }
+        },
+        "DiffDiskSettings": {
+            "type": "object",
+            "description": "This is the ephemeral disk settings.",
+            "properties": {
+                "option": {
+                    "type": "string",
+                    "description": "This specifies the ephemeral disk settings."
                 }
             }
         },
@@ -832,7 +828,7 @@
                 },
                 "network": {
                     "$ref": "#/definitions/Network",
-                    "description": "Network Metadata"
+                    "description": "Network Metadata" 
                 }
             }
         },
@@ -846,7 +842,7 @@
                 },
                 "encoding": {
                     "type": "string",
-                    "description": "This is the encoding scheme of the signature."
+                    "description": "This is the encoding scheme of the signature."               
                 }
             }
         },
@@ -944,9 +940,9 @@
             "properties": {
                 "tenantId": {
                     "type": "string",
-                    "description": "This is the AAD tenantId of the identity of the caller."
+                    "description": "This is the AAD tenantId of the identity of the system assigned managed identity."
                 }
-            }
+            }           
         }
     },
     "parameters": {
