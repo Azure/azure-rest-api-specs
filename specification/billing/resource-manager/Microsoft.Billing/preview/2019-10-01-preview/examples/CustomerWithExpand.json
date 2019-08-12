@@ -3,7 +3,7 @@
     "api-version": "2018-11-01-preview",
     "billingAccountName": "{billingAccountName}",
     "customerName": "{customerName}",
-    "$expand": "enabledAzureSkus,resellers"
+    "$expand": "enabledAzurePlans,resellers"
   },
   "responses": {
     "200": {
@@ -13,7 +13,7 @@
         "type": "Microsoft.Billing/customers",
         "properties": {
           "displayName": "customerName1",
-          "enabledAzureSKUs": [
+          "enabledAzurePlans": [
             {
               "skuId": "0002",
               "skuDescription": "Microsoft Azure Standard"
