@@ -87,8 +87,10 @@ These settings apply only when `--tag=package-2019-08-15` is specified on the co
 ```yaml $(tag) == 'package-2019-08-15'
 input-file:
 - Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
-- 
+```
+
 ## Suppression
+
  ``` yaml
  directive:
    - suppress: DefinitionsPropertiesNamesCamelCase
