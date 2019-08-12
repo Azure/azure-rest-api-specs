@@ -802,6 +802,14 @@
         }
       ]
     },
+    "ImageTemplateVmProfile": {
+      "properties": {
+        "vmSize": {
+          "type": "string",
+          "description": "Size of the virtual machine used to build, customize and capture images. Omit or specify empty string to use the default (Standard_D1_v2)."
+        }
+      }
+    },
     "ProvisioningState": {
       "type": "string",
       "enum": [
@@ -916,7 +924,11 @@
           "type": "integer",
           "minimum": 0,
           "maximum": 960,
-          "description": "Maximum duration to wait while building the image template. Omit or specify 0 to use the default (60 minutes)."
+          "description": "Maximum duration to wait while building the image template. Omit or specify 0 to use the default (4 hours)."
+        },
+        "vmProfile": {
+          "$ref": "#/definitions/ImageTemplateVmProfile",
+          "description": "Describes how virtual machine is set up to build images"
         }
       },
       "required": [
