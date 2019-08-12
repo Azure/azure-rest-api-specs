@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{locationId}/usages": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{location}/usages": {
       "get": {
         "tags": [
           "QuotaInformation"
@@ -75,7 +75,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{locationId}/quotaRequests/{requestName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{location}/quotaRequests/{requestName}": {
       "put": {
         "tags": [
           "QuotaRequests"
@@ -111,10 +111,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Quota requests will be created asynchronously. A request id for each changed resource is returned in the same order as the order in which they were provided.",
-            "schema": {
-              "$ref": "#/definitions/QuotaRequestResponseStatus"
-            }
+            "description": "Accepted. Quota requests will be created asynchronously. Please use requestName to check the status.",
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -162,9 +159,6 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       },
       "delete": {
@@ -207,13 +201,10 @@
               "$ref": "#/definitions/ExceptionResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{locationId}/quotaRequests": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Quota/providers/{providerId}/locations/{location}/quotaRequests": {
       "get": {
         "tags": [
           "QuotaRequests"
@@ -243,7 +234,7 @@
             }
           },
           "404": {
-            "description": "Error: Not found. Quota requests for provided quotaRequestId not found"
+            "description": "Error: Not found. Quota requests for provided quotaRequest not found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -252,7 +243,7 @@
             }
           },
           "x-ms-pageable": {
-            "nextLinkName": "nextPage"
+            "nextLinkName": "nextLink"
           }
         }
       }
@@ -375,15 +366,19 @@
           "type": "integer",
           "readOnly": true
         },
-        "currentValue": {
-          "description": "The current Resource usages.",
-          "type": "integer",
-          "readOnly": true
-        },
         "name": {
-          "description": "Resource display name.",
-          "type": "string",
-          "readOnly": true
+          "properties": {
+            "localizedValue": {
+              "description": "Resource display name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "value": {
+              "description": "Resource name.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         },
         "resourceType": {
           "description": "Resource type for which the quota check was made.",
@@ -398,10 +393,11 @@
     "QuotaRequestDetail": {
       "description": "The details of the quota Request.",
       "properties": {
-        "requestId": {
-          "description": "The quota requestId.",
+        "requestSubmitTime": {
+          "description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "format": "date-time"
         },
         "message": {
           "description": "User friendly status message.",
@@ -411,14 +407,6 @@
         "requestStatus": {
           "$ref": "#/definitions/QuotaRequestState"
         },
-        "subRequests": {
-          "$ref": "#/definitions/SubRequests"
-        }
-      }
-    },
-    "SubRequests": {
-      "description": "Sub-Requests submitted in the Quota request.",
-      "properties": {
         "quotaRequests": {
           "type": "array",
           "items": {
@@ -435,6 +423,12 @@
           "type": "string",
           "readOnly": true
         },
+        "requestSubmitTime": {
+          "description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+          "type": "string",
+          "readOnly": true,
+          "format": "date-time"
+        },
         "message": {
           "description": "User friendly status message.",
           "type": "string",
@@ -443,8 +437,11 @@
         "requestStatus": {
           "$ref": "#/definitions/QuotaRequestState"
         },
-        "subRequests": {
-          "$ref": "#/definitions/SubRequests"
+        "quotaRequests": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SubRequest"
+          }
         }
       }
     },
@@ -512,10 +509,6 @@
           "type": "string",
           "description": "The error message."
         },
-        "target": {
-          "type": "string",
-          "description": "The target of the error."
-        },
         "details": {
           "type": "array",
           "items": {
@@ -539,11 +532,6 @@
           "type": "string",
           "readOnly": true,
           "description": "The error message."
-        },
-        "target": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The target of the error."
         }
       }
     }
@@ -564,11 +552,11 @@
       "description": "Api version."
     },
     "LocationIdParameter": {
-      "name": "locationId",
+      "name": "location",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Azure data center location id."
+      "description": "Azure data center location."
     },
     "ProviderIdParameter": {
       "name": "providerId",
@@ -576,13 +564,6 @@
       "required": true,
       "type": "string",
       "description": "Azure resource Provider id."
-    },
-    "QuotaRequestIdParameter": {
-      "name": "id",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The QuotaRequestId."
     },
     "QuotaRequestNameParameter": {
       "name": "requestName",
