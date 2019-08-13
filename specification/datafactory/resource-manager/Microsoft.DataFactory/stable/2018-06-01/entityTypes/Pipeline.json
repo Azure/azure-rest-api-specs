@@ -559,7 +559,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureBlobFSWriteSettings": {
       "description": "Azure blobFS write settings.",
@@ -568,7 +574,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureDataLakeStoreWriteSettings": {
       "description": "Azure data lake store write settings.",
@@ -2732,7 +2744,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreReadSettings",
+          "$ref": "#/definitions/StoreWriteSettings",
           "description": "Binary store settings."
         }
       }
@@ -2760,10 +2772,6 @@
         },
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "type": "object"
-        },
-        "blockSizeInMB": {
-          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
           "type": "object"
         }
       }
@@ -3107,10 +3115,6 @@
       "properties": {
         "copyBehavior": {
           "description": "The type of copy behavior for copy sink.",
-          "type": "object"
-        },
-        "blockSizeInMB": {
-          "description": "Indicates the block size(MB) when writing data to blobFS. Type: integer (or Expression with resultType integer).",
           "type": "object"
         }
       }
