@@ -63,10 +63,16 @@
             "schema": {
               "$ref": "#/definitions/ClusterListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -96,10 +102,16 @@
             "schema": {
               "$ref": "#/definitions/ClusterListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -161,6 +173,12 @@
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -204,6 +222,12 @@
           },
           "204": {
             "description": "NoContent response definition."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -246,6 +270,12 @@
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -283,7 +313,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Cluster"
+              "$ref": "#/definitions/ClusterPatchProperties"
             },
             "description": "The parameters required to patch a cluster."
           },
@@ -300,6 +330,12 @@
             "schema": {
               "$ref": "#/definitions/Cluster"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -308,6 +344,10 @@
   "definitions": {
     "ClusterProperties": {
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of recommendations.",
+          "type": "string"
+        },
         "clusterId": {
           "type": "string",
           "description": "The ID associated with the cluster."
@@ -335,6 +375,15 @@
       },
       "description": "Cluster properties."
     },
+    "ClusterPatchProperties": {
+      "properties": {
+        "encryptionKeyUri": {
+          "type": "string",
+          "description": "The Key Vault key or certificate path associated with the cluster."
+        }
+      },
+      "description": "Cluster patch properties."
+    },
     "Cluster": {
       "properties": {
         "properties": {
@@ -359,14 +408,12 @@
             "$ref": "#/definitions/Cluster"
           },
           "description": "A list of clusters."
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "description": "The list clusters operation response."
-    },
-    "Object": {
-      "type": "object",
-      "properties": {},
-      "description": "JSON object"
     },
     "Resource": {
       "properties": {
@@ -399,33 +446,6 @@
       },
       "description": "The resource definition.",
       "x-ms-azure-resource": true
-    },
-    "ProxyResource": {
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource ID."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource name."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Resource type."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "Resource tags"
-        }
-      },
-      "description": "Common properties of proxy resource."
     }
   },
   "parameters": {
