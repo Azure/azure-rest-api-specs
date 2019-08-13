@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
 - Microsoft.Storage/stable/2019-04-01/storage.json
 - Microsoft.Storage/stable/2019-04-01/blob.json
+- Microsoft.Storage/stable/2019-04-01/file.json
 
 directive:
   - suppress: R3018
