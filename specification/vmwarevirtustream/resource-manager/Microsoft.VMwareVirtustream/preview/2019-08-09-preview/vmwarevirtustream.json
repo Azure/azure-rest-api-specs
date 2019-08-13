@@ -905,7 +905,7 @@
           "$ref": "#/definitions/Circuit"
         },
         "cluster": {
-          "$ref": "#/definitions/ClusterProperties"
+          "$ref": "#/definitions/DefaultClusterProperties"
         },
         "clusters": {
           "type": "array",
@@ -973,12 +973,33 @@
         }
       }
     },
-    "ClusterProperties": {
+    "DefaultClusterProperties": {
       "properties": {
         "clusterId": {
           "type": "integer",
           "readOnly": true
         },
+        "clusterSize": {
+          "type": "integer",
+          "minimum": 3,
+          "maximum": 16
+        },
+        "hosts": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ClusterProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
         "provisioningState": {
           "type": "string",
           "readOnly": true,
@@ -991,18 +1012,6 @@
           "x-ms-enum": {
             "name": "ClusterProvisioningState",
             "modelAsString": true
-          }
-        },
-        "clusterSize": {
-          "type": "integer",
-          "minimum": 3,
-          "maximum": 16
-        },
-        "hosts": {
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "type": "string"
           }
         }
       }
