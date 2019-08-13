@@ -224,6 +224,19 @@
           },
           {
             "$ref": "#/parameters/LocationIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "| Field                    | Supported operators  \n|---------------------|------------------------\n\r\n|requestSubmitTime | ge, le, eq, gt, lt\n"
+          },
+          {
+            "$ref": "#/parameters/SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/TopQueryParameter"
           }
         ],
         "responses": {
@@ -551,6 +564,26 @@
       "required": true,
       "type": "string",
       "description": "The QuotaRequest Name."
+    },
+    "SkipQueryParameter": {
+      "name": "$skip",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to skip.",
+      "minimum": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "TopQueryParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Number of records to return.",
+      "minimum": 1,
+      "x-ms-parameter-location": "method"
     }
   }
 }
