@@ -150,7 +150,7 @@
           "200": {
             "description": "Ok. Returning the status for all relevant quota requests .",
             "schema": {
-              "$ref": "#/definitions/QuotaRequestDetail"
+              "$ref": "#/definitions/QuotaRequestDetailsByName"
             }
           },
           "default": {
@@ -190,10 +190,10 @@
             "description": "Ok. Quota Request deleted."
           },
           "404": {
-            "description": "Error: Not found. Quota request for provided quotaRequest name not found"
+            "description": "Not found. Quota request for provided quotaRequest name not found"
           },
           "409": {
-            "description": "Error: Conflict. Quota request for provided quotaRequest is in processing state. Request cannot be deleted."
+            "description": "Conflict. Quota request for provided quotaRequest is in processing state. Request cannot be deleted."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -234,7 +234,7 @@
             }
           },
           "404": {
-            "description": "Error: Not found. Quota requests for provided quotaRequest not found"
+            "description": "Not found. Quota requests for provided quotaRequest not found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -366,6 +366,11 @@
           "type": "integer",
           "readOnly": true
         },
+        "message": {
+          "description": "User friendly status message.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "properties": {
             "localizedValue": {
@@ -387,31 +392,6 @@
         },
         "requestStatus": {
           "$ref": "#/definitions/QuotaRequestState"
-        }
-      }
-    },
-    "QuotaRequestDetail": {
-      "description": "The details of the quota Request.",
-      "properties": {
-        "requestSubmitTime": {
-          "description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
-          "type": "string",
-          "readOnly": true,
-          "format": "date-time"
-        },
-        "message": {
-          "description": "User friendly status message.",
-          "type": "string",
-          "readOnly": true
-        },
-        "requestStatus": {
-          "$ref": "#/definitions/QuotaRequestState"
-        },
-        "quotaRequests": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SubRequest"
-          }
         }
       }
     },
