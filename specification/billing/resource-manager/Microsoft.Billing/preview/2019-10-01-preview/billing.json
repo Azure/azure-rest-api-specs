@@ -6249,6 +6249,36 @@
           "type": "string",
           "readOnly": true
         }
+      }
+    },
+    "ValidateTransferResponse": {
+        "type": "object",
+        "description": "Transfer validation response.",
+        "properties": {
+          "properties": {
+            "description": "Transfer validation response properties.",
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/ValidateTransferResponseProperties"
+          }
+        }
+      },
+      "ValidateTransferResponseProperties": {
+        "type": "object",
+        "description": "Properties of transfer validation response.",
+        "properties": {
+          "status": {
+            "description": "The status of validation",
+            "type": "string",
+            "readOnly": true
+          },
+          "results": {
+            "description": "Array of validation results.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ValidationResultProperties"
+            }
+          }
+        }
       },
       "ValidationResults": {
         "description": "Array containing the results of transfer validation.",
@@ -6287,36 +6317,6 @@
             "readOnly": true
           }
         }
-      },
-      "ValidateTransferResponse": {
-        "type": "object",
-        "description": "Transfer validation response.",
-        "properties": {
-          "properties": {
-            "description": "Transfer validation response properties.",
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/ValidateTransferResponseProperties"
-          }
-        }
-      },
-      "ValidateTransferResponseProperties": {
-        "type": "object",
-        "description": "Properties of transfer validation response.",
-        "properties": {
-          "validationStatus": {
-            "description": "The status of validation",
-            "type": "string",
-            "readOnly": true
-          },
-          "ValidationResults": {
-            "description": "Array of validation results.",
-            "type": "array",
-            "items": {
-              "$ref": "#/definitions/ValidationResultProperties"
-            }
-          }
-        }
-      }
     },
     "Participants": {
       "description": "Details about the participant or signer.",
