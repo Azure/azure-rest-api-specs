@@ -4,7 +4,7 @@
 
 The underlying APIs are available to users who would like to write their own REST calls. These APIs would allow the user to accept the terms at a subscription, offer and SKU level. These apis are invoked in the context of azure subscription.
 
-----
+---
 ***GetAzureRmMarketplaceTerms***
 
 **Request**
@@ -73,6 +73,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js

@@ -1,0 +1,659 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-08-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotSecuritySolutions": {
+      "get": {
+        "x-ms-examples": {
+          "Get Security Solutions list": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsList.json"
+          },
+          "Get Security Solutions list By IotHub": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHub.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions"
+        ],
+        "description": "List of security solutions",
+        "operationId": "IoTSecuritySolutions_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/FilterParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions": {
+      "get": {
+        "x-ms-examples": {
+          "Get Security Solutions list": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByRg.json"
+          },
+          "Get Security Solutions list By IotHub": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHubAndRg.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions"
+        ],
+        "description": "List of security solutions",
+        "operationId": "IoTSecuritySolutionsResourceGroup_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/FilterParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionsList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get an iot security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolution.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions"
+        ],
+        "description": "Details of a specific iot security solution",
+        "operationId": "IotSecuritySolution_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create an iot security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/CreateIoTSecuritySolution.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions"
+        ],
+        "description": "Create new solution manager",
+        "operationId": "IotSecuritySolution_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          },
+          {
+            "$ref": "#/parameters/IotSecuritySolutionData"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Update an iot security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions"
+        ],
+        "description": "update existing Security Solution tags or user defined resources. To update other fields use the CreateOrUpdate method",
+        "operationId": "IotSecuritySolution_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          },
+          {
+            "$ref": "#/parameters/UpdateIotSecuritySolution"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated",
+            "schema": {
+              "$ref": "#/definitions/IoTSecuritySolutionModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Create an iot security solution": {
+            "$ref": "./examples/IoTSecuritySolutions/DeleteIoTSecuritySolution.json"
+          }
+        },
+        "tags": [
+          "IoT Security Solutions"
+        ],
+        "description": "Create new solution manager",
+        "operationId": "IotSecuritySolution_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SolutionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Security Solution deleted"
+          },
+          "204": {
+            "description": "Security Solution was not exists"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "TagsResource": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "description": "A container holding only the Tags for a resource, allowing the user to update the tags."
+    },
+    "IoTSecuritySolutionsList": {
+      "description": "List of iot solutions",
+      "required": [
+        "value"
+      ],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of security solutions",
+          "items": {
+            "$ref": "#/definitions/IoTSecuritySolutionModel"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "IoTSecuritySolutionModel": {
+      "type": "object",
+      "description": "Security Solution",
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The resource location."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security Solution data",
+          "$ref": "#/definitions/IoTSecuritySolutionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
+      ]
+    },
+    "IoTSecuritySolutionProperties": {
+      "type": "object",
+      "description": "Security Solution setting data",
+      "properties": {
+        "workspace": {
+          "type": "string",
+          "description": "Workspace resource ID"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Resource display name."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Enabled",
+          "description": "Security solution status",
+          "x-ms-enum": {
+            "name": "SecuritySolutionStatus",
+            "modelAsString": true
+          }
+        },
+        "export": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "RawEvents"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "ExportData",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "RawEvents",
+                  "description": "Agent raw events"
+                }
+              ]
+            }
+          },
+          "description": "List of additional export to workspace data options"
+        },
+        "disabledDataSources": {
+          "type": "array",
+          "items": {
+            "enum": [
+              "TwinData"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DataSource",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "TwinData",
+                  "description": "Devices twin data"
+                }
+              ]
+            }
+          },
+          "description": "Disabled data sources. Disabling these data sources compromises the system."
+        },
+        "iotHubs": {
+          "type": "array",
+          "description": "IoT Hub resource IDs",
+          "items": {
+            "type": "string"
+          }
+        },
+        "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties"
+        },
+        "autoDiscoveredResources": {
+          "type": "array",
+          "description": "List of resources that were automatically discovered as relevant to the security solution.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "recommendationsConfiguration": {
+          "$ref": "#/definitions/RecommendationConfigurationList"
+        }
+      },
+      "required": [
+        "iotHubs",
+        "workspace",
+        "displayName"
+      ]
+    },
+    "UserDefinedResourcesProperties": {
+      "type": "object",
+      "description": "Properties of the solution's user defined resources.",
+      "properties": {
+        "query": {
+          "type": "string",
+          "x-nullable": true,
+          "description": "Azure Resource Graph query which represents the security solution's user defined resources. Required to start with \"where type != \"Microsoft.Devices/IotHubs\"\""
+        },
+        "querySubscriptions": {
+          "type": "array",
+          "x-nullable": true,
+          "description": "List of Azure subscription ids on which the user defined resources query should be executed.",
+          "items": {
+            "type": "string",
+            "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$"
+          }
+        }
+      },
+      "required": [
+        "query",
+        "querySubscriptions"
+      ]
+    },
+    "RecommendationConfigurationProperties": {
+      "type": "object",
+      "description": "Recommendation configuration",
+      "properties": {
+        "recommendationType": {
+          "type": "string",
+          "description": "The recommendation type.",
+          "enum": [
+            "IoT_ACRAuthentication",
+            "IoT_AgentSendsUnutilizedMessages",
+            "IoT_Baseline",
+            "IoT_EdgeHubMemOptimize",
+            "IoT_EdgeLoggingOptions",
+            "IoT_InconsistentModuleSettings",
+            "IoT_InstallAgent",
+            "IoT_IPFilter_DenyAll",
+            "IoT_IPFilter_PermissiveRule",
+            "IoT_OpenPorts",
+            "IoT_PermissiveFirewallPolicy",
+            "IoT_PermissiveInputFirewallRules",
+            "IoT_PermissiveOutputFirewallRules",
+            "IoT_PrivilegedDockerOptions",
+            "IoT_SharedCredentials",
+            "IoT_VulnerableTLSCipherSuite"
+          ],
+          "x-ms-enum": {
+            "name": "RecommendationType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "IoT_ACRAuthentication",
+                "description": "Authentication schema used for pull an edge module from an ACR repository does not use Service Principal Authentication."
+              },
+              {
+                "value": "IoT_AgentSendsUnutilizedMessages",
+                "description": "IoT agent message size capacity is currently underutilized, causing an increase in the number of sent messages. Adjust message intervals for better utilization."
+              },
+              {
+                "value": "IoT_Baseline",
+                "description": "Identified security related system configuration issues."
+              },
+              {
+                "value": "IoT_EdgeHubMemOptimize",
+                "description": "You can optimize Edge Hub memory usage by turning off protocol heads for any protocols not used by Edge modules in your solution."
+              },
+              {
+                "value": "IoT_EdgeLoggingOptions",
+                "description": "Logging is disabled for this edge module."
+              },
+              {
+                "value": "IoT_InconsistentModuleSettings",
+                "description": "A minority within a device security group has inconsistent Edge Module settings with the rest of their group."
+              },
+              {
+                "value": "IoT_InstallAgent",
+                "description": "Install the Azure Security of Things Agent."
+              },
+              {
+                "value": "IoT_IPFilter_DenyAll",
+                "description": "IP Filter Configuration should have rules defined for allowed traffic and should deny all other traffic by default."
+              },
+              {
+                "value": "IoT_IPFilter_PermissiveRule",
+                "description": "An Allow IP Filter rules source IP range is too large. Overly permissive rules might expose your IoT hub to malicious intenders."
+              },
+              {
+                "value": "IoT_OpenPorts",
+                "description": "A listening endpoint was found on the device."
+              },
+              {
+                "value": "IoT_PermissiveFirewallPolicy",
+                "description": "An Allowed firewall policy was found (INPUT/OUTPUT). The policy should Deny all traffic by default and define rules to allow necessary communication to/from the device."
+              },
+              {
+                "value": "IoT_PermissiveInputFirewallRules",
+                "description": "A rule in the firewall has been found that contains a permissive pattern for a wide range of IP addresses or Ports."
+              },
+              {
+                "value": "IoT_PermissiveOutputFirewallRules",
+                "description": "A rule in the firewall has been found that contains a permissive pattern for a wide range of IP addresses or Ports."
+              },
+              {
+                "value": "IoT_PrivilegedDockerOptions",
+                "description": "Edge module is configured to run in privileged mode, with extensive Linux capabilities or with host-level network access (send/receive data to host machine)."
+              },
+              {
+                "value": "IoT_SharedCredentials",
+                "description": "Same authentication credentials to the IoT Hub used by multiple devices. This could indicate an illegitimate device impersonating a legitimate device. It also exposes the risk of device impersonation by an attacker."
+              },
+              {
+                "value": "IoT_VulnerableTLSCipherSuite",
+                "description": "Insecure TLS configurations detected. Immediate upgrade recommended."
+              }
+            ]
+          }
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "default": "Enabled",
+          "description": "Recommendation status. The recommendation is not generated when the status is disabled",
+          "x-ms-enum": {
+            "name": "RecommendationConfigStatus",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "recommendationType",
+        "status"
+      ]
+    },
+    "RecommendationConfigurationList": {
+      "type": "array",
+      "description": "List of recommendation configuration",
+      "items": {
+        "$ref": "#/definitions/RecommendationConfigurationProperties"
+      }
+    },
+    "UpdateIotSecuritySolutionData": {
+      "type": "object",
+      "properties": {
+        "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties"
+        },
+        "recommendationsConfiguration": {
+          "$ref": "#/definitions/RecommendationConfigurationList"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TagsResource"
+        }
+      ]
+    }
+  },
+  "parameters": {
+    "SolutionName": {
+      "name": "solutionName",
+      "in": "path",
+      "required": true,
+      "description": "The solution manager name",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IotSecuritySolutionData": {
+      "name": "iotSecuritySolutionData",
+      "in": "body",
+      "required": true,
+      "description": "The security solution data",
+      "schema": {
+        "$ref": "#/definitions/IoTSecuritySolutionModel"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParam": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "description": "filter the Security Solution with OData syntax. supporting filter by iotHubs",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "UpdateIotSecuritySolution": {
+      "name": "updateIotSecuritySolutionData",
+      "in": "body",
+      "required": true,
+      "description": "The security solution data",
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/UpdateIotSecuritySolutionData"
+      }
+    }
+  }
+}

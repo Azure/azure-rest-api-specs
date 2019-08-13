@@ -71,6 +71,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -89,7 +90,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MySQL
-  output-folder: $(csharp-sdks-folder)/MySQL/Management.MySQL/Generated
+  output-folder: $(csharp-sdks-folder)/mysql/Microsoft.Azure.Management.MySQL/src/Generated
   clear-output-folder: true
 ```
 
@@ -127,34 +128,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.mysql
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-mysql
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-12-01
-```
-
-### Tag: package-2017-12-01 and java
-
-These settings apply only when `--tag=package-2017-12-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-12-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.mysql.v2017_12_01
-  output-folder: $(azure-libraries-for-java-folder)/mysql/resource-manager/v2017_12_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
