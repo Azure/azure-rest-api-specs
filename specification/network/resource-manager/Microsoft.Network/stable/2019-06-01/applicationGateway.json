@@ -801,13 +801,13 @@
           "$ref": "#/definitions/ApplicationGatewayProbeHealthResponseMatch",
           "description": "Criterion for classifying a healthy probe response."
         },
-        "backendPoolName": {
-          "type": "string",
-          "description": "Name of backend pool of application gateway to which probe request will be sent."
+        "backendAddressPool": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of backend pool of application gateway to which probe request will be sent."
         },
-        "backendHttpSettingName": {
-          "type": "string",
-          "description": "Name of backend http setting of application gateway to be used for test probe."
+        "backendHttpSettings": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference of backend http setting of application gateway to be used for test probe."
         }
       },
       "description": "Details of on demand test probe request."

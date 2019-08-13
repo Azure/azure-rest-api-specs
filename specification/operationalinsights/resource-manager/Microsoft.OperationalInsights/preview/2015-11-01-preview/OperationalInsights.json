@@ -1347,15 +1347,18 @@
         },
         "source": {
           "type": "string",
-          "description": "The source of the workspace.  Source defines where the workspace was created. 'Azure' implies it was created in Azure.  'External' implies it was created via the Operational Insights Portal. This value is set on the service side and read-only on the client side."
+          "description": "This is a read-only legacy property. It is always set to 'Azure' by the service. Kept here for backward compatibility.",
+          "readOnly": true
         },
         "customerId": {
           "type": "string",
-          "description": "The ID associated with the workspace.  Setting this value at creation time allows the workspace being created to be linked to an existing workspace."
+          "description": "This is a read-only property. Represents the ID associated with the workspace.",
+          "readOnly": true
         },
         "portalUrl": {
           "type": "string",
-          "description": "The URL of the Operational Insights portal for this workspace.  This value is set on the service side and read-only on the client side."
+          "description": "This is a legacy property and is not used anymore. Kept here for backward compatibility.",
+          "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/Sku",
