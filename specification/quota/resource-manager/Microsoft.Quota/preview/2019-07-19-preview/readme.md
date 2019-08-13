@@ -144,6 +144,11 @@ generate-interface: true
 ```
 
 # Validation
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/{providerName}/operations"
+    from: quota.json
+    where: $.paths
 
 ## Suppression
 
