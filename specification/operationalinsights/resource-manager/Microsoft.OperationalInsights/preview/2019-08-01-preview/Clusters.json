@@ -313,7 +313,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClusterPatchProperties"
+              "$ref": "#/definitions/ClusterPatch"
             },
             "description": "The parameters required to patch a cluster."
           },
@@ -413,6 +413,22 @@
         }
       },
       "description": "Cluster patch properties."
+    },
+    "ClusterPatch": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ClusterPatchProperties",
+          "description": "Cluster properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "The top level Cluster resource container.",
+      "x-ms-azure-resource": true
     },
     "Cluster": {
       "properties": {
