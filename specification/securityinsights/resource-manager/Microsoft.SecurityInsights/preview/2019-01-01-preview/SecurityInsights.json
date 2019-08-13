@@ -1802,7 +1802,7 @@
         }
       }
     },
-    "AlertRuleSeverity":{
+    "AlertRuleSeverity": {
       "type": "string",
       "enum": [
         "High",
@@ -1834,7 +1834,7 @@
       },
       "description": "The severity for alerts created by this alert rule."
     },
-    "AlertRuleTriggerOperator":{
+    "AlertRuleTriggerOperator": {
       "type": "string",
       "enum": [
         "GreaterThan",
@@ -1848,7 +1848,7 @@
       },
       "description": "The operation against the threshold that triggers alert rule."
     },
-    "AttackTactic":{
+    "AttackTactic": {
       "type": "string",
       "enum": [
         "InitialAccess",
@@ -1869,18 +1869,18 @@
       },
       "description": "The severity for alerts created by this alert rule."
     },
-    "DataConnectorStatus":{
+    "DataConnectorStatus": {
       "type": "object",
       "description": "alert rule template data connector status",
       "properties": {
-        "connectorId":{
+        "connectorId": {
           "type": "string",
           "description": "the connector id"
         },
-        "dataTypes":{
-          "type":"object",
+        "dataTypes": {
+          "type": "object",
           "additionalProperties": {
-            "type":"string",
+            "type": "string",
             "enum": [
               "Exist",
               "NotExist"
@@ -1982,7 +1982,7 @@
         "suppressionDuration"
       ]
     },
-    "AlertRuleTemplatesList":{
+    "AlertRuleTemplatesList": {
       "description": "List all the alert rule templates.",
       "properties": {
         "nextLink": {
@@ -2002,7 +2002,7 @@
         "value"
       ]
     },
-    "AlertRuleTemplate":{
+    "AlertRuleTemplate": {
       "type": "object",
       "description": "Alert rule template.",
       "discriminator": "kind",
@@ -2071,8 +2071,8 @@
           "type": "string",
           "description": "The description of the alert rule template."
         },
-        "tactics":{
-          "type":"array",
+        "tactics": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/AttackTactic"
           },
@@ -2083,7 +2083,7 @@
           "readOnly": true,
           "description": "The time that this alert rule template has been added."
         },
-        "status":{
+        "status": {
           "type": "string",
           "enum": [
             "Installed",
@@ -2110,15 +2110,15 @@
           },
           "description": "The alert rule template status."
         },
-        "requiredDataConnectors":{
-          "type":"array",
+        "requiredDataConnectors": {
+          "type": "array",
           "items": {
             "$ref": "#/definitions/DataConnectorStatus"
           },
           "description": "The required data connectors for this template"
         },
-        "alertRulesCreatedByTemplateCount":{
-          "type":"integer",
+        "alertRulesCreatedByTemplateCount": {
+          "type": "integer",
           "description": "the number of alert rules that was created by this template"
         }
       }
