@@ -35,7 +35,7 @@ These settings apply only when `--tag=2019-07-19-preview` is specified on the co
 
 ``` yaml $(tag) == '2019-07-19-preview'
 input-file:
-- ./Quota.json
+- Quota.json
 ```
 
 
