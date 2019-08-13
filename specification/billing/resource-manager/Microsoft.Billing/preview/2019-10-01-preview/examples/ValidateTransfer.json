@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01-preview",
+    "transferName": "transferName",
+    "parameters": {
+      "properties": {
+        "productDetails": [
+          {
+            "productType": "AzureSubscription",
+            "productId": "subscriptionId"
+          },
+          {
+            "productType": "AzureReservation",
+            "productId": "reservedInstanceId"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "validationStatus": "Succeeded",
+          "ValidationResults": [
+            {
+              "level": "Error",
+              "productId": "subscriptionId",
+              "code": "NotIntendedRecipient",
+              "message" : "Intented recipient is different." 
+            }
+          ]
+        }
+      }
+    }
+  }
+}

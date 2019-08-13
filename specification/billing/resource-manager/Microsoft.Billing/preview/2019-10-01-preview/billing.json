@@ -2692,6 +2692,48 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/transfers/{transferName}/validateTransfer": {
+      "post": {
+        "tags": [
+          "RecipientTransfers"
+        ],
+        "summary": "Validates if the products can be transfered in the context of the given transfer name.",
+        "operationId": "RecipientTransfers_Validate",
+        "x-ms-examples": {
+          "ValidateTransfer": {
+            "$ref": "./examples/ValidateTransfer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/transferNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AcceptTransferRequest"
+            },
+            "description": "Parameters supplied to validate the transfer."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Results of the transfer validation.",
+            "schema": {
+              "$ref": "#/definitions/ValidateTransferResponse"
+            }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/transfers/{transferName}/declineTransfer": {
       "post": {
         "tags": [
@@ -6206,6 +6248,73 @@
           "description": "The agreement status",
           "type": "string",
           "readOnly": true
+        }
+      },
+      "ValidationResults": {
+        "description": "Array containing the results of transfer validation.",
+        "properties": {
+          "value": {
+            "description": "List of validation results.",
+            "type": "array",
+            "readOnly": true,
+            "items": {
+              "$ref": "#/definitions/ValidationResultProperties"
+            }
+          }
+        }
+      },
+      "ValidationResultProperties": {
+        "description": "The properties of the validation result.",
+        "properties": {
+          "productId": {
+            "description": "The product id for which this result applies.",
+            "type": "string",
+            "readOnly": true
+          },
+          "level": {
+            "description": "Result Level.",
+            "type": "string",
+            "readOnly": true
+          },
+          "code": {
+            "description": "Result Code.",
+            "type": "string",
+            "readOnly": true
+          },
+          "message": {
+            "description": "The validation message.",
+            "type": "string",
+            "readOnly": true
+          }
+        }
+      },
+      "ValidateTransferResponse": {
+        "type": "object",
+        "description": "Transfer validation response.",
+        "properties": {
+          "properties": {
+            "description": "Transfer validation response properties.",
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/ValidateTransferResponseProperties"
+          }
+        }
+      },
+      "ValidateTransferResponseProperties": {
+        "type": "object",
+        "description": "Properties of transfer validation response.",
+        "properties": {
+          "validationStatus": {
+            "description": "The status of validation",
+            "type": "string",
+            "readOnly": true
+          },
+          "ValidationResults": {
+            "description": "Array of validation results.",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ValidationResult"
+            }
+          }
         }
       }
     },
