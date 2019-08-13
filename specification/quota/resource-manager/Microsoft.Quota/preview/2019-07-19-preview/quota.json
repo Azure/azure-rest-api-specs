@@ -111,7 +111,7 @@
         ],
         "responses": {
           "202": {
-            "description": "Accepted. Quota requests will be created asynchronously. Please use requestName to check the status.",
+            "description": "Accepted. Quota requests will be created asynchronously. Please use requestName to check the status."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -239,6 +239,10 @@
             "$ref": "#/parameters/TopQueryParameter"
           }
         ],
+		
+		"x-ms-pageable": {
+			"nextLinkName": "nextLink"
+		},
         "responses": {
           "200": {
             "description": "Ok. Sending Quota request status and details",
@@ -254,11 +258,8 @@
             "schema": {
               "$ref": "#/definitions/ExceptionResponse"
             }
-          },
-          "x-ms-pageable": {
-            "nextLinkName": "nextLink"
           }
-        }
+		}
       }
     }
   },
