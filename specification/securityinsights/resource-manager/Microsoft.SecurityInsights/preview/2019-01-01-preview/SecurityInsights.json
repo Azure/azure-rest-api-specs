@@ -2339,7 +2339,7 @@
             "values": [
               {
                 "value": "Installed",
-                "description": "Alert rule template installed. and cann't use more then once"
+                "description": "Alert rule template installed. and can not use more then once"
               },
               {
                 "value": "Available",
@@ -2467,7 +2467,14 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Fusion alert rule template properties",
-          "$ref": "#/definitions/BaseAlertRuleTemplateProperties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/FusionAlertRuleTemplateProperties"
+            }
+          ],
           "required": [
             "displayName",
             "description",
@@ -2475,6 +2482,16 @@
             "status",
             "alertRulesCreatedByTemplateCount"
           ]
+        }
+      }
+    },
+    "FusionAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Filter alert rule template property bag.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
         }
       }
     },
