@@ -79,13 +79,13 @@
         "tags": [
           "WebApplicationFirewallPolicies"
         ],
+        "description": "Gets all the WAF policies in a subscription.",
         "operationId": "WebApplicationFirewallPolicies_ListAll",
         "x-ms-examples": {
           "Lists all WAF policies in a subscription": {
             "$ref": "./examples/WafListAllPolicies.json"
           }
         },
-        "description": "Gets all the WAF policies in a subscription.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -305,7 +305,7 @@
         "exclusions": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CrsExclusionEntry"
+            "$ref": "#/definitions/OwaspCrsExclusionEntry"
           },
           "description": "Describes the Exclusions that are applied on the policy."
         },
@@ -634,25 +634,39 @@
         }
       }
     },
-    "CrsExclusionEntry": {
+    "OwaspCrsExclusionEntry": {
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator",
+        "selector"
+      ],
+      "description": "Allow to exclude some variable satisfy the condition for the WAF check.",
       "properties": {
         "matchVariable": {
           "type": "string",
+          "enum": [
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "RequestArgNames"
+          ],
           "description": "The variable to be excluded."
         },
         "selectorMatchOperator": {
           "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "EqualsAny"
+          ],
           "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to."
         },
         "selector": {
           "type": "string",
           "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
         }
-      },
-      "required": [
-        "matchVariable"
-      ],
-      "description": "Allow to exclude some variable satisfy the condition for the WAF check."
+      }
     }
   }
 }
