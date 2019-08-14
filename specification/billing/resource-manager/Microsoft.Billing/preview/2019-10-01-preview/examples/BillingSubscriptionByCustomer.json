@@ -2,13 +2,13 @@
   "parameters": {
     "api-version": "2018-11-01-preview",
     "billingAccountName": "{billingAccountName}",
-    "invoiceSectionName": "{invoiceSectionName}",
+    "customerName": "{customerName}",
     "billingSubscriptionName": "{billingSubscriptionName}"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}",
+        "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/{billingSubscriptionName}",
         "name": "{billingSubscriptionName}",
         "type": "Microsoft.Billing/billingSubscriptions",
         "properties": {
@@ -23,12 +23,14 @@
             "currency": "USD",
             "value": 600
           },
-          "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}",
-          "invoiceSectionName": "Contoso operations invoiceSection",
-          "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
-          "billingProfileName": "Contoso operations billing",
-          "skuId": "0001",
-          "skuDescription": "Microsoft Azure Dev/Test"
+          "customerId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}",
+          "customerDisplayName": "Customer1",
+          "reseller": {
+            "resellerId": "3b65b5a8-bd4f-4084-90e9-e1bd667a2b19",
+            "description": "Reseller2"
+          },
+          "skuId": "0002",
+          "skuDescription": "Microsoft Azure Standard"
         }
       }
     }
