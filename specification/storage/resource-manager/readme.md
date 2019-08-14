@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2019-04` is specified on the comma
 input-file:
 - Microsoft.Storage/stable/2019-04-01/storage.json
 - Microsoft.Storage/stable/2019-04-01/blob.json
+- Microsoft.Storage/stable/2019-04-01/file.json
 
 directive:
   - suppress: R3018
@@ -236,6 +237,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
     autorest_options:
       use: "@microsoft.azure/autorest.python@4.0.70"
