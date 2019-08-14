@@ -251,19 +251,13 @@
                             "$ref": "#/definitions/IdentityTokenResponse"
                         }
                     },
-                    "401": {
-                        "description": "This is the response header from an Identity operation in the case authentication information is missing or invalid.",
+                    "default": {
                         "headers": {
                             "Www-Authenticate": {
                                 "type": "string",
                                 "description": "This is the response header containing a challenge for the Basic scheme with a realm value."
                             }
                         },
-                        "schema": {
-                            "$ref": "#/definitions/IdentityErrorResponse"
-                        }
-                    },
-                    "default": {
                         "description": "Error response describing why the operation failed.",
                         "schema": {
                             "$ref": "#/definitions/IdentityErrorResponse"
