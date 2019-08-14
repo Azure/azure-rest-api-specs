@@ -50,6 +50,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -66,7 +67,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MachineLearningExperimentation
-  output-folder: $(csharp-sdks-folder)/MachineLearningExperimentation/Management.MachineLearningExperimentation/Generated
+  output-folder: $(csharp-sdks-folder)/machinelearningexperimentation/Microsoft.Azure.Management.MachineLearningExperimentation/src/Generated
   clear-output-folder: true
 ```
 

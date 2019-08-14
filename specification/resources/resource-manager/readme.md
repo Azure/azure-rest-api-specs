@@ -41,7 +41,7 @@ tag: package-policy-2019-01
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-0510
+tag: package-resources-2019-07
 ```
 
 ``` yaml $(package-subscriptions)
@@ -53,9 +53,18 @@ tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-managedapplications-2016-09
+tag: package-2019-06
 ```
 
+
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.Resources/stable/2019-06-01/subscriptions.json
+```
 ### Tag: package-features-2015-12
 
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
@@ -84,6 +93,7 @@ input-file:
 ```
 
 ### Tag: package-policy-2019-01
+
 These settings apply only when `--tag=package-policy-2019-01` is specified on the command line.
 
 ``` yaml $(tag) == 'package-policy-2019-01'
@@ -188,13 +198,13 @@ input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
 ```
 
-### Tag: package-resources-2019-05
+### Tag: package-resources-2019-07
 
-These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-07` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-05'
+``` yaml $(tag) == 'package-resources-2019-07'
 input-file:
-- Microsoft.Resources/stable/2019-05-01/resources.json
+- Microsoft.Resources/stable/2019-07-01/resources.json
 ```
 
 ### Tag: package-resources-2019-0510
@@ -204,6 +214,15 @@ These settings apply only when `--tag=package-resources-2019-0510` is specified 
 ``` yaml $(tag) == 'package-resources-2019-0510'
 input-file:
 - Microsoft.Resources/stable/2019-05-10/resources.json
+```
+
+### Tag: package-resources-2019-05
+
+These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-05'
+input-file:
+- Microsoft.Resources/stable/2019-05-01/resources.json
 ```
 
 ### Tag: package-resources-2019-03
@@ -422,6 +441,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#features
@@ -466,6 +486,7 @@ batch:
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2019-07
   - tag: package-resources-2019-0510
   - tag: package-resources-2019-05
   - tag: package-resources-2019-03
@@ -573,6 +594,19 @@ directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
   transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-resources-2019-07 and java
+
+These settings apply only when `--tag=package-resources-2019-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_07_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-resources-2019-0510 and java
