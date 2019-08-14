@@ -20,9 +20,12 @@
           "resourceState": "Enabled",
           "provisioningState": "Succeeded",
           "policySettings": {
-            "enabledState": "Enabled",
-            "mode": "Prevention"
-          },
+            "state": "Enabled",
+            "mode": "Prevention",
+            "maxRequestBodySizeInKb": 128,
+            "fileUploadLimitInMb": 750,
+            "requestBodyCheck" : true
+        },
           "customRules": [
             {
               "name": "Rule1",
@@ -89,52 +92,54 @@
             "state": "Enabled",
             "mode": "Prevention"
           },
-          "managedRuleSets": [
-            {
-              "ruleSetType" : "OWASP",
-              "ruleSetVersion" : "3.0",
-              "ruleGroupOverrides" : [
-                {
-                  "ruleGroupName" : "REQUEST-942-APPLICATION-ATTACK-SQLI",
-                  "rules" : [
-                    {
-                      "ruleId" : "942130",
-                      "state" :  "Disabled"
-                    },
-                    {
-                      "ruleId" : "942110",
-                      "state" :  "Disabled"
-                    }
-                  ]
-                },
-                {
-                  "ruleGroupName" : "REQUEST-920-PROTOCOL-ENFORCEMENT",
-                  "rules" : [
-                    {
-                      "ruleId" : "920100",
-                      "state" :  "Disabled"
-                    },
-                    {
-                      "ruleId" : "920120",
-                      "state" :  "Disabled"
-                    }
-                  ]
-                }
-              ]
-            }
-          ],
-          "exclusions" : [
-            {
-              "matchVariable" : "RequestHeaderNames",
-              "selectorMatchOperator" : "Equals",
-              "selector" : "testHeader1"
-            },
-            {
-              "matchVariable" : "RequestHeaderNames",
-              "selectorMatchOperator" : "StartsWith",
-              "selector" : "testHeader2"
-            }
-          ]
+          "managedRules": {
+            "managedRuleSets" : [
+              {
+                "ruleSetType" : "OWASP",
+                "ruleSetVersion" : "3.0",
+                "ruleGroupOverrides" : [
+                  {
+                    "ruleGroupName" : "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                    "rules" : [
+                      {
+                        "ruleId" : "942130",
+                        "state" :  "Disabled"
+                      },
+                      {
+                        "ruleId" : "942110",
+                        "state" :  "Disabled"
+                      }
+                    ]
+                  },
+                  {
+                    "ruleGroupName" : "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                    "rules" : [
+                      {
+                        "ruleId" : "920100",
+                        "state" :  "Disabled"
+                      },
+                      {
+                        "ruleId" : "920120",
+                        "state" :  "Disabled"
+                      }
+                    ]
+                  }
+                ]
+              }
+            ],
+            "exclusions": [
+              {
+                "matchVariable" : "RequestHeaderNames",
+                "selectorMatchOperator" : "Equals",
+                "selector" : "testHeader1"
+              },
+              {
+                "matchVariable" : "RequestHeaderNames",
+                "selectorMatchOperator" : "StartsWith",
+                "selector" : "testHeader2"
+              }
+            ]
+          }
         }
       }
     }

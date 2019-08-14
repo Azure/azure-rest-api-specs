@@ -296,18 +296,8 @@
           }
         },
         "managedRules": {
-          "description": "Describes the list of ManagedRuleSets in the policy.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedRuleSet"
-          }
-        },
-        "exclusions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OwaspCrsExclusionEntry"
-          },
-          "description": "Describes the Exclusions that are applied on the policy."
+          "description": "Describes the managedRules structure",
+          "$ref": "#/definition/ManagedRulesDefinition"
         },
         "applicationGateways": {
           "readOnly": true,
@@ -630,6 +620,27 @@
           "x-ms-enum": {
             "name": "ManagedRuleEnabledState",
             "modelAsString": true
+          }
+        }
+      }
+    },
+    "ManagedRulesDefinition": {
+      "description": "Allow to exclude some variable satisfy the condition for the WAF check.",
+      "required": [
+        "managedRuleSets"
+      ],
+      "properties": {
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OwaspCrsExclusionEntry"
+          },
+          "description": "Describes the Exclusions that are applied on the policy."
+        },
+        "managedRuleSets": {
+          "type" : "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
           }
         }
       }
