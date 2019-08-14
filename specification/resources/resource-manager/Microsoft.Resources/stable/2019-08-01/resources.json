@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2019-07-01",
+    "version": "2019-08-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -2287,13 +2287,17 @@
               "$ref": "#/definitions/ResourceGroupExportResult"
             }
           },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups": {
