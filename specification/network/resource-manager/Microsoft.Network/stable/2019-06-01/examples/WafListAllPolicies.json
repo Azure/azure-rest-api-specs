@@ -20,7 +20,7 @@
               "resourceState": "Enabled",
               "provisioningState": "Succeeded",
               "policySettings": {
-                "enabledState": "Enabled",
+                "state": "Enabled",
                 "mode": "Prevention"
               },
               "customRules": [
@@ -81,7 +81,15 @@
                   ],
                   "action": "Block"
                 }
-              ]
+              ],
+              "managedRules" :{
+                "managedRuleSets": [
+                  {
+                    "ruleSetType" : "OWASP",
+                    "ruleSetVersion" : "3.0"
+                  }
+                ]
+              }
             }
           }
         ]
