@@ -54,6 +54,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-js
@@ -75,7 +76,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.HybridData
-  output-folder: $(csharp-sdks-folder)/HybridDataManager/Management.HybridData/Generated
+  output-folder: $(csharp-sdks-folder)/hybriddatamanager/Microsoft.Azure.Management.HybridDataManager/src/Generated
   clear-output-folder: true
 ```
 

@@ -69,6 +69,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -88,7 +89,7 @@ csharp:
   azure-arm: true
   license-header: NONE
   namespace: Microsoft.Azure.Management.Scheduler
-  output-folder: $(csharp-sdks-folder)/Scheduler/Management.Scheduler/Generated
+  output-folder: $(csharp-sdks-folder)/scheduler/Microsoft.Azure.Management.Scheduler/src/Generated
   clear-output-folder: true
 ```
 
@@ -111,12 +112,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-scheduler/azure/mgmt/scheduler
+  output-folder: $(python-sdks-folder)/scheduler/azure-mgmt-scheduler/azure/mgmt/scheduler
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-scheduler
+  output-folder: $(python-sdks-folder)/scheduler/azure-mgmt-scheduler
 ```
 
 ## Go

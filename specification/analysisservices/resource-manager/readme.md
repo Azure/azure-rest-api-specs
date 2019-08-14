@@ -77,6 +77,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -96,7 +97,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Analysis
-  output-folder: $(csharp-sdks-folder)/AnalysisServices/Management.Analysis/Generated
+  output-folder: $(csharp-sdks-folder)/analysisservices/Microsoft.Azure.Management.AnalysisServices/src/Generated
   clear-output-folder: true
 ```
 

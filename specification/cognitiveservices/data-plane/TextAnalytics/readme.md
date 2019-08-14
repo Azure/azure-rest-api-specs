@@ -176,7 +176,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   azure-arm: false
   namespace: Microsoft.Azure.CognitiveServices.Language.TextAnalytics
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Language/TextAnalytics/Generated/TextAnalytics
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Language.TextAnalytics/src/Generated
   clear-output-folder: true
 ```
 
@@ -200,13 +200,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-textanalytics/azure/cognitiveservices/language/textanalytics
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-textanalytics/azure/cognitiveservices/language/textanalytics
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-language-textanalytics
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-language-textanalytics
 ```
 
 ## Go

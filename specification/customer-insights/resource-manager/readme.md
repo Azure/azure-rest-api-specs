@@ -61,6 +61,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -80,7 +81,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.CustomerInsights
-  output-folder: $(csharp-sdks-folder)/CustomerInsights/Management.CustomerInsights/Generated
+  output-folder: $(csharp-sdks-folder)/customer-insights/Microsoft.Azure.Management.CustomerInsights/src/Generated
   clear-output-folder: true
 ```
 
@@ -135,5 +136,6 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
+
 
 

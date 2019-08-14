@@ -78,7 +78,7 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 ```yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.OperationalInsights
-  output-folder: $(csharp-sdks-folder)/OperationalInsights/DataPlane/OperationalInsights/Generated
+  output-folder: $(csharp-sdks-folder)/operationalinsights/Microsoft.Azure.OperationalInsights/src/Generated
   clear-output-folder: true
   payload-flattening-threshold: 3
 directive:
@@ -105,12 +105,12 @@ directive:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-loganalytics/azure/loganalytics
+  output-folder: $(python-sdks-folder)/loganalytics/azure-loganalytics/azure/loganalytics
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-loganalytics
+  output-folder: $(python-sdks-folder)/loganalytics/azure-loganalytics
 ```
 
 ## Go

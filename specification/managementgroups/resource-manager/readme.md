@@ -69,6 +69,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -86,7 +87,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ManagementGroups
-  output-folder: $(csharp-sdks-folder)/ManagementGroups/Management.ManagementGroups/Generated
+  output-folder: $(csharp-sdks-folder)/managementgroups/Microsoft.Azure.Management.ManagementGroups/src/Generated
   clear-output-folder: true
 ```
 
@@ -109,12 +110,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-managementgroups/azure/mgmt/managementgroups
+  output-folder: $(python-sdks-folder)/managementgroups/azure-mgmt-managementgroups/azure/mgmt/managementgroups
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-managementgroups
+  output-folder: $(python-sdks-folder)/managementgroups/azure-mgmt-managementgroups
 ```
 
 ## Go

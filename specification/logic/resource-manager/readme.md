@@ -116,6 +116,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -136,7 +137,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Logic
-  output-folder: $(csharp-sdks-folder)/Logic/Management.Logic/Generated
+  output-folder: $(csharp-sdks-folder)/logic/Microsoft.Azure.Management.Logic/src/Generated
   clear-output-folder: true
 ```
 
@@ -160,13 +161,13 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-logic/azure/mgmt/logic
+  output-folder: $(python-sdks-folder)/logic/azure-mgmt-logic/azure/mgmt/logic
 ```
 
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-logic
+  output-folder: $(python-sdks-folder)/logic/azure-mgmt-logic
 ```
 
 ## Go

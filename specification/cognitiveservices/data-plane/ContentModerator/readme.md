@@ -50,7 +50,7 @@ These settings apply only when `--csharp` is specified on the command line.
 ``` yaml $(csharp)
 csharp:
   namespace: Microsoft.Azure.CognitiveServices.ContentModerator
-  output-folder: $(csharp-sdks-folder)/CognitiveServices/dataPlane/Vision/ContentModerator/ContentModerator/Generated
+  output-folder: $(csharp-sdks-folder)/CognitiveServices/Vision.ContentModerator/src/Generated
 ```
 
 ``` yaml
@@ -80,12 +80,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator/azure/cognitiveservices/vision/contentmoderator
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-contentmoderator/azure/cognitiveservices/vision/contentmoderator
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-cognitiveservices-vision-contentmoderator
+  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-vision-contentmoderator
 ```
 
 ## Go

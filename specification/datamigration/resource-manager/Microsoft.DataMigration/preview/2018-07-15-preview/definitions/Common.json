@@ -282,7 +282,7 @@
       "required": [
         "connectionString"
       ]
-    },    
+    },
     "SqlConnectionInfo": {
       "x-ms-discriminator-value": "SqlConnectionInfo",
       "type": "object",
@@ -359,6 +359,25 @@
         "port"
       ]
     },
+    "OracleConnectionInfo": {
+      "x-ms-discriminator-value": "OracleConnectionInfo",
+      "type": "object",
+      "description": "Information for connecting to Oracle server",
+      "properties": {
+        "dataSource": {
+          "type": "string",
+          "description": "EZConnect or TNSName connection string."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ConnectionInfo"
+        }
+      ],
+      "required": [
+        "dataSource"
+      ]
+    },
     "PostgreSqlConnectionInfo": {
       "x-ms-discriminator-value": "PostgreSqlConnectionInfo",
       "type": "object",
@@ -391,7 +410,7 @@
       "type": "string",
       "description": "An enumeration of possible target types when migrating from MySQL",
       "enum": [
-		"SqlServer",
+        "SqlServer",
         "AzureDbForMySQL"
       ],
       "x-ms-enum": {

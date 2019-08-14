@@ -32,7 +32,7 @@
             "$ref": "./Common.json#/definitions/ODataError"
           },
           "description": "Array of errors. This is ignored if submitted.",
-		      "readOnly": true
+          "readOnly": true
         },
         "state": {
           "type": "string",
@@ -60,9 +60,11 @@
             "$ref": "./Commands.json#/definitions/CommandProperties"
           },
           "readOnly": true
-		}
+        }
       },
-      "required": [ "taskType" ],
+      "required": [
+        "taskType"
+      ],
       "discriminator": "taskType"
     },
     "ProjectTask": {
@@ -125,7 +127,7 @@
         }
       ]
     },
-	"ConnectToSourceSqlServerSyncTaskProperties": {
+    "ConnectToSourceSqlServerSyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToSource.SqlServer.Sync",
       "type": "object",
       "description": "Properties for the task that validates connection to SQL Server and source server requirements for online migration",
@@ -149,7 +151,7 @@
         }
       ]
     },
-	"ConnectToSourcePostgreSqlSyncTaskProperties": {
+    "ConnectToSourcePostgreSqlSyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToSource.PostgreSql.Sync",
       "type": "object",
       "description": "Properties for the task that validates connection to PostgreSQL server and source server requirements for online migration",
@@ -197,7 +199,7 @@
         }
       ]
     },
-	"ConnectToTargetSqlSqlDbSyncTaskProperties": {
+    "ConnectToTargetSqlSqlDbSyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.SqlDb.Sync",
       "type": "object",
       "description": "Properties for the task that validates connection to SQL DB and target server requirements for online migration",
@@ -221,7 +223,7 @@
         }
       ]
     },
-	"ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties": {
+    "ConnectToTargetAzureDbForPostgreSqlSyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureDbForPostgreSql.Sync",
       "type": "object",
       "description": "Properties for the task that validates connection to Azure Database For PostgreSQL server and target server requirements for online migration",
@@ -269,7 +271,7 @@
         }
       ]
     },
-	"GetUserTablesSqlSyncTaskProperties": {
+    "GetUserTablesSqlSyncTaskProperties": {
       "x-ms-discriminator-value": "GetUserTables.AzureSqlDb.Sync",
       "type": "object",
       "description": "Properties for the task that collects user tables for the given list of databases",
@@ -317,7 +319,7 @@
         }
       ]
     },
-	"ConnectToTargetSqlMISyncTaskProperties": {
+    "ConnectToTargetSqlMISyncTaskProperties": {
       "x-ms-discriminator-value": "ConnectToTarget.AzureSqlDbMI.Sync.LRS",
       "type": "object",
       "description": "Properties for the task that validates connection to Azure SQL Database Managed Instance",
@@ -389,7 +391,7 @@
         }
       ]
     },
-	"MigrateSqlServerSqlMISyncTaskProperties": {
+    "MigrateSqlServerSqlMISyncTaskProperties": {
       "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDbMI.Sync.LRS",
       "type": "object",
       "description": "Properties for task that migrates SQL Server databases to Azure SQL Database Managed Instance sync scenario",
@@ -436,7 +438,7 @@
           "$ref": "#/definitions/ProjectTaskProperties"
         }
       ]
-	},
+    },
     "MigrateSqlServerSqlDbSyncTaskProperties": {
       "x-ms-discriminator-value": "Migrate.SqlServer.AzureSqlDb.Sync",
       "type": "object",
@@ -557,7 +559,7 @@
         }
       ]
     },
-	"ValidateMigrationInputSqlServerSqlMISyncTaskProperties": {
+    "ValidateMigrationInputSqlServerSqlMISyncTaskProperties": {
       "x-ms-discriminator-value": "ValidateMigrationInput.SqlServer.AzureSqlDbMI.Sync.LRS",
       "type": "object",
       "description": "Properties for task that validates migration input for SQL to Azure SQL Database Managed Instance sync scenario",

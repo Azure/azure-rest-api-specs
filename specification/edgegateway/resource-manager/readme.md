@@ -49,6 +49,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-go
@@ -69,7 +70,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.EdgeGateway
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/EdgeGateway/Management.EdgeGateway/Generated
+  output-folder: $(csharp-sdks-folder)/edgegateway/Microsoft.Azure.Management.EdgeGateway/src/Generated
   clear-output-folder: true
 ```
 
@@ -94,12 +95,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-edgegateway/azure/mgmt/edgegateway
+  output-folder: $(python-sdks-folder)/edgegateway/azure-mgmt-edgegateway/azure/mgmt/edgegateway
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-edgegateway
+  output-folder: $(python-sdks-folder)/edgegateway/azure-mgmt-edgegateway
 ```
 
 ## Ruby

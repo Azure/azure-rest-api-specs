@@ -53,6 +53,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -71,7 +72,7 @@ csharp:
   namespace: Microsoft.Azure.Management.OperationsManagement
   payload-flattening-threshold: 1
   license-header: MICROSOFT_MIT_NO_VERSION
-  output-folder: $(csharp-sdks-folder)/OperationsManagement/Management.OperationsManagement/Generated
+  output-folder: $(csharp-sdks-folder)/operationsmanagement/Microsoft.Azure.Management.OperationsManagement/src/Generated
   clear-output-folder: true
 ```
 

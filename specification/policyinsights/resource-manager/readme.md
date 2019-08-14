@@ -125,6 +125,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -143,7 +144,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.PolicyInsights
-  output-folder: $(csharp-sdks-folder)/PolicyInsights/Management/Management.PolicyInsights/Generated
+  output-folder: $(csharp-sdks-folder)/policyinsights/Microsoft.Azure.Management.PolicyInsights/src/Generated
   clear-output-folder: true
 ```
 
@@ -166,12 +167,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights/azure/mgmt/policyinsights
+  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights/azure/mgmt/policyinsights
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-policyinsights
+  output-folder: $(python-sdks-folder)/policyinsights/azure-mgmt-policyinsights
 ```
 
 ## Go

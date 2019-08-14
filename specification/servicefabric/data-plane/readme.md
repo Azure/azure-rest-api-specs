@@ -25,7 +25,7 @@ These are the global settings for the ServiceFabricClient API.
 
 ``` yaml
 openapi-type: data-plane
-tag: '6.4'
+tag: '6.5'
 ```
 
 ### Suppression
@@ -95,6 +95,17 @@ input-file:
 
 ```
 
+### Tag: 6.5
+
+These settings apply only when `--tag=6.5` is specified on the command line.
+
+``` yaml $(tag) == '6.5'
+input-file:
+- Microsoft.ServiceFabric/stable/6.5/servicefabric.json
+
+```
+
+
 ---
 # Code Generation
 
@@ -110,34 +121,6 @@ swagger-to-sdk:
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
-```
-
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.servicefabric
-  package-name: azure-servicefabric
-  package-version: 6.4.0.0
-  add-credentials: true
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-servicefabric/azure/servicefabric
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-servicefabric
 ```
 
 ## Go

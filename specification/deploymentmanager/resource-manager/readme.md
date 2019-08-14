@@ -75,6 +75,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -95,7 +96,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DeploymentManager
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DeploymentManager/Management.DeploymentManager/Generated
+  output-folder: $(csharp-sdks-folder)/deploymentmanager/Microsoft.Azure.Management.DeploymentManager/src/Generated
   clear-output-folder: true
 ```
 
@@ -121,12 +122,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-deploymentmanager/azure/mgmt/deploymentmanager
+  output-folder: $(python-sdks-folder)/deploymentmanager/azure-mgmt-deploymentmanager/azure/mgmt/deploymentmanager
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-deploymentmanager
+  output-folder: $(python-sdks-folder)/deploymentmanager/azure-mgmt-deploymentmanager
 ```
 
 ## Go

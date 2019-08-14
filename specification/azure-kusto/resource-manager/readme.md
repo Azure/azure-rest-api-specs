@@ -109,6 +109,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-java
@@ -124,7 +125,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Kusto
-  output-folder: $(csharp-sdks-folder)/Kusto/Management.Kusto/Generated
+  output-folder: $(csharp-sdks-folder)/kusto/Microsoft.Azure.Management.Kusto/src/Generated
   clear-output-folder: true
 ```
 

@@ -193,6 +193,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
@@ -213,7 +214,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.Automation
-  output-folder: $(csharp-sdks-folder)/Automation/Management.Automation/Generated
+  output-folder: $(csharp-sdks-folder)/automation/Microsoft.Azure.Management.Automation/src/Generated
   clear-output-folder: true
 ```
 
