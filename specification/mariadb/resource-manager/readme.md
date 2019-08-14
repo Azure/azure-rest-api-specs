@@ -72,6 +72,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -90,7 +91,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MariaDB
-  output-folder: $(csharp-sdks-folder)/MariaDB/Management.MariaDB/Generated
+  output-folder: $(csharp-sdks-folder)/mariadb/Microsoft.Azure.Management.MariaDB/src/Generated
   clear-output-folder: true
 ```
 

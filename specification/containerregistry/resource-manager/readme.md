@@ -155,11 +155,12 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
     autorest_options:
       use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-containerregistry --default-api-version=2017-10-01
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-containerregistry
       - python ./scripts/trim_aio.py ./sdk/containerregistry/azure-mgmt-containerregistry
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go

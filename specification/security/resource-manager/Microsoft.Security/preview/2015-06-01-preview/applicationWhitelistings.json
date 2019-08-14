@@ -1,524 +1,524 @@
 {
-	"swagger": "2.0",
-	"info": {
-		"title": "Security Center",
-		"description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-		"version": "2015-06-01-preview"
-	},
-	"host": "management.azure.com",
-	"schemes": [
-		"https"
-	],
-	"consumes": [
-		"application/json"
-	],
-	"produces": [
-		"application/json"
-	],
-	"security": [
-		{
-			"azure_auth": [
-				"user_impersonation"
-			]
-		}
-	],
-	"securityDefinitions": {
-		"azure_auth": {
-			"type": "oauth2",
-			"authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-			"flow": "implicit",
-			"description": "Azure Active Directory OAuth2 Flow",
-			"scopes": {
-				"user_impersonation": "impersonate your user account"
-			}
-		}
-	},
-	"paths": {
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/applicationWhitelistings": {
-			"get": {
-				"description": "Gets a list of application control VM/server groups for the subscription.",
-				"operationId": "AdaptiveApplicationControls_List",
-				"x-ms-examples": {
-					"Gets a list of application control VM/server groups for the subscription": {
-						"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsSubscription_example.json"
-					}
-				},
-				"tags": [
-					"applicationWhitelistings"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-					},
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-					},
-					{
-						"$ref": "#/parameters/IncludePathRecommendations"
-					},
-					{
-						"$ref": "#/parameters/Summary"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/AppWhitelistingGroups"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-						}
-					}
-				}
-			}
-		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/applicationWhitelistings/{groupName}": {
-			"get": {
-				"description": "Gets an application control VM/server group.",
-				"operationId": "AdaptiveApplicationControls_Get",
-				"x-ms-examples": {
-					"Gets a configured application control VM/server group": {
-						"$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsGroup_example.json"
-					}
-				},
-				"tags": [
-					"applicationWhitelistings"
-				],
-				"produces": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-					},
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/AscLocation"
-					},
-					{
-						"$ref": "#/parameters/GroupName"
-					},
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/AppWhitelistingGroup"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-						}
-					}
-				}
-			},
-			"put": {
-				"tags": [
-					"applicationWhitelistings"
-				],
-				"x-ms-examples": {
-					"Update an application control VM/server group by adding a new file": {
-						"$ref": "./examples/ApplicationWhitelistings/PutApplicationWhitelistings_example.json"
-					}
-				},
-				"description": "Update an application control VM/server group",
-				"operationId": "AdaptiveApplicationControls_Put",
-				"consumes": [
-					"application/json"
-				],
-				"parameters": [
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-					},
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/AscLocation"
-					},
-					{
-						"$ref": "#/parameters/GroupName"
-					},
-					{
-						"$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-					},
-					{
-						"$ref": "#/parameters/AppWhitelistingGroupDataPutDataBody"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK",
-						"schema": {
-							"$ref": "#/definitions/AppWhitelistingGroup"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "../../../common/v1/types.json#/definitions/CloudError"
-						}
-					}
-				}
-			}
-		}
-	},
-	"definitions": {
-		"AppWhitelistingGroups": {
-			"type": "object",
-			"description": "Represents a list of VM/server groups and set of rules that are Recommended by Azure Security Center to be allowed",
-			"properties": {
-				"value": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/AppWhitelistingGroup"
-					}
-				}
-			}
-		},
-		"AppWhitelistingGroup": {
-			"type": "object",
-			"properties": {
-				"properties": {
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/AppWhitelistingGroupData"
-				}
-			},
-			"required": [
-				"properties"
-			],
-			"allOf": [
-				{
-					"$ref": "../../../common/v1/types.json#/definitions/Resource"
-				},
-				{
-					"$ref": "../../../common/v1/types.json#/definitions/Location"
-				}
-			]
-		},
-		"AppWhitelistingGroupData": {
-			"type": "object",
-			"description": "Represents a VM/server group and set of rules that are Recommended by Azure Security Center to be allowed",
-			"properties": {
-				"enforcementMode": {
-					"$ref": "#/definitions/EnforcementMode"
-				},
-				"configurationStatus": {
-					"$ref": "#/definitions/ConfigurationStatus"
-				},
-				"recommendationStatus": {
-					"$ref": "#/definitions/RecommendationStatus"
-				},
-				"issues": {
-					"$ref": "#/definitions/AppWhitelistingIssuesSummaries"
-				},
-				"sourceSystem": {
-					"$ref": "#/definitions/SourceSystem"
-				},
-				"vmRecommendations": {
-					"$ref": "#/definitions/VmRecommendations"
-				},
-				"pathRecommendations": {
-					"$ref": "#/definitions/PathRecommendations"
-				}
-			}
-		},
-		"AppWhitelistingPutGroupData": {
-			"type": "object",
-			"description": "The altered data of the recommended VM/server group policy",
-			"properties": {
-				"enforcementMode": {
-					"$ref": "#/definitions/EnforcementMode"
-				},
-				"vmRecommendations": {
-					"$ref": "#/definitions/VmRecommendations"
-				},
-				"pathRecommendations": {
-					"$ref": "#/definitions/PathRecommendations"
-				}
-			}
-		},
-		"ConfigurationStatus": {
-			"type": "string",
-			"description": "The configuration status of the VM/server group or machine or rule on the machine",
-			"enum": [
-				"Configured",
-				"NotConfigured",
-				"InProgress",
-				"Failed",
-				"NoStatus"
-			]
-		},
-		"EnforcementMode": {
-			"type": "string",
-			"description": "The application control policy enforcement mode of the VM/server group",
-			"enum": [
-				"Audit",
-				"Enforce"
-			]
-		},
-		"RecommendationStatus": {
-			"type": "string",
-			"description": "The recommendation status of the VM/server group or VM/server",
-			"enum": [
-				"Recommended",
-				"NotRecommended",
-				"NotAvailable",
-				"NoStatus"
-			]
-		},
-		"RecommendationAction": {
-			"type": "string",
-			"description": "The recommendation action of the VM/server or rule",
-			"enum": [
-				"Recommended",
-				"Add",
-				"Remove"
-			]
-		},
-		"RecommendationType": {
-			"type": "string",
-			"description": "The type of the rule to be allowed",
-			"enum": [
-				"File",
-				"FileHash",
-				"PublisherSignature",
-				"ProductSignature",
-				"BinarySignature",
-				"VersionAndAboveSignature"
-			]
-		},
-		"AppWhitelistingIssue": {
-			"type": "string",
-			"description": "An alert that VMs/servers within a group can have",
-			"enum": [
-				"ViolationsAudited",
-				"ViolationsBlocked",
-				"MsiAndScriptViolationsAudited",
-				"MsiAndScriptViolationsBlocked",
-				"ExecutableViolationsAudited",
-				"RulesViolatedManually"
-			]
-		},
-		"FileType": {
-			"type": "string",
-			"description": "The type of the file (for Linux files - Executable is used)",
-			"enum": [
-				"Exe",
-				"Dll",
-				"Msi",
-				"Script",
-				"Executable",
-				"Unknown"
-			]
-		},
-		"SourceSystem": {
-			"type": "string",
-			"description": "The source type of the VM/server group",
-			"enum": [
-				"Azure_AppLocker",
-				"Azure_AuditD",
-				"NonAzure_AppLocker",
-				"NonAzure_AuditD",
-				"None"
-			]
-		},
-		"AppWhitelistingIssueSummary": {
-			"type": "object",
-			"description": "Represents a summary of the alerts of the VM/server group",
-			"properties": {
-				"issue": {
-					"$ref": "#/definitions/AppWhitelistingIssue"
-				},
-				"numberOfVms": {
-					"type": "number",
-					"description": "The number of machines in the VM/server group that have this alert"
-				}
-			}
-		},
-		"AppWhitelistingIssuesSummaries": {
-			"type": "array",
-			"items": {
-				"$ref": "#/definitions/AppWhitelistingIssueSummary"
-			}
-		},
-		"VmRecommendations": {
-			"type": "array",
-			"items": {
-				"$ref": "#/definitions/VmRecommendation"
-			}
-		},
-		"VmRecommendation": {
-			"type": "object",
-			"description": "Represents a machine that is part of a VM/server group",
-			"properties": {
-				"configurationStatus": {
-					"$ref": "#/definitions/ConfigurationStatus"
-				},
-				"recommendationAction": {
-					"$ref": "#/definitions/RecommendationAction"
-				},
-				"resourceId": {
-					"$ref": "#/definitions/VmResourceId"
-				}
-			}
-		},
-		"PublisherInfo": {
-			"type": "object",
-			"description": "Represents the publisher information of a process/rule",
-			"properties": {
-				"publisherName": {
-					"type": "string",
-					"description": "The Subject field of the x.509 certificate used to sign the code, using the following fields -  O = Organization, L = Locality, S = State or Province, and C = Country",
-					"example": "O=GOOGLE INC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US"
-				},
-				"productName": {
-					"type": "string",
-					"description": "The product name taken from the file's version resource",
-					"example": "GOOGLE CHROME"
-				},
-				"binaryName": {
-					"type": "string",
-					"description": "The \"OriginalName\" field taken from the file's version resource",
-					"example": "CHROME.EXE"
-				},
-				"version": {
-					"type": "string",
-					"description": "The binary file version taken from the file's version resource",
-					"example": "66.0.3359.139"
-				}
-			}
-		},
-		"UserRecommendation": {
-			"type": "object",
-			"description": "Represents a user that is recommended to be allowed for a certain rule",
-			"properties": {
-				"username": {
-					"type": "string",
-					"description": "Represents a user that is recommended to be allowed for a certain rule",
-					"example": "LOCAL SYSTEM"
-				},
-				"recommendationAction": {
-					"$ref": "#/definitions/RecommendationAction"
-				}
-			}
-		},
-		"PathRecommendations": {
-			"type": "array",
-			"items": {
-				"$ref": "#/definitions/PathRecommendation"
-			}
-		},
-		"PathRecommendation": {
-			"type": "object",
-			"description": "Represents a path that is recommended to be allowed and its properties",
-			"properties": {
-				"path": {
-					"type": "string",
-					"description": "The full path to whitelist",
-					"example": "C:\\Windows\\System32\\calc.exe"
-				},
-				"action": {
-					"$ref": "#/definitions/RecommendationAction"
-				},
-				"type": {
-					"$ref": "#/definitions/RecommendationType"
-				},
-				"publisherInfo": {
-					"$ref": "#/definitions/PublisherInfo"
-				},
-				"common": {
-					"type": "boolean",
-					"description": "Whether the path is commonly run on the machine"
-				},
-				"userSids": {
-					"type": "array",
-					"items": {
-						"type": "string",
-						"description": "A security identifier",
-						"example": "S-1-5-18"
-					}
-				},
-				"usernames": {
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/UserRecommendation"
-					}
-				},
-				"fileType": {
-					"$ref": "#/definitions/FileType"
-				},
-				"configurationStatus": {
-					"$ref": "#/definitions/ConfigurationStatus"
-				}
-			}
-		},
-		"GroupResourceId": {
-			"type": "string",
-			"description": "The azure resource id of the application control VM/server group",
-			"example": "/subscriptions/12345678-1234-1234-1234-123456789123/providers/Microsoft.Security/applicationWhitelistings/GROUP1"
-		},
-		"VmResourceId": {
-			"type": "string",
-			"description": "The full azure resource id of the machine",
-			"example": "/subscriptions/12345678-1234-1234-1234-123456789123/resourcegroups/group/providers/microsoft.compute/virtualmachines/vm"
-		},
-		"AppWhitelistingResourceType": {
-			"type": "string",
-			"description": "The resource type of the application control resources",
-			"example": "Microsoft.Security/applicationWhitelistings"
-		}
-	},
-	"parameters": {
-		"GroupName": {
-			"name": "groupName",
-			"in": "path",
-			"description": "Name of an application control VM/server group",
-			"required": true,
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		},
-		"IncludePathRecommendations": {
-			"name": "includePathRecommendations",
-			"in": "query",
-			"description": "Include the policy rules",
-			"type": "boolean",
-			"required": false,
-			"enum": [
-				false,
-				true
-			],
-			"x-ms-parameter-location": "method"
-		},
-		"Summary": {
-			"name": "summary",
-			"in": "query",
-			"description": "Return output in a summarized form",
-			"type": "boolean",
-			"required": false,
-			"enum": [
-				false,
-				true
-			],
-			"x-ms-parameter-location": "method"
-		},
-		"AppWhitelistingGroupDataPutDataBody": {
-			"in": "body",
-			"name": "body",
-			"description": "The updated VM/server group data",
-			"required": true,
-			"schema": {
-				"$ref": "#/definitions/AppWhitelistingPutGroupData"
-			},
-			"x-ms-parameter-location": "method"
-		}
-	}
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2015-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/applicationWhitelistings": {
+      "get": {
+        "description": "Gets a list of application control VM/server groups for the subscription.",
+        "operationId": "AdaptiveApplicationControls_List",
+        "x-ms-examples": {
+          "Gets a list of application control VM/server groups for the subscription": {
+            "$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "applicationWhitelistings"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/IncludePathRecommendations"
+          },
+          {
+            "$ref": "#/parameters/Summary"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppWhitelistingGroups"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{ascLocation}/applicationWhitelistings/{groupName}": {
+      "get": {
+        "description": "Gets an application control VM/server group.",
+        "operationId": "AdaptiveApplicationControls_Get",
+        "x-ms-examples": {
+          "Gets a configured application control VM/server group": {
+            "$ref": "./examples/ApplicationWhitelistings/GetApplicationWhitelistingsGroup_example.json"
+          }
+        },
+        "tags": [
+          "applicationWhitelistings"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/GroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppWhitelistingGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "applicationWhitelistings"
+        ],
+        "x-ms-examples": {
+          "Update an application control VM/server group by adding a new file": {
+            "$ref": "./examples/ApplicationWhitelistings/PutApplicationWhitelistings_example.json"
+          }
+        },
+        "description": "Update an application control VM/server group",
+        "operationId": "AdaptiveApplicationControls_Put",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/AscLocation"
+          },
+          {
+            "$ref": "#/parameters/GroupName"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/AppWhitelistingGroupDataPutDataBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AppWhitelistingGroup"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AppWhitelistingGroups": {
+      "type": "object",
+      "description": "Represents a list of VM/server groups and set of rules that are Recommended by Azure Security Center to be allowed",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AppWhitelistingGroup"
+          }
+        }
+      }
+    },
+    "AppWhitelistingGroup": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AppWhitelistingGroupData"
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        },
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Location"
+        }
+      ]
+    },
+    "AppWhitelistingGroupData": {
+      "type": "object",
+      "description": "Represents a VM/server group and set of rules that are Recommended by Azure Security Center to be allowed",
+      "properties": {
+        "enforcementMode": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "configurationStatus": {
+          "$ref": "#/definitions/ConfigurationStatus"
+        },
+        "recommendationStatus": {
+          "$ref": "#/definitions/RecommendationStatus"
+        },
+        "issues": {
+          "$ref": "#/definitions/AppWhitelistingIssuesSummaries"
+        },
+        "sourceSystem": {
+          "$ref": "#/definitions/SourceSystem"
+        },
+        "vmRecommendations": {
+          "$ref": "#/definitions/VmRecommendations"
+        },
+        "pathRecommendations": {
+          "$ref": "#/definitions/PathRecommendations"
+        }
+      }
+    },
+    "AppWhitelistingPutGroupData": {
+      "type": "object",
+      "description": "The altered data of the recommended VM/server group policy",
+      "properties": {
+        "enforcementMode": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "vmRecommendations": {
+          "$ref": "#/definitions/VmRecommendations"
+        },
+        "pathRecommendations": {
+          "$ref": "#/definitions/PathRecommendations"
+        }
+      }
+    },
+    "ConfigurationStatus": {
+      "type": "string",
+      "description": "The configuration status of the VM/server group or machine or rule on the machine",
+      "enum": [
+        "Configured",
+        "NotConfigured",
+        "InProgress",
+        "Failed",
+        "NoStatus"
+      ]
+    },
+    "EnforcementMode": {
+      "type": "string",
+      "description": "The application control policy enforcement mode of the VM/server group",
+      "enum": [
+        "Audit",
+        "Enforce"
+      ]
+    },
+    "RecommendationStatus": {
+      "type": "string",
+      "description": "The recommendation status of the VM/server group or VM/server",
+      "enum": [
+        "Recommended",
+        "NotRecommended",
+        "NotAvailable",
+        "NoStatus"
+      ]
+    },
+    "RecommendationAction": {
+      "type": "string",
+      "description": "The recommendation action of the VM/server or rule",
+      "enum": [
+        "Recommended",
+        "Add",
+        "Remove"
+      ]
+    },
+    "RecommendationType": {
+      "type": "string",
+      "description": "The type of the rule to be allowed",
+      "enum": [
+        "File",
+        "FileHash",
+        "PublisherSignature",
+        "ProductSignature",
+        "BinarySignature",
+        "VersionAndAboveSignature"
+      ]
+    },
+    "AppWhitelistingIssue": {
+      "type": "string",
+      "description": "An alert that VMs/servers within a group can have",
+      "enum": [
+        "ViolationsAudited",
+        "ViolationsBlocked",
+        "MsiAndScriptViolationsAudited",
+        "MsiAndScriptViolationsBlocked",
+        "ExecutableViolationsAudited",
+        "RulesViolatedManually"
+      ]
+    },
+    "FileType": {
+      "type": "string",
+      "description": "The type of the file (for Linux files - Executable is used)",
+      "enum": [
+        "Exe",
+        "Dll",
+        "Msi",
+        "Script",
+        "Executable",
+        "Unknown"
+      ]
+    },
+    "SourceSystem": {
+      "type": "string",
+      "description": "The source type of the VM/server group",
+      "enum": [
+        "Azure_AppLocker",
+        "Azure_AuditD",
+        "NonAzure_AppLocker",
+        "NonAzure_AuditD",
+        "None"
+      ]
+    },
+    "AppWhitelistingIssueSummary": {
+      "type": "object",
+      "description": "Represents a summary of the alerts of the VM/server group",
+      "properties": {
+        "issue": {
+          "$ref": "#/definitions/AppWhitelistingIssue"
+        },
+        "numberOfVms": {
+          "type": "number",
+          "description": "The number of machines in the VM/server group that have this alert"
+        }
+      }
+    },
+    "AppWhitelistingIssuesSummaries": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/AppWhitelistingIssueSummary"
+      }
+    },
+    "VmRecommendations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/VmRecommendation"
+      }
+    },
+    "VmRecommendation": {
+      "type": "object",
+      "description": "Represents a machine that is part of a VM/server group",
+      "properties": {
+        "configurationStatus": {
+          "$ref": "#/definitions/ConfigurationStatus"
+        },
+        "recommendationAction": {
+          "$ref": "#/definitions/RecommendationAction"
+        },
+        "resourceId": {
+          "$ref": "#/definitions/VmResourceId"
+        }
+      }
+    },
+    "PublisherInfo": {
+      "type": "object",
+      "description": "Represents the publisher information of a process/rule",
+      "properties": {
+        "publisherName": {
+          "type": "string",
+          "description": "The Subject field of the x.509 certificate used to sign the code, using the following fields -  O = Organization, L = Locality, S = State or Province, and C = Country",
+          "example": "O=GOOGLE INC, L=MOUNTAIN VIEW, S=CALIFORNIA, C=US"
+        },
+        "productName": {
+          "type": "string",
+          "description": "The product name taken from the file's version resource",
+          "example": "GOOGLE CHROME"
+        },
+        "binaryName": {
+          "type": "string",
+          "description": "The \"OriginalName\" field taken from the file's version resource",
+          "example": "CHROME.EXE"
+        },
+        "version": {
+          "type": "string",
+          "description": "The binary file version taken from the file's version resource",
+          "example": "66.0.3359.139"
+        }
+      }
+    },
+    "UserRecommendation": {
+      "type": "object",
+      "description": "Represents a user that is recommended to be allowed for a certain rule",
+      "properties": {
+        "username": {
+          "type": "string",
+          "description": "Represents a user that is recommended to be allowed for a certain rule",
+          "example": "LOCAL SYSTEM"
+        },
+        "recommendationAction": {
+          "$ref": "#/definitions/RecommendationAction"
+        }
+      }
+    },
+    "PathRecommendations": {
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/PathRecommendation"
+      }
+    },
+    "PathRecommendation": {
+      "type": "object",
+      "description": "Represents a path that is recommended to be allowed and its properties",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The full path to whitelist",
+          "example": "C:\\Windows\\System32\\calc.exe"
+        },
+        "action": {
+          "$ref": "#/definitions/RecommendationAction"
+        },
+        "type": {
+          "$ref": "#/definitions/RecommendationType"
+        },
+        "publisherInfo": {
+          "$ref": "#/definitions/PublisherInfo"
+        },
+        "common": {
+          "type": "boolean",
+          "description": "Whether the path is commonly run on the machine"
+        },
+        "userSids": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A security identifier",
+            "example": "S-1-5-18"
+          }
+        },
+        "usernames": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UserRecommendation"
+          }
+        },
+        "fileType": {
+          "$ref": "#/definitions/FileType"
+        },
+        "configurationStatus": {
+          "$ref": "#/definitions/ConfigurationStatus"
+        }
+      }
+    },
+    "GroupResourceId": {
+      "type": "string",
+      "description": "The azure resource id of the application control VM/server group",
+      "example": "/subscriptions/12345678-1234-1234-1234-123456789123/providers/Microsoft.Security/applicationWhitelistings/GROUP1"
+    },
+    "VmResourceId": {
+      "type": "string",
+      "description": "The full azure resource id of the machine",
+      "example": "/subscriptions/12345678-1234-1234-1234-123456789123/resourcegroups/group/providers/microsoft.compute/virtualmachines/vm"
+    },
+    "AppWhitelistingResourceType": {
+      "type": "string",
+      "description": "The resource type of the application control resources",
+      "example": "Microsoft.Security/applicationWhitelistings"
+    }
+  },
+  "parameters": {
+    "GroupName": {
+      "name": "groupName",
+      "in": "path",
+      "description": "Name of an application control VM/server group",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "IncludePathRecommendations": {
+      "name": "includePathRecommendations",
+      "in": "query",
+      "description": "Include the policy rules",
+      "type": "boolean",
+      "required": false,
+      "enum": [
+        false,
+        true
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "Summary": {
+      "name": "summary",
+      "in": "query",
+      "description": "Return output in a summarized form",
+      "type": "boolean",
+      "required": false,
+      "enum": [
+        false,
+        true
+      ],
+      "x-ms-parameter-location": "method"
+    },
+    "AppWhitelistingGroupDataPutDataBody": {
+      "in": "body",
+      "name": "body",
+      "description": "The updated VM/server group data",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/AppWhitelistingPutGroupData"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

@@ -4502,12 +4502,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Base 64 encoded value of the secondary read-write key."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
+        }
+      },
+      "allOf": [
+        {
           "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
         }
-      }
+      ]
     },
     "DatabaseAccountConnectionString": {
       "description": "Connection string for the Cosmos DB account",

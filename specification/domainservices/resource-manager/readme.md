@@ -58,6 +58,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-node
@@ -74,7 +75,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DomainServices
   payload-flattening-threshold: 2
-  output-folder: $(csharp-sdks-folder)/DomainServices/Management.DomainServices/Generated
+  output-folder: $(csharp-sdks-folder)/domainservices/Microsoft.Azure.Management.DomainServices/src/Generated
   clear-output-folder: true
 ```
 
