@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-05-01",
+    "api-version": "2019-08-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "frontDoorName": "frontDoor1",
@@ -35,6 +35,7 @@
                   "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
                 }
               },
+              "rulesEngine": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
               "enabledState": "Enabled"
             }
           }
@@ -115,6 +116,66 @@
             }
           }
         ],
+        "rulesEngines": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
+            "name": "rulesEngine1",
+            "properties": {
+              "rules": [
+                {
+                  "name": "Rule1",
+                  "priority": 1,
+                  "action": {
+                    "routeConfigurationOverride": {
+                      "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                      "redirectType": "Moved",
+                      "redirectProtocol": "HttpsOnly",
+                      "customHost": "www.bing.com",
+                      "customPath": "/api",
+                      "customFragment": "fragment",
+                      "customQueryString": "a=b"
+                    }
+                  },
+                  "matchConditions": [
+                    {
+                      "rulesEngineMatchVariable": "RemoteAddr",
+                      "rulesEngineOperator": "GeoMatch",
+                      "rulesEngineMatchValue": [
+                        "CH"
+                      ]
+                    }
+                  ],
+                  "matchProcessingBehavior": "Stop"
+                },
+                {
+                  "name": "Rule2",
+                  "priority": 2,
+                  "action": {
+                    "responseHeaderActions": [
+                      {
+                        "headerActionType": "Overwrite",
+                        "headerName": "Cache-Control",
+                        "value": "public, max-age=31536000"
+                      }
+                    ]
+                  },
+                  "matchConditions": [
+                    {
+                      "rulesEngineMatchVariable": "FilenameExtension",
+                      "rulesEngineOperator": "Equal",
+                      "rulesEngineMatchValue": [
+                        "jpg"
+                      ],
+                      "transforms": [
+                        "Lowercase"
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          }
+        ],
         "backendPoolsSettings": {
           "enforceCertificateNameCheck": "Enabled",
           "sendRecvTimeoutSeconds": 60
@@ -162,6 +223,7 @@
                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
                   }
                 },
+                "rulesEngine": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
                 "enabledState": "Enabled"
               }
             }
@@ -245,6 +307,66 @@
               "name": "default",
               "properties": {
                 "hostName": "frontDoor1.azurefd.net"
+              }
+            }
+          ],
+          "rulesEngines": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
+              "name": "rulesEngine1",
+              "properties": {
+                "rules": [
+                  {
+                    "name": "Rule1",
+                    "priority": 1,
+                    "action": {
+                      "routeConfigurationOverride": {
+                        "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                        "redirectType": "Moved",
+                        "redirectProtocol": "HttpsOnly",
+                        "customHost": "www.bing.com",
+                        "customPath": "/api",
+                        "customFragment": "fragment",
+                        "customQueryString": "a=b"
+                      }
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "RemoteAddr",
+                        "rulesEngineOperator": "GeoMatch",
+                        "rulesEngineMatchValue": [
+                          "CH"
+                        ]
+                      }
+                    ],
+                    "matchProcessingBehavior": "Stop"
+                  },
+                  {
+                    "name": "Rule2",
+                    "priority": 2,
+                    "action": {
+                      "responseHeaderActions": [
+                        {
+                          "headerActionType": "Overwrite",
+                          "headerName": "Cache-Control",
+                          "value": "public, max-age=31536000"
+                        }
+                      ]
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "FilenameExtension",
+                        "rulesEngineOperator": "Equal",
+                        "rulesEngineMatchValue": [
+                          "jpg"
+                        ],
+                        "transforms": [
+                          "Lowercase"
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             }
           ],
@@ -297,7 +419,8 @@
                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
                   }
                 },
-                "enabledState": "Enabled"
+                "enabledState": "Enabled",
+                "rulesEngine": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1"
               }
             }
           ],
@@ -380,6 +503,66 @@
               "name": "default",
               "properties": {
                 "hostName": "frontDoor1.azurefd.net"
+              }
+            }
+          ],
+          "rulesEngines": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
+              "name": "rulesEngine1",
+              "properties": {
+                "rules": [
+                  {
+                    "name": "Rule1",
+                    "priority": 1,
+                    "action": {
+                      "routeConfigurationOverride": {
+                        "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                        "redirectType": "Moved",
+                        "redirectProtocol": "HttpsOnly",
+                        "customHost": "www.bing.com",
+                        "customPath": "/api",
+                        "customFragment": "fragment",
+                        "customQueryString": "a=b"
+                      }
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "RemoteAddr",
+                        "rulesEngineOperator": "GeoMatch",
+                        "rulesEngineMatchValue": [
+                          "CH"
+                        ]
+                      }
+                    ],
+                    "matchProcessingBehavior": "Stop"
+                  },
+                  {
+                    "name": "Rule2",
+                    "priority": 2,
+                    "action": {
+                      "responseHeaderActions": [
+                        {
+                          "headerActionType": "Overwrite",
+                          "headerName": "Cache-Control",
+                          "value": "public, max-age=31536000"
+                        }
+                      ]
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "FilenameExtension",
+                        "rulesEngineOperator": "Equal",
+                        "rulesEngineMatchValue": [
+                          "jpg"
+                        ],
+                        "transforms": [
+                          "Lowercase"
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             }
           ],
@@ -432,6 +615,7 @@
                     "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/backendPools/backendPool1"
                   }
                 },
+                "rulesEngine": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
                 "enabledState": "Enabled"
               }
             }
@@ -515,6 +699,66 @@
               "name": "default",
               "properties": {
                 "hostName": "frontDoor1.azurefd.net"
+              }
+            }
+          ],
+          "rulesEngines": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/frontDoors/frontDoor1/routingRules/rulesEngine1",
+              "name": "rulesEngine1",
+              "properties": {
+                "rules": [
+                  {
+                    "name": "Rule1",
+                    "priority": 1,
+                    "action": {
+                      "routeConfigurationOverride": {
+                        "@odata.type": "#Microsoft.Azure.FrontDoor.Models.FrontdoorRedirectConfiguration",
+                        "redirectType": "Moved",
+                        "redirectProtocol": "HttpsOnly",
+                        "customHost": "www.bing.com",
+                        "customPath": "/api",
+                        "customFragment": "fragment",
+                        "customQueryString": "a=b"
+                      }
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "RemoteAddr",
+                        "rulesEngineOperator": "GeoMatch",
+                        "rulesEngineMatchValue": [
+                          "CH"
+                        ]
+                      }
+                    ],
+                    "matchProcessingBehavior": "Stop"
+                  },
+                  {
+                    "name": "Rule2",
+                    "priority": 2,
+                    "action": {
+                      "responseHeaderActions": [
+                        {
+                          "headerActionType": "Overwrite",
+                          "headerName": "Cache-Control",
+                          "value": "public, max-age=31536000"
+                        }
+                      ]
+                    },
+                    "matchConditions": [
+                      {
+                        "rulesEngineMatchVariable": "FilenameExtension",
+                        "rulesEngineOperator": "Equal",
+                        "rulesEngineMatchValue": [
+                          "jpg"
+                        ],
+                        "transforms": [
+                          "Lowercase"
+                        ]
+                      }
+                    ]
+                  }
+                ]
               }
             }
           ],
