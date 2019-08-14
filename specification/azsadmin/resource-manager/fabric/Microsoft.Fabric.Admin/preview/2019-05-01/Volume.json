@@ -1,0 +1,239 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "description": "Volume operation endpoints and objects.",
+    "title": "FabricAdminClient",
+    "version": "2019-05-01"
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/storageSubSystems/{storageSubSystem}/volumes/{volume}": {
+      "get": {
+        "x-ms-examples": {
+          "Return the requested a storage volume.": {
+            "$ref": "./examples/Volume/Get.json"
+          }
+        },
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Return the requested a storage volume.",
+        "operationId": "Volumes_Get",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "../2018-10-01/StorageSubSystem.json#/parameters/StorageSubSystemParameter"
+          },
+          {
+            "$ref": "#/parameters/VolumeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/Volume"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Fabric.Admin/fabricLocations/{location}/scaleUnits/{scaleUnit}/storageSubSystems/{storageSubSystem}/volumes": {
+      "get": {
+        "x-ms-examples": {
+          "Returns a list of all storage volumes at a location.": {
+            "$ref": "./examples/Volume/List.json"
+          }
+        },
+        "tags": [
+          "Volumes"
+        ],
+        "description": "Returns a list of all storage volumes at a location.",
+        "operationId": "Volumes_List",
+        "parameters": [
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../2016-05-01/ScaleUnit.json#/parameters/ScaleUnitParameter"
+          },
+          {
+            "$ref": "../2018-10-01/StorageSubSystem.json#/parameters/StorageSubSystemParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../2016-05-01/Fabric.json#/parameters/FilterParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VolumeList"
+            }
+          },
+          "404": {
+            "description": "NOT FOUND"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-odata": "#/definitions/Volume"
+      }
+    }
+  },
+  "definitions": {
+    "Volume": {
+      "description": "Representation of a volume resource.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of a volume.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VolumeModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../2016-05-01/Fabric.json#/definitions/Resource"
+        }
+      ]
+    },
+    "VolumeModel": {
+      "description": "Properties of a volume.",
+      "type": "object",
+      "properties": {
+        "totalCapacityGB": {
+          "description": "Total capacity in GB of the volume.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "remainingCapacityGB": {
+          "description": "Remaining capacity in GB of the volume.",
+          "format": "int32",
+          "type": "integer",
+          "readOnly": true
+        },
+        "healthStatus": {
+          "description": "Health status of the volume.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operationalStatus": {
+          "description": "Operational status of the volume.",
+          "type": "string",
+          "readOnly": true
+        },
+        "repairStatus": {
+          "description": "Repair status of the volume. Empty if no repair job running, something like 'Running, 90%' when repairing.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Detailed description for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.",
+          "type": "string",
+          "readOnly": true
+        },
+        "action": {
+          "description": "Detailed recommended action for HealthStatus/OperationalStatus. Empty if HealthStatus/OperationalStatus is Healthy/Ok.",
+          "type": "string",
+          "readOnly": true
+        },
+        "volumeLabel": {
+          "description": "Volume label.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VolumeList": {
+      "description": "Pageable list of storage volumes.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of storage volumes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Volume"
+          }
+        },
+        "nextLink": {
+          "description": "URI to the next page.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "Client API Version.",
+      "required": true,
+      "type": "string",
+      "default": "2019-05-01"
+    },
+    "VolumeParameter": {
+      "name": "volume",
+      "description": "Name of the storage volume.",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

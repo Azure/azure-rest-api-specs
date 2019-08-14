@@ -65,6 +65,16 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-03'
 input-file:
+- Microsoft.ServiceFabric/stable/2019-03-01/cluster.json
+- Microsoft.ServiceFabric/stable/2019-03-01/application.json
+```
+
+### Tag: package-2019-03-preview
+
+These settings apply only when `--tag=package-2019-03-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03-preview'
+input-file:
 - Microsoft.ServiceFabric/preview/2019-03-01-preview/cluster.json
 - Microsoft.ServiceFabric/preview/2019-03-01-preview/application.json
 ```
@@ -97,6 +107,14 @@ input-file:
 - Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
 ```
 
+### Tag: package-2018-02-only
+
+These settings apply only when `--tag=package-2018-02-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-02-only'
+input-file:
+- Microsoft.ServiceFabric/stable/2018-02-01/cluster.json
+```
 
 ---
 # Code Generation
@@ -109,6 +127,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -141,50 +160,4 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.servicefabric
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-servicefabric
-```
-
-### Java multi-api
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-2017-07
-  - tag: package-2016-09
-```
-
-### Tag: package-2017-07 and java
-
-These settings apply only when `--tag=package-2017-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2017-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.servicefabric.v2017_07_01_preview
-  output-folder: $(azure-libraries-for-java-folder)/servicefabric/resource-manager/v2017_07_01_preview
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-2016-09 and java
-
-These settings apply only when `--tag=package-2016-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2016-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.servicefabric.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/servicefabric/resource-manager/v2016_09_01
-regenerate-manager: true
-generate-interface: true
-```
-
-
+See configuration in [readme.java.md](./readme.java.md)

@@ -62,32 +62,32 @@
             },
             "examples": {
               "application/json": {
-                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
-                "type":"",
-                "name":"service",
-                "location":"",
-                "tags":null,
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "type": "",
+                "name": "service",
+                "location": "",
+                "tags": null,
                 "properties": {
-                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
-                  "serviceBusRuleId":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
-                  "workspaceId":"",
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
                   "metrics": [
                     {
-                      "timeGrain":"PT1M",
-                      "enabled":true,
+                      "timeGrain": "PT1M",
+                      "enabled": true,
                       "retentionPolicy": {
-                        "enabled":false,
-                        "days":0
+                        "enabled": false,
+                        "days": 0
                       }
                     }
                   ],
                   "logs": [
                     {
-                      "category":"WorkflowRuntime",
-                      "enabled":true,
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
                       "retentionPolicy": {
-                        "enabled":false,
-                        "days":0
+                        "enabled": false,
+                        "days": 0
                       }
                     }
                   ]
@@ -97,7 +97,9 @@
           }
         },
         "x-ms-examples": {
-          "Get service diagnostic setting": { "$ref": "./examples/getServiceDiagnosticSetting.json" }
+          "Get service diagnostic setting": {
+            "$ref": "./examples/getServiceDiagnosticSetting.json"
+          }
         }
       },
       "put": {
@@ -131,33 +133,33 @@
             },
             "examples": {
               "application/json": {
-                "id":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
-                "type":"",
-                "name":"service",
-                "location":"",
-                "tags":null,
+                "id": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourcegroups/viruela1/providers/microsoft.logic/workflows/viruela6/diagnosticSettings/service",
+                "type": "",
+                "name": "service",
+                "location": "",
+                "tags": null,
                 "properties": {
-                  "storageAccountId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
-                  "serviceBusRuleId":"/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
-                  "workspaceId":"",
-                  "eventHubAuthorizationRuleId":"/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/authorizationrules/myrule",
+                  "storageAccountId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/apptest/providers/Microsoft.Storage/storageAccounts/appteststorage1",
+                  "serviceBusRuleId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/andy1101/providers/Microsoft.EventHub/namespaces/andy1101/authorizationrules/RootManageSharedAccessKey",
+                  "workspaceId": "",
+                  "eventHubAuthorizationRuleId": "/subscriptions/1a66ce04-b633-4a0b-b2bc-a912ec8986a6/resourceGroups/montest/providers/microsoft.eventhub/namespaces/mynamespace/authorizationrules/myrule",
                   "metrics": [
                     {
-                      "timeGrain":"PT1M",
-                      "enabled":true,
+                      "timeGrain": "PT1M",
+                      "enabled": true,
                       "retentionPolicy": {
-                        "enabled":false,
-                        "days":0
+                        "enabled": false,
+                        "days": 0
                       }
                     }
                   ],
                   "logs": [
                     {
-                      "category":"WorkflowRuntime",
-                      "enabled":true,
+                      "category": "WorkflowRuntime",
+                      "enabled": true,
                       "retentionPolicy": {
-                        "enabled":false,
-                        "days":0
+                        "enabled": false,
+                        "days": 0
                       }
                     }
                   ]
@@ -167,45 +169,49 @@
           }
         },
         "x-ms-examples": {
-          "Create or update a service diagnostic setting": { "$ref": "./examples/createOrUpdateServiceDiagnosticSetting.json" }
+          "Create or update a service diagnostic setting": {
+            "$ref": "./examples/createOrUpdateServiceDiagnosticSetting.json"
+          }
         }
       },
       "patch": {
         "description": "Updates an existing ServiceDiagnosticSettingsResource. To update other fields use the CreateOrUpdate method. **WARNING**: This method will be deprecated in future releases.",
         "operationId": "ServiceDiagnosticSettings_Update",
         "parameters": [
-            {
-              "$ref": "#/parameters/ResourceUriParameter"
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "serviceDiagnosticSettingsResource",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResourcePatch"
             },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-                "name": "serviceDiagnosticSettingsResource",
-                "in": "body",
-                "required": true,
-                "schema": {
-                    "$ref": "#/definitions/ServiceDiagnosticSettingsResourcePatch"
-                },
-                "description": "Parameters supplied to the operation."
-            }
+            "description": "Parameters supplied to the operation."
+          }
         ],
         "responses": {
-            "default": {
-                "description": "Error response describing why the operation failed.",
-                "schema": {
-                    "$ref": "#/definitions/ErrorResponse"
-                }
-            },
-            "200": {
-                "description": "An existing service diagnostics setting resource was successfully updated.",
-                "schema": {
-                    "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
-                }
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
+          },
+          "200": {
+            "description": "An existing service diagnostics setting resource was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/ServiceDiagnosticSettingsResource"
+            }
+          }
         },
         "x-ms-examples": {
-          "Update a service diagnostic setting": { "$ref": "./examples/updateServiceDiagnosticSetting.json" }
+          "Update a service diagnostic setting": {
+            "$ref": "./examples/updateServiceDiagnosticSetting.json"
+          }
         }
       }
     }
@@ -232,8 +238,8 @@
           "type": "string",
           "description": "Resource location",
           "x-ms-mutability": [
-              "create",
-              "read"
+            "create",
+            "read"
           ]
         },
         "tags": {
@@ -262,7 +268,10 @@
           "description": "the number of days for the retention in days. A value of 0 will retain the events indefinitely."
         }
       },
-      "required": [ "enabled", "days" ],
+      "required": [
+        "enabled",
+        "days"
+      ],
       "description": "Specifies the retention policy for the log."
     },
     "MetricSettings": {
@@ -281,7 +290,10 @@
           "description": "the retention policy for this timegrain."
         }
       },
-      "required": [ "enabled", "timeGrain" ],
+      "required": [
+        "enabled",
+        "timeGrain"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular metric."
     },
     "LogSettings": {
@@ -299,7 +311,9 @@
           "description": "the retention policy for this log."
         }
       },
-      "required": [ "enabled" ],
+      "required": [
+        "enabled"
+      ],
       "description": "Part of MultiTenantDiagnosticSettings. Specifies the settings for a particular log."
     },
     "ServiceDiagnosticSettings": {
@@ -357,10 +371,10 @@
       "description": "Service diagnostic setting resource for patch operations",
       "properties": {
         "tags": {
-            "additionalProperties": {
-                "type": "string"
-            },
-            "description": "Resource tags"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         },
         "properties": {
           "x-ms-client-flatten": true,

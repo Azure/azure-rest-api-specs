@@ -69,66 +69,66 @@
             },
             "examples": {
               "application/json": {
-                "value":[
+                "value": [
                   {
-                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
+                    "resourceId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
                     "name": {
-                      "value":"RunsStarted",
-                      "localizedValue":"Runs Started"
+                      "value": "RunsStarted",
+                      "localizedValue": "Runs Started"
                     },
-                    "unit":"Count",
-                    "primaryAggregationType":"Total",
-                    "metricAvailabilities":[
-                      {
-                        "timeGrain":"PT1M",
-                        "retention":"P30D"
-                      },
-                      {
-                        "timeGrain":"PT1H",
-                        "retention":"P30D"
-                      }
-                    ],
-                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsStarted"
-                  },
-                  {
-                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
-                    "name": {
-                      "value":"RunsCompleted",
-                      "localizedValue":"Runs Completed"
-                    },
-                    "unit":"Count",
-                    "primaryAggregationType":"Total",
+                    "unit": "Count",
+                    "primaryAggregationType": "Total",
                     "metricAvailabilities": [
                       {
-                        "timeGrain":"PT1M",
-                        "retention":"P30D"
+                        "timeGrain": "PT1M",
+                        "retention": "P30D"
                       },
                       {
-                        "timeGrain":"PT1H",
-                        "retention":"P30D"
+                        "timeGrain": "PT1H",
+                        "retention": "P30D"
                       }
                     ],
-                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsCompleted"
+                    "id": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsStarted"
                   },
                   {
-                    "resourceId":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
+                    "resourceId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
                     "name": {
-                      "value":"RunsSucceeded",
-                      "localizedValue":"Runs Succeeded"
+                      "value": "RunsCompleted",
+                      "localizedValue": "Runs Completed"
                     },
-                    "unit":"Count",
-                    "primaryAggregationType":"Total",
+                    "unit": "Count",
+                    "primaryAggregationType": "Total",
                     "metricAvailabilities": [
                       {
-                        "timeGrain":"PT1M",
-                        "retention":"P30D"
+                        "timeGrain": "PT1M",
+                        "retention": "P30D"
                       },
                       {
-                        "timeGrain":"PT1H",
-                        "retention":"P30D"
+                        "timeGrain": "PT1H",
+                        "retention": "P30D"
                       }
                     ],
-                    "id":"/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsSucceeded"
+                    "id": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsCompleted"
+                  },
+                  {
+                    "resourceId": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia",
+                    "name": {
+                      "value": "RunsSucceeded",
+                      "localizedValue": "Runs Succeeded"
+                    },
+                    "unit": "Count",
+                    "primaryAggregationType": "Total",
+                    "metricAvailabilities": [
+                      {
+                        "timeGrain": "PT1M",
+                        "retention": "P30D"
+                      },
+                      {
+                        "timeGrain": "PT1H",
+                        "retention": "P30D"
+                      }
+                    ],
+                    "id": "/subscriptions/df602c9c-7aa0-407d-a6fb-eb20c8bd1192/resourceGroups/andy0802australia/providers/Microsoft.Logic/workflows/andy0803australia/providers/microsoft.insights/metricdefinitions/RunsSucceeded"
                   }
                 ]
               }
@@ -140,15 +140,21 @@
         },
         "x-ms-odata": "#/definitions/MetricDefinition",
         "x-ms-examples": {
-          "Get Metric Definitions without filter": { "$ref": "./examples/GetMetricDefinitions.json" },
-          "Get Metric Definitions with filter": { "$ref": "./examples/GetMetricDefinitionsFiltered.json" }
+          "Get Metric Definitions without filter": {
+            "$ref": "./examples/GetMetricDefinitions.json"
+          },
+          "Get Metric Definitions with filter": {
+            "$ref": "./examples/GetMetricDefinitionsFiltered.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -247,7 +253,9 @@
           "description": "the values for the metric definitions."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents collection of metric definitions."
     },
     "ErrorResponse": {

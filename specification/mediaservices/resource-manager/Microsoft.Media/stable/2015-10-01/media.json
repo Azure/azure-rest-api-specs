@@ -42,7 +42,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "OperationsList": { "$ref": "./examples/OperationsList.json" }
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
         },
         "parameters": [
           {
@@ -67,7 +69,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceCheckNameAvailability": { "$ref": "./examples/MediaServiceCheckNameAvailability.json" }
+          "MediaServiceCheckNameAvailability": {
+            "$ref": "./examples/MediaServiceCheckNameAvailability.json"
+          }
         },
         "parameters": [
           {
@@ -92,12 +96,12 @@
             "schema": {
               "$ref": "#/definitions/CheckNameAvailabilityOutput"
             },
-            "examples": { 
+            "examples": {
               "application/json": {
                 "nameAvailable": false,
                 "reason": "AlreadyExists",
                 "message": "Already in use by another Media Service instance. Please try again with a name that is not likely to be in use."
-              }  
+              }
             }
           },
           "default": {
@@ -117,7 +121,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceListByResourceGroup": { "$ref": "./examples/MediaServiceListByResourceGroup.json" }
+          "MediaServiceListByResourceGroup": {
+            "$ref": "./examples/MediaServiceListByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -129,7 +135,7 @@
           {
             "$ref": "#/parameters/resourceGroupNameParameter"
           }
-        ],        
+        ],
         "responses": {
           "200": {
             "description": "Success. Returns a list of all of the Media Services accounts in a resource group.",
@@ -144,15 +150,15 @@
                     "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                     "type": "Microsoft.Media/mediaservices",
                     "location": "West US",
-                    "properties":{  
-                      "apiEndpoints":[  
-                        {  
+                    "properties": {
+                      "apiEndpoints": [
+                        {
                           "endpoint": "https://wamsbayclus001rest-hs.cloudapp.net/api/",
                           "majorVersion": "2"
                         }
                       ],
-                      "storageAccounts":[  
-                        {  
+                      "storageAccounts": [
+                        {
                           "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                           "isPrimary": true
                         }
@@ -171,7 +177,7 @@
           }
         },
         "x-ms-pageable": {
-            "nextLinkName": null
+          "nextLinkName": null
         }
       }
     },
@@ -183,7 +189,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceGet": { "$ref": "./examples/MediaServiceGet.json" }
+          "MediaServiceGet": {
+            "$ref": "./examples/MediaServiceGet.json"
+          }
         },
         "parameters": [
           {
@@ -205,27 +213,27 @@
             "schema": {
               "$ref": "#/definitions/MediaService"
             },
-            "examples" : {
+            "examples": {
               "application/json": {
                 "name": "contosomedia",
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
-                "properties":{  
-                  "apiEndpoints":[  
-                    {  
+                "properties": {
+                  "apiEndpoints": [
+                    {
                       "endpoint": "https://wamsbayclus001rest-hs.cloudapp.net/api/",
                       "majorVersion": "2"
                     }
                   ],
-                  "storageAccounts":[  
-                    {  
+                  "storageAccounts": [
+                    {
                       "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                       "isPrimary": true
                     }
                   ]
                 }
-              }  
+              }
             }
           },
           "default": {
@@ -243,7 +251,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceCreate": { "$ref": "./examples/MediaServiceCreate.json" }
+          "MediaServiceCreate": {
+            "$ref": "./examples/MediaServiceCreate.json"
+          }
         },
         "parameters": [
           {
@@ -274,27 +284,27 @@
             "schema": {
               "$ref": "#/definitions/MediaService"
             },
-            "examples" : {
+            "examples": {
               "application/json": {
                 "name": "contosomedia",
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
-                "properties":{  
-                  "apiEndpoints":[  
-                    {  
+                "properties": {
+                  "apiEndpoints": [
+                    {
                       "endpoint": "https://wamsbayclus001rest-hs.cloudapp.net/api/",
                       "majorVersion": "2"
                     }
                   ],
-                  "storageAccounts":[  
-                    {  
+                  "storageAccounts": [
+                    {
                       "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                       "isPrimary": true
                     }
                   ]
                 }
-              }  
+              }
             }
           },
           "default": {
@@ -312,7 +322,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceDelete": { "$ref": "./examples/MediaServiceDelete.json" }
+          "MediaServiceDelete": {
+            "$ref": "./examples/MediaServiceDelete.json"
+          }
         },
         "parameters": [
           {
@@ -350,7 +362,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceUpdate": { "$ref": "./examples/MediaServiceUpdate.json" }
+          "MediaServiceUpdate": {
+            "$ref": "./examples/MediaServiceUpdate.json"
+          }
         },
         "parameters": [
           {
@@ -381,26 +395,26 @@
             "schema": {
               "$ref": "#/definitions/MediaService"
             },
-            "examples" : {
+            "examples": {
               "application/json": {
                 "name": "contosomedia",
                 "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Media/mediaservices/contosomedia",
                 "type": "Microsoft.Media/mediaservices",
                 "location": "West US",
-                "properties":{  
-                  "apiEndpoints":[  
-                    {  
+                "properties": {
+                  "apiEndpoints": [
+                    {
                       "endpoint": "https://wamsbayclus001rest-hs.cloudapp.net/api/",
                       "majorVersion": "2"
                     }
                   ],
-                  "storageAccounts":[  
-                    {  
+                  "storageAccounts": [
+                    {
                       "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
                       "isPrimary": true
                     }
                   ]
-                }  
+                }
               }
             }
           },
@@ -421,7 +435,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceRegenerateKey": { "$ref": "./examples/MediaServiceRegenerateKey.json" }
+          "MediaServiceRegenerateKey": {
+            "$ref": "./examples/MediaServiceRegenerateKey.json"
+          }
         },
         "parameters": [
           {
@@ -455,7 +471,7 @@
             "examples": {
               "application/json": {
                 "key": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx="
-              }  
+              }
             }
           },
           "default": {
@@ -475,7 +491,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceListKeys": { "$ref": "./examples/MediaServiceListKeys.json" }
+          "MediaServiceListKeys": {
+            "$ref": "./examples/MediaServiceListKeys.json"
+          }
         },
         "parameters": [
           {
@@ -497,14 +515,14 @@
             "schema": {
               "$ref": "#/definitions/ServiceKeys"
             },
-            "examples":{
+            "examples": {
               "application/json": {
                 "primaryAuthEndpoint": "https://wamsprodglobal001acs.accesscontrol.windows.net/",
                 "secondaryAuthEndpoint": "https://wamsprodglobal002acs.accesscontrol.windows.net/",
                 "primaryKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=",
                 "secondaryKey": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx=",
                 "scope": "urn:windowsazuremediaservices"
-              }  
+              }
             }
           },
           "default": {
@@ -524,7 +542,9 @@
           "url": "https://aka.ms/media-manage"
         },
         "x-ms-examples": {
-          "MediaServiceSyncStorageKeys": { "$ref": "./examples/MediaServiceSyncStorageKeys.json" }
+          "MediaServiceSyncStorageKeys": {
+            "$ref": "./examples/MediaServiceSyncStorageKeys.json"
+          }
         },
         "parameters": [
           {
@@ -566,9 +586,9 @@
   "definitions": {
     "ApiEndpoint": {
       "description": "The properties for a Media Services REST API endpoint.",
-      "example": {  
-        "endpoint":"https://wamsbayclus001rest-hs.cloudapp.net/api/",
-        "majorVersion":"2"
+      "example": {
+        "endpoint": "https://wamsbayclus001rest-hs.cloudapp.net/api/",
+        "majorVersion": "2"
       },
       "properties": {
         "endpoint": {
@@ -603,8 +623,8 @@
     "CheckNameAvailabilityInput": {
       "description": "The request body for CheckNameAvailability API.",
       "example": {
-        "name":"contosomedia",
-        "type":"mediaservices"
+        "name": "contosomedia",
+        "type": "mediaservices"
       },
       "required": [
         "name",
@@ -634,7 +654,7 @@
         "name": "ResourceType",
         "modelAsString": false
       }
-    },    
+    },
     "CheckNameAvailabilityOutput": {
       "description": "The response body for CheckNameAvailability API.",
       "properties": {
@@ -653,7 +673,7 @@
           "x-ms-enum": {
             "name": "EntityNameUnavailabilityReason",
             "modelAsString": false
-          }  
+          }
         },
         "message": {
           "description": "Specifies the detailed reason if the name is not available.",
@@ -730,21 +750,21 @@
           "type": "string",
           "enum": [
             "Primary",
-            "Secondary"  
+            "Secondary"
           ],
           "x-ms-enum": {
             "name": "KeyType",
             "modelAsString": false
-          }  
+          }
         }
       },
       "required": [
-         "keyType"
+        "keyType"
       ]
     },
     "RegenerateKeyOutput": {
       "description": "The response body for a RegenerateKey API.",
-       "example": {
+      "example": {
         "key": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx="
       },
       "properties": {
@@ -820,7 +840,7 @@
     },
     "StorageAccount": {
       "description": "The properties of a storage account associated with this resource.",
-       "example": {
+      "example": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/contosoresources/providers/Microsoft.Storage/storageAccounts/contosomedia",
         "isPrimary": true
       },
