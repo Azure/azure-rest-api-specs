@@ -350,10 +350,12 @@
         },
         "clusterId": {
           "type": "string",
+          "readOnly": true,
           "description": "The ID associated with the cluster."
         },
         "provisioningState": {
           "type": "string",
+          "readOnly": true,
           "description": "The provisioning state of the cluster.",
           "enum": [
             "Creating",
@@ -422,11 +424,13 @@
           "description": "Cluster properties."
         }
       },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
+      "tags": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "description": "Resource tags"
+      },
       "description": "The top level Cluster resource container.",
       "x-ms-azure-resource": true
     },
@@ -448,6 +452,10 @@
     },
     "ClusterListResult": {
       "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of recommendations.",
+          "type": "string"
+        },
         "value": {
           "type": "array",
           "items": {
