@@ -676,6 +676,29 @@
         "fileExtension"
       ]
     },
+	"JsonWriteSettings": {
+      "description": "Json write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "filePattern": {
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
+          "type": "string",
+          "enum": [
+            "setOfObjects",
+            "arrayOfObjects"
+          ],
+          "x-ms-enum": {
+            "name": "JsonWriteFilePattern",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AvroSource": {
       "description": "A copy activity Avro source.",
       "type": "object",
@@ -725,6 +748,21 @@
         }
       }
     },
+	"JsonSource": {
+      "description": "A copy activity Json source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Json store settings."
+        }
+      }
+    },
     "DelimitedTextSink": {
       "description": "A copy activity DelimitedText sink.",
       "type": "object",
@@ -741,6 +779,25 @@
         "formatSettings": {
           "$ref": "#/definitions/DelimitedTextWriteSettings",
           "description": "DelimitedText format settings."
+        }
+      }
+    },
+	"JsonSink": {
+      "description": "A copy activity Json sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Json store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/JsonWriteSettings",
+          "description": "Json format settings."
         }
       }
     },
