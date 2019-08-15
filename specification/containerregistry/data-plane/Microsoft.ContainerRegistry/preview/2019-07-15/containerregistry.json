@@ -83,48 +83,14 @@
             "$ref": "./examples/GetDockerRegistryV2Support.json"
           }
         },
-        "operationId": "GetDockerRegistryV2Support",
+        "operationId": "CheckV2Support",
         "responses": {
           "200": {
-            "description": "Successful response. API v2 supported"
-          },
-          "default": {
-            "description": "ACR error response describing why the operation failed.",
+            "description": "Successful response. API v2 supported",
             "schema": {
-              "$ref": "#/definitions/AcrErrors"
-            }
-          }
-        }
-      }
-    },
-    "/v2/{name}/tags/list": {
-      "get": {
-        "tags": [
-          "Tag"
-        ],
-        "description": "Fetch the tags under the repository identified by name",
-        "x-ms-examples": {
-          "List tags": {
-            "$ref": "./examples/GetTagList.json"
-          }
-        },
-        "operationId": "GetTagList",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ImageName"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Gives a list of tags for the names repository.",
-            "headers": {
-              "Link": {
-                "description": "next paginated result",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/RepositoryTags"
+              "enum": [
+                true
+              ]
             }
           },
           "default": {
@@ -254,48 +220,6 @@
         "responses": {
           "202": {
             "description": "The manifest has been deleted"
-          },
-          "default": {
-            "description": "ACR error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AcrErrors"
-            }
-          }
-        }
-      }
-    },
-    "/v2/_catalog": {
-      "get": {
-        "tags": [
-          "Repository"
-        ],
-        "description": "List repositories",
-        "operationId": "GetRepositories",
-        "x-ms-examples": {
-          "Get repositories in a registry": {
-            "$ref": "./examples/GetRepositories.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/QueryLast"
-          },
-          {
-            "$ref": "#/parameters/QueryNum"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Returns a list of repositories",
-            "headers": {
-              "Link": {
-                "description": "next paginated result",
-                "type": "string"
-              }
-            },
-            "schema": {
-              "$ref": "#/definitions/Repositories"
-            }
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -771,10 +695,10 @@
           "AcrRepository"
         ],
         "description": "List repositories",
-        "operationId": "GetAcrRepositories",
+        "operationId": "GetRepositoryList",
         "x-ms-examples": {
           "Get repositories in a registry": {
-            "$ref": "./examples/GetRepositories.json"
+            "$ref": "./examples/GetRepositoryList.json"
           }
         },
         "parameters": [
@@ -787,6 +711,12 @@
         ],
         "responses": {
           "200": {
+            "headers": {
+              "Link": {
+                "description": "next paginated result",
+                "type": "string"
+              }
+            },
             "description": "Returns a list of repositories",
             "schema": {
               "$ref": "#/definitions/Repositories"
@@ -808,10 +738,10 @@
           "AcrMetadata"
         ],
         "description": "Get repository attributes",
-        "operationId": "GetAcrRepositoryAttributes",
+        "operationId": "GetRepositoryAttributes",
         "x-ms-examples": {
           "Get details of repository": {
-            "$ref": "./examples/GetAcrRepositoryAttributes.json"
+            "$ref": "./examples/GetRepositoryAttributes.json"
           }
         },
         "parameters": [
@@ -839,7 +769,7 @@
           "AcrRepository"
         ],
         "description": "Delete the repository identified by `name`",
-        "operationId": "DeleteAcrRepository",
+        "operationId": "DeleteRepository",
         "x-ms-examples": {
           "Delete a repository": {
             "$ref": "./examples/DeleteAcrRepository.json"
@@ -871,10 +801,10 @@
           "AcrMetadata"
         ],
         "description": "Update the attribute identified by `name` where `reference` is the name of the repository.",
-        "operationId": "UpdateAcrRepositoryAttributes",
+        "operationId": "UpdateRepositoryAttributes",
         "x-ms-examples": {
           "Update repository attributes": {
-            "$ref": "./examples/UpdateAcrRepository.json"
+            "$ref": "./examples/UpdateRepositoryAttributes.json"
           }
         },
         "consumes": [
@@ -914,10 +844,10 @@
           "AcrMetadata"
         ],
         "description": "List tags of a repository",
-        "operationId": "GetAcrTags",
+        "operationId": "GetAcrTagList",
         "x-ms-examples": {
           "Get tags of a repository": {
-            "$ref": "./examples/GetAcrTags.json"
+            "$ref": "./examples/GetTagList.json"
           }
         },
         "parameters": [
@@ -941,7 +871,7 @@
           "200": {
             "description": "Tag details of a repository",
             "schema": {
-              "$ref": "#/definitions/AcrRepositoryTags"
+              "$ref": "#/definitions/TagList"
             }
           },
           "default": {
@@ -960,10 +890,10 @@
           "AcrMetadata"
         ],
         "description": "Get tag attributes by tag",
-        "operationId": "GetAcrTagAttributes",
+        "operationId": "GetTagAttributes",
         "x-ms-examples": {
           "Get tag attributes": {
-            "$ref": "./examples/GetAcrTagAttributes.json"
+            "$ref": "./examples/GetTagAttributes.json"
           }
         },
         "parameters": [
@@ -978,7 +908,7 @@
           "200": {
             "description": "Tag attributes",
             "schema": {
-              "$ref": "#/definitions/AcrTagAttributes"
+              "$ref": "#/definitions/TagAttributes"
             }
           },
           "default": {
@@ -995,13 +925,13 @@
           "AcrMetadata"
         ],
         "description": "Update tag attributes",
-        "operationId": "UpdateAcrTagAttributes",
+        "operationId": "UpdateTagAttributes",
         "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
           "Update attributes of a manifest": {
-            "$ref": "./examples/UpdateAcrTagAttributes.json"
+            "$ref": "./examples/UpdateTagAttributes.json"
           }
         },
         "parameters": [
@@ -1033,13 +963,13 @@
           "AcrMetadata"
         ],
         "description": "Delete tag",
-        "operationId": "DeleteAcrTag",
+        "operationId": "DeleteTag",
         "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
           "Update attributes of a manifest": {
-            "$ref": "./examples/DeleteAcrTag.json"
+            "$ref": "./examples/DeleteTag.json"
           }
         },
         "parameters": [
@@ -1070,10 +1000,10 @@
           "AcrMetadata"
         ],
         "description": "List manifests of a repository",
-        "operationId": "GetAcrManifests",
+        "operationId": "GetManifestList",
         "x-ms-examples": {
           "Get details of repository": {
-            "$ref": "./examples/GetAcrManifests.json"
+            "$ref": "./examples/GetManifestList.json"
           }
         },
         "parameters": [
@@ -1113,10 +1043,10 @@
           "AcrMetadata"
         ],
         "description": "Get manifest attributes",
-        "operationId": "GetAcrManifestAttributes",
+        "operationId": "GetManifestAttributes",
         "x-ms-examples": {
           "Get manifest attributes": {
-            "$ref": "./examples/GetAcrManifestAttributes.json"
+            "$ref": "./examples/GetManifestAttributes.json"
           }
         },
         "parameters": [
@@ -1131,7 +1061,7 @@
           "200": {
             "description": "List of attributes",
             "schema": {
-              "$ref": "#/definitions/AcrManifestAttributes"
+              "$ref": "#/definitions/ManifestAttributes"
             }
           },
           "default": {
@@ -1148,13 +1078,13 @@
           "AcrMetadata"
         ],
         "description": "Update attributes of a manifest",
-        "operationId": "UpdateAcrManifestAttributes",
+        "operationId": "UpdateManifestAttributes",
         "consumes": [
           "application/json"
         ],
         "x-ms-examples": {
           "Update attributes of a manifest": {
-            "$ref": "./examples/UpdateAcrManifestAttributes.json"
+            "$ref": "./examples/UpdateManifestAttributes.json"
           }
         },
         "parameters": [
@@ -1188,7 +1118,7 @@
           "RefreshToken"
         ],
         "description": "Exchange AAD tokens for an ACR refresh Token",
-        "operationId": "GetAcrRefreshTokenFromExchange",
+        "operationId": "GetRefreshTokenFromExchange",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -1238,7 +1168,7 @@
           "AccessToken"
         ],
         "description": "Exchange ACR Refresh token for an ACR Access Token",
-        "operationId": "GetAcrAccessToken",
+        "operationId": "GetAccessToken",
         "consumes": [
           "application/x-www-form-urlencoded"
         ],
@@ -1299,7 +1229,7 @@
           "userLogin"
         ],
         "description": "Exchange Username, Password and Scope an ACR Access Token",
-        "operationId": "GetAcrAccessTokenFromLogin",
+        "operationId": "GetAccessTokenFromLogin",
         "parameters": [
           {
             "name": "service",
@@ -1587,7 +1517,7 @@
         "lastUpdateTime": "2018-09-07T16:30:46.6583219Z"
       }
     },
-    "AcrRepositoryTags": {
+    "TagList": {
       "description": "List of tag details",
       "properties": {
         "registry": {
@@ -1603,7 +1533,7 @@
           "x-ms-client-name": "TagsAttributes",
           "description": "List of tag attribute details",
           "items": {
-            "$ref": "#/definitions/AcrTagAttributesBase"
+            "$ref": "#/definitions/TagAttributesBase"
           }
         }
       },
@@ -1640,7 +1570,7 @@
         ]
       }
     },
-    "AcrTagAttributes": {
+    "TagAttributes": {
       "description": "Tag attributes",
       "properties": {
         "registry": {
@@ -1654,7 +1584,7 @@
         "tag": {
           "x-ms-client-name": "TagAttributes",
           "description": "List of tag attribute details",
-          "$ref": "#/definitions/AcrTagAttributesBase"
+          "$ref": "#/definitions/TagAttributesBase"
         }
       },
       "example": {
@@ -1675,31 +1605,7 @@
         }
       }
     },
-    "TagAttributes": {
-      "description": "Tag attributes",
-      "properties": {
-        "registry": {
-          "description": "Registry name",
-          "type": "string"
-        },
-        "imageName": {
-          "description": "Image name",
-          "type": "string"
-        },
-        "tag": {
-          "$ref": "#/definitions/TagAttributes_tag",
-          "description": "Tag attributes"
-        }
-      },
-      "example": {
-        "registry": "registry",
-        "imageName": "imageName",
-        "tag": {
-          "signatureRecord": "signatureRecord"
-        }
-      }
-    },
-    "AcrTagAttributesBase": {
+    "TagAttributesBase": {
       "description": "Tag attribute details",
       "properties": {
         "name": {
@@ -1757,7 +1663,7 @@
           "type": "array",
           "description": "List of manifests",
           "items": {
-            "$ref": "#/definitions/AcrManifestAttributesBase",
+            "$ref": "#/definitions/ManifestAttributesBase",
             "description": "Manifest details"
           }
         }
@@ -1813,7 +1719,7 @@
         ]
       }
     },
-    "AcrManifestAttributes": {
+    "ManifestAttributes": {
       "description": "Manifest attributes details",
       "properties": {
         "registry": {
@@ -1827,7 +1733,7 @@
         "manifest": {
           "x-ms-client-name": "ManifestAttributes",
           "description": "Manifest attributes",
-          "$ref": "#/definitions/AcrManifestAttributesBase"
+          "$ref": "#/definitions/ManifestAttributesBase"
         }
       },
       "example": {
@@ -1854,7 +1760,7 @@
         }
       }
     },
-    "AcrManifestAttributesBase": {
+    "ManifestAttributesBase": {
       "type": "object",
       "description": "Manifest details",
       "properties": {
