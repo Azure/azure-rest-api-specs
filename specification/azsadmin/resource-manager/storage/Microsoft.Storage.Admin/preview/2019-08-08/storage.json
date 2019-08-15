@@ -30,14 +30,14 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The list of operations has been returned.",
             "schema": {
-              "$ref": "operations.json#/definitions/OperationList"
+              "$ref": "storage.json#/definitions/OperationList"
             }
           }
         },
@@ -58,7 +58,7 @@
         },
         "display": {
           "description": "Contains the localized display information for this particular operation / action.",
-          "$ref": "operations.json#/definitions/Display",
+          "$ref": "storage.json#/definitions/Display",
           "readOnly": true
         }
       }
@@ -95,7 +95,7 @@
           "description": "List of operations",
           "type": "array",
           "items": {
-            "$ref": "operations.json#/definitions/Operation"
+            "$ref": "storage.json#/definitions/Operation"
           }
         },
         "nextLink": {
@@ -106,7 +106,38 @@
       }
     }
   },
-  "parameters": { },
+  "parameters": { 
+    "ApiVersionParameter": {
+      "description": "REST Api Version.",
+      "name": "api-version",
+      "type": "string",
+      "in": "query",
+      "required": true
+    },
+    "LocationParameter": {
+      "description": "Resource location.",
+      "name": "location",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "description": "Subscription Id.",
+      "name": "subscriptionId",
+      "type": "string",
+      "in": "path",
+      "required": true
+    },
+    "ResourceGroupNameParameter": {
+      "description": "Resource group name.",
+      "name": "resourceGroupName",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    }
+  },
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",

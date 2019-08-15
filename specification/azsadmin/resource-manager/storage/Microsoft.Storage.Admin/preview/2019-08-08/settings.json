@@ -26,20 +26,20 @@
         "tags": [
           "Settings"
         ],
-        "description": "Update storge resource provider settings.",
+        "description": "Update storage resource provider settings.",
         "operationId": "StorageSettings_Update",
         "parameters": [
           {
-            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
-            "description": "Parameters used to update storge resource provider settings",
+            "description": "Parameters used to update storage resource provider settings",
             "name": "settingsObject",
             "in": "body",
             "required": true,
@@ -50,7 +50,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- The new storge resource provider setting is updated.",
+            "description": "OK -- The new storage resource provider setting is updated.",
             "schema": {
               "$ref": "settings.json#/definitions/settings"
             }
@@ -70,18 +70,18 @@
         "operationId": "StorageSettings_Get",
         "parameters": [
           {
-            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK -- The farm has been returned.",
+            "description": "OK -- The settings has been returned.",
             "schema": {
               "$ref": "settings.json#/definitions/settings"
             }

@@ -30,13 +30,13 @@
         "description": "Returns a list of storage accounts.",
         "parameters": [
           {
-            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "storageaccounts.json#/parameters/FilterParameter"
@@ -72,16 +72,16 @@
         "description": "Returns the requested storage account.",
         "parameters": [
           {
-            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "storageaccounts.json#/parameters/AccountIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -111,16 +111,16 @@
         "description": "Undelete a deleted storage account.",
         "parameters": [
           {
-            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "storageaccounts.json#/parameters/AccountIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
             "$ref": "storageaccounts.json#/parameters/NewAccountNameParameter"
@@ -157,13 +157,13 @@
         "description": "Start garbage collection on deleted storage objects.",
         "parameters": [
           {
-            "$ref": "storageaccounts.json#/parameters/SubscriptionIdParameter"
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/ApiVersionParameter"
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -324,7 +324,7 @@
           "readOnly": true
         },
         "keySource": {
-          "description": "Encryption keysource",
+          "description": "Encryption keySource",
           "$ref": "storageaccounts.json#/definitions/EncryptionKeySource",
           "readOnly": true
         }
@@ -520,7 +520,7 @@
     },
     "NewAccountNameParameter": {
       "description": "New storage account name when doing undelete storage account operation.",
-      "name": "newaccountname",
+      "name": "newAccountName",
       "in": "query",
       "required": false,
       "type": "string",
@@ -539,36 +539,6 @@
       "name": "$filter",
       "type": "string",
       "in": "query",
-      "x-ms-parameter-location": "method"
-    },
-    "LocationParameter": {
-      "description": "Resource location.",
-      "name": "location",
-      "type": "string",
-      "in": "path",
-      "required": true,
-      "x-ms-parameter-location": "method"
-    },
-    "SubscriptionIdParameter": {
-      "description": "Subscription Id.",
-      "name": "subscriptionId",
-      "type": "string",
-      "in": "path",
-      "required": true
-    },
-    "ApiVersionParameter": {
-      "description": "REST Api Version.",
-      "name": "api-version",
-      "type": "string",
-      "in": "query",
-      "required": true
-    },
-    "ResourceGroupNameParameter": {
-      "description": "Resource group name.",
-      "name": "resourceGroupName",
-      "type": "string",
-      "in": "path",
-      "required": true,
       "x-ms-parameter-location": "method"
     }
   },
