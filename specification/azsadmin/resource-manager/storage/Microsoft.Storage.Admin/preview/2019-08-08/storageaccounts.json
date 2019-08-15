@@ -39,17 +39,17 @@
             "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/FilterParameter"
+            "$ref": "#/parameters/FilterParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/SummaryParameter"
+            "$ref": "#/parameters/SummaryParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The list of storage accounts has been returned.",
             "schema": {
-              "$ref": "storageaccounts.json#/definitions/StorageAccountList"
+              "$ref": "#/definitions/StorageAccountList"
             }
           }
         },
@@ -78,7 +78,7 @@
             "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/AccountIdParameter"
+            "$ref": "#/parameters/AccountIdParameter"
           },
           {
             "$ref": "storage.json#/parameters/ApiVersionParameter"
@@ -88,7 +88,7 @@
           "200": {
             "description": "OK -- The storage account has been returned.",
             "schema": {
-              "$ref": "storageaccounts.json#/definitions/StorageAccount"
+              "$ref": "#/definitions/StorageAccount"
             }
           },
           "404": {
@@ -117,20 +117,20 @@
             "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/AccountIdParameter"
+            "$ref": "#/parameters/AccountIdParameter"
           },
           {
             "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "storageaccounts.json#/parameters/NewAccountNameParameter"
+            "$ref": "#/parameters/NewAccountNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Undelete either has been performed or account was not deleted.",
             "schema": {
-              "$ref": "storageaccounts.json#/definitions/UndeleteStorageAccount"
+              "$ref": "#/definitions/UndeleteStorageAccount"
             }
           },
           "202": {
@@ -288,17 +288,17 @@
       "properties": {
         "blob": {
           "description": "Blob service.",
-          "$ref": "storageaccounts.json#/definitions/StorageEncryptionSetting",
+          "$ref": "#/definitions/StorageEncryptionSetting",
           "readOnly": true
         },
         "table": {
           "description": "Table service.",
-          "$ref": "storageaccounts.json#/definitions/StorageEncryptionSetting",
+          "$ref": "#/definitions/StorageEncryptionSetting",
           "readOnly": true
         },
         "queue": {
           "description": "Queue service",
-          "$ref": "storageaccounts.json#/definitions/StorageEncryptionSetting",
+          "$ref": "#/definitions/StorageEncryptionSetting",
           "readOnly": true
         }
       }
@@ -320,12 +320,12 @@
       "properties": {
         "services": {
           "description": "Services for which encryption setting is mentioned",
-          "$ref": "storageaccounts.json#/definitions/StorageEncryptionServices",
+          "$ref": "#/definitions/StorageEncryptionServices",
           "readOnly": true
         },
         "keySource": {
           "description": "Encryption keySource",
-          "$ref": "storageaccounts.json#/definitions/EncryptionKeySource",
+          "$ref": "#/definitions/EncryptionKeySource",
           "readOnly": true
         }
       }
@@ -341,12 +341,12 @@
         },
         "accountType": {
           "description": "Storage account type.",
-          "$ref": "storageaccounts.json#/definitions/StorageAccountType",
+          "$ref": "#/definitions/StorageAccountType",
           "readOnly": true
         },
         "provisioningState": {
           "description": "The provisioning state of storage account.",
-          "$ref": "storageaccounts.json#/definitions/StorageAccountState",
+          "$ref": "#/definitions/StorageAccountState",
           "readOnly": true
         },
         "primaryEndpoints": {
@@ -378,7 +378,7 @@
         },
         "statusOfPrimary": {
           "description": "The status of primary location of storage account.",
-          "$ref": "storageaccounts.json#/definitions/LocationStatus",
+          "$ref": "#/definitions/LocationStatus",
           "readOnly": true
         },
         "tenantSubscriptionId": {
@@ -403,12 +403,12 @@
           "readOnly": true
         },
         "accountStatus": {
-          "$ref": "storageaccounts.json#/definitions/StorageAccountStatus",
+          "$ref": "#/definitions/StorageAccountStatus",
           "description": "The status of storage account."
         },
         "permissions": {
           "description": "The permissions on the storage account.",
-          "$ref": "storageaccounts.json#/definitions/WacAccountPermissions",
+          "$ref": "#/definitions/WacAccountPermissions",
           "readOnly": true
         },
         "accountId": {
@@ -418,12 +418,12 @@
         },
         "wacInternalState": {
           "description": "The internal state of storage account in WAC.",
-          "$ref": "storageaccounts.json#/definitions/WacAccountStates",
+          "$ref": "#/definitions/WacAccountStates",
           "readOnly": true
         },
         "encryption": {
           "description": "The storage encryption setting",
-          "$ref": "storageaccounts.json#/definitions/StorageEncryption",
+          "$ref": "#/definitions/StorageEncryption",
           "readOnly": true
         },
         "supportsHttpsTrafficOnly": {
@@ -440,7 +440,7 @@
         "properties": {
           "description": "Properties of the storage account.",
           "x-ms-client-flatten": true,
-          "$ref": "storageaccounts.json#/definitions/StorageAccountProperties",
+          "$ref": "#/definitions/StorageAccountProperties",
           "readOnly": true
         },
         "name": {
@@ -481,7 +481,7 @@
           "description": "List of storage accounts.",
           "type": "array",
           "items": {
-            "$ref": "storageaccounts.json#/definitions/StorageAccount"
+            "$ref": "#/definitions/StorageAccount"
           },
           "readOnly": true
         },

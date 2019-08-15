@@ -30,14 +30,14 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "storage.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The list of operations has been returned.",
             "schema": {
-              "$ref": "storage.json#/definitions/OperationList"
+              "$ref": "#/definitions/OperationList"
             }
           }
         },
@@ -58,7 +58,7 @@
         },
         "display": {
           "description": "Contains the localized display information for this particular operation / action.",
-          "$ref": "storage.json#/definitions/Display",
+          "$ref": "#/definitions/Display",
           "readOnly": true
         }
       }
@@ -95,7 +95,7 @@
           "description": "List of operations",
           "type": "array",
           "items": {
-            "$ref": "storage.json#/definitions/Operation"
+            "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {

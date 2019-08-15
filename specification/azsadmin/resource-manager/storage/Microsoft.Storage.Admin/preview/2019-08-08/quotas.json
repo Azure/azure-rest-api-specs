@@ -39,17 +39,17 @@
             "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/QuotaNameParameter"
+            "$ref": "#/parameters/QuotaNameParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/StorageQuotaParameters"
+            "$ref": "#/parameters/StorageQuotaParameters"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The storage quota has been created or updated.",
             "schema": {
-              "$ref": "quotas.json#/definitions/StorageQuota"
+              "$ref": "#/definitions/StorageQuota"
             }
           }
         }
@@ -76,7 +76,7 @@
             "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/QuotaNameParameter"
+            "$ref": "#/parameters/QuotaNameParameter"
           }
         ],
         "responses": {
@@ -107,14 +107,14 @@
             "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "quotas.json#/parameters/QuotaNameParameter"
+            "$ref": "#/parameters/QuotaNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The storage quota has been returned.",
             "schema": {
-              "$ref": "quotas.json#/definitions/StorageQuota"
+              "$ref": "#/definitions/StorageQuota"
             }
           },
           "404": {
@@ -150,7 +150,7 @@
           "200": {
             "description": "OK -- The list of storage quotas has been returned.",
             "schema": {
-              "$ref": "quotas.json#/definitions/StorageQuotaList"
+              "$ref": "#/definitions/StorageQuotaList"
             }
           }
         },
@@ -168,7 +168,7 @@
         "properties": {
           "description": "Storage quota properties.",
           "x-ms-client-flatten": true,
-          "$ref": "quotas.json#/definitions/StorageQuotaProperties"
+          "$ref": "#/definitions/StorageQuotaProperties"
         },
         "name": {
           "description": "quota name",
@@ -219,7 +219,7 @@
           "description": "List of storage quotas.",
           "type": "array",
           "items": {
-            "$ref": "quotas.json#/definitions/StorageQuota"
+            "$ref": "#/definitions/StorageQuota"
           }
         },
         "nextLink": {
@@ -244,7 +244,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "quotas.json#/definitions/StorageQuota"
+        "$ref": "#/definitions/StorageQuota"
       },
       "x-ms-parameter-location": "method"
     }
