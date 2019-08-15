@@ -41,7 +41,7 @@
         ],
         "summary": "Gets the current quota limit and usages for the resources provider for the specified location.",
         "description": "This API gets the current quota limit and usages for the resources provider for the specified location. This response can be used to submit quotaRequests.",
-        "operationId": "Quotas_list_Status",
+        "operationId": "Quotas_listStatus",
 		 "x-ms-examples": {
           "Quotas_listUsages": {
             "$ref": "./examples/getComputeUsages.json"
@@ -112,7 +112,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. Returns Quota requests deatils.",
+            "description": "OK. Returns Quota requests details.",
 			      "schema": {
               "$ref": "#/definitions/QuotaRequestDetails"
             }
@@ -291,7 +291,7 @@
     "CreateGenericQuotaRequestParameters": {
       "description": "Quota change requests information.",
       "properties": {
-        "quotaRequests": {
+        "value": {
           "description": "Quota change requests.",
           "type": "array",
           "items": {
