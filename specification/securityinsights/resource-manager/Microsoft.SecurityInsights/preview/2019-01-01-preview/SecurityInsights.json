@@ -465,6 +465,102 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all alert rule templates.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplates.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets all alert rule templates.",
+        "operationId": "AlertRuleTemplates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get alert rule template by Id.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets the alert rule template.",
+        "operationId": "AlertRuleTemplates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleTemplateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
       "get": {
         "x-ms-examples": {
@@ -1959,7 +2055,9 @@
           "type": "string",
           "description": "The kind of the alert rule",
           "enum": [
-            "Scheduled"
+            "Scheduled",
+            "Filter",
+            "Fusion"
           ],
           "x-ms-enum": {
             "name": "AlertRuleKind",
@@ -1967,9 +2065,75 @@
             "values": [
               {
                 "value": "Scheduled"
+              },
+              {
+                "value": "Filter"
+              },
+              {
+                "value": "Fusion"
               }
             ]
           }
+        }
+      }
+    },
+    "AlertRuleTriggerOperator": {
+      "type": "string",
+      "enum": [
+        "GreaterThan",
+        "LessThan",
+        "Equal",
+        "NotEqual"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerOperator",
+        "modelAsString": false
+      },
+      "description": "The operation against the threshold that triggers alert rule."
+    },
+    "AttackTactic": {
+      "type": "string",
+      "enum": [
+        "InitialAccess",
+        "Execution",
+        "Persistence",
+        "PrivilegeEscalation",
+        "DefenseEvasion",
+        "CredentialAccess",
+        "Discovery",
+        "LateralMovement",
+        "Collection",
+        "Exfiltration",
+        "CommandAndControl"
+      ],
+      "x-ms-enum": {
+        "name": "AttackTactic",
+        "modelAsString": false
+      },
+      "description": "The severity for alerts created by this alert rule."
+    },
+    "DataConnectorStatus": {
+      "type": "object",
+      "description": "alert rule template data connector status",
+      "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "the connector id"
+        },
+        "dataTypes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "enum": [
+              "Exist",
+              "NotExist"
+            ],
+            "x-ms-enum": {
+              "name": "DataTypeStatus",
+              "modelAsString": false
+            }
+          },
+          "description": "The data types availability map"
         }
       }
     },
@@ -2025,17 +2189,7 @@
           "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
         },
         "triggerOperator": {
-          "type": "string",
-          "enum": [
-            "GreaterThan",
-            "LessThan",
-            "Equal",
-            "NotEqual"
-          ],
-          "x-ms-enum": {
-            "name": "TriggerOperator",
-            "modelAsString": false
-          },
+          "$ref": "#/definitions/AlertRuleTriggerOperator",
           "description": "The operation against the threshold that triggers alert rule."
         },
         "triggerThreshold": {
@@ -2070,6 +2224,276 @@
         "suppressionEnabled",
         "suppressionDuration"
       ]
+    },
+    "AlertRuleTemplatesList": {
+      "description": "List all the alert rule templates.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of alert rule templates.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of alert rule templates.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplate"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertRuleTemplate": {
+      "type": "object",
+      "description": "Alert rule template.",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/AlertRuleKind"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the alert rule."
+        }
+      }
+    },
+    "ScheduledAlertRuleTemplate": {
+      "x-ms-discriminator-value": "Scheduled",
+      "type": "object",
+      "description": "Represents scheduled alert rule template.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Scheduled alert rule template properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/ScheduledAlertRuleTemplateProperties"
+            }
+          ],
+          "required": [
+            "displayName",
+            "description",
+            "createdDateUTC",
+            "status",
+            "requiredDataConnectors",
+            "alertRulesCreatedByTemplateCount",
+            "severity",
+            "query",
+            "queryFrequency",
+            "queryPeriod",
+            "triggerOperator",
+            "triggerThreshold"
+          ]
+        }
+      }
+    },
+    "BaseAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Base alert rule template property bag.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for alert rule template."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the alert rule template."
+        },
+        "tactics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "description": "The tactics of the alert rule template"
+        },
+        "createdDateUTC": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The time that this alert rule template has been added."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Installed",
+            "Available",
+            "NotAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "TemplateStatus",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Installed",
+                "description": "Alert rule template installed. and can not use more then once"
+              },
+              {
+                "value": "Available",
+                "description": "Alert rule template is available."
+              },
+              {
+                "value": "NotAvailable",
+                "description": "Alert rule template is not available"
+              }
+            ]
+          },
+          "description": "The alert rule template status."
+        },
+        "requiredDataConnectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectorStatus"
+          },
+          "description": "The required data connectors for this template"
+        },
+        "alertRulesCreatedByTemplateCount": {
+          "type": "integer",
+          "description": "the number of alert rules that were created by this template"
+        }
+      }
+    },
+    "ScheduledAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Schedule alert rule template property bag.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query that creates alerts for this rule."
+        },
+        "queryFrequency": {
+          "type": "string",
+          "format": "duration",
+          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run."
+        },
+        "queryPeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
+        },
+        "triggerOperator": {
+          "$ref": "#/definitions/AlertRuleTriggerOperator",
+          "description": "The operation against the threshold that triggers alert rule."
+        },
+        "triggerThreshold": {
+          "type": "integer",
+          "description": "The threshold triggers this alert rule."
+        }
+      }
+    },
+    "FilterAlertRuleTemplate": {
+      "x-ms-discriminator-value": "Filter",
+      "type": "object",
+      "description": "Represents filter alert rule template.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Filter alert rule template properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/FilterAlertRuleTemplateProperties"
+            }
+          ],
+          "required": [
+            "displayName",
+            "description",
+            "createdDateUTC",
+            "status",
+            "alertRulesCreatedByTemplateCount",
+            "filterProduct"
+          ]
+        }
+      }
+    },
+    "FilterAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Filter alert rule template property bag.",
+      "properties": {
+        "filterProduct": {
+          "type": "string",
+          "description": "The filter product name for this template rule."
+        },
+        "filterSeverities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertSeverity"
+          },
+          "description": "the alert’s severities on which the cases will be generated"
+        },
+        "filterTitles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the alert’s titles on which the cases will be generated"
+        }
+      }
+    },
+    "FusionAlertRuleTemplate": {
+      "x-ms-discriminator-value": "Fusion",
+      "type": "object",
+      "description": "Represents fusion alert rule template.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Fusion alert rule template properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/FusionAlertRuleTemplateProperties"
+            }
+          ],
+          "required": [
+            "displayName",
+            "description",
+            "createdDateUTC",
+            "status",
+            "alertRulesCreatedByTemplateCount"
+          ]
+        }
+      }
+    },
+    "FusionAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Filter alert rule template property bag.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        }
+      }
     },
     "AlertSeverity": {
       "type": "string",
@@ -2490,12 +2914,12 @@
           "type": "string",
           "description": "The display name of the bookmark"
         },
-        "lastUpdatedTimeUtc": {
+        "updated": {
           "type": "string",
           "format": "date-time",
           "description": "The last time the bookmark was updated"
         },
-        "createdTimeUtc": {
+        "created": {
           "type": "string",
           "format": "date-time",
           "description": "The time the bookmark was created"
@@ -2524,6 +2948,10 @@
         "query": {
           "type": "string",
           "description": "The query of the bookmark."
+        },
+        "queryResult": {
+          "type": "string",
+          "description": "The query result of the bookmark."
         }
       },
       "required": [
@@ -5101,6 +5529,14 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "AlertRuleTemplateId": {
+      "name": "alertRuleTemplateId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Alert rule template ID",
+      "x-ms-parameter-location": "method"
+    },
     "ActionId": {
       "name": "actionId",
       "in": "path",
@@ -5286,3 +5722,4 @@
     }
   }
 }
+
