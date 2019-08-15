@@ -68,7 +68,7 @@
             "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
-            "description": "Request successful. Resource with the specified name does not exist"
+            "description": "Request successful. Resource with the specified name does not exist."
           },
           "200": {
             "description": "Delete successful."
@@ -366,7 +366,7 @@
             "description": "Accepted and the operation will complete asynchronously."
           },
           "204": {
-            "description": "Request successful. Resource with the specified name does not exist"
+            "description": "Request successful. Resource with the specified name does not exist."
           },
           "200": {
             "description": "Delete successful."
@@ -574,7 +574,7 @@
         "ruleGroups": {
           "type": "array",
           "readOnly": true,
-          "description": "List of references to FirewallPolicyRuleGroups",
+          "description": "List of references to FirewallPolicyRuleGroups.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
@@ -591,7 +591,7 @@
         "firewalls": {
           "type": "array",
           "readOnly": true,
-          "description": "List of references to Azure Firewalls that this Firewall Policy is associated with",
+          "description": "List of references to Azure Firewalls that this Firewall Policy is associated with.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
@@ -599,7 +599,7 @@
         "childPolicies": {
           "type": "array",
           "readOnly": true,
-          "description": "List of references to Child Firewall Policies",
+          "description": "List of references to Child Firewall Policies.",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
@@ -609,7 +609,7 @@
           "$ref": "./azureFirewall.json#/definitions/AzureFirewallThreatIntelMode"
         }
       },
-      "description": "Firewall Policy definition"
+      "description": "Firewall Policy definition."
     },
     "FirewallPolicyRuleGroup": {
       "properties": {
@@ -638,7 +638,7 @@
           "$ref": "./network.json#/definitions/SubResource"
         }
       ],
-      "description": "Rule Group resource"
+      "description": "Rule Group resource."
     },
     "FirewallPolicyRuleGroupProperties": {
       "properties": {
@@ -674,7 +674,7 @@
       "properties": {
         "ruleType": {
           "type": "string",
-          "description": " The type of the rule",
+          "description": "The type of the rule.",
           "enum": [
             "FirewallPolicyNatRule",
             "FirewallPolicyFilterRule"
@@ -686,7 +686,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Name of the Rule"
+          "description": "The name of the rule."
         },
         "priority": {
           "type": "integer",
@@ -703,7 +703,7 @@
       "properties": {
         "action": {
           "$ref": "#/definitions/FirewallPolicyNatRuleAction",
-          "description": "The action type of a Nat rule, SNAT or DNAT"
+          "description": "The action type of a Nat rule."
         },
         "translatedAddress": {
           "type": "string",
@@ -715,7 +715,7 @@
         },
         "ruleCondition": {
           "$ref": "#/definitions/FirewallPolicyRuleCondition",
-          "description": "The match conditions for incoming traffic"
+          "description": "The match conditions for incoming traffic."
         }
       },
       "allOf": [
@@ -724,13 +724,13 @@
         }
       ],
       "x-ms-discriminator-value": "FirewallPolicyNatRule",
-      "description": "Firewall Policy NAT Rule"
+      "description": "Firewall Policy NAT Rule."
     },
     "FirewallPolicyFilterRule": {
       "properties": {
         "action": {
           "$ref": "#/definitions/FirewallPolicyFilterRuleAction",
-          "description": "The action type of a Filter rule"
+          "description": "The action type of a Filter rule."
         },
         "ruleConditions": {
           "type": "array",
@@ -746,7 +746,7 @@
         }
       ],
       "x-ms-discriminator-value": "FirewallPolicyFilterRule",
-      "description": "Firewall Policy Filter Rule"
+      "description": "Firewall Policy Filter Rule."
     },
     "FirewallPolicyRuleCondition": {
       "description": "Properties of a rule.",
@@ -765,7 +765,7 @@
         },
         "ruleConditionType": {
           "type": "string",
-          "description": "Rule Condition Type",
+          "description": "Rule Condition Type.",
           "enum": [
             "ApplicationRuleCondition",
             "NetworkRuleCondition"
@@ -824,7 +824,7 @@
       "description": "Rule condition of type application."
     },
     "NetworkRuleCondition": {
-      "description": "Rule condition of type network",
+      "description": "Rule condition of type network.",
       "x-ms-discriminator-value": "NetworkRuleCondition",
       "allOf": [
         {
@@ -865,7 +865,7 @@
     "FirewallPolicyRuleConditionApplicationProtocol": {
       "properties": {
         "protocolType": {
-          "description": "Protocol type",
+          "description": "Protocol type.",
           "$ref": "#/definitions/FirewallPolicyRuleConditionApplicationProtocolType"
         },
         "port": {
@@ -894,7 +894,7 @@
     },
     "FirewallPolicyNatRuleActionType": {
       "type": "string",
-      "description": "The action type of a rule",
+      "description": "The action type of a rule.",
       "enum": [
         "DNAT",
         "SNAT"
@@ -915,7 +915,7 @@
     },
     "FirewallPolicyFilterRuleActionType": {
       "type": "string",
-      "description": "The action type of a rule",
+      "description": "The action type of a rule.",
       "enum": [
         "Allow",
         "Deny",
@@ -937,7 +937,7 @@
     },
     "FirewallPolicyRuleConditionNetworkProtocol": {
       "type": "string",
-      "description": "The Network protocol of a Rule condition",
+      "description": "The Network protocol of a Rule condition.",
       "enum": [
         "TCP",
         "UDP",
