@@ -781,6 +781,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
+  - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-10-01-preview/capabilities.json
@@ -863,6 +864,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2017-03-01-preview/ManagedDatabaseSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-03-01-preview/ManagedServerSecurityAlertPolicy.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-03-01-preview/SensitivityLabels.json
+  - $(this-folder)/./Microsoft.Sql/preview/2017-03-01-preview/managedInstanceAdministrators.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/advisors.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/databaseAutomaticTuning.json
