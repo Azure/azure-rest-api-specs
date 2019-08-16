@@ -21,8 +21,8 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
   package-name: azure-cognitiveservices-knowledge-qnamaker
+  no-namespace-folders: true
   clear-output-folder: true
 ```
 
@@ -36,5 +36,6 @@ python:
 ``` yaml $(python) && $(tag) == 'runtime_release_4_0'
 python:
   basic-setup-py: true
+  namespace: azure.cognitiveservices.knowledge.qnamaker.runtime
   output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker
 ```
