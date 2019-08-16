@@ -10,8 +10,8 @@ python:
   license-header: MICROSOFT_MIT_NO_VERSION
   add-credentials: true
   payload-flattening-threshold: 2
-  namespace: azure.cognitiveservices.knowledge.qnamaker
   package-name: azure-cognitiveservices-knowledge-qnamaker
+  no-namespace-folders: true
   clear-output-folder: true
 ```
 
@@ -26,23 +26,14 @@ python:
   clear-output-folder: true
 ```
 
-``` yaml $(python) && $(python-mode) == 'update' && $(tag) == 'release_4_0'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker
-```
-``` yaml $(python) && $(python-mode) == 'create' && $(tag) == 'release_4_0'
+``` yaml $(python) && $(tag) == 'release_4_0'
 python:
   basic-setup-py: true
+  namespace: azure.cognitiveservices.knowledge.qnamaker.authoring
   output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker
 ```
 
-``` yaml $(python) && $(python-mode) == 'update' && $(tag) == 'runtime_release_4_0'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker/azure/cognitiveservices/knowledge/qnamaker/runtime
-```
-``` yaml $(python) && $(python-mode) == 'create' && $(tag) == 'runtime_release_4_0'
+``` yaml $(python) && $(tag) == 'runtime_release_4_0'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/cognitiveservices/azure-cognitiveservices-knowledge-qnamaker
