@@ -6,73 +6,85 @@
         "description": "Azure Maintenance Management Client"
     },
     "host": "management.azure.com",
-    "schemes": ["https"],
-    "consumes": ["application/json"],
-    "produces": ["application/json"],
+    "schemes": [
+        "https"
+    ],
+    "consumes": [
+        "application/json"
+    ],
+    "produces": [
+        "application/json"
+    ],
     "paths": {
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}": {
             "get": {
-                "tags": ["ApplyUpdates"],
+                "tags": [
+                    "ApplyUpdates"
+                ],
                 "summary": "Track Updates to resource with parent",
                 "description": "Track maintenance updates to resource with parent",
                 "operationId": "ApplyUpdates_GetParent",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentType",
-                    "in": "path",
-                    "description": "Resource parent type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentName",
-                    "in": "path",
-                    "description": "Resource parent identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "applyUpdateName",
-                    "in": "path",
-                    "description": "applyUpdate Id",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentType",
+                        "in": "path",
+                        "description": "Resource parent type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentName",
+                        "in": "path",
+                        "description": "Resource parent identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "applyUpdateName",
+                        "in": "path",
+                        "description": "applyUpdate Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -90,53 +102,59 @@
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/{applyUpdateName}": {
             "get": {
-                "tags": ["ApplyUpdates"],
+                "tags": [
+                    "ApplyUpdates"
+                ],
                 "summary": "Track Updates to resource",
                 "description": "Track maintenance updates to resource",
                 "operationId": "ApplyUpdates_Get",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "applyUpdateName",
-                    "in": "path",
-                    "description": "applyUpdate Id",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "applyUpdateName",
+                        "in": "path",
+                        "description": "applyUpdate Id",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -154,60 +172,66 @@
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
             "put": {
-                "tags": ["ApplyUpdates"],
+                "tags": [
+                    "ApplyUpdates"
+                ],
                 "summary": "Apply Updates to resource with parent",
                 "description": "Apply maintenance updates to resource with parent",
                 "operationId": "ApplyUpdates_CreateOrUpdateParent",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentType",
-                    "in": "path",
-                    "description": "Resource parent type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentName",
-                    "in": "path",
-                    "description": "Resource parent identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentType",
+                        "in": "path",
+                        "description": "Resource parent type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentName",
+                        "in": "path",
+                        "description": "Resource parent identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -225,46 +249,52 @@
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/applyUpdates/default": {
             "put": {
-                "tags": ["ApplyUpdates"],
+                "tags": [
+                    "ApplyUpdates"
+                ],
                 "summary": "Apply Updates to resource",
                 "description": "Apply maintenance updates to resource",
                 "operationId": "ApplyUpdates_CreateOrUpdate",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -282,76 +312,84 @@
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
             "put": {
-                "tags": ["ConfigurationAssignments"],
+                "tags": [
+                    "ConfigurationAssignments"
+                ],
                 "summary": "Create configuration assignment",
                 "description": "Register configuration for resource.",
                 "operationId": "ConfigurationAssignments_CreateOrUpdateParent",
-                "consumes": ["application/json"],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentType",
-                    "in": "path",
-                    "description": "Resource parent type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentName",
-                    "in": "path",
-                    "description": "Resource parent identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configurationAssignmentName",
-                    "in": "path",
-                    "description": "Configuration assignment name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configurationAssignment",
-                    "in": "body",
-                    "description": "The configurationAssignment",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/ConfigurationAssignment"
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentType",
+                        "in": "path",
+                        "description": "Resource parent type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentName",
+                        "in": "path",
+                        "description": "Resource parent identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configurationAssignmentName",
+                        "in": "path",
+                        "description": "Configuration assignment name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configurationAssignment",
+                        "in": "body",
+                        "description": "The configurationAssignment",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ConfigurationAssignment"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -367,67 +405,73 @@
                 }
             },
             "delete": {
-                "tags": ["ConfigurationAssignments"],
+                "tags": [
+                    "ConfigurationAssignments"
+                ],
                 "summary": "Unregister configuration for resource",
                 "description": "Unregister configuration for resource.",
                 "operationId": "ConfigurationAssignments_DeleteParent",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentType",
-                    "in": "path",
-                    "description": "Resource parent type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentName",
-                    "in": "path",
-                    "description": "Resource parent identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configurationAssignmentName",
-                    "in": "path",
-                    "description": "Unique configuration assignment name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentType",
+                        "in": "path",
+                        "description": "Resource parent type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentName",
+                        "in": "path",
+                        "description": "Resource parent identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configurationAssignmentName",
+                        "in": "path",
+                        "description": "Unique configuration assignment name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -445,62 +489,70 @@
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments/{configurationAssignmentName}": {
             "put": {
-                "tags": ["ConfigurationAssignments"],
+                "tags": [
+                    "ConfigurationAssignments"
+                ],
                 "summary": "Create configuration assignment",
                 "description": "Register configuration for resource.",
                 "operationId": "ConfigurationAssignments_CreateOrUpdate",
-                "consumes": ["application/json"],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configurationAssignmentName",
-                    "in": "path",
-                    "description": "Configuration assignment name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configurationAssignment",
-                    "in": "body",
-                    "description": "The configurationAssignment",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/ConfigurationAssignment"
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configurationAssignmentName",
+                        "in": "path",
+                        "description": "Configuration assignment name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configurationAssignment",
+                        "in": "body",
+                        "description": "The configurationAssignment",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/ConfigurationAssignment"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -516,53 +568,59 @@
                 }
             },
             "delete": {
-                "tags": ["ConfigurationAssignments"],
+                "tags": [
+                    "ConfigurationAssignments"
+                ],
                 "summary": "Unregister configuration for resource",
                 "description": "Unregister configuration for resource.",
                 "operationId": "ConfigurationAssignments_Delete",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configurationAssignmentName",
-                    "in": "path",
-                    "description": "Unique configuration assignment name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configurationAssignmentName",
+                        "in": "path",
+                        "description": "Unique configuration assignment name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -578,33 +636,185 @@
                 }
             }
         },
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments": {
+            "get": {
+                "tags": [
+                    "ConfigurationAssignments"
+                ],
+                "summary": "List configurationAssignments for resource",
+                "description": "List configurationAssignments for resource.",
+                "operationId": "ConfigurationAssignments_ListParent",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentType",
+                        "in": "path",
+                        "description": "Resource parent type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentName",
+                        "in": "path",
+                        "description": "Resource parent identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                },
+                "x-ms-examples": {
+                    "ConfigurationAssignments_ListParent": {
+                        "$ref": "./examples/ConfigurationAssignments_ListParent.json"
+                    }
+                }
+            }
+        },
+        "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/configurationAssignments": {
+            "get": {
+                "tags": [
+                    "ConfigurationAssignments"
+                ],
+                "summary": "List configurationAssignments for resource",
+                "description": "List configurationAssignments for resource.",
+                "operationId": "ConfigurationAssignments_List",
+                "consumes": [],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/ListConfigurationAssignmentsResult"
+                        }
+                    }
+                },
+                "x-ms-pageable": {
+                    "nextLinkName": null
+                },
+                "x-ms-examples": {
+                    "ConfigurationAssignments_List": {
+                        "$ref": "./examples/ConfigurationAssignments_List.json"
+                    }
+                }
+            }
+        },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Maintenance/maintenanceConfigurations/{resourceName}": {
             "get": {
-                "tags": ["MaintenanceConfigurations"],
+                "tags": [
+                    "MaintenanceConfigurations"
+                ],
                 "summary": "Get Configuration record",
                 "operationId": "MaintenanceConfigurations_Get",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource Group Name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource Identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource Group Name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource Identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -626,40 +836,48 @@
                 }
             },
             "put": {
-                "tags": ["MaintenanceConfigurations"],
+                "tags": [
+                    "MaintenanceConfigurations"
+                ],
                 "summary": "Create or Update configuration record",
                 "operationId": "MaintenanceConfigurations_CreateOrUpdate",
-                "consumes": ["application/json"],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource Group Name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource Identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configuration",
-                    "in": "body",
-                    "description": "The configuration",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/MaintenanceConfiguration"
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource Group Name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource Identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configuration",
+                        "in": "body",
+                        "description": "The configuration",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MaintenanceConfiguration"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -681,31 +899,37 @@
                 }
             },
             "delete": {
-                "tags": ["MaintenanceConfigurations"],
+                "tags": [
+                    "MaintenanceConfigurations"
+                ],
                 "summary": "Delete Configuration record",
                 "operationId": "MaintenanceConfigurations_Delete",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource Group Name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource Identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource Group Name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource Identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -727,40 +951,48 @@
                 }
             },
             "patch": {
-                "tags": ["MaintenanceConfigurations"],
+                "tags": [
+                    "MaintenanceConfigurations"
+                ],
                 "summary": "Patch configuration record",
                 "operationId": "MaintenanceConfigurations_Update",
-                "consumes": ["application/json"],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource Group Name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource Identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "configuration",
-                    "in": "body",
-                    "description": "The configuration",
-                    "required": true,
-                    "schema": {
-                        "$ref": "#/definitions/MaintenanceConfiguration"
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource Group Name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource Identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "configuration",
+                        "in": "body",
+                        "description": "The configuration",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/MaintenanceConfiguration"
+                        }
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
                     }
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -784,17 +1016,23 @@
         },
         "/subscriptions/{subscriptionId}/providers/Microsoft.Maintenance/maintenanceConfigurations": {
             "get": {
-                "tags": ["MaintenanceConfigurations"],
+                "tags": [
+                    "MaintenanceConfigurations"
+                ],
                 "summary": "Get Configuration records within a subscription",
                 "operationId": "MaintenanceConfigurations_List",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -821,15 +1059,21 @@
         },
         "/providers/Microsoft.Maintenance/operations": {
             "get": {
-                "tags": ["Operations"],
+                "tags": [
+                    "Operations"
+                ],
                 "summary": "List available operations",
                 "description": "List the available operations supported by the Microsoft.Maintenance resource provider",
                 "operationId": "Operations_List",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -856,60 +1100,66 @@
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceParentType}/{resourceParentName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates": {
             "get": {
-                "tags": ["Updates"],
+                "tags": [
+                    "Updates"
+                ],
                 "summary": "Get Updates to resource",
                 "description": "Get updates to resources.",
                 "operationId": "Updates_ListParent",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentType",
-                    "in": "path",
-                    "description": "Resource parent type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceParentName",
-                    "in": "path",
-                    "description": "Resource parent identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentType",
+                        "in": "path",
+                        "description": "Resource parent type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceParentName",
+                        "in": "path",
+                        "description": "Resource parent identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -930,46 +1180,52 @@
         },
         "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{providerName}/{resourceType}/{resourceName}/providers/Microsoft.Maintenance/updates": {
             "get": {
-                "tags": ["Updates"],
+                "tags": [
+                    "Updates"
+                ],
                 "summary": "Get Updates to resource",
                 "description": "Get updates to resources.",
                 "operationId": "Updates_List",
                 "consumes": [],
-                "produces": ["application/json"],
-                "parameters": [{
-                    "$ref": "#/parameters/SubscriptionIdParameter"
-                },
-                {
-                    "name": "resourceGroupName",
-                    "in": "path",
-                    "description": "Resource group name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "providerName",
-                    "in": "path",
-                    "description": "Resource provider name",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceType",
-                    "in": "path",
-                    "description": "Resource type",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "name": "resourceName",
-                    "in": "path",
-                    "description": "Resource identifier",
-                    "required": true,
-                    "type": "string"
-                },
-                {
-                    "$ref": "#/parameters/ApiVersionParameter"
-                }],
+                "produces": [
+                    "application/json"
+                ],
+                "parameters": [
+                    {
+                        "$ref": "#/parameters/SubscriptionIdParameter"
+                    },
+                    {
+                        "name": "resourceGroupName",
+                        "in": "path",
+                        "description": "Resource group name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "providerName",
+                        "in": "path",
+                        "description": "Resource provider name",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceType",
+                        "in": "path",
+                        "description": "Resource type",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "name": "resourceName",
+                        "in": "path",
+                        "description": "Resource identifier",
+                        "required": true,
+                        "type": "string"
+                    },
+                    {
+                        "$ref": "#/parameters/ApiVersionParameter"
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -996,11 +1252,13 @@
             "properties": {
                 "status": {
                     "description": "The status",
-                    "enum": ["Pending",
-                    "InProgress",
-                    "Completed",
-                    "RetryNow",
-                    "RetryLater"],
+                    "enum": [
+                        "Pending",
+                        "InProgress",
+                        "Completed",
+                        "RetryNow",
+                        "RetryLater"
+                    ],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "UpdateStatus",
@@ -1043,9 +1301,11 @@
         "ApplyUpdate": {
             "description": "Apply Update request",
             "type": "object",
-            "allOf": [{
-                "$ref": "#/definitions/Resource"
-            }],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
             "properties": {
                 "properties": {
                     "$ref": "#/definitions/ApplyUpdateProperties",
@@ -1071,9 +1331,11 @@
         "ConfigurationAssignment": {
             "description": "Configuration Assignment",
             "type": "object",
-            "allOf": [{
-                "$ref": "#/definitions/Resource"
-            }],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
             "properties": {
                 "location": {
                     "description": "Location of the resource",
@@ -1083,6 +1345,19 @@
                     "$ref": "#/definitions/ConfigurationAssignmentProperties",
                     "description": "Properties of the configuration assignment",
                     "x-ms-client-flatten": true
+                }
+            }
+        },
+        "ListConfigurationAssignmentsResult": {
+            "description": "Response for ConfigurationAssignments list",
+            "type": "object",
+            "properties": {
+                "value": {
+                    "description": "The list of configuration Assignments",
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/ConfigurationAssignment"
+                    }
                 }
             }
         },
@@ -1103,10 +1378,12 @@
                 },
                 "maintenanceScope": {
                     "description": "Gets or sets maintenanceScope of the configuration",
-                    "enum": ["All",
-                    "Host",
-                    "Resource",
-                    "InResource"],
+                    "enum": [
+                        "All",
+                        "Host",
+                        "Resource",
+                        "InResource"
+                    ],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "MaintenanceScope",
@@ -1118,9 +1395,11 @@
         "MaintenanceConfiguration": {
             "description": "Maintenance configuration record type",
             "type": "object",
-            "allOf": [{
-                "$ref": "#/definitions/Resource"
-            }],
+            "allOf": [
+                {
+                    "$ref": "#/definitions/Resource"
+                }
+            ],
             "properties": {
                 "location": {
                     "description": "Gets or sets location of the resource",
@@ -1254,10 +1533,12 @@
             "properties": {
                 "maintenanceScope": {
                     "description": "The impact area",
-                    "enum": ["All",
-                    "Host",
-                    "Resource",
-                    "InResource"],
+                    "enum": [
+                        "All",
+                        "Host",
+                        "Resource",
+                        "InResource"
+                    ],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "MaintenanceScope",
@@ -1266,10 +1547,12 @@
                 },
                 "impactType": {
                     "description": "The impact type",
-                    "enum": ["None",
-                    "Freeze",
-                    "Restart",
-                    "Redeploy"],
+                    "enum": [
+                        "None",
+                        "Freeze",
+                        "Restart",
+                        "Redeploy"
+                    ],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "ImpactType",
@@ -1278,11 +1561,13 @@
                 },
                 "status": {
                     "description": "The status",
-                    "enum": ["Pending",
-                    "InProgress",
-                    "Completed",
-                    "RetryNow",
-                    "RetryLater"],
+                    "enum": [
+                        "Pending",
+                        "InProgress",
+                        "Completed",
+                        "RetryNow",
+                        "RetryLater"
+                    ],
                     "type": "string",
                     "x-ms-enum": {
                         "name": "UpdateStatus",
@@ -1297,6 +1582,21 @@
                 "notBefore": {
                     "format": "date-time",
                     "description": "Time when Azure will start force updates if not self-updated by customer before this time",
+                    "type": "string"
+                },
+                "properties": {
+                    "$ref": "#/definitions/UpdateProperties",
+                    "description": "Properties of the apply update",
+                    "x-ms-client-flatten": true
+                }
+            }
+        },
+        "UpdateProperties": {
+            "description": "Properties for update",
+            "type": "object",
+            "properties": {
+                "resourceId": {
+                    "description": "The resourceId",
                     "type": "string"
                 }
             }
