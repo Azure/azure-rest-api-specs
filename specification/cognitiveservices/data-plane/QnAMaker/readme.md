@@ -35,7 +35,7 @@ These settings apply only when `--tag=runtime_release_4_0` is specified on the c
 input-file: stable/v4.0/QnAMakerRuntime.json
 ```
 
-``` yaml
+``` yaml && !$(python)
 batch:
   - tag: release_4_0
   - tag: runtime_release_4_0
