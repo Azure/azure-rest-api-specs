@@ -51,6 +51,12 @@
             "schema": {
               "$ref": "#/definitions/StorageAccountList"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -91,8 +97,11 @@
               "$ref": "#/definitions/StorageAccount"
             }
           },
-          "404": {
-            "description": "NOT FOUND -- The storage account was not found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -135,6 +144,12 @@
           },
           "202": {
             "description": "Accepted -- undelete operation trigged; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -143,18 +158,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/storageaccounts/ondemandgc": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/storageaccounts/reclaimstoragecapacity": {
       "post": {
         "x-ms-examples": {
-          "Start garbage collection on deleted storage objects.": {
-            "$ref": "./examples/StorageAccounts/StartGarbageCollection.json"
+          "Start reclaim storage capacity on deleted storage objects.": {
+            "$ref": "./examples/StorageAccounts/ReclaimStorageCapacity.json"
           }
         },
         "tags": [
           "StorageAccounts"
         ],
-        "operationId": "StorageAccounts_OnDemandGC",
-        "description": "Start garbage collection on deleted storage objects.",
+        "operationId": "StorageAccounts_ReclaimStorageCapacity",
+        "description": "Start reclaim storage capacity on deleted storage objects.",
         "parameters": [
           {
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
@@ -168,10 +183,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Garbage collection has completed."
+            "description": "OK -- Reclaim storage capacity has completed."
           },
           "202": {
-            "description": "Accepted -- on demand gc operation triggered; operation will complete asynchronously."
+            "description": "Accepted -- reclaim storage capacity operation triggered; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true
@@ -443,16 +464,6 @@
           "$ref": "#/definitions/StorageAccountProperties",
           "readOnly": true
         },
-        "name": {
-          "description": "account name, a unique account id",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "resource location",
-          "type": "string",
-          "readOnly": true
-        },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
@@ -460,18 +471,13 @@
             "type": "string"
           },
           "readOnly": true
-        },
-        "id": {
-          "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "storage.json#/definitions/Resource"
+        }
+      ]
     },
     "StorageAccountList": {
       "description": "Pageable list of storage accounts.",

@@ -51,6 +51,12 @@
             "schema": {
               "$ref": "#/definitions/StorageQuota"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -82,6 +88,12 @@
         "responses": {
           "200": {
             "description": "OK -- The storage quota has been deleted."
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -117,8 +129,11 @@
               "$ref": "#/definitions/StorageQuota"
             }
           },
-          "404": {
-            "description": "NOT FOUND -- The storage quota cannot be found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -152,6 +167,12 @@
             "schema": {
               "$ref": "#/definitions/StorageQuotaList"
             }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -169,29 +190,13 @@
           "description": "Storage quota properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageQuotaProperties"
-        },
-        "name": {
-          "description": "quota name",
-          "type": "string",
-          "readOnly": true
-        },
-        "location": {
-          "description": "location for the quota",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "id for the storage quota",
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "description": "resource type for storage quota",
-          "type": "string",
-          "readOnly": true
         }
       },
-	    "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "storage.json#/definitions/Resource"
+        }
+      ]
     },
     "StorageQuotaProperties": {
       "description": "Storage quota properties.",
