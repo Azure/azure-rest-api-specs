@@ -352,40 +352,28 @@
         "typeProperties": {
           "description": "Install 3rd party component type properties.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ComponentSetupTypeProperties"
-        }
-      }
-    },
-    "ComponentSetupTypeProperties": {
-      "description": "Install 3rd party component setup type properties.",
-      "type": "object",
-      "discriminator": "type",
-      "properties": {
-        "componentName": {
-          "description": "The name of the 3rd party component.",
-          "type": "string"
+          "$ref": "#/definitions/LicensedComponentSetupTypeProperties"
         }
       },
       "required": [
-        "type",
-        "componentName"
+        "typeProperties"
       ]
     },
     "LicensedComponentSetupTypeProperties": {
       "description": "Installation of licensed component setup type properties.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ComponentSetupTypeProperties"
-        }
-      ],
       "properties": {
+        "componentName": {
+          "description": "The name of the 3rd party component.",
+          "type": "string"
+        },
         "licenseKey": {
           "description": "The license key to activate the component.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         }
       },
       "required": [
+        "componentName",
         "licenseKey"
       ]
     },
