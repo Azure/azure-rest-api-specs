@@ -4588,11 +4588,21 @@
         "source": {
           "type": "string",
           "description": "The source of the input."
+        },
+        "sourceContext": {
+          "type": "string",
+          "description": "The source context used for selecting recursive inputs."
+        },
+        "inputs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InputFieldMappingEntry"
+          },
+          "description": "The recursive inputs used when creating a complex type."
         }
       },
       "required": [
-        "name",
-        "source"
+        "name"
       ],
       "description": "Input field mapping for a skill."
     },
@@ -4614,6 +4624,18 @@
         "url": "https://docs.microsoft.com/rest/api/searchservice/naming-rules"
       },
       "description": "Output field mapping for a skill."
+    },
+    "ConditionalSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.ConditionalSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-conditional"
+      },
+      "description": "A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output."
     },
     "KeyPhraseExtractionSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
@@ -4865,6 +4887,35 @@
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-textsplit"
       },
       "description": "A skill to split a string into chunks of text."
+    },
+    "TextTranslationSkill": {
+      "x-ms-discriminator-value": "#Microsoft.Skills.Text.TranslationSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Skill"
+        }
+      ],
+      "properties": {
+        "defaultToLanguageCode": {
+          "$ref": "#/definitions/TextTranslationSkillLanguage",
+          "description": "The language code to translate documents into for documents that don't specify the to language explicitly. "
+        },
+        "defaultFromLanguageCode": {
+          "$ref": "#/definitions/TextTranslationSkillLanguage",
+          "description": "The language code to translate documents from for documents that don't specify the from language explicitly."
+        },
+        "suggestedFrom": {
+          "$ref": "#/definitions/TextTranslationSkillLanguage",
+          "description": "The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is en."
+        }
+      },
+      "required": [
+        "defaultToLanguageCode"
+      ],
+      "externalDocs": {
+        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-text-translation"
+      },
+      "description": "A skill to translate text from one language to another."
     },
     "WebApiSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Custom.WebApiSkill",
@@ -5150,6 +5201,79 @@
         "modelAsString": false
       },
       "description": "The language codes supported for input text by NamedEntityRecognitionSkill."
+    },
+    "TextTranslationSkillLanguage": {
+      "type": "string",
+      "enum": [
+        "af",
+        "ar",
+        "bn",
+        "bs",
+        "bg",
+        "yue",
+        "ca",
+        "zh-Hans",
+        "zh-Hant",
+        "hr",
+        "cs",
+        "da",
+        "nl",
+        "en",
+        "et",
+        "fj",
+        "fil",
+        "fi",
+        "fr",
+        "de",
+        "el",
+        "ht",
+        "he",
+        "hi",
+        "mww",
+        "hu",
+        "is",
+        "id",
+        "it",
+        "ja",
+        "sw",
+        "tlh",
+        "ko",
+        "lv",
+        "lt",
+        "mg",
+        "ms",
+        "mt",
+        "nb",
+        "fa",
+        "pl",
+        "pt",
+        "otq",
+        "ro",
+        "ru",
+        "sm",
+        "sr-Cyrl",
+        "sr-Latn",
+        "sk",
+        "sl",
+        "es",
+        "sv",
+        "ty",
+        "ta",
+        "te",
+        "th",
+        "to",
+        "tr",
+        "uk",
+        "ur",
+        "vi",
+        "cy",
+        "yua"
+      ],
+      "x-ms-enum": {
+        "name": "TextTranslationSkillLanguage",
+        "modelAsString": false
+      },
+      "description": "The language codes supported for input text by TextTranslationSkill."
     },
     "ImageAnalysisSkillLanguage": {
       "type": "string",
