@@ -282,7 +282,7 @@
     },
     "CmdkeySetupTypeProperties": {
       "description": "Cmdkey command custom setup type properties.",
-      "type": "object,",
+      "type": "object",
       "properties": {
         "targetName": {
           "description": "The server name of data source access.",
@@ -296,7 +296,12 @@
           "description": "The password of data source access.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         }
-      }
+      },
+      "required": [
+        "targetName",
+        "userName",
+        "password"
+      ]
     },
     "EnvironmentVariableSetup": {
       "description": "The custom setup of setting environment variable.",
@@ -329,7 +334,11 @@
           "description": "The value of the environment variable.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "variableName",
+        "variableValue"
+      ]
     },
     "ComponentSetup": {
       "description": "The custom setup of installing 3rd party components.",
@@ -356,7 +365,10 @@
           "description": "The name of the 3rd party component.",
           "type": "string"
         }
-      }
+      },
+      "required": [
+        "componentName"
+      ]
     },
     "LicensedComponentSetupTypeProperties": {
       "description": "Installation of licensed component setup type properties.",
@@ -371,7 +383,10 @@
           "description": "The license key to activate the component.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         }
-      }
+      },
+      "required": [
+        "licenseKey"
+      ]
     },
     "EntityReference": {
       "description": "The entity reference.",
