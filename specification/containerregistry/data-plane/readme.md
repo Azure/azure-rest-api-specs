@@ -26,7 +26,15 @@ These are the global settings for the ContainerRegistry API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2019-07
+tag: package-2019-08
+```
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+- Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
 ```
 
 ### Tag: package-2019-07
@@ -71,7 +79,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.ContainerRegistry
   sync-methods: None
-  output-folder: $(csharp-sdks-folder)/ContainerRegistry/preview/Microsoft.Azure.ContainerRegistry/src/Generated
+  output-folder: $(csharp-sdks-folder)/ContainerRegistry/Microsoft.Azure.ContainerRegistry/src/Generated
   clear-output-folder: true
   add-credentials: true
 ```
@@ -109,6 +117,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-07-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
 

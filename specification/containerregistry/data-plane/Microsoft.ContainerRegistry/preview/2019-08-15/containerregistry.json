@@ -3,7 +3,7 @@
   "info": {
     "title": "Azure Container Registry",
     "description": "Metadata API definition for the Azure Container Registry runtime",
-    "version": "2019-07-15-preview"
+    "version": "2019-08-15-preview"
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "{url}",
@@ -844,7 +844,7 @@
           "AcrMetadata"
         ],
         "description": "List tags of a repository",
-        "operationId": "GetAcrTagList",
+        "operationId": "GetTagList",
         "x-ms-examples": {
           "Get tags of a repository": {
             "$ref": "./examples/GetTagList.json"
@@ -901,7 +901,7 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-            "$ref": "#/parameters/ManifestReference"
+            "$ref": "#/parameters/TagReference"
           }
         ],
         "responses": {
@@ -1530,7 +1530,6 @@
         },
         "tags": {
           "type": "array",
-          "x-ms-client-name": "TagsAttributes",
           "description": "List of tag attribute details",
           "items": {
             "$ref": "#/definitions/TagAttributesBase"
@@ -1582,7 +1581,7 @@
           "description": "Image name"
         },
         "tag": {
-          "x-ms-client-name": "TagAttributes",
+          "x-ms-client-name": "attributes",
           "description": "List of tag attribute details",
           "$ref": "#/definitions/TagAttributesBase"
         }
@@ -1731,7 +1730,7 @@
           "type": "string"
         },
         "manifest": {
-          "x-ms-client-name": "ManifestAttributes",
+          "x-ms-client-name": "attributes",
           "description": "Manifest attributes",
           "$ref": "#/definitions/ManifestAttributesBase"
         }
@@ -2281,6 +2280,14 @@
       "name": "reference",
       "in": "path",
       "description": "Tag or digest of the target manifest",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "TagReference": {
+      "name": "reference",
+      "in": "path",
+      "description": "Tag name",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
