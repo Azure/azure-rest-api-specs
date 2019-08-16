@@ -35,15 +35,10 @@ These settings apply only when `--tag=runtime_release_4_0` is specified on the c
 input-file: stable/v4.0/QnAMakerRuntime.json
 ```
 
-``` yaml !$(python)
+``` yaml
 batch:
   - tag: release_4_0
   - tag: runtime_release_4_0
-```
-
-```yaml $(python)
-batch:
-  - tag: combined_release_4_0
 ```
 
 # Combined Releases
@@ -52,10 +47,15 @@ batch:
 These settings apply only when `--tag=combined_release_4_0` is specified on the command line.
 
 ``` yaml $(tag) == 'combined_release_4_0'
-input-file: stable/v4.0/QnAMaker.json
-input-file: stable/v4.0/QnAMakerRuntime.json
+input-file:
+  - stable/v4.0/QnAMaker.json
+  - stable/v4.0/QnAMakerRuntime.json
 ```
 
+```yaml $(python)
+batch:
+  - tag: combined_release_4_0
+```
 
 ## Swagger to SDK
 
