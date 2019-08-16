@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2.0",
+    "version": "2.1",
     "title": "Computer Vision Client",
     "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively."
   },
@@ -27,7 +27,7 @@
     ]
   },
   "host": "westcentralus.api.cognitive.microsoft.com",
-  "basePath": "/vision/v2.0",
+  "basePath": "/vision/v2.1",
   "schemes": [
     "https"
   ],
@@ -71,6 +71,9 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
+            "$ref": "#/parameters/DescriptionExclude"
+          },
+          {
             "$ref": "#/parameters/ImageUrl"
           }
         ],
@@ -97,7 +100,7 @@
     },
     "/describe": {
       "post": {
-        "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. All descriptions are in English.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+        "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. Descriptions may include results from celebrity and landmark domain models, if applicable.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
         "operationId": "DescribeImage",
         "consumes": [
           "application/json"
@@ -118,6 +121,9 @@
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
+          },
+          {
+            "$ref": "#/parameters/DescriptionExclude"
           },
           {
             "$ref": "#/parameters/ImageUrl"
@@ -279,7 +285,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The OCR results in the hierarchy of region/line/word. The results include text, bounding box for regions, lines and words. The angle, in degrees, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
+            "description": "The OCR results in the hierarchy of region/line/word. The results include text, bounding box for regions, lines and words. The angle, in radians, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
             "schema": {
               "$ref": "#/definitions/OcrResult"
             }
@@ -300,7 +306,7 @@
     },
     "/tag": {
       "post": {
-        "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag \"cello\" may be accompanied by the hint \"musical instrument\". All tags are in English.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+        "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag \"ascomycete\" may be accompanied by the hint \"fungus\".\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
         "operationId": "TagImage",
         "consumes": [
           "application/json"
@@ -549,6 +555,11 @@
           "type": "boolean",
           "x-nullable": false
         },
+        "isGoryContent": {
+          "description": "A value indicating if the image is gory.",
+          "type": "boolean",
+          "x-nullable": false
+        },
         "adultScore": {
           "format": "double",
           "description": "Score from 0 to 1 that indicates how much the content is considered adult-oriented within the image.",
@@ -558,6 +569,12 @@
         "racyScore": {
           "format": "double",
           "description": "Score from 0 to 1 that indicates how suggestive is the image.",
+          "type": "number",
+          "x-nullable": false
+        },
+        "goreScore": {
+          "format": "double",
+          "description": "Score from 0 to 1 that indicates how gory is the image.",
           "type": "number",
           "x-nullable": false
         }
@@ -1048,12 +1065,12 @@
         },
         "textAngle": {
           "format": "double",
-          "description": "The angle, in degrees, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
+          "description": "The angle, in radians, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
           "type": "number",
           "x-nullable": false
         },
         "orientation": {
-          "description": "Orientation of the text recognized in the image. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).",
+          "description": "Orientation of the text recognized in the image, if requested. The value (up, down, left, or right) refers to the direction that the top of the recognized text is facing, after the image has been rotated around its center according to the detected text angle (see textAngle property).\r\nIf detection of the orientation was not requested, or no text is detected, the value is 'NotDetected'.",
           "type": "string",
           "x-nullable": true
         },
@@ -1322,6 +1339,28 @@
       "x-ms-parameter-location": "method",
       "x-nullable": false
     },
+    "DescriptionExclude": {
+      "name": "descriptionExclude",
+      "in": "query",
+      "description": "Turn off specified domain models when generating the description.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string",
+        "enum": [
+          "Celebrities",
+          "Landmarks"
+        ],
+        "x-nullable": false,
+        "x-ms-enum": {
+          "name": "DescriptionExclude",
+          "modelAsString": false
+        }
+      },
+      "collectionFormat": "csv",
+      "x-nullable": true,
+      "x-ms-parameter-location": "method"
+    },
     "OcrLanguage": {
       "name": "language",
       "in": "query",
@@ -1368,7 +1407,7 @@
     "VisualFeatures": {
       "name": "visualFeatures",
       "in": "query",
-      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white. Adult - detects if the image is pornographic in nature (depicts nudity or a sex act).  Sexually suggestive content is also detected. Objects - detects various objects within an image, including the approximate location. The Objects argument is only available in English. Brands - detects various brands within an image, including the approximate location. The Brands argument is only available in English.",
+      "description": "A string indicating what visual feature types to return. Multiple values should be comma-separated. Valid visual feature types include: Categories - categorizes image content according to a taxonomy defined in documentation. Tags - tags the image with a detailed list of words related to the image content. Description - describes the image content with a complete English sentence. Faces - detects if faces are present. If present, generate coordinates, gender and age. ImageType - detects if image is clipart or a line drawing. Color - determines the accent color, dominant color, and whether an image is black&white. Adult - detects if the image is pornographic in nature (depicts nudity or a sex act), or is gory (depicts extreme violence or blood). Sexually suggestive content (aka racy content) is also detected. Objects - detects various objects within an image, including the approximate location. The Objects argument is only available in English. Brands - detects various brands within an image, including the approximate location. The Brands argument is only available in English.",
       "required": false,
       "type": "array",
       "items": {
@@ -1444,6 +1483,9 @@
             "$ref": "#/parameters/ServiceLanguage"
           },
           {
+            "$ref": "#/parameters/DescriptionExclude"
+          },
+          {
             "$ref": "#/parameters/ImageStream"
           }
         ],
@@ -1507,7 +1549,7 @@
     },
     "/describe?overload=stream": {
       "post": {
-        "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. All descriptions are in English.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+        "description": "This operation generates a description of an image in human readable language with complete sentences. The description is based on a collection of content tags, which are also returned by the operation. More than one description can be generated for each image. Descriptions are ordered by their confidence score. Descriptions may include results from celebrity and landmark domain models, if applicable.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
         "operationId": "DescribeImageInStream",
         "consumes": [
           "application/octet-stream",
@@ -1529,6 +1571,9 @@
           },
           {
             "$ref": "#/parameters/ServiceLanguage"
+          },
+          {
+            "$ref": "#/parameters/DescriptionExclude"
           },
           {
             "$ref": "#/parameters/ImageStream"
@@ -1732,7 +1777,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The OCR results in the hierarchy of region/line/word. The results include text, bounding box for regions, lines and words. The angle, in degrees, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
+            "description": "The OCR results in the hierarchy of region/line/word. The results include text, bounding box for regions, lines and words. The angle, in radians, of the detected text with respect to the closest horizontal or vertical direction. After rotating the input image clockwise by this angle, the recognized text lines become horizontal or vertical. In combination with the orientation property it can be used to overlay recognition results correctly on the original image, by rotating either the original image or recognition results by a suitable angle around the center of the original image. If the angle cannot be confidently detected, this property is not present. If the image contains text at different angles, only part of the text will be recognized correctly.",
             "schema": {
               "$ref": "#/definitions/OcrResult"
             }
@@ -1753,7 +1798,7 @@
     },
     "/tag?overload=stream": {
       "post": {
-        "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag \"cello\" may be accompanied by the hint \"musical instrument\". All tags are in English.\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
+        "description": "This operation generates a list of words, or tags, that are relevant to the content of the supplied image. The Computer Vision API can return tags based on objects, living beings, scenery or actions found in images. Unlike categories, tags are not organized according to a hierarchical classification system, but correspond to image content. Tags may contain hints to avoid ambiguity or provide context, for example the tag \"ascomycete\" may be accompanied by the hint \"fungus\".\r\nTwo input methods are supported -- (1) Uploading an image or (2) specifying an image URL.\r\nA successful response will be returned in JSON. If the request failed, the response will contain an error code and a message to help understand what went wrong.",
         "operationId": "TagImageInStream",
         "consumes": [
           "application/octet-stream",
