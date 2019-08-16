@@ -11,7 +11,6 @@ python:
   add-credentials: true
   payload-flattening-threshold: 2
   package-name: azure-cognitiveservices-knowledge-qnamaker
-  no-namespace-folders: true
   clear-output-folder: true
 ```
 
