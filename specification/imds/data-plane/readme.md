@@ -80,7 +80,17 @@ input-file:
 - Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
 ```
 
+### Tag: package-2019-08-15
+
+These settings apply only when `--tag=package-2019-08-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-08-15'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
+```
+
 ## Suppression
+
  ``` yaml
  directive:
    - suppress: DefinitionsPropertiesNamesCamelCase
@@ -166,6 +176,16 @@ input-file:
    - suppress: DefinitionsPropertiesNamesCamelCase
      reason: The following properties follow the Oath2 spec, which does not use camelCase.
      from: Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
+
+   - suppress: HttpsSupportedScheme
+     reason: IMDS does not require HTTPS to query it
+
+   - suppress: SecurityDefinitionsStructure
+     reason: IMDS does not support any authentication
+
+   - suppress: DefinitionsPropertiesNamesCamelCase
+     reason: The following properties follow the Oath2 spec, which does not use camelCase.
+     from: Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
      where:
        - $.definitions.IdentityTokenResponse.properties.access_token
        - $.definitions.IdentityTokenResponse.properties.expires_in
@@ -178,12 +198,6 @@ input-file:
        - $.definitions.IdentityTokenResponse.properties.object_id
        - $.definitions.IdentityTokenResponse.properties.msi_res_id
        - $.definitions.IdentityErrorResponse.properties.error_description
-
-   - suppress: HttpsSupportedScheme
-     reason: IMDS does not require HTTPS to query it
-
-   - suppress: SecurityDefinitionsStructure
-     reason: IMDS does not support any authentication
  ```
 
 ---
