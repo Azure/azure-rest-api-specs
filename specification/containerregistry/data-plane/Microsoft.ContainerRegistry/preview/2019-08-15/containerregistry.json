@@ -1884,79 +1884,6 @@
         ]
       }
     },
-    "Manifest": {
-      "description": "Returns the requested manifest file",
-      "properties": {
-        "schemaVersion": {
-          "type": "integer",
-          "description": "Schema version"
-        },
-        "mediaType": {
-          "type": "string",
-          "description": "Media type usually application/vnd.docker.distribution.manifest.v2+json if this is in the accept header"
-        },
-        "config": {
-          "description": "V2 image config descriptor",
-          "$ref": "#/definitions/V2Descriptor"
-        },
-        "layers": {
-          "type": "array",
-          "description": "List of V2 image layer information",
-          "items": {
-            "$ref": "#/definitions/V2Descriptor"
-          }
-        },
-        "architecture": {
-          "type": "string",
-          "description": "CPU architecture"
-        },
-        "name": {
-          "type": "string",
-          "description": "Image name"
-        },
-        "tag": {
-          "type": "string",
-          "description": "Image tag"
-        },
-        "fsLayers": {
-          "type": "array",
-          "description": "List of layer information",
-          "items": {
-            "$ref": "#/definitions/FsLayer"
-          }
-        },
-        "history": {
-          "type": "array",
-          "description": "Image history",
-          "items": {
-            "$ref": "#/definitions/History"
-          }
-        },
-        "signatures": {
-          "type": "array",
-          "description": "Image signature",
-          "items": {
-            "$ref": "#/definitions/ImageSignature"
-          }
-        }
-      },
-      "example": {
-        "schemaVersion": 2,
-        "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-        "config": {
-          "mediaType": "application/vnd.docker.container.image.v1+json",
-          "size": 1512,
-          "digest": "sha256:6d1ef012b5674ad8a127ecfa9b5e6f5178d171b90ee462846974177fd9bdd39f"
-        },
-        "layers": [
-          {
-            "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
-            "size": 2107098,
-            "digest": "sha256:5d20c808ce198565ff70b3ed23a991dd49afac45dece63474b27ce6ed036adc6"
-          }
-        ]
-      }
-    },
     "ImageSignature": {
       "description": "Signature of a signed manifest",
       "properties": {
@@ -2256,7 +2183,7 @@
         "writeEnabled": true
       }
     },
-    "SuperManifest": {
+    "Manifest": {
       "description": "Returns the requested multi-arch-manifest file",
       "discriminator": "mediaType",
       "required": [
@@ -2416,7 +2343,23 @@
         {
           "$ref": "#/definitions/SuperManifest"
         }
-      ]
+      ],
+      "example": {
+        "schemaVersion": 2,
+        "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
+        "config": {
+          "mediaType": "application/vnd.docker.container.image.v1+json",
+          "size": 1512,
+          "digest": "sha256:6d1ef012b5674ad8a127ecfa9b5e6f5178d171b90ee462846974177fd9bdd39f"
+        },
+        "layers": [
+          {
+            "mediaType": "application/vnd.docker.image.rootfs.diff.tar.gzip",
+            "size": 2107098,
+            "digest": "sha256:5d20c808ce198565ff70b3ed23a991dd49afac45dece63474b27ce6ed036adc6"
+          }
+        ]
+      }
     },
     "OCIManifest": {
       "x-ms-discriminator-value": "application/vnd.oci.image.manifest.v1+json",
