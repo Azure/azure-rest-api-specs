@@ -133,7 +133,7 @@
           "200": {
             "description": "Returns the requested manifest file",
             "schema": {
-              "$ref": "#/definitions/Manifest"
+              "$ref": "#/definitions/SuperManifest"
             }
           },
           "default": {
@@ -2255,6 +2255,190 @@
         "deleteEnabled": true,
         "writeEnabled": true
       }
+    },
+    "SuperManifest": {
+      "description": "Returns the requested multi-arch-manifest file",
+      "discriminator": "mediaType",
+      "required": [
+        "valueType"
+      ],
+      "properties": {
+        "mediaType": {
+          "type": "string",
+          "description": "Media type for this Manifest",
+          "enum": [
+            "",
+            "application/vnd.docker.distribution.manifest.list.v2+json",
+            "application/vnd.docker.distribution.manifest.v2+json",
+            "application/vnd.oci.image.manifest.v1+json"
+          ]
+        },
+        "schemaVersion": {
+          "type": "integer",
+          "description": "Schema version"
+        }
+      }
+    },
+    "MultiArchManifest": {
+      "x-ms-discriminator-value": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "description": "Returns the requested Docker multi-arch-manifest file",
+      "properties": {
+        "manifests": {
+          "type": "array",
+          "description": "List of V2 image layer information",
+          "items": {
+            "$ref": "#/definitions/MultiArchManifestAttributes"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SuperManifest"
+        }
+      ]
+    },
+    "MultiArchManifestAttributes": {
+      "properties": {
+        "mediaType": {
+          "type": "string",
+          "description": "The MIME type of the referenced object. This will generally be application/vnd.docker.image.manifest.v2+json, but it could also be application/vnd.docker.image.manifest.v1+json"
+        },
+        "size": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size in bytes of the object"
+        },
+        "digest": {
+          "type": "string",
+          "description": "The digest of the content, as defined by the Registry V2 HTTP API Specificiation"
+        },
+        "platform": {
+          "$ref": "#/definitions/Platform"
+        }
+      }
+    },
+    "Platform": {
+      "description": "The platform object describes the platform which the image in the manifest runs on. A full list of valid operating system and architecture values are listed in the Go language documentation for $GOOS and $GOARCH",
+      "properties": {
+        "architecture": {
+          "type": "string",
+          "description": "Specifies the CPU architecture, for example amd64 or ppc64le."
+        },
+        "os": {
+          "type": "string",
+          "description": "The os field specifies the operating system, for example linux or windows."
+        },
+        "os.version": {
+          "type": "string",
+          "description": "The optional os.version field specifies the operating system version, for example 10.0.10586."
+        },
+        "os.features": {
+          "type": "array",
+          "description": "The optional os.features field specifies an array of strings, each listing a required OS feature (for example on Windows win32k",
+          "items": {
+            "type": "string"
+          }
+        },
+        "variant": {
+          "type": "string",
+          "description": "The optional variant field specifies a variant of the CPU, for example armv6l to specify a particular CPU variant of the ARM CPU."
+        },
+        "features": {
+          "type": "array",
+          "description": "The optional features field specifies an array of strings, each listing a required CPU feature (for example sse4 or aes",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "V1Manifest": {
+      "x-ms-discriminator-value": "",
+      "description": "Returns the requested Docker V1 Manifest file",
+      "properties": {
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture"
+        },
+        "name": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Image tag"
+        },
+        "fsLayers": {
+          "type": "array",
+          "description": "List of layer information",
+          "items": {
+            "$ref": "#/definitions/FsLayer"
+          }
+        },
+        "history": {
+          "type": "array",
+          "description": "Image history",
+          "items": {
+            "$ref": "#/definitions/History"
+          }
+        },
+        "signatures": {
+          "type": "array",
+          "description": "Image signature",
+          "items": {
+            "$ref": "#/definitions/ImageSignature"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SuperManifest"
+        }
+      ]
+    },
+    "V2Manifest": {
+      "x-ms-discriminator-value": "application/vnd.docker.distribution.manifest.v2+json",
+      "description": "Returns the requested Docker V2 Manifest file",
+      "properties": {
+        "config": {
+          "description": "V2 image config descriptor",
+          "$ref": "#/definitions/V2Descriptor"
+        },
+        "layers": {
+          "type": "array",
+          "description": "List of V2 image layer information",
+          "items": {
+            "$ref": "#/definitions/V2Descriptor"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SuperManifest"
+        }
+      ]
+    },
+    "OCIManifest": {
+      "x-ms-discriminator-value": "application/vnd.oci.image.manifest.v1+json",
+      "description": "Returns the requested OCI Manifest file",
+      "properties": {
+        "config": {
+          "description": "V2 image config descriptor",
+          "$ref": "#/definitions/V2Descriptor"
+        },
+        "layers": {
+          "type": "array",
+          "description": "List of V2 image layer information",
+          "items": {
+            "$ref": "#/definitions/V2Descriptor"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/SuperManifest"
+        }
+      ]
     }
   },
   "parameters": {
@@ -2433,7 +2617,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/Manifest"
+        "$ref": "#/definitions/SuperManifest"
       },
       "x-ms-parameter-location": "method"
     },
