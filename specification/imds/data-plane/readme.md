@@ -242,6 +242,7 @@ input-file:
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
   - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
 
 ```
 
