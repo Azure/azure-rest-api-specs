@@ -45,7 +45,7 @@
           }
         },
         "operationId": "Clusters_ListByResourceGroup",
-        "description": "Gets clusters in a resource group.",
+        "description": "Gets Log Analytics clusters in a resource group.",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
@@ -87,7 +87,7 @@
           }
         },
         "operationId": "Clusters_List",
-        "description": "Gets the clusters in a subscription.",
+        "description": "Gets the Log Analytics clusters in a subscription.",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -126,14 +126,14 @@
           }
         },
         "operationId": "Clusters_CreateOrUpdate",
-        "description": "Create or update a cluster.",
+        "description": "Create or update a Log Analytics cluster.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the cluster."
+            "description": "The resource group name of the Log Analytics cluster."
           },
           {
             "name": "clusterName",
@@ -143,7 +143,7 @@
             "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$",
             "minLength": 4,
             "maxLength": 63,
-            "description": "The name of the cluster."
+            "description": "The name of the Log Analytics cluster."
           },
           {
             "name": "parameters",
@@ -152,7 +152,7 @@
             "schema": {
               "$ref": "#/definitions/Cluster"
             },
-            "description": "The parameters required to create or update a cluster."
+            "description": "The parameters required to create or update a Log Analytics cluster."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -200,7 +200,7 @@
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the cluster."
+            "description": "The resource group name of the Log Analytics cluster."
           },
           {
             "name": "clusterName",
@@ -241,14 +241,14 @@
           }
         },
         "operationId": "Clusters_Get",
-        "description": "Gets a cluster instance.",
+        "description": "Gets a Log Analytics cluster instance.",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The resource group name of the cluster."
+            "description": "The resource group name of the Log Analytics cluster."
           },
           {
             "name": "clusterName",
@@ -289,7 +289,7 @@
           }
         },
         "operationId": "Clusters_Update",
-        "description": "Updates a cluster.",
+        "description": "Updates a Log Analytics cluster.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -315,7 +315,7 @@
             "schema": {
               "$ref": "#/definitions/ClusterPatch"
             },
-            "description": "The parameters required to patch a cluster."
+            "description": "The parameters required to patch a Log Analytics cluster."
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -372,7 +372,7 @@
         },
         "encryptionKeyUri": {
           "type": "string",
-          "description": "The Key Vault key or certificate path associated with the cluster."
+          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
         }
       },
       "description": "Cluster properties."
@@ -411,17 +411,17 @@
       "properties": {
         "encryptionKeyUri": {
           "type": "string",
-          "description": "The Key Vault key or certificate path associated with the cluster."
+          "description": "The Key Vault key or certificate path associated with the Log Analytics cluster."
         }
       },
-      "description": "Cluster patch properties."
+      "description": "Log Analytics cluster patch properties."
     },
     "ClusterPatch": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterPatchProperties",
-          "description": "Cluster properties."
+          "description": "Log Analytics cluster properties."
         },
         "tags": {
           "type": "object",
@@ -431,7 +431,7 @@
           "description": "Resource tags"
         }
       },
-      "description": "The top level Cluster resource container.",
+      "description": "The top level Log Analytics cluster resource container.",
       "x-ms-azure-resource": true
     },
     "Cluster": {
@@ -439,7 +439,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
-          "description": "Cluster properties."
+          "description": "Log Analytics cluster properties."
         }
       },
       "allOf": [
@@ -447,7 +447,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "The top level Cluster resource container.",
+      "description": "The top level Log Analytics cluster resource container.",
       "x-ms-azure-resource": true
     },
     "ClusterListResult": {
@@ -461,7 +461,7 @@
           "items": {
             "$ref": "#/definitions/Cluster"
           },
-          "description": "A list of clusters."
+          "description": "A list of Log Analytics clusters."
         }
       },
       "description": "The list clusters operation response."
