@@ -3733,6 +3733,43 @@
         }
       }
     },
+    "AzureMariaDBLinkedService": {
+      "x-ms-discriminator-value": "AzureMariaDB",
+      "description": "Azure Database for MariaDB linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure Database for MariaDB linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureMariaDBLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMariaDBLinkedServiceTypeProperties": {
+      "description": "Azure Database for MariaDB linked service properties.",
+      "properties": {
+        "connectionString": {
+          "description": "An ODBC connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
+          "type": "object"
+        },
+        "pwd": {
+          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
+          "description": "The Azure key vault secret reference of password in connection string."
+        },
+        "encryptedCredential": {
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string).",
+          "type": "object"
+        }
+      }
+    },
     "MarketoLinkedService": {
       "x-ms-discriminator-value": "Marketo",
       "description": "Marketo server linked service.",
