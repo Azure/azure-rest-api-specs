@@ -133,7 +133,7 @@ directive:
   - where:
       - $.definitions.DedicatedHostUpdate
     suppress:
-      - RequiredPropertiesMissingInResourceModel	  
+      - RequiredPropertiesMissingInResourceModel
 
   - where:
       - $.definitions.VirtualMachineScaleSetVM
