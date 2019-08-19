@@ -42,7 +42,7 @@
         "description": "Get the metadata of a service instance.",
         "operationId": "Services_Get",
         "x-ms-examples": {
-          "ServiceGet": {
+          "Get metadata": {
             "$ref": "./examples/ServiceGet.json"
           }
         },
@@ -83,8 +83,11 @@
         "description": "Create or update the metadata of a service instance.",
         "operationId": "Services_CreateOrUpdate",
         "x-ms-examples": {
-          "ServicePut": {
+          "Create or Update a service with all parameters": {
             "$ref": "./examples/ServiceCreate.json"
+          },
+          "Create or Update a service with minimum parameters": {
+            "$ref": "./examples/ServiceCreateMinimum.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -140,7 +143,7 @@
         "description": "Update the metadata of a service instance.",
         "operationId": "Services_Update",
         "x-ms-examples": {
-          "ServicePatch": {
+          "Patch service": {
             "$ref": "./examples/ServicePatch.json"
           }
         },
@@ -191,7 +194,7 @@
         "description": "Delete a service instance.",
         "operationId": "Services_Delete",
         "x-ms-examples": {
-          "ServiceDelete": {
+          "Delete service": {
             "$ref": "./examples/ServiceDelete.json"
           }
         },
@@ -234,7 +237,7 @@
         "description": "Get all the service instances in a subscription.",
         "operationId": "Services_List",
         "x-ms-examples": {
-          "ServiceList": {
+          "List all services in subscription": {
             "$ref": "./examples/ServiceList.json"
           }
         },
@@ -274,7 +277,7 @@
         "description": "Get all the service instances in a resource group.",
         "operationId": "Services_ListByResourceGroup",
         "x-ms-examples": {
-          "ServiceListByResourceGroup": {
+          "List all services in resource group": {
             "$ref": "./examples/ServiceListByResourceGroup.json"
           }
         },
@@ -317,7 +320,7 @@
         "description": "Lists all of the available Healthcare service REST API operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "OperationsList": {
+          "List operations": {
             "$ref": "./examples/OperationsList.json"
           }
         },
@@ -354,7 +357,7 @@
         "description": "Check if a service instance name is available.",
         "operationId": "Services_CheckNameAvailability",
         "x-ms-examples": {
-          "ServiceList": {
+          "Check name availability": {
             "$ref": "./examples/CheckNameAvailabilityPost.json"
           }
         },
@@ -400,7 +403,7 @@
         "description": "Get the operation result for a long running operation.",
         "operationId": "OperationResults_Get",
         "x-ms-examples": {
-          "OperationResultsGet": {
+          "Get operation result": {
             "$ref": "./examples/OperationResultsGet.json"
           }
         },
@@ -500,7 +503,7 @@
       "description": "An access policy entry.",
       "properties": {
         "objectId": {
-          "description": "An object ID that is allowed access to the FHIR service.",
+          "description": "An Azure AD object ID (User or Apps) that is allowed access to the FHIR service.",
           "type": "string",
           "pattern": "^(([0-9A-Fa-f]{8}[-]?(?:[0-9A-Fa-f]{4}[-]?){3}[0-9A-Fa-f]{12}){1})+$"
         }
@@ -649,7 +652,7 @@
         "kind": {
           "readOnly": false,
           "type": "string",
-          "description": "The kind of the service. Valid values are: fhir, fhir-Stu3 and fhir-R4.",
+          "description": "The kind of the service.",
           "enum": [
             "fhir",
             "fhir-Stu3",
