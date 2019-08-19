@@ -638,7 +638,7 @@
         "loadBalancerFrontendIpConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "An array of references to the load balancer IP configurations."
         },
@@ -647,17 +647,18 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkServiceIpConfiguration"
           },
-          "description": "An array of references to the private link service IP configuration."
+          "description": "An array of private link service IP configurations."
         },
         "networkInterfaces": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterface"
+            "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "Gets an array of references to the network interfaces created for this private link service."
+          "description": "An array of references to the network interfaces created for this private link service."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private link service."
         },
@@ -751,14 +752,15 @@
           "description": "The private IP address allocation method."
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
-          "description": "The reference of the subnet resource."
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the subnet resource."
         },
         "primary": {
           "type": "boolean",
           "description": "Whether the ip configuration is primary or not."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private link service ip configuration."
         },
@@ -801,14 +803,15 @@
     "PrivateEndpointConnectionProperties": {
       "properties": {
         "privateEndpoint": {
-          "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint",
-          "description": "The resource of private end point."
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to the private endpoint."
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of information about the state of the connection between service consumer and provider."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private endpoint connection."
         }
