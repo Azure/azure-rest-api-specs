@@ -1458,6 +1458,11 @@
                   "description": "A boolean value that indicates if the cluster's disks are encrypted.",
                   "type": "boolean"
                 },
+                "enableStreamingIngest": {
+                  "description": "A boolean value that indicates if the streaming ingest is enabled.",
+                  "default": false,
+                  "type": "boolean"
+                },
                 "virtualNetworkConfiguration": {
                   "type": "object",
                   "$ref": "#/definitions/VirtualNetworkConfiguration",
@@ -1797,6 +1802,47 @@
             ],
             "description": "Class representing the Kusto event hub connection properties."
         },
+        "IotHubConnectionProperties": {
+          "properties": {
+            "iotHubResourceId": {
+              "type": "string",
+              "description": "The resource ID of the Iot hub to be used to create a data connection."
+            },
+            "consumerGroup": {
+              "type": "string",
+              "description": "The iot hub consumer group."
+            },
+            "tableName": {
+              "type": "string",
+              "description": "The table where the data should be ingested. Optionally the table information can be added to each message."
+            },
+            "mappingRuleName": {
+              "type": "string",
+              "description": "The mapping rule to be used to ingest the data. Optionally the mapping information can be added to each message."
+            },
+            "dataFormat": {
+              "$ref": "#/definitions/DataFormat",
+              "description": "The data format of the message. Optionally the data format can be added to each message."
+            },
+            "eventSystemProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              },
+              "description": "System properties of the iot hub"
+            },
+            "sharedAccessPolicyName": {
+              "type": "string",
+              "description": "The name of the share access policy name"
+            }
+          },
+          "required": [
+            "iotHubResourceId",
+            "consumerGroup",
+            "sharedAccessPolicyName"
+          ],
+          "description": "Class representing the Kusto iot hub connection properties."
+        },
         "DataFormat": {
             "description": "The data format of the message. Optionally the data format can be added to each message.",
             "type": "string",
@@ -2063,7 +2109,8 @@
                     "description": "Kind of the endpoint for the data connection",
                     "enum": [
                         "EventHub",
-                        "EventGrid"
+                        "EventGrid",
+                        "IotHub"
                     ],
                     "type": "string",
                     "x-ms-enum": {
@@ -2130,6 +2177,22 @@
             ],
             "description": "Class representing an event hub data connection.",
             "x-ms-discriminator-value": "EventHub"
+        },
+        "IotHubDataConnection": {
+          "properties": {
+            "properties": {
+              "x-ms-client-flatten": true,
+              "description": "The Iot Hub data connection properties.",
+              "$ref": "#/definitions/IotHubConnectionProperties"
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "#/definitions/DataConnection"
+            }
+          ],
+          "description": "Class representing an iot hub data connection.",
+          "x-ms-discriminator-value": "IotHub"
         },
         "EventGridDataConnection": {
             "properties": {
