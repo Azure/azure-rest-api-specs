@@ -495,8 +495,10 @@
   },
   "definitions": {
     "ImageTemplateListResult": {
+      "description": "The result of List image templates operation",
       "properties": {
         "value": {
+          "description": "An array of image templates",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ImageTemplate"
@@ -509,6 +511,7 @@
       }
     },
     "ImageTemplateSource": {
+      "description": "Describes a virtual machine image source for building, customizing and distributing",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -607,6 +610,7 @@
       ]
     },
     "ImageTemplateCustomizer": {
+      "description": "Describes a unit of image customization",
       "discriminator": "type",
       "properties": {
         "type": {
@@ -781,6 +785,7 @@
           "description": "Resource Id of the Shared Image Gallery image"
         },
         "replicationRegions": {
+          "description": "A list of regions that the image will be replicated to",
           "type": "array",
           "items": {
             "type": "string"
@@ -803,6 +808,7 @@
       ]
     },
     "ImageTemplateVmProfile": {
+      "description": "Describes the virtual machine used to build, customize and capture images",
       "properties": {
         "vmSize": {
           "type": "string",
@@ -819,9 +825,14 @@
         "Failed",
         "Deleting"
       ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": false
+      },
       "description": "Provisioning state of the resource"
     },
     "ProvisioningError": {
+      "description": "Describes the error happened when create or update an image template",
       "properties": {
         "provisioningErrorCode": {
           "type": "string",
@@ -839,6 +850,10 @@
             "ServerError",
             "Other"
           ],
+          "x-ms-enum": {
+            "name": "ProvisioningErrorCode",
+            "modelAsString": true
+          },
           "description": "Error code of the provisioning failure"
         },
         "message": {
@@ -848,6 +863,7 @@
       }
     },
     "ImageTemplateLastRunStatus": {
+      "description": "Describes the latest status of running an image template",
       "properties": {
         "startTime": {
           "type": "string",
@@ -867,6 +883,10 @@
             "PartiallySucceeded",
             "Failed"
           ],
+          "x-ms-enum": {
+            "name": "RunState",
+            "modelAsString": false
+          },
           "description": "State of the last run"
         },
         "runSubState": {
@@ -877,6 +897,10 @@
             "Customizing",
             "Distributing"
           ],
+          "x-ms-enum": {
+            "name": "RunSubState",
+            "modelAsString": false
+          },
           "description": "Sub-state of the last run"
         },
         "message": {
@@ -886,6 +910,7 @@
       }
     },
     "ImageTemplateProperties": {
+      "description": "Describes the properties of an image template",
       "properties": {
         "source": {
           "$ref": "#/definitions/ImageTemplateSource",
@@ -973,6 +998,7 @@
       "description": "Identity for the image template."
     },
     "RunOutputProperties": {
+      "description": "Describes the properties of a run output",
       "properties": {
         "artifactId": {
           "type": "string",
@@ -990,10 +1016,12 @@
       }
     },
     "ImageTemplate": {
+      "description": "Image template is an ARM resource managed by Microsoft.VirtualMachineImages provider",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ImageTemplateProperties"
+          "$ref": "#/definitions/ImageTemplateProperties",
+          "description": "The properties of the image template"
         },
         "identity": {
           "$ref": "#/definitions/ImageTemplateIdentity",
@@ -1032,13 +1060,16 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/RunOutputProperties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "description": "The properties of the run output"
         }
       }
     },
     "RunOutputCollection": {
+      "description": "The result of List run outputs operation",
       "properties": {
         "value": {
+          "description": "An array of run outputs",
           "type": "array",
           "items": {
             "$ref": "#/definitions/RunOutput"
