@@ -2247,14 +2247,13 @@
         "description": "Captures the specified resource group as a template.",
         "parameters": [
           {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group to export as a template.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -2264,12 +2263,6 @@
               "$ref": "#/definitions/ExportTemplateRequest"
             },
             "description": "Parameters for exporting the template."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "x-ms-examples": {
