@@ -11,9 +11,9 @@
       "body": {
         "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4918/resourceGroups/my-resource-group/providers/microsoft.insights/querypacks/my-querypack/queries/3466c160-4a10-4df8-afdf-0007f3f6dee5",
         "properties": {
-          "name": "Exceptions - New in the last 24 hours",
+          "displayName": "Exceptions - New in the last 24 hours",
           "queryId": "3466c160-4a10-4df8-afdf-0007f3f6dee5",
-          "content": "let newExceptionsTimeRange = 1d;\nlet timeRangeToCheckBefore = 7d;\nexceptions\n| where timestamp < ago(timeRangeToCheckBefore)\n| summarize count() by problemId\n| join kind= rightanti (\nexceptions\n| where timestamp >= ago(newExceptionsTimeRange)\n| extend stack = tostring(details[0].rawStack)\n| summarize count(), dcount(user_AuthenticatedId), min(timestamp), max(timestamp), any(stack) by problemId  \n) on problemId \n| order by  count_ desc\n",
+          "body": "let newExceptionsTimeRange = 1d;\nlet timeRangeToCheckBefore = 7d;\nexceptions\n| where timestamp < ago(timeRangeToCheckBefore)\n| summarize count() by problemId\n| join kind= rightanti (\nexceptions\n| where timestamp >= ago(newExceptionsTimeRange)\n| extend stack = tostring(details[0].rawStack)\n| summarize count(), dcount(user_AuthenticatedId), min(timestamp), max(timestamp), any(stack) by problemId  \n) on problemId \n| order by  count_ desc\n",
           "timeModified": "2018-02-14T13:13:19.3381394Z",
           "timeCreated": "2018-02-12T11:44:39.2980634Z",
           "description": "Thie query fetcges the recent exceptions from the last 24 hours"

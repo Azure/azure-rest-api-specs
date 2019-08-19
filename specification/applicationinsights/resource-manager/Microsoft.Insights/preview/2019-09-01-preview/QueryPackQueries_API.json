@@ -95,7 +95,7 @@
             "$ref": "#/parameters/ContinuationTokenParameter"
           },
           {
-            "name": "QuerySearchProperties",
+            "displayName": "QuerySearchProperties",
             "description": "Properties by which to search queries in the given Log Analytics QueryPack.",
             "in": "body",
             "required": true,
@@ -114,7 +114,7 @@
         },
         "x-ms-examples": {
           "QueryList": {
-            "$ref": "./examples/QueryPackQueriesList.json"
+            "$ref": "./examples/QueryPackQueriesSearch.json"
           }
         }
       }
@@ -174,7 +174,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "QueryProperties",
+            "displayName": "QueryProperties",
             "description": "Properties that need to be specified to create a new query and add it to a Log Analytics QueryPack.",
             "in": "body",
             "required": true,
@@ -270,7 +270,7 @@
           "description": "The unique ID of your application. This field cannot be changed.",
           "readOnly": true
         },
-        "name": {
+        "displayName": {
           "type": "string",
           "readOnly": false,
           "description": "Unique name for your Query Pack."
@@ -292,7 +292,7 @@
           "readOnly": false,
           "description": "Azure tenant id."
         },
-        "content": {
+        "body": {
           "type": "string",
           "readOnly": false,
           "description": "Subscription id."
@@ -324,7 +324,7 @@
           }
         }
       },
-      "required": ["content", "name"]
+      "required": ["body", "displayName"]
     },
     "LogAnalyticsQueryPackQuerySearchProperties": {
       "description": "Properties that define an Log Analytics QueryPack-Query search properties.",
@@ -372,7 +372,7 @@
   },
   "parameters": {
     "QueryPackNameParameter": {
-      "name": "queryPackName",
+      "displayName": "queryPackName",
       "in": "path",
       "required": true,
       "type": "string",
@@ -380,7 +380,7 @@
       "x-ms-parameter-location": "method"
     },
     "QueryIdParameter": {
-      "name": "queryId",
+      "displayName": "queryId",
       "in": "path",
       "required": true,
       "type": "string",
@@ -388,7 +388,7 @@
       "x-ms-parameter-location": "method"
     },
     "IncludeContentParameter": {
-      "name": "includeContent",
+      "displayName": "includeContent",
       "in": "query",
       "required": false,
       "type": "boolean",
@@ -396,7 +396,7 @@
       "x-ms-parameter-location": "method"
     },
     "MaxItemCountParameter": {
-      "name": "maxItemCount",
+      "displayName": "maxItemCount",
       "in": "query",
       "required": false,
       "type": "integer",
@@ -404,7 +404,7 @@
       "x-ms-parameter-location": "method"
     },
     "ContinuationTokenParameter": {
-      "name": "continuationToken",
+      "displayName": "continuationToken",
       "in": "query",
       "required": false,
       "type": "string",

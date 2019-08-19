@@ -4,7 +4,12 @@
     "subscriptionId": "86dc51d3-92ed-4d7e-947a-775ea79b4918",
     "resourceGroupName": "my-resource-group",
     "resourceName": "my-querypack",
-    "includeContent": "true"
+    "includeContent": "false",
+    "maxItemCount": 3,
+    "QuerySearchProperties": {
+      "categories": ["other", "analytics"],
+      "labels": ["my-label"]
+    }
   },
   "responses": {
     "200": {
@@ -18,8 +23,10 @@
               "author": "1809f206-263a-46f7-942d-4572c156b7e7",
               "timeModified": "2019-08-15T10:29:56.1030254Z",
               "displayName": "Heartbeat_1",
-              "description": "Thie query takes 10 entries of heartbeat",
-              "body": "heartbeat | take 10"
+              "description": "Thie query takes 10 entries of heartbeat 0",
+              "body": null,
+              "categories": ["other"],
+              "labels": ["my-label"]
             }
           },
           {
@@ -30,8 +37,10 @@
               "author": "1809f206-263a-46f7-942d-4572c156b7e7",
               "timeModified": "2019-08-15T10:30:26.7943629Z",
               "displayName": "Heartbeat_2",
-              "description": "Thie query takes 10 entries of heartbeat",
-              "body": "heartbeat | take 10"
+              "description": "Thie query takes 10 entries of heartbeat 1",
+              "body": null,
+              "categories": ["analytics"],
+              "labels": ["my-label"]
             }
           },
           {
@@ -42,20 +51,10 @@
               "author": "1809f206-263a-46f7-942d-4572c156b7e7",
               "timeModified": "2019-08-15T10:30:29.4505584Z",
               "displayName": "Heartbeat_3",
-              "description": "Thie query takes 10 entries of heartbeat",
-              "body": "heartbeat | take 10"
-            }
-          },
-          {
-            "id": "/subscriptions/86dc51d3-92ed-4d7e-947a-775ea79b4918/resourceGroups/my-resource-group/providers/microsoft.insights/querypacks/my-querypack/queries/a5a9010e-e4b7-45ad-8b14-09d7e6082819",
-            "properties": {
-              "queryId": "a5a9010e-e4b7-45ad-8b14-09d7e6082819",
-              "timeCreated": "2019-08-15T10:30:32.5742324Z",
-              "author": "1809f206-263a-46f7-942d-4572c156b7e7",
-              "timeModified": "2019-08-15T10:30:32.5742324Z",
-              "displayName": "Heartbeat_4",
-              "description": "Thie query takes 10 entries of heartbeat",
-              "body": "heartbeat | take 10"
+              "description": "Thie query takes 10 entries of heartbeat 2",
+              "body": null,
+              "categories": ["other", "analytics"],
+              "labels": ["my-label"]
             }
           }
         ],
