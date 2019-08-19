@@ -28,8 +28,17 @@ These are the global settings for HealthcareApis service.
 title: HealthcareApisManagementClient
 description: Azure Healthcare APIs Client
 openapi-type: arm
-tag: package-2018-08-preview
+tag: package-2019-09-16
 azure-arm: true
+```
+
+### Tag: package-2018-08-preview
+
+These settings apply only when `--tag=package-2019-09-16` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-16'
+input-file:
+- Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
 ```
 
 
@@ -98,7 +107,20 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-healthcareapis
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2018-08-preview
+  - tag: package-2019-09-16
+```
+
+### Tag: package-2019-09-16 and java
+
+These settings apply only when `--tag=package-2019-09-16 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-09-16' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.healthcareapis.v2019-09-16
+  output-folder: $(azure-libraries-for-java-folder)/healthcareapis/resource-manager/v2019-09-16
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-08-preview and java
@@ -128,6 +150,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+   - $(this-folder)/Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
   - $(this-folder)/Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
 
 ```
