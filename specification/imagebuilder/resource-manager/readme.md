@@ -32,15 +32,15 @@ tag: package-preview-2019-05
 azure-arm: true
 ```
 
-
 ### Tag: package-preview-2019-05
 
 These settings apply only when `--tag=package-preview-2019-05` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-05'
+``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
   - Microsoft.VirtualMachineImages/preview/2019-05-01-preview/imagebuilder.json
 ```
+
 ### Tag: package-2018-02
 
 These settings apply only when `--tag=package-2018-02` is specified on the command line.
@@ -154,4 +154,14 @@ java:
   output-folder: $(azure-libraries-for-java-folder)/imagebuilder/resource-manager/v2019_02_01_preview
 regenerate-manager: true
 generate-interface: true
+```
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: TrackedResourceListByImmediateParent
+    from: imagebuilder.json
+    where: $.definitions
+    reason: runOutput is not a tracked resource. it's proxy only
 ```
