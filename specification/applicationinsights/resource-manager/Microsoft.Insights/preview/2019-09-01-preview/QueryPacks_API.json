@@ -170,7 +170,7 @@
           },
           {
             "name": "LogAnalyticsQueryPackPayload",
-            "description": "Properties that need to be specified to create a Log Analytics QueryPack.",
+            "description": "Properties that need to be specified to create or update a Log Analytics QueryPack.",
             "in": "body",
             "required": true,
             "schema": {
@@ -284,10 +284,6 @@
     },
     "LogAnalyticsQueryPack": {
       "properties": {
-        "kind": {
-          "type": ["string", "null"],
-          "description": "The kind of application that this QueryPack refers to, used to customize UI. This value is a freeform string, values should typically be one of the following: web, ios, other, store, java, phone."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties that define a Log Analytics QueryPack resource.",
