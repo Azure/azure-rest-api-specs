@@ -35,11 +35,11 @@ directive:
     from: kusto.json
     where: $.definitions.DataConnection.required
     reason: Implements kind which is required also in patch
-  - suppress: KustoDataConnectionValidation
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: kusto.json
     where: $.definitions.DataConnection
     reason: Already exists in earlier versions
-  - suppress: KustoDatabaseCheckNameAvailability
+  - suppress: INVALID_TYPE
     from: kusto.json
     where: $.definitions.DataConnectionCheckNameRequest
     reason: Already exists in earlier versions
