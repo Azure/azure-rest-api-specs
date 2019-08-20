@@ -147,6 +147,73 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountName}/providers/Microsoft.Subscription/subscription/{subscriptionId}/createSubscription": {
+      "put": {
+        "description": "Creates an Azure subscription",
+        "operationId": "SubscriptionFactory_CreateSubscriptionWithSubId",
+        "x-ms-examples": {
+          "createSubscription": {
+            "$ref": "./examples/createSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query. The response body will contain the data that matches the filters specified in the query parameters.",
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Subscription creation is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "parameters": [
+          {
+            "name": "enrollmentAccountName",
+            "in": "path",
+            "description": "The name of the enrollment account to which the subscription will be billed.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "subscriptionId",
+            "in": "path",
+            "description": "The Guid for subscription",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The subscription creation parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SubscriptionCreationParameters"
+            }
+          }
+        ]
+      }
     }
   },
   "definitions": {
@@ -246,6 +313,62 @@
           }
         }
       }
+    },
+    "SubscriptionCreationResult": {
+      "description": "The created subscription object.",
+      "properties": {
+        "subscriptionLink": {
+          "description": "The link to the new subscription.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionCreationParameters": {
+      "description": "Subscription Creation Parameters required to create a new Azure subscription.",
+      "properties": {
+        "displayName": {
+          "description": "The display name of the subscription.",
+          "type": "string"
+        },
+        "owners": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AdPrincipal"
+          },
+          "description": "The list of principals that should be granted Owner access on the subscription. Principals should be of type User, Service Principal or Security Group."
+        },
+        "offerType": {
+          "description": "The offer type of the subscription. For example, MS-AZR-0017P (EnterpriseAgreement) and MS-AZR-0148P (EnterpriseAgreement devTest) are available. Only valid when creating a subscription in a enrollment account scope.",
+          "type": "string",
+          "x-ms-enum": {
+            "name": "offerType",
+            "modelAsString": true
+          },
+          "enum": [
+            "MS-AZR-0017P",
+            "MS-AZR-0148P"
+          ]
+        },
+        "additionalParameters": {
+          "description": "Additional, untyped parameters to support custom subscription creation scenarios.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      }
+    },
+    "AdPrincipal": {
+      "description": "Active Directory Principal for subscription creation delegated permission",
+      "properties": {
+        "objectId": {
+          "description": "Object id of the Principal",
+          "type": "string"
+        }
+      },
+      "required": [
+        "objectId"
+      ]
     }
   },
   "parameters": {
