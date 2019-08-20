@@ -31,12 +31,18 @@ openapi-type: arm
 tag: package-2019-05-15
 
 directive:
-  - where:
-      - $.definitions.DataConnection.required
-    suppress:
-      - R2016
-    reason:
-      - Implements kind which is required also in patch
+  - suppress: R2016
+    from: kusto.json
+    where: $.definitions.DataConnection.required
+    reason: Implements kind which is required also in patch
+  - suppress: KustoDataConnectionValidation
+    from: kusto.json
+    where: $.definitions.DataConnection
+    reason: Already exists in earlier versions
+  - suppress: KustoDatabaseCheckNameAvailability
+    from: kusto.json
+    where: $.definitions.DataConnectionCheckNameRequest
+    reason: Already exists in earlier versions
 ```
 ### Tag: package-2019-05-15
 
