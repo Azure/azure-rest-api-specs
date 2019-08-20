@@ -516,6 +516,54 @@
         "bucketName"
       ]
     },
+    "AvroDataset": {
+      "x-ms-discriminator-value": "Avro",
+      "description": "Avro dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Avro dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvroDatasetTypeProperties"
+        }
+      }
+    },
+    "AvroDatasetTypeProperties": {
+      "description": "Avro dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the avro storage."
+        },
+        "avroCompressionCodec": {
+          "type": "string",
+          "enum": [
+            "none",
+            "deflate",
+            "snappy",
+            "xz",
+            "bzip2"
+          ],
+          "x-ms-enum": {
+            "name": "avroCompressionCodec",
+            "modelAsString": true
+          }
+        },
+        "avroCompressionLevel": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 9
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "ParquetDataset": {
       "x-ms-discriminator-value": "Parquet",
       "description": "Parquet dataset.",
@@ -628,6 +676,43 @@
         "nullValue": {
           "type": "object",
           "description": "The null value string. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "JsonDataset": {
+      "x-ms-discriminator-value": "Json",
+      "description": "Json dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Json dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/JsonDatasetTypeProperties"
+        }
+      }
+    },
+    "JsonDatasetTypeProperties": {
+      "description": "Json dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the json data storage."
+        },
+        "encodingName": {
+          "type": "object",
+          "description": "The code page name of the preferred encoding. If not specified, the default value is UTF-8, unless BOM denotes another Unicode encoding. Refer to the name column of the table in the following link to set supported values: https://msdn.microsoft.com/library/system.text.encoding.aspx. Type: string (or Expression with resultType string)."
+        },
+        "compression": {
+          "description": "The data compression method used for the json dataset.",
+          "$ref": "#/definitions/DatasetCompression"
         }
       },
       "required": [
@@ -1385,6 +1470,74 @@
         }
       }
     },
+    "AmazonRedshiftTableDataset": {
+      "x-ms-discriminator-value": "AmazonRedshiftTable",
+      "description": "The Amazon Redshift table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Amazon Redshift table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AmazonRedshiftTableDatasetTypeProperties"
+        }
+      }
+    },
+    "AmazonRedshiftTableDatasetTypeProperties": {
+      "description": "Amazon Redshift table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The Amazon Redshift table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Amazon Redshift schema name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "Db2TableDataset": {
+      "x-ms-discriminator-value": "Db2Table",
+      "description": "The Db2 table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Db2 table dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/Db2TableDatasetTypeProperties"
+        }
+      }
+    },
+    "Db2TableDatasetTypeProperties": {
+      "description": "Db2 table dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The Db2 schema name. Type: string (or Expression with resultType string)."
+        },
+        "table": {
+          "type": "object",
+          "description": "The Db2 table name. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "RelationalTableDataset": {
       "x-ms-discriminator-value": "RelationalTable",
       "description": "The relational table dataset.",
@@ -1511,7 +1664,15 @@
       "properties": {
         "tableName": {
           "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
           "description": "The PostgreSQL table name. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The PostgreSQL schema name. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -1628,8 +1789,7 @@
           "$ref": "#/definitions/Dataset"
         }
       ],
-      "properties": {
-      }
+      "properties": {}
     },
     "SapCloudForCustomerResourceDataset": {
       "x-ms-discriminator-value": "SapCloudForCustomerResource",
@@ -2353,6 +2513,23 @@
         }
       }
     },
+    "AzureMariaDBTableDataset": {
+      "x-ms-discriminator-value": "AzureMariaDBTable",
+      "description": "Azure Database for MariaDB dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Properties specific to this dataset type.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GenericDatasetTypeProperties"
+        }
+      }
+    },
     "MarketoObjectDataset": {
       "x-ms-discriminator-value": "MarketoObject",
       "description": "Marketo server dataset.",
@@ -2604,7 +2781,24 @@
         "typeProperties": {
           "description": "Properties specific to this dataset type.",
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/GenericDatasetTypeProperties"
+          "$ref": "#/definitions/NetezzaTableDatasetTypeProperties"
+        }
+      }
+    },
+    "NetezzaTableDatasetTypeProperties": {
+      "description": "Netezza dataset properties.",
+      "properties": {
+        "tableName": {
+          "type": "object",
+          "description": "This property will be retired. Please consider using schema + table properties instead."
+        },
+        "table": {
+          "type": "object",
+          "description": "The table name of the Netezza. Type: string (or Expression with resultType string)."
+        },
+        "schema": {
+          "type": "object",
+          "description": "The schema name of the Netezza. Type: string (or Expression with resultType string)."
         }
       }
     },

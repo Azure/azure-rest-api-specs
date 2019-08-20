@@ -16,6 +16,45 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices": {
+      "get": {
+        "tags": [
+          "BlobService"
+        ],
+        "operationId": "BlobServices_List",
+        "x-ms-examples": {
+          "ListBlobServices": {
+            "$ref": "./examples/BlobServicesList.json"
+          }
+        },
+        "description": "List blob services of storage account. It returns a collection of one object named default.",
+        "parameters": [
+          {
+            "$ref": "./storage.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "./storage.json#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- List blob services operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/BlobServiceItems"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/blobServices/{BlobServicesName}": {
       "put": {
         "tags": [
@@ -1118,6 +1157,18 @@
         }
       ],
       "description": "The properties of a storage account’s Blob service."
+    },
+    "BlobServiceItems": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BlobServiceProperties"
+          },
+          "description": "List of blob services returned.",
+          "readOnly": true
+        }
+      }
     },
     "DeleteRetentionPolicy": {
       "properties": {
