@@ -952,12 +952,27 @@
         }
       }
     },
+    "TabularSource": {
+      "description": "Copy activity sources of tabular type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
     "AzureTableSource": {
       "description": "A copy activity Azure Table source.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -999,7 +1014,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1108,7 +1123,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1123,7 +1138,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1138,7 +1153,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1153,7 +1168,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1168,7 +1183,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1183,7 +1198,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1213,7 +1228,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1267,7 +1282,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1282,7 +1297,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1297,7 +1312,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1335,7 +1350,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1447,7 +1462,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1473,7 +1488,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1503,7 +1518,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1533,7 +1548,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1563,7 +1578,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1642,7 +1657,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1745,7 +1760,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1805,7 +1820,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1855,7 +1870,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1878,7 +1893,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2010,7 +2025,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2025,7 +2040,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2070,7 +2085,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2085,7 +2100,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2100,7 +2115,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2115,7 +2130,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2130,7 +2145,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2145,7 +2160,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2160,7 +2175,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2175,7 +2190,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2190,7 +2205,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2205,7 +2220,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2220,7 +2235,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2235,7 +2250,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2250,7 +2265,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2265,7 +2280,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2280,7 +2295,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2295,7 +2310,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2310,7 +2325,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2325,7 +2340,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2340,7 +2355,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2355,7 +2370,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2370,7 +2385,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2385,7 +2400,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2400,7 +2415,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2415,7 +2430,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2430,7 +2445,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2445,7 +2460,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2495,7 +2510,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2555,7 +2570,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2570,7 +2585,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2585,7 +2600,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
