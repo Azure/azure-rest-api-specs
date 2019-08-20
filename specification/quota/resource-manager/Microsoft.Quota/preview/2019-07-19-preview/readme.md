@@ -154,7 +154,7 @@ directive:
     reason: We do have a operations api as "/providers/{providerName}/operations"
     from: quota.json
     where: $.paths
- - suppress:  - suppress: PageableOperation
+  - suppress: PageableOperation
 	reason: The usages API from RP doesn't support pageable operation. This Api returns the /usages responses from different RPs.
 	from: quota.json
 	where: $.paths["/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/providers/{providerId}/locations/{location}/serviceLimits"]
