@@ -80,14 +80,14 @@
 				"tags": [
 					"QuotaRequests"
 				],
-				"x-ms-examples": {
+				"summary": "Submits a Quota Request for a resource provider at the specified location.",
+				"description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
+        "operationId": "QuotaRequests_Create",
+        "x-ms-examples": {
 					"Quotas_listUsages": {
 						"$ref": "./examples/putComputeQuotaRequest.json"
 					}
 				},
-				"summary": "Submits a Quota Request for a resource provider at the specified location.",
-				"description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
-				"operationId": "QuotaRequests_Create",
 				"x-ms-long-running-operation": true,
 				"parameters": [
 					{
@@ -123,7 +123,7 @@
 						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
 						"schema": {
 							"$ref": "#/definitions/QuotaRequestSubmitResponse"
-						}
+            }
 					},
 					"default": {
 						"description": "Error response describing why the operation failed.",
@@ -143,7 +143,7 @@
 				"description": "Gets the QuotaRequest details and status by the quota requestId for the resources for the resource  provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
         "operationId": "QuotaRequestStatus_Get",
         "x-ms-examples": {
-					"QuotaRequestStatu": {
+					"QuotaRequestStatus": {
 						"$ref": "./examples/getQuotaRequestStatusById.json"
 					}
 				},
@@ -189,7 +189,7 @@
 				"description": "For the specified location and Resource provider gets the current quota requests under the subscription over the time period of one year ago from now to one year back. oData filter can be used to select quota requests.",
         "operationId": "QuotaRequests_listStatus",
         "x-ms-examples": {
-					"QuotaRequestStatus": {
+					"QuotaRequestHistory": {
 						"$ref": "./examples/getQuotaRequestsHistory.json"
 					}
 				},
@@ -391,8 +391,8 @@
 		"QuotaRequestDetailsList": {
 			"description": "Quota requests information.",
 			"properties": {
-				"quotaRequests": {
-					"description": "The quotaRequests.",
+				"value": {
+					"description": "The quota Requests.",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/QuotaRequestDetails"
