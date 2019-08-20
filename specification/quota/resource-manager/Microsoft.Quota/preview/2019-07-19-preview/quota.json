@@ -74,9 +74,6 @@
 							"$ref": "#/definitions/ExceptionResponse"
 						}
 					}
-				},
-				"x-ms-pageable": {
-					"nextLinkName": "nextLink"
 				}
 			},
 			"put": {
@@ -192,7 +189,7 @@
 				"description": "For the specified location and Resource provider gets the current quota requests under the subscription over the time period of one year ago from now to one year back. oData filter can be used to select quota requests.",
         "operationId": "QuotaRequests_listStatus",
         "x-ms-examples": {
-					"QuotaRequestStatu": {
+					"QuotaRequestStatus": {
 						"$ref": "./examples/getQuotaRequestsHistory.json"
 					}
 				},
@@ -295,10 +292,6 @@
 					"items": {
 						"$ref": "#/definitions/CurrentQuotaLimit"
 					}
-				},
-				"nextLink": {
-					"description": "The uri to fetch the next page of quota limits. When there are no more pages, this is null.",
-					"type": "string"
 				}
 			}
 		},
