@@ -260,13 +260,13 @@
 				"name": {
 					"description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
 					"properties": {
-						"localizedValue": {
-							"description": "Resource display name.",
+            "value": {
+							"description": "Resource name.",
 							"type": "string",
 							"readOnly": true
 						},
-						"value": {
-							"description": "Resource name.",
+						"localizedValue": {
+							"description": "Resource display name.",
 							"type": "string",
 							"readOnly": true
 						}
@@ -282,8 +282,7 @@
 				},
 				"quotaPeriod": {
 					"description": "The quota period over which the usage values are summarized, such as - P1D (Per one day), PT1M (Per one minute), PT1S (Per one second). This parameter is optional because, for some resources like compute, the period doesn’t matter.",
-					"type": "string",
-					"readOnly": true
+					"type": "string"
 				}
 			}
 		},
