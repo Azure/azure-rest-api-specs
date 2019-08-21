@@ -158,4 +158,5 @@ directive:
 	reason: QuotaRequestDetails doesn't have any property like - 'name', 'id' and 'type' in its hierarchy.
 	from: quota.json
 	where: $.paths
+	
 ```
