@@ -1516,10 +1516,26 @@
         },
         "firewallPolicy": {
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Reference of the FirewallPolicy resource."
+          "description": "Reference to the FirewallPolicy resource."
         }
       },
       "description": "Properties of path rule of an application gateway."
+    },
+    "ApplicationGatewayBasicRulePropertiesFormat": {
+      "properties": {
+        "paths": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Path rules of URL path map."
+        },
+        "firewallPolicy": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "Reference to the FirewallPolicy resource."
+        }
+      },
+      "description": "Properties of basic rule of an application gateway."
     },
     "ApplicationGatewayPathRule": {
       "properties": {
@@ -1684,6 +1700,10 @@
         "redirectConfiguration": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Redirect configuration resource of the application gateway."
+        },
+        "basicRule": {
+          "$ref": "./network.json#/definitions/ApplicationGatewayBasicRulePropertiesFormat",
+          "description": "Basic routing rule"
         },
         "firewallPolicy": {
           "$ref": "./network.json#/definitions/SubResource",
