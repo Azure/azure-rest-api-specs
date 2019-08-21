@@ -34,20 +34,7 @@ directive:
   - suppress: R2016
     from: kusto.json
     where: $.definitions.DataConnection.required
-    reason: Implements kind which is required also in patch
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    from: kusto.json
-    where: $.definitions.DataConnection
-    text-matches: "[properties]"
-  - suppress: INVALID_TYPE
-    from: kusto.json
-    where: $.definitions.DataConnectionCheckNameRequest
-    text-matches: "[properties|name|type]"
-  - suppress: OBJECT_ADDITIONAL_PROPERTIES
-    from: "kusto.json"
-    where: "$.definitions.DataConnectionValidation"
-    text-matches: "[properties]"    
-
+    reason: Implements kind which is required also in patch   
 ```
 ### Tag: package-2019-05-15
 
