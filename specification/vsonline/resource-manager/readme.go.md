@@ -10,10 +10,10 @@ go:
 
 ### Tag: package-2019-07-01 and go
 
-These settings apply only when `--tag=package-2019-07-01 --go` is specified on the command line.
+These settings apply only when `--tag=package-2019-07-01-preview --go` is specified on the command line.
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-```yaml $(tag) == 'package-2019-07-01' && $(go)
+```yaml $(tag) == 'package-2019-07-01-preview' && $(go)
 namespace: Microsoft.VSOnline
 output-folder: $(go-sdks-folder)/vsonline/Generated
 ```
