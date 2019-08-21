@@ -530,6 +530,7 @@
     },
     "StoreWriteSettings": {
       "description": "Connector write settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -559,7 +560,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureBlobFSWriteSettings": {
       "description": "Azure blobFS write settings.",
@@ -568,7 +575,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureDataLakeStoreWriteSettings": {
       "description": "Azure data lake store write settings.",
