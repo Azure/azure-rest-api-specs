@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2019-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2019-07-01'
 input-file:
-  - Microsoft.VSOnline/preview/2019-07-01/vsonline.json
+  - Microsoft.VSOnline/preview/2019-07-01-preview/vsonline.json
 ```
 
 ---
