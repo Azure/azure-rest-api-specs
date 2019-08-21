@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2019-01-01",
+    "version": "2019-06-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -564,6 +564,19 @@
         "metadata": {
           "type": "object",
           "description": "The policy assignment metadata."
+        },
+		"enforcementMode": {
+          "type": "string",
+          "description": "The policy assignment enforcement mode. Possible values are NotSpecified, Default, and DoNotEnforce.",
+          "enum": [
+            "NotSpecified",
+            "Default",
+            "DoNotEnforce"
+          ],
+          "x-ms-enum": {
+            "name": "enforcementMode",
+            "modelAsString": true
+          }
         }
       },
       "description": "The policy assignment properties."

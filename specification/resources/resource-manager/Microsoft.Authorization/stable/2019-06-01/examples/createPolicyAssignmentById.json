@@ -1,7 +1,7 @@
 {
   "parameters": {
     "policyAssignmentId": "providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyAssignments/LowCostStorage",
-    "api-version": "2019-01-01",
+    "api-version": "2019-06-01",
     "parameters": {
       "properties": {
         "displayName": "Enforce storage account SKU",
@@ -17,7 +17,8 @@
               "Standard_LRS"
             ]
           }
-        }
+        },
+        "enforcementMode": "Default"
       }
     }
   },
@@ -40,7 +41,8 @@
                 "Standard_LRS"
               ]
             }
-          }
+          },
+          "enforcementMode": "Default"
         },
         "id": "/providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyAssignments/LowCostStorage",
         "type": "Microsoft.Authorization/policyAssignments",

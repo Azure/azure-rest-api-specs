@@ -1,7 +1,7 @@
 {
   "parameters": {
     "policyAssignmentId": "providers/Microsoft.Management/managementGroups/MyManagementGroup/providers/Microsoft.Authorization/policyAssignments/LowCostStorage",
-    "api-version": "2019-01-01",
+    "api-version": "2019-06-01",
     "parameters": {
       "identity": {
         "type": "SystemAssigned"
@@ -21,7 +21,8 @@
               "Standard_LRS"
             ]
           }
-        }
+        },
+        "enforcementMode": "Default"
       }
     }
   },
@@ -44,7 +45,8 @@
                 "Standard_LRS"
               ]
             }
-          }
+          },
+          "enforcementMode": "Default"
         },
         "identity": {
           "type": "SystemAssigned",
