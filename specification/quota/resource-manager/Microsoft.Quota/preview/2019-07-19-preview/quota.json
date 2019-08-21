@@ -111,7 +111,7 @@
 						"description": "Quota requests payload.",
 						"required": true,
 						"schema": {
-							"$ref": "#/definitions/CreateGenericQuotaRequestParameters"
+							"$ref": "#/definitions/QuotaLimits"
 						}
 					}
 				],
@@ -245,7 +245,7 @@
 	},
 	"definitions": {
 		"CurrentQuotaLimit": {
-			"description": "Current Quota limits.",
+			"description": "Quota limits.",
 			"properties": {
 				"limit": {
 					"description": "The quota limit.",
@@ -283,10 +283,10 @@
 			}
 		},
 		"QuotaLimits": {
-			"description": "Current Quota limits.",
+			"description": "Quota limits.",
 			"properties": {
 				"value": {
-					"description": "List of current Quota limits.",
+					"description": "List of Quota limits.",
 					"type": "array",
 					"items": {
 						"$ref": "#/definitions/CurrentQuotaLimit"
