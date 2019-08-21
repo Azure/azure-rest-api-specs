@@ -3,13 +3,13 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2019-03-01",
-    "snapshotName": "mySnapshot2",
-    "snapshot": {
+    "diskName": "myDisk",
+    "disk": {
       "location": "West US",
       "properties": {
         "creationData": {
           "createOption": "Copy",
-          "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+          "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
         }
       }
     }
@@ -17,26 +17,26 @@
   "responses": {
     "202": {
       "body": {
-        "name": "mySnapshot2",
+        "name": "myDisk",
         "location": "West US",
         "properties": {
           "provisioningState": "Updating",
           "creationData": {
             "createOption": "Copy",
-            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
           }
         }
       }
     },
     "200": {
       "body": {
-        "name": "mySnapshot2",
+        "name": "myDisk",
         "location": "West US",
         "properties": {
           "provisioningState": "Updating",
           "creationData": {
             "createOption": "Copy",
-            "sourceResourceId": "subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot1"
+            "sourceResourceId": "subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot"
           }
         }
       }

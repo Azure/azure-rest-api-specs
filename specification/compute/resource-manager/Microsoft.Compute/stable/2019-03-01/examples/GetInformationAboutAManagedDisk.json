@@ -3,17 +3,21 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2019-03-01",
-    "snapshotName": "mySnapshot"
+    "diskName": "myManagedDisk"
   },
   "responses": {
     "200": {
       "body": {
+        "managedBy": "/subscriptions/123caaa-123v-v211-a49f-f88ccac5bf88/resourceGroups/ResourceGroupName/providers/Microsoft.Compute/virtualMachines/TestVM414689371c88843d65ec",
+        "sku": {
+          "name": "Standard_LRS"
+        },
         "properties": {
           "osType": "Windows",
           "creationData": {
             "createOption": "Empty"
           },
-          "diskSizeGB": 100,
+          "diskSizeGB": 10,
           "encryptionSettingsCollection": {
             "enabled": true,
             "encryptionSettings": [
@@ -36,14 +40,14 @@
           "timeCreated": "2016-12-28T04:41:35.079872+00:00",
           "provisioningState": "Succeeded"
         },
-        "type": "Microsoft.Compute/snapshots",
+        "type": "Microsoft.Compute/disks",
         "location": "westus",
         "tags": {
           "department": "Development",
-          "project": "Snapshots"
+          "project": "ManagedDisks"
         },
-        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/snapshots/mySnapshot",
-        "name": "mySnapshot"
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/myManagedDisk",
+        "name": "myManagedDisk"
       }
     }
   }

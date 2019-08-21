@@ -3,13 +3,13 @@
     "subscriptionId": "{subscription-id}",
     "resourceGroupName": "myResourceGroup",
     "api-version": "2019-03-01",
-    "snapshotName": "mySnapshot1",
-    "snapshot": {
+    "diskName": "myDisk",
+    "disk": {
       "location": "West US",
       "properties": {
         "creationData": {
-          "createOption": "Import",
-          "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+          "createOption": "Upload",
+          "uploadSizeBytes": 10737418752
         }
       }
     }
@@ -19,26 +19,26 @@
       "body": {
         "properties": {
           "creationData": {
-            "createOption": "Import",
-            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+            "createOption": "Upload",
+            "uploadSizeBytes": 10737418752
           },
           "provisioningState": "Updating"
         },
         "location": "West US",
-        "name": "mySnapshot1"
+        "name": "myDisk"
       }
     },
     "200": {
       "body": {
         "properties": {
           "creationData": {
-            "createOption": "Import",
-            "sourceUri": "https://mystorageaccount.blob.core.windows.net/osimages/osimage.vhd"
+            "createOption": "Upload",
+            "uploadSizeBytes": 10737418752
           },
           "provisioningState": "Updating"
         },
         "location": "West US",
-        "name": "mySnapshot1"
+        "name": "myDisk"
       }
     }
   }
