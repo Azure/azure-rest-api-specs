@@ -154,4 +154,8 @@ directive:
     reason: We do have a operations api as "/providers/{providerName}/operations"
     from: quota.json
     where: $.paths
+  - suppress: RequiredPropertiesMissingInResourceModel
+	reason: QuotaRequestDetails doesn't have any property like - 'name', 'id' and 'type' in its hierarchy.
+	from: quota.json
+	where: $.paths
 ```
