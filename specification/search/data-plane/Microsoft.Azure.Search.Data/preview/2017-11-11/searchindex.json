@@ -4,10 +4,10 @@
     "title": "SearchIndexClient",
     "description": "Client that can be used to query an Azure Search index and upload, merge, or delete documents.",
     "version": "2017-11-11",
-    "x-ms-code-generation-settings": {  
+    "x-ms-code-generation-settings": {
       "useDateTimeOffset": true,
-      "syncMethods": "None"  
-    }  
+      "syncMethods": "None"
+    }
   },
   "x-ms-parameterized-host": {
     "hostTemplate": "https://{searchServiceName}.{searchDnsSuffix}/indexes('{indexName}')",
@@ -38,7 +38,9 @@
         ],
         "operationId": "DocumentsProxy_Count",
         "x-ms-examples": {
-          "SearchIndexCountDocuments": { "$ref": "./examples/SearchIndexCountDocuments.json" }
+          "SearchIndexCountDocuments": {
+            "$ref": "./examples/SearchIndexCountDocuments.json"
+          }
         },
         "description": "Queries the number of documents in the Azure Search index.",
         "externalDocs": {
@@ -100,7 +102,7 @@
         "value": {
           "x-ms-client-name": "Results",
           "type": "array",
-          "readOnly":  true,
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/IndexingResult"
           },
@@ -117,7 +119,9 @@
         "mergeOrUpload",
         "delete"
       ],
-      "x-ms-enum": { "name": "IndexActionType" },
+      "x-ms-enum": {
+        "name": "IndexActionType"
+      },
       "description": "Specifies the operation to perform on a document in an indexing batch."
     },
     "SearchMode": {
@@ -126,7 +130,9 @@
         "any",
         "all"
       ],
-      "x-ms-enum": { "name": "SearchMode" },
+      "x-ms-enum": {
+        "name": "SearchMode"
+      },
       "description": "Specifies whether any or all of the search terms must be matched in order to count the document as a match."
     },
     "QueryType": {
@@ -135,7 +141,9 @@
         "simple",
         "full"
       ],
-      "x-ms-enum": { "name": "QueryType" },
+      "x-ms-enum": {
+        "name": "QueryType"
+      },
       "description": "Specifies the syntax of the search query. The default is 'simple'. Use 'full' if your query uses the Lucene query syntax."
     },
     "SearchParametersPayload": {
@@ -305,7 +313,9 @@
       "format": "uuid",
       "description": "The tracking ID sent with the request to help with debugging.",
       "x-ms-client-request-id": true,
-      "x-ms-parameter-grouping": { "name": "search-request-options" },
+      "x-ms-parameter-grouping": {
+        "name": "search-request-options"
+      },
       "x-ms-parameter-location": "method"
     },
     "SearchServiceNameParameter": {

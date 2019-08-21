@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databricks/azure/mgmt/databricks
+  output-folder: $(python-sdks-folder)/databricks/azure-mgmt-databricks/azure/mgmt/databricks
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databricks
+  output-folder: $(python-sdks-folder)/databricks/azure-mgmt-databricks
 ```

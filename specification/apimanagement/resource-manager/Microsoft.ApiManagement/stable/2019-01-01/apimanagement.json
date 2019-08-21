@@ -167,7 +167,6 @@
       "description": "API identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "ApiIdRevParameter": {
@@ -229,7 +228,6 @@
       "description": "Identifier of the Backend entity. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "CacheIdParameter": {
@@ -307,7 +305,6 @@
       "description": "Group identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "IdentityProviderNameParameter": {
@@ -479,7 +476,33 @@
       "description": "Operation identifier within an API. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
+      "x-ms-parameter-location": "method"
+    },
+    "PolicyExportFormat": {
+      "name": "format",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Policy Export Format.",
+      "enum": [
+        "xml",
+        "rawxml"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyExportFormat",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "xml",
+            "description": "The contents are inline and Content type is an XML document."
+          },
+          {
+            "value": "rawxml",
+            "description": "The contents are inline and Content type is a non XML encoded policy document."
+          }
+        ]
+      },
+      "default": "xml",
       "x-ms-parameter-location": "method"
     },
     "PolicyIdParameter": {
@@ -505,7 +528,6 @@
       "description": "Product identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 256,
-      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     },
     "PropertyIdParameter": {
@@ -659,7 +681,6 @@
       "description": "User identifier. Must be unique in the current API Management service instance.",
       "minLength": 1,
       "maxLength": 80,
-      "pattern": "^[^*#&+:<>?]+$",
       "x-ms-parameter-location": "method"
     }
   }

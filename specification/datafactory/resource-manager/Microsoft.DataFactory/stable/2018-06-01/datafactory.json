@@ -204,6 +204,57 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/getFeatureValue": {
+      "post": {
+        "tags": [
+          "exposureControl"
+        ],
+        "operationId": "ExposureControl_GetFeatureValueByFactory",
+        "x-ms-examples": {
+          "ExposureControl_GetFeatureValueByFactory": {
+            "$ref": "./examples/ExposureControl_GetFeatureValueByFactory.json"
+          }
+        },
+        "description": "Get exposure control feature for specific factory.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "exposureControlRequest",
+            "description": "The exposure control request.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExposureControlRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/ExposureControlResponse"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories": {
       "get": {
         "tags": [
@@ -2714,6 +2765,149 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/subscribeToEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_SubscribeToEvents",
+        "x-ms-examples": {
+          "Triggers_SubscribeToEvents": {
+            "$ref": "./examples/Triggers_SubscribeToEvents.json"
+          }
+        },
+        "description": "Subscribe event trigger to events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is subscribed to events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/getEventSubscriptionStatus": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_GetEventSubscriptionStatus",
+        "x-ms-examples": {
+          "Triggers_GetEventSubscriptionStatus": {
+            "$ref": "./examples/Triggers_GetEventSubscriptionStatus.json"
+          }
+        },
+        "description": "Get a trigger's event subscription status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger event subscription state.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/unsubscribeFromEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_UnsubscribeFromEvents",
+        "x-ms-examples": {
+          "Triggers_UnsubscribeFromEvents": {
+            "$ref": "./examples/Triggers_UnsubscribeFromEvents.json"
+          }
+        },
+        "description": "Unsubscribe event trigger from events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is unsubscribed from events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/start": {
       "post": {
         "tags": [
@@ -2800,6 +2994,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/triggerRuns/{runId}/rerun": {
+      "post": {
+        "tags": [
+          "triggerruns"
+        ],
+        "operationId": "TriggerRuns_Rerun",
+        "x-ms-examples": {
+          "Triggers_Rerun": {
+            "$ref": "./examples/TriggerRuns_Rerun.json"
+          }
+        },
+        "description": "Rerun single trigger instance by runId.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/runId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "TriggerRun has been restarted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/rerunTriggers/{rerunTriggerName}": {
       "put": {
         "tags": [
@@ -2864,7 +3103,7 @@
         ],
         "operationId": "RerunTriggers_Start",
         "x-ms-examples": {
-          "Triggers_Start": {
+          "RerunTriggers_Start": {
             "$ref": "./examples/RerunTriggers_Start.json"
           }
         },
@@ -2910,7 +3149,7 @@
         ],
         "operationId": "RerunTriggers_Stop",
         "x-ms-examples": {
-          "Triggers_Stop": {
+          "RerunTriggers_Stop": {
             "$ref": "./examples/RerunTriggers_Stop.json"
           }
         },
@@ -2956,7 +3195,7 @@
         ],
         "operationId": "RerunTriggers_Cancel",
         "x-ms-examples": {
-          "Triggers_Cancel": {
+          "RerunTriggers_Cancel": {
             "$ref": "./examples/RerunTriggers_Cancel.json"
           }
         },
@@ -3002,7 +3241,7 @@
         ],
         "operationId": "RerunTriggers_ListByTrigger",
         "x-ms-examples": {
-          "RerunTriggers_List": {
+          "RerunTriggers_ListByTrigger": {
             "$ref": "./examples/RerunTriggers_ListByTrigger.json"
           }
         },
@@ -3562,6 +3801,33 @@
         "message"
       ]
     },
+    "TriggerSubscriptionOperationStatus": {
+      "description": "Defines the response of a trigger subscription operation.",
+      "type": "object",
+      "properties": {
+        "triggerName": {
+          "description": "Trigger name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Provisioning",
+            "Deprovisioning",
+            "Disabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EventSubscriptionStatus",
+            "modelAsString": true
+          },
+          "description": "Event Subscription Status.",
+          "readOnly": true
+        }
+      }
+    },
     "VariableDefinitionSpecification": {
       "description": "Definition of variable for a Pipeline.",
       "type": "object",
@@ -3762,15 +4028,15 @@
     "UserAccessPolicy": {
       "description": "Get Data Plane read only token request definition.",
       "properties": {
-        "permissions" : {
+        "permissions": {
           "description": "The string with permissions for Data Plane access. Currently only 'r' is supported which grants read only access.",
           "type": "string"
         },
-        "accessResourcePath" : {
+        "accessResourcePath": {
           "description": "The resource path to get access relative to factory. Currently only empty string is supported which corresponds to the factory resource.",
           "type": "string"
         },
-        "profileName" : {
+        "profileName": {
           "description": "The name of the profile. Currently only the default is supported. The default value is DefaultProfile.",
           "type": "string"
         },
@@ -3787,7 +4053,7 @@
     "AccessPolicyResponse": {
       "description": "Get Data Plane read only token response definition.",
       "properties": {
-        "policy" : {
+        "policy": {
           "description": "The user access policy.",
           "$ref": "#/definitions/UserAccessPolicy"
         },
@@ -4742,10 +5008,10 @@
       "type": "object",
       "description": "The request payload of get SSIS object metadata.",
       "properties": {
-          "metadataPath": {
-              "type": "string",
-              "description": "Metadata path."
-          }
+        "metadataPath": {
+          "type": "string",
+          "description": "Metadata path."
+        }
       }
     },
     "SsisObjectMetadataStatusResponse": {

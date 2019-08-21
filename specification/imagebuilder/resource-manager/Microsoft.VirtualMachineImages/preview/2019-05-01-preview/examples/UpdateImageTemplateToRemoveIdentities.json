@@ -17,6 +17,9 @@
         "name": "myImageTemplate",
         "location": "westus",
         "type": "Microsoft.VirtualMachineImages/imageTemplate",
+        "identity": {
+          "type": "None"
+        },
         "tags": {
           "new-tag": "new-value"
         },
@@ -39,12 +42,17 @@
               "location": "1_location",
               "runOutputName": "image_it_pir_1",
               "imageId": "/subscriptions/{subscription-id}/resourceGroups/rg1/providers/Microsoft.Compute/images/image_it_1",
-              "tags": {
+              "artifactTags": {
                 "tagName": "value"
               }
             }
           ]
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscription-id}/providers/Microsoft.VirtualMachineImages/locations/{location}/operations/{operation-id}?api-version=2019-05-01-preview"
       }
     }
   }

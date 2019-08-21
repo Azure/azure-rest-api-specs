@@ -24,8 +24,8 @@
           ],
           "evaluationFrequency": "PT1M",
           "windowSize": "PT15M",
-          "targetResourceType":"Microsoft.Compute/virtualMachines",
-          "targetResourceRegion":"southcentralus",
+          "targetResourceType": "Microsoft.Compute/virtualMachines",
+          "targetResourceRegion": "southcentralus",
           "criteria": {
             "odata.type": "Microsoft.Azure.Monitor.MultipleResourceMultipleMetricCriteria",
             "allOf": [
@@ -34,8 +34,7 @@
                 "name": "High_CPU_80",
                 "metricName": "Percentage CPU",
                 "metricNamespace": "microsoft.compute/virtualmachines",
-                "dimensions": [
-                ],
+                "dimensions": [],
                 "operator": "GreaterThan",
                 "threshold": 80.50,
                 "timeAggregation": "Average"
