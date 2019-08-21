@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/storageaccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts": {
       "get": {
         "x-ms-examples": {
           "Returns a list of storage accounts.": {
@@ -33,7 +33,7 @@
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "storage.json#/parameters/ApiVersionParameter"
@@ -64,7 +64,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/storageaccounts/{accountId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts/{accountId}": {
       "get": {
         "x-ms-examples": {
           "Returns the requested storage account.": {
@@ -81,7 +81,7 @@
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/AccountIdParameter"
@@ -106,7 +106,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/storageaccounts/{accountId}/undelete": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts/{accountId}/undelete": {
       "post": {
         "x-ms-examples": {
           "Undelete a deleted storage account.": {
@@ -123,7 +123,7 @@
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/AccountIdParameter"
@@ -158,7 +158,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/storageaccounts/reclaimstoragecapacity": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/reclaimstoragecapacity": {
       "post": {
         "x-ms-examples": {
           "Start reclaim storage capacity on deleted storage objects.": {
@@ -175,7 +175,7 @@
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "storage.json#/parameters/ApiVersionParameter"
