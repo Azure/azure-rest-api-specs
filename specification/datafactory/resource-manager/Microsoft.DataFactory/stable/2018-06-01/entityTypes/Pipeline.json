@@ -1025,6 +1025,10 @@
         "nestingSeparator": {
           "type": "object",
           "description": "Nested properties separator. Type: string (or Expression with resultType string)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -1870,7 +1874,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TabularSource"
+          "$ref": "#/definitions/CopySource"
         }
       ],
       "properties": {
@@ -1885,6 +1889,10 @@
         "batchSize": {
           "type": "object",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -1893,7 +1901,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TabularSource"
+          "$ref": "#/definitions/CopySource"
         }
       ],
       "properties": {
@@ -1908,6 +1916,10 @@
         "batchSize": {
           "type": "object",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
