@@ -1,65 +1,65 @@
- {
- "parameters":{       
-        "resourceGroupName":"rg1",
-        "api-version":"2015-11-01-preview",
-        "subscriptionId":"subid"        
-    },
- "responses":{
-        "200":{
-            "body":{
-                "value":[
-                    {
-                        "id":"/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.OperationsManagement/ManagementConfigurations/managementConfiguration1",
-                        "location":"East US",
-                        "name":"managementConfiguration1",
-                        "type":"Microsoft.OperationsManagement/ManagementConfiguration",
-                        "properties":{
-                            "applicationId":"/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Appliance/Appliances/managementConfiguration1",
-                            "parentResourceType":"Microsoft.OperationalInsights/workspaces",
-                            "template": {
-                                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
-                                "contentVersion": "1.0.0.0",
-                                "parameters": {
-                                    "parentResourceName": {
-                                        "type": "string"
-                                    },
-                                    "managementConfigurationName": {
-                                        "type": "string"
-                                    },
-                                    "jsonobject": {
-                                        "type": "object"
-                                    }
-                                },
-                                "resources": [
-                                    {
-                                        "apiVersion": "2015-11-01-preview",
-                                        "name": "[concat(parameters('parentResourceName'), '/', parameters('managementConfigurationName'), '-', parameters('jsonobject').displayName)]",
-                                        "type": "Microsoft.OperationalInsights/workspaces/savedsearches",
-                                        "dependsOn": [],
-                                        "properties": {
-                                            "ETag": "*",
-                                            "Category": "A-Templated",
-                                            "DisplayName": "[parameters('jsonobject').displayName]",
-                                            "Query": "[parameters('jsonobject').query]",
-                                            "Version": 1
-                                        }
-                                    }
-                                ],
-                                "outputs": {}
-                            },
-                            "parameters": [
-                                {
-                                    "name": "jsonobject",
-                                    "value": {
-                                        "displayName": "abcde",
-                                        "query": "hello"
-                                    }
-                                }
-                            ]
-                        }                        
+{
+  "parameters": {
+    "resourceGroupName": "rg1",
+    "api-version": "2015-11-01-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.OperationsManagement/ManagementConfigurations/managementConfiguration1",
+            "location": "East US",
+            "name": "managementConfiguration1",
+            "type": "Microsoft.OperationsManagement/ManagementConfiguration",
+            "properties": {
+              "applicationId": "/subscriptions/sub1/resourcegroups/rg1/providers/Microsoft.Appliance/Appliances/managementConfiguration1",
+              "parentResourceType": "Microsoft.OperationalInsights/workspaces",
+              "template": {
+                "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentTemplate.json",
+                "contentVersion": "1.0.0.0",
+                "parameters": {
+                  "parentResourceName": {
+                    "type": "string"
+                  },
+                  "managementConfigurationName": {
+                    "type": "string"
+                  },
+                  "jsonobject": {
+                    "type": "object"
+                  }
+                },
+                "resources": [
+                  {
+                    "apiVersion": "2015-11-01-preview",
+                    "name": "[concat(parameters('parentResourceName'), '/', parameters('managementConfigurationName'), '-', parameters('jsonobject').displayName)]",
+                    "type": "Microsoft.OperationalInsights/workspaces/savedsearches",
+                    "dependsOn": [],
+                    "properties": {
+                      "ETag": "*",
+                      "Category": "A-Templated",
+                      "DisplayName": "[parameters('jsonobject').displayName]",
+                      "Query": "[parameters('jsonobject').query]",
+                      "Version": 1
                     }
-                ]
+                  }
+                ],
+                "outputs": {}
+              },
+              "parameters": [
+                {
+                  "name": "jsonobject",
+                  "value": {
+                    "displayName": "abcde",
+                    "query": "hello"
+                  }
+                }
+              ]
             }
-        }
+          }
+        ]
+      }
     }
- }
+  }
+}

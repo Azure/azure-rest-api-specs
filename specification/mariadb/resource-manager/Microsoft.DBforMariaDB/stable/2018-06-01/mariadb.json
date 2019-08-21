@@ -45,7 +45,7 @@
             "$ref": "./examples/ServerCreate.json"
           },
           "Create a database as a point in time restore": {
-              "$ref":"./examples/ServerCreatePointInTimeRestore.json"
+            "$ref": "./examples/ServerCreatePointInTimeRestore.json"
           },
           "Create a server as a geo restore ": {
             "$ref": "./examples/ServerCreateGeoRestoreMode.json"
@@ -293,7 +293,9 @@
         ],
         "operationId": "Servers_Restart",
         "x-ms-examples": {
-          "ServerRestart": { "$ref": "./examples/ServerRestart.json" }
+          "ServerRestart": {
+            "$ref": "./examples/ServerRestart.json"
+          }
         },
         "description": "Restarts a server.",
         "parameters": [
@@ -326,7 +328,7 @@
         },
         "x-ms-long-running-operation": true
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforMariaDB/servers/{serverName}/replicas": {
       "get": {
         "tags": [
@@ -1347,7 +1349,7 @@
           "x-ms-mutability": [
             "read",
             "create"
-           ],
+          ],
           "description": "The location the resource resides in."
         },
         "tags": {
@@ -1446,6 +1448,18 @@
           "type": "integer",
           "format": "int32",
           "description": "Max storage allowed for a server."
+        },
+        "storageAutogrow": {
+          "type": "string",
+          "description": "Enable Storage Auto Grow.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "StorageAutogrow",
+            "modelAsString": true
+          }
         }
       },
       "description": "Storage Profile properties of a server"
@@ -2264,7 +2278,7 @@
         }
       },
       "description": "An error response from the Batch service."
-    }    
+    }
   },
   "parameters": {
     "SubscriptionIdParameter": {

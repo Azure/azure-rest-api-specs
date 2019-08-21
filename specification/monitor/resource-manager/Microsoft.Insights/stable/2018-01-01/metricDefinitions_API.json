@@ -72,14 +72,18 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "Get Metric Definitions without filter": { "$ref": "./examples/GetMetricDefinitions.json" }
+          "Get Metric Definitions without filter": {
+            "$ref": "./examples/GetMetricDefinitions.json"
+          }
         }
       }
     }
   },
   "definitions": {
     "LocalizableString": {
-      "required": [ "value" ],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "string",
@@ -119,30 +123,33 @@
         "Percent",
         "MilliSeconds",
         "ByteSeconds",
-        "Unspecified"
+        "Unspecified",
+        "Cores",
+        "MilliCores",
+        "NanoCores",
+        "BitsPerSecond"
       ],
       "x-ms-enum": {
         "name": "Unit",
         "modelAsString": false
       }
     },
-	"AggregationType":
-	{
+    "AggregationType": {
       "type": "string",
       "description": "the aggregation type of the metric.",
       "enum": [
-         "None",
-         "Average",
-         "Count",
-         "Minimum",
-         "Maximum",
-         "Total"
+        "None",
+        "Average",
+        "Count",
+        "Minimum",
+        "Maximum",
+        "Total"
       ],
       "x-ms-enum": {
-         "name": "AggregationType",
-         "modelAsString": false
+        "name": "AggregationType",
+        "modelAsString": false
       }
-	},
+    },
     "MetricDefinition": {
       "properties": {
         "isDimensionRequired": {
@@ -169,7 +176,7 @@
           "$ref": "#/definitions/AggregationType",
           "description": "the primary aggregation type value defining how to use the values for display."
         },
-		"supportedAggregationTypes": {
+        "supportedAggregationTypes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/AggregationType"
@@ -207,7 +214,9 @@
           "description": "the values for the metric definitions."
         }
       },
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "description": "Represents collection of metric definitions."
     },
     "ErrorResponse": {

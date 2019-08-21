@@ -8,58 +8,57 @@
     "containerName": "containerName",
     "createUpdateSqlContainerParameters": {
       "properties": {
-          "resource": {
-            "id": "containerName",  
-            "indexingPolicy": {  
-              "indexingMode": "Consistent",  
-              "automatic": true,  
-              "includedPaths": [  
-                {  
-                  "path": "/*",  
-                  "indexes": [  
-                    {  
-                      "kind": "Range",  
-                      "dataType": "String",  
-                      "precision": -1  
-                    },  
-                    {  
-                      "kind": "Range",  
-                      "dataType": "Number",  
-                      "precision": -1  
-                    }  
-                  ]  
-                }  
-              ],  
-              "excludedPaths": []  
-            },  
-            "partitionKey": {  
-              "paths": [  
-                "/AccountNumber"  
-              ],  
-              "kind": "Hash"  
-            },
-            "defaultTtl": 100,
-            "uniqueKeyPolicy": {
-              "uniqueKeys": [
-                {
-                  "paths": [
-                    "/testPath"
-                  ]
-                }
-              ]
-            },
-            "conflictResolutionPolicy": {
-              "mode": "LastWriterWins",
-              "conflictResolutionPath": "/path"
-            }
+        "resource": {
+          "id": "containerName",
+          "indexingPolicy": {
+            "indexingMode": "Consistent",
+            "automatic": true,
+            "includedPaths": [
+              {
+                "path": "/*",
+                "indexes": [
+                  {
+                    "kind": "Range",
+                    "dataType": "String",
+                    "precision": -1
+                  },
+                  {
+                    "kind": "Range",
+                    "dataType": "Number",
+                    "precision": -1
+                  }
+                ]
+              }
+            ],
+            "excludedPaths": []
           },
-          "options": {
+          "partitionKey": {
+            "paths": [
+              "/AccountNumber"
+            ],
+            "kind": "Hash"
+          },
+          "defaultTtl": 100,
+          "uniqueKeyPolicy": {
+            "uniqueKeys": [
+              {
+                "paths": [
+                  "/testPath"
+                ]
+              }
+            ]
+          },
+          "conflictResolutionPolicy": {
+            "mode": "LastWriterWins",
+            "conflictResolutionPath": "/path"
           }
+        },
+        "options": {}
       }
     }
   },
   "responses": {
-    "200": { 
+    "200": {
       "body": {
         "id": "containerName",
         "name": "containerName",
@@ -114,8 +113,6 @@
         }
       }
     },
-    "202": {
-      
-    }
+    "202": {}
   }
 }
