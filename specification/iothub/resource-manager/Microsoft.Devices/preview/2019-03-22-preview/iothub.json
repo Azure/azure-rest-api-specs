@@ -2045,6 +2045,14 @@
             "name": "Capabilities",
             "modelAsString": true
           }
+        },
+        "locations": {
+          "description": "Primary and secondary location for iot hub",
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IotHubLocationDescription"
+          }
         }
       }
     },
@@ -3453,6 +3461,28 @@
       "required": [
         "failoverRegion"
       ]
+    },
+    "IotHubLocationDescription": {
+      "description": "Public representation of one of the locations where a resource is provisioned.",
+      "type": "object",
+      "properties": {
+        "location": {
+          "description": "Azure Geo Regions",
+          "type": "string"
+        },
+        "role": {
+          "description": "Specific Role assigned to this location",
+          "enum": [
+            "primary",
+            "secondary"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "IotHubReplicaRoleType",
+            "modelAsString": true
+          }
+        }
+      }
     }
   },
   "parameters": {

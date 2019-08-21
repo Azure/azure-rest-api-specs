@@ -1,0 +1,39 @@
+{
+  "parameters": {
+    "subscriptionId": "b368ca2f-e298-46b7-b0ab-012281956afa",
+    "resourceGroupName": "MyAlertRules",
+    "alertRuleName": "MyAlertRule",
+    "api-version": "2019-06-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyAlertRules/providers/microsoft.alertsManagement/smartDetectorAlertRules/MyAlertRule",
+        "type": "Microsoft.AlertsManagement/smartDetectorAlertRules",
+        "name": "MyAlertRule",
+        "location": "global",
+        "tags": "",
+        "properties": {
+          "description": "Sample smart detector alert rule description",
+          "state": "Enabled",
+          "severity": "Sev3",
+          "frequency": "PT5M",
+          "detector": {
+            "id": "VMMemoryLeak"
+          },
+          "scope": [
+            "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/MyVms/providers/Microsoft.Compute/virtualMachines/vm1"
+          ],
+          "actionGroups": [
+            {
+              "actionGroupId": "/subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourcegroups/MyActionGroups/providers/microsoft.insights/actionGroups/MyActionGroup"
+            }
+          ],
+          "throttling": {
+            "duration": "PT20M"
+          }
+        }
+      }
+    }
+  }
+}
