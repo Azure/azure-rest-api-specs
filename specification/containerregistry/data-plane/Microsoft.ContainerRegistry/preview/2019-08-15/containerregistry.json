@@ -131,9 +131,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the requested manifest file",
+            "description": "Returns the requested manifest file in a larger combined group",
             "schema": {
-              "$ref": "#/definitions/Manifest"
+              "$ref": "#/definitions/ManifestWrapper"
             }
           },
           "default": {
@@ -2184,8 +2184,21 @@
       }
     },
     "Manifest": {
-      "description": "Returns the requested multi-arch-manifest file",
-      "discriminator": "mediaType",
+      "description": "Returns the requested manifest file",
+      "discriminator": "valueType",
+      "required": [
+        "valueType"
+      ],
+      "properties": {
+        "schemaVersion": {
+          "type": "integer",
+          "description": "Schema version"
+        }
+      }
+    },
+    "ManifestWrapper": {
+      "description": "Returns the requested manifest file",
+      "discriminator": "valueType",
       "required": [
         "valueType"
       ],
@@ -2194,27 +2207,64 @@
           "type": "string",
           "description": "Media type for this Manifest",
           "enum": [
-            "",
             "application/vnd.docker.distribution.manifest.list.v2+json",
             "application/vnd.docker.distribution.manifest.v2+json",
             "application/vnd.oci.image.manifest.v1+json"
           ]
         },
-        "schemaVersion": {
-          "type": "integer",
-          "description": "Schema version"
-        }
-      }
-    },
-    "MultiArchManifest": {
-      "x-ms-discriminator-value": "application/vnd.docker.distribution.manifest.list.v2+json",
-      "description": "Returns the requested Docker multi-arch-manifest file",
-      "properties": {
         "manifests": {
           "type": "array",
-          "description": "List of V2 image layer information",
+          "description": "(ManifestList, OCIIndex) List of V2 image layer information",
           "items": {
-            "$ref": "#/definitions/MultiArchManifestAttributes"
+            "$ref": "#/definitions/ManifestListAttributes"
+          }
+        },
+        "config": {
+          "description": "(V2, OCI) Image config descriptor",
+          "$ref": "#/definitions/V2Descriptor"
+        },
+        "layers": {
+          "type": "array",
+          "description": "(V2, OCI) List of V2 image layer information",
+          "items": {
+            "$ref": "#/definitions/V2Descriptor"
+          }
+        },
+        "annotations": {
+          "description": "(OCI, OCIIndex) Additional metadata",
+          "$ref": "#/definitions/Annotations"
+        },
+        "architecture": {
+          "type": "string",
+          "description": "(V1) CPU architecture"
+        },
+        "name": {
+          "type": "string",
+          "description": "(V1) Image name"
+        },
+        "tag": {
+          "type": "string",
+          "description": "(V1) Image tag"
+        },
+        "fsLayers": {
+          "type": "array",
+          "description": "(V1) List of layer information",
+          "items": {
+            "$ref": "#/definitions/FsLayer"
+          }
+        },
+        "history": {
+          "type": "array",
+          "description": "(V1) Image history",
+          "items": {
+            "$ref": "#/definitions/History"
+          }
+        },
+        "signatures": {
+          "type": "array",
+          "description": "(V1) Image signature",
+          "items": {
+            "$ref": "#/definitions/ImageSignature"
           }
         }
       },
@@ -2224,7 +2274,29 @@
         }
       ]
     },
-    "MultiArchManifestAttributes": {
+    "ManifestList": {
+      "x-ms-discriminator-value": "application/vnd.docker.distribution.manifest.list.v2+json",
+      "description": "Returns the requested Docker multi-arch-manifest file",
+      "properties": {
+        "mediaType": {
+          "type": "string",
+          "description": "Media type for this Manifest"
+        },
+        "manifests": {
+          "type": "array",
+          "description": "List of V2 image layer information",
+          "items": {
+            "$ref": "#/definitions/ManifestListAttributes"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Manifest"
+        }
+      ]
+    },
+    "ManifestListAttributes": {
       "properties": {
         "mediaType": {
           "type": "string",
@@ -2279,54 +2351,14 @@
         }
       }
     },
-    "V1Manifest": {
-      "x-ms-discriminator-value": "",
-      "description": "Returns the requested Docker V1 Manifest file",
-      "properties": {
-        "architecture": {
-          "type": "string",
-          "description": "CPU architecture"
-        },
-        "name": {
-          "type": "string",
-          "description": "Image name"
-        },
-        "tag": {
-          "type": "string",
-          "description": "Image tag"
-        },
-        "fsLayers": {
-          "type": "array",
-          "description": "List of layer information",
-          "items": {
-            "$ref": "#/definitions/FsLayer"
-          }
-        },
-        "history": {
-          "type": "array",
-          "description": "Image history",
-          "items": {
-            "$ref": "#/definitions/History"
-          }
-        },
-        "signatures": {
-          "type": "array",
-          "description": "Image signature",
-          "items": {
-            "$ref": "#/definitions/ImageSignature"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Manifest"
-        }
-      ]
-    },
     "V2Manifest": {
       "x-ms-discriminator-value": "application/vnd.docker.distribution.manifest.v2+json",
       "description": "Returns the requested Docker V2 Manifest file",
       "properties": {
+        "mediaType": {
+          "type": "string",
+          "description": "Media type for this Manifest"
+        },
         "config": {
           "description": "V2 image config descriptor",
           "$ref": "#/definitions/V2Descriptor"
@@ -2375,6 +2407,9 @@
           "items": {
             "$ref": "#/definitions/V2Descriptor"
           }
+        },
+        "annotations": {
+          "$ref": "#/definitions/Annotations"
         }
       },
       "allOf": [
@@ -2382,6 +2417,146 @@
           "$ref": "#/definitions/Manifest"
         }
       ]
+    },
+    "OCIIndex": {
+      "x-ms-discriminator-value": "application/vnd.oci.image.index.v1+json",
+      "description": "Returns the requested OCI index file",
+      "properties": {
+        "manifests": {
+          "type": "array",
+          "description": "List of OCI image layer information",
+          "items": {
+            "$ref": "#/definitions/ManifestListAttributes"
+          }
+        },
+        "annotations": {
+          "$ref": "#/definitions/Annotations"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Manifest"
+        }
+      ]
+    },
+    "V1Manifest": {
+      "description": "Returns the requested V1 manifest file",
+      "x-ms-discriminator-value": "application/vnd.oci.image.manifest.v1+json",
+      "required": [
+        "valueType"
+      ],
+      "properties": {
+        "architecture": {
+          "type": "string",
+          "description": "CPU architecture"
+        },
+        "name": {
+          "type": "string",
+          "description": "Image name"
+        },
+        "tag": {
+          "type": "string",
+          "description": "Image tag"
+        },
+        "fsLayers": {
+          "type": "array",
+          "description": "List of layer information",
+          "items": {
+            "$ref": "#/definitions/FsLayer"
+          }
+        },
+        "history": {
+          "type": "array",
+          "description": "Image history",
+          "items": {
+            "$ref": "#/definitions/History"
+          }
+        },
+        "signatures": {
+          "type": "array",
+          "description": "Image signature",
+          "items": {
+            "$ref": "#/definitions/ImageSignature"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Manifest"
+        }
+      ]
+    },
+    "Annotations": {
+      "description": "Additional information provided through arbitrary metadata",
+      "type": "object",
+      "x-nullable": true,
+      "additionalProperties": {
+        "type": "object"
+      },
+      "properties": {
+        "org.opencontainers.image.created": {
+          "description": "Date and time on which the image was built (string, date-time as defined by https://tools.ietf.org/html/rfc3339#section-5.6)",
+          "type": "string",
+          "format": "date-time",
+          "x-ms-client-name": "Created"
+        },
+        "org.opencontainers.image.authors": {
+          "description": "Contact details of the people or organization responsible for the image (freeform string)",
+          "format": "freeform",
+          "type": "string",
+          "x-ms-client-name": "Authors"
+        },
+        "org.opencontainers.image.url": {
+          "description": "URL to find more information on the image (string)",
+          "type": "string",
+          "x-ms-client-name": "Url"
+        },
+        "org.opencontainers.image.documentation": {
+          "description": "URL to get documentation on the image (string)",
+          "type": "string",
+          "x-ms-client-name": "Documentation"
+        },
+        "org.opencontainers.image.source": {
+          "description": "URL to get source code for building the image (string)",
+          "type": "string",
+          "x-ms-client-name": "Source"
+        },
+        "org.opencontainers.image.version": {
+          "description": "Version of the packaged software. The version MAY match a label or tag in the source code repository, may also be Semantic versioning-compatible",
+          "type": "string",
+          "x-ms-client-name": "Version"
+        },
+        "org.opencontainers.image.revision": {
+          "description": "Source control revision identifier for the packaged software.",
+          "type": "string",
+          "x-ms-client-name": "Revision"
+        },
+        "org.opencontainers.image.vendor": {
+          "description": "Name of the distributing entity, organization or individual.",
+          "type": "string",
+          "x-ms-client-name": "Vendor"
+        },
+        "org.opencontainers.image.licenses": {
+          "description": "License(s) under which contained software is distributed as an SPDX License Expression.",
+          "type": "string",
+          "x-ms-client-name": "Licenses"
+        },
+        "org.opencontainers.image.ref.name": {
+          "description": "Name of the reference for a target (string). ",
+          "type": "string",
+          "x-ms-client-name": "Name"
+        },
+        "org.opencontainers.image.title": {
+          "description": "Human-readable title of the image (string)",
+          "type": "string",
+          "x-ms-client-name": "Title"
+        },
+        "org.opencontainers.image.description": {
+          "description": "Human-readable description of the software packaged in the image (string)",
+          "type": "string",
+          "x-ms-client-name": "Description"
+        }
+      }
     }
   },
   "parameters": {
