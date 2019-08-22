@@ -17,7 +17,7 @@
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/settings": {
-      "post": {
+      "put": {
         "x-ms-examples": {
           "Update srp settings.": {
             "$ref": "./examples/Settings/Update.json"
@@ -44,7 +44,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/settings"
+              "$ref": "#/definitions/Settings"
             }
           }
         ],
@@ -52,7 +52,7 @@
           "200": {
             "description": "OK -- The new storage resource provider setting is updated.",
             "schema": {
-              "$ref": "#/definitions/settings"
+              "$ref": "#/definitions/Settings"
             }
           },
           "default": {
@@ -89,7 +89,7 @@
           "200": {
             "description": "OK -- The settings has been returned.",
             "schema": {
-              "$ref": "#/definitions/settings"
+              "$ref": "#/definitions/Settings"
             }
           },
           "default": {
@@ -103,16 +103,33 @@
     }
   },
   "definitions": {
-    "settings": {
-      "description": "Storage resource provider settings",
+    "SettingProperties": {
+      "description": "Properties of storage setting.",
       "type": "object",
       "properties": {
         "retentionPeriodForDeletedStorageAccountsInDays": {
-          "description": "Set the retention days for deleted storage accounts.",
+          "description": "The number of days a deleted storage account is kept before being permanently deleted.",
           "type": "integer",
           "format": "int32"
         }
       }
+    },
+    "Settings": {
+      "description": "Storage resource provider settings",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "description": "Properties of the storage account.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SettingProperties",
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "storage.json#/definitions/Resource"
+        }
+      ]
     }
   },
   "parameters": {},
