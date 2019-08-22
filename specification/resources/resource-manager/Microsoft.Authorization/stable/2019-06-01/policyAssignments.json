@@ -99,6 +99,10 @@
           "Create or update a policy assignment with a managed identity": {
             "$ref": "./examples/createPolicyAssignmentWithIdentity.json"
           }
+		  ,
+          "Create or update a policy assignment without enforcing policy effect during resource creation or update.": {
+            "$ref": "./examples/createPolicyAssignmentWithoutEnforcement.json"
+          }
         },
         "parameters": [
           {
@@ -567,15 +571,24 @@
         },
 		"enforcementMode": {
           "type": "string",
-          "description": "The policy assignment enforcement mode. Possible values are NotSpecified, Default, and DoNotEnforce.",
+          "description": "The policy assignment enforcement mode. Possible values are Default and DoNotEnforce.",
           "enum": [
-            "NotSpecified",
             "Default",
             "DoNotEnforce"
           ],
           "x-ms-enum": {
             "name": "enforcementMode",
-            "modelAsString": true
+            "modelAsString": true,
+			"values": [
+              {
+                "value": "Default",
+                "description": "The policy effect is enforced during resource creation or update."
+              },
+              {
+                "value": "DoNotEnforce",
+                "description": "The policy effect is not enforced during resource creation or update."
+              }
+            ]
           }
         }
       },
