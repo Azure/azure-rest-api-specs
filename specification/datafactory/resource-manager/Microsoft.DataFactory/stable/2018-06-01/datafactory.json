@@ -2765,6 +2765,149 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/subscribeToEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_SubscribeToEvents",
+        "x-ms-examples": {
+          "Triggers_SubscribeToEvents": {
+            "$ref": "./examples/Triggers_SubscribeToEvents.json"
+          }
+        },
+        "description": "Subscribe event trigger to events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is subscribed to events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/getEventSubscriptionStatus": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_GetEventSubscriptionStatus",
+        "x-ms-examples": {
+          "Triggers_GetEventSubscriptionStatus": {
+            "$ref": "./examples/Triggers_GetEventSubscriptionStatus.json"
+          }
+        },
+        "description": "Get a trigger's event subscription status.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger event subscription state.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/unsubscribeFromEvents": {
+      "post": {
+        "tags": [
+          "triggers"
+        ],
+        "operationId": "Triggers_UnsubscribeFromEvents",
+        "x-ms-examples": {
+          "Triggers_UnsubscribeFromEvents": {
+            "$ref": "./examples/Triggers_UnsubscribeFromEvents.json"
+          }
+        },
+        "description": "Unsubscribe event trigger from events.",
+        "x-ms-long-running-operation": true,
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/factoryName"
+          },
+          {
+            "$ref": "#/parameters/triggerName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Trigger is unsubscribed from events.",
+            "schema": {
+              "$ref": "#/definitions/TriggerSubscriptionOperationStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted."
+          },
+          "default": {
+            "description": "An error response received from the Azure Data Factory service.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/triggers/{triggerName}/start": {
       "post": {
         "tags": [
@@ -3657,6 +3800,33 @@
         "code",
         "message"
       ]
+    },
+    "TriggerSubscriptionOperationStatus": {
+      "description": "Defines the response of a trigger subscription operation.",
+      "type": "object",
+      "properties": {
+        "triggerName": {
+          "description": "Trigger name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Provisioning",
+            "Deprovisioning",
+            "Disabled",
+            "Unknown"
+          ],
+          "x-ms-enum": {
+            "name": "EventSubscriptionStatus",
+            "modelAsString": true
+          },
+          "description": "Event Subscription Status.",
+          "readOnly": true
+        }
+      }
     },
     "VariableDefinitionSpecification": {
       "description": "Definition of variable for a Pipeline.",
