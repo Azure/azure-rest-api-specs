@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2019-06-01",
+    "version": "2019-07-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -67,31 +67,31 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/checkNameAvailability": {
+      "parameters": [
+        {
+          "name": "body",
+          "in": "body",
+          "description": "Name availability request.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ResourceNameAvailabilityRequest"
+          },
+          "x-ms-client-flatten": true
+        },
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/location"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "summary": "Check resource name availability",
         "description": "Check if a resource name is available.",
         "operationId": "CheckNameAvailability",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Name availability request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceNameAvailabilityRequest"
-            },
-            "x-ms-client-flatten": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/location"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -111,31 +111,31 @@
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/checkFilePathAvailability": {
+      "parameters": [
+        {
+          "name": "body",
+          "in": "body",
+          "description": "File path availability request.",
+          "required": true,
+          "schema": {
+            "$ref": "#/definitions/ResourceNameAvailabilityRequest"
+          },
+          "x-ms-client-flatten": true
+        },
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/location"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "post": {
         "summary": "Check file path availability",
         "description": "Check if a file path is available.",
         "operationId": "CheckFilePathAvailability",
-        "parameters": [
-          {
-            "name": "body",
-            "in": "body",
-            "description": "File path availability request.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceNameAvailabilityRequest"
-            },
-            "x-ms-client-flatten": true
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/location"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -155,6 +155,17 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "summary": "Describe all NetApp Accounts in a resource group",
         "description": "List and describe all NetApp accounts in the resource group",
@@ -162,17 +173,6 @@
           "NetApp Accounts"
         ],
         "operationId": "Accounts_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -195,6 +195,20 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "summary": "Describe a NetApp Account",
         "description": "Get the NetApp account",
@@ -202,20 +216,6 @@
           "NetApp Accounts"
         ],
         "operationId": "Accounts_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -249,18 +249,6 @@
             "schema": {
               "$ref": "#/definitions/netAppAccount"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -296,20 +284,6 @@
         ],
         "operationId": "Accounts_Delete",
         "summary": "Delete a NetApp account",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "description": "Delete the specified NetApp account",
         "responses": {
           "202": {
@@ -345,18 +319,6 @@
             "schema": {
               "$ref": "#/definitions/netAppAccountPatch"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -381,6 +343,20 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "summary": "Describe all Capacity Pools",
         "description": "List all capacity pools in the NetApp Account",
@@ -388,20 +364,6 @@
           "Capacity Pools"
         ],
         "operationId": "Pools_List",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "x-ms-pageable": {
           "nextLinkName": null
         },
@@ -424,6 +386,23 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/PoolName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "summary": "Describe a Capacity Pool",
         "description": "Get details of the specified capacity pool",
@@ -431,23 +410,6 @@
           "Capacity Pools"
         ],
         "operationId": "Pools_Get",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -481,21 +443,6 @@
             "schema": {
               "$ref": "#/definitions/capacityPool"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -541,21 +488,6 @@
             "schema": {
               "$ref": "#/definitions/capacityPoolPatch"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -585,23 +517,6 @@
         "operationId": "Pools_Delete",
         "summary": "Delete a capacity pool",
         "description": "Delete the specified capacity pool",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "202": {
             "description": "Accepted -- Create, update or delete request accepted; operation will complete asynchronously"
@@ -622,26 +537,26 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/PoolName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "summary": "Describe all volumes",
         "description": "List all volumes within the capacity pool",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "tags": [
           "Volumes"
         ],
@@ -668,6 +583,26 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/PoolName"
+        },
+        {
+          "$ref": "#/parameters/VolumeName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "Volumes"
@@ -675,26 +610,6 @@
         "operationId": "Volumes_Get",
         "summary": "Describe a volume",
         "description": "Get the details of the specified volume",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -728,24 +643,6 @@
             "schema": {
               "$ref": "#/definitions/volume"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -791,24 +688,6 @@
             "schema": {
               "$ref": "#/definitions/volumePatch"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -837,26 +716,6 @@
         ],
         "operationId": "Volumes_Delete",
         "summary": "Delete a volume",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "description": "Delete the specified volume",
         "responses": {
           "202": {
@@ -878,32 +737,32 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/PoolName"
+        },
+        {
+          "$ref": "#/parameters/VolumeName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "MountTargets"
         ],
         "operationId": "MountTargets_List",
         "summary": "Describe all mount targets",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "description": "List all mount targets associated with the volume",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -927,32 +786,32 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/PoolName"
+        },
+        {
+          "$ref": "#/parameters/VolumeName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "Snapshots"
         ],
         "operationId": "Snapshots_List",
         "summary": "Describe all snapshots",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "description": "List all snapshots associated with the volume",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -976,6 +835,29 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/SubscriptionId"
+        },
+        {
+          "$ref": "#/parameters/ResourceGroup"
+        },
+        {
+          "$ref": "#/parameters/AccountName"
+        },
+        {
+          "$ref": "#/parameters/PoolName"
+        },
+        {
+          "$ref": "#/parameters/VolumeName"
+        },
+        {
+          "$ref": "#/parameters/SnapshotName"
+        },
+        {
+          "$ref": "#/parameters/ApiVersionParameter"
+        }
+      ],
       "get": {
         "tags": [
           "Snapshots"
@@ -983,29 +865,6 @@
         "operationId": "Snapshots_Get",
         "summary": "Describe a snapshot",
         "description": "Get details of the specified snapshot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/SnapshotName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -1039,27 +898,6 @@
             "schema": {
               "$ref": "#/definitions/snapshot"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/SnapshotName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1099,27 +937,6 @@
             "schema": {
               "$ref": "#/definitions/snapshotPatch"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/SnapshotName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1149,29 +966,6 @@
         "operationId": "Snapshots_Delete",
         "summary": "Delete a snapshot",
         "description": "Delete snapshot",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroup"
-          },
-          {
-            "$ref": "#/parameters/AccountName"
-          },
-          {
-            "$ref": "#/parameters/PoolName"
-          },
-          {
-            "$ref": "#/parameters/VolumeName"
-          },
-          {
-            "$ref": "#/parameters/SnapshotName"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
         "responses": {
           "200": {
             "description": "OK"
@@ -1878,10 +1672,7 @@
           "items": {
             "type": "string"
           },
-          "example": [
-            "NFSv3",
-            "NFSv4"
-          ]
+          "example": [ "NFSv3", "NFSv4.1" ]
         },
         "provisioningState": {
           "type": "string",
@@ -1944,9 +1735,9 @@
           "type": "boolean",
           "description": "Allows NFSv3 protocol"
         },
-        "nfsv4": {
+        "nfsv41": {
           "type": "boolean",
-          "description": "Allows NFSv4 protocol"
+          "description": "Allows NFSv4.1 protocol"
         },
         "allowedClients": {
           "type": "string",
@@ -2263,7 +2054,7 @@
           "minLength": 36,
           "example": "9760acf5-4638-11e7-9bdb-020073ca3333"
         },
-        "creationDate": {
+        "created": {
           "title": "name",
           "type": "string",
           "format": "date-time",
