@@ -54,7 +54,29 @@
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
           {
-            "$ref": "#/parameters/$expand"
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand whether you want to get more information about the network data (ports and connections details)",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandValues",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "true",
+                  "description": "Get the expand network data object - more information about the network data (ports and connections details)"
+                },
+                {
+                  "value": "false",
+                  "description": "Get the slim network data object"
+                }
+              ]
+            }
           }
         ],
         "responses": {
