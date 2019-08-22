@@ -3768,6 +3768,21 @@
           "x-nullable": false,
           "readOnly": true,
           "description": "The status code indicating why the indexing operation failed. Possible values include: 400 for a malformed input document, 404 for document not found, 409 for a version conflict, 422 when the index is temporarily unavailable, or 503 for when the service is too busy."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the source at which the error originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available."
+        },
+        "details": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Additional, verbose details about the error to assist in debugging the indexer. This may not be always available."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A link to a troubleshooting guide for these classes of errors. This may not be always available."
         }
       },
       "description": "Represents an item- or document-level indexing error."
@@ -3783,6 +3798,21 @@
           "type": "string",
           "readOnly": true,
           "description": "The message describing the warning that occurred while processing the item."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the source at which the warning originated. For example, this could refer to a particular skill in the attached skillset. This may not be always available."
+        },
+        "details": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Additional, verbose details about the warning to assist in debugging the indexer. This may not be always available."
+        },
+        "documentationLink": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A link to a troubleshooting guide for these classes of warnings. This may not be always available."
         }
       },
       "description": "Represents an item-level warning."
@@ -4546,6 +4576,10 @@
         "@odata.type": {
           "type": "string"
         },
+        "name": {
+          "type": "string",
+          "description": "The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'."
+        },
         "description": {
           "type": "string",
           "description": "The description of the skill which describes the inputs, outputs, and usage of the skill."
@@ -4947,6 +4981,12 @@
           "format": "int32",
           "x-nullable": true,
           "description": "The desired batch size which indicates number of documents."
+        },
+        "degreeOfParallelism": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "If set, the number of parallel calls that can be made to the Web API."
         }
       },
       "required": [
