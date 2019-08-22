@@ -112,7 +112,31 @@
         "operationId": "NetworkData_Get",
         "parameters": [
           {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
