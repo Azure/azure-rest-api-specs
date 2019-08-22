@@ -116,6 +116,31 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "expand whether you want to get more information about the network data (ports and connections details)",
+            "enum": [
+              "true",
+              "false"
+            ],
+            "x-ms-enum": {
+              "name": "ExpandValues",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "true",
+                  "description": "Get the expand network data object - more information about the network data (ports and connections details)"
+                },
+                {
+                  "value": "false",
+                  "description": "Get the slim network data object"
+                }
+              ]
+            }
           }
         ],
         "responses": {
@@ -230,10 +255,17 @@
           "type": "object",
           "description": "The actual traffic details",
           "properties": {
-            "timeRange": {
-              "readOnly": true,
+            "startTime": {
               "type": "string",
-              "description": "The actual traffic time range"
+              "format": "date-time",
+              "readOnly": true,
+              "description": "The UTC start time of the actual traffic time range"
+            },
+            "endTime": {
+              "type": "string",
+              "format": "date-time",
+              "readOnly": true,
+              "description": "The UTC end time of the actual traffic time range"
             },
             "trafficDataState": {
               "type": "string",
