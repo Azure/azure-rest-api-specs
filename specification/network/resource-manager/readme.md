@@ -74,6 +74,7 @@ input-file:
   - Microsoft.Network/stable/2019-07-01/virtualNetwork.json
   - Microsoft.Network/stable/2019-07-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2019-07-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2019-07-01/virtualRouter.json
   - Microsoft.Network/stable/2019-07-01/virtualWan.json
   - Microsoft.Network/stable/2019-07-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-07-01/vmssPublicIpAddress.json
@@ -1070,6 +1071,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkTap.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualRouter.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
