@@ -26,9 +26,18 @@ These are the global settings for the Reservations API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-04
+tag: package-preview-2019-07-19
 ```
 
+### Tag: package-preview-2019-07-19
+
+These settings apply only when `--tag=package-preview-2019-07-19` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-07-19'
+input-file:
+  - Microsoft.Capacity/preview/2019-07-19/quota.json
+  - Microsoft.Capacity/preview/2019-04-01/reservations.json
+```
 
 ### Tag: package-preview-2019-04
 
@@ -121,3 +130,22 @@ python:
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
+
+
+# Validation
+
+
+## Suppression
+
+``` yaml
+directive:
+  - suppress: OperationsAPIImplementation
+    reason: We do have a operations api as "/providers/{providerName}/operations"
+    from: quota.json
+    where: $.paths
+  - suppress: RequiredPropertiesMissingInResourceModel
+	reason: QuotaRequestDetails doesn't have any property like - 'name', 'id' and 'type' in its hierarchy.
+	from: quota.json
+	where: $.paths
+	
+```
