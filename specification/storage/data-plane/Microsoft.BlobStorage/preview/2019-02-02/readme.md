@@ -3,6 +3,7 @@
 > see https://aka.ms/autorest
 
 ``` yaml
+input-file: blob.json
 azure-validator: true
 openapi-type: data-plane
 

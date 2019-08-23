@@ -3,6 +3,7 @@
 > see https://aka.ms/autorest
 
 ``` yaml
+input-file: queue.json
 azure-validator: true
 openapi-type: data-plane
 
