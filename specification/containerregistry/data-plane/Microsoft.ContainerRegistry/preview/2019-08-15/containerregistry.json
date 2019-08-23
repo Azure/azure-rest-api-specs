@@ -2031,7 +2031,7 @@
         "blobSum": "sha256:1f7d468f830cb0ed4beb8edc9438f18096e8c682e56a35242f60e6c61b718b30"
       }
     },
-    "V2Descriptor": {
+    "Descriptor": {
       "description": "Docker V2 image layer descriptor including config and layers",
       "properties": {
         "mediaType": {
@@ -2046,6 +2046,17 @@
         "digest": {
           "type": "string",
           "description": "Layer digest"
+        },
+        "urls": {
+          "type": "array",
+          "description": "Specifies a list of URIs from which this object may be downloaded.",
+          "items": {
+            "description": "Must conform to RFC 3986. Entries should use the http and https schemes, as defined in RFC 7230.",
+            "type": "string"
+          }
+        },
+        "annotations": {
+          "$ref": "#/definitions/Annotations"
         }
       },
       "example": {
@@ -2221,13 +2232,13 @@
         },
         "config": {
           "description": "(V2, OCI) Image config descriptor",
-          "$ref": "#/definitions/V2Descriptor"
+          "$ref": "#/definitions/Descriptor"
         },
         "layers": {
           "type": "array",
           "description": "(V2, OCI) List of V2 image layer information",
           "items": {
-            "$ref": "#/definitions/V2Descriptor"
+            "$ref": "#/definitions/Descriptor"
           }
         },
         "annotations": {
@@ -2361,13 +2372,13 @@
         },
         "config": {
           "description": "V2 image config descriptor",
-          "$ref": "#/definitions/V2Descriptor"
+          "$ref": "#/definitions/Descriptor"
         },
         "layers": {
           "type": "array",
           "description": "List of V2 image layer information",
           "items": {
-            "$ref": "#/definitions/V2Descriptor"
+            "$ref": "#/definitions/Descriptor"
           }
         }
       },
@@ -2399,13 +2410,13 @@
       "properties": {
         "config": {
           "description": "V2 image config descriptor",
-          "$ref": "#/definitions/V2Descriptor"
+          "$ref": "#/definitions/Descriptor"
         },
         "layers": {
           "type": "array",
           "description": "List of V2 image layer information",
           "items": {
-            "$ref": "#/definitions/V2Descriptor"
+            "$ref": "#/definitions/Descriptor"
           }
         },
         "annotations": {
