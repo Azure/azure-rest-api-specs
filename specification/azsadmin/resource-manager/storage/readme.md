@@ -49,7 +49,7 @@ input-file:
     - "Microsoft.Storage.Admin/preview/2015-12-01/quotas.json"
     - "Microsoft.Storage.Admin/preview/2015-12-01/storage.json"
     - "Microsoft.Storage.Admin/preview/2015-12-01/acquisitions.json"
-    - "Microsoft.Storage.Admin/preview/2015-12-01/blobService.json"
+    - "Microsoft.Storage.Admin/preview/2015-12-01/blobServices.json"
     - "Microsoft.Storage.Admin/preview/2015-12-01/containers.json"
     - "Microsoft.Storage.Admin/preview/2015-12-01/farms.json"
     - "Microsoft.Storage.Admin/preview/2015-12-01/queueServices.json"
