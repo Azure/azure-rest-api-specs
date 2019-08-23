@@ -7956,7 +7956,7 @@
           "description" : "The reference."
         },
         "type" : {
-          "$ref": "#/definitions/SkuName",
+          "$ref": "#/definitions/SwaggerSchemaType",
           "description" : "The type"
         },
         "title" : {
@@ -7964,11 +7964,8 @@
           "description" : "The title."
         },
         "items" : {
-          "type" : "array",
           "description": "The items schema.",
-          "$items" : {
-            "$ref" : "#/definitions/SwaggerSchema"
-          } 
+          "$ref" : "#/definitions/SwaggerSchema"
         },
         "properties" : {
           "type" : "object",
@@ -7984,7 +7981,7 @@
         "required" : {
           "type" : "array",
           "description" : "The object required properties.",
-          "$items" : {
+          "items" : {
             "type" : "string"
           }
         },
@@ -8629,21 +8626,27 @@
         "code",
         "message"
       ],
-      "code" : {
-        "description": "The error code.",
-        "$ref": "#/definitions/ErrorResponseCode"
-      },
-      "message" : {
-        "type": "string",
-        "description": "The error message."
-      },
-      "details" : {
-        "type": "array",
-        "description" : "The error message details.",
-        "items": {
-          "$ref": "#/definitions/ExtendedErrorInfo"
+      "properties" : {
+        "code" : {
+          "description": "The error code.",
+          "$ref": "#/definitions/ErrorResponseCode"
+        },
+        "message" : {
+          "type": "string",
+          "description": "The error message."
+        },
+        "details" : {
+          "type": "array",
+          "description" : "The error message details.",
+          "items": {
+            "$ref": "#/definitions/ExtendedErrorInfo"
+          }
+        },
+        "innerError" : {
+          "$ref": "#/definitions/Object",
+          "description" : "The inner error."
         }
-      }
+      } 
     },
     "ErrorResponseCode" : {
       "type": "string",
