@@ -3,7 +3,7 @@
 > see https://aka.ms/autorest
 
 ``` yaml
-input-file: blob.json
+input-file: ./blob.json
 azure-validator: true
 openapi-type: data-plane
 
@@ -20,4 +20,6 @@ directive:
   - suppress: R4001 # url defined in global param without extension
   - suppress: D5001 # x-ms-examples describing minimum/maximum property set for response/request payloads for operations
 
+  # This error is being temporarily suppressed while we work on swagger improvements in our fork
+  - suppress: MISSING_PATH_PARAMETER_DEFINITION # Storage generators ignore path parameters so they're not in the swagger
 ```
