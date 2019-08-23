@@ -21,7 +21,8 @@ directive:
   - suppress: D5001 # x-ms-examples describing minimum/maximum property set for response/request payloads for operations
 
   # Errors being temporarily suppressed while we work on swagger improvements in our fork
-  - suppress:
+  - suppress: UNREFERENCED_JSON_FILE # This is because of the top level DataLake readme
+  - where: $["x-ms-paths"][*][*]
+    suppress:
       - MISSING_PATH_PARAMETER_DEFINITION # Storage generators ignore path parameters so they're not in the swagger
-      - UNREFERENCED_JSON_FILE # This is because of the top level DataLake readme
 ```
