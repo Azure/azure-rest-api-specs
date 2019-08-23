@@ -7741,6 +7741,7 @@
     },
     "SwaggerExternalDocumentation" : {
       "type" : "object",
+      "description" : "The swagger external documentation",
       "properties" : {
         "description" : {
           "type" : "string",
@@ -7754,7 +7755,7 @@
           "type" : "object",
           "description" : "The vendor extensions.",
           "additionalProperties" : {
-            "$ref" : "#definitions/Object"
+            "$ref" : "#/definitions/Object"
           }
         }
       }
@@ -7843,11 +7844,11 @@
         },
         "open" : {
           "description" : "The tree on-open configuration",
-          "$ref" : "#definitions/SwaggerCustomDynamicTreeCommand"
+          "$ref" : "#/definitions/SwaggerCustomDynamicTreeCommand"
         },
         "browse" : {
           "description" : "The tree on-browse configuration",
-          "$ref" : "#definitions/SwaggerCustomDynamicTreeCommand"
+          "$ref" : "#/definitions/SwaggerCustomDynamicTreeCommand"
         }
       }
     },
@@ -7927,6 +7928,24 @@
         }
       }
     },
+    "SwaggerSchemaType": {
+      "type": "string",
+      "enum": [
+        "String",
+        "Number",
+        "Integer",
+        "Boolean",
+        "Array",
+        "File",
+        "Object",
+        "Null"
+      ],
+      "x-ms-enum": {
+        "name": "SwaggerSchemaType",
+        "modelAsString": true
+      },
+      "description": "The swagger schema type."
+    },
      "SwaggerSchema" : {
       "type" : "object",
       "description" : "The swagger schema.",
@@ -7936,7 +7955,7 @@
           "description" : "The reference."
         },
         "type" : {
-          "type" : "",
+          "$ref": "#/definitions/SkuName",
           "description" : "The type"
         },
         "title" : {
@@ -7992,7 +8011,7 @@
         },
         "xml" : {
           "description" : "The xml representation format for a property.",
-          "type" : "#definitions/SwaggerXml"
+          "type" : "#/definitions/SwaggerXml"
         },
         "externalDocs" : {
           "type" : "#/definitions/SwaggerExternalDocumentation",
@@ -8012,7 +8031,7 @@
           "description" : "The dynamic schema configuration."
         },
         "dynamicSchemaNew" : {
-          "$ref" : "#definitions/SwaggerCustomDynamicProperties",
+          "$ref" : "#/definitions/SwaggerCustomDynamicProperties",
           "description" : "The dynamic schema configuration."
         },
         "dynamicListNew" : {
