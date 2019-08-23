@@ -4,7 +4,9 @@
     "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
     "resourceGroupName": "myRg",
     "workspaceName": "myWorkspace",
-    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights"
+    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights",
+    "$orderby": "properties/createdTimeUtc desc",
+    "$top": 1
   },
   "responses": {
     "200": {
@@ -26,14 +28,21 @@
               ],
               "description": "This is a demo case",
               "title": "My case",
-              "assignedTo": {
+              "owner": {
                 "objectId": "2046feea-040d-4a46-9e2b-91c2941bfa70",
                 "email": "john@contoso.com",
                 "name": "john doe"
               },
               "severity": "High",
               "closeReason": "Resolved",
-              "status": "Closed"
+              "status": "Closed",
+              "closedReasonText": "case resolved",
+              "relatedAlertIds": [
+                "cf441808-2d50-4c10-81af-cdd0b908c121"
+              ],
+              "caseNumber": 3177,
+              "lastComment": "This is a demo case",
+              "totalComments": 3
             }
           }
         ]

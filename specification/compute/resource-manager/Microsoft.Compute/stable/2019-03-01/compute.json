@@ -3127,7 +3127,7 @@
           "Create a scale set with ephemeral os disks.": {
             "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
           },
-          "Create a scale set with terminate scheduled events enabled.": {            
+          "Create a scale set with terminate scheduled events enabled.": {
             "$ref": "./examples/CreateAScaleSetWithTerminateScheduledEventEnabled.json"
           }
         }
@@ -5237,7 +5237,7 @@
     },
     "HyperVGenerationType": {
       "type": "string",
-      "description": "Specifies the HyperVGeneration Type for the Virtual Machine created from the image",
+      "description": "Specifies the HyperVGeneration Type",
       "enum": [
         "V1",
         "V2"
@@ -6063,6 +6063,9 @@
         },
         "automaticOSUpgradeProperties": {
           "$ref": "#/definitions/AutomaticOSUpgradeProperties"
+        },
+        "hyperVGeneration": {
+          "$ref": "#/definitions/HyperVGenerationType"
         }
       },
       "description": "Describes the properties of a Virtual Machine Image."
@@ -6993,6 +6996,16 @@
       },
       "description": "Specifies the boot diagnostic settings state. <br><br>Minimum api-version: 2015-06-15."
     },
+    "BillingProfile": {
+      "properties": {
+        "maxPrice": {
+          "type": "number",
+          "format": "double",
+          "description": "Specifies the maximum price you are willing to pay for a low priority VM/VMSS. This price is in US Dollars. <br><br> This price will be compared with the current low priority price for the VM size. Also, the prices are compared at the time of create/update of low priority VM/VMSS and the operation will only succeed if  the maxPrice is greater than the current low priority price. <br><br> The maxPrice will also be used for evicting a low priority VM/VMSS if the current low priority price goes beyond the maxPrice after creation of VM/VMSS. <br><br> Possible values are: <br><br> - Any decimal value greater than zero. Example: $0.01538 <br><br> -1 – indicates default price to be up-to on-demand. <br><br> You can set the maxPrice to -1 to indicate that the low priority VM/VMSS should not be evicted for price reasons. Also, the default max price is -1 if it is not provided by you. <br><br>Minimum api-version: 2019-03-01."
+        }
+      },
+      "description": "Specifies the billing related details of a low priority VM or VMSS. <br><br>Minimum api-version: 2019-03-01."
+    },
     "VirtualMachineExtensionHandlerInstanceView": {
       "properties": {
         "type": {
@@ -7275,11 +7288,43 @@
         },
         "availabilitySet": {
           "$ref": "#/definitions/SubResource",
-          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set."
+          "description": "Specifies information about the availability set that the virtual machine should be assigned to. Virtual machines specified in the same availability set are allocated to different nodes to maximize availability. For more information about availability sets, see [Manage the availability of virtual machines](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-manage-availability?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json). <br><br> For more information on Azure planned maintenance, see [Planned maintenance for virtual machines in Azure](https://docs.microsoft.com/azure/virtual-machines/virtual-machines-windows-planned-maintenance?toc=%2fazure%2fvirtual-machines%2fwindows%2ftoc.json) <br><br> Currently, a VM can only be added to availability set at creation time. An existing VM cannot be added to an availability set. <br><br>This property cannot exist along with a non-null properties.virtualMachineScaleSet reference."
+        },
+        "virtualMachineScaleSet": {
+          "$ref": "#/definitions/SubResource",
+          "description": "Specifies information about the virtual machine scale set that the virtual machine should be assigned to. Virtual machines specified in the same virtual machine scale set are allocated to different nodes to maximize availability. Currently, a VM can only be added to virtual machine scale set at creation time. An existing VM cannot be added to a virtual machine scale set. <br><br>This property cannot exist along with a non-null properties.availabilitySet reference. <br><br>Minimum api‐version: 2019‐03‐01"
         },
         "proximityPlacementGroup": {
           "$ref": "#/definitions/SubResource",
           "description": "Specifies information about the proximity placement group that the virtual machine should be assigned to. <br><br>Minimum api-version: 2018-04-01."
+        },
+        "priority": {
+          "type": "string",
+          "description": "Specifies the priority for the virtual machine. <br><br>Minimum api-version: 2019-03-01",
+          "enum": [
+            "Regular",
+            "Low"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachinePriorityTypes",
+            "modelAsString": true
+          }
+        },
+        "evictionPolicy": {
+          "type": "string",
+          "description": "Specifies the eviction policy for the low priority virtual machine. Only supported value is 'Deallocate'. <br><br>Minimum api-version: 2019-03-01",
+          "enum": [
+            "Deallocate",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "VirtualMachineEvictionPolicyTypes",
+            "modelAsString": true
+          }
+        },
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a low priority virtual machine. <br><br>Minimum api-version: 2019-03-01."
         },
         "host": {
           "$ref": "#/definitions/SubResource",
@@ -8516,8 +8561,12 @@
             "modelAsString": true
           }
         },
-        "scheduledEventsProfile" : {
-          "$ref":"#/definitions/ScheduledEventsProfile",
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
         }
       },
@@ -8549,8 +8598,12 @@
           "type": "string",
           "description": "The license type, which is for bring your own license scenario."
         },
-        "scheduledEventsProfile" : {
-          "$ref":"#/definitions/ScheduledEventsProfile",
+        "billingProfile": {
+          "$ref": "#/definitions/BillingProfile",
+          "description": "Specifies the billing related details of a low priority VMSS. <br><br>Minimum api-version: 2019-03-01."
+        },
+        "scheduledEventsProfile": {
+          "$ref": "#/definitions/ScheduledEventsProfile",
           "description": "Specifies Scheduled Event related configurations."
         }
       },
@@ -9269,9 +9322,8 @@
     "ScheduledEventsProfile": {
       "type": "object",
       "properties": {
-        "terminateNotificationProfile":
-        {
-          "$ref":"#/definitions/TerminateNotificationProfile",
+        "terminateNotificationProfile": {
+          "$ref": "#/definitions/TerminateNotificationProfile",
           "description": "Specifies Terminate Scheduled Event related configurations."
         }
       }
@@ -9281,9 +9333,9 @@
       "properties": {
         "notBeforeTimeout": {
           "type": "string",
-          "description" : "Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)"
+          "description": "Configurable length of time a Virtual Machine being deleted will have to potentially approve the Terminate Scheduled Event before the event is auto approved (timed out). The configuration must be specified in ISO 8601 format, the default value is 5 minutes (PT5M)"
         },
-        "enable" : {
+        "enable": {
           "type": "boolean",
           "description": "Specifies whether the Terminate Scheduled event is enabled or disabled."
         }
