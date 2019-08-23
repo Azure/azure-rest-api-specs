@@ -7733,6 +7733,7 @@
         },
         "extensions" : {
           "type" : "object",
+          "description" : "The vendor extensions.",
           "additionalProperties" : {
             "$ref": "#/definitions/Object"
           }
@@ -7977,6 +7978,7 @@
           }
         },
         "additionalProperties" : {
+          "description" : "The additional properties.",
           "$ref": "#/definitions/Object"
         },
         "required" : {
@@ -8010,18 +8012,17 @@
           "description" : "Gets or sets whether this property must be present in the a request."
         },
         "xml" : {
-          "description" : "The xml representation format for a property.",
-          "type" : "#/definitions/SwaggerXml"
+          "$ref" : "#/definitions/SwaggerXml",
+          "description" : "The xml representation format for a property."
         },
         "externalDocs" : {
-          "type" : "#/definitions/SwaggerExternalDocumentation",
+          "$ref" : "#/definitions/SwaggerExternalDocumentation",
           "description" : "The external documentation."
         },
         "example" : {
           "description" : "The example value.",
           "$ref": "#/definitions/Object"
-        }
-        ,
+        },
         "notificationUrlExtension" : {
           "type" : "boolean",
           "description" : "Gets or sets the notification url extension. If this is set, the property's value should be a callback url for a webhook."
