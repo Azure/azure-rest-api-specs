@@ -1,0 +1,19 @@
+name: Mirror Branch $(Build.SourceBranchName) -- 
+
+resources:
+  repositories:
+    - repository: mirror_template
+      type: github
+      name: AzureSDKAutomation/repo-mirror-template
+      endpoint: Azure
+trigger:
+  batch: true
+  branches:
+    include: [master]
+
+jobs:
+  - template: .azure-pipelines/job-mirror.yml@mirror_template
+    parameters:
+      TARGET_ENDPOINTS: |
+        https://github.com/test-repo-billy/test-sync!master
+        https://github.com/test-repo-tih/test-sync!master
