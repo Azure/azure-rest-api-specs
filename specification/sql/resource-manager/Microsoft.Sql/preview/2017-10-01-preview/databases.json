@@ -232,6 +232,9 @@
           },
           "Creates a database from recoverableDatabaseId.": {
             "$ref": "./examples/CreateDatabaseRecoveryMode.json"
+          },
+          "Creates a Hyperscale database and specifies the number of readonly replicas.": {
+            "$ref": "./examples/CreateHyperscaleDatabaseWithReadReplicas.json"
           }
         }
       },
@@ -674,7 +677,8 @@
             "Resuming",
             "Scaling",
             "OfflineChangingDwPerformanceTiers",
-            "OnlineChangingDwPerformanceTiers"
+            "OnlineChangingDwPerformanceTiers",
+            "Disabled"
           ],
           "type": "string",
           "readOnly": true,
@@ -804,7 +808,7 @@
           "readOnly": true
         },
         "readScale": {
-          "description": "The state of read-only routing. If enabled, connections that have application intent set to readonly in their connection string may be routed to a readonly secondary replica in the same region.",
+          "description": "If enabled, connections that have application intent set to readonly in their connection string may be routed to a readonly secondary replica. This property is only settable for Premium and Business Critical databases.",
           "enum": [
             "Enabled",
             "Disabled"
@@ -821,7 +825,7 @@
         },
         "readReplicaCount": {
           "format": "int32",
-          "description": "The number of readonly secondary replicas associated with the database.",
+          "description": "The number of readonly secondary replicas associated with the database to which readonly application intent connections may be routed. This property is only settable for Hyperscale edition databases.",
           "type": "integer"
         },
         "currentSku": {
