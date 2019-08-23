@@ -7708,6 +7708,323 @@
         }
       }
     },
+    "SwaggerXml" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "The xml element or attribute name."
+        },
+        "namespace" : {
+          "type" : "string",
+          "description" : "The xml namespace."
+        },
+        "prefix" : {
+          "type" : "string",
+          "description" : "The name prefix."
+        },
+        "attribute" : {
+          "type" : "boolean",
+          "description" : "Gets or sets a value indicating whether the property should be an attribute instead of an element."
+        },
+        "wrapped" : {
+          "type" : "boolean",
+          "description" : "Gets or sets a value indicating whether the array elements are wrapped in a container element."
+        },
+        "extensions" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref": "#/definitions/Object"
+          }
+        }
+      }
+    },
+    "SwaggerExternalDocumentation" : {
+      "type" : "object",
+      "properties" : {
+        "description" : {
+          "type" : "string",
+          "description" : "The document description."
+        },
+        "uri" : {
+          "description" : "The documentation Uri.",
+          "type" : "string"
+        },
+        "extensions" : {
+          "type" : "object",
+          "description" : "The vendor extensions.",
+          "additionalProperties" : {
+            "$ref" : "#definitions/Object"
+          }
+        }
+      }
+    },
+    "SwaggerCustomDynamicSchema" : {
+      "type" : "object",
+      "description" : "The swagger custom dynamic schema.",
+      "properties" : {
+        "operationId" : {
+          "type" : "string",
+          "description" : "The operation id to fetch dynamic schema."
+        },
+        "valuePath" : {
+          "type" : "string",
+          "description" : "Json pointer to the dynamic schema on the response body."
+        },
+        "parameters" : {
+          "type" : "object",
+          "description" : "The operation parameters.",
+          "additionalProperties" : {
+            "$ref": "#/definitions/Object"
+          }
+        }
+      }
+    },
+    "SwaggerCustomDynamicProperties" : {
+      "type" : "object",
+      "description" : "The swagger custom dynamic properties.",
+      "properties" : {
+        "operationId" : {
+          "type" : "string",
+          "description" : "The operation id to fetch dynamic schema."
+        },
+        "valuePath" : {
+          "type" : "string",
+          "description" : "Json pointer to the dynamic schema on the response body."
+        },
+        "parameters" : {
+          "type" : "object",
+          "description" : "The operation parameters.",
+          "additionalProperties" : {
+            "$ref": "#/definitions/SwaggerCustomDynamicProperties"
+          }
+        }
+      }
+    },
+    "SwaggerCustomDynamicList" : {
+      "type" : "object",
+      "description" : "The swagger custom dynamic list.",
+      "properties" : {
+        "operationId" : {
+          "type" : "string",
+          "description" : "The operation id to fetch dynamic schema."
+        },
+        "builtInOperation" : {
+          "type" : "string",
+          "description" : "The built in operation."
+        },
+        "itemsPath" : {
+          "type" : "string",
+          "description" : "The path to a response property (relative to the response object, not the response body) which contains an array of dynamic value items."
+        },
+        "itemValuePath" : {
+          "type" : "string",
+          "description" : "The path to a property which defines the value which should be used."
+        },
+        "itemTitlePath" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "parameters" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref": "#/definitions/SwaggerCustomDynamicProperties"
+          }
+        }
+      }
+    },
+    "SwaggerCustomDynamicTree" : {
+      "type" : "object",
+      "description" : "The swagger custom dynamic tree.",
+      "properties" : {
+        "settings" : {
+          "description" : "The tree settings",
+          "$ref": "#/definitions/SwaggerCustomDynamicTreeSettings"
+        },
+        "open" : {
+          "description" : "The tree on-open configuration",
+          "$ref" : "#definitions/SwaggerCustomDynamicTreeCommand"
+        },
+        "browse" : {
+          "description" : "The tree on-browse configuration",
+          "$ref" : "#definitions/SwaggerCustomDynamicTreeCommand"
+        }
+      }
+    },
+    "SwaggerCustomDynamicTreeParameter" : {
+      "type" : "object",
+      "description" : "The swagger custom dynamic tree parameter.",
+      "properties" : {
+        "selectedItemValuePath" : {
+          "type" : "string",
+          "description" : "Gets or sets a path to a property in the currently selected item to pass as a value to a parameter for the given operation."
+        },
+        "value" : {
+          "$ref": "#/definitions/Object",
+          "description": "The parameter value."
+        },
+        "parameterReference" : {
+          "type" : "string",
+          "description" : "The parameter reference."
+        },
+        "required" : {
+          "type" : "boolean",
+          "description" : "Gets or sets a value indicating whether the parameter is required."
+        }
+      }
+    },
+    "SwaggerCustomDynamicTreeCommand" : {
+      "type" : "object",
+      "description" : "The swagger tree command.",
+      "properties" : {
+        "operationId" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "itemsPath" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "itemValuePath" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "itemTitlePath" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "itemFullTitlePath" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "itemIsParent" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "selectableFilter" : {
+          "type" : "string",
+          "description" : "The path to an item property which defines the display name of the item."
+        },
+        "parameters" : {
+          "type" : "object",
+          "additionalProperties" : {
+            "$ref": "#/definitions/SwaggerCustomDynamicTreeParameter"
+          }
+        }
+      }
+    },
+    "SwaggerCustomDynamicTreeSettings" : {
+      "type" : "object",
+      "description" : "The swagger custom dynamic tree settings.",
+      "properties" : {
+        "CanSelectParentNodes" : {
+          "type" : "boolean",
+          "description" : "Gets or sets a value indicating whether parent nodes can be selected."
+        },
+        "CanSelectLeafNodes" : {
+          "type" : "boolean",
+          "description" : "Gets or sets a value indicating whether leaf nodes can be selected."
+        }
+      }
+    },
+     "SwaggerSchema" : {
+      "type" : "object",
+      "description" : "The swagger schema.",
+      "properties" : {
+        "ref" : {
+          "type" : "string",
+          "description" : "The reference."
+        },
+        "type" : {
+          "type" : "",
+          "description" : "The type"
+        },
+        "title" : {
+          "type" : "string",
+          "description" : "The title."
+        },
+        "items" : {
+          "type" : "array",
+          "description": "The items schema.",
+          "$items" : {
+            "$ref" : "#/definitions/SwaggerSchema"
+          } 
+        },
+        "properties" : {
+          "type" : "object",
+          "description" : "The object properties",
+          "additionalProperties" : {
+            "$ref": "#/definitions/SwaggerSchema"
+          }
+        },
+        "additionalProperties" : {
+          "$ref": "#/definitions/Object"
+        },
+        "required" : {
+          "type" : "array",
+          "description" : "The object required properties.",
+          "$items" : {
+            "type" : "string"
+          }
+        },
+        "maxProperties" : {
+          "type" : "integer",
+          "description" : "The maximum number of allowed properties."
+        },
+        "minProperties" : {
+          "type" : "integer",
+          "description" : "The minimum number of allowed properties."
+        },
+        "allOf" : {
+          "type" : "array",
+          "description" : "The schemas which must pass validation when this schema is used.",
+          "items" : {
+            "$ref" : "#/definitions/SwaggerSchema"
+          }
+        },
+        "discriminator" : {
+          "type" : "string",
+          "description" : "The discriminator."
+        },
+        "readOnly" : {
+          "type" : "boolean",
+          "description" : "Gets or sets whether this property must be present in the a request."
+        },
+        "xml" : {
+          "description" : "The xml representation format for a property.",
+          "type" : "#definitions/SwaggerXml"
+        },
+        "externalDocs" : {
+          "type" : "#/definitions/SwaggerExternalDocumentation",
+          "description" : "The external documentation."
+        },
+        "example" : {
+          "description" : "The example value.",
+          "$ref": "#/definitions/Object"
+        }
+        ,
+        "notificationUrlExtension" : {
+          "type" : "boolean",
+          "description" : "Gets or sets the notification url extension. If this is set, the property's value should be a callback url for a webhook."
+        },
+        "dynamicSchemaOld" : {
+          "$ref" : "#/definitions/SwaggerCustomDynamicSchema",
+          "description" : "The dynamic schema configuration."
+        },
+        "dynamicSchemaNew" : {
+          "$ref" : "#definitions/SwaggerCustomDynamicProperties",
+          "description" : "The dynamic schema configuration."
+        },
+        "dynamicListNew" : {
+          "$ref" : "#/definitions/SwaggerCustomDynamicList",
+          "description" : "The dynamic list."
+        },
+        "dynamicTree" : {
+          "$ref" : "#/definitions/SwaggerCustomDynamicTree",
+          "description" : "The dynamic values tree configuration."
+        }
+      }
+    },
     "ApiOperationPropertiesDefinition" : {
       "type" : "object",
       "description" : "The api operations properties",
@@ -7741,18 +8058,18 @@
           "description" : "The annotation of api operation."
         },
         "api" : {
-          "#ref" : "#/definitions/ApiReference",
+          "$ref" : "#/definitions/ApiReference",
           "description" : "The api reference."
         },
         "inputsDefinition" : {
-          "type" : "SwaggerSchema",
+          "$ref": "#/definitions/SwaggerSchema",
           "description" : "The operation inputs definition schema."
         },
         "responsesDefinition": {
           "type": "object",
           "description" : "The operation responses definition schemas.",
           "additionalProperties": {
-            "type" : "SwaggerSchema"
+            "$ref": "#/definitions/SwaggerSchema"
           }
         },
         "isWebHook" : {
@@ -7824,7 +8141,7 @@
           "description" : "The icon uri of the api."
         },
         "swagger" : {
-          "type" : "jtoken",
+          "$ref": "#/definitions/Object",
           "description" : "The swagger of the api."
         },
         "brandColor" : {
@@ -7869,7 +8186,7 @@
         "connectionParameters": {
           "type": "object",
           "additionalProperties": {
-            "type": "jtoken"
+            "$ref": "#/definitions/Object"
           },
           "description": "The connection parameters."
         },
@@ -7988,7 +8305,7 @@
           "description" : "The description."
         },
         "visibility" : {
-          "#ref" : "#/definitions/ApiDeploymentParameterVisibility",
+          "$ref" : "#/definitions/ApiDeploymentParameterVisibility",
           "description" : "The visibility."
         }
       }
@@ -8539,9 +8856,15 @@
         },
         "sku" : {
           "type" : "object",
-          "name" : {
-            "type" : "string",
-            "description" : "The sku name"
+          "properties" : {
+            "name" : {
+              "$ref": "#/definitions/IntegrationServiceEnvironmentSkuName",
+              "description": "The sku name."
+            },
+            "tier" : {
+              "type" : "string",
+              "description" : "The sku tier."
+            }
           }
         },
         "capacity" : {
@@ -8628,7 +8951,7 @@
           "description": "The integration service environment."
         },
         "state" : {
-          "#ref" : "#/definitions/WorkflowState",
+          "$ref" : "#/definitions/WorkflowState",
           "description" : "The workflow state."
         }
       }
