@@ -1541,6 +1541,33 @@
       },
       "description": "Properties of basic rule of an application gateway."
     },
+    "ApplicationGatewayBasicRule": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationGatewayBasicRulePropertiesFormat",
+          "description": "Properties of the application gateway basic rule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the path rule that is unique within an Application Gateway."
+        },
+        "etag": {
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "Basic rule of URL path map of an application gateway."
+    },
     "ApplicationGatewayPathRule": {
       "properties": {
         "properties": {
@@ -1705,13 +1732,12 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Redirect configuration resource of the application gateway."
         },
-        "basicRule": {
-          "$ref": "#/definitions/ApplicationGatewayBasicRulePropertiesFormat",
-          "description": "Basic routing rule"
-        },
-        "firewallPolicy": {
-          "$ref": "./network.json#/definitions/SubResource",
-          "description": "FirewallPolicy referred for Routing Rule."
+        "basicRules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationGatewayBasicRule"
+          },
+          "description": "Array of Basic Rules"
         },
         "provisioningState": {
           "type": "string",
