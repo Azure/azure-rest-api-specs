@@ -1,49 +1,49 @@
 {
+  "parameters": {
+    "resourceGroupName": "hsm-group",
+    "name": "hsm1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-10-31-preview",
     "parameters": {
-        "resourceGroupName": "hsm-group",
-        "name": "hsm1",
-        "subscriptionId": "00000000-0000-0000-0000-000000000000",
-        "api-version": "2018-10-31-preview",
-        "parameters": {
-            "tags": {
-                "Dept": "hsm",
-                "Environment": "dogfood",
-                "Slice": "A"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "properties": {
-                    "networkProfile": {
-                        "subnet": {
-                            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01"
-                        },
-                        "networkInterfaces": [
-                            {
-                                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/networkInterfaces/hsm_vnic",
-                                "privateIpAddress": "1.0.0.1"
-                            }
-                        ]
-                    },
-                    "stampId": "stamp01",
-                    "provisioningState": "Succeeded",
-                    "statusMessage": "DedicatedHsm device is functional."
-                },
-                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs/hsm1",
-                "name": "hsm1",
-                "type": "Microsoft.HardwareSecurityModules/dedicatedHSMs",
-                "location": "westus",
-                "sku": {
-                    "name": "SafeNet Luna Network HSM A790"
-                },
-                "tags": {
-                    "Dept": "hsm",
-                    "Environment": "dogfood",
-                    "Slice": "A"
-                }
-            }
-        }
+      "tags": {
+        "Dept": "hsm",
+        "Environment": "dogfood",
+        "Slice": "A"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "networkProfile": {
+            "subnet": {
+              "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/virtualNetworks/stamp01/subnets/stamp01"
+            },
+            "networkInterfaces": [
+              {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.Network/networkInterfaces/hsm_vnic",
+                "privateIpAddress": "1.0.0.1"
+              }
+            ]
+          },
+          "stampId": "stamp01",
+          "provisioningState": "Succeeded",
+          "statusMessage": "DedicatedHsm device is functional."
+        },
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/hsm-group/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs/hsm1",
+        "name": "hsm1",
+        "type": "Microsoft.HardwareSecurityModules/dedicatedHSMs",
+        "location": "westus",
+        "sku": {
+          "name": "SafeNet Luna Network HSM A790"
+        },
+        "tags": {
+          "Dept": "hsm",
+          "Environment": "dogfood",
+          "Slice": "A"
+        }
+      }
+    }
+  }
 }

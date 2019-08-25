@@ -870,7 +870,7 @@
             "schema": {
               "$ref": "#/definitions/Endpoint"
             }
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously.",
             "schema": {
@@ -936,7 +936,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -999,7 +999,7 @@
         "responses": {
           "200": {
             "description": "OK. The request has succeeded."
-          },          
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -1656,7 +1656,7 @@
           "CustomDomains_EnableCustomHttpsUsingYourOwnCertificate": {
             "$ref": "./examples/CustomDomains_EnableCustomHttpsUsingBYOC.json"
           },
-          "CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate" :{
+          "CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate": {
             "$ref": "./examples/CustomDomains_EnableCustomHttpsUsingCDNManagedCertificate.json"
           }
         },
@@ -2220,7 +2220,7 @@
           "required": [
             "rules"
           ],
-          "properties":{
+          "properties": {
             "description": {
               "description": "User-friendly description of the policy.",
               "type": "string"
@@ -2233,7 +2233,6 @@
               }
             }
           }
-
         }
       }
     },
@@ -2265,7 +2264,7 @@
         }
       }
     },
-    "DeliveryRuleCondition":{
+    "DeliveryRuleCondition": {
       "description": "A condition for the delivery rule.",
       "discriminator": "name",
       "required": [
@@ -2312,7 +2311,7 @@
           "type": "string",
           "enum": [
             "Microsoft.Azure.Cdn.Models.DeliveryRuleUrlPathConditionParameters"
-          ]  
+          ]
         },
         "path": {
           "description": "A URL path for the condition of the delivery rule",
@@ -2357,7 +2356,7 @@
           "type": "string",
           "enum": [
             "Microsoft.Azure.Cdn.Models.DeliveryRuleUrlFileExtensionConditionParameters"
-          ]  
+          ]
         },
         "extensions": {
           "description": "A list of extensions for the condition of the delivery rule.",
@@ -2392,7 +2391,7 @@
           "$ref": "#/definitions/DeliveryRuleAction"
         }
       ],
-      "required":[
+      "required": [
         "parameters"
       ],
       "properties": {
@@ -2414,7 +2413,7 @@
           "type": "string",
           "enum": [
             "Microsoft.Azure.Cdn.Models.DeliveryRuleCacheExpirationActionParameters"
-          ]  
+          ]
         },
         "cacheBehavior": {
           "description": "Caching behavior for the requests that include query strings.",
@@ -2828,7 +2827,7 @@
           "$ref": "#/definitions/CdnCertificateSourceParameters"
         }
       }
-    }, 
+    },
     "CdnCertificateSourceParameters": {
       "description": "Defines the parameters for using CDN managed certificate for securing custom domain.",
       "required": [
@@ -2840,7 +2839,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.CdnCertificateSourceParameters"
-          ]  
+          ]
         },
         "certificateType": {
           "description": "Type of certificate used",
@@ -2873,7 +2872,7 @@
           "$ref": "#/definitions/KeyVaultCertificateSourceParameters"
         }
       }
-    }, 
+    },
     "KeyVaultCertificateSourceParameters": {
       "description": "Describes the parameters for using a user's KeyVault certificate for securing custom domain.",
       "required": [
@@ -2891,7 +2890,7 @@
           "type": "string",
           "enum": [
             "#Microsoft.Azure.Cdn.Models.KeyVaultCertificateSourceParameters"
-          ]  
+          ]
         },
         "subscriptionId": {
           "description": "Subscription Id of the user's Key Vault containing the SSL certificate",
@@ -2917,7 +2916,7 @@
           "description": "Describes the action that shall be taken when the certificate is updated in Key Vault.",
           "type": "string",
           "enum": [
-             "NoAction"
+            "NoAction"
           ],
           "x-ms-enum": {
             "name": "UpdateRule",
@@ -2928,7 +2927,7 @@
           "description": "Describes the action that shall be taken when the certificate is removed from Key Vault.",
           "type": "string",
           "enum": [
-             "NoAction"
+            "NoAction"
           ],
           "x-ms-enum": {
             "name": "DeleteRule",

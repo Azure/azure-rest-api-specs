@@ -452,7 +452,7 @@
         "x-ms-long-running-operation": true
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableServerVariables": {
       "get": {
         "tags": [
           "ApplicationGateways"
@@ -488,8 +488,8 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableRequestHeaders": {
-     "get": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableRequestHeaders": {
+      "get": {
         "tags": [
           "ApplicationGateways"
         ],
@@ -524,7 +524,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/applicationGatewayAvailableResponseHeaders": {
       "get": {
         "tags": [
           "ApplicationGateways"
@@ -1336,7 +1336,7 @@
             "$ref": "#/definitions/ApplicationGatewayCustomError"
           },
           "description": "Custom error configurations of the HTTP listener."
-         }
+        }
       },
       "description": "Properties of HTTP listener of an application gateway."
     },
@@ -1910,7 +1910,7 @@
             "$ref": "#/definitions/ApplicationGatewayCustomError"
           },
           "description": "Custom error configurations of the application gateway resource."
-         }
+        }
       },
       "description": "Properties of the application gateway."
     },
@@ -2162,44 +2162,26 @@
       ],
       "description": "Allows to disable rules within a rule group or an entire rule group."
     },
-	"ApplicationGatewayAvailableServerVariablesResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of supported server variables in application gateway."
-        }
+    "ApplicationGatewayAvailableServerVariablesResult": {
+      "type": "array",
+      "items": {
+        "type": "string"
       },
       "description": "Response for ApplicationGatewayAvailableServerVariables API service call."
     },
-	"ApplicationGatewayAvailableRequestHeadersResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of supported request headers in application gateway."
-        }
+    "ApplicationGatewayAvailableRequestHeadersResult": {
+      "type": "array",
+      "items": {
+        "type": "string"
       },
       "description": "Response for ApplicationGatewayAvailableRequestHeaders API service call."
     },
-	"ApplicationGatewayAvailableResponseHeadersResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The list of supported response header in application gateway."
-        }
+    "ApplicationGatewayAvailableResponseHeadersResult": {
+      "type": "array",
+      "items": {
+        "type": "string"
       },
-      "description": "Response for ApplicationGatewayAvailableResponeHeaders API service call."
+      "description": "Response for ApplicationGatewayAvailableResponseHeaders API service call."
     },
     "ApplicationGatewayFirewallExclusion": {
       "properties": {
@@ -2413,7 +2395,7 @@
       },
       "description": "Properties of ApplicationGatewaySslPredefinedPolicy"
     },
-	"ApplicationGatewayCustomError": {
+    "ApplicationGatewayCustomError": {
       "properties": {
         "statusCode": {
           "type": "string",
@@ -2488,7 +2470,10 @@
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA256",
         "TLS_DHE_DSS_WITH_AES_256_CBC_SHA",
         "TLS_DHE_DSS_WITH_AES_128_CBC_SHA",
-        "TLS_RSA_WITH_3DES_EDE_CBC_SHA"
+        "TLS_RSA_WITH_3DES_EDE_CBC_SHA",
+        "TLS_DHE_DSS_WITH_3DES_EDE_CBC_SHA",
+        "TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256",
+        "TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384"
       ],
       "x-ms-enum": {
         "name": "ApplicationGatewaySslCipherSuite",

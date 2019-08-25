@@ -19,7 +19,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(profile)
 namespace: Microsoft.Azure.Management.Subscription
-output-folder: $(csharp-sdks-folder)/Subscription/Management.Subscription/Generated
+output-folder: $(csharp-sdks-folder)/subscription/Microsoft.Azure.Management.Subscription/src/Generated
 ```
 
 ## Batch settings
@@ -44,3 +44,14 @@ output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscrip
 batch:
   - tag: package-2017-11-preview
 ```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+``` yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(profile).Subscription
+output-folder: $(csharp-sdks-folder)/$(profile)/Subscription/Management.Subscription/Generated
+batch:
+ - tag: package-2016-06-01
+ ```

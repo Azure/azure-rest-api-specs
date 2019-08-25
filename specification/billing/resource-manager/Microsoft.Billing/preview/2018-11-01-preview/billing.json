@@ -33,7 +33,7 @@
           }
         },
         "operationId": "BillingAccounts_List",
-        "description": "Lists all billing accounts for a user which he has access to.",
+        "description": "Lists all billing accounts for which a user has access.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -59,6 +59,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -97,6 +100,142 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "operationId": "BillingAccounts_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "description": "The operation to update a billing account.",
+        "x-ms-examples": {
+          "UpdateBillingAccount": {
+            "$ref": "./examples/UpdateBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingAccountUpdateProperties"
+            },
+            "description": "Parameters supplied to the update billing account operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingAccount"
+            }
+          },
+          "202": {
+            "description": "Accepted. Billing account update is in progress."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods": {
+      "get": {
+        "tags": [
+          "PaymentMethods"
+        ],
+        "operationId": "PaymentMethods_ListByBillingAccountName",
+        "description": "Lists the Payment Methods by billing account Id.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/2018-11-01-preview/paymentmethods"
+        },
+        "x-ms-examples": {
+          "PaymentMethodsListByBillingAccount": {
+            "$ref": "./examples/PaymentMethodsListByBillingAccount.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PaymentMethodsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/validateAddress": {
+      "post": {
+        "tags": [
+          "ValidateAddress"
+        ],
+        "x-ms-examples": {
+          "ValidateAddressValid": {
+            "$ref": "./examples/ValidateAddressValid.json"
+          },
+          "ValidateAddressInvalid": {
+            "$ref": "./examples/ValidateAddressInvalid.json"
+          }
+        },
+        "operationId": "Addresses_Validate",
+        "description": "Validates the address.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "address",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Address"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateAddressResponse"
             }
           },
           "default": {
@@ -232,6 +371,70 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "tags": [
+          "BillingProfiles"
+        ],
+        "operationId": "BillingProfiles_Create",
+        "x-ms-long-running-operation": true,
+        "description": "The operation to create a BillingProfile.",
+        "x-ms-examples": {
+          "CreateBillingProfile": {
+            "$ref": "./examples/CreateBillingProfile.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/BillingProfileCreationParameters"
+            },
+            "description": "Parameters supplied to the Create BillingProfile operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingProfile"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -341,6 +544,108 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "x-ms-examples": {
+          "CustomersListByBillingAccountName": {
+            "$ref": "./examples/CustomersListByBillingAccountName.json"
+          }
+        },
+        "operationId": "Customers_ListByBillingAccountName",
+        "description": "Lists all customers which the current user can work with on-behalf of a partner.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter using hasPermission('{permissionId}') to only return customers for which the caller has the specified permission.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "$skiptoken",
+            "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}": {
+      "get": {
+        "tags": [
+          "Customers"
+        ],
+        "x-ms-examples": {
+          "Customer": {
+            "$ref": "./examples/Customer.json"
+          },
+          "CustomerWithExpand": {
+            "$ref": "./examples/CustomerWithExpand.json"
+          }
+        },
+        "operationId": "Customers_Get",
+        "description": "Get the customer by id.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand enabledAzureSkus, resellers.",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Customer"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections": {
       "get": {
         "tags": [
@@ -355,7 +660,7 @@
           }
         },
         "operationId": "InvoiceSections_ListByBillingAccountName",
-        "description": "Lists all invoice sections for a user which he has access to.",
+        "description": "Lists all invoice sections for which a user has access.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -410,7 +715,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/InvoiceSectionProperties"
+              "$ref": "#/definitions/InvoiceSectionCreationRequest"
             },
             "description": "Parameters supplied to the Create InvoiceSection operation."
           }
@@ -459,7 +764,7 @@
           }
         },
         "operationId": "InvoiceSections_ListByBillingProfileName",
-        "description": "Lists all invoice sections under a billing profile for a user which he has access to.",
+        "description": "Lists all invoice sections under a billing profile for which a user has access.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -484,6 +789,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -530,6 +838,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -656,7 +967,7 @@
           }
         },
         "operationId": "Departments_ListByBillingAccountName",
-        "description": "Lists all departments for a user which he has access to.",
+        "description": "Lists all departments for which a user has access.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -692,6 +1003,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -765,7 +1079,7 @@
           }
         },
         "operationId": "EnrollmentAccounts_ListByBillingAccountName",
-        "description": "Lists all Enrollment Accounts for a user which he has access to.",
+        "description": "Lists all Enrollment Accounts for which a user has access.",
         "parameters": [
           {
             "$ref": "#/parameters/apiVersionParameter"
@@ -801,6 +1115,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -907,6 +1224,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1032,6 +1352,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1158,6 +1481,99 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions": {
+      "get": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "BillingSubscriptions_ListByCustomerName",
+        "description": "Lists billing subscription by customer name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionsListByCustomer": {
+            "$ref": "./examples/BillingSubscriptionsListByCustomer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/billingSubscriptions/{billingSubscriptionName}": {
+      "get": {
+        "tags": [
+          "BillingSubscriptions"
+        ],
+        "operationId": "BillingSubscriptions_GetByCustomerName",
+        "description": "Get a single billing subscription by name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "BillingSubscriptionByCustomerName": {
+            "$ref": "./examples/BillingSubscriptionByCustomerName.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingSubscriptionSummary"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
@@ -1200,6 +1616,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1311,6 +1730,54 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/billingSubscriptions/{billingSubscriptionName}/validateTransferEligibility": {
+      "post": {
+        "x-ms-examples": {
+          "SubscriptionTransferValidateSuccess": {
+            "$ref": "./examples/ValidateSubscriptionTransferSuccess.json"
+          },
+          "SubscriptionTransferValidateFailure": {
+            "$ref": "./examples/ValidateSubscriptionTransferFailure.json"
+          }
+        },
+        "operationId": "BillingSubscriptions_ValidateTransfer",
+        "description": "Validates the transfer of billing subscriptions across invoice sections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/billingSubscriptionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferBillingSubscriptionRequestProperties"
+            },
+            "description": "Parameters supplied to the Transfer Billing Subscription operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateSubscriptionTransferEligibilityResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products": {
       "get": {
         "tags": [
@@ -1406,6 +1873,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1511,6 +1981,54 @@
                 "description": "URI to poll for the operation status",
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/{invoiceSectionName}/products/{productName}/validateTransferEligibility": {
+      "post": {
+        "x-ms-examples": {
+          "SubscriptionTransferValidateSuccess": {
+            "$ref": "./examples/ValidateProductTransferSuccess.json"
+          },
+          "SubscriptionTransferValidateFailure": {
+            "$ref": "./examples/ValidateProductTransferFailure.json"
+          }
+        },
+        "operationId": "Products_ValidateTransfer",
+        "description": "Validates the transfer of products across invoice sections.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/invoiceSectionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/productNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TransferProductRequestProperties"
+            },
+            "description": "Parameters supplied to the Transfer Products operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ValidateProductTransferEligibilityResult"
             }
           },
           "default": {
@@ -1651,6 +2169,78 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/transactions": {
+      "get": {
+        "tags": [
+          "Transactions"
+        ],
+        "operationId": "Transactions_ListByCustomerName",
+        "description": "Lists the transactions by invoice section name for given start date and end date.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "TransactionsListByCustomer": {
+            "$ref": "./examples/TransactionsListByCustomer.json"
+          },
+          "ReservationTransactionsListByCustomer": {
+            "$ref": "./examples/ReservationTransactionsListByCustomer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "startDate",
+            "in": "query",
+            "description": "Start date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endDate",
+            "in": "query",
+            "description": "End date",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "description": "May be used to filter by transaction kind. The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/TransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1717,6 +2307,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2303,6 +2896,45 @@
           },
           {
             "$ref": "#/parameters/billingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/BillingPermissionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Billing/billingPermissions": {
+      "get": {
+        "tags": [
+          "BillingPermissions"
+        ],
+        "x-ms-examples": {
+          "CustomerPermissionsList": {
+            "$ref": "./examples/CustomerPermissionsList.json"
+          }
+        },
+        "operationId": "BillingPermissions_ListByCustomers",
+        "description": "Lists all billing permissions for the caller under customer.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
           }
         ],
         "responses": {
@@ -3171,6 +3803,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3219,6 +3854,106 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingAccounts/default/lineOfCredit/default": {
+      "get": {
+        "tags": [
+          "LineOfCredits"
+        ],
+        "x-ms-examples": {
+          "LineOfCreditBySubscription": {
+            "$ref": "./examples/LineOfCreditBySubscription.json"
+          }
+        },
+        "operationId": "LineOfCredits_Get",
+        "description": "Get the current line of credit.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LineOfCredit"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "LineOfCredits"
+        ],
+        "operationId": "LineOfCredits_Update",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "IncreaseLineOfCreditBySubscription": {
+            "$ref": "./examples/IncreaseLineOfCreditBySubscription.json"
+          }
+        },
+        "description": "Increase the current line of credit.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LineOfCredit"
+            },
+            "description": "Parameters supplied to the increase line of credit operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/LineOfCredit"
+            }
+          },
+          "202": {
+            "description": "Accepted. Line of credit increase is in progress.",
+            "headers": {
+              "Location": {
+                "description": "Location URI to poll for result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Recommends the retryable time after receiving this.",
+                "type": "integer"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for the operation status",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3231,6 +3966,39 @@
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/InitiateTransferProperties"
         }
+      }
+    },
+    "ValidateAddressResponse": {
+      "type": "object",
+      "description": "Result of the address validation",
+      "properties": {
+        "status": {
+          "description": "status of the address validation.",
+          "$ref": "#/definitions/AddressValidationStatus"
+        },
+        "suggestedAddresses": {
+          "description": "list of suggested addresses.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Address"
+          }
+        },
+        "validationMessage": {
+          "description": "Validation error message.",
+          "type": "string"
+        }
+      }
+    },
+    "AddressValidationStatus": {
+      "type": "string",
+      "description": "Status of the address validation response.",
+      "enum": [
+        "Valid",
+        "Invalid"
+      ],
+      "x-ms-enum": {
+        "name": "addressValidationStatus",
+        "modelAsString": true
       }
     },
     "InitiateTransferProperties": {
@@ -3569,8 +4337,12 @@
       "description": "The properties of the product to initiate a transfer.",
       "properties": {
         "destinationInvoiceSectionId": {
-          "description": "Destination invoice section id.",
-          "type": "string"
+          "type": "string",
+          "description": "The destination invoice section id."
+        },
+        "destinationBillingProfileId": {
+          "type": "string",
+          "description": "The destination billing profile id."
         }
       }
     },
@@ -3613,7 +4385,62 @@
         "destinationInvoiceSectionId": {
           "type": "string",
           "description": "The destination invoice section id."
+        },
+        "destinationBillingProfileId": {
+          "type": "string",
+          "description": "The destination billing profile id."
         }
+      }
+    },
+    "ValidateSubscriptionTransferEligibilityResult": {
+      "type": "object",
+      "description": "Result of the transfer eligibility validation.",
+      "properties": {
+        "isTransferEligible": {
+          "description": "Specifies whether the transfer is eligible or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "Validation error details.",
+          "$ref": "#/definitions/ValidateSubscriptionTransferEligibilityError"
+        }
+      }
+    },
+    "ValidateSubscriptionTransferEligibilityError": {
+      "type": "object",
+      "description": "Error details of the transfer eligibility validation",
+      "properties": {
+        "code": {
+          "description": "Error code for the product transfer validation.",
+          "$ref": "#/definitions/SubscriptionTransferValidationErrorCode"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Detailed error message explaining the error.",
+          "type": "string"
+        }
+      }
+    },
+    "SubscriptionTransferValidationErrorCode": {
+      "type": "string",
+      "description": "Error code of the transfer validation response.",
+      "enum": [
+        "InvalidSource",
+        "SubscriptionNotActive",
+        "InsufficientPermissionOnSource",
+        "InsufficientPermissionOnDestination",
+        "DestinationBillingProfilePastDue",
+        "SubscriptionTypeNotSupported",
+        "CrossBillingAccountNotAllowed",
+        "NotAvailableForDestinationMarket"
+      ],
+      "x-ms-enum": {
+        "name": "subscriptionTransferValidationErrorCode",
+        "modelAsString": true
       }
     },
     "UpdateAutoRenewOperationSummary": {
@@ -3740,6 +4567,16 @@
           "description": "Specifies whether the user has read access on billing account.",
           "type": "boolean",
           "readOnly": true
+        }
+      }
+    },
+    "BillingAccountUpdateProperties": {
+      "description": "The properties of the billing account that can be updated.",
+      "properties": {
+        "properties": {
+          "description": "A billing property.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/BillingAccountProperties"
         }
       }
     },
@@ -4060,6 +4897,34 @@
         }
       }
     },
+    "BillingProfileCreationParameters": {
+      "description": "The parameters for creating a new billing profile.",
+      "properties": {
+        "displayName": {
+          "description": "The billing profile name.",
+          "type": "string"
+        },
+        "poNumber": {
+          "description": "Purchase order number.",
+          "type": "string"
+        },
+        "address": {
+          "description": "Billing address.",
+          "$ref": "#/definitions/Address"
+        },
+        "invoiceEmailOptIn": {
+          "description": "If the billing profile is opted in to receive invoices via email.",
+          "type": "boolean"
+        },
+        "enableAzureSKUs": {
+          "description": "Azure skus to enable for this billing profile..",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnabledAzureSKUs"
+          }
+        }
+      }
+    },
     "BillingProfileProperties": {
       "description": "The properties of the billing profile.",
       "properties": {
@@ -4156,6 +5021,76 @@
         }
       }
     },
+    "CustomerListResult": {
+      "description": "Result of listing customers.",
+      "properties": {
+        "value": {
+          "description": "The list of customers.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Customer"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Customer": {
+      "description": "A partner's customer.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The customer.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomerProperties"
+        }
+      }
+    },
+    "CustomerProperties": {
+      "description": "The properties of a customer.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the customer.",
+          "type": "string"
+        },
+        "enabledAzureSKUs": {
+          "description": "Information about the product.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnabledAzureSKUs"
+          }
+        },
+        "resellers": {
+          "description": "The resellers which are allowed to provide service to this customer.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Reseller"
+          }
+        }
+      }
+    },
+    "InvoiceSectionCreationRequest": {
+      "description": "The properties of an InvoiceSection.",
+      "properties": {
+        "displayName": {
+          "description": "The name of the InvoiceSection.",
+          "type": "string"
+        },
+        "billingProfileId": {
+          "description": "The billing profile id.",
+          "type": "string"
+        }
+      }
+    },
     "InvoiceSectionListResult": {
       "description": "Result of listing invoice sections.",
       "properties": {
@@ -4211,11 +5146,25 @@
       "properties": {
         "skuId": {
           "description": "The sku id.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "skuDescription": {
           "description": "The sku description.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Reseller": {
+      "description": "Details about a reseller.",
+      "properties": {
+        "resellerId": {
+          "description": "The reseller id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "A description of the reseller.",
           "type": "string",
           "readOnly": true
         }
@@ -4616,6 +5565,58 @@
         }
       }
     },
+    "ValidateProductTransferEligibilityResult": {
+      "type": "object",
+      "description": "Result of the product transfer eligibility validation.",
+      "properties": {
+        "isTransferEligible": {
+          "description": "Specifies whether the transfer is eligible or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "errorDetails": {
+          "description": "Validation error details.",
+          "$ref": "#/definitions/ValidateProductTransferEligibilityError"
+        }
+      }
+    },
+    "ValidateProductTransferEligibilityError": {
+      "type": "object",
+      "description": "Error details of the product transfer eligibility validation.",
+      "properties": {
+        "code": {
+          "description": "Error code for the product transfer validation.",
+          "$ref": "#/definitions/ProductTransferValidationErrorCode"
+        },
+        "message": {
+          "description": "The error message.",
+          "type": "string"
+        },
+        "details": {
+          "description": "Detailed error message explaining the error.",
+          "type": "string"
+        }
+      }
+    },
+    "ProductTransferValidationErrorCode": {
+      "type": "string",
+      "description": "Error code of the transfer validation response.",
+      "enum": [
+        "InvalidSource",
+        "ProductNotActive",
+        "InsufficientPermissionOnSource",
+        "InsufficientPermissionOnDestination",
+        "DestinationBillingProfilePastDue",
+        "ProductTypeNotSupported",
+        "CrossBillingAccountNotAllowed",
+        "NotAvailableForDestinationMarket",
+        "OneTimePurchaseProductTransferNotAllowed"
+      ],
+      "x-ms-enum": {
+        "name": "productTransferValidationErrorCode",
+        "modelAsString": true
+      }
+    },
     "BillingSubscriptionsListResult": {
       "description": "Result of listing billing subscriptions summary.",
       "properties": {
@@ -4699,6 +5700,16 @@
           "type": "string",
           "readOnly": true
         },
+        "customerId": {
+          "description": "Customer id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerDisplayName": {
+          "description": "Display name of customer to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
         "invoiceSectionId": {
           "description": "Invoice section id to which this product belongs.",
           "type": "string",
@@ -4717,6 +5728,11 @@
           "description": "The sku description.",
           "type": "string",
           "readOnly": true
+        },
+        "reseller": {
+          "description": "Reseller for this subscription.",
+          "readOnly": true,
+          "$ref": "#/definitions/Reseller"
         }
       }
     },
@@ -4855,6 +5871,16 @@
           "type": "integer",
           "readOnly": true
         },
+        "customerId": {
+          "description": "Customer id to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerDisplayName": {
+          "description": "Display name of customer to which this product belongs.",
+          "type": "string",
+          "readOnly": true
+        },
         "invoiceSectionId": {
           "description": "Invoice section id to which this product belongs.",
           "type": "string",
@@ -4956,8 +5982,7 @@
         },
         "value": {
           "description": "Amount value.",
-          "type": "number",
-          "readOnly": true
+          "type": "number"
         }
       }
     },
@@ -5100,13 +6125,11 @@
       "properties": {
         "principalId": {
           "description": "The user's principal id that the role gets assigned to",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
-        "billingRoleDefinitionName": {
+        "billingRoleDefinitionId": {
           "description": "The role definition id",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         }
       }
     },
@@ -5352,6 +6375,54 @@
         }
       }
     },
+    "LineOfCredit": {
+      "description": "Line of credit resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "A line of credit.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LineOfCreditProperties"
+        }
+      }
+    },
+    "LineOfCreditProperties": {
+      "description": "The properties of the line of credit.",
+      "properties": {
+        "creditLimit": {
+          "description": "The current credit limit.",
+          "$ref": "#/definitions/Amount",
+          "readOnly": false
+        },
+        "reason": {
+          "description": "The reason for the line of credit status when not approved.",
+          "type": "string",
+          "readOnly": true
+        },
+        "remainingBalance": {
+          "description": "Remaining balance.",
+          "$ref": "#/definitions/Amount",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The line of credit status.",
+          "type": "string",
+          "enum": [
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "Action": {
       "description": "the action the caller allowed to do",
       "type": "string",
@@ -5374,14 +6445,22 @@
     "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
-      "description": "Azure Subscription ID.",
+      "description": "Azure Subscription Id.",
       "required": true,
       "type": "string"
     },
     "billingAccountNameParameter": {
       "name": "billingAccountName",
       "in": "path",
-      "description": "billing Account Id.",
+      "description": "Billing Account Id.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "customerNameParameter": {
+      "name": "customerName",
+      "in": "path",
+      "description": "Customer Id.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
