@@ -441,13 +441,18 @@
         "actionType": {
           "type": "string",
           "description": "type of action that will be triggered by the PlaybookConfiguration",
-          "enum": ["LogicApp"],
+          "enum": ["LogicApp", "EventHub"],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": true,
-            "values": [{
-              "value": "LogicApp"
-            }]
+            "values": [
+              {
+                "value": "LogicApp"
+              },
+              {
+                "value": "EventHub"
+              }
+            ]
           }
         }
       }
@@ -468,6 +473,24 @@
           "type": "string",
           "description": "The uri that should be triggered by an Http GET request.",
           "format": "uri"
+        }
+      }
+    },
+    "PlaybookConfigurationActionEventHub": {
+      "type": "object",
+      "description": "The event hub action that should be triggered.",
+      "x-ms-discriminator-value": "EventHub",
+      "allOf": [{
+        "$ref": "#/definitions/PlaybookConfigurationAction"
+      }],
+      "properties": {
+        "eventHubResourceId": {
+          "type": "string",
+          "description": "The event hub resource id."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "The event hub connection string(the primary or secondary key)."
         }
       }
     },
