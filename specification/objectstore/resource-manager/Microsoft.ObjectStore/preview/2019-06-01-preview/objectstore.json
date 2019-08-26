@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ObjectStore/OSNamespaces/{osNamespace}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ObjectStore/osNamespaces/{osNamespace}": {
       "get": {
         "tags": [
           "OSNamespaces"
@@ -145,6 +145,9 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successful"
+          },
           "202": {
             "description": "OSNamespace delete operation will complete asynchronously"
           },
@@ -208,7 +211,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ObjectStore/OSNamespaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ObjectStore/osNamespaces": {
       "get": {
         "tags": [
           "OSNamespaces"
@@ -250,7 +253,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ObjectStore/OSNamespaces": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ObjectStore/osNamespaces": {
       "get": {
         "tags": [
           "OSNamespaces"
