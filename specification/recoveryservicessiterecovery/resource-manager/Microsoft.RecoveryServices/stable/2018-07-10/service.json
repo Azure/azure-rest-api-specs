@@ -7892,6 +7892,16 @@
           "description": "The fabric specific object Id of the virtual machine.",
           "type": "string"
         },
+        "initialPrimaryFabricLocation": {
+          "description": "The initial primary fabric location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialRecoveryFabricLocation": {
+          "description": "The initial recovery fabric location.",
+          "type": "string",
+          "readOnly": true
+        },
         "multiVmGroupId": {
           "description": "The multi vm group Id.",
           "type": "string"
@@ -8043,6 +8053,20 @@
         "recoveryAvailabilityZone": {
           "description": "The recovery availability zone.",
           "type": "string"
+        },
+        "vmEncryptionType": {
+          "description": "The encryption type of the VM.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NotEncrypted",
+            "OnePassEncrypted",
+            "TwoPassEncrypted"
+          ],
+          "x-ms-enum": {
+            "name": "VmEncryptionType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8255,6 +8279,10 @@
         "recoveryTargetDiskAccountType": {
           "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
           "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for one / single pass flows)."
         }
       }
     },
@@ -8273,6 +8301,10 @@
         "recoveryReplicaDiskAccountType": {
           "description": "The replica disk type before failover.",
           "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for one / single pass flows)."
         }
       }
     },
