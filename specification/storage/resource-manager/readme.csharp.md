@@ -41,7 +41,7 @@ These settings apply only when `--csharp-profile=hybrid_2018_03_01` is specified
 
 ```yaml $(csharp-profile)=='hybrid_2018_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Storage
-output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Storage/Management.Storage/Generated
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.Management.Storage/src/Generated
 batch:
   - tag: package-2018-03
   - tag: package-2018-02
@@ -55,7 +55,7 @@ These settings apply only when `--csharp-profile=profile_2017_03_09` is specifie
 
 ```yaml $(csharp-profile)=='profile_2017_03_09'
 namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Storage
-output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Storage/Management.Storage/Generated
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.Management.Storage/src/Generated
 batch:
   - tag: package-2016-01
 ```
@@ -66,7 +66,7 @@ These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified
 
 ```yaml $(csharp-profile)=='hybrid_2019_03_01'
 namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Storage
-output-folder: $(csharp-sdks-folder)/$(csharp-profile)/Storage/Management.Storage/Generated
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.Management.Storage/src/Generated
 batch:
   - tag: profile-hybrid-2019-03-01
 ```
