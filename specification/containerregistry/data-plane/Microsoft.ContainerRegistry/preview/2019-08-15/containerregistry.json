@@ -420,7 +420,7 @@
           }
         ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
-        "operationId": "GetBlobUploadStatusSpecified",
+        "operationId": "GetBlobStatusSpecified",
         "responses": {
           "204": {
             "description": "The upload is known and in progress. The last received offset is available in the Range header.",
@@ -448,7 +448,7 @@
           "Layer"
         ],
         "description": "Upload a stream of data without completing the upload. (Complete path definition)",
-        "operationId": "UploadBlobContentSpecified",
+        "operationId": "UploadBlobSpecified",
         "consumes": [
           "application/octet-stream"
         ],
@@ -574,7 +574,7 @@
           "Layer"
         ],
         "description": "Upload a stream of data without completing the upload.",
-        "operationId": "UploadBlobContent",
+        "operationId": "UploadBlob",
         "consumes": [
           "application/octet-stream"
         ],
