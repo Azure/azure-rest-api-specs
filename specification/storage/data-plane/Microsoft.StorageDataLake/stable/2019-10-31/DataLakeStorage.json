@@ -1605,7 +1605,7 @@
       },
       "head": {
         "operationId": "Path_GetProperties",
-        "summary": "Get Properties | Get Status | Get Access Control List",
+        "summary": "Get Properties | Get Status | Get Access Control List | Check Access",
         "description": "Get Properties returns all system and user defined properties for a path. Get Status returns all system defined properties for a path. Get Access Control List returns the access control list for a path. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
           "File and Directory Operations"
@@ -1723,7 +1723,8 @@
             "type": "string",
             "enum": [
               "getAccessControl",
-              "getStatus"
+              "getStatus",
+              "checkAccess"
             ],
             "x-ms-enum": {
               "name": "PathGetPropertiesAction",
@@ -1736,6 +1737,13 @@
             "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the user identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "fsAction",
+            "in": "query",
+            "description": "Required only for check access action. Valid only when Hierarchical Namespace is enabled for the account. File system operation read/write/execute in string form, matching regex pattern '[rwx-]{3}'",
+            "required": false,
+            "type": "string"
           },
           {
             "name": "x-ms-lease-id",
