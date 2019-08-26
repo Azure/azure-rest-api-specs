@@ -370,21 +370,10 @@
 					"type": "string",
 					"readOnly": true
 				},
-				"requestSubmitTime": {
-					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
-					"type": "string",
-					"readOnly": true,
-					"format": "date-time"
-				},
-				"message": {
-					"description": "User friendly status message.",
-					"type": "string",
-					"readOnly": true
-				},
-				"requestStatus": {
-					"description": "The quota request status.",
-					"$ref": "#/definitions/QuotaRequestState"
-				},
+				"properties": {
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/quotaRequestProperties"
+				  },
 				"value": {
 					"description": "The quotaRequests.",
 					"type": "array",
@@ -407,6 +396,26 @@
 				"nextLink": {
 					"description": "The uri to fetch the next page of quota limits. When there are no more pages, this is null.",
 					"type": "string"
+				}
+			}
+		},
+		"quotaRequestProperties": {
+			"type" : "object",
+			"properties": {
+				"requestSubmitTime": {
+					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+					"type": "string",
+					"readOnly": true,
+					"format": "date-time"
+				},
+				"message": {
+					"description": "User friendly status message.",
+					"type": "string",
+					"readOnly": true
+				},
+				"requestStatus": {
+					"description": "The quota request status.",
+					"$ref": "#/definitions/QuotaRequestState"
 				}
 			}
 		},
