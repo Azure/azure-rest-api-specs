@@ -33,45 +33,45 @@ tag: package-2018-06-preview
 ```
 
 ## Suppression
- ``` yaml
- directive:
-   - suppress: DefinitionsPropertiesNamesCamelCase
-     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-     from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
-     where:
-       - $.definitions.CapabilitiesResult.properties.vmSize_filters
-       - $.definitions.RegionalQuotaCapability.properties.cores_available
-       - $.definitions.RegionalQuotaCapability.properties.cores_used
-       - $.definitions.RegionalQuotaCapability.properties.region_name
-       - $.definitions.QuotaCapability.properties.cores_used
-       - $.definitions.QuotaCapability.properties.max_cores_allowed
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
- ```
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/preview/2015-03-01-preview/locations.json
+    where:
+      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.RegionalQuotaCapability.properties.cores_available
+      - $.definitions.RegionalQuotaCapability.properties.cores_used
+      - $.definitions.RegionalQuotaCapability.properties.region_name
+      - $.definitions.QuotaCapability.properties.cores_used
+      - $.definitions.QuotaCapability.properties.max_cores_allowed
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+```
  
- ``` yaml
- directive:
-   - suppress: DefinitionsPropertiesNamesCamelCase
-     reason: This would require a breaking change, and need to be consistent with the response from RP side.
-     from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
-     where:
-       - $.definitions.CapabilitiesResult.properties.vmSize_filters
-       - $.definitions.RegionalQuotaCapability.properties.cores_available
-       - $.definitions.RegionalQuotaCapability.properties.cores_used
-       - $.definitions.RegionalQuotaCapability.properties.region_name
-       - $.definitions.QuotaCapability.properties.cores_used
-       - $.definitions.QuotaCapability.properties.max_cores_allowed
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
-       - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
-       - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
-       - $.definitions.VmSizeCompatibilityFilter.properties.Regions
-       - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
- ```
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: This would require a breaking change, and need to be consistent with the response from RP side.
+    from: Microsoft.HDInsight/stable/2018-06-01-preview/locations.json
+    where:
+      - $.definitions.CapabilitiesResult.properties.vmSize_filters
+      - $.definitions.RegionalQuotaCapability.properties.cores_available
+      - $.definitions.RegionalQuotaCapability.properties.cores_used
+      - $.definitions.RegionalQuotaCapability.properties.region_name
+      - $.definitions.QuotaCapability.properties.cores_used
+      - $.definitions.QuotaCapability.properties.max_cores_allowed
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterVersions
+      - $.definitions.VmSizeCompatibilityFilter.properties.NodeTypes
+      - $.definitions.VmSizeCompatibilityFilter.properties.ClusterFlavors
+      - $.definitions.VmSizeCompatibilityFilter.properties.Regions
+      - $.definitions.VmSizeCompatibilityFilter.properties.FilterMode
+```
 
- ``` yaml
+``` yaml
 directive:
   - suppress: R3016 # to suppress (DefinitionsPropertiesNamesCamelCase)
     from: cluster.json
