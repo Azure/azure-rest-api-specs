@@ -1179,8 +1179,8 @@
           "description": "The reference of the Public IP Prefix resource."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the frontend IP configuration resource."
         }
       },
       "description": "Properties of Frontend IP Configuration of the load balancer."
@@ -1252,8 +1252,8 @@
           "description": "Gets outbound rules that use this backend address pool."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Get provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the backend address pool resource."
         }
       },
       "description": "Properties of the backend address pool."
@@ -1345,8 +1345,8 @@
           "description": "Configures SNAT for the VMs in the backend pool to use the publicIP address specified in the frontend of the load balancing rule."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the load balancing rule resource."
         }
       },
       "required": [
@@ -1426,8 +1426,8 @@
           "description": "The URI used for requesting health status from the VM. Path is required if a protocol is set to http. Otherwise, it is not allowed. There is no default value."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the probe resource."
         }
       },
       "required": [
@@ -1503,8 +1503,8 @@
           "description": "Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the inbound NAT rule resource."
         }
       },
       "description": "Properties of the inbound NAT rule."
@@ -1576,8 +1576,8 @@
           "description": "Receive bidirectional TCP Reset on TCP flow idle timeout or unexpected connection termination. This element is only used when the protocol is set to TCP."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the inbound NAT pool resource."
         }
       },
       "required": [
@@ -1635,8 +1635,8 @@
           "description": "A reference to a pool of DIPs. Outbound traffic is randomly load balanced across IPs in the backend IPs."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the outbound rule resource."
         },
         "protocol": {
           "type": "string",
@@ -1751,8 +1751,8 @@
           "description": "The resource GUID property of the load balancer resource."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the PublicIP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the load balancer resource."
         }
       },
       "description": "Properties of the load balancer."
