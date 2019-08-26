@@ -291,7 +291,7 @@
           "Layer"
         ],
         "description": "Same as GET, except only the headers are returned.",
-        "operationId": "CheckBlobExistence",
+        "operationId": "CheckBlob",
         "responses": {
           "200": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
@@ -574,7 +574,7 @@
           "Layer"
         ],
         "description": "Upload a stream of data without completing the upload.",
-        "operationId": "UploadBlobContentFromNext",
+        "operationId": "UploadBlobContent",
         "consumes": [
           "application/octet-stream"
         ],
@@ -617,7 +617,7 @@
           "application/octet-stream"
         ],
         "description": "Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.",
-        "operationId": "EndBlobUploadFromNext",
+        "operationId": "EndBlobUpload",
         "parameters": [
           {
             "$ref": "#/parameters/BlobQueryDigest"
@@ -665,7 +665,7 @@
           }
         ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
-        "operationId": "GetBlobUploadStatusFromNext",
+        "operationId": "GetBlobStatus",
         "responses": {
           "204": {
             "description": "The upload is known and in progress. The last received offset is available in the Range header.",
@@ -1280,7 +1280,7 @@
           "Layer"
         ],
         "description": "Initiate a resumable blob upload with an empty request body.",
-        "operationId": "StartEmptyResumableBlobUpload",
+        "operationId": "StartBlobUpload",
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -1337,7 +1337,7 @@
           "Layer"
         ],
         "description": "Upload a chunk of data to specified upload without completing the upload. The data will be uploaded to the specified Content Range.",
-        "operationId": "UploadBlobContentChunk",
+        "operationId": "UploadBlobChunk",
         "consumes": [
           "application/octet-stream"
         ],
@@ -1408,7 +1408,7 @@
           "Layer"
         ],
         "description": "Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.",
-        "operationId": "GetBlobPart",
+        "operationId": "GetBlobChunk",
         "responses": {
           "206": {
             "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
@@ -1442,7 +1442,7 @@
           "Layer"
         ],
         "description": "Same as GET, except only the headers are returned.",
-        "operationId": "CheckBlobPartExistence",
+        "operationId": "CheckBlobChunk",
         "responses": {
           "206": {
             "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
