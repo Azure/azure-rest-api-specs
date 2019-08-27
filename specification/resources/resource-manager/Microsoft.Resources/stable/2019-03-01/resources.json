@@ -2382,8 +2382,22 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "template",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            },
+            "description": "The template provided to calculate hash."
           }
         ],
+        "x-ms-examples": {
+          "Calculate template hash": {
+            "$ref": "./examples/CalculateTemplateHash.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "OK - Returns the hash.",
