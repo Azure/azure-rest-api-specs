@@ -157,6 +157,9 @@
 			},
 			"Quotas_listUsagesForBatchAI": {
 			  "$ref": "./examples/getBatchAIUsages.json"
+			},
+			"Quotas_listUsagesForMsSql": {
+			  "$ref" : "./examples/getMsSqlUsages.json"
 			}
 		  },
 		  "parameters": [
@@ -257,7 +260,7 @@
 		  ],
 		  "summary": "Submits a Quota Request for a resource provider at the specified location.",
 		  "description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
-		  "operationId": "QuotaRequests_Patch",
+		  "operationId": "QuotaRequests_Update",
 		  "x-ms-examples": {
 			"Quotas_listUsages": {
 			  "$ref": "./examples/patchComputeQuotaRequest.json"
@@ -445,7 +448,8 @@
 			}
 		  },
 		  "resourceType": {
-				"$ref": "#/definitions/ResourceTypesName"
+			  "description": "The Resource Type Name.",
+			  "$ref": "#/definitions/ResourceTypesName"
 		  },
 		  "unit": {
 			"description": " The units of the limit, such as - Count, Bytes, etc. Use the unit field provided in the Get quota response.",
@@ -455,10 +459,10 @@
 			"description": "The quota period over which the usage values are summarized, such as - P1D (Per one day), PT1M (Per one minute), PT1S (Per one second). This parameter is optional because, for some resources like compute, the period doesn’t matter.",
 			"type": "string"
 		  },
-		  "properties":
-		  {
+		  "properties": {
 			  "description": "Additional properties for the specific resource provider.",
-			  "type" : "object"
+			  "type" : "object",
+			  "x-ms-client-flatten": true
 		  }
 		}
 	  },
