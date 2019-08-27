@@ -80,6 +80,3 @@ See configuration in [readme.typescript.md](./readme.typescript.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
-## Node.js
-
-See configuration in [readme.nodejs.md](./readme.nodejs.md)
