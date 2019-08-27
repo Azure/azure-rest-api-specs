@@ -799,14 +799,17 @@
       "properties": {
         "primarySubnet": {
           "type": "string",
+          "readOnly": true,
           "description": "CIDR of primary subnet"
         },
         "secondarySubnet": {
           "type": "string",
+          "readOnly": true,
           "description": "CIDR of secondary subnet"
         },
         "expressRouteID": {
           "type": "string",
+          "readOnly": true,
           "description": "Identifier of the ExpressRoute (Microsoft Colo only)"
         },
         "authorizations": {
@@ -818,6 +821,7 @@
         },
         "expressRoutePrivatePeeringID": {
           "type": "string",
+          "readOnly": true,
           "description": "ExpressRoute private peering identifier"
         }
       }
@@ -825,10 +829,12 @@
     "Endpoints": {
       "properties": {
         "nsxtManager": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "vcsa": {
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -918,6 +924,7 @@
           }
         },
         "endpoints": {
+          "readOnly": true,
           "$ref": "#/definitions/Endpoints"
         },
         "internet": {
@@ -933,7 +940,6 @@
         },
         "identitySources": {
           "type": "array",
-          "readOnly": true,
           "items": {
             "$ref": "#/definitions/IdentitySource"
           }
