@@ -123,6 +123,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 
 # Needed when there is more than one input file
 override-info:
@@ -216,6 +217,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 
 # Needed when there is more than one input file
 override-info:
@@ -303,6 +305,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 
 # Needed when there is more than one input file
 override-info:
