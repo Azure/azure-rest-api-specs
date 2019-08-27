@@ -35,6 +35,17 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
+# These two methods will fail to run in C# since autorest generates proper header use, nonetheless
+# Content-Range is used in a non standard way for cross compatibility. This addresses this by
+# modifying the addition of the headers in a customized manner.
+directive:
+  - from: source-file-csharp
+    where: $
+    transform: >-
+      return $.
+        replace( /if \(_httpRequest.Headers.Contains\("Content-Range"\)\)/g, "if (_httpRequest.Content == null)" ).
+        replace( /_httpRequest.Headers.Remove\("Content-Range"\);/g, "_httpRequest.Content = new StringContent(\"\");" ).
+        replace( /_httpRequest.Headers.TryAddWithoutValidation\("Content-Range", contentRange\);/g, "_httpRequest.Content.Headers.TryAddWithoutValidation(\"Content-Range\", contentRange);" )
 ```
 
 ### Tag: package-2019-07
@@ -53,6 +64,7 @@ These settings apply only when `--tag=package-2018-08` is specified on the comma
 ``` yaml $(tag) == 'package-2018-08'
 input-file:
 - Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
+
 ```
 
 ---
@@ -82,15 +94,6 @@ csharp:
   output-folder: $(csharp-sdks-folder)/ContainerRegistry/Microsoft.Azure.ContainerRegistry/src/Generated
   clear-output-folder: true
   add-credentials: true
-  directive: 
-  # These two methods will fail to run in C# since autorest generates proper header use, nonetheless
-  # Content-Type is used in a non standard way for cross compatibility. Keeping these around however
-  # saves the trouble of writing extra code (As the fix is rather simple) when generating the sdk. Thus
-  # we can manually disable this for adding such code to the sdk.
-    - reason: Remove UploadBlobChunkSpecified from SDK due to non standard use of Content-Range
-      remove-operation: UploadBlobChunkSpecified
-    - reason: Remove UploadBlobChunk from SDK due to non standard use of Content-Range
-      remove-operation: UploadBlobChunk
 ```
 
 ## Go
@@ -114,7 +117,8 @@ directive:
     from: containerregistry.json
     where: $.paths["/v2/{name}/manifests/{reference}"].put.responses["201"]
 ```
-## Multi-API/Profile support for AutoRest v3 generators 
+
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -129,14 +133,27 @@ input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-07-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
-
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+### Code modifiers
+
+``` yaml
+components:
+  operations: # operations to add to the code model
+    - {"operationId": "HasV2Support", "visibility" : ["public"], "implementation" : "{
+             try {
+               await this.CheckV2SupportAsync();
+             } catch (Exception e) {
+                 return false;
+             }
+             return true;
+          }"}
+```
+
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
+#exclude-file:
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
