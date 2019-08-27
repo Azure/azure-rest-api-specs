@@ -34,7 +34,7 @@
 	  }
 	},
 	"paths": {
-	  "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/providers/{providerId}/locations/{location}/serviceLimits/resourceTypes/{resourceType}/resources/{resourceName}": {
+	  "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/providers/{providerId}/locations/{location}/serviceLimits/{resourceName}": {
 		"get": {
 		  "tags": [
 			"QuotaInformation"
@@ -42,7 +42,11 @@
 		  "summary": "Gets the current quota limit and usages for the resources provider for the specified location for the specific resource.",
 		  "description": "This API gets the current quota limit and usages for the secific resource for resources provider for the specified location. This response can be used to submit quotaRequests.",
 		  "operationId": "Quota_listStatus",
-		  
+		  "x-ms-examples": {
+			"Quotas_listUsagesForCompute": {
+			  "$ref": "./examples/getComputeOneSkuUsages.json"
+			}
+		  },
 		  "parameters": [
 			{
 			  "$ref": "#/parameters/SubscriptionIdInParameters"
@@ -55,9 +59,6 @@
 			},
 			{
 			  "$ref": "#/parameters/ApiVersionParameter"
-			},
-			{
-			  "$ref": "#/parameters/ResourceTypeParameter"
 			},
 			{
 			  "$ref": "#/parameters/ResourceNameParameter"
@@ -76,9 +77,6 @@
 				"$ref": "#/definitions/ExceptionResponse"
 			  }
 			}
-		  },
-		  "x-ms-pageable": {
-			"nextLinkName": "nextLink"
 		  }
 		},
 		"put": {
@@ -87,8 +85,7 @@
 		  ],
 		  "summary": "Submits a Quota Request for a resource provider at the specified location.",
 		  "description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
-		  "operationId": "QuotaRequests_Create",
-		  
+		  "operationId": "QuotaRequest_Create",
 		  "x-ms-long-running-operation": true,
 		  "x-ms-long-running-operation-options": {
 			"final-state-via": "location"
@@ -104,16 +101,13 @@
 			  "$ref": "#/parameters/LocationIdInParameters"
 			},
 			{
-			  "$ref": "#/parameters/ResourceTypeParameter"
-			},
-			{
 			  "$ref": "#/parameters/ResourceNameParameter"
 			},
 			{
 			  "$ref": "#/parameters/ApiVersionParameter"
 			},
 			{
-			  "name": "createQuotaRequests",
+			  "name": "createQuotaRequest",
 			  "in": "body",
 			  "description": "Quota requests payload.",
 			  "required": true,
@@ -152,7 +146,14 @@
 		  "summary": "Gets the current quota limit and usages for the resources provider for the specified location.",
 		  "description": "This API gets the current quota limit and usages for the resources provider for the specified location. This response can be used to submit quotaRequests.",
 		  "operationId": "Quotas_listStatus",
-		  
+		  "x-ms-examples": {
+			"Quotas_listUsagesForCompute": {
+			  "$ref": "./examples/getComputeUsages.json"
+			},
+			"Quotas_listUsagesForBatchAI": {
+			  "$ref": "./examples/getBatchAIUsages.json"
+			}
+		  },
 		  "parameters": [
 			{
 			  "$ref": "#/parameters/SubscriptionIdInParameters"
@@ -192,8 +193,15 @@
 		  "summary": "Submits a Quota Request for a resource provider at the specified location.",
 		  "description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
 		  "operationId": "QuotaRequest_Create",
-		  
+		  "x-ms-examples": {
+			"Quotas_listUsages": {
+			  "$ref": "./examples/putComputeQuotaRequest.json"
+			}
+		  },
 		  "x-ms-long-running-operation": true,
+		  "x-ms-long-running-operation-options": {
+			"final-state-via": "location"
+		  },
 		  "parameters": [
 			{
 			  "$ref": "#/parameters/SubscriptionIdInParameters"
@@ -245,7 +253,11 @@
 		  "summary": "Submits a Quota Request for a resource provider at the specified location.",
 		  "description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
 		  "operationId": "QuotaRequests_Patch",
-		  
+		  "x-ms-examples": {
+			"Quotas_listUsages": {
+			  "$ref": "./examples/patchComputeQuotaRequest.json"
+			}
+		  },
 		  "x-ms-long-running-operation": true,
 		  "x-ms-long-running-operation-options": {
 			"final-state-via": "location"
@@ -418,8 +430,7 @@
 			}
 		  },
 		  "resourceType": {
-			"description": "The resource type for the specific resource provider. For example, BatchAI has a resource type of ‘dedicated lowPriority cluster’. Call the /usages API and use the resource type and resource name from that API. This is an optional field because some resources, like compute, do not have a resource type.",
-			"type": "string"
+				"$ref": "#/definitions/ResourceTypesName"
 		  },
 		  "unit": {
 			"description": " The units of the limit, such as - Count, Bytes, etc. Use the unit field provided in the Get quota response.",
@@ -675,14 +686,6 @@
 		"type": "string",
 		"description": "Azure resource Provider id.",
 		"x-ms-parameter-location": "method"
-	  },
-	  "ResourceTypeParameter": {
-		"name": "resourceType",
-		"in": "path",
-		"required": true,
-		"type": "string",
-		"description": "Resource type.",
-		"x-ms-parameter-location": "client"
 	  },
 	  "ResourceNameParameter": {
 		"name": "resourceName",
