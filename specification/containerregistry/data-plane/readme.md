@@ -82,6 +82,15 @@ csharp:
   output-folder: $(csharp-sdks-folder)/ContainerRegistry/Microsoft.Azure.ContainerRegistry/src/Generated
   clear-output-folder: true
   add-credentials: true
+  directive: 
+  # These two methods will fail to run in C# since autorest generates proper header use, nonetheless
+  # Content-Type is used in a non standard way for cross compatibility. Keeping these around however
+  # saves the trouble of writing extra code (As the fix is rather simple) when generating the sdk. Thus
+  # we can manually disable this for adding such code to the sdk.
+    - reason: Remove UploadBlobChunkSpecified from SDK due to non standard use of Content-Range
+      remove-operation: UploadBlobChunkSpecified
+    - reason: Remove UploadBlobChunk from SDK due to non standard use of Content-Range
+      remove-operation: UploadBlobChunk
 ```
 
 ## Go
