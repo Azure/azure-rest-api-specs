@@ -1476,7 +1476,7 @@
         },
         "capacity": {
           "$ref": "#/definitions/AzureCapacity",
-          "description": "The SKU capacity."
+          "description": "The number of instances of the cluster."
         }
       },
       "description": "Azure resource SKU definition."
@@ -1504,11 +1504,11 @@
           }
         },
         "minimum": {
-          "description": "Minimum allowed capacity.",
+          "description": "Minimum allowed instances count.",
           "type": "integer"
         },
         "maximum": {
-          "description": "Maximum allowed capacity.",
+          "description": "Maximum allowed instances count.",
           "type": "integer"
         },
         "default": {
@@ -1529,13 +1529,18 @@
           "description": "SKU name.",
           "type": "string",
           "enum": [
-            "D13_v2",
-            "D14_v2",
-            "L8",
-            "L16",
-            "D11_v2",
-            "D12_v2",
-            "L4"
+            "Standard_DS13_v2+1TB_PS",
+            "Standard_DS13_v2+2TB_PS",
+            "Standard_DS14_v2+3TB_PS",
+            "Standard_DS14_v2+4TB_PS",
+            "Standard_D13_v2",
+            "Standard_D14_v2",
+            "Standard_L8s",
+            "Standard_L16s",
+            "Standard_D11_v2",
+            "Standard_D12_v2",
+            "Standard_L4s",
+            "Dev(No SLA)_Standard_D11_v2"
           ],
           "x-ms-enum": {
             "name": "AzureSkuName",
@@ -1543,13 +1548,14 @@
           }
         },
         "capacity": {
-          "description": "SKU capacity.",
+          "description": "The number of instances of the cluster.",
           "type": "integer"
         },
         "tier": {
           "description": "SKU tier.",
           "type": "string",
           "enum": [
+            "Basic",
             "Standard"
           ],
           "x-ms-enum": {

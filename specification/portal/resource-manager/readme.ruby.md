@@ -13,6 +13,7 @@ azure-arm: true
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2019-01-01-preview
+  - tag: package-2018-10-01-preview
   - tag: package-2015-08-01-preview
 ```
 
@@ -22,6 +23,16 @@ These settings apply only when `--tag=package-2019-01-01-preview --ruby` is spec
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2019-01-01-preview' && $(ruby)
+namespace: Microsoft.Portal
+output-folder: $(ruby-sdks-folder)/portal
+```
+
+### Tag: package-2018-10-01-preview and ruby
+
+These settings apply only when `--tag=package-2018-10-01-preview --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+```yaml $(tag) == 'package-2018-10-01-preview' && $(ruby)
 namespace: Microsoft.Portal
 output-folder: $(ruby-sdks-folder)/portal
 ```
