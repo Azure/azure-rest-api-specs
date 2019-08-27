@@ -2057,7 +2057,7 @@
         },
         "x-ms-examples": {
           "List Backup Protection Containers": {
-            "$ref": "./examples/AzureWorkload/ProtectionContainers_List.json"
+            "$ref": "./examples/AzureStorage/ProtectionContainers_List.json"
           }
         }
       }
@@ -5418,10 +5418,6 @@
           "description": "Protected, ProtectionStopped, IRPending or ProtectionError",
           "type": "string"
         },
-        "isScheduledForDeferredDelete": {
-          "description": "Specifies if the item is scheduled for deferred deletion.",
-          "type": "boolean"
-        },
         "deferredDeleteSyncTimeInUTC": {
           "format": "int64",
           "description": "Sync time for deferred deletion.",
@@ -5871,6 +5867,27 @@
             "name": "CreateMode",
             "modelAsString": true
           }
+        },
+        "deferredDeleteTimeInUTC": {
+          "format": "date-time",
+          "description": "Time for deferred deletion in UTC",
+          "type": "string"
+        },
+        "isScheduledForDeferredDelete": {
+          "description": "Flag to identify whether the DS is scheduled for deferred delete",
+          "type": "boolean"
+        },
+        "deferredDeleteTimeRemaining": {
+          "description": "Time remaining before the DS marked for deferred delete is permanently deleted",
+          "type": "string"
+        },
+        "isDeferredDeleteScheduleUpcoming": {
+          "description": "Flag to identify whether the deferred deleted DS is to be purged soon",
+          "type": "boolean"
+        },
+        "isRehydrate": {
+          "description": "Flag to identify that deferred deleted DS is to be moved into Pause state",
+          "type": "boolean"
         }
       },
       "discriminator": "protectedItemType"

@@ -530,6 +530,7 @@
     },
     "StoreWriteSettings": {
       "description": "Connector write settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -559,7 +560,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureBlobFSWriteSettings": {
       "description": "Azure blobFS write settings.",
@@ -568,7 +575,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureDataLakeStoreWriteSettings": {
       "description": "Azure data lake store write settings.",
@@ -676,6 +689,29 @@
         "fileExtension"
       ]
     },
+    "JsonWriteSettings": {
+      "description": "Json write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "filePattern": {
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
+          "type": "string",
+          "enum": [
+            "setOfObjects",
+            "arrayOfObjects"
+          ],
+          "x-ms-enum": {
+            "name": "JsonWriteFilePattern",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AvroSource": {
       "description": "A copy activity Avro source.",
       "type": "object",
@@ -725,6 +761,21 @@
         }
       }
     },
+    "JsonSource": {
+      "description": "A copy activity Json source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Json store settings."
+        }
+      }
+    },
     "DelimitedTextSink": {
       "description": "A copy activity DelimitedText sink.",
       "type": "object",
@@ -741,6 +792,25 @@
         "formatSettings": {
           "$ref": "#/definitions/DelimitedTextWriteSettings",
           "description": "DelimitedText format settings."
+        }
+      }
+    },
+    "JsonSink": {
+      "description": "A copy activity Json sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Json store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/JsonWriteSettings",
+          "description": "Json format settings."
         }
       }
     },
@@ -2606,10 +2676,6 @@
         "maxConcurrentConnections": {
           "type": "object",
           "description": "The maximum concurrent connection count for the sink data store. Type: integer (or Expression with resultType integer)."
-        },
-        "tableOption": {
-          "type": "object",
-          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       },
       "additionalProperties": {
@@ -2833,6 +2899,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2867,6 +2937,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2901,6 +2975,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2935,6 +3013,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2958,6 +3040,10 @@
         "polyBaseSettings": {
           "description": "Specifies PolyBase-related settings when allowPolyBase is true.",
           "$ref": "#/definitions/PolybaseSettings"
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },

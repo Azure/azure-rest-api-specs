@@ -27,6 +27,50 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Capacity/reservationOrders/{reservationOrderId}/reservations/{reservationId}/availableScopes": {
+      "post": {
+        "summary": "Get Available Scopes for `Reservation`.",
+        "description": "Get Available Scopes for `Reservation`.\n",
+        "operationId": "Reservation_AvailableScopes", 
+		"x-ms-examples": {
+          "AvailableScopes": {
+            "$ref": "./examples/GetAvailableScope.json"
+          }
+        },		
+        "x-ms-long-running-operation": true,
+        "parameters": [
+		  {
+            "$ref": "#/parameters/ReservationOrderIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ReservationIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          }
+        ],
+        "tags": [
+          "Reservation, AvailableScopes"
+        ],
+        "responses": {
+          "200": {
+            "description": "List of `Subscription`s created after the filter.",
+            "schema": {
+                "$ref": "#/definitions/Properties"
+            }
+          },
+		  "default": {
+            "description": "Unexpected error",
+            "schema": {
+              "$ref": "#/definitions/Error"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/catalogs": {
       "get": {
         "summary": "Get the regions and skus that are available for RI purchase for the specified Azure subscription.",
@@ -1393,6 +1437,36 @@
       "format": "int32",
       "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
     },
+    "Properties" : {
+      "type" : "object",
+      "properties": {
+        "properties" :{
+          "$ref": "#/definitions/SubscriptionScopeProperties"
+        }
+      }
+    },
+	"SubscriptionScopeProperties":{
+	  "type": "object",
+	  "properties": {
+		"scopes":{
+          "type": "array",
+          "items": {
+              "$ref": "#/definitions/ScopeProperties"
+          }
+       }
+     }
+   },
+   "ScopeProperties":{
+    "type": "object",
+    "properties": {
+      "scope": {
+        "type": "string" 
+        },
+      "valid": {
+        "type": "boolean"
+        }
+      }
+    },
     "ReservedResourceType": {
       "type": "string",
       "description": "The type of the resource that is being reserved.",
@@ -1413,6 +1487,18 @@
     }
   },
   "parameters": {
+    "ScopeParameter": {
+		  "name": "body",
+		  "x-ms-parameter-location": "method",
+		  "in": "body",
+		  "required": true,
+		  "schema": {
+			  "type": "array",
+			  "items": {
+				  "type": "string"
+			  }
+      }
+	  },
     "PurchaseParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
