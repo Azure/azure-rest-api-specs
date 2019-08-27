@@ -45,7 +45,8 @@ directive:
       return $.
         replace( /if \(_httpRequest.Headers.Contains\("Content-Range"\)\)/g, "if (_httpRequest.Content == null)" ).
         replace( /_httpRequest.Headers.Remove\("Content-Range"\);/g, "_httpRequest.Content = new StringContent(\"\");" ).
-        replace( /_httpRequest.Headers.TryAddWithoutValidation\("Content-Range", contentRange\);/g, "_httpRequest.Content.Headers.TryAddWithoutValidation(\"Content-Range\", contentRange);" )
+        replace( /_httpRequest.Headers.TryAddWithoutValidation\("Content-Range", contentRange\);/g, "_httpRequest.Content.Headers.TryAddWithoutValidation(\"Content-Range\", contentRange);" ).
+        replace( /_url = _url.Replace\("\{nextBlobUuidLink\}", location\);/g, "_url = _url.Replace(\"/{nextBlobUuidLink}\", location);")
 ```
 
 ### Tag: package-2019-07
@@ -135,7 +136,7 @@ input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
 ```
 
-### Code modifiers
+<!-- ### Code modifiers
 
 ``` yaml
 components:
@@ -148,7 +149,7 @@ components:
              }
              return true;
           }"}
-```
+``` -->
 
 If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
