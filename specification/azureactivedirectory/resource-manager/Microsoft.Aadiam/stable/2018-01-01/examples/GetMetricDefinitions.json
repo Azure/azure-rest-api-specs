@@ -1,0 +1,52 @@
+{
+    "parameters": {
+      "resourceUri": "providers/microsoft.aadiam/metricDefinitions",
+      "api-version": "2018-01-01"
+    },
+    "responses": {
+      "200": {
+        "headers": {},
+        "body": {
+          "value": [
+            {
+                "id": "/providers/microsoft.aadiam/metricdefinitions/SuccessServerLatency",
+                "resourceId": "/providers/microsoft.aadiam/metricdefinitions/default",
+                "category": "Transaction",
+                "name": {
+                  "value": "SuccessServerLatency",
+                  "localizedValue": "Success Server Latency"
+                },
+                "isDimensionRequired": false,
+                "unit": "MilliSeconds",
+                "primaryAggregationType": "Average",
+                "metricAvailabilities": [
+                  {
+                    "timeGrain": "PT1M",
+                    "retention": "P93D"
+                  },
+                  {
+                    "timeGrain": "PT1H",
+                    "retention": "P93D"
+                  }
+                ],
+                "dimensions": [
+                  {
+                    "value": "GeoType",
+                    "localizedValue": "Geo type"
+                  },
+                  {
+                    "value": "ApiName",
+                    "localizedValue": "API name"
+                  },
+                  {
+                    "value": "Authentication",
+                    "localizedValue": "Authentication"
+                  }
+                ]
+              }
+          ]
+        }
+      }
+    }
+  }
+  
