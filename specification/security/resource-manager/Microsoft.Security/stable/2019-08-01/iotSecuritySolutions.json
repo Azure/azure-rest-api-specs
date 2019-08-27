@@ -37,18 +37,18 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotSecuritySolutions": {
       "get": {
         "x-ms-examples": {
-          "Get Security Solutions list": {
+          "List IoT security solutions by subscription": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsList.json"
           },
-          "Get Security Solutions list By IotHub": {
+          "List IoT security solutions by IoT hub": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHub.json"
           }
         },
         "tags": [
           "IoT Security Solutions"
         ],
-        "description": "List of security solutions",
-        "operationId": "IoTSecuritySolutions_List",
+        "description": "List IoT security solutions by subscription",
+        "operationId": "IotSecuritySolutions_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -82,18 +82,18 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions": {
       "get": {
         "x-ms-examples": {
-          "Get Security Solutions list": {
+          "List IoT security solutions by resource group": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByRg.json"
           },
-          "Get Security Solutions list By IotHub": {
+          "List IoT security solutions by resource group and IoT hub": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHubAndRg.json"
           }
         },
         "tags": [
           "IoT Security Solutions"
         ],
-        "description": "List of security solutions",
-        "operationId": "IoTSecuritySolutionsResourceGroup_List",
+        "description": "List IoT security solutions by resource group",
+        "operationId": "IotSecuritySolutions_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -130,14 +130,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}": {
       "get": {
         "x-ms-examples": {
-          "Get an iot security solution": {
+          "Get a IoT security solution": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolution.json"
           }
         },
         "tags": [
           "IoT Security Solutions"
         ],
-        "description": "Details of a specific iot security solution",
+        "description": "Get details of a specific IoT security solution",
         "operationId": "IotSecuritySolution_Get",
         "parameters": [
           {
@@ -170,14 +170,14 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create an iot security solution": {
+          "Create or update a IoT security solution": {
             "$ref": "./examples/IoTSecuritySolutions/CreateIoTSecuritySolution.json"
           }
         },
         "tags": [
           "IoT Security Solutions"
         ],
-        "description": "Create new solution manager",
+        "description": "Create or update an IoT security solution",
         "operationId": "IotSecuritySolution_Create",
         "parameters": [
           {
@@ -219,14 +219,14 @@
       },
       "patch": {
         "x-ms-examples": {
-          "Update an iot security solution": {
+          "Update an existing IoT security solution": {
             "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution.json"
           }
         },
         "tags": [
           "IoT Security Solutions"
         ],
-        "description": "update existing Security Solution tags or user defined resources. To update other fields use the CreateOrUpdate method",
+        "description": "Update an existing IoT security solution tags or user defined resources. To update other fields use the CreateOrUpdate method",
         "operationId": "IotSecuritySolution_Update",
         "parameters": [
           {
@@ -262,14 +262,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Create an iot security solution": {
+          "Delete an IoT security solution": {
             "$ref": "./examples/IoTSecuritySolutions/DeleteIoTSecuritySolution.json"
           }
         },
         "tags": [
           "IoT Security Solutions"
         ],
-        "description": "Create new solution manager",
+        "description": "Delete an IoT security solution",
         "operationId": "IotSecuritySolution_Delete",
         "parameters": [
           {
