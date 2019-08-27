@@ -439,6 +439,11 @@
 		  "quotaPeriod": {
 			"description": "The quota period over which the usage values are summarized, such as - P1D (Per one day), PT1M (Per one minute), PT1S (Per one second). This parameter is optional because, for some resources like compute, the period doesn’t matter.",
 			"type": "string"
+		  },
+		  "properties":
+		  {
+			  "description": "Additional properties for the specific resource provider.",
+			  "type" : "object"
 		  }
 		}
 	  },
@@ -692,7 +697,7 @@
 		"in": "path",
 		"required": true,
 		"type": "string",
-		"description": "Resource name.",
+		"description": "The Resource name for the specific resource provider, such as skuname for Microsoft.Compute, pool for Microsoft.Batch.",
 		"x-ms-parameter-location": "client"
 	  },
 	  "RequestIdParameter": {
