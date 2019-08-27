@@ -122,9 +122,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Peering/preview/2019-06-01-preview/peering.json
-  - $(this-folder)/Microsoft.Peering/preview/2019-07-01-preview/peering.json
   - $(this-folder)/Microsoft.Peering/preview/2019-08-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-07-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-06-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-03-01-preview/peering.json
 
 ```
 
