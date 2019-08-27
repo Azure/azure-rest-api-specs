@@ -312,6 +312,11 @@
 		  "tags": [
 			"QuotaRequests"
 		  ],
+		  "x-ms-examples": {
+			"QuotaRequestStatus": {
+			  "$ref": "./examples/getQuotaRequestStatusById.json"
+			}
+		  },
 		  "summary": "For the specified location, gets the Quota request status by requestId.",
 		  "description": "Gets the QuotaRequest details and status by the quota requestId for the resources for the resource  provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
 		  "operationId": "QuotaRequestStatus_Get",
@@ -353,6 +358,11 @@
 		  "tags": [
 			"QuotaRequests"
 		  ],
+		  "x-ms-examples": {
+			"QuotaRequestHistory": {
+			  "$ref": "./examples/getQuotaRequestsHistory.json"
+			}
+		  },
 		  "summary": "For the specified location and resource Provider, gets the current quota requests under the subscription over the time\n period of one year ago from now to one year back.",
 		  "description": "For the specified location and Resource provider gets the current quota requests under the subscription over the time period of one year ago from now to one year back. oData filter can be used to select quota requests.",
 		  "operationId": "QuotaRequests_listStatus",
@@ -526,8 +536,6 @@
 	  },
 	  "QuotaRequestDetails": {
 		"description": "The details of the quota Request.",
-		"type": "object",
-		"x-ms-azure-resource": true,
 		"properties": {
 		  "id": {
 			"description": "The quota request Id.",
