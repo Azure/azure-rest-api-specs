@@ -29,16 +29,6 @@ openapi-type: arm
 tag: package-2019-08
 ```
 
-
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06'
-input-file:
-- Microsoft.StorageCache/preview/2019-06-01-preview/storagecache.json
-```
-
 ### Tag: package-2019-08
 
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
@@ -56,9 +46,40 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-python
+  - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-java
+  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
+  - repo: azure-sdk-for-node
+    after_scripts:
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_storagecache']
 ```
 
 ## Python
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## C#
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## Node.js
+
+See configuration in [readme.nodejs.md](./readme.nodejs.md)
