@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+    "metric": "BlobCapacity",
+    "metricnamespace": "microsoft.aadiam",
+    "$filter": "BlobType eq '*'",
+    "top": 3,
+    "orderby": "Average asc",
+    "aggregation": "Average,count",
+    "interval": "PT1M",
+    "resulttype": "metadata",
+    "resourceUri": "/providers/microsoft.aadiam/default",
+    "api-version": "2018-01-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+        "namespace": "microsoft.aadiam",
+        "resourceregion": "eastus2",
+        "value": [
+          {
+            "id": "/providers/microsoft.aadiam/metrics/BlobCapacity",
+            "type": "microsoft.aadiam/metrics",
+            "name": {
+              "value": "BlobCapacity",
+              "localizedValue": "Blob Capacity"
+            },
+            "unit": "Bytes",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "BlockBlob"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "PageBlob"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}
