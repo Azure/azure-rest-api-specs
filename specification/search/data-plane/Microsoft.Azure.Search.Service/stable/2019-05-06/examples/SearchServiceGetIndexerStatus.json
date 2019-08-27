@@ -43,17 +43,38 @@
               {
                 "key": "",
                 "errorMessage": "Document key cannot be missing or empty.",
-                "statusCode": 400
+                "statusCode": 400,
+                "name": null,
+                "details": null,
+                "documentationLink": null
+              },
+              {
+                "key": "document id 1",
+                "errorMessage": "Could not read the value of column 'foo' at index '0'.",
+                "statusCode": 400,
+                "name": "DocumentExtraction.AzureBlob.MyDataSource",
+                "details": "The file could not be parsed.",
+                "documentationLink": "https://go.microsoft.com/fwlink/?linkid=2049388"
               }
             ],
             "warnings": [
               {
                 "key": "document id",
-                "message": "A warning doesn't stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob."
+                "message": "A warning doesn't stop indexing, and is intended to inform you of certain interesting situations, like when a blob indexer truncates the amount of text extracted from a blob.",
+                "name": null,
+                "details": null,
+                "documentationLink": null
+              },
+              {
+                "key": "document id 2",
+                "message": "Document was truncated to 50000 characters.",
+                "name": "Enrichment.LanguageDetectionSkill.#4",
+                "details": "The skill did something that didn't break anything, nonetheless something we didn't expect happened, so it might be worth double checking.",
+                "documentationLink": "https://go.microsoft.com/fwlink/?linkid=2099692"
               }
             ],
             "itemsProcessed": 1,
-            "itemsFailed": 1,
+            "itemsFailed": 2,
             "initialTrackingState": null,
             "finalTrackingState": null
           }

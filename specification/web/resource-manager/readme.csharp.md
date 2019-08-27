@@ -17,7 +17,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.WebSites
-output-folder: $(csharp-sdks-folder)/WebSites/Management.WebSites/Generated
+output-folder: $(csharp-sdks-folder)/websites/Microsoft.Azure.Management.WebSites/src/Generated
 ```
 
 ## Batch settings
