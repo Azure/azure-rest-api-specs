@@ -334,7 +334,7 @@
         ],
         "operationId": "DeleteBlob",
         "responses": {
-          "200": {
+          "202": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
             "schema": {
               "description": "blob binary data",
@@ -405,20 +405,19 @@
         },
         {
           "$ref": "#/parameters/Uuid"
+        },
+        {
+          "$ref": "#/parameters/State"
+        },
+        {
+          "$ref": "#/parameters/NoUploadCache"
         }
       ],
       "get": {
         "tags": [
           "Layer"
         ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/State"
-          },
-          {
-            "$ref": "#/parameters/NoUploadCache"
-          }
-        ],
+        "parameters": [],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
         "operationId": "GetBlobStatusSpecified",
         "responses": {
@@ -455,12 +454,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/RawData"
-          },
-          {
-            "$ref": "#/parameters/State"
-          },
-          {
-            "$ref": "#/parameters/NoUploadCache"
           }
         ],
         "responses": {
@@ -500,12 +493,6 @@
         "operationId": "EndBlobUploadSpecified",
         "parameters": [
           {
-            "$ref": "#/parameters/State"
-          },
-          {
-            "$ref": "#/parameters/NoUploadCache"
-          },
-          {
             "$ref": "#/parameters/BlobQueryDigest"
           },
           {
@@ -543,7 +530,7 @@
           "Layer"
         ],
         "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
-        "operationId": "CancelBlobUpload",
+        "operationId": "CancelBlobUploadSpecified",
         "responses": {
           "204": {
             "description": "The upload has been successfully deleted."
@@ -563,6 +550,34 @@
           "$ref": "#/parameters/NextLink"
         }
       ],
+      "get": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
+        "operationId": "GetBlobStatus",
+        "responses": {
+          "204": {
+            "description": "The upload is known and in progress. The last received offset is available in the Range header.",
+            "headers": {
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      },
       "patch": {
         "security": [
           {
@@ -652,33 +667,15 @@
           }
         }
       },
-      "get": {
+      "delete": {
         "tags": [
           "Layer"
         ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/State"
-          },
-          {
-            "$ref": "#/parameters/NoUploadCache"
-          }
-        ],
-        "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
-        "operationId": "GetBlobStatus",
+        "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
+        "operationId": "CancelBlobUpload",
         "responses": {
           "204": {
-            "description": "The upload is known and in progress. The last received offset is available in the Range header.",
-            "headers": {
-              "Range": {
-                "description": "Range indicating the current progress of the upload.",
-                "type": "string"
-              },
-              "Docker-Upload-UUID": {
-                "description": "Identifies the docker upload uuid for the current request.",
-                "type": "string"
-              }
-            }
+            "description": "The upload has been successfully deleted."
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -1330,6 +1327,12 @@
           "type": "string",
           "in": "path",
           "required": true
+        },
+        {
+          "$ref": "#/parameters/State"
+        },
+        {
+          "$ref": "#/parameters/NoUploadCache"
         }
       ],
       "patch": {
@@ -1337,7 +1340,7 @@
           "Layer"
         ],
         "description": "Upload a chunk of data to specified upload without completing the upload. The data will be uploaded to the specified Content Range.",
-        "operationId": "UploadBlobChunk",
+        "operationId": "UploadBlobChunkSpecified",
         "consumes": [
           "application/octet-stream"
         ],
@@ -1356,7 +1359,7 @@
           }
         ],
         "responses": {
-          "202": {
+          "206": {
             "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
             "headers": {
               "Location": {
@@ -1382,7 +1385,7 @@
         }
       }
     },
-    "/v2/{name}/blobs/{digest}?mode={part}": {
+    "/v2/{name}/blobs/{digest}?mode={chunk}": {
       "parameters": [
         {
           "$ref": "#/parameters/ImageName"
@@ -1394,8 +1397,8 @@
           "$ref": "#/parameters/Range"
         },
         {
-          "name": "part",
-          "description": "Acquire only part of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
+          "name": "chunk",
+          "description": "Acquire only chunks of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
           "type": "string",
           "in": "query"
         }
@@ -1444,7 +1447,7 @@
         "description": "Same as GET, except only the headers are returned.",
         "operationId": "CheckBlobChunk",
         "responses": {
-          "206": {
+          "200": {
             "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
             "headers": {
               "Content-Length": {
@@ -1455,6 +1458,62 @@
               "Content-Range": {
                 "type": "string",
                 "description": "Content range of blob chunk."
+              }
+            }
+          },
+          "default": {
+            "description": "ACR error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/AcrErrors"
+            }
+          }
+        }
+      }
+    },
+    "/{nextBlobUuidLink}?mode={chunk}": {
+      "parameters": [
+        {
+          "$ref": "#/parameters/NextLink"
+        },
+        {
+          "name": "chunk",
+          "description": "Acquire only chunks of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
+          "type": "string",
+          "in": "query"
+        }
+      ],
+      "patch": {
+        "tags": [
+          "Layer"
+        ],
+        "description": "Upload a chunk of data to specified upload without completing the upload. The data will be uploaded to the specified Content Range.",
+        "operationId": "UploadBlobChunk",
+        "consumes": [
+          "application/octet-stream"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/RawData"
+          },
+          {
+            "$ref": "#/parameters/Content-Range"
+          }
+        ],
+        "responses": {
+          "206": {
+            "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
+            "headers": {
+              "Location": {
+                "description": "Provided location for blob",
+                "type": "string"
+              },
+              "Range": {
+                "description": "Range indicating the current progress of the upload.",
+                "type": "string"
+              },
+              "Docker-Upload-UUID": {
+                "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
               }
             }
           },
