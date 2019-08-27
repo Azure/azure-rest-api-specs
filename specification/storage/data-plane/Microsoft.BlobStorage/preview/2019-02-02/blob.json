@@ -522,7 +522,7 @@
       ]
     },
     "/?comp=batch": {
-      "get": {
+      "post": {
         "tags": [
           "service"
         ],
@@ -554,7 +554,7 @@
             "headers": {
               "Content-Type": {
                 "type": "string",
-                "description": "The media type of the body of the response. For batch requests, this is ' multipart/mixed; boundary=batchresponse_<GUID>'"
+                "description": "The media type of the body of the response. For batch requests, this is multipart/mixed; boundary=batchresponse_GUID"
               },
               "x-ms-request-id": {
                 "x-ms-client-name": "RequestId",
@@ -2586,7 +2586,7 @@
       ]
     },
     "/{filesystem}/{path}?action=getAccessControl&directory": {
-      "patch": {
+      "head": {
         "tags": [
           "directory"
         ],
@@ -3673,7 +3673,7 @@
       ]
     },
     "/{filesystem}/{path}?action=getAccessControl&blob": {
-      "patch": {
+      "head": {
         "tags": [
           "blob"
         ],
@@ -9657,6 +9657,7 @@
     },
     "Upn": {
       "name": "upn",
+      "x-ms-client-name": "upn",
       "in": "query",
       "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false.",
       "required": false,
