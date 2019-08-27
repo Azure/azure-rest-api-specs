@@ -2085,6 +2085,12 @@
             "schema": {
               "$ref": "#/definitions/TemplateHashResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -2280,6 +2286,15 @@
         }
       },
       "description": "Deployment operation parameters."
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
     },
     "ResourceManagementError": {
       "properties": {
