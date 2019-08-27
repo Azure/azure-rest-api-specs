@@ -37,14 +37,14 @@
     "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups": {
       "get": {
         "x-ms-examples": {
-          "List all device security groups for the specified IoT hub resource": {
+          "List all device security groups for the specified IoT Hub resource": {
             "$ref": "./examples/DeviceSecurityGroups/ListDeviceSecurityGroups_example.json"
           }
         },
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Gets the list of device security groups for the specified IoT hub resource.",
+        "description": "Use this method get the list of device security groups for the specified IoT Hub resource.",
         "operationId": "DeviceSecurityGroups_List",
         "parameters": [
           {
@@ -76,14 +76,14 @@
     "/{resourceId}/providers/Microsoft.Security/deviceSecurityGroups/{deviceSecurityGroupName}": {
       "get": {
         "x-ms-examples": {
-          "Get an device security group for the specified IoT hub resource": {
+          "Get a device security group for the specified IoT Hub resource": {
             "$ref": "./examples/DeviceSecurityGroups/GetDeviceSecurityGroups_example.json"
           }
         },
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Gets the device security group for the specified IoT hub resource.",
+        "description": "Use this method to get the device security group for the specified IoT Hub resource.",
         "operationId": "DeviceSecurityGroups_Get",
         "parameters": [
           {
@@ -98,7 +98,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successful request to get security group.",
+            "description": "Successful request to get device security group.",
             "schema": {
               "$ref": "#/definitions/DeviceSecurityGroup"
             }
@@ -120,7 +120,7 @@
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Creates or updates the device security group on a specified IoT hub resource.",
+        "description": "Use this method to creates or updates the device security group on a specified IoT Hub resource.",
         "operationId": "DeviceSecurityGroups_CreateOrUpdate",
         "parameters": [
           {
@@ -138,13 +138,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Security group was updated",
+            "description": "Security group was updated.",
             "schema": {
               "$ref": "#/definitions/DeviceSecurityGroup"
             }
           },
           "201": {
-            "description": "Security group was created",
+            "description": "Security group was created.",
             "schema": {
               "$ref": "#/definitions/DeviceSecurityGroup"
             }
@@ -159,14 +159,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a device security group for the specified IoT hub resource": {
+          "Delete a device security group for the specified IoT Hub resource": {
             "$ref": "./examples/DeviceSecurityGroups/DeleteDeviceSecurityGroups_example.json"
           }
         },
         "tags": [
           "DeviceSecurityGroups"
         ],
-        "description": "Deletes the security group",
+        "description": "User this method to deletes the device security group.",
         "operationId": "DeviceSecurityGroups_Delete",
         "parameters": [
           {
@@ -238,7 +238,7 @@
       "properties": {
         "thresholdRules": {
           "type": "array",
-          "description": "A list of threshold custom alert rules.",
+          "description": "The list of custom alert threshold rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/ThresholdCustomAlertRule"
@@ -246,7 +246,7 @@
         },
         "timeWindowRules": {
           "type": "array",
-          "description": "A list of time window custom alert rules.",
+          "description": "The list of custom alert time-window rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/TimeWindowCustomAlertRule"
@@ -254,7 +254,7 @@
         },
         "allowlistRules": {
           "type": "array",
-          "description": "A list of allow-list custom alert rules.",
+          "description": "The allow-list custom alert rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/AllowlistCustomAlertRule"
@@ -262,7 +262,7 @@
         },
         "denylistRules": {
           "type": "array",
-          "description": "A list of deny-list custom alert rules.",
+          "description": "The deny-list custom alert rules.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/DenylistCustomAlertRule"
@@ -272,7 +272,7 @@
     },
     "CustomAlertRule": {
       "type": "object",
-      "description": "A custom alert rule",
+      "description": "A custom alert rule.",
       "properties": {
         "displayName": {
           "type": "string",
@@ -286,7 +286,7 @@
         },
         "isEnabled": {
           "type": "boolean",
-          "description": "Whether the custom alert is enabled."
+          "description": "Status of the custom alert."
         },
         "ruleType": {
           "type": "string",
@@ -300,7 +300,7 @@
     },
     "ListCustomAlertRule": {
       "type": "object",
-      "description": "A List custom alert rule",
+      "description": "A List custom alert rule.",
       "allOf": [
         {
           "$ref": "#/definitions/CustomAlertRule"
@@ -309,7 +309,7 @@
       "properties": {
         "valueType": {
           "type": "string",
-          "description": "The value type of the items in the list",
+          "description": "The value type of the items in the list.",
           "enum": [
             "IpCidr",
             "String"
@@ -334,7 +334,7 @@
     },
     "AllowlistCustomAlertRule": {
       "type": "object",
-      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is allowed",
+      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is allowed.",
       "allOf": [
         {
           "$ref": "#/definitions/ListCustomAlertRule"
@@ -382,7 +382,7 @@
     },
     "DenylistCustomAlertRule": {
       "type": "object",
-      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is denied",
+      "description": "A custom alert rule that checks if a value (depends on the custom alert type) is denied.",
       "allOf": [
         {
           "$ref": "#/definitions/ListCustomAlertRule"
@@ -545,7 +545,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the security group. Please notice that the name is case insensitive.",
+      "description": "The name of the device security group. Note that the name of the device security group is case insensitive.",
       "x-ms-parameter-location": "method"
     },
     "DeviceSecurityGroup": {
