@@ -84,6 +84,31 @@
               "targetName": "keyPhrases"
             }
           ]
+        },
+        {
+          "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+          "name": "MyCustomWebApiSkill",
+          "uri": "https://contoso.example.org",
+          "httpMethod": "POST",
+          "timeout": "PT30S",
+          "batchSize": 1,
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/pages/*"
+            },
+            {
+              "name": "languageCode",
+              "source": "/document/languageCode"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "customresult",
+              "targetName": "result"
+            }
+          ],
+          "httpHeaders": {}
         }
       ]
     }
@@ -96,6 +121,7 @@
         "skills": [
           {
             "@odata.type": "#Microsoft.Skills.Text.EntityRecognitionSkill",
+            "name": "#1",
             "description": null,
             "context": null,
             "inputs": [
@@ -118,6 +144,7 @@
           },
           {
             "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
+            "name": "#2",
             "description": null,
             "context": null,
             "inputs": [
@@ -135,6 +162,7 @@
           },
           {
             "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+            "name": "#3",
             "description": null,
             "context": null,
             "inputs": [
@@ -159,6 +187,7 @@
           },
           {
             "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+            "name": "#4",
             "description": null,
             "context": "/document/pages/*",
             "inputs": [
@@ -179,6 +208,34 @@
             ],
             "defaultLanguageCode": null,
             "maxKeyPhraseCount": null
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+            "name": "MyCustomWebApiSkill",
+            "description": null,
+            "context": "/document",
+            "uri": "https://contoso.example.org",
+            "httpMethod": "POST",
+            "timeout": "PT30S",
+            "batchSize": 1,
+            "degreeOfParallelism": null,
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/pages/*"
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode"
+              }
+            ],
+            "outputs": [
+              {
+                "name": "customresult",
+                "targetName": "result"
+              }
+            ],
+            "httpHeaders": {}
           }
         ]
       }
