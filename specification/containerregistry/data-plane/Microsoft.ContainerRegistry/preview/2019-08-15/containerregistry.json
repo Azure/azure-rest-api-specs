@@ -86,12 +86,7 @@
         "operationId": "CheckV2Support",
         "responses": {
           "200": {
-            "description": "Successful response. API v2 supported",
-            "schema": {
-              "enum": [
-                true
-              ]
-            }
+            "description": "Successful response. API v2 supported"
           },
           "default": {
             "description": "ACR error response describing why the operation failed.",
@@ -273,7 +268,6 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "format": "url",
                 "description": "The location where the layer should be accessible."
               }
             }
@@ -312,7 +306,6 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "format": "url",
                 "description": "The location where the layer should be accessible."
               }
             }
@@ -326,6 +319,7 @@
         }
       },
       "delete": {
+        "description": "Removes an already uploaded blob.",
         "produces": [
           "application/octet-stream"
         ],
@@ -1125,7 +1119,7 @@
     }
   },
   "x-ms-paths": {
-    "/v2/{name}/blobs/uploads/?mode={resumable}": {
+    "/v2/{name}/blobs/uploads/?mode=resumable": {
       "post": {
         "tags": [
           "Layer"
@@ -1135,12 +1129,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
-          },
-          {
-            "name": "resumable",
-            "description": "Initiate Resumable Blob Upload",
-            "type": "string",
-            "in": "query"
           }
         ],
         "responses": {
@@ -1170,7 +1158,7 @@
         }
       }
     },
-    "/v2/{name}/blobs/{digest}?mode={chunk}": {
+    "/v2/{name}/blobs/{digest}?mode=chunk": {
       "parameters": [
         {
           "$ref": "#/parameters/ImageName"
@@ -1180,12 +1168,6 @@
         },
         {
           "$ref": "#/parameters/Range"
-        },
-        {
-          "name": "chunk",
-          "description": "Acquire only chunks of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
-          "type": "string",
-          "in": "query"
         }
       ],
       "get": {
@@ -1255,7 +1237,7 @@
         }
       }
     },
-    "/{nextBlobUuidLink}?mode={chunk}": {
+    "/{nextBlobUuidLink}?mode=chunk": {
       "parameters": [
         {
           "$ref": "#/parameters/NextLink"
@@ -2040,10 +2022,6 @@
     },
     "Manifest": {
       "description": "Returns the requested manifest file",
-      "discriminator": "valueType",
-      "required": [
-        "valueType"
-      ],
       "properties": {
         "schemaVersion": {
           "type": "integer",
@@ -2053,10 +2031,6 @@
     },
     "ManifestWrapper": {
       "description": "Returns the requested manifest file",
-      "discriminator": "valueType",
-      "required": [
-        "valueType"
-      ],
       "properties": {
         "mediaType": {
           "type": "string",
@@ -2065,7 +2039,11 @@
             "application/vnd.docker.distribution.manifest.list.v2+json",
             "application/vnd.docker.distribution.manifest.v2+json",
             "application/vnd.oci.image.manifest.v1+json"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "mediaType",
+            "modelAsString": false
+          }
         },
         "manifests": {
           "type": "array",
@@ -2297,9 +2275,6 @@
     "V1Manifest": {
       "description": "Returns the requested V1 manifest file",
       "x-ms-discriminator-value": "application/vnd.oci.image.manifest.v1+json",
-      "required": [
-        "valueType"
-      ],
       "properties": {
         "architecture": {
           "type": "string",
@@ -2342,7 +2317,7 @@
       ]
     },
     "Annotations": {
-      "description": "Additional information provided through arbitrary metadata",
+      "description": "Additional information provided through arbitrary metadata.",
       "type": "object",
       "x-nullable": true,
       "additionalProperties": {
@@ -2356,23 +2331,22 @@
           "x-ms-client-name": "Created"
         },
         "org.opencontainers.image.authors": {
-          "description": "Contact details of the people or organization responsible for the image (freeform string)",
-          "format": "freeform",
+          "description": "Contact details of the people or organization responsible for the image.",
           "type": "string",
           "x-ms-client-name": "Authors"
         },
         "org.opencontainers.image.url": {
-          "description": "URL to find more information on the image (string)",
+          "description": "URL to find more information on the image.",
           "type": "string",
           "x-ms-client-name": "Url"
         },
         "org.opencontainers.image.documentation": {
-          "description": "URL to get documentation on the image (string)",
+          "description": "URL to get documentation on the image.",
           "type": "string",
           "x-ms-client-name": "Documentation"
         },
         "org.opencontainers.image.source": {
-          "description": "URL to get source code for building the image (string)",
+          "description": "URL to get source code for building the image.",
           "type": "string",
           "x-ms-client-name": "Source"
         },
@@ -2397,17 +2371,17 @@
           "x-ms-client-name": "Licenses"
         },
         "org.opencontainers.image.ref.name": {
-          "description": "Name of the reference for a target (string). ",
+          "description": "Name of the reference for a target.",
           "type": "string",
           "x-ms-client-name": "Name"
         },
         "org.opencontainers.image.title": {
-          "description": "Human-readable title of the image (string)",
+          "description": "Human-readable title of the image",
           "type": "string",
           "x-ms-client-name": "Title"
         },
         "org.opencontainers.image.description": {
-          "description": "Human-readable description of the software packaged in the image (string)",
+          "description": "Human-readable description of the software packaged in the image",
           "type": "string",
           "x-ms-client-name": "Description"
         }
@@ -2596,6 +2570,7 @@
     },
     "RawData": {
       "name": "value",
+      "description": "Raw data of blob",
       "in": "body",
       "schema": {
         "type": "object",
@@ -2606,6 +2581,7 @@
     },
     "RawDataOptional": {
       "name": "value",
+      "description": "Optional raw data of blob",
       "in": "body",
       "schema": {
         "type": "object",
