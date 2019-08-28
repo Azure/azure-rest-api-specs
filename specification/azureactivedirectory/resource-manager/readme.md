@@ -44,7 +44,7 @@ input-file:
 
 These settings apply only when `--tag=package-2018-01-01-only` is specified on the command line.
 
-```yaml $(tag) == 'package-2018-01'
+```yaml $(tag) == 'package-2018-01-01-only'
 input-file:
   - Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
   - Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
@@ -72,6 +72,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+   after_scripts:
+      - python ./scripts/multiapi_init_gen.py azureactivedirectory
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
