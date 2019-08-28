@@ -31,15 +31,15 @@
       "post": {
         "summary": "Get Available Scopes for `Reservation`.",
         "description": "Get Available Scopes for `Reservation`.\n",
-        "operationId": "Reservation_AvailableScopes", 
-		"x-ms-examples": {
+        "operationId": "Reservation_AvailableScopes",
+        "x-ms-examples": {
           "AvailableScopes": {
             "$ref": "./examples/GetAvailableScope.json"
           }
-        },		
+        },
         "x-ms-long-running-operation": true,
         "parameters": [
-		  {
+          {
             "$ref": "#/parameters/ReservationOrderIdParameter"
           },
           {
@@ -59,10 +59,10 @@
           "200": {
             "description": "List of `Subscription`s created after the filter.",
             "schema": {
-                "$ref": "#/definitions/Properties"
+              "$ref": "#/definitions/Properties"
             }
           },
-		  "default": {
+          "default": {
             "description": "Unexpected error",
             "schema": {
               "$ref": "#/definitions/Error"
@@ -1437,33 +1437,33 @@
       "format": "int32",
       "description": "Quantity of the SKUs that are part of the Reservation. Must be greater than zero."
     },
-    "Properties" : {
-      "type" : "object",
+    "Properties": {
+      "type": "object",
       "properties": {
-        "properties" :{
+        "properties": {
           "$ref": "#/definitions/SubscriptionScopeProperties"
         }
       }
     },
-	"SubscriptionScopeProperties":{
-	  "type": "object",
-	  "properties": {
-		"scopes":{
+    "SubscriptionScopeProperties": {
+      "type": "object",
+      "properties": {
+        "scopes": {
           "type": "array",
           "items": {
-              "$ref": "#/definitions/ScopeProperties"
+            "$ref": "#/definitions/ScopeProperties"
           }
-       }
-     }
-   },
-   "ScopeProperties":{
-    "type": "object",
-    "properties": {
-      "scope": {
-        "type": "string" 
+        }
+      }
+    },
+    "ScopeProperties": {
+      "type": "object",
+      "properties": {
+        "scope": {
+          "type": "string"
         },
-      "valid": {
-        "type": "boolean"
+        "valid": {
+          "type": "boolean"
         }
       }
     },
@@ -1488,17 +1488,17 @@
   },
   "parameters": {
     "ScopeParameter": {
-		  "name": "body",
-		  "x-ms-parameter-location": "method",
-		  "in": "body",
-		  "required": true,
-		  "schema": {
-			  "type": "array",
-			  "items": {
-				  "type": "string"
-			  }
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "schema": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
       }
-	  },
+    },
     "PurchaseParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
