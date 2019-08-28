@@ -345,7 +345,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Update successful. The operation returns the resulting PrivateEndpointConnection resource",
+            "description": "Update successful. The operation returns the resulting PrivateEndpointConnection resource.",
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
@@ -432,7 +432,7 @@
           "PrivateLinkServices"
         ],
         "operationId": "PrivateLinkServices_CheckPrivateLinkServiceVisibility",
-        "description": "Checks the subscription is visible to private link service",
+        "description": "Checks whether the subscription is visible to private link service.",
         "parameters": [
           {
             "name": "location",
@@ -478,7 +478,7 @@
           "PrivateLinkServices"
         ],
         "operationId": "PrivateLinkServices_CheckPrivateLinkServiceVisibilityByResourceGroup",
-        "description": "Checks the subscription is visible to private link service",
+        "description": "Checks whether the subscription is visible to private link service in the specified resource group.",
         "parameters": [
           {
             "name": "location",
@@ -647,7 +647,7 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkServiceIpConfiguration"
           },
-          "description": "An array of references to the private link service IP configuration."
+          "description": "An array of private link service IP configurations."
         },
         "networkInterfaces": {
           "type": "array",
@@ -655,7 +655,7 @@
           "items": {
             "$ref": "./networkInterface.json#/definitions/NetworkInterface"
           },
-          "description": "Gets an array of references to the network interfaces created for this private link service."
+          "description": "An array of references to the network interfaces created for this private link service."
         },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -752,7 +752,7 @@
         },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
-          "description": "The reference of the subnet resource."
+          "description": "The reference to the subnet resource."
         },
         "primary": {
           "type": "boolean",
@@ -764,7 +764,7 @@
         },
         "privateIPAddressVersion": {
           "$ref": "./network.json#/definitions/IPVersion",
-          "description": "Available from Api-Version 2016-03-30 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4."
+          "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
         }
       },
       "description": "Properties of private link service IP configuration."
@@ -839,7 +839,7 @@
           "items": {
             "$ref": "#/definitions/PrivateLinkService"
           },
-          "description": "Gets a list of PrivateLinkService resources in a resource group."
+          "description": "A list of PrivateLinkService resources in a resource group."
         },
         "nextLink": {
           "type": "string",

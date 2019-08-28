@@ -1128,7 +1128,7 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "Read only. Inbound rules URIs that use this frontend IP."
+          "description": "An array of references to inbound rules that use this frontend IP."
         },
         "inboundNatPools": {
           "readOnly": true,
@@ -1136,7 +1136,7 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "Read only. Inbound pools URIs that use this frontend IP."
+          "description": "An array of references to inbound pools that use this frontend IP."
         },
         "outboundRules": {
           "readOnly": true,
@@ -1144,7 +1144,7 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "Read only. Outbound rules URIs that use this frontend IP."
+          "description": "An array of references to outbound rules that use this frontend IP."
         },
         "loadBalancingRules": {
           "readOnly": true,
@@ -1152,7 +1152,7 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "Gets load balancing rules URIs that use this frontend IP."
+          "description": "An array of references to load balancing rules that use this frontend IP."
         },
         "privateIPAddress": {
           "type": "string",
@@ -1164,7 +1164,7 @@
         },
         "privateIPAddressVersion": {
           "$ref": "./network.json#/definitions/IPVersion",
-          "description": "It represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4."
+          "description": "Whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4."
         },
         "subnet": {
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
@@ -1228,7 +1228,7 @@
           "items": {
             "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
           },
-          "description": "Gets collection of references to IP addresses defined in network interfaces."
+          "description": "An array of references to IP addresses defined in network interfaces."
         },
         "loadBalancingRules": {
           "readOnly": true,
@@ -1236,12 +1236,12 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "Gets load balancing rules that use this backend address pool."
+          "description": "An array of references to load balancing rules that use this backend address pool."
         },
         "outboundRule": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/SubResource",
-          "description": "Gets outbound rules that use this backend address pool."
+          "description": "A reference to an outbound rule that uses this backend address pool."
         },
         "outboundRules": {
           "readOnly": true,
@@ -1249,7 +1249,7 @@
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           },
-          "description": "Gets outbound rules that use this backend address pool."
+          "description": "An array of references to outbound rules that use this backend address pool."
         },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
@@ -1267,7 +1267,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource."
+          "description": "The name of the resource that is unique within the set of backend address pools used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
@@ -1445,7 +1445,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource."
+          "description": "The name of the resource that is unique within the set of probes used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
@@ -1518,7 +1518,7 @@
         },
         "name": {
           "type": "string",
-          "description": "Gets name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource."
+          "description": "The name of the resource that is unique within the set of inbound NAT rules used by the load balancer. This name can be used to access the resource."
         },
         "etag": {
           "type": "string",
