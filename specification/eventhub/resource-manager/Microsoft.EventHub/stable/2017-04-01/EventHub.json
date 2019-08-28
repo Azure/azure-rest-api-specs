@@ -2030,7 +2030,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/namespaces/{namespaceName}/networkRuleSets": {
       "get": {
         "tags": [
           "Namespaces"
@@ -2069,6 +2069,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     }
@@ -2917,7 +2920,7 @@
       ],
       "description": "Description of NetworkRuleSet resource."
     },
-	"NetworkRuleSetListResult": {
+    "NetworkRuleSetListResult": {
       "properties": {
         "value": {
           "type": "array",
