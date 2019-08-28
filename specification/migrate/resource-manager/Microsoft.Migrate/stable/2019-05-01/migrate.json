@@ -1877,8 +1877,7 @@
       "type": "object",
       "properties": {
         "eTag": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "id": {
           "type": "string",
@@ -1893,8 +1892,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/CollectorProperties",
-          "readOnly": true
+          "$ref": "#/definitions/CollectorProperties"
         }
       }
     },
@@ -1943,8 +1941,7 @@
       "type": "object",
       "properties": {
         "eTag": {
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "id": {
           "type": "string",
@@ -1959,8 +1956,7 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/CollectorProperties",
-          "readOnly": true
+          "$ref": "#/definitions/CollectorProperties"
         }
       }
     },
@@ -1990,163 +1986,57 @@
         }
       }
     },
-    "AssessmentOptions": {
+    "VmFamily": {
       "type": "object",
-      "description": "Assessment options.",
+      "description": "VM family name, the list of targeted azure locations and the category of the family.",
+      "properties": {
+        "familyName": {
+          "type": "string",
+          "description": "Name of the VM family.",
+          "readOnly": true
+        },
+        "targetLocations": {
+          "type": "array",
+          "description": "List of Azure regions.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "Azure region name.",
+            "readOnly": true
+          }
+        },
+        "category": {
+          "type": "array",
+          "description": "Category of the VM family.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "VM family Category.",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "AssessmentOptionsResultList": {
+      "type": "object",
+      "description": "List of assessment options.",
       "properties": {
         "vmFamilies": {
           "type": "array",
-          "description": "List of vm families.",
+          "description": "Dictionary of VM families grouped by vm family name describing the targeted azure locations of VM family and the category of the family.",
+          "readOnly": true,
           "items": {
             "$ref": "#/definitions/VmFamily"
           }
         },
         "reservedInstanceVmFamilies": {
           "type": "array",
-          "description": "List of azure VM families.",
+          "description": "List of supported VM Families.",
+          "readOnly": true,
           "items": {
             "type": "string",
-            "enum": [
-              "Unknown",
-              "Basic_A0_A4",
-              "Standard_A0_A7",
-              "Standard_A8_A11",
-              "Av2_series",
-              "D_series",
-              "Dv2_series",
-              "DS_series",
-              "DSv2_series",
-              "F_series",
-              "Fs_series",
-              "G_series",
-              "GS_series",
-              "H_series",
-              "Ls_series",
-              "Dsv3_series",
-              "Dv3_series",
-              "Fsv2_series",
-              "Ev3_series",
-              "Esv3_series",
-              "M_series",
-              "DC_Series"
-            ],
-            "description": "Azure VM family.",
-            "x-ms-enum": {
-              "name": "AzureVmFamily",
-              "modelAsString": true
-            }
-          }
-        }
-      }
-    },
-    "VmFamily": {
-      "type": "object",
-      "description": "Vm family.",
-      "properties": {
-        "familyName": {
-          "type": "string",
-          "enum": [
-            "Unknown",
-            "Basic_A0_A4",
-            "Standard_A0_A7",
-            "Standard_A8_A11",
-            "Av2_series",
-            "D_series",
-            "Dv2_series",
-            "DS_series",
-            "DSv2_series",
-            "F_series",
-            "Fs_series",
-            "G_series",
-            "GS_series",
-            "H_series",
-            "Ls_series",
-            "Dsv3_series",
-            "Dv3_series",
-            "Fsv2_series",
-            "Ev3_series",
-            "Esv3_series",
-            "M_series",
-            "DC_Series"
-          ],
-          "description": "Azure VM family.",
-          "x-ms-enum": {
-            "name": "AzureVmFamily",
-            "modelAsString": true
-          }
-        },
-        "targetLocations": {
-          "type": "array",
-          "description": "List of azure locations.",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "EastAsia",
-              "SoutheastAsia",
-              "AustraliaEast",
-              "AustraliaSoutheast",
-              "BrazilSouth",
-              "CanadaCentral",
-              "CanadaEast",
-              "WestEurope",
-              "NorthEurope",
-              "CentralIndia",
-              "SouthIndia",
-              "WestIndia",
-              "JapanEast",
-              "JapanWest",
-              "KoreaCentral",
-              "KoreaSouth",
-              "UkWest",
-              "UkSouth",
-              "NorthCentralUs",
-              "EastUs",
-              "WestUs2",
-              "SouthCentralUs",
-              "CentralUs",
-              "EastUs2",
-              "WestUs",
-              "WestCentralUs",
-              "GermanyCentral",
-              "GermanyNortheast",
-              "ChinaNorth",
-              "ChinaEast",
-              "USGovArizona",
-              "USGovTexas",
-              "USGovIowa",
-              "USGovVirginia",
-              "USDoDCentral",
-              "USDoDEast"
-            ],
-            "description": "Target Azure location for which the machines should be assessed. These enums are the same as used by Compute API.",
-            "x-ms-enum": {
-              "name": "AzureLocation",
-              "modelAsString": true
-            }
-          }
-        },
-        "category": {
-          "type": "array",
-          "description": "List of azure vm categories.",
-          "items": {
-            "type": "string",
-            "enum": [
-              "Unknown",
-              "GeneralPurpose",
-              "ComputeOptimized",
-              "MemoryOptimized",
-              "StorageOptimized",
-              "GpuOptimized",
-              "HighPerformanceCompute",
-              "SupportsPremiumStorage",
-              "Confidential"
-            ],
-            "description": "The azure vm category.",
-            "x-ms-enum": {
-              "name": "AzureVmCategory",
-              "modelAsString": true
-            }
+            "description": "Azure VM family name.",
+            "readOnly": true
           }
         }
       }
@@ -2473,7 +2363,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/AssessmentOptions"
+              "$ref": "#/definitions/AssessmentOptionsResultList"
             }
           },
           "401": {
