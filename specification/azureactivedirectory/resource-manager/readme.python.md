@@ -8,10 +8,10 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  package-name: azure-mgmt-azureactivedirectory
+  namespace: Microsoft.Aadiam
+  package-name: azureactivedirectory
   clear-output-folder: true
   no-namespace-folders: true
-  python-base-folder: azureactivedirectory/azure-mgmt-azureactivedirectory/azure/mgmt/azureactivedirectory
 ```
 
 ### Python multi-api
@@ -31,8 +31,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2017-04-01-only' && $(python)
 python:
-  namespace: $(python-base-namespace).v2017_04_01
-  output-folder: $(python-sdks-folder)/$(python-base-folder)/v2017_04_01
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory/v2017_04_01
 ```
 
 ### Tag: package-2018-01-01-only and python
@@ -42,6 +42,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2018-01-01-only' && $(python)
 python:
-  namespace: $(python-base-namespace).v2018_01_01
-  output-folder: $(python-sdks-folder)/$(python-base-folder)/v2018_01_01
+  no-namespace-folders: true
+  output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory/v2018_01_01
 ```
