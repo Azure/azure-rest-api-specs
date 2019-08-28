@@ -50,11 +50,11 @@ input-file:
   - Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
 ```
 
-### Tag: package-2017-04-01
+### Tag: package-2017-04-01-only
 
-These settings apply only when `--tag=package-2017-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-04-01'
+``` yaml $(tag) == 'package-2017-04-01-only'
 input-file:
   - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 ```

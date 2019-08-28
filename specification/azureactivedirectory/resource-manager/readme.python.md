@@ -19,16 +19,16 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
-  - tag: package-2017-04-01
+  - tag: package-2017-04-01-only
   - tag: package-2018-01-01-only
 ```
 
 ### Tag: package-2017-04-01 and python
 
-These settings apply only when `--tag=package-2017-04-01 --python` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-01-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2017-04-01' && $(python)
+``` yaml $(tag) == 'package-2017-04-01-only' && $(python)
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory/v2017_04_01
