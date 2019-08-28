@@ -14,7 +14,6 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: release_2_0
-  - tag: release_2_1
 ```
 
 ### Tag: release_2_0 and go
@@ -24,13 +23,4 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'release_2_0' && $(go)
 output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.0/$(namespace)
-```
-
-### Tag: release_2_1 and go
-
-These settings apply only when `--tag=release_2_1 --go` is specified on the command line.
-Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
-
-``` yaml $(tag) == 'release_2_1' && $(go)
-output-folder: $(go-sdk-folder)/services/cognitiveservices/v2.1/$(namespace)
 ```

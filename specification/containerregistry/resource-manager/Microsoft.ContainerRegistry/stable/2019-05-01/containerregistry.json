@@ -1264,7 +1264,7 @@
       }
     },
     "OperationServiceSpecificationDefinition": {
-      "description": "The definition of Azure Monitoring list.",
+      "description": "The definition of Azure Monitoring metrics list.",
       "type": "object",
       "properties": {
         "metricSpecifications": {
@@ -1570,7 +1570,6 @@
       "properties": {
         "status": {
           "description": "The value that indicates whether the policy is enabled or not.",
-          "default": "disabled",
           "enum": [
             "enabled",
             "disabled"
@@ -1589,7 +1588,6 @@
       "properties": {
         "type": {
           "description": "The type of trust policy.",
-          "default": "Notary",
           "enum": [
             "Notary"
           ],
@@ -1601,7 +1599,6 @@
         },
         "status": {
           "description": "The value that indicates whether the policy is enabled or not.",
-          "default": "disabled",
           "enum": [
             "enabled",
             "disabled"
@@ -1620,8 +1617,7 @@
       "properties": {
         "days": {
           "format": "int32",
-          "description": "The number of days to retain an untagged manifest after which it gets purged.",
-          "default": 7,
+          "description": "The number of days to retain manifest before it expires.",
           "type": "integer"
         },
         "lastUpdatedTime": {
@@ -1632,7 +1628,6 @@
         },
         "status": {
           "description": "The value that indicates whether the policy is enabled or not.",
-          "default": "disabled",
           "enum": [
             "enabled",
             "disabled"
