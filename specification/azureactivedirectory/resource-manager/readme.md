@@ -29,20 +29,32 @@ openapi-type: arm
 tag: package-2018-01
 ```
 
-
 ### Tag: package-2018-01
 
 These settings apply only when `--tag=package-2018-01` is specified on the command line.
 
 ```yaml $(tag) == 'package-2018-01'
 input-file:
-  - Microsoft.Aadiam/stable/2018-01-01/azureactivedirectory.json
+  - Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
+  - Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
+  - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 ```
+
+### Tag: package-2018-01-01-only
+
+These settings apply only when `--tag=package-2018-01-01-only` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-01'
+input-file:
+  - Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
+  - Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
+```
+
 ### Tag: package-2017-04-01
 
 These settings apply only when `--tag=package-2017-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-04-01'
+``` yaml $(tag) == 'package-2017-04-1'
 input-file:
   - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 ```
