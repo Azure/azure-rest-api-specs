@@ -23,7 +23,7 @@ batch:
   - tag: package-2018-01-01-only
 ```
 
-### Tag: package-2017-04-01-only and python
+### Tag: package-2017-04-01 and python
 
 These settings apply only when `--tag=package-2017-04-01 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.

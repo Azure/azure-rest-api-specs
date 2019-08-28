@@ -115,7 +115,8 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
-
+  - $(this-folder)/Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
+  - $(this-folder)/Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,
