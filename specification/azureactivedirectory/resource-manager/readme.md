@@ -35,9 +35,9 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2018-01'
 input-file:
-  - Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
-  - Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
-  - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
+- Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
+- Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 ```
 
 ### Tag: package-2018-01-01-only
@@ -46,8 +46,8 @@ These settings apply only when `--tag=package-2018-01-01-only` is specified on t
 
 ```yaml $(tag) == 'package-2018-01-01-only'
 input-file:
-  - Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
-  - Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
+- Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
+- Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
 ```
 
 ### Tag: package-2017-04-01-only
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2017-04-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2017-04-01-only'
 input-file:
-  - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
+- Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 ```
 
 ---
@@ -117,6 +117,7 @@ input-file:
   - $(this-folder)/Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
   - $(this-folder)/Microsoft.Aadiam/stable/2018-01-01/metrics_API.json
   - $(this-folder)/Microsoft.Aadiam/stable/2018-01-01/metricDefinitions_API.json
+  
 ```
 
 If there are files that should not be in the `all-api-versions` set,
