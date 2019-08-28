@@ -3648,7 +3648,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}" : {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -3678,9 +3678,6 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
-          },
-          "default": {
-            "description": "TODO: put error responses for GET privateEndpoint connection here"
           }
         },
         "x-ms-examples": {
@@ -3715,9 +3712,6 @@
         "responses": {
           "200": {
             "description": "Successfully approved or rejected private endpoint connection."
-          },
-          "default": {
-            "description": "TODO: put error responses for PUT privateEndpoint connection here"
           },
           "202": {
             "description": "Accepted"
@@ -3757,9 +3751,6 @@
           "200": {
             "description": "Successfully deleted private endpoint connection."
           },
-          "default": {
-            "description": "TODO: put error responses for PUT privateEndpoint connection here"
-          },
           "202": {
             "description": "Accepted"
           },
@@ -3771,6 +3762,42 @@
         "x-ms-examples": {
           "Deletes a private endpoint connection with a given name.": {
             "$ref": "./examples/CosmosDBPrivateEndpointConnectionDelete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/privateLinkResources" : {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Gets the private link resources that need to be created for a Cosmos DB account.",
+        "operationId": "PrivateLinkResources_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceList"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets private endpoint connection.": {
+            "$ref": "./examples/CosmosDBPrivateLinkResourceListGet.json"
           }
         }
       }
@@ -6077,6 +6104,54 @@
           "type": "string",
           "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
           "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceList" : {
+      "type": "object",
+      "properties": {
+        "value" : {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        }
+      },
+      "PrivateLinkResource" : {
+        "id": {
+          "type": "string",
+          "description": "Resource id of the private link."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the private link."
+        },
+        "type" : {
+          "type": "string",
+          "description": "Resource Type"
+        },
+        "properties" : {
+          "$ref": "#/defintions/PrivateLinkResourceProperties"
+        }
+      },
+      "PrivateLinkResourceProperties": {
+        "description": "Properties of a private link resource.",
+        "type": "object",
+        "properties": {
+          "groupId": {
+            "description": "The private link resource group id.",
+            "type": "string",
+            "readOnly": true
+          },
+          "requiredMembers": {
+            "description": "The private link resource required member names.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "readOnly": true
+          }
         }
       }
     }
