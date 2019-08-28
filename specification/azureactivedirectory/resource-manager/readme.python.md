@@ -8,12 +8,10 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.Aadiam
   package-name: azure-mgmt-azureactivedirectory
   clear-output-folder: true
   no-namespace-folders: true
-  python-base-folder: azureactivedirectory/azure-mgmt-azureactivedirectory/azureactivedirectory
-  python-base-namespace: azureactivedirectory
+  python-base-folder: azureactivedirectory/azure-mgmt-azureactivedirectory/azure/mgmt/azureactivedirectory
 ```
 
 ### Python multi-api
