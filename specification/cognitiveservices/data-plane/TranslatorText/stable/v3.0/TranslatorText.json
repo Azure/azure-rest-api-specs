@@ -12,31 +12,23 @@
     "description": "# Introduction\n\nThe Microsoft Translator Text API provides a JSON-based Web API. It provides:\n\n  * Translation between any supported languages to any other supported language.\n  * Translation to multiple languages in one request.\n  * Transliteration to convert text from one script to another script of the same language.\n  * Language detection, translation, and transliteration in one request.\n  * Dictionary to lookup alternative translations of a term, to find back-translations and examples showing terms used in context.\n  * Rich language detection.\n# Base URLs\n\nThe Translator Text API is available in the following clouds:\n\n| Description | Region    | Base URL                                |\n| -------     | --------  | -------                                 |\n| Azure       | Global    | api.cognitive.microsofttranslator.com   |\n| Azure       | Europe    | api-eur.cognitive.microsofttranslator.com |\n\n\n# Authentication\n\nSubscribe to the Translator Text API, part of Azure Cognitive Services, and use your subscription key from the Azure portal to authenticate. You can follow the steps in https://docs.microsoft.com/en-us/azure/cognitive-services/translator/translator-text-how-to-signup.\n\n\nThe simplest way is to pass your Azure secret key to the Translator service using the http request header `Ocp-Apim-Subscription-Key`.\n\nIf you prefer using a short-lived authentication, you may use your secret key to obtain an authorization token from the token service. In that case you pass the authorization token to the Translator service using the `Authorization` request header. To obtain an authorization token, make a `POST` request to the following URL:\n\n| Environment | Authentication service URL                                |\n| ----------  | ----------                                                |\n| Azure       | `https://api.cognitive.microsoft.com/sts/v1.0/issueToken` |\n\nHere are example requests to obtain a token with a lifetime of 10 minutes, given a secret key:\n\n```python\n// Pass secret key using header\ncurl --header 'Ocp-Apim-Subscription-Key: <your-key>' --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken'\n// Pass secret key using query string parameter\ncurl --data \"\" 'https://api.cognitive.microsoft.com/sts/v1.0/issueToken?Subscription-Key=<your-key>'\n```\n\nA successful request returns the encoded access token as plain text in the response body. The valid token is passed to the Translator service as a bearer token in the Authorization. \n\n```\nAuthorization: Bearer <Base64-access_token>\n```\n\nAn authentication token is valid for 10 minutes. The token should be re-used when making multiple calls to the Translator APIs. If you make requests to the Translator API over an extended period of time,  you  must request a new access token at regular intervals before the token expires, for instance every 9 minutes.\n\nTo summarize, a client request to the Translator API will include one authorization header taken from the following table:\n\n| Headers       | Description  |\n| ----------    | ----------   |\n| Ocp-Apim-Subscription-key    | Use with Cognitive Services subscription if you are passing your secret key.                               The value is the Azure secret key for your subscription to Translator Text API.                         |\n| Authorization                | Use with Cognitive Services subscription if you are passing an authentication token. The value is the Bearer token: `Bearer <token>`.       |\n\n## All-in-one subscription\nThe last authentication option is to use a Cognitive Service’s all-in-one subscription. This allows you to use a single secret key to authenticate requests for multiple services.\nWhen you use an all-in-one secret key, you must include two authentication headers with your request. The first passes the secret key, the second specifies the region associated with your subscription.\n`Ocp-Api-Subscription-Key` `Ocp-Apim-Subscription-Region`\nIf you pass the secret key in the query string with the parameter `Subscription-Key`, then you must specify the region with query parameter `Subscription-Region`.\nIf you use a bearer token, you must obtain the token from the region endpoint:\n`https://<your-region>.api.cognitive.microsoft.com/sts/v1.0/issueToken`.\n\nAvailable regions are: `australiaeast`, `brazilsouth`, `canadacentral`, `centralindia`, `centraluseuap`, `eastasia`, `eastus`, `eastus2`, `japaneast`, `northeurope`, `southcentralus`, `southeastasia`, `uksouth`, `westcentralus`, `westeurope`, `westus`, and `westus2`.\n\nRegion is required for the all-in-one Text API subscription.\n\n\n# Errors\n\nA standard error response is a JSON object with name/value pair named `error`. The value is also a JSON object with properties:\n  * `code`: A server-defined error code.\n  * `message`: A string giving a human-readable representation of the error.\n\nFor example, a customer with a free trial subscription receives the following error once the free quota is exhausted:\n\n```json\n{\n  \"error\": {\n  \"code\":403000,\n  \"message\":\"The subscription has exceeded its free quota.\"\n  }\n}\n```\n# Enter your subscription keys to try out Microsoft Translator.\nSelect the `Authorize` button and enter your Microsoft Translator subscription key, OR your `all in one Cognitive Services` subscription key. If you are using the all in one Cognitive Services key you will need to also enter your subscription region.\n## Available regions are:\n\n  `australiaeast`, `brazilsouth`, `canadacentral`, `centralindia`, `centraluseuap`, `eastasia`, `eastus`, `eastus2`, `japaneast`, `northeurope`, `southcentralus`, `southeastasia`, `uksouth`, `westcentralus`, `westeurope`, `westus`, `westus2`.\n"
   },
   "securityDefinitions": {
-    "apim_key": {
+    "apiKeyHeader": {
       "type": "apiKey",
       "name": "Ocp-Apim-Subscription-Key",
       "in": "header"
     },
-    "api_key_all_in_one": {
+    "apiKeyQuery": {
       "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Key",
-      "in": "header"
-    },
-    "api_region_all_in_one": {
-      "type": "apiKey",
-      "name": "Ocp-Apim-Subscription-Region",
-      "in": "header"
-    }
+      "name": "subscription-key",
+      "in": "query"
+    }    
   },
   "security": [
     {
-      "apim_key": []
+      "apiKeyHeader": []
     },
     {
-      "api_key_all_in_one": []
-    },
-    {
-      "api_region_all_in_one": []
+      "apiKeyQuery": []
     }
   ],
   "x-ms-parameterized-host": {
@@ -339,7 +331,7 @@
     },
     "/Languages": {
       "get": {
-        "description": "Gets the set of languages currently supported by other operations of the Translator Text API.\n**Authentication is not required to get language resources.**\n\n# Response Body\nA client uses the `scope` query parameter to define which groups of languages it is interested in.\n* `scope=translation` provides languages supported to translate text from one language to another language.\n* `scope=transliteration` provides capabilities for converting text in one language from one script to another script.\n* `scope=dictionary` provides language pairs for which `Dictionary` operations return data.\n\nA client may retrieve several groups simultaneously by specifying a comma-separated list of names. For example, `scope=translation,transliteration,dictionary` would return supported languages for all groups.\n\nA successful response is a JSON object with one property for each requested group.\nThe value for each property is as follows.\n\n* `translation` property\n  The value of the `translation` property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag. A key identifies a language for which text can be translated to or translated from. The value associated with the key is a JSON object with properties that describe the language\n  * `name-` Display name of the language in the locale requested via `Accept-Language` header.\n  * `nativeName-` Display name of the language in the locale native for this language.\n  * `dir-` Directionality, which is `rtl` for right-to-left languages or `ltr` for left-to-right languages.\n```json\n{\n  \"translation\": {\n  ...\n  \"fr\": {\n  \"name\": \"French\",\n  \"nativeName\": \"Français\",\n  \"dir\": \"ltr\"\n  },\n...\n }\n}\n```\n* `transliteration` property\n  The value of the `transliteration` property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag. A key identifies a language for which text can be converted from one script to another script. The value associated with the key is a JSON object with properties that describe the language and its supported scripts\n  * `name-` Display name of the language in the locale requested via `Accept-Language` header.\n  * `nativeName-` Display name of the language in the locale native for this language.\n  * `scripts-` List of scripts to convert from. Each element of the `scripts` list has properties-\n    * `code-` Code identifying the script.\n    * `name-` Display name of the script in the locale requested via `Accept-Language` header.\n    * `nativeName-` Display name of the language in the locale native for the language.\n    * `dir-` Directionality, which is `rtl` for right-to-left languages or `ltr` for left-to-right languages.\n    * `toScripts-` List of scripts available to convert text to. Each element of the `toScripts` list has properties `code`, `name`, `nativeName`, and `dir` as described earlier.\n\n```json\n{\n  \"transliteration\": {\n    ...\n    \"ja\": {\n      \"name\": \"Japanese\",\n      \"nativeName\": \"日本語\",\n      \"scripts\": [\n        {\n          \"code\": \"Jpan\",\n          \"name\": \"Japanese\",\n          \"nativeName\": \"日本語\",\n          \"dir\": \"ltr\",\n          \"toScripts\": [\n            {\n              \"code\": \"Latn\",\n              \"name\": \"Latin\",\n              \"nativeName\": \"ラテン語\",\n              \"dir\": \"ltr\"\n            }\n          ]\n        },\n        {\n          \"code\": \"Latn\",\n          \"name\": \"Latin\",\n          \"nativeName\": \"ラテン語\",\n          \"dir\": \"ltr\",\n          \"toScripts\": [\n          {\n            \"code\": \"Jpan\",\n            \"name\": \"Japanese\",\n            \"nativeName\": \"日本語\",\n            \"dir\": \"ltr\"\n          }\n          ]\n        }\n      ]\n    },\n  ...\n  }\n}\n\n```\n* `dictionary` property\nThe value of the `dictionary` property is a dictionary of (key, value) pairs. Each key is a BCP 47 language tag. The key identifies a language for which alternative translations and back-translations are available. The value is a JSON object that describes the source language and the target languages with available translations.\n  * `name-` Display name of the source language in the locale requested via `Accept-Language` header.\n  * `nativeName-` Display name of the language in the locale native for this language.\n  * `dir-` Directionality, which is `rtl` for right-to-left languages or `ltr` for left-to-right languages.\n  * `translations-` List of languages with alterative translations and examples for the query expressed in the source language. Each element of the `translations` list has properties\n    * `name-` Display name of the target language in the locale requested via `Accept-Language` header.\n    * `nativeName-` Display name of the target language in the locale native for the target language.\n    * `dir-` Directionality, which is `rtl` for right-to-left languages or `ltr` for left-to-right languages.\n    * `code-` Language code identifying the target language.\n\n```json\n\n\"es\": {\n  \"name\": \"Spanish\",\n  \"nativeName\": \"Español\",\n  \"dir\": \"ltr\",\n  \"translations\": [\n    {\n      \"name\": \"English\",\n      \"nativeName\": \"English\",\n      \"dir\": \"ltr\",\n      \"code\": \"en\"\n    }\n  ]\n},\n\n```\n\nThe structure of the response object will not change without a change in the version of the API. For the same version of the API, the list of available languages may change over time because Microsoft Translator continually extends the list of languages supported by its services.\n\nThe list of supported languages will not change frequently. To save network bandwidth and improve responsiveness, a client application should consider caching language resources and the corresponding entity tag (`ETag`). Then, the client application can periodically (for example, once every 24 hours) query the service to fetch the latest set of supported languages. Passing the current `ETag` value in an `If-None-Match` header field will allow the service to optimize the response. If the resource has not been modified, the service will return status code 304 and an empty response body.\n \n# Response Header\nETag - Current value of the entity tag for the requested groups of supported languages. To make subsequent requests more efficient, the client may send the `ETag` value in an `If-None-Match` header field.\n\nX-RequestId - Value generated by the service to identify the request. It is used for troubleshooting purposes. \n  \n  \n",
+        "description": "Gets the set of languages currently supported by other operations of the Translator Text API.\n**Authentication is not required to get language resources.**",
         "tags": [
           "Languages"
         ],
@@ -383,7 +375,7 @@
             "required": false,
             "type": "string"
           }
-        ],
+        ],        
         "responses": {
           "200": {
             "description": "Success",
@@ -540,6 +532,16 @@
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/TranslateResultAll"
+            },
+            "headers": {
+              "E-Tag": {
+                "type": "string",
+                "description": "Current value of the entity tag for the requested groups of supported languages. To make subsequent requests more efficient, the client may send the ETag value in an If-None-Match header field."
+              },
+              "X-RequestId": {
+                "type": "integer",
+                "decription": "Value generated by the service to identify the request. It is used for troubleshooting purposes."
+              }
             }
           },
           "default": {
@@ -641,22 +643,26 @@
   "definitions": {
     "LanguagesResult": {
       "type": "object",
-      "description": "Example of a successful languages request",
+      "description": "In the response body, a client uses the scope query parameter to define which groups of languages it is interested in. A client may retrieve several groups simultaneously by specifying a comma-separated list of names. For example, scope=translation,transliteration,dictionary would return supported languages for all groups. A successful response is a JSON object with one property for each requested group. The value for each property is as follows.",
       "properties": {
         "translation": {
           "type": "object",
           "properties": {
             "languageCode": {
               "type": "object",
+              "description": "Refer to LanguageCode for the relevant types",
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Display name of the script in the locale requested via Accept-Language header."
                 },
                 "nativeName": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Display name of the language in the locale native for the language."
                 },
                 "dir": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
                 }
               }
             }
@@ -667,56 +673,49 @@
           "properties": {
             "languageCode": {
               "type": "object",
+              "description": "Refer to LanguageCode for the relevant types",
               "properties": {
                 "name": {
-                  "type": "string"
+                  "type": "string",
+                  "description": "Display name of the script in the locale requested via Accept-Language header."
                 },
                 "nativeName": {
-                  "type": "string"
-                },
-                "scripts": {
-                  "type": "array",
-                  "items": {
-                    "type": "object",
-                    "properties": {
-                      "code": {
-                        "type": "string"
-                      },
-                      "name": {
-                        "type": "string"
-                      },
-                      "nativeName": {
-                        "type": "string"
-                      },
-                      "dir": {
-                        "type": "string"
-                      },
-                      "toScripts": {
-                        "type": "array",
-                        "items": {
-                          "type": "object",
-                          "properties": {
-                            "code": {
-                              "type": "string"
-                            },
-                            "name": {
-                              "type": "string"
-                            },
-                            "nativeName": {
-                              "type": "string"
-                            },
-                            "dir": {
-                              "type": "string"
-                            }
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "type": "string",
+                  "description": "Display name of the language in the locale native for the language."
                 }
               }
-            }
-          }
+            },
+            "Code": {
+              "type": "string",
+              "object": "Code identifying the script"
+            },
+            "toScripts": {
+              "type": "object",
+              "properties": {
+                "languageCode": {
+                  "type": "object",
+                  "properties": {
+                    "name": {
+                      "type": "string",
+                      "description": "Display name of the script in the locale requested via Accept-Language header."
+                    },
+                    "nativeName": {
+                      "type": "string",
+                      "description": "Display name of the language in the locale native for the language."
+                    },
+                    "dir": {
+                      "type": "string",
+                      "description": "Directionality, which is rtl for right-to-left languages or ltr for left-to-right languages."
+                    }
+                  }  
+                },
+                "Code": {
+                  "type": "string",
+                  "object": "Code identifying the script"
+                }
+              }
+            }                
+          }          
         },
         "dictionary": {
           "type": "object",
@@ -757,7 +756,7 @@
             }
           }
         }
-      }
+      }      
     },
     "DictionaryExampleResult": {
       "type": "array",
@@ -960,19 +959,35 @@
       }
     },
     "BreakSentenceResult": {
-      "type": "array",
-      "description": "Example of a successful break sentence request",
-      "items": {
-        "type": "object",
-        "properties": {
-          "sentLen": {
-            "type": "array",
-            "items": {
-              "type": "integer"
+      "type": "object",
+      "required": [
+        "sentLen",
+        "detectedLanguage"
+      ],
+      "properties": {
+        "sentLen": {
+          "type": "array",
+          "format": "integer",
+          "description": "An array of integers representing the lengths of the sentences in the text element. The length of the array is the number of sentences, and the values are the length of each sentence."
+        },
+        "detectedLanguage":{
+          "type": "object",
+          "description": "This property is only present in the result object when language auto-detection is requested.",
+          "properties":{
+            "language": {
+              "type": "string",
+              "description": "Code of the detected language"
+            },
+            "score":{
+              "type": "number",
+              "format": "float",
+              "description": "A float value indicating the confidence in the result. The score is between zero and one and a low score indicates a low confidence."
             }
           }
         }
       }
+      
+        
     },
     "TransliterateResult": {
       "type": "array",
