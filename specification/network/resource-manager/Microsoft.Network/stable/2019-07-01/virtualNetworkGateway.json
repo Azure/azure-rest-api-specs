@@ -2489,6 +2489,29 @@
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection."
     },
+    "TrafficSelectorPolicy": {
+      "properties": {
+        "LocalAddressRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A collection of local address spaces in CIDR format"
+          }
+        },
+        "RemoteAddressRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A collection of remote address spaces in CIDR format"
+          }
+        }
+      },
+      "required": [
+        "LocalAddressRanges",
+        "RemoteAddressRanges"
+      ],
+      "description": "An traffic selector policy for a virtual network gateway connection."
+    },
     "ConnectionProtocol": {
       "type": "string",
       "description": "Gateway connection protocol.",
@@ -2705,6 +2728,13 @@
             "$ref": "#/definitions/IpsecPolicy"
           },
           "description": "The IPSec Policies to be considered by this connection."
+        },
+        "trafficSelectorPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficSelectorPolicy"
+          },
+          "description": "The Traffic Selector Policies to be considered by this connection."
         },
         "resourceGuid": {
           "type": "string",
