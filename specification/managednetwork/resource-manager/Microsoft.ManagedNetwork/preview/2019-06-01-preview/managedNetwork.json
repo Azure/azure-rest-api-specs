@@ -991,7 +991,6 @@
       "type": "object",
       "properties": {
         "scope": {
-          "readOnly": true,
           "$ref": "#/definitions/Scope",
           "description": "The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this Managed Network"
         },
@@ -1012,8 +1011,11 @@
       "type": "object",
       "properties": {
         "tags": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagsObject",
+          "type": "array",
+          "items": {
+                "x-ms-client-flatten": true,
+                "$ref": "#/definitions/TagsObject"
+                },
           "description": "Updates the tags property of the Managed Network"
         }
       },
@@ -1230,9 +1232,8 @@
       "description": "The Managed Network Peering Policy resource"
     },
     "ManagedNetworkPeeringPolicyProperties": {
-      "discriminator": "peeringPolicyType",
       "properties": {
-        "peeringPolicyType": {
+        "type": {
           "type": "string",
           "enum": [
             "HubAndSpokeTopology",
@@ -1269,7 +1270,7 @@
         }
       ],
       "required": [
-        "peeringPolicyType"
+        "type"
       ],
       "description": "Properties of a Managed Network Peering Policy"
     },
@@ -1413,15 +1414,15 @@
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
+            "type": "array",
+            "items": {
+                  "type": "string",
+                  "x-ms-mutability": [
+                    "read",
+                    "create",
+                    "update"
+                  ]
+                },
           "description": "Resource tags."
         },
         "location": {
@@ -1460,10 +1461,7 @@
       "description": "Generic pointer to a resource"
     },
     "TagsObject": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
+      "type": "string",
       "description": "Resource tags."
     },
     "ResourceProperties": {
