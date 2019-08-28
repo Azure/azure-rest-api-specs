@@ -54,7 +54,7 @@ input-file:
 
 These settings apply only when `--tag=package-2017-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-04-1'
+``` yaml $(tag) == 'package-2017-04-01'
 input-file:
   - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
 ```
