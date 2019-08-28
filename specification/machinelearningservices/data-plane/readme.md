@@ -45,7 +45,7 @@ directive:
     reason: Not a Long Running Operation
   - from: hyperdrive.json
     suppress: DefinitionsPropertiesNamesCamelCase
-    reason: Existing service; would be a breaking change	
+    reason: Existing service; would be a breaking change
 ```
 
 ### Tag: package-2019-08-preview
