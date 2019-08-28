@@ -11,6 +11,7 @@ python:
   namespace: Microsoft.Aadiam
   package-name: azureactivedirectory
   clear-output-folder: true
+  python-base-namespace: azureactivedirectory
 ```
 
 ### Python multi-api
@@ -30,7 +31,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2017-04-01-only' && $(python)
 python:
-  no-namespace-folders: true
+  namespace: $(python-base-namespace).v2017_04_01
   output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory/v2017_04_01
 ```
 
@@ -41,6 +42,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2018-01-01-only' && $(python)
 python:
-  no-namespace-folders: true
+  namespace: $(python-base-namespace).v2018_01_01
   output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory/v2018_01_01
 ```

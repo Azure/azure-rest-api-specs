@@ -8,12 +8,12 @@ package-version: 2017-04-01
 azure-arm: true
 ```
 
-### Tag: package-2017-04-01 and ruby
+### Tag: package-2017-04-01-only and ruby
 
-These settings apply only when `--tag=package-2017-04-01 --ruby` is specified on the command line.
+These settings apply only when `--tag=package-2017-04-01-only --ruby` is specified on the command line.
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
-```yaml $(tag) == 'package-2017-04-01' && $(ruby)
+```yaml $(tag) == 'package-2017-04-01-only' && $(ruby)
 namespace: Microsoft.Aadiam
 output-folder: $(ruby-sdks-folder)/azureactivedirectory
 ```
