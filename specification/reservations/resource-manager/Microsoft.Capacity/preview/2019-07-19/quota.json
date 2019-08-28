@@ -326,6 +326,12 @@
 		  "x-ms-examples": {
 			"QuotaRequestStatus": {
 			  "$ref": "./examples/getQuotaRequestStatusById.json"
+			},
+			"QuotaRequestInProgress": {
+				"$ref": "./examples/getQuotaRequestStatusInProgress.json"
+			},
+			"QuotaRequestFailed": {
+				"$ref": "./examples/getQuotaRequestStatusFailed.json"
 			}
 		  },
 		  "summary": "For the specified location, gets the Quota request status by requestId.",
@@ -397,7 +403,6 @@
 			{
 			  "name": "$filter",
 			  "in": "query",
-			  "required": false,
 			  "type": "string",
 			  "description": "| Field                    | Supported operators  \n|---------------------|------------------------\n\r\n|requestSubmitTime | ge, le, eq, gt, lt\n"
 			},
@@ -559,6 +564,7 @@
 			"readOnly": true
 		  },
 		  "properties": {
+			  "description": "The quota request details.",
 			"x-ms-client-flatten": true,
 			"$ref": "#/definitions/quotaRequestProperties"
 		  },
@@ -705,7 +711,7 @@
 		"in": "path",
 		"required": true,
 		"type": "string",
-		"description": "User's Azure region.",
+		"description": "Azure region.",
 		"x-ms-parameter-location": "method"
 	  },
 	  "ProviderIdInParameters": {
@@ -735,7 +741,6 @@
 	  "SkipQueryParameter": {
 		"name": "$skip",
 		"in": "query",
-		"required": false,
 		"type": "integer",
 		"format": "int32",
 		"description": "Number of records to skip.",
@@ -745,7 +750,6 @@
 	  "TopQueryParameter": {
 		"name": "$top",
 		"in": "query",
-		"required": false,
 		"type": "integer",
 		"format": "int32",
 		"description": "Number of records to return.",
