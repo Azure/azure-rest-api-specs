@@ -8282,11 +8282,11 @@
       "type" : "object",
       "description" : "The API deployment parameters metadata.",
       "properties" : {
-        "PackageContentLink" : {
+        "packageContentLink" : {
           "$ref": "#/definitions/ApiDeploymentParameterMetadata",
           "description": "The package content link parameter."
         },
-        "RedisCacheConnectionString" : {
+        "redisCacheConnectionString" : {
           "$ref": "#/definitions/ApiDeploymentParameterMetadata",
           "description": "The package content link parameter."
         }
@@ -8718,10 +8718,10 @@
     },
     "IntegrationServiceEnvironmentProperties" : {
       "type": "object",
+      "description" : "The integration service environment properties.",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/WorkflowProvisioningState",
-          "readOnly": true,
           "description": "The provisioning state."
         },
         "state": {
@@ -8730,17 +8730,14 @@
         },
         "integrationServiceEnvironmentId": {
           "type": "string",
-          "readOnly": true,
           "description": "Gets the tracking id."
         },
         "endpointsConfiguration" : {
           "$ref": "#/definitions/FlowEndpointsConfiguration",
-          "readOnly": true,
           "description": "The endpoints configuration."
         },
         "networkConfiguration" : {
           "$ref": "#/definitions/NetworkConfiguration",
-          "readOnly": true,
           "description": "The network configuration."
         }
       }
