@@ -241,6 +241,11 @@
         "tags": [
           "Layer"
         ],
+        "x-ms-examples": {
+          "Get a blob from digest": {
+            "$ref": "./examples/GetBlob.json"
+          }
+        },
         "description": "Retrieve the blob from the registry identified by digest.",
         "operationId": "GetBlob",
         "responses": {
@@ -286,6 +291,11 @@
         ],
         "description": "Same as GET, except only the headers are returned.",
         "operationId": "CheckBlob",
+        "x-ms-examples": {
+          "Head for a Blob Chunk": {
+            "$ref": "./examples/CheckBlob.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
@@ -327,6 +337,11 @@
           "Layer"
         ],
         "operationId": "DeleteBlob",
+        "x-ms-examples": {
+          "Delete a blob": {
+            "$ref": "./examples/DeleteBlob.json"
+          }
+        },
         "responses": {
           "202": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
@@ -358,6 +373,11 @@
         ],
         "description": "Mount a blob identified by the `mount` parameter from another repository.",
         "operationId": "MountBlob",
+        "x-ms-examples": {
+          "Get a blob from digest": {
+            "$ref": "./examples/MountBlob.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -379,6 +399,10 @@
               },
               "Docker-Upload-UUID": {
                 "description": "Identifies the docker upload uuid for the current request.",
+                "type": "string"
+              },
+              "Docker-Content-Digest": {
+                "description": "Digest of the targeted content for the request.",
                 "type": "string"
               }
             }
@@ -404,6 +428,11 @@
         ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
         "operationId": "GetBlobStatus",
+        "x-ms-examples": {
+          "Get blob status": {
+            "$ref": "./examples/GetBlobStatus.json"
+          }
+        },
         "responses": {
           "204": {
             "description": "The upload is known and in progress. The last received offset is available in the Range header.",
@@ -438,6 +467,11 @@
         ],
         "description": "Upload a stream of data without completing the upload.",
         "operationId": "UploadBlob",
+        "x-ms-examples": {
+          "Upload Blob": {
+            "$ref": "./examples/UploadBlob.json"
+          }
+        },
         "consumes": [
           "application/octet-stream"
         ],
@@ -481,6 +515,11 @@
         ],
         "description": "Complete the upload, providing all the data in the body, if necessary. A request without a body will just complete the upload with previously uploaded content.",
         "operationId": "EndBlobUpload",
+        "x-ms-examples": {
+          "End a blob upload": {
+            "$ref": "./examples/EndBlobUpload.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/BlobQueryDigest"
@@ -521,6 +560,11 @@
         ],
         "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
         "operationId": "CancelBlobUpload",
+        "x-ms-examples": {
+          "End a blob upload": {
+            "$ref": "./examples/CancelBlobUpload.json"
+          }
+        },
         "responses": {
           "204": {
             "description": "The upload has been successfully deleted."
@@ -1126,6 +1170,11 @@
         ],
         "description": "Initiate a resumable blob upload with an empty request body.",
         "operationId": "StartBlobUpload",
+        "x-ms-examples": {
+          "Start a Blob upload": {
+            "$ref": "./examples/StartBlobUpload.json"
+          }
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ImageName"
@@ -1179,6 +1228,11 @@
         ],
         "description": "Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.",
         "operationId": "GetBlobChunk",
+        "x-ms-examples": {
+          "Get a Blob Chunk": {
+            "$ref": "./examples/GetBlobChunk.json"
+          }
+        },
         "responses": {
           "206": {
             "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
@@ -1213,6 +1267,11 @@
         ],
         "description": "Same as GET, except only the headers are returned.",
         "operationId": "CheckBlobChunk",
+        "x-ms-examples": {
+          "Get Headers without Blob Chunk": {
+            "$ref": "./examples/CheckBlobChunk.json"
+          }
+        },
         "responses": {
           "200": {
             "description": "The blob identified by digest is available. The specified chunk of blob content will be present in the body of the request.",
@@ -1225,62 +1284,6 @@
               "Content-Range": {
                 "type": "string",
                 "description": "Content range of blob chunk."
-              }
-            }
-          },
-          "default": {
-            "description": "ACR error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/AcrErrors"
-            }
-          }
-        }
-      }
-    },
-    "/{nextBlobUuidLink}?mode=chunk": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/NextLink"
-        },
-        {
-          "name": "chunk",
-          "description": "Acquire only chunks of a blob. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content",
-          "type": "string",
-          "in": "query"
-        }
-      ],
-      "patch": {
-        "tags": [
-          "Layer"
-        ],
-        "description": "Upload a chunk of data to specified upload without completing the upload. The data will be uploaded to the specified Content Range.",
-        "operationId": "UploadBlobChunk",
-        "consumes": [
-          "application/octet-stream"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/RawData"
-          },
-          {
-            "$ref": "#/parameters/Content-Range"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The stream of data has been accepted and the current progress is available in the range header. The updated upload location is available in the Location header.",
-            "headers": {
-              "Location": {
-                "description": "Provided location for blob",
-                "type": "string"
-              },
-              "Range": {
-                "description": "Range indicating the current progress of the upload.",
-                "type": "string"
-              },
-              "Docker-Upload-UUID": {
-                "description": "Identifies the docker upload uuid for the current request.",
-                "type": "string"
               }
             }
           },
@@ -2034,16 +2037,7 @@
       "properties": {
         "mediaType": {
           "type": "string",
-          "description": "Media type for this Manifest",
-          "enum": [
-            "application/vnd.docker.distribution.manifest.list.v2+json",
-            "application/vnd.docker.distribution.manifest.v2+json",
-            "application/vnd.oci.image.manifest.v1+json"
-          ],
-          "x-ms-enum": {
-            "name": "mediaType",
-            "modelAsString": false
-          }
+          "description": "Media type for this Manifest"
         },
         "manifests": {
           "type": "array",
@@ -2435,22 +2429,6 @@
       "name": "digest",
       "in": "query",
       "description": "Digest of a BLOB",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "metadata": {
-      "name": "metadata",
-      "in": "path",
-      "description": "Name of the metadata",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "property": {
-      "name": "property",
-      "in": "path",
-      "description": "Name of the property",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"

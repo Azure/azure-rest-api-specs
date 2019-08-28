@@ -35,18 +35,14 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
-# These two methods will fail to run in C# since autorest generates proper header use, nonetheless
-# Content-Range is used in a non standard way for cross compatibility. This addresses this by
-# modifying the addition of the headers in a customized manner.
+# This override adds support for directly passing in the acquired location link (Since it starts with /)
+# It also caters to passing it without / as some implementations may remove the initial / .
 directive:
   - from: source-file-csharp
     where: $
     transform: >-
       return $.
-        replace( /if \(_httpRequest.Headers.Contains\("Content-Range"\)\)/g, "if (_httpRequest.Content == null)" ).
-        replace( /_httpRequest.Headers.Remove\("Content-Range"\);/g, "_httpRequest.Content = new StringContent(\"\");" ).
-        replace( /_httpRequest.Headers.TryAddWithoutValidation\("Content-Range", contentRange\);/g, "_httpRequest.Content.Headers.TryAddWithoutValidation(\"Content-Range\", contentRange);" ).
-        replace( /_url = _url.Replace\("\{nextBlobUuidLink\}", location\);/g, "_url = _url.Replace(\"/{nextBlobUuidLink}\", location);")
+        replace( /_url = _url.Replace\("\{nextBlobUuidLink\}", location\);/g, "_url = _url.Replace(location.StartsWith(\"/\") ? \"/{nextBlobUuidLink}\" : \"{nextBlobUuidLink}\", location);")
 ```
 
 ### Tag: package-2019-07
@@ -157,21 +153,6 @@ input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-07-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
 ```
-
-<!-- ### Code modifiers
-
-``` yaml
-components:
-  operations: # operations to add to the code model
-    - {"operationId": "HasV2Support", "visibility" : ["public"], "implementation" : "{
-             try {
-               await this.CheckV2SupportAsync();
-             } catch (Exception e) {
-                 return false;
-             }
-             return true;
-          }"}
-``` -->
 
 If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
