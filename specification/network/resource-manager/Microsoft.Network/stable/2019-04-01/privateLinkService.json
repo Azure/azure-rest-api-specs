@@ -74,7 +74,7 @@
             "description": "Delete successful."
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -133,7 +133,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -173,7 +173,7 @@
             "schema": {
               "$ref": "#/definitions/PrivateLinkService"
             },
-            "description": "Parameters supplied to the create or update private link service operation"
+            "description": "Parameters supplied to the create or update private link service operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -196,7 +196,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -243,7 +243,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -282,7 +282,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -351,7 +351,7 @@
             }
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -409,7 +409,7 @@
             "description": "Delete successful."
           },
           "default": {
-            "description": "Error",
+            "description": "Error.",
             "schema": {
               "$ref": "./network.json#/definitions/Error"
             }
@@ -623,7 +623,7 @@
         },
         "etag": {
           "type": "string",
-          "description": "Gets a unique read-only string that changes whenever the resource is updated."
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -659,8 +659,8 @@
         },
         "provisioningState": {
           "readOnly": true,
-          "type": "string",
-          "description": "The provisioning state of the private link service. Possible values are: 'Updating', 'Succeeded', and 'Failed'."
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private link service."
         },
         "privateEndpointConnections": {
           "type": "array",
@@ -722,8 +722,23 @@
         "name": {
           "type": "string",
           "description": "The name of private link service ip configuration."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
         }
       },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
       "description": "The private link service ip configuration."
     },
     "PrivateLinkServiceIpConfigurationProperties": {
@@ -740,13 +755,14 @@
           "$ref": "./virtualNetwork.json#/definitions/Subnet",
           "description": "The reference of the subnet resource."
         },
-        "publicIPAddress": {
-          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
-          "description": "The reference of the public IP resource."
+        "primary": {
+          "type": "boolean",
+          "description": "Whether the ip configuration is primary or not."
         },
         "provisioningState": {
-          "type": "string",
-          "description": "Gets the provisioning state of the public IP resource. Possible values are: 'Updating', 'Deleting', and 'Failed'."
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private link service ip configuration."
         },
         "privateIPAddressVersion": {
           "$ref": "./network.json#/definitions/IPVersion",
@@ -765,6 +781,16 @@
         "name": {
           "type": "string",
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The resource type."
+        },
+        "etag": {
+          "readOnly": true,
+          "type": "string",
+          "description": "A unique read-only string that changes whenever the resource is updated."
         }
       },
       "allOf": [
@@ -783,6 +809,11 @@
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
           "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the private endpoint connection."
         }
       },
       "description": "Properties of the PrivateEndpointConnectProperties."
