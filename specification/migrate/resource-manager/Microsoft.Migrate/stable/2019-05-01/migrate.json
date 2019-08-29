@@ -299,7 +299,7 @@
             "Completed",
             "Invalid"
           ],
-          "description": "Wheter the group has been created and is valid.",
+          "description": "Whether the group has been created and is valid.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "GroupStatus",
@@ -824,7 +824,7 @@
             "OutOfSync",
             "OutDated"
           ],
-          "description": "Wheter the assessment has been created and is valid.",
+          "description": "Whether the assessment has been created and is valid.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "AssessmentStatus",
@@ -2103,6 +2103,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": null
+        },
+        "x-ms-examples": {
+          "Projects_List": {
+            "$ref": "./examples/Projects_List.json"
+          }
         }
       }
     },
@@ -2152,6 +2157,11 @@
           },
           "503": {
             "description": "Service Unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Get": {
+            "$ref": "./examples/Projects_Get.json"
           }
         }
       },
@@ -2221,6 +2231,11 @@
           "503": {
             "description": "Service Unavailable."
           }
+        },
+        "x-ms-examples": {
+          "Projects_Create": {
+            "$ref": "./examples/Projects_Create.json"
+          }
         }
       },
       "patch": {
@@ -2280,6 +2295,11 @@
           "503": {
             "description": "Service Unavailable."
           }
+        },
+        "x-ms-examples": {
+          "Projects_Update": {
+            "$ref": "./examples/Projects_Update.json"
+          }
         }
       },
       "delete": {
@@ -2327,6 +2347,11 @@
           },
           "503": {
             "description": "Service Unavailable."
+          }
+        },
+        "x-ms-examples": {
+          "Projects_Delete": {
+            "$ref": "./examples/Projects_Delete.json"
           }
         }
       }
@@ -2434,6 +2459,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Machines_ListByProject": {
+            "$ref": "./examples/Machines_ListByProject.json"
+          }
         }
       }
     },
@@ -2933,7 +2963,7 @@
             "description": "Not authorized (No access to subscription, resource group, or project)."
           },
           "404": {
-            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or assesmentName)."
+            "description": "Not found (Invalid subscriptionId, resourceGroupName, projectName, or assessmentName)."
           },
           "500": {
             "description": "Internal Server Error."
@@ -2945,7 +2975,7 @@
       },
       "put": {
         "summary": "Create or Update assessment.",
-        "description": "Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identiefier, if an assessment with the name provided already exists, then the existing assessment is updated.\n\nAny PUT operation, resulting in either create or update on an assessment, will cause the assessment to go in a \"InProgress\" state. This will be indicated by the field 'computationState' on the Assessment object. During this time no other PUT operation will be allowed on that assessment object, nor will a Delete operation. Once the computation for the assessment is complete, the field 'computationState' will be updated to 'Ready', and then other PUT or DELETE operations can happen on the assessment.\n\nWhen assessment is under computation, any PUT will lead to a 400 - Bad Request error.\n",
+        "description": "Create a new assessment with the given name and the specified settings. Since name of an assessment in a project is a unique identifier, if an assessment with the name provided already exists, then the existing assessment is updated.\n\nAny PUT operation, resulting in either create or update on an assessment, will cause the assessment to go in a \"InProgress\" state. This will be indicated by the field 'computationState' on the Assessment object. During this time no other PUT operation will be allowed on that assessment object, nor will a Delete operation. Once the computation for the assessment is complete, the field 'computationState' will be updated to 'Ready', and then other PUT or DELETE operations can happen on the assessment.\n\nWhen assessment is under computation, any PUT will lead to a 400 - Bad Request error.\n",
         "operationId": "Assessments_Create",
         "parameters": [
           {
@@ -3190,7 +3220,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/groups/{groupName}/assessments/{assessmentName}/assessedMachines/{assessedMachineName}": {
       "get": {
         "summary": "Get an assessed machine.",
-        "description": "Get an assessed machine with its size & cost estimnate that was evaluated in the specified assessment.",
+        "description": "Get an assessed machine with its size & cost estimate that was evaluated in the specified assessment.",
         "operationId": "AssessedMachines_Get",
         "parameters": [
           {
