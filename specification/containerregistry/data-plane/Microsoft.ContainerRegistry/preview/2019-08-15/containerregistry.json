@@ -390,7 +390,7 @@
         "description": "Mount a blob identified by the `mount` parameter from another repository.",
         "operationId": "Blob_Mount",
         "x-ms-examples": {
-          "Get a blob from digest": {
+          "Mount a blob from repository": {
             "$ref": "./examples/MountBlob.json"
           }
         },
@@ -846,7 +846,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Update attributes of a manifest": {
+          "Update attributes of a tag": {
             "$ref": "./examples/UpdateTagAttributes.json"
           }
         },
@@ -855,7 +855,7 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-            "$ref": "#/parameters/ManifestReference"
+            "$ref": "#/parameters/TagReference"
           },
           {
             "$ref": "#/parameters/RepoValue"
@@ -884,7 +884,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Update attributes of a manifest": {
+          "Delete a tag": {
             "$ref": "./examples/DeleteTag.json"
           }
         },
@@ -893,7 +893,7 @@
             "$ref": "#/parameters/ImageName"
           },
           {
-            "$ref": "#/parameters/ManifestReference"
+            "$ref": "#/parameters/TagReference"
           }
         ],
         "responses": {
@@ -918,7 +918,7 @@
         "description": "List manifests of a repository",
         "operationId": "Manifests_GetList",
         "x-ms-examples": {
-          "Get details of repository": {
+          "Get list of available manifests": {
             "$ref": "./examples/GetManifestList.json"
           }
         },
@@ -1198,7 +1198,7 @@
         "description": "Initiate a resumable blob upload with an empty request body.",
         "operationId": "Blob_StartUpload",
         "x-ms-examples": {
-          "Start a Blob upload": {
+          "Start a blob upload": {
             "$ref": "./examples/StartBlobUpload.json"
           }
         },
@@ -1256,7 +1256,7 @@
           }
         ],
         "x-ms-examples": {
-          "Get a Blob Chunk": {
+          "Get a blob Chunk": {
             "$ref": "./examples/GetBlobChunk.json"
           }
         },
@@ -1306,7 +1306,7 @@
         "description": "Same as GET, except only the headers are returned.",
         "operationId": "Blob_CheckChunk",
         "x-ms-examples": {
-          "Get Headers without Blob Chunk": {
+          "Get headers without blob Chunk": {
             "$ref": "./examples/CheckBlobChunk.json"
           }
         },
