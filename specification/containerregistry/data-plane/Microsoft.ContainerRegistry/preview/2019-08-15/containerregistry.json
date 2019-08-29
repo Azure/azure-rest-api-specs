@@ -226,20 +226,20 @@
       }
     },
     "/v2/{name}/blobs/{digest}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/ImageName"
-        },
-        {
-          "$ref": "#/parameters/Digest"
-        }
-      ],
       "get": {
         "produces": [
           "application/octet-stream"
         ],
         "tags": [
           "Layer"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/Digest"
+          }
         ],
         "x-ms-examples": {
           "Get a blob from digest": {
@@ -296,6 +296,14 @@
             "$ref": "./examples/CheckBlob.json"
           }
         },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/Digest"
+          }
+        ],
         "responses": {
           "200": {
             "description": "The blob identified by digest is available. The blob content will be present in the body of the response.",
@@ -329,6 +337,14 @@
         }
       },
       "delete": {
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/Digest"
+          }
+        ],
         "description": "Removes an already uploaded blob.",
         "produces": [
           "application/octet-stream"
@@ -417,17 +433,17 @@
       }
     },
     "/{nextBlobUuidLink}": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/NextLink"
-        }
-      ],
       "get": {
         "tags": [
           "Layer"
         ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/NextLink"
+          }
+        ],
         "description": "Retrieve status of upload identified by uuid. The primary purpose of this endpoint is to resolve the current status of a resumable upload.",
-        "operationId": "BlobStatus_Get",
+        "operationId": "Blob_GetStatus",
         "x-ms-examples": {
           "Get blob status": {
             "$ref": "./examples/GetBlobStatus.json"
@@ -478,6 +494,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/RawData"
+          },
+          {
+            "$ref": "#/parameters/NextLink"
           }
         ],
         "responses": {
@@ -526,6 +545,9 @@
           },
           {
             "$ref": "#/parameters/RawDataOptional"
+          },
+          {
+            "$ref": "#/parameters/NextLink"
           }
         ],
         "responses": {
@@ -557,6 +579,11 @@
       "delete": {
         "tags": [
           "Layer"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/NextLink"
+          }
         ],
         "description": "Cancel outstanding upload processes, releasing associated resources. If this is not called, the unfinished uploads will eventually timeout.",
         "operationId": "Blob_CancelUpload",
@@ -1208,17 +1235,6 @@
       }
     },
     "/v2/{name}/blobs/{digest}?mode=chunk": {
-      "parameters": [
-        {
-          "$ref": "#/parameters/ImageName"
-        },
-        {
-          "$ref": "#/parameters/Digest"
-        },
-        {
-          "$ref": "#/parameters/Range"
-        }
-      ],
       "get": {
         "produces": [
           "application/octet-stream"
@@ -1228,6 +1244,17 @@
         ],
         "description": "Retrieve the blob from the registry identified by `digest`. This endpoint may also support RFC7233 compliant range requests. Support can be detected by issuing a HEAD request. If the header `Accept-Range: bytes` is returned, range requests can be used to fetch partial content.",
         "operationId": "Blob_GetChunk",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/Digest"
+          },
+          {
+            "$ref": "#/parameters/Range"
+          }
+        ],
         "x-ms-examples": {
           "Get a Blob Chunk": {
             "$ref": "./examples/GetBlobChunk.json"
@@ -1264,6 +1291,17 @@
       "head": {
         "tags": [
           "Layer"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ImageName"
+          },
+          {
+            "$ref": "#/parameters/Digest"
+          },
+          {
+            "$ref": "#/parameters/Range"
+          }
         ],
         "description": "Same as GET, except only the headers are returned.",
         "operationId": "Blob_CheckChunk",
