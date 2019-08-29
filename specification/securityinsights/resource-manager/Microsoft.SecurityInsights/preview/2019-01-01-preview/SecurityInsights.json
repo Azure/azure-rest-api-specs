@@ -465,6 +465,102 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates": {
+      "get": {
+        "x-ms-examples": {
+          "Get all alert rule templates.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplates.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets all alert rule templates.",
+        "operationId": "AlertRuleTemplates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplatesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRuleTemplates/{alertRuleTemplateId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get alert rule template by Id.": {
+            "$ref": "./examples/alertRuleTemplates/GetAlertRuleTemplateById.json"
+          }
+        },
+        "tags": [
+          "Alert Rule Templates"
+        ],
+        "description": "Gets the alert rule template.",
+        "operationId": "AlertRuleTemplates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AlertRuleTemplateId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AlertRuleTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases": {
       "get": {
         "x-ms-examples": {
@@ -492,6 +588,18 @@
           },
           {
             "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
           }
         ],
         "responses": {
@@ -652,6 +760,173 @@
           },
           "204": {
             "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments": {
+      "get": {
+        "x-ms-examples": {
+          "Get all case comments.": {
+            "$ref": "./examples/cases/comments/GetAllCaseComments.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets all case comments.",
+        "operationId": "Comments_ListByCase",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseCommentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/CaseComment",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/comments/{caseCommentId}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case comment.": {
+            "$ref": "./examples/cases/comments/GetCaseCommentById.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Gets a case comment.",
+        "operationId": "Cases_GetComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case comment.": {
+            "$ref": "./examples/cases/comments/CreateCaseComment.json"
+          }
+        },
+        "tags": [
+          "CaseComments"
+        ],
+        "description": "Creates the case comment.",
+        "operationId": "CaseComments_CreateComment",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/CaseCommentId"
+          },
+          {
+            "$ref": "#/parameters/CaseComment"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CaseComment"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1780,7 +2055,9 @@
           "type": "string",
           "description": "The kind of the alert rule",
           "enum": [
-            "Scheduled"
+            "Scheduled",
+            "Filter",
+            "Fusion"
           ],
           "x-ms-enum": {
             "name": "AlertRuleKind",
@@ -1788,9 +2065,75 @@
             "values": [
               {
                 "value": "Scheduled"
+              },
+              {
+                "value": "Filter"
+              },
+              {
+                "value": "Fusion"
               }
             ]
           }
+        }
+      }
+    },
+    "AlertRuleTriggerOperator": {
+      "type": "string",
+      "enum": [
+        "GreaterThan",
+        "LessThan",
+        "Equal",
+        "NotEqual"
+      ],
+      "x-ms-enum": {
+        "name": "TriggerOperator",
+        "modelAsString": false
+      },
+      "description": "The operation against the threshold that triggers alert rule."
+    },
+    "AttackTactic": {
+      "type": "string",
+      "enum": [
+        "InitialAccess",
+        "Execution",
+        "Persistence",
+        "PrivilegeEscalation",
+        "DefenseEvasion",
+        "CredentialAccess",
+        "Discovery",
+        "LateralMovement",
+        "Collection",
+        "Exfiltration",
+        "CommandAndControl"
+      ],
+      "x-ms-enum": {
+        "name": "AttackTactic",
+        "modelAsString": false
+      },
+      "description": "The severity for alerts created by this alert rule."
+    },
+    "DataConnectorStatus": {
+      "type": "object",
+      "description": "alert rule template data connector status",
+      "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "the connector id"
+        },
+        "dataTypes": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "enum": [
+              "Exist",
+              "NotExist"
+            ],
+            "x-ms-enum": {
+              "name": "DataTypeStatus",
+              "modelAsString": false
+            }
+          },
+          "description": "The data types availability map"
         }
       }
     },
@@ -1846,17 +2189,7 @@
           "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
         },
         "triggerOperator": {
-          "type": "string",
-          "enum": [
-            "GreaterThan",
-            "LessThan",
-            "Equal",
-            "NotEqual"
-          ],
-          "x-ms-enum": {
-            "name": "TriggerOperator",
-            "modelAsString": false
-          },
+          "$ref": "#/definitions/AlertRuleTriggerOperator",
           "description": "The operation against the threshold that triggers alert rule."
         },
         "triggerThreshold": {
@@ -1891,6 +2224,276 @@
         "suppressionEnabled",
         "suppressionDuration"
       ]
+    },
+    "AlertRuleTemplatesList": {
+      "description": "List all the alert rule templates.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of alert rule templates.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of alert rule templates.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertRuleTemplate"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AlertRuleTemplate": {
+      "type": "object",
+      "description": "Alert rule template.",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/AlertRuleKind"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the alert rule."
+        }
+      }
+    },
+    "ScheduledAlertRuleTemplate": {
+      "x-ms-discriminator-value": "Scheduled",
+      "type": "object",
+      "description": "Represents scheduled alert rule template.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Scheduled alert rule template properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/ScheduledAlertRuleTemplateProperties"
+            }
+          ],
+          "required": [
+            "displayName",
+            "description",
+            "createdDateUTC",
+            "status",
+            "requiredDataConnectors",
+            "alertRulesCreatedByTemplateCount",
+            "severity",
+            "query",
+            "queryFrequency",
+            "queryPeriod",
+            "triggerOperator",
+            "triggerThreshold"
+          ]
+        }
+      }
+    },
+    "BaseAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Base alert rule template property bag.",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "The display name for alert rule template."
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the alert rule template."
+        },
+        "tactics": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "description": "The tactics of the alert rule template"
+        },
+        "createdDateUTC": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The time that this alert rule template has been added."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Installed",
+            "Available",
+            "NotAvailable"
+          ],
+          "x-ms-enum": {
+            "name": "TemplateStatus",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Installed",
+                "description": "Alert rule template installed. and can not use more then once"
+              },
+              {
+                "value": "Available",
+                "description": "Alert rule template is available."
+              },
+              {
+                "value": "NotAvailable",
+                "description": "Alert rule template is not available"
+              }
+            ]
+          },
+          "description": "The alert rule template status."
+        },
+        "requiredDataConnectors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataConnectorStatus"
+          },
+          "description": "The required data connectors for this template"
+        },
+        "alertRulesCreatedByTemplateCount": {
+          "type": "integer",
+          "description": "the number of alert rules that were created by this template"
+        }
+      }
+    },
+    "ScheduledAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Schedule alert rule template property bag.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        },
+        "query": {
+          "type": "string",
+          "description": "The query that creates alerts for this rule."
+        },
+        "queryFrequency": {
+          "type": "string",
+          "format": "duration",
+          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run."
+        },
+        "queryPeriod": {
+          "type": "string",
+          "format": "duration",
+          "description": "The period (in ISO 8601 duration format) that this alert rule looks at."
+        },
+        "triggerOperator": {
+          "$ref": "#/definitions/AlertRuleTriggerOperator",
+          "description": "The operation against the threshold that triggers alert rule."
+        },
+        "triggerThreshold": {
+          "type": "integer",
+          "description": "The threshold triggers this alert rule."
+        }
+      }
+    },
+    "FilterAlertRuleTemplate": {
+      "x-ms-discriminator-value": "Filter",
+      "type": "object",
+      "description": "Represents filter alert rule template.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Filter alert rule template properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/FilterAlertRuleTemplateProperties"
+            }
+          ],
+          "required": [
+            "displayName",
+            "description",
+            "createdDateUTC",
+            "status",
+            "alertRulesCreatedByTemplateCount",
+            "filterProduct"
+          ]
+        }
+      }
+    },
+    "FilterAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Filter alert rule template property bag.",
+      "properties": {
+        "filterProduct": {
+          "type": "string",
+          "description": "The filter product name for this template rule."
+        },
+        "filterSeverities": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AlertSeverity"
+          },
+          "description": "the alert’s severities on which the cases will be generated"
+        },
+        "filterTitles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "the alert’s titles on which the cases will be generated"
+        }
+      }
+    },
+    "FusionAlertRuleTemplate": {
+      "x-ms-discriminator-value": "Fusion",
+      "type": "object",
+      "description": "Represents fusion alert rule template.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRuleTemplate"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Fusion alert rule template properties",
+          "allOf": [
+            {
+              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+            },
+            {
+              "$ref": "#/definitions/FusionAlertRuleTemplateProperties"
+            }
+          ],
+          "required": [
+            "displayName",
+            "description",
+            "createdDateUTC",
+            "status",
+            "alertRulesCreatedByTemplateCount"
+          ]
+        }
+      }
+    },
+    "FusionAlertRuleTemplateProperties": {
+      "type": "object",
+      "description": "Filter alert rule template property bag.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule."
+        }
+      }
     },
     "AlertSeverity": {
       "type": "string",
@@ -2021,12 +2624,14 @@
         "lastUpdatedTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The last time the case was updated"
+          "description": "The last time the case was updated",
+          "readOnly": true
         },
         "createdTimeUtc": {
           "type": "string",
           "format": "date-time",
-          "description": "The time the case was created"
+          "description": "The time the case was created",
+          "readOnly": true
         },
         "endTimeUtc": {
           "type": "string",
@@ -2053,7 +2658,7 @@
           "type": "string",
           "description": "The title of the case"
         },
-        "assignedTo": {
+        "owner": {
           "type": "object",
           "description": "Describes a user that the case is assigned to",
           "$ref": "#/definitions/UserInfo"
@@ -2133,6 +2738,8 @@
           "enum": [
             "Resolved",
             "Dismissed",
+            "TruePositive",
+            "FalsePositive",
             "Other"
           ],
           "x-ms-enum": {
@@ -2148,17 +2755,115 @@
                 "description": "Case was dismissed"
               },
               {
+                "value": "TruePositive",
+                "description": "Case was true positive"
+              },
+              {
+                "value": "FalsePositive",
+                "description": "Case was false positive"
+              },
+              {
                 "value": "Other",
                 "description": "Case was closed for another reason"
               }
             ]
           }
+        },
+        "closedReasonText": {
+          "type": "string",
+          "description": "the case close reason details"
+        },
+        "relatedAlertIds": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "related alert id"
+          },
+          "description": "List of related alert identifiers",
+          "readOnly": true
+        },
+        "caseNumber": {
+          "type": "integer",
+          "description": "a sequential number",
+          "readOnly": true
+        },
+        "lastComment": {
+          "type": "string",
+          "description": "the last comment in the case",
+          "readOnly": true
+        },
+        "totalComments": {
+          "type": "integer",
+          "description": "the number of total comments in the case",
+          "readOnly": true
         }
       },
       "required": [
         "title",
         "severity",
-        "status"
+        "status",
+        "startTimeUtc"
+      ]
+    },
+    "CaseCommentList": {
+      "description": "List of case comments.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of comments.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of comments.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseComment"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseComment": {
+      "type": "object",
+      "description": "Represents a case comment",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Case comment properties",
+          "$ref": "#/definitions/CaseCommentProperties"
+        }
+      }
+    },
+    "CaseCommentProperties": {
+      "type": "object",
+      "description": "Case comment property bag.",
+      "properties": {
+        "message": {
+          "type": "string",
+          "description": "The comment message"
+        },
+        "createdTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time the comment was created",
+          "readOnly": true
+        },
+        "userInfo": {
+          "type": "object",
+          "description": "Describes the user that created the comment",
+          "$ref": "#/definitions/UserInfo",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "message"
       ]
     },
     "BookmarkList": {
@@ -2209,12 +2914,12 @@
           "type": "string",
           "description": "The display name of the bookmark"
         },
-        "lastUpdatedTimeUtc": {
+        "updated": {
           "type": "string",
           "format": "date-time",
           "description": "The last time the bookmark was updated"
         },
-        "createdTimeUtc": {
+        "created": {
           "type": "string",
           "format": "date-time",
           "description": "The time the bookmark was created"
@@ -2243,6 +2948,10 @@
         "query": {
           "type": "string",
           "description": "The query of the bookmark."
+        },
+        "queryResult": {
+          "type": "string",
+          "description": "The query result of the bookmark."
         }
       },
       "required": [
@@ -2257,17 +2966,23 @@
         "objectId": {
           "type": "string",
           "format": "uuid",
+          "x-nullable": true,
           "description": "The object id of the user."
         },
         "email": {
           "type": "string",
-          "description": "The email of the user."
+          "description": "The email of the user.",
+          "readOnly": true
         },
         "name": {
           "type": "string",
-          "description": "The name of the user."
+          "description": "The name of the user.",
+          "readOnly": true
         }
-      }
+      },
+      "required": [
+        "objectId"
+      ]
     },
     "Label": {
       "description": "Label that will be used to tag and filter on.",
@@ -4814,6 +5529,14 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "AlertRuleTemplateId": {
+      "name": "alertRuleTemplateId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Alert rule template ID",
+      "x-ms-parameter-location": "method"
+    },
     "ActionId": {
       "name": "actionId",
       "in": "path",
@@ -4847,6 +5570,24 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/Case"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "CaseCommentId": {
+      "name": "caseCommentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Case comment ID",
+      "x-ms-parameter-location": "method"
+    },
+    "CaseComment": {
+      "name": "caseComment",
+      "in": "body",
+      "description": "The case comment",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/CaseComment"
       },
       "x-ms-parameter-location": "method"
     },
@@ -4944,6 +5685,39 @@
       "required": true,
       "type": "string",
       "description": "entity query ID",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataFilter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Filters the results, based on a Boolean condition. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataOrderBy": {
+      "name": "$orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Sorts the results. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataTop": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "description": "Returns only the first n results. Optional.",
+      "x-ms-parameter-location": "method"
+    },
+    "ODataSkipToken": {
+      "name": "$skipToken",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls. Optional.",
       "x-ms-parameter-location": "method"
     }
   }

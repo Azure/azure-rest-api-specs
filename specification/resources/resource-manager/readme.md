@@ -37,11 +37,15 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
+tag: package-policy-2019-06
+```
+
+``` yaml $(package-policy)
 tag: package-policy-2019-01
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-0510
+tag: package-resources-2019-08
 ```
 
 ``` yaml $(package-subscriptions)
@@ -90,6 +94,21 @@ These settings apply only when `--tag=package-locks-2015-01` is specified on the
 ``` yaml $(tag) == 'package-locks-2015-01'
 input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
+```
+
+### Tag: package-policy-2019-06
+
+These settings apply only when `--tag=package-policy-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2019-06'
+input-file:
+- Microsoft.Authorization/stable/2019-06-01/policyAssignments.json
+- Microsoft.Authorization/stable/2019-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2019-06-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2019-01
@@ -198,13 +217,22 @@ input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
 ```
 
-### Tag: package-resources-2019-05
+### Tag: package-resources-2019-08
 
-These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
+These settings apply only when `--tag=package-resources-2019-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-resources-2019-05'
+``` yaml $(tag) == 'package-resources-2019-08'
 input-file:
-- Microsoft.Resources/stable/2019-05-01/resources.json
+- Microsoft.Resources/stable/2019-08-01/resources.json
+```
+
+### Tag: package-resources-2019-07
+
+These settings apply only when `--tag=package-resources-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-07'
+input-file:
+- Microsoft.Resources/stable/2019-07-01/resources.json
 ```
 
 ### Tag: package-resources-2019-0510
@@ -214,6 +242,15 @@ These settings apply only when `--tag=package-resources-2019-0510` is specified 
 ``` yaml $(tag) == 'package-resources-2019-0510'
 input-file:
 - Microsoft.Resources/stable/2019-05-10/resources.json
+```
+
+### Tag: package-resources-2019-05
+
+These settings apply only when `--tag=package-resources-2019-05` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-05'
+input-file:
+- Microsoft.Resources/stable/2019-05-01/resources.json
 ```
 
 ### Tag: package-resources-2019-03
@@ -473,10 +510,13 @@ Generate all API versions currently shipped for this package
 batch:
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
+  - tag: package-policy-2019-06
   - tag: package-policy-2019-01
   - tag: package-policy-2018-05
   - tag: package-policy-2018-03
   - tag: package-policy-2016-12
+  - tag: package-resources-2019-08
+  - tag: package-resources-2019-07
   - tag: package-resources-2019-0510
   - tag: package-resources-2019-05
   - tag: package-resources-2019-03
@@ -512,6 +552,24 @@ java:
 regenerate-manager: true
 generate-interface: true
 fconfig: '{"moduleName": "Locks"}'
+```
+
+### Tag: package-policy-2019-06 and java
+
+These settings apply only when `--tag=package-policy-2019-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-policy-2019-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.policy.v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2019_06_01
+regenerate-manager: true
+generate-interface: true
+fconfig: '{"moduleName": "Policy"}'
+directive:
+  from: policyAssignments.json
+  where: $.definitions.PolicyAssignmentProperties.properties.scope
+  transform: $['x-ms-client-name'] = 'scopeProperty'
 ```
 
 ### Tag: package-policy-2019-01 and java
@@ -584,6 +642,32 @@ directive:
   from: policyAssignments.json
   where: $.definitions.PolicyAssignmentProperties.properties.scope
   transform: $['x-ms-client-name'] = 'scopeProperty'
+```
+
+### Tag: package-resources-2019-08 and java
+
+These settings apply only when `--tag=package-resources-2019-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_08_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-resources-2019-07 and java
+
+These settings apply only when `--tag=package-resources-2019-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-resources-2019-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_07_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-resources-2019-0510 and java
@@ -705,3 +789,68 @@ input-file:
 - Microsoft.Resources/stable/2016-06-01/subscriptions.json
 - Microsoft.Resources/stable/2018-05-01/resources.json
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.Resources/stable/2019-06-01/subscriptions.json
+  - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
+  - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policySetDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-01-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-01-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-01-01/policySetDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2018-05-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2018-05-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2018-05-01/policySetDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2018-03-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2018-03-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2018-03-01/policySetDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/preview/2017-06-01-preview/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/preview/2017-06-01-preview/policySetDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
+  - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-08-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-07-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-05-10/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-05-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-03-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2018-05-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2018-02-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2017-05-10/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2016-09-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2016-07-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2016-02-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2015-11-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2018-06-01/subscriptions.json
+  - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
+  - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
+  - $(this-folder)/Microsoft.Resources/stable/2016-09-01/links.json
+  - $(this-folder)/Microsoft.Solutions/stable/2018-06-01/managedapplications.json
+  - $(this-folder)/Microsoft.Solutions/stable/2017-09-01/managedapplications.json
+  - $(this-folder)/Microsoft.Solutions/preview/2016-09-01-preview/managedapplications.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+
