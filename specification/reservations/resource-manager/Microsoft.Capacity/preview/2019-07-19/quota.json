@@ -632,6 +632,7 @@
 			}
 		},
 		"QuotaRequestDetails": {
+			"type" : "object",
 			"description": "The details of the quota Request.",
 			"x-ms-azure-resource": true,
 			"properties": {
@@ -654,13 +655,6 @@
 					"description": "The quota request details.",
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/quotaRequestProperties"
-				},
-				"value": {
-					"description": "The quotaRequests.",
-					"type": "array",
-					"items": {
-						"$ref": "#/definitions/SubRequest"
-					}
 				}
 			}
 		},
@@ -698,6 +692,13 @@
 				"requestStatus": {
 					"description": "The quota request status.",
 					"$ref": "#/definitions/QuotaRequestState"
+				},
+				"value": {
+					"description": "The quotaRequests.",
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/SubRequest"
+					}
 				}
 			}
 		},
@@ -786,6 +787,7 @@
 			}
 		},
 		"EmailAction": {
+			"description": "The email action.",
 			"properties": {
 				"recipients": {
 					"description": "The support request action.",
@@ -800,6 +802,7 @@
 			}
 		},
 		"SupportRequestAction": {
+			"description": "The SupportRequest action.",
 			"properties": {
 				"recipients": {
 					"description": "The support request action.",
