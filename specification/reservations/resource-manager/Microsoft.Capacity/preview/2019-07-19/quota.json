@@ -431,9 +431,14 @@
 				"tags": [
 					"AutoQuotaIncrease"
 				],
-				"summary": "For the specified subscription, gets the Auto Quota Increase encrollment status.",
+				"summary": "For the specified subscription, gets the Auto Quota Increase enrollment status.",
 				"description": "Gets the Auto Quota Increase enrollment details.",
 				"operationId": "AutoQuotaIncreaseStatus_Get",
+				"x-ms-examples": {
+					"GetAutoQuotaIncreaseSettings": {
+						"$ref": "./examples/getAutoQuotaIncreaseStatus.json"
+					}
+				},
 				"parameters": [
 					{
 						"$ref": "#/parameters/SubscriptionIdInParameters"
@@ -461,9 +466,14 @@
 				"tags": [
 					"AutoQuotaIncrease"
 				],
-				"summary": "For the specified subscription, sets the Auto Quota Increase encrollment properties.",
-				"description": "Sets the Auto Quota Increase encrollment properties for the specified subscription.",
+				"summary": "For the specified subscription, sets the Auto Quota Increase enrollment properties.",
+				"description": "Sets the Auto Quota Increase enrollment properties for the specified subscription.",
 				"operationId": "AutoQuotaIncrease_Put",
+				"x-ms-examples": {
+					"SetAutoQuotaIncreaseSettings": {
+						"$ref": "./examples/putAutoQuotaIncrease.json"
+					}
+				},
 				"parameters": [
 					{
 						"$ref": "#/parameters/SubscriptionIdInParameters"
@@ -733,6 +743,7 @@
 					"description": "The list of recipients.",
 					"type": "array",
 					"items": {
+						"description": "User email address.",
 						"type": "string"
 					}
 				}
@@ -744,10 +755,10 @@
 					"description": "The support request action.",
 					"$ref": "#/definitions/recipientsList"
 				},
-				"ActionForSuccess": {
+				"actionForSuccess": {
 					"type": "boolean"
 				},
-				"ActionForFailure": {
+				"actionForFailure": {
 					"type": "boolean"
 				}
 			}
@@ -758,11 +769,11 @@
 					"description": "The support request action.",
 					"$ref": "#/definitions/recipientsList"
 				},
-				"Severity": {
+				"severity": {
 					"description": "The support request severity.",
 					"$ref": "#/definitions/SeverityTypes"
 				},
-				"SupportLanguage": {
+				"supportLanguage": {
 					"type": "string"
 				}
 			}
