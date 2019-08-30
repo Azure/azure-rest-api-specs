@@ -1811,6 +1811,37 @@
       ],
       "x-ms-discriminator-value": "DataLakeAnalytics"
     },
+    "OnPrem": {
+      "description": "A OnPrem compute.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "type": "object",
+              "properties": {
+                "address": {
+                  "description": "Public IP address of the virtual machine.",
+                  "type": "string"
+                },
+                "username": {
+                  "description": "Username of admin account",
+                  "type": "string"
+                },
+                "password": {
+                  "description": "Password of admin account",
+                  "type": "string"
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "OnPrem"
+    },
     "ServicePrincipalCredentials": {
       "type": "object",
       "description": "Service principal credentials.",
@@ -2217,7 +2248,8 @@
         "VirtualMachine",
         "HDInsight",
         "Databricks",
-        "DataLakeAnalytics"
+        "DataLakeAnalytics",
+        "OnPrem"
       ],
       "x-ms-enum": {
         "name": "ComputeType",
