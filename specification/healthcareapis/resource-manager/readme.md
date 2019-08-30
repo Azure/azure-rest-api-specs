@@ -150,8 +150,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-   - $(this-folder)/Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
-   - $(this-folder)/Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
+  - $(this-folder)/Microsoft.HealthcareApis/stable/2019-09-16/healthcare-apis.json
+  - $(this-folder)/Microsoft.HealthcareApis/preview/2018-08-20-preview/healthcare-apis.json
 
 ```
 
