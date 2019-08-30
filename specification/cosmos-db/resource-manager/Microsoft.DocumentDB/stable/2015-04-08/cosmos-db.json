@@ -6148,22 +6148,15 @@
     "PrivateLinkResource": {
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private link."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the private link."
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource Type"
-        },
         "properties": {
           "$ref": "#/defintions/PrivateLinkResourceProperties"
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "PrivateLinkResourceProperties": {
       "description": "Properties of a private link resource.",
