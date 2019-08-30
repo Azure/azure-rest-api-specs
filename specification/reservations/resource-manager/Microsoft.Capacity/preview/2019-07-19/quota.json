@@ -462,8 +462,9 @@
 					"AutoQuotaIncrease"
 				],
 				"summary": "For the specified subscription, sets the Auto Quota Increase encrollment properties.",
-				"description": "Sets the Auto Quota Increase encrollment properties for the specified subscription. At fir make a Get request and update the properties which need to be updated. If enrolled is false, then the notificationType will be ignored and will be set to none. If enrolled is set to true, then the notificationType is required.",
+				"description": "Sets the Auto Quota Increase encrollment properties for the specified subscription.",
 				"operationId": "AutoQuotaIncrease_Put",
+				"x-ms-azure-resource" : true,
 				"parameters": [
 					{
 						"$ref": "#/parameters/SubscriptionIdInParameters"
@@ -689,9 +690,13 @@
 					"description": "If the subscription is enrolled to auto quota increase.",
 					"type": "boolean"
 				},
-				"notificationType": {
-					"description": "The auto quota increase notification type.",
-					"$ref": "#/definitions/NotificationTypes"
+				"emailAction": {
+					"description": "The email action.",
+					"$ref": "#/definitions/EmailAction"
+				},
+				"supportRequestAction": {
+					"description": "The support request action.",
+					"$ref": "#/definitions/SupportRequestAction"
 				}
 			}
 		},
@@ -722,16 +727,67 @@
 				"modelAsString": true
 			}
 		},
-		"NotificationTypes": {
-			"description": "The Notification types.",
+		"receipientsList": {
+			"description": "The list of receipients.",
+			"properties": {
+				"value": {
+					"description": "The list of receipients.",
+					"type": "array",
+					"items": {
+						"type": "string"
+					}
+				}
+			}
+		},
+		"EmailAction": {
+			"properties": {
+				"receipients": {
+					"description": "The support request action.",
+					"$ref": "#/definitions/receipientsList"
+				},
+				"ActionForSuccess": {
+					"type": "boolean"
+				},
+				"ActionForFailure": {
+					"type": "boolean"
+				}
+			}
+		},
+		"SupportRequestAction": {
+			"properties": {
+				"receipients": {
+					"description": "The support request action.",
+					"$ref": "#/definitions/receipientsList"
+				},
+				"Severity": {
+					"description": "The support request severity.",
+					"$ref": "#/definitions/SeverityTypes"
+				},
+				"SupportLanguage": {
+					"type": "string"
+				}
+			}
+		},
+		"SeverityTypes": {
+			"description": "The Severity types.",
 			"enum": [
-				"email",
-				"text",
-				"phone",
-				"none"
+				"SevA",
+				"SevB",
+				"SevC"
 			],
 			"x-ms-enum": {
-				"name": "NotificationType",
+				"name": "SeverityType",
+				"modelAsString": true
+			}
+		},
+		"ActionTypes": {
+			"description": "The Action types.",
+			"enum": [
+				"email",
+				"supportRequest"
+			],
+			"x-ms-enum": {
+				"name": "ActionType",
 				"modelAsString": true
 			}
 		},
