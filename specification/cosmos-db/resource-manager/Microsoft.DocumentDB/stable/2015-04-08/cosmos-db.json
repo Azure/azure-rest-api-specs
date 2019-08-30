@@ -3648,7 +3648,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -3711,10 +3711,19 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully approved or rejected private endpoint connection."
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
           },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted. The private endpoint connection update will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -3748,14 +3757,17 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Successfully deleted private endpoint connection."
-          },
           "202": {
-            "description": "Accepted"
+            "description": "Accepted. The private endpoint connection delete will complete asynchronously."
           },
           "204": {
             "description": "Private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -3766,7 +3778,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/privateLinkResources" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/privateLinkResources": {
       "get": {
         "tags": [
           "PrivateEndpointConnections"
@@ -3791,7 +3803,7 @@
           "200": {
             "description": "Successfully retrieved private link resources.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResourceList"
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
             }
           }
         },
@@ -4505,6 +4517,17 @@
         "connectorOffer": {
           "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
           "$ref": "#/definitions/ConnectorOffer"
+        },
+        "isPrivateEndpointConnectionEnabled": {
+          "description": "Flag to indicate whether to enable/disable private endpoint connections.",
+          "type": "boolean"
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "List of private endpoint connections configured for the Cosmos DB account",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
         }
       }
     },
@@ -6051,20 +6074,21 @@
         "modelAsString": true
       }
     },
-    "PrivateEndpointConnection" : {
+    "PrivateEndpointConnection": {
       "description": "A private endpoint connection",
       "type": "object",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private endpoint connection."
-        },
         "properties": {
           "$ref": "#/definitions/PrivateEndpointConnectionProperties",
           "description": "Resource properties.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "PrivateEndpointConnectionProperties": {
       "description": "Properties of a private endpoint connection.",
@@ -6080,8 +6104,9 @@
         }
       }
     },
-    "PrivateEndpointProperty" : {
+    "PrivateEndpointProperty": {
       "type": "object",
+      "description": "Private endpoint which the connection belongs to.",
       "properties": {
         "id": {
           "type": "string",
@@ -6089,8 +6114,9 @@
         }
       }
     },
-    "PrivateLinkServiceConnectionStateProperty" : {
+    "PrivateLinkServiceConnectionStateProperty": {
       "type": "object",
+      "description": "Connection State of the Private Endpoint Connection.",
       "properties": {
         "status": {
           "type": "string",
@@ -6107,18 +6133,21 @@
         }
       }
     },
-    "PrivateLinkResourceList" : {
+    "PrivateLinkResourceListResult": {
       "type": "object",
       "properties": {
-        "value" : {
+        "value": {
           "type": "array",
           "description": "Array of private link resources",
           "items": {
             "$ref": "#/definitions/PrivateLinkResource"
           }
         }
-      },
-      "PrivateLinkResource" : {
+      }
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "properties": {
         "id": {
           "type": "string",
           "description": "Resource id of the private link."
@@ -6127,31 +6156,31 @@
           "type": "string",
           "description": "Name of the private link."
         },
-        "type" : {
+        "type": {
           "type": "string",
           "description": "Resource Type"
         },
-        "properties" : {
+        "properties": {
           "$ref": "#/defintions/PrivateLinkResourceProperties"
         }
-      },
-      "PrivateLinkResourceProperties": {
-        "description": "Properties of a private link resource.",
-        "type": "object",
-        "properties": {
-          "groupId": {
-            "description": "The private link resource group id.",
-            "type": "string",
-            "readOnly": true
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Properties of a private link resource.",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The private link resource group id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "description": "The private link resource required member names.",
+          "type": "array",
+          "items": {
+            "type": "string"
           },
-          "requiredMembers": {
-            "description": "The private link resource required member names.",
-            "type": "array",
-            "items": {
-              "type": "string"
-            },
-            "readOnly": true
-          }
+          "readOnly": true
         }
       }
     }
