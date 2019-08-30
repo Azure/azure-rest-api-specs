@@ -3333,7 +3333,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows/{dataFlowName}": {
       "put": {
         "tags": [
           "dataFlows"
@@ -3493,7 +3493,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/dataflows": {
       "get": {
         "tags": [
           "dataFlows"
@@ -3538,7 +3538,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/createDataFlowDebugSession": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/createDataFlowDebugSession": {
       "post": {
         "tags": [
           "dataFlowDebugSession"
@@ -3589,7 +3589,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querydataflowdebugsessions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querydataflowdebugsessions": {
       "post": {
         "tags": [
           "dataFlowDebugSession"
@@ -3631,7 +3631,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/submitDataFlowForPreview": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/submitDataFlowForPreview": {
       "post": {
         "tags": [
           "dataFlowDebugSession"
@@ -3682,7 +3682,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/deleteDataFlowDebugSession": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/deleteDataFlowDebugSession": {
       "post": {
         "tags": [
           "dataFlowDebugSession"
@@ -3730,7 +3730,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/executeDataFlowDebugCommand": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/executeDataFlowDebugCommand": {
       "post": {
         "tags": [
           "dataFlowDebugSession"
@@ -3781,7 +3781,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/operationStatuses/{dataFactoryOperationId}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/operationStatuses/{dataFactoryOperationId}": {
       "get": {
         "tags": [
           "dataFlows"
@@ -3828,7 +3828,7 @@
           "nextLinkName": "nextLink"
         }
       }
-    }	
+    }
   },
   "definitions": {
     "Resource": {
@@ -5562,7 +5562,7 @@
         }
       }
     },
-	"DataFlowListResponse": {
+    "DataFlowListResponse": {
       "description": "A list of data flow resources.",
       "type": "object",
       "required": [
@@ -5582,7 +5582,7 @@
         }
       }
     },
-	"CreateDataFlowDebugSessionRequest": {
+    "CreateDataFlowDebugSessionRequest": {
       "description": "Request body structure for creating data flow debug session.",
       "type": "object",
       "properties": {
@@ -5598,10 +5598,10 @@
           "description": "Core count of the cluster. The value will be overwritten by the same setting in integration runtime if provided.",
           "type": "integer"
         },
-		"timeToLive": {
-		  "description": "TTL setting of the cluster.",
+        "timeToLive": {
+          "description": "TTL setting of the cluster.",
           "type": "integer"
-		},
+        },
         "integrationRuntime": {
           "description": "Set to use integration runtime setting for data flow debug session.",
           "$ref": "#/definitions/IntegrationRuntimeResource"
@@ -5618,7 +5618,7 @@
         }
       }
     },
-	"SubmitDataFlowForPreviewRequest": {
+    "SubmitDataFlowForPreviewRequest": {
       "description": "Request body structure for starting data flow debug session.",
       "type": "object",
       "properties": {
@@ -5682,7 +5682,7 @@
         }
       }
     },
-	"DeleteDataFlowDebugSessionRequest": {
+    "DeleteDataFlowDebugSessionRequest": {
       "description": "Request body structure for deleting data flow debug session.",
       "type": "object",
       "properties": {
@@ -5705,7 +5705,7 @@
           "type": "string"
         },
         "commandName": {
-          "description": "The command name.",        
+          "description": "The command name.",
           "type": "string",
           "enum": [
             "executePreviewQuery",
@@ -5747,7 +5747,7 @@
         }
       }
     },
-	"QueryDataFlowDebugSessionsResponse": {
+    "QueryDataFlowDebugSessionsResponse": {
       "description": "Response body structure of data flow query all API.",
       "type": "object",
       "properties": {
@@ -5802,7 +5802,7 @@
         }
       }
     },
-	"GetDataFactoryOperationStatusResponse": {
+    "GetDataFactoryOperationStatusResponse": {
       "description": "Response body structure for get data factory operation status.",
       "type": "object",
       "properties": {
@@ -5815,7 +5815,7 @@
         }
       }
     },
-	"DataFlowResource": {
+    "DataFlowResource": {
       "description": "Data flow resource type.",
       "allOf": [
         {
@@ -5983,7 +5983,7 @@
       "maxLength": 150,
       "x-ms-parameter-location": "method"
     },
-	"dataFlowName": {
+    "dataFlowName": {
       "name": "dataFlowName",
       "description": "The data flow name.",
       "in": "path",
@@ -5994,7 +5994,7 @@
       "maxLength": 260,
       "x-ms-parameter-location": "method"
     },
-	"sessionId": {
+    "sessionId": {
       "name": "sessionId",
       "description": "The data flow session identifier.",
       "in": "path",
