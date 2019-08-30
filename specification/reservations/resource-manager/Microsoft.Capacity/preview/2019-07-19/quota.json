@@ -464,7 +464,6 @@
 				"summary": "For the specified subscription, sets the Auto Quota Increase encrollment properties.",
 				"description": "Sets the Auto Quota Increase encrollment properties for the specified subscription.",
 				"operationId": "AutoQuotaIncrease_Put",
-				"x-ms-azure-resource" : true,
 				"parameters": [
 					{
 						"$ref": "#/parameters/SubscriptionIdInParameters"
@@ -727,11 +726,11 @@
 				"modelAsString": true
 			}
 		},
-		"receipientsList": {
-			"description": "The list of receipients.",
+		"recipientsList": {
+			"description": "The list of recipients.",
 			"properties": {
 				"value": {
-					"description": "The list of receipients.",
+					"description": "The list of recipients.",
 					"type": "array",
 					"items": {
 						"type": "string"
@@ -741,9 +740,9 @@
 		},
 		"EmailAction": {
 			"properties": {
-				"receipients": {
+				"recipients": {
 					"description": "The support request action.",
-					"$ref": "#/definitions/receipientsList"
+					"$ref": "#/definitions/recipientsList"
 				},
 				"ActionForSuccess": {
 					"type": "boolean"
@@ -755,9 +754,9 @@
 		},
 		"SupportRequestAction": {
 			"properties": {
-				"receipients": {
+				"recipients": {
 					"description": "The support request action.",
-					"$ref": "#/definitions/receipientsList"
+					"$ref": "#/definitions/recipientsList"
 				},
 				"Severity": {
 					"description": "The support request severity.",
