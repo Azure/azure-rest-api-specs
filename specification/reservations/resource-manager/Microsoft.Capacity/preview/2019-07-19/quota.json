@@ -474,7 +474,7 @@
 						"$ref": "./examples/putAutoQuotaIncrease.json"
 					},
 					"TurnOffAutoQuotaIncrease": {
-						"$ref" : "./examples/putAutoQuotaIncreaseTurnOff.json"
+						"$ref": "./examples/putAutoQuotaIncreaseTurnOff.json"
 					}
 				},
 				"parameters": [
@@ -698,6 +698,17 @@
 					"type": "string",
 					"readOnly": true
 				},
+				"properties": {
+					"description": "Actions for auto quota increase.",
+					"x-ms-client-flatten": true,
+					"$ref": "#/definistions/autoQuotaIncreaseActions"
+				}
+			}
+		},
+		"autoQuotaIncreaseActions": {
+			"type": "object",
+			"description": "Actions for auto quota increase.",
+			"properties": {
 				"enrolled": {
 					"description": "If the subscription is enrolled to auto quota increase.",
 					"type": "boolean"
