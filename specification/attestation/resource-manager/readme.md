@@ -52,6 +52,10 @@ swagger-to-sdk:
   - repo: azure-sdk-for-python
 ```
 
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
 ---
 ## C# 
 
