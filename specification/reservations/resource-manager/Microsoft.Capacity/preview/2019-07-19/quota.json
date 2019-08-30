@@ -39,8 +39,8 @@
 				"tags": [
 					"QuotaInformation"
 				],
-				"summary": "Gets the current quota limit and usages for the resources provider for the specified location for the specific resource.",
-				"description": "This API gets the current quota limit and usages for the specific resource for resources provider for the specified location. This response can be used to submit quotaRequests.",
+				"summary": "Gets the current quota limit and usages for the resource provider for the specified location for the specific resource.",
+				"description": "This API gets the current quota limit and usages for the specific resource for resource provider for the specified location. This response can be used to submit quotaRequests.",
 				"operationId": "Quota_listStatus",
 				"x-ms-examples": {
 					"Quotas_listUsagesForCompute": {
@@ -148,8 +148,8 @@
 				"tags": [
 					"QuotaInformation"
 				],
-				"summary": "Gets the current quota limit and usages for the resources provider for the specified location.",
-				"description": "This API gets the current quota limit and usages for the resources provider for the specified location. This response can be used to submit quotaRequests.",
+				"summary": "Gets the current quota limit and usages for the resource provider for the specified location.",
+				"description": "This API gets the current quota limits and usages for the resource provider for the specified location. This response can be used to submit quotaRequests.",
 				"operationId": "Quotas_listStatus",
 				"x-ms-examples": {
 					"Quotas_listUsagesForCompute": {
@@ -198,8 +198,8 @@
 				"tags": [
 					"QuotaRequests"
 				],
-				"summary": "Submits a Quota Request for a resource provider at the specified location.",
-				"description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
+				"summary": "Submits Quota Requests for a resource provider at the specified location.",
+				"description": "Submits Quota change requests for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified. For updating only few resources, please use Patch.",
 				"operationId": "QuotaRequests_Create",
 				"x-ms-examples": {
 					"Quotas_listUsages": {
@@ -258,8 +258,8 @@
 				"tags": [
 					"QuotaRequests"
 				],
-				"summary": "Submits a Quota Request for a resource provider at the specified location.",
-				"description": "Submits Quota change request for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
+				"summary": "Submits a Quota Requests for a resource provider at the specified location.",
+				"description": "Submits Quota change requests for a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values, remove the values which doesn't require any update. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
 				"operationId": "QuotaRequests_Update",
 				"x-ms-examples": {
 					"Quotas_listUsages": {
@@ -332,7 +332,7 @@
 					}
 				},
 				"summary": "For the specified location, gets the Quota request status by requestId.",
-				"description": "Gets the QuotaRequest details and status by the quota requestId for the resources for the resource  provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
+				"description": "Gets the QuotaRequest details and status by the quota requestId for the resources for the resource provider at a specific location. The requestId is returned as response to the Put requests for serviceLimits.",
 				"operationId": "QuotaRequestStatus_Get",
 				"parameters": [
 					{
@@ -353,7 +353,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "Ok. Returning the status for all relevant quota requests .",
+						"description": "Ok. Returning the status for the quota request .",
 						"schema": {
 							"$ref": "#/definitions/QuotaRequestDetails"
 						}
@@ -432,7 +432,7 @@
 					"AutoQuotaIncrease"
 				],
 				"summary": "For the specified subscription, gets the Auto Quota Increase enrollment status.",
-				"description": "Gets the Auto Quota Increase enrollment details.",
+				"description": "Gets the Auto Quota Increase enrollment details for the specifie subscription.",
 				"operationId": "AutoQuotaIncreaseStatus_Get",
 				"x-ms-examples": {
 					"GetAutoQuotaIncreaseSettings": {
