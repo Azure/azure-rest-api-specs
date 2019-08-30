@@ -6491,6 +6491,10 @@
           "readOnly": true,
           "description": "Gets the access endpoint."
         },
+        "endpointsConfiguration" : {
+          "$ref": "#/definitions/FlowEndpointsConfiguration",
+          "description": "The endpoints configuration."
+        },
         "sku": {
           "$ref": "#/definitions/Sku",
           "description": "The sku."
@@ -8158,7 +8162,12 @@
           "$ref": "#/definitions/ResourceReference",
           "description": "The integration service environment reference."
         }        
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "ManagedApiListResult": {
       "type": "object",
