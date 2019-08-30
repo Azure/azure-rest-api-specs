@@ -516,11 +516,17 @@
                 ],
                 "operationId": "Share_CreatePermission",
                 "description": "Create a permission (a security descriptor).",
+                "consumes": [
+                    "application/json"
+                ],
                 "parameters": [{
                         "$ref": "#/parameters/Timeout"
                     },
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
+                    },
+                    {
+                        "$ref": "#/parameters/SharePermission"
                     }
                 ],
                 "responses": {
@@ -547,6 +553,9 @@
                                 "type": "string",
                                 "description": "Key of the permission set for the directory/file."
                             }
+                        },
+                        "schema": {
+                            "$ref": "#/definitions/SharePermission"
                         }
                     },
                     "default": {
@@ -3971,6 +3980,19 @@
                     }
                 }
             }
+        },
+        "SharePermission": {
+            "description": "A permission (a security descriptor) at the share level.",
+            "type": "object",
+            "required": [
+                "permission"
+            ],
+            "properties": {
+                "permission": {
+                    "type": "string",
+                    "description": "The permission in the Security Descriptor Definition Language (SDDL)."
+                }
+            }
         }
     },
     "parameters": {
@@ -4403,6 +4425,16 @@
             "required": false,
             "type": "integer",
             "minimum": 0,
+            "x-ms-parameter-location": "method"
+        },
+        "SharePermission": {
+            "name": "sharePermission",
+            "in": "body",
+            "description": "A permission (a security descriptor) at the share level.",
+            "required": true,
+            "schema": {
+                "$ref": "#/definitions/SharePermission"
+            },
             "x-ms-parameter-location": "method"
         }
     }
