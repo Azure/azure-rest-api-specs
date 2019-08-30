@@ -425,6 +425,77 @@
 					}
 				}
 			}
+		},
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/autoQuotaIncrease": {
+			"get": {
+				"tags": [
+					"AutoQuotaIncrease"
+				],
+				"summary": "For the specified subscription, gets the Auto Quota Increase encrollment status.",
+				"description": "Gets the Auto Quota Increase enrollment details.",
+				"operationId": "AutoQuotaIncreaseStatus_Get",
+				"parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdInParameters"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Ok. Returning the properties of auto quota increase .",
+						"schema": {
+							"$ref": "#/definitions/AutoQuotaIncreaseDetail"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ExceptionResponse"
+						}
+					}
+				}
+			},
+			"put": {
+				"tags": [
+					"AutoQuotaIncrease"
+				],
+				"summary": "For the specified subscription, sets the Auto Quota Increase encrollment properties.",
+				"description": "Sets the Auto Quota Increase encrollment properties for the specified subscription. At fir make a Get request and update the properties which need to be updated. If enrolled is false, then the notificationType will be ignored and will be set to none. If enrolled is set to true, then the notificationType is required.",
+				"operationId": "AutoQuotaIncrease_Put",
+				"parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdInParameters"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"name": "autoQuotaIncreaseRequest",
+						"in": "body",
+						"description": "Auto Quota increase request payload.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/AutoQuotaIncreaseDetail"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Ok. Returning the updated status of auto quota increase request.",
+						"schema": {
+							"$ref": "#/definitions/AutoQuotaIncreaseDetail"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ExceptionResponse"
+						}
+					}
+				}
+			}
 		}
 	},
 	"definitions": {
@@ -607,6 +678,23 @@
 				}
 			}
 		},
+		"AutoQuotaIncreaseDetail": {
+			"properties": {
+				"id": {
+					"description": "The subscription Id.",
+					"type": "string",
+					"readOnly": true
+				},
+				"enrolled": {
+					"description": "If the subscription is enrolled to auto quota increase.",
+					"type": "boolean"
+				},
+				"notificationType": {
+					"description": "The auto quota increase notification type.",
+					"$ref": "#/definitions/NotificationTypes"
+				}
+			}
+		},
 		"QuotaRequestState": {
 			"description": "The quota request status.",
 			"enum": [
@@ -631,6 +719,19 @@
 			],
 			"x-ms-enum": {
 				"name": "ResourceType",
+				"modelAsString": true
+			}
+		},
+		"NotificationTypes": {
+			"description": "The Notification types.",
+			"enum": [
+				"email",
+				"text",
+				"phone",
+				"none"
+			],
+			"x-ms-enum": {
+				"name": "NotificationType",
 				"modelAsString": true
 			}
 		},
