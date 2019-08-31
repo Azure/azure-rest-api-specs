@@ -1,16 +1,16 @@
 {
   "parameters": {
-    "subscriptionId": "{subscriptionId}",
+    "subscriptionId": "{subscription-id}",
     "api-version": "2019-07-01",
-    "$expand": "virtualMachines\\$ref"
+    "$expand": "virtualMachines\$ref"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": "{availabilitySetName}",
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "name": "myavset1",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/availabilitySets/myavset1",
             "type": "Microsoft.Compute/availabilitySets",
             "location": "australiasoutheast",
             "properties": {
@@ -18,7 +18,7 @@
               "platformFaultDomainCount": 3,
               "virtualMachines": [
                 {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup1/providers/Microsoft.Compute/virtualMachines/myvm1"
                 }
               ]
             },
@@ -27,8 +27,8 @@
             }
           },
           {
-            "name": "{availabilitySetName}",
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "name": "myavset2",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/availabilitySets/myavset2",
             "type": "Microsoft.Compute/availabilitySets",
             "location": "australiasoutheast",
             "properties": {
@@ -36,7 +36,7 @@
               "platformFaultDomainCount": 3,
               "virtualMachines": [
                 {
-                  "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}"
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup2/providers/Microsoft.Compute/virtualMachines/myvm2"
                 }
               ]
             },
@@ -45,12 +45,13 @@
             }
           },
           {
-            "name": "{availabilitySetName}",
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "name": "myavset3",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup3/providers/Microsoft.Compute/availabilitySets/myavset3",
             "type": "Microsoft.Compute/availabilitySets",
             "location": "westcentralus",
             "tags": {
-              "{tagName}": "{tagValue}"
+              "RG1": "rg1",
+              "testTag": "1"
             },
             "properties": {
               "platformUpdateDomainCount": 5,
@@ -62,12 +63,13 @@
             }
           },
           {
-            "name": "{availabilitySetName}",
-            "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/availabilitySets/{availabilitySetName}",
+            "name": "myavset4",
+            "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup3/providers/Microsoft.Compute/availabilitySets/myavset4",
             "type": "Microsoft.Compute/availabilitySets",
             "location": "westcentralus",
             "tags": {
-              "{tagName}": "{tagValue}"
+              "RG2": "rg2",
+              "testTag": "2"
             },
             "properties": {
               "platformUpdateDomainCount": 5,
