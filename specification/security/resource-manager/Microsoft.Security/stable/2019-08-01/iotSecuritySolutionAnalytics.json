@@ -502,52 +502,24 @@
     },
     "IoTSecurityAlertedDevicesList": {
       "description": "List of devices with open alerts including the count of alerts per device.",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
           "type": "array",
-          "description": "List of devices with open alerts including the count of alerts per device",
           "items": {
             "$ref": "#/definitions/IoTSecurityAlertedDevice"
           }
-        }
-      }
-    },
+        },
+
     "IoTSecurityDeviceAlertsList": {
       "description": "List of alerts with the count of raised alerts",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of top alerts data",
-          "items": {
-            "$ref": "#/definitions/IoTSecurityDeviceAlert"
-          }
-        },
-        "nextLink": {
-          "readOnly": true,
-          "type": "string",
-          "description": "When there is too much alert data for one page, use this URI to fetch the next page."
-        }
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IoTSecurityDeviceAlert"
       }
     },
     "IoTSecurityDeviceRecommendationsList": {
       "description": "List of aggregated recommendation data, per recommendation type, per device.",
-      "required": [
-        "value"
-      ],
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of aggregated recommendation data",
-          "items": {
-            "$ref": "#/definitions/IoTSecurityDeviceRecommendation"
-          }
-        }
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/IoTSecurityDeviceRecommendation"
       }
     },
     "IoTSecurityAggregatedAlert": {
