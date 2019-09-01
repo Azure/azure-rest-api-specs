@@ -267,10 +267,10 @@
               "description": "The UTC time on which the allowed connections was calculated"
             },
             "inboundConnectedResources": {
-              "$ref": "#/definitions/AllowedConnectionsConnectedResources"
+              "$ref": "#/definitions/ConnectedResources"
             },
             "outboundConnectedResources": {
-              "$ref": "#/definitions/AllowedConnectionsConnectedResources"
+              "$ref": "#/definitions/ConnectedResources"
             }
           }
         },
@@ -327,19 +327,19 @@
           "description": "The unused ports details",
           "properties": {
             "inboundConnectedResources": {
-              "$ref": "#/definitions/UnusedPortsConnectedResources"
+              "$ref": "#/definitions/ConnectedResources"
             },
             "outboundConnectedResources": {
-              "$ref": "#/definitions/UnusedPortsConnectedResources"
+              "$ref": "#/definitions/ConnectedResources"
             }
           }
         }
       }
     },
-    "AllowedConnectionsConnectedResources": {
+    "ConnectedResources": {
       "readOnly": true,
       "type": "object",
-      "description": "The allowed connections details",
+      "description": "The connections details",
       "properties": {
         "tcpPortsCount": {
           "readOnly": true,
@@ -378,33 +378,6 @@
           "items": {
             "$ref": "#/definitions/ConnectionDetails"
           }
-        }
-      }
-    },
-    "UnusedPortsConnectedResources": {
-      "readOnly": true,
-      "type": "object",
-      "description": "The unused ports details",
-      "properties": {
-        "unusedTcpPortsCount": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The unused tcp ports count"
-        },
-        "unusedUdpPortsCount": {
-          "readOnly": true,
-          "type": "integer",
-          "description": "The unused udp ports count"
-        },
-        "tcpPorts": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unused tcp ports"
-        },
-        "udpPorts": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The unused udp ports"
         }
       }
     },
