@@ -17,5 +17,5 @@ python:
 ```yaml $(python)
 python:
   no-namespace-folders: true
-  output-folder: output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory
+  output-folder: $(python-sdks-folder)/azure-mgmt/azureactivedirectory
 ```
