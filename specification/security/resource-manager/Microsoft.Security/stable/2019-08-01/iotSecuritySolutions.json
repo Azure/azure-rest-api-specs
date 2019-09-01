@@ -45,7 +45,7 @@
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
         "description": "Use this method to get the list of IoT Security solutions by subscription.",
         "operationId": "IotSecuritySolution_ListBySubscription",
@@ -90,9 +90,9 @@
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
-        "description": "Use thie method to get the list IoT Security solutions organized by resource group.",
+        "description": "Use this method to get the list IoT Security solutions organized by resource group.",
         "operationId": "IotSecuritySolution_ListByResourceGroup",
         "parameters": [
           {
@@ -135,7 +135,7 @@
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
         "description": "User this method to get details of a specific IoT Security solution based on solution name",
         "operationId": "IotSecuritySolution_Get",
@@ -175,10 +175,10 @@
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
         "description": "Use this method to create or update yours IoT Security solution",
-        "operationId": "IotSecuritySolution_Create",
+        "operationId": "IotSecuritySolution_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -224,7 +224,7 @@
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
         "description": "Use this method to update existing IoT Security solution tags or user defined resources. To update other fields use the CreateOrUpdate method.",
         "operationId": "IotSecuritySolution_Update",
@@ -267,7 +267,7 @@
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
         "description": "Use this method to delete yours IoT Security solution",
         "operationId": "IotSecuritySolution_Delete",
@@ -337,7 +337,7 @@
     },
     "IoTSecuritySolutionModel": {
       "type": "object",
-      "description": "IoT Security solution confgurtion and resource information.",
+      "description": "IoT Security solution configuration and resource information.",
       "properties": {
         "location": {
           "type": "string",
@@ -358,6 +358,18 @@
         }
       ]
     },
+	"UpdateIoTSecuritySolutionProperties": {
+	 "type": "object",
+      "description": "Update Security Solution setting data",
+      "properties": {
+	    "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties"
+        },
+        "recommendationsConfiguration": {
+          "$ref": "#/definitions/RecommendationConfigurationList"
+        }
+	  }
+	},
     "IoTSecuritySolutionProperties": {
       "type": "object",
       "description": "Security Solution setting data",
@@ -582,7 +594,7 @@
             "Enabled"
           ],
           "default": "Enabled",
-          "description": "Recommendation status. When the recommendtion status is disabled recommendations are not generated.",
+          "description": "Recommendation status. When the recommendation status is disabled recommendations are not generated.",
           "x-ms-enum": {
             "name": "RecommendationConfigStatus",
             "modelAsString": true
@@ -604,11 +616,10 @@
     "UpdateIotSecuritySolutionData": {
       "type": "object",
       "properties": {
-        "userDefinedResources": {
-          "$ref": "#/definitions/UserDefinedResourcesProperties"
-        },
-        "recommendationsConfiguration": {
-          "$ref": "#/definitions/RecommendationConfigurationList"
+	    "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security Solution data",
+          "$ref": "#/definitions/UpdateIoTSecuritySolutionProperties"
         }
       },
       "allOf": [
