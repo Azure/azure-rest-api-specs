@@ -165,6 +165,13 @@
             "name": "IntegrationRuntimeEdition",
             "modelAsString": true
           }
+        },
+        "expressCustomSetupProperties": {
+          "description": "Custom setup without script properties for a SSIS integration runtime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomSetupBase"
+          }
         }
       },
       "additionalProperties": {
@@ -239,6 +246,136 @@
           "type": "string"
         }
       }
+    },
+    "CustomSetupBase": {
+      "description": "The base definition of the custom setup.",
+      "type": "object",
+      "discriminator": "type",
+      "properties": {
+        "type": {
+          "description": "The type of custom setup.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "type"
+      ]
+    },
+    "CmdkeySetup": {
+      "description": "The custom setup of running cmdkey commands.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Cmdkey command custom setup type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CmdkeySetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CmdkeySetupTypeProperties": {
+      "description": "Cmdkey command custom setup type properties.",
+      "type": "object",
+      "properties": {
+        "targetName": {
+          "description": "The server name of data source access.",
+          "type": "object"
+        },
+        "userName": {
+          "description": "The user name of data source access.",
+          "type": "object"
+        },
+        "password": {
+          "description": "The password of data source access.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "targetName",
+        "userName",
+        "password"
+      ]
+    },
+    "EnvironmentVariableSetup": {
+      "description": "The custom setup of setting environment variable.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Add environment variable type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/EnvironmentVariableSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "EnvironmentVariableSetupTypeProperties": {
+      "description": "Environment variable custom setup type properties.",
+      "type": "object",
+      "properties": {
+        "variableName": {
+          "description": "The name of the environment variable.",
+          "type": "string"
+        },
+        "variableValue": {
+          "description": "The value of the environment variable.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "variableName",
+        "variableValue"
+      ]
+    },
+    "ComponentSetup": {
+      "description": "The custom setup of installing 3rd party components.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CustomSetupBase"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Install 3rd party component type properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/LicensedComponentSetupTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "LicensedComponentSetupTypeProperties": {
+      "description": "Installation of licensed component setup type properties.",
+      "type": "object",
+      "properties": {
+        "componentName": {
+          "description": "The name of the 3rd party component.",
+          "type": "string"
+        },
+        "licenseKey": {
+          "description": "The license key to activate the component.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        }
+      },
+      "required": [
+        "componentName",
+        "licenseKey"
+      ]
     },
     "EntityReference": {
       "description": "The entity reference.",
