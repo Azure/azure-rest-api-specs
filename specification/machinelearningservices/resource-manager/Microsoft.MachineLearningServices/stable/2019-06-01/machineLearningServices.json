@@ -456,6 +456,100 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/updateQuotas": {
+      "post": {
+        "tags": [
+          "Quota"
+        ],
+        "operationId": "Quotas_Update",
+        "description": "Update quota for each VM family in workspace.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for update quota is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/QuotaUpdateParameters"
+            },
+            "description": "Quota update parameters."
+          },
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/UpdateWorkspaceQuotasResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/MachineLearningServiceError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "update quotas": {
+            "$ref": "./examples/updateQuota.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/locations/{location}/Quotas": {
+      "get": {
+        "tags": [
+          "Quota"
+        ],
+        "operationId": "Quotas_List",
+        "description": "Gets the currently assigned Workspace Quotas based on VMFamily.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/APIVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListWorkspaceQuotas"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List workspace quotas by VMFamily": {
+            "$ref": "./examples/ListWorkspaceQuotasByVMFamily.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.MachineLearningServices/workspaces": {
       "get": {
         "tags": [
@@ -1292,6 +1386,189 @@
           "type": "string"
         }
       }
+    },
+    "QuotaBaseProperties": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
+        },
+        "unit": {
+          "type": "string",
+          "description": "An enum describing the unit of quota measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUnit",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties for Quota update or retrieval."
+    },
+    "QuotaUpdateParameters": {
+      "properties": {
+        "value": {
+          "description": "The list for update quota.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuotaBaseProperties"
+          }
+        }
+      },
+      "description": "Quota update parameters."
+    },
+    "UpdateWorkspaceQuotasResult": {
+      "properties": {
+        "value": {
+          "description": "The list of workspace quota update result.",
+          "items": {
+            "$ref": "#/definitions/UpdateWorkspaceQuotas"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of workspace quota update result. Call ListNext() with this to fetch the next page of Workspace Quota update result.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "description": "The result of update workspace quota."
+    },
+    "UpdateWorkspaceQuotas": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
+        "limit": {
+          "type": "integer",
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An enum describing the unit of quota measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUnit",
+            "modelAsString": true
+          }
+        },
+        "status": {
+          "type": "string",
+          "readOnly": false,
+          "title": "Update Workspace Quota Status.",
+          "description": "Status of update workspace quota.",
+          "enum": [
+            "Undefined",
+            "Success",
+            "Failure",
+            "InvalidQuotaBelowClusterMinimum",
+            "InvalidQuotaExceedsSubscriptionLimit",
+            "InvalidVMFamilyName"
+          ],
+          "x-ms-enum": {
+            "name": "status",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The properties for update Quota response."
+    },
+    "ResourceName": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Resource Name."
+    },
+    "ResourceQuota": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource ID."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Specifies the resource type."
+        },
+        "name": {
+          "$ref": "#/definitions/ResourceName",
+          "description": "Name of the resource.",
+          "readOnly": true
+        },
+        "limit": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int64",
+          "title": "Limit.",
+          "description": "The maximum permitted quota of the resource."
+        },
+        "unit": {
+          "readOnly": true,
+          "type": "string",
+          "description": "An enum describing the unit of quota measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "QuotaUnit",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "The quota assigned to a resource."
+    },
+    "ListWorkspaceQuotas": {
+      "properties": {
+        "value": {
+          "description": "The list of Workspace Quotas by VM Family",
+          "items": {
+            "$ref": "#/definitions/ResourceQuota"
+          },
+          "readOnly": true,
+          "type": "array"
+        },
+        "nextLink": {
+          "description": "The URI to fetch the next page of workspace quota information by VM Family. Call ListNext() with this to fetch the next page of Workspace Quota information.",
+          "readOnly": true,
+          "type": "string"
+        }
+      },
+      "description": "The List WorkspaceQuotasByVMFamily operation response."
     },
     "Identity": {
       "properties": {
