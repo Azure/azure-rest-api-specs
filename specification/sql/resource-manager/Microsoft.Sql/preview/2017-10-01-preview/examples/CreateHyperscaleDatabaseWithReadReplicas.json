@@ -8,9 +8,12 @@
     "parameters": {
       "location": "southeastasia",
       "sku": {
-        "name": "BC",
-        "family": "Gen4",
-        "capacity": 2
+        "name": "HS_Gen4",
+        "tier": "Hyperscale",
+        "capacity": 1
+      },
+      "properties": {
+        "readReplicaCount": 3
       }
     }
   },
@@ -18,29 +21,27 @@
     "200": {
       "body": {
         "sku": {
-          "name": "BC_Gen4",
-          "tier": "BusinessCritical",
+          "name": "HS_Gen4",
+          "tier": "Hyperscale",
           "family": "Gen4",
-          "capacity": 2
+          "capacity": 1
         },
-        "kind": "v12.0,user",
+        "kind": "v12.0,user,vcore,hyperscale",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "maxSizeBytes": 1073741824,
+          "maxSizeBytes": -1,
           "status": "Online",
           "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
           "creationDate": "2017-06-07T04:41:33.937Z",
-          "currentServiceObjectiveName": "BC_Gen4_2",
+          "currentServiceObjectiveName": "HS_Gen4_1",
           "defaultSecondaryLocation": "North Europe",
           "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
           "licenseType": "LicenseIncluded",
-          "maxLogSizeBytes": 104857600,
           "readScale": "Enabled",
-          "readReplicaCount": 1
+          "readReplicaCount": 3
         },
         "location": "southeastasia",
-        "id":
-          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
         "name": "testdb",
         "type": "Microsoft.Sql/servers/databases"
       }
@@ -48,29 +49,27 @@
     "201": {
       "body": {
         "sku": {
-          "name": "BC_Gen4",
-          "tier": "BusinessCritical",
+          "name": "HS_Gen4",
+          "tier": "Hyperscale",
           "family": "Gen4",
-          "capacity": 2
+          "capacity": 1
         },
-        "kind": "v12.0,user",
+        "kind": "v12.0,user,vcore,hyperscale",
         "properties": {
           "collation": "SQL_Latin1_General_CP1_CI_AS",
-          "maxSizeBytes": 1073741824,
+          "maxSizeBytes": -1,
           "status": "Online",
           "databaseId": "6c764297-577b-470f-9af4-96d3d41e2ba3",
           "creationDate": "2017-06-07T04:41:33.937Z",
-          "currentServiceObjectiveName": "BC_Gen4_2",
+          "currentServiceObjectiveName": "HS_Gen4_1",
           "defaultSecondaryLocation": "North Europe",
           "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
           "licenseType": "LicenseIncluded",
-          "maxLogSizeBytes": 104857600,
           "readScale": "Enabled",
-          "readReplicaCount": 1
+          "readReplicaCount": 3
         },
         "location": "southeastasia",
-        "id":
-          "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
         "name": "testdb",
         "type": "Microsoft.Sql/servers/databases"
       }
