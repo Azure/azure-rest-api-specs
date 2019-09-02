@@ -33,7 +33,7 @@
         "user_impersonation": "impersonate your user account"
       }
     }
-  },  
+  },
   "paths": {
     "/providers/Microsoft.StorageCache/operations": {
       "get": {
@@ -41,7 +41,7 @@
           "application/json"
         ],
         "parameters": [
-      	  {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
@@ -67,7 +67,7 @@
           "StorageTargets_List": {
             "$ref": "./examples/Operations_List.json"
           }
-        },        	
+        },
         "operationId": "Operations_List",
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
@@ -80,12 +80,12 @@
           "application/json"
         ],
         "parameters": [
-      	  {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-      	  {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        }
+          }
         ],
         "responses": {
           "200": {
@@ -122,12 +122,12 @@
           "application/json"
         ],
         "parameters": [
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        }
+          }
         ],
         "responses": {
           "200": {
@@ -150,7 +150,7 @@
           "UsageModels_List": {
             "$ref": "./examples/UsageModels_List.json"
           }
-        },                
+        },
         "tags": [
           "UsageModels"
         ],
@@ -164,12 +164,12 @@
           "application/json"
         ],
         "parameters": [
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        }
+          }
         ],
         "responses": {
           "200": {
@@ -199,7 +199,7 @@
         "description": "Returns all Caches the user has access to under a subscription.",
         "operationId": "Caches_List"
       }
-    },    
+    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches": {
       "get": {
         "produces": [
@@ -261,7 +261,7 @@
             "name": "resourceGroupName",
             "required": true,
             "type": "string"
-          },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -270,12 +270,12 @@
             "required": true,
             "type": "string"
           },
-      	  {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-      	  {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        }
+          }
         ],
         "responses": {
           "200": {
@@ -329,12 +329,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        }
+          }
         ],
         "responses": {
           "200": {
@@ -376,12 +376,12 @@
             "required": true,
             "type": "string"
           },
-      	  {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -446,12 +446,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -487,13 +487,13 @@
           "Caches_Update": {
             "$ref": "./examples/Caches_Update.json"
           }
-        },        
+        },
         "tags": [
           "Caches"
         ],
         "description": "Update a Cache instance.",
         "operationId": "Caches_Update"
-      }      
+      }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/flush": {
       "post": {
@@ -508,12 +508,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -565,12 +565,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -601,7 +601,7 @@
             "$ref": "./examples/Caches_Start.json"
           }
         },
-        "x-ms-long-running-operation": true,                  
+        "x-ms-long-running-operation": true,
         "tags": [
           "Caches"
         ],
@@ -622,12 +622,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -658,7 +658,7 @@
             "$ref": "./examples/Caches_Stop.json"
           }
         },
-        "x-ms-long-running-operation": true,                
+        "x-ms-long-running-operation": true,
         "tags": [
           "Caches"
         ],
@@ -679,12 +679,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -712,10 +712,10 @@
           "StorageTargets_List": {
             "$ref": "./examples/StorageTargets_ListByCache.json"
           }
-        },        
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },        
+        },
         "tags": [
           "StorageTargets"
         ],
@@ -736,12 +736,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -784,7 +784,7 @@
             "$ref": "./examples/StorageTargets_Delete.json"
           }
         },
-        "x-ms-long-running-operation": true,                
+        "x-ms-long-running-operation": true,
         "tags": [
           "StorageTargets"
         ],
@@ -803,12 +803,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -844,7 +844,7 @@
           "StorageTargets_Get": {
             "$ref": "./examples/StorageTargets_Get.json"
           }
-        },        
+        },
         "tags": [
           "StorageTargets"
         ],
@@ -866,12 +866,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -944,12 +944,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -993,13 +993,13 @@
           "StorageTargets_Update": {
             "$ref": "./examples/StorageTargets_Update.json"
           }
-        },        
+        },
         "tags": [
           "StorageTargets"
         ],
         "description": "Update a storage target.  This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cache is healthy again.",
         "operationId": "StorageTargets_Update"
-      }      
+      }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
       "post": {
@@ -1014,12 +1014,12 @@
             "required": true,
             "type": "string"
           },
-	        {
+          {
             "$ref": "#/parameters/ApiVersionParameter"
           },
-	        {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
-	        },	  
+          },
           {
             "description": "Name of cache.",
             "in": "path",
@@ -1049,8 +1049,8 @@
           "Caches_UpgradeFirmware": {
             "$ref": "./examples/Caches_UpgradeFirmware.json"
           }
-        },        
-        "x-ms-long-running-operation": true,                
+        },
+        "x-ms-long-running-operation": true,
         "tags": [
           "Caches"
         ],
@@ -1188,7 +1188,7 @@
             },
             "provisioningState": {
               "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-              "enum":[
+              "enum": [
                 "Succeeded",
                 "Failed",
                 "Cancelled",
@@ -1224,7 +1224,7 @@
           "type": "object"
         }
       },
-      "x-ms-azure-resource": true,      
+      "x-ms-azure-resource": true,
       "type": "object"
     },
     "CachesListResult": {
@@ -1278,7 +1278,7 @@
         "currentFirmwareVersion": {
           "description": "Version string of the firmware currently installed on this cache.",
           "type": "string",
-          "readOnly": true          
+          "readOnly": true
         },
         "firmwareUpdateStatus": {
           "description": "True if there is a firmware update ready to install on this cache.  The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
@@ -1290,7 +1290,7 @@
             "name": "FirmwareStatusType",
             "modelAsString": true
           },
-          "readOnly": true,          
+          "readOnly": true,
           "type": "string"
         },
         "firmwareUpdateDeadline": {
@@ -1308,7 +1308,7 @@
         "pendingFirmwareVersion": {
           "description": "When firmwareUpdateAvailable is true, this field holds the version string for the update.",
           "type": "string",
-          "readOnly": true          
+          "readOnly": true
         }
       },
       "type": "object"
@@ -1344,7 +1344,7 @@
           "$ref": "#/definitions/URLString"
         }
       },
-      "x-ms-discriminator-value": "clfs",      
+      "x-ms-discriminator-value": "clfs",
       "type": "object"
     },
     "UnknownTarget": {
@@ -1355,9 +1355,9 @@
           "$ref": "#/definitions/UnknownProperties"
         }
       },
-      "x-ms-discriminator-value": "unknown",      
+      "x-ms-discriminator-value": "unknown",
       "type": "object"
-    },    
+    },
     "ResourceName": {
       "description": "Schema for the name of resources served by this provider.   Note that objects will contain an odata @id annotation as appropriate, this will contain the complete URL of the object.   These names are case-preserving, but not case sensitive.",
       "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -1491,7 +1491,7 @@
       "discriminator": "targetType",
       "properties": {
         "name": {
-          "description":"A fully qualified URL.",
+          "description": "A fully qualified URL.",
           "readOnly": true,
           "$ref": "#/definitions/ResourceName"
         },
@@ -1504,7 +1504,7 @@
           "description": "Type for the storage target; Microsoft.StorageCache/Cache/StorageTarget",
           "readOnly": true,
           "type": "string"
-        },        
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties of the storage target.",
@@ -1532,7 +1532,7 @@
             },
             "provisioningState": {
               "description": "ARM provisioning state, see https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#provisioningstate-property",
-              "enum":[
+              "enum": [
                 "Succeeded",
                 "Failed",
                 "Cancelled",
@@ -1551,13 +1551,13 @@
               "$ref": "#/definitions/Nfs3Target"
             },
             "clfs": {
-              "description": "Properties when clfs target.",              
+              "description": "Properties when clfs target.",
               "$ref": "#/definitions/ClfsTarget"
             },
             "unknown": {
               "description": "Properties when unknown target.",
               "$ref": "#/definitions/UnknownTarget"
-            }            
+            }
           }
         }
       },
@@ -1568,12 +1568,12 @@
       "type": "object",
       "properties": {
         "namespacePath": {
-            "description": "Namespace path on a cache for a storage target.",
-            "type": "string"
+          "description": "Namespace path on a cache for a storage target.",
+          "type": "string"
         },
         "targetPath": {
-            "description": "Path in storage target to which namespacePath points.",
-            "type": "string"
+          "description": "Path in storage target to which namespacePath points.",
+          "type": "string"
         },
         "nfsExport": {
           "description": "NFS export where targetPath exists.",
@@ -1659,5 +1659,5 @@
       "type": "string",
       "description": "Client Api Version."
     }
-  }  
+  }
 }
