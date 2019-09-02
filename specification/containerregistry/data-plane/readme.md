@@ -152,6 +152,7 @@ input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-08-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-07-15/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-08-10/containerregistry.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set,
