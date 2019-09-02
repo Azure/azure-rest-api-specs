@@ -8,6 +8,13 @@ go:
   namespace: containerregistry
   clear-output-folder: true
   add-credentials: true
+
+  # Non standard header use, still awaiting checks here
+  directive:
+    - remove-operation: UploadBlobChunkSpecified
+    - remove-operation: UploadBlobChunk
+    - remove-model: UploadBlobChunkSpecifiedHeaders
+    - remove-model: UploadBlobChunkHeaders
 ```
 
 ### Go multi-api
