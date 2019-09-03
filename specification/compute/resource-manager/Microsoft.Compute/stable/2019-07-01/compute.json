@@ -8383,6 +8383,18 @@
         "publicIPPrefix": {
           "$ref": "#/definitions/SubResource",
           "description": "The PublicIPPrefix from which to allocate publicIP addresses."
+        },
+        "publicIPAddressVersion": {
+          "type": "string",
+          "description": "Available from Api-Version 2019-07-01 onwards, it represents whether the specific ipconfiguration is IPv4 or IPv6. Default is taken as IPv4. Possible values are: 'IPv4' and 'IPv6'.",
+          "enum": [
+            "IPv4",
+            "IPv6"
+          ],
+          "x-ms-enum": {
+            "name": "IPVersion",
+            "modelAsString": true
+          }
         }
       },
       "description": "Describes a virtual machines scale set IP Configuration's PublicIPAddress configuration"
