@@ -2199,7 +2199,7 @@
           "description": "The kind of the alert rule",
           "enum": [
             "Scheduled",
-            "Filter",
+            "MicrosoftSecurityIncidentCreation",
             "Fusion"
           ],
           "type": "string",
@@ -2211,7 +2211,7 @@
                 "value": "Scheduled"
               },
               {
-                "value": "Filter"
+                "value": "MicrosoftSecurityIncidentCreation"
               },
               {
                 "value": "Fusion"
@@ -2349,7 +2349,8 @@
         "LateralMovement",
         "Collection",
         "Exfiltration",
-        "CommandAndControl"
+        "CommandAndControl",
+        "Impact"
       ],
       "type": "string",
       "x-ms-enum": {
@@ -2436,7 +2437,7 @@
       },
       "type": "object"
     },
-    "BaseAlertRuleTemplateProperties": {
+    "AlertRuleTemplatePropertiesBase": {
       "description": "Base alert rule template property bag.",
       "properties": {
         "alertRulesCreatedByTemplateCount": {
@@ -3760,54 +3761,54 @@
       },
       "type": "object"
     },
-    "FilterAlertRuleTemplate": {
+    "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
       "allOf": [
         {
           "$ref": "#/definitions/AlertRuleTemplate"
         }
       ],
-      "description": "Represents filter alert rule template.",
+      "description": "Represents MicrosoftSecurityIncidentCreation rule template.",
       "properties": {
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
             },
             {
-              "$ref": "#/definitions/FilterAlertRuleTemplateProperties"
+              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleAdditionalProperties"
             }
           ],
-          "description": "Filter alert rule template properties",
+          "description": "MicrosoftSecurityIncidentCreation rule template properties",
           "required": [
             "displayName",
             "description",
             "createdDateUTC",
             "status",
             "alertRulesCreatedByTemplateCount",
-            "filterProduct"
+            "productFilter"
           ],
           "x-ms-client-flatten": true
         }
       },
       "type": "object",
-      "x-ms-discriminator-value": "Filter"
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
-    "FilterAlertRuleTemplateProperties": {
-      "description": "Filter alert rule template property bag.",
+    "MicrosoftSecurityIncidentCreationAlertRuleAdditionalProperties": {
+      "description": "MicrosoftSecurityIncidentCreation rule property bag.",
       "properties": {
-        "filterProduct": {
-          "description": "The filter product name for this template rule.",
+        "productFilter": {
+          "description": "The alerts' productName on which the cases will be generated",
           "type": "string"
         },
-        "filterSeverities": {
-          "description": "the alert’s severities on which the cases will be generated",
+        "severitiesFilter": {
+          "description": "the alerts' severities on which the cases will be generated",
           "items": {
             "$ref": "#/definitions/AlertSeverity"
           },
           "type": "array"
         },
-        "filterTitles": {
-          "description": "the alert’s titles on which the cases will be generated",
+        "displayNamesFilter": {
+          "description": "the alerts' displayNames on which the cases will be generated",
           "items": {
             "type": "string"
           },
@@ -3822,15 +3823,15 @@
           "$ref": "#/definitions/AlertRuleTemplate"
         }
       ],
-      "description": "Represents fusion alert rule template.",
+      "description": "Represents Fusion alert rule template.",
       "properties": {
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
             },
             {
-              "$ref": "#/definitions/FusionAlertRuleTemplateProperties"
+              "$ref": "#/definitions/FusionAlertRuleAdditionalProperties"
             }
           ],
           "description": "Fusion alert rule template properties",
@@ -3847,8 +3848,8 @@
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
     },
-    "FusionAlertRuleTemplateProperties": {
-      "description": "Filter alert rule template property bag.",
+    "FusionAlertRuleAdditionalProperties": {
+      "description": "Fusion alert rule property bag.",
       "properties": {
         "severity": {
           "$ref": "#/definitions/AlertSeverity",
@@ -4766,10 +4767,10 @@
         "properties": {
           "allOf": [
             {
-              "$ref": "#/definitions/BaseAlertRuleTemplateProperties"
+              "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
             },
             {
-              "$ref": "#/definitions/ScheduledAlertRuleTemplateProperties"
+              "$ref": "#/definitions/ScheduledAlertRuleAdditionalProperties"
             }
           ],
           "description": "Scheduled alert rule template properties",
@@ -4793,7 +4794,7 @@
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
     },
-    "ScheduledAlertRuleTemplateProperties": {
+    "ScheduledAlertRuleAdditionalProperties": {
       "description": "Schedule alert rule template property bag.",
       "properties": {
         "query": {
