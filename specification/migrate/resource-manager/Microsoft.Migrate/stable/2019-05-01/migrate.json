@@ -246,6 +246,7 @@
             "Succeeded"
           ],
           "description": "Provisioning state of the project.",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ProvisioningState",
             "modelAsString": true
@@ -1649,9 +1650,9 @@
             "NoSuitableVmSizeFound",
             "OneOrMoreDisksNotSuitable",
             "OneOrMoreAdaptersNotSuitable",
-            "InternalErrorOccuredDuringComputeEvaluation",
-            "InternalErrorOccuredDuringStorageEvaluation",
-            "InternalErrorOccuredDuringNetworkEvaluation",
+            "InternalErrorOccurredDuringComputeEvaluation",
+            "InternalErrorOccurredDuringStorageEvaluation",
+            "InternalErrorOccurredDuringNetworkEvaluation",
             "NoVmSizeSupportsStoragePerformance",
             "NoVmSizeSupportsNetworkPerformance",
             "NoVmSizeForSelectedPricingTier",
@@ -1857,18 +1858,23 @@
       "type": "object",
       "properties": {
         "authority": {
+          "description": "AAD Authority URL which was used to request the token for the service principal.",
           "type": "string"
         },
         "applicationId": {
+          "description": "Application/client Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         },
         "audience": {
+          "description": "Intended audience for the service principal.",
           "type": "string"
         },
         "objectId": {
+          "description": "Object Id of the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         },
         "tenantId": {
+          "description": "Tenant Id for the service principal with which the on-premise management/data plane components would communicate with our Azure services.",
           "type": "string"
         }
       }
