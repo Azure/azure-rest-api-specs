@@ -644,7 +644,7 @@ override-info:
 directive:
   - suppress: TrackedResourcePatchOperation
     from: restorableDroppedManagedDatabases.json
-    reason: dropped database shouldn’t support patch
+    reason: dropped database shouldn't support patch
 ```
 
 ---
