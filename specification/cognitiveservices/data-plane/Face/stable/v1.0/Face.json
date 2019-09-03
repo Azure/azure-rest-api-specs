@@ -777,7 +777,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/MetaDataContract"
+              "$ref": "#/definitions/MetaDataContractMandatoryName"
             }
           }
         ],
@@ -1755,7 +1755,7 @@
             "required": true,
             "x-ms-client-flatten": true,
             "schema": {
-              "$ref": "#/definitions/MetaDataContract"
+              "$ref": "#/definitions/MetaDataContractMandatoryName"
             }
           }
         ],
@@ -3835,7 +3835,26 @@
     },
     "NameAndUserDataContract": {
       "type": "object",
-      "description": "A combination of user defined name and user specified data for the person, largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "description": "A combination of user defined name and user specified data for the person and largePersonGroup/personGroup.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "User defined name, maximum length is 128.",
+          "maxLength": 128
+        },
+        "userData": {
+          "type": "string",
+          "description": "User specified data. Length should not exceed 16KB.",
+          "maxLength": 16384
+        }
+      }
+    },
+    "NameAndUserDataContractMandatoryName": {
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "description": "A combination of user defined name and user specified data for largeFaceList/faceList.",
       "properties": {
         "name": {
           "type": "string",
@@ -3851,7 +3870,7 @@
     },
     "MetaDataContract": {
       "type": "object",
-      "description": "A combination of user defined name and user specified data and recognition model name for largePersonGroup/personGroup, and largeFaceList/faceList.",
+      "description": "A combination of user defined name and user specified data and recognition model name for largePersonGroup/personGroup.",
       "properties": {
         "recognitionModel": {
           "$ref": "#/definitions/RecognitionModel"
@@ -3860,6 +3879,20 @@
       "allOf": [
         {
           "$ref": "#/definitions/NameAndUserDataContract"
+        }
+      ]
+    },
+    "MetaDataContractMandatoryName": {
+      "type": "object",
+      "description": "A combination of user defined name and user specified data and recognition model name for largeFaceList/faceList.",
+      "properties": {
+        "recognitionModel": {
+          "$ref": "#/definitions/RecognitionModel"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/NameAndUserDataContractMandatoryName"
         }
       ]
     },
