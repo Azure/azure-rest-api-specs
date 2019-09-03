@@ -2106,15 +2106,11 @@
     "Action": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Action for alert rule.",
       "properties": {
-        "etag": {
-          "description": "Etag of the action.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/ActionProperties",
           "description": "Action properties",
@@ -2186,7 +2182,7 @@
     "AlertRule": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/AlertRuleKind"
@@ -2194,12 +2190,6 @@
       ],
       "description": "Alert rule.",
       "discriminator": "kind",
-      "properties": {
-        "etag": {
-          "description": "Etag of the alert rule.",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "AlertRuleKind": {
@@ -2235,7 +2225,7 @@
     "AlertRuleTemplate": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/AlertRuleKind"
@@ -2243,12 +2233,6 @@
       ],
       "description": "Alert rule template.",
       "discriminator": "kind",
-      "properties": {
-        "etag": {
-          "description": "Etag of the alert rule.",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "AlertRuleTemplatesList": {
@@ -2519,15 +2503,11 @@
     "Bookmark": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a bookmark in Azure Security Insights.",
       "properties": {
-        "etag": {
-          "description": "Etag of the bookmark.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/BookmarkProperties",
           "description": "Bookmark properties",
@@ -2612,15 +2592,11 @@
     "Case": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         }
       ],
       "description": "Represents a case in Azure Security Insights.",
       "properties": {
-        "etag": {
-          "description": "Etag of the alert rule.",
-          "type": "string"
-        },
         "properties": {
           "$ref": "#/definitions/CaseProperties",
           "description": "Case properties",
@@ -3061,7 +3037,7 @@
     "DataConnector": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/DataConnectorKind"
@@ -3069,12 +3045,6 @@
       ],
       "description": "Data connector.",
       "discriminator": "kind",
-      "properties": {
-        "etag": {
-          "description": "Etag of the data connector.",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "DataConnectorDataTypeCommon": {
@@ -4683,6 +4653,20 @@
       },
       "x-ms-azure-resource": true
     },
+    "ResourceWithEtag": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "An azure resource object with an Etag property",
+      "properties": {
+        "etag": {
+          "description": "Etag of the azure resource",
+          "type": "string"
+        }
+      },
+    },
     "ScheduledAlertRule": {
       "allOf": [
         {
@@ -5206,7 +5190,7 @@
     "Settings": {
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ResourceWithEtag"
         },
         {
           "$ref": "#/definitions/SettingsKind"
@@ -5214,12 +5198,6 @@
       ],
       "description": "The Setting.",
       "discriminator": "kind",
-      "properties": {
-        "etag": {
-          "description": "Etag of the alert rule.",
-          "type": "string"
-        }
-      },
       "type": "object"
     },
     "SettingsKind": {
