@@ -1960,7 +1960,7 @@
       }
     },
     "Office365Source": {
-      "description": "A copy activity source for an Office365 service.",
+      "description": "A copy activity source for an Office 365 service.",
       "type": "object",
       "allOf": [
         {
@@ -1987,6 +1987,10 @@
         "endTime": {
           "type": "object",
           "description": "End time of the requested range for this dataset. Type: string (or Expression with resultType string)."
+        },
+        "outputColumns": {
+          "type": "object",
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
         }
       }
     },
