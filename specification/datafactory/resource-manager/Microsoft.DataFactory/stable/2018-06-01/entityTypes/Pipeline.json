@@ -784,6 +784,21 @@
         }
       }
     },
+    "OrcSource": {
+      "description": "A copy activity ORC source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "ORC store settings."
+        }
+      }
+    },
     "DelimitedTextSink": {
       "description": "A copy activity DelimitedText sink.",
       "type": "object",
@@ -819,6 +834,21 @@
         "formatSettings": {
           "$ref": "#/definitions/JsonWriteSettings",
           "description": "Json format settings."
+        }
+      }
+    },
+    "OrcSink": {
+      "description": "A copy activity ORC sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "ORC store settings."
         }
       }
     },
