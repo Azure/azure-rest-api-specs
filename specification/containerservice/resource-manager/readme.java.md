@@ -16,6 +16,7 @@ description: "Container Service Client"
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-06
   - tag: package-2019-08
 ```
 
