@@ -6,12 +6,24 @@
 			"id": "/subscriptons/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
 			"type": "Microsoft.Capacity/autoQuotaIncrease",
 			"name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
-			"enrolled": true,
+			"enabled": true,
 			"emailActions": {
 				"receipients": {
 					"value": [
-						"admin2@contoso.com",
-						"itsupport@contoso.com"
+						{
+							"actionType": "OnSuccess",
+							"emailRecipients": [
+								"admin2@contoso.com",
+								"itsupport@contoso.com"
+							]
+						},
+						{
+							"actionType": "OnFailure",
+							"emailRecipients": [
+								"admin2@contoso.com",
+								"itsupport@contoso.com"
+							]
+						}
 					]
 				},
 				"actionForSuccess": true,
@@ -22,8 +34,14 @@
 				"supportLanguage": "en-us",
 				"receipients": {
 					"value": [
-						"admin2@contoso.com",
-						"itsupport@contoso.com"
+						{
+							"recipientType": "email",
+							"recipient": "admin2@contoso.com"
+						},
+						{
+							"recipientType": "phone",
+							"recipient": "+1-206-999-9999"
+						}
 					]
 				}
 			}
@@ -35,12 +53,24 @@
 				"id": "/subscriptons/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
 				"type": "Microsoft.Capacity/autoQuotaIncrease",
 				"name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
-				"enrolled": true,
+				"enabled": true,
 				"emailActions": {
 					"receipients": {
 						"value": [
-							"admin2@contoso.com",
-							"itsupport@contoso.com"
+							{
+								"actionType": "OnSuccess",
+								"emailRecipients": [
+									"admin2@contoso.com",
+									"itsupport@contoso.com"
+								]
+							},
+							{
+								"actionType": "OnFailure",
+								"emailRecipients": [
+									"admin2@contoso.com",
+									"itsupport@contoso.com"
+								]
+							}
 						]
 					},
 					"actionForSuccess": true,
@@ -51,8 +81,14 @@
 					"supportLanguage": "en-us",
 					"receipients": {
 						"value": [
-							"admin2@contoso.com",
-							"itsupport@contoso.com"
+							{
+								"recipientType": "email",
+								"recipient": "admin2@contoso.com"
+							},
+							{
+								"recipientType": "phone",
+								"recipient": "+1-206-999-9999"
+							}
 						]
 					}
 				}

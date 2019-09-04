@@ -2,28 +2,43 @@
 	"parameters": {
 		"subscriptionId": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
 		"api-version": "2019-07-19-preview",
-        "autoQuotaIncreaseRequest": {
+		"autoQuotaIncreaseRequest": {
 			"id": "/subscriptons/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
 			"type": "Microsoft.Capacity/autoQuotaIncrease",
-            "name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
-			"enrolled": false,
+			"name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
+			"enabled": false,
 			"emailActions": {
 				"receipients": {
 					"value": [
-						"admin2@contoso.com",
-						"itsupport@contoso.com"
+						{
+							"actionType": "OnSuccess",
+							"emailRecipients": [
+								"admin2@contoso.com",
+								"itsupport@contoso.com"
+							]
+						},
+						{
+							"actionType": "OnFailure",
+							"emailRecipients": [
+								"itsupport@contoso.com"
+							]
+						}
 					]
-				},
-				"actionForSuccess": true,
-				"actionForFailure": true
+				}
 			},
 			"supportRequestAction": {
 				"severity": "SevB",
 				"supportLanguage": "en-us",
 				"receipients": {
 					"value": [
-						"admin2@contoso.com",
-						"itsupport@contoso.com"
+						{
+							"recipientType": "chat",
+							"recipient": "support@contoso.com"
+						},
+						{
+							"recipientType": "phone",
+							"recipient": "+1-206-999-9999"
+						}
 					]
 				}
 			}
@@ -34,25 +49,40 @@
 			"body": {
 				"id": "/subscriptons/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
 				"type": "Microsoft.Capacity/autoQuotaIncrease",
-                "name": "2B5C8515-37D8-4B6A-879B-CD641A2CF605",
-				"enrolled": false,
+				"name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
+				"enabled": false,
 				"emailActions": {
 					"receipients": {
 						"value": [
-							"admin2@contoso.com",
-							"itsupport@contoso.com"
+							{
+								"actionType": "OnSuccess",
+								"emailRecipients": [
+									"admin2@contoso.com",
+									"itsupport@contoso.com"
+								]
+							},
+							{
+								"actionType": "OnFailure",
+								"emailRecipients": [
+									"itsupport@contoso.com"
+								]
+							}
 						]
-					},
-					"actionForSuccess": true,
-					"actionForFailure": true
+					}
 				},
 				"supportRequestAction": {
 					"severity": "SevB",
 					"supportLanguage": "en-us",
 					"receipients": {
 						"value": [
-							"admin2@contoso.com",
-							"itsupport@contoso.com"
+							{
+								"recipientType": "chat",
+								"recipient": "support@contoso.com"
+							},
+							{
+								"recipientType": "phone",
+								"recipient": "+1-206-999-9999"
+							}
 						]
 					}
 				}
