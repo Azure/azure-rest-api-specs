@@ -1,10 +1,10 @@
 {
   "parameters": {
     "subscriptionId": "a7f23fdb-e626-4f95-89aa-3a360a90861e",
-    "$select" : "OSType",
-    "$filter" : "HealthStateCategory eq 'Identity' and (ComponentTypeName eq 'Microsoft.Windows.Server.10.0.Full.Computer' or ComponentTypeName eq 'Microsoft.Linux.Universal.Computer') and WorkloadType eq 'BaseOS' and (ResourceGroupId eq 'viv_rg')",
-    "$apply" : "groupby((OperatingSystem,HealthState),aggregate(VmId with countdistinct as VmCount))",
-    "$orderby" : "Error",
+    "$select": "OSType",
+    "$filter": "HealthStateCategory eq 'Identity' and (ComponentTypeName eq 'Microsoft.Windows.Server.10.0.Full.Computer' or ComponentTypeName eq 'Microsoft.Linux.Universal.Computer') and WorkloadType eq 'BaseOS' and (ResourceGroupId eq 'viv_rg')",
+    "$apply": "groupby((OperatingSystem,HealthState),aggregate(VmId with countdistinct as VmCount))",
+    "$orderby": "Error",
     "api-version": "2018-08-31-preview"
   },
   "responses": {
@@ -13,13 +13,10 @@
         "value": [
           {
             "properties": {
- 
               "componentTypeGroupCategory": null,
-
               "vmId": null,
               "vmName": null,
               "vmTags": null,
-
               "children": null,
               "workspaceId": null,
               "solutionId": null,
@@ -48,13 +45,10 @@
           },
           {
             "properties": {
- 
               "componentTypeGroupCategory": null,
-
               "vmId": null,
               "vmName": null,
               "vmTags": null,
-
               "children": null,
               "workspaceId": null,
               "solutionId": null,

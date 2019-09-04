@@ -6,7 +6,7 @@
     "applicationGatewayName": "appgw",
     "parameters": {
       "identity": {
-        "type":"UserAssigned",
+        "type": "UserAssigned",
         "userAssignedIdentities": {
           "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identity1": {}
         }
@@ -154,7 +154,8 @@
                   "name": "apiPaths",
                   "properties": {
                     "paths": [
-                      "/api", "/v1/api"
+                      "/api",
+                      "/v1/api"
                     ],
                     "backendAddressPool": {
                       "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
@@ -212,12 +213,12 @@
                   "name": "Set X-Forwarded-For",
                   "ruleSequence": 102,
                   "conditions": [
-                      {
-                        "variable": "http_req_Authorization",
-                        "pattern": "^Bearer",
-                        "ignoreCase": true,
-                        "negate": false
-                      }
+                    {
+                      "variable": "http_req_Authorization",
+                      "pattern": "^Bearer",
+                      "ignoreCase": true,
+                      "negate": false
+                    }
                   ],
                   "actionSet": {
                     "requestHeaderConfigurations": [
@@ -389,7 +390,8 @@
                     "properties": {
                       "provisioningState": "Succeeded",
                       "paths": [
-                        "/api", "/v1/api"
+                        "/api",
+                        "/v1/api"
                       ],
                       "backendAddressPool": {
                         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
@@ -453,12 +455,12 @@
                     "name": "Set X-Forwarded-For",
                     "ruleSequence": 102,
                     "conditions": [
-                        {
-                          "variable": "http_req_Authorization",
-                          "pattern": "^Bearer",
-                          "ignoreCase": true,
-                          "negate": false
-                        }
+                      {
+                        "variable": "http_req_Authorization",
+                        "pattern": "^Bearer",
+                        "ignoreCase": true,
+                        "negate": false
+                      }
                     ],
                     "actionSet": {
                       "requestHeaderConfigurations": [
@@ -630,7 +632,8 @@
                     "properties": {
                       "provisioningState": "Succeeded",
                       "paths": [
-                        "/api", "/v1/api"
+                        "/api",
+                        "/v1/api"
                       ],
                       "backendAddressPool": {
                         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
@@ -694,12 +697,12 @@
                     "name": "Set X-Forwarded-For",
                     "ruleSequence": 102,
                     "conditions": [
-                        {
-                          "variable": "http_req_Authorization",
-                          "pattern": "^Bearer",
-                          "ignoreCase": true,
-                          "negate": false
-                        }
+                      {
+                        "variable": "http_req_Authorization",
+                        "pattern": "^Bearer",
+                        "ignoreCase": true,
+                        "negate": false
+                      }
                     ],
                     "actionSet": {
                       "requestHeaderConfigurations": [

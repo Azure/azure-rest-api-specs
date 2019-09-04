@@ -1,21 +1,23 @@
 {
-  "parameters":{
-    "subscriptionId":"00000000-1111-2222-3333-444444444444",
-    "resourceGroupName":"group1",
-    "serverName":"sqlcrudtest",
-    "databaseName":"db1",
-    "queryId":"19",
-    "api-version":"2014-04-01"
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "serverName": "sqlcrudtest",
+    "databaseName": "db1",
+    "queryId": "19",
+    "api-version": "2014-04-01"
   },
-  "responses":{
-    "200":{
-      "value":[
-        {
-          "name":"current",
-          "queryText":"select 1",
-          "type":"Microsoft.Sql/servers/databases/topQueries/queryText"
-        }
-      ]
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "current",
+            "queryText": "select 1",
+            "type": "Microsoft.Sql/servers/databases/topQueries/queryText"
+          }
+        ]
+      }
     }
   }
 }

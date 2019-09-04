@@ -22,31 +22,183 @@ These are the global settings for the Instance Metadata Service API.
 ``` yaml
 openapi-type: data-plane
 azure-arm: true
-tag: package-2018-05
-input-file:
-- Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
+tag: package-2019-02-01
 output-folder: ./Generated
 ```
 
+### Tag: package-2018-10-01
+
+These settings apply only when `--tag=package-2018-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2018-10-01'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
+```
+
+### Tag: package-2019-02-01
+
+These settings apply only when `--tag=package-2019-02-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-02-01'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-02-01/imds.json
+```
+
+### Tag: package-2019-03-11
+
+These settings apply only when `--tag=package-2019-03-11` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-03-11'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
+```
+
+### Tag: package-2019-04-30
+
+These settings apply only when `--tag=package-2019-04-30` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-04-30'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
+```
+
+### Tag: package-2019-06-01
+
+These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06-01'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
+```
+
+### Tag: package-2019-08-01
+
+These settings apply only when `--tag=package-2019-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-08-01'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
+```
+
+### Tag: package-2019-08-15
+
+These settings apply only when `--tag=package-2019-08-15` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-08-15'
+input-file:
+- Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
+```
+
 ## Suppression
- ``` yaml
- directive:
-   - suppress: DefinitionsPropertiesNamesCamelCase
-     reason: The following properties follow the Oath2 spec, which does not use camelCase.
-     from: Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
-     where:
-       - $.definitions.IdentityTokenResponse.properties.access_token
-       - $.definitions.IdentityTokenResponse.properties.expires_in
-       - $.definitions.IdentityTokenResponse.properties.expires_on
-       - $.definitions.IdentityTokenResponse.properties.ext_expires_in
-       - $.definitions.IdentityTokenResponse.properties.not_before
-       - $.definitions.IdentityTokenResponse.properties.resource
-       - $.definitions.IdentityTokenResponse.properties.token_type
-       - $.definitions.IdentityTokenResponse.properties.client_id
-       - $.definitions.IdentityTokenResponse.properties.object_id
-       - $.definitions.IdentityTokenResponse.properties.msi_res_id
-       - $.definitions.IdentityErrorResponse.properties.error_description
- ```
+
+``` yaml
+directive:
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2019-02-01/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
+
+  - suppress: HttpsSupportedScheme
+    reason: IMDS does not require HTTPS to query it
+
+  - suppress: SecurityDefinitionsStructure
+    reason: IMDS does not support any authentication
+
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    reason: The following properties follow the Oath2 spec, which does not use camelCase.
+    from: Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
+    where:
+      - $.definitions.IdentityTokenResponse.properties.access_token
+      - $.definitions.IdentityTokenResponse.properties.expires_in
+      - $.definitions.IdentityTokenResponse.properties.expires_on
+      - $.definitions.IdentityTokenResponse.properties.ext_expires_in
+      - $.definitions.IdentityTokenResponse.properties.not_before
+      - $.definitions.IdentityTokenResponse.properties.resource
+      - $.definitions.IdentityTokenResponse.properties.token_type
+      - $.definitions.IdentityTokenResponse.properties.client_id
+      - $.definitions.IdentityTokenResponse.properties.object_id
+      - $.definitions.IdentityTokenResponse.properties.msi_res_id
+      - $.definitions.IdentityErrorResponse.properties.error_description
+```
 
 ---
 # Code Generation
@@ -71,3 +223,34 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-python
 ```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2018-10-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-02-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-03-11/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-04-30/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-06-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-08-01/imds.json
+  - $(this-folder)/Microsoft.InstanceMetadataService/stable/2019-08-15/imds.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
+

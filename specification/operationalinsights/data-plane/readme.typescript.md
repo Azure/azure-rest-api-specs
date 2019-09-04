@@ -6,7 +6,7 @@ Please also specify `--typescript-sdks-folder=<path to the root directory of you
 ``` yaml $(typescript)
 typescript:
   package-name: "@azure/loganalytics"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/loganalytics"
+  output-folder: "$(typescript-sdks-folder)/sdk/operationalinsights/loganalytics"
   override-client-name: LogAnalyticsClient
   generate-metadata: true
 ```

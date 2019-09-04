@@ -1,8 +1,11 @@
 {
   "parameters": {
     "api-version": "2019-01-01",
+    "billingAccountId": "100",
     "enrollmentAccountId": "1234",
-    "exportName": "TestExport"
+    "exportName": "TestExport",
+    "id": "providers/Microsoft.Billing/billingAccounts/12/enrollmentAccounts/1234/providers/Microsoft.CostManagement/exports/TestExport",
+    "scope": "providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}"
   },
   "responses": {
     "200": {
@@ -19,7 +22,7 @@
               "rootFolderPath": "ad-hoc"
             }
           },
-          "definition":{
+          "definition": {
             "type": "Usage",
             "timeframe": "Custom",
             "timePeriod": {
@@ -53,7 +56,7 @@
                   "name": "Environment"
                 }
               ],
-              "filter":{
+              "filter": {
                 "and": [
                   {
                     "dimension": {
@@ -75,7 +78,7 @@
                       ]
                     }
                   }
-                ]                
+                ]
               }
             }
           }

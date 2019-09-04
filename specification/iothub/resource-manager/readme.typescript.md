@@ -7,7 +7,7 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-iothub"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-iothub"
+  output-folder: "$(typescript-sdks-folder)/sdk/iothub/arm-iothub"
   payload-flattening-threshold: 1
   generate-metadata: true
 ```
