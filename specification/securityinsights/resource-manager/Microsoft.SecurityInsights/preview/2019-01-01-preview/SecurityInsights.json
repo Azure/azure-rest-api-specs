@@ -3828,11 +3828,8 @@
         }
       },
       "required": [
-      	"alertRuleTemplateName",
-      	"description",
         "displayName",
         "enabled",
-        "lastModifiedUtc",
         "productFilter"
       ],
       "type": "object"
@@ -3965,11 +3962,7 @@
       },
       "required": [
       	"alertRuleTemplateName",
-      	"description",
-        "displayName",
-        "enabled",
-        "lastModifiedUtc",
-        "severity"
+        "enabled"
       ],
       "type": "object"
     },
@@ -4838,7 +4831,7 @@
     "ScheduledAlertRuleProperties": {
       "allOf": [
         {
-          "$ref": "#/definitions/ScheduledAlertRuleAdditionalProperties"
+          "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
         }
       ],
       "description": "Scheduled alert rule base property bag.",
@@ -4884,7 +4877,6 @@
       "required": [
         "displayName",
         "enabled",
-        "lastModifiedUtc",
         "severity",
         "query",
         "queryFrequency",
@@ -4910,16 +4902,14 @@
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
             },
             {
-              "$ref": "#/definitions/ScheduledAlertRuleAdditionalProperties"
+              "$ref": "#/definitions/ScheduledAlertRuleCommonProperties"
             }
           ],
           "description": "Scheduled alert rule template properties",
           "required": [
             "displayName",
             "description",
-            "createdDateUTC",
             "status",
-            "requiredDataConnectors",
             "alertRulesCreatedByTemplateCount",
             "severity",
             "query",
@@ -4934,7 +4924,7 @@
       "type": "object",
       "x-ms-discriminator-value": "Scheduled"
     },
-    "ScheduledAlertRuleAdditionalProperties": {
+    "ScheduledAlertRuleCommonProperties": {
       "description": "Schedule alert rule template property bag.",
       "properties": {
         "query": {
