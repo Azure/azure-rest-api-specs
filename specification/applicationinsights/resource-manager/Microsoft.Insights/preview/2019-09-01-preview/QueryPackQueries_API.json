@@ -54,6 +54,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "A list containing 0 or more queries associated with the Log Analytics QueryPack.",
             "schema": {
@@ -105,6 +111,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "A list containing 0 or more queries associated with the Log Analytics QueryPack.",
             "schema": {
@@ -141,6 +153,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "A single query associated with the Log Analytics QueryPack.",
             "schema": {
@@ -184,6 +202,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "The new or updated query associated with the Log Analytics QueryPack.",
             "schema": {
@@ -218,6 +242,12 @@
           }
         ],
         "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
           "200": {
             "description": "The query has been successfully removed from the Log Analytics QueryPack"
           },
@@ -234,6 +264,20 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Describe the format of an Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
     "QueriesResource": {
       "properties": {
         "id": {
