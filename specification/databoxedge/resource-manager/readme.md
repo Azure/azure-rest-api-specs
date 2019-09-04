@@ -78,7 +78,7 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataBoxEdge
   payload-flattening-threshold: 0
-  output-folder: $(csharp-sdks-folder)/DataBoxEdge/Management.DataBoxEdge/src/Generated
+  output-folder: $(csharp-sdks-folder)/DataBoxEdge/Microsoft.Azure.Management.DataBoxEdge/src/Generated
    clear-output-folder: true
 ```
 
@@ -103,12 +103,12 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databoxedge/azure/mgmt/databoxedge
+  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge/azure/mgmt/databoxedge
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-databoxedge
+  output-folder: $(python-sdks-folder)/databoxedge/azure-mgmt-databoxedge
 ```
 
 ## Ruby
