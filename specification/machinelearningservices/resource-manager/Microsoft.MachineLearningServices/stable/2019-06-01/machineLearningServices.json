@@ -1824,16 +1824,13 @@
               "type": "object",
               "properties": {
                 "address": {
-                  "description": "Public IP address of the virtual machine.",
+                  "description": "relay connection string to the on prem.",
                   "type": "string"
                 },
-                "username": {
-                  "description": "Username of admin account",
-                  "type": "string"
-                },
-                "password": {
-                  "description": "Password of admin account",
-                  "type": "string"
+                "userAccountCredentials": {
+                  "title": "User account credentials.",
+                  "description": "Credentials for an administrator user account that will be created on each compute node.",
+                  "$ref": "#/definitions/UserAccountCredentials"
                 }
               }
             }
