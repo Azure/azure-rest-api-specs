@@ -41,6 +41,14 @@
             "type": "object"
           }
         },
+        "runDimensions": {
+          "description": "Dimensions emitted by Pipeline.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
         "folder": {
           "description": "The folder that this Pipeline is in. If not specified, Pipeline will appear at the root level.",
           "type": "object",
@@ -530,6 +538,7 @@
     },
     "StoreWriteSettings": {
       "description": "Connector write settings.",
+      "discriminator": "type",
       "type": "object",
       "properties": {
         "type": {
@@ -559,7 +568,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureBlobFSWriteSettings": {
       "description": "Azure blobFS write settings.",
@@ -568,7 +583,13 @@
         {
           "$ref": "#/definitions/StoreWriteSettings"
         }
-      ]
+      ],
+      "properties": {
+        "blockSizeInMB": {
+          "description": "Indicates the block size(MB) when writing data to blob. Type: integer (or Expression with resultType integer).",
+          "type": "object"
+        }
+      }
     },
     "AzureDataLakeStoreWriteSettings": {
       "description": "Azure data lake store write settings.",
@@ -676,6 +697,29 @@
         "fileExtension"
       ]
     },
+    "JsonWriteSettings": {
+      "description": "Json write settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/FormatWriteSettings"
+        }
+      ],
+      "properties": {
+        "filePattern": {
+          "description": "File pattern of JSON. This setting controls the way a collection of JSON objects will be treated. The default value is 'setOfObjects'. It is case-sensitive.",
+          "type": "string",
+          "enum": [
+            "setOfObjects",
+            "arrayOfObjects"
+          ],
+          "x-ms-enum": {
+            "name": "JsonWriteFilePattern",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AvroSource": {
       "description": "A copy activity Avro source.",
       "type": "object",
@@ -725,6 +769,36 @@
         }
       }
     },
+    "JsonSource": {
+      "description": "A copy activity Json source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "Json store settings."
+        }
+      }
+    },
+    "OrcSource": {
+      "description": "A copy activity ORC source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "ORC store settings."
+        }
+      }
+    },
     "DelimitedTextSink": {
       "description": "A copy activity DelimitedText sink.",
       "type": "object",
@@ -741,6 +815,40 @@
         "formatSettings": {
           "$ref": "#/definitions/DelimitedTextWriteSettings",
           "description": "DelimitedText format settings."
+        }
+      }
+    },
+    "JsonSink": {
+      "description": "A copy activity Json sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "Json store settings."
+        },
+        "formatSettings": {
+          "$ref": "#/definitions/JsonWriteSettings",
+          "description": "Json format settings."
+        }
+      }
+    },
+    "OrcSink": {
+      "description": "A copy activity ORC sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "ORC store settings."
         }
       }
     },
@@ -1852,7 +1960,7 @@
       }
     },
     "Office365Source": {
-      "description": "A copy activity source for an Office365 service.",
+      "description": "A copy activity source for an Office 365 service.",
       "type": "object",
       "allOf": [
         {
@@ -1879,6 +1987,10 @@
         "endTime": {
           "type": "object",
           "description": "End time of the requested range for this dataset. Type: string (or Expression with resultType string)."
+        },
+        "outputColumns": {
+          "type": "object",
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
         }
       }
     },
@@ -1967,6 +2079,21 @@
     },
     "AzurePostgreSqlSink": {
       "description": "A copy activity Azure PostgreSQL sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "preCopyScript": {
+          "type": "object",
+          "description": "A query to execute before starting the copy. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "AzureMySqlSink": {
+      "description": "A copy activity Azure MySql sink.",
       "type": "object",
       "allOf": [
         {
@@ -2717,7 +2844,7 @@
       ],
       "properties": {
         "storeSettings": {
-          "$ref": "#/definitions/StoreReadSettings",
+          "$ref": "#/definitions/StoreWriteSettings",
           "description": "Binary store settings."
         }
       }
@@ -2814,6 +2941,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2848,6 +2979,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2882,6 +3017,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2916,6 +3055,10 @@
         "storedProcedureTableTypeParameterName": {
           "type": "object",
           "description": "The stored procedure parameter name of the table type. Type: string (or Expression with resultType string)."
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },
@@ -2939,6 +3082,10 @@
         "polyBaseSettings": {
           "description": "Specifies PolyBase-related settings when allowPolyBase is true.",
           "$ref": "#/definitions/PolybaseSettings"
+        },
+        "tableOption": {
+          "type": "object",
+          "description": "The option to handle sink table, such as autoCreate. For now only 'autoCreate' value is supported. Type: string (or Expression with resultType string)."
         }
       }
     },

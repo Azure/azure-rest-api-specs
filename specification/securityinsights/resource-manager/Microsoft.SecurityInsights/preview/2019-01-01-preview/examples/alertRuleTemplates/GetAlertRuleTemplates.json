@@ -1,0 +1,87 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalIinsights"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/65360bb0-8986-4ade-a89d-af3cf44d28aa",
+            "name": "65360bb0-8986-4ade-a89d-af3cf44d28aa",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "Scheduled",
+            "properties": {
+              "severity": "Low",
+              "query": "\nlet timeframe = 1d;\nAWSCloudTrail\n| where TimeGenerated >= ago(timeframe)\n| where EventName == \"CreateNetworkAclEntry\"\n     or EventName == \"CreateRoute\"\n| project TimeGenerated, EventName, EventTypeName, UserIdentityAccountId, UserIdentityPrincipalid, UserAgent, UserIdentityUserName, SessionMfaAuthenticated, SourceIpAddress, AWSRegion, EventSource, AdditionalEventData, ResponseElements\n",
+              "queryFrequency": "1.00:00:00",
+              "queryPeriod": "1.00:00:00",
+              "triggerOperator": "GreaterThan",
+              "triggerThreshold": 0,
+              "displayName": "AWS - Changes to VPC settings",
+              "description": "This alert monitors changes to VPC settings such as new ACL entries and routes in route tables.\nMore information: https://medium.com/@GorillaStack/the-most-important-aws-cloudtrail-security-events-to-track-a5b9873f8255\n",
+              "tactics": [
+                "LateralMovement",
+                "PrivilegeEscalation"
+              ],
+              "createdDateUTC": "2019-02-27T00:00:00",
+              "status": "NotAvailable",
+              "requiredDataConnectors": [
+                {
+                  "connectorId": "AWS",
+                  "dataTypes": {
+                    "AWSCloudTrail": "NotExist"
+                  }
+                }
+              ],
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          },
+          {
+            "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalIinsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/AlertRuleTemplates/f71aba3d-28fb-450b-b192-4e76a83015c8",
+            "name": "f71aba3d-28fb-450b-b192-4e76a83015c8",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "Fusion",
+            "properties": {
+              "displayName": "Fusion Detections",
+              "description": "Place holder: Fusion uses graph powered machine learning algorithms to correlate between millions of lower fidelity anomalous activities from different products such as Azure AD Identity Protection, and Microsoft Cloud App Security, to combine them into a manageable number of interesting security cases.\n",
+              "tactics": [
+                "Persistence",
+                "Exfiltration"
+              ],
+              "createdDateUTC": "2019-07-25T00:00:00",
+              "status": "Available",
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          },
+          {
+            "id": "/subscriptions/bd794837-4d29-4647-9105-6339bfdb4e6a/resourceGroups/mms-eus/providers/Microsoft.OperationalInsights/workspaces/avdvirInt/providers/Microsoft.SecurityInsights/AlertRuleTemplates/eb7b4e69-085d-44dd-9227-9b0d67af9fe7",
+            "name": "eb7b4e69-085d-44dd-9227-9b0d67af9fe7",
+            "type": "Microsoft.SecurityInsights/AlertRuleTemplates",
+            "kind": "Filter",
+            "properties": {
+              "filterProduct": "Azure Active Directory Identity Protection",
+              "displayName": "All alerts from AADIP",
+              "description": "All alerts from AADIP\n",
+              "createdDateUTC": "2019-07-16T00:00:00",
+              "status": "Available",
+              "requiredDataConnectors": [
+                {
+                  "connectorId": "AzureActiveDirectoryIdentityProtection",
+                  "dataTypes": {
+                    "SecurityAlert": "Exist"
+                  }
+                }
+              ],
+              "alertRulesCreatedByTemplateCount": 0
+            }
+          }
+        ]
+      }
+    }
+  }
+}
