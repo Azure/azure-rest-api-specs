@@ -26,7 +26,15 @@ These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-03
+tag: package-2019-07
+```
+### Tag: package-2019-07
+
+These settings apply only when `--tag=package-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-03'
+input-file:
+- Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
 
 ### Tag: package-2019-03
@@ -35,7 +43,7 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-03'
 input-file:
-- Microsoft.DataBoxEdge/stable/2019-03-01/edgegateway.json
+- Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
 
 ---
@@ -55,7 +63,7 @@ swagger-to-sdk:
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-ruby
     after_scripts:
-      - bundle install && rake arm:regen_all_profiles['azure_mgmt_edgegateway']
+      - bundle install && rake arm:regen_all_profiles['azure_mgmt_databoxedge']
 ```
 
 ## C#
@@ -67,9 +75,9 @@ Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azur
 csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  namespace: Microsoft.Azure.Management.EdgeGateway
+  namespace: Microsoft.Azure.Management.DataBoxEdge
   payload-flattening-threshold: 0
-  output-folder: $(csharp-sdks-folder)/EdgeGateway/Management.EdgeGateway/Generated
+  output-folder: $(csharp-sdks-folder)/DataBoxEdge/Management.DataBoxEdge/Generated
   clear-output-folder: true
 ```
 
@@ -84,22 +92,22 @@ python-mode: create
 python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.edgegateway
-  package-name: azure-mgmt-edgegateway
-  title: EdgeGatewayManagementClient
-  description: The EdgeGateway Client.
+  payload-flattening-threshold: 0
+  namespace: azure.mgmt.databoxedge
+  package-name: azure-mgmt-databoxedge
+  title: DataBoxEdgeManagementClient
+  description: The DataBoxEdge Client.
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-edgegateway/azure/mgmt/edgegateway
+  output-folder: $(python-sdks-folder)/azure-mgmt-databoxedge/azure/mgmt/databoxedge
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-edgegateway
+  output-folder: $(python-sdks-folder)/azure-mgmt-databoxedge
 ```
 
 ## Ruby
@@ -119,17 +127,31 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   azure-arm: true
   fluent: true
-  namespace: com.microsoft.azure.management.edgegateway
+  namespace: com.microsoft.azure.management.databoxedge
   license-header: MICROSOFT_MIT_NO_CODEGEN
-  payload-flattening-threshold: 1
-  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-edgegateway
+  payload-flattening-threshold: 0
+  output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-databoxedge
 ```
 
 ### Java multi-api
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-07
   - tag: package-2019-03
+```
+
+### Tag: package-2019-07 and java
+
+These settings apply only when `--tag=package-2019-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databoxedge.v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_07_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-03 and java
@@ -139,8 +161,8 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 
 ``` yaml $(tag) == 'package-2019-03' && $(java) && $(multiapi)
 java:
-  namespace: com.microsoft.azure.management.edgegateway.v2018_07_01
-  output-folder: $(azure-libraries-for-java-folder)/edgegateway/resource-manager/v2018_07_01
+  namespace: com.microsoft.azure.management.databoxedge.v2019_03_01
+  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_03_01
 regenerate-manager: true
 generate-interface: true
 ```
