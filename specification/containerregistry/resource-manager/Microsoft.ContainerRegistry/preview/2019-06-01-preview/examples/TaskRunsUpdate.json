@@ -1,0 +1,68 @@
+{
+  "parameters": {
+    "subscriptionId": "3647315e-0c5b-4ce4-8739-b071e144b2c9",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2019-06-01-preview",
+    "taskRunName": "myTask",
+    "updateParameters": {
+      "runRequest": {
+        "type": "EncodedTaskRunRequest",
+        "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
+        "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
+        "values": [],
+        "platform": {
+            "os": "linux",
+            "architecture": "amd64"
+        },
+        "credentials": {},
+        "isArchiveEnabled": true
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "type": "Microsoft.ContainerRegistry/registries/TaskRuns",
+        "properties": {
+            "provisioningState": "Creating"
+        },
+        "runRequest": {
+            "type": "EncodedTaskRunRequest",
+            "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
+            "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
+            "values": [],
+            "platform": {
+                "os": "linux",
+                "architecture": "amd64"
+            },
+            "credentials": {},
+            "isArchiveEnabled": true
+        },
+        "runResult": {
+            "type": "Microsoft.ContainerRegistry/registries/runs",
+            "properties": {
+                "runId": "yd4",
+                "status": "Queued",
+                "lastUpdatedTime": "2019-09-04T17:15:29+00:00",
+                "runType": "QuickRun",
+                "createTime": "2019-09-04T17:15:29.2278794+00:00",
+                "platform": {
+                    "os": "linux",
+                    "architecture": "amd64"
+                },
+                "agentConfiguration": {
+                    "cpu": 2
+                },
+                "provisioningState": "Succeeded",
+                "isArchiveEnabled": true
+            },
+            "id": "/subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/panwangwest/providers/Microsoft.ContainerRegistry/registries/pwnewtest/runs/yd4",
+            "name": "yd4"
+        },
+        "id": "/subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/panwangwest/providers/Microsoft.ContainerRegistry/registries/pwnewtest/taskRuns/mytestrun",
+        "name": "mytestrun"
+      }
+    }
+  }
+}
