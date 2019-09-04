@@ -61,7 +61,7 @@
         }
       }
     },
-    "/{scope}/providers/Microsoft.Security/subAssessments/{subAssessmentName}": {
+   "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/subAssessments/{subAssessmentName}": {
       "get": {
         "x-ms-examples": {
           "Get security recommendation task from security data location": {
@@ -76,6 +76,9 @@
         },
         {
           "$ref": "../../../common/v1/types.json#/parameters/Scope"
+        },
+		{
+          "$ref": "#/parameters/AssessmentName"
         },
         {
           "$ref": "#/parameters/SubAssessmentName"
@@ -513,6 +516,14 @@
     }
   },
   "parameters": {
+   "AssessmentName": {
+      "name": "assessmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Assessment Key - Unique key for the assessment type",
+      "x-ms-parameter-location": "method"
+    },
     "SubAssessmentName": {
       "name": "subAssessmentName",
       "in": "path",
