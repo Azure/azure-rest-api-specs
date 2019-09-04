@@ -62,8 +62,8 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules": {
       "get": {
         "x-ms-examples": {
-          "Get all scheduled alert rules.": {
-            "$ref": "./examples/alertRules/GetScheduledAlertRules.json"
+          "Get all alert rules.": {
+            "$ref": "./examples/alertRules/GetAllAlertRules.json"
           }
         },
         "tags": [
@@ -110,8 +110,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/alertRules/{ruleId}": {
       "get": {
         "x-ms-examples": {
-          "Get a scheduled alert rule.": {
-            "$ref": "./examples/alertRules/GetScheduledAlertRuleById.json"
+          "Get a Scheduled alert rule.": {
+            "$ref": "./examples/alertRules/GetScheduledAlertRule.json"
+          },
+          "Get a Fusion alert rule.": {
+            "$ref": "./examples/alertRules/GetFusionAlertRule.json"
+          },
+          "Get a MicrosoftSecutiryIncidentCreation rule.": {
+            "$ref": "./examples/alertRules/GetMicrosoftSecutiryIncidentCreationAlertRule.json"
           }
         },
         "tags": [
@@ -156,8 +162,14 @@
       },
       "put": {
         "x-ms-examples": {
-          "Creates or updates a scheduled alert rule.": {
+          "Creates or updates a Scheduled alert rule.": {
             "$ref": "./examples/alertRules/CreateScheduledAlertRule.json"
+          },
+          "Creates or updates a Fusion alert rule.": {
+            "$ref": "./examples/alertRules/CreateFusionAlertRule.json"
+          },
+          "Creates or updates a MicrosoftSecutiryIncidentCreation rule.": {
+            "$ref": "./examples/alertRules/CreateMicrosoftSecutiryIncidentCreationAlertRule.json"
           }
         },
         "tags": [
@@ -211,8 +223,8 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Delete a scheduled alert rule.": {
-            "$ref": "./examples/alertRules/DeleteScheduledAlertRule.json"
+          "Delete an alert rule.": {
+            "$ref": "./examples/alertRules/DeleteAlertRule.json"
           }
         },
         "tags": [
@@ -2299,7 +2311,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "modelAsString": false,
+        "modelAsString": true,
         "name": "AlertSeverity",
         "values": [
           {
@@ -2354,7 +2366,7 @@
       ],
       "type": "string",
       "x-ms-enum": {
-        "modelAsString": false,
+        "modelAsString": true,
         "name": "AttackTactic"
       }
     },
@@ -2473,7 +2485,7 @@
           ],
           "type": "string",
           "x-ms-enum": {
-            "modelAsString": false,
+            "modelAsString": true,
             "name": "TemplateStatus",
             "values": [
               {
@@ -3151,7 +3163,7 @@
             ],
             "type": "string",
             "x-ms-enum": {
-              "modelAsString": false,
+              "modelAsString": true,
               "name": "DataTypeStatus"
             }
           },
@@ -3862,7 +3874,17 @@
       "properties": {
         "productFilter": {
           "description": "The alerts' productName on which the cases will be generated",
-          "type": "string"
+          "enum":[
+          	"Microsoft Cloud App Security",
+          	"Azure Security Center",
+          	"Azure Advanced Threat Protection",
+          	"Azure Active Directory Identity Protection"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+          	"modelAsString": true,
+          	"name": "MicrosoftSecurityProductName"
+          }
         },
         "severitiesFilter": {
           "description": "the alerts' severities on which the cases will be generated",
