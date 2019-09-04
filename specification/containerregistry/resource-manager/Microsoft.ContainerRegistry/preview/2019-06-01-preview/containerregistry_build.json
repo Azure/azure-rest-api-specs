@@ -64,21 +64,6 @@
         "x-ms-examples": {
           "Registries_ScheduleRun": {
             "$ref": "./examples/RegistriesScheduleRun.json"
-          },
-          "Registries_ScheduleRun_EncodedTaskRun": {
-            "$ref": "./examples/RegistriesScheduleRun_EncodedTaskRun.json"
-          },
-          "Registries_ScheduleRun_FileTaskRun": {
-            "$ref": "./examples/RegistriesScheduleRun_FileTaskRun.json"
-          },
-          "Registries_ScheduleRun_Task": {
-            "$ref": "./examples/RegistriesScheduleRun_Task.json"
-          },
-          "Registries_ScheduleRun_Task_WithCustomCredentials": {
-            "$ref": "./examples/RegistriesScheduleRun_FileTask_WithCustomCredentials.json"
-          },
-          "Registries_ScheduleRun_WithCustomCredentials": {
-            "$ref": "./examples/RegistriesScheduleRun_WithCustomCredentials.json"
           }
         }
       }
@@ -379,6 +364,253 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}": {
+      "get": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Gets the detailed information for a given run request.",
+        "operationId": "TaskRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The run request name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned."
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_Get": {
+            "$ref": "./examples/TaskRunsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Creates a run request for a container registry with the specified parameters.",
+        "operationId": "TaskRuns_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The name of task run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskRun",
+            "in": "body",
+            "description": "The parameters of a run that needs to scheduled.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TaskRuns_Create": {
+            "$ref": "./examples/TaskRunsCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Deletes a specified TaskRun resource.",
+        "operationId": "TaskRuns_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The Run Request name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TaskRuns_Delete": {
+            "$ref": "./examples/TaskRunsDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Updates a task run with the specified parameters.",
+        "operationId": "TaskRuns_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The run request name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateParameters",
+            "in": "body",
+            "description": "The parameters for updating a task run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskRunUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TaskRuns_Update": {
+            "$ref": "./examples/TaskRunsUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns": {
+      "get": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Lists all the task runs for a specified container registry.",
+        "operationId": "TaskRuns_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRunListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TaskRuns_List": {
+            "$ref": "./examples/TaskRunsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks": {
       "get": {
         "tags": [
@@ -515,15 +747,6 @@
         "x-ms-examples": {
           "Tasks_Create": {
             "$ref": "./examples/TasksCreate.json"
-          },
-          "Tasks_Create_WithSystemAndUserIdentities": {
-            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemAndUserIdentities.json"
-          },
-          "Tasks_Create_WithUserIdentities_WithSystemIdentity": {
-            "$ref": "./examples/ManagedIdentity/TasksCreate_WithSystemIdentity.json"
-          },
-          "Tasks_Create_WithUserIdentities": {
-            "$ref": "./examples/ManagedIdentity/TasksCreate_WithUserIdentities.json"
           }
         }
       },
@@ -624,15 +847,6 @@
         "x-ms-examples": {
           "Tasks_Update": {
             "$ref": "./examples/TasksUpdate.json"
-          },
-          "Tasks_Update_WithKeyVaultCustomCredentials": {
-            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithKeyVaultCustomCredentials.json"
-          },
-          "Tasks_Update_WithMSICustomCredentials": {
-            "$ref": "./examples/ManagedIdentity/TasksUpdate_WithMSICustomCredentials.json"
-          },
-          "Tasks_Update_WithOpaqueCustomCredentials": {
-            "$ref": "./examples/TasksUpdate_WithOpaqueCustomCredentials.json"
           }
         }
       }
@@ -1054,6 +1268,10 @@
             "modelAsString": true
           }
         },
+        "taskRunName": {
+          "description": "The name of task run associated with this run.",
+          "type": "string"
+        },
         "status": {
           "description": "The current status of the run.",
           "enum": [
@@ -1116,25 +1334,7 @@
         }
       }
     },
-    "TaskListResult": {
-      "description": "The collection of tasks.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The collection value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Task"
-          }
-        },
-        "nextLink": {
-          "description": "The URI that can be used to request the next set of paged results.",
-          "type": "string"
-        }
-      }
-    },
-    "Task": {
-      "description": "The task that has the ARM resource and task properties. \r\nThe task will have all information to schedule a run against it.",
+    "TaskRun": {
       "type": "object",
       "allOf": [
         {
@@ -1147,9 +1347,14 @@
           "description": "Identity for the resource."
         },
         "properties": {
-          "$ref": "#/definitions/TaskProperties",
-          "description": "The properties of a task.",
+          "$ref": "#/definitions/TaskRunProperties",
           "x-ms-client-flatten": true
+        },
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest"
+        },
+        "runResult": {
+          "$ref": "#/definitions/Run"
         }
       }
     },
@@ -1185,6 +1390,112 @@
           "additionalProperties": {
             "$ref": "#/definitions/UserIdentityProperties"
           }
+        }
+      }
+    },
+    "TaskRunProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string"
+        }
+      }
+    },
+    "TaskRunUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest"
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TaskRunListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaskRun"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "TaskListResult": {
+      "description": "The collection of tasks.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Task"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
+          "type": "string"
+        }
+      }
+    },
+    "Task": {
+      "description": "The task that has the ARM resource and task properties. \r\nThe task will have all information to schedule a run against it.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/TaskProperties",
+          "description": "The properties of a task.",
+          "x-ms-client-flatten": true
         }
       }
     },
@@ -1258,19 +1569,6 @@
         "credentials": {
           "$ref": "#/definitions/Credentials",
           "description": "The properties that describes a set of credentials that will be used when this run is invoked."
-        }
-      }
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal id of user assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "description": "The client id of user assigned identity.",
-          "type": "string"
         }
       }
     },
@@ -2075,7 +2373,6 @@
     "DockerBuildRequest": {
       "description": "The parameters for a docker quick build.",
       "required": [
-        "type",
         "dockerFilePath",
         "platform"
       ],
@@ -2171,7 +2468,6 @@
     "FileTaskRunRequest": {
       "description": "The request parameters for a scheduling run against a task file.",
       "required": [
-        "type",
         "taskFilePath",
         "platform"
       ],
@@ -2250,7 +2546,6 @@
     "TaskRunRequest": {
       "description": "The parameters for a task run request.",
       "required": [
-        "type",
         "taskId"
       ],
       "type": "object",
@@ -2309,7 +2604,6 @@
     "EncodedTaskRunRequest": {
       "description": "The parameters for a quick task run request.",
       "required": [
-        "type",
         "encodedTaskContent",
         "platform"
       ],
