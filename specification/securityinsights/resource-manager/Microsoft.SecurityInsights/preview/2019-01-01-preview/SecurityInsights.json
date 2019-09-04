@@ -3761,6 +3761,70 @@
       },
       "type": "object"
     },
+    "MicrosoftSecurityIncidentCreationAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents MicrosoftSecurityIncidentCreation rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleProperties",
+          "description": "MicrosoftSecurityIncidentCreation rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
+    },
+    "MicrosoftSecurityIncidentCreationAlertRuleProperties": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
+        }
+      ],
+      "description": "MicrosoftSecurityIncidentCreation rule property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert has been modified.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+      	"alertRuleTemplateName",
+      	"description",
+        "displayName",
+        "enabled",
+        "lastModifiedUtc",
+        "productFilter"
+      ],
+      "type": "object"
+    },
     "MicrosoftSecurityIncidentCreationAlertRuleTemplate": {
       "allOf": [
         {
@@ -3775,7 +3839,7 @@
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
             },
             {
-              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleAdditionalProperties"
+              "$ref": "#/definitions/MicrosoftSecurityIncidentCreationAlertRuleCommonProperties"
             }
           ],
           "description": "MicrosoftSecurityIncidentCreation rule template properties",
@@ -3793,8 +3857,8 @@
       "type": "object",
       "x-ms-discriminator-value": "MicrosoftSecurityIncidentCreation"
     },
-    "MicrosoftSecurityIncidentCreationAlertRuleAdditionalProperties": {
-      "description": "MicrosoftSecurityIncidentCreation rule property bag.",
+    "MicrosoftSecurityIncidentCreationAlertRuleCommonProperties": {
+      "description": "MicrosoftSecurityIncidentCreation rule common property bag.",
       "properties": {
         "productFilter": {
           "description": "The alerts' productName on which the cases will be generated",
@@ -3815,6 +3879,76 @@
           "type": "array"
         }
       },
+      "required": [
+      	"productFilter"
+      ],
+      "type": "object"
+    },
+    "FusionAlertRule": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/AlertRule"
+        }
+      ],
+      "description": "Represents Fusion alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/FusionAlertRuleProperties",
+          "description": "Fusion alert rule properties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object",
+      "x-ms-discriminator-value": "Fusion"
+		},
+    "FusionAlertRuleProperties": {
+      "description": "Fusion alert rule base property bag.",
+      "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The description of the alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "displayName": {
+          "description": "The display name for alerts created by this alert rule.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Determines whether this alert rule is enabled or disabled.",
+          "type": "boolean"
+        },
+        "lastModifiedUtc": {
+          "description": "The last time that this alert has been modified.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "severity": {
+          "$ref": "#/definitions/AlertSeverity",
+          "description": "The severity for alerts created by this alert rule.",
+          "readOnly": true
+        },
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "type": "array"
+        }
+      },
+      "required": [
+      	"alertRuleTemplateName",
+      	"description",
+        "displayName",
+        "enabled",
+        "lastModifiedUtc",
+        "severity"
+      ],
       "type": "object"
     },
     "FusionAlertRuleTemplate": {
@@ -3829,17 +3963,21 @@
           "allOf": [
             {
               "$ref": "#/definitions/AlertRuleTemplatePropertiesBase"
-            },
-            {
-              "$ref": "#/definitions/FusionAlertRuleAdditionalProperties"
             }
           ],
           "description": "Fusion alert rule template properties",
+		      "properties": {
+		        "severity": {
+		          "$ref": "#/definitions/AlertSeverity",
+		          "description": "The severity for alerts created by this alert rule."
+		        }
+		      },
           "required": [
             "displayName",
             "description",
             "createdDateUTC",
             "status",
+            "severity",
             "alertRulesCreatedByTemplateCount"
           ],
           "x-ms-client-flatten": true
@@ -3847,16 +3985,6 @@
       },
       "type": "object",
       "x-ms-discriminator-value": "Fusion"
-    },
-    "FusionAlertRuleAdditionalProperties": {
-      "description": "Fusion alert rule property bag.",
-      "properties": {
-        "severity": {
-          "$ref": "#/definitions/AlertSeverity",
-          "description": "The severity for alerts created by this alert rule."
-        }
-      },
-      "type": "object"
     },
     "GeoLocation": {
       "description": "The geo-location context attached to the ip entity",
@@ -4666,7 +4794,7 @@
           "description": "Etag of the azure resource",
           "type": "string"
         }
-      },
+      }
     },
     "ScheduledAlertRule": {
       "allOf": [
@@ -4686,8 +4814,17 @@
       "x-ms-discriminator-value": "Scheduled"
     },
     "ScheduledAlertRuleProperties": {
-      "description": "Alert rule property bag.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ScheduledAlertRuleAdditionalProperties"
+        }
+      ],
+      "description": "Scheduled alert rule base property bag.",
       "properties": {
+        "alertRuleTemplateName": {
+          "description": "The Name of the alert rule template used to create this rule.",
+          "type": "string"
+        },
         "description": {
           "description": "The description of the alert rule.",
           "type": "string"
@@ -4701,27 +4838,9 @@
           "type": "boolean"
         },
         "lastModifiedUtc": {
-          "description": "The last time that this alert has been modified.",
+          "description": "The last time that this alert rule has been modified.",
           "readOnly": true,
           "type": "string"
-        },
-        "query": {
-          "description": "The query that creates alerts for this rule.",
-          "type": "string"
-        },
-        "queryFrequency": {
-          "description": "The frequency (in ISO 8601 duration format) for this alert rule to run.",
-          "format": "duration",
-          "type": "string"
-        },
-        "queryPeriod": {
-          "description": "The period (in ISO 8601 duration format) that this alert rule looks at.",
-          "format": "duration",
-          "type": "string"
-        },
-        "severity": {
-          "$ref": "#/definitions/AlertSeverity",
-          "description": "The severity for alerts created by this alert rule."
         },
         "suppressionDuration": {
           "description": "The suppression (in ISO 8601 duration format) to wait since last time this alert rule been triggered.",
@@ -4732,20 +4851,19 @@
           "description": "Determines whether the suppression for this alert rule is enabled or disabled.",
           "type": "boolean"
         },
-        "triggerOperator": {
-          "$ref": "#/definitions/AlertRuleTriggerOperator",
-          "description": "The operation against the threshold that triggers alert rule."
-        },
-        "triggerThreshold": {
-          "description": "The threshold triggers this alert rule.",
-          "type": "integer"
+        "tactics": {
+          "description": "The tactics of the alert rule",
+          "items": {
+            "$ref": "#/definitions/AttackTactic"
+          },
+          "type": "array"
         }
       },
       "required": [
         "displayName",
-        "description",
-        "severity",
         "enabled",
+        "lastModifiedUtc",
+        "severity",
         "query",
         "queryFrequency",
         "queryPeriod",
