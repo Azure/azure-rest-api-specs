@@ -3341,10 +3341,10 @@
         "operationId": "DataFlows_CreateOrUpdate",
         "x-ms-examples": {
           "DataFlows_Create": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlows_Create.json"
           },
           "DataFlows_Update": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlows_Update.json"
           }
         },
         "description": "Creates or updates a data flow.",
@@ -3403,7 +3403,7 @@
         "operationId": "DataFlows_Get",
         "x-ms-examples": {
           "DataFlows_Get": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlows_Get.json"
           }
         },
         "description": "Gets a data flow.",
@@ -3456,7 +3456,7 @@
         "operationId": "DataFlows_Delete",
         "x-ms-examples": {
           "DataFlows_Delete": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlows_Delete.json"
           }
         },
         "description": "Deletes a data flow.",
@@ -3501,7 +3501,7 @@
         "operationId": "DataFlows_ListByFactory",
         "x-ms-examples": {
           "DataFlows_ListByFactory": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlows_ListByFactory.json"
           }
         },
         "description": "Lists data flows.",
@@ -3546,7 +3546,7 @@
         "operationId": "DataFlowDebugSession_Create",
         "x-ms-examples": {
           "DataFlowDebugSession_Create": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlowDebugSession_Create.json"
           }
         },
         "description": "Creates a data flow debug session.",
@@ -3597,7 +3597,7 @@
         "operationId": "DataFlowDebugSession_Query",
         "x-ms-examples": {
           "DataFlowDebugSession_Query": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlowDebugSession_Query.json"
           }
         },
         "description": "Query all active data flow debug sessions.",
@@ -3639,7 +3639,7 @@
         "operationId": "DataFlowDebugSession_SubmitDataFlow",
         "x-ms-examples": {
           "DataFlowDebugSession_SubmitDataFlow": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlowDebugSession_SubmitDataFlow.json"
           }
         },
         "description": "Starts a data flow debug session.",
@@ -3690,7 +3690,7 @@
         "operationId": "DataFlowDebugSession_Delete",
         "x-ms-examples": {
           "DataFlowDebugSession_Delete": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlowDebugSession_Delete.json"
           }
         },
         "description": "Deletes a data flow debug session.",
@@ -3738,7 +3738,7 @@
         "operationId": "DataFlowDebugSession_ExecuteCommand",
         "x-ms-examples": {
           "DataFlowDebugSession_ExecuteCommand": {
-            "$ref": "./examples/Operations_List.json"
+            "$ref": "./examples/DataFlowDebugSession_ExecuteCommand.json"
           }
         },
         "description": "Execute command from a debug session job.",
@@ -5618,6 +5618,13 @@
         }
       }
     },
+    "DataFlowDatasetParameterSpecification": {
+      "description": "Definition of all dataset parameters for data flow preview request.",
+      "type": "object",
+      "additionalProperties": {
+        "$ref": "#/definitions/ParameterValueSpecification"
+      }
+    },
     "SubmitDataFlowForPreviewRequest": {
       "description": "Request body structure for starting data flow debug session.",
       "type": "object",
@@ -5661,8 +5668,8 @@
               "$ref": "#/definitions/ParameterValueSpecification"
             },
             "datasetParameters": {
-              "type": "object",
-              "description": "Parameters for dataset."
+              "description": "Parameters for dataset.",
+              "$ref": "#/definitions/DataFlowDatasetParameterSpecification"
             }
           }
         },
@@ -5692,6 +5699,34 @@
         }
       }
     },
+    "DataFlowDebugCommandPayload": {
+      "description": "Structure of command payload.",
+      "type": "object",
+      "properties": {
+        "streamName": {
+          "description": "The stream name which is used for preview.",
+          "type": "string"
+        },
+        "rowLimits": {
+          "description": "Row limits for preview response.",
+          "type": "integer"
+        },
+        "columns": {
+          "description": "Array of column names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expression": {
+          "description": "The expression which is used for preview.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "streamName"
+      ]
+    },
     "DataFlowDebugCommandRequest": {
       "description": "Request body structure for data flow expression preview.",
       "type": "object",
@@ -5719,7 +5754,7 @@
         },
         "commandPayload": {
           "description": "The command payload object.",
-          "type": "object"
+          "$ref": "#/definitions/DataFlowDebugCommandPayload"
         }
       }
     },
