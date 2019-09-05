@@ -406,8 +406,8 @@ input-file:
   - $(this-folder)/Microsoft.Insights/preview/2017-10-01/componentFeaturesAndPricing_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
   - $(this-folder)/Microsoft.Insights/preview/2018-05-01/componentProactiveDetection_API.json
-  - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPacks_API.json
   - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPackQueries_API.json
+  - $(this-folder)/Microsoft.Insights/preview/2019-09-01-preview/QueryPacks_API.json
 
 ```
 
