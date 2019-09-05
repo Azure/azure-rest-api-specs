@@ -1,0 +1,45 @@
+{
+    "parameters": {
+      "api-version": "2019-07-01",
+      "subscriptionId": "subId",
+      "resourceGroupName": "myResourceGroup",
+      "ipTagName": "iptag1"
+    },
+    "responses": {
+      "200": {
+        "body": {
+          "name": "iptag1",
+          "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipTags/iptag1",
+          "type": "Microsoft.Network/ipTags",
+          "location": "westcentralus",
+          "changeNumber": "5",
+          "provisioningState": "Succeeded",
+          "properties": {
+            "subgroups": [
+              {
+                "name": "iptags.eastus",
+                "region": "eastus",
+                "addressPrefixes": [
+                  "13.64.39.16/32",
+                  "40.74.146.80/31",
+                  "40.74.147.32/28"
+                ],
+                "dynamicTags": [
+                  null
+                ]
+              }
+            ],
+            "reference_resources": [
+              {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/azureFirewalls/azurefirewall"
+              },
+              {
+                "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkSecurityGroups/testnsg/securityRules/rule1"
+              }
+            ]
+          },
+          "etag": "w/\\00000000-0000-0000-0000-000000000000\\"
+        }
+      }
+    }
+  }
