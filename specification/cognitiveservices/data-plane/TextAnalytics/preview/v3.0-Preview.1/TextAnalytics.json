@@ -1,0 +1,1189 @@
+{
+  "swagger" : "2.0",
+  "info" : {
+    "description" : "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. \nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase and entity extraction as well as language detection. \nNo training data is needed to use this API; just bring your text data. \nThis API uses advanced natural language processing techniques to deliver best in class predictions.\n\nFurther documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\n\nThis API is currently available in:\n\n* Australia East - australiaeast.api.cognitive.microsoft.com\n* Brazil South - brazilsouth.api.cognitive.microsoft.com\n* Canada Central - canadacentral.api.cognitive.microsoft.com\n* Central India - centralindia.api.cognitive.microsoft.com\n* Central US - centralus.api.cognitive.microsoft.com\n* East Asia - eastasia.api.cognitive.microsoft.com\n* East US - eastus.api.cognitive.microsoft.com\n* East US 2 - eastus2.api.cognitive.microsoft.com\n* France Central - francecentral.api.cognitive.microsoft.com\n* Japan East - japaneast.api.cognitive.microsoft.com\n* Japan West - japanwest.api.cognitive.microsoft.com\n* Korea Central - koreacentral.api.cognitive.microsoft.com\n* North Central US - northcentralus.api.cognitive.microsoft.com\n* North Europe - northeurope.api.cognitive.microsoft.com\n* South Africa North - southafricanorth.api.cognitive.microsoft.com\n* South Central US - southcentralus.api.cognitive.microsoft.com\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com\n* UK South - uksouth.api.cognitive.microsoft.com\n* West Central US - westcentralus.api.cognitive.microsoft.com\n* West Europe - westeurope.api.cognitive.microsoft.com\n* West US - westus.api.cognitive.microsoft.com\n* West US 2 - westus2.api.cognitive.microsoft.com",
+    "version" : "V3.0-Preview.1",
+    "title" : "Text Analytics API (V3.0-Preview.1)"
+  },
+  "host" : "westus.api.cognitive.microsoft.com",
+  "basePath" : "/text/analytics/V3.0-preview.1",
+  "tags" : [ ],
+  "schemes" : [ "https" ],
+  "security" : [ {
+    "apiKeyHeader" : [ ]
+  }, {
+    "apiKeyQuery" : [ ]
+  } ],
+  "paths" : {
+    "/entities" : {
+      "post" : {
+        "summary" : "Entities from open domain",
+        "description" : "The API returns a list of general named entities (\\\"Person\\\", \\\"Location\\\", \\\"Organization\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a> for the list of supported Entity Types. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "operationId" : "5ac4251d5b4ccd1554da7631",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "modelVersion",
+          "in" : "query",
+          "description" : "(optional) This value indicates which model be used for scoring .",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showStats",
+          "in" : "query",
+          "description" : "(optional) if set to true, response will contain input and document level statistics.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "body",
+          "name" : "multiLanguageBatchInput",
+          "description" : "Collection of documents to analyze.",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MultiLanguageBatchInput"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A successful call results in a list of recognized entities returned for each valid document",
+            "examples" : {
+              "application/json" : {
+                "documents" : [ {
+                  "id" : "1",
+                  "entities" : [ {
+                    "text" : "Microsoft",
+                    "type" : "Organization",
+                    "offset" : 25,
+                    "length" : 9
+                  } ]
+                }, {
+                  "id" : "2",
+                  "entities" : [ {
+                    "text" : "John",
+                    "type" : "Person",
+                    "offset" : 25,
+                    "length" : 9
+                  }, {
+                    "text" : 20,
+                    "type" : "Number",
+                    "subType" : "Age",
+                    "offset" : 30,
+                    "length" : 2
+                  } ]
+                } ],
+                "errors" : [ ]
+              }
+            },
+            "schema" : {
+              "$ref" : "#/definitions/EntitiesBatchResult"
+            }
+          },
+          "500" : {
+            "description" : "Error Response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entities/biomedical" : {
+      "post" : {
+        "summary" : "Entities from biomedical domain",
+        "description" : "The API returns a list of biomedical entities (\\\"Treatment\\\", \\\"Medication\\\", \\\"Dosage\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "operationId" : "5ac4251d5b4ccd1554da7632",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "modelVersion",
+          "in" : "query",
+          "description" : "(optional) This value indicates which model be used for scoring .",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showStats",
+          "in" : "query",
+          "description" : "(optional) if set to true, response will contain input and document level statistics.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "body",
+          "name" : "multiLanguageBatchInput",
+          "description" : "Collection of documents to analyze.",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MultiLanguageBatchInput"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A successful call results in a list of recognized entities returned for each valid document",
+            "examples" : {
+              "application/json" : {
+                "documents" : [ {
+                  "id" : "1",
+                  "entities" : [ {
+                    "text" : "100mg",
+                    "type" : "Organization",
+                    "offset" : 11,
+                    "length" : 5
+                  }, {
+                    "text" : "ibuprofen",
+                    "type" : "Chemical",
+                    "offset" : 17,
+                    "length" : 9
+                  }, {
+                    "text" : "twice daily",
+                    "type" : "Frequency",
+                    "offset" : 34,
+                    "length" : 11
+                  } ],
+                  "relations" : [ {
+                    "target" : "TBD",
+                    "source" : "TBD",
+                    "relationType" : "TBD"
+                  } ]
+                } ],
+                "errors" : [ ]
+              }
+            },
+            "schema" : {
+              "$ref" : "#/definitions/BioEntitiesBatchResult"
+            }
+          },
+          "500" : {
+            "description" : "Error Response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entities/pii" : {
+      "post" : {
+        "summary" : "Entities from PII domain",
+        "description" : "The API returns a list of pii entities (\\\"SSN\\\", \\\"Bank Account\\\", \\\"Goverment ID\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "operationId" : "5ac4251d5b4ccd1554da7633",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "modelVersion",
+          "in" : "query",
+          "description" : "(optional) This value indicates which model be used for scoring .",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showStats",
+          "in" : "query",
+          "description" : "(optional) if set to true, response will contain input and document level statistics.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "body",
+          "name" : "multiLanguageBatchInput",
+          "description" : "Collection of documents to analyze.",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MultiLanguageBatchInput"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A successful call results in a list of recognized entities returned for each valid document",
+            "examples" : {
+              "application/json" : {
+                "documents" : [ {
+                  "id" : "1",
+                  "entities" : [ {
+                    "text" : "111-22-5555",
+                    "type" : "SSN",
+                    "offset" : 22,
+                    "length" : 11
+                  }, {
+                    "text" : "23902039I23J902RJ32",
+                    "type" : "National_ID",
+                    "subType" : "Country_ID",
+                    "offset" : 20,
+                    "length" : 55
+                  } ]
+                } ],
+                "errors" : [ ]
+              }
+            },
+            "schema" : {
+              "$ref" : "#/definitions/EntitiesBatchResult"
+            }
+          },
+          "500" : {
+            "description" : "Error Response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/entities/linking" : {
+      "post" : {
+        "summary" : "Well-known entities.",
+        "description" : "The API returns a list of recognized entities in a given document. To get even more information on each recognized entity we recommend using the Bing Entity Search API by querying for the recognized entities names. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API.\n",
+        "operationId" : "5ac4251d5b4ccd1554da7635",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "modelVersion",
+          "in" : "query",
+          "description" : "(optional) This value indicates which model be used for scoring .",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showStats",
+          "in" : "query",
+          "description" : "(optional) if set to true, response will contain input and document level statistics.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "body",
+          "name" : "multiLanguageBatchInput",
+          "description" : "Collection of documents to analyze.",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MultiLanguageBatchInput"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A successful call results in a list of recognized entities returned for each valid document",
+            "examples" : {
+              "application/json" : {
+                "documents" : [ {
+                  "id" : "1",
+                  "entities" : [ {
+                    "name" : "Microsoft",
+                    "matches" : [ {
+                      "wikipediaScore" : 0.9,
+                      "text" : "MSFT",
+                      "offset" : 0,
+                      "length" : 4
+                    }, {
+                      "wikipediaScore" : 0.8,
+                      "text" : "Microsoft",
+                      "offset" : 25,
+                      "length" : 9
+                    } ],
+                    "wikipediaLanguage" : "en",
+                    "wikipediaId" : "Microsoft",
+                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Microsoft",
+                    "bingId" : "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85"
+                  }, {
+                    "name" : "Windows 10",
+                    "matches" : [ {
+                      "wikipediaScore" : 0.8,
+                      "text" : "Windows 10",
+                      "offset" : 44,
+                      "length" : 10
+                    } ],
+                    "wikipediaLanguage" : "en",
+                    "wikipediaId" : "Windows 10",
+                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Windows_10",
+                    "bingId" : "5f9fbd03-49c4-39ef-cc95-de83ab897b94"
+                  } ]
+                }, {
+                  "id" : "2",
+                  "entities" : [ {
+                    "name" : "Application programming interface",
+                    "matches" : [ {
+                      "wikipediaScore" : 0.8,
+                      "text" : "API",
+                      "offset" : 31,
+                      "length" : 3
+                    } ],
+                    "wikipediaLanguage" : "en",
+                    "wikipediaId" : "Application programming interface",
+                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Application_programming_interface",
+                    "bingId" : "e8c1a257-7315-a482-c81d-202a0260e4ed"
+                  }, {
+                    "name" : "Microsoft",
+                    "matches" : [ {
+                      "wikipediaScore" : 0.8,
+                      "text" : "Microsoft",
+                      "offset" : 40,
+                      "length" : 9
+                    } ],
+                    "wikipediaLanguage" : "en",
+                    "wikipediaId" : "Microsoft",
+                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Microsoft",
+                    "bingId" : "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85"
+                  } ]
+                } ],
+                "errors" : [ ]
+              }
+            },
+            "schema" : {
+              "$ref" : "#/definitions/EntityLinkingBatchResult"
+            }
+          },
+          "500" : {
+            "description" : "Error Response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/keyPhrases" : {
+      "post" : {
+        "summary" : "Key Phrases",
+        "description" : "The API returns a list of strings denoting the key talking points in the input text. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId" : "56f30ceeeda5650db055a3c6",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "modelVersion",
+          "in" : "query",
+          "description" : "(optional) This value indicates which model be used for scoring .",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showStats",
+          "in" : "query",
+          "description" : "(optional) if set to true, response will contain input and document level statistics.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "body",
+          "name" : "multiLanguageBatchInput",
+          "description" : "Collection of documents to analyze. Documents can now contain a language field to indicate the text language",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MultiLanguageBatchInput"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A successful response results in 0 or more key phrases identified in each valid document",
+            "examples" : {
+              "application/json" : {
+                "documents" : [ {
+                  "id" : "1",
+                  "keyPhrases" : [ "world", "input text" ]
+                }, {
+                  "id" : "2",
+                  "keyPhrases" : [ "monde" ]
+                }, {
+                  "id" : "3",
+                  "keyPhrases" : [ "carretera", "tráfico", "día" ]
+                } ],
+                "errors" : [ ]
+              }
+            },
+            "schema" : {
+              "$ref" : "#/definitions/KeyPhraseBatchResult"
+            }
+          },
+          "500" : {
+            "description" : "Error Response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/languages" : {
+      "post" : {
+        "summary" : "Detect Language",
+        "description" : "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.",
+        "operationId" : "56f30ceeeda5650db055a3c7",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "modelVersion",
+          "in" : "query",
+          "description" : "(optional) This value indicates which model be used for scoring .",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showStats",
+          "in" : "query",
+          "description" : "(optional) if set to true, response will contain input and document level statistics.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "body",
+          "name" : "languageBatchInput",
+          "description" : "Collection of documents to analyze.",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/LanguageBatchInput"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A successful call results in the detected language with the highest probability for each valid document",
+            "examples" : {
+              "application/json" : {
+                "documents" : [ {
+                  "id" : "1",
+                  "detectedLanguages" : [ {
+                    "name" : "English",
+                    "iso6391Name" : "en",
+                    "score" : 1
+                  } ]
+                }, {
+                  "id" : "2",
+                  "detectedLanguages" : [ {
+                    "name" : "French",
+                    "iso6391Name" : "fr",
+                    "score" : 1
+                  } ]
+                }, {
+                  "id" : "3",
+                  "detectedLanguages" : [ {
+                    "name" : "Spanish",
+                    "iso6391Name" : "es",
+                    "score" : 1
+                  } ]
+                }, {
+                  "id" : "4",
+                  "detectedLanguages" : [ {
+                    "name" : "(Unknown)",
+                    "iso6391Name" : "(Unknown)",
+                    "score" : 0
+                  } ]
+                } ],
+                "errors" : [ ]
+              }
+            },
+            "schema" : {
+              "$ref" : "#/definitions/LanguageBatchResult"
+            }
+          },
+          "500" : {
+            "description" : "Error Response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sentiment" : {
+      "post" : {
+        "summary" : "Sentiment",
+        "description" : "The API returns a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral).In addition, sentence level sentiment predictions are returned. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "operationId" : "56f30ceeeda5650db055a3c9",
+        "consumes" : [ "application/json", "text/json" ],
+        "produces" : [ "application/json", "text/json" ],
+        "parameters" : [ {
+          "name" : "modelVersion",
+          "in" : "query",
+          "description" : "(optional) This value indicates which model be used for scoring .",
+          "required" : false,
+          "type" : "string"
+        }, {
+          "name" : "showStats",
+          "in" : "query",
+          "description" : "(optional) if set to true, response will contain input and document level statistics.",
+          "required" : false,
+          "type" : "boolean"
+        }, {
+          "in" : "body",
+          "name" : "multiLanguageBatchInput",
+          "description" : "Collection of documents to analyze.",
+          "required" : false,
+          "schema" : {
+            "$ref" : "#/definitions/MultiLanguageBatchInput"
+          }
+        } ],
+        "responses" : {
+          "200" : {
+            "description" : "A successful call results in a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral)",
+            "examples" : {
+              "application/json" : {
+                "documents" : [ {
+                  "id" : "1",
+                  "sentiment" : "positive",
+                  "documentScores" : {
+                    "positive" : 0.998519241809845,
+                    "neutral" : 9.635657188483E-4,
+                    "negative" : 5.17153472174E-4
+                  },
+                  "sentences" : [ {
+                    "sentiment" : "neutral",
+                    "sentenceScores" : {
+                      "positive" : 0.070910170674324,
+                      "neutral" : 0.9124033451080322,
+                      "negative" : 0.0166865326464176
+                    },
+                    "offset" : 0,
+                    "length" : 12
+                  }, {
+                    "sentiment" : "positive",
+                    "sentenceScores" : {
+                      "positive" : 0.998519241809845,
+                      "neutral" : 9.635657188483E-4,
+                      "negative" : 5.17153472174E-4
+                    },
+                    "offset" : 13,
+                    "length" : 36
+                  } ]
+                }, {
+                  "id" : "2",
+                  "sentiment" : "positive",
+                  "documentScores" : {
+                    "positive" : 0.9954571723937988,
+                    "neutral" : 0.0034653299953789,
+                    "negative" : 0.0010774657130241
+                  },
+                  "sentences" : [ {
+                    "sentiment" : "neutral",
+                    "sentenceScores" : {
+                      "positive" : 0.0499138832092285,
+                      "neutral" : 0.9387012720108032,
+                      "negative" : 0.0113849258050323
+                    },
+                    "offset" : 0,
+                    "length" : 30
+                  }, {
+                    "sentiment" : "positive",
+                    "sentenceScores" : {
+                      "positive" : 0.9954571723937988,
+                      "neutral" : 0.0034653299953789,
+                      "negative" : 0.0010774657130241
+                    },
+                    "offset" : 31,
+                    "length" : 13
+                  } ]
+                }, {
+                  "id" : "3",
+                  "sentiment" : "positive",
+                  "documentScores" : {
+                    "positive" : 0.9965128302574158,
+                    "neutral" : 0.0018965365597978,
+                    "negative" : 0.0015906029148027
+                  },
+                  "sentences" : [ {
+                    "sentiment" : "positive",
+                    "sentenceScores" : {
+                      "positive" : 0.9965128302574158,
+                      "neutral" : 0.0018965365597978,
+                      "negative" : 0.0015906029148027
+                    },
+                    "offset" : 0,
+                    "length" : 52
+                  } ]
+                } ],
+                "errors" : [ ]
+              }
+            },
+            "schema" : {
+              "$ref" : "#/definitions/SentimentResponse"
+            }
+          },
+          "500" : {
+            "description" : "Error Response",
+            "schema" : {
+              "$ref" : "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "securityDefinitions" : {
+    "apiKeyHeader" : {
+      "type" : "apiKey",
+      "name" : "Ocp-Apim-Subscription-Key",
+      "in" : "header"
+    },
+    "apiKeyQuery" : {
+      "type" : "apiKey",
+      "name" : "subscription-key",
+      "in" : "query"
+    }
+  },
+  "definitions" : {
+    "MultiLanguageBatchInput" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "description" : "The set of documents to process as part of this batch.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/MultiLanguageInput"
+          }
+        }
+      },
+      "description" : "Contains a set of input documents to be analyzed by the service.",
+      "example" : "{\n  \"documents\": [\n    {\n      \"language\": \"en\",\n      \"id\": \"1\",\n      \"text\": \"Hello world. This is some input text that I love.\"\n    },\n    {\n      \"language\": \"en\",\n      \"id\": \"2\",\n      \"text\": \"It's incredibly sunny outside! I'm so happy.\"\n    },\n    {\n      \"language\": \"en\",\n      \"id\": \"3\",\n      \"text\": \"Pike place market is my favorite Seattle attraction.\"\n    }\n  ]\n}"
+    },
+    "MultiLanguageInput" : {
+      "type" : "object",
+      "properties" : {
+        "language" : {
+          "type" : "string",
+          "description" : "This is the 2 letter ISO 639-1 representation of a language.\r\nFor example, use \"en\" for English; \"es\" for Spanish etc.,."
+        },
+        "id" : {
+          "type" : "string",
+          "description" : "A unique, non-empty document identifier."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "The input text to process."
+        }
+      },
+      "description" : "Contains an input document to be analyzed by the service."
+    },
+    "ErrorRecord" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "The input document unique identifier that this error refers to."
+        },
+        "message" : {
+          "type" : "string",
+          "description" : "The actual error message."
+        }
+      },
+      "description" : "Contains error information about a particular document."
+    },
+    "ErrorResponse" : {
+      "type" : "object",
+      "properties" : {
+        "TBD-- Need to follow design for all Cognitive Service" : {
+          "type" : "string"
+        }
+      }
+    },
+    "SentimentResponse" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "description" : "The set of successful results.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/DocumentSentiment"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "The set of error results.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/ErrorRecord"
+          }
+        },
+        "statistics" : {
+          "readOnly" : true
+        }
+      },
+      "description" : "A wrapper class around a collection of results and errors."
+    },
+    "DocumentSentiment" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Unique, non-empty document identifier."
+        },
+        "sentiment" : {
+          "type" : "string",
+          "description" : "Predicted sentiment for document (Negative, Neutral, Positive, or Mixed).",
+          "enum" : [ "positive", "neutral", "negative", "mixed" ]
+        },
+        "statistics" : {
+          "$ref" : "#/definitions/DocumentStatistics"
+        },
+        "documentScores" : {
+          "description" : "Document level sentiment confidence scores for each sentiment class."
+        },
+        "sentences" : {
+          "type" : "array",
+          "description" : "Sentence level sentiment analysis.",
+          "items" : {
+            "$ref" : "#/definitions/SentenceSentiment"
+          }
+        }
+      }
+    },
+    "RequestStatistics" : {
+      "type" : "object",
+      "properties" : {
+        "documentsCount" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Number of documents submitted in the request."
+        },
+        "validDocumentsCount" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Number of valid documents. This excludes empty, over-size limit or non-supported languages documents."
+        },
+        "erroneousDocumentsCount" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Number of invalid documents. This includes empty, over-size limit or non-supported languages documents."
+        },
+        "transactionsCount" : {
+          "type" : "integer",
+          "format" : "int64",
+          "description" : "Number of transactions for the request."
+        }
+      }
+    },
+    "DocumentStatistics" : {
+      "type" : "object",
+      "properties" : {
+        "charactersCount" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Number of text elements recognized in the document."
+        },
+        "transactionsCount" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Number of transactions for the document."
+        }
+      },
+      "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the\r\ndocument payload."
+    },
+    "SentimentConfidenceScoreLabel" : {
+      "type" : "object",
+      "properties" : {
+        "positive" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "neutral" : {
+          "type" : "number",
+          "format" : "double"
+        },
+        "negative" : {
+          "type" : "number",
+          "format" : "double"
+        }
+      },
+      "description" : "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
+    },
+    "SentenceSentiment" : {
+      "type" : "object",
+      "properties" : {
+        "sentiment" : {
+          "type" : "string",
+          "description" : "The predicted Sentiment for the sentence.",
+          "enum" : [ "positive", "neutral", "negative" ]
+        },
+        "sentenceScores" : {
+          "description" : "The sentiment confidence score for the sentence for all classes."
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The sentence offset from the start of the document."
+        },
+        "length" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "The sentence length as given by StringInfo's LengthInTextElements property."
+        },
+        "warnings" : {
+          "type" : "array",
+          "description" : "The warnings generated for the sentence.",
+          "items" : {
+            "type" : "string"
+          }
+        }
+      }
+    },
+    "EntitiesBatchResult" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "description" : "Response by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/EntitiesBatchResultItem"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Errors and Warnings by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/ErrorRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
+          "readOnly" : true
+        }
+      }
+    },
+    "EntitiesBatchResultItem" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Unique, non-empty document identifier."
+        },
+        "entities" : {
+          "type" : "array",
+          "description" : "Recognized entities in the document.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/EntityRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+        }
+      }
+    },
+    "EntityRecord" : {
+      "type" : "object",
+      "properties" : {
+        "text" : {
+          "type" : "string",
+          "description" : "Entity text as appears in the request."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Entity type, such as Person/Location/Org/SSN etc"
+        },
+        "subType" : {
+          "type" : "string",
+          "description" : "Entity sub type, such as Age/Year/TimeRange etc"
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Start position (in Unicode characters) for the entity match text."
+        },
+        "length" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Length (in Unicode characters) for the entity match text."
+        }
+      }
+    },
+    "BioEntitiesBatchResult" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "description" : "Response by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/BioEntitiesBatchResultItem"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Errors and Warnings by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/ErrorRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
+          "readOnly" : true
+        }
+      }
+    },
+    "BioEntitiesBatchResultItem" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Unique, non-empty document identifier."
+        },
+        "entities" : {
+          "type" : "array",
+          "description" : "Recognized biomedical entities in the document.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/EntityRecord"
+          }
+        },
+        "relations" : {
+          "type" : "array",
+          "description" : "Relations of recognized biomedical entities in the document.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/RelationRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+        }
+      }
+    },
+    "RelationRecord" : {
+      "type" : "object",
+      "properties" : {
+        "target" : {
+          "type" : "string",
+          "description" : "TBD"
+        },
+        "source" : {
+          "type" : "string",
+          "description" : "TBD"
+        },
+        "relationType" : {
+          "type" : "string",
+          "description" : "TBD"
+        }
+      }
+    },
+    "EntityLinkingBatchResult" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "description" : "Response by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/EntityLinkingBatchResultItem"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Errors and Warnings by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/ErrorRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
+          "readOnly" : true
+        }
+      }
+    },
+    "EntityLinkingBatchResultItem" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Unique, non-empty document identifier."
+        },
+        "entities" : {
+          "type" : "array",
+          "description" : "Recognized well-known entities in the document.",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/EntityLinkingRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+        }
+      }
+    },
+    "EntityLinkingRecord" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Entity Linking formal name."
+        },
+        "matches" : {
+          "type" : "array",
+          "description" : "List of instances this entity appears in the text.",
+          "items" : {
+            "$ref" : "#/definitions/MatchRecord"
+          }
+        },
+        "wikipediaLanguage" : {
+          "type" : "string",
+          "description" : "Wikipedia language for which the WikipediaId and WikipediaUrl refers to."
+        },
+        "wikipediaId" : {
+          "type" : "string",
+          "description" : "Wikipedia unique identifier of the recognized entity."
+        },
+        "wikipediaUrl" : {
+          "type" : "string",
+          "description" : "URL for the entity's Wikipedia page.",
+          "readOnly" : true
+        },
+        "bingId" : {
+          "type" : "string",
+          "description" : "Bing unique identifier of the recognized entity."
+        }
+      }
+    },
+    "MatchRecord" : {
+      "type" : "object",
+      "properties" : {
+        "wikipediaScore" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "(optional) If a well-known item with Wikipedia link is recognized,\r\n            a decimal number denoting the confidence level of the Wikipedia info will be returned."
+        },
+        "text" : {
+          "type" : "string",
+          "description" : "Entity text as appears in the request."
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Start position (in Unicode characters) for the entity match text."
+        },
+        "length" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Length (in Unicode characters) for the entity match text."
+        }
+      }
+    },
+    "KeyPhraseBatchResult" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "description" : "Response by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/KeyPhraseBatchResultItem"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Errors and Warnings by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/ErrorRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
+          "readOnly" : true
+        }
+      }
+    },
+    "KeyPhraseBatchResultItem" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Unique, non-empty document identifier."
+        },
+        "keyPhrases" : {
+          "type" : "array",
+          "description" : "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
+          "readOnly" : true,
+          "items" : {
+            "type" : "string"
+          }
+        },
+        "statistics" : {
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+        }
+      }
+    },
+    "LanguageBatchInput" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "items" : {
+            "$ref" : "#/definitions/LanguageInput"
+          }
+        }
+      },
+      "example" : "{\n  \"documents\": [\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"1\",\n      \"text\": \"Hello world\"\n    },\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"2\",\n      \"text\": \"Bonjour tout le monde\"\n    },\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"3\",\n      \"text\": \"La carretera estaba atascada. Había mucho tráfico el día de ayer.\"\n    },\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"4\",\n      \"text\": \":) :( :D\"\n    }\n  ]\n}"
+    },
+    "LanguageInput" : {
+      "type" : "object",
+      "properties" : {
+        "countryHint" : {
+          "type" : "string"
+        },
+        "id" : {
+          "type" : "string",
+          "description" : "Unique, non-empty document identifier."
+        },
+        "text" : {
+          "type" : "string"
+        }
+      }
+    },
+    "LanguageBatchResult" : {
+      "type" : "object",
+      "properties" : {
+        "documents" : {
+          "type" : "array",
+          "description" : "Response by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/LanguageBatchResultItem"
+          }
+        },
+        "errors" : {
+          "type" : "array",
+          "description" : "Errors and Warnings by document",
+          "readOnly" : true,
+          "items" : {
+            "$ref" : "#/definitions/ErrorRecord"
+          }
+        },
+        "statistics" : {
+          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
+          "readOnly" : true
+        }
+      }
+    },
+    "LanguageBatchResultItem" : {
+      "type" : "object",
+      "properties" : {
+        "id" : {
+          "type" : "string",
+          "description" : "Unique, non-empty document identifier."
+        },
+        "detectedLanguages" : {
+          "type" : "array",
+          "description" : "A list of extracted languages.",
+          "items" : {
+            "$ref" : "#/definitions/DetectedLanguage"
+          }
+        },
+        "statistics" : {
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+        }
+      }
+    },
+    "DetectedLanguage" : {
+      "type" : "object",
+      "properties" : {
+        "name" : {
+          "type" : "string",
+          "description" : "Long name of a detected language (e.g. English, French)."
+        },
+        "iso6391Name" : {
+          "type" : "string",
+          "description" : "A two letter representation of the detected language according to the ISO 639-1 standard (e.g. en, fr)."
+        },
+        "score" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "A confidence score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true."
+        }
+      }
+    }
+  },
+  "x-servers" : [ {
+    "url" : "https://cognitivewusprod.cognitiveservices.azure.com"
+  }, {
+    "url" : "https://westus.api.cognitive.microsoft.com"
+  } ]
+}
