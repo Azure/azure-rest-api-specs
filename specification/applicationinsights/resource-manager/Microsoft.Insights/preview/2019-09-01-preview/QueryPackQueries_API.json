@@ -47,12 +47,15 @@
             "$ref": "#/parameters/MaxItemCountParameter"
           },
           {
-            "$ref": "#/parameters/IncludeContentParameter"
+            "$ref": "#/parameters/IncludeBodyParameter"
           },
           {
             "$ref": "#/parameters/ContinuationTokenParameter"
           }
         ],
+        "x-ms-pageable":  {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -95,7 +98,7 @@
             "$ref": "#/parameters/MaxItemCountParameter"
           },
           {
-            "$ref": "#/parameters/IncludeContentParameter"
+            "$ref": "#/parameters/IncludeBodyParameter"
           },
           {
             "$ref": "#/parameters/ContinuationTokenParameter"
@@ -110,6 +113,9 @@
             }
           }
         ],
+        "x-ms-pageable":  {
+          "nextLinkName": "nextLink"
+        },
         "responses": {
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -162,7 +168,7 @@
           "200": {
             "description": "A single query associated with the Log Analytics QueryPack.",
             "schema": {
-              "$ref": "#/definitions/QueriesResource"
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
             }
           }
         },
@@ -197,7 +203,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/QueriesResource"
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
             }
           }
         ],
@@ -211,7 +217,7 @@
           "200": {
             "description": "The new or updated query associated with the Log Analytics QueryPack.",
             "schema": {
-              "$ref": "#/definitions/QueriesResource"
+              "$ref": "#/definitions/LogAnalyticsQueryPackQuery"
             }
           }
         },
@@ -278,15 +284,22 @@
         }
       }
     },
-    "QueriesResource": {
+    "AzureResourceProperties": {
       "properties": {
         "id": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource Id"
         },
-        "properties": {
-          "$ref": "#/definitions/LogAnalyticsQueryPackQueryProperties"
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
         }
       },
       "description": "An Azure resource QueryPack-Query object"
@@ -301,7 +314,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/QueriesResource"
+          "$ref": "#/definitions/AzureResourceProperties"
         }
       ],
       "description": "A Log Analytics QueryPack-Query definition."
@@ -339,12 +352,12 @@
         "description": {
           "type": "string",
           "readOnly": false,
-          "description": "Azure tenant id."
+          "description": "Description of the query."
         },
         "body": {
           "type": "string",
           "readOnly": false,
-          "description": "Subscription id."
+          "description": "Body of the query."
         },
         "linkedResourceId": {
           "type": "string",
@@ -359,14 +372,14 @@
           }
         },
         "resourceTypes": {
-          "description": "Labels associated with the query.",
+          "description": "Resource Types associated with the query.",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "labels": {
-          "description": "Resource Types associated with the query.",
+          "description": "Labels associated with the query.",
           "type": "array",
           "items": {
             "type": "string"
@@ -436,16 +449,16 @@
       "description": "The id of a specific query defined in the Log Analytics QueryPack",
       "x-ms-parameter-location": "method"
     },
-    "IncludeContentParameter": {
-      "name": "includeContent",
+    "IncludeBodyParameter": {
+      "name": "includeBody",
       "in": "query",
       "required": false,
       "type": "boolean",
-      "description": "Flag indicating whether or not to return the content of each applicable query. If false, only return the query information.",
+      "description": "Flag indicating whether or not to return the body of each applicable query. If false, only return the query information.",
       "x-ms-parameter-location": "method"
     },
     "MaxItemCountParameter": {
-      "name": "maxItemCount",
+      "name": "$top",
       "in": "query",
       "required": false,
       "type": "integer",
@@ -453,7 +466,7 @@
       "x-ms-parameter-location": "method"
     },
     "ContinuationTokenParameter": {
-      "name": "continuationToken",
+      "name": "$skipToken",
       "in": "query",
       "required": false,
       "type": "string",
