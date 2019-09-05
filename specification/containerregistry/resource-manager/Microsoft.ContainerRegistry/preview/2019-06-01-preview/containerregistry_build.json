@@ -379,6 +379,253 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns/{taskRunName}": {
+      "get": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Gets the detailed information for a given run request.",
+        "operationId": "TaskRuns_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The run request name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned."
+          }
+        },
+        "x-ms-examples": {
+          "TaskRuns_Get": {
+            "$ref": "./examples/TaskRunsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Creates a run request for a container registry with the specified parameters.",
+        "operationId": "TaskRuns_Create",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The name of task run.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "taskRun",
+            "in": "body",
+            "description": "The parameters of a run that needs to scheduled.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TaskRuns_Create": {
+            "$ref": "./examples/TaskRunsCreate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Deletes a specified TaskRun resource.",
+        "operationId": "TaskRuns_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The Run Request name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly."
+          },
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "No Content - the specified resource was not found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TaskRuns_Delete": {
+            "$ref": "./examples/TaskRunsDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Updates a task run with the specified parameters.",
+        "operationId": "TaskRuns_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "taskRunName",
+            "in": "path",
+            "description": "The run request name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "updateParameters",
+            "in": "body",
+            "description": "The parameters for updating a task run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TaskRunUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "TaskRuns_Update": {
+            "$ref": "./examples/TaskRunsUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/taskRuns": {
+      "get": {
+        "tags": [
+          "TaskRuns"
+        ],
+        "description": "Lists all the task runs for a specified container registry.",
+        "operationId": "TaskRuns_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RegistryNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRunListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed."
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "TaskRuns_List": {
+            "$ref": "./examples/TaskRunsList.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/tasks": {
       "get": {
         "tags": [
@@ -1054,6 +1301,10 @@
             "modelAsString": true
           }
         },
+        "taskRunName": {
+          "description": "The name of task run associated with this run.",
+          "type": "string"
+        },
         "status": {
           "description": "The current status of the run.",
           "enum": [
@@ -1112,6 +1363,86 @@
       "properties": {
         "logLink": {
           "description": "The link to logs for a run on a azure container registry.",
+          "type": "string"
+        }
+      }
+    },
+    "TaskRun": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
+        "properties": {
+          "$ref": "#/definitions/TaskRunProperties",
+          "x-ms-client-flatten": true
+        },
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest"
+        },
+        "runResult": {
+          "$ref": "#/definitions/Run"
+        }
+      }
+    },
+    "TaskRunProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "enum": [
+            "Creating",
+            "Updating",
+            "Deleting",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "TaskRunUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/IdentityProperties",
+          "description": "Identity for the resource."
+        },
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest"
+        },
+        "tags": {
+          "description": "The ARM resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "TaskRunListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TaskRun"
+          }
+        },
+        "nextLink": {
+          "description": "The URI that can be used to request the next set of paged results.",
           "type": "string"
         }
       }
