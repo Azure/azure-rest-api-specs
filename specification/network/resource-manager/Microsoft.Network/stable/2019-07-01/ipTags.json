@@ -3,7 +3,7 @@
   "info": {
     "title": "NetworkManagementClient",
     "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
-    "version": "2019-06-01"
+    "version": "2019-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -149,8 +149,8 @@
         "tags": [
           "IpTags"
         ],
-        "operationId": "IpTags_Update",
-        "description": "Updates an ipTag in a specified resource group.",
+        "operationId": "IpTags_UpdateTags",
+        "description": "Updates an ipTag Tags.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -167,7 +167,7 @@
             "description": "The name of the ipTag."
           },
           {
-            "name": "ipTagsParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
@@ -187,12 +187,18 @@
             "description": "Request successful. The operation returns the resulting ipTag resource.",
             "schema": {
               "$ref": "#/definitions/IpTags"
+            },
+            "default": {
+              "description": "Error.",
+              "schema": {
+                "$ref": "./network.json#/definitions/Error"
+              }
             }
           }
         },
         "x-ms-examples": {
           "Update_IpTags": {
-            "$ref": "./examples/IpTagsUpdate.json"
+            "$ref": "./examples/IpTagsUpdateTag.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -324,7 +330,7 @@
   "definitions": {
     "IpTagsListResult": {
       "properties": {
-        "values": {
+        "value": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/IpTags"
