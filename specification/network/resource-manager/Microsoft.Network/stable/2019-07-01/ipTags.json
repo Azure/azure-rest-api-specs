@@ -1,0 +1,406 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "NetworkManagementClient",
+    "description": "The Microsoft Azure Network management API provides a RESTful set of web services that interact with Microsoft Azure Networks service to manage your network resources. The API has entities that capture the relationship between an end user and the Microsoft Azure Networks service.",
+    "version": "2019-06-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ipTags/{ipTagName}": {
+      "get": {
+        "tags": [
+          "IpTags"
+        ],
+        "operationId": "IpTags_Get",
+        "description": "Gets the specified ipTag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ipTagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ipTag."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting IpTags resource.",
+            "schema": {
+              "$ref": "#/definitions/IpTags"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get_IpTag": {
+            "$ref": "./examples/IpTagsGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "IpTags"
+        ],
+        "operationId": "IpTags_CreateOrUpdate",
+        "description": "Creates or updates an ipTag in a specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ipTagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ipTag."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IpTags"
+            },
+            "description": "Parameters supplied to the create or update IpTags operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting ipTag resource.",
+            "schema": {
+              "$ref": "#/definitions/IpTags"
+            }
+          },
+          "201": {
+            "description": "Create successful. The operation returns the resulting ipTag resource.",
+            "schema": {
+              "$ref": "#/definitions/IpTags"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate_IpTag": {
+            "$ref": "./examples/IpTagsCreate.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "IpTags"
+        ],
+        "operationId": "IpTags_Update",
+        "description": "Updates an ipTag in a specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ipTagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ipTag."
+          },
+          {
+            "name": "ipTagsParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./network.json#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the update ipTag operation."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting ipTag resource.",
+            "schema": {
+              "$ref": "#/definitions/IpTags"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update_IpTags": {
+            "$ref": "./examples/IpTagsUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "IpTags"
+        ],
+        "operationId": "IpTags_Delete",
+        "description": "Deletes the specified ipTag.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "ipTagName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the ipTag."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete successful."
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "204": {
+            "description": "Delete successful."
+          }
+        },
+        "x-ms-examples": {
+          "Delete_IpTags": {
+            "$ref": "./examples/IpTagsDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ipTags": {
+      "get": {
+        "tags": [
+          "IpTags"
+        ],
+        "operationId": "IpTags_ListByResourceGroup",
+        "description": "Gets all IpTags in a resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ipTag resources.",
+            "schema": {
+              "$ref": "#/definitions/IpTagsListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListByResourceGroup_IpTags": {
+            "$ref": "./examples/IpTagsListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ipTags": {
+      "get": {
+        "tags": [
+          "IpTags"
+        ],
+        "operationId": "IpTags_List",
+        "description": "Gets all IpTags in a subscription.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of ipTag resources.",
+            "schema": {
+              "$ref": "#/definitions/IpTagsListResult"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List_IpTags": {
+            "$ref": "./examples/IpTagsListBySubscription.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "definitions": {
+    "IpTagsListResult": {
+      "properties": {
+        "values": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpTags"
+          },
+          "description": "The list of iptag information resources."
+        }
+      },
+      "description": "Response for the ListIpTags API service call."
+    },
+    "IpTags": {
+      "properties": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the firewall policy resource."
+        },
+        "changeNumber": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The iteration number of the change."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IpTagsPropertiesFormat",
+          "description": "Properties of the IpTags."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/Resource"
+        }
+      ],
+      "description": "The IpTags resource information."
+    },
+    "IpTagsPropertiesFormat": {
+      "properties": {
+        "subgroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpTagsSubGroupPropertiesFormat"
+          },
+          "readOnly": true,
+          "description": "Properties of the iptag information."
+        },
+        "reference_resources": {
+          "type": "array",
+          "readOnly": true,
+          "description": "List of references to Azure resources that this IpTags is associated with",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          }
+        }
+      }
+    },
+    "IpTagsSubGroupPropertiesFormat": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of subgroup."
+        },
+        "region": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The region of service tag."
+        },
+        "addressPrefixes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "dynamicTags": {
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/TagsObject"
+          }
+        }
+      },
+      "description": "Properties of the iptag information."
+    }
+  }
+}
