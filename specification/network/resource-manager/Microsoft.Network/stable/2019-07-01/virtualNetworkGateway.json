@@ -2370,6 +2370,13 @@
           },
           "description": "The IPSec Policies to be considered by this connection."
         },
+        "trafficSelectorPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficSelectorPolicy"
+          },
+          "description": "The Traffic Selector Policies to be considered by this connection."
+        },
         "resourceGuid": {
           "type": "string",
           "description": "The resource GUID property of the virtual network gateway connection resource."
@@ -2509,6 +2516,29 @@
         "pfsGroup"
       ],
       "description": "An IPSec Policy configuration for a virtual network gateway connection."
+    },
+    "TrafficSelectorPolicy": {
+      "properties": {
+        "localAddressRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of local address spaces in CIDR format"
+        },
+        "remoteAddressRanges": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A collection of remote address spaces in CIDR format"
+        }
+      },
+      "required": [
+        "localAddressRanges",
+        "remoteAddressRanges"
+      ],
+      "description": "An traffic selector policy for a virtual network gateway connection."
     },
     "ConnectionProtocol": {
       "type": "string",
@@ -2726,6 +2756,13 @@
             "$ref": "#/definitions/IpsecPolicy"
           },
           "description": "The IPSec Policies to be considered by this connection."
+        },
+        "trafficSelectorPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficSelectorPolicy"
+          },
+          "description": "The Traffic Selector Policies to be considered by this connection."
         },
         "resourceGuid": {
           "type": "string",
