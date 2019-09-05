@@ -1,0 +1,74 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2019-06-01-preview",
+    "taskRunName": "myRun",
+    "taskRun": {
+      "location": "westus",
+      "tags": {
+        "key": "value"
+      },
+      "sku": {
+        "name": "Standard"
+      },
+      "runRequest": {
+          "type": "EncodedTaskRunRequest",
+          "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
+          "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
+          "values": [],
+          "platform": {
+            "os": "linux",
+            "architecture": "amd64"
+          },
+          "credentials": {}
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {      
+          "type": "Microsoft.ContainerRegistry/registries/TaskRuns",
+          "properties": {
+              "provisioningState": "Creating"
+          },
+          "runRequest": {
+              "type": "EncodedTaskRunRequest",
+              "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
+              "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
+              "values": [],
+              "platform": {
+                  "os": "linux",
+                  "architecture": "amd64"
+              },
+              "credentials": {},
+              "isArchiveEnabled": true
+          },
+          "runResult": {
+              "type": "Microsoft.ContainerRegistry/registries/runs",
+              "properties": {
+                  "runId": "yd3",
+                  "status": "Queued",
+                  "lastUpdatedTime": "2019-08-29T20:32:53+00:00",
+                  "runType": "QuickRun",
+                  "createTime": "2019-08-29T20:32:53.1034107+00:00",
+                  "platform": {
+                      "os": "linux",
+                      "architecture": "amd64"
+                  },
+                  "agentConfiguration": {
+                      "cpu": 2
+                  },
+                  "provisioningState": "Succeeded",
+                  "isArchiveEnabled": true
+              },
+              "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd3",
+              "name": "yd3"
+          },
+          "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun",
+          "name": "myRun"
+      }
+    }
+  }
+}
