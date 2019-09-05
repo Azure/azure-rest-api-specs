@@ -37,11 +37,15 @@ tag: package-locks-2016-09
 ```
 
 ``` yaml $(package-policy)
+tag: package-policy-2019-06
+```
+
+``` yaml $(package-policy)
 tag: package-policy-2019-01
 ```
 
 ``` yaml $(package-resources)
-tag: package-resources-2019-07
+tag: package-resources-2019-08
 ```
 
 ``` yaml $(package-subscriptions)
@@ -90,6 +94,21 @@ These settings apply only when `--tag=package-locks-2015-01` is specified on the
 ``` yaml $(tag) == 'package-locks-2015-01'
 input-file:
 - Microsoft.Authorization/stable/2015-01-01/locks.json
+```
+
+### Tag: package-policy-2019-06
+
+These settings apply only when `--tag=package-policy-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-policy-2019-06'
+input-file:
+- Microsoft.Authorization/stable/2019-06-01/policyAssignments.json
+- Microsoft.Authorization/stable/2019-06-01/policyDefinitions.json
+- Microsoft.Authorization/stable/2019-06-01/policySetDefinitions.json
+
+# Needed when there is more than one input file
+override-info:
+  title: PolicyClient
 ```
 
 ### Tag: package-policy-2019-01
@@ -196,6 +215,15 @@ These settings apply only when `--tag=package-policy-2015-10` is specified on th
 ``` yaml $(tag) == 'package-policy-2015-10'
 input-file:
 - Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+```
+
+### Tag: package-resources-2019-08
+
+These settings apply only when `--tag=package-resources-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-resources-2019-08'
+input-file:
+- Microsoft.Resources/stable/2019-08-01/resources.json
 ```
 
 ### Tag: package-resources-2019-07
@@ -462,243 +490,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 ## Java
 
-These settings apply only when `--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(java)
-azure-arm: true
-fluent: true
-namespace: com.microsoft.azure.management.resources
-license-header: MICROSOFT_MIT_NO_CODEGEN
-payload-flattening-threshold: 1
-output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-resources
-```
-
-### Java multi-api
-
-Generate all API versions currently shipped for this package
-
-``` yaml $(java) && $(multiapi)
-batch:
-  - tag: package-features-2015-12
-  - tag: package-locks-2016-09
-  - tag: package-policy-2019-01
-  - tag: package-policy-2018-05
-  - tag: package-policy-2018-03
-  - tag: package-policy-2016-12
-  - tag: package-resources-2019-07
-  - tag: package-resources-2019-0510
-  - tag: package-resources-2019-05
-  - tag: package-resources-2019-03
-  - tag: package-resources-2018-02
-  - tag: package-resources-2016-09
-  - tag: package-subscriptions-2018-06
-  - tag: package-subscriptions-2016-06
-```
-
-### Tag: package-features-2015-12 and java
-
-These settings apply only when `--tag=package-features-2015-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-features-2015-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.features.v2015_12_01
-  output-folder: $(azure-libraries-for-java-folder)/features/resource-manager/v2015_12_01
-regenerate-manager: true
-generate-interface: true
-fconfig: '{"moduleName": "Features"}'
-```
-
-### Tag: package-locks-2016-09 and java
-
-These settings apply only when `--tag=package-locks-2016-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-locks-2016-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.locks.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/locks/resource-manager/v2016_09_01
-regenerate-manager: true
-generate-interface: true
-fconfig: '{"moduleName": "Locks"}'
-```
-
-### Tag: package-policy-2019-01 and java
-
-These settings apply only when `--tag=package-policy-2019-01 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-policy-2019-01' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.policy.v2019_01_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2019_01_01
-regenerate-manager: true
-generate-interface: true
-fconfig: '{"moduleName": "Policy"}'
-directive:
-  from: policyAssignments.json
-  where: $.definitions.PolicyAssignmentProperties.properties.scope
-  transform: $['x-ms-client-name'] = 'scopeProperty'
-```
-
-### Tag: package-policy-2018-05 and java
-
-These settings apply only when `--tag=package-policy-2018-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-policy-2018-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.policy.v2018_05_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2018_05_01
-regenerate-manager: true
-generate-interface: true
-fconfig: '{"moduleName": "Policy"}'
-directive:
-  from: policyAssignments.json
-  where: $.definitions.PolicyAssignmentProperties.properties.scope
-  transform: $['x-ms-client-name'] = 'scopeProperty'
-```
-
-### Tag: package-policy-2018-03 and java
-
-These settings apply only when `--tag=package-policy-2018-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-policy-2018-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.policy.v2018_03_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2018_03_01
-regenerate-manager: true
-generate-interface: true
-fconfig: '{"moduleName": "Policy"}'
-directive:
-  from: policyAssignments.json
-  where: $.definitions.PolicyAssignmentProperties.properties.scope
-  transform: $['x-ms-client-name'] = 'scopeProperty'
-```
-
-### Tag: package-policy-2016-12 and java
-
-These settings apply only when `--tag=package-policy-2016-12 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-policy-2016-12' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.policy.v2016_12_01
-  output-folder: $(azure-libraries-for-java-folder)/policy/resource-manager/v2016_12_01
-regenerate-manager: true
-generate-interface: true
-fconfig: '{"moduleName": "Policy"}'
-directive:
-  from: policyAssignments.json
-  where: $.definitions.PolicyAssignmentProperties.properties.scope
-  transform: $['x-ms-client-name'] = 'scopeProperty'
-```
-
-### Tag: package-resources-2019-07 and java
-
-These settings apply only when `--tag=package-resources-2019-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-resources-2019-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_07_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-resources-2019-0510 and java
-
-These settings apply only when `--tag=package-resources-2019-0510 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-resources-2019-0510' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2019_05_10
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_05_10
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-resources-2019-05 and java
-
-These settings apply only when `--tag=package-resources-2019-05 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-resources-2019-05' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2019_05_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_05_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-resources-2019-03 and java
-
-These settings apply only when `--tag=package-resources-2019-03 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-resources-2019-03' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2019_03_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_03_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-resources-2018-02 and java
-
-These settings apply only when `--tag=package-resources-2018-02 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-resources-2018-02' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2018_02_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2018_02_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-resources-2016-09 and java
-
-These settings apply only when `--tag=package-resources-2016-09 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-resources-2016-09' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2016_09_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2016_09_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-subscriptions-2018-06 and java
-
-These settings apply only when `--tag=package-subscriptions-2018-06--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-subscriptions-2018-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2018_06_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2018_06_01
-regenerate-manager: true
-generate-interface: true
-```
-
-### Tag: package-subscriptions-2016-06 and java
-
-These settings apply only when `--tag=package-subscriptions-2016-06--java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-subscriptions-2016-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2016_06_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2016_06_01
-regenerate-manager: true
-generate-interface: true
-```
+See configuration in [readme.java.md](./readme.java.md)
 
 # Validation
 
@@ -745,6 +537,9 @@ input-file:
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policyAssignments.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policyDefinitions.json
+  - $(this-folder)/Microsoft.Authorization/stable/2019-06-01/policySetDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-01-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-01-01/policyDefinitions.json
   - $(this-folder)/Microsoft.Authorization/stable/2019-01-01/policySetDefinitions.json
@@ -760,6 +555,7 @@ input-file:
   - $(this-folder)/Microsoft.Authorization/stable/2016-12-01/policyAssignments.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-04-01/policy.json
   - $(this-folder)/Microsoft.Authorization/preview/2015-10-01-preview/policy.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-08-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-05-10/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2019-05-01/resources.json
