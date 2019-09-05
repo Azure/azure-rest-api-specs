@@ -339,7 +339,7 @@
           }
         }
       },
-      "description": "SKU of a public IP prefix"
+      "description": "SKU of a public IP prefix."
     },
     "PublicIPPrefixPropertiesFormat": {
       "properties": {
@@ -361,14 +361,19 @@
         },
         "ipPrefix": {
           "type": "string",
-          "description": "The allocated Prefix"
+          "description": "The allocated Prefix."
         },
         "publicIPAddresses": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ReferencedPublicIpAddress"
           },
-          "description": "The list of all referenced PublicIPAddresses"
+          "description": "The list of all referenced PublicIPAddresses."
+        },
+        "loadBalancerFrontendIpConfiguration": {
+          "readOnly": true,
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The reference to load balancer frontend IP configuration associated with the public IP prefix."
         },
         "resourceGuid": {
           "type": "string",
@@ -431,7 +436,7 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "The PublicIPAddress Reference"
+          "description": "The PublicIPAddress Reference."
         }
       },
       "description": "Reference to a public IP address."
