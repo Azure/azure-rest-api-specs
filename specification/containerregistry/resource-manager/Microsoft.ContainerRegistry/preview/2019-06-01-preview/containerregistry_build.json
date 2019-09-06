@@ -1382,12 +1382,41 @@
         "properties": {
           "$ref": "#/definitions/TaskRunProperties",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "IdentityProperties": {
+      "description": "Managed identity for the resource.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal ID of resource identity.",
+          "type": "string"
         },
-        "runRequest": {
-          "$ref": "#/definitions/RunRequest"
+        "tenantId": {
+          "description": "The tenant ID of resource.",
+          "type": "string"
         },
-        "runResult": {
-          "$ref": "#/definitions/Run"
+        "type": {
+          "description": "The identity type.",
+          "enum": [
+            "SystemAssigned",
+            "UserAssigned",
+            "SystemAssigned, UserAssigned",
+            "None"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ResourceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserIdentityProperties"
+          }
         }
       }
     },
@@ -1409,6 +1438,26 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "runRequest": {
+            "$ref": "#/definitions/RunRequest"
+        },
+        "runResult": {
+            "$ref": "#/definitions/Run",
+            "readOnly": true
+        }  
+      }
+    },
+    "UserIdentityProperties": {
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "The principal id of user assigned identity.",
+          "type": "string"
+        },
+        "clientId": {
+          "description": "The client id of user assigned identity.",
+          "type": "string"
         }
       }
     },
@@ -1419,8 +1468,10 @@
           "$ref": "#/definitions/IdentityProperties",
           "description": "Identity for the resource."
         },
-        "runRequest": {
-          "$ref": "#/definitions/RunRequest"
+        "properties": {
+          "$ref": "#/definitions/TaskRunPropertiesUpdateParameters",
+          "description": "The properties for updating a taskrun.",
+          "x-ms-client-flatten": true
         },
         "tags": {
           "description": "The ARM resource tags.",
@@ -1428,6 +1479,14 @@
           "additionalProperties": {
             "type": "string"
           }
+        }
+      }
+    },
+    "TaskRunPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest"
         }
       }
     },
@@ -1481,41 +1540,6 @@
           "$ref": "#/definitions/TaskProperties",
           "description": "The properties of a task.",
           "x-ms-client-flatten": true
-        }
-      }
-    },
-    "IdentityProperties": {
-      "description": "Managed identity for the resource.",
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal ID of resource identity.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenant ID of resource.",
-          "type": "string"
-        },
-        "type": {
-          "description": "The identity type.",
-          "enum": [
-            "SystemAssigned",
-            "UserAssigned",
-            "SystemAssigned, UserAssigned",
-            "None"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ResourceIdentityType",
-            "modelAsString": false
-          }
-        },
-        "userAssignedIdentities": {
-          "description": "The list of user identities associated with the resource. The user identity \r\ndictionary key references will be ARM resource ids in the form: \r\n'/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/\r\n    providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.",
-          "type": "object",
-          "additionalProperties": {
-            "$ref": "#/definitions/UserIdentityProperties"
-          }
         }
       }
     },
@@ -1589,19 +1613,6 @@
         "credentials": {
           "$ref": "#/definitions/Credentials",
           "description": "The properties that describes a set of credentials that will be used when this run is invoked."
-        }
-      }
-    },
-    "UserIdentityProperties": {
-      "type": "object",
-      "properties": {
-        "principalId": {
-          "description": "The principal id of user assigned identity.",
-          "type": "string"
-        },
-        "clientId": {
-          "description": "The client id of user assigned identity.",
-          "type": "string"
         }
       }
     },

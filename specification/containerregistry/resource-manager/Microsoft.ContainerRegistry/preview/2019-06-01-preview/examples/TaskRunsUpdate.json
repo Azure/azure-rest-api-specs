@@ -1,32 +1,12 @@
 {
   "parameters": {
-    "subscriptionId": "3647315e-0c5b-4ce4-8739-b071e144b2c9",
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
     "resourceGroupName": "myResourceGroup",
     "registryName": "myRegistry",
     "api-version": "2019-06-01-preview",
-    "taskRunName": "myTask",
+    "taskRunName": "myRun",
     "updateParameters": {
-      "runRequest": {
-        "type": "EncodedTaskRunRequest",
-        "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
-        "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
-        "values": [],
-        "platform": {
-            "os": "linux",
-            "architecture": "amd64"
-        },
-        "credentials": {},
-        "isArchiveEnabled": true
-      }
-    }
-  },
-  "responses": {
-    "201": {
-      "body": {
-        "type": "Microsoft.ContainerRegistry/registries/TaskRuns",
-        "properties": {
-            "provisioningState": "Creating"
-        },
+      "properties": {
         "runRequest": {
             "type": "EncodedTaskRunRequest",
             "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
@@ -38,29 +18,51 @@
             },
             "credentials": {},
             "isArchiveEnabled": true
-        },
-        "runResult": {
-            "type": "Microsoft.ContainerRegistry/registries/runs",
-            "properties": {
-                "runId": "yd4",
-                "status": "Queued",
-                "lastUpdatedTime": "2019-09-04T17:15:29+00:00",
-                "runType": "QuickRun",
-                "createTime": "2019-09-04T17:15:29.2278794+00:00",
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "type": "Microsoft.ContainerRegistry/registries/TaskRuns",
+        "properties": {
+            "provisioningState": "Creating",
+            "runRequest": {
+                "type": "EncodedTaskRunRequest",
+                "encodedTaskContent": "c3RlcHM6IAogIC0gY21kOiB7eyAuVmFsdWVzLmNvbW1hbmQgfX0K",
+                "encodedValuesContent": "Y29tbWFuZDogYmFzaCBlY2hvIHt7LlJ1bi5SZWdpc3RyeX19Cg==",
+                "values": [],
                 "platform": {
                     "os": "linux",
                     "architecture": "amd64"
                 },
-                "agentConfiguration": {
-                    "cpu": 2
-                },
-                "provisioningState": "Succeeded",
+                "credentials": {},
                 "isArchiveEnabled": true
             },
-            "id": "/subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/panwangwest/providers/Microsoft.ContainerRegistry/registries/pwnewtest/runs/yd4",
-            "name": "yd4"
+            "runResult": {
+                "type": "Microsoft.ContainerRegistry/registries/runs",
+                "properties": {
+                    "runId": "yd6",
+                    "status": "Queued",
+                    "lastUpdatedTime": "2019-09-06T17:31:34+00:00",
+                    "runType": "QuickRun",
+                    "createTime": "2019-09-06T17:31:34.1184031+00:00",
+                    "platform": {
+                        "os": "linux",
+                        "architecture": "amd64"
+                    },
+                    "agentConfiguration": {
+                        "cpu": 2
+                    },
+                    "provisioningState": "Succeeded",
+                    "isArchiveEnabled": true
+                },
+                "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/runs/yd6",
+                "name": "yd6"
+            }
         },
-        "id": "/subscriptions/3647315e-0c5b-4ce4-8739-b071e144b2c9/resourceGroups/panwangwest/providers/Microsoft.ContainerRegistry/registries/pwnewtest/taskRuns/mytestrun",
+        "id": "/subscriptions/4385cf00-2d3a-425a-832f-f4285b1c9dce/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/taskRuns/myRun",
         "name": "mytestrun"
       }
     }
