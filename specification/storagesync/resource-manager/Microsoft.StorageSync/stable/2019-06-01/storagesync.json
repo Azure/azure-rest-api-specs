@@ -3846,14 +3846,15 @@
           "readOnly": true
         },
         "syncActivity": {
-          "$ref": "#/definitions/SyncActivityState",
+          "$ref": "#/definitions/ServerEndpointSyncActivityState",
           "description": "Sync activity",
           "readOnly": true
         },
         "totalPersistentFilesNotSyncingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Total count of persistent files not syncing (combined upload + download). Reserved for future use.",
+          "minimum": 0,
+          "description": "Total count of persistent files not syncing (combined upload + download).",
           "readOnly": true
         },
         "lastUpdatedTimestamp": {
@@ -3863,33 +3864,33 @@
           "readOnly": true
         },
         "uploadStatus": {
-          "$ref": "#/definitions/SyncSessionStatus",
+          "$ref": "#/definitions/ServerEndpointSyncSessionStatus",
           "description": "Upload Status",
           "readOnly": true
         },
         "downloadStatus": {
-          "$ref": "#/definitions/SyncSessionStatus",
+          "$ref": "#/definitions/ServerEndpointSyncSessionStatus",
           "description": "Download Status",
           "readOnly": true
         },
         "uploadActivity": {
-          "$ref": "#/definitions/SyncActivityStatus",
+          "$ref": "#/definitions/ServerEndpointSyncActivityStatus",
           "description": "Upload sync activity",
           "readOnly": true
         },
         "downloadActivity": {
-          "$ref": "#/definitions/SyncActivityStatus",
+          "$ref": "#/definitions/ServerEndpointSyncActivityStatus",
           "description": "Download sync activity",
           "readOnly": true
         },
         "offlineDataTransferStatus": {
-          "$ref": "#/definitions/OfflineDataTransferState",
+          "$ref": "#/definitions/ServerEndpointOfflineDataTransferState",
           "description": "Offline Data Transfer State",
           "readOnly": true
         }
       }
     },
-    "SyncSessionStatus": {
+    "ServerEndpointSyncSessionStatus": {
       "type": "object",
       "description": "Sync Session status object.",
       "properties": {
@@ -3914,32 +3915,35 @@
         "lastSyncPerItemErrorCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Last sync per item error count.",
           "readOnly": true
         },
         "persistentFilesNotSyncingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Count of persistent files not syncing. Reserved for future use.",
+          "minimum": 0,
+          "description": "Count of persistent files not syncing.",
           "readOnly": true
         },
         "transientFilesNotSyncingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Count of transient files not syncing. Reserved for future use.",
+          "minimum": 0,
+          "description": "Count of transient files not syncing.",
           "readOnly": true
         },
         "filesNotSyncingErrors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FilesNotSyncingError"
+            "$ref": "#/definitions/ServerEndpointFilesNotSyncingError"
           },
-          "description": "Array of per-item errors coming from the last sync session. Reserved for future use.",
+          "description": "Array of per-item errors coming from the last sync session.",
           "readOnly": true
         }
       }
     },
-    "SyncActivityStatus": {
+    "ServerEndpointSyncActivityStatus": {
       "type": "object",
       "description": "Sync Session status object.",
       "properties": {
@@ -3952,36 +3956,41 @@
         "perItemErrorCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Per item error count",
           "readOnly": true
         },
         "appliedItemCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Applied item count.",
           "readOnly": true
         },
         "totalItemCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Total item count (if available)",
           "readOnly": true
         },
         "appliedBytes": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Applied bytes",
           "readOnly": true
         },
         "totalBytes": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Total bytes (if available)",
           "readOnly": true
         }
       }
     },
-    "FilesNotSyncingError": {
+    "ServerEndpointFilesNotSyncingError": {
       "type": "object",
       "description": "Files not syncing error object",
       "properties": {
@@ -3994,12 +4003,14 @@
         "persistentCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Count of persistent files not syncing with the specified error code",
           "readOnly": true
         },
         "transientCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Count of transient files not syncing with the specified error code",
           "readOnly": true
         }
@@ -4036,7 +4047,7 @@
         "NoActivity"
       ]
     },
-    "SyncActivityState": {
+    "ServerEndpointSyncActivityState": {
       "type": "string",
       "description": "Type of the sync activity state",
       "enum": [
@@ -4045,7 +4056,7 @@
         "UploadAndDownload"
       ]
     },
-    "OfflineDataTransferState": {
+    "ServerEndpointOfflineDataTransferState": {
       "type": "string",
       "description": "Type of the Health state",
       "enum": [
