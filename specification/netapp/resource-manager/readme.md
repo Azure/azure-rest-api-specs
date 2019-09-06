@@ -119,6 +119,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.NetApp/stable/2019-07-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2019-06-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/stable/2019-05-01/netapp.json
   - $(this-folder)/Microsoft.NetApp/preview/2017-08-15/netapp.json
