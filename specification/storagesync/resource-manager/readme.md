@@ -26,18 +26,27 @@ These are the global settings for the Storage Sync API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-03-01
+tag: package-2019-06
 ```
 
 
+### Tag: package-2019-06
+
+These settings apply only when `--tag=package-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-06'
+input-file:
+  - Microsoft.StorageSync/stable/2019-06-01/storagesync.json
+```
 ### Tag: package-2019-03-01
 
 These settings apply only when `--tag=package-2019-03-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-03-01'
+``` yaml $(tag) == 'package-2019-03-01'
 input-file:
   - Microsoft.StorageSync/stable/2019-03-01/storagesync.json
 ```
+
 ### Tag: package-2019-02-01
 
 These settings apply only when `--tag=package-2019-02-01` is specified on the command line.
@@ -155,7 +164,7 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.java.md](./readme.java.md)
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -176,11 +185,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
