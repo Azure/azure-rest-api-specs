@@ -5954,6 +5954,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6101,6 +6104,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6333,6 +6339,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6881,7 +6890,7 @@
         "fired": {
           "type": "boolean",
           "readOnly": true,
-          "description": "Gets a value indicating whether trigger was fired."
+          "description": "The value indicating whether trigger was fired."
         },
         "run": {
           "$ref": "#/definitions/ResourceReference",
@@ -7177,6 +7186,7 @@
     },
     "WorkflowState": {
       "type": "string",
+      "description" : "The workflow state.",
       "enum": [
         "NotSpecified",
         "Completed",
@@ -7192,6 +7202,7 @@
     },
     "WorkflowStatus": {
       "type": "string",
+      "description" : "The workflow status.",
       "enum": [
         "NotSpecified",
         "Paused",
@@ -7214,6 +7225,7 @@
     },
     "ParameterType": {
       "type": "string",
+      "description" : "The parameter type.",
       "enum": [
         "NotSpecified",
         "String",
@@ -7232,6 +7244,7 @@
     },
     "KeyType": {
       "type": "string",
+      "description" : "The key type.",
       "enum": [
         "NotSpecified",
         "Primary",
@@ -7244,6 +7257,7 @@
     },
     "Sku": {
       "type": "object",
+      "description": "The sku type.",
       "required": [
         "name"
       ],
@@ -7256,8 +7270,7 @@
           "$ref": "#/definitions/ResourceReference",
           "description": "The reference to plan."
         }
-      },
-      "description": "The sku type."
+      }
     },
     "ContentLink": {
       "type": "object",
@@ -7392,6 +7405,7 @@
     },
     "RecurrenceFrequency": {
       "type": "string",
+      "description" : "The recurrence frequency.",
       "enum": [
         "NotSpecified",
         "Second",
@@ -7590,6 +7604,7 @@
     },
     "WorkflowTriggerProvisioningState": {
       "type": "string",
+      "description" : "The workflow trigger provisioning state.",
       "enum": [
         "NotSpecified",
         "Accepted",
@@ -7617,6 +7632,7 @@
     },
     "WorkflowProvisioningState": {
       "type": "string",
+      "description" : "The workflow provisioning state.",
       "enum": [
         "NotSpecified",
         "Accepted",
@@ -7644,6 +7660,7 @@
     },
     "DayOfWeek": {
       "type": "string",
+      "description" : "The day of the week.",
       "enum": [
         "Sunday",
         "Monday",
@@ -7714,11 +7731,11 @@
         },
         "attribute" : {
           "type" : "boolean",
-          "description" : "Gets or sets a value indicating whether the property should be an attribute instead of an element."
+          "description" : "Indicates whether the property should be an attribute instead of an element."
         },
         "wrapped" : {
           "type" : "boolean",
-          "description" : "Gets or sets a value indicating whether the array elements are wrapped in a container element."
+          "description" : "Indicates whether the array elements are wrapped in a container element."
         },
         "extensions" : {
           "type" : "object",
@@ -7860,7 +7877,7 @@
         },
         "required" : {
           "type" : "boolean",
-          "description" : "Gets or sets a value indicating whether the parameter is required."
+          "description" : "Indicates whether the parameter is required."
         }
       }
     },
@@ -7910,11 +7927,11 @@
       "properties" : {
         "CanSelectParentNodes" : {
           "type" : "boolean",
-          "description" : "Gets or sets a value indicating whether parent nodes can be selected."
+          "description" : "Indicates whether parent nodes can be selected."
         },
         "CanSelectLeafNodes" : {
           "type" : "boolean",
-          "description" : "Gets or sets a value indicating whether leaf nodes can be selected."
+          "description" : "Indicates whether leaf nodes can be selected."
         }
       }
     },
@@ -7995,7 +8012,7 @@
         },
         "readOnly" : {
           "type" : "boolean",
-          "description" : "Gets or sets whether this property must be present in the a request."
+          "description" : "Indicates whether this property must be present in the a request."
         },
         "xml" : {
           "$ref" : "#/definitions/SwaggerXml",
@@ -8011,7 +8028,7 @@
         },
         "notificationUrlExtension" : {
           "type" : "boolean",
-          "description" : "Gets or sets the notification url extension. If this is set, the property's value should be a callback url for a webhook."
+          "description" : "Indicates the notification url extension. If this is set, the property's value should be a callback url for a webhook."
         },
         "dynamicSchemaOld" : {
           "$ref" : "#/definitions/SwaggerCustomDynamicSchema",
@@ -8749,6 +8766,7 @@
     },
     "IntegrationServiceEnvironmentSkuName": {
       "type": "string",
+      "description" : "The integration service environment sku name.",
       "enum": [
         "NotSpecified",
         "Premium",
@@ -8792,6 +8810,7 @@
     },
     "IntegrationServiceEnvironmentAccessEndpointType": {
       "type": "string",
+      "description" : "The integration service environment access endpoint type.",
       "enum": [
         "NotSpecified",
         "External",
@@ -8929,6 +8948,7 @@
     },
     "IntegrationAccountSkuName": {
       "type": "string",
+      "description" : "The integration account sku name.",
       "enum": [
         "NotSpecified",
         "Free",
@@ -8962,6 +8982,7 @@
     },
     "IntegrationAccountProperties": {
       "type": "object",
+      "description" : "The integration account properties.",
       "properties": {
         "integrationServiceEnvironment" : {
           "$ref": "#/definitions/IntegrationServiceEnvironment",
@@ -9122,6 +9143,7 @@
     },
     "SchemaType": {
       "type": "string",
+      "description" : "The schema type.",
       "enum": [
         "NotSpecified",
         "Xml"
@@ -9236,6 +9258,7 @@
     },
     "MapType": {
       "type": "string",
+      "description" : "The map type.",
       "enum": [
         "NotSpecified",
         "Xslt",
@@ -9347,6 +9370,7 @@
     },
     "PartnerType": {
       "type": "string",
+      "description" : "The partner type.",
       "enum": [
         "NotSpecified",
         "B2B"
@@ -9503,6 +9527,7 @@
     },
     "AgreementType": {
       "type": "string",
+      "description" : "The agreement type.",
       "enum": [
         "NotSpecified",
         "AS2",
@@ -9627,19 +9652,19 @@
       "properties": {
         "ignoreCertificateNameMismatch": {
           "type": "boolean",
-          "description": "The value indicating whether to ignore mismatch in certificate name."
+          "description": "Indicates whether to ignore mismatch in certificate name."
         },
         "supportHttpStatusCodeContinue": {
           "type": "boolean",
-          "description": "The value indicating whether to support HTTP status code 'CONTINUE'."
+          "description": "Indicates whether to support HTTP status code 'CONTINUE'."
         },
         "keepHttpConnectionAlive": {
           "type": "boolean",
-          "description": "The value indicating whether to keep the connection alive."
+          "description": "Indicates whether to keep the connection alive."
         },
         "unfoldHttpHeaders": {
           "type": "boolean",
-          "description": "The value indicating whether to unfold the HTTP headers."
+          "description": "Indicates whether to unfold the HTTP headers."
         }
       },
       "description": "The AS2 agreement acknowledgement connection settings."
@@ -10598,6 +10623,7 @@
     },
     "X12CharacterSet": {
       "type": "string",
+      "description" : "The X12 character set.",
       "enum": [
         "NotSpecified",
         "Basic",
@@ -10611,6 +10637,7 @@
     },
     "SegmentTerminatorSuffix": {
       "type": "string",
+      "description" : "The segment terminator suffix.",
       "enum": [
         "NotSpecified",
         "None",
@@ -10625,6 +10652,7 @@
     },
     "X12DateFormat": {
       "type": "string",
+      "description" : "The x12 date format.",
       "enum": [
         "NotSpecified",
         "CCYYMMDD",
@@ -10637,6 +10665,7 @@
     },
     "X12TimeFormat": {
       "type": "string",
+      "description" : "The x12 time format.",
       "enum": [
         "NotSpecified",
         "HHMM",
@@ -10651,6 +10680,7 @@
     },
     "UsageIndicator": {
       "type": "string",
+      "description" : "The usage indicator.",
       "enum": [
         "NotSpecified",
         "Test",
@@ -10664,6 +10694,7 @@
     },
     "MessageFilterType": {
       "type": "string",
+      "description" : "The message filter type.",
       "enum": [
         "NotSpecified",
         "Include",
@@ -10676,6 +10707,7 @@
     },
     "HashingAlgorithm": {
       "type": "string",
+      "description" : "The signing or hashing algorithm.",
       "enum": [
         "NotSpecified",
         "None",
@@ -10692,6 +10724,7 @@
     },
     "EncryptionAlgorithm": {
       "type": "string",
+      "description" : "The encryption algorithm.",
       "enum": [
         "NotSpecified",
         "None",
@@ -10708,6 +10741,7 @@
     },
     "SigningAlgorithm": {
       "type": "string",
+      "description" : "The signing or hashing algorithm.",
       "enum": [
         "NotSpecified",
         "Default",
@@ -10723,6 +10757,7 @@
     },
     "TrailingSeparatorPolicy": {
       "type": "string",
+      "description" : "The trailing separator policy.",
       "enum": [
         "NotSpecified",
         "NotAllowed",
@@ -11508,6 +11543,7 @@
     },
     "EdifactCharacterSet": {
       "type": "string",
+      "description" : "The edifact character set.",
       "enum": [
         "NotSpecified",
         "UNOB",
@@ -11532,6 +11568,7 @@
     },
     "EdifactDecimalIndicator": {
       "type": "string",
+      "description" : "The edifact decimal indicator.",
       "enum": [
         "NotSpecified",
         "Comma",
@@ -11870,6 +11907,7 @@
     },
     "TrackingEventsDefinition": {
       "type": "object",
+      "description" : "The tracking events definition.",
       "additionalProperties": false,
       "required": [
         "sourceType",
@@ -11904,6 +11942,7 @@
     },
     "TrackingEvent": {
       "type": "object",
+      "description" : "The tracking event.",
       "additionalProperties": false,
       "required": [
         "eventLevel",
@@ -11970,6 +12009,7 @@
     },
     "TrackingEventErrorInfo": {
       "type": "object",
+      "description" : "The tracking event error info.",
       "additionalProperties": false,
       "properties": {
         "message": {
@@ -11982,6 +12022,7 @@
     },
     "SetTriggerStateActionDefinition": {
       "type": "object",
+      "description" : "The set trigger state action definition.",
       "additionalProperties": false,
       "required": [
         "source"
@@ -11993,6 +12034,7 @@
       }
     },
     "ExpressionTraces": {
+      "description" : "The expression traces.",
       "type": "object",
       "properties": {
         "inputs": {
@@ -12004,6 +12046,7 @@
       }
     },
     "ExpressionRoot": {
+      "description" : "The expression root.",
       "type": "object",
       "properties": {
         "path": {
@@ -12018,6 +12061,7 @@
       ]
     },
     "Expression": {
+      "description" : "The expression.",
       "type": "object",
       "additionalProperties": false,
       "properties": {
