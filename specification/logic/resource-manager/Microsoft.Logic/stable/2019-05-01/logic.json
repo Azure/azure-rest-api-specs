@@ -2554,7 +2554,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }       
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs/{runName}/actions/{actionName}/scopeRepetitions/{repetitionName}": {
@@ -5912,7 +5915,7 @@
         "tags": [
           "integrationServiceEnvironmentSkus"
         ],
-        "operationId": "IntegrationServiceEnvironment_Skus",
+        "operationId": "IntegrationServiceEnvironmentSkus_List",
         "description": "Gets a list of integration service environment skus.",
         "x-ms-examples": {
           "List integration service environment skus": {
@@ -6012,7 +6015,7 @@
         "tags": [
           "integrationServiceEnvironmentNetworkHealth"
         ],
-        "operationId": "IntegrationServiceEnvironment_NetworkHealth",
+        "operationId": "IntegrationServiceEnvironmentNetworkHealth_Get",
         "description": "Gets the integration service environment network health.",
         "x-ms-examples": {
           "Gets the integration service environment network health": {
@@ -6062,7 +6065,7 @@
         "tags": [
           "integrationServiceEnvironmentManagedApis"
         ],
-        "operationId": "IntegrationServiceEnvironment_ManagedApis",
+        "operationId": "IntegrationServiceEnvironmentManagedApis_List",
         "description": "Gets the integration service environment managed Apis.",
         "x-ms-examples": {
           "Gets the integration service environment managed Apis": {
@@ -6288,9 +6291,9 @@
     "/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Logic/integrationServiceEnvironments/{integrationServiceEnvironmentName}/managedApis/{apiName}/apiOperations" : {
       "get": {
         "tags": [
-          "integrationServiceEnvironmentManagedApi"
+          "integrationServiceEnvironmentManagedApis"
         ],
-        "operationId": "IntegrationServiceEnvironment_ManagedApiOperations",
+        "operationId": "IntegrationServiceEnvironmentManagedApiOperations_List",
         "description": "Gets the managed Api operations.",
         "x-ms-examples": {
           "Gets the integration service environment managed Apis": {
@@ -7686,6 +7689,7 @@
       "description": "The parameters to generate upgraded definition."
     },
     "ApiTier" : {
+      "description" : "The Api tier.",
       "type": "string",
       "enum": [
         "NotSpecified",
@@ -7700,6 +7704,7 @@
     },
     "ApiOperationAnnotation" : {
       "type" : "object",
+      "description" : "The Api Operation Annotation.",
       "properties" : {
         "status" : {
           "$ref" : "#/definitions/StatusAnnotation"
@@ -7716,6 +7721,7 @@
     },
     "SwaggerXml" : {
       "type" : "object",
+      "description": "The Swagger XML.",
       "properties" : {
         "name" : {
           "type" : "string",
@@ -7835,6 +7841,7 @@
         },
         "parameters" : {
           "type" : "object",
+          "description" : "The parameters.",
           "additionalProperties" : {
             "$ref": "#/definitions/SwaggerCustomDynamicProperties"
           }
@@ -7975,6 +7982,7 @@
         },
         "properties" : {
           "type" : "object",
+          "x-ms-client-flatten": true,
           "description" : "The object properties",
           "additionalProperties" : {
             "$ref": "#/definitions/SwaggerSchema"
@@ -8138,6 +8146,7 @@
     },
     "StatusAnnotation" : {
       "type": "string",
+      "description" : "The status annotation.",
       "enum": [
         "NotSpecified",
         "Preview",
@@ -8150,6 +8159,7 @@
   },
     "ApiReference" : {
       "type" : "object",
+      "description" : "The Api reference.",
       "properties" : {
         "displayName" : {
           "type" : "string",
@@ -8340,6 +8350,7 @@
     },
     "ApiDeploymentParameterVisibility" : {
       "type": "string",
+      "description" : "The Api deployment parameter visibility.",
       "enum": [
         "NotSpecified",
         "Default",
@@ -8423,6 +8434,7 @@
     },
     "WsdlService" : {
       "type" : "object",
+      "description" : "The WSDL service.",
       "properties" : {
         "qualifiedName" :{
           "type" : "string",
@@ -8439,6 +8451,7 @@
     },
     "WsdlImportMethod" : {
       "type": "string",
+      "description" : "The WSDL import method.",
       "enum": [
         "NotSpecified",
         "SoapToRest",
@@ -8496,6 +8509,7 @@
     },
     "IntegrationServiceEnvironmentNetworkEndPointAccessibilityState" : {
       "type": "string",
+      "description" : "The integration service environment network endpoint accessibility state.",
       "enum": [
         "NotSpecified",
         "Unknown",
@@ -8616,6 +8630,7 @@
       ],
       "properties": {
         "outboundNetworkDependencies": {
+          "description" : "The outbound network dependencies.",
           "type" : "array",
           "items" :{
             "$ref": "#/definitions/IntegrationServiceEnvironmentNetworkDependency",
@@ -8663,6 +8678,7 @@
     },
     "ErrorResponseCode" : {
       "type": "string",
+      "description": "The error response code.",
       "enum": [
         "NotSpecified",
         "IntegrationServiceEnvironmentNotFound",
@@ -8676,6 +8692,7 @@
     },
     "AzureAsyncOperationState": {
       "type": "string",
+      "description": "The Azure async operation state.",
       "enum": [
         "Failed",
         "Succeeded",
@@ -8791,9 +8808,10 @@
         },
         "subnets" : {
           "type" : "array",
+          "description" : "The subnets.",
           "items": {
             "$ref": "#/definitions/ResourceReference",
-            "description": "The subnets."
+            "description": "The subnet."
           }
         }
       }
@@ -8859,6 +8877,7 @@
     },
     "IpAddress" : {
       "type" :"object",
+      "description" : "The ip address.",
       "properties": {
         "address" : {
           "type": "string",
@@ -8885,12 +8904,15 @@
     },
     "IntegrationServiceEnvironmentSkuDefinition" : {
       "type" : "object",
+      "description" : "The integration service environment sku definition.",
       "properties": {
         "resourceType" : {
+          "description" : "The resource type.",
           "type" : "string"
         },
         "sku" : {
           "type" : "object",
+          "description" : "The sku.",
           "properties" : {
             "name" : {
               "$ref": "#/definitions/IntegrationServiceEnvironmentSkuName",
