@@ -19,6 +19,22 @@ Generate all API versions currently shipped for this package
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2019-06
+  - tag: package-features-2015-12
+  - tag: package-locks-2016-09
+  - tag: package-policy-2019-06
+  - tag: package-policy-2019-01
+  - tag: package-policy-2018-05
+  - tag: package-policy-2018-03
+  - tag: package-policy-2016-12
+  - tag: package-resources-2019-08
+  - tag: package-resources-2019-07
+  - tag: package-resources-2019-0510
+  - tag: package-resources-2019-05
+  - tag: package-resources-2019-03
+  - tag: package-resources-2018-02
+  - tag: package-resources-2016-09
+  - tag: package-subscriptions-2018-06
+  - tag: package-subscriptions-2016-06
 ```
 
 ### Tag: package-2019-06 and java
