@@ -6,12 +6,20 @@
     "version": "2019-09-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -53,7 +61,7 @@
             "$ref": "#/parameters/ContinuationTokenParameter"
           }
         ],
-        "x-ms-pageable":  {
+        "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "responses": {
@@ -113,7 +121,7 @@
             }
           }
         ],
-        "x-ms-pageable":  {
+        "x-ms-pageable": {
           "nextLinkName": "nextLink"
         },
         "responses": {
@@ -386,7 +394,10 @@
           }
         }
       },
-      "required": ["body", "displayName"]
+      "required": [
+        "body",
+        "displayName"
+      ]
     },
     "LogAnalyticsQueryPackQuerySearchProperties": {
       "description": "Properties that define an Log Analytics QueryPack-Query search properties.",
@@ -416,7 +427,9 @@
     },
     "LogAnalyticsQueryPackQueryListResult": {
       "description": "Describes the list of Log Analytics QueryPack-Query resources.",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
