@@ -166,6 +166,18 @@ input-file:
 - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
+### Tag: profile-2019-07-01
+
+These settings apply only when `--tag=profile-2019-07-01` is specified on the command line.
+Creating this tag to pick proper resources from the profile.
+
+``` yaml $(tag) == 'profile-2019-07-01'
+input-file:
+- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+```
+
 ---
 # Code Generation
 
