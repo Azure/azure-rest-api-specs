@@ -1,16 +1,22 @@
 {
   "parameters": {
-    "api-version": "2019-07-01",
+    "api-version": "2019-06-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "networkWatcherName": "nw1",
-    "connectionMonitorName": "cm1"
+    "connectionMonitorName": "cm1",
+    "parameters": {
+      "tags": {
+        "tag1": "value1",
+        "tag2": "value2"
+      }
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "cm1",
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
+        "id": "/subscriptions/subid/`/rg1/providers/Microsoft.Network/networkWatchers/nw1/connectionMonitors/cm1",
         "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
         "properties": {
           "provisioningState": "Succeeded",
@@ -24,11 +30,15 @@
           },
           "monitoringIntervalInSeconds": 60,
           "autoStart": true,
-          "startTime": "2018-01-08T03:42:33.3387305Z",
+          "startTime": "2019-09-04T02:48:10.6797393Z",
           "monitoringStatus": "Running"
         },
-        "location": "centraluseuap",
-        "type": "Microsoft.Network/networkWatchers/connectionMonitors"
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "type": "Microsoft.Network/networkWatchers/connectionMonitors",
+        "location": "westcentralus"
       }
     }
   }
