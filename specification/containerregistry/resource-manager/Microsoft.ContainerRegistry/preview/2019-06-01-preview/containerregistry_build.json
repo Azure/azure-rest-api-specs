@@ -569,8 +569,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource."
           },
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
@@ -1368,6 +1368,7 @@
       }
     },
     "TaskRun": {
+      "description": "The taskrun that has the ARM resource and taskrun properties. \r\nThe taskrun will have the information of request and result of a run.",
       "type": "object",
       "allOf": [
         {
@@ -1381,6 +1382,7 @@
         },
         "properties": {
           "$ref": "#/definitions/TaskRunProperties",
+          "description": "The properties associated with the taskrun, i.e., request and result of the run",
           "x-ms-client-flatten": true
         }
       }
@@ -1421,9 +1423,11 @@
       }
     },
     "TaskRunProperties": {
+      "description": "The properties of a taskrun.",
       "type": "object",
       "properties": {
         "provisioningState": {
+          "description": "The privisioning state of this taskrun",
           "enum": [
             "Creating",
             "Updating",
@@ -1440,10 +1444,12 @@
           }
         },
         "runRequest": {
-            "$ref": "#/definitions/RunRequest"
+            "$ref": "#/definitions/RunRequest",
+            "description": "The request (parameters) for the run"
         },
         "runResult": {
             "$ref": "#/definitions/Run",
+            "description": "The run result of this taskrun",
             "readOnly": true
         }  
       }
@@ -1462,6 +1468,7 @@
       }
     },
     "TaskRunUpdateParameters": {
+      "description": "The parameters for updating a taskrun.",
       "type": "object",
       "properties": {
         "identity": {
@@ -1483,14 +1490,17 @@
       }
     },
     "TaskRunPropertiesUpdateParameters": {
+      "description": "The properties of a taskrun update parameters.",
       "type": "object",
       "properties": {
         "runRequest": {
-          "$ref": "#/definitions/RunRequest"
+          "$ref": "#/definitions/RunRequest",
+          "description": "The request (parameters) for the new run"
         }
       }
     },
     "TaskRunListResult": {
+      "description": "The collection of taskruns.",
       "type": "object",
       "properties": {
         "value": {
