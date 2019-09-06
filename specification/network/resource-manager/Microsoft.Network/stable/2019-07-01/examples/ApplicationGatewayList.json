@@ -1,421 +1,125 @@
 {
-  "bv": 10,
-  "component": "PlatformMetrics",
-  "computedMetrics": null,
-  "deleted": false,
-  "description": null,
-  "dimensions": null,
-  "displayName": null,
-  "enableClientEtwPublication": true,
-  "enableClientSideForking": true,
-  "enableClientSideLastSamplingMode": false,
-  "enableClientSidePublication": true,
-  "id": "SegmentationFaultCount",
-  "isFromNewPipeline": false,
-  "isQosMetric": false,
-  "metrics": null,
-  "monitors": [
-    {
-      "category": "PlatformMetrics",
-      "conditions": [
-        [
-          "applicationGatewayId",
-          "*",
-          ""
-        ],
-        [
-          "process",
-          "nginx",
-          ""
-        ],
-        [
-          "region",
-          "*",
-          ""
-        ],
-        [
-          "roleInstance",
-          "*",
-          ""
-        ],
-        [
-          "servicePrefix",
-          "wavnet*",
-          "",
-          "w"
+  "parameters": {
+    "api-version": "2019-07-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "appgw",
+            "type": "Microsoft.Network/applicationGateways",
+            "location": "southcentralus",
+            "properties": {
+              "sku": {
+                "name": "Standard_Medium",
+                "tier": "Standard",
+                "capacity": 3
+              },
+              "gatewayIPConfigurations": [
+                {
+                  "name": "appgwipc",
+                  "properties": {
+                    "subnet": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet/subnets/appgwsubnet"
+                    }
+                  }
+                }
+              ],
+              "sslCertificates": [
+                {
+                  "name": "sslcert",
+                  "properties": {
+                    "data": "base64-pfxData",
+                    "password": "pass1"
+                  }
+                }
+              ],
+              "frontendIPConfigurations": [
+                {
+                  "name": "appgwfip",
+                  "properties": {
+                    "publicIPAddress": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/appgwpip"
+                    }
+                  }
+                }
+              ],
+              "frontendPorts": [
+                {
+                  "name": "appgwfp",
+                  "properties": {
+                    "port": 443
+                  }
+                }
+              ],
+              "backendAddressPools": [
+                {
+                  "name": "appgwpool",
+                  "properties": {
+                    "backendAddresses": [
+                      {
+                        "ipAddress": "10.0.1.1"
+                      },
+                      {
+                        "ipAddress": "10.0.1.2"
+                      }
+                    ]
+                  }
+                }
+              ],
+              "backendHttpSettingsCollection": [
+                {
+                  "name": "appgwbhs",
+                  "properties": {
+                    "port": 80,
+                    "protocol": "Http",
+                    "cookieBasedAffinity": "Disabled",
+                    "requestTimeout": 30
+                  }
+                }
+              ],
+              "httpListeners": [
+                {
+                  "name": "appgwhl",
+                  "properties": {
+                    "frontendIPConfiguration": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendIPConfigurations/appgwfip"
+                    },
+                    "frontendPort": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/frontendPorts/appgwfp"
+                    },
+                    "protocol": "Https",
+                    "sslCertificate": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/sslCertificates/sslcert"
+                    },
+                    "requireServerNameIndication": false
+                  }
+                }
+              ],
+              "requestRoutingRules": [
+                {
+                  "name": "appgwrule",
+                  "properties": {
+                    "ruleType": "Basic",
+                    "httpListener": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/httpListeners/appgwhl"
+                    },
+                    "backendAddressPool": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendAddressPools/appgwpool"
+                    },
+                    "backendHttpSettings": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/applicationGateways/appgw/backendHttpSettingsCollection/appgwbhs"
+                    }
+                  }
+                }
+              ]
+            }
+          }
         ]
-      ],
-      "customLinks": [
-        {
-          "$type": "Microsoft.Online.Metrics.Common.EventConfiguration.DashboardConfiguration, Microsoft.Online.Metrics.Common",
-          "accountName": "AppGWT",
-          "autoExecute": true,
-          "dimensionsToOverride": [
-            "region",
-            "servicePrefix",
-            "process"
-          ],
-          "executionDelay": "00:01:00",
-          "lookbackDuration": "01:00:00",
-          "name": null,
-          "namespace": null,
-          "path": [
-            "Performance",
-            "Overview - GatewayId "
-          ],
-          "preIncidentQueryTimeout": "00:00:50",
-          "title": "Graphical overview of segfaults",
-          "type": "Dashboard"
-        },
-        {
-          "$type": "Microsoft.Online.Metrics.Common.EventConfiguration.DashboardConfiguration, Microsoft.Online.Metrics.Common",
-          "accountName": "AppGWT",
-          "autoExecute": true,
-          "dimensionsToOverride": [
-            "region",
-            "servicePrefix",
-            "process"
-          ],
-          "executionDelay": "00:01:00",
-          "lookbackDuration": "01:00:00",
-          "name": null,
-          "namespace": null,
-          "path": [
-            "Performance",
-            "Overview - GatewayId "
-          ],
-          "preIncidentQueryTimeout": "00:00:50",
-          "title": "Graphical overview of segfaults",
-          "type": "Dashboard"
-        },
-        {
-          "$type": "Microsoft.Online.Metrics.Common.EventConfiguration.DGrepJarvisLink, Microsoft.Online.Metrics.Common",
-          "autoExecute": true,
-          "clientQuery": "where Msg.contains(\"nginx\")\r\nlet matches = Regex.Match(Msg, \"\\] ([^\\[]+).*(error[^\\[]+)\").Groups\r\nlet process = matches[1].Value\r\nlet error = matches[2].Value",
-          "dGrepEndpoint": "https://dgrepv2-frontend-prod.trafficmanager.net/",
-          "endpointAlias": "Diagnostics PROD",
-          "endTime": "{EndTime}",
-          "eventFilters": [
-            {
-              "isScrubbed": false,
-              "monikerRegex": null,
-              "nameRegex": "LinuxAsmSecurity",
-              "namespaceRegex": "AppGWT",
-              "versionRegex": null
-            }
-          ],
-          "eventInfos": null,
-          "executionDelay": "00:01:00",
-          "identityColumns": {
-            "Region": [
-              "{Monitor.Dimension.region}"
-            ],
-            "ServicePrefix": [
-              "{Monitor.Dimension.servicePrefix}"
-            ]
-          },
-          "jarvisPathAndQuery": "?page=logs&be=DGrep&time={EndTime}&offset=-15&offsetUnit=Minutes&ep=Diagnostics%20PROD&ns=AppGWT&en=LinuxAsmSecurity&serverQuery=where%20Facility%20==%20\"kern\"%20and%20Msg.contains(\"segfault\")\r%0A&scopingConditions=[[\"Region\",\"{Monitor.Dimension.region}\"],[\"ServicePrefix\",\"{Monitor.Dimension.servicePrefix}\"]]&aggregatesVisible=true&aggregates=[\"Count%20by%20process\",\"Count%20by%20error\",\"Count%20by%20Tenant\"]&chartsVisible=false&chartEditorVisible=true&chartType=Line&chartLayers=[[\"New%20Layer\",\"\"]]&UTC=true&clientQuery=where%20Msg.contains(\"nginx\")\r%0Alet%20matches%20=%20Regex.Match(Msg,%20\"\\]%20([^\\[]+).*(error[^\\[]+)\").Groups\r%0Alet%20process%20=%20matches[1].Value\r%0Alet%20error%20=%20matches[2].Value",
-          "lookback": "00:15:00",
-          "maxResultRowCount": 15,
-          "maxRowCount": 500000,
-          "mdsEndpoint": "https://production.diagnostics.monitoring.core.windows.net/",
-          "preIncidentQueryTimeout": "00:00:50",
-          "serverQuery": "where Facility == \"kern\" and Msg.contains(\"segfault\")\r\n",
-          "serverQuerySimpleConditions": null,
-          "startTime": null,
-          "stepback": "00:00:00",
-          "title": "Logs for segfaults across all application gateways.",
-          "type": "DGrep",
-          "uxParameters": [
-            {
-              "key": "aggregatesVisible",
-              "value": true
-            },
-            {
-              "key": "aggregates",
-              "value": [
-                "Count by process",
-                "Count by error",
-                "Count by Tenant"
-              ]
-            },
-            {
-              "key": "chartsVisible",
-              "value": false
-            },
-            {
-              "key": "chartEditorVisible",
-              "value": true
-            },
-            {
-              "key": "chartType",
-              "value": "Line"
-            },
-            {
-              "key": "chartLayers",
-              "value": [
-                [
-                  "New Layer",
-                  ""
-                ]
-              ]
-            },
-            {
-              "key": "UTC",
-              "value": true
-            }
-          ]
-        },
-        {
-          "$type": "Microsoft.Online.Metrics.Common.EventConfiguration.DGrepJarvisLink, Microsoft.Online.Metrics.Common",
-          "autoExecute": false,
-          "clientQuery": "where Msg.contains(\"nginx\")\r\nlet matches = Regex.Match(Msg, \"\\] ([^\\[] ).*(error[^\\[] )\").Groups\r\nlet process = matches[1].Value\r\nlet error = matches[2].Value",
-          "dGrepEndpoint": "https://dgrepv2-frontend-prod.trafficmanager.net/",
-          "endpointAlias": "Diagnostics PROD",
-          "endTime": "{EndTime}",
-          "eventFilters": [
-            {
-              "isScrubbed": false,
-              "monikerRegex": null,
-              "nameRegex": "LinuxAsmSecurity",
-              "namespaceRegex": "AppGWT",
-              "versionRegex": null
-            }
-          ],
-          "eventInfos": null,
-          "executionDelay": "00:00:00",
-          "identityColumns": {
-            "Region": [
-              "{Monitor.Dimension.region}"
-            ],
-            "ServicePrefix": [
-              "{Monitor.Dimension.servicePrefix}"
-            ]
-          },
-          "jarvisPathAndQuery": "?page=logs&be=DGrep&time={EndTime}&offset=-15&offsetUnit=Minutes&ep=Diagnostics%20PROD&ns=AppGWT&en=LinuxAsmSecurity&serverQuery=where%20Facility%20==%20\"kern\"%20and%20Msg.contains(\"segfault\")&scopingConditions=[[\"Region\",\"{Monitor.Dimension.region}\"],[\"ServicePrefix\",\"{Monitor.Dimension.servicePrefix}\"]]&chartsVisible=false&chartEditorVisible=true&chartType=Line&chartLayers=[[\"New%20Layer\",\"\"]]&UTC=true&clientQuery=where%20Msg.contains(\"nginx\")\r%0Alet%20matches%20=%20Regex.Match(Msg,%20\"\\]%20([^\\[]%20).*(error[^\\[]%20)\").Groups\r%0Alet%20process%20=%20matches[1].Value\r%0Alet%20error%20=%20matches[2].Value",
-          "lookback": "00:15:00",
-          "maxResultRowCount": 15,
-          "maxRowCount": 0,
-          "mdsEndpoint": "https://production.diagnostics.monitoring.core.windows.net/",
-          "preIncidentQueryTimeout": "00:00:00",
-          "serverQuery": "where Facility == \"kern\" and Msg.contains(\"segfault\")",
-          "serverQuerySimpleConditions": null,
-          "startTime": null,
-          "stepback": "00:00:00",
-          "title": "Logs",
-          "type": "DGrep",
-          "uxParameters": [
-            {
-              "key": "chartsVisible",
-              "value": "false"
-            },
-            {
-              "key": "chartEditorVisible",
-              "value": "true"
-            },
-            {
-              "key": "chartType",
-              "value": "Line"
-            },
-            {
-              "key": "chartLayers",
-              "value": [
-                [
-                  "New Layer",
-                  ""
-                ]
-              ]
-            },
-            {
-              "key": "offsetUnit",
-              "value": "Minutes"
-            },
-            {
-              "key": "UTC",
-              "value": "true"
-            }
-          ]
-        },
-        {
-          "$type": "Microsoft.Online.Metrics.Common.EventConfiguration.GenericCustomLink, Microsoft.Online.Metrics.Common",
-          "autoExecute": false,
-          "executionDelay": "00:00:00",
-          "link": "https://microsoft.sharepoint.com/teams/WAG/AzureNetworking/_layouts/OneNote.aspx?id=%2Fteams%2FWAG%2FAzureNetworking%2FEngineering%2FApplication%20Gateway%2FApplication%20Gateway&wd=target%28General.one%7CC16103D0-E086-425F-8E56-7159E9F2C8FC%2F1001%20Nginx%20crashes%20with%20segmentation%20fault%7CAB1CC4BE-4E4A-4B79-A745-4E04132AF9D8%2F%29 onenote:https://microsoft.sharepoint.com/teams/WAG/AzureNetworking/Engineering/Application%20Gateway/Application%20Gateway/General.one#1001%20Nginx%20crashes%20with%20segmentation%20fault&section-id={C16103D0-E086-425F-8E56-7159E9F2C8FC}&page-id={AB1CC4BE-4E4A-4B79-A745-4E04132AF9D8}&end",
-          "preIncidentQueryTimeout": "00:00:50",
-          "title": "TSG",
-          "type": "Custom"
-        }
-      ],
-      "customMessage": "",
-      "customTitle": "",
-      "dashboardName": "",
-      "dashboardNamespace": "",
-      "dashboards": [
-        {
-          "accountName": "AppGWT",
-          "autoExecute": true,
-          "dimensionsToOverride": [
-            "region",
-            "servicePrefix",
-            "process"
-          ],
-          "executionDelay": "00:01:00",
-          "lookbackDuration": "01:00:00",
-          "name": null,
-          "namespace": null,
-          "path": [
-            "Performance",
-            "Overview - GatewayId "
-          ],
-          "preIncidentQueryTimeout": "00:00:50",
-          "title": "Graphical overview of segfaults",
-          "type": "Dashboard"
-        },
-        {
-          "accountName": "AppGWT",
-          "autoExecute": true,
-          "dimensionsToOverride": [
-            "region",
-            "servicePrefix",
-            "process"
-          ],
-          "executionDelay": "00:01:00",
-          "lookbackDuration": "01:00:00",
-          "name": null,
-          "namespace": null,
-          "path": [
-            "Performance",
-            "Overview - GatewayId "
-          ],
-          "preIncidentQueryTimeout": "00:00:50",
-          "title": "Graphical overview of segfaults",
-          "type": "Dashboard"
-        }
-      ],
-      "description": "Alert for segmentation faults/crashes in critical path. Currently the alerts are only sent out for nginx crashes.",
-      "desiredConditions": null,
-      "diagnosticsLink": "https://jarvis-west.dc.ad.msft.net/?page=logs&be=DGrep&time={EndTime}&offset=-15&offsetUnit=Minutes&ep=Diagnostics%20PROD&ns=AppGWT&en=LinuxAsmSecurity&serverQuery=where%20Facility%20==%20\"kern\"%20and%20Msg.contains(\"segfault\")\r%0A&scopingConditions=[[\"Region\",\"{Monitor.Dimension.region}\"],[\"ServicePrefix\",\"{Monitor.Dimension.servicePrefix}\"]]&aggregatesVisible=true&aggregates=[\"Count%20by%20process\",\"Count%20by%20error\",\"Count%20by%20Tenant\"]&chartsVisible=false&chartEditorVisible=true&chartType=Line&chartLayers=[[\"New%20Layer\",\"\"]]&UTC=true&clientQuery=where%20Msg.contains(\"nginx\")\r%0Alet%20matches%20=%20Regex.Match(Msg,%20\"\\]%20([^\\[]+).*(error[^\\[]+)\").Groups\r%0Alet%20process%20=%20matches[1].Value\r%0Alet%20error%20=%20matches[2].Value",
-      "eventIdentifier": {
-        "component": "PlatformMetrics",
-        "id": "SegmentationFaultCount",
-        "tenant": "AppGWT"
-      },
-      "explicitPreAgg": null,
-      "frequency": "00:03:00",
-      "healthyCountToMitigateIncident": 10,
-      "healthyDurationToMitigateIncident": "00:27:00",
-      "hintsLookbackDuration": "1.00:00:00",
-      "id": "criticalPathSegmentationFaultV2",
-      "ingestionDelay": "00:00:00",
-      "inputResourceType": "",
-      "isDisabled": false,
-      "isRegularMonitor": true,
-      "isSilent": false,
-      "isThrottled": false,
-      "lastUpdatedBy": "nizece",
-      "lastUpdateTime": "2019-06-06T15:34:51.3842555Z",
-      "lookbackDuration": "00:05:00",
-      "metadata": [],
-      "metricsViewName": "",
-      "monitorActorConfiguration": {
-        "additionalDataForMonitorsEnabled": false,
-        "baselineConcurrentGetAnomalyCallsV2": 0,
-        "baselineFastServiceUri": null,
-        "baselineFastServiceUriForAzure": null,
-        "baselineIsAnomalyBatchProcessingSize": 0,
-        "baselineServiceUri": null,
-        "baselineServiceUriForAzure": null,
-        "baselineServiceUseQueryService": false,
-        "baselineUiFacingServiceUri": null,
-        "baselineUiFacingServiceUriForAzure": null,
-        "batchReportingMonitor": false,
-        "cacheTimeToExclude": "00:00:00",
-        "certificateIdentifier": null,
-        "certificateThumbprint": null,
-        "combinationDeltaFetchLookback": "00:00:00",
-        "combinationRefreshMinInterval": "00:00:00",
-        "combinationsChunkSizePerConcurrentEvaluateBlock": 0,
-        "consecutiveMonitorTimeoutsForAlerting": 0,
-        "customizeSeverityForMonitorExecutionFailure": false,
-        "debug": false,
-        "disabled": false,
-        "disableMetricDataInAlerts": false,
-        "dqConcurrencyConfiguration": null,
-        "dynamicThresholdMaxCombinationsEvaluationThreshold": 0,
-        "enableCostReporting": false,
-        "enableDictionaryBasedMetricsSourceMatching": false,
-        "enableGroupingByCommonDimensions": false,
-        "enableHealthMonitors": false,
-        "enableMonitorTimeoutAlerts": false,
-        "enableQueryServiceQosMetricSupport": false,
-        "enableSelectPreaggregate": false,
-        "enableSubmitMetricsFromJs": false,
-        "evaluatorTimeout": "00:00:00",
-        "fetchDeltaHints": false,
-        "hintLookbackDuration": "00:00:00",
-        "includeTimeSeriesInformationInWatchdogMetadata": false,
-        "isThirdPartyStamp": false,
-        "kenshoServiceUri": null,
-        "logCombinationsInfo": false,
-        "maxBufferSizeForRetrievedData": 0,
-        "maxCombinationsCountPerPartition": 0,
-        "maxCombinationsEvaluationThreshold": 0,
-        "maxCombinationsForDataSources": 0,
-        "maxCombinationsForMetricSources": 0,
-        "maxConcurrentRetrieveOperations": 0,
-        "maxDegreeOfParallelismForEvaluateBlock": 0,
-        "maxFetchMetricsInJs": 0,
-        "minCombinationsCountToRequirePartition": 0,
-        "notQueryMetricsSourceCombinationIfNoWildcard": false,
-        "overrideHealthDataValidation": false,
-        "overrideMetricDataValidation": false,
-        "preferMetricsStore": false,
-        "previewWithHistoricData": false,
-        "removeExtraIngestionDelayInExecution": false,
-        "resourceTypeOverride": null,
-        "treatInheritNotAsWildcard": false,
-        "useAccountMigrationSupport": false,
-        "useHealthService": false,
-        "useInternalHintingApi": false,
-        "useLatestQueryRequestSerializationVersion": false,
-        "useMetricsStoreMigrationSupport": false,
-        "useNewHintingApi": false,
-        "useNewMonitorTemplateInterface": false,
-        "useNewMonitorTemplateInterfaceForDynamicThreshold": false,
-        "useOptimizedMetricFetch": false,
-        "useQueryServiceBatching": false,
-        "useQueryServiceBatchingForJs": false,
-        "useQueryServiceForCrossStampQuery": false,
-        "useQueryServiceInMdmDataQualityClient": false,
-        "useResolutionForAnomalyTimeWindowLookback": false,
-        "zeroAsNoValueSentinel": false
-      },
-      "monitorDataSourceType": 0,
-      "raiseIncientOnMonitorFailure": null,
-      "resourceType": "Region-AppGwId-RoleInstance",
-      "severityForMonitorFailure": 0,
-      "shouldMitigateIncident": true,
-      "templateSpecificParameters": {
-        "metric": "Sum"
-      },
-      "templateType": 2,
-      "tenantName": "",
-      "thresholds": [
-        {
-          "comparator": ">",
-          "healthStatus": 1,
-          "severity": 3,
-          "value": 5.0
-        }
-      ],
-      "version": 7
+      }
     }
-  ],
-  "pendingMetricsOrderingFix": false,
-  "preferQueryMetricsStore": null,
-  "replicationState": 0,
-  "tenant": "AppGWT",
-  "treatMissingSeriesAsZeros": false,
-  "version": 0,
-  "views": null
+  }
 }
