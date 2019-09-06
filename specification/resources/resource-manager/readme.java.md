@@ -39,7 +39,7 @@ batch:
 
 ### Tag: package-2019-06 and java
 
-These settings apply only when `--tag=package-2019-06--java` is specified on the command line.
+These settings apply only when `--tag=package-2019-06 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(tag) == 'package-2019-06' && $(java) && $(multiapi)
@@ -261,7 +261,7 @@ generate-interface: true
 
 ### Tag: package-subscriptions-2018-06 and java
 
-These settings apply only when `--tag=package-subscriptions-2018-06--java` is specified on the command line.
+These settings apply only when `--tag=package-subscriptions-2018-06 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(tag) == 'package-subscriptions-2018-06' && $(java) && $(multiapi)
@@ -274,7 +274,7 @@ generate-interface: true
 
 ### Tag: package-subscriptions-2016-06 and java
 
-These settings apply only when `--tag=package-subscriptions-2016-06--java` is specified on the command line.
+These settings apply only when `--tag=package-subscriptions-2016-06 --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
 ``` yaml $(tag) == 'package-subscriptions-2016-06' && $(java) && $(multiapi)
