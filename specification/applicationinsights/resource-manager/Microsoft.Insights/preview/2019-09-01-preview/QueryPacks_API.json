@@ -6,12 +6,20 @@
     "version": "2019-09-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -308,7 +316,10 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": ["create", "read"]
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
         },
         "tags": {
           "additionalProperties": {
@@ -317,7 +328,9 @@
           "description": "Resource tags"
         }
       },
-      "required": ["location"],
+      "required": [
+        "location"
+      ],
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
@@ -345,7 +358,9 @@
           "$ref": "#/definitions/QueryPacksResource"
         }
       ],
-      "required": ["properties"],
+      "required": [
+        "properties"
+      ],
       "description": "An Log Analytics QueryPack definition."
     },
     "LogAnalyticsQueryPackProperties": {
@@ -377,7 +392,9 @@
     },
     "LogAnalyticsQueryPackListResult": {
       "description": "Describes the list of Log Analytics QueryPack resources.",
-      "required": ["value"],
+      "required": [
+        "value"
+      ],
       "properties": {
         "value": {
           "type": "array",
