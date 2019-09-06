@@ -554,7 +554,7 @@
           {
             "name": "taskRunName",
             "in": "path",
-            "description": "The run request name.",
+            "description": "The task run name.",
             "required": true,
             "type": "string"
           },
@@ -569,8 +569,17 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
+          },
           "201": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource."
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
@@ -1368,7 +1377,7 @@
       }
     },
     "TaskRun": {
-      "description": "The taskrun that has the ARM resource and taskrun properties. \r\nThe taskrun will have the information of request and result of a run.",
+      "description": "The task run that has the ARM resource and properties. \r\nThe task run will have the information of request and result of a run.",
       "type": "object",
       "allOf": [
         {
@@ -1423,7 +1432,7 @@
       }
     },
     "TaskRunProperties": {
-      "description": "The properties of a taskrun.",
+      "description": "The properties of task run.",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1449,7 +1458,7 @@
         },
         "runResult": {
             "$ref": "#/definitions/Run",
-            "description": "The run result of this taskrun",
+            "description": "The result of this task run",
             "readOnly": true
         }  
       }
