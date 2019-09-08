@@ -158,6 +158,45 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/listInvoiceSectionsWithCreateSubscriptionPermission": {
+      "post": {
+        "tags": [
+          "BillingAccounts"
+        ],
+        "x-ms-examples": {
+          "InvoiceSectionsListWithCreateSubPermission": {
+            "$ref": "./examples/InvoiceSectionsListWithCreateSubPermission.json"
+          }
+        },
+        "operationId": "BillingAccounts_ListInvoiceSectionsByCreateSubscriptionPermission",
+        "description": "Lists all invoice sections with create subscription permission for a user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/InvoiceSectionListWithCreateSubPermissionResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/paymentMethods": {
       "get": {
         "tags": [
@@ -2591,7 +2630,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default": {
       "get": {
         "tags": [
           "BillingProperties"
@@ -2619,48 +2658,6 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/BillingProperty"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/products/{productName}/updateAutoRenew": {
-      "post": {
-        "tags": [
-          "Products"
-        ],
-        "operationId": "Products_UpdateAutoRenewByBillingAccount",
-        "description": "Cancel auto renew for product by product id and billing account name",
-        "x-ms-examples": {
-          "ProductsCancelByBillingAccount": {
-            "$ref": "./examples/ProductCancelByBillingAccount.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/productNameParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/updateAutoRenewRequestParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/UpdateAutoRenewOperation"
             }
           },
           "default": {
@@ -5568,6 +5565,56 @@
         "displayName": {
           "description": "The name of the InvoiceSection.",
           "type": "string"
+        }
+      }
+    },
+    "InvoiceSectionListWithCreateSubPermissionResult": {
+      "type": "object",
+      "description": "Result of listing invoice section properties with create subscription permission.",
+      "properties": {
+        "value": {
+          "description": "The list of invoice section properties with create subscription permission.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/InvoiceSectionWithCreateSubPermission"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "InvoiceSectionWithCreateSubPermission": {
+      "description": "Invoice section properties with create subscription permission.",
+      "properties": {
+        "invoiceSectionId": {
+          "description": "Invoice Section Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionDisplayName": {
+          "description": "Invoice Section display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing profile Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileDisplayName": {
+          "description": "Billing profile display name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enabledAzurePlans": {
+          "description": "Enabled azure plans for the associated billing profile.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzurePlan"
+          }
         }
       }
     },
