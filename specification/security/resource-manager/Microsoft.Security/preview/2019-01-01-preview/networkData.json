@@ -76,6 +76,45 @@
         }
       }
     },
+    "/{resourceId}/providers/Microsoft.Security/NetworkData": {
+      "get": {
+        "x-ms-examples": {
+          "Get the network data collection of a resource": {
+            "$ref": "./examples/networkData/GetNetworkData_resourceCollection_example.json"
+          }
+        },
+        "tags": [
+          "NetworkData"
+        ],
+        "description": "Get the network data collection on your scanned resource",
+        "operationId": "NetworkData_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/Expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkData"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/{resourceId}/providers/Microsoft.Security/NetworkData/default": {
       "get": {
         "x-ms-examples": {
