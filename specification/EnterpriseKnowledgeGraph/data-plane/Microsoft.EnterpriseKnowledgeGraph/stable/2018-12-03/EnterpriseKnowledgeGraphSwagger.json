@@ -12,53 +12,46 @@
         ],
         "summary": "Get conversation result based on the natural language utterance.",
         "operationId": "ExecNLQuery",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
-            "name": "service",
             "in": "query",
-            "description": "Decide to get result from which service, e.g. AI-V1.0, AI-V2.0, Search or any combination of them.",
+            "name": "service",
+            "description": "Decide to get result from which service, e.g. AI-V1.0, AI-V2.0, Search or any combination of them. \r\n1=AI-V1.0; \r\n2=AI-V2.0; \r\n3=AI-V1.0 Then AI-V2.0; \r\n4=Search; \r\n5=AI-V1.0 Then Search; \r\n7=Default; \r\n",
+            "type": "integer",
+            "format": "int32",
+            "enum": [
+              1,
+              2,
+              3,
+              4,
+              5,
+              7
+            ]
+          },
+          {
+            "in": "body",
+            "name": "body",
             "schema": {
-              "enum": [
-                1,
-                2,
-                3,
-                4,
-                5,
-                7
-              ],
-              "type": "integer",
-              "description": "\r\n1=AI-V1.0; \r\n2=AI-V2.0; \r\n3=AI-V1.0 Then AI-V2.0; \r\n4=Search; \r\n5=AI-V1.0 Then Search; \r\n7=Default; \r\n",
-              "format": "int32"
+              "$ref": "#/definitions/ConverseRequest"
             }
           }
         ],
-        "requestBody": {
-          "content": {
-            "application/json": {
-              "schema": {
-                "$ref": "#/definitions/ConverseRequest"
-              }
-            }
-          }
-        },
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/ConverseResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ConverseResponse"
             }
           },
           "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/ErrorResponse"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         }
@@ -506,1165 +499,1055 @@
           }
         }
       },
-    "/search/suggestions": {
-      "get": {
-        "tags": [
-          "Search"
-        ],
-        "summary": "Provide suggestions from query",
-        "operationId": "GetQuerySuggestion",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "q",
-            "type": "string"
-          },
-          {
-            "in": "query",
-            "name": "top",
-            "type": "integer",
-            "format": "int32",
-            "default": 10
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "uniqueItems": false,
-              "type": "array",
-              "items": {
-                "type": "string"
+      "/search/suggestions": {
+        "get": {
+          "tags": [
+            "Search"
+          ],
+          "summary": "Provide suggestions from query",
+          "operationId": "GetQuerySuggestion",
+          "produces": [
+            "application/json"
+          ],
+          "parameters": [
+            {
+              "in": "query",
+              "name": "q",
+              "type": "string"
+            },
+            {
+              "in": "query",
+              "name": "top",
+              "type": "integer",
+              "format": "int32",
+              "default": 10
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Success",
+              "schema": {
+                "uniqueItems": false,
+                "type": "array",
+                "items": {
+                  "type": "string"
+                }
+              }
+            },
+            "default": {
+              "schema": {
+                "$ref": "#/definitions/NotFoundResult"
               }
             }
-          },
-          "default": {
-            "schema": {
-              "$ref": "#/definitions/NotFoundResult"
-            }
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
-    "ConverseRequest": {
-      "required": [
-        "utterance"
-      ],
-      "type": "object",
-      "properties": {
-        "utterance": {
-          "type": "string"
-        },
-        "entityType": {
-          "type": "string"
-        },
-        "maximumNumberOfInterpretations": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "thresholdForDisambiguation": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maximumNumberOfDisambiguations": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "maximumNumberOfEntities": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "previousInterpretations": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/InterpretationResult"
-          }
-        },
-        "entityIdOnly": {
-          "type": "boolean"
-        },
-        "requesterEntityId": {
-          "type": "string"
-        },
-        "modelId": {
-          "type": "string"
-        }
-      }
-    },
-    "ConverseResponse": {
-      "type": "object",
-      "properties": {
-        "totalNumberOfEntitiesFound": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "entityDocuments": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityDocument"
-          }
-        },
-        "interpretationResult": {
-          "$ref": "#/definitions/InterpretationResult"
-        },
-        "restatement": {
-          "type": "string"
-        },
-        "suggestions": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityDocumentSuggestionChip"
           }
         }
       }
     },
-    "ErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorMessage"
-        }
-      }
-    },
-    "ErrorMessage": {
-      "type": "object",
-      "properties": {
-        "code": {
-          "type": "string",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EntityDocument": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "types": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityType"
-          },
-          "readOnly": true
-        },
-        "dominantType": {
-          "$ref": "#/definitions/EntityType"
-        },
+    "definitions": {
+      "ConverseRequest": {
+        "required": [
+          "utterance"
+        ],
+        "type": "object",
         "properties": {
-          "type": "object",
-          "additionalProperties": {
+          "utterance": {
+            "type": "string"
+          },
+          "entityType": {
+            "type": "string"
+          },
+          "maximumNumberOfInterpretations": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "thresholdForDisambiguation": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "maximumNumberOfDisambiguations": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "maximumNumberOfEntities": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "previousInterpretations": {
             "uniqueItems": false,
             "type": "array",
             "items": {
-              "$ref": "#/definitions/EntityNode"
+              "$ref": "#/definitions/InterpretationResult"
             }
           },
-          "readOnly": true
-        },
-        "timeStamp": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "sourceIds": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+          "entityIdOnly": {
+            "type": "boolean"
+          },
+          "requesterEntityId": {
+            "type": "string"
+          },
+          "modelId": {
+            "type": "string"
+          }
+        }
+      },
+      "ConverseResponse": {
+        "type": "object",
+        "properties": {
+          "totalNumberOfEntitiesFound": {
             "format": "int32",
             "type": "integer"
           },
-          "readOnly": true
-        }
-      }
-    },
-    "InterpretationResult": {
-      "type": "object",
-      "properties": {
-        "utterance": {
-          "$ref": "#/definitions/Utterance"
-        },
-        "sparql": {
-          "$ref": "#/definitions/SparqlQuery"
-        },
-        "confidence": {
-          "format": "double",
-          "type": "number"
-        },
-        "mainProjection": {
-          "type": "string"
-        },
-        "mainProjectionEntityType": {
-          "type": "string"
-        },
-        "restatement": {
-          "type": "string"
-        }
-      }
-    },
-    "EntityDocumentSuggestionChip": {
-      "type": "object",
-      "properties": {
-        "actionEntityDocument": {
-          "$ref": "#/definitions/EntityDocument"
-        },
-        "suggestionInterpretation": {
-          "$ref": "#/definitions/InterpretationResult"
-        },
-        "actionEntityId": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EntityType": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "EntityNode": {
-      "type": "object",
-      "properties": {
-        "sourceIds": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
+          "entityDocuments": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EntityDocument"
+            }
           },
-          "readOnly": true
+          "interpretationResult": {
+            "$ref": "#/definitions/InterpretationResult"
+          },
+          "restatement": {
+            "type": "string"
+          },
+          "suggestions": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EntityDocumentSuggestionChip"
+            }
+          }
         }
-      }
-    },
-    "NotFoundResult": {
+      },
+      "ErrorResponse": {
+        "type": "object",
+        "properties": {
+          "error": {
+            "$ref": "#/definitions/ErrorMessage"
+          }
+        }
+      },
+      "ErrorMessage": {
+        "type": "object",
+        "properties": {
+          "code": {
+            "type": "string"
+          },
+          "message": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityDocument": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            
+          },
+          "types": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EntityType"
+            },
+            
+          },
+          "dominantType": {
+            "$ref": "#/definitions/EntityType"
+          },
+          "properties": {
+            "type": "object",
+            "additionalProperties": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/EntityNode"
+              }
+            },
+            
+          },
+          "timeStamp": {
+            "format": "date-time",
+            "type": "string"
+          },
+          "sourceIds": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "InterpretationResult": {
+        "type": "object",
+        "properties": {
+          "utterance": {
+            "$ref": "#/definitions/Utterance"
+          },
+          "sparql": {
+            "$ref": "#/definitions/SparqlQuery"
+          },
+          "confidence": {
+            "format": "double",
+            "type": "number"
+          },
+          "mainProjection": {
+            "type": "string"
+          },
+          "mainProjectionEntityType": {
+            "type": "string"
+          },
+          "restatement": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityDocumentSuggestionChip": {
+        "type": "object",
+        "properties": {
+          "actionEntityDocument": {
+            "$ref": "#/definitions/EntityDocument"
+          },
+          "suggestionInterpretation": {
+            "$ref": "#/definitions/InterpretationResult"
+          },
+          "actionEntityId": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityType": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityNode": {
+        "type": "object",
+        "properties": {
+          "sourceIds": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "NotFoundResult": {
         "type": "object",
         "properties": {
           "statusCode": {
             "type": "integer",
-            "format": "int32",
-            "readOnly": true
+            "format": "int32"
           }
         }
       },
-    "Utterance": {
-      "type": "object",
-      "properties": {
-        "text": {
-          "type": "string",
-          "readOnly": true
-        },
-        "unrecognizedTerms": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+      "Utterance": {
+        "type": "object",
+        "properties": {
+          "text": {
             "type": "string"
           },
-          "readOnly": true
-        }
-      }
-    },
-    "SparqlQuery": {
-      "type": "object",
-      "properties": {
-        "namespaceMap": {
-          "$ref": "#/definitions/NamespaceMapper"
-        },
-        "baseUri": {
-          "type": "string"
-        },
-        "defaultGraphs": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "namedGraphs": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SparqlVariable"
-          },
-          "readOnly": true
-        },
-        "describeVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IToken"
-          },
-          "readOnly": true
-        },
-        "queryType": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6,
-            7,
-            8,
-            9,
-            10
-          ],
-          "type": "integer",
-          "readOnly": true
-        },
-        "specialType": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3
-          ],
-          "type": "integer",
-          "readOnly": true
-        },
-        "rootGraphPattern": {
-          "$ref": "#/definitions/GraphPattern"
-        },
-        "constructTemplate": {
-          "$ref": "#/definitions/GraphPattern"
-        },
-        "orderBy": {
-          "$ref": "#/definitions/ISparqlOrderBy"
-        },
-        "groupBy": {
-          "$ref": "#/definitions/ISparqlGroupBy"
-        },
-        "having": {
-          "$ref": "#/definitions/ISparqlFilter"
-        },
-        "bindings": {
-          "$ref": "#/definitions/BindingsPattern"
-        },
-        "describer": {
-          "$ref": "#/definitions/ISparqlDescribe"
-        },
-        "algebraOptimisers": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IAlgebraOptimiser"
+          "unrecognizedTerms": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           }
-        },
-        "expressionFactories": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ISparqlCustomExpressionFactory"
-          }
-        },
-        "propertyFunctionFactories": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IPropertyFunctionFactory"
-          }
-        },
-        "limit": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "offset": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "timeout": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "partialResultsOnTimeout": {
-          "type": "boolean"
-        },
-        "queryExecutionTime": {
-          "type": "string"
-        },
-        "isAggregate": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isOptimised": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isSubQuery": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "hasDistinctModifier": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "hasSolutionModifier": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "virtualCount": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "usesDefaultDataset": {
-          "type": "boolean",
-          "readOnly": true
         }
-      }
-    },
-    "NamespaceMapper": {
-      "type": "object",
-      "properties": {
-        "prefixes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+      },
+      "SparqlQuery": {
+        "type": "object",
+        "properties": {
+          "namespaceMap": {
+            "$ref": "#/definitions/NamespaceMapper"
+          },
+          "baseUri": {
             "type": "string"
           },
-          "readOnly": true
-        }
-      }
-    },
-    "SparqlVariable": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "isResultVariable": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isAggregate": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isProjection": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "aggregate": {
-          "$ref": "#/definitions/ISparqlAggregate"
-        },
-        "projection": {
-          "$ref": "#/definitions/ISparqlExpression"
-        }
-      }
-    },
-    "IToken": {
-      "type": "object",
-      "properties": {
-        "tokenType": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "value": {
-          "type": "string",
-          "readOnly": true
-        },
-        "startLine": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "endLine": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "startPosition": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "endPosition": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "length": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "GraphPattern": {
-      "type": "object",
-      "properties": {
-        "isOptional": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isFiltered": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isUnion": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isGraph": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isEmpty": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isExists": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isNotExists": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isMinus": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isService": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isOptimised": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isSilent": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "hasInlineData": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "hasModifier": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "filter": {
-          "$ref": "#/definitions/ISparqlFilter"
-        },
-        "graphSpecifier": {
-          "$ref": "#/definitions/IToken"
-        },
-        "hasChildGraphPatterns": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "childGraphPatterns": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+          "defaultGraphs": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "namedGraphs": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/SparqlVariable"
+            }
+          },
+          "describeVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/IToken"
+            }
+          },
+          "queryType": {
+            "format": "int32",
+            "description": "\r\n0=Unknown; \r\n1=Ask; \r\n2=Construct; \r\n3=Describe; \r\n4=DescribeAll; \r\n5=Select; \r\n6=SelectDistinct; \r\n7=SelectReduced; \r\n8=SelectAll; \r\n9=SelectAllDistinct; \r\n10=SelectAllReduced; \r\n",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6,
+              7,
+              8,
+              9,
+              10
+            ],
+            "type": "integer"
+          },
+          "specialType": {
+            "format": "int32",
+            "description": "\r\n0=DistinctGraphs; \r\n1=NotApplicable; \r\n2=Unknown; \r\n3=AskAnyTriples; \r\n",
+            "enum": [
+              0,
+              1,
+              2,
+              3
+            ],
+            "type": "integer"
+          },
+          "rootGraphPattern": {
             "$ref": "#/definitions/GraphPattern"
           },
-          "readOnly": true
-        },
-        "triplePatterns": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ITriplePattern"
+          "constructTemplate": {
+            "$ref": "#/definitions/GraphPattern"
           },
-          "readOnly": true
-        },
-        "isSubQuery": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "usesDefaultDataset": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "unplacedFilters": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+          "orderBy": {
+            "$ref": "#/definitions/ISparqlOrderBy"
+          },
+          "groupBy": {
+            "$ref": "#/definitions/ISparqlGroupBy"
+          },
+          "having": {
             "$ref": "#/definitions/ISparqlFilter"
           },
-          "readOnly": true
-        },
-        "unplacedAssignments": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IAssignmentPattern"
+          "bindings": {
+            "$ref": "#/definitions/BindingsPattern"
           },
-          "readOnly": true
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
+          "describer": {
+            "$ref": "#/definitions/ISparqlDescribe"
           },
-          "readOnly": true
-        },
-        "inlineData": {
-          "$ref": "#/definitions/BindingsPattern"
-        }
-      }
-    },
-    "ISparqlOrderBy": {
-      "type": "object",
-      "properties": {
-        "child": {
-          "$ref": "#/definitions/ISparqlOrderBy"
-        },
-        "context": {
-          "$ref": "#/definitions/SparqlEvaluationContext"
-        },
-        "descending": {
-          "type": "boolean"
-        },
-        "isSimple": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
+          "algebraOptimisers": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/IAlgebraOptimiser"
+            }
           },
-          "readOnly": true
-        },
-        "expression": {
-          "$ref": "#/definitions/ISparqlExpression"
-        }
-      }
-    },
-    "ISparqlGroupBy": {
-      "type": "object",
-      "properties": {
-        "child": {
-          "$ref": "#/definitions/ISparqlGroupBy"
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
+          "expressionFactories": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ISparqlCustomExpressionFactory"
+            }
           },
-          "readOnly": true
-        },
-        "projectableVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
+          "propertyFunctionFactories": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/IPropertyFunctionFactory"
+            }
           },
-          "readOnly": true
-        },
-        "expression": {
-          "$ref": "#/definitions/ISparqlExpression"
-        },
-        "assignVariable": {
-          "type": "string"
-        }
-      }
-    },
-    "ISparqlFilter": {
-      "type": "object",
-      "properties": {
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "expression": {
-          "$ref": "#/definitions/ISparqlExpression"
-        }
-      }
-    },
-    "BindingsPattern": {
-      "type": "object",
-      "properties": {
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "fixedVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "floatingVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "tuples": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/BindingTuple"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ISparqlDescribe": {
-      "type": "object"
-    },
-    "IAlgebraOptimiser": {
-      "type": "object"
-    },
-    "ISparqlCustomExpressionFactory": {
-      "type": "object",
-      "properties": {
-        "availableExtensionFunctions": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "availableExtensionAggregates": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "IPropertyFunctionFactory": {
-      "type": "object"
-    },
-    "ISparqlAggregate": {
-      "type": "object",
-      "properties": {
-        "expression": {
-          "$ref": "#/definitions/ISparqlExpression"
-        },
-        "type": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6
-          ],
-          "type": "integer",
-          "readOnly": true
-        },
-        "functor": {
-          "type": "string",
-          "readOnly": true
-        },
-        "arguments": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ISparqlExpression"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ISparqlExpression": {
-      "type": "object",
-      "properties": {
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "type": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6
-          ],
-          "type": "integer",
-          "readOnly": true
-        },
-        "functor": {
-          "type": "string",
-          "readOnly": true
-        },
-        "arguments": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ISparqlExpression"
-          },
-          "readOnly": true
-        },
-        "canParallelise": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "ITriplePattern": {
-      "type": "object",
-      "properties": {
-        "patternType": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6
-          ],
-          "type": "integer",
-          "readOnly": true
-        },
-        "isAcceptAll": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "floatingVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "fixedVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "usesDefaultDataset": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "hasNoBlankVariables": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "IAssignmentPattern": {
-      "type": "object",
-      "properties": {
-        "assignExpression": {
-          "$ref": "#/definitions/ISparqlExpression"
-        },
-        "variableName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "patternType": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4,
-            5,
-            6
-          ],
-          "type": "integer",
-          "readOnly": true
-        },
-        "isAcceptAll": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "floatingVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "fixedVariables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "usesDefaultDataset": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "hasNoBlankVariables": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "SparqlEvaluationContext": {
-      "type": "object",
-      "properties": {
-        "query": {
-          "$ref": "#/definitions/SparqlQuery"
-        },
-        "data": {
-          "$ref": "#/definitions/ISparqlDataset"
-        },
-        "processor": {
-          "$ref": "#/definitions/ISparqlQueryAlgebraProcessor[BaseMultiset,SparqlEvaluationContext]"
-        },
-        "inputMultiset": {
-          "$ref": "#/definitions/BaseMultiset"
-        },
-        "outputMultiset": {
-          "$ref": "#/definitions/BaseMultiset"
-        },
-        "binder": {
-          "$ref": "#/definitions/SparqlResultBinder"
-        },
-        "trimTemporaryVariables": {
-          "type": "boolean"
-        },
-        "remainingTimeout": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "queryTimeout": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "queryTime": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        },
-        "queryTimeTicks": {
-          "format": "int64",
-          "type": "integer",
-          "readOnly": true
-        }
-      }
-    },
-    "BindingTuple": {
-      "type": "object",
-      "properties": {
-        "values": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KeyValuePair[String,PatternItem]"
-          },
-          "readOnly": true
-        },
-        "isEmpty": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "isComplete": {
-          "type": "boolean",
-          "readOnly": true
-        }
-      }
-    },
-    "ISparqlDataset": {
-      "type": "object",
-      "properties": {
-        "defaultGraphUris": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "activeGraphUris": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "usesUnionDefaultGraph": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "graphs": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IGraph"
-          },
-          "readOnly": true
-        },
-        "graphUris": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "hasTriples": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "triples": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "object"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ISparqlQueryAlgebraProcessor[BaseMultiset,SparqlEvaluationContext]": {
-      "type": "object"
-    },
-    "BaseMultiset": {
-      "type": "object",
-      "properties": {
-        "virtualCount": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "isEmpty": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "count": {
-          "format": "int32",
-          "type": "integer",
-          "readOnly": true
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "sets": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ISet"
-          },
-          "readOnly": true
-        },
-        "setIDs": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+          "limit": {
             "format": "int32",
             "type": "integer"
           },
-          "readOnly": true
-        }
-      }
-    },
-    "SparqlResultBinder": {
-      "type": "object",
-      "properties": {
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        },
-        "bindingIDs": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+          "offset": {
             "format": "int32",
             "type": "integer"
           },
-          "readOnly": true
-        },
-        "groups": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
+          "timeout": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "partialResultsOnTimeout": {
+            "type": "boolean"
+          },
+          "queryExecutionTime": {
+            "type": "string"
+          },
+          "isAggregate": {
+            "type": "boolean",
+            
+          },
+          "isOptimised": {
+            "type": "boolean",
+            
+          },
+          "isSubQuery": {
+            "type": "boolean",
+            
+          },
+          "hasDistinctModifier": {
+            "type": "boolean"
+          },
+          "hasSolutionModifier": {
+            "type": "boolean"
+          },
+          "virtualCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "usesDefaultDataset": {
+            "type": "boolean"
+          }
+        }
+      },
+      "NamespaceMapper": {
+        "type": "object",
+        "properties": {
+          "prefixes": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SparqlVariable": {
+        "type": "object",
+        "properties": {
+          "name": {
+            "type": "string"
+          },
+          "isResultVariable": {
+            "type": "boolean"
+          },
+          "isAggregate": {
+            "type": "boolean"
+          },
+          "isProjection": {
+            "type": "boolean"
+          },
+          "aggregate": {
+            "$ref": "#/definitions/ISparqlAggregate"
+          },
+          "projection": {
+            "$ref": "#/definitions/ISparqlExpression"
+          }
+        }
+      },
+      "IToken": {
+        "type": "object",
+        "properties": {
+          "tokenType": {
+            "format": "int32",
+            "type": "integer",
+            
+          },
+          "value": {
+            "type": "string"
+          },
+          "startLine": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "endLine": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "startPosition": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "endPosition": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "length": {
+            "format": "int32",
+            "type": "integer"
+          }
+        }
+      },
+      "GraphPattern": {
+        "type": "object",
+        "properties": {
+          "isOptional": {
+            "type": "boolean"
+          },
+          "isFiltered": {
+            "type": "boolean"
+          },
+          "isUnion": {
+            "type": "boolean"
+          },
+          "isGraph": {
+            "type": "boolean"
+          },
+          "isEmpty": {
+            "type": "boolean"
+          },
+          "isExists": {
+            "type": "boolean"
+          },
+          "isNotExists": {
+            "type": "boolean"
+          },
+          "isMinus": {
+            "type": "boolean"
+          },
+          "isService": {
+            "type": "boolean"
+          },
+          "isOptimised": {
+            "type": "boolean"
+          },
+          "isSilent": {
+            "type": "boolean"
+          },
+          "hasInlineData": {
+            "type": "boolean"
+          },
+          "hasModifier": {
+            "type": "boolean"
+          },
+          "filter": {
+            "$ref": "#/definitions/ISparqlFilter"
+          },
+          "graphSpecifier": {
+            "$ref": "#/definitions/IToken"
+          },
+          "hasChildGraphPatterns": {
+            "type": "boolean"
+          },
+          "childGraphPatterns": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/GraphPattern"
+            }
+          },
+          "triplePatterns": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ITriplePattern"
+            }
+          },
+          "isSubQuery": {
+            "type": "boolean"
+          },
+          "usesDefaultDataset": {
+            "type": "boolean"
+          },
+          "unplacedFilters": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ISparqlFilter"
+            }
+          },
+          "unplacedAssignments": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/IAssignmentPattern"
+            }
+          },
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "inlineData": {
+            "$ref": "#/definitions/BindingsPattern"
+          }
+        }
+      },
+      "ISparqlOrderBy": {
+        "type": "object",
+        "properties": {
+          "child": {
+            "$ref": "#/definitions/ISparqlOrderBy"
+          },
+          "context": {
+            "$ref": "#/definitions/SparqlEvaluationContext"
+          },
+          "descending": {
+            "type": "boolean"
+          },
+          "isSimple": {
+            "type": "boolean"
+          },
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "expression": {
+            "$ref": "#/definitions/ISparqlExpression"
+          }
+        }
+      },
+      "ISparqlGroupBy": {
+        "type": "object",
+        "properties": {
+          "child": {
+            "$ref": "#/definitions/ISparqlGroupBy"
+          },
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "projectableVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "expression": {
+            "$ref": "#/definitions/ISparqlExpression"
+          },
+          "assignVariable": {
+            "type": "string"
+          }
+        }
+      },
+      "ISparqlFilter": {
+        "type": "object",
+        "properties": {
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "expression": {
+            "$ref": "#/definitions/ISparqlExpression"
+          }
+        }
+      },
+      "BindingsPattern": {
+        "type": "object",
+        "properties": {
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fixedVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "floatingVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "tuples": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/BindingTuple"
+            }
+          }
+        }
+      },
+      "ISparqlDescribe": {
+        "type": "object"
+      },
+      "IAlgebraOptimiser": {
+        "type": "object"
+      },
+      "ISparqlCustomExpressionFactory": {
+        "type": "object",
+        "properties": {
+          "availableExtensionFunctions": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "availableExtensionAggregates": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "IPropertyFunctionFactory": {
+        "type": "object"
+      },
+      "ISparqlAggregate": {
+        "type": "object",
+        "properties": {
+          "expression": {
+            "$ref": "#/definitions/ISparqlExpression"
+          },
+          "type": {
+            "format": "int32",
+            "description": "\r\n0=Primary; \r\n1=UnaryOperator; \r\n2=BinaryOperator; \r\n3=Function; \r\n4=Aggregate; \r\n5=SetOperator; \r\n6=GraphOperator; \r\n",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "functor": {
+            "type": "string"
+          },
+          "arguments": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ISparqlExpression"
+            }
+          }
+        }
+      },
+      "ISparqlExpression": {
+        "type": "object",
+        "properties": {
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "type": {
+            "format": "int32",
+            "description": "\r\n0=Primary; \r\n1=UnaryOperator; \r\n2=BinaryOperator; \r\n3=Function; \r\n4=Aggregate; \r\n5=SetOperator; \r\n6=GraphOperator; \r\n",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "functor": {
+            "type": "string"
+          },
+          "arguments": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ISparqlExpression"
+            }
+          },
+          "canParallelise": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ITriplePattern": {
+        "type": "object",
+        "properties": {
+          "patternType": {
+            "format": "int32",
+            "description": "\r\n0=Match; \r\n1=Filter; \r\n2=BindAssignment; \r\n3=LetAssignment; \r\n4=SubQuery; \r\n5=Path; \r\n6=PropertyFunction; \r\n",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "isAcceptAll": {
+            "type": "boolean"
+          },
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "floatingVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fixedVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "usesDefaultDataset": {
+            "type": "boolean"
+          },
+          "hasNoBlankVariables": {
+            "type": "boolean"
+          }
+        }
+      },
+      "IAssignmentPattern": {
+        "type": "object",
+        "properties": {
+          "assignExpression": {
+            "$ref": "#/definitions/ISparqlExpression"
+          },
+          "variableName": {
+            "type": "string",
+            
+          },
+          "patternType": {
+            "format": "int32",
+            "description": "\r\n0=Match; \r\n1=Filter; \r\n2=BindAssignment; \r\n3=LetAssignment; \r\n4=SubQuery; \r\n5=Path; \r\n6=PropertyFunction; \r\n",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4,
+              5,
+              6
+            ],
+            "type": "integer"
+          },
+          "isAcceptAll": {
+            "type": "boolean"
+          },
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "floatingVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "fixedVariables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "usesDefaultDataset": {
+            "type": "boolean"
+          },
+          "hasNoBlankVariables": {
+            "type": "boolean"
+          }
+        }
+      },
+      "SparqlEvaluationContext": {
+        "type": "object",
+        "properties": {
+          "query": {
+            "$ref": "#/definitions/SparqlQuery"
+          },
+          "data": {
+            "$ref": "#/definitions/ISparqlDataset"
+          },
+          "processor": {
+            "$ref": "#/definitions/ISparqlQueryAlgebraProcessor[BaseMultiset,SparqlEvaluationContext]"
+          },
+          "inputMultiset": {
+            "$ref": "#/definitions/BaseMultiset"
+          },
+          "outputMultiset": {
+            "$ref": "#/definitions/BaseMultiset"
+          },
+          "binder": {
+            "$ref": "#/definitions/SparqlResultBinder"
+          },
+          "trimTemporaryVariables": {
+            "type": "boolean"
+          },
+          "remainingTimeout": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "queryTimeout": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "queryTime": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "queryTimeTicks": {
+            "format": "int64",
+            "type": "integer"
+          }
+        }
+      },
+      "BindingTuple": {
+        "type": "object",
+        "properties": {
+          "values": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/KeyValuePair[String,PatternItem]"
+            }
+          },
+          "isEmpty": {
+            "type": "boolean"
+          },
+          "isComplete": {
+            "type": "boolean"
+          }
+        }
+      },
+      "ISparqlDataset": {
+        "type": "object",
+        "properties": {
+          "defaultGraphUris": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "activeGraphUris": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "usesUnionDefaultGraph": {
+            "type": "boolean"
+          },
+          "graphs": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/IGraph"
+            }
+          },
+          "graphUris": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "hasTriples": {
+            "type": "boolean"
+          },
+          "triples": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "ISparqlQueryAlgebraProcessor[BaseMultiset,SparqlEvaluationContext]": {
+        "type": "object"
+      },
+      "BaseMultiset": {
+        "type": "object",
+        "properties": {
+          "virtualCount": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "isEmpty": {
+            "type": "boolean"
+          },
+          "count": {
+            "format": "int32",
+            "type": "integer",
+            
+          },
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "sets": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ISet"
+            }
+          },
+          "setIDs": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "format": "int32",
+              "type": "integer"
+            }
+          }
+        }
+      },
+      "SparqlResultBinder": {
+        "type": "object",
+        "properties": {
+          "variables": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "bindingIDs": {
             "uniqueItems": false,
             "type": "array",
             "items": {
@@ -1672,446 +1555,450 @@
               "type": "integer"
             }
           },
-          "readOnly": true
-        }
-      }
-    },
-    "KeyValuePair[String,PatternItem]": {
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "readOnly": true
-        },
-        "value": {
-          "$ref": "#/definitions/PatternItem"
-        }
-      }
-    },
-    "IGraph": {
-      "type": "object",
-      "properties": {
-        "baseUri": {
-          "type": "string"
-        },
-        "isEmpty": {
-          "type": "boolean",
-          "readOnly": true
-        },
-        "namespaceMap": {
-          "$ref": "#/definitions/INamespaceMapper"
-        },
-        "nodes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/INode"
-          },
-          "readOnly": true
-        },
-        "triples": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "object"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ISet": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "format": "int32",
-          "type": "integer"
-        },
-        "values": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/INode"
-          },
-          "readOnly": true
-        },
-        "variables": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "PatternItem": {
-      "type": "object",
-      "properties": {
-        "bindingContext": {
-          "$ref": "#/definitions/SparqlResultBinder"
-        },
-        "rigorousEvaluation": {
-          "type": "boolean"
-        },
-        "variableName": {
-          "type": "string",
-          "readOnly": true
-        },
-        "repeated": {
-          "type": "boolean"
-        }
-      }
-    },
-    "INamespaceMapper": {
-      "type": "object",
-      "properties": {
-        "prefixes": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "INode": {
-      "type": "object",
-      "properties": {
-        "nodeType": {
-          "format": "int32",
-          "enum": [
-            0,
-            1,
-            2,
-            3,
-            4
-          ],
-          "type": "integer",
-          "readOnly": true
-        },
-        "graph": {
-          "$ref": "#/definitions/IGraph"
-        },
-        "graphUri": {
-          "type": "string"
-        }
-      }
-    },
-    "SearchOptions": {
-      "type": "object",
-      "properties": {
-        "entities": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "SparqlQueryResponse": {
-      "type": "object",
-      "properties": {
-        "sparqlResponse": {
-          "$ref": "#/definitions/SparqlQueryDbResponse"
-        },
-        "metadata": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "object"
-          }
-        }
-      }
-    },
-    "SparqlQueryDbResponse": {
-      "type": "object",
-      "properties": {
-        "head": {
-          "$ref": "#/definitions/ResultHeader"
-        },
-        "results": {
-          "$ref": "#/definitions/Result"
-        }
-      }
-    },
-    "ResultHeader": {
-      "type": "object",
-      "properties": {
-        "vars": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "Result": {
-      "type": "object",
-      "properties": {
-        "bindings": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "type": "object",
-            "additionalProperties": {
-              "$ref": "#/definitions/RdfTerm"
+          "groups": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "format": "int32",
+                "type": "integer"
+              }
             }
           }
         }
-      }
-    },
-    "RdfTerm": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "type": "string"
-        },
-        "value": {
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "IngestionJobResponse": {
-      "type": "object",
-      "properties": {
-        "JobId": {
-          "type": "string"
-        }
-      }
-    },
-    "ErrorResponseBody": {
-      "type": "object",
-      "properties": {
-        "ErrorCode": {
-          "type": "string"
-        },
-        "Message": {
-          "type": "string"
-        }
-      }
-    },
-    "BatchStatusApiResponse": {
-      "type": "object",
-      "properties": {
-        "JobId": {
-          "description": "JobId",
-          "type": "string"
-        },
-        "Stage": {
-          "description": "Stage of Ingestion i.e Upload or Mapping or Conflation or GraphUpdate",
-          "type": "string"
-        },
-        "TotalDocsInBatch": {
-          "format": "int32",
-          "description": "Total documents in batch",
-          "type": "integer"
-        },
-        "SuccessDocsCount": {
-          "format": "int32",
-          "description": "Count of documents processed successfully",
-          "type": "integer"
-        },
-        "FailedDocsCount": {
-          "format": "int32",
-          "description": "Count of documents failed",
-          "type": "integer"
-        },
-        "ExceptionMessage": {
-          "description": "Aggregated exception message",
-          "type": "string"
-        },
-        "TimeTakenInStage": {
-          "description": "Time taken for stage in hh:mm:ss.s format",
-          "type": "string"
-        }
-      }
-    },
-    "IngestionJobPostRequest": {
-      "description": "IngestionJobPostRequest",
-      "type": "object",
-      "properties": {
-        "Type": {
-          "description": "Type of Ingestion payload \r\nblob or 0 : Url of the blob having payload \r\npayload or 1: Raw Payload in Json format",
-          "enum": [
-            "blob",
-            "payload"
-          ],
-          "type": "string"
-        },
-        "SourceId": {
-          "format": "int32",
-          "description": "Source Id Note:SourceId can be obtained from UX",
-          "type": "integer"
-        },
-        "BlobUrls": {
-          "description": "List of blob Urls having payload \r\nNote:Only one blob url is allowed for BatchIngestion",
-          "type": "array",
-          "items": {
+      },
+      "KeyValuePair[String,PatternItem]": {
+        "type": "object",
+        "properties": {
+          "key": {
             "type": "string"
-          }
-        },
-        "RawPayloads": {
-          "description": "List of payloads in json format Max Recommended size is 250 MB",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/LoadRequest"
-          }
-        },
-        "ForceUpdate": {
-          "description": "Whether to process document when there are no changes \r\ntrue : Unmodified documents are reprocessed \r\nfalse : Unmodified documents are not processed\r\nNote : Default value is false",
-          "type": "boolean"
-        },
-        "IngestionMode": {
-          "description": "Mode of Ingestion \r\nBatch or 0:Graph for the source is recreated with current data\r\nNote : BatchIngestion allowed only when no other ingestion is in progress for the source\r\nOnly one blob url is allowed for BatchIngestion\r\nStreaming or 1:Graph for the source is appended with current data\r\nNote : Default mode is streaming",
-          "enum": [
-            "Batch",
-            "Streaming"
-          ],
-          "type": "string"
-        }
-      }
-    },
-    "BatchInfoApiResponse": {
-      "description": "Status of Job",
-      "type": "object",
-      "properties": {
-        "JobId": {
-          "description": "Job Id",
-          "type": "string"
-        },
-        "SourceId": {
-          "format": "int32",
-          "description": "Source Id Note:SourceId can be obtained from UX",
-          "type": "integer"
-        },
-        "BatchState": {
-          "description": "State of job \r\nNew : Job processing is in progress\r\nDone: Job processing is completed without any issues\r\nDoneWithErrors: Job processing is completed with issues\r\nExpired: Job processing is stopped after trying for maximum attempts",
-          "type": "string"
-        },
-        "StartTime": {
-          "description": "Start time of job",
-          "type": "string"
-        },
-        "LastUpdated": {
-          "description": "LastUpdated time of job",
-          "type": "string"
-        },
-        "OntologyVersionId": {
-          "format": "int32",
-          "description": "Ontology Version",
-          "type": "integer"
-        },
-        "OperationType": {
-          "type": "string"
-        }
-      }
-    },
-    "LoadRequest": {
-      "type": "object",
-      "properties": {
-        "Id": {
-          "description": "DocumentId",
-          "type": "string"
-        },
-        "PayLoad": {
-          "description": "RawPayload in Json format",
-          "type": "string"
-        }
-      }
-    },
-    "IntentionResponse": {
-      "type": "object",
-      "properties": {
-        "sentence": {
-          "type": "string"
-        },
-        "intentionLabel": {
-          "type": "string"
-        },
-        "isGraphIntention": {
-          "type": "boolean"
-        },
-        "intentionGraphType": {
-          "type": "string"
-        },
-        "intentionScore": {
-          "format": "float",
-          "type": "number"
-        },
-        "mentions": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/MentionResponse"
+          },
+          "value": {
+            "$ref": "#/definitions/PatternItem"
           }
         }
-      }
-    },
-    "MentionResponse": {
-      "type": "object",
-      "properties": {
-        "mention": {
-          "type": "string"
-        },
-        "type": {
-          "type": "string"
-        }
-      }
-    },
-    "DocumentSearchResult": {
-      "type": "object",
-      "properties": {
-        "debugInfo": {
-          "type": "string"
-        },
-        "recommendedQuery": {
-          "type": "string"
-        },
-        "rewrittenQuery": {
-          "type": "string"
-        },
-        "originalQuery": {
-          "type": "string"
-        },
-        "engineName": {
-          "type": "string"
-        },
-        "indexName": {
-          "type": "string"
-        },
-        "totalHits": {
-          "format": "int64",
-          "type": "integer"
-        },
-        "results": {
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/EntityBaseResult"
+      },
+      "IGraph": {
+        "type": "object",
+        "properties": {
+          "baseUri": {
+            "type": "string"
+          },
+          "isEmpty": {
+            "type": "boolean",
+            
+          },
+          "namespaceMap": {
+            "$ref": "#/definitions/INamespaceMapper"
+          },
+          "nodes": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/INode"
+            }
+          },
+          "triples": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "object"
+            }
           }
-        },
-        "filter": {
-          "type": "string"
         }
-      }
-    },
-    "EntityBaseResult": {
-      "type": "object",
-      "properties": {
-        "score": {
-          "format": "double",
-          "type": "number"
-        },
-        "highlights": {
-          "type": "object",
-          "additionalProperties": {
+      },
+      "ISet": {
+        "type": "object",
+        "properties": {
+          "id": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "values": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/INode"
+            }
+          },
+          "variables": {
             "uniqueItems": false,
             "type": "array",
             "items": {
               "type": "string"
+            }
+          }
+        }
+      },
+      "PatternItem": {
+        "type": "object",
+        "properties": {
+          "bindingContext": {
+            "$ref": "#/definitions/SparqlResultBinder"
+          },
+          "rigorousEvaluation": {
+            "type": "boolean"
+          },
+          "variableName": {
+            "type": "string"
+          },
+          "repeated": {
+            "type": "boolean"
+          }
+        }
+      },
+      "INamespaceMapper": {
+        "type": "object",
+        "properties": {
+          "prefixes": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "INode": {
+        "type": "object",
+        "properties": {
+          "nodeType": {
+            "format": "int32",
+            "description": "\r\n0=Blank; \r\n1=Uri; \r\n2=Literal; \r\n3=GraphLiteral; \r\n4=Variable; \r\n",
+            "enum": [
+              0,
+              1,
+              2,
+              3,
+              4
+            ],
+            "type": "integer"
+          },
+          "graph": {
+            "$ref": "#/definitions/IGraph"
+          },
+          "graphUri": {
+            "type": "string"
+          }
+        }
+      },
+      "SearchOptions": {
+        "type": "object",
+        "properties": {
+          "entities": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "SparqlQueryResponse": {
+        "type": "object",
+        "properties": {
+          "sparqlResponse": {
+            "$ref": "#/definitions/SparqlQueryDbResponse"
+          },
+          "metadata": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "object"
+            }
+          }
+        }
+      },
+      "SparqlQueryDbResponse": {
+        "type": "object",
+        "properties": {
+          "head": {
+            "$ref": "#/definitions/ResultHeader"
+          },
+          "results": {
+            "$ref": "#/definitions/Result"
+          }
+        }
+      },
+      "ResultHeader": {
+        "type": "object",
+        "properties": {
+          "vars": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      },
+      "Result": {
+        "type": "object",
+        "properties": {
+          "bindings": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/RdfTerm"
+              }
+            }
+          }
+        }
+      },
+      "RdfTerm": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string"
+          },
+          "value": {
+            "type": "string",
+            
+          }
+        }
+      },
+      "IngestionJobResponse": {
+        "type": "object",
+        "properties": {
+          "JobId": {
+            "type": "string"
+          }
+        }
+      },
+      "ErrorResponseBody": {
+        "type": "object",
+        "properties": {
+          "ErrorCode": {
+            "type": "string"
+          },
+          "Message": {
+            "type": "string"
+          }
+        }
+      },
+      "BatchStatusApiResponse": {
+        "type": "object",
+        "properties": {
+          "JobId": {
+            "description": "JobId",
+            "type": "string"
+          },
+          "Stage": {
+            "description": "Stage of Ingestion i.e Upload or Mapping or Conflation or GraphUpdate",
+            "type": "string"
+          },
+          "TotalDocsInBatch": {
+            "format": "int32",
+            "description": "Total documents in batch",
+            "type": "integer"
+          },
+          "SuccessDocsCount": {
+            "format": "int32",
+            "description": "Count of documents processed successfully",
+            "type": "integer"
+          },
+          "FailedDocsCount": {
+            "format": "int32",
+            "description": "Count of documents failed",
+            "type": "integer"
+          },
+          "ExceptionMessage": {
+            "description": "Aggregated exception message",
+            "type": "string"
+          },
+          "TimeTakenInStage": {
+            "description": "Time taken for stage in hh:mm:ss.s format",
+            "type": "string"
+          }
+        }
+      },
+      "IngestionJobPostRequest": {
+        "description": "IngestionJobPostRequest",
+        "type": "object",
+        "properties": {
+          "Type": {
+            "description": "Type of Ingestion payload \r\nblob or 0 : Url of the blob having payload \r\npayload or 1: Raw Payload in Json format",
+            "enum": [
+              "blob",
+              "payload"
+            ],
+            "type": "string"
+          },
+          "SourceId": {
+            "format": "int32",
+            "description": "Source Id Note:SourceId can be obtained from UX",
+            "type": "integer"
+          },
+          "BlobUrls": {
+            "description": "List of blob Urls having payload \r\nNote:Only one blob url is allowed for BatchIngestion",
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "RawPayloads": {
+            "description": "List of payloads in json format Max Recommended size is 250 MB",
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/LoadRequest"
+            }
+          },
+          "ForceUpdate": {
+            "description": "Whether to process document when there are no changes \r\ntrue : Unmodified documents are reprocessed \r\nfalse : Unmodified documents are not processed\r\nNote : Default value is false",
+            "type": "boolean"
+          },
+          "IngestionMode": {
+            "description": "Mode of Ingestion \r\nBatch or 0:Graph for the source is recreated with current data\r\nNote : BatchIngestion allowed only when no other ingestion is in progress for the source\r\nOnly one blob url is allowed for BatchIngestion\r\nStreaming or 1:Graph for the source is appended with current data\r\nNote : Default mode is streaming",
+            "enum": [
+              "Batch",
+              "Streaming"
+            ],
+            "type": "string"
+          }
+        }
+      },
+      "BatchInfoApiResponse": {
+        "description": "Status of Job",
+        "type": "object",
+        "properties": {
+          "JobId": {
+            "description": "Job Id",
+            "type": "string"
+          },
+          "SourceId": {
+            "format": "int32",
+            "description": "Source Id Note:SourceId can be obtained from UX",
+            "type": "integer"
+          },
+          "BatchState": {
+            "description": "State of job \r\nNew : Job processing is in progress\r\nDone: Job processing is completed without any issues\r\nDoneWithErrors: Job processing is completed with issues\r\nExpired: Job processing is stopped after trying for maximum attempts",
+            "type": "string"
+          },
+          "StartTime": {
+            "description": "Start time of job",
+            "type": "string"
+          },
+          "LastUpdated": {
+            "description": "LastUpdated time of job",
+            "type": "string"
+          },
+          "OntologyVersionId": {
+            "format": "int32",
+            "description": "Ontology Version",
+            "type": "integer"
+          },
+          "OperationType": {
+            "type": "string"
+          }
+        }
+      },
+      "LoadRequest": {
+        "type": "object",
+        "properties": {
+          "Id": {
+            "description": "DocumentId",
+            "type": "string"
+          },
+          "PayLoad": {
+            "description": "RawPayload in Json format",
+            "type": "string"
+          }
+        }
+      },
+      "IntentionResponse": {
+        "type": "object",
+        "properties": {
+          "sentence": {
+            "type": "string"
+          },
+          "intentionLabel": {
+            "type": "string"
+          },
+          "isGraphIntention": {
+            "type": "boolean"
+          },
+          "intentionGraphType": {
+            "type": "string"
+          },
+          "intentionScore": {
+            "format": "float",
+            "type": "number"
+          },
+          "mentions": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/MentionResponse"
+            }
+          }
+        }
+      },
+      "MentionResponse": {
+        "type": "object",
+        "properties": {
+          "mention": {
+            "type": "string"
+          },
+          "type": {
+            "type": "string"
+          }
+        }
+      },
+      "DocumentSearchResult": {
+        "type": "object",
+        "properties": {
+          "debugInfo": {
+            "type": "string"
+          },
+          "recommendedQuery": {
+            "type": "string"
+          },
+          "rewrittenQuery": {
+            "type": "string"
+          },
+          "originalQuery": {
+            "type": "string"
+          },
+          "engineName": {
+            "type": "string"
+          },
+          "indexName": {
+            "type": "string"
+          },
+          "totalHits": {
+            "format": "int64",
+            "type": "integer"
+          },
+          "results": {
+            "uniqueItems": false,
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/EntityBaseResult"
+            }
+          },
+          "filter": {
+            "type": "string"
+          }
+        }
+      },
+      "EntityBaseResult": {
+        "type": "object",
+        "properties": {
+          "score": {
+            "format": "double",
+            "type": "number"
+          },
+          "highlights": {
+            "type": "object",
+            "additionalProperties": {
+              "uniqueItems": false,
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
             }
           }
         }
