@@ -423,6 +423,9 @@
 					},
 					{
 						"$ref": "#/parameters/TopQueryParameter"
+					},
+					{
+						"$ref": "#/parameters/SkipTokenParameter"
 					}
 				],
 				"x-ms-pageable": {
@@ -1056,6 +1059,15 @@
 			"format": "int32",
 			"description": "Number of records to return.",
 			"minimum": 1,
+			"x-ms-parameter-location": "method"
+		},
+		"SkipTokenParameter":
+		{
+			"name": "$skiptoken",	
+			"in": "query",
+			"type": "string",
+			"required": false,
+			"description": "Skiptoken is only used if a previous operation returned a partial result. If a previous response contains a nextLink element, the value of the nextLink element will include a skiptoken parameter that specifies a starting point to use for subsequent calls",
 			"x-ms-parameter-location": "method"
 		},
 		"IfMatchRequiredParameter": {
