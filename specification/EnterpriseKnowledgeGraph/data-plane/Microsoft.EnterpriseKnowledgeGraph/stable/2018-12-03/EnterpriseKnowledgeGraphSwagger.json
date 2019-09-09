@@ -12,50 +12,53 @@
         ],
         "summary": "Get conversation result based on the natural language utterance.",
         "operationId": "ExecNLQuery",
-        "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
-        ],
-        "produces": [
-          "application/json"
-        ],
         "parameters": [
           {
-            "in": "query",
             "name": "service",
+            "in": "query",
             "description": "Decide to get result from which service, e.g. AI-V1.0, AI-V2.0, Search or any combination of them.",
-            "type": "integer",
-            "format": "int32",
-            "enum": [
-              1,
-              2,
-              3,
-              4,
-              5,
-              7
-            ]
-          },
-          {
-            "in": "body",
-            "name": "body",
             "schema": {
-              "$ref": "#/definitions/ConverseRequest"
+              "enum": [
+                1,
+                2,
+                3,
+                4,
+                5,
+                7
+              ],
+              "type": "integer",
+              "description": "\r\n1=AI-V1.0; \r\n2=AI-V2.0; \r\n3=AI-V1.0 Then AI-V2.0; \r\n4=Search; \r\n5=AI-V1.0 Then Search; \r\n7=Default; \r\n",
+              "format": "int32"
             }
           }
         ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/ConverseRequest"
+              }
+            }
+          }
+        },
         "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ConverseResponse"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ConverseResponse"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/ErrorResponse"
+                }
+              }
             }
           }
         }
@@ -631,6 +634,27 @@
           "items": {
             "$ref": "#/definitions/EntityDocumentSuggestionChip"
           }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorMessage"
+        }
+      }
+    },
+    "ErrorMessage": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "readOnly": true
         }
       }
     },
