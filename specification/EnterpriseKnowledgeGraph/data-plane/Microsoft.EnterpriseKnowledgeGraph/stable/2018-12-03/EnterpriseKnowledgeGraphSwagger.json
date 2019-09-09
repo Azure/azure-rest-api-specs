@@ -60,7 +60,7 @@
     "/entitydocument/entities/{id}": {
       "get": {
         "tags": [
-          "Entitydocument"
+          "EntityDocument"
         ],
         "operationId": "GetEntityDocument",
         "produces": [
@@ -68,32 +68,22 @@
         ],
         "parameters": [
           {
-            "name": "id",
             "in": "path",
+            "name": "id",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
+            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/EntityDocument"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/EntityDocument"
             }
           },
           "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/definitions/NotFoundResult"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/NotFoundResult"
             }
           }
         }
@@ -102,7 +92,7 @@
     "/entitydocument/entities": {
       "post": {
         "tags": [
-          "Entitydocument"
+          "EntityDocument"
         ],
         "operationId": "GetEntityDocuments",
         "consumes": [
@@ -123,24 +113,16 @@
         "responses": {
           "200": {
             "description": "Success",
-            "content": {
-              "application/json": {
-                "schema": {
-                  "type": "object",
-                  "additionalProperties": {
-                    "$ref": "#/components/schemas/EntityDocument"
-                  }
-                }
+            "schema": {
+              "type": "object",
+              "additionalProperties": {
+                "$ref": "#/definitions/EntityDocument"
               }
             }
           },
           "default": {
-            "content": {
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/NotFoundResult"
-                }
-              }
+            "schema": {
+              "$ref": "#/definitions/NotFoundResult"
             }
           }
         }
@@ -1510,8 +1492,7 @@
           },
           "count": {
             "format": "int32",
-            "type": "integer",
-            
+            "type": "integer"
           },
           "variables": {
             "uniqueItems": false,
