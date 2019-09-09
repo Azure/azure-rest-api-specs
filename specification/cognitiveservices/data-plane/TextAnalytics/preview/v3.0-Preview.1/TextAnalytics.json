@@ -628,7 +628,7 @@
           \"documents\": [
             {
               \"language\": \"en\",
-              \"id\": "1",
+              \"id\": \"1\",
               \"text\": \"Hello world. This is some input text that I love.\"
             },
             {
@@ -685,18 +685,7 @@
           "type": "array",
           "description" : "(Optional) An array of details about specific errors that led to this reported error.",
           "items" : {
-              "code": {
-                "type": "string",
-                "description" : "One of a server-defined set of error codes."
-              },
-              "message": {
-                "type": "string",
-                "description" : "A human-readable representation of the error."
-              },
-              "target": {
-                "type": "string",
-                "description" : "(Optional) The target of the error."
-              },
+            "$ref" : "#/definitions/ErrorResponse"
           }
         }
       }
