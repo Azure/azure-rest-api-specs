@@ -36,7 +36,7 @@
           "content": {
             "application/json": {
               "schema": {
-                "$ref": "#/components/schemas/ConverseRequest"
+                "$ref": "#/definitions/ConverseRequest"
               }
             }
           }
@@ -47,7 +47,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ConverseResponse"
+                  "$ref": "#/definitions/ConverseResponse"
                 }
               }
             }
@@ -56,7 +56,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/ErrorResponse"
+                  "$ref": "#/definitions/ErrorResponse"
                 }
               }
             }
@@ -71,29 +71,36 @@
         ],
         "operationId": "GetEntityDocument",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "id",
+            "in": "path",
             "required": true,
-            "type": "string"
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
           "200": {
             "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/EntityDocument"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/EntityDocument"
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/definitions/NotFoundResult"
+                }
+              }
             }
           }
         }
@@ -106,15 +113,10 @@
         ],
         "operationId": "GetEntityDocuments",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "application/json"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -126,18 +128,25 @@
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
           "200": {
             "description": "Success",
-            "schema": {
-              "type": "object",
-              "additionalProperties": {
-                "$ref": "#/definitions/EntityDocument"
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": {
+                    "$ref": "#/components/schemas/EntityDocument"
+                  }
+                }
+              }
+            }
+          },
+          "default": {
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/NotFoundResult"
+                }
               }
             }
           }
@@ -151,15 +160,10 @@
         ],
         "operationId": "ExecGraphQuery",
         "consumes": [
-          "application/json-patch+json",
-          "application/json",
-          "text/json",
-          "application/*+json"
+          "text/plain"
         ],
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
@@ -171,16 +175,16 @@
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
           "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/SparqlQueryResponse"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -764,6 +768,16 @@
         }
       }
     },
+    "NotFoundResult": {
+        "type": "object",
+        "properties": {
+          "statusCode": {
+            "type": "integer",
+            "format": "int32",
+            "readOnly": true
+          }
+        }
+      },
     "Utterance": {
       "type": "object",
       "properties": {
