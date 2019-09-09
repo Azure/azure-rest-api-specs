@@ -637,6 +637,7 @@
           "Workflows"
         ],
         "operationId": "Workflows_Move",
+        "x-ms-long-running-operation": true,
         "description": "Moves an existing workflow.",
         "x-ms-examples": {
           "Move a workflow": {
@@ -1547,6 +1548,7 @@
           "WorkflowTriggerHistories"
         ],
         "operationId": "WorkflowTriggerHistories_Resubmit",
+        "x-ms-long-running-operation": true,
         "description": "Resubmits a workflow run based on the trigger history.",
         "x-ms-examples": {
           "Resubmit a workflow run based on the trigger history": {
@@ -1599,7 +1601,10 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        } 
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Logic/workflows/{workflowName}/runs": {
@@ -11937,13 +11942,16 @@
       ],
       "properties": {
         "sourceType": {
+          "description": "The source type.",
           "type": "string"
         },
         "trackEventsOptions": {
+          "description": "The track events options.",
           "$ref": "#/definitions/TrackEventsOperationOptions"
         },
         "events": {
           "type": "array",
+          "description": "The events.",
           "items": {
             "$ref": "#/definitions/TrackingEvent"
           }
@@ -11973,16 +11981,20 @@
       ],
       "properties": {
         "eventLevel": {
+          "description" : "The event level.",
           "$ref": "#/definitions/EventLevel"
         },
         "eventTime": {
           "type": "string",
+          "description": "The event time.",
           "format": "date-time"
         },
         "recordType": {
+          "description": "The record type.",
           "$ref": "#/definitions/TrackingRecordType"
         },
         "error": {
+          "description": "The error.",
           "$ref": "#/definitions/TrackingEventErrorInfo"
         }
       }
@@ -12035,9 +12047,11 @@
       "additionalProperties": false,
       "properties": {
         "message": {
+          "description" : "The message.",
           "type": "string"
         },
         "code": {
+          "description": "The code.",
           "type": "string"
         }
       }
@@ -12051,6 +12065,7 @@
       ],
       "properties": {
         "source": {
+          "description": "The source.",
           "$ref": "#/definitions/WorkflowTrigger"
         }
       }
@@ -12088,11 +12103,13 @@
       "additionalProperties": false,
       "properties": {
         "text": {
+          "description": "The text.",
           "type": "string"
         },
         "value": {},
         "subexpressions": {
           "type": "array",
+          "description" : "The sub expressions.",
           "items": {
             "$ref": "#/definitions/Expression"
           }
