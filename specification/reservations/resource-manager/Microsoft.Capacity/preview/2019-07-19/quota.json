@@ -72,10 +72,10 @@
 						},
 						"headers": {
 							"ETag": {
-							  "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-							  "type": "string"
+								"description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+								"type": "string"
 							}
-						  }
+						}
 					},
 					"default": {
 						"description": "Error response describing why the operation failed.",
@@ -127,7 +127,7 @@
 						}
 					},
 					{
-						"$ref": "#/parameters/IfMatchOptionalParameter"
+						"$ref": "#/parameters/IfMatchRequiredParameter"
 					}
 				],
 				"responses": {
@@ -193,10 +193,10 @@
 						},
 						"headers": {
 							"ETag": {
-							  "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-							  "type": "string"
+								"description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+								"type": "string"
 							}
-						  }
+						}
 					},
 					"default": {
 						"description": "Error response describing why the operation failed.",
@@ -248,7 +248,7 @@
 						}
 					},
 					{
-						"$ref": "#/parameters/IfMatchOptionalParameter"
+						"$ref": "#/parameters/IfMatchRequiredParameter"
 					}
 				],
 				"responses": {
@@ -310,10 +310,9 @@
 							"$ref": "#/definitions/QuotaLimits"
 						}
 					},
-						{
-							"$ref": "#/parameters/IfMatchRequiredParameter"
-						}
-					
+					{
+						"$ref": "#/parameters/IfMatchRequiredParameter"
+					}
 				],
 				"responses": {
 					"200": {
@@ -445,45 +444,44 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/serviceLimitsRequests/$metadata":	{
-		"get": {
-			"tags": [
-				"QuotaRequests"
-			],
-			"operationId": "ServiceLimitsRequests_GetMetadata",
-			"description": "Gets OData metadata XML document.",
-			"produces": [
-			  "application/xml"
-			],
-			"parameters": [
-				{
-					"$ref": "#/parameters/SubscriptionIdInParameters"
+		"/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/serviceLimitsRequests/$metadata": {
+			"get": {
+				"tags": [
+					"QuotaRequests"
+				],
+				"operationId": "ServiceLimitsRequests_GetMetadata",
+				"description": "Gets OData metadata XML document.",
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdInParameters"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OData metadata XML document.",
+						"schema": {
+							"$ref": "#/definitions/MetadataDocument"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ExceptionResponse"
+						}
+					}
 				},
-			  {
-				"$ref": "#/parameters/ApiVersionParameter"
-			  }
-			],
-			"responses": {
-			  "200": {
-				"description": "OData metadata XML document.",
-				"schema": {
-				  "$ref": "#/definitions/MetadataDocument"
+				"x-ms-examples": {
+					"Get metadata": {
+						"$ref": "./examples/GetMetadata_ServiceLimitsRequests.json"
+					}
 				}
-			  },
-			  "default": {
-				"description": "Error response describing why the operation failed.",
-				"schema": {
-				  "$ref": "#/definitions/ExceptionResponse"
-				}
-			  }
-			},
-			"x-ms-examples": {
-			  "Get metadata": {
-				"$ref": "./examples/GetMetadata_ServiceLimitsRequests.json"
-			  }
 			}
-		  }
-		
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/autoQuotaIncrease": {
 			"get": {
@@ -952,7 +950,6 @@
 		"MetadataDocument": {
 			"description": "Metadata XML document.",
 			"type": "string"
-		  
 		},
 		"ExceptionResponse": {
 			"type": "object",
@@ -1061,21 +1058,13 @@
 			"minimum": 1,
 			"x-ms-parameter-location": "method"
 		},
-		"IfMatchOptionalParameter": {
-			"name": "If-Match",
-			"in": "header",
-			"required": false,
-			"description": "ETag of the Entity. Not required when creating an entity, but required when updating an entity.",
-			"type": "string",
-			"x-ms-parameter-location": "method"
-		  },
-		  "IfMatchRequiredParameter": {
+		"IfMatchRequiredParameter": {
 			"name": "If-Match",
 			"in": "header",
 			"required": true,
 			"description": "ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.",
 			"type": "string",
 			"x-ms-parameter-location": "method"
-		  }
+		}
 	}
 }
