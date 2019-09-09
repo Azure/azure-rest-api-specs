@@ -18,19 +18,19 @@ const verboseExec = async (commandLine: string, options: ExecOptions = {}) => {
     result = await childProcess.exec(commandLine, options);
   } catch (e) {
     result = e;
- }
+  }
 
- if (!result.code) {
-   return 0;
- }
+  if (!result.code) {
+    return 0;
+  }
 
- if (result.stdout) {
-   logError(result.stdout);
- }
- if (result.stderr) {
-   console.error(result.stderr);
- }
- return result.code;
+  if (result.stdout) {
+    logError(result.stdout);
+  }
+  if (result.stderr) {
+    console.error(result.stderr);
+  }
+  return result.code;
 }
 
 const main = async () => {
@@ -48,7 +48,7 @@ const main = async () => {
     logWarn("No changed spec json file");
     return 0;
   }
-  
+
   let retCode = 0;
   for (const jsonFile of changedJsonFiles) {
     const code = await verboseExec(`cspell ${jsonFile}`);
