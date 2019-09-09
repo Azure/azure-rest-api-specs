@@ -76,6 +76,12 @@
             "schema": {
               "$ref": "#/definitions/IpTags"
             }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -133,6 +139,12 @@
             "schema": {
               "$ref": "#/definitions/IpTags"
             }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -188,14 +200,19 @@
             "schema": {
               "$ref": "#/definitions/IpTags"
             }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
           "Update_IpTags": {
             "$ref": "./examples/IpTagsUpdateTags.json"
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "tags": [
@@ -234,6 +251,12 @@
           },
           "204": {
             "description": "Delete successful."
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -275,6 +298,12 @@
             "schema": {
               "$ref": "#/definitions/IpTagsListResult"
             }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -308,6 +337,12 @@
             "schema": {
               "$ref": "#/definitions/IpTagsListResult"
             }
+          },
+          "default": {
+            "description": "Unexpected error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
           }
         },
         "x-ms-examples": {
@@ -336,15 +371,6 @@
     },
     "IpTags": {
       "properties": {
-        "provisioningState": {
-          "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the IpTags resource."
-        },
-        "changeNumber": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The iteration number of the change."
-        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/IpTagsPropertiesFormat",
@@ -365,14 +391,17 @@
     },
     "IpTagsPropertiesFormat": {
       "properties": {
-        "subgroups": {
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the IpTags resource."
+        },
+        "ipAddresses": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IpTagsSubGroupPropertiesFormat"
-          },
-          "description": "Properties of the iptag information."
+            "type": "string"
+          }
         },
-        "reference_resources": {
+        "referenceResources": {
           "type": "array",
           "readOnly": true,
           "description": "List of references to Azure resources that this IpTags is associated with",
@@ -381,31 +410,6 @@
           }
         }
       }
-    },
-    "IpTagsSubGroupPropertiesFormat": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of subgroup."
-        },
-        "region": {
-          "type": "string",
-          "description": "The region of service tag."
-        },
-        "addressPrefixes": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "dynamicTags": {
-          "type": "array",
-          "items": {
-            "$ref": "./network.json#/definitions/TagsObject"
-          }
-        }
-      },
-      "description": "Properties of the iptag information."
     }
   }
 }
