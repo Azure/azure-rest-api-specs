@@ -449,21 +449,17 @@
         "summary": "EntitySearch",
         "operationId": "ExecFreeTextQuery",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
             "in": "query",
             "name": "q",
-            "description": "Natural language query",
             "type": "string"
           },
           {
             "in": "query",
             "name": "top",
-            "description": "Maximum number of entity documents to return",
             "type": "integer",
             "format": "int32",
             "default": 10
@@ -471,14 +467,12 @@
           {
             "in": "query",
             "name": "filter",
-            "description": "Type of entity to return, e.g. project or employee",
             "type": "string",
             "default": ""
           },
           {
             "in": "query",
             "name": "includeEntityDocument",
-            "description": "1 to include entityDocument in response body, 0 not to include",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -486,7 +480,6 @@
           {
             "in": "query",
             "name": "enableQueryRewrite",
-            "description": "1 to rewrite query, 0 to not",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -494,28 +487,25 @@
           {
             "in": "query",
             "name": "debug",
-            "description": "1 to show debug info like index, etc., 0 to not",
             "type": "integer",
             "format": "int32",
             "default": 0
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
           "200": {
             "description": "Success",
             "schema": {
               "$ref": "#/definitions/DocumentSearchResult"
             }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/NotFoundResult"
+            }
           }
         }
-      }
-    },
+      },
     "/search/suggestions": {
       "get": {
         "tags": [
@@ -524,33 +514,23 @@
         "summary": "Provide suggestions from query",
         "operationId": "GetQuerySuggestion",
         "produces": [
-          "text/plain",
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
             "in": "query",
             "name": "q",
-            "description": "Natural language query",
             "type": "string"
           },
           {
             "in": "query",
             "name": "top",
-            "description": "Maximum number of suggestions to return",
             "type": "integer",
             "format": "int32",
             "default": 10
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
           "200": {
             "description": "Success",
             "schema": {
@@ -559,6 +539,11 @@
               "items": {
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "schema": {
+              "$ref": "#/definitions/NotFoundResult"
             }
           }
         }
