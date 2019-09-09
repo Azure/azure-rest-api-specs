@@ -3,29 +3,46 @@
   "info" : {
     "description" : "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. \nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase and entity extraction as well as language detection. \nNo training data is needed to use this API; just bring your text data. \nThis API uses advanced natural language processing techniques to deliver best in class predictions.\n\nFurther documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\n\nThis API is currently available in:\n\n* Australia East - australiaeast.api.cognitive.microsoft.com\n* Brazil South - brazilsouth.api.cognitive.microsoft.com\n* Canada Central - canadacentral.api.cognitive.microsoft.com\n* Central India - centralindia.api.cognitive.microsoft.com\n* Central US - centralus.api.cognitive.microsoft.com\n* East Asia - eastasia.api.cognitive.microsoft.com\n* East US - eastus.api.cognitive.microsoft.com\n* East US 2 - eastus2.api.cognitive.microsoft.com\n* France Central - francecentral.api.cognitive.microsoft.com\n* Japan East - japaneast.api.cognitive.microsoft.com\n* Japan West - japanwest.api.cognitive.microsoft.com\n* Korea Central - koreacentral.api.cognitive.microsoft.com\n* North Central US - northcentralus.api.cognitive.microsoft.com\n* North Europe - northeurope.api.cognitive.microsoft.com\n* South Africa North - southafricanorth.api.cognitive.microsoft.com\n* South Central US - southcentralus.api.cognitive.microsoft.com\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com\n* UK South - uksouth.api.cognitive.microsoft.com\n* West Central US - westcentralus.api.cognitive.microsoft.com\n* West Europe - westeurope.api.cognitive.microsoft.com\n* West US - westus.api.cognitive.microsoft.com\n* West US 2 - westus2.api.cognitive.microsoft.com",
     "version" : "V3.0-Preview.1",
-    "title" : "Text Analytics API (V3.0-Preview.1)"
+    "title" : "Text Analytics API (V3.0-Preview.1)",
+    "contact": {
+      "name": "Microsoft Cognitive Services",
+      "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
+      "email": "mlapi@microsoft.com"
+    }
   },
-  "host" : "westus.api.cognitive.microsoft.com",
-  "basePath" : "/text/analytics/V3.0-preview.1",
-  "tags" : [ ],
-  "schemes" : [ "https" ],
-  "security" : [ {
-    "apiKeyHeader" : [ ]
-  }, {
-    "apiKeyQuery" : [ ]
-  } ],
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/text/analytics/v2.1-preview",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
   "paths" : {
     "/entities" : {
       "post" : {
         "summary" : "Entities from open domain",
-        "description" : "The API returns a list of general named entities (\\\"Person\\\", \\\"Location\\\", \\\"Organization\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a> for the list of supported Entity Types. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "description" : "The API returns a list of general named entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a> for the list of supported Entity Types. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
         "operationId" : "5ac4251d5b4ccd1554da7631",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring .",
+          "description" : "(optional) This value indicates which model be used for scoring.",
           "required" : false,
           "type" : "string"
         }, {
@@ -45,7 +62,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "A successful call results in a list of recognized entities returned for each valid document",
+            "description" : "A successful call results in a list of recognized entities returned for each valid document.",
             "examples" : {
               "application/json" : {
                 "documents" : [ {
@@ -89,8 +106,8 @@
     },
     "/entities/biomedical" : {
       "post" : {
-        "summary" : "Entities from biomedical domain",
-        "description" : "The API returns a list of biomedical entities (\\\"Treatment\\\", \\\"Medication\\\", \\\"Dosage\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "summary" : "Entities from Biomedical domain",
+        "description" : "The API returns a list of biomedical entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
         "operationId" : "5ac4251d5b4ccd1554da7632",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
@@ -162,7 +179,7 @@
     },
     "/entities/pii" : {
       "post" : {
-        "summary" : "Entities from PII domain",
+        "summary" : "Entities from Personally Identifiable Information (PII) domain",
         "description" : "The API returns a list of pii entities (\\\"SSN\\\", \\\"Bank Account\\\", \\\"Goverment ID\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
         "operationId" : "5ac4251d5b4ccd1554da7633",
         "consumes" : [ "application/json", "text/json" ],
@@ -226,7 +243,7 @@
     },
     "/entities/linking" : {
       "post" : {
-        "summary" : "Well-known entities.",
+        "summary" : "Entities from Well-Known domain",
         "description" : "The API returns a list of recognized entities in a given document. To get even more information on each recognized entity we recommend using the Bing Entity Search API by querying for the recognized entities names. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API.\n",
         "operationId" : "5ac4251d5b4ccd1554da7635",
         "consumes" : [ "application/json", "text/json" ],
@@ -593,18 +610,6 @@
       }
     }
   },
-  "securityDefinitions" : {
-    "apiKeyHeader" : {
-      "type" : "apiKey",
-      "name" : "Ocp-Apim-Subscription-Key",
-      "in" : "header"
-    },
-    "apiKeyQuery" : {
-      "type" : "apiKey",
-      "name" : "subscription-key",
-      "in" : "query"
-    }
-  },
   "definitions" : {
     "MultiLanguageBatchInput" : {
       "type" : "object",
@@ -619,14 +624,32 @@
         }
       },
       "description" : "Contains a set of input documents to be analyzed by the service.",
-      "example" : "{\n  \"documents\": [\n    {\n      \"language\": \"en\",\n      \"id\": \"1\",\n      \"text\": \"Hello world. This is some input text that I love.\"\n    },\n    {\n      \"language\": \"en\",\n      \"id\": \"2\",\n      \"text\": \"It's incredibly sunny outside! I'm so happy.\"\n    },\n    {\n      \"language\": \"en\",\n      \"id\": \"3\",\n      \"text\": \"Pike place market is my favorite Seattle attraction.\"\n    }\n  ]\n}"
+      "example" : "{
+          \"documents\": [
+            {
+              \"language\": \"en\",
+              \"id\": "1",
+              \"text\": \"Hello world. This is some input text that I love.\"
+            },
+            {
+              \"language\": \"en\",
+              \"id\": \"2\",
+              \"text\": \"It's incredibly sunny outside! I'm so happy.\"
+            },
+            {
+              \"language\": \"en\",
+              \"id\": \"3\",
+              \"text\": \"Pike place market is my favorite Seattle attraction.\"
+            }
+          ]
+      }"
     },
     "MultiLanguageInput" : {
       "type" : "object",
       "properties" : {
         "language" : {
           "type" : "string",
-          "description" : "This is the 2 letter ISO 639-1 representation of a language.\r\nFor example, use \"en\" for English; \"es\" for Spanish etc.,."
+          "description" : "This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc.,."
         },
         "id" : {
           "type" : "string",
@@ -639,25 +662,59 @@
       },
       "description" : "Contains an input document to be analyzed by the service."
     },
-    "ErrorRecord" : {
-      "type" : "object",
-      "properties" : {
-        "id" : {
-          "type" : "string",
-          "description" : "The input document unique identifier that this error refers to."
+    "ErrorResponse": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description" : "One of a server-defined set of error codes."
         },
-        "message" : {
-          "type" : "string",
-          "description" : "The actual error message."
+        "message": {
+          "type": "string",
+          "description" : "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description" : "(Optional) The target of the error."
+        },
+        "innerError": {
+          "$ref": "#/definitions/InternalError",
+          "description" : "(Optional) An object containing more specific information than the current object about the error."
+        },
+        "details": {
+          "type": "array",
+          "description" : "(Optional) An array of details about specific errors that led to this reported error.",
+          "items" : {
+              "code": {
+                "type": "string",
+                "description" : "One of a server-defined set of error codes."
+              },
+              "message": {
+                "type": "string",
+                "description" : "A human-readable representation of the error."
+              },
+              "target": {
+                "type": "string",
+                "description" : "(Optional) The target of the error."
+              },
+          }
         }
-      },
-      "description" : "Contains error information about a particular document."
+      }
     },
-    "ErrorResponse" : {
-      "type" : "object",
-      "properties" : {
-        "TBD-- Need to follow design for all Cognitive Service" : {
-          "type" : "string"
+    "InternalError": {
+      "type": "object",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description" : "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description" : "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description" : "(Optional) The target of the error."
         }
       }
     },
@@ -666,7 +723,7 @@
       "properties" : {
         "documents" : {
           "type" : "array",
-          "description" : "The set of successful results.",
+          "description" : "Sentiment analysis per document.",
           "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/DocumentSentiment"
@@ -674,17 +731,17 @@
         },
         "errors" : {
           "type" : "array",
-          "description" : "The set of error results.",
+          "description" : "Errors by document id.",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/ErrorRecord"
+            "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "readOnly" : true
+          "readOnly" : true,
+          "$ref" : "#/definitions/RequestStatistics"
         }
       },
-      "description" : "A wrapper class around a collection of results and errors."
     },
     "DocumentSentiment" : {
       "type" : "object",
@@ -736,7 +793,8 @@
           "format" : "int64",
           "description" : "Number of transactions for the request."
         }
-      }
+      },
+      "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the request payload."
     },
     "DocumentStatistics" : {
       "type" : "object",
@@ -752,9 +810,9 @@
           "description" : "Number of transactions for the document."
         }
       },
-      "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the\r\ndocument payload."
+      "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the document payload."
     },
-    "SentimentConfidenceScoreLabel" : {
+    "SentimentConfidenceScorePerLabel" : {
       "type" : "object",
       "properties" : {
         "positive" : {
@@ -791,7 +849,7 @@
         "length" : {
           "type" : "integer",
           "format" : "int32",
-          "description" : "The sentence length as given by StringInfo's LengthInTextElements property."
+          "description" : "The length of the sentence by Unicode standard."
         },
         "warnings" : {
           "type" : "array",
@@ -818,12 +876,12 @@
           "description" : "Errors and Warnings by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/ErrorRecord"
+            "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
-          "readOnly" : true
+          "readOnly" : true,
+          "$ref" : "#/definitions/RequestStatistics"
         }
       }
     },
@@ -843,7 +901,8 @@
           }
         },
         "statistics" : {
-          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref" : "#/definitions/DocumentStatistics"
         }
       }
     },
@@ -890,12 +949,12 @@
           "description" : "Errors and Warnings by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/ErrorRecord"
+            "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
-          "readOnly" : true
+          "readOnly" : true,
+          "$ref" : "#/definitions/RequestStatistics"
         }
       }
     },
@@ -923,7 +982,8 @@
           }
         },
         "statistics" : {
-          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref" : "#/definitions/DocumentStatistics"
         }
       }
     },
@@ -960,12 +1020,12 @@
           "description" : "Errors and Warnings by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/ErrorRecord"
+            "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
-          "readOnly" : true
+          "readOnly" : true,
+          "$ref" : "#/definitions/RequestStatistics"
         }
       }
     },
@@ -985,7 +1045,8 @@
           }
         },
         "statistics" : {
-          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref" : "#/definitions/DocumentStatistics"
         }
       }
     },
@@ -1028,7 +1089,7 @@
         "wikipediaScore" : {
           "type" : "number",
           "format" : "double",
-          "description" : "(optional) If a well-known item with Wikipedia link is recognized,\r\n            a decimal number denoting the confidence level of the Wikipedia info will be returned."
+          "description" : "(optional) If a well-known item with Wikipedia link is recognized, a decimal number denoting the confidence level of the Wikipedia info will be returned."
         },
         "text" : {
           "type" : "string",
@@ -1062,12 +1123,12 @@
           "description" : "Errors and Warnings by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/ErrorRecord"
+            "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
-          "readOnly" : true
+          "readOnly" : true,
+          "$ref" : "#/definitions/RequestStatistics"
         }
       }
     },
@@ -1087,7 +1148,8 @@
           }
         },
         "statistics" : {
-          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref" : "#/definitions/DocumentStatistics"
         }
       }
     },
@@ -1134,12 +1196,12 @@
           "description" : "Errors and Warnings by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/ErrorRecord"
+            "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "description" : "/// <summary>\r\n            (Optional) if showStats=true was specified in the request this field will contain information about the \r\n            request payload.\r\n            </summary>",
-          "readOnly" : true
+          "readOnly" : true,
+          "$ref" : "#/definitions/RequestStatistics"
         }
       }
     },
@@ -1158,7 +1220,8 @@
           }
         },
         "statistics" : {
-          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the \r\n            document payload."
+          "description" : "(Optional) if showStats=true was specified in the request this field will contain information about the document payload.",
+          "$ref" : "#/definitions/DocumentStatistics"
         }
       }
     },
@@ -1181,9 +1244,15 @@
       }
     }
   },
-  "x-servers" : [ {
-    "url" : "https://cognitivewusprod.cognitiveservices.azure.com"
-  }, {
-    "url" : "https://westus.api.cognitive.microsoft.com"
-  } ]
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    }
+  }
 }
