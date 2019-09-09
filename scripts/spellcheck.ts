@@ -1,6 +1,13 @@
 import { devOps, cli, childProcess } from '@azure/avocado';
 import { ExecOptions } from 'child_process';
 
+const logError = (msg: string) => {
+  const lines = msg.split('\n');
+  for (const line of lines) {
+    console.log(`##vso[task.logissue type=error]${line}`);
+  }
+}
+
 const verboseExec = async (commandLine: string, options: ExecOptions = {}) => {
   console.log(commandLine);
   let result: any = {};
@@ -15,7 +22,7 @@ const verboseExec = async (commandLine: string, options: ExecOptions = {}) => {
  }
 
  if (result.stdout) {
-   console.error(result.stdout);
+   logError(result.stdout);
  }
  if (result.stderr) {
    console.error(result.stderr);
