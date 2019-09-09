@@ -191,38 +191,40 @@
         "summary": "Deletes requested document of the source from Graph",
         "description": "This API deletes the document of source from the graph",
         "operationId": "DeleteDocument",
+        "consumes": [
+          
+        ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "sourceId",
-            "description": "Id of  document source <br /> Note:SourceId can be obtained from UX",
+            "in": "path",
+            "description": "Id of  document source Note:SourceId can be obtained from UX",
             "required": true,
             "type": "integer",
             "format": "int32"
           },
           {
-            "in": "path",
             "name": "documentId",
+            "in": "path",
             "description": "Id of document to be deleted",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/IngestionJobResponse"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -236,37 +238,86 @@
         "summary": "Deletes source from Graph",
         "description": "This API deletes source and all its documents from Graph",
         "operationId": "DeleteSource",
+        "consumes": [
+          
+        ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "sourceId",
-            "description": "Id of source to be deleted<br /> Note:SourceId can be obtained from UX",
+            "in": "path",
+            "description": "Id of source to be deleted Note:SourceId can be obtained from UX",
             "required": true,
             "type": "integer",
             "format": "int32"
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/IngestionJobResponse"
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
       }
     },
     "/ingestion/ingestion-jobs": {
+      "get": {
+        "tags": [
+          "Ingestion"
+        ],
+        "summary": "Returns the details  of jobs submitted in time range",
+        "description": "This API  provides the details of the jobs submitted in time range",
+        "operationId": "GetAllJobsStatus",
+        "consumes": [
+          
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "startTime",
+            "in": "query",
+            "description": "StartTime of time range in the format yyyy-MM-ddTHH:mm:ss.fffZ",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endTime",
+            "in": "query",
+            "description": "EndTime of time range in the format yyyy-MM-ddTHH:mm:ss.fffZ",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/BatchInfoApiResponse"
+              }
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
+            }
+          }
+        }
+      },
       "post": {
         "tags": [
           "Ingestion"
@@ -275,125 +326,33 @@
         "description": "This API is used to submit new ingestion job to graph build pipeline",
         "operationId": "CreateIngestionJob",
         "consumes": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml",
-          "application/x-www-form-urlencoded"
+          "application/json"
         ],
         "produces": [
-          "application/json",
-          "text/json"
+          "application/json"
         ],
         "parameters": [
           {
-            "in": "formData",
-            "name": "Type",
-            "description": "Type of Ingestion payload<br />\r\nblob or 0 : Url of the blob having payload<br />\r\npayload or 1: Raw Payload in Json format",
-            "type": "string",
-            "enum": [
-              "blob",
-              "payload"
-            ]
-          },
-          {
-            "in": "formData",
-            "name": "SourceId",
-            "description": "Source Id <br /> Note:SourceId can be obtained from UX",
-            "type": "integer",
-            "format": "int32"
-          },
-          {
-            "in": "formData",
-            "name": "BlobUrls",
-            "description": "List of blob Urls having payload<br />\r\nNote:Only one blob url is allowed for BatchIngestion<br />",
-            "type": "array",
-            "items": {
+            "name": "ingestionJobRequest",
+            "in": "body",
+            "description": "IngestionJob Request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IngestionJobPostRequest"
             }
-          },
-          {
-            "in": "formData",
-            "name": "RawPayloads",
-            "description": "List of payloads in json format <br />Max Recommended size is 250 MB",
-            "type": "array",
-            "items": {
-            }
-          },
-          {
-            "in": "formData",
-            "name": "ForceUpdate",
-            "description": "Whether to process document when there are no changes <br />\r\ntrue : Unmodified documents are reprocessed <br />\r\nfalse : Unmodified documents are not processed<br />\r\nNote : Default value is false",
-            "type": "boolean"
-          },
-          {
-            "in": "formData",
-            "name": "IngestionMode",
-            "description": "Mode of Ingestion <br />\r\nBatch or 0:Graph for the source is recreated with current data<br />\r\nNote : BatchIngestion allowed only when no other ingestion is in progress for the source<br />\r\nOnly one blob url is allowed for BatchIngestion<br />\r\nStreaming or 1:Graph for the source is appended with current data<br />\r\nNote : Default mode is streaming",
-            "type": "string",
-            "enum": [
-              "Batch",
-              "Streaming"
-            ]
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/IngestionJobResponse"
             }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Ingestion"
-        ],
-        "summary": "Returns the details  of jobs submitted in time range",
-        "description": "This API  provides the details of the jobs submitted in time range",
-        "operationId": "GetAllJobsStatus",
-        "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
-        ],
-        "parameters": [
-          {
-            "in": "query",
-            "name": "startTime",
-            "description": "StartTime of time range in the format yyyy-MM-ddTHH:mm:ss.fffZ",
-            "required": true,
-            "type": "string"
           },
-          {
-            "in": "query",
-            "name": "endTime",
-            "description": "EndTime of time range in the format yyyy-MM-ddTHH:mm:ss.fffZ",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
-          "200": {
-            "description": "OK",
+          "default": {
+            "description": "An error response object.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/BatchInfoApiResponse"
-              }
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -407,28 +366,22 @@
         "summary": "Returns the Ingestion status of job",
         "description": "This API  provides the details of status of the ingestion job",
         "operationId": "GetJobStatus",
+        "consumes": [
+          
+        ],
         "produces": [
-          "application/json",
-          "text/json",
-          "application/xml",
-          "text/xml"
+          "application/json"
         ],
         "parameters": [
           {
-            "in": "path",
             "name": "jobId",
+            "in": "path",
             "description": "Id of ingestion job",
             "required": true,
             "type": "string"
           }
         ],
         "responses": {
-          "401": {
-            "description": "Unauthorized access"
-          },
-          "403": {
-            "description": "Forbidden access"
-          },
           "200": {
             "description": "OK",
             "schema": {
@@ -436,6 +389,12 @@
               "items": {
                 "$ref": "#/definitions/BatchStatusApiResponse"
               }
+            }
+          },
+          "default": {
+            "description": "An error response object.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponseBody"
             }
           }
         }
@@ -1900,6 +1859,17 @@
         }
       }
     },
+    "ErrorResponseBody": {
+      "type": "object",
+      "properties": {
+        "ErrorCode": {
+          "type": "string"
+        },
+        "Message": {
+          "type": "string"
+        }
+      }
+    },
     "BatchStatusApiResponse": {
       "type": "object",
       "properties": {
@@ -1941,7 +1911,7 @@
       "type": "object",
       "properties": {
         "Type": {
-          "description": "Type of Ingestion payload<br />\r\nblob or 0 : Url of the blob having payload<br />\r\npayload or 1: Raw Payload in Json format",
+          "description": "Type of Ingestion payload \r\nblob or 0 : Url of the blob having payload \r\npayload or 1: Raw Payload in Json format",
           "enum": [
             "blob",
             "payload"
@@ -1950,29 +1920,29 @@
         },
         "SourceId": {
           "format": "int32",
-          "description": "Source Id <br /> Note:SourceId can be obtained from UX",
+          "description": "Source Id Note:SourceId can be obtained from UX",
           "type": "integer"
         },
         "BlobUrls": {
-          "description": "List of blob Urls having payload<br />\r\nNote:Only one blob url is allowed for BatchIngestion<br />",
+          "description": "List of blob Urls having payload \r\nNote:Only one blob url is allowed for BatchIngestion",
           "type": "array",
           "items": {
             "type": "string"
           }
         },
         "RawPayloads": {
-          "description": "List of payloads in json format <br />Max Recommended size is 250 MB",
+          "description": "List of payloads in json format Max Recommended size is 250 MB",
           "type": "array",
           "items": {
             "$ref": "#/definitions/LoadRequest"
           }
         },
         "ForceUpdate": {
-          "description": "Whether to process document when there are no changes <br />\r\ntrue : Unmodified documents are reprocessed <br />\r\nfalse : Unmodified documents are not processed<br />\r\nNote : Default value is false",
+          "description": "Whether to process document when there are no changes \r\ntrue : Unmodified documents are reprocessed \r\nfalse : Unmodified documents are not processed\r\nNote : Default value is false",
           "type": "boolean"
         },
         "IngestionMode": {
-          "description": "Mode of Ingestion <br />\r\nBatch or 0:Graph for the source is recreated with current data<br />\r\nNote : BatchIngestion allowed only when no other ingestion is in progress for the source<br />\r\nOnly one blob url is allowed for BatchIngestion<br />\r\nStreaming or 1:Graph for the source is appended with current data<br />\r\nNote : Default mode is streaming",
+          "description": "Mode of Ingestion \r\nBatch or 0:Graph for the source is recreated with current data\r\nNote : BatchIngestion allowed only when no other ingestion is in progress for the source\r\nOnly one blob url is allowed for BatchIngestion\r\nStreaming or 1:Graph for the source is appended with current data\r\nNote : Default mode is streaming",
           "enum": [
             "Batch",
             "Streaming"
@@ -1991,11 +1961,11 @@
         },
         "SourceId": {
           "format": "int32",
-          "description": "Source Id <br />Note:SourceId can be obtained from UX",
+          "description": "Source Id Note:SourceId can be obtained from UX",
           "type": "integer"
         },
         "BatchState": {
-          "description": "State of job <br />\r\nNew : Job processing is in progress<br />\r\nDone: Job processing is completed without any issues<br />\r\nDoneWithErrors: Job processing is completed with issues<br />\r\nExpired: Job processing is stopped after trying for maximum attempts",
+          "description": "State of job \r\nNew : Job processing is in progress\r\nDone: Job processing is completed without any issues\r\nDoneWithErrors: Job processing is completed with issues\r\nExpired: Job processing is stopped after trying for maximum attempts",
           "type": "string"
         },
         "StartTime": {
