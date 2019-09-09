@@ -1,12 +1,15 @@
 import { devOps, cli, childProcess } from '@azure/avocado';
 import { ExecOptions } from 'child_process';
 
-const logError = (msg: string) => {
+const logToAzureDevops = (msg: string, type: string) => {
   const lines = msg.split('\n');
   for (const line of lines) {
-    console.log(`##vso[task.logissue type=error]${line}`);
+    console.log(`##vso[task.logissue type=${type}]${line}`);
   }
 }
+
+const logError = (msg: string) => logToAzureDevops(msg, 'error');
+const logWarn = (msg: string) => logToAzureDevops(msg, 'warning');
 
 const verboseExec = async (commandLine: string, options: ExecOptions = {}) => {
   console.log(commandLine);
@@ -34,7 +37,7 @@ const main = async () => {
   const config = cli.defaultConfig();
   const pr = await devOps.createPullRequestProperties(config);
   if (pr === undefined) {
-    console.warn("Not in CI environment. Run against all the spec json.");
+    logWarn("Not in CI environment. Run against all the spec json.");
     return verboseExec(`cspell "specification/**/*.json"`);
   }
 
@@ -42,7 +45,7 @@ const main = async () => {
     .filter(filePath => filePath.endsWith('.json') && filePath.startsWith('specification/'))
     .toArray();
   if (changedJsonFiles.length === 0) {
-    console.warn("No changed spec json file");
+    logWarn("No changed spec json file");
     return 0;
   }
   
@@ -59,7 +62,7 @@ const main = async () => {
 
 main().then(retCode => {
   if (retCode !== 0) {
-    console.error('Please fix the error or add words to custom-words.txt');
+    logError('Please fix the error or add words to ./custom-words.txt');
   }
   process.exit(retCode);
 });
