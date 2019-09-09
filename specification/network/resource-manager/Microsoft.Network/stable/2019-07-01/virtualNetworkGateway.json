@@ -982,6 +982,129 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/startpacketcapture": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_StartPacketCapture",
+        "description": "Starts packet capture on virtual network gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStartParameters"
+            },
+            "description": "Virtual network gateway packet capture parameters supplied to start packet capture on gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation packet capture started on virtual network gateway.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartPacketCaptureVirtualNetworkGateway1": {
+            "$ref": "./examples/VirtualNetworkGatewayStartPacketCapture.json"
+          },
+          "StartPacketCaptureVirtualNetworkGateway2": {
+            "$ref": "./examples/VirtualNetworkGatewayStartPacketCaptureFilterData.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/stoppacketcapture": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGateways"
+        ],
+        "operationId": "VirtualNetworkGateways_StopPacketCapture",
+        "description": "Stops packet capture on virtual network gateway in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStopParameters"
+            },
+            "description": "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation packet capture stopped on virtual network gateway.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StopPacketCaptureVirtualNetworkGateway": {
+            "$ref": "./examples/VirtualNetworkGatewayStopPacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}": {
       "put": {
         "tags": [
@@ -1391,6 +1514,129 @@
         "x-ms-examples": {
           "ResetVirtualNetworkGatewayConnectionSharedKey": {
             "$ref": "./examples/VirtualNetworkGatewayConnectionResetSharedKey.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/startpacketcapture": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_StartPacketCapture",
+        "description": "Starts packet capture on virtual network gateway connection in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway connection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStartParameters"
+            },
+            "description": "Virtual network gateway packet capture parameters supplied to start packet capture on gateway connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation packet capture started on virtual network gateway connection.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartPacketCaptureVirtualNetworkGatewayConnection1": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionStartPacketCapture.json"
+          },
+          "StartPacketCaptureVirtualNetworkGatewayConnection2": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionStartPacketCaptureFilterData.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/connections/{virtualNetworkGatewayConnectionName}/stoppacketcapture": {
+      "post": {
+        "tags": [
+          "VirtualNetworkGatewayConnections"
+        ],
+        "operationId": "VirtualNetworkGatewayConnections_StopPacketCapture",
+        "description": "Stops packet capture on virtual network gateway connection in the specified resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "virtualNetworkGatewayConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual network gateway Connection."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStopParameters"
+            },
+            "description": "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously."
+          },
+          "200": {
+            "description": "Request successful. The operation packet capture stopped on virtual network gateway connection.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StopPacketCaptureVirtualNetworkGateway": {
+            "$ref": "./examples/VirtualNetworkGatewayConnectionStopPacketCapture.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -3056,6 +3302,24 @@
         }
       },
       "description": "VPN client connection health detail."
+    },
+    "VpnPacketCaptureStopParameters": {
+      "properties": {
+        "sasUrl": {
+          "type": "string",
+          "description": "SAS url for packet capture on VNG."
+        }
+      },
+      "description": "Stop packet capture parameters."
+    },
+    "VpnPacketCaptureStartParameters": {
+      "properties": {
+        "filterData": {
+          "type": "string",
+          "description": "Start Packet capture parameters."
+        }
+      },
+      "description": "Start packet capture parameters on VNG."
     }
   }
 }
