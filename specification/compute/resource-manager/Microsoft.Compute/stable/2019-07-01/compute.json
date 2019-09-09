@@ -3,7 +3,7 @@
   "info": {
     "title": "ComputeManagementClient",
     "description": "The Compute Management Client.",
-    "version": "2019-03-01"
+    "version": "2019-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -2874,6 +2874,46 @@
         ],
         "operationId": "VirtualMachines_Start",
         "description": "The operation to start a virtual machine.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the virtual machine."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/reapply": {
+      "post": {
+        "tags": [
+          "VirtualMachines"
+        ],
+        "operationId": "VirtualMachines_Reapply",
+        "description": "Reapplies the state of a virtual machine.",
         "parameters": [
           {
             "name": "resourceGroupName",
