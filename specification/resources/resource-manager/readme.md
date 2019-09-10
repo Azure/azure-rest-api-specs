@@ -463,12 +463,15 @@ directive:
     reason: managedBy is a top level property
   - suppress: OperationsAPIImplementation
     from: managedapplications.json
+    where: $.paths
     reason: preexisting
   - suppress: XmsExamplesRequired
     from: managedapplications.json
+    where: $.paths
     reason: preexisting
   - suppress: PatchBodyParametersSchema
     from: managedapplications.json
+    where: $.paths
     reason: preexisting
 ```
 
