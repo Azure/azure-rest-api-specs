@@ -624,25 +624,27 @@
         }
       },
       "description" : "Contains a set of input documents to be analyzed by the service.",
-      "example" : "{
-          \"documents\": [
+      "example" : {
+        "application/json" : {
+          "documents": [
             {
-              \"language\": \"en\",
-              \"id\": \"1\",
-              \"text\": \"Hello world. This is some input text that I love.\"
+              "language": "en",
+              "id": "1",
+              "text": "Hello world. This is some input text that I love."
             },
             {
-              \"language\": \"en\",
-              \"id\": \"2\",
-              \"text\": \"It's incredibly sunny outside! I'm so happy.\"
+              "language": "en",
+              "id": "2",
+              "text": "It's incredibly sunny outside! I'm so happy."
             },
             {
-              \"language\": \"en\",
-              \"id\": \"3\",
-              \"text\": \"Pike place market is my favorite Seattle attraction.\"
+              "language": "en",
+              "id": "3",
+              "text": "Pike place market is my favorite Seattle attraction."
             }
           ]
-      }"
+        }
+      }
     },
     "MultiLanguageInput" : {
       "type" : "object",
@@ -1152,7 +1154,31 @@
           }
         }
       },
-      "example" : "{\n  \"documents\": [\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"1\",\n      \"text\": \"Hello world\"\n    },\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"2\",\n      \"text\": \"Bonjour tout le monde\"\n    },\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"3\",\n      \"text\": \"La carretera estaba atascada. Había mucho tráfico el día de ayer.\"\n    },\n    {\n      \"countryHint\": \"US\",\n      \"id\": \"4\",\n      \"text\": \":) :( :D\"\n    }\n  ]\n}"
+      "example" : {
+        "application/json" : {
+          "documents": [
+            {
+            "countryHint": "US",
+            "id": "1",
+            "text": "Hello world"
+            },            
+            {
+              "countryHint": "US",
+              "id": "2",
+              "text": "Bonjour tout le monde"
+            },
+            {
+              "countryHint": "US",
+              "id": "3",
+              "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
+            },
+            {
+              "countryHint": "US",
+              "id": "4",
+              "text": ":) :( :D"
+            }
+          ]
+        }
     },
     "LanguageInput" : {
       "type" : "object",
