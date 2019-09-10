@@ -563,6 +563,32 @@
         }
       }
     },
+    "ExpressRouteLinkMacSecConfig": {
+      "description": "ExpressRouteLink Mac Security Configuration.",
+      "title": "Definition of ExpressRouteLink Mac Security configuration.",
+      "properties": {
+        "cknSecretIdentifier": {
+          "type": "string",
+          "description": "Keyvault Secret Identifier URL containing Mac security CKN key."
+        },
+        "cakSecretIdentifier": {
+          "type": "string",
+          "description": "Keyvault Secret Identifier URL containing Mac security CAK key."
+        },
+        "cipher": {
+          "type": "string",
+          "description": "Mac security cipher.",
+          "enum": [
+            "gcm-aes-128",
+            "gcm-aes-256"
+          ],
+          "x-ms-enum": {
+            "name": "ExpressRouteLinkMacSecCipher",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "ExpressRouteLinkPropertiesFormat": {
       "title": "ExpressRouteLink Resource Properties",
       "description": "Properties specific to ExpressRouteLink resources.",
@@ -616,6 +642,10 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the express route link resource."
+        },
+        "macSecConfig": {
+          "$ref": "#/definitions/ExpressRouteLinkMacSecConfig",
+          "description": "MacSec configuration."
         }
       }
     },
@@ -746,6 +776,10 @@
           "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of ExpressRoutePort, if configured."
         }
       },
       "allOf": [

@@ -60,6 +60,7 @@ input-file:
   - Microsoft.Network/stable/2019-07-01/networkProfile.json
   - Microsoft.Network/stable/2019-07-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2019-07-01/networkWatcher.json
+  - Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
   - Microsoft.Network/stable/2019-07-01/operation.json
   - Microsoft.Network/stable/2019-07-01/privateEndpoint.json
   - Microsoft.Network/stable/2019-07-01/privateLinkService.json
@@ -74,6 +75,7 @@ input-file:
   - Microsoft.Network/stable/2019-07-01/virtualNetwork.json
   - Microsoft.Network/stable/2019-07-01/virtualNetworkGateway.json
   - Microsoft.Network/stable/2019-07-01/virtualNetworkTap.json
+  - Microsoft.Network/stable/2019-07-01/virtualRouter.json
   - Microsoft.Network/stable/2019-07-01/virtualWan.json
   - Microsoft.Network/stable/2019-07-01/vmssNetworkInterface.json
   - Microsoft.Network/stable/2019-07-01/vmssPublicIpAddress.json
@@ -107,6 +109,7 @@ input-file:
   - Microsoft.Network/stable/2019-06-01/networkProfile.json
   - Microsoft.Network/stable/2019-06-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2019-06-01/networkWatcher.json
+  - Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
   - Microsoft.Network/stable/2019-06-01/operation.json
   - Microsoft.Network/stable/2019-06-01/privateEndpoint.json
   - Microsoft.Network/stable/2019-06-01/privateLinkService.json
@@ -1070,6 +1073,9 @@ directive:
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkTap.json
+    reason: name, id and type properties are inherited from the upper level
+  - suppress: RequiredPropertiesMissingInResourceModel
+    from: virtualRouter.json
     reason: name, id and type properties are inherited from the upper level
   - suppress: RequiredPropertiesMissingInResourceModel
     from: virtualNetworkGateway.json
