@@ -719,6 +719,35 @@
         "location"
       ]
     },
+    "OrcDataset": {
+      "x-ms-discriminator-value": "Orc",
+      "description": "ORC dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "ORC dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OrcDatasetTypeProperties"
+        }
+      }
+    },
+    "OrcDatasetTypeProperties": {
+      "description": "ORC dataset properties.",
+      "properties": {
+        "location": {
+          "$ref": "#/definitions/DatasetLocation",
+          "description": "The location of the ORC data storage."
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
     "BinaryDataset": {
       "x-ms-discriminator-value": "Binary",
       "description": "Binary dataset.",
