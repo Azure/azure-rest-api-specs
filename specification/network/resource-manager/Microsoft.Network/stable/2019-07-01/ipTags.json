@@ -357,18 +357,6 @@
     }
   },
   "definitions": {
-    "IpTagsListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IpTags"
-          },
-          "description": "The list of iptag information resources."
-        }
-      },
-      "description": "Response for the ListIpTags API service call."
-    },
     "IpTags": {
       "properties": {
         "properties": {
@@ -388,6 +376,22 @@
         }
       ],
       "description": "The IpTags resource information."
+    },
+    "IpTagsListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IpTags"
+          },
+          "description": "The list of iptag information resources."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of results."
+        }
+      },
+      "description": "Response for the ListIpTags API service call."
     },
     "IpTagsPropertiesFormat": {
       "properties": {
