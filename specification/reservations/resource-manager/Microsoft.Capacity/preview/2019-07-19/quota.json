@@ -447,45 +447,6 @@
 				}
 			}
 		},
-		"/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/serviceLimitsRequests/$metadata": {
-			"get": {
-				"tags": [
-					"QuotaRequests"
-				],
-				"operationId": "ServiceLimitsRequests_GetMetadata",
-				"description": "Gets OData metadata XML document.",
-				"produces": [
-					"application/xml"
-				],
-				"parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdInParameters"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OData metadata XML document.",
-						"schema": {
-							"$ref": "#/definitions/MetadataDocument"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ExceptionResponse"
-						}
-					}
-				},
-				"x-ms-examples": {
-					"Get metadata": {
-						"$ref": "./examples/GetMetadata_ServiceLimitsRequests.json"
-					}
-				}
-			}
-		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/autoQuotaIncrease": {
 			"get": {
 				"tags": [
