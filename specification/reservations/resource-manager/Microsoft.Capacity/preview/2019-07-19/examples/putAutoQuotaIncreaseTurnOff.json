@@ -16,6 +16,7 @@
 					{
 						"actionType": "OnFailure",
 						"emailRecipients": [
+							"admin2@contoso.com",
 							"itsupport@contoso.com"
 						]
 					}
@@ -27,8 +28,8 @@
 				"recipients": {
 					"value": [
 						{
-							"recipientType": "chat",
-							"recipient": "support@contoso.com"
+							"recipientType": "email",
+							"recipient": "admin2@contoso.com"
 						},
 						{
 							"recipientType": "phone",
@@ -37,47 +38,48 @@
 					]
 				}
 			}
-		},
-		"responses": {
-			"200": {
-				"body": {
-					"id": "/subscriptons/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
-					"type": "Microsoft.Capacity/autoQuotaIncrease",
-					"name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
-					"properties": {
-						"enabled": false,
-						"emailAction": {
-							"value": [
-								{
-									"actionType": "OnSuccess",
-									"emailRecipients": [
-										"admin2@contoso.com",
-										"itsupport@contoso.com"
-									]
-								},
-								{
-									"actionType": "OnFailure",
-									"emailRecipients": [
-										"itsupport@contoso.com"
-									]
-								}
-							]
-						},
-						"supportRequestAction": {
-							"severity": "SevB",
-							"supportLanguage": "en-us",
-							"recipients": {
-								"value": [
-									{
-										"recipientType": "chat",
-										"recipient": "support@contoso.com"
-									},
-									{
-										"recipientType": "phone",
-										"recipient": "+1-206-999-9999"
-									}
+		}
+	},
+	"responses": {
+		"200": {
+			"body": {
+				"id": "/subscriptons/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
+				"type": "Microsoft.Capacity/autoQuotaIncrease",
+				"name": "D7EC67B3-7657-4966-BFFC-41EFD36BAAB3",
+				"properties": {
+					"enabled": false,
+					"emailAction": {
+						"value": [
+							{
+								"actionType": "OnSuccess",
+								"emailRecipients": [
+									"admin2@contoso.com",
+									"itsupport@contoso.com"
+								]
+							},
+							{
+								"actionType": "OnFailure",
+								"emailRecipients": [
+									"admin2@contoso.com",
+									"itsupport@contoso.com"
 								]
 							}
+						]
+					},
+					"supportRequestAction": {
+						"severity": "SevB",
+						"supportLanguage": "en-us",
+						"recipients": {
+							"value": [
+								{
+									"recipientType": "email",
+									"recipient": "admin2@contoso.com"
+								},
+								{
+									"recipientType": "phone",
+									"recipient": "+1-206-999-9999"
+								}
+							]
 						}
 					}
 				}
