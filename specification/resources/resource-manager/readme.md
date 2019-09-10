@@ -40,16 +40,12 @@ tag: package-locks-2016-09
 tag: package-policy-2019-06
 ```
 
-``` yaml $(package-policy)
-tag: package-policy-2019-01
-```
-
 ``` yaml $(package-resources)
 tag: package-resources-2019-08
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2018-06
+tag: package-subscriptions-2019-06
 ```
 
 ``` yaml $(package-links)
@@ -57,7 +53,7 @@ tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-2019-06
+tag: package-managedapplications-2018-06
 ```
 
 
@@ -487,6 +483,7 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#managedapplications
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
