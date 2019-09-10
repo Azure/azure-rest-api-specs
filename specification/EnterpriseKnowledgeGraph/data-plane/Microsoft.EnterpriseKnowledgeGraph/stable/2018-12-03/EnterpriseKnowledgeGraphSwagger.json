@@ -96,7 +96,7 @@
         "tags": [
           "EntityDocument"
         ],
-        "summary": "Retrieve a list of entity documents by a give list of entity ids",
+        "summary": "Retrieve a dictionary of with entity ids as keys and corresponding entity documents as values",
         "operationId": "GetEntityDocuments",
         "consumes": [
           "application/json"
@@ -107,7 +107,7 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "options",
             "schema": {
               "$ref": "#/definitions/SearchOptions"
             }
@@ -118,6 +118,7 @@
             "description": "Success",
             "schema": {
               "type": "object",
+              "descripton": "a dictionary of with entity ids as keys and corresponding entity documents as values",
               "additionalProperties": {
                 "$ref": "#/definitions/EntityDocument"
               }
@@ -136,6 +137,7 @@
         "tags": [
           "Graph"
         ],
+        "description": "Executes SPARQL query",
         "operationId": "ExecGraphQuery",
         "consumes": [
           "text/plain"
@@ -146,7 +148,8 @@
         "parameters": [
           {
             "in": "body",
-            "name": "body",
+            "name": "query",
+            "description": "Sparql Query",
             "schema": {
               "type": "string"
             }
@@ -161,7 +164,7 @@
           },
           "default": {
             "schema": {
-              "$ref": "#/definitions/SparqlQueryResponse"
+              "$ref": "#/definitions/NotFoundResult"
             }
           }
         }
@@ -1675,6 +1678,7 @@
       },
       "SparqlQueryResponse": {
         "type": "object",
+        "description": "Query Response class for graph engine service",
         "properties": {
           "sparqlResponse": {
             "$ref": "#/definitions/SparqlQueryDbResponse"
@@ -1892,12 +1896,15 @@
             "type": "string"
           },
           "intentionLabel": {
+            "description": "Intention label as that in the training data",
             "type": "string"
           },
           "isGraphIntention": {
+            "description": "Whether or not this is a graph query intention",
             "type": "boolean"
           },
           "intentionGraphType": {
+            "description": "If this is a graph query, the target entity type in the graph; \"Other\" otherwise",
             "type": "string"
           },
           "intentionScore": {
