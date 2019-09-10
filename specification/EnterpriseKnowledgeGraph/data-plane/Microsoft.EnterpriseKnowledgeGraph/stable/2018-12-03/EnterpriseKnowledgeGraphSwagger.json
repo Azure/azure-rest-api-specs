@@ -62,6 +62,7 @@
         "tags": [
           "EntityDocument"
         ],
+        "summary": "Retrieve an entity document by a given entity id",
         "operationId": "GetEntityDocument",
         "produces": [
           "application/json"
@@ -70,6 +71,7 @@
           {
             "in": "path",
             "name": "id",
+            "description": "Entity Id",
             "required": true,
             "type": "string"
           }
@@ -94,6 +96,7 @@
         "tags": [
           "EntityDocument"
         ],
+        "summary": "Retrieve a list of entity documents by a give list of entity ids",
         "operationId": "GetEntityDocuments",
         "consumes": [
           "application/json"
@@ -1657,10 +1660,12 @@
         }
       },
       "SearchOptions": {
+        "description": "Search options specified in Entity Document request body",
         "type": "object",
         "properties": {
           "entities": {
             "uniqueItems": false,
+            "description": "Gets or sets a list of entity ids for retrieving from Entity Document store",
             "type": "array",
             "items": {
               "type": "string"
