@@ -1789,6 +1789,18 @@
         "modelAsString": true
       }
     },
+    "ExpressRouteCircuitConnectionIPv6PrefixPropertiesFormat": {
+      "properties": {
+        "addressPrefix": {
+          "type": "string",
+          "description": "/125 IP address space to carve out Customer addresses for Global Reach."
+        },
+        "circuitConnectionStatus": {
+          "$ref": "#/definitions/CircuitConnectionStatus",
+          "description": "Express Route Circuit connection state."
+        }
+      }
+    },
     "ExpressRouteCircuitConnectionPropertiesFormat": {
       "properties": {
         "expressRouteCircuitPeering": {
@@ -1807,6 +1819,12 @@
           "type": "string",
           "description": "The authorization key."
         },
+        "ipv6CircuitConnectionConfig": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ExpressRouteCircuitConnectionIPv6PrefixPropertiesFormat",
+          "description": "Properties of the express route circuit connection."
+        },
+
         "circuitConnectionStatus": {
           "$ref": "#/definitions/CircuitConnectionStatus",
           "description": "Express Route Circuit connection state."
