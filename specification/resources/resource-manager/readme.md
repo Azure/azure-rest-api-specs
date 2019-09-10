@@ -325,6 +325,15 @@ input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
 ```
 
+### Tag: package-subscriptions-2019-06
+
+These settings apply only when `--tag=package-subscriptions-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2019-06'
+input-file:
+- Microsoft.Resources/stable/2019-06-01/subscriptions.json
+```
+
 ### Tag: package-subscriptions-2018-06
 
 These settings apply only when `--tag=package-subscriptions-2018-06` is specified on the command line.

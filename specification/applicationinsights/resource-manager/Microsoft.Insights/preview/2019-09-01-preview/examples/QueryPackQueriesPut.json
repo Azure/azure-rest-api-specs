@@ -10,8 +10,13 @@
         "displayName": "Exceptions - New in the last 24 hours",
         "description": "my description",
         "body": "let newExceptionsTimeRange = 1d;\nlet timeRangeToCheckBefore = 7d;\nexceptions\n| where timestamp < ago(timeRangeToCheckBefore)\n| summarize count() by problemId\n| join kind= rightanti (\nexceptions\n| where timestamp >= ago(newExceptionsTimeRange)\n| extend stack = tostring(details[0].rawStack)\n| summarize count(), dcount(user_AuthenticatedId), min(timestamp), max(timestamp), any(stack) by problemId  \n) on problemId \n| order by  count_ desc\n",
-        "categories": ["analytics"],
-        "labels": ["my-label", "my-other-label"],
+        "categories": [
+          "analytics"
+        ],
+        "labels": [
+          "my-label",
+          "my-other-label"
+        ],
         "linkedResourceId": "/subscriptions/a51967b5-271e-4f12-810e-e7fa20c8828d/resourceGroups/FoodHere/providers/Microsoft.KeyVault/vaults/FoodHere"
       }
     }
@@ -30,8 +35,13 @@
           "displayName": "Exceptions - New in the last 24 hours",
           "description": "my description",
           "body": "let newExceptionsTimeRange = 1d;\nlet timeRangeToCheckBefore = 7d;\nexceptions\n| where timestamp < ago(timeRangeToCheckBefore)\n| summarize count() by problemId\n| join kind= rightanti (\nexceptions\n| where timestamp >= ago(newExceptionsTimeRange)\n| extend stack = tostring(details[0].rawStack)\n| summarize count(), dcount(user_AuthenticatedId), min(timestamp), max(timestamp), any(stack) by problemId  \n) on problemId \n| order by  count_ desc\n",
-          "categories": ["analytics"],
-          "labels": ["my-label", "my-other-label"],
+          "categories": [
+            "analytics"
+          ],
+          "labels": [
+            "my-label",
+            "my-other-label"
+          ],
           "linkedResourceId": "/subscriptions/a51967b5-271e-4f12-810e-e7fa20c8828d/resourceGroups/FoodHere/providers/Microsoft.KeyVault/vaults/FoodHere"
         }
       }
