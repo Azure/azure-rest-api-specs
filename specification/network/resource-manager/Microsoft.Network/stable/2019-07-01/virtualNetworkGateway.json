@@ -1008,7 +1008,9 @@
             "name": "FilterData",
             "in": "body",
             "required": false,
-            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStartParameters"
+            },
             "description": "Virtual network gateway packet capture parameters supplied to start packet capture on gateway."
           },
           {
@@ -1069,7 +1071,9 @@
             "name": "SasUrl",
             "in": "body",
             "required": true,
-            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStopParameters"
+            },
             "description": "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway."
           },
           {
@@ -1544,7 +1548,9 @@
             "name": "FilterData",
             "in": "body",
             "required": false,
-            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStartParameters"
+            },
             "description": "Virtual network gateway packet capture parameters supplied to start packet capture on gateway connection."
           },
           {
@@ -1605,7 +1611,9 @@
             "name": "SasUrl",
             "in": "body",
             "required": true,
-            "type": "string",
+            "schema": {
+              "$ref": "#/definitions/VpnPacketCaptureStopParameters"
+            },
             "description": "Virtual network gateway packet capture parameters supplied to stop packet capture on gateway connection."
           },
           {
@@ -3294,6 +3302,24 @@
         }
       },
       "description": "VPN client connection health detail."
+    },
+    "VpnPacketCaptureStopParameters": {
+      "properties": {
+        "sasUrl": {
+          "type": "string",
+          "description": "SAS url for packet capture on VNG."
+        }
+      },
+      "description": "Stop packet capture parameters."
+    },
+    "VpnPacketCaptureStartParameters": {
+      "properties": {
+        "filterData": {
+          "type": "string",
+          "description": "Start Packet capture parameters."
+        }
+      },
+      "description": "Start packet capture parameters on VNG."
     }
   }
 }
