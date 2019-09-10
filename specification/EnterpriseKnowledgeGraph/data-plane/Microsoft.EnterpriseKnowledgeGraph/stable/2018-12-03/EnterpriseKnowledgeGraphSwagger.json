@@ -422,7 +422,7 @@
         "tags": [
           "Search"
         ],
-        "summary": "EntitySearch",
+        "summary": "Search entities from Graph",
         "operationId": "ExecFreeTextQuery",
         "produces": [
           "application/json"
@@ -431,17 +431,20 @@
           {
             "in": "query",
             "name": "q",
+            "description": "Natural language query",
             "type": "string"
           },
           {
             "in": "query",
             "name": "top",
+            "description": "Maximum number of entity documents to return",
             "type": "integer",
             "format": "int32",
             "default": 10
           },
           {
             "in": "query",
+            "description": "Type of entity to return, e.g. project or employee",
             "name": "filter",
             "type": "string",
             "default": ""
@@ -449,6 +452,7 @@
           {
             "in": "query",
             "name": "includeEntityDocument",
+            "description": "1 to include entityDocument in response body, 0 not to include",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -456,6 +460,7 @@
           {
             "in": "query",
             "name": "enableQueryRewrite",
+            "description": "1 to rewrite query, such as removing stop words, etc., 0 to not",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -463,6 +468,7 @@
           {
             "in": "query",
             "name": "debug",
+            "description": "1 to show debug info like index, etc., 0 to not",
             "type": "integer",
             "format": "int32",
             "default": 0
@@ -496,11 +502,13 @@
             {
               "in": "query",
               "name": "q",
+              "description": "Natural language query",
               "type": "string"
             },
             {
               "in": "query",
               "name": "top",
+              "description": "Maximum number of suggestions to return",
               "type": "integer",
               "format": "int32",
               "default": 10
@@ -512,6 +520,7 @@
               "schema": {
                 "uniqueItems": false,
                 "type": "array",
+                "description": "A list of suggestion terms",
                 "items": {
                   "type": "string"
                 }
