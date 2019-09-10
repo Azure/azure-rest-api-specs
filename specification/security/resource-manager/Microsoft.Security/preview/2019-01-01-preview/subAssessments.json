@@ -28,6 +28,43 @@
       "get": {
         "x-ms-examples": {
           "List security sub-assessments": {
+            "$ref": "./examples/SubAssessments/ListSubscriptionSubAssessments_example.json"
+          }
+        },
+        "tags": ["SubAssessments"],
+        "description": "Get security sub-assessments on all your scanned resources inside a subscription scope",
+        "operationId": "SubAssessments_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecuritySubAssessmentList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+	"/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/subAssessments": {
+      "get": {
+        "x-ms-examples": {
+          "List security sub-assessments": {
             "$ref": "./examples/SubAssessments/ListSubAssessments_example.json"
           }
         },
@@ -40,6 +77,9 @@
           },
           {
             "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
           }
         ],
         "responses": {
