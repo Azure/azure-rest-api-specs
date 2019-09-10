@@ -214,9 +214,9 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+  - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2019-04-01/containerregistry_build.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2017-10-01/containerregistry.json
-  - $(this-folder)/Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
   - $(this-folder)/Microsoft.ContainerRegistry/stable/2018-09-01/containerregistry_build.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2018-02-01-preview/containerregistry_build.json
   - $(this-folder)/Microsoft.ContainerRegistry/preview/2017-06-01-preview/containerregistry.json
