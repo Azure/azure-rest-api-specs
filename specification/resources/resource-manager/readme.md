@@ -56,15 +56,6 @@ tag: package-links-2016-09
 tag: package-managedapplications-2018-06
 ```
 
-
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-06'
-input-file:
-  - Microsoft.Resources/stable/2019-06-01/subscriptions.json
-```
 ### Tag: package-features-2015-12
 
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
@@ -461,18 +452,6 @@ directive:
     from: managedapplications.json
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
-  - suppress: OperationsAPIImplementation
-    from: managedapplications.json
-    where: $.paths
-    reason: preexisting
-  - suppress: XmsExamplesRequired
-    from: managedapplications.json
-    where: $.paths
-    reason: preexisting
-  - suppress: PatchBodyParametersSchema
-    from: managedapplications.json
-    where: $.paths
-    reason: preexisting
 ```
 
 ---
