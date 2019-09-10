@@ -1,99 +1,86 @@
 {
-    "parameters": {
-        "api-version": "2018-11-01-preview",
-        "billingAccountId": "1234",
-        "$expand": "billingProfile"
-    },
-    "responses": {
-        "200": {
-            "body": {
-                "value": [
-                    {
-                        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/invoiceSections/12345/billingSubscriptions/billinSubscriptionId1",
-                        "name": "billinSubscriptionId1",
-                        "type": "Microsoft.Billing/billingSubscriptions",
-                        "properties": {
-                            "displayName": "AIP Dev",
-                            "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
-                            "subscriptionBillingStatus": "Active",
-                            "monthToDateCharges": {
-                                "currency": "USD",
-                                "value": 1000.00
-                            },
-                            "lastMonthCharges": {
-                                "currency": "USD",
-                                "value": 5000.00
-                            },
-                            "enrollmentAccountContext": {
-                                "costCenter": "Cost center A",
-                                "startDate": "Date",
-                                "endDate": "Date",
-                                "enrollmentAccountId": "providers/Microsoft.Billing/billingAccount/100/enrollmentAccounts/12345"
-                            },
-                            "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId1",
-                            "billingProfileName": "BillingProfileId1",
-                            "skuId": "0001",
-                            "skuDescription": "Microsoft Azure Dev/Test"
-                        }
-                    },
-                    {
-                        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/invoiceSections/12345/billingSubscriptions/billinSubscriptionId2",
-                        "name": "billinSubscriptionId2",
-                        "type": "Microsoft.Billing/billingSubscriptions",
-                        "properties": {
-                            "displayName": "AIP Int",
-                            "subscriptionId": "6b96d3f2-9008-4a9d-912f-6b96d3f2",
-                            "subscriptionBillingStatus": "Active",
-                            "monthToDateCharges": {
-                                "currency": "USD",
-                                "value": 2000.00
-                            },
-                            "lastMonthCharges": {
-                                "currency": "USD",
-                                "value": 1000.00
-                            },
-                            "enrollmentAccountContext": {
-                                "costCenter": "Cost center A",
-                                "startDate": "Date",
-                                "endDate": "Date",
-                                "enrollmentAccountId": "providers/Microsoft.Billing/billingAccount/100/enrollmentAccounts/12345"
-                            },
-                            "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId2",
-                            "billingProfileName": "BillingProfileId2",
-                            "skuId": "0001",
-                            "skuDescription": "Microsoft Azure Dev/Test"
-                        }
-                    },
-                    {
-                        "id": "/providers/Microsoft.Billing/BillingAccounts/1234/invoiceSections/12345/billingSubscriptions/billinSubscriptionId3",
-                        "name": "billinSubscriptionId3",
-                        "type": "Microsoft.Billing/billingSubscriptions",
-                        "properties": {
-                            "displayName": "AIP Prod",
-                            "subscriptionId": "6b96d3f2-4a9d-9008-912f-f87744185aa3",
-                            "subscriptionBillingStatus": "Active",
-                            "monthToDateCharges": {
-                                "currency": "USD",
-                                "value": 4000.00
-                            },
-                            "lastMonthCharges": {
-                                "currency": "USD",
-                                "value": 6000.00
-                            },
-                            "enrollmentAccountContext": {
-                                "costCenter": "Cost center A",
-                                "startDate": "Date",
-                                "endDate": "Date",
-                                "enrollmentAccountId": "providers/Microsoft.Billing/billingAccount/100/enrollmentAccounts/12345"
-                            },
-                            "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/BillingProfileId3",
-                            "billingProfileName": "BillingProfileId3",
-                            "skuId": "0001",
-                            "skuDescription": "Microsoft Azure Dev/Test"
-                        }
-                    }
-                ]
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "billingAccountName": "{billingAccountName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000/billingSubscriptions/90000000-0000-0000-0000-000000000000",
+            "name": "90000000-0000-0000-0000-000000000000",
+            "type": "Microsoft.Billing/billingSubscriptions",
+            "properties": {
+              "displayName": "My subscription",
+              "subscriptionId": "6b96d3f2-9008-4a9d-912f-f87744185aa3",
+              "subscriptionBillingStatus": "Active",
+              "lastMonthCharges": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "monthToDateCharges": {
+                "currency": "USD",
+                "value": 600
+              },
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
+              "invoiceSectionName": "Contoso operations invoiceSection",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+              "billingProfileName": "Contoso operations billing",
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Dev/Test"
             }
-        }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000/billingSubscriptions/90000000-0000-0000-0000-000000000001",
+            "name": "90000000-0000-0000-0000-000000000001",
+            "type": "Microsoft.Billing/billingSubscriptions",
+            "properties": {
+              "displayName": "Test subscription",
+              "subscriptionId": "6b96d3f2-9008-4a9d-912f-6b96d3f2",
+              "subscriptionBillingStatus": "Active",
+              "lastMonthCharges": {
+                "currency": "USD",
+                "value": 1000.00
+              },
+              "monthToDateCharges": {
+                "currency": "USD",
+                "value": 400
+              },
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
+              "invoiceSectionName": "Contoso operations invoiceSection",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+              "billingProfileName": "Contoso operations billing",
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Dev/Test"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000/billingSubscriptions/90000000-0000-0000-0000-000000000002",
+            "name": "90000000-0000-0000-0000-000000000002",
+            "type": "Microsoft.Billing/billingSubscriptions",
+            "properties": {
+              "displayName": "Dev Subscription",
+              "subscriptionId": "6b96d3f2-4a9d-9008-912f-f87744185aa3",
+              "subscriptionBillingStatus": "Active",
+              "lastMonthCharges": {
+                "currency": "USD",
+                "value": 6000.00
+              },
+              "monthToDateCharges": {
+                "currency": "USD",
+                "value": 900
+              },
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/invoiceSections/22000000-0000-0000-0000-000000000000",
+              "invoiceSectionName": "Contoso operations invoiceSection",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/11000000-0000-0000-0000-000000000000",
+              "billingProfileName": "Contoso operations billing",
+              "skuId": "0001",
+              "skuDescription": "Microsoft Azure Dev/Test"
+            }
+          }
+        ]
+      }
     }
+  }
 }

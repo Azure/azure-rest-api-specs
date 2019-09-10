@@ -1,30 +1,31 @@
 {
-   "parameters":{
-      "storage-account-name":"patchStrg01",
-      "api-version":"2016-10-01",
-      "parameters":{
-         "activeKeyName":"key1",
-         "regenerationPeriod":"P10D"
+  "parameters": {
+    "storage-account-name": "patchStrg01",
+    "api-version": "2016-10-01",
+    "parameters": {
+      "activeKeyName": "key1",
+      "regenerationPeriod": "P10D"
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "https://storage-sdk-test.vault-int.azure-int.net/storage/patchStrg01",
+        "resourceId": "/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc",
+        "activeKeyName": "key1",
+        "autoRegenerateKey": true,
+        "regenerationPeriod": "P10D",
+        "attributes": {
+          "enabled": true,
+          "created": 1490738386,
+          "updated": 1490738386
+        },
+        "tags": {
+          "tag1": "val1",
+          "tag2": "val2"
+        }
       }
-   },
-   "responses":{
-      "200":{
-         "headers":{
-
-         },
-         "body":{
-            "id":"https://storage-sdk-test.vault-int.azure-int.net/storage/patchStrg01",
-            "resourceId":"/subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.Storage/storageAccounts/kvstorageacc",
-            "activeKeyName":"key1",
-            "autoRegenerateKey":true,
-            "regenerationPeriod":"P10D",
-            "attributes":{
-               "enabled":true,
-               "created":1490738386,
-               "updated":1490738386
-            },
-            "tags":{"tag1":"val1", "tag2":"val2"}
-         }
-      }
-   }
+    }
+  }
 }

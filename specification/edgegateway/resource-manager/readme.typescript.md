@@ -9,6 +9,6 @@ typescript:
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
   package-name: "@azure/arm-edgegateway"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-edgegateway"
+  output-folder: "$(typescript-sdks-folder)/sdk/edgegateway/arm-edgegateway"
   generate-metadata: true
 ```

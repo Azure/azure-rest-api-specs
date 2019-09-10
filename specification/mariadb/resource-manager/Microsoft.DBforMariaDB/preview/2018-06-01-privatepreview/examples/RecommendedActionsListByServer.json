@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "api-version": "2018-06-01-privatepreview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "resourceGroupName": "testResourceGroupName",
+    "serverName": "testServerName",
+    "advisorName": "Index"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-1",
+            "name": "Index-1",
+            "type": "Microsoft.DBforMariaDB/servers/advisors/recommendedActions",
+            "properties": {
+              "advisorName": "Index",
+              "sessionId": "c63c2114-e2a4-4c7a-98c1-85577d1a5d50",
+              "actionId": 1,
+              "createdTime": "2019-05-01T23:43:24Z",
+              "expirationTime": "2019-05-08T23:43:24Z",
+              "reason": "Column `movies_genres`.`movie_id` appear in Join On clause(s).",
+              "recommendationType": "Add",
+              "details": {
+                "engine": "InnoDB",
+                "script": "alter table `movies`.`movies_genres` add index `idx_movie_id` (`movie_id`)",
+                "queryIds": "779",
+                "indexName": "idx_movie_id",
+                "indexType": "BTREE",
+                "tableName": "movies_genres",
+                "schemaName": "movies",
+                "indexColumns": "`movies_genres`.`movie_id`",
+                "parentTableName": "movies_genres"
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testResourceGroupName/providers/Microsoft.Sql/servers/testServerName/advisors/Index/recommendedActions/Index-2",
+            "name": "Index-2",
+            "type": "Microsoft.DBforMariaDB/servers/advisors/recommendedActions",
+            "properties": {
+              "advisorName": "Index",
+              "sessionId": "c63c2114-e2a4-4c7a-98c1-85577d1a5d50",
+              "actionId": 2,
+              "createdTime": "2019-05-01T23:43:24Z",
+              "expirationTime": "2019-05-08T23:43:24Z",
+              "reason": "Column `movies_genres`.`genre` appear in Group By clause(s).",
+              "recommendationType": "Add",
+              "details": {
+                "engine": "InnoDB",
+                "script": "alter table `movies`.`movies_genres` add index `idx_genre` (`genre`)",
+                "queryIds": "779",
+                "indexName": "idx_genre",
+                "indexType": "BTREE",
+                "tableName": "movies_genres",
+                "schemaName": "movies",
+                "indexColumns": "`movies_genres`.`genre`",
+                "parentTableName": "movies_genres"
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

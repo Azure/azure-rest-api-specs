@@ -7,6 +7,6 @@ Please also specify `--typescript-sdks-folder=<path to root folder of your azure
 typescript:
   azure-arm: true
   package-name: "@azure/arm-hanaonazure"
-  output-folder: "$(typescript-sdks-folder)/packages/@azure/arm-hanaonazure"
+  output-folder: "$(typescript-sdks-folder)/sdk/hanaonazure/arm-hanaonazure"
   generate-metadata: true
 ```

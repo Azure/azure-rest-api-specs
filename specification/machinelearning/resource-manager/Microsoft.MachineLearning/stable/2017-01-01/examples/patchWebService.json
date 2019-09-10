@@ -1,203 +1,203 @@
 {
-    "parameters": {
-        "subscriptionId": "subscription-id",
-        "resourceGroupName": "OneResourceGroupName",
-        "api-version": "2017-01-01",
-        "webServiceName": "TargetWebServiceName",
-        "patchPayload": {
-            "location": "West US",
-            "properties": {
-                "title": "New Web Service Title",
-                "description": "New Web Service Description",
-                "packageType": "Graph"
-            }
-        }
-    },
-    "responses": {
-        "200": {
-            "headers": {
-                "azure-asyncoperation": "http://azure.async.operation/status"
-            },
-            "body": {
-                "id": "TheWebServiceId",
-                "location": "West US",
-                "tags": {
-                    "tag1": "value1",
-                    "tag2": "value2"
-                },
-                "properties": {
-                    "title": "New Web Service Title",
-                    "description": "New Web Service Description",
-                    "readOnly": false,
-                    "exposeSampleData": true,
-                    "storageAccount": {
-                        "name": "Storage_Name"
-                    },
-                    "commitmentPlan": {
-                        "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.MachineLearning/commitmentPlans/commitmentPlanName"
-                    },
-                    "createdOn": "2017-01-01T01:01:01Z",
-                    "modifiedOn": "2017-01-01T02:02:02Z",
-                    "provisioningState": "Provisioning",
-                    "swaggerLocation": "https://ussouthcentral.services.azureml.net/subscriptions/subscriptionId/services/serviceId/swagger.json",
-                    "realtimeConfiguration": {
-                        "maxConcurrentCalls": 4
-                    },
-                    "diagnostics": {
-                        "level": "None"
-                    },
-                    "payloadsInBlobStorage": false,
-                    "machineLearningWorkspace": {
-                        "id": "workspaceId"
-                    },
-                    "packageType": "Graph",
-                    "assets": {
-                        "asset1": {
-                            "name": "Execute R Script",
-                            "type": "Module",
-                            "locationInfo": {
-                                "uri": "aml://module/moduleId-1",
-                                "credentials": ""
-                            }
-                        },
-                        "asset2": {
-                            "name": "Import Data",
-                            "type": "Module",
-                            "locationInfo": {
-                                "uri": "aml://module/moduleId-2",
-                                "credentials": ""
-                            }
-                        }
-                    },
-                    "parameters": {},
-                    "input": {
-                        "title": "",
-                        "description": "",
-                        "type": "object",
-                        "properties": {
-                            "input1": {
-                                "title": "",
-                                "description": "",
-                                "type": "object",
-                                "properties": {
-                                    "column_name": {
-                                        "type": "String",
-                                        "x-ms-isnullable": false
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "output": {
-                        "title": "",
-                        "description": "",
-                        "type": "object",
-                        "properties": {
-                            "output1": {
-                                "title": "",
-                                "description": "",
-                                "type": "object",
-                                "properties": {
-                                    "age": {
-                                        "type": "Integer",
-                                        "format": "Int32",
-                                        "x-ms-isnullable": true
-                                    },
-                                    "workclass": {
-                                        "type": "String",
-                                        "x-ms-isnullable": false
-                                    }
-                                }
-                            }
-                        }
-                    },
-                    "package": {
-                        "Nodes": {
-                            "node1": {
-                                "AssetId": "asset1",
-                                "Parameters": {
-                                    "R Script": {
-                                        "Value": "The R Script",
-                                        "CertificateThumbprint": ""
-                                    },
-                                    "R Version": {
-                                        "Value": "CRAN R 3.1.0",
-                                        "CertificateThumbprint": ""
-                                    }
-                                }
-                            },
-                            "node2": {
-                                "AssetId": "asset2",
-                                "Parameters": {
-                                    "Please Specify Data Source": {
-                                        "Value": "AzureBlobStorage",
-                                        "CertificateThumbprint": ""
-                                    },
-                                    "Please Specify Authentication Type": {
-                                        "Value": "Account",
-                                        "CertificateThumbprint": ""
-                                    },
-                                    "Account Name": {
-                                        "Value": "accountName",
-                                        "CertificateThumbprint": ""
-                                    },
-                                    "Account Key": {
-                                        "Value": "Encrypted Key",
-                                        "CertificateThumbprint": "TheThumbprint"
-                                    }
-                                }
-                            },
-                            "node3": {
-                                "InputId": "input1"
-                            },
-                            "node4": {
-                                "OutputId": "output1"
-                            }
-                        },
-                        "Edges": [
-                            {
-                                "SourceNodeId": "node2",
-                                "SourcePortId": "Results dataset",
-                                "TargetNodeId": "node1",
-                                "TargetPortId": "Dataset2"
-                            },
-                            {
-                                "SourceNodeId": "node3",
-                                "TargetNodeId": "node1",
-                                "TargetPortId": "Dataset1"
-                            },
-                            {
-                                "SourceNodeId": "node1",
-                                "SourcePortId": "Result Dataset",
-                                "TargetNodeId": "node4"
-                            }
-                        ],
-                        "GraphParameters": {}
-                    },
-                    "exampleRequest": {
-                        "inputs": {
-                            "input1": [
-                                [
-                                    "age"
-                                ],
-                                [
-                                    "workclass"
-                                ],
-                                [
-                                    "fnlwgt"
-                                ],
-                                [
-                                    "education"
-                                ],
-                                [
-                                    "education-num"
-                                ]
-                            ]
-                        },
-                        "globalParameters": null
-                    }
-                }
-            }
-        }
+  "parameters": {
+    "subscriptionId": "subscription-id",
+    "resourceGroupName": "OneResourceGroupName",
+    "api-version": "2017-01-01",
+    "webServiceName": "TargetWebServiceName",
+    "patchPayload": {
+      "location": "West US",
+      "properties": {
+        "title": "New Web Service Title",
+        "description": "New Web Service Description",
+        "packageType": "Graph"
+      }
     }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "azure-asyncoperation": "http://azure.async.operation/status"
+      },
+      "body": {
+        "id": "TheWebServiceId",
+        "location": "West US",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "title": "New Web Service Title",
+          "description": "New Web Service Description",
+          "readOnly": false,
+          "exposeSampleData": true,
+          "storageAccount": {
+            "name": "Storage_Name"
+          },
+          "commitmentPlan": {
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroupName/providers/Microsoft.MachineLearning/commitmentPlans/commitmentPlanName"
+          },
+          "createdOn": "2017-01-01T01:01:01Z",
+          "modifiedOn": "2017-01-01T02:02:02Z",
+          "provisioningState": "Provisioning",
+          "swaggerLocation": "https://ussouthcentral.services.azureml.net/subscriptions/subscriptionId/services/serviceId/swagger.json",
+          "realtimeConfiguration": {
+            "maxConcurrentCalls": 4
+          },
+          "diagnostics": {
+            "level": "None"
+          },
+          "payloadsInBlobStorage": false,
+          "machineLearningWorkspace": {
+            "id": "workspaceId"
+          },
+          "packageType": "Graph",
+          "assets": {
+            "asset1": {
+              "name": "Execute R Script",
+              "type": "Module",
+              "locationInfo": {
+                "uri": "aml://module/moduleId-1",
+                "credentials": ""
+              }
+            },
+            "asset2": {
+              "name": "Import Data",
+              "type": "Module",
+              "locationInfo": {
+                "uri": "aml://module/moduleId-2",
+                "credentials": ""
+              }
+            }
+          },
+          "parameters": {},
+          "input": {
+            "title": "",
+            "description": "",
+            "type": "object",
+            "properties": {
+              "input1": {
+                "title": "",
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "column_name": {
+                    "type": "String",
+                    "x-ms-isnullable": false
+                  }
+                }
+              }
+            }
+          },
+          "output": {
+            "title": "",
+            "description": "",
+            "type": "object",
+            "properties": {
+              "output1": {
+                "title": "",
+                "description": "",
+                "type": "object",
+                "properties": {
+                  "age": {
+                    "type": "Integer",
+                    "format": "Int32",
+                    "x-ms-isnullable": true
+                  },
+                  "workclass": {
+                    "type": "String",
+                    "x-ms-isnullable": false
+                  }
+                }
+              }
+            }
+          },
+          "package": {
+            "nodes": {
+              "node1": {
+                "assetId": "asset1",
+                "parameters": {
+                  "R Script": {
+                    "value": "The R Script",
+                    "certificateThumbprint": ""
+                  },
+                  "R Version": {
+                    "value": "CRAN R 3.1.0",
+                    "certificateThumbprint": ""
+                  }
+                }
+              },
+              "node2": {
+                "assetId": "asset2",
+                "parameters": {
+                  "Please Specify Data Source": {
+                    "value": "AzureBlobStorage",
+                    "certificateThumbprint": ""
+                  },
+                  "Please Specify Authentication Type": {
+                    "value": "Account",
+                    "certificateThumbprint": ""
+                  },
+                  "Account Name": {
+                    "value": "accountName",
+                    "certificateThumbprint": ""
+                  },
+                  "Account Key": {
+                    "value": "Encrypted Key",
+                    "certificateThumbprint": "TheThumbprint"
+                  }
+                }
+              },
+              "node3": {
+                "inputId": "input1"
+              },
+              "node4": {
+                "outputId": "output1"
+              }
+            },
+            "edges": [
+              {
+                "sourceNodeId": "node2",
+                "sourcePortId": "Results dataset",
+                "targetNodeId": "node1",
+                "targetPortId": "Dataset2"
+              },
+              {
+                "sourceNodeId": "node3",
+                "targetNodeId": "node1",
+                "targetPortId": "Dataset1"
+              },
+              {
+                "sourceNodeId": "node1",
+                "sourcePortId": "Result Dataset",
+                "targetNodeId": "node4"
+              }
+            ],
+            "graphParameters": {}
+          },
+          "exampleRequest": {
+            "inputs": {
+              "input1": [
+                [
+                  "age"
+                ],
+                [
+                  "workclass"
+                ],
+                [
+                  "fnlwgt"
+                ],
+                [
+                  "education"
+                ],
+                [
+                  "education-num"
+                ]
+              ]
+            },
+            "globalParameters": null
+          }
+        }
+      }
+    }
+  }
 }

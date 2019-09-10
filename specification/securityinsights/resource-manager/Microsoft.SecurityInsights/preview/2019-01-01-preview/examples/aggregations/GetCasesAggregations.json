@@ -1,0 +1,35 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "operationalInsightsResourceProvider": "Microsoft.OperationalInsights",
+    "aggregationsName": "Cases"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/d0cfe6b2-9ac0-4464-9919-dccaee2e48c0/resourceGroups/myRg/providers/Microsoft.OperationalInsights/workspaces/myWorkspace/providers/Microsoft.SecurityInsights/aggregations/Cases",
+        "name": "Cases",
+        "type": "Microsoft.SecurityInsights/aggregations",
+        "kind": "CasesAggregation",
+        "properties": {
+          "aggregationBySeverity": {
+            "totalCriticalSeverity": 13,
+            "totalHighSeverity": 14,
+            "totalMediumSeverity": 4,
+            "totalLowSeverity": 15,
+            "totalInformationalSeverity": 26
+          },
+          "aggregationByStatus": {
+            "totalNewStatus": 42,
+            "totalInProgressStatus": 30,
+            "totalResolvedStatus": 2,
+            "totalDismissedStatus": 1
+          }
+        }
+      }
+    }
+  }
+}

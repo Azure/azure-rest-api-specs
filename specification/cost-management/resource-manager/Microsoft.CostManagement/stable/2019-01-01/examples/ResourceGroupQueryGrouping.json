@@ -3,29 +3,30 @@
     "api-version": "2019-01-01",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "ScreenSharingTest-peer",
-    "parameters":{
-        "type": "Usage",
-        "timeframe": "TheLastMonth",
-        "dataset": {
-          "granularity": "Daily",
-          "aggregation": {
-            "totalCost": {
-              "name": "PreTaxCost",
-              "function": "Sum"
-            }
-          },
-          "grouping": [
-            {
-              "type": "Dimension",
-              "name": "ResourceType"
-            }
-          ],
-          "sorting": [
-            {
-              "name": "ResourceType",
-              "direction": "Descending"
-            }
-          ]      
+    "scope": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/{resourceGroupName}",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "TheLastMonth",
+      "dataset": {
+        "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "ResourceType"
+          }
+        ],
+        "sorting": [
+          {
+            "name": "ResourceType",
+            "querySortingDirection": "Descending"
+          }
+        ]
       }
     }
   },
