@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2019-06-preview` is specified on t
 input-file:
 - Microsoft.ContainerRegistry/stable/2019-05-01/containerregistry.json
 - Microsoft.ContainerRegistry/preview/2019-06-01-preview/containerregistry_build.json
+- Microsoft.ContainerRegistry/preview/2019-05-01-preview/containerregistry_scopemap.json
 ```
 
 ### Tag: package-2019-06-preview-only
