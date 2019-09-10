@@ -6,40 +6,42 @@
 			"id": "/subscriptons/D7EC67B3-7657-4966-BFFC-41EFD36BAAB3/providers/Microsoft.Capacity/autoQuotaIncrease",
 			"type": "Microsoft.Capacity/autoQuotaIncrease",
 			"name": "Automatic Quota Increase",
-			"enabled": false,
-			"emailActions": {
-				"receipients": {
-					"value": [
-						{
-							"actionType": "OnSuccess",
-							"emailRecipients": [
-								"admin2@contoso.com",
-								"itsupport@contoso.com"
-							]
-						},
-						{
-							"actionType": "OnFailure",
-							"emailRecipients": [
-								"itsupport@contoso.com"
-							]
-						}
-					]
-				}
-			},
-			"supportRequestAction": {
-				"severity": "SevB",
-				"supportLanguage": "en-us",
-				"receipients": {
-					"value": [
-						{
-							"recipientType": "chat",
-							"recipient": "support@contoso.com"
-						},
-						{
-							"recipientType": "phone",
-							"recipient": "+1-206-999-9999"
-						}
-					]
+			"properties": {
+				"enabled": false,
+				"emailActions": {
+					"receipients": {
+						"value": [
+							{
+								"actionType": "OnSuccess",
+								"emailRecipients": [
+									"admin2@contoso.com",
+									"itsupport@contoso.com"
+								]
+							},
+							{
+								"actionType": "OnFailure",
+								"emailRecipients": [
+									"itsupport@contoso.com"
+								]
+							}
+						]
+					}
+				},
+				"supportRequestAction": {
+					"severity": "SevB",
+					"supportLanguage": "en-us",
+					"receipients": {
+						"value": [
+							{
+								"recipientType": "chat",
+								"recipient": "support@contoso.com"
+							},
+							{
+								"recipientType": "phone",
+								"recipient": "+1-206-999-9999"
+							}
+						]
+					}
 				}
 			}
 		}
