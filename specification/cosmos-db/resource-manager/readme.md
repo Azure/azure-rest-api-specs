@@ -26,9 +26,24 @@ These are the global settings for the Cosmos-DB API.
 
 ``` yaml
 openapi-type: arm
+```
+
+``` yaml
+tag: package-2019-08
+```
+
+``` yaml
 tag: package-2015-04
 ```
 
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+input-file:
+- Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+```
 
 ### Tag: package-2015-04
 
@@ -50,42 +65,6 @@ directive:
     from: cosmos-db.json
     where: $.definitions.DatabaseAccountCreateUpdateParameters
     reason: The DatabaseAccount request and response resources differ so the DatabaseAccountCreateUpdateParameters must only have a PUT operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.SqlDatabase
-    reason: The SqlDatabase doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.Container
-    reason: The Container doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.MongoDBDatabase
-    reason: The MongoDBDatabase doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.MongoDBCollection
-    reason: The MongoDBCollection doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.Table
-    reason: The Table doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.CassandraKeyspace
-    reason: The CassandraKeyspace doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.CassandraTable
-    reason: The CassandraTable doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabase
-    reason: The GremlinDatabase doesn't support Patch operation
-  - suppress: TrackedResourcePatchOperation
-    from: cosmos-db.json
-    where: $.definitions.GremlinGraph
-    reason: The GremlinGraph doesn't support Patch operation
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.MetricValue.properties._count
@@ -100,32 +79,16 @@ directive:
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.ExtendedResourceProperties.properties._self
-    reason: The resource has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
     where: $.definitions.ExtendedResourceProperties.properties._etag
     reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.SqlDatabaseProperties.properties._colls
+    where: $.definitions.SqlDatabaseGetProperties.properties._colls
     reason: The database has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
-    where: $.definitions.SqlDatabaseProperties.properties._users
+    where: $.definitions.SqlDatabaseGetProperties.properties._users
     reason: The database has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabaseProperties.properties._rid
-    reason: The resource has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabaseProperties.properties._ts
-    reason: The resource has a property name with a leading underscore character
-  - suppress: DefinitionsPropertiesNamesCamelCase
-    from: cosmos-db.json
-    where: $.definitions.GremlinDatabaseProperties.properties._etag
-    reason: The resource has a property name with a leading underscore character
   - suppress: DefinitionsPropertiesNamesCamelCase
     from: cosmos-db.json
     where: $.definitions.PercentileMetricValue.properties.P10
