@@ -781,7 +781,7 @@
           "CaseRelations"
         ],
         "description": "Gets all case relations.",
-        "operationId": "Relations_ListByCase",
+        "operationId": "CaseRelations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -845,7 +845,7 @@
           "CaseRelations"
         ],
         "description": "Gets a case relation.",
-        "operationId": "Cases_GetRelation",
+        "operationId": "CaseRelations_GetRelation",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -894,7 +894,7 @@
           "CaseRelations"
         ],
         "description": "Creates the case relation.",
-        "operationId": "CaseRelations_CreateRelation",
+        "operationId": "CaseRelations_CreateOrUpdateRelation",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -1003,7 +1003,7 @@
           "BookmarkRelations"
         ],
         "description": "Gets all bookmark relations.",
-        "operationId": "Relations_ListByBookmark",
+        "operationId": "BookmarkRelations_List",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -1067,7 +1067,7 @@
           "BookmarkRelations"
         ],
         "description": "Gets a bookmark relation.",
-        "operationId": "Bookmarks_GetRelation",
+        "operationId": "BookmarkRelations_GetRelation",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -1116,7 +1116,7 @@
           "BookmarkRelations"
         ],
         "description": "Creates the bookmark relation.",
-        "operationId": "BookmarkRelations_CreateRelation",
+        "operationId": "BookmarkRelations_CreateOrUpdateRelation",
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersion"
@@ -3479,11 +3479,27 @@
     "RelationsModelInput": {
       "type": "object",
       "description": "Relation input model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Relation input properties",
+          "$ref": "#/definitions/RelationsModelInputProperties"
+        }
+      }
+    },
+    "RelationsModelInputProperties": {
+      "type": "object",
+      "description": "Relation input properties",
       "properties": {
         "relationName": {
           "type": "string",
-          "description": "The relation name"
-        },
+          "description": "Name of relation"
+        },   
         "sourceRelationNode": {
           "type": "object",
           "description": "Relation source node",
