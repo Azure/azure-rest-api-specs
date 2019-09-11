@@ -3,7 +3,7 @@
   "info": {
     "title": "Cosmos DB",
     "description": "Azure Cosmos DB Database Service Resource Provider REST API",
-    "version": "2015-04-08"
+    "version": "2019-08-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -61,7 +61,7 @@
           "200": {
             "description": "The database account properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseAccount"
+              "$ref": "#/definitions/DatabaseAccountGetResults"
             }
           }
         }
@@ -102,7 +102,7 @@
           "200": {
             "description": "The properties of the database account were patched successfully.",
             "schema": {
-              "$ref": "#/definitions/DatabaseAccount"
+              "$ref": "#/definitions/DatabaseAccountGetResults"
             }
           }
         }
@@ -146,7 +146,7 @@
           "200": {
             "description": "The database account create or update operation will complete asynchronously.",
             "schema": {
-              "$ref": "#/definitions/DatabaseAccount"
+              "$ref": "#/definitions/DatabaseAccountGetResults"
             }
           }
         }
@@ -1443,9 +1443,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases": {
       "get": {
-        "operationId": "DatabaseAccounts_ListSqlDatabases",
+        "operationId": "SqlResources_ListSqlDatabases",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseList": {
             "$ref": "./examples/CosmosDBSqlDatabaseList.json"
@@ -1479,9 +1479,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetSqlDatabase",
+        "operationId": "SqlResources_GetSqlDatabase",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseGet": {
             "$ref": "./examples/CosmosDBSqlDatabaseGet.json"
@@ -1509,13 +1509,13 @@
           "200": {
             "description": "The SQL database property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlDatabase"
+              "$ref": "#/definitions/SqlDatabaseGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateSqlDatabase",
+        "operationId": "SqlResources_CreateUpdateSqlDatabase",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlDatabaseCreateUpdate.json"
@@ -1556,13 +1556,13 @@
           "200": {
             "description": "The SQL database create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlDatabase"
+              "$ref": "#/definitions/SqlDatabaseGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteSqlDatabase",
+        "operationId": "SqlResources_DeleteSqlDatabase",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseDelete": {
             "$ref": "./examples/CosmosDBSqlDatabaseDelete.json"
@@ -1597,9 +1597,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetSqlDatabaseThroughput",
+        "operationId": "SqlResources_GetSqlDatabaseThroughput",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseThroughputGet": {
             "$ref": "./examples/CosmosDBSqlDatabaseThroughputGet.json"
@@ -1627,13 +1627,13 @@
           "200": {
             "description": "The RUs per second of the SQL database was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateSqlDatabaseThroughput",
+        "operationId": "SqlResources_UpdateSqlDatabaseThroughput",
         "x-ms-examples": {
           "CosmosDBSqlDatabaseThroughputUpdate": {
             "$ref": "./examples/CosmosDBSqlDatabaseThroughputUpdate.json"
@@ -1662,7 +1662,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The parameters to provide for the RUs per second of the current SQL database."
           }
@@ -1674,15 +1674,15 @@
           "200": {
             "description": "The RUs per second of the SQL database update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers": {
       "get": {
-        "operationId": "DatabaseAccounts_ListSqlContainers",
+        "operationId": "SqlResources_ListSqlContainers",
         "x-ms-examples": {
           "CosmosDBSqlContainerList": {
             "$ref": "./examples/CosmosDBSqlContainerList.json"
@@ -1719,9 +1719,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetSqlContainer",
+        "operationId": "SqlResources_GetSqlContainer",
         "x-ms-examples": {
           "CosmosDBSqlContainerGet": {
             "$ref": "./examples/CosmosDBSqlContainerGet.json"
@@ -1752,13 +1752,13 @@
           "200": {
             "description": "The SQL container property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlContainer"
+              "$ref": "#/definitions/SqlContainerGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateSqlContainer",
+        "operationId": "SqlResources_CreateUpdateSqlContainer",
         "x-ms-examples": {
           "CosmosDBSqlContainerCreateUpdate": {
             "$ref": "./examples/CosmosDBSqlContainerCreateUpdate.json"
@@ -1802,13 +1802,13 @@
           "200": {
             "description": "The SQL container create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlContainer"
+              "$ref": "#/definitions/SqlContainerGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteSqlContainer",
+        "operationId": "SqlResources_DeleteSqlContainer",
         "x-ms-examples": {
           "CosmosDBSqlContainerDelete": {
             "$ref": "./examples/CosmosDBSqlContainerDelete.json"
@@ -1846,9 +1846,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/sql/databases/{databaseName}/containers/{containerName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetSqlContainerThroughput",
+        "operationId": "SqlResources_GetSqlContainerThroughput",
         "x-ms-examples": {
           "CosmosDBSqlContainerThroughputGet": {
             "$ref": "./examples/CosmosDBSqlContainerThroughputGet.json"
@@ -1879,13 +1879,13 @@
           "200": {
             "description": "The RUs per second of the SQL container was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateSqlContainerThroughput",
+        "operationId": "SqlResources_UpdateSqlContainerThroughput",
         "x-ms-examples": {
           "CosmosDBSqlContainerThroughputUpdate": {
             "$ref": "./examples/CosmosDBSqlContainerThroughputUpdate.json"
@@ -1917,7 +1917,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The parameters to provide for the RUs per second of the current SQL container."
           }
@@ -1929,15 +1929,15 @@
           "200": {
             "description": "The RUs per second of the SQL container update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases": {
       "get": {
-        "operationId": "DatabaseAccounts_ListMongoDBDatabases",
+        "operationId": "MongoDBResources_ListMongoDBDatabases",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseList": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseList.json"
@@ -1971,9 +1971,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongoDBDatabase",
+        "operationId": "MongoDBResources_GetMongoDBDatabase",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseGet": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseGet.json"
@@ -2001,13 +2001,13 @@
           "200": {
             "description": "The MongoDB database property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoDBDatabase"
+              "$ref": "#/definitions/MongoDBDatabaseGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateMongoDBDatabase",
+        "operationId": "MongoDBResources_CreateUpdateMongoDBDatabase",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseCreateUpdate": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseCreateUpdate.json"
@@ -2048,13 +2048,13 @@
           "200": {
             "description": "The MongoDB database create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoDBDatabase"
+              "$ref": "#/definitions/MongoDBDatabaseGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteMongoDBDatabase",
+        "operationId": "MongoDBResources_DeleteMongoDBDatabase",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseDelete": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseDelete.json"
@@ -2089,9 +2089,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongoDBDatabaseThroughput",
+        "operationId": "MongoDBResources_GetMongoDBDatabaseThroughput",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseThroughputGet": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseThroughputGet.json"
@@ -2119,13 +2119,13 @@
           "200": {
             "description": "The RUs per second of the MongoDB database was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateMongoDBDatabaseThroughput",
+        "operationId": "MongoDBResources_UpdateMongoDBDatabaseThroughput",
         "x-ms-examples": {
           "CosmosDBMongoDBDatabaseThroughputUpdate": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseThroughputUpdate.json"
@@ -2154,7 +2154,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The RUs per second of the parameters to provide for the current MongoDB database."
           }
@@ -2166,15 +2166,15 @@
           "200": {
             "description": "The RUs per second of the MongoDB database update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections": {
       "get": {
-        "operationId": "DatabaseAccounts_ListMongoDBCollections",
+        "operationId": "MongoDBResources_ListMongoDBCollections",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionList": {
             "$ref": "./examples/CosmosDBMongoDBCollectionList.json"
@@ -2211,9 +2211,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections/{collectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongoDBCollection",
+        "operationId": "MongoDBResources_GetMongoDBCollection",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionGet": {
             "$ref": "./examples/CosmosDBMongoDBCollectionGet.json"
@@ -2244,13 +2244,13 @@
           "200": {
             "description": "The MongoDB collection property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoDBCollection"
+              "$ref": "#/definitions/MongoDBCollectionGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateMongoDBCollection",
+        "operationId": "MongoDBResources_CreateUpdateMongoDBCollection",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionCreateUpdate": {
             "$ref": "./examples/CosmosDBMongoDBCollectionCreateUpdate.json"
@@ -2294,13 +2294,13 @@
           "200": {
             "description": "The MongoDB Collection create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/MongoDBCollection"
+              "$ref": "#/definitions/MongoDBCollectionGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteMongoDBCollection",
+        "operationId": "MongoDBResources_DeleteMongoDBCollection",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionDelete": {
             "$ref": "./examples/CosmosDBMongoDBCollectionDelete.json"
@@ -2338,9 +2338,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/mongodb/databases/{databaseName}/collections/{collectionName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetMongoDBCollectionThroughput",
+        "operationId": "MongoDBResources_GetMongoDBCollectionThroughput",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionThroughputGet": {
             "$ref": "./examples/CosmosDBMongoDBCollectionThroughputGet.json"
@@ -2371,13 +2371,13 @@
           "200": {
             "description": "The RUs per second of the MongoDB collection was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateMongoDBCollectionThroughput",
+        "operationId": "MongoDBResources_UpdateMongoDBCollectionThroughput",
         "x-ms-examples": {
           "CosmosDBMongoDBCollectionThroughputUpdate": {
             "$ref": "./examples/CosmosDBMongoDBCollectionThroughputUpdate.json"
@@ -2409,7 +2409,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The RUs per second of the parameters to provide for the current MongoDB collection."
           }
@@ -2421,15 +2421,15 @@
           "200": {
             "description": "The RUs per second of the MongoDB collection update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables": {
       "get": {
-        "operationId": "DatabaseAccounts_ListTables",
+        "operationId": "TableResources_ListTables",
         "x-ms-examples": {
           "CosmosDBTableList": {
             "$ref": "./examples/CosmosDBTableList.json"
@@ -2463,9 +2463,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetTable",
+        "operationId": "TableResources_GetTable",
         "x-ms-examples": {
           "CosmosDBTableGet": {
             "$ref": "./examples/CosmosDBTableGet.json"
@@ -2493,13 +2493,13 @@
           "200": {
             "description": "The Table property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Table"
+              "$ref": "#/definitions/TableGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateTable",
+        "operationId": "TableResources_CreateUpdateTable",
         "x-ms-examples": {
           "CosmosDBTableReplace": {
             "$ref": "./examples/CosmosDBTableCreateUpdate.json"
@@ -2540,13 +2540,13 @@
           "200": {
             "description": "The Table create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Table"
+              "$ref": "#/definitions/TableGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteTable",
+        "operationId": "TableResources_DeleteTable",
         "x-ms-examples": {
           "CosmosDBTableDelete": {
             "$ref": "./examples/CosmosDBTableDelete.json"
@@ -2581,9 +2581,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/table/tables/{tableName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetTableThroughput",
+        "operationId": "TableResources_GetTableThroughput",
         "x-ms-examples": {
           "CosmosDBTableThroughputGet": {
             "$ref": "./examples/CosmosDBTableThroughputGet.json"
@@ -2611,13 +2611,13 @@
           "200": {
             "description": "The RUs per second of the Table was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateTableThroughput",
+        "operationId": "TableResources_UpdateTableThroughput",
         "x-ms-examples": {
           "CosmosDBTableThroughputUpdate": {
             "$ref": "./examples/CosmosDBTableThroughputUpdate.json"
@@ -2646,7 +2646,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The parameters to provide for the RUs per second of the current Table."
           }
@@ -2658,15 +2658,15 @@
           "200": {
             "description": "The RUs per second of the Table update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces": {
       "get": {
-        "operationId": "DatabaseAccounts_ListCassandraKeyspaces",
+        "operationId": "CassandraResources_ListCassandraKeyspaces",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceList": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceList.json"
@@ -2700,9 +2700,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetCassandraKeyspace",
+        "operationId": "CassandraResources_GetCassandraKeyspace",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceGet": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceGet.json"
@@ -2730,13 +2730,13 @@
           "200": {
             "description": "The Cassandra keyspace property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/CassandraKeyspace"
+              "$ref": "#/definitions/CassandraKeyspaceGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateCassandraKeyspace",
+        "operationId": "CassandraResources_CreateUpdateCassandraKeyspace",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceCreateUpdate": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceCreateUpdate.json"
@@ -2777,13 +2777,13 @@
           "200": {
             "description": "The Cassandra keyspace create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CassandraKeyspace"
+              "$ref": "#/definitions/CassandraKeyspaceGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteCassandraKeyspace",
+        "operationId": "CassandraResources_DeleteCassandraKeyspace",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceDelete": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceDelete.json"
@@ -2818,9 +2818,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetCassandraKeyspaceThroughput",
+        "operationId": "CassandraResources_GetCassandraKeyspaceThroughput",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceThroughputGet": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceThroughputGet.json"
@@ -2848,13 +2848,13 @@
           "200": {
             "description": "The RUs per second of the Cassandra Keyspace was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateCassandraKeyspaceThroughput",
+        "operationId": "CassandraResources_UpdateCassandraKeyspaceThroughput",
         "x-ms-examples": {
           "CosmosDBCassandraKeyspaceThroughputUpdate": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceThroughputUpdate.json"
@@ -2883,7 +2883,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
           }
@@ -2895,15 +2895,15 @@
           "200": {
             "description": "The RUs per second of the Cassandra Keyspace update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables": {
       "get": {
-        "operationId": "DatabaseAccounts_ListCassandraTables",
+        "operationId": "CassandraResources_ListCassandraTables",
         "x-ms-examples": {
           "CosmosDBCassandraTableList": {
             "$ref": "./examples/CosmosDBCassandraTableList.json"
@@ -2940,9 +2940,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables/{tableName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetCassandraTable",
+        "operationId": "CassandraResources_GetCassandraTable",
         "x-ms-examples": {
           "CosmosDBCassandraTableGet": {
             "$ref": "./examples/CosmosDBCassandraTableGet.json"
@@ -2973,13 +2973,13 @@
           "200": {
             "description": "The Cassandra table property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/CassandraTable"
+              "$ref": "#/definitions/CassandraTableGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateCassandraTable",
+        "operationId": "CassandraResources_CreateUpdateCassandraTable",
         "x-ms-examples": {
           "CosmosDBCassandraTableCreateUpdate": {
             "$ref": "./examples/CosmosDBCassandraTableCreateUpdate.json"
@@ -3023,13 +3023,13 @@
           "200": {
             "description": "The Cassandra Table create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/CassandraTable"
+              "$ref": "#/definitions/CassandraTableGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteCassandraTable",
+        "operationId": "CassandraResources_DeleteCassandraTable",
         "x-ms-examples": {
           "CosmosDBCassandraTableDelete": {
             "$ref": "./examples/CosmosDBCassandraTableDelete.json"
@@ -3067,9 +3067,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/cassandra/keyspaces/{keyspaceName}/tables/{tableName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetCassandraTableThroughput",
+        "operationId": "CassandraResources_GetCassandraTableThroughput",
         "x-ms-examples": {
           "CosmosDBCassandraTableThroughputGet": {
             "$ref": "./examples/CosmosDBCassandraTableThroughputGet.json"
@@ -3100,13 +3100,13 @@
           "200": {
             "description": "The RUs per second of the Cassandra table was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateCassandraTableThroughput",
+        "operationId": "CassandraResources_UpdateCassandraTableThroughput",
         "x-ms-examples": {
           "CosmosDBCassandraTableThroughputUpdate": {
             "$ref": "./examples/CosmosDBCassandraTableThroughputUpdate.json"
@@ -3138,7 +3138,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The RUs per second of the parameters to provide for the current Cassandra table."
           }
@@ -3150,15 +3150,15 @@
           "200": {
             "description": "The RUs per second of the Cassandra table update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases": {
       "get": {
-        "operationId": "DatabaseAccounts_ListGremlinDatabases",
+        "operationId": "GremlinResources_ListGremlinDatabases",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseList": {
             "$ref": "./examples/CosmosDBGremlinDatabaseList.json"
@@ -3192,9 +3192,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetGremlinDatabase",
+        "operationId": "GremlinResources_GetGremlinDatabase",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseGet": {
             "$ref": "./examples/CosmosDBGremlinDatabaseGet.json"
@@ -3222,13 +3222,13 @@
           "200": {
             "description": "The Gremlin database property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/GremlinDatabase"
+              "$ref": "#/definitions/GremlinDatabaseGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateGremlinDatabase",
+        "operationId": "GremlinResources_CreateUpdateGremlinDatabase",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseCreateUpdate": {
             "$ref": "./examples/CosmosDBGremlinDatabaseCreateUpdate.json"
@@ -3269,13 +3269,13 @@
           "200": {
             "description": "The Gremlin database create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GremlinDatabase"
+              "$ref": "#/definitions/GremlinDatabaseGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteGremlinDatabase",
+        "operationId": "GremlinResources_DeleteGremlinDatabase",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseDelete": {
             "$ref": "./examples/CosmosDBGremlinDatabaseDelete.json"
@@ -3310,9 +3310,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetGremlinDatabaseThroughput",
+        "operationId": "GremlinResources_GetGremlinDatabaseThroughput",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseThroughputGet": {
             "$ref": "./examples/CosmosDBGremlinDatabaseThroughputGet.json"
@@ -3340,13 +3340,13 @@
           "200": {
             "description": "The RUs per second of the Gremlin database was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateGremlinDatabaseThroughput",
+        "operationId": "GremlinResources_UpdateGremlinDatabaseThroughput",
         "x-ms-examples": {
           "CosmosDBGremlinDatabaseThroughputUpdate": {
             "$ref": "./examples/CosmosDBGremlinDatabaseThroughputUpdate.json"
@@ -3375,7 +3375,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The RUs per second of the parameters to provide for the current Gremlin database."
           }
@@ -3387,15 +3387,15 @@
           "200": {
             "description": "The RUs per second of the Gremlin database update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs": {
       "get": {
-        "operationId": "DatabaseAccounts_ListGremlinGraphs",
+        "operationId": "GremlinResources_ListGremlinGraphs",
         "x-ms-examples": {
           "CosmosDBGremlinGraphList": {
             "$ref": "./examples/CosmosDBGremlinGraphList.json"
@@ -3432,9 +3432,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs/{graphName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}": {
       "get": {
-        "operationId": "DatabaseAccounts_GetGremlinGraph",
+        "operationId": "GremlinResources_GetGremlinGraph",
         "x-ms-examples": {
           "CosmosDBGremlinGraphGet": {
             "$ref": "./examples/CosmosDBGremlinGraphGet.json"
@@ -3465,13 +3465,13 @@
           "200": {
             "description": "The Gremlin graph property was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/GremlinGraph"
+              "$ref": "#/definitions/GremlinGraphGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateUpdateGremlinGraph",
+        "operationId": "GremlinResources_CreateUpdateGremlinGraph",
         "x-ms-examples": {
           "CosmosDBGremlinGraphCreateUpdate": {
             "$ref": "./examples/CosmosDBGremlinGraphCreateUpdate.json"
@@ -3515,13 +3515,13 @@
           "200": {
             "description": "The Gremlin graph create or update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/GremlinGraph"
+              "$ref": "#/definitions/GremlinGraphGetResults"
             }
           }
         }
       },
       "delete": {
-        "operationId": "DatabaseAccounts_DeleteGremlinGraph",
+        "operationId": "GremlinResources_DeleteGremlinGraph",
         "x-ms-examples": {
           "CosmosDBGremlinGraphDelete": {
             "$ref": "./examples/CosmosDBGremlinGraphDelete.json"
@@ -3559,9 +3559,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/apis/gremlin/databases/{databaseName}/graphs/{graphName}/settings/throughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default": {
       "get": {
-        "operationId": "DatabaseAccounts_GetGremlinGraphThroughput",
+        "operationId": "GremlinResources_GetGremlinGraphThroughput",
         "x-ms-examples": {
           "CosmosDBGremlinGraphThroughputGet": {
             "$ref": "./examples/CosmosDBGremlinGraphThroughputGet.json"
@@ -3592,13 +3592,13 @@
           "200": {
             "description": "The RUs per second of the Gremlin graph was retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_UpdateGremlinGraphThroughput",
+        "operationId": "GremlinResources_UpdateGremlinGraphThroughput",
         "x-ms-examples": {
           "CosmosDBGremlinGraphThroughputUpdate": {
             "$ref": "./examples/CosmosDBGremlinGraphThroughputUpdate.json"
@@ -3630,7 +3630,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ThroughputUpdateParameters"
+              "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
             },
             "description": "The RUs per second of the parameters to provide for the current Gremlin graph."
           }
@@ -3642,7 +3642,7 @@
           "200": {
             "description": "The RUs per second of the Gremlin graph update operation was completed successfully.",
             "schema": {
-              "$ref": "#/definitions/Throughput"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           }
         }
@@ -3656,7 +3656,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DatabaseAccount"
+            "$ref": "#/definitions/DatabaseAccountGetResults"
           },
           "description": "List of database account and their properties."
         }
@@ -3669,7 +3669,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlDatabase"
+            "$ref": "#/definitions/SqlDatabaseGetResults"
           },
           "description": "List of SQL databases and their properties."
         }
@@ -3682,7 +3682,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SqlContainer"
+            "$ref": "#/definitions/SqlContainerGetResults"
           },
           "description": "List of containers and their properties."
         }
@@ -3695,7 +3695,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MongoDBDatabase"
+            "$ref": "#/definitions/MongoDBDatabaseGetResults"
           },
           "description": "List of MongoDB databases and their properties."
         }
@@ -3708,7 +3708,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/MongoDBCollection"
+            "$ref": "#/definitions/MongoDBCollectionGetResults"
           },
           "description": "List of MongoDB collections and their properties."
         }
@@ -3721,7 +3721,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Table"
+            "$ref": "#/definitions/TableGetResults"
           },
           "description": "List of Table and their properties."
         }
@@ -3734,7 +3734,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CassandraKeyspace"
+            "$ref": "#/definitions/CassandraKeyspaceGetResults"
           },
           "description": "List of Cassandra keyspaces and their properties."
         }
@@ -3747,7 +3747,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/CassandraTable"
+            "$ref": "#/definitions/CassandraTableGetResults"
           },
           "description": "List of Cassandra tables and their properties."
         }
@@ -3760,7 +3760,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GremlinDatabase"
+            "$ref": "#/definitions/GremlinDatabaseGetResults"
           },
           "description": "List of Gremlin databases and their properties."
         }
@@ -3773,7 +3773,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/GremlinGraph"
+            "$ref": "#/definitions/GremlinGraphGetResults"
           },
           "description": "List of graphs and their properties."
         }
@@ -3874,19 +3874,19 @@
         }
       }
     },
-    "Resource": {
+    "ARMResourceProperties": {
       "type": "object",
       "description": "The core properties of ARM resources.",
       "properties": {
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "The unique resource identifier of the database account."
+          "description": "The unique resource identifier of the ARM resource."
         },
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "The name of the database account."
+          "description": "The name of the ARM resource."
         },
         "type": {
           "readOnly": true,
@@ -3903,7 +3903,7 @@
       },
       "x-ms-azure-resource": true
     },
-    "DatabaseAccount": {
+    "DatabaseAccountGetResults": {
       "description": "An Azure Cosmos DB database account.",
       "type": "object",
       "properties": {
@@ -3923,74 +3923,77 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseAccountProperties"
+          "$ref": "#/definitions/DatabaseAccountGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
     "ExtendedResourceProperties": {
-      "description": "The system generated resource properties associated with SQL databases and SQL containers.",
+      "description": "The system generated resource properties associated with SQL databases, SQL containers, Gremlin databases and Gremlin graphs.",
       "type": "object",
       "properties": {
         "_rid": {
           "type": "string",
-          "description": "A system generated property. A unique identifier."
+          "description": "A system generated property. A unique identifier.",
+          "readOnly": true
         },
         "_ts": {
-          "description": "A system generated property that denotes the last updated timestamp of the resource."
+          "description": "A system generated property that denotes the last updated timestamp of the resource.",
+          "readOnly": true
         },
         "_etag": {
           "type": "string",
-          "description": "A system generated property representing the resource etag required for optimistic concurrency control."
+          "description": "A system generated property representing the resource etag required for optimistic concurrency control.",
+          "readOnly": true
         }
       }
     },
-    "Throughput": {
+    "ThroughputSettingsGetResults": {
       "description": "An Azure Cosmos DB resource throughput.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB resource throughput",
-          "$ref": "#/definitions/ThroughputProperties"
+          "$ref": "#/definitions/ThroughputSettingsGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "ThroughputProperties": {
+    "ThroughputSettingsGetProperties": {
       "description": "The properties of an Azure Cosmos DB resource throughput",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ThroughputResource"
+          "$ref": "#/definitions/ThroughputSettingsResource"
         }
       ]
     },
-    "SqlDatabase": {
+    "SqlDatabaseGetResults": {
       "description": "An Azure Cosmos DB SQL database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB SQL database",
-          "$ref": "#/definitions/SqlDatabaseProperties"
+          "$ref": "#/definitions/SqlDatabaseGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "SqlDatabaseProperties": {
+    "SqlDatabaseGetProperties": {
       "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
       "properties": {
@@ -4012,23 +4015,23 @@
         }
       ]
     },
-    "SqlContainer": {
+    "SqlContainerGetResults": {
       "description": "An Azure Cosmos DB container.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB container",
-          "$ref": "#/definitions/SqlContainerProperties"
+          "$ref": "#/definitions/SqlContainerGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "SqlContainerProperties": {
+    "SqlContainerGetProperties": {
       "description": "The properties of an Azure Cosmos DB container",
       "type": "object",
       "allOf": [
@@ -4040,186 +4043,191 @@
         }
       ]
     },
-    "MongoDBDatabase": {
+    "MongoDBDatabaseGetResults": {
       "description": "An Azure Cosmos DB MongoDB database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB MongoDB database",
-          "$ref": "#/definitions/MongoDBDatabaseProperties"
+          "$ref": "#/definitions/MongoDBDatabaseGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "MongoDBDatabaseProperties": {
+    "MongoDBDatabaseGetProperties": {
       "description": "The properties of an Azure Cosmos DB MongoDB database",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MongoDBDatabaseResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "MongoDBCollection": {
+    "MongoDBCollectionGetResults": {
       "description": "An Azure Cosmos DB MongoDB collection.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB MongoDB collection",
-          "$ref": "#/definitions/MongoDBCollectionProperties"
+          "$ref": "#/definitions/MongoDBCollectionGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "MongoDBCollectionProperties": {
+    "MongoDBCollectionGetProperties": {
       "description": "The properties of an Azure Cosmos DB MongoDB collection",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/MongoDBCollectionResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "Table": {
+    "TableGetResults": {
       "description": "An Azure Cosmos DB Table.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB Table",
-          "$ref": "#/definitions/TableProperties"
+          "$ref": "#/definitions/TableGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "TableProperties": {
+    "TableGetProperties": {
       "description": "The properties of an Azure Cosmos Table",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/TableResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "CassandraKeyspace": {
+    "CassandraKeyspaceGetResults": {
       "description": "An Azure Cosmos DB Cassandra keyspace.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
-          "$ref": "#/definitions/CassandraKeyspaceProperties"
+          "$ref": "#/definitions/CassandraKeyspaceGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "CassandraKeyspaceProperties": {
+    "CassandraKeyspaceGetProperties": {
       "description": "The properties of an Azure Cosmos DB Cassandra keyspace",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/CassandraKeyspaceResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "CassandraTable": {
+    "CassandraTableGetResults": {
       "description": "An Azure Cosmos DB Cassandra table.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB Cassandra table",
-          "$ref": "#/definitions/CassandraTableProperties"
+          "$ref": "#/definitions/CassandraTableGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "CassandraTableProperties": {
+    "CassandraTableGetProperties": {
       "description": "The properties of an Azure Cosmos DB Cassandra table",
       "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/CassandraTableResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "GremlinDatabase": {
+    "GremlinDatabaseGetResults": {
       "description": "An Azure Cosmos DB Gremlin database.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB SQL database",
-          "$ref": "#/definitions/GremlinDatabaseProperties"
+          "$ref": "#/definitions/GremlinDatabaseGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "GremlinDatabaseProperties": {
+    "GremlinDatabaseGetProperties": {
       "description": "The properties of an Azure Cosmos DB SQL database",
       "type": "object",
-      "properties": {
-        "_rid": {
-          "type": "string",
-          "description": "A system generated property. A unique identifier."
-        },
-        "_ts": {
-          "description": "A system generated property that denotes the last updated timestamp of the resource."
-        },
-        "_etag": {
-          "type": "string",
-          "description": "A system generated property representing the resource etag required for optimistic concurrency control."
-        }
-      },
       "allOf": [
         {
           "$ref": "#/definitions/GremlinDatabaseResource"
+        },
+        {
+          "$ref": "#/definitions/ExtendedResourceProperties"
         }
       ]
     },
-    "GremlinGraph": {
+    "GremlinGraphGetResults": {
       "description": "An Azure Cosmos DB Gremlin graph.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "The properties of an Azure Cosmos DB Gremlin graph",
-          "$ref": "#/definitions/GremlinGraphProperties"
+          "$ref": "#/definitions/GremlinGraphGetProperties"
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ]
     },
-    "GremlinGraphProperties": {
+    "GremlinGraphGetProperties": {
       "description": "The properties of an Azure Cosmos DB Gremlin graph",
       "type": "object",
       "allOf": [
@@ -4269,7 +4277,7 @@
         "defaultConsistencyLevel"
       ]
     },
-    "DatabaseAccountProperties": {
+    "DatabaseAccountGetProperties": {
       "description": "Properties for the database account.",
       "type": "object",
       "properties": {
@@ -4455,7 +4463,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Resource"
+          "$ref": "#/definitions/ARMResourceProperties"
         }
       ],
       "required": [
@@ -4571,27 +4579,32 @@
         "modelAsString": false
       }
     },
-    "ThroughputUpdateParameters": {
+    "ThroughputSettingsUpdateParameters": {
       "description": "Parameters to update Cosmos DB resource throughput.",
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Properties to update Azure Cosmos DB resource throughput.",
-          "$ref": "#/definitions/ThroughputUpdateProperties"
+          "$ref": "#/definitions/ThroughputSettingsUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
     },
-    "ThroughputUpdateProperties": {
+    "ThroughputSettingsUpdateProperties": {
       "description": "Properties to update Azure Cosmos DB resource throughput.",
       "type": "object",
       "properties": {
         "resource": {
           "description": "The standard JSON format of a resource throughput",
-          "$ref": "#/definitions/ThroughputResource"
+          "$ref": "#/definitions/ThroughputSettingsResource"
         }
       },
       "required": [
@@ -4608,6 +4621,11 @@
           "$ref": "#/definitions/SqlDatabaseCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4640,6 +4658,11 @@
           "$ref": "#/definitions/SqlContainerCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4672,6 +4695,11 @@
           "$ref": "#/definitions/MongoDBDatabaseCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4704,6 +4732,11 @@
           "$ref": "#/definitions/MongoDBCollectionCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4736,6 +4769,11 @@
           "$ref": "#/definitions/TableCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4768,6 +4806,11 @@
           "$ref": "#/definitions/CassandraKeyspaceCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4800,6 +4843,11 @@
           "$ref": "#/definitions/CassandraTableCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4832,6 +4880,11 @@
           "$ref": "#/definitions/GremlinDatabaseCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4864,6 +4917,11 @@
           "$ref": "#/definitions/GremlinGraphCreateUpdateProperties"
         }
       },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ARMResourceProperties"
+        }
+      ],
       "required": [
         "properties"
       ]
@@ -4886,13 +4944,23 @@
         "options"
       ]
     },
-    "ThroughputResource": {
+    "ThroughputSettingsResource": {
       "type": "object",
       "description": "Cosmos DB resource throughput object",
       "properties": {
         "throughput": {
           "type": "integer",
           "description": "Value of the Cosmos DB resource throughput"
+        },
+        "minimumThroughput": {
+          "type": "string",
+          "description": "The minimum throughput of the resource",
+          "readOnly": true
+        },
+        "offerReplacePending": {
+          "type": "string",
+          "description": "The throughput replace is pending",
+          "readOnly": true
         }
       },
       "required": [
@@ -4901,7 +4969,7 @@
     },
     "SqlDatabaseResource": {
       "type": "object",
-      "description": "Cosmos DB SQL database id object",
+      "description": "Cosmos DB SQL database resource object",
       "properties": {
         "id": {
           "type": "string",
@@ -4939,39 +5007,6 @@
         "conflictResolutionPolicy": {
           "$ref": "#/definitions/ConflictResolutionPolicy",
           "description": "The conflict resolution policy for the container."
-        }
-      },
-      "required": [
-        "id"
-      ]
-    },
-    "GremlinGraphResource": {
-      "type": "object",
-      "description": "Cosmos DB Gremlin graph resource object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Name of the Cosmos DB Gremlin graph"
-        },
-        "indexingPolicy": {
-          "$ref": "#/definitions/IndexingPolicy",
-          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the graph"
-        },
-        "partitionKey": {
-          "$ref": "#/definitions/ContainerPartitionKey",
-          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
-        },
-        "defaultTtl": {
-          "type": "integer",
-          "description": "Default time to live"
-        },
-        "uniqueKeyPolicy": {
-          "$ref": "#/definitions/UniqueKeyPolicy",
-          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
-        },
-        "conflictResolutionPolicy": {
-          "$ref": "#/definitions/ConflictResolutionPolicy",
-          "description": "The conflict resolution policy for the graph."
         }
       },
       "required": [
@@ -5168,7 +5203,7 @@
     },
     "MongoDBDatabaseResource": {
       "type": "object",
-      "description": "Cosmos DB MongoDB database id object",
+      "description": "Cosmos DB MongoDB database resource object",
       "properties": {
         "id": {
           "type": "string",
@@ -5257,7 +5292,7 @@
     },
     "TableResource": {
       "type": "object",
-      "description": "Cosmos DB table id object",
+      "description": "Cosmos DB table resource object",
       "properties": {
         "id": {
           "type": "string",
@@ -5270,7 +5305,7 @@
     },
     "CassandraKeyspaceResource": {
       "type": "object",
-      "description": "Cosmos DB Cassandra keyspace id object",
+      "description": "Cosmos DB Cassandra keyspace resource object",
       "properties": {
         "id": {
           "type": "string",
@@ -5283,7 +5318,7 @@
     },
     "CassandraTableResource": {
       "type": "object",
-      "description": "Cosmos DB Cassandra table id object",
+      "description": "Cosmos DB Cassandra table resource object",
       "properties": {
         "id": {
           "type": "string",
@@ -5369,11 +5404,44 @@
     },
     "GremlinDatabaseResource": {
       "type": "object",
-      "description": "Cosmos DB Gremlin database id object",
+      "description": "Cosmos DB Gremlin database resource object",
       "properties": {
         "id": {
           "type": "string",
           "description": "Name of the Cosmos DB Gremlin database"
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
+    "GremlinGraphResource": {
+      "type": "object",
+      "description": "Cosmos DB Gremlin graph resource object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Name of the Cosmos DB Gremlin graph"
+        },
+        "indexingPolicy": {
+          "$ref": "#/definitions/IndexingPolicy",
+          "description": "The configuration of the indexing policy. By default, the indexing is automatic for all document paths within the graph"
+        },
+        "partitionKey": {
+          "$ref": "#/definitions/ContainerPartitionKey",
+          "description": "The configuration of the partition key to be used for partitioning data into multiple partitions"
+        },
+        "defaultTtl": {
+          "type": "integer",
+          "description": "Default time to live"
+        },
+        "uniqueKeyPolicy": {
+          "$ref": "#/definitions/UniqueKeyPolicy",
+          "description": "The unique key policy configuration for specifying uniqueness constraints on documents in the collection in the Azure Cosmos DB service."
+        },
+        "conflictResolutionPolicy": {
+          "$ref": "#/definitions/ConflictResolutionPolicy",
+          "description": "The conflict resolution policy for the graph."
         }
       },
       "required": [
@@ -5911,7 +5979,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Version of the API to be used with the client request. The current version is 2015-04-08."
+      "description": "Version of the API to be used with the client request. The current version is 2019-08-01."
     },
     "resourceGroupNameParameter": {
       "name": "resourceGroupName",
