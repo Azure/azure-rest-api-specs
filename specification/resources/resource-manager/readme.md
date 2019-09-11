@@ -529,7 +529,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Resources/stable/2019-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
@@ -563,6 +562,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2016-02-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2018-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
