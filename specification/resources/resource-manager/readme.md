@@ -474,7 +474,6 @@ swagger-to-sdk:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#resources
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#subscriptions
       - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#links
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-resource#managedapplications
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
