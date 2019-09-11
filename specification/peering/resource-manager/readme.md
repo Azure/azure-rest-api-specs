@@ -21,22 +21,59 @@ To see additional help and options, run:
 
 ### Basic Information 
 These are the global settings for the Peering API.
-
 ``` yaml
+title: PeeringManagementClient
+description: Peering Client
 openapi-type: arm
-tag: package-2019-03-01-preview
+tag: package-2019-08-01-preview
 ```
 or
 ``` yaml
+title: PeeringManagementClient
+description: Peering Client
+openapi-type: arm
+tag: package-2019-07-01-preview
+```
+or
+``` yaml
+title: PeeringManagementClient
+description: Peering Client
 openapi-type: arm
 tag: package-2019-06-01-preview
 ```
 or
 ``` yaml
+title: PeeringManagementClient
+description: Peering Client
 openapi-type: arm
-tag: package-2019-07-01-preview
+tag: package-2019-03-01-preview
 ```
 
+### Tag: package-2019-08-01-preview
+
+These settings apply only when `--tag=package-2019-08-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-01-preview'
+input-file:
+- Microsoft.Peering/preview/2019-08-01-preview/peering.json
+```
+
+### Tag: package-2019-07-01-preview
+
+These settings apply only when `--tag=package-2019-07-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-07-01-preview'
+input-file:
+- Microsoft.Peering/preview/2019-07-01-preview/peering.json
+```
+### Tag: package-2019-06-01-preview
+
+These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01-preview'
+input-file:
+- Microsoft.Peering/preview/2019-06-01-preview/peering.json
+```
 ### Tag: package-2019-03-01-preview
 
 These settings apply only when `--tag=package-2019-03-01-preview` is specified on the command line.
@@ -46,22 +83,6 @@ input-file:
 - Microsoft.Peering/preview/2019-03-01-preview/peering.json
 ```
 
-### Tag: package-2019-06-01-preview
-
-These settings apply only when `--tag=package-2019-06-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-06-01-preview'
-input-file:
-- Microsoft.Peering/preview/2019-06-01-preview/peering.json
-```
-### Tag: package-2019-07-01-preview
-
-These settings apply only when `--tag=package-2019-07-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-07-01-preview'
-input-file:
-- Microsoft.Peering/preview/2019-07-01-preview/peering.json
-```
 # Code Generation
 
 ## Swagger to SDK
@@ -101,9 +122,10 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Peering/preview/2019-03-01-preview/peering.json
-  - $(this-folder)/Microsoft.Peering/preview/2019-06-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-08-01-preview/peering.json
   - $(this-folder)/Microsoft.Peering/preview/2019-07-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-06-01-preview/peering.json
+  - $(this-folder)/Microsoft.Peering/preview/2019-03-01-preview/peering.json
 
 ```
 
@@ -111,7 +133,6 @@ If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
-#exclude-file: 
-#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+exclude-file: 
+- $(this-folder)/Microsoft.Peering/preview/2019-03-01-preview/peering.json
 ```
-
