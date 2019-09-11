@@ -67,7 +67,7 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Expands referenced resources."
+            "description": "Expands resourceIds (of Firewalls/NSGs etc.) back referenced by the IpTags resource."
           }
         ],
         "responses": {
@@ -403,7 +403,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "description": "IpAddresses/addressPrefixes constituiting the IpTags resource."
         },
         "referenceResources": {
           "type": "array",
