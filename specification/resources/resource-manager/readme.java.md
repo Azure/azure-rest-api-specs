@@ -18,7 +18,6 @@ Generate all API versions currently shipped for this package
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2019-06
   - tag: package-features-2015-12
   - tag: package-locks-2016-09
   - tag: package-policy-2019-06
@@ -33,21 +32,9 @@ batch:
   - tag: package-resources-2019-03
   - tag: package-resources-2018-02
   - tag: package-resources-2016-09
+  - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
-```
-
-### Tag: package-2019-06 and java
-
-These settings apply only when `--tag=package-2019-06 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-06' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.resources.v2019_06_01
-  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_06_01
-regenerate-manager: true
-generate-interface: true
 ```
 
 ### Tag: package-features-2015-12 and java
@@ -255,6 +242,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.resources.v2016_09_01
   output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2016_09_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-subscriptions-2019-06 and java
+
+These settings apply only when `--tag=package-subscriptions-2019-06 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2019-06' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.resources.v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/resources/resource-manager/v2019_06_01
 regenerate-manager: true
 generate-interface: true
 ```
