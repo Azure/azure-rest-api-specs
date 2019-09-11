@@ -101,10 +101,10 @@
         }
       }
     },
-    "/entities/biomedical" : {
+    "/entities/healthcare" : {
       "post" : {
-        "summary" : "Entities from Biomedical domain",
-        "description" : "The API returns a list of biomedical entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "summary" : "Entities from healthcare domain",
+        "description" : "The API returns a list of healthcare entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
         "operationId" : "5ac4251d5b4ccd1554da7632",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
@@ -894,12 +894,17 @@
         "offset" : {
           "type" : "integer",
           "format" : "int32",
-          "description" : "Start position (in Unicode characters) for the entity match text."
+          "description" : "Start position (in Unicode characters) for the entity text."
         },
         "length" : {
           "type" : "integer",
           "format" : "int32",
-          "description" : "Length (in Unicode characters) for the entity match text."
+          "description" : "Length (in Unicode characters) for the entity text."
+        },
+        "score" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Confidence score of the extracted entity."
         }
       }
     },
@@ -937,7 +942,7 @@
         },
         "entities" : {
           "type" : "array",
-          "description" : "Recognized biomedical entities in the document.",
+          "description" : "Recognized healthcare entities in the document.",
           "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/EntityRecord"
@@ -945,7 +950,7 @@
         },
         "relations" : {
           "type" : "array",
-          "description" : "Relations of recognized biomedical entities in the document.",
+          "description" : "Relations of recognized healthcare entities in the document.",
           "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/RelationRecord"
