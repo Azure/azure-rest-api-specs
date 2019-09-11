@@ -40,16 +40,12 @@ tag: package-locks-2016-09
 tag: package-policy-2019-06
 ```
 
-``` yaml $(package-policy)
-tag: package-policy-2019-01
-```
-
 ``` yaml $(package-resources)
 tag: package-resources-2019-08
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2018-06
+tag: package-subscriptions-2019-06
 ```
 
 ``` yaml $(package-links)
@@ -57,18 +53,9 @@ tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-2019-06
+tag: package-managedapplications-2018-06
 ```
 
-
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-06'
-input-file:
-  - Microsoft.Resources/stable/2019-06-01/subscriptions.json
-```
 ### Tag: package-features-2015-12
 
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
