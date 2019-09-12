@@ -1011,12 +1011,16 @@
       "type": "object",
       "properties": {
         "tags": {
-          "type": "array",
-          "items": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/TagsObject"
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "additionalProperties": {
+            "type": "string"
           },
-          "description": "Updates the tags property of the Managed Network"
+          "description": "Resource tags"
         }
       },
       "description": "Update Tags of Managed Network"
@@ -1414,16 +1418,16 @@
       "description": "The resource model definition for a ARM tracked top level resource",
       "properties": {
         "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "x-ms-mutability": [
-              "read",
-              "create",
-              "update"
-            ]
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "additionalProperties": {
+            "type": "string"
           },
-          "description": "Resource tags."
+          "description": "Resource tags"
         },
         "location": {
           "type": "string",
@@ -1459,10 +1463,6 @@
         }
       },
       "description": "Generic pointer to a resource"
-    },
-    "TagsObject": {
-      "type": "string",
-      "description": "Resource tags."
     },
     "ResourceProperties": {
       "properties": {
