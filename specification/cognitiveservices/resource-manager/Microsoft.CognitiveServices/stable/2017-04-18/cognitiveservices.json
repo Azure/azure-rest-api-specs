@@ -676,7 +676,7 @@
         }
       }
     },
-    "/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
       "post": {
         "tags": [
           "CognitiveServicesAccounts"
@@ -689,6 +689,9 @@
           }
         },
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
