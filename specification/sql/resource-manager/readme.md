@@ -123,6 +123,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 
 # Needed when there is more than one input file
@@ -217,6 +218,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 
 # Needed when there is more than one input file
@@ -305,6 +307,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+- Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
 
 # Needed when there is more than one input file
@@ -475,6 +478,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 
 # Needed when there is more than one input file
 override-info:
@@ -640,7 +644,7 @@ override-info:
 directive:
   - suppress: TrackedResourcePatchOperation
     from: restorableDroppedManagedDatabases.json
-    reason: dropped database shouldn’t support patch
+    reason: dropped database shouldn't support patch
 ```
 
 ---
@@ -809,6 +813,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
@@ -832,6 +837,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
