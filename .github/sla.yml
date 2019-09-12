@@ -5,19 +5,17 @@
     action: sendEmailToAssignee
     args:
       limit: 48h
+      ignoredLabels: ["WaitForARMFeedback", "DoNotMerge"]
       message: "<h2>Action Required</h2> <p> Dear reviewer, <br> Please response to PR. The PR has no update in 48 hours. <a href=${PR_URL}> PR link </a>. <br> <br>Belows are some useful information. <ul> <li>If no response from ARM review board, please send email to armapireview@microsoft.com.</li> <li>If need immediate ARM review, please get ARM review oncall contact point from ICM https://icm.ad.msft.net/imp/v3/oncall/current under Service “Azure Resource Manager” and Team “RP Manifest Approvers”</li> <li>If no response from Azure API review board, please send email to azureapirbcore@microsoft.com.</li> <li>If you have problem to fix CI task errors, please send email to Visual Studio China Swagger and Tool teamvscswagger@microsoft.com.</li> <li>If you want to opt out from Swagger reviewing for out of office period, please set vacation date at https://inframonitorweb1.azurewebsites.net/Home/MyView.</li> <li>Pls refer to <link> for more about Swagger review process.</li> </ul> Best wishes, <br> Email-bot </p>"
       subject: "Action Required: Please respond to PR ${PR_URL}"
-    branchWhitelist:
-      - master
     description: "None initial response in 24 hours"
 
 - scheduleTask:
     name: "no-update-in-5d"
     description: "None update in PR in 5 days"
-    branchWhitelist: ["master", "release"]
     action: sendEmailToAssignee
     args:
-      ignoredLabels: ["WaitForAuthor", "DonNotMerge"]
+      ignoredLabels: ["WaitForARMFeedback", "DoNotMerge"]
       limit: 5d
       subject: "Action Required: Please respond to PR ${PR_URL}"
       message: "<h2>Action Required</h2> <p> Dear reviewer, <br> Please response to PR. The PR has no update in 5 days. <a href=${PR_URL}> PR link </a>. <br> <br>Belows are some useful information. <ul> <li>If no response from ARM review board, please send email to armapireview@microsoft.com.</li> <li>If need immediate ARM review, please get ARM review oncall contact point from ICM https://icm.ad.msft.net/imp/v3/oncall/current under Service “Azure Resource Manager” and Team “RP Manifest Approvers”</li> <li>If no response from Azure API review board, please send email to azureapirbcore@microsoft.com.</li> <li>If you have problem to fix CI task errors, please send email to Visual Studio China Swagger and Tool teamvscswagger@microsoft.com.</li> <li>If you want to opt out from Swagger reviewing for out of office period, please set vacation date at https://inframonitorweb1.azurewebsites.net/Home/MyView.</li> <li>Pls refer to <link> for more about Swagger review process.</li> </ul> Best wishes, <br> Email-bot </p>"
