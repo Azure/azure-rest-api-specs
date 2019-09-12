@@ -2960,6 +2960,252 @@
       },
       "type": "object"
     },
+    "RelationBase": {
+      "type": "object",
+      "description": "Represents a relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "The type of relation node",
+              "readOnly": true,
+              "enum": [
+                "CasesToBookmarks"
+              ],
+              "x-ms-enum": {
+                "name": "RelationTypes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "CasesToBookmarks",
+                    "description": "Relations between cases and bookmarks"
+                  }
+                ]
+              }
+            },
+            "etag": {
+              "type": "string",
+              "description": "ETag for relation"
+            }
+          }
+        }
+      ]
+    },
+    "CaseRelationList": {
+      "description": "List of case relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseRelation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseRelation": {
+      "type": "object",
+      "description": "Represents a case relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Case relation properties",
+          "$ref": "#/definitions/CaseRelationProperties"
+        }
+      }
+    },
+    "CaseRelationProperties": {
+      "type": "object",
+      "description": "Case relation properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "bookmarkId": {
+          "type": "string",
+          "description": "The case related bookmark id"
+        },
+        "caseIdentifier": {
+          "type": "string",
+          "description": "The case identifier"
+        },
+        "bookmarkName": {
+          "type": "string",
+          "description": "The case related bookmark name"
+        }
+      },
+      "required": [
+        "relationName",
+        "caseIdentifier",
+        "bookmarkId"
+      ]
+    },
+    "BookmarkRelationList": {
+      "description": "List of bookmark relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BookmarkRelation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BookmarkRelation": {
+      "type": "object",
+      "description": "Represents a bookmark relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Bookmark relation properties",
+          "$ref": "#/definitions/BookmarkRelationProperties"
+        }
+      }
+    },
+    "BookmarkRelationProperties": {
+      "type": "object",
+      "description": "Bookmark relation properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "bookmarkId": {
+          "type": "string",
+          "description": "The case related bookmark id"
+        },
+        "caseIdentifier": {
+          "type": "string",
+          "description": "The case identifier"
+        },
+        "caseTitle": {
+          "type": "string",
+          "description": "The case title"
+        },
+        "caseSeverity": {
+          "type": "string",
+          "description": "The case severity"
+        }
+      },
+      "required": [
+        "relationName",
+        "caseIdentifier",
+        "bookmarkId"
+      ]
+    },
+    "RelationsModelInput": {
+      "type": "object",
+      "description": "Relation input model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Relation input properties",
+          "$ref": "#/definitions/RelationsModelInputProperties"
+        }
+      }
+    },
+    "RelationsModelInputProperties": {
+      "type": "object",
+      "description": "Relation input properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "sourceRelationNode": {
+          "type": "object",
+          "description": "Relation source node",
+          "$ref": "#/definitions/RelationNode"
+        },
+        "targetRelationNode": {
+          "type": "object",
+          "description": "Relation target node",
+          "$ref": "#/definitions/RelationNode"
+        }
+      }
+    },
+    "RelationNode": {
+      "type": "object",
+      "description": "Relation node",
+      "properties": {
+        "relationNodeId": {
+          "type": "string",
+          "description": "Relation Node Id"
+        },
+        "relationNodeKind": {
+          "type": "string",
+          "description": "The type of relation node",
+          "readOnly": true,
+          "enum": [
+            "Case",
+            "Bookmark"
+          ],
+          "x-ms-enum": {
+            "name": "RelationNodeKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Case",
+                "description": "Case node part of the relation"
+              },
+              {
+                "value": "Bookmark",
+                "description": "Bookmark node part of the relation"
+              }
+            ]
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag for relation node"
+        },
+        "relationAdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional set of properties"
+        }
+      }
+    },
     "Bookmark": {
       "allOf": [
         {
@@ -5969,6 +6215,24 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/Bookmark"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RelationName": {
+      "name": "relationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Relation Name",
+      "x-ms-parameter-location": "method"
+    },
+    "RelationInputModel": {
+      "name": "relationInputModel",
+      "in": "body",
+      "description": "The relation input model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RelationsModelInput"
       },
       "x-ms-parameter-location": "method"
     },
