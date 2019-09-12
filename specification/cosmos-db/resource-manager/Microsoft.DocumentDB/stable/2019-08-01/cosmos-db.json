@@ -2291,15 +2291,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/storedProcedures/": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/triggers/": {
       "get": {
-        "operationId": "SqlResources_ListSqlStoredProcedures",
+        "operationId": "SqlResources_ListSqlTriggers",
         "x-ms-examples": {
-          "CosmosDBSqlStoredProcedureList": {
-            "$ref": "./examples/CosmosDBSqlStoredProcedureList.json"
+          "CosmosDBSqlTriggerist": {
+            "$ref": "./examples/CosmosDBSqlTriggerList.json"
           }
         },
-        "description": "Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.",
+        "description": "Lists the SQL trigger under an existing Azure Cosmos DB database account.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionIdParameter"
@@ -2322,9 +2322,9 @@
         ],
         "responses": {
           "200": {
-            "description": "The SQL stored procedure properties were retrieved successfully.",
+            "description": "The SQL trigger properties were retrieved successfully.",
             "schema": {
-              "$ref": "#/definitions/SqlStoredProcedureListResult"
+              "$ref": "#/definitions/SqlTriggerListResult"
             }
           }
         },
