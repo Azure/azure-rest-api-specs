@@ -1029,6 +1029,12 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1091,6 +1097,12 @@
             "description": "Request successful. The operation packet capture stopped on virtual network gateway.",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -1569,6 +1581,12 @@
             "schema": {
               "type": "string"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-examples": {
@@ -1631,6 +1649,12 @@
             "description": "Request successful. The operation packet capture stopped on virtual network gateway connection.",
             "schema": {
               "type": "string"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -3307,7 +3331,7 @@
       "properties": {
         "sasUrl": {
           "type": "string",
-          "description": "SAS url for packet capture on VNG."
+          "description": "SAS url for packet capture on virtual network gateway."
         }
       },
       "description": "Stop packet capture parameters."
@@ -3319,7 +3343,17 @@
           "description": "Start Packet capture parameters."
         }
       },
-      "description": "Start packet capture parameters on VNG."
+      "description": "Start packet capture parameters on virtual network gateway."
+    },
+    "ErrorResponse": {
+      "description": "The error object.",
+      "properties": {
+        "error": {
+          "title": "Error",
+          "$ref": "./network.json#/definitions/ErrorDetails",
+          "description": "The error details object."
+        }
+      }
     }
   }
 }
