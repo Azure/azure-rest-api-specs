@@ -900,7 +900,8 @@
         },
         "privateLinkConnectionProperties": {
           "$ref": "#/definitions/NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties",
-          "description": "PrivateLinkConnection properties for the network interface."
+          "description": "PrivateLinkConnection properties for the network interface.",
+          "readOnly": true
         }
       },
       "description": "Properties of IP configuration."
@@ -909,10 +910,12 @@
       "properties": {
         "groupId": {
           "type": "string",
+          "readOnly": true,
           "description": "The group ID for current private link connection."
         },
         "requiredMemberName": {
           "type": "string",
+          "readOnly": true,
           "description": "The required member name for current private link connection."
         },
         "fqdns": {
@@ -920,6 +923,7 @@
           "items": {
             "type": "string"
           },
+          "readOnly": true,
           "description": "List of FQDNs for current private link connection."
         }
       },
