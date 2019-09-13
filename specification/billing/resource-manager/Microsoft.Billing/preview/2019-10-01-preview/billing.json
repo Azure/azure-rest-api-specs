@@ -6547,6 +6547,39 @@
         }
       }
     },
+	"CustomerPolicy": {
+      "description": "The Customer's Policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomerPolicyProperties",
+          "title": "Customer Policy properties"
+        }
+      }
+    },
+    "CustomerPolicyProperties": {
+      "description": "The properties of a Customer's policy.",
+      "properties": {
+        "viewCharges": {
+          "description": "Customer can view retail prices.",
+          "type": "string",
+          "enum": [
+            "Allowed",
+            "NotAllowed"
+          ],
+          "x-ms-enum": {
+            "name": "ViewChargesPolicy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "AvailableBalance": {
       "description": "Latest available balance on Monetary Credit PI.",
       "type": "object",
