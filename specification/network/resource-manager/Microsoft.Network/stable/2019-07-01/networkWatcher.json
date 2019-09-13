@@ -2488,6 +2488,7 @@
           "description": "Properties of the flow log."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -2503,8 +2504,7 @@
       "description": "Parameters that define the configuration of flow log.",
       "required": [
         "targetResourceId",
-        "storageId",
-        "enabled"
+        "storageId"
       ],
       "properties": {
         "targetResourceId": {
@@ -2512,6 +2512,7 @@
           "type": "string"
         },
         "targetResourceGuid": {
+          "readOnly": true,
           "description": "GUID of network security group to which flow log will be applied.",
           "type": "string"
         },
@@ -2536,6 +2537,7 @@
           "description": "Parameters that define the configuration of traffic analytics."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the flow log."
         }
