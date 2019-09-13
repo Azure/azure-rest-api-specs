@@ -2,19 +2,40 @@
   "parameters": {
     "subscriptionId": "subid",
     "resourceGroupName": "rg",
-    "managedApplicationName": "myManagedApplication",
-    "api-version": "2018-06-01",
+    "applicationName": "myManagedApplication",
+    "api-version": "2019-07-01",
     "parameters": {
       "properties": {
-        "managedApplicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
+        "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
         "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG"
       },
-      "name": "myManagedApplication",
       "location": "East US 2",
-      "kind": "ServiceCatalog"
+      "kind":  "ServiceCatalog"
     }
   },
   "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "name": "myManagedApplication",
+        "id": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applications/myManagedApplication",
+        "type": "Microsoft.Solutions/applications",
+        "location": "East US 2",
+        "managedBy": null,
+        "tags": null,
+        "plan": null,
+        "identity": null,
+        "kind": "ServiceCatalog",
+        "sku":  null,
+        "properties": {
+          "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
+          "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
+          "outputs": null,
+          "parameters": null,
+          "provisioningState": "Created"
+        }
+      }
+    },
     "201": {
       "headers": {},
       "body": {
@@ -23,14 +44,13 @@
         "type": "Microsoft.Solutions/applications",
         "location": "East US 2",
         "managedBy": null,
-        "resourceGroup": "rg",
         "tags": null,
         "plan": null,
         "identity": null,
         "kind": "ServiceCatalog",
-        "sku": null,
+        "sku":  null,
         "properties": {
-          "managedApplicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
+          "applicationDefinitionId": "/subscriptions/subid/resourceGroups/rg/providers/Microsoft.Solutions/applicationDefinitions/myAppDef",
           "managedResourceGroupId": "/subscriptions/subid/resourceGroups/myManagedRG",
           "outputs": null,
           "parameters": null,
