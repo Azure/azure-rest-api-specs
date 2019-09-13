@@ -2630,19 +2630,19 @@
         }
       }
     },
-	"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/policies/default": {
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/default": {
       "get": {
         "tags": [
           "Policies"
         ],
-        "operationId": "Policies_GetByBillingProfile",
-        "description": "The policy for a given billing account name and billing profile name.",
+        "operationId": "Policies_GetByCustomer",
+        "description": "The policy for a given billing account name and billing profile name and customer name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
         "x-ms-examples": {
-          "PolicyByBillingProfile": {
-            "$ref": "./examples/Policy.json"
+          "PolicyByCustomer": {
+            "$ref": "./examples/CustomerPolicy.json"
           }
         },
         "parameters": [
@@ -2653,6 +2653,9 @@
             "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
             "$ref": "#/parameters/apiVersionParameter"
           }
         ],
@@ -2660,7 +2663,7 @@
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Policy"
+              "$ref": "#/definitions/CustomerPolicy"
             }
           },
           "default": {
@@ -2675,11 +2678,11 @@
         "tags": [
           "Policies"
         ],
-        "operationId": "Policies_Update",
-        "description": "The operation to update a policy.",
+        "operationId": "Policies_UpdateCustomer",
+        "description": "The operation to update a Customer policy.",
         "x-ms-examples": {
-          "UpdateBillingProfile": {
-            "$ref": "./examples/UpdatePolicy.json"
+          "UpdateCustomer": {
+            "$ref": "./examples/UpdateCustomerPolicy.json"
           }
         },
         "parameters": [
@@ -2693,20 +2696,23 @@
             "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Policy"
+              "$ref": "#/definitions/CustomerPolicy"
             },
-            "description": "Parameters supplied to the update policy operation."
+            "description": "Parameters supplied to the update customer policy operation."
           }
         ],
         "responses": {
           "200": {
             "description": "OK. The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Policy"
+              "$ref": "#/definitions/CustomerPolicy"
             }
           },
           "default": {
