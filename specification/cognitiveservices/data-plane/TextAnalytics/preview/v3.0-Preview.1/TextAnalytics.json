@@ -23,7 +23,7 @@
     }
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/text/analytics/v2.1-preview",
+    "hostTemplate": "{Endpoint}/text/analytics/v3.0-preview.1",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -711,7 +711,7 @@
           "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
         }
-      },
+      }
     },
     "DocumentSentiment" : {
       "type" : "object",
@@ -905,6 +905,14 @@
           "type" : "number",
           "format" : "double",
           "description" : "Confidence score of the extracted entity."
+        },
+        "url" : {
+          "type" : "string",
+          "description" : "(Optional) URL for the product info from Skills Model (TBD)."
+        },
+        "name" : {
+          "type" : "string",
+          "description" : "(Optional) Name of Entity from Skills Model (TBD)."
         }
       }
     },
@@ -945,7 +953,7 @@
           "description" : "Recognized healthcare entities in the document.",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/EntityRecord"
+            "$ref" : "#/definitions/BioEntityRecord"
           }
         },
         "relations" : {
@@ -962,20 +970,91 @@
         }
       }
     },
+    "BioEntityRecord" : {
+      "type" : "object",
+      "properties" : {
+        "text" : {
+          "type" : "string",
+          "description" : "Entity text as appears in the request."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Entity type, such as DOSAGE/FREQUENCY etc."
+        },
+        "category" : {
+          "type" : "string",
+          "description" : "Entity category, such as MEDICATION etc -- (TBD)."
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Start position (in Unicode characters) for the entity text."
+        },
+        "length" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Length (in Unicode characters) for the entity text."
+        },
+        "score" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Confidence score of the extracted entity."
+        },
+        "umlsId" : {
+          "type" : "string",
+          "description" : "(Optional) Id from the Unified Medical Language System (UMLS)."
+        }
+      }
+    },
     "RelationRecord" : {
       "type" : "object",
       "properties" : {
-        "target" : {
-          "type" : "string",
-          "description" : "TBD"
-        },
-        "source" : {
-          "type" : "string",
-          "description" : "TBD"
-        },
         "relationType" : {
           "type" : "string",
-          "description" : "TBD"
+          "description" : "Relation types of the related entities, such as DOSAGE_OF_MEDICATION etc."
+        },
+        "score" : {
+          "type" : "string",
+          "description" : "Confidence score of the relation."
+        },
+        "entityInfo" : {
+          "type" : "array",
+          "description" : "Related entities. // To-do: entity info?  Or just BioEntityRecord?",
+          "items" : {
+            "$ref" : "#/definitions/EntityInfo"
+          }
+        }
+      }
+    },
+    "EntityInfo" : {
+      "type" : "object",
+      "properties" : {
+        "text" : {
+          "type" : "string",
+          "description" : "Entity text as appears in the request."
+        },
+        "type" : {
+          "type" : "string",
+          "description" : "Entity type, such as DOSAGE/FREQUENCY etc."
+        },
+        "category" : {
+          "type" : "string",
+          "description" : "Entity category, such as MEDICATION etc -- (TBD)."
+        },
+        "offset" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Start position (in Unicode characters) for the entity text."
+        },
+        "length" : {
+          "type" : "integer",
+          "format" : "int32",
+          "description" : "Length (in Unicode characters) for the entity text."
+        },
+        "score" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Confidence score of the extracted entity."
         }
       }
     },
@@ -1163,8 +1242,9 @@
             }
           ]
         }
-    },
-    "LanguageInput" : {
+     }
+   },
+   "LanguageInput" : {
       "type" : "object",
       "properties" : {
         "countryHint" : {
@@ -1178,8 +1258,8 @@
           "type" : "string"
         }
       }
-    },
-    "LanguageBatchResult" : {
+   },
+   "LanguageBatchResult" : {
       "type" : "object",
       "properties" : {
         "documents" : {
@@ -1242,7 +1322,7 @@
         }
       }
     }
-  },
+   },
   "parameters": {
     "Endpoint": {
       "name": "Endpoint",
@@ -1255,3 +1335,4 @@
     }
   }
 }
+
