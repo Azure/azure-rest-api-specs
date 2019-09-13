@@ -331,13 +331,13 @@
         "createdTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Time when this project was created. Date-Time represented in ISO-8601 format.",
+          "description": "Time when this group was created. Date-Time represented in ISO-8601 format.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
           "format": "date-time",
-          "description": "Time when this project was last updated. Date-Time represented in ISO-8601 format.",
+          "description": "Time when this group was last updated. Date-Time represented in ISO-8601 format.",
           "readOnly": true
         }
       }
@@ -363,7 +363,6 @@
         "operationType": {
           "type": "string",
           "enum": [
-            "Unknown",
             "Add",
             "Remove"
           ],
@@ -1182,7 +1181,7 @@
             "InternalErrorOccurredForDiskEvaluation",
             "NoEaPriceFoundForDiskSize"
           ],
-          "description": "If disk is suitable, this explains the reasons and mitigation steps.",
+          "description": "If disk is not suitable to be migrated, this explains the reasons and mitigation steps.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "AzureDiskSuitabilityExplanation",
@@ -1206,7 +1205,7 @@
             "DiskGigabytesConsumedOutOfRange",
             "DiskGigabytesProvisionedOutOfRange"
           ],
-          "description": "If disk is not suitable, this explains the details.",
+          "description": "If disk is suitable to be migrate but some conditions/checks were not considered while calculating suitability, this explains the details.",
           "readOnly": true,
           "x-ms-enum": {
             "name": "AzureDiskSuitabilityDetail",
@@ -1940,14 +1939,17 @@
       "type": "object",
       "properties": {
         "discoverySiteId": {
-          "type": "string"
+          "type": "string",
+          "description":  "The ARM id of the discovery service site."
         },
         "createdTimestamp": {
           "type": "string",
+          "description":  "Time when this collector was created. Date-Time represented in ISO-8601 format.",
           "readOnly": true
         },
         "updatedTimestamp": {
           "type": "string",
+          "decription": "Time when this collector was updated. Date-Time represented in ISO-8601 format.",
           "readOnly": true
         },
         "agentProperties": {
@@ -2450,9 +2452,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         },
         "x-ms-examples": {
           "AssessmentOptions_Get": {
