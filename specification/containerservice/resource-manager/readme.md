@@ -225,6 +225,15 @@ input-file:
 - Microsoft.ContainerService/preview/2018-09-30-preview/openShiftManagedClusters.json
 ```
 
+### Tag: package-2019-09-preview-only
+
+These settings apply only when `--tag=package-2019-09-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09-preview-only'
+input-file:
+- Microsoft.ContainerService/preview/2019-09-30-preview/openShiftManagedClusters.json
+```
+
 ### Tag: package-2018-03-only
 
 These settings apply only when `--tag=package-2018-03-only` is specified on the command line.
