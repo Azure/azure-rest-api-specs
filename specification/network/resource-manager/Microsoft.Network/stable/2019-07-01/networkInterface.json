@@ -897,9 +897,37 @@
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network interface IP configuration."
+        },
+        "privateLinkConnectionProperties": {
+          "$ref": "#/definitions/NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties",
+          "description": "PrivateLinkConnection properties for the network interface.",
+          "readOnly": true
         }
       },
       "description": "Properties of IP configuration."
+    },
+    "NetworkInterfaceIPConfigurationPrivateLinkConnectionProperties": {
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The group ID for current private link connection."
+        },
+        "requiredMemberName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The required member name for current private link connection."
+        },
+        "fqdns": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "description": "List of FQDNs for current private link connection."
+        }
+      },
+      "description": "PrivateLinkConnection properties for the network interface."
     },
     "NetworkInterfaceIPConfiguration": {
       "properties": {
