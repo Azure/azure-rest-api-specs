@@ -3,7 +3,7 @@
   "info": {
     "title": "ContainerServiceClient",
     "description": "The Container Service Client.",
-    "version": "2019-09-30-preview"
+    "version": "2019-04-30"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -632,6 +632,15 @@
       },
       "description": "Defines all possible authentication profiles for the OpenShift cluster."
     },
+    "OpenShiftManagedClusterMonitorProfile":{
+      "properties": {
+        "workspaceResourceID":{
+          "type": "string",
+          "description": "Azure Resource Manager Resource ID for the Log Analytics workspace to integrate with."
+        }
+      },
+      "description": "Defines the configuration for Log Analytics integration."
+    },
     "OpenShiftManagedClusterProperties": {
       "properties": {
         "provisioningState": {
@@ -683,6 +692,10 @@
         "authProfile": {
           "$ref": "#/definitions/OpenShiftManagedClusterAuthProfile",
           "description": "Configures OpenShift authentication."
+        },
+        "monitorProfile":{
+          "$ref": "#/definitions/OpenShiftManagedClusterMonitorProfile",
+          "description": "Configures Log Analytics intergration."
         }
       },
       "required": [
