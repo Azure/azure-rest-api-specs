@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-12-01-preview",
+    "version": "2019-08-08-preview",
     "title": "StorageManagementClient",
     "description": "The Admin Storage Management Client."
   },
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/acquisitions": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/acquisitions": {
       "get": {
         "x-ms-examples": {
           "Returns a list of page BLOB acquisitions.": {
@@ -33,16 +33,10 @@
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "storage.json#/parameters/FarmIdParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "storage.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "storage.json#/parameters/FilterParameter"
           }
         ],
         "responses": {
@@ -52,12 +46,12 @@
               "$ref": "#/definitions/AcquisitionList"
             }
           },
-          "404": {
-            "description": "NOT FOUND -- The specified farm cannot be found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": null
         }
       }
     }
@@ -67,7 +61,9 @@
       "description": "The status of page BLOB acquisition.",
       "type": "string",
       "enum": [
-        "InProgress",
+        "Unknown",
+        "NotAcquired",
+        "Pending",
         "Success",
         "Failed"
       ],
@@ -76,26 +72,10 @@
         "modelAsString": true
       }
     },
-    "AcquisitionProperties": {
-      "description": "The Properties of page BLOB acquisition.",
+    "Acquisition": {
+      "description": "The acquisition of the page BLOB.",
       "type": "object",
       "properties": {
-        "filePath": {
-          "description": "The file path of the page BLOB file on storage cluster.",
-          "type": "string",
-          "readOnly": true
-        },
-        "maximumblobsize": {
-          "description": "The maximum size of the page BLOB.",
-          "type": "integer",
-          "format": "int64",
-          "readOnly": true
-        },
-        "status": {
-          "description": "The status of the page BLOB acquisition.",
-          "$ref": "#/definitions/AcquisitionStatus",
-          "readOnly": true
-        },
         "susbcriptionid": {
           "description": "ID of the subscription associated with the page BLOB.",
           "type": "string",
@@ -120,31 +100,43 @@
           "description": "The ID of page BLOB acquisition.",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "Acquisition": {
-      "description": "The acquisition of the page BLOB.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "The properties of the page blob acquisition.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/AcquisitionProperties",
+        },
+        "filePath": {
+          "description": "The file path of the page BLOB file on storage cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "filePathUnc": {
+          "description": "The file path unc of the page BLOB file on storage cluster.",
+          "type": "string",
+          "readOnly": true
+        },
+        "maximumblobsize": {
+          "description": "The maximum size of the page BLOB.",
+          "type": "integer",
+          "format": "int64",
+          "readOnly": true
+        },
+        "status": {
+          "description": "The status of the page BLOB acquisition.",
+          "$ref": "#/definitions/AcquisitionStatus",
           "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "storage.json#/definitions/Resource"
-        }
-      ]
+      "x-ms-azure-resource": true
     },
     "AcquisitionList": {
       "description": "The list of page BLOB acquisitions.",
-      "type": "array",
-      "items": {
-        "$ref": "#/definitions/Acquisition"
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of acquisitions.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Acquisition"
+          },
+          "readOnly": true
+        }
       }
     }
   },
