@@ -47,7 +47,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "farms.json#/definitions/FarmCreationProperties"
+              "$ref": "#/definitions/FarmCreationProperties"
             }
           }
         ],
@@ -55,7 +55,7 @@
           "200": {
             "description": "OK -- The new storage farm has been created.",
             "schema": {
-              "$ref": "farms.json#/definitions/Farm"
+              "$ref": "#/definitions/Farm"
             }
           }
         }
@@ -89,7 +89,7 @@
           "200": {
             "description": "OK -- The farm has been returned.",
             "schema": {
-              "$ref": "farms.json#/definitions/Farm"
+              "$ref": "#/definitions/Farm"
             }
           },
           "404": {
@@ -127,7 +127,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "farms.json#/definitions/Farm"
+              "$ref": "#/definitions/Farm"
             }
           }
         ],
@@ -135,7 +135,7 @@
           "200": {
             "description": "OK -- The properties and settings of storage farm have been updated.",
             "schema": {
-              "$ref": "farms.json#/definitions/Farm"
+              "$ref": "#/definitions/Farm"
             }
           }
         }
@@ -252,7 +252,7 @@
           "200": {
             "description": "OK -- The list of storage farms has been returned.",
             "schema": {
-              "$ref": "farms.json#/definitions/FarmList"
+              "$ref": "#/definitions/FarmList"
             }
           }
         },
@@ -350,7 +350,7 @@
           "description": "List of storage farms.",
           "type": "array",
           "items": {
-            "$ref": "farms.json#/definitions/Farm"
+            "$ref": "#/definitions/Farm"
           }
         },
         "nextLink": {
@@ -367,7 +367,7 @@
         "properties": {
           "description": "Storage farm properties.",
           "x-ms-client-flatten": true,
-          "$ref": "farms.json#/definitions/SettingAccessString"
+          "$ref": "#/definitions/SettingAccessString"
         }
       },
       "allOf": [
@@ -383,8 +383,7 @@
         "properties": {
           "description": "Storage farm properties.",
           "x-ms-client-flatten": true,
-          "$ref": "farms.json#/definitions/FarmProperties",
-          "readOnly": true
+          "$ref": "#/definitions/FarmProperties"
         }
       },
       "allOf": [
@@ -400,245 +399,204 @@
         "settingsPollingIntervalInSecond": {
           "description": "The polling interval (in second).",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "retentionPeriodForDeletedStorageAccountsInDays": {
           "description": "The retention period (in days) for deleted storage account.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "hostStyleHttpPort": {
           "description": "Host style HTTP port.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "hostStyleHttpsPort": {
           "description": "Host style HTTPs port.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "corsAllowedOriginsList": {
           "description": "The list of allowed origins.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "dataCenterUriHostSuffixes": {
           "description": "The suffixes of URI of hosts in data center.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "bandwidthThrottleIsEnabled": {
           "description": "Switch of bandwidth throttle enablement.",
-          "type": "boolean",
-          "readOnly": true
+          "type": "boolean"
         },
         "usageCollectionIntervalInSeconds": {
           "description": "Interval (in seconds) of storage usage collection.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "feedbackRefreshIntervalInSeconds": {
           "description": "Interval (in seconds) of feedback refresh.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "numberOfAccountsToSync": {
           "description": "Number of accounts to sync.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "defaultThrottleProbabilityDecayIntervalInSeconds": {
           "description": "Interval (in seconds) of default throttle probability decay.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "gracePeriodForFullThrottlingInRefreshIntervals": {
           "description": "Grace period for full throttling in refresh intervals.",
           "type": "integer",
-          "format": "int32",
-          "readOnly": true
+          "format": "int32"
         },
         "gracePeriodMaxThrottleProbability": {
           "description": "Maximum probability of throttle in grace period.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "overallRequestThresholdInTps": {
           "description": "Overall request threshold (in TPS).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "defaultRequestThresholdInTps": {
           "description": "Default request threshold (in TPS).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "minimumRequestThresholdInTps": {
           "description": "Minimum request threshold (in TPS).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "toleranceFactorForTps": {
           "description": "Tolerance factor for TPS.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "overallIngressThresholdInGbps": {
           "description": "Overall ingress threshold (in Gbps)",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "defaultIngressThresholdInGbps": {
           "description": "Default ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "minimumIngressThresholdInGbps": {
           "description": "Minimum ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "toleranceFactorForIngress": {
           "description": "Tolerance factor for ingress.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "overallIntranetIngressThresholdInGbps": {
           "description": "Overall Intranet ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "defaultIntranetIngressThresholdInGbps": {
           "description": "Default Intranet ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "minimumIntranetIngressThresholdInGbps": {
           "description": "Minimum Intranet ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "toleranceFactorForIntranetIngress": {
           "description": "Tolerance factor for Intranet ingress.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "overallEgressThresholdInGbps": {
           "description": "Overall egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "defaultEgressThresholdInGbps": {
           "description": "Default egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "minimumEgressThresholdInGbps": {
           "description": "Minimum egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "toleranceFactorForEgress": {
           "description": "Tolerance factor for egress.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "overallIntranetEgressThresholdInGbps": {
           "description": "Overall Intranet egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "defaultIntranetEgressThresholdInGbps": {
           "description": "Default Intranet egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "minimumIntranetEgressThresholdInGbps": {
           "description": "Minimum Intranet egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "toleranceFactorForIntranetEgress": {
           "description": "Tolerance factor for Intranet egress.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "overallTotalIngressThresholdInGbps": {
           "description": "Overall total ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "defaultTotalIngressThresholdInGbps": {
           "description": "Default total ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "minimumTotalIngressThresholdInGbps": {
           "description": "Minimum total ingress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "toleranceFactorForTotalIngress": {
           "description": "Tolerance factor for total ingress.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "overallTotalEgressThresholdInGbps": {
           "description": "Overall total egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "defaultTotalEgressThresholdInGbps": {
           "description": "Default total egress threshold (in Gbps).",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "minimumTotalEgressThresholdInGbps": {
           "description": "Minimum total egress threshold (in Gbp",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         },
         "toleranceFactorForTotalEgress": {
           "description": "Tolerance factor for total egress.",
           "type": "number",
-          "format": "float",
-          "readOnly": true
+          "format": "float"
         }
       }
     },
@@ -648,24 +606,20 @@
       "properties": {
         "farmId": {
           "description": "Farm identifier.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "version": {
           "description": "Resource version.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "settingsStore": {
           "description": "The settings of storage farm.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "settings": {
           "description": "The properties of storage farm.",
           "x-ms-client-flatten": true,
-          "$ref": "farms.json#/definitions/FarmSettings",
-          "readOnly": true
+          "$ref": "#/definitions/FarmSettings"
         }
       }
     },

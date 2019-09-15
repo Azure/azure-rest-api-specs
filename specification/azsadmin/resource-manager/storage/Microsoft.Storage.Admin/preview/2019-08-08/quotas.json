@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-12-01-preview",
+    "version": "2019-08-08-preview",
     "title": "StorageManagementClient",
     "description": "The Admin Storage Management Client."
   },
@@ -42,7 +42,7 @@
             "$ref": "#/parameters/QuotaNameParameter"
           },
           {
-            "$ref": "#/parameters/StorgeQuotaParameters"
+            "$ref": "#/parameters/StorageQuotaParameters"
           }
         ],
         "responses": {
@@ -52,8 +52,11 @@
               "$ref": "#/definitions/StorageQuota"
             }
           },
-          "404": {
-            "description": "NOT FOUND -- The location or quota was not found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -86,8 +89,11 @@
           "200": {
             "description": "OK -- The storage quota has been deleted."
           },
-          "404": {
-            "description": "NOT FOUND -- The location or storage quota cannot be found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -123,8 +129,11 @@
               "$ref": "#/definitions/StorageQuota"
             }
           },
-          "404": {
-            "description": "NOT FOUND -- The location or storage quota cannot be found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -159,12 +168,12 @@
               "$ref": "#/definitions/StorageQuotaList"
             }
           },
-          "404": {
-            "description": "OK -- The location does not exist."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
@@ -214,10 +223,6 @@
           "items": {
             "$ref": "#/definitions/StorageQuota"
           }
-        },
-        "nextLink": {
-          "description": "URI to the next page.",
-          "type": "string"
         }
       }
     }
@@ -231,7 +236,7 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "StorgeQuotaParameters": {
+    "StorageQuotaParameters": {
       "description": "The properties of quota being created or updated.",
       "name": "quotaObject",
       "in": "body",

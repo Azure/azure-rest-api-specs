@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2015-12-01-preview",
+    "version": "2019-08-08-preview",
     "title": "StorageManagementClient",
     "description": "The Admin Storage Management Client."
   },
@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/storageaccounts": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts": {
       "get": {
         "x-ms-examples": {
           "Returns a list of storage accounts.": {
@@ -33,13 +33,13 @@
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "storage.json#/parameters/FarmIdParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "storage.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/FilterParameter"
           },
           {
             "$ref": "#/parameters/SummaryParameter"
@@ -52,16 +52,19 @@
               "$ref": "#/definitions/StorageAccountList"
             }
           },
-          "404": {
-            "description": "NOT FOUND -- The specified farm was not found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+          "nextLinkName": "@odata.nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Storage.Admin/farms/{farmId}/storageaccounts/{accountId}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts/{accountId}": {
       "get": {
         "x-ms-examples": {
           "Returns the requested storage account.": {
@@ -78,10 +81,7 @@
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "storage.json#/parameters/FarmIdParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/AccountIdParameter"
@@ -97,11 +97,16 @@
               "$ref": "#/definitions/StorageAccount"
             }
           },
-          "404": {
-            "description": "NOT FOUND -- The storage account or farm was not found."
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
         }
-      },
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/storageaccounts/{accountId}/undelete": {
       "post": {
         "x-ms-examples": {
           "Undelete a deleted storage account.": {
@@ -112,19 +117,65 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_Undelete",
-        "description": "Undelete a deleted storage account.",
+        "description": "Undelete a deleted storage account with new account name if the a new name is provided.",
         "parameters": [
           {
             "$ref": "storage.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "storage.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "storage.json#/parameters/FarmIdParameter"
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "#/parameters/AccountIdParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NewAccountNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Undelete either has been performed or account was not deleted.",
+            "schema": {
+              "$ref": "#/definitions/UndeleteStorageAccount"
+            }
+          },
+          "202": {
+            "description": "Accepted -- undelete operation trigged; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Storage.Admin/locations/{location}/reclaimStorageCapacity": {
+      "post": {
+        "x-ms-examples": {
+          "Start reclaim storage capacity on deleted storage objects.": {
+            "$ref": "./examples/StorageAccounts/ReclaimStorageCapacity.json"
+          }
+        },
+        "tags": [
+          "StorageAccounts"
+        ],
+        "operationId": "StorageAccounts_ReclaimStorageCapacity",
+        "description": "Start reclaim storage capacity on deleted storage objects.",
+        "parameters": [
+          {
+            "$ref": "storage.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "storage.json#/parameters/LocationParameter"
           },
           {
             "$ref": "storage.json#/parameters/ApiVersionParameter"
@@ -132,9 +183,19 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Undelete either has been performed or account was not deleted."
+            "description": "OK -- Reclaim storage capacity has completed."
+          },
+          "202": {
+            "description": "Accepted -- reclaim storage capacity operation triggered; operation will complete asynchronously."
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "storage.json#/definitions/ErrorResponse"
+            }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -181,31 +242,12 @@
         "modelAsString": true
       }
     },
-    "StorageAccountOperation": {
-      "readOnly": true,
-      "description": "The permissions of storage account in WAC.",
-      "type": "string",
-      "enum": [
-        "None",
-        "Create",
-        "Update",
-        "Suspend",
-        "Delete",
-        "Undelete"
-      ],
-      "x-ms-enum": {
-        "name": "StorageAccountOperation",
-        "modelAsString": true
-      }
-    },
     "StorageAccountStatus": {
       "description": "The state of storage account in WAC.",
       "type": "string",
       "enum": [
         "Active",
-        "Deleted",
-        "OutOfRetentionPeriod",
-        "Recycled"
+        "Deleted"
       ],
       "x-ms-enum": {
         "name": "StorageAccountStatus",
@@ -237,11 +279,76 @@
         "Deleted",
         "AboveQuota",
         "Suspended",
-        "All"
+        "All",
+        "GcReadyState"
       ],
       "x-ms-enum": {
         "name": "WacAccountStates",
         "modelAsString": true
+      }
+    },
+    "StorageEncryptionSetting": {
+      "description": "Storage Encryption setting",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Bool to indicate whether enabled or not.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "lastEnabledTime": {
+          "description": "A rough estimate of the date/time when the encryption was last enabled by the user.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "StorageEncryptionServices": {
+      "description": "Services for which encryption setting is mentioned.",
+      "type": "object",
+      "properties": {
+        "blob": {
+          "description": "Blob service.",
+          "$ref": "#/definitions/StorageEncryptionSetting",
+          "readOnly": true
+        },
+        "table": {
+          "description": "Table service.",
+          "$ref": "#/definitions/StorageEncryptionSetting",
+          "readOnly": true
+        },
+        "queue": {
+          "description": "Queue service",
+          "$ref": "#/definitions/StorageEncryptionSetting",
+          "readOnly": true
+        }
+      }
+    },
+    "EncryptionKeySource": {
+      "description": "Encryption Key Source",
+      "type": "string",
+      "enum": [
+        "Microsoft.Storage"
+      ],
+      "x-ms-enum": {
+        "name": "EncryptionKeySource",
+        "modelAsString": true
+      }
+    },
+    "StorageEncryption": {
+      "description": "Storage encryption setting",
+      "type": "object",
+      "properties": {
+        "services": {
+          "description": "Services for which encryption setting is mentioned",
+          "$ref": "#/definitions/StorageEncryptionServices",
+          "readOnly": true
+        },
+        "keySource": {
+          "description": "Encryption keySource",
+          "$ref": "#/definitions/EncryptionKeySource",
+          "readOnly": true
+        }
       }
     },
     "StorageAccountProperties": {
@@ -285,6 +392,11 @@
           "type": "string",
           "readOnly": true
         },
+        "faultDomain": {
+          "description": "The fault domain for the storage account.",
+          "type": "string",
+          "readOnly": true
+        },
         "statusOfPrimary": {
           "description": "The status of primary location of storage account.",
           "$ref": "#/definitions/LocationStatus",
@@ -305,22 +417,6 @@
           "type": "string",
           "readOnly": true
         },
-        "currentOperation": {
-          "description": "Current operation being performed on Storage Account",
-          "$ref": "#/definitions/StorageAccountOperation",
-          "readOnly": true
-        },
-        "customDomain": {
-          "description": "The custom domain the user assigned to this storage account.",
-          "type": "string",
-          "readOnly": true
-        },
-        "acquisitionOperationCount": {
-          "description": "The count of acquisitions in the storage account.",
-          "type": "integer",
-          "format": "int32",
-          "readOnly": true
-        },
         "deletedTime": {
           "description": "The date-time when the storage account was deleted.",
           "type": "string",
@@ -330,18 +426,6 @@
         "accountStatus": {
           "$ref": "#/definitions/StorageAccountStatus",
           "description": "The status of storage account."
-        },
-        "recoveredTime": {
-          "description": "The time when the storage account is undeleted.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
-        },
-        "recycledTime": {
-          "description": "The time when the storage account is physically deleted.",
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true
         },
         "permissions": {
           "description": "The permissions on the storage account.",
@@ -358,9 +442,14 @@
           "$ref": "#/definitions/WacAccountStates",
           "readOnly": true
         },
-        "resourceAdminApiVersion": {
-          "description": "Storage admin REST API version.",
-          "type": "string",
+        "encryption": {
+          "description": "The storage encryption setting",
+          "$ref": "#/definitions/StorageEncryption",
+          "readOnly": true
+        },
+        "supportsHttpsTrafficOnly": {
+          "description": "Storage account supports https traffic only or not",
+          "type": "boolean",
           "readOnly": true
         }
       }
@@ -373,6 +462,14 @@
           "description": "Properties of the storage account.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties",
+          "readOnly": true
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
           "readOnly": true
         }
       },
@@ -394,8 +491,24 @@
           },
           "readOnly": true
         },
-        "nextLink": {
+        "@odata.nextLink": {
           "description": "URI to the next page.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "UndeleteStorageAccount": {
+      "description": "Undelete storage account information.",
+      "type": "object",
+      "properties": {
+        "accountId": {
+          "description": "The internal wac id for storage account.",
+          "type": "string",
+          "readOnly": true
+        },
+        "newAccountName": {
+          "description": "The new account name for the restored account if defined.",
           "type": "string",
           "readOnly": true
         }
@@ -411,12 +524,27 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "NewAccountNameParameter": {
+      "description": "New storage account name when doing undelete storage account operation.",
+      "name": "newAccountName",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
     "SummaryParameter": {
       "description": "Switch for whether summary or detailed information is returned.",
       "name": "summary",
       "in": "query",
-      "required": true,
+      "required": false,
       "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "FilterParameter": {
+      "description": "Filter string",
+      "name": "$filter",
+      "type": "string",
+      "in": "query",
       "x-ms-parameter-location": "method"
     }
   },

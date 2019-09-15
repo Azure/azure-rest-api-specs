@@ -49,7 +49,7 @@
           "200": {
             "description": "OK -- The BLOB service has been returned.",
             "schema": {
-              "$ref": "blobServices.json#/definitions/BlobService"
+              "$ref": "#/definitions/BlobService"
             }
           },
           "404": {
@@ -184,7 +184,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "blobServices.json#/definitions/BlobServiceWritableSettings"
+          "$ref": "#/definitions/BlobServiceWritableSettings"
         }
       ]
     },
@@ -194,7 +194,7 @@
       "properties": {
         "settings": {
           "x-ms-client-flatten": true,
-          "$ref": "blobServices.json#/definitions/BlobServiceSettings",
+          "$ref": "#/definitions/BlobServiceSettings",
           "description": "Blob service settings.",
           "readOnly": true
         }
@@ -212,7 +212,7 @@
         "properties": {
           "description": "Blob service properties.",
           "x-ms-client-flatten": true,
-          "$ref": "blobServices.json#/definitions/BlobServiceProperties",
+          "$ref": "#/definitions/BlobServiceProperties",
           "readOnly": true
         }
       },
