@@ -17,7 +17,7 @@
         "name": "SampleServerEndpoint_1",
         "properties": {
           "serverLocalPath": "D:\\SampleServerEndpoint_1",
-          "cloudTiering": "off",
+          "cloudTiering": "on",
           "volumeFreeSpacePercent": 100,
           "friendlyName": "somemachine.redmond.corp.microsoft.com",
           "serverResourceId": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/registeredServers/080d4133-bdb5-40a0-96a0-71a6057bfe9a",
@@ -71,7 +71,31 @@
           "offlineDataTransfer": "on",
           "offlineDataTransferStorageAccountResourceId": "/subscriptions/744f4d70-6d17-4921-8970-a765d14f763f/resourceGroups/myRG/providers/Microsoft.Storage/storageAccounts/mysa",
           "offlineDataTransferStorageAccountTenantId": "72f988bf-86f1-41af-91ab-2d7cd011db47",
-          "offlineDataTransferShareName": "myfileshare"
+          "offlineDataTransferShareName": "myfileshare",
+          "cloudTieringStatus": {
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "health": "Error",
+            "lastCloudTieringResult": -2134347771,
+            "lastSuccessTimestamp": "2018-06-11T23:32:51.1057915Z"
+          },
+          "recallStatus": {
+            "lastUpdatedTimestamp": "2018-06-11T23:32:51.1057915Z",
+            "totalRecallErrorsCount": 30,
+            "recallErrors": [
+              {
+                "errorCode": -2134347775,
+                "count": 5
+              },
+              {
+                "errorCode": -2134347774,
+                "count": 10
+              },
+              {
+                "errorCode": -2134347773,
+                "count": 15
+              }
+            ]
+          }
         },
         "id": "/subscriptions/52b8da2f-61e0-4a1f-8dde-336911f367fb/resourceGroups/SampleResourceGroup_1/providers/Microsoft.StorageSync/storageSyncServices/SampleStorageSyncService_1/syncGroups/SampleSyncGroup_1/serverEndpoints/SampleServerEndpoint_1",
         "type": "Microsoft.StorageSync/storageSyncServices/syncGroups/serverEndpoints"

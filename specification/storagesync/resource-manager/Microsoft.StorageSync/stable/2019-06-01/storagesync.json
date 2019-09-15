@@ -3409,8 +3409,7 @@
         },
         "isdir": {
           "type": "boolean",
-          "description": "Restore file spec isdir",
-          "readOnly": true
+          "description": "Restore file spec isdir"
         }
       }
     },
@@ -3577,7 +3576,8 @@
       "properties": {
         "uniqueId": {
           "type": "string",
-          "description": "Unique Id"
+          "description": "Unique Id",
+          "readOnly": true
         },
         "syncGroupStatus": {
           "type": "string",
@@ -3811,6 +3811,18 @@
         "offlineDataTransferShareName": {
           "type": "string",
           "description": "Offline data transfer share name"
+        },
+        "cloudTieringStatus": {
+          "type": "object",
+          "$ref": "#/definitions/ServerEndpointCloudTieringStatus",
+          "description": "Cloud tiering status. Only populated if cloud tiering is enabled.",
+          "readOnly": true
+        },
+        "recallStatus": {
+          "type": "object",
+          "$ref": "#/definitions/ServerEndpointRecallStatus",
+          "description": "Recall status. Only populated if cloud tiering is enabled.",
+          "readOnly": true
         }
       }
     },
@@ -3819,29 +3831,30 @@
       "description": "Server Endpoint sync status",
       "properties": {
         "downloadHealth": {
-          "$ref": "#/definitions/HealthState",
+          "$ref": "#/definitions/ServerEndpointSyncHealthState",
           "description": "Download Health Status.",
           "readOnly": true
         },
         "uploadHealth": {
-          "$ref": "#/definitions/HealthState",
+          "$ref": "#/definitions/ServerEndpointSyncHealthState",
           "description": "Upload Health Status.",
           "readOnly": true
         },
         "combinedHealth": {
-          "$ref": "#/definitions/HealthState",
+          "$ref": "#/definitions/ServerEndpointSyncHealthState",
           "description": "Combined Health Status.",
           "readOnly": true
         },
         "syncActivity": {
-          "$ref": "#/definitions/SyncActivityState",
+          "$ref": "#/definitions/ServerEndpointSyncActivityState",
           "description": "Sync activity",
           "readOnly": true
         },
         "totalPersistentFilesNotSyncingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Total count of persistent files not syncing (combined upload + download). Reserved for future use.",
+          "minimum": 0,
+          "description": "Total count of persistent files not syncing (combined upload + download).",
           "readOnly": true
         },
         "lastUpdatedTimestamp": {
@@ -3851,33 +3864,33 @@
           "readOnly": true
         },
         "uploadStatus": {
-          "$ref": "#/definitions/SyncSessionStatus",
+          "$ref": "#/definitions/ServerEndpointSyncSessionStatus",
           "description": "Upload Status",
           "readOnly": true
         },
         "downloadStatus": {
-          "$ref": "#/definitions/SyncSessionStatus",
+          "$ref": "#/definitions/ServerEndpointSyncSessionStatus",
           "description": "Download Status",
           "readOnly": true
         },
         "uploadActivity": {
-          "$ref": "#/definitions/SyncActivityStatus",
+          "$ref": "#/definitions/ServerEndpointSyncActivityStatus",
           "description": "Upload sync activity",
           "readOnly": true
         },
         "downloadActivity": {
-          "$ref": "#/definitions/SyncActivityStatus",
+          "$ref": "#/definitions/ServerEndpointSyncActivityStatus",
           "description": "Download sync activity",
           "readOnly": true
         },
         "offlineDataTransferStatus": {
-          "$ref": "#/definitions/OfflineDataTransferState",
+          "$ref": "#/definitions/ServerEndpointOfflineDataTransferState",
           "description": "Offline Data Transfer State",
           "readOnly": true
         }
       }
     },
-    "SyncSessionStatus": {
+    "ServerEndpointSyncSessionStatus": {
       "type": "object",
       "description": "Sync Session status object.",
       "properties": {
@@ -3902,32 +3915,35 @@
         "lastSyncPerItemErrorCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Last sync per item error count.",
           "readOnly": true
         },
         "persistentFilesNotSyncingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Count of persistent files not syncing. Reserved for future use.",
+          "minimum": 0,
+          "description": "Count of persistent files not syncing.",
           "readOnly": true
         },
         "transientFilesNotSyncingCount": {
           "type": "integer",
           "format": "int64",
-          "description": "Count of transient files not syncing. Reserved for future use.",
+          "minimum": 0,
+          "description": "Count of transient files not syncing.",
           "readOnly": true
         },
         "filesNotSyncingErrors": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FilesNotSyncingError"
+            "$ref": "#/definitions/ServerEndpointFilesNotSyncingError"
           },
-          "description": "Array of per-item errors coming from the last sync session. Reserved for future use.",
+          "description": "Array of per-item errors coming from the last sync session.",
           "readOnly": true
         }
       }
     },
-    "SyncActivityStatus": {
+    "ServerEndpointSyncActivityStatus": {
       "type": "object",
       "description": "Sync Session status object.",
       "properties": {
@@ -3940,36 +3956,41 @@
         "perItemErrorCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Per item error count",
           "readOnly": true
         },
         "appliedItemCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Applied item count.",
           "readOnly": true
         },
         "totalItemCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Total item count (if available)",
           "readOnly": true
         },
         "appliedBytes": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Applied bytes",
           "readOnly": true
         },
         "totalBytes": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Total bytes (if available)",
           "readOnly": true
         }
       }
     },
-    "FilesNotSyncingError": {
+    "ServerEndpointFilesNotSyncingError": {
       "type": "object",
       "description": "Files not syncing error object",
       "properties": {
@@ -3982,12 +4003,14 @@
         "persistentCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Count of persistent files not syncing with the specified error code",
           "readOnly": true
         },
         "transientCount": {
           "type": "integer",
           "format": "int64",
+          "minimum": 0,
           "description": "Count of transient files not syncing with the specified error code",
           "readOnly": true
         }
@@ -4013,9 +4036,9 @@
         "off"
       ]
     },
-    "HealthState": {
+    "ServerEndpointSyncHealthState": {
       "type": "string",
-      "description": "Type of the Health state",
+      "description": "Type of the sync health state",
       "enum": [
         "Healthy",
         "Error",
@@ -4024,7 +4047,7 @@
         "NoActivity"
       ]
     },
-    "SyncActivityState": {
+    "ServerEndpointSyncActivityState": {
       "type": "string",
       "description": "Type of the sync activity state",
       "enum": [
@@ -4033,7 +4056,7 @@
         "UploadAndDownload"
       ]
     },
-    "OfflineDataTransferState": {
+    "ServerEndpointOfflineDataTransferState": {
       "type": "string",
       "description": "Type of the Health state",
       "enum": [
@@ -4106,6 +4129,89 @@
         }
       },
       "description": "Operation status object"
+    },
+    "ServerEndpointCloudTieringStatus": {
+      "type": "object",
+      "description": "Server endpoint cloud tiering status object.",
+      "properties": {
+        "health": {
+          "$ref": "#/definitions/ServerEndpointCloudTieringHealthState",
+          "description": "Cloud tiering health state.",
+          "readOnly": true
+        },
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "lastCloudTieringResult": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Last cloud tiering result (HResult)",
+          "readOnly": true
+        },
+        "lastSuccessTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last cloud tiering success timestamp",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerEndpointCloudTieringHealthState": {
+      "type": "string",
+      "description": "Type of the cloud tiering health state",
+      "enum": [
+        "Healthy",
+        "Error"
+      ]
+    },
+    "ServerEndpointRecallStatus": {
+      "type": "object",
+      "description": "Server endpoint recall status object.",
+      "properties": {
+        "lastUpdatedTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated timestamp",
+          "readOnly": true
+        },
+        "totalRecallErrorsCount": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Total count of recall errors.",
+          "readOnly": true
+        },
+        "recallErrors": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServerEndpointRecallError"
+          },
+          "description": "Array of recall errors",
+          "readOnly": true
+        }
+      }
+    },
+    "ServerEndpointRecallError": {
+      "type": "object",
+      "description": "Server endpoint recall error object",
+      "properties": {
+        "errorCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Error code (HResult)",
+          "readOnly": true
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "minimum": 0,
+          "description": "Count of occurences of the error",
+          "readOnly": true
+        }
+      }
     }
   },
   "securityDefinitions": {
