@@ -1531,15 +1531,71 @@
         }
       }
     },
-    "GeoJSONPolygon": {
-      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+    "GeoJSONGeometry": {
+      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJSONGeometryType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry."
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry."
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry."
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry."
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry."
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry."
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Polygon": {
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.    ",
+      "type": "object",
       "allOf": [
         {
-          "description": "This represents the geometry for one or more geographical features (parks, state boundary etc.) and should be a `GeoJSON` compliant type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946) for details.",
-          "type": "object"
+          "$ref": "#/definitions/GeoJSONGeometry"
         },
         {
-          "type": "object",
           "properties": {
             "type": {
               "description": "Specifies the `type` for the object. Value should always be equal to \"Polygon\".",
@@ -1563,22 +1619,32 @@
         }
       ]
     },
-    "GeoJSONLineString": {
+    "LineString": {
       "description": "A valid `GeoJSON LineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.4) for details.",
       "type": "object",
-      "properties": {
-        "type": {
-          "description": "Specifies the `type` for the geometry. Value should always be equal to \"LineString\".",
-          "type": "string"
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
         },
-        "coordinates": {
-          "description": "Coordinates for the `LineString` geometry.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/GeoJSONPosition"
-          }
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"LineString\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `LineString` geometry.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoJSONPosition"
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
         }
-      }
+      ]
     },
     "GeoJSONPosition": {
       "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
@@ -1601,7 +1667,7 @@
       }
     },
     "MetroAreaInfoResponse": {
-      "description": "This object is returned from a successful Metroa Area call.",
+      "description": "This object is returned from a successful Metro Area call.",
       "type": "object",
       "properties": {
         "metroName": {
@@ -1692,7 +1758,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Car share provider spesific value – most often will be the vehicle's license plate.",
+          "description": "Car share provider specific value – most often will be the vehicle's license plate.",
           "type": "string"
         },
         "model": {
@@ -1704,7 +1770,11 @@
           "type": "integer"
         },
         "fuelLevel": {
-          "description": "Percentage of fuel indicating the fuel level, 100 being full, 0 empty.",
+          "description": "Percentage of fuel indicating the fuel level, 100 being full, 0 empty. Unit: percentage (%).",
+          "type": "integer"
+        },
+        "batteryLevel": {
+          "description": "Percentage of battery indicating the battery level, 100 being full, 0 empty. Unit: percentage (%).",
           "type": "integer"
         },
         "pricing": {
@@ -1805,7 +1875,7 @@
           "type": "string"
         },
         "geometry": {
-          "$ref": "#/definitions/GeoJSONPolygon"
+          "$ref": "#/definitions/Polygon"
         },
         "viewport": {
           "$ref": "#/definitions/ResultViewport"
@@ -1971,7 +2041,7 @@
           "type": "string"
         },
         "caption2": {
-          "description": "A desciptive string.",
+          "description": "A descriptive string.",
           "type": "string"
         },
         "color": {
@@ -2153,7 +2223,7 @@
           "$ref": "#/definitions/LegPoint"
         },
         "geometry": {
-          "$ref": "#/definitions/GeoJSONLineString"
+          "$ref": "#/definitions/LineString"
         },
         "lineGroup": {
           "description": "In case of a public transit leg, the line group serving this leg.",
@@ -2504,7 +2574,7 @@
         },
         "geometry": {
           "description": "Stop sequence and shape per a line in GeoJSON format.",
-          "$ref": "#/definitions/GeoJSONLineString"
+          "$ref": "#/definitions/LineString"
         }
       }
     },
@@ -2547,7 +2617,7 @@
       "type": "string",
       "enum": [
         "Bus",
-        "Cable",
+        "CableCar",
         "Ferry",
         "Funicular",
         "Gondola",
@@ -2564,7 +2634,7 @@
             "description": "bus"
           },
           {
-            "value": "Cable",
+            "value": "CableCar",
             "description": "cableCar"
           },
           {
