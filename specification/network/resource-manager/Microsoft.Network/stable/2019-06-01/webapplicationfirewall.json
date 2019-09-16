@@ -79,19 +79,19 @@
         "tags": [
           "WebApplicationFirewallPolicies"
         ],
+        "description": "Gets all the WAF policies in a subscription.",
         "operationId": "WebApplicationFirewallPolicies_ListAll",
         "x-ms-examples": {
           "Lists all WAF policies in a subscription": {
             "$ref": "./examples/WafListAllPolicies.json"
           }
         },
-        "description": "Gets all the WAF policies in a subscription.",
         "parameters": [
           {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -191,7 +191,7 @@
             }
           },
           {
-            "$ref": "network.json#/parameters/ApiVersionParameter"
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -295,6 +295,10 @@
             "$ref": "#/definitions/WebApplicationFirewallCustomRule"
           }
         },
+        "managedRules": {
+          "description": "Describes the managedRules structure",
+          "$ref": "#/definitions/ManagedRulesDefinition"
+        },
         "applicationGateways": {
           "readOnly": true,
           "type": "array",
@@ -346,10 +350,31 @@
         }
       }
     },
+    "ManagedRulesDefinition": {
+      "description": "Allow to exclude some variable satisfy the condition for the WAF check.",
+      "required": [
+        "managedRuleSets"
+      ],
+      "properties": {
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OwaspCrsExclusionEntry"
+          },
+          "description": "Describes the Exclusions that are applied on the policy."
+        },
+        "managedRuleSets": {
+          "type" : "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleSet"
+          }
+        }
+      }
+    },
     "PolicySettings": {
       "description": "Defines contents of a web application firewall global configuration.",
       "properties": {
-        "enabledState": {
+        "state": {
           "description": "Describes if the policy is in enabled state or disabled state.",
           "type": "string",
           "enum": [
@@ -372,6 +397,26 @@
             "name": "WebApplicationFirewallMode",
             "modelAsString": true
           }
+        },
+        "requestBodyCheck": {
+          "type": "boolean",
+          "description": "Whether to allow WAF to check request Body."
+        },
+        "maxRequestBodySizeInKb": {
+          "type": "integer",
+          "format": "int32",
+          "maximum": 128,
+          "exclusiveMaximum": false,
+          "minimum": 8,
+          "exclusiveMinimum": false,
+          "description": "Maximum request body size in Kb for WAF."
+        },
+        "fileUploadLimitInMb": {
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "exclusiveMinimum": false,
+          "description": "Maximum file upload size in Mb for WAF."
         }
       }
     },
@@ -530,6 +575,115 @@
           "items": {
             "$ref": "#/definitions/Transform"
           }
+        }
+      }
+    },
+    "ManagedRuleSet": {
+      "type": "object",
+      "description": "Defines a managed rule set.",
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ],
+      "properties": {
+        "ruleSetType": {
+          "description": "Defines the rule set type to use.",
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "description": "Defines the version of the rule set to use.",
+          "type": "string"
+        },
+        "ruleGroupOverrides": {
+          "description": "Defines the rule group overrides to apply to the rule set.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupOverride"
+          }
+        }
+      }
+    },
+    "ManagedRuleGroupOverride": {
+      "description": "Defines a managed rule group override setting.",
+      "required": [
+        "ruleGroupName"
+      ],
+      "properties": {
+        "ruleGroupName": {
+          "description": "Describes the managed rule group to override.",
+          "type": "string"
+        },
+        "rules": {
+          "description": "List of rules that will be disabled. If none specified, all rules in the group will be disabled.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleOverride"
+          }
+        }
+      }
+    },
+    "ManagedRuleOverride": {
+      "description": "Defines a managed rule group override setting.",
+      "required": [
+        "ruleId"
+      ],
+      "properties": {
+        "ruleId": {
+          "description": "Identifier for the managed rule.",
+          "type": "string"
+        },
+        "state": {
+          "description": "Describes if the managed rule is in enabled or disabled state. Defaults to Disabled if not specified.",
+          "type": "string",
+          "enum": [
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "ManagedRuleEnabledState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "OwaspCrsExclusionEntry": {
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator",
+        "selector"
+      ],
+      "description": "Allow to exclude some variable satisfy the condition for the WAF check.",
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "RequestArgNames"
+          ],
+          "description": "The variable to be excluded.",
+          "x-ms-enum": {
+            "name": "OwaspCrsExclusionEntryMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "EqualsAny"
+          ],
+          "description": "When matchVariable is a collection, operate on the selector to specify which elements in the collection this exclusion applies to.",
+          "x-ms-enum": {
+            "name": "OwaspCrsExclusionEntrySelectorMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "When matchVariable is a collection, operator used to specify which elements in the collection this exclusion applies to."
         }
       }
     }
