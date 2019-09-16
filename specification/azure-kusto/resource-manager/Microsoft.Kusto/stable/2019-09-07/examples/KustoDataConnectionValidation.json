@@ -8,20 +8,23 @@
     "parameters": {
       "dataConnectionName": "DataConnections8",
       "properties": {
-        "kind": "EventHub"
+        "kind": "EventHub",
+        "eventHubResourceId": "/subscriptions/12345678-1234-1234-1234-123456789098/resourceGroups/kustorptest/providers/Microsoft.EventHub/namespaces/eventhubTestns1/eventhubs/eventhubTest1",
+        "consumerGroup": "testConsumerGroup1"
       }
     }
   },
   "responses": {
     "200": {
-      "body": [
-        {
-          "errorMessage": "event hub namespace does not exist"
-        },
-        {
-          "errorMessage": "database does not exist"
-        }
-      ]
+      "body": 
+        [
+          {
+            "errorMessage": "event hub namespace does not exist"
+          },
+          {
+            "errorMessage": "database does not exist"
+          }
+        ]
     }
   }
 }

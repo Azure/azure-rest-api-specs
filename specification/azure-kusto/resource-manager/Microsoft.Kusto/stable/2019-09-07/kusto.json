@@ -160,6 +160,12 @@
               "$ref": "#/definitions/Cluster"
             }
           },
+          "202": {
+            "description": "Successfully updated the cluster.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -400,9 +406,7 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/SkuDescriptionList"
-            }
+            "schema": { "$ref": "#/definitions/SkuDescriptionList" }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -548,9 +552,7 @@
         "responses": {
           "200": {
             "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/ListResourceSkusResult"
-            }
+            "schema": { "$ref": "#/definitions/ListResourceSkusResult" }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -704,8 +706,11 @@
             }
           },
           "202": {
-            "description": "Accepted the create database request."
-          },
+            "description": "Accepted the create database request.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          }, 
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -766,7 +771,10 @@
             }
           },
           "202": {
-            "description": "Accepted the update database request."
+            "description": "Accepted the update database request.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1232,7 +1240,10 @@
             }
           },
           "202": {
-            "description": "Accepted the create data connection request."
+            "description": "Accepted the create data connection request.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1297,7 +1308,10 @@
             }
           },
           "202": {
-            "description": "Accepted the update data connection request."
+            "description": "Accepted the update data connection request.",
+            "schema": {
+              "$ref": "#/definitions/DataConnection"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1471,7 +1485,12 @@
           "type": "object",
           "$ref": "#/definitions/VirtualNetworkConfiguration",
           "description": "Virtual network definition."
-        }
+        },
+        "keyVaultProperties": {
+          "type": "object",
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "KeyVault properties for the cluster encryption."
+        } 
       },
       "description": "Class representing the Kusto cluster properties."
     },
@@ -1918,6 +1937,10 @@
           "$ref": "#/definitions/Zones",
           "description": "The availability zones of the cluster."
         },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the cluster, if configured."
+        },
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/ClusterProperties",
@@ -1952,6 +1975,10 @@
         "sku": {
           "$ref": "#/definitions/AzureSku",
           "description": "The SKU of the cluster."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "The identity of the cluster, if configured."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -2360,9 +2387,7 @@
       "properties": {
         "value": {
           "type": "array",
-          "items": {
-            "$ref": "#/definitions/AzureResourceSku"
-          },
+          "items": { "$ref": "#/definitions/AzureResourceSku" },
           "description": "The collection of available SKUs for an existing resource."
         }
       }
@@ -2447,6 +2472,80 @@
           "title": "Properties of the operation.",
           "type": "object",
           "x-ms-client-flatten": true
+        }
+      }
+    },
+    "Identity": {
+      "properties": {
+        "principalId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The principal ID of resource identity."
+        },
+        "tenantId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The tenant ID of resource."
+        },
+        "type": {
+          "type": "string",
+          "description": "The identity type.",
+          "enum": [
+            "None",
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "properties": {
+              "principalId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The principal id of user assigned identity."
+              },
+              "clientId": {
+                "readOnly": true,
+                "type": "string",
+                "description": "The client id of user assigned identity."
+              }
+            }
+          },
+          "description": "The list of user identities associated with the Kusto cluster. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'."
+        }
+      },
+      "required": [
+        "type"
+      ],
+      "description": "Identity for the resource."
+    },
+    "KeyVaultProperties": {
+      "description": "Properties of the key vault.",
+      "required": [
+        "keyName",
+        "keyVersion",
+        "keyVaultUri"
+      ],
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "The name of the key vault key.",
+          "x-ms-client-name": "KeyName"
+        },
+        "keyVersion": {
+          "type": "string",
+          "description": "The version of the key vault key.",
+          "x-ms-client-name": "KeyVersion"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "The Uri of the key vault.",
+          "x-ms-client-name": "KeyVaultUri"
         }
       }
     }
