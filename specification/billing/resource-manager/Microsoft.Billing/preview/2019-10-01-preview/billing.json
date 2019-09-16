@@ -2630,6 +2630,94 @@
         }
       }
     },
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/policies/default": {
+      "get": {
+        "tags": [
+          "Policies"
+        ],
+        "operationId": "Policies_GetByCustomer",
+        "description": "The policy for a given billing account name and customer name.",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
+        },
+        "x-ms-examples": {
+          "PolicyByCustomer": {
+            "$ref": "./examples/CustomerPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "Policies"
+        ],
+        "operationId": "Policies_UpdateCustomer",
+        "description": "The operation to update a Customer policy.",
+        "x-ms-examples": {
+          "UpdateCustomer": {
+            "$ref": "./examples/UpdateCustomerPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/customerNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            },
+            "description": "Parameters supplied to the update customer policy operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CustomerPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Billing/billingProperty/default": {
       "get": {
         "tags": [
@@ -6448,6 +6536,39 @@
           ],
           "x-ms-enum": {
             "name": "ViewChargesPolicy",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+	"CustomerPolicy": {
+      "description": "The Customer's Policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomerPolicyProperties",
+          "title": "Customer Policy properties"
+        }
+      }
+    },
+    "CustomerPolicyProperties": {
+      "description": "The properties of a Customer's policy.",
+      "properties": {
+        "viewCharges": {
+          "description": "Customer can view retail prices.",
+          "type": "string",
+          "enum": [
+            "Allowed",
+            "NotAllowed"
+          ],
+          "x-ms-enum": {
+            "name": "ViewCharges",
             "modelAsString": true
           }
         }
