@@ -8,7 +8,7 @@ typescript:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 0
-  package-name: "@azure/arm-edgegateway"
+  package-name: "@azure/arm-databoxedge"
   output-folder: "$(typescript-sdks-folder)/sdk/databoxedge/arm-databoxedge"
   generate-metadata: true
 ```

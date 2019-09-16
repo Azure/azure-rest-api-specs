@@ -8,7 +8,7 @@ This is the AutoRest configuration file for DataBox.
 
 ---
 ## Getting Started
-To build the SDK for DataBoxEdge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for DataBox Edge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,19 +22,11 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the DataBoxEdge API.
+These are the global settings for the DataBox API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-07
-```
-### Tag: package-2019-07
-
-These settings apply only when `--tag=package-2019-07` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-07'
-input-file:
-- Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
+tag: package-2019-03
 ```
 
 ### Tag: package-2019-03
@@ -78,8 +70,8 @@ csharp:
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.DataBoxEdge
   payload-flattening-threshold: 0
-  output-folder: $(csharp-sdks-folder)/DataBoxEdge/Microsoft.Azure.Management.DataBoxEdge/src/Generated
-   clear-output-folder: true
+  output-folder: $(csharp-sdks-folder)/databoxedge/Microsoft.Azure.Management.DataBoxEdge/src/Generated
+  clear-output-folder: true
 ```
 
 ## Python
@@ -138,21 +130,7 @@ java:
 
 ``` yaml $(java) && $(multiapi)
 batch:
-  - tag: package-2019-07
   - tag: package-2019-03
-```
-
-### Tag: package-2019-07 and java
-
-These settings apply only when `--tag=package-2019-07 --java` is specified on the command line.
-Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
-
-``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
-java:
-  namespace: com.microsoft.azure.management.databoxedge.v2019_07_01
-  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_07_01
-regenerate-manager: true
-generate-interface: true
 ```
 
 ### Tag: package-2019-03 and java
@@ -180,7 +158,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
   - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 
 ```
@@ -192,4 +169,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
