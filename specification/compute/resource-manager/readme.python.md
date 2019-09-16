@@ -33,6 +33,17 @@ batch:
   - tag: package-compute-2015-06
 ```
 
+### Tag: package-2019-07-01-only and python
+
+These settings apply only when `--tag=package-2019-07-01-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-07-01-only' && $(python)
+python:
+  namespace: azure.mgmt.compute.v2019_07_01
+  output-folder: $(python-sdks-folder)/compute/azure-mgmt-compute/azure/mgmt/compute/v2019_07_01
+```
+
 ### Tag: package-2019-04-01-only and python
 
 These settings apply only when `--tag=package-2019-04-01-only --python` is specified on the command line.
