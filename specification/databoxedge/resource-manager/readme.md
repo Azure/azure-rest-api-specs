@@ -1,4 +1,4 @@
-# DataBox
+# DataBoxEdge
 
 > see https://aka.ms/autorest
 
@@ -8,7 +8,7 @@ This is the AutoRest configuration file for DataBox.
 
 ---
 ## Getting Started
-To build the SDK for DataBox, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
+To build the SDK for DataBoxEdge, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
 
@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the DataBox API.
+These are the global settings for the DataBoxEdge API.
 
 ``` yaml
 openapi-type: arm
@@ -180,7 +180,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/edgegateway.json
+  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
+  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 
 ```
 
