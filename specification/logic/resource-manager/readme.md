@@ -41,7 +41,7 @@ directive:
 
 ### Tag: package-2019-05
 
-These settings apply only when `--package-2019-05` is specified on the command line.
+These settings apply only when `--tag=package-2019-05` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2019-05'
 input-file:
@@ -50,7 +50,7 @@ input-file:
 
 ### Tag: package-2018-07-preview
 
-These settings apply only when `--package-2018-07-preview` is specified on the command line.
+These settings apply only when `--tag=package-2018-07-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2018-07-preview'
 input-file:
