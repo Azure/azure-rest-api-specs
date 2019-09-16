@@ -2630,13 +2630,13 @@
         }
       }
     },
-	"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/customers/{customerName}/policies/default": {
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/policies/default": {
       "get": {
         "tags": [
           "Policies"
         ],
         "operationId": "Policies_GetByCustomer",
-        "description": "The policy for a given billing account name and billing profile name and customer name.",
+        "description": "The policy for a given billing account name and customer name.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/billing/"
         },
@@ -2648,9 +2648,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
             "$ref": "#/parameters/customerNameParameter"
@@ -2691,9 +2688,6 @@
           },
           {
             "$ref": "#/parameters/billingAccountNameParameter"
-          },
-          {
-            "$ref": "#/parameters/billingProfileNameParameter"
           },
           {
             "$ref": "#/parameters/customerNameParameter"
