@@ -49,13 +49,13 @@
           "200": {
             "description": "OK -- Operation has been accepted and processed",
             "schema": {
-              "$ref": "containers.json#/definitions/MigrationResult"
+              "$ref": "#/definitions/MigrationResult"
             }
           },
           "202": {
             "description": "ACCEPTED - Operation has been accepted will be processed asynchronously",
             "schema": {
-              "$ref": "containers.json#/definitions/MigrationResult"
+              "$ref": "#/definitions/MigrationResult"
             }
           }
         },
@@ -93,7 +93,7 @@
           "200": {
             "description": "OK -- Operation has been accepted and processed",
             "schema": {
-              "$ref": "containers.json#/definitions/MigrationResult"
+              "$ref": "#/definitions/MigrationResult"
             }
           }
         }
@@ -128,20 +128,20 @@
             "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "containers.json#/parameters/MigrationIntentParameter"
+            "$ref": "#/parameters/MigrationIntentParameter"
           },
           {
-            "$ref": "containers.json#/parameters/MaxCountParameter"
+            "$ref": "#/parameters/MaxCountParameter"
           },
           {
-            "$ref": "containers.json#/parameters/StartIndexParameter"
+            "$ref": "#/parameters/StartIndexParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The list of containers has been returned.",
             "schema": {
-              "$ref": "containers.json#/definitions/ContainerList"
+              "$ref": "#/definitions/ContainerList"
             }
           },
           "404": {
@@ -224,20 +224,20 @@
             "$ref": "storage.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "containers.json#/parameters/MigrationParameterParameter"
+            "$ref": "#/parameters/MigrationParameterParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- Container has been migrated",
             "schema": {
-              "$ref": "containers.json#/definitions/MigrationResult"
+              "$ref": "#/definitions/MigrationResult"
             }
           },
           "202": {
             "description": "ACCEPTED -- Operation accepted and will be performed asynchronously",
             "schema": {
-              "$ref": "containers.json#/definitions/MigrationResult"
+              "$ref": "#/definitions/MigrationResult"
             }
           }
         },
@@ -293,7 +293,7 @@
       "description": "List of containers.",
       "type": "array",
       "items": {
-        "$ref": "containers.json#/definitions/Container"
+        "$ref": "#/definitions/Container"
       }
     },
     "MigrationResult": {
@@ -327,7 +327,7 @@
         },
         "migrationStatus": {
           "description": "The migration status.",
-          "$ref": "containers.json#/definitions/MigrationState",
+          "$ref": "#/definitions/MigrationState",
           "readOnly": true
         },
         "subEntitiesCompleted": {
@@ -423,7 +423,7 @@
       "in": "body",
       "required": true,
       "schema": {
-        "$ref": "containers.json#/definitions/MigrationParameters"
+        "$ref": "#/definitions/MigrationParameters"
       },
       "x-ms-parameter-location": "method"
     }

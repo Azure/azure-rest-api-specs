@@ -4971,19 +4971,23 @@
         },
         "existingClusterId": {
           "type": "object",
-          "description": "The id of an existing cluster that will be used for all runs of this job. Type: string (or Expression with resultType string)."
+          "description": "The id of an existing interactive cluster that will be used for all runs of this activity. Type: string (or Expression with resultType string)."
+        },
+        "instancePoolId": {
+          "type": "object",
+          "description": "The id of an existing instance pool that will be used for all runs of this activity. Type: string (or Expression with resultType string)."
         },
         "newClusterVersion": {
           "type": "object",
-          "description": "The Spark version of new cluster. Type: string (or Expression with resultType string)."
+          "description": "If not using an existing interactive cluster, this specifies the Spark version of a new job cluster or instance pool nodes created for each run of this activity. Required if instancePoolId is specified. Type: string (or Expression with resultType string)."
         },
         "newClusterNumOfWorker": {
           "type": "object",
-          "description": "Number of worker nodes that new cluster should have. A string formatted Int32, like '1' means numOfWorker is 1 or '1:10' means auto-scale from 1 as min and 10 as max. Type: string (or Expression with resultType string)."
+          "description": "If not using an existing interactive cluster, this specifies the number of worker nodes to use for the new job cluster or instance pool. For new job clusters, this a string-formatted Int32, like '1' means numOfWorker is 1 or '1:10' means auto-scale from 1 (min) to 10 (max). For instance pools, this is a string-formatted Int32, and can only specify a fixed number of worker nodes, such as '2'. Required if newClusterVersion is specified. Type: string (or Expression with resultType string)."
         },
         "newClusterNodeType": {
           "type": "object",
-          "description": "The node types of new cluster. Type: string (or Expression with resultType string)."
+          "description": "The node type of the new job cluster. This property is required if newClusterVersion is specified and instancePoolId is not specified. If instancePoolId is specified, this property is ignored. Type: string (or Expression with resultType string)."
         },
         "newClusterSparkConf": {
           "description": "A set of optional, user-specified Spark configuration key-value pairs.",
@@ -5002,7 +5006,7 @@
           }
         },
         "newClusterCustomTags": {
-          "description": "Additional tags for cluster resources.",
+          "description": "Additional tags for cluster resources. This property is ignored in instance pool configurations.",
           "type": "object",
           "additionalProperties": {
             "type": "object",
@@ -5011,7 +5015,7 @@
         },
         "newClusterDriverNodeType": {
           "type": "object",
-          "description": "The driver node type for the new cluster. Type: string (or Expression with resultType string)."
+          "description": "The driver node type for the new job cluster. This property is ignored in instance pool configurations. Type: string (or Expression with resultType string)."
         },
         "newClusterInitScripts": {
           "type": "object",
@@ -5019,7 +5023,7 @@
         },
         "newClusterEnableElasticDisk": {
           "type": "object",
-          "description": "Enable the elastic disk on the new cluster. Type: boolean (or Expression with resultType boolean)."
+          "description": "Enable the elastic disk on the new cluster. This property is now ignored, and takes the default elastic disk behavior in Databricks (elastic disks are always enabled). Type: boolean (or Expression with resultType boolean)."
         },
         "encryptedCredential": {
           "type": "object",
