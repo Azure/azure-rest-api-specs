@@ -22,13 +22,21 @@ To see additional help and options, run:
 
 
 ### Basic Information
-These are the global settings for the DataBox API.
+These are the global settings for the DataBox Edge API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-03
+tag: package-2019-07
 ```
 
+### Tag: package-2019-07
+
+These settings apply only when `--tag=package-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-07'
+input-file:
+- Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
+```
 ### Tag: package-2019-03
 
 These settings apply only when `--tag=package-2019-03` is specified on the command line.
@@ -37,7 +45,6 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 input-file:
 - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 ```
-
 ---
 # Code Generation
 
@@ -131,6 +138,21 @@ java:
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2019-03
+  - tag: package-2019-07
+
+```
+
+### Tag: package-2019-07 and java
+
+These settings apply only when `--tag=package-2019-07 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-07' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databoxedge.v2019_07_01
+  output-folder: $(azure-libraries-for-java-folder)/databoxedge/resource-manager/v2019_07_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2019-03 and java
@@ -159,6 +181,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
+  - Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
 
 ```
 
