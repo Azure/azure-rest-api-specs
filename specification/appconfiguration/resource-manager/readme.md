@@ -91,6 +91,10 @@ directive:
     from: appconfiguration.json
     where: $.definitions.ApiKey.properties.readOnly
     reason: We did consider using an enum instead but found it to not be helpful.
+  - suppress: EnumInsteadOfBoolean
+    from: appconfiguration.json
+    where: $.definitions.KeyValue.properties.locked
+    reason: This is data plane level information proxied through the RP and cannot be changed.
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators 
