@@ -158,7 +158,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
+  - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 
 ```
 
