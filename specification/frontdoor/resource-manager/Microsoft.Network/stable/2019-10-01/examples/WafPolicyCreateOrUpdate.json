@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-03-01",
+    "api-version": "2019-10-01",
     "subscriptionId": "subid",
     "resourceGroupName": "rg1",
     "policyName": "Policy1",
@@ -62,18 +62,40 @@
           "managedRuleSets": [
             {
               "ruleSetType": "DefaultRuleSet",
-              "ruleSetVersion": "preview-1.0",
+              "ruleSetVersion": "1.0",
+              "exclusions": [
+                {
+                  "matchVariable": "RequestHeaderNames",
+                  "selectorMatchOperator": "Equals",
+                  "selector": "User-Agent"
+                }
+              ],
               "ruleGroupOverrides": [
                 {
-                  "ruleGroupName": "Group1",
+                  "ruleGroupName": "SQLI",
+                  "exclusions": [
+                    {
+                      "matchVariable": "RequestCookieNames",
+                      "selectorMatchOperator": "StartsWith",
+                      "selector": "token"
+                    }
+                  ],
                   "rules": [
                     {
-                      "ruleId": "GROUP1-0001",
+                      "ruleId": "942100",
                       "enabledState": "Enabled",
-                      "action": "Redirect"
+                      "action": "Redirect",
+                      "exclusions": [
+                        {
+                          "matchVariable": "QueryStringArgNames",
+                          "selectorMatchOperator": "Equals",
+                          "selector": "query"
+                        }
+                      ]
                     },
                     {
-                      "ruleId": "GROUP1-0002"
+                      "ruleId": "942110",
+                      "enabledState": "Disabled"
                     }
                   ]
                 }
@@ -167,18 +189,39 @@
             "managedRuleSets": [
               {
                 "ruleSetType": "DefaultRuleSet",
-                "ruleSetVersion": "preview-1.0",
+                "ruleSetVersion": "1.0",
+                "exclusions": [
+                  {
+                    "matchVariable": "RequestHeaderNames",
+                    "selectorMatchOperator": "Equals",
+                    "selector": "User-Agent"
+                  }
+                ],
                 "ruleGroupOverrides": [
                   {
-                    "ruleGroupName": "Group1",
+                    "ruleGroupName": "SQLI",
+                    "exclusions": [
+                      {
+                        "matchVariable": "RequestCookieNames",
+                        "selectorMatchOperator": "StartsWith",
+                        "selector": "token"
+                      }
+                    ],
                     "rules": [
                       {
-                        "ruleId": "GROUP1-0001",
+                        "ruleId": "942100",
                         "enabledState": "Enabled",
-                        "action": "Redirect"
+                        "action": "Redirect",
+                        "exclusions": [
+                          {
+                            "matchVariable": "QueryStringArgNames",
+                            "selectorMatchOperator": "Equals",
+                            "selector": "query"
+                          }
+                        ]
                       },
                       {
-                        "ruleId": "GROUP1-0002",
+                        "ruleId": "942110",
                         "enabledState": "Disabled"
                       }
                     ]
@@ -273,18 +316,39 @@
             "managedRuleSets": [
               {
                 "ruleSetType": "DefaultRuleSet",
-                "ruleSetVersion": "preview-1.0",
+                "ruleSetVersion": "1.0",
+                "exclusions": [
+                  {
+                    "matchVariable": "RequestHeaderNames",
+                    "selectorMatchOperator": "Equals",
+                    "selector": "User-Agent"
+                  }
+                ],
                 "ruleGroupOverrides": [
                   {
-                    "ruleGroupName": "Group1",
+                    "ruleGroupName": "SQLI",
+                    "exclusions": [
+                      {
+                        "matchVariable": "RequestCookieNames",
+                        "selectorMatchOperator": "StartsWith",
+                        "selector": "token"
+                      }
+                    ],
                     "rules": [
                       {
-                        "ruleId": "GROUP1-0001",
+                        "ruleId": "942100",
                         "enabledState": "Enabled",
-                        "action": "Redirect"
+                        "action": "Redirect",
+                        "exclusions": [
+                          {
+                            "matchVariable": "QueryStringArgNames",
+                            "selectorMatchOperator": "Equals",
+                            "selector": "query"
+                          }
+                        ]
                       },
                       {
-                        "ruleId": "GROUP1-0002",
+                        "ruleId": "942110",
                         "enabledState": "Disabled"
                       }
                     ]
@@ -379,18 +443,39 @@
             "managedRuleSets": [
               {
                 "ruleSetType": "DefaultRuleSet",
-                "ruleSetVersion": "preview-1.0",
+                "ruleSetVersion": "1.0",
+                "exclusions": [
+                  {
+                    "matchVariable": "RequestHeaderNames",
+                    "selectorMatchOperator": "Equals",
+                    "selector": "User-Agent"
+                  }
+                ],
                 "ruleGroupOverrides": [
                   {
-                    "ruleGroupName": "Group1",
+                    "ruleGroupName": "SQLI",
+                    "exclusions": [
+                      {
+                        "matchVariable": "RequestCookieNames",
+                        "selectorMatchOperator": "StartsWith",
+                        "selector": "token"
+                      }
+                    ],
                     "rules": [
                       {
-                        "ruleId": "GROUP1-0001",
+                        "ruleId": "942100",
                         "enabledState": "Enabled",
-                        "action": "Redirect"
+                        "action": "Redirect",
+                        "exclusions": [
+                          {
+                            "matchVariable": "QueryStringArgNames",
+                            "selectorMatchOperator": "Equals",
+                            "selector": "query"
+                          }
+                        ]
                       },
                       {
-                        "ruleId": "GROUP1-0002",
+                        "ruleId": "942110",
                         "enabledState": "Disabled"
                       }
                     ]

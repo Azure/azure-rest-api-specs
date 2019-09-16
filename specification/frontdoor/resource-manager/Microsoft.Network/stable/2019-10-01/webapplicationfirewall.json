@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-03-01",
+    "version": "2019-10-01",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules."
   },
@@ -579,6 +579,13 @@
           "description": "Defines the version of the rule set to use.",
           "type": "string"
         },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleExclusion"
+          },
+          "description": "Describes the exclusions that are applied to all rules in the set."
+        },
         "ruleGroupOverrides": {
           "description": "Defines the rule group overrides to apply to the rule set.",
           "type": "array",
@@ -597,6 +604,13 @@
         "ruleGroupName": {
           "description": "Describes the managed rule group to override.",
           "type": "string"
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleExclusion"
+          },
+          "description": "Describes the exclusions that are applied to all rules in the group."
         },
         "rules": {
           "description": "List of rules that will be disabled. If none specified, all rules in the group will be disabled.",
@@ -624,6 +638,13 @@
         "action": {
           "description": "Describes the override action to be applied when rule matches.",
           "$ref": "#/definitions/ActionType"
+        },
+        "exclusions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleExclusion"
+          },
+          "description": "Describes the exclusions that are applied to this specific rule."
         }
       }
     },
@@ -730,6 +751,49 @@
           "description": "Describes the functionality of the managed rule.",
           "readOnly": true,
           "type": "string"
+        }
+      }
+    },
+    "ManagedRuleExclusion": {
+      "required": [
+        "matchVariable",
+        "selectorMatchOperator",
+        "selector"
+      ],
+      "description": "Exclude variables from managed rule evaluation.",
+      "properties": {
+        "matchVariable": {
+          "type": "string",
+          "enum": [
+            "RequestHeaderNames",
+            "RequestCookieNames",
+            "QueryStringArgNames",
+            "RequestBodyPostArgNames"
+          ],
+          "description": "The variable type to be excluded.",
+          "x-ms-enum": {
+            "name": "ManagedRuleExclusionMatchVariable",
+            "modelAsString": true
+          }
+        },
+        "selectorMatchOperator": {
+          "type": "string",
+          "enum": [
+            "Equals",
+            "Contains",
+            "StartsWith",
+            "EndsWith",
+            "EqualsAny"
+          ],
+          "description": "Comparison operator to apply to the selector when specifing which elements in the collection this exclusion applies to.",
+          "x-ms-enum": {
+            "name": "ManagedRuleExclusionSelectorMatchOperator",
+            "modelAsString": true
+          }
+        },
+        "selector": {
+          "type": "string",
+          "description": "Selector value for which elements in the collection this exclusion applies to."
         }
       }
     },
