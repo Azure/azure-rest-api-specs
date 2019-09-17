@@ -134,39 +134,63 @@
             "description" : "A successful call results in a list of recognized entities returned for each valid document",
             "examples" : {
               "application/json" : {
-                "documents" : [
+                "documents" : 
+                [
                   {
-                    "id": "48740a85-578b-4de2-a005-f932c2fe52d6",
-                    "offset": 17,
-                    "length": 4,
-                    "text": "pain",
-                    "type": "SYMPTOM_OR_SIGN",
-                    "score": 0.9998,
-                    "umlsId": "C0030193"
-                  },
-                  {
-                    "id": "7f6bf109-c897-418c-885a-1cf4ade2c314",
-                    "offset": 25,
-                    "length": 5,
-                    "text": "lower",
-                    "type": "DIRECTION",
-                    "score": 0.9996
-                  },
-                  {
-                    "id": "c6f217ed-2d48-4e4d-8f26-2299624a21a9",
-                    "offset": 31,
-                    "length": 3,
-                    "text": "leg",
-                    "type": "BODY_STRUCTURE",
-                    "score": 0.9997,
-                    "umlsId": "C1140621"
-                  } ],
-                  "relations" : [ {
-                    "target" : "TBD",
-                    "source" : "TBD",
-                    "relationType" : "TBD"
-                  } ]
-                } ,
+                    "id": "1",
+                    "entities": [
+                      {
+                        "id": "24d1116e-8b0f-4a91-a3a2-05ff499ec26a",
+                        "offset": 11,
+                        "length": 4,
+                        "text": "oral",
+                        "type": "ROUTE_OR_MODE",
+                        "score": 0.9671
+                      },
+                      {
+                        "id": "73acd11a-3289-4813-815c-34340f6394ec",
+                        "offset": 16,
+                        "length": 11,
+                        "text": "antibiotics",
+                        "type": "MEDICATION_CLASS",
+                        "score": 0.9988,
+                        "umlsId": "C0003232"
+                      },
+                      {
+                        "id": "97ac0c51-ab50-45cc-b832-9a2d074eda59",
+                        "offset": 32,
+                        "length": 7,
+                        "text": "10 days",
+                        "type": "TIME",
+                        "score": 0.9965
+                      },
+                      {
+                        "id": "96c4a5d9-0f53-41f8-9c93-0bfa7ee3a75d",
+                        "offset": 48,
+                        "length": 9,
+                        "text": "infection",
+                        "type": "DIAGNOSIS",
+                        "score": 0.9724,
+                        "umlsId": "C3714514"
+                      } 
+                  ],
+                  "relations": [
+                    {
+                      "relationType": "DIRECTION_OF_BODY_STRUCTURE",
+                      "score": 1,
+                      "entities": [
+                        {
+                          "id": "7f6bf109-c897-418c-885a-1cf4ade2c314",
+                          "role": "ATTRIBUTE"
+                        },
+                        {
+                          "id": "c6f217ed-2d48-4e4d-8f26-2299624a21a9",
+                          "role": "ENTITY"
+                        }
+                      ]
+                    }
+                  ]
+                } ],
                 "errors" : [ ]
               }
             },
