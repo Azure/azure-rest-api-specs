@@ -323,17 +323,17 @@
       "type": "object",
       "properties": {
         "query": {
-          "description": "Gets or sets the query used in the prediction.",
+          "description": "The query used in the prediction.",
           "type": "string"
         },
         "prediction": {
-          "description": "Gets or sets the prediction of the requested query.",
+          "description": "The prediction of the requested query.",
           "$ref": "#/definitions/Prediction"
         }
       }
     },
     "Prediction": {
-      "description": "Represents the prediction of a query.\n            v3.0",
+      "description": "Represents the prediction of a query.",
       "required": [
         "topIntent",
         "intents",
@@ -342,19 +342,19 @@
       "type": "object",
       "properties": {
         "subQuery": {
-          "description": "Gets or sets the original subquery",
+          "description": "The original sub-query.",
           "type": "string"
         },
         "alteredQuery": {
-          "description": "Gets or sets the query after spell checking. Only set if spell check was enabled and a spelling mistake was found.",
+          "description": "The query after spell checking.",
           "type": "string"
         },
         "topIntent": {
-          "description": "Gets or sets the name of the top scoring intent.",
+          "description": "The name of the top scoring intent.",
           "type": "string"
         },
         "intents": {
-          "description": "Gets or sets the dictionary representing the intents that fired.",
+          "description": "The dictionary representing the intents that fired.",
           "type": "object",
           "additionalProperties": {
             "$ref": "#/definitions/Intent"
@@ -366,7 +366,7 @@
           "additionalProperties": {}
         },
         "sentiment": {
-          "description": "Gets or sets the result of the sentiment analysis.",
+          "description": "The result of the sentiment analysis.",
           "$ref": "#/definitions/Sentiment"
         }
       }
@@ -377,11 +377,11 @@
       "properties": {
         "score": {
           "format": "float",
-          "description": "Gets or sets the score of the fired intent.",
+          "description": "The score of the fired intent.",
           "type": "number"
         },
         "childApp": {
-          "description": "Gets or sets the prediction of the dispatched application.",
+          "description": "The prediction of the dispatched application.",
           "$ref": "#/definitions/Prediction"
         }
       }
@@ -394,12 +394,12 @@
       "type": "object",
       "properties": {
         "label": {
-          "description": "Gets or sets the label of the sentiment analysis result.",
+          "description": "The label of the sentiment analysis result.",
           "type": "string"
         },
         "score": {
           "format": "float",
-          "description": "Gets or sets the sentiment score of the query.",
+          "description": "The sentiment score of the query.",
           "type": "number"
         }
       }
