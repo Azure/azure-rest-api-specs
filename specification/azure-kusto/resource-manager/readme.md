@@ -271,8 +271,6 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ## Suppression
 
-## Suppression
-
 ``` yaml
 directive:
   - suppress: ListInOperationName
