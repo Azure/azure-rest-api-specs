@@ -37,6 +37,18 @@ directive:
   - remove-operation: Prediction_GetVersionPredictionGET
 ```
 
+## Runtime 3.0
+These settings apply only when `--tag=runtime_3_0` is specified on the command line.
+
+``` yaml $(tag) == 'runtime_3_0'
+input-file: stable/v3.0/LUIS-Runtime.json
+
+# remove the GET APIs from code-generation (since the POST and GET operations are functionally identical)
+directive:
+  - remove-operation: Prediction_GetSlotPredictionGET
+  - remove-operation: Prediction_GetVersionPredictionGET
+```
+
 ---
 # Code Generation
 

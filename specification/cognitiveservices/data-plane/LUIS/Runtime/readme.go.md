@@ -34,3 +34,12 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'runtime_3_0_preview' && $(go)
 output-folder: $(go-sdk-folder)/services/preview/cognitiveservices/v3.0/luis/$(namespace)
 ```
+
+### Tag: runtime_3_0 and go
+
+These settings apply only when `--tag=runtime_3_0 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'runtime_3_0_preview' && $(go)
+output-folder: $(go-sdk-folder)/services/stable/cognitiveservices/v3.0/luis/$(namespace)
+```
