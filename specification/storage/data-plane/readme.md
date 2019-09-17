@@ -168,6 +168,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.StorageDataLake/stable/2019-10-31/DataLakeStorage.json
   - $(this-folder)/Microsoft.StorageDataLake/stable/2018-11-09/DataLakeStorage.json
   - $(this-folder)/Microsoft.StorageDataLake/preview/2018-06-17/DataLakeStorage.json
 
