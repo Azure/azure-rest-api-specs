@@ -32,7 +32,7 @@
     ]
   },
   "paths" : {
-    "/entities" : {
+    "/entities/recognition" : {
       "post" : {
         "summary" : "Entities from open domain",
         "description" : "The API returns a list of general named entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a> for the list of supported Entity Types. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
@@ -68,7 +68,8 @@
                     "text" : "Microsoft",
                     "type" : "Organization",
                     "offset" : 25,
-                    "length" : 9
+                    "length" : 9,
+                    "score" : 0.9
                   } ]
                 }, {
                   "id" : "2",
@@ -76,20 +77,22 @@
                     "text" : "John",
                     "type" : "Person",
                     "offset" : 25,
-                    "length" : 9
+                    "length" : 9,
+                    "score" : 0.9
                   }, {
                     "text" : 20,
                     "type" : "Number",
                     "subType" : "Age",
                     "offset" : 30,
-                    "length" : 2
+                    "length" : 2,
+                    "score" : 0.8
                   } ]
                 } ],
                 "errors" : [ ]
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/EntitiesBatchResult"
+              "$ref" : "#/definitions/"
             }
           },
           "500" : {
@@ -101,7 +104,7 @@
         }
       }
     },
-    "/entities/healthcare" : {
+    "/healthcare" : {
       "post" : {
         "summary" : "Entities from healthcare domain",
         "description" : "The API returns a list of healthcare entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
@@ -131,35 +134,44 @@
             "description" : "A successful call results in a list of recognized entities returned for each valid document",
             "examples" : {
               "application/json" : {
-                "documents" : [ {
-                  "id" : "1",
-                  "entities" : [ {
-                    "text" : "100mg",
-                    "type" : "Organization",
-                    "offset" : 11,
-                    "length" : 5
-                  }, {
-                    "text" : "ibuprofen",
-                    "type" : "Chemical",
-                    "offset" : 17,
-                    "length" : 9
-                  }, {
-                    "text" : "twice daily",
-                    "type" : "Frequency",
-                    "offset" : 34,
-                    "length" : 11
+                "documents" : [
+                  {
+                    "id": "48740a85-578b-4de2-a005-f932c2fe52d6",
+                    "offset": 17,
+                    "length": 4,
+                    "text": "pain",
+                    "type": "SYMPTOM_OR_SIGN",
+                    "score": 0.9998,
+                    "umlsId": "C0030193"
+                  },
+                  {
+                    "id": "7f6bf109-c897-418c-885a-1cf4ade2c314",
+                    "offset": 25,
+                    "length": 5,
+                    "text": "lower",
+                    "type": "DIRECTION",
+                    "score": 0.9996
+                  },
+                  {
+                    "id": "c6f217ed-2d48-4e4d-8f26-2299624a21a9",
+                    "offset": 31,
+                    "length": 3,
+                    "text": "leg",
+                    "type": "BODY_STRUCTURE",
+                    "score": 0.9997,
+                    "umlsId": "C1140621"
                   } ],
                   "relations" : [ {
                     "target" : "TBD",
                     "source" : "TBD",
                     "relationType" : "TBD"
                   } ]
-                } ],
+                } ,
                 "errors" : [ ]
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/BioEntitiesBatchResult"
+              "$ref" : "#/definitions/HealthcareBatchResult"
             }
           },
           "500" : {
@@ -171,7 +183,7 @@
         }
       }
     },
-    "/entities/pii" : {
+    "/entities/recognition/pii" : {
       "post" : {
         "summary" : "Entities from Personally Identifiable Information (PII) domain",
         "description" : "The API returns a list of pii entities (\\\"SSN\\\", \\\"Bank Account\\\", \\\"Goverment ID\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
@@ -710,6 +722,11 @@
         "statistics" : {
           "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
+        },
+        "modelVersion" : {
+          "readOnly" : true,
+          "type" : "string",
+          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -852,6 +869,11 @@
         "statistics" : {
           "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
+        },
+        "modelVersion" : {
+          "readOnly" : true,
+          "type" : "string",
+          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -867,7 +889,7 @@
           "description" : "Recognized entities in the document.",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/EntityRecord"
+            "$ref" : "#/definitions/Entity"
           }
         },
         "statistics" : {
@@ -876,7 +898,7 @@
         }
       }
     },
-    "EntityRecord" : {
+    "Entity" : {
       "type" : "object",
       "properties" : {
         "text" : {
@@ -905,18 +927,10 @@
           "type" : "number",
           "format" : "double",
           "description" : "Confidence score of the extracted entity."
-        },
-        //"url" : {
-        //  "type" : "string",
-        //  "description" : "(Optional) URL for the product info from Skills Model (TBD)."
-        //},
-        //"name" : {
-        //  "type" : "string",
-        //  "description" : "(Optional) Name of Entity from Skills Model (TBD)."
         }
       }
     },
-    "BioEntitiesBatchResult" : {
+    "HealthcareBatchResult" : {
       "type" : "object",
       "properties" : {
         "documents" : {
@@ -924,7 +938,7 @@
           "description" : "Response by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/BioEntitiesBatchResultItem"
+            "$ref" : "#/definitions/HealthcareBatchResultItem"
           }
         },
         "errors" : {
@@ -938,10 +952,15 @@
         "statistics" : {
           "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
+        },
+        "modelVersion" : {
+          "readOnly" : true,
+          "type" : "string",
+          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
-    "BioEntitiesBatchResultItem" : {
+    "HealthcareBatchResultItem" : {
       "type" : "object",
       "properties" : {
         "id" : {
@@ -953,7 +972,7 @@
           "description" : "Recognized healthcare entities in the document.",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/BioEntityRecord"
+            "$ref" : "#/definitions/HealthcareEntity"
           }
         },
         "relations" : {
@@ -961,7 +980,7 @@
           "description" : "Relations of recognized healthcare entities in the document.",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/RelationRecord"
+            "$ref" : "#/definitions/HealthcareRelation"
           }
         },
         "statistics" : {
@@ -970,20 +989,20 @@
         }
       }
     },
-    "BioEntityRecord" : { // HealthcareEntity
+    "HealthcareEntity" : {
       "type" : "object",
       "properties" : {
         "text" : {
           "type" : "string",
           "description" : "Entity text as appears in the request."
         },
+        "id" : {
+          "type" : "string",
+          "description" : "Unique Id of the entity (used for matching between relation and entity results)."
+        },
         "type" : {
           "type" : "string",
           "description" : "Entity type, such as DOSAGE/FREQUENCY etc."
-        },
-        "category" : {
-          "type" : "string",
-          "description" : "Entity category, such as MEDICATION etc -- (TBD)."
         },
         "offset" : {
           "type" : "integer",
@@ -1003,62 +1022,42 @@
         "umlsId" : {
           "type" : "string",
           "description" : "(Optional) Id from the Unified Medical Language System (UMLS)."
+        },
+        "category" : {
+          "type" : "string",
+          "description" : "(Optional) Entity category, such as MEDICATION etc -- (TBD)."
         }
       }
     },
-    "RelationRecord" : {
+    "HealthcareRelation" : {
       "type" : "object",
       "properties" : {
         "relationType" : {
           "type" : "string",
-          "description" : "Relation types of the related entities, such as DOSAGE_OF_MEDICATION etc."
+          "description" : "Relation types of the related entities, such as DOSAGE_OF_MEDICATION/TIME_OF_MEDICATION etc."
         },
         "score" : {
           "type" : "string",
           "description" : "Confidence score of the relation."
         },
-        "entityInfo" : {
+        "entities" : {
           "type" : "array",
-          "description" : "Related entities. // To-do: entity info?  Or just BioEntityRecord?",
+          "description" : "Related entities",
           "items" : {
-            "$ref" : "#/definitions/EntityInfo"
+            "$ref" : "#/definitions/EntityRole"
           }
         }
       }
     },
-    "EntityInfo" : {
+    "EntityRole" : {
       "type" : "object",
       "properties" : {
-        "text" : {
+        "id" : {
           "type" : "string",
-          "description" : "Entity text as appears in the request."
-        },
-        "type" : {
-          "type" : "string",
-          "description" : "Entity type, such as DOSAGE/FREQUENCY etc."
-        },
-        "category" : {
-          "type" : "string",
-          "description" : "Entity category, such as MEDICATION etc -- (TBD)."
-        },
-        "offset" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Start position (in Unicode characters) for the entity text."
-        },
-        "length" : {
-          "type" : "integer",
-          "format" : "int32",
-          "description" : "Length (in Unicode characters) for the entity text."
-        },
-        "score" : {
-          "type" : "number",
-          "format" : "double",
-          "description" : "Confidence score of the extracted entity."
+          "description" : "Unique Id of the entity (used for matching between relation and entity results)."
         },
         "role" : {
-          "type" : "number",
-          "format" : "double",
+          "type" : "string",
           "description" : "Role of the extracted entity."
         }
       }
@@ -1085,6 +1084,11 @@
         "statistics" : {
           "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
+        },
+        "modelVersion" : {
+          "readOnly" : true,
+          "type" : "string",
+          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -1100,7 +1104,7 @@
           "description" : "Recognized well-known entities in the document.",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/EntityLinkingRecord"
+            "$ref" : "#/definitions/EntityLinking"
           }
         },
         "statistics" : {
@@ -1109,7 +1113,7 @@
         }
       }
     },
-    "EntityLinkingRecord" : {
+    "EntityLinking" : {
       "type" : "object",
       "properties" : {
         "name" : {
@@ -1120,7 +1124,7 @@
           "type" : "array",
           "description" : "List of instances this entity appears in the text.",
           "items" : {
-            "$ref" : "#/definitions/MatchRecord"
+            "$ref" : "#/definitions/Match"
           }
         },
         "language" : "en",
@@ -1152,7 +1156,7 @@
         }
       }
     },
-    "MatchRecord" : {
+    "Match" : {
       "type" : "object",
       "properties" : {
         "wikipediaScore" : { // score
@@ -1198,6 +1202,11 @@
         "statistics" : {
           "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
+        },
+        "modelVersion" : {
+          "readOnly" : true,
+          "type" : "string",
+          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -1296,6 +1305,11 @@
         "statistics" : {
           "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
+        },
+        "modelVersion" : {
+          "readOnly" : true,
+          "type" : "string",
+          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
