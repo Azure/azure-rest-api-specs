@@ -906,13 +906,13 @@
           "format" : "double",
           "description" : "Confidence score of the extracted entity."
         },
-        "url" : {
-          "type" : "string",
-          "description" : "(Optional) URL for the product info from Skills Model (TBD)."
-        },
-        "name" : {
-          "type" : "string",
-          "description" : "(Optional) Name of Entity from Skills Model (TBD)."
+        //"url" : {
+        //  "type" : "string",
+        //  "description" : "(Optional) URL for the product info from Skills Model (TBD)."
+        //},
+        //"name" : {
+        //  "type" : "string",
+        //  "description" : "(Optional) Name of Entity from Skills Model (TBD)."
         }
       }
     },
@@ -970,7 +970,7 @@
         }
       }
     },
-    "BioEntityRecord" : {
+    "BioEntityRecord" : { // HealthcareEntity
       "type" : "object",
       "properties" : {
         "text" : {
@@ -1055,6 +1055,11 @@
           "type" : "number",
           "format" : "double",
           "description" : "Confidence score of the extracted entity."
+        },
+        "role" : {
+          "type" : "number",
+          "format" : "double",
+          "description" : "Role of the extracted entity."
         }
       }
     },
@@ -1118,6 +1123,16 @@
             "$ref" : "#/definitions/MatchRecord"
           }
         },
+        "language" : "en",
+        "id" : "id",
+        "url": "url",
+        "datasource": "wikipedia",
+
+        "language" : "en",
+        "id" : "id",
+        "url": "url",
+        "datasource": "skills",
+
         "wikipediaLanguage" : {
           "type" : "string",
           "description" : "Wikipedia language for which the WikipediaId and WikipediaUrl refers to."
@@ -1131,7 +1146,7 @@
           "description" : "URL for the entity's Wikipedia page.",
           "readOnly" : true
         },
-        "bingId" : {
+        "bingId" : {  // "optional id"
           "type" : "string",
           "description" : "Bing unique identifier of the recognized entity."
         }
@@ -1140,7 +1155,7 @@
     "MatchRecord" : {
       "type" : "object",
       "properties" : {
-        "wikipediaScore" : {
+        "wikipediaScore" : { // score
           "type" : "number",
           "format" : "double",
           "description" : "(optional) If a well-known item with Wikipedia link is recognized, a decimal number denoting the confidence level of the Wikipedia info will be returned."
