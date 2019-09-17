@@ -632,6 +632,15 @@
       },
       "description": "Defines all possible authentication profiles for the OpenShift cluster."
     },
+    "OpenShiftManagedClusterMonitorProfile":{
+      "properties": {
+        "workspaceResourceID":{
+          "type": "string",
+          "description": "Azure Resource Manager Resource ID for the Log Analytics workspace to integrate with."
+        }
+      },
+      "description": "Defines the configuration for Log Analytics integration."
+    },
     "OpenShiftManagedClusterProperties": {
       "properties": {
         "provisioningState": {
@@ -683,6 +692,10 @@
         "authProfile": {
           "$ref": "#/definitions/OpenShiftManagedClusterAuthProfile",
           "description": "Configures OpenShift authentication."
+        },
+        "monitorProfile":{
+          "$ref": "#/definitions/OpenShiftManagedClusterMonitorProfile",
+          "description": "Configures Log Analytics integration."
         }
       },
       "required": [
