@@ -3576,6 +3576,14 @@
         "responses": {
           "202": {
             "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "200": {
             "schema": {
               "$ref": "#/definitions/CreateDataFlowDebugSessionResponse"
             }
@@ -3589,15 +3597,15 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/querydataflowdebugsessions": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/queryDataFlowDebugSessions": {
       "post": {
         "tags": [
           "dataFlowDebugSession"
         ],
-        "operationId": "DataFlowDebugSession_Query",
+        "operationId": "DataFlowDebugSession_QueryByFactory",
         "x-ms-examples": {
-          "DataFlowDebugSession_Query": {
-            "$ref": "./examples/DataFlowDebugSession_Query.json"
+          "DataFlowDebugSession_QueryByFactory": {
+            "$ref": "./examples/DataFlowDebugSession_QueryByFactory.json"
           }
         },
         "description": "Query all active data flow debug sessions.",
@@ -3628,21 +3636,24 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/submitDataFlowForPreview": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/addDataFlowToDebugSession": {
       "post": {
         "tags": [
           "dataFlowDebugSession"
         ],
-        "operationId": "DataFlowDebugSession_SubmitDataFlow",
+        "operationId": "DataFlowDebugSession_AddDataFlow",
         "x-ms-examples": {
-          "DataFlowDebugSession_SubmitDataFlow": {
-            "$ref": "./examples/DataFlowDebugSession_SubmitDataFlow.json"
+          "DataFlowDebugSession_AddDataFlow": {
+            "$ref": "./examples/DataFlowDebugSession_AddDataFlow.json"
           }
         },
-        "description": "Starts a data flow debug session.",
+        "description": "Add a data flow into debug session.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3662,7 +3673,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubmitDataFlowForPreviewRequest"
+              "$ref": "#/definitions/DataFlowDebugPackage"
             }
           }
         ],
@@ -3670,7 +3681,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/SubmitDataFlowForPreviewResponse"
+              "$ref": "#/definitions/AddDataFlowToDebugSessionResponse"
             }
           },
           "default": {
@@ -3741,7 +3752,7 @@
             "$ref": "./examples/DataFlowDebugSession_ExecuteCommand.json"
           }
         },
-        "description": "Execute command from a debug session job.",
+        "description": "Execute a data flow debug command.",
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3766,8 +3777,16 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
           "200": {
-            "description": "OK.",
             "schema": {
               "$ref": "#/definitions/DataFlowDebugCommandResponse"
             }
@@ -5586,10 +5605,6 @@
       "description": "Request body structure for creating data flow debug session.",
       "type": "object",
       "properties": {
-        "dataFlowName": {
-          "description": "The name of the data flow.",
-          "type": "string"
-        },
         "computeType": {
           "description": "Compute type of the cluster. The value will be overwritten by the same setting in integration runtime if provided.",
           "type": "string"
@@ -5599,7 +5614,7 @@
           "type": "integer"
         },
         "timeToLive": {
-          "description": "TTL setting of the cluster.",
+          "description": "Time to live setting of the cluster in minutes.",
           "type": "integer"
         },
         "integrationRuntime": {
@@ -5612,20 +5627,47 @@
       "description": "Response body structure for creating data flow debug session.",
       "type": "object",
       "properties": {
+        "status": {
+          "description": "The state of the debug session.",
+          "type": "string"
+        },
         "sessionId": {
           "description": "The ID of data flow debug session.",
           "type": "string"
         }
       }
     },
-    "DataFlowDatasetParameterSpecification": {
-      "description": "Definition of all dataset parameters for data flow preview request.",
+    "DataFlowSourceSetting": {
+      "description": "Definition of data flow source setting for debug.",
       "type": "object",
-      "additionalProperties": {
-        "$ref": "#/definitions/ParameterValueSpecification"
+      "properties": {
+        "sourceName": {
+          "description": "The data flow source name.",
+          "type": "string"
+        },
+        "rowLimit": {
+          "description": "Defines the row limit of data flow source in debug.",
+          "type": "integer"
+        },
+        "additionalProperties": {
+          "type": "object"
+        }
       }
     },
-    "SubmitDataFlowForPreviewRequest": {
+    "DataFlowStagingInfo": {
+      "description": "Staging info for execute data flow activity.",
+      "properties": {
+        "linkedService": {
+          "description": "Staging linked service reference.",
+          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
+        },
+        "folderPath": {
+          "description": "Folder path for staging blob.",
+          "type": "string"
+        }
+      }
+    },
+    "DataFlowDebugPackage": {
       "description": "Request body structure for starting data flow debug session.",
       "type": "object",
       "properties": {
@@ -5653,15 +5695,18 @@
         },
         "staging": {
           "description": "Staging info for debug session.",
-          "type": "object"
+          "$ref": "#/definitions/DataFlowStagingInfo"
         },
         "debugSettings": {
           "description": "Data flow debug settings.",
           "type": "object",
           "properties": {
             "sourceSettings": {
-              "type": "object",
-              "description": "Source setting for data flow debug."
+              "type": "array",
+              "description": "Source setting for data flow debug.",
+              "items": {
+                "$ref": "#/definitions/DataFlowSourceSetting"
+              }
             },
             "parameters": {
               "description": "Data flow parameters.",
@@ -5669,17 +5714,16 @@
             },
             "datasetParameters": {
               "description": "Parameters for dataset.",
-              "$ref": "#/definitions/DataFlowDatasetParameterSpecification"
+              "type": "object"
             }
           }
         },
-        "incrementalDebug": {
-          "description": "The type of new Databricks cluster.",
-          "type": "boolean"
+        "additionalProperties": {
+          "type": "object"
         }
       }
     },
-    "SubmitDataFlowForPreviewResponse": {
+    "AddDataFlowToDebugSessionResponse": {
       "description": "Response body structure for starting data flow debug session.",
       "type": "object",
       "properties": {
@@ -5728,7 +5772,7 @@
       ]
     },
     "DataFlowDebugCommandRequest": {
-      "description": "Request body structure for data flow expression preview.",
+      "description": "Request body structure for data flow debug command.",
       "type": "object",
       "properties": {
         "sessionId": {
@@ -5739,8 +5783,8 @@
           "description": "The data flow which contains the debug session.",
           "type": "string"
         },
-        "commandName": {
-          "description": "The command name.",
+        "command": {
+          "description": "The command type.",
           "type": "string",
           "enum": [
             "executePreviewQuery",
@@ -5759,16 +5803,6 @@
       }
     },
     "DataFlowDebugCommandResponse": {
-      "description": "Response body structure of data flow query for data preview, statistics or expression preview.",
-      "type": "object",
-      "properties": {
-        "runId": {
-          "description": "The run ID of data flow debug session.",
-          "type": "string"
-        }
-      }
-    },
-    "DataFlowDebugResultResponse": {
       "description": "Response body structure of data flow result for data preview, statistics or expression preview.",
       "type": "object",
       "properties": {
@@ -5783,11 +5817,11 @@
       }
     },
     "QueryDataFlowDebugSessionsResponse": {
-      "description": "Response body structure of data flow query all API.",
+      "description": "A list of active debug sessions.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array with all active debug session or job cluster info.",
+          "description": "Array with all active debug sessions.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/DataFlowDebugSessionInfo"
@@ -5796,7 +5830,7 @@
       }
     },
     "DataFlowDebugSessionInfo": {
-      "description": "Data flow debug session or job cluster info.",
+      "description": "Data flow debug session info.",
       "type": "object",
       "properties": {
         "dataFlowName": {
@@ -5815,9 +5849,9 @@
           "description": "Node count of the cluster. (deprecated property)",
           "type": "integer"
         },
-        "integrationRuntime": {
+        "integrationRuntimeName": {
           "description": "Attached integration runtime name of data flow debug session.",
-          "$ref": "#/definitions/IntegrationRuntimeResource"
+          "type": "string"
         },
         "sessionId": {
           "description": "The ID of data flow debug session.",
@@ -5834,6 +5868,9 @@
         "lastActivityTime": {
           "description": "Last activity time of data flow debug session.",
           "type": "string"
+        },
+        "additionalProperties": {
+          "type": "object"
         }
       }
     },
@@ -6027,30 +6064,6 @@
       "pattern": "^[A-Za-z0-9_][^<>*#.%&:\\\\+?/]*$",
       "minLength": 1,
       "maxLength": 260,
-      "x-ms-parameter-location": "method"
-    },
-    "sessionId": {
-      "name": "sessionId",
-      "description": "The data flow session identifier.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "jobVersion": {
-      "name": "jobVersion",
-      "description": "The data flow job version identifier.",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "dataFactoryOperationId": {
-      "name": "dataFactoryOperationId",
-      "description": "The data factory operation identifier.",
-      "in": "path",
-      "required": true,
-      "type": "string",
       "x-ms-parameter-location": "method"
     },
     "api-version": {

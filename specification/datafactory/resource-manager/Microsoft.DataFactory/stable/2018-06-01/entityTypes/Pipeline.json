@@ -5346,25 +5346,16 @@
         },
         "staging": {
           "description": "Staging info for execute data flow activity.",
-          "$ref": "#/definitions/DataFlowStagingInfo"
+          "$ref": "../datafactory.json#/definitions/DataFlowStagingInfo"
+        },
+        "integrationRuntime": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
         }
       },
       "required": [
         "dataFlow"
       ]
-    },
-    "DataFlowStagingInfo": {
-      "description": "Staging info for execute data flow activity.",
-      "properties": {
-        "linkedService": {
-          "description": "Staging linked service reference.",
-          "$ref": "../datafactory.json#/definitions/LinkedServiceReference"
-        },
-        "folderPath": {
-          "description": "Folder path for staging blob.",
-          "type": "string"
-        }
-      }
     }
   }
 }

@@ -91,35 +91,8 @@
         }
       }
     },
-    "WranglingDataFlow": {
-      "x-ms-discriminator-value": "WranglingDataFlow",
-      "description": "Wrangling data flow.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/DataFlow"
-        }
-      ],
-      "properties": {
-        "typeProperties": {
-          "description": "Wrangling data flow type properties.",
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/WranglingDataFlowTypeProperties"
-        }
-      },
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
-    "WranglingDataFlowTypeProperties": {
-      "description": "Wrangling data flow type properties.",
-      "properties": {},
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
     "Transformation": {
-      "description": "A transformation.",
+      "description": "A data flow transformation.",
       "type": "object",
       "properties": {
         "name": {
