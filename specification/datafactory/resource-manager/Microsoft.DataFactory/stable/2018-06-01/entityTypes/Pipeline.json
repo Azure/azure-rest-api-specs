@@ -1051,6 +1051,33 @@
         }
       }
     },
+	"CosmosDbSqlApiSource": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SQL API query. Type: string (or Expression with resultType string)."
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
+        },
+        "preferredRegions": {
+          "type": "object",
+          "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
+        },
+        "includeSystemColumns": {
+          "type": "object",
+          "description": "Whether includes system columns in result. Type: boolean (or Expression with resultType boolean)."
+        }
+      }
+    },
     "DynamicsSource": {
       "description": "A copy activity Dynamics source.",
       "type": "object",
@@ -2904,6 +2931,21 @@
           "type": "object",
           "description": "Nested properties separator. Default is . (dot). Type: string (or Expression with resultType string)."
         },
+        "writeBehavior": {
+          "type": "object",
+          "description": "Describes how to write data to Azure Cosmos DB. Allowed values: insert and upsert."
+        }
+      }
+    },
+	"CosmosDbSqlApiSink": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
         "writeBehavior": {
           "type": "object",
           "description": "Describes how to write data to Azure Cosmos DB. Allowed values: insert and upsert."
