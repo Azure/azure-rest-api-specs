@@ -3,97 +3,97 @@
     "subscriptionId": "12345678-1234-1234-1234-12345678abc",
     "resourceGroupName": "exampleResourceGroup",
     "factoryName": "exampleFactoryName",
-    "dataFlow": {
-      "name": "dataflow2",
-      "properties": {
-        "type": "MappingDataFlow",
-        "typeProperties": {
-          "sources": [
-            {
-              "dataset": {
-                "referenceName": "DelimitedText2",
-                "type": "DatasetReference"
-              },
-              "name": "source1",
-              "typeProperties": {}
-            }
-          ],
-          "sinks": [],
-          "transformations": [],
-          "script": "\n\nsource(output(\n\t\tColumn_1 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1"
-        }
-      }
-    },
-    "datasets": [
-      {
-        "name": "DelimitedText2",
+    "request": {
+      "dataFlow": {
+        "name": "dataflow2",
         "properties": {
-          "linkedServiceName": {
-            "referenceName": "linkedService5",
-            "type": "LinkedServiceReference"
-          },
-          "annotations": [],
-          "type": "DelimitedText",
+          "type": "MappingDataFlow",
           "typeProperties": {
-            "location": {
-              "type": "AzureBlobStorageLocation",
-              "fileName": "Ansiencoding.csv",
-              "container": "dataflow-sample-data"
+            "sources": [
+              {
+                "dataset": {
+                  "referenceName": "DelimitedText2",
+                  "type": "DatasetReference"
+                },
+                "name": "source1",
+                "typeProperties": {}
+              }
+            ],
+            "sinks": [],
+            "transformations": [],
+            "script": "\n\nsource(output(\n\t\tColumn_1 as string\n\t),\n\tallowSchemaDrift: true,\n\tvalidateSchema: false) ~> source1"
+          }
+        }
+      },
+      "datasets": [
+        {
+          "name": "DelimitedText2",
+          "properties": {
+            "linkedServiceName": {
+              "referenceName": "linkedService5",
+              "type": "LinkedServiceReference"
             },
-            "columnDelimiter": ",",
-            "escapeChar": "\\",
-            "firstRowAsHeader": true,
-            "quoteChar": "\""
+            "annotations": [],
+            "type": "DelimitedText",
+            "typeProperties": {
+              "location": {
+                "type": "AzureBlobStorageLocation",
+                "fileName": "Ansiencoding.csv",
+                "container": "dataflow-sample-data"
+              },
+              "columnDelimiter": ",",
+              "escapeChar": "\\",
+              "firstRowAsHeader": true,
+              "quoteChar": "\""
+            },
+            "schema": [
+              {
+                "type": "String"
+              }
+            ]
           },
-          "schema": [
-            {
-              "type": "String"
-            }
-          ]
-        },
-        "type": "Microsoft.DataFactory/factories/datasets"
-      }
-    ],
-    "linkedServices": [
-      {
-        "name": "linkedService5",
-        "type": "Microsoft.DataFactory/factories/linkedservices",
-        "properties": {
-          "type": "AzureBlobStorage",
-          "typeProperties": {
-            "connectionString": "DefaultEndpointsProtocol=https;AccountName=<storageName>;EndpointSuffix=core.windows.net;",
-            "encryptedCredential": "<credential>"
-          },
-          "annotations": []
-        }
-      }
-    ],
-    "debugSettings": {
-      "sourceSettings": [
-        {
-          "sourceName": "source1",
-          "rowLimit": 1000
-        },
-        {
-          "sourceName": "source2",
-          "rowLimit": "222"
+          "type": "Microsoft.DataFactory/factories/datasets"
         }
       ],
-      "parameters": {
-        "sourcePath": "Toy"
-      },
-      "datasetParameters": {
-        "Movies": {
-          "path": "abc"
-        },
-        "Output": {
-          "time": "def"
+      "linkedServices": [
+        {
+          "name": "linkedService5",
+          "type": "Microsoft.DataFactory/factories/linkedservices",
+          "properties": {
+            "type": "AzureBlobStorage",
+            "typeProperties": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=<storageName>;EndpointSuffix=core.windows.net;",
+              "encryptedCredential": "<credential>"
+            },
+            "annotations": []
+          }
         }
-      }
+      ],
+      "debugSettings": {
+        "sourceSettings": [
+          {
+            "sourceName": "source1",
+            "rowLimit": 1000
+          },
+          {
+            "sourceName": "source2",
+            "rowLimit": "222"
+          }
+        ],
+        "parameters": {
+          "sourcePath": "Toy"
+        },
+        "datasetParameters": {
+          "Movies": {
+            "path": "abc"
+          },
+          "Output": {
+            "time": "def"
+          }
+        }
+      },
+      "sessionId": "f06ed247-9d07-49b2-b05e-2cb4a2fc871e"
     },
-    "sessionId": "f06ed247-9d07-49b2-b05e-2cb4a2fc871e",
-    "userSessionId": "b6da5ee9-c6a4-44e3-9eaf-357b04500d10",
-    "incrementalDebug": false,
     "api-version": "2018-06-01"
   },
   "responses": {
