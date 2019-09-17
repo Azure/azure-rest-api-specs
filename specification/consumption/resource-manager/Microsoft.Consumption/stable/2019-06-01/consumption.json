@@ -1014,6 +1014,55 @@
         }
       }
     },
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.consumption/reservationTransactions": {
+      "get": {
+        "tags": [
+          "ReservedInstances"
+        ],
+        "operationId": "ReservationTransactions_ListByBillingAccountId",
+        "description": "List of transactions for reserved instances on billing account scope",
+        "externalDocs": {
+          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+        },
+        "x-ms-examples": {
+          "ReservationTransaction": {
+            "$ref": "./examples/ReservationTransactionsListByBillingAccountId.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$filter",
+            "description": "Filter reservation transactions by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
+            "in": "query",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/billingAccountIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ReservationTransactionsListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/pricesheets/default": {
       "get": {
         "tags": [
@@ -1499,7 +1548,7 @@
           "readOnly": true
         },
         "effectivePrice": {
-          "description": "Effective Price that’s charged for the usage.",
+          "description": "Effective Price that's charged for the usage.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
@@ -2040,6 +2089,41 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
+        },
+        "kind": {
+          "description": "The reservation kind.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchasedQuantity": {
+          "description": "This is the purchased quantity for the reservationId.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "remainingQuantity": {
+          "description": "This is the remaining quantity for the reservationId.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "totalReservedQuantity": {
+          "description": "This is the total count of instances that are reserved for the reservationId.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "usedQuantity": {
+          "description": "This is the used quantity for the reservationId.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "utilizedPercentage": {
+          "description": "This is the utilized percentage for the reservation Id.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
         }
       }
     },
@@ -2132,6 +2216,11 @@
           "description": "This is the total count of instances that are reserved for the reservationId.",
           "type": "number",
           "format": "decimal",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "The reservation kind.",
+          "type": "string",
           "readOnly": true
         }
       }
@@ -2244,6 +2333,167 @@
         },
         "scope": {
           "description": "Shared or single recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuProperties": {
+          "description": "List of sku properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuProperty"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "SkuProperty": {
+      "description": "The Sku property",
+      "properties": {
+        "name": {
+          "description": "The name of sku property.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "The value of sku property.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationTransactionProperties": {
+      "default": "The properties of the reservation transaction.",
+      "properties": {
+        "eventDate": {
+          "description": "The date of the transaction",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "reservationOrderId": {
+          "description": "The reservation order ID is the identifier for a reservation purchase. Each reservation order ID represents a single purchase transaction. A reservation order contains reservations. The reservation order specifies the VM size and region for the reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The description of the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventType": {
+          "description": "The type of the transaction (Purchase, Cancel, etc.)",
+          "type" : "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The quantity of the transaction.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "amount": {
+          "description": "The charge of the transaction.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "currency": {
+          "description": "The ISO currency in which the transaction is charged, for example, USD.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationOrderName": {
+          "description": "The name of the reservation order.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchasingEnrollment": {
+          "description": "The purchasing enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchasingSubscriptionGuid": {
+          "description": "The subscription guid that makes the transaction.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "purchasingSubscriptionName": {
+          "description": "The subscription name that makes the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "armSkuName": {
+          "description": "This is the ARM Sku name. It can be used to join with the serviceType field in additional info in usage records.",
+          "type": "string",
+          "readOnly": true
+        },
+        "term": {
+          "description": "This is the term of the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "region": {
+          "description": "The region of the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountName": {
+          "description": "The name of the account that makes the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "accountOwnerEmail": {
+          "description": "The email of the account owner that makes the transaction.",
+          "type": "string",
+          "readOnly": true
+        },
+        "departmentName": {
+          "description": "The department name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center of this department if it is a department and a cost center is provided.",
+          "type": "string",
+          "readOnly": true
+        },
+        "currentEnrollment": {
+          "description": "The current enrollment.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ReservationTransaction": {
+      "description": "Reservation transaction resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReservationTransactionProperties",
+          "title": "Reservation Transaction properties"
+        }
+      }
+    },
+    "ReservationTransactionsListResult": {
+      "description": "Result of listing reservation transactions",
+      "properties": {
+        "value": {
+          "description": "The list of reservation transactions.",
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/ReservationTransaction"
+          }
+        },
+        "nextLink": {
+          "description": "The link (url) to the next page of results.",
           "type": "string",
           "readOnly": true
         }
