@@ -5,7 +5,6 @@
     "factoryName": "exampleFactoryName",
     "request": {
       "dataFlow": {
-        "name": "dataflow2",
         "properties": {
           "type": "MappingDataFlow",
           "typeProperties": {
@@ -27,7 +26,6 @@
       },
       "datasets": [
         {
-          "name": "DelimitedText2",
           "properties": {
             "linkedServiceName": {
               "referenceName": "linkedService5",
@@ -51,14 +49,11 @@
                 "type": "String"
               }
             ]
-          },
-          "type": "Microsoft.DataFactory/factories/datasets"
+          }
         }
       ],
       "linkedServices": [
         {
-          "name": "linkedService5",
-          "type": "Microsoft.DataFactory/factories/linkedservices",
           "properties": {
             "type": "AzureBlobStorage",
             "typeProperties": {
@@ -77,7 +72,7 @@
           },
           {
             "sourceName": "source2",
-            "rowLimit": "222"
+            "rowLimit": 222
           }
         ],
         "parameters": {
