@@ -3801,54 +3801,6 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/operationStatuses/{dataFactoryOperationId}": {
-      "get": {
-        "tags": [
-          "dataFlows"
-        ],
-        "operationId": "DataFactoryOperation_GetStatus",
-        "x-ms-examples": {
-          "DataFactoryOperation_GetStatus": {
-            "$ref": "./examples/Operations_List.json"
-          }
-        },
-        "description": "Get the status of one data factory operation.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/factoryName"
-          },
-          {
-            "$ref": "#/parameters/dataFactoryOperationId"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "#/definitions/GetDataFactoryOperationStatusResponse"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Azure Data Factory service.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
     }
   },
   "definitions": {
