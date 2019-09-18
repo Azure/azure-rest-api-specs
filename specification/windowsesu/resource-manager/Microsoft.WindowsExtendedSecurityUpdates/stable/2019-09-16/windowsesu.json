@@ -34,7 +34,7 @@
         "tags": ["Operations"],
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/ListOperations.json" }
+          "ListOperations": { "$ref": "./examples/ListOperations.json" }
         },
         "description": "List all available Windows.ExtendedSecurityUpdates provider operations.",
         "parameters": [
@@ -46,7 +46,7 @@
           "200": {
             "description": "Successfully retrieved operations.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/OperationList"
             }
           },
           "default": {
@@ -66,7 +66,7 @@
         "tags": ["MultipleActivationKeys"],
         "operationId": "MultipleActivationKeys_List",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/ListMultipleActivationKeys.json" }
+          "ListMultipleActivationKeys": { "$ref": "./examples/ListMultipleActivationKeys.json" }
         },
         "description": "List all Multiple Activation Keys (MAK) created for a subscription.",
         "parameters": [
@@ -81,7 +81,7 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/MultipleActivationKeyList"
             }
           },
           "default": {
@@ -90,6 +90,9 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -98,7 +101,7 @@
         "tags": ["MultipleActivationKeys"],
         "operationId": "MultipleActivationKeys_Get",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/GetMultipleActivationKey.json" }
+          "GetMultipleActivationKey": { "$ref": "./examples/GetMultipleActivationKey.json" }
         },
         "description": "Get a MAK key.",
         "parameters": [
@@ -116,7 +119,7 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/MultipleActivationKey"
             }
           },
           "default": {
@@ -131,7 +134,7 @@
         "tags": ["MultipleActivationKeys"],
         "operationId": "MultipleActivationKeys_Create",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/CreateMultipleActivationKey.json" }
+          "CreateMultipleActivationKey": { "$ref": "./examples/CreateMultipleActivationKey.json" }
         },
         "description": "Create a MAK key.",
         "parameters": [
@@ -149,7 +152,7 @@
           "200": {
             "description": "Describe the result of a successful operation.",
             "schema": {
-              "$ref": "#/definitions/Result"
+              "$ref": "#/definitions/MultipleActivationKey"
             }
           },
           "default": {
@@ -163,12 +166,108 @@
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "MultipleActivationKey": {
+      "description": "MAK key details.",
+      "type": "object",
       "properties": {
-        "sampleProperty": {
+        "name": {
+          "description": "Friendly name of the MAK key.",
           "type": "string",
-          "description": "Sample property of type string"
+          "readOnly": true
+        },
+        "multipleActivationKey": {
+          "description": "MAK 5x5 key.",
+          "type": "string",
+          "readOnly": true
+        },
+        "expirationDate": {
+          "description": "Expiration date of the MAK key.",
+          "format": "date-time",
+          "type": "string",
+          "readOnly": true
+        },
+        "installedServerNumberRange": {
+          "description": "Number of activations/servers using the MAK key.",
+          "enum": [
+            "LessThan10",
+            "From10To100",
+            "From100To1000",
+            "MoreThan1000"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "installedServerNumberRange",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "MultipleActivationKeyList": {
+      "description": "List of MAK keys.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of MAK keys.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MultipleActivationKey"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation details.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Meta data about operation used for display in portal.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "type": "string"
+        },
+        "resource": {
+          "type": "string"
+        },
+        "operation": {
+          "type": "string"
+        },
+        "description": {
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "List of available REST API opertions.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "description": "Link to the next page of resources.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
