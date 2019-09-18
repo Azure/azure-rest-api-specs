@@ -92,7 +92,7 @@
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/"
+              "$ref": "#/definitions/EntitiesBatchResult"
             }
           },
           "500" : {
@@ -1151,42 +1151,32 @@
             "$ref" : "#/definitions/Match"
           }
         },
-        "language" : "en",
-        "id" : "id",
-        "url": "url",
-        "datasource": "wikipedia",
-
-        "language" : "en",
-        "id" : "id",
-        "url": "url",
-        "datasource": "skills",
-
-        "wikipediaLanguage" : {
+        "language" : {
           "type" : "string",
-          "description" : "Wikipedia language for which the WikipediaId and WikipediaUrl refers to."
+          "description" : "Language used in the data source."
         },
-        "wikipediaId" : {
+        "id" : {
           "type" : "string",
-          "description" : "Wikipedia unique identifier of the recognized entity."
+          "description" : "Unique identifier of the recognized entity from the data source."
         },
-        "wikipediaUrl" : {
+        "url" : {
           "type" : "string",
-          "description" : "URL for the entity's Wikipedia page.",
+          "description" : "URL for the entity's page from the data source.",
           "readOnly" : true
         },
-        "bingId" : {  // "optional id"
+        "datasource" : {
           "type" : "string",
-          "description" : "Bing unique identifier of the recognized entity."
+          "description" : "Datasource used to extract entity linking, such as Wiki/Bing etc."
         }
       }
     },
     "Match" : {
       "type" : "object",
       "properties" : {
-        "wikipediaScore" : { // score
+        "score" : {
           "type" : "number",
           "format" : "double",
-          "description" : "(optional) If a well-known item with Wikipedia link is recognized, a decimal number denoting the confidence level of the Wikipedia info will be returned."
+          "description" : "(optional) If a well-known item is recognized, a decimal number denoting the confidence level will be returned."
         },
         "text" : {
           "type" : "string",
