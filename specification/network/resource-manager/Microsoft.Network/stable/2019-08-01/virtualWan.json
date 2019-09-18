@@ -2699,7 +2699,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getp2svpnconnectionhealthdetailed": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/getP2sVpnConnectionHealthDetailed": {
       "post": {
         "tags": [
           "P2SVpnGateways"
@@ -2759,7 +2759,6 @@
         }
       }
     },
-	
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/vpnServerConfigurations": {
       "post": {
         "operationId": "VpnServerConfigurationsAssociatedWithVirtualWan_List",
@@ -2814,7 +2813,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/generatevpnprofile": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualWans/{virtualWANName}/GenerateVpnProfile": {
       "post": {
         "operationId": "generatevirtualwanvpnserverconfigurationvpnprofile",
         "x-ms-examples": {
@@ -4004,7 +4003,7 @@
           "description": "The scale unit for this p2s vpn gateway."
         },
         "vpnServerConfiguration": {
-          "$ref": "./virtualNetworkGateway.json#/definitions/BgpSettings",
+		  "$ref": "#/definitions/VpnServerConfiguration",
           "description": "The VpnServerConfiguration to which the p2sVpnGateway is attached to."
         },
         "vpnClientConnectionHealth": {
