@@ -779,7 +779,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/jobs.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
-  - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
@@ -827,6 +826,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/cancelOperations.json
   - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/dataWarehouseUserActivities.json
+  - $(this-folder)/Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/restorePoints.json
   - $(this-folder)/Microsoft.Sql/stable/2015-05-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
