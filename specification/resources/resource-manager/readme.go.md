@@ -42,6 +42,7 @@ batch:
   - tag: package-resources-2016-07
   - tag: package-resources-2016-02
   - tag: package-resources-2015-11
+  - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
   - tag: package-subscriptions-2015-11
@@ -249,6 +250,16 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 ``` yaml $(tag) == 'package-resources-2015-11' && $(go)
 namespace: resources
 output-folder: $(go-sdk-folder)/services/resources/mgmt/2015-11-01/resources
+```
+
+### Tag: package-subscriptions-2019-06 and go
+
+These settings apply only when `--tag=package-subscriptions-2019-06 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2019-06' && $(go)
+namespace: subscriptions
+output-folder: $(go-sdk-folder)/services/resources/mgmt/2019-06-01/subscriptions
 ```
 
 ### Tag: package-subscriptions-2018-06 and go
