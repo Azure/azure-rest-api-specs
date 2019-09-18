@@ -606,6 +606,12 @@
 		"SubRequest": {
 			"description": "The sub-request submitted with the quota request.",
 			"properties": {
+				"subRequestId":
+				{
+					"description": "Sub request id for individual request.",
+					"type": "string",
+					"readOnly": true
+				},
 				"limit": {
 					"description": "The Resource limit.",
 					"type": "integer",
@@ -910,10 +916,6 @@
 					"$ref": "#/definitions/emailRecipientsList"
 				}
 			}
-		},
-		"MetadataDocument": {
-			"description": "Metadata XML document.",
-			"type": "string"
 		},
 		"ExceptionResponse": {
 			"type": "object",
