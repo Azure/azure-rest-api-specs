@@ -1228,6 +1228,71 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_WhatIfAtSubscriptionScope",
+        "description": "Returns changes that will be made by the deployment if executed at the scope of the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Parameters to What If."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns What-If operation status",
+            "schema": {
+              "$ref": "#/definitions/WhatIfOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at subscription scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnSubscription.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deployments/{deploymentName}/exportTemplate": {
       "post": {
         "tags": [
@@ -1607,6 +1672,81 @@
               "$ref": "#/definitions/CloudError"
             }
           }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Resources/deployments/{deploymentName}/whatIf": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_WhatIf",
+        "description": "Returns changes that will be made by the deployment if executed at the scope of the resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group the template will be deployed to. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            },
+            "description": "Parameters to validate."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns What-If operation status",
+            "schema": {
+              "$ref": "#/definitions/WhatIfOperationResult"
+            }
+          },
+          "202": {
+            "description": "Accepted - Returns URL in Location header to query for long-running operation status.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "URL to get status of this long-running operation."
+              },
+              "Retry-After": {
+                "type": "string",
+                "description": "Number of seconds to wait before polling for status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Predict template changes at resource group scope": {
+            "$ref": "./examples/PostDeploymentWhatIfOnResourceGroup.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         }
       }
     },
@@ -4981,6 +5121,101 @@
         "templateHash": {
           "type": "string",
           "description": "The template hash."
+        }
+      }
+    },
+    "WhatIfChange": {
+      "description": "Information about a single resource change predicted by What-If operation.",
+      "properties": {
+        "resourceId": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource ID"
+        },
+        "changeType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of change that will be made to the resource when the deployment is executed.",
+          "enum": [
+            "Create",
+            "Delete",
+            "Ignore",
+            "Deploy",
+            "NoChange",
+            "Modify"
+          ],
+          "x-ms-enum": {
+            "name": "ChangeType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Create",
+                "description": "The resource does not exist in the current state but is present in the desired state. The resource will be created when the deployment is executed."
+              },
+              {
+                "value": "Delete",
+                "description": "The resource exists in the current state and is missing from the desired state. The resource will be deleted when the deployment is executed."
+              },
+              {
+                "value": "Ignore",
+                "description": "The resource exists in the current state and is missing from the desired state. The resource will not be deployed or modified when the deployment is executed."
+              },
+              {
+                "value": "Deploy",
+                "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource may or may not change."
+              },
+              {
+                "value": "NoChange",
+                "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change."
+              },
+              {
+                "value": "Modify",
+                "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will change."
+              }
+            ]
+          }
+        },
+        "before": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The state of the resource before the deployment is executed."
+        },
+        "after": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The predicted state of the resource after the deployment is executed."
+        }
+      }
+    },
+    "WhatIfOperationProperties": {
+      "description": "Deployment operation properties.",
+      "properties": {
+        "changes": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WhatIfChange"
+          },
+          "description": "List of resource changes predicted by What-If operation."
+        }
+      }
+    },
+    "WhatIfOperationResult": {
+      "description": "Result of the What-If operation. Contains a list of predicted changes and a URL link to get to the next set of results.",
+      "properties": {
+        "status": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Status of the What-If operation."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/WhatIfOperationProperties",
+          "description": "What-If operation properties."
+        },
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "Error when What-If operation fails."
         }
       }
     }
