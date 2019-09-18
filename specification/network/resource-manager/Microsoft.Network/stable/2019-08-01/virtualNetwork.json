@@ -204,6 +204,9 @@
           "Create virtual network with subnet containing address prefixes": {
             "$ref": "./examples/VirtualNetworkCreateSubnetWithAddressPrefixes.json"
           },
+          "Create virtual network with Bgp Communities": {
+            "$ref": "./examples/VirtualNetworkCreateWithBgpCommunities.json"
+          },
           "Create virtual network with service endpoints": {
             "$ref": "./examples/VirtualNetworkCreateServiceEndpoints.json"
           },
@@ -1594,6 +1597,11 @@
           "$ref": "./network.json#/definitions/SubResource",
           "default": null,
           "description": "The DDoS protection plan associated with the virtual network."
+        },
+        "bgpCommunities": {
+          "$ref": "#/definitions/VirtualNetworkBgpCommunities",
+          "default": null,
+          "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET."
         }
       },
       "description": "Properties of the virtual network."
@@ -1656,6 +1664,24 @@
         }
       },
       "description": "DhcpOptions contains an array of DNS servers available to VMs deployed in the virtual network. Standard DHCP option for a subnet overrides VNET DHCP options."
+    },
+    "VirtualNetworkBgpCommunities": {
+      "properties": {
+        "virtualNetworkCommunity": {
+          "type": "string",
+          "description": "The BGP community associated with the virtual network"
+        },
+        "regionalCommunity":
+        {
+          "type": "string",
+          "readOnly": true,
+          "description": "The BGP community associated with the region of the virtual network"
+        }
+      },
+      "required": [
+        "virtualNetworkCommunity"
+      ],
+      "description": "Bgp Communities sent over ExpressRoute with each route corresponding to a prefix in this VNET."
     },
     "IPAddressAvailabilityResult": {
       "properties": {
