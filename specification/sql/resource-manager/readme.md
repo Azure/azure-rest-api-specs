@@ -88,7 +88,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
-- Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverDnsAliases.json
@@ -121,6 +120,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -185,7 +185,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/longTermRetention.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
-- Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
@@ -216,6 +215,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -274,7 +274,6 @@ input-file:
 - Microsoft.Sql/preview/2017-03-01-preview/databaseVulnerabilityAssessments.json
 - Microsoft.Sql/preview/2017-03-01-preview/jobs.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedBackupShortTermRetention.json
-- Microsoft.Sql/preview/2017-03-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2017-03-01-preview/ManagedRestorableDroppedDatabaseBackupShortTermRetenion.json
 - Microsoft.Sql/preview/2017-03-01-preview/renameDatabase.json
 - Microsoft.Sql/preview/2017-03-01-preview/serverAutomaticTuning.json
@@ -305,6 +304,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
 - Microsoft.Sql/preview/2018-06-01-preview/usages.json
 - Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+- Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -476,6 +476,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/usages.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -811,6 +812,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/usages.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+  - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
@@ -835,6 +837,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/usages.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedInstances.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
