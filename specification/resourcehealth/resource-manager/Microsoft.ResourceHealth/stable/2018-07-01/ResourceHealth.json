@@ -126,48 +126,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/impactedResources": {
-      "get": {
-        "tags": [
-          "ImpactedResources"
-        ],
-        "operationId": "ImpactedResources_ListBySubscriptionId",
-        "description": "Lists the current availability status for impacted resources in the subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/FilterParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The list of current availability status for impacted resources in the subscription",
-            "schema": {
-              "$ref": "#/definitions/impactedResourceListResult"
-            }
-          },
-          "default": {
-            "description": "DefaultErrorResponse",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ListHealthBySubscriptionId": {
-            "$ref": "./examples/ImpactedResources_ListBySubscriptionId.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ResourceHealth/availabilityStatuses": {
       "get": {
         "tags": [
@@ -728,83 +686,6 @@
           "format": "date-time"
         }
       }
-    },
-    "impactedResourceListResult": {
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/impactedResourceStatus"
-          },
-          "description": "The list of impactedResourceStatus."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URI to fetch the next page of impactedResourceStatus."
-        }
-      },
-      "required": [
-        "value"
-      ],
-      "description": "The List impactedResourceStatus operation response."
-    },
-    "impactedResourceStatus": {
-      "type": "object",
-      "description": "impactedResource with health status",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "description": "Properties of impacted resource status.",
-          "properties": {
-            "availabilityState": {
-              "type": "string",
-              "description": "Impacted resource status of the resource.",
-              "enum": [
-                "Available",
-                "Unavailable",
-                "Degraded",
-                "Unknown"
-              ],
-              "x-ms-enum": {
-                "name": "AvailabilityStateValues",
-                "modelAsString": true
-              }
-            },
-            "title": {
-              "type": "string",
-              "description": "Title description of the impacted resource status."
-            },
-            "summary": {
-              "type": "string",
-              "description": "Summary description of the impacted resource status."
-            },
-            "reasonType": {
-              "type": "string",
-              "description": "When the resource's availabilityState is Unavailable, it describes where the health impacting event was originated.",
-              "enum": [
-                "Unplanned",
-                "Planned",
-                "UserInitiated"
-              ],
-              "x-ms-enum": {
-                "name": "ReasonTypeValues",
-                "modelAsString": true
-              }
-            },
-            "occurredTime": {
-              "type": "string",
-              "description": "Timestamp for when last change in health status occurred.",
-              "format": "date-time"
-            }
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
-        }
-      ]
     },
     "availabilityStatusListResult": {
       "properties": {
