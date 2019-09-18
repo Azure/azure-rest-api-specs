@@ -32,17 +32,17 @@
     ]
   },
   "paths" : {
-    "/entities/recognition" : {
+    "/entities/recognition/general" : {
       "post" : {
         "summary" : "Entities from open domain",
-        "description" : "The API returns a list of general named entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a> for the list of supported Entity Types. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "description" : "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a>. For the list of enabled languages, check <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a>.\n",
         "operationId" : "5ac4251d5b4ccd1554da7631",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring.",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -69,7 +69,7 @@
                     "type" : "Organization",
                     "offset" : 25,
                     "length" : 9,
-                    "score" : 0.9
+                    "score" : 0.99
                   } ]
                 }, {
                   "id" : "2",
@@ -78,21 +78,21 @@
                     "type" : "Person",
                     "offset" : 25,
                     "length" : 9,
-                    "score" : 0.9
+                    "score" : 0.99
                   }, {
                     "text" : 20,
                     "type" : "Number",
                     "subType" : "Age",
                     "offset" : 30,
                     "length" : 2,
-                    "score" : 0.8
+                    "score" : 0.88
                   } ]
                 } ],
                 "errors" : [ ]
               }
             },
             "schema" : {
-              "$ref": "#/definitions/EntitiesBatchResult"
+              "$ref": "#/definitions/EntitiesResult"
             }
           },
           "500" : {
@@ -114,7 +114,7 @@
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring .",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -195,7 +195,7 @@
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/HealthcareBatchResult"
+              "$ref" : "#/definitions/HealthcareResult"
             }
           },
           "500" : {
@@ -217,7 +217,7 @@
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring .",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -244,19 +244,13 @@
                     "type" : "SSN",
                     "offset" : 22,
                     "length" : 11
-                  }, {
-                    "text" : "23902039I23J902RJ32",
-                    "type" : "National_ID",
-                    "subType" : "Country_ID",
-                    "offset" : 20,
-                    "length" : 55
-                  } ]
+                  }]
                 } ],
                 "errors" : [ ]
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/EntitiesBatchResult"
+              "$ref" : "#/definitions/EntitiesResult"
             }
           },
           "500" : {
@@ -278,7 +272,7 @@
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring .",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -303,66 +297,39 @@
                   "entities" : [ {
                     "name" : "Microsoft",
                     "matches" : [ {
-                      "wikipediaScore" : 0.9,
+                      "score" : 0.88,
                       "text" : "MSFT",
                       "offset" : 0,
                       "length" : 4
                     }, {
-                      "wikipediaScore" : 0.8,
+                      "score" : 0.99,
                       "text" : "Microsoft",
                       "offset" : 25,
                       "length" : 9
                     } ],
-                    "wikipediaLanguage" : "en",
-                    "wikipediaId" : "Microsoft",
-                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Microsoft",
-                    "bingId" : "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85"
+                    "language" : "en",
+                    "id" : "Microsoft",
+                    "url" : "https://en.wikipedia.org/wiki/Microsoft",
+                    "dataSource" : "Wikipedia"
                   }, {
                     "name" : "Windows 10",
                     "matches" : [ {
-                      "wikipediaScore" : 0.8,
+                      "score" : 0.88,
                       "text" : "Windows 10",
                       "offset" : 44,
                       "length" : 10
                     } ],
-                    "wikipediaLanguage" : "en",
-                    "wikipediaId" : "Windows 10",
-                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Windows_10",
-                    "bingId" : "5f9fbd03-49c4-39ef-cc95-de83ab897b94"
+                    "language" : "en",
+                    "id" : "Windows 10",
+                    "url" : "https://en.wikipedia.org/wiki/Windows_10",
+                    "dataSource" : "Wikipedia"
                   } ]
-                }, {
-                  "id" : "2",
-                  "entities" : [ {
-                    "name" : "Application programming interface",
-                    "matches" : [ {
-                      "wikipediaScore" : 0.8,
-                      "text" : "API",
-                      "offset" : 31,
-                      "length" : 3
-                    } ],
-                    "wikipediaLanguage" : "en",
-                    "wikipediaId" : "Application programming interface",
-                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Application_programming_interface",
-                    "bingId" : "e8c1a257-7315-a482-c81d-202a0260e4ed"
-                  }, {
-                    "name" : "Microsoft",
-                    "matches" : [ {
-                      "wikipediaScore" : 0.8,
-                      "text" : "Microsoft",
-                      "offset" : 40,
-                      "length" : 9
-                    } ],
-                    "wikipediaLanguage" : "en",
-                    "wikipediaId" : "Microsoft",
-                    "wikipediaUrl" : "https://en.wikipedia.org/wiki/Microsoft",
-                    "bingId" : "a093e9b9-90f5-a3d5-c4b8-5855e1b01f85"
-                  } ]
-                } ],
+                }],
                 "errors" : [ ]
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/EntityLinkingBatchResult"
+              "$ref" : "#/definitions/EntityLinkingResult"
             }
           },
           "500" : {
@@ -384,7 +351,7 @@
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring .",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -418,7 +385,7 @@
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/KeyPhraseBatchResult"
+              "$ref" : "#/definitions/KeyPhraseResult"
             }
           },
           "500" : {
@@ -440,7 +407,7 @@
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring .",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -493,7 +460,7 @@
               }
             },
             "schema" : {
-              "$ref" : "#/definitions/LanguageBatchResult"
+              "$ref" : "#/definitions/LanguageResult"
             }
           },
           "500" : {
@@ -515,7 +482,7 @@
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model be used for scoring .",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -684,30 +651,30 @@
       "properties": {
         "code": {
           "type": "string",
-          "description" : "One of a server-defined set of error codes."
+          "description" : "Error code."
         },
         "message": {
           "type": "string",
-          "description" : "A human-readable representation of the error."
+          "description" : "Error message."
         },
         "target": {
           "type": "string",
-          "description" : "(Optional) The target of the error."
+          "description" : "(Optional) Error target."
         },
         "innerError": {
-          "$ref": "#/definitions/InternalError",
-          "description" : "(Optional) An object containing more specific information than the current object about the error."
+          "$ref": "#/definitions/InnerError",
+          "description" : "(Optional) InnerError contains more specific information."
         },
         "details": {
           "type": "array",
-          "description" : "(Optional) An array of details about specific errors that led to this reported error.",
+          "description" : "(Optional) Details about specific errors that led to this reported error.",
           "items" : {
             "$ref" : "#/definitions/ErrorResponse"
           }
         }
       }
     },
-    "InternalError": {
+    "InnerError": {
       "type": "object",
       "properties": {
         "code": {
@@ -871,7 +838,7 @@
         }
       }
     },
-    "EntitiesBatchResult" : {
+    "EntitiesResult" : {
       "type" : "object",
       "properties" : {
         "documents" : {
@@ -879,7 +846,7 @@
           "description" : "Response by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/EntitiesBatchResultItem"
+            "$ref" : "#/definitions/DocumentEntities"
           }
         },
         "errors" : {
@@ -901,7 +868,7 @@
         }
       }
     },
-    "EntitiesBatchResultItem" : {
+    "DocumentEntities" : {
       "type" : "object",
       "properties" : {
         "id" : {
@@ -954,7 +921,7 @@
         }
       }
     },
-    "HealthcareBatchResult" : {
+    "HealthcareResult" : {
       "type" : "object",
       "properties" : {
         "documents" : {
@@ -962,7 +929,7 @@
           "description" : "Response by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/HealthcareBatchResultItem"
+            "$ref" : "#/definitions/DocumentHealthcareEntities"
           }
         },
         "errors" : {
@@ -984,7 +951,7 @@
         }
       }
     },
-    "HealthcareBatchResultItem" : {
+    "DocumentHealthcareEntities" : {
       "type" : "object",
       "properties" : {
         "id" : {
@@ -1086,7 +1053,7 @@
         }
       }
     },
-    "EntityLinkingBatchResult" : {
+    "EntityLinkingResult" : {
       "type" : "object",
       "properties" : {
         "documents" : {
@@ -1094,7 +1061,7 @@
           "description" : "Response by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/EntityLinkingBatchResultItem"
+            "$ref" : "#/definitions/DocumentLinkedEntities"
           }
         },
         "errors" : {
@@ -1116,7 +1083,7 @@
         }
       }
     },
-    "EntityLinkingBatchResultItem" : {
+    "DocumentLinkedEntities" : {
       "type" : "object",
       "properties" : {
         "id" : {
@@ -1128,7 +1095,7 @@
           "description" : "Recognized well-known entities in the document.",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/EntityLinking"
+            "$ref" : "#/definitions/LinkedEntity"
           }
         },
         "statistics" : {
@@ -1137,7 +1104,7 @@
         }
       }
     },
-    "EntityLinking" : {
+    "LinkedEntity" : {
       "type" : "object",
       "properties" : {
         "name" : {
@@ -1164,9 +1131,9 @@
           "description" : "URL for the entity's page from the data source.",
           "readOnly" : true
         },
-        "datasource" : {
+        "dataSource" : {
           "type" : "string",
-          "description" : "Datasource used to extract entity linking, such as Wiki/Bing etc."
+          "description" : "Data source used to extract entity linking, such as Wiki/Bing etc."
         }
       }
     },
@@ -1194,7 +1161,7 @@
         }
       }
     },
-    "KeyPhraseBatchResult" : {
+    "KeyPhraseResult" : {
       "type" : "object",
       "properties" : {
         "documents" : {
@@ -1202,7 +1169,7 @@
           "description" : "Response by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/KeyPhraseBatchResultItem"
+            "$ref" : "#/definitions/DocumentKeyPhrases"
           }
         },
         "errors" : {
@@ -1224,7 +1191,7 @@
         }
       }
     },
-    "KeyPhraseBatchResultItem" : {
+    "DocumentKeyPhrases" : {
       "type" : "object",
       "properties" : {
         "id" : {
@@ -1259,24 +1226,24 @@
         "application/json" : {
           "documents": [
             {
-            "countryHint": "US",
-            "id": "1",
-            "text": "Hello world"
+              "id": "1",
+              "text": "Hello world",
+              "countryHint": "US"
             },            
             {
-              "countryHint": "US",
               "id": "2",
-              "text": "Bonjour tout le monde"
+              "text": "Bonjour tout le monde",
+              "countryHint": "US"
             },
             {
-              "countryHint": "US",
               "id": "3",
-              "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
+              "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer.",
+              "countryHint": "US"
             },
             {
-              "countryHint": "US",
               "id": "4",
-              "text": ":) :( :D"
+              "text": ":) :( :D",
+              "countryHint": "US"
             }
           ]
         }
@@ -1285,19 +1252,19 @@
    "LanguageInput" : {
       "type" : "object",
       "properties" : {
-        "countryHint" : {
-          "type" : "string"
-        },
         "id" : {
           "type" : "string",
           "description" : "Unique, non-empty document identifier."
         },
         "text" : {
           "type" : "string"
+        },
+        "countryHint" : {
+          "type" : "string"
         }
       }
    },
-   "LanguageBatchResult" : {
+   "LanguageResult" : {
       "type" : "object",
       "properties" : {
         "documents" : {
@@ -1305,7 +1272,7 @@
           "description" : "Response by document",
           "readOnly" : true,
           "items" : {
-            "$ref" : "#/definitions/LanguageBatchResultItem"
+            "$ref" : "#/definitions/DocumentLanguage"
           }
         },
         "errors" : {
@@ -1327,7 +1294,7 @@
         }
       }
     },
-    "LanguageBatchResultItem" : {
+    "DocumentLanguage" : {
       "type" : "object",
       "properties" : {
         "id" : {
