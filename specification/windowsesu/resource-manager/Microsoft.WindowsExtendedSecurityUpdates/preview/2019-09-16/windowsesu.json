@@ -44,7 +44,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved operations.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
@@ -79,7 +79,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/MultipleActivationKeyList"
             }
@@ -117,7 +117,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "OK",
             "schema": {
               "$ref": "#/definitions/MultipleActivationKey"
             }
@@ -149,8 +149,8 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Describe the result of a successful operation.",
+          "201": {
+            "description": "Created",
             "schema": {
               "$ref": "#/definitions/MultipleActivationKey"
             }
@@ -170,38 +170,55 @@
       "description": "MAK key details.",
       "type": "object",
       "properties": {
+        "id": {
+          "description": "Resource Id.",
+          "type": "string",
+          "readOnly": true
+        },
         "name": {
           "description": "Friendly name of the MAK key.",
           "type": "string",
           "readOnly": true
         },
-        "multipleActivationKey": {
-          "description": "MAK 5x5 key.",
+        "type": {
+          "description": "Resource type.",
           "type": "string",
           "readOnly": true
         },
-        "expirationDate": {
-          "description": "Expiration date of the MAK key.",
-          "format": "date-time",
-          "type": "string",
-          "readOnly": true
-        },
-        "installedServerNumberRange": {
-          "description": "Number of activations/servers using the MAK key.",
-          "enum": [
-            "LessThan10",
-            "From10To100",
-            "From100To1000",
-            "MoreThan1000"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "installedServerNumberRange",
-            "modelAsString": false
+        "properties": {
+          "description": "",
+          "type": "object",
+          "properties": {
+            "multipleActivationKey": {
+              "description": "MAK 5x5 key.",
+              "type": "string",
+              "readOnly": true
+            },
+            "expirationDate": {
+              "description": "Expiration date of the MAK key.",
+              "format": "date-time",
+              "type": "string",
+              "readOnly": true
+            },
+            "installedServerNumberRange": {
+              "description": "Number of activations/servers using the MAK key.",
+              "enum": [
+                "LessThan10",
+                "From10To100",
+                "From100To1000",
+                "MoreThan1000"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "installedServerNumberRange",
+                "modelAsString": false
+              }
+            }
           }
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "MultipleActivationKeyList": {
       "description": "List of MAK keys.",
@@ -332,7 +349,8 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The name of the MAK key."
+      "description": "The name of the MAK key.",
+      "x-ms-parameter-location": "method"
     }
   }
 }
