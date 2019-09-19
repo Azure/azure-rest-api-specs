@@ -1029,7 +1029,10 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }		
       },
       "delete": {
         "operationId": "VpnServerConfigurations_Delete",
@@ -1838,7 +1841,13 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
-          }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }		  
         },
         "x-ms-examples": {
           "ResetVpnGateway": {
@@ -2635,7 +2644,13 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
-          }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }		  
         },
         "x-ms-examples": {
           "GenerateP2SVpnGatewayVPNProfile": {
@@ -2686,7 +2701,13 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
-          }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }		  
         },
         "x-ms-examples": {
           "P2SVpnGatewayGetConnectionHealth": {
@@ -2746,7 +2767,13 @@
           },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
-          }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }		  
         },
         "x-ms-examples": {
           "P2SVpnGatewayGetConnectionHealthDetailed": {
