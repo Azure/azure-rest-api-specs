@@ -5971,7 +5971,7 @@
     },
     "SqlStoredProcedureResource": {
       "type": "object",
-      "description": "Cosmos DB SQL storedProcedure resource object",
+      "description": "Cosmos DB SQL storedProcedure/userDefinedFunction resource object",
       "properties": {
         "id": {
           "type": "string",
@@ -5988,7 +5988,7 @@
     },
     "SqlUserDefinedFunctionResource": {
       "type": "object",
-      "description": "Cosmos DB SQL userDefinedFunction resource object",
+      "description": "Cosmos DB SQL storedProcedure/userDefinedFunction resource object",
       "properties": {
         "id": {
           "type": "string",
@@ -6017,6 +6017,10 @@
         },
         "triggerType":{
           "type": "string",
+          "enum": [
+            "Pre",
+            "Post"
+          ],
           "description": "Type of the Trigger"
         },
         "triggerOperation":{
