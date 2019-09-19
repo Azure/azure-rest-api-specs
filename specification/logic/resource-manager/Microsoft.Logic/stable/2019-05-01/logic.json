@@ -1548,7 +1548,6 @@
           "WorkflowTriggerHistories"
         ],
         "operationId": "WorkflowTriggerHistories_Resubmit",
-        "x-ms-long-running-operation": true,
         "description": "Resubmits a workflow run based on the trigger history.",
         "x-ms-examples": {
           "Resubmit a workflow run based on the trigger history": {
@@ -6635,7 +6634,8 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WorkflowVersion"
+            "$ref": "#/definitions/WorkflowVersion",
+            "description": "The workflow version."
           },
           "description": "A list of workflow versions."
         },
@@ -7017,7 +7017,8 @@
           "type": "object",
           "readOnly": true,
           "additionalProperties": {
-            "$ref": "#/definitions/WorkflowOutputParameter"
+            "$ref": "#/definitions/WorkflowOutputParameter",
+            "description": "The workflow output parameter."
           },
           "description": "Gets the outputs."
         },
