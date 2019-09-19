@@ -162,6 +162,45 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareVirtustream/privateClouds": {
+      "get": {
+        "operationId": "PrivateClouds_ListInSubscription",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "List private clouds in a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/apiVersion"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PrivateCloudList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed",
+            "schema": {
+              "$ref": "#/definitions/ApiError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateClouds_List": {
+            "$ref": "./examples/PrivateClouds_ListInSubscription.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareVirtustream/privateClouds/{privateCloudName}": {
       "get": {
         "operationId": "PrivateClouds_Get",
