@@ -1593,7 +1593,10 @@
         ],
         "responses": {
           "200": {
-            "description": "OK"
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/WorkflowRunListResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -8194,12 +8197,7 @@
           "$ref": "#/definitions/ResourceReference",
           "description": "The integration service environment reference."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ]
+      }
     },
     "ManagedApiListResult": {
       "type": "object",
