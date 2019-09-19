@@ -720,6 +720,10 @@
         "target": {
           "type": "string",
           "description" : "(Optional) Error target."
+        },
+        "innerError": {
+          "$ref": "#/definitions/InnerError",
+          "description" : "(Optional) InnerError contains more specific information."
         }
       }
     },
@@ -733,7 +737,6 @@
         "documents" : {
           "type" : "array",
           "description" : "Sentiment analysis per document.",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/DocumentSentiment"
           }
@@ -741,17 +744,14 @@
         "errors" : {
           "type" : "array",
           "description" : "Errors by document id.",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
         },
         "modelVersion" : {
-          "readOnly" : true,
           "type" : "string",
           "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
@@ -1005,7 +1005,6 @@
         "documents" : {
           "type" : "array",
           "description" : "Response by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/DocumentHealthcareEntities"
           }
@@ -1013,17 +1012,14 @@
         "errors" : {
           "type" : "array",
           "description" : "Errors and Warnings by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
         },
         "modelVersion" : {
-          "readOnly" : true,
           "type" : "string",
           "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
@@ -1043,7 +1039,6 @@
         "entities" : {
           "type" : "array",
           "description" : "Recognized healthcare entities in the document.",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/HealthcareEntity"
           }
@@ -1051,7 +1046,6 @@
         "relations" : {
           "type" : "array",
           "description" : "(Optional) Relations of recognized healthcare entities in the document.",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/HealthcareRelation"
           }
@@ -1196,7 +1190,6 @@
         "entities" : {
           "type" : "array",
           "description" : "Recognized well-known entities in the document.",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/LinkedEntity"
           }
@@ -1240,7 +1233,7 @@
         },
         "url" : {
           "type" : "string",
-          "description" : "URL for the entity's page from the data source.",
+          "description" : "URL for the entity's page from the data source."
         },
         "dataSource" : {
           "type" : "string",
