@@ -14,7 +14,7 @@
             "properties": {
               "provisioningState": "Succeeded",
               "ruleSetType": "DefaultRuleSet",
-              "ruleSetVersion": "preview-1.0",
+              "ruleSetVersion": "1.0",
               "ruleGroups": [
                 {
                   "ruleGroupName": "Group1",
@@ -22,11 +22,15 @@
                   "rules": [
                     {
                       "ruleId": "GROUP1-0001",
-                      "description": "Generic managed web application firewall rule."
+                      "description": "Generic managed web application firewall rule.",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Block"
                     },
                     {
                       "ruleId": "GROUP1-0002",
-                      "description": "Generic managed web application firewall rule."
+                      "description": "Generic managed web application firewall rule.",
+                      "defaultState": "Disabled",
+                      "defaultAction": "Block"
                     }
                   ]
                 },
@@ -36,7 +40,9 @@
                   "rules": [
                     {
                       "ruleId": "GROUP2-0001",
-                      "description": "Generic managed web application firewall rule."
+                      "description": "Generic managed web application firewall rule.",
+                      "defaultState": "Enabled",
+                      "defaultAction": "Allow"
                     }
                   ]
                 }
