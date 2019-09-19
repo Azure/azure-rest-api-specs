@@ -168,8 +168,7 @@
       },
       "type": "object",
       "required": [
-        "rtspUrl",
-        "credentials"
+        "rtspUrl"
       ],
       "description": "RTSP source"
     },
@@ -413,11 +412,8 @@
           }
         ],
         "x-ms-examples": {
-          "Get a Media Graph that exists by name": {
-            "$ref": "examples/media-graph-get-by-name-success.json"
-          },
-          "Get a Media Graph that does not exist by name": {
-            "$ref": "examples/media-graph-get-by-name-failure.json"
+          "Get a Media Graph by name": {
+            "$ref": "examples/media-graph-get-by-name.json"
           }
         }
       },
@@ -428,12 +424,6 @@
         "responses": {
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MediaGraph"
-            }
-          },
-          "201": {
-            "description": "Created",
             "schema": {
               "$ref": "#/definitions/MediaGraph"
             }
@@ -569,11 +559,8 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Start Media Graph which completes synchronously": {
+          "Start Media Graph": {
             "$ref": "examples/media-graph-start.json"
-          },
-          "Start MediaGraph which completes asynchronously": {
-            "$ref": "examples/media-graph-start-async.json"
           }
         }
       }
@@ -620,11 +607,8 @@
         ],
         "x-ms-long-running-operation": true,
         "x-ms-examples": {
-          "Stop Media Graph which completes synchronously": {
+          "Stop Media Graph": {
             "$ref": "examples/media-graph-stop.json"
-          },
-          "Stop MediaGraph which completes asynchronously": {
-            "$ref": "examples/media-graph-stop-async.json"
           }
         }
       }
