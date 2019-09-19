@@ -53,6 +53,7 @@
           "in" : "body",
           "name" : "multiLanguageBatchInput",
           "description" : "Collection of documents to analyze.",
+          "required": true,
           "schema" : {
             "$ref" : "#/definitions/MultiLanguageBatchInput"
           }
@@ -125,6 +126,7 @@
           "in" : "body",
           "name" : "multiLanguageBatchInput",
           "description" : "Collection of documents to analyze.",
+          "required": true,
           "schema" : {
             "$ref" : "#/definitions/MultiLanguageBatchInput"
           }
@@ -228,6 +230,7 @@
           "in" : "body",
           "name" : "multiLanguageBatchInput",
           "description" : "Collection of documents to analyze.",
+          "required": true,
           "schema" : {
             "$ref" : "#/definitions/MultiLanguageBatchInput"
           }
@@ -294,6 +297,7 @@
           "in" : "body",
           "name" : "multiLanguageBatchInput",
           "description" : "Collection of documents to analyze.",
+          "required": true,
           "schema" : {
             "$ref" : "#/definitions/MultiLanguageBatchInput"
           }
@@ -373,6 +377,7 @@
           "in" : "body",
           "name" : "multiLanguageBatchInput",
           "description" : "Collection of documents to analyze. Documents can now contain a language field to indicate the text language",
+          "required": true,
           "schema" : {
             "$ref" : "#/definitions/MultiLanguageBatchInput"
           }
@@ -429,6 +434,7 @@
           "in" : "body",
           "name" : "languageBatchInput",
           "description" : "Collection of documents to analyze.",
+          "required": true,
           "schema" : {
             "$ref" : "#/definitions/LanguageBatchInput"
           }
@@ -504,6 +510,7 @@
           "in" : "body",
           "name" : "multiLanguageBatchInput",
           "description" : "Collection of documents to analyze.",
+          "required": true,
           "schema" : {
             "$ref" : "#/definitions/MultiLanguageBatchInput"
           }
@@ -606,11 +613,13 @@
   "definitions" : {
     "MultiLanguageBatchInput" : {
       "type" : "object",
+      "required" : [
+        "documents"
+      ],
       "properties" : {
         "documents" : {
           "type" : "array",
           "description" : "The set of documents to process as part of this batch.",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/MultiLanguageInput"
           }
@@ -641,11 +650,11 @@
     },
     "MultiLanguageInput" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "text"
+      ],
       "properties" : {
-        "language" : {
-          "type" : "string",
-          "description" : "This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc.,."
-        },
         "id" : {
           "type" : "string",
           "description" : "A unique, non-empty document identifier."
@@ -653,12 +662,20 @@
         "text" : {
           "type" : "string",
           "description" : "The input text to process."
-        }
+        },
+        "language" : {
+          "type" : "string",
+          "description" : "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+        }        
       },
       "description" : "Contains an input document to be analyzed by the service."
     },
     "ErrorResponse": {
       "type": "object",
+      "required" : [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "type": "string",
@@ -687,23 +704,31 @@
     },
     "InnerError": {
       "type": "object",
+      "required" : [
+        "code",
+        "message"
+      ],
       "properties": {
         "code": {
           "type": "string",
-          "description" : "One of a server-defined set of error codes."
+          "description" : "Error code."
         },
         "message": {
           "type": "string",
-          "description" : "A human-readable representation of the error."
+          "description" : "Error message."
         },
         "target": {
           "type": "string",
-          "description" : "(Optional) The target of the error."
+          "description" : "(Optional) Error target."
         }
       }
     },
     "SentimentResponse" : {
       "type" : "object",
+      "required" : [
+        "documents",
+        "errors"
+      ],
       "properties" : {
         "documents" : {
           "type" : "array",
@@ -734,6 +759,12 @@
     },
     "DocumentSentiment" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "sentiment",
+        "documentScores",
+        "sentences"
+      ],      
       "properties" : {
         "id" : {
           "type" : "string",
@@ -761,6 +792,12 @@
     },
     "RequestStatistics" : {
       "type" : "object",
+      "required" : [
+        "documentsCount",
+        "validDocumentsCount",
+        "erroneousDocumentsCount",
+        "transactionsCount"
+      ],
       "properties" : {
         "documentsCount" : {
           "type" : "integer",
@@ -787,6 +824,10 @@
     },
     "DocumentStatistics" : {
       "type" : "object",
+      "required" : [
+        "charactersCount",
+        "transactionsCount"
+      ],
       "properties" : {
         "charactersCount" : {
           "type" : "integer",
@@ -803,6 +844,11 @@
     },
     "SentimentConfidenceScorePerLabel" : {
       "type" : "object",
+      "required" : [
+        "positive",
+        "neutral",
+        "negative"
+      ],      
       "properties" : {
         "positive" : {
           "type" : "number",
@@ -821,6 +867,13 @@
     },
     "SentenceSentiment" : {
       "type" : "object",
+      "required" : [
+        "sentiment",
+        "sentenceScores",
+        "offset",
+        "length",
+        "warnings"
+      ],      
       "properties" : {
         "sentiment" : {
           "type" : "string",
@@ -851,11 +904,14 @@
     },
     "EntitiesResult" : {
       "type" : "object",
+      "required" : [
+        "documents",
+        "errors"
+      ],      
       "properties" : {
         "documents" : {
           "type" : "array",
           "description" : "Response by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/DocumentEntities"
           }
@@ -863,17 +919,14 @@
         "errors" : {
           "type" : "array",
           "description" : "Errors and Warnings by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
         },
         "modelVersion" : {
-          "readOnly" : true,
           "type" : "string",
           "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
@@ -881,6 +934,10 @@
     },
     "DocumentEntities" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "entities"
+      ],
       "properties" : {
         "id" : {
           "type" : "string",
@@ -889,7 +946,6 @@
         "entities" : {
           "type" : "array",
           "description" : "Recognized entities in the document.",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/Entity"
           }
@@ -902,6 +958,13 @@
     },
     "Entity" : {
       "type" : "object",
+      "required" : [
+        "text",
+        "type",
+        "offset",
+        "length",
+        "score"
+      ],
       "properties" : {
         "text" : {
           "type" : "string",
@@ -913,7 +976,7 @@
         },
         "subType" : {
           "type" : "string",
-          "description" : "Entity sub type, such as Age/Year/TimeRange etc"
+          "description" : "(Optional) Entity sub type, such as Age/Year/TimeRange etc"
         },
         "offset" : {
           "type" : "integer",
@@ -934,6 +997,10 @@
     },
     "HealthcareResult" : {
       "type" : "object",
+      "required" : [
+        "documents",
+        "errors"
+      ],      
       "properties" : {
         "documents" : {
           "type" : "array",
@@ -964,6 +1031,10 @@
     },
     "DocumentHealthcareEntities" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "entities"
+      ],
       "properties" : {
         "id" : {
           "type" : "string",
@@ -979,7 +1050,7 @@
         },
         "relations" : {
           "type" : "array",
-          "description" : "Relations of recognized healthcare entities in the document.",
+          "description" : "(Optional) Relations of recognized healthcare entities in the document.",
           "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/HealthcareRelation"
@@ -993,6 +1064,14 @@
     },
     "HealthcareEntity" : {
       "type" : "object",
+      "required" : [
+        "text",
+        "id",
+        "type",
+        "offset",
+        "length",
+        "score"
+      ],      
       "properties" : {
         "text" : {
           "type" : "string",
@@ -1033,6 +1112,11 @@
     },
     "HealthcareRelation" : {
       "type" : "object",
+      "required" : [
+        "relationType",
+        "score",
+        "entities"
+      ],
       "properties" : {
         "relationType" : {
           "type" : "string",
@@ -1053,6 +1137,10 @@
     },
     "EntityRole" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "role"
+      ],
       "properties" : {
         "id" : {
           "type" : "string",
@@ -1066,11 +1154,14 @@
     },
     "EntityLinkingResult" : {
       "type" : "object",
+      "required" : [
+        "documents",
+        "errors"
+      ],
       "properties" : {
         "documents" : {
           "type" : "array",
           "description" : "Response by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/DocumentLinkedEntities"
           }
@@ -1078,17 +1169,14 @@
         "errors" : {
           "type" : "array",
           "description" : "Errors and Warnings by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
         },
         "modelVersion" : {
-          "readOnly" : true,
           "type" : "string",
           "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
@@ -1096,6 +1184,10 @@
     },
     "DocumentLinkedEntities" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "entities"
+      ],
       "properties" : {
         "id" : {
           "type" : "string",
@@ -1117,6 +1209,15 @@
     },
     "LinkedEntity" : {
       "type" : "object",
+      "required" : [
+        "name",
+        "matches",
+        "language",
+        "id",
+        "url",
+        "dataSource"
+      ],
+      
       "properties" : {
         "name" : {
           "type" : "string",
@@ -1140,7 +1241,6 @@
         "url" : {
           "type" : "string",
           "description" : "URL for the entity's page from the data source.",
-          "readOnly" : true
         },
         "dataSource" : {
           "type" : "string",
@@ -1150,6 +1250,12 @@
     },
     "Match" : {
       "type" : "object",
+      "required" : [
+        "score",
+        "text",
+        "offset",
+        "length"
+      ],
       "properties" : {
         "score" : {
           "type" : "number",
@@ -1174,11 +1280,14 @@
     },
     "KeyPhraseResult" : {
       "type" : "object",
+      "required" : [
+        "documents",
+        "errors"
+      ],
       "properties" : {
         "documents" : {
           "type" : "array",
           "description" : "Response by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/DocumentKeyPhrases"
           }
@@ -1186,17 +1295,14 @@
         "errors" : {
           "type" : "array",
           "description" : "Errors and Warnings by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
         },
         "modelVersion" : {
-          "readOnly" : true,
           "type" : "string",
           "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
@@ -1204,6 +1310,10 @@
     },
     "DocumentKeyPhrases" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "keyPhrases"
+      ],
       "properties" : {
         "id" : {
           "type" : "string",
@@ -1212,7 +1322,6 @@
         "keyPhrases" : {
           "type" : "array",
           "description" : "A list of representative words or phrases. The number of key phrases returned is proportional to the number of words in the input document.",
-          "readOnly" : true,
           "items" : {
             "type" : "string"
           }
@@ -1225,6 +1334,9 @@
     },
     "LanguageBatchInput" : {
       "type" : "object",
+      "required" : [
+        "documents"
+      ],
       "properties" : {
         "documents" : {
           "type" : "array",
@@ -1262,6 +1374,10 @@
    },
    "LanguageInput" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "text"
+      ],
       "properties" : {
         "id" : {
           "type" : "string",
@@ -1277,11 +1393,14 @@
    },
    "LanguageResult" : {
       "type" : "object",
+      "required" : [
+        "documents",
+        "errors"
+      ],
       "properties" : {
         "documents" : {
           "type" : "array",
           "description" : "Response by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/DocumentLanguage"
           }
@@ -1289,17 +1408,14 @@
         "errors" : {
           "type" : "array",
           "description" : "Errors and Warnings by document",
-          "readOnly" : true,
           "items" : {
             "$ref" : "#/definitions/ErrorResponse"
           }
         },
         "statistics" : {
-          "readOnly" : true,
           "$ref" : "#/definitions/RequestStatistics"
         },
         "modelVersion" : {
-          "readOnly" : true,
           "type" : "string",
           "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
         }
@@ -1307,12 +1423,16 @@
     },
     "DocumentLanguage" : {
       "type" : "object",
+      "required" : [
+        "id",
+        "detectedLanguage"
+      ],
       "properties" : {
         "id" : {
           "type" : "string",
           "description" : "Unique, non-empty document identifier."
         },
-        "detectedLanguages" : {
+        "detectedLanguage" : {
           "type" : "array",
           "description" : "A list of extracted languages.",
           "items" : {
@@ -1327,6 +1447,11 @@
     },
     "DetectedLanguage" : {
       "type" : "object",
+      "required" : [
+        "name",
+        "iso6391Name",
+        "score"
+      ],
       "properties" : {
         "name" : {
           "type" : "string",
