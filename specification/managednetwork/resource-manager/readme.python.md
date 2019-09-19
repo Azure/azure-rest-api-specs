@@ -12,6 +12,15 @@ python:
   no-namespace-folders: true
 ```
 
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-2019-06-01-preview
+```
+
 ### Tag: package-2019-06-01-preview and python
 
 These settings apply only when `--tag=package-2019-06-01-preview --python` is specified on the command line.
@@ -20,5 +29,5 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2019-06-01-preview' && $(python)
 python:
   namespace: azure.mgmt.managednetwork.v2019_06_01_pre
-  output-folder: $(python-sdks-folder)/managednetwork/azure-mgmt-managednetwork/azure/mgmt/Microsoft.ManagedNetwork/v2019_06_01_pre
+  output-folder: $(python-sdks-folder)/managednetwork/azure-mgmt-managednetwork/azure/mgmt/managednetwork
 ```
