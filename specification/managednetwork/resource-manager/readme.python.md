@@ -28,6 +28,6 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 
 ``` yaml $(tag) == 'package-2019-06-01-preview' && $(python)
 python:
-  namespace: azure.mgmt.managednetwork.v2019_06_01_pre
+  namespace: azure.mgmt.managednetwork.v2019_06_01_preview
   output-folder: $(python-sdks-folder)/managednetwork/azure-mgmt-managednetwork/azure/mgmt/managednetwork
 ```
