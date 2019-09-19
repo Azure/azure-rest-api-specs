@@ -84,6 +84,39 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/enable": {
+      "post": {
+        "operationId": "Subscriptions_Enable",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/enableSubscription.json"
+          }
+        },
+        "description": "The operation to enable a subscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EnabledSubscriptionId"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -116,6 +149,16 @@
       "properties": {
         "value": {
           "description": "The ID of the subscriptions that is being renamed",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "EnabledSubscriptionId": {
+      "description": "The ID of the subscriptions that is being enabled",
+      "properties": {
+        "value": {
+          "description": "The ID of the subscriptions that is being enabled",
           "type": "string",
           "readOnly": true
         }

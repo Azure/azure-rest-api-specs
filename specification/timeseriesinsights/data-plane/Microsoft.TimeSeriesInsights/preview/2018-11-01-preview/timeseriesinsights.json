@@ -291,6 +291,9 @@
           "QueryAggregateSeriesPage2": {
             "$ref": "./examples/QueryAggregateSeriesPage2.json"
           },
+          "QueryAggregateSeriesWithSampleInterpolation": {
+            "$ref": "./examples/QueryAggregateSeriesWithSampleInterpolation.json"
+          },
           "QueryGetEventsPage1": {
             "$ref": "./examples/QueryGetEventsPage1.json"
           },
@@ -1158,6 +1161,34 @@
         "tsx"
       ]
     },
+    "Interpolation": {
+      "description": "The interpolation operation to be performed on the raw data points. Interpolation is only supported in \"numeric\" variables. Currently, only sampling of interpolated time series is allowed. Allowed aggregate function - eg: left($value). Can be null if no interpolation needs to be applied.",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The type of interpolation technique : \"Linear\" or \"Step\".",
+          "type": "string",
+          "enum": [
+            "Linear",
+            "Step"
+          ],
+          "x-ms-enum": {
+            "name": "InterpolationKind",
+            "modelAsString": true
+          }
+        },
+        "boundary": {
+          "description": "The time range to the left and right of the search span to be used for Interpolation. This is helpful in scenarios where the data points are missing close to the start or end of the input search span. Can be null.",
+          "type": "object",
+          "properties": {
+            "span": {
+              "type": "string",
+              "format": "duration"
+            }
+          }
+        }
+      }
+    },
     "DateTimeRange": {
       "description": "The range of time. Cannot be null or negative.",
       "type": "object",
@@ -1192,6 +1223,9 @@
               "description": "Value time series expression is used to represent the value of the signal that is going to be aggregated or interpolated. For example, temperature values from the event is represented like this: \"$event.Temperature.Double\".",
               "$ref": "#/definitions/Tsx"
             },
+            "interpolation": {
+              "$ref": "#/definitions/Interpolation"
+            },
             "aggregation": {
               "description": "Aggregation time series expression when kind is \"numeric\" is used to represent the aggregation that needs to be performed on the $value expression. This requires $value to be specified and can only use $value inside the aggregate functions. For example, aggregation for calculating minimum of the $value is written as: \"min($value)\".",
               "$ref": "#/definitions/Tsx"
@@ -1206,7 +1240,7 @@
       ]
     },
     "AggregateVariable": {
-      "description": "Aggregate variable represents any aggregation calculation.",
+      "description": "Aggregate variable represents any aggregation calculation. Aggregate Variables does not support interpolation.",
       "x-ms-discriminator-value": "aggregate",
       "allOf": [
         {
@@ -1239,6 +1273,9 @@
         "filter": {
           "description": "Filter over the events that restricts the number of events being considered for computation. Example: \"$event.Status.String='Good'\". Optional.",
           "$ref": "#/definitions/Tsx"
+        },
+        "interpolation": {
+          "$ref": "#/definitions/Interpolation"
         }
       },
       "required": [
@@ -2322,7 +2359,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Optional client request ID. Service records this value. Allows the service to trace operation across services, and allows the customer to contact support support regarding a particular request."
+      "description": "Optional client request ID. Service records this value. Allows the service to trace operation across services, and allows the customer to contact support regarding a particular request."
     },
     "ClientSessionId": {
       "name": "x-ms-client-session-id",
@@ -2331,7 +2368,7 @@
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "Optional client session ID. Service records this value. Allows the service to trace a group of related operations across services, and allows the customer to contact support support regarding a particular group of requests."
+      "description": "Optional client session ID. Service records this value. Allows the service to trace a group of related operations across services, and allows the customer to contact support regarding a particular group of requests."
     }
   }
 }
