@@ -444,6 +444,10 @@
           "readOnly": true,
           "description": "IP addresses associated with AzureFirewall.",
           "$ref": "#/definitions/HubIPAddresses"
+        },
+        "sku": {
+          "description": "The Azure Firewall Resource SKU.",
+          "$ref": "#/definitions/AzureFirewallSku"
         }
       },
       "description": "Properties of the Azure Firewall."
@@ -880,6 +884,34 @@
         "name": "AzureFirewallApplicationRuleProtocolType",
         "modelAsString": true
       }
+    },
+    "AzureFirewallSku": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of an Azure Firewall SKU.",
+          "enum": [
+            "AZFW_VNet",
+            "AZFW_Hub"  
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallSkuName",
+            "modelAsString": true
+          }
+        },
+        "tier": {
+          "type": "string",
+          "description": "Tier of an Azure Firewall.",
+          "enum": [
+            "Standard"
+          ],
+          "x-ms-enum": {
+            "name": "AzureFirewallTier",
+            "modelAsString": true
+          }
+        }
+      },
+      "description": "SKU of an Azure Firewall."
     }
   }
 }
