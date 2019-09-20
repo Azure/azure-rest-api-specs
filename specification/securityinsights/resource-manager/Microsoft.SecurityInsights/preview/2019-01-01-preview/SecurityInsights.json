@@ -1153,6 +1153,454 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all case relations.": {
+            "$ref": "./examples/cases/relations/GetAllCaseRelations.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Gets all case relations.",
+        "deprecated": true,
+        "operationId": "CaseRelations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/CaseRelation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/cases/{caseId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a case relation.": {
+            "$ref": "./examples/cases/relations/GetCaseRelationByName.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Gets a case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a case relation.": {
+            "$ref": "./examples/cases/relations/CreateCaseRelation.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Creates or updates the case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_CreateOrUpdateRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          },
+          {
+            "$ref": "#/parameters/RelationInputModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/CaseRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the case relation.": {
+            "$ref": "./examples/cases/relations/DeleteCaseRelation.json"
+          }
+        },
+        "tags": [
+          "CaseRelations"
+        ],
+        "description": "Delete the case relation.",
+        "deprecated": true,
+        "operationId": "CaseRelations_DeleteRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/CaseId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations": {
+      "get": {
+        "x-ms-examples": {
+          "Get all bookmark relations.": {
+            "$ref": "./examples/bookmarks/relations/GetAllBookmarkRelations.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Gets all bookmark relations.",
+        "operationId": "BookmarkRelations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/ODataFilter"
+          },
+          {
+            "$ref": "#/parameters/ODataOrderBy"
+          },
+          {
+            "$ref": "#/parameters/ODataTop"
+          },
+          {
+            "$ref": "#/parameters/ODataSkipToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-odata": "#/definitions/BookmarkRelation",
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/bookmarks/{bookmarkId}/relations/{relationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/GetBookmarkRelationByName.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Gets a bookmark relation.",
+        "operationId": "BookmarkRelations_GetRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Creates or updates a bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/CreateBookmarkRelation.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Creates the bookmark relation.",
+        "operationId": "BookmarkRelations_CreateOrUpdateRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          },
+          {
+            "$ref": "#/parameters/RelationInputModel"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/BookmarkRelation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete the bookmark relation.": {
+            "$ref": "./examples/bookmarks/relations/DeleteBookmarkRelation.json"
+          }
+        },
+        "tags": [
+          "BookmarkRelations"
+        ],
+        "description": "Delete the bookmark relation.",
+        "operationId": "BookmarkRelations_DeleteRelation",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/BookmarkId"
+          },
+          {
+            "$ref": "#/parameters/RelationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/dataConnectors": {
       "get": {
         "x-ms-examples": {
@@ -2550,6 +2998,252 @@
         }
       },
       "type": "object"
+    },
+    "RelationBase": {
+      "type": "object",
+      "description": "Represents a relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "kind": {
+              "type": "string",
+              "description": "The type of relation node",
+              "readOnly": true,
+              "enum": [
+                "CasesToBookmarks"
+              ],
+              "x-ms-enum": {
+                "name": "RelationTypes",
+                "modelAsString": true,
+                "values": [
+                  {
+                    "value": "CasesToBookmarks",
+                    "description": "Relations between cases and bookmarks"
+                  }
+                ]
+              }
+            },
+            "etag": {
+              "type": "string",
+              "description": "ETag for relation"
+            }
+          }
+        }
+      ]
+    },
+    "CaseRelationList": {
+      "description": "List of case relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CaseRelation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "CaseRelation": {
+      "type": "object",
+      "description": "Represents a case relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Case relation properties",
+          "$ref": "#/definitions/CaseRelationProperties"
+        }
+      }
+    },
+    "CaseRelationProperties": {
+      "type": "object",
+      "description": "Case relation properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "bookmarkId": {
+          "type": "string",
+          "description": "The case related bookmark id"
+        },
+        "caseIdentifier": {
+          "type": "string",
+          "description": "The case identifier"
+        },
+        "bookmarkName": {
+          "type": "string",
+          "description": "The case related bookmark name"
+        }
+      },
+      "required": [
+        "relationName",
+        "caseIdentifier",
+        "bookmarkId"
+      ]
+    },
+    "BookmarkRelationList": {
+      "description": "List of bookmark relations.",
+      "properties": {
+        "nextLink": {
+          "readOnly": true,
+          "description": "URL to fetch the next set of relations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Array of relations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BookmarkRelation"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "BookmarkRelation": {
+      "type": "object",
+      "description": "Represents a bookmark relation",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Bookmark relation properties",
+          "$ref": "#/definitions/BookmarkRelationProperties"
+        }
+      }
+    },
+    "BookmarkRelationProperties": {
+      "type": "object",
+      "description": "Bookmark relation properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "bookmarkId": {
+          "type": "string",
+          "description": "The case related bookmark id"
+        },
+        "caseIdentifier": {
+          "type": "string",
+          "description": "The case identifier"
+        },
+        "caseTitle": {
+          "type": "string",
+          "description": "The case title"
+        },
+        "caseSeverity": {
+          "type": "string",
+          "description": "The case severity"
+        }
+      },
+      "required": [
+        "relationName",
+        "caseIdentifier",
+        "bookmarkId"
+      ]
+    },
+    "RelationsModelInput": {
+      "type": "object",
+      "description": "Relation input model",
+      "allOf": [
+        {
+          "$ref": "#/definitions/RelationBase"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Relation input properties",
+          "$ref": "#/definitions/RelationsModelInputProperties"
+        }
+      }
+    },
+    "RelationsModelInputProperties": {
+      "type": "object",
+      "description": "Relation input properties",
+      "properties": {
+        "relationName": {
+          "type": "string",
+          "description": "Name of relation"
+        },
+        "sourceRelationNode": {
+          "type": "object",
+          "description": "Relation source node",
+          "$ref": "#/definitions/RelationNode"
+        },
+        "targetRelationNode": {
+          "type": "object",
+          "description": "Relation target node",
+          "$ref": "#/definitions/RelationNode"
+        }
+      }
+    },
+    "RelationNode": {
+      "type": "object",
+      "description": "Relation node",
+      "properties": {
+        "relationNodeId": {
+          "type": "string",
+          "description": "Relation Node Id"
+        },
+        "relationNodeKind": {
+          "type": "string",
+          "description": "The type of relation node",
+          "readOnly": true,
+          "enum": [
+            "Case",
+            "Bookmark"
+          ],
+          "x-ms-enum": {
+            "name": "RelationNodeKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Case",
+                "description": "Case node part of the relation"
+              },
+              {
+                "value": "Bookmark",
+                "description": "Bookmark node part of the relation"
+              }
+            ]
+          }
+        },
+        "etag": {
+          "type": "string",
+          "description": "Etag for relation node"
+        },
+        "relationAdditionalProperties": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Additional set of properties"
+        }
+      }
     },
     "Bookmark": {
       "allOf": [
@@ -5674,6 +6368,24 @@
       "required": true,
       "schema": {
         "$ref": "#/definitions/Bookmark"
+      },
+      "x-ms-parameter-location": "method"
+    },
+    "RelationName": {
+      "name": "relationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Relation Name",
+      "x-ms-parameter-location": "method"
+    },
+    "RelationInputModel": {
+      "name": "relationInputModel",
+      "in": "body",
+      "description": "The relation input model",
+      "required": true,
+      "schema": {
+        "$ref": "#/definitions/RelationsModelInput"
       },
       "x-ms-parameter-location": "method"
     },
