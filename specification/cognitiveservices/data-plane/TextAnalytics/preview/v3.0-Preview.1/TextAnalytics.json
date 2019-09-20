@@ -3,7 +3,7 @@
   "info" : {
     "description" : "The Text Analytics API is a suite of text analytics web services built with best-in-class Microsoft machine learning algorithms. \nThe API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase and entity extraction as well as language detection. \nNo training data is needed to use this API; just bring your text data. \nThis API uses advanced natural language processing techniques to deliver best in class predictions.\n\nFurther documentation can be found in https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/overview\n\nThis API is currently available in:\n\n* Australia East - australiaeast.api.cognitive.microsoft.com\n* Brazil South - brazilsouth.api.cognitive.microsoft.com\n* Canada Central - canadacentral.api.cognitive.microsoft.com\n* Central India - centralindia.api.cognitive.microsoft.com\n* Central US - centralus.api.cognitive.microsoft.com\n* East Asia - eastasia.api.cognitive.microsoft.com\n* East US - eastus.api.cognitive.microsoft.com\n* East US 2 - eastus2.api.cognitive.microsoft.com\n* France Central - francecentral.api.cognitive.microsoft.com\n* Japan East - japaneast.api.cognitive.microsoft.com\n* Japan West - japanwest.api.cognitive.microsoft.com\n* Korea Central - koreacentral.api.cognitive.microsoft.com\n* North Central US - northcentralus.api.cognitive.microsoft.com\n* North Europe - northeurope.api.cognitive.microsoft.com\n* South Africa North - southafricanorth.api.cognitive.microsoft.com\n* South Central US - southcentralus.api.cognitive.microsoft.com\n* Southeast Asia - southeastasia.api.cognitive.microsoft.com\n* UK South - uksouth.api.cognitive.microsoft.com\n* West Central US - westcentralus.api.cognitive.microsoft.com\n* West Europe - westeurope.api.cognitive.microsoft.com\n* West US - westus.api.cognitive.microsoft.com\n* West US 2 - westus2.api.cognitive.microsoft.com",
     "version" : "V3.0-Preview.1",
-    "title" : "Text Analytics API (V3.0-Preview.1)",
+    "title" : "Text Analytics API",
     "contact": {
       "name": "Microsoft Cognitive Services",
       "url": "https://azure.microsoft.com/en-us/services/cognitive-services/text-analytics/",
@@ -115,7 +115,7 @@
         "parameters" : [ {
           "name" : "modelVersion",
           "in" : "query",
-          "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+          "description" : "(optional) This value indicates which model will be used for scoring. If a model version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
         }, {
           "name" : "showStats",
@@ -212,7 +212,7 @@
     "/entities/recognition/pii" : {
       "post" : {
         "summary" : "Entities from Personally Identifiable Information (PII) domain",
-        "description" : "The API returns a list of pii entities (\\\"SSN\\\", \\\"Bank Account\\\", \\\"Goverment ID\\\" etc) in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
+        "description" : "The API returns a list of personally identifiable information (PII) entities (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.\n",
         "operationId" : "5ac4251d5b4ccd1554da7633",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
@@ -278,8 +278,8 @@
     },
     "/entities/linking" : {
       "post" : {
-        "summary" : "Entities from Well-Known domain",
-        "description" : "The API returns a list of recognized entities in a given document. To get even more information on each recognized entity we recommend using the Bing Entity Search API by querying for the recognized entities names. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API.\n",
+        "summary" : "Linked entities from a well-known knowledge base",
+        "description" : "The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API.\n",
         "operationId" : "5ac4251d5b4ccd1554da7635",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
@@ -359,7 +359,7 @@
     "/keyPhrases" : {
       "post" : {
         "summary" : "Key Phrases",
-        "description" : "The API returns a list of strings denoting the key talking points in the input text. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "description" : "The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
         "operationId" : "56f30ceeeda5650db055a3c6",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
@@ -492,7 +492,7 @@
     "/sentiment" : {
       "post" : {
         "summary" : "Sentiment",
-        "description" : "The API returns a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral).In addition, sentence level sentiment predictions are returned. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.",
+        "description" : "The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
         "operationId" : "56f30ceeeda5650db055a3c9",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
@@ -637,7 +637,7 @@
             {
               "language": "en",
               "id": "2",
-              "text": "It's incredibly sunny outside! I'm so happy."
+              "text": "It's sunny outside! I'm so happy."
             },
             {
               "language": "en",
@@ -1206,7 +1206,6 @@
         "name",
         "matches",
         "language",
-        "id",
         "url",
         "dataSource"
       ],
