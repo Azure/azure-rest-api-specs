@@ -6029,7 +6029,18 @@
         },
         "triggerOperation":{
           "type": "string",
-          "description": "The operation the trigger is associated with"
+          "enum": [
+            "All",
+            "Create",
+            "Update",
+            "Delete",
+            "Replace"
+          ],
+          "description": "The operation the trigger is associated with",
+          "x-ms-enum": {
+            "name": "triggerOperation",
+            "modelAsString": true
+          }
         }
       },
       "required": [
