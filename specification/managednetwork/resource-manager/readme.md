@@ -65,6 +65,7 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.ManagedNetwork
+  output-folder: $(csharp-sdks-folder)/managednetwork/Microsoft.Azure.Management.ManagedNetwork/src/generated
   clear-output-folder: true
 ```
 
