@@ -358,7 +358,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/ActionResponse"
             }
           },
           "default": {
@@ -410,13 +410,13 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/ActionResponse"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Action"
+              "$ref": "#/definitions/ActionResponse"
             }
           },
           "default": {
@@ -2122,7 +2122,7 @@
       },
       "type": "object"
     },
-    "Action": {
+    "ActionRequest": {
       "allOf": [
         {
           "$ref": "#/definitions/ResourceWithEtag"
@@ -2131,18 +2131,48 @@
       "description": "Action for alert rule.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ActionProperties",
-          "description": "Action properties",
+          "$ref": "#/definitions/ActionRequestProperties",
+          "description": "Action properties for put request",
           "x-ms-client-flatten": true
         }
       },
       "type": "object"
     },
-    "ActionProperties": {
+    "ActionRequestProperties": {
       "description": "Action property bag.",
       "properties": {
         "triggerUri": {
-          "description": "The uri for the action to trigger.",
+          "description": "Logic App Callback URL for this specific workflow.",
+          "type": "string"
+        }
+      },
+      "type": "object"
+    },
+    "ActionResponse": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "description": "Action for alert rule.",
+      "properties": {
+        "etag": {
+          "description": "Etag of the action.",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ActionResponseProperties",
+          "description": "Action properties for get request",
+          "x-ms-client-flatten": true
+        }
+      },
+      "type": "object"
+    },
+    "ActionResponseProperties": {
+      "description": "Action property bag.",
+      "properties": {
+        "workflowId": {
+          "description": "The name of the logic app's workflow.",
           "type": "string"
         }
       },
@@ -2159,7 +2189,7 @@
         "value": {
           "description": "Array of actions.",
           "items": {
-            "$ref": "#/definitions/Action"
+            "$ref": "#/definitions/ActionResponse"
           },
           "type": "array"
         }
@@ -5589,7 +5619,7 @@
       "name": "action",
       "required": true,
       "schema": {
-        "$ref": "#/definitions/Action"
+        "$ref": "#/definitions/ActionRequest"
       },
       "x-ms-parameter-location": "method"
     },
