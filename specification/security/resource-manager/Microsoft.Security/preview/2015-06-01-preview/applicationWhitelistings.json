@@ -275,9 +275,20 @@
     },
     "ProtectionMode": {
       "type": "object",
-      "description": "The protection mode of the collection/file types",
-      "additionalProperties": {
-        "type": "string"
+      "description": "The protection mode of the collection/file types. Exe/Msi/Script are used for Windows, Executable is used for Linux.",
+      "properties": {
+        "Exe": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "Msi": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "Script": {
+          "$ref": "#/definitions/EnforcementMode"
+        },
+        "Executable": {
+          "$ref": "#/definitions/EnforcementMode"
+        }
 	  }
     },
     "RecommendationStatus": {
