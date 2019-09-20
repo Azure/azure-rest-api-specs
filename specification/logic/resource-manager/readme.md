@@ -255,6 +255,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Logic/stable/2019-05-01/logic.json
   - $(this-folder)/Microsoft.Logic/preview/2018-07-01-preview/logic.json
   - $(this-folder)/Microsoft.Logic/stable/2016-06-01/logic.json
   - $(this-folder)/Microsoft.Logic/preview/2015-08-01-preview/logic.json
