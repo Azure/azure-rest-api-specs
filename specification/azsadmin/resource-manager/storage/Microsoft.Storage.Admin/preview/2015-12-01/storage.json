@@ -30,14 +30,14 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "storage.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK -- The list of operations has been returned.",
             "schema": {
-              "$ref": "storage.json#/definitions/OperationList"
+              "$ref": "#/definitions/OperationList"
             }
           }
         },
@@ -137,7 +137,7 @@
       },
       "allOf": [
         {
-          "$ref": "storage.json#/definitions/WritableSettings"
+          "$ref": "#/definitions/WritableSettings"
         }
       ]
     },
@@ -207,24 +207,24 @@
       "properties": {
         "name": {
           "description": "Metric name.",
-          "$ref": "storage.json#/definitions/LocalizableString",
+          "$ref": "#/definitions/LocalizableString",
           "readOnly": true
         },
         "unit": {
           "description": "Metric unit.",
-          "$ref": "storage.json#/definitions/MetricUnit",
+          "$ref": "#/definitions/MetricUnit",
           "readOnly": true
         },
         "primaryAggregationType": {
           "description": "Aggregation type of metric.",
-          "$ref": "storage.json#/definitions/AggregateType",
+          "$ref": "#/definitions/AggregateType",
           "readOnly": true
         },
         "metricAvailabilities": {
           "description": "Metric availabilities.",
           "type": "array",
           "items": {
-            "$ref": "storage.json#/definitions/MetricAvailability"
+            "$ref": "#/definitions/MetricAvailability"
           },
           "readOnly": true
         }
@@ -236,12 +236,12 @@
       "properties": {
         "name": {
           "description": "Metric Name.",
-          "$ref": "storage.json#/definitions/LocalizableString",
+          "$ref": "#/definitions/LocalizableString",
           "readOnly": true
         },
         "metricUnit": {
           "description": "Metric Unit.",
-          "$ref": "storage.json#/definitions/MetricUnit",
+          "$ref": "#/definitions/MetricUnit",
           "readOnly": true
         },
         "timeGrain": {
@@ -265,7 +265,7 @@
           "description": "List of metric values.",
           "type": "array",
           "items": {
-            "$ref": "storage.json#/definitions/MetricValue"
+            "$ref": "#/definitions/MetricValue"
           },
           "readOnly": true
         }
@@ -279,7 +279,7 @@
           "description": "List of metric definitions.",
           "type": "array",
           "items": {
-            "$ref": "storage.json#/definitions/MetricDefinition"
+            "$ref": "#/definitions/MetricDefinition"
           },
           "readOnly": true
         },
@@ -298,7 +298,7 @@
           "description": "List of metrics.",
           "type": "array",
           "items": {
-            "$ref": "storage.json#/definitions/Metric"
+            "$ref": "#/definitions/Metric"
           },
           "readOnly": true
         },
@@ -376,31 +376,26 @@
       "properties": {
         "id": {
           "description": "Resource ID.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "name": {
           "description": "Resource Name.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "type": {
           "description": "Resource type.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "location": {
           "description": "Resource location.",
-          "type": "string",
-          "readOnly": true
+          "type": "string"
         },
         "tags": {
           "description": "Resource tags.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
-          },
-          "readOnly": true
+          }
         }
       },
       "x-ms-azure-resource": true
@@ -414,7 +409,7 @@
         },
         "healthStatus": {
           "description": "Health status of storage service.",
-          "$ref": "storage.json#/definitions/HealthStatus"
+          "$ref": "#/definitions/HealthStatus"
         }
       }
     },
@@ -428,7 +423,7 @@
         },
         "display": {
           "description": "Contains the localized display information for this particular operation / action.",
-          "$ref": "storage.json#/definitions/Display",
+          "$ref": "#/definitions/Display",
           "readOnly": true
         }
       }
@@ -465,7 +460,7 @@
           "description": "List of operations",
           "type": "array",
           "items": {
-            "$ref": "storage.json#/definitions/Operation"
+            "$ref": "#/definitions/Operation"
           }
         },
         "nextLink": {
