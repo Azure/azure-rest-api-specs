@@ -5178,12 +5178,10 @@
       ],
       "properties": {
         "path": {
-          "readOnly": true,
           "type": "string",
           "description": "The path of the property."
         },
         "propertyChangeType": {
-          "readOnly": true,
           "type": "string",
           "description": "The type of property change.",
           "enum": [
@@ -5216,17 +5214,14 @@
           }
         },
         "before": {
-          "readOnly": true,
           "type": "object",
           "description": "The value of the property before the deployment is executed."
         },
         "after": {
-          "readOnly": true,
           "type": "object",
           "description": "The value of the property after the deployment is executed."
         },
         "children": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/WhatIfPropertyChange"
@@ -5244,12 +5239,10 @@
       ],
       "properties": {
         "resourceId": {
-          "readOnly": true,
           "type": "string",
           "description": "Resource ID"
         },
         "changeType": {
-          "readOnly": true,
           "type": "string",
           "description": "Type of change that will be made to the resource when the deployment is executed.",
           "enum": [
@@ -5292,17 +5285,14 @@
           }
         },
         "before": {
-          "readOnly": true,
           "type": "object",
           "description": "The snapshot of the resource before the deployment is executed."
         },
         "after": {
-          "readOnly": true,
           "type": "object",
           "description": "The predicted snapshot of the resource after the deployment is executed."
         },
         "delta": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/WhatIfPropertyChange"
@@ -5315,7 +5305,6 @@
       "description": "Deployment operation properties.",
       "properties": {
         "changes": {
-          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/WhatIfChange"
@@ -5328,7 +5317,6 @@
       "description": "Result of the What-If operation. Contains a list of predicted changes and a URL link to get to the next set of results.",
       "properties": {
         "status": {
-          "readOnly": true,
           "type": "string",
           "description": "Status of the What-If operation."
         },
