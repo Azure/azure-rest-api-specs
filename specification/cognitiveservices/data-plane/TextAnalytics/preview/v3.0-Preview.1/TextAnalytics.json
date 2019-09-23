@@ -36,11 +36,11 @@
       "post" : {
         "summary" : "Entities from open domain",
         "description" : "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a>. For the list of enabled languages, check <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a>.\n",
-        "operationId" : "5ac4251d5b4ccd1554da7631",
+        "operationId" : "/entities/recognition/general",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "modelVersion",
+          "name" : "model-version",
           "in" : "query",
           "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
@@ -109,11 +109,11 @@
       "post" : {
         "summary" : "Entities from healthcare domain",
         "description" : "The API returns a list of healthcare entities in a given document. See the <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a> for the list of enabled languages.\n",
-        "operationId" : "5ac4251d5b4ccd1554da7632",
+        "operationId" : "/healthcare",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "modelVersion",
+          "name" : "model-version",
           "in" : "query",
           "description" : "(optional) This value indicates which model will be used for scoring. If a model version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
@@ -142,7 +142,7 @@
                     "id": "1",
                     "entities": [
                       {
-                        "id": "24d1116e-8b0f-4a91-a3a2-05ff499ec26a",
+                        "id": "1",
                         "offset": 11,
                         "length": 4,
                         "text": "oral",
@@ -150,7 +150,7 @@
                         "score": 0.9671
                       },
                       {
-                        "id": "73acd11a-3289-4813-815c-34340f6394ec",
+                        "id": "2",
                         "offset": 16,
                         "length": 11,
                         "text": "antibiotics",
@@ -159,7 +159,7 @@
                         "umlsId": "C0003232"
                       },
                       {
-                        "id": "97ac0c51-ab50-45cc-b832-9a2d074eda59",
+                        "id": "3",
                         "offset": 32,
                         "length": 7,
                         "text": "10 days",
@@ -167,7 +167,7 @@
                         "score": 0.9965
                       },
                       {
-                        "id": "96c4a5d9-0f53-41f8-9c93-0bfa7ee3a75d",
+                        "id": "4",
                         "offset": 48,
                         "length": 9,
                         "text": "infection",
@@ -178,15 +178,15 @@
                   ],
                   "relations": [
                     {
-                      "relationType": "DIRECTION_OF_BODY_STRUCTURE",
+                      "relationType": "ROUTE_OR_MODE_OF_MEDICATION",
                       "score": 1,
-                      "entities": [
+                      "entityInfo": [
                         {
-                          "id": "7f6bf109-c897-418c-885a-1cf4ade2c314",
+                          "id": "1",
                           "role": "ATTRIBUTE"
                         },
                         {
-                          "id": "c6f217ed-2d48-4e4d-8f26-2299624a21a9",
+                          "id": "2",
                           "role": "ENTITY"
                         }
                       ]
@@ -213,11 +213,11 @@
       "post" : {
         "summary" : "Entities from Personally Identifiable Information (PII) domain",
         "description" : "The API returns a list of personally identifiable information (PII) entities (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.\n",
-        "operationId" : "5ac4251d5b4ccd1554da7633",
+        "operationId" : "/entities/recognition/pii",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "modelVersion",
+          "name" : "model-version",
           "in" : "query",
           "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
@@ -280,11 +280,11 @@
       "post" : {
         "summary" : "Linked entities from a well-known knowledge base",
         "description" : "The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API.\n",
-        "operationId" : "5ac4251d5b4ccd1554da7635",
+        "operationId" : "/entities/linking",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "modelVersion",
+          "name" : "model-version",
           "in" : "query",
           "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
@@ -360,11 +360,11 @@
       "post" : {
         "summary" : "Key Phrases",
         "description" : "The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
-        "operationId" : "56f30ceeeda5650db055a3c6",
+        "operationId" : "/keyPhrases",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "modelVersion",
+          "name" : "model-version",
           "in" : "query",
           "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
@@ -417,11 +417,11 @@
       "post" : {
         "summary" : "Detect Language",
         "description" : "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.",
-        "operationId" : "56f30ceeeda5650db055a3c7",
+        "operationId" : "/languages",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "modelVersion",
+          "name" : "model-version",
           "in" : "query",
           "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
@@ -493,11 +493,11 @@
       "post" : {
         "summary" : "Sentiment",
         "description" : "The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
-        "operationId" : "56f30ceeeda5650db055a3c9",
+        "operationId" : "/sentiment",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
-          "name" : "modelVersion",
+          "name" : "model-version",
           "in" : "query",
           "description" : "(optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
           "type" : "string"
@@ -673,10 +673,15 @@
     "ErrorResponse": {
       "type": "object",
       "required" : [
+        "id",
         "code",
         "message"
       ],
       "properties": {
+        "id": {
+          "type": "string",
+          "description" : "Document Id."
+        },
         "code": {
           "type": "string",
           "description" : "Error code."
@@ -689,9 +694,9 @@
           "type": "string",
           "description" : "(Optional) Error target."
         },
-        "innerError": {
+        "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description" : "(Optional) InnerError contains more specific information."
+          "description" : "(Optional) Innererror contains more specific information."
         },
         "details": {
           "type": "array",
@@ -721,7 +726,7 @@
           "type": "string",
           "description" : "(Optional) Error target."
         },
-        "innerError": {
+        "innererror": {
           "$ref": "#/definitions/InnerError",
           "description" : "(Optional) InnerError contains more specific information."
         }
@@ -751,9 +756,9 @@
         "statistics" : {
           "$ref" : "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
+        "model-version" : {
           "type" : "string",
-          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
+          "description" : "(Optional) if model-version=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -926,9 +931,9 @@
         "statistics" : {
           "$ref" : "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
+        "model-version" : {
           "type" : "string",
-          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
+          "description" : "(Optional) if model-version=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -1019,9 +1024,9 @@
         "statistics" : {
           "$ref" : "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
+        "model-version" : {
           "type" : "string",
-          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
+          "description" : "(Optional) if model-version=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -1170,9 +1175,9 @@
         "statistics" : {
           "$ref" : "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
+        "model-version" : {
           "type" : "string",
-          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
+          "description" : "(Optional) if model-version=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -1294,9 +1299,9 @@
         "statistics" : {
           "$ref" : "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
+        "model-version" : {
           "type" : "string",
-          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
+          "description" : "(Optional) if model-version=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
@@ -1407,9 +1412,9 @@
         "statistics" : {
           "$ref" : "#/definitions/RequestStatistics"
         },
-        "modelVersion" : {
+        "model-version" : {
           "type" : "string",
-          "description" : "(Optional) if modelVersion=true was specified in the request this field will indicate which model is used for scoring."
+          "description" : "(Optional) if model-version=true was specified in the request this field will indicate which model is used for scoring."
         }
       }
     },
