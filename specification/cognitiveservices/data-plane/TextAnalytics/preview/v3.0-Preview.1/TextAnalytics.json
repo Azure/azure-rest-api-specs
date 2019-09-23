@@ -99,7 +99,7 @@
           "500" : {
             "description" : "Error Response",
             "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+              "$ref" : "#/definitions/Error"
             }
           }
         }
@@ -203,7 +203,7 @@
           "500" : {
             "description" : "Error Response",
             "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+              "$ref" : "#/definitions/Error"
             }
           }
         }
@@ -270,7 +270,7 @@
           "500" : {
             "description" : "Error Response",
             "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+              "$ref" : "#/definitions/Error"
             }
           }
         }
@@ -350,7 +350,7 @@
           "500" : {
             "description" : "Error Response",
             "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+              "$ref" : "#/definitions/Error"
             }
           }
         }
@@ -407,7 +407,7 @@
           "500" : {
             "description" : "Error Response",
             "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+              "$ref" : "#/definitions/Error"
             }
           }
         }
@@ -483,7 +483,7 @@
           "500" : {
             "description" : "Error Response",
             "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+              "$ref" : "#/definitions/Error"
             }
           }
         }
@@ -603,7 +603,7 @@
           "500" : {
             "description" : "Error Response",
             "schema" : {
-              "$ref" : "#/definitions/ErrorResponse"
+              "$ref" : "#/definitions/Error"
             }
           }
         }
@@ -665,12 +665,12 @@
         },
         "language" : {
           "type" : "string",
-          "description" : "(Optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
+          "description" : "(optional) This is the 2 letter ISO 639-1 representation of a language. For example, use \"en\" for English; \"es\" for Spanish etc. If not set, use \"en\" for English as default."
         }        
       },
       "description" : "Contains an input document to be analyzed by the service."
     },
-    "ErrorResponse": {
+    "DocumentError": {
       "type": "object",
       "required" : [
         "id",
@@ -682,15 +682,15 @@
           "description" : "Document Id."
         },
         "error": {
-          "type": "string",
+          "type": "object",
           "description" : "Document Error.",
           "items" : {
-            "$ref" : "#/definitions/DocumentError"
+            "$ref" : "#/definitions/Error"
           }          
         }
       }
     },
-    "DocumentError": {
+    "Error": {
       "type": "object",
       "required" : [
         "code",
@@ -711,13 +711,13 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description" : "(Optional) Innererror contains more specific information."
+          "description" : "(Optional) Inner error contains more specific information."
         },
         "details": {
           "type": "array",
           "description" : "(Optional) Details about specific errors that led to this reported error.",
           "items" : {
-            "$ref" : "#/definitions/ErrorResponse"
+            "$ref" : "#/definitions/Error"
           }
         }
       }
@@ -743,7 +743,7 @@
         },
         "innererror": {
           "$ref": "#/definitions/InnerError",
-          "description" : "(Optional) InnerError contains more specific information."
+          "description" : "(Optional) Innererror contains more specific information."
         }
       }
     },
@@ -765,7 +765,7 @@
           "type" : "array",
           "description" : "Errors by document id.",
           "items" : {
-            "$ref" : "#/definitions/ErrorResponse"
+            "$ref" : "#/definitions/DocumentError"
           }
         },
         "statistics" : {
@@ -938,9 +938,9 @@
         },
         "errors" : {
           "type" : "array",
-          "description" : "Errors and Warnings by document",
+          "description" : "Errors by document id.",
           "items" : {
-            "$ref" : "#/definitions/ErrorResponse"
+            "$ref" : "#/definitions/DocumentError"
           }
         },
         "statistics" : {
@@ -1031,9 +1031,9 @@
         },
         "errors" : {
           "type" : "array",
-          "description" : "Errors and Warnings by document",
+          "description" : "Errors by document id.",
           "items" : {
-            "$ref" : "#/definitions/ErrorResponse"
+            "$ref" : "#/definitions/DocumentError"
           }
         },
         "statistics" : {
@@ -1182,9 +1182,9 @@
         },
         "errors" : {
           "type" : "array",
-          "description" : "Errors and Warnings by document",
+          "description" : "Errors by document id.",
           "items" : {
-            "$ref" : "#/definitions/ErrorResponse"
+            "$ref" : "#/definitions/DocumentError"
           }
         },
         "statistics" : {
@@ -1306,9 +1306,9 @@
         },
         "errors" : {
           "type" : "array",
-          "description" : "Errors and Warnings by document",
+          "description" : "Errors by document id.",
           "items" : {
-            "$ref" : "#/definitions/ErrorResponse"
+            "$ref" : "#/definitions/DocumentError"
           }
         },
         "statistics" : {
@@ -1419,9 +1419,9 @@
         },
         "errors" : {
           "type" : "array",
-          "description" : "Errors and Warnings by document",
+          "description" : "Errors by document id.",
           "items" : {
-            "$ref" : "#/definitions/ErrorResponse"
+            "$ref" : "#/definitions/DocumentError"
           }
         },
         "statistics" : {
