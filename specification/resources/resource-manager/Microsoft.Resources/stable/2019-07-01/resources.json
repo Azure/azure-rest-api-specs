@@ -1244,7 +1244,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/DeploymentWhatIf"
             },
             "description": "Parameters to What If."
           },
@@ -1701,7 +1701,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/DeploymentWhatIf"
             },
             "description": "Parameters to validate."
           },
@@ -4155,6 +4155,53 @@
       },
       "description": "The deployment export result. "
     },
+    "DeploymentWhatIf": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location to store the deployment data."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentWhatIfProperties",
+          "description": "The deployment properties."
+        }
+      },
+      "required": [
+        "properties"
+      ],
+      "description": "Deployment What-if operation parameters."
+    },
+    "DeploymentWhatIfProperties": {
+      "properties": {
+        "whatIfSettings": {
+          "$ref": "#/definitions/DeploymentWhatIfSettings",
+          "description": "Optional What-If operation settings."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeploymentProperties"
+        }
+      ],
+      "description": "Deployment What-if properties."
+    },
+    "DeploymentWhatIfSettings": {
+      "properties": {
+        "resultFormat": {
+          "type": "string",
+          "description": "The format of the What-If results",
+          "enum": [
+            "ResourceIdOnly",
+            "FullResourcePayloads"
+          ],
+          "x-ms-enum": {
+            "name": "WhatIfResultFormat",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Deployment What-If operation settings."
+    },
     "CloudError": {
       "x-ms-external": true,
       "properties": {
@@ -5124,8 +5171,77 @@
         }
       }
     },
+    "WhatIfPropertyChange": {
+      "required": [
+        "path",
+        "propertyChangeType"
+      ],
+      "properties": {
+        "path": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The path of the property."
+        },
+        "propertyChangeType": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of property change.",
+          "enum": [
+            "Create",
+            "Delete",
+            "Modify",
+            "Array"
+          ],
+          "x-ms-enum": {
+            "name": "PropertyChangeType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Create",
+                "description": "The property does not exist in the current state but is present in the desired state. The property will be created when the deployment is executed."
+              },
+              {
+                "value": "Delete",
+                "description": "The property exists in the current state and is missing from the desired state. It will be deleted when the deployment is executed."
+              },
+              {
+                "value": "Modify",
+                "description": "The property exists in both current and desired state and is different. The value of the property will change when the deployment is executed."
+              },
+              {
+                "value": "Array",
+                "description": "The property is an array and contains nested changes."
+              }
+            ]
+          }
+        },
+        "before": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The value of the property before the deployment is executed."
+        },
+        "after": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The value of the property after the deployment is executed."
+        },
+        "children": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WhatIfPropertyChange"
+          },
+          "description": "Nested property changes."
+        }
+      },
+      "description": "The predicted change to the resource property."
+    },
     "WhatIfChange": {
       "description": "Information about a single resource change predicted by What-If operation.",
+      "required": [
+        "resourceId",
+        "changeType"
+      ],
       "properties": {
         "resourceId": {
           "readOnly": true,
@@ -5178,12 +5294,20 @@
         "before": {
           "readOnly": true,
           "type": "object",
-          "description": "The state of the resource before the deployment is executed."
+          "description": "The snapshot of the resource before the deployment is executed."
         },
         "after": {
           "readOnly": true,
           "type": "object",
-          "description": "The predicted state of the resource after the deployment is executed."
+          "description": "The predicted snapshot of the resource after the deployment is executed."
+        },
+        "delta": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WhatIfPropertyChange"
+          },
+          "description": "The predicted changes to resource properties."
         }
       }
     },
