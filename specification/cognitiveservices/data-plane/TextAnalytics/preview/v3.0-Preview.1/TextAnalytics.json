@@ -416,7 +416,7 @@
     "/languages" : {
       "post" : {
         "summary" : "Detect Language",
-        "description" : "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. A total of 120 languages are supported.",
+        "description" : "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
         "operationId" : "/languages",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
@@ -674,14 +674,29 @@
       "type": "object",
       "required" : [
         "id",
-        "code",
-        "message"
+        "error"
       ],
       "properties": {
         "id": {
           "type": "string",
           "description" : "Document Id."
         },
+        "error": {
+          "type": "string",
+          "description" : "Document Error.",
+          "items" : {
+            "$ref" : "#/definitions/DocumentError"
+          }          
+        }
+      }
+    },
+    "DocumentError": {
+      "type": "object",
+      "required" : [
+        "code",
+        "message"
+      ],
+      "properties": {
         "code": {
           "type": "string",
           "description" : "Error code."
