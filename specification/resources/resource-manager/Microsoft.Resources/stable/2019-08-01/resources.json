@@ -285,6 +285,12 @@
               "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
+          "400": {
+            "description": "Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -576,6 +582,12 @@
         "responses": {
           "200": {
             "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "Returns the validation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
@@ -887,6 +899,12 @@
               "$ref": "#/definitions/DeploymentValidateResult"
             }
           },
+          "400": {
+            "description": "Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1191,6 +1209,12 @@
         "responses": {
           "200": {
             "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "Returns the validation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
@@ -1567,6 +1591,12 @@
         "responses": {
           "200": {
             "description": "OK - Returns the validation result.",
+            "schema": {
+              "$ref": "#/definitions/DeploymentValidateResult"
+            }
+          },
+          "400": {
+            "description": "Returns the validation result.",
             "schema": {
               "$ref": "#/definitions/DeploymentValidateResult"
             }
@@ -4270,6 +4300,10 @@
     },
     "DeploymentValidateResult": {
       "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse",
+          "description": "The deployment validation error."
+        },
         "properties": {
           "$ref": "#/definitions/DeploymentPropertiesExtended",
           "description": "The template deployment properties."
