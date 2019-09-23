@@ -1,0 +1,355 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissAlertsRules": {
+      "get": {
+        "x-ms-examples": {
+          "Get auto dismiss rules for subscription": {
+            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRules_example.json"
+          }
+        },
+        "tags": [
+          "AutoDismissAlertsRules"
+        ],
+        "description": "List of all the dismiss rules for the given subscription",
+        "operationId": "AutoDismissAlertsRules_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AlertType"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoDismissAlertsRulesList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoDismissAlertsRules/{autoDismissAlertsRuleName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get auto dismiss alert rule for subscription": {
+            "$ref": "./examples/AutoDismissAlertsRules/GetAutoDismissAlertsRule_example.json"
+          }
+        },
+        "tags": [
+          "AutoDismissAlertsRules"
+        ],
+        "description": "Get dismiss rule, with name: {autoDismissAlertsRuleName}, for the given subscription",
+        "operationId": "AutoDismissAlertsRules_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissAlertsRuleName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoDismissAlertsRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Update or create auto dismiss rule for subscription": {
+            "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRule_example.json"
+          },
+          "Test a rule for subscription": {
+            "$ref": "./examples/AutoDismissAlertsRules/PutAutoDismissAlertsRuleTest_example.json"
+          }
+        },
+        "tags": [
+          "AutoDismissAlertsRules"
+        ],
+        "description": "Update existing rule or create new rule if not exist",
+        "operationId": "AutoDismissAlertsRules_Update",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissAlertsRuleName"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissAlertsRule"
+          },
+          {
+            "$ref": "#/parameters/TestRule"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoDismissAlertsRule"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete auto dismiss rule data for a subscription": {
+            "$ref": "./examples/AutoDismissAlertsRules/DeleteAutoDismissAlertsRule_example.json"
+          }
+        },
+        "tags": [
+          "AutoDismissAlertsRules"
+        ],
+        "description": "Delete dismiss alert rule for this subscription.",
+        "operationId": "AutoDismissAlertsRules_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AutoDismissAlertsRuleName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoDismissAlertsRulesList": {
+      "type": "object",
+      "description": "Auto dismiss rules list for subscription.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoDismissAlertsRule"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "AutoDismissAlertsRule": {
+      "type": "object",
+      "description": "Describes the auto dismiss rule",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AutoDismissAlertsRuleProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AutoDismissAlertsRuleProperties": {
+      "type": "object",
+      "description": "describes AutoDismissAlertsRule properties",
+      "properties": {
+        "alertType": {
+          "type": "string",
+          "description": "Type of the auto dismissed alert. For all alert types, use '*'"
+        },
+        "lastModifiedUTC": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time this rule was modified"
+        },
+        "expirationDateUTC": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration date of the rule"
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for dismissing the alert"
+        },
+        "state": {
+          "type": "string",
+          "description": "Possible states of the rule",
+          "x-ms-enum": {
+            "name": "State"
+          },
+          "enum": [
+            "Enabled",
+            "Disabled",
+            "Expired"
+          ]
+        },
+        "comment": {
+          "type": "string",
+          "description": "Any comment regarding the rule"
+        },
+        "autoDismissAlertsScope": {
+          "type": "object",
+          "description": "The auto dismiss conditions",
+          "$ref": "#/definitions/AutoDismissAlertsScope"
+        },
+        "ruleImpact": {
+          "type": "object",
+          "description": "The impact of the rule. Use for testing the rule and will be returned only when the test flag is set",
+          "readOnly": true,
+          "$ref": "#/definitions/RuleImpact"
+        }
+      },
+      "required": [
+        "alertType",
+        "reason",
+        "state"
+      ]
+    },
+    "AutoDismissAlertsScope": {
+      "type": "object",
+      "properties": {
+        "allOf": {
+          "type": "array",
+          "description": "All the conditions inside need to be true in order to auto dismiss the alert",
+          "items": {}
+        }
+      },
+      "required": [
+        "allOf"
+      ]
+    },
+    "RuleImpact": {
+      "type": "object",
+      "required": [
+        "scannedAlertsNumber",
+        "dismissedAlertsNumber"
+      ],
+      "properties": {
+        "scannedAlertsNumber" : {
+          "type": "integer"
+        },
+        "dismissedAlertsNumber" : {
+          "type": "integer"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AlertType": {
+      "name": "AlertType",
+      "in": "query",
+      "type": "string",
+      "description": "The type of the alert to get rules for",
+      "x-ms-parameter-location": "method"
+    },
+    "TestRule": {
+      "name": "TestRule",
+      "in": "query",
+      "type": "boolean",
+      "description": "The type of the alert to get rules for",
+      "x-ms-parameter-location": "method"
+    },
+    "AutoDismissAlertsRuleName": {
+      "name": "autoDismissAlertsRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The unique name of the auto dismiss alert rule",
+      "x-ms-parameter-location": "method" 
+    },
+    "AutoDismissAlertsRule": {
+      "name": "autoDismissAlertsRule",
+      "in": "body",
+      "required": true,
+      "description": "Auto dismiss rule object",
+      "schema": {
+        "$ref": "#/definitions/AutoDismissAlertsRule"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
