@@ -96,7 +96,45 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.WindowsExtendedSecurityUpdates/multipleActivationKeys/{multipleActivationKeyName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsExtendedSecurityUpdates/multipleActivationKeys": {
+      "get": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListMultipleActivationKeys": { "$ref": "./examples/ListMultipleActivationKeysByResourceGroup.json" }
+        },
+        "description": "List all Multiple Activation Keys (MAK) in a resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKeyList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.WindowsExtendedSecurityUpdates/multipleActivationKeys/{multipleActivationKeyName}": {
       "get": {
         "tags": ["MultipleActivationKeys"],
         "operationId": "MultipleActivationKeys_Get",
@@ -107,6 +145,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -140,6 +181,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -176,7 +220,7 @@
           "readOnly": true
         },
         "name": {
-          "description": "Friendly name of the MAK key.",
+          "description": "Name of the MAK key.",
           "type": "string",
           "readOnly": true
         },
