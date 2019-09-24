@@ -17,6 +17,11 @@
             "properties": {
               "recommendationStatus": "Recommended",
               "enforcementMode": "Audit",
+              "protectionMode": {
+                "exe": "Audit",
+                "msi": "Audit",
+                "script": "None"
+              },
               "vmRecommendations": [
                 {
                   "configurationStatus": "Configured",
@@ -124,6 +129,11 @@
             "properties": {
               "recommendationStatus": "Recommended",
               "enforcementMode": "Audit",
+              "protectionMode": {
+                "exe": "Audit",
+                "msi": "None",
+                "script": "None"
+              },
               "vmRecommendations": [
                 {
                   "configurationStatus": "Configured",
@@ -169,6 +179,11 @@
             "properties": {
               "recommendationStatus": "Recommended",
               "enforcementMode": "Audit",
+              "protectionMode": {
+                "exe": "Audit",
+                "msi": "None",
+                "script": "None"
+              },
               "vmRecommendations": [
                 {
                   "configurationStatus": "Configured",
@@ -314,123 +329,6 @@
             }
           },
           {
-            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/centralus/applicationWhitelistings/GROUP2-RE",
-            "name": "GROUP2-RE",
-            "type": "Microsoft.Security/applicationWhitelistings",
-            "location": "centralus",
-            "properties": {
-              "recommendationStatus": "Recommended",
-              "enforcementMode": "Audit",
-              "vmRecommendations": [
-                {
-                  "configurationStatus": "Configured",
-                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/matanjittest/providers/microsoft.compute/virtualmachines/matansourcejit",
-                  "recommendationAction": "Recommended"
-                },
-                {
-                  "configurationStatus": "Configured",
-                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-dsc/providers/microsoft.compute/virtualmachines/erelh-14010",
-                  "recommendationAction": "Recommended"
-                },
-                {
-                  "configurationStatus": "Configured",
-                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/erelh-stable/providers/microsoft.compute/virtualmachines/erelh-16091",
-                  "recommendationAction": "Recommended"
-                }
-              ],
-              "pathRecommendations": [
-                {
-                  "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
-                  "type": "PublisherSignature",
-                  "publisherInfo": {
-                    "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
-                    "productName": "*",
-                    "binaryName": "*",
-                    "version": "0.0.0.0"
-                  },
-                  "common": true,
-                  "action": "Recommended",
-                  "usernames": [
-                    {
-                      "username": "Everyone",
-                      "recommendationAction": "Recommended"
-                    }
-                  ],
-                  "userSids": [
-                    "S-1-1-0"
-                  ],
-                  "fileType": "Exe",
-                  "configurationStatus": "Configured"
-                },
-                {
-                  "path": "C:\\bla.exe",
-                  "type": "File",
-                  "common": true,
-                  "action": "Add",
-                  "usernames": [
-                    {
-                      "username": "Everyone",
-                      "recommendationAction": "Recommended"
-                    }
-                  ],
-                  "userSids": [
-                    "S-1-1-0"
-                  ],
-                  "fileType": "Exe",
-                  "configurationStatus": "Configured"
-                }
-              ],
-              "configurationStatus": "Configured",
-              "issues": [],
-              "sourceSystem": "Azure_AppLocker"
-            }
-          },
-          {
-            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/westeurope/applicationWhitelistings/BENJITGROUP13",
-            "name": "BENJITGROUP13",
-            "type": "Microsoft.Security/applicationWhitelistings",
-            "location": "westeurope",
-            "properties": {
-              "recommendationStatus": "Recommended",
-              "enforcementMode": "Audit",
-              "vmRecommendations": [
-                {
-                  "configurationStatus": "Configured",
-                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/bengr-jit-test/providers/microsoft.compute/virtualmachines/bengr-jit-test3",
-                  "recommendationAction": "Recommended"
-                }
-              ],
-              "pathRecommendations": [
-                {
-                  "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
-                  "type": "PublisherSignature",
-                  "publisherInfo": {
-                    "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
-                    "productName": "*",
-                    "binaryName": "*",
-                    "version": "0.0.0.0"
-                  },
-                  "common": true,
-                  "action": "Recommended",
-                  "usernames": [
-                    {
-                      "username": "Everyone",
-                      "recommendationAction": "Recommended"
-                    }
-                  ],
-                  "userSids": [
-                    "S-1-1-0"
-                  ],
-                  "fileType": "Exe",
-                  "configurationStatus": "Configured"
-                }
-              ],
-              "configurationStatus": "Configured",
-              "issues": [],
-              "sourceSystem": "Azure_AppLocker"
-            }
-          },
-          {
             "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/westeurope/applicationWhitelistings/GROUP1",
             "name": "GROUP1",
             "type": "Microsoft.Security/applicationWhitelistings",
@@ -438,6 +336,9 @@
             "properties": {
               "recommendationStatus": "Recommended",
               "enforcementMode": "Audit",
+              "protectionMode": {
+                "executable": "Audit"
+              },
               "vmRecommendations": [
                 {
                   "configurationStatus": "Configured",
@@ -1109,51 +1010,6 @@
                 }
               ],
               "sourceSystem": "Azure_AuditD"
-            }
-          },
-          {
-            "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/providers/Microsoft.Security/locations/westeurope/applicationWhitelistings/GROUP2",
-            "name": "GROUP2",
-            "type": "Microsoft.Security/applicationWhitelistings",
-            "location": "westeurope",
-            "properties": {
-              "recommendationStatus": "Recommended",
-              "enforcementMode": "Audit",
-              "vmRecommendations": [
-                {
-                  "configurationStatus": "Configured",
-                  "resourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourcegroups/bengr-jit-test/providers/microsoft.compute/virtualmachines/bengr-jit-test1",
-                  "recommendationAction": "Recommended"
-                }
-              ],
-              "pathRecommendations": [
-                {
-                  "path": "[Exe] O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US\\*\\*\\0.0.0.0",
-                  "type": "PublisherSignature",
-                  "publisherInfo": {
-                    "publisherName": "O=MICROSOFT CORPORATION, L=REDMOND, S=WASHINGTON, C=US",
-                    "productName": "*",
-                    "binaryName": "*",
-                    "version": "0.0.0.0"
-                  },
-                  "common": true,
-                  "action": "Recommended",
-                  "usernames": [
-                    {
-                      "username": "Everyone",
-                      "recommendationAction": "Recommended"
-                    }
-                  ],
-                  "userSids": [
-                    "S-1-1-0"
-                  ],
-                  "fileType": "Exe",
-                  "configurationStatus": "Configured"
-                }
-              ],
-              "configurationStatus": "Configured",
-              "issues": [],
-              "sourceSystem": "Azure_AppLocker"
             }
           }
         ]
