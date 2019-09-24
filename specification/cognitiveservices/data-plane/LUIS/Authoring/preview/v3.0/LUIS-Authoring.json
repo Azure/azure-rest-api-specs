@@ -808,7 +808,7 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "name": "EntityModelCreateObject",
+            "name": "entityModelCreateObject",
             "in": "body",
             "required": true,
             "schema": {
@@ -1493,7 +1493,7 @@
       },
       "patch": {
         "description": "Updates the name of an entity extractor or the name and instanceOf model of a child entity extractor.",
-        "operationId": "Model_AddEntityChild",
+        "operationId": "Model_UpdateEntityChild",
         "parameters": [
           {
             "$ref": "#/parameters/AppIdInPath"
@@ -1510,7 +1510,7 @@
             "format": "uuid"
           },
           {
-            "name": "EntityModelUpdateObject",
+            "name": "entityModelUpdateObject",
             "in": "body",
             "required": true,
             "schema": {
@@ -1542,7 +1542,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Successful Create Composite Entity Child Model request": {
+          "Successful Update Entity Extractor request": {
             "$ref": "./examples/model/SuccessfulUpdateEntityExtractorRequest.json"
           }
         }
@@ -1600,7 +1600,7 @@
             "$ref": "#/parameters/HEntityIdInPath"
           },
           {
-            "name": "hierarchicalModelUpdateObject",
+            "name": "modelUpdateObject",
             "in": "body",
             "required": true,
             "schema": {
@@ -8887,6 +8887,31 @@
       "properties": {
         "roles": {
           "$ref": "#/definitions/EntityRoleList"
+        },
+        "children": {
+          "$ref": "#/definitions/ChildEntityModelInfo"
+        },
+        "instanceOf": {
+          "description": "Instance of Model.",
+          "type": "string"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModelInfo"
+        }
+      ]
+    },
+    "ChildEntityModelInfo": {
+      "description": "A Child Entity Extractor model info.",
+      "type": "object",
+      "properties": {
+        "children": {
+          "$ref": "#/definitions/ChildEntityModelInfo"
+        },
+        "instanceOf": {
+          "description": "Instance of Model.",
+          "type": "string"
         }
       },
       "allOf": [
