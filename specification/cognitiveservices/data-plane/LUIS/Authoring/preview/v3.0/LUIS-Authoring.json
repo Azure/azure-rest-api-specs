@@ -9030,6 +9030,24 @@
         "name": {
           "type": "string",
           "description": "The name of a child entity."
+        },
+        "instanceOf": {
+          "description": "Instance of Model.",
+          "type": "string"
+        },
+        "typeId": {
+          "description": "The type ID of the Entity Model.",
+          "type": "integer"
+        },
+        "readableType": {
+          "$ref": "#/definitions/ReadableType"
+        },
+        "children": {
+          "description": "List of children",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChildEntity"
+          }
         }
       },
       "required": [
@@ -9140,7 +9158,10 @@
           "type": "string"
         },
         "children": {
-          "type": "array"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ChildEntity"
+          }
         }
       }
     },
