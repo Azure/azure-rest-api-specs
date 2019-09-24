@@ -5398,6 +5398,45 @@
         "method",
         "url"
       ]
+    },
+    "ExecuteDataFlowActivity": {
+      "description": "Execute data flow activity.",
+      "x-ms-discriminator-value": "ExecuteDataFlow",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute data flow activity properties.",
+          "$ref": "#/definitions/ExecuteDataFlowActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ExecuteDataFlowActivityTypeProperties": {
+      "description": "Execute data flow activity properties.",
+      "properties": {
+        "dataFlow": {
+          "description": "Data flow reference.",
+          "$ref": "../datafactory.json#/definitions/DataFlowReference"
+        },
+        "staging": {
+          "description": "Staging info for execute data flow activity.",
+          "$ref": "../datafactory.json#/definitions/DataFlowStagingInfo"
+        },
+        "integrationRuntime": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        }
+      },
+      "required": [
+        "dataFlow"
+      ]
     }
   }
 }
