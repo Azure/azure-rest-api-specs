@@ -579,7 +579,7 @@
                     "application/json"
                 ],
                 "parameters": [{
-                        "$ref": "#/parameters/FilePermissionKey"
+                        "$ref": "#/parameters/FilePermissionKeyRequired"
                     },
                     {
                         "$ref": "#/parameters/Timeout"
@@ -4191,6 +4191,15 @@
             "required": false,
             "type": "string",
             "x-ms-parameter-location": "method"
+        },
+        "FilePermissionKeyRequired": {
+          "name": "x-ms-file-permission-key",
+          "x-ms-client-name": "FilePermissionKey",
+          "in": "header",
+          "description": "Key of the permission to be set for the directory/file.",
+          "required": true,
+          "type": "string",
+          "x-ms-parameter-location": "method"
         },
         "FileRangeWriteFromUrl": {
             "name": "x-ms-write",
