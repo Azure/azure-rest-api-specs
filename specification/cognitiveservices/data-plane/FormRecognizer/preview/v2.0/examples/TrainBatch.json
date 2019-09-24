@@ -1,0 +1,20 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "body": {
+      "trainRequest": {
+        "sources": [ 
+          { "source": "/input/data1" },
+          { "source": "/input/data2" } 
+        ]
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "Location": "{Endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}"      
+     }
+  }
+}

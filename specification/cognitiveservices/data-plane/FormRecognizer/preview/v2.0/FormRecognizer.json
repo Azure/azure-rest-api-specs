@@ -1,0 +1,1426 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2.0-preview",
+    "title": "Form Recognizer Client",
+    "description": "Extracts information from forms and images into structured data based on a model created by a set of representative training forms."
+  },
+  "securityDefinitions": {
+    "apim_key": {
+      "type": "apiKey",
+      "name": "Ocp-Apim-Subscription-Key",
+      "in": "header"
+    }
+  },
+  "security": [
+    {
+      "apim_key": []
+    }
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{Endpoint}/formrecognizer/v2.0-preview",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "$ref": "#/parameters/Endpoint"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/custom/models": {
+      "post": {
+        "summary": "Train Custom Model",
+        "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be directly under the source folder. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored.",
+        "operationId": "TrainCustomModel",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "trainRequest",
+            "in": "body",
+            "description": "Input for training custom model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TrainRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request to train custom model is successfully queued.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Location and Id of model being trained. Trained model status is specified in Status field in result."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Train new model example": {
+            "$ref": "./examples/TrainBatch.json"
+          },
+          "Train new model example, subfolder filter options": {
+            "$ref": "./examples/TrainBatchWithSubFolders.json"
+          }
+        }
+      },
+      "get": {
+        "summary": "List Custom Models",
+        "description": "Get information about all trained custom models",
+        "operationId": "GetCustomModels",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "op",
+            "in": "query",
+            "description": "Summary or full list of models to be returned.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "full",
+              "summary"
+            ]
+          }          
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Models"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/GetModels.json"
+          }
+        }
+      }      
+    },
+    "/custom/models/{modelId}": {
+      "get": {
+        "summary": "Get Custom Model",
+        "description": "Get detailed information about a model.",
+        "operationId": "GetCustomModel",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "keys",
+            "in": "query",
+            "description": "Include list extracted keys in model information.",
+            "required": false,
+            "type": "boolean"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/Model"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/GetModel.json"
+          }
+        }
+      },
+      "delete": {
+        "summary": "Delete Model",
+        "description": "Delete model artifacts. Model status is marked as tombstoned. Artifacts of tombstoned model are deleted within 48 hours.",
+        "operationId": "DeleteCustomModel",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Identifier of the model to delete.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "Successfully tombstoned model and its artifacts will be removed within 48 hours."
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/DeleteModel.json"
+          }
+        }
+      }
+    },    
+    "/custom/models/{modelId}/analyze": {
+      "post": {
+        "summary": "Analyze Form",
+        "description": "Extract key-value pairs from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/jiff'. Alternatively, use 'application/json' format to specify location (URI or local path) of document to be analyzed.",
+        "operationId": "AnalyzeWithCustomModelAsync",
+        "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier to analyze the document with.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }, 
+          {
+            "name": "includeTextDetails",
+            "in": "query",
+            "description": "Get or set specifier to retrieve text results.",
+            "required": false,
+            "default":false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/FileStream"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Analyze request queued successfully.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Result id to track the progress of analyze operation. Result of analyze operation can be obtained only when the operation status becomes \"succeeded\" in status field."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/AnalyzeBatch.json"
+          }
+        }
+      }
+    },
+    "/custom/models/{modelId}/analyzeResults/{resultId}": {
+      "get": {
+        "summary": "Get Analyze Result",
+        "description": "Retrieve Analyze operation status.",
+        "operationId": "GetAnalyzeResult",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Custom model identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeOperationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Keys from Model": {
+            "$ref": "./examples/AnalyzeOperationResult.json"
+          }
+        }
+      }
+    },
+    "/custom/models/{modelId}/copy": {
+      "post": {
+        "summary": "Copy Model",
+        "description": "Copy model artifacts to target subscription.",
+        "operationId": "CopyCustomModelAsync",
+        "consumes": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Model identifier to copy.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "copyRequest",
+            "in": "body",
+            "description": "Request object for copying model.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CopyRequest"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request to copy model artifacts queued successfully.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Result id to track the progress of copy operation. Result of copy operation can be obtained only when the operation status becomes \"succeeded\" in status field."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Model from id": {
+            "$ref": "./examples/CopyBatch.json"
+          }
+        }
+      }
+    },
+    "/custom/models/{modelId}/copyResults/{resultId}": {
+      "get": {
+        "summary": "Get Copy Result",
+        "description": "Retrieve Copy operation result.",
+        "operationId": "GetCopyResult",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "modelId",
+            "in": "path",
+            "description": "Custom model identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Copy operation result identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/CopyOperationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Keys from Model": {
+            "$ref": "./examples/GetOperationResult.json"
+          }
+        }
+      }
+    }
+  },  
+  "definitions": {
+    "OperationStatus": {
+      "type": "string",
+      "description": "Status of queued operation.",
+      "enum": [
+        "notStarted",
+        "running",
+        "succeeded",
+        "failed"
+      ],
+      "x-ms-enum": {
+        "name": "OperationStatus",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },
+    "AnalyzeOperationResult": {
+      "description": "Status and result of queued analyze operation.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Get or set status of operation.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Get date and time (UTC) the batch operation was submitted.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Get last updated date and time (UTC) of this operation.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "analyzeResult": {
+          "description": "Results of Analyze operation.",
+          "$ref": "#/definitions/AnalyzeResult"
+        }
+      }
+    },
+    "TrainRequest": {
+      "description": "Request parameter to train new model.",
+      "required": [
+        "source"
+      ],
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Get or set source path.",
+          "$ref": "#/definitions/SourcePath"
+        },
+        "sourceFilter": {
+          "$ref": "#/definitions/TrainSourceFilter",
+          "description": "Get or set filter to further search the\r\nsource path for content."
+        }
+      }
+    },
+    "TrainSourceFilter": {
+      "description": "Filters to be applied when traversing data source.",
+      "type": "object",
+      "required": [
+        "prefix"
+      ],
+      "properties": {
+        "prefix": {
+          "description": "A case-sensitive prefix string to filter content under the source location. For e.g., when using a Azure Blob Uri use the prefix to restrict subfolders for content.",
+          "maxLength": 128,
+          "minLength": 0,
+          "type": "string"
+        },
+        "includeSubFolders": {
+          "description": "A flag to indicate if sub folders within the set of\r\nprefix folders will also need to be included when searching\r\nfor content to be preprocessed.",
+          "type": "boolean",
+          "default": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "TrainResult": {
+      "description": "Response of the Train API call.",
+      "type": "object",
+      "required": [
+        "trainingDocuments",
+        "trainingFields",
+        "errors"
+      ],
+      "properties": {
+        "trainingDocuments": {
+          "description": "List of documents used to train the model and the\r\ntrain operation error reported by each.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormDocumentReport"
+          }
+        },
+        "trainingFields": {
+          "description": "Training Fields.",
+          "$ref": "#/definitions/TrainingFields"
+        },
+        "errors": {
+          "description": "Errors returned during the training operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormOperationError"
+          }
+        }
+      }
+    },
+    "TrainingFields": {
+      "description": "Training Fields.",
+      "type": "object",
+      "required": [
+        "fields",
+        "averageModelAccuracy"
+      ],
+      "properties": {
+        "fields": {
+          "description": "List of fields used to train the model and the\r\ntrain operation error reported by each.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormFieldsReport"
+          }
+        },
+        "averageModelAccuracy": {
+          "description": "Average accuracy.",
+          "type": "number"
+        }
+      }
+    },
+    "SourcePath": {
+      "description": "URI or local path to source data.",
+      "type": "object",
+      "properties": {
+        "source": {
+          "description": "Get or set source path to file to score.",
+          "maxLength": 2048,
+          "minLength": 0,
+          "type": "string"
+        }
+      }
+    },
+    "SourceDataStream": {
+      "description": "A pdf document or image (jpg,png,tiff) file to analyze.",
+      "type":"object"
+    },
+    "ModelInfo":{
+      "description": "A pdf document or image (jpg,png,tiff) file to analyze.",
+      "type":"object",
+      "properties": {      
+        "modelId": {
+          "description": "Get or set model identifier.",
+          "type": "string",
+          "format": "uuid",
+          "x-nullable": false
+        },
+        "status": {
+          "description": "Get or set the status of model.",
+          "enum": [
+            "creating",
+            "created",
+            "ready",
+            "invalid",
+            "tombstoned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ModelStatus",
+            "modelAsString": false
+          },
+          "x-nullable": false
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Get or set the created date time of the model.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Get or set the model last updated datetime.",
+          "type": "string",
+          "x-nullable": false
+        }
+      }
+    },
+    "Models": {
+      "description": "Result of query operation to fetch multiple models.",
+      "type": "object",
+      "required": [
+        "modelList"
+      ],
+      "properties": {
+        "modelList": {
+          "description": "Collection of models.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ModelInfo"
+          }
+        },
+        "@nextLink": {
+          "description": "Next link",
+          "type": "string"
+        }
+      }
+    },
+    "Model": {
+      "description": "Result of a model status query operation.",
+      "type": "object",
+      "required": [
+        "modelId",
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime",
+        "keys"
+      ],
+      "properties": {
+        "modelInfo":{
+          "$ref": "#/definitions/ModelInfo",
+          "description":"Basic Model info"
+        },
+        "keys": {
+          "$ref": "#/definitions/KeysResult",
+          "description": "Keys extracted by model."
+        },
+        "trainResult": {
+          "description": "Train batch operation result.",
+          "$ref": "#/definitions/TrainResult"
+        }        
+      }
+    },
+    "KeysResult": {
+      "description": "Keys extracted by a model.",
+      "type": "object",
+      "required": [
+        "clusters"
+      ],
+      "properties": {
+        "clusters": {
+          "description": "Object mapping ClusterIds to Key lists.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "FormDocumentReport": {
+      "type": "object",
+      "required": [
+        "documentName",
+        "pages",
+        "errors",
+        "status"
+      ],
+      "properties": {
+        "documentName": {
+          "description": "Reference to the data that the report is for.",
+          "type": "string"
+        },
+        "pages": {
+          "format": "int32",
+          "description": "Total number of pages trained on.",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "errors": {
+          "description": "List of errors per page.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "description": "Status of the training operation.",
+          "enum": [
+            "succeeded",
+            "partiallySucceeded",
+            "failed"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "TrainStatus",
+            "modelAsString": false
+          },
+          "x-nullable": false
+        }
+      }
+    },
+    "FormFieldsReport": {
+      "type": "object",
+      "required": [
+        "fieldName",
+        "accuracy"
+      ],
+      "properties": {
+        "fieldName": {
+          "description": "Field Name to be extracted.",
+          "type": "string"
+        },
+        "accuracy": {
+          "description": "Accuracy of extracted label data.",
+          "type": "number"
+        }
+      }
+    },
+    "FormOperationError": {
+      "description": "Error reported during an operation.",
+      "type": "object",
+      "required": [
+        "errorMessage"
+      ],
+      "properties": {
+        "errorMessage": {
+          "description": "Message reported during the train operation.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "type": "object",
+      "required": [
+        "error"
+      ],
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorInformation"
+        }
+      }
+    },
+    "ErrorInformation": {
+      "type": "object",
+      "required": [
+        "code",
+        "message"
+      ],
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "innererror": {
+          "$ref": "#/definitions/InnerError"
+        },
+        "message": {
+          "type": "string"
+        }
+      }
+    },
+    "InnerError": {
+      "type": "object",
+      "required": [
+        "requestId"
+      ],
+      "properties": {
+        "requestId": {
+          "type": "string"
+        }
+      }
+    },
+    "AnalyzeResult": {
+      "description": "Analyze API call result.",
+      "type": "object",
+      "required": [
+        "version",
+        "readResults",
+        "pageResults",
+        "documentResults"
+      ],
+      "properties": {
+        "version": {
+          "description": "Version of schema used for this result.",
+          "type": "string"
+        },
+        "readResults": {
+          "description": "Text extracted from the input.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReadResult"
+          }
+        },
+        "pageResults": {
+          "description": "Page-level information extracted from the input.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PageResult"
+          }
+        },
+        "documentResults": {
+          "description": "Document-level information extracted from the input.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DocumentResult"
+          }
+        },
+        "errors": {
+          "description": "List of errors reported during the analyze\r\noperation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormOperationError"
+          }
+        }
+      }
+    },
+    "ReadResult": {
+      "description": "Text extracted from a page in the input document.",
+      "type": "object",
+      "required": [
+        "page",
+        "angle",
+        "width",
+        "height",
+        "unit",
+        "language"
+      ],
+      "properties": {
+        "page": {
+          "description": "The 1-based page number in the input document.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "angle": {
+          "description": "The general orientation of the text in clockwise direction, measured in degrees between (-180, 180].",
+          "type": "number",
+          "minimum": -180,
+          "maximum": 180,
+          "exclusiveMinimum": true
+        },
+        "width": {
+          "description": "The width of the image/PDF in pixels/inches, respectively.",
+          "type": "number",
+          "minimum": 0
+        },
+        "height": {
+          "description": "The height of the image/PDF in pixels/inches, respectively.",
+          "type": "number",
+          "minimum": 0
+        },
+        "unit": {
+          "description": "The unit used by the width, height and boundingBox properties. For images, the unit is \"pixel\". For PDF, the unit is \"inch\".",
+          "type": "string",
+          "enum": [
+            "pixel",
+            "inch"
+          ],
+          "x-ms-enum": {
+            "name": "LengthUnit",
+            "modelAsString": false
+          },
+          "x-nullable": false
+        },
+        "language": {
+          "description": "The detected language on the page overall.",
+          "$ref": "#/definitions/Language"
+        },
+        "lines": {
+          "description": "A list of recognized text lines. The maximum number of lines returned is 300 per page.\n\nThe lines are sorted top to bottom, left to right, although in certain cases proximity is treated with higher priority. As the sorting order depends on the detected text, it may change across images and OCR version updates. Thus, business logic should be built upon the actual line location instead of order.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextLine"
+          }
+        }
+      }
+    },
+    "Language": {
+      "description": "Language code",
+      "type": "string",
+      "enum": [
+        "en",
+        "es"
+      ],
+      "x-ms-enum": {
+        "name": "Language",
+        "modelAsString": true
+      },
+      "x-nullable": false
+    },
+    "TextLine": {
+      "description": "An object representing an extracted text line.",
+      "type": "object",
+      "required": [
+        "text",
+        "boundingBox",
+        "words"
+      ],
+      "properties": {
+        "text": {
+          "description": "The text content of the line.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "description": "Bounding box of an extracted line.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "language": {
+          "description": "The detected language of this line, if different from the overall page language.",
+          "$ref": "#/definitions/Language"
+        },
+        "words": {
+          "description": "List of words in the text line.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextWord"
+          }
+        }
+      }
+    },
+    "TextWord": {
+      "description": "An object representing a word.",
+      "type": "object",
+      "required": [
+        "boundingBox",
+        "text",
+        "confidence"
+      ],
+      "properties": {
+        "text": {
+          "description": "The text content of the word.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "description": "Bounding box of an extracted word.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "$ref": "#/definitions/Confidence"
+        }
+      }
+    },
+    "BoundingBox": {
+      "description": "Quadrangle bounding box, with coordinates specified relative to the original image. The eight numbers represent the four points, clockwise from the top-left corner. For image, the (x, y) coordinates are measured in pixels. For PDF, the (x, y) coordinates are measured in inches.",
+      "type": "array",
+      "minItems": 8,
+      "maxItems": 8,
+      "items": {
+        "type": "number",
+        "x-nullable": false
+      }
+    },
+    "PageResult": {
+      "description": "Extraction information of a single page in a document.",
+      "type": "object",
+      "required": [
+        "page",
+        "keyValuePairs",
+        "tables"
+      ],
+      "properties": {
+        "page": {
+          "description": "Page number.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 1
+        },
+        "clusterId": {
+          "description": "Cluster identifier.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0,
+          "x-nullable": false
+        },
+        "keyValuePairs": {
+          "description": "List of key-value pairs extracted from the page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KeyValuePair"
+          }
+        },
+        "tables": {
+          "description": "List of data tables extracted from the page.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataTable"
+          }
+        }
+      }
+    },
+    "KeyValuePair": {
+      "description": "Representation of a key-value pair as a list of key and value tokens.",
+      "type": "object",
+      "required": [
+        "key",
+        "value",
+        "confidence"
+      ],
+      "properties": {
+        "key": {
+          "description": "Information about the extracted key in a key-value pair.",
+          "$ref": "#/definitions/KeyValueElement"
+        },
+        "value": {
+          "description": "Information about the extracted value in a key-value pair.",
+          "$ref": "#/definitions/KeyValueElement"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "$ref": "#/definitions/Confidence"
+        }
+      }
+    },
+    "KeyValueElement": {
+      "description": "Information about the extracted key or value in a key-value pair.",
+      "type": "object",
+      "required": [
+        "text",
+        "boundingBox"
+      ],
+      "properties": {
+        "text": {
+          "description": "The text content of the key or value.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "description": "Bounding box of the key or value.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "elements": {
+          "description": "List of element references.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElementReference"
+          }
+        },
+        "words": {
+          "description": "List of words in the text content of the key or value.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextWord"
+          }
+        }
+      }
+    },
+    "ElementReference": {
+      "description": "Reference to an extracted line or word.",
+      "type": "string"
+    },
+    "DataTable": {
+      "description": "Extraction information about a table contained in a page.",
+      "type": "object",
+      "required": [
+        "rows",
+        "columns",
+        "cells"
+      ],
+      "properties": {
+        "rows": {
+          "description": "Number of rows.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "columns": {
+          "description": "Number of columns.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "cells": {
+          "description": "List of cells contained in the table.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataTableCell"
+          }
+        }
+      }
+    },
+    "DataTableCell": {
+      "description": "Information about the extracted cell in a table.",
+      "type": "object",
+      "required": [
+        "rowIndex",
+        "columnIndex",
+        "text",
+        "boundingBox",
+        "confidence"
+      ],
+      "properties": {
+        "rowIndex": {
+          "description": "Row index of the cell.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "columnIndex": {
+          "description": "Column index of the cel.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "rowSpan": {
+          "description": "Number of rows spanned by this cell.",
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "x-nullable": false
+        },
+        "columnSpan": {
+          "description": "Number of columns spanned by this cell.",
+          "type": "integer",
+          "minimum": 1,
+          "default": 1,
+          "x-nullable": false
+        },
+        "text": {
+          "description": "The text content of the cell.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "description": "Bounding box of the cell.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "$ref": "#/definitions/Confidence"
+        },
+        "elements": {
+          "description": "List element references.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElementReference"
+          }
+        },
+        "words": {
+          "description": "List of words in the text content of the cell.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TextWord"
+          }
+        },
+        "isHeader": {
+          "description": "Is the current cell a header cell?",
+          "type": "boolean",
+          "default": false,
+          "x-nullable": false
+        },
+        "isFooter": {
+          "description": "Is the current cell a footer cell?",
+          "type": "boolean",
+          "default": false,
+          "x-nullable": false
+        }
+      }
+    },
+    "DocumentResult": {
+      "description": "A set of extracted fields corresponding to the input document.",
+      "required": [
+        "docType",
+        "pageRange",
+        "fields"
+      ],
+      "properties": {
+        "docType": {
+          "description": "Document type.",
+          "type": "string"
+        },
+        "pageRange": {
+          "description": "First and last page number where the document is found.",
+          "type": "array",
+          "minItems": 2,
+          "maxItems": 2,
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "x-nullable": false
+          }
+        },
+        "fields": {
+          "description": "Dictionary of analyzed field values. If a field is not detected, the corresponding field value will be set to null.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FieldValue"
+          }
+        }
+      }
+    },
+    "FieldValue": {
+      "description": "Recognized field value.",
+      "type": "object",
+      "required": [
+        "type",
+        "text",
+        "confidence"
+      ],
+      "properties": {
+        "type": {
+          "description": "Type of field value.",
+          "$ref": "#/definitions/FieldValueType"
+        },
+        "valueString": {
+          "description": "String value.",
+          "type": "string"
+        },
+        "valueDate": {
+          "description": "Date value.",
+          "type": "string",
+          "format": "date",
+          "x-nullable": false
+        },
+        "valueTime": {
+          "description": "Time value.",
+          "type": "string",
+          "format": "time",
+          "x-nullable": false
+        },
+        "valuePhoneNumber": {
+          "description": "Phone number value.",
+          "type": "string",
+          "format": "phone-number"
+        },
+        "valueNumber": {
+          "description": "Floating point value.",
+          "type": "number",
+          "x-nullable": false
+        },
+        "valueInteger": {
+          "description": "Integer value.",
+          "type": "integer",
+          "x-nullable": false
+        },
+        "valueArray": {
+          "description": "Array of field values.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FieldValue"
+          }
+        },
+        "valueObject": {
+          "description": "Dictionary of named field values.",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/FieldValue"
+          }
+        },
+        "text": {
+          "description": "Extracted text content of the recognized field.",
+          "type": "string"
+        },
+        "boundingBox": {
+          "description": "Bounding box of the field text, if appropriate.",
+          "$ref": "#/definitions/BoundingBox"
+        },
+        "confidence": {
+          "description": "Qualitative confidence measure.",
+          "$ref": "#/definitions/Confidence"
+        },
+        "elements": {
+          "description": "List element references.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ElementReference"
+          }
+        }
+      }
+    },
+    "FieldValueType": {
+      "type": "string",
+      "description": "Type of field value.",
+      "enum": [
+        "string",
+        "date",
+        "time",
+        "phoneNumber",
+        "number",
+        "integer",
+        "array",
+        "object"
+      ],
+      "x-ms-enum": {
+        "name": "FieldValueType",
+        "modelAsString": false
+      },
+      "x-nullable": false
+    },    
+    "Confidence": {
+      "description": "Confidence value.",
+      "type": "number",
+      "minimum": 0,
+      "maximum": 1
+    },
+    "CopyRequest": {
+      "description": "Contract to initiate a copy request.",
+      "type": "object",
+      "properties": {
+        "targetInformation": {
+          "description": "Information about target subscription.",
+          "type": "object",
+          "properties":{
+            "endpoint": {
+              "description": "Get or set enpoint path.",
+              "maxLength": 2048,
+              "minLength": 0,
+              "type": "string"
+            },
+            "resourceId": {
+              "description": "Get or set resource identifier.",
+              "maxLength": 2048,
+              "minLength": 0,
+              "type": "string"
+            }
+          }
+        },
+        "copyConfig": {
+          "description": "Copy operation options.",
+          "type": "object",
+          "required":[
+            "deleteSource"
+          ],
+          "properties":{
+            "deleteSource": {
+              "description": "Indicate deletion of source model artifacts.",
+              "type":"boolean",
+              "default":false
+            },
+            "supportCrossTenetCopy": {
+              "description": "Indicate copy target tenency requirement.",
+              "type": "boolean",
+              "default":false
+            },
+            "targetModelMetadata": {
+              "description": "Metadata for copied model to Target",
+              "type": "object",
+              "properties":{
+                "name": {
+                  "description": "Name of copied model at Target.",
+                  "maxLength": 128,
+                  "minLength": 0,
+                  "type": "string"
+                },
+                "description": {
+                  "description": "Description of copied model.",
+                  "maxLength": 1024,
+                  "minLength": 0,
+                  "type": "string"
+                },
+                "tags": {
+                  "description": "Tags for copied model",
+                  "type": "array",
+                  "items": {
+                    "type": "string"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "CopyResult": {
+      "description": "Results of copy model operation.",
+      "type": "object",
+      "required": [
+        "resourceLocation"
+      ],
+      "properties": {
+        "resourceLocation": {
+          "description": "Target location of copied model",
+          "type": "string"
+        },
+        "errors": {
+          "description": "List of errors reported during copy operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormOperationError"
+          }
+        }        
+      }
+    },
+    "CopyOperationResult": {
+      "description": "Status and result of copy operation.",
+      "type": "object",
+      "required": [
+        "copyResult"
+      ],      
+      "properties": {
+        "status": {
+          "description": "Get status of copy operation.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Get date time the copy operation was submitted.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Get last status update date time of this copy operation.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "copyResult": {
+          "description": "Copy operation result.",
+          "$ref": "#/definitions/CopyResult"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "Endpoint": {
+      "name": "Endpoint",
+      "description": "Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus2.api.cognitive.microsoft.com).",
+      "x-ms-parameter-location": "client",
+      "required": true,
+      "type": "string",
+      "in": "path",
+      "x-ms-skip-url-encoding": true
+    },
+    "FileStream": {
+      "name": "FileStream",
+      "description": ".json, .pdf, .jpg, .png or .tiff type file stream.",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "schema": {
+        "$ref": "#/definitions/SourceDataStream"
+      }
+    }
+  }
+}
