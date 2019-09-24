@@ -303,6 +303,14 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Encoding.json
+  - $(this-folder)/Microsoft.Media/preview/2019-09-01-preview/MediaGraphs.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
+  - $(this-folder)/Microsoft.Media/stable/2018-07-01/streamingservice.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AccountFilters.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/Accounts.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/AssetsAndAssetFilters.json
@@ -311,14 +319,7 @@ input-file:
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/Encoding.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/StreamingPoliciesAndStreamingLocators.json
   - $(this-folder)/Microsoft.Media/preview/2019-05-01-preview/streamingservice.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AccountFilters.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Accounts.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/AssetsAndAssetFilters.json
   - $(this-folder)/Microsoft.Media/stable/2018-07-01/Common.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/ContentKeyPolicies.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/Encoding.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/StreamingPoliciesAndStreamingLocators.json
-  - $(this-folder)/Microsoft.Media/stable/2018-07-01/streamingservice.json
   - $(this-folder)/Microsoft.Media/stable/2015-10-01/media.json
   - $(this-folder)/Microsoft.Media/preview/2018-03-30-preview/Accounts.json
   - $(this-folder)/Microsoft.Media/preview/2018-03-30-preview/Assets.json
