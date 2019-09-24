@@ -1502,7 +1502,12 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "$ref": "#/parameters/entityIdInPath"
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity extractor or the child entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "EntityModelUpdateObject",
@@ -3937,7 +3942,12 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "$ref": "#/parameters/entityIdInPath"
+            "name": "entityId",
+            "in": "path",
+            "description": "The entity extractor ID.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
           },
           {
             "name": "ChildEntityModelCreateObject",
