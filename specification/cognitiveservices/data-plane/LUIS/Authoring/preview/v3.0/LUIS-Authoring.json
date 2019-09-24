@@ -865,7 +865,7 @@
           "200": {
             "description": "A list of entity model infos.",
             "schema": {
-              "$ref": "#/definitions/EntityExtractorsList"
+              "$ref": "#/definitions/NDepthEntityExtractorsList"
             }
           },
           "default": {
@@ -1430,7 +1430,7 @@
           "200": {
             "description": "An entity model info.",
             "schema": {
-              "$ref": "#/definitions/EntityExtractor"
+              "$ref": "#/definitions/NDepthEntityExtractor"
             }
           },
           "default": {
@@ -3948,7 +3948,7 @@
             "format": "uuid"
           },
           {
-            "name": "ChildEntityModelCreateObject",
+            "name": "childEntityModelCreateObject",
             "in": "body",
             "required": true,
             "schema": {
@@ -3979,7 +3979,7 @@
           "application/json"
         ],
         "x-ms-examples": {
-          "Successful Create Composite Entity Child Model request": {
+          "Successful Create Entity Child Model request": {
             "$ref": "./examples/model/SuccessfulCreateEntityChildModelRequest.json"
           }
         }
@@ -8874,6 +8874,9 @@
         },
         {
           "$ref": "#/definitions/PatternAnyEntityExtractor"
+        },
+        {
+          "$ref": "#/definitions/NDepthEntityExtractor"
         }
       ]
     },
@@ -8883,31 +8886,6 @@
       "properties": {
         "roles": {
           "$ref": "#/definitions/EntityRoleList"
-        },
-        "children": {
-          "$ref": "#/definitions/ChildEntityModelInfo"
-        },
-        "instanceOf": {
-          "description": "Instance of Model.",
-          "type": "string"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ModelInfo"
-        }
-      ]
-    },
-    "ChildEntityModelInfo": {
-      "description": "A Child Entity Extractor model info.",
-      "type": "object",
-      "properties": {
-        "children": {
-          "$ref": "#/definitions/ChildEntityModelInfo"
-        },
-        "instanceOf": {
-          "description": "Instance of Model.",
-          "type": "string"
         }
       },
       "allOf": [
@@ -9140,6 +9118,32 @@
         }
       }
     },
+    "NDepthEntityExtractor": {
+      "description": "N-Depth Entity Extractor.",
+      "type": "object",
+      "x-ms-discriminator-value": "N-Depth Entity Extractor",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ModelInfo"
+        },
+        {
+          "$ref": "#/definitions/EntityModelInfo"
+        }
+      ],
+      "properties": {
+        "customPrebuiltDomainName": {
+          "description": "The domain name.",
+          "type": "string"
+        },
+        "customPrebuiltModelName": {
+          "description": "The intent name or entity name.",
+          "type": "string"
+        },
+        "children": {
+          "type": "array"
+        }
+      }
+    },
     "IntentClassifiersList": {
       "description": "List of Intent Classifiers.",
       "type": "array",
@@ -9152,6 +9156,13 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/EntityExtractor"
+      }
+    },
+    "NDepthEntityExtractorsList": {
+      "description": "List of N-Depth Entity Extractors.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/NDepthEntityExtractor"
       }
     },
     "FeaturesResponseObject": {
