@@ -271,6 +271,8 @@ uncomment the  `exclude-file` section below and add the file paths.
 
 ## Suppression
 
+## Suppression
+
 ``` yaml
 directive:
   - suppress: ListInOperationName
@@ -281,6 +283,10 @@ directive:
     from: kusto.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/removePrincipals"].post.operationId'
     reason: 'Already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: kusto.json
+    where: $.definitions.Database
+    reason: 'Action is expected to receive a subclass of Database'
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: kusto.json
     where: $.definitions.EventHubDataConnection
