@@ -585,6 +585,46 @@
       "required": [
         "typeProperties"
       ]
+    },
+    "ChainingTrigger": {
+      "description": "Trigger that allows the referenced pipeline to depend on other pipeline runs based on runDimension Name/Value pairs. Upstream pipelines should declare the same runDimension Name and their runs should have the values for those runDimensions. The referenced pipeline run would be triggered if the values for the runDimension match for all upstream pipeline runs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Trigger"
+        }
+      ],
+      "properties": {
+        "pipeline": {
+          "$ref": "../datafactory.json#/definitions/TriggerPipelineReference",
+          "description": "Pipeline for which runs are created when all upstream pipelines complete successfully."
+        },
+        "typeProperties": {
+          "description": "Chaining Trigger properties.",
+          "x-ms-client-flatten": true,
+          "properties": {
+            "dependsOn": {
+              "type": "array",
+              "items": {
+                "$ref": "../datafactory.json#/definitions/PipelineReference"
+              },
+              "description": "Upstream Pipelines."
+            },
+            "runDimension": {
+              "description": "Run Dimension property that needs to be emitted by upstream pipelines.",
+              "type": "string"
+            }
+          },
+          "required": [
+            "runDimension",
+            "dependsOn"
+          ]
+        }
+      },
+      "required": [
+        "pipeline",
+        "typeProperties"
+      ]
     }
   }
 }
