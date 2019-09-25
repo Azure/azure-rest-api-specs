@@ -1,0 +1,216 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoProvisioningAwsAccountId": {
+      "get": {
+        "x-ms-examples": {
+          "Get auto provisioning aws accounts id for a subscription": {
+            "$ref": "./examples/AutoProvisioningAwsAccount/GetAutoProvisioningAwsAccountsIdSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AutoProvisioningAwsAccounts"
+        ],
+        "description": "Exposes the auto provisioning aws accounts id of the subscription",
+        "operationId": "AutoProvisioningAwsAccountsId_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningAwsAccountsIdList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create auto provisioning for aws account in a subscription": {
+            "$ref": "./examples/AutoProvisioningAwsAccount/CreateAutoProvisioningSettingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AutoProvisioningAwsAccount"
+        ],
+        "description": "Details of a specific setting and credentials of an aws account",
+        "operationId": "AutoProvisioningAwsAccount_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "#/parameters/AutoProvisioningAwsAccountCredentials"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AutoProvisioningAwsAccountId"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AutoProvisioningAwsAccountsIdList": {
+      "type": "object",
+      "description": "List of all the auto provisioning aws account response",
+      "properties": {
+        "value": {
+          "description": "List of all the auto provisioning accounts id",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoProvisioningAwsAccountId"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AutoProvisioningAwsAccountId": {
+      "type": "object",
+      "description": "Auto provisioning aws account id",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Auto provisioning setting data",
+          "$ref": "#/definitions/AutoProvisioningAwsAccountIdProperties"
+        }
+      }
+    },
+    "AutoProvisioningAwsAccountCredentials": {
+      "type": "object",
+      "description": "Auto provisioning of aws account credentials",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Auto provisioning setting data",
+          "$ref": "#/definitions/AutoProvisioningAwsAccountCredentialsProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "AutoProvisioningAwsAccountCredentialsProperties": {
+      "type": "object",
+      "description": "describes properties of an auto provisioning aws account credentials",
+      "properties": {
+        "awsAccessKeyId": {
+          "type": "string",
+          "description": "Aws access key id",
+          "x-ms-enum": {
+            "name": "awsAccessKeyId",
+            "modelAsString": true          }
+        },
+        "awsSecretAccessKey": {
+          "type": "string",
+          "description": "Aws secret access key",
+          "x-ms-enum": {
+            "name": "awsSecretAccessKey",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "awsAccessKeyId",
+        "awsSecretAccessKey"
+      ]
+    },
+    "AutoProvisioningAwsAccountIdProperties": {
+      "type": "object",
+      "description": "describes properties of an auto provisioning aws account credentials",
+      "properties": {
+        "awsAccountId": {
+          "type": "string",
+          "description": "Aws account id"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AutoProvisioningAwsAccountId": {
+      "name": "awsAccountId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Auto provisioning aws account id",
+      "x-ms-parameter-location": "method"
+    },
+    "AutoProvisioningAwsAccountCredentials": {
+      "name": "setting",
+      "in": "body",
+      "required": true,
+      "description": "Auto provisioning aws account credentials",
+      "schema": {
+        "$ref": "#/definitions/AutoProvisioningAwsAccountCredentials"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
