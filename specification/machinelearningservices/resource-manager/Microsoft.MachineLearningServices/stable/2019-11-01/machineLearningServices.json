@@ -1978,6 +1978,146 @@
       ],
       "x-ms-discriminator-value": "AmlCompute"
     },
+    "AmlInstance": {
+      "description": "An Azure Machine Learning instance.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Compute"
+        },
+        {
+          "type": "object",
+          "properties": {
+            "properties": {
+              "description": "AML Instance properties",
+              "type": "object",
+              "properties": {
+                "vmSize": {
+                  "description": "Virtual Machine Size",
+                  "type": "string"
+                },
+                "subnet": {
+                  "title": "Subnet.",
+                  "description": "Virtual network subnet resource ID the compute nodes belong to.",
+                  "$ref": "#/definitions/ResourceId"
+                },
+                "dataStoresMountSettings": {
+                  "type": "object",
+                  "description": "Describes what data stores will be mounted on this compute instance."
+                  "dataStoreSelection": {
+                    "type": "string",
+                    "description": "Allows users to select between mounting All vs Selected datastores from the parent workspace. The 'All' setting also implies that any datastores that later become part of the workspace will be automatically mounted to the compute instance on next start.",
+                    "default": "All",
+                    "enum": [
+                      "All",
+                      "UserSpecified"
+                    ],
+                    "x-ms-enum": {
+                      "name": "dataStoreSelection",
+                      "modelAsString": true
+                    }
+                  },
+                  "dataStores": {
+                    "description": "Specifies the set of data stores that will be mounted on this compute instance. This should only be specified if dataStoreSelection is set to 'UserSpecified'.",
+                    "type": "array",
+                    "items": {
+                      "$ref": "#/definitions/AmlInstanceDatastore"
+                    }
+                  }
+                },
+                "customScriptSettings": {
+                  "type": "object",
+                  "startupScript": {
+                    "type": "object",
+                    "scriptLocation": {
+                      "type": "string",
+                      "description": "The location of customization script. Could be a URI or a relative file path in the default fileshare in the parent workspace."
+                    },
+                    "scriptParameters": {
+                      "type": "string",
+                      "description": "Parameters required for this script if any."
+                    }
+                  }
+                },
+                "softwareUpdateSettings": {
+                  "type": "object",
+                  "osUpdateSettings": {
+                    "type": "object",
+                    "osUpdateType": {
+                      "type": "string",
+                      "default": "Recommended",
+                      "title": "Type of automatic operating system updates to install",
+                      "enum": [
+                        "Critical",
+                        "Recommended"
+                      ],
+                      "x-ms-enum": {
+                        "name": "osUpdateType",
+                        "modelAsString": true
+                      }
+                    },
+                    "updateFrequencyInDays": {
+                      "type": "integer",
+                      "format": "int64",
+                      "description": "Frequency of update checks and installation. Maximum allowable frequency is 30 days."
+                    },
+                    "updateHourInUtc": {
+                      "type": "integer",
+                      "format": "int64"
+                      "description": "Hour of the day (0-23) in Universal Time at which software updates can be installed, potentially requiring VM reboot."
+                    }
+                  },
+                  "sdkUpdateSettings": {
+                    "type": "object",
+                    "readonly": true,
+                    "availableUpdates": {
+                      "type": "array",
+                      "readonly": true,
+                      "description": "Describes available SDK updates for this compute instance.",
+                      "items": {
+                        "$ref": "#/definitions/AmlInstanceSdkUpdate"
+                      }
+                    }
+                  }
+                },
+                "sshSettings": {
+                  "type": "object",
+                  "sshPublicAccess": {
+                    "type": "string",
+                    "default": "Disabled",
+                    "title": "Access policy for SSH",
+                    "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.",
+                    "enum": [
+                      "Enabled",
+                      "Disabled"
+                    ],
+                    "x-ms-enum": {
+                      "name": "sshPublicAccess",
+                      "modelAsString": true
+                    }
+                  },
+                  "adminCredentials": {
+                    "type": "object",
+                    "adminPublicKey": {
+                      "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
+                    }
+                  }
+                },
+                "errors": {
+                  "readOnly": true,
+                  "title": "Errors.",
+                  "description": "Collection of errors encountered by various compute nodes during node setup.",
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/definitions/MachineLearningServiceError"
+                  }
+                }
+              }
+            }
+          }
+        }
+      ],
+      "x-ms-discriminator-value": "AmlInstance"
+    },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
       "allOf": [
@@ -2501,6 +2641,7 @@
       "enum": [
         "AKS",
         "AmlCompute",
+        "AmlInstance",
         "DataFactory",
         "VirtualMachine",
         "HDInsight",
@@ -2564,6 +2705,44 @@
         "code",
         "message"
       ]
+    },
+    "AmlInstanceDatastore": {
+      "type": "object",
+      "description": "Represents specification for datastore requested to be mounted on an AzureML instance as well as its mounting status.",
+      "name": {
+        "type": "string",
+        "description": "Name of the datastore to be mounted on an AzureML instance."
+      },
+      "state": {
+        "type": "string",
+        "description": "Current state of the datastore on the parent AzureML instance.",
+        "enum": [
+          "Mounted",
+          "MountFailed"
+        ],
+        "x-ms-enum": {
+          "name": "datastoreState",
+          "modelAsString": true
+        },
+        "readonly": true
+      },
+      "error": {
+        "type": "string",
+        "description": "Describes the error if datastore could not be successfully mounted on the parent AzureML instance.",
+        "readonly": true
+      }
+    },
+    "AmlInstanceSdkUpdate": {
+      "type": "object",
+      "readonly": true,
+      "updateName": {
+        "type": "string",
+        "description": "Short name of the update."
+      },
+      "updateDescription": {
+        "type": "string",
+        "description": "Detailed description of the available SDK update."
+      }
     }
   }
 }
