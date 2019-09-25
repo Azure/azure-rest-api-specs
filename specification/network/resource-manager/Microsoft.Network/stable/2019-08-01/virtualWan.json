@@ -2927,10 +2927,6 @@
           },
           "description": "List of VpnSites in the VirtualWAN."
         },
-        "securityProviderName": {
-          "type": "string",
-          "description": "The Security Provider name."
-        },
         "allowBranchToBranchTraffic": {
           "type": "boolean",
           "description": "True if branch to branch traffic is allowed."
@@ -3175,6 +3171,10 @@
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The expressRouteGateway associated with this VirtualHub."
         },
+        "azureFirewall": {
+          "$ref": "./network.json#/definitions/SubResource",
+          "description": "The azureFirewall associated with this VirtualHub."
+        },
         "virtualNetworkConnections": {
           "type": "array",
           "description": "List of all vnet connections with this VirtualHub.",
@@ -3193,6 +3193,10 @@
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual hub resource."
+        },
+        "securityProviderName": {
+          "type": "string",
+          "description": "The Security Provider name."
         }
       },
       "description": "Parameters for VirtualHub."
