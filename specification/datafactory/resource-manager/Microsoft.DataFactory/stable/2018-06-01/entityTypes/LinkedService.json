@@ -850,6 +850,91 @@
         "host"
       ]
     },
+    "AzureFileStorageLinkedService": {
+      "x-ms-discriminator-value": "AzureFileStorage",
+      "description": "Azure File Storage linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure File Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureFileStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureFileStorageLinkedServiceTypeProperties": {
+      "description": "Azure File Storage linked service properties.",
+      "properties": {
+        "host": {
+          "type": "object",
+          "description": "Host name of the server. Type: string (or Expression with resultType string)."
+        },
+        "userId": {
+          "type": "object",
+          "description": "User ID to logon the server. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to logon the server.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "host"
+      ]
+    },
+    "GoogleCloudStorageLinkedService": {
+      "x-ms-discriminator-value": "GoogleCloudStorage",
+      "description": "Linked service for Google Cloud Storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Google Cloud Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleCloudStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleCloudStorageLinkedServiceTypeProperties": {
+      "description": "Google Cloud Storage linked service properties.",
+      "properties": {
+        "accessKeyId": {
+          "type": "object",
+          "description": "The access key identifier of the Google Cloud Storage Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
+        },
+        "secretAccessKey": {
+          "description": "The secret access key of the Google Cloud Storage Identity and Access Management (IAM) user.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "serviceUrl": {
+          "type": "object",
+          "description": "This value specifies the endpoint to access with the Google Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "OracleLinkedService": {
       "x-ms-discriminator-value": "Oracle",
       "description": "Oracle database.",

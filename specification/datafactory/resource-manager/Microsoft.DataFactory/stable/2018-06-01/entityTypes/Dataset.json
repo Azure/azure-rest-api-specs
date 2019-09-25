@@ -152,6 +152,34 @@
         }
       ]
     },
+    "AzureFileStorageLocation": {
+      "description": "The location of file server dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ]
+    },
+    "GoogleCloudStorageLocation": {
+      "description": "The location of Google Cloud Storage dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DatasetLocation"
+        }
+      ],
+      "properties": {
+        "bucketName": {
+          "type": "object",
+          "description": "Specify the bucketName of Google Cloud Storage. Type: string (or Expression with resultType string)"
+        },
+        "version": {
+          "type": "object",
+          "description": "Specify the version of Google Cloud Storage. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "FtpServerLocation": {
       "description": "The location of ftp server dataset.",
       "type": "object",
@@ -1528,6 +1556,10 @@
         "tableName": {
           "type": "object",
           "description": "The Azure MySQL database table name. Type: string (or Expression with resultType string)."
+        },
+		"table": {
+          "type": "object",
+          "description": "The name of Azure MySQL database table. Type: string (or Expression with resultType string)."
         }
       }
     },
