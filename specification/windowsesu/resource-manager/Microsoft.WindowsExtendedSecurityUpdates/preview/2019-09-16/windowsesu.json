@@ -190,6 +190,15 @@
           },
           {
             "$ref": "#/parameters/MultipleActivationKeyNameParameter"
+          },
+          {
+            "name": "multipleActivationKey",
+            "in": "body",
+            "description": "Details of the MAK key.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKey"
+            }
           }
         ],
         "responses": {
@@ -206,6 +215,84 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_Update",
+        "x-ms-examples": {
+          "UpdateMultipleActivationKey": { "$ref": "./examples/UpdateMultipleActivationKey.json" }
+        },
+        "description": "Update a MAK key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MultipleActivationKeyNameParameter"
+          },
+          {
+            "name": "multipleActivationKey",
+            "in": "body",
+            "description": "Details of the MAK key.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKeyUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/MultipleActivationKey"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": ["MultipleActivationKeys"],
+        "operationId": "MultipleActivationKeys_Delete",
+        "x-ms-examples": {
+          "DeleteMultipleActivationKey": { "$ref": "./examples/DeleteMultipleActivationKey.json" }
+        },
+        "description": "Delete a MAK key.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/MultipleActivationKeyNameParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     }
   },
@@ -213,6 +300,9 @@
     "MultipleActivationKey": {
       "description": "MAK key details.",
       "type": "object",
+      "required": [
+        "location"
+      ],
       "properties": {
         "id": {
           "description": "Resource Id.",
@@ -228,6 +318,18 @@
           "description": "Resource type.",
           "type": "string",
           "readOnly": true
+        },
+        "location": {
+          "description": "Resource location.",
+          "type": "string",
+          "x-ms-mutability": ["create", "read"]
+        },
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         },
         "properties": {
           "description": "",
@@ -253,11 +355,11 @@
                 "MoreThan1000"
               ],
               "type": "string",
-              "readOnly": true,
               "x-ms-enum": {
                 "name": "installedServerNumberRange",
                 "modelAsString": false
-              }
+              },
+              "x-ms-mutability": ["create", "read"]
             }
           }
         }
@@ -279,6 +381,19 @@
           "description": "Link to the next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "MultipleActivationKeyUpdate": {
+      "description": "MAK key details.",
+      "type": "object",
+      "properties": {
+        "tags": {
+          "description": "Resource tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
