@@ -1012,6 +1012,38 @@
         }
       }
     },
+    "CosmosDbSqlApiCollectionDataset": {
+      "x-ms-discriminator-value": "CosmosDbSqlApiCollection",
+      "description": "Microsoft Azure CosmosDB (SQL API) Collection dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Dataset"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "CosmosDB (SQL API) Collection dataset properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CosmosDbSqlApiCollectionDatasetTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "CosmosDbSqlApiCollectionDatasetTypeProperties": {
+      "description": "CosmosDB (SQL API) Collection dataset properties.",
+      "properties": {
+        "collectionName": {
+          "type": "object",
+          "description": "CosmosDB (SQL API) collection name. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "collectionName"
+      ]
+    },
     "DocumentDbCollectionDataset": {
       "x-ms-discriminator-value": "DocumentDbCollection",
       "description": "Microsoft Azure Document Database Collection dataset.",
