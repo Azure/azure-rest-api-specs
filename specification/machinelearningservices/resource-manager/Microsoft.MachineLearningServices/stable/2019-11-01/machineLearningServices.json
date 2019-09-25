@@ -2002,7 +2002,7 @@
                 },
                 "dataStoresMountSettings": {
                   "type": "object",
-                  "description": "Describes what data stores will be mounted on this compute instance."
+                  "description": "Describes what data stores will be mounted on this compute instance.",
                   "dataStoreSelection": {
                     "type": "string",
                     "description": "Allows users to select between mounting All vs Selected datastores from the parent workspace. The 'All' setting also implies that any datastores that later become part of the workspace will be automatically mounted to the compute instance on next start.",
@@ -2062,7 +2062,7 @@
                     },
                     "updateHourInUtc": {
                       "type": "integer",
-                      "format": "int64"
+                      "format": "int64",
                       "description": "Hour of the day (0-23) in Universal Time at which software updates can be installed, potentially requiring VM reboot."
                     }
                   },
@@ -2098,6 +2098,7 @@
                   "adminCredentials": {
                     "type": "object",
                     "adminPublicKey": {
+                      "type": "string",
                       "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
                     }
                   }
