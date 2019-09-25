@@ -4,11 +4,11 @@
 
 Configuration for generating Custom Vision Training SDK.
 
-The current release is `release_3_0`.
+The current release is `release_3_1`.
 
 ``` yaml
 
-tag: release_3_0
+tag: release_3_1
 openapi-type: data-plane
 ```
 # Releases
@@ -41,6 +41,12 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 input-file: stable/v3.0/Training.json
 ```
 
+### Release 3.1
+These settings apply only when `--tag=release_3_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_3_1'
+input-file: stable/v3.1/Training.json
+```
 # Validation
 
 ## Suppression
@@ -146,6 +152,7 @@ input-file:
   - $(this-folder)/stable/v2.1/Training.json
   - $(this-folder)/stable/v2.2/Training.json
   - $(this-folder)/stable/v3.0/Training.json
+  - $(this-folder)/stable/v3.1/Training.json
 
 ```
 

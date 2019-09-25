@@ -41,6 +41,14 @@
             "type": "object"
           }
         },
+        "runDimensions": {
+          "description": "Dimensions emitted by Pipeline.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object",
+            "description": "Type: string (or Expression with resultType string)."
+          }
+        },
         "folder": {
           "description": "The folder that this Pipeline is in. If not specified, Pipeline will appear at the root level.",
           "type": "object",
@@ -776,6 +784,21 @@
         }
       }
     },
+    "OrcSource": {
+      "description": "A copy activity ORC source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreReadSettings",
+          "description": "ORC store settings."
+        }
+      }
+    },
     "DelimitedTextSink": {
       "description": "A copy activity DelimitedText sink.",
       "type": "object",
@@ -811,6 +834,21 @@
         "formatSettings": {
           "$ref": "#/definitions/JsonWriteSettings",
           "description": "Json format settings."
+        }
+      }
+    },
+    "OrcSink": {
+      "description": "A copy activity ORC sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "storeSettings": {
+          "$ref": "#/definitions/StoreWriteSettings",
+          "description": "ORC store settings."
         }
       }
     },
@@ -952,12 +990,27 @@
         }
       }
     },
+    "TabularSource": {
+      "description": "Copy activity sources of tabular type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
     "AzureTableSource": {
       "description": "A copy activity Azure Table source.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1010,6 +1063,33 @@
         "nestingSeparator": {
           "type": "object",
           "description": "Nested properties separator. Type: string (or Expression with resultType string)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
+    "CosmosDbSqlApiSource": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SQL API query. Type: string (or Expression with resultType string)."
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
+        },
+        "preferredRegions": {
+          "type": "object",
+          "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
         }
       }
     },
@@ -1078,7 +1158,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1108,7 +1188,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1123,7 +1203,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1138,7 +1218,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1153,7 +1233,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1168,7 +1248,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1183,7 +1263,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1213,7 +1293,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1267,7 +1347,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1282,7 +1362,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1297,7 +1377,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1316,7 +1396,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1335,7 +1415,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1447,7 +1527,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1473,7 +1553,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1503,7 +1583,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1533,7 +1613,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1563,7 +1643,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1642,7 +1722,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1745,7 +1825,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1805,7 +1885,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1870,6 +1950,10 @@
         "batchSize": {
           "type": "object",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -1893,6 +1977,10 @@
         "batchSize": {
           "type": "object",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -1922,7 +2010,7 @@
       }
     },
     "Office365Source": {
-      "description": "A copy activity source for an Office365 service.",
+      "description": "A copy activity source for an Office 365 service.",
       "type": "object",
       "allOf": [
         {
@@ -1949,6 +2037,10 @@
         "endTime": {
           "type": "object",
           "description": "End time of the requested range for this dataset. Type: string (or Expression with resultType string)."
+        },
+        "outputColumns": {
+          "type": "object",
+          "description": "The columns to be read out from the Office 365 table. Type: array of objects (or Expression with resultType array of objects). Example: [ { \"name\": \"Id\" }, { \"name\": \"CreatedDateTime\" } ]"
         }
       }
     },
@@ -2010,7 +2102,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2025,7 +2117,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2070,7 +2162,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2085,7 +2177,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2100,7 +2192,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2115,7 +2207,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2130,7 +2222,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2145,7 +2237,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2160,7 +2252,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2175,7 +2267,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2190,7 +2282,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2205,7 +2297,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2220,7 +2312,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2235,7 +2327,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2250,7 +2342,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2265,7 +2357,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2280,7 +2372,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2295,7 +2387,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2310,7 +2402,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2325,7 +2417,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2340,7 +2432,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2355,7 +2447,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2370,7 +2462,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2385,7 +2477,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2400,7 +2492,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2415,7 +2507,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2430,7 +2522,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2445,7 +2537,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2495,7 +2587,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2510,7 +2602,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2525,7 +2617,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2540,7 +2632,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2555,7 +2647,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2570,7 +2662,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2585,7 +2677,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2864,7 +2956,22 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "Describes how to write data to Azure Cosmos DB. Allowed values: insert and upsert."
+          "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
+        }
+      }
+    },
+    "CosmosDbSqlApiSink": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
         }
       }
     },
@@ -3288,6 +3395,10 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -3317,6 +3428,10 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -3346,6 +3461,10 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
       "required": [

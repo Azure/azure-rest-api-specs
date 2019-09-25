@@ -4971,6 +4971,14 @@
           },
           "readOnly": true
         },
+        "runDimensions": {
+          "description": "Run dimensions emitted by Pipeline run.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "invokedBy": {
           "description": "Entity that started the pipeline run.",
           "$ref": "#/definitions/PipelineRunInvokedBy",
@@ -5208,6 +5216,22 @@
           "type": "object",
           "additionalProperties": {
             "type": "string"
+          },
+          "readOnly": true
+        },
+        "runDimension": {
+          "description": "Run dimension for which trigger was fired.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "dependencyStatus": {
+          "description": "Status of the upstream pipelines.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "object"
           },
           "readOnly": true
         }

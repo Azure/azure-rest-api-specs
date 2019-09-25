@@ -50,6 +50,15 @@ input-file:
 - Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
 ```
 
+### Tag: package-2019-08-preview
+
+These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview'
+input-file:
+- Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
+```
+
 ---
 # Code Generation
 
@@ -149,6 +158,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.OperationalInsights/preview/2015-11-01-preview/OperationalInsights.json
   - $(this-folder)/Microsoft.OperationalInsights/stable/2015-03-20/OperationalInsights.json
+  - $(this-folder)/Microsoft.OperationalInsights/preview/2019-08-01-preview/Clusters.json
 
 ```
 

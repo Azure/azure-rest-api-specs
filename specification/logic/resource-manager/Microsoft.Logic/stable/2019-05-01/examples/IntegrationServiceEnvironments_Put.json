@@ -1,0 +1,198 @@
+{
+  "parameters": {
+    "api-version": "2019-05-01",
+    "subscriptionId": "f34b22a3-2202-4fb1-b040-1332bd928c84",
+    "resourceGroup": "testResourceGroup",
+    "integrationServiceEnvironmentName": "testIntegrationServiceEnvironment",
+    "integrationServiceEnvironment": {
+      "sku": {
+        "capacity": 2,
+        "name": "Premium"
+      },
+      "location": "brazilsouth",
+      "properties": {
+        "networkConfiguration": {
+          "accessEndpoint": {
+            "type": "Internal"
+          },
+          "subnets": [
+            {
+              "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s1"
+            },
+            {
+              "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s2"
+            },
+            {
+              "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s3"
+            },
+            {
+              "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s4"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/operationStatuses/eyJmbG93T3BlcmF0aW9uIjoiUHV0SW50ZWdyYXRpb25TZXJ2aWNlRW52aXJvbm1lbnQiLCJvcGVyYXRpb25TZXF1ZW5jZUlkIjoiMDg1ODYzNjkwMzg1NzEwMTExNzUifQ==?api-version=2019-05-01"
+      },
+      "body": {
+        "sku": {
+          "name": "Developer",
+          "capacity": 0
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "state": "Enabled",
+          "integrationServiceEnvironmentId": "13b261d30b984753869902d7f47f4d55",
+          "endpointsConfiguration": {
+            "workflow": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "40.69.195.162"
+                },
+                {
+                  "address": "10.43.1.0/24"
+                }
+              ],
+              "accessEndpointIpAddresses": [
+                {
+                  "address": "10.43.1.6"
+                }
+              ]
+            },
+            "connector": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "40.127.188.117"
+                },
+                {
+                  "address": "40.85.114.29"
+                },
+                {
+                  "address": "10.43.2.0/24"
+                },
+                {
+                  "address": "10.43.3.0/24"
+                }
+              ]
+            }
+          },
+          "networkConfiguration": {
+            "accessEndpoint": {
+              "type": "Internal"
+            },
+            "subnets": [
+              {
+                "name": "testVNET/s1",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s1",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "name": "testVNET/s2",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s2",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "name": "testVNET/s3",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s3",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "name": "testVNET/s4",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s4",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+        "name": "testIntegrationServiceEnvironment",
+        "type": "Microsoft.Logic/integrationServiceEnvironments",
+        "location": "northeurope"
+      }
+    },
+    "201": {
+      "headers": {
+        "azure-AsyncOperation": "https://management.azure.com/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment/operationStatuses/eyJmbG93T3BlcmF0aW9uIjoiUHV0SW50ZWdyYXRpb25TZXJ2aWNlRW52aXJvbm1lbnQiLCJvcGVyYXRpb25TZXF1ZW5jZUlkIjoiMDg1ODYzNjkwMzg1NzEwMTExNzUifQ==?api-version=2019-05-01"
+      },
+      "body": {
+        "sku": {
+          "name": "Developer",
+          "capacity": 0
+        },
+        "properties": {
+          "provisioningState": "InProgress",
+          "state": "Enabled",
+          "integrationServiceEnvironmentId": "13b261d30b984753869902d7f47f4d55",
+          "endpointsConfiguration": {
+            "workflow": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "40.69.195.162"
+                },
+                {
+                  "address": "10.43.1.0/24"
+                }
+              ],
+              "accessEndpointIpAddresses": [
+                {
+                  "address": "10.43.1.6"
+                }
+              ]
+            },
+            "connector": {
+              "outgoingIpAddresses": [
+                {
+                  "address": "40.127.188.117"
+                },
+                {
+                  "address": "40.85.114.29"
+                },
+                {
+                  "address": "10.43.2.0/24"
+                },
+                {
+                  "address": "10.43.3.0/24"
+                }
+              ]
+            }
+          },
+          "networkConfiguration": {
+            "accessEndpoint": {
+              "type": "Internal"
+            },
+            "subnets": [
+              {
+                "name": "testVNET/s1",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s1",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "name": "testVNET/s2",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s2",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "name": "testVNET/s3",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s3",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              },
+              {
+                "name": "testVNET/s4",
+                "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Network/virtualNetworks/testVNET/subnets/s4",
+                "type": "Microsoft.Network/virtualNetworks/subnets"
+              }
+            ]
+          }
+        },
+        "id": "/subscriptions/f34b22a3-2202-4fb1-b040-1332bd928c84/resourceGroups/testResourceGroup/providers/Microsoft.Logic/integrationServiceEnvironments/testIntegrationServiceEnvironment",
+        "name": "testIntegrationServiceEnvironment",
+        "type": "Microsoft.Logic/integrationServiceEnvironments",
+        "location": "northeurope"
+      }
+    }
+  }
+}
