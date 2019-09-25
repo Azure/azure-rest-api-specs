@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2019-09-16` is specified on the co
 
 ```yaml $(tag) == 'package-2019-09-16'
 input-file:
-  - Microsoft.WindowsExtendedSecurityUpdates/preview/2019-09-16/windowsesu.json
+  - Microsoft.WindowsESU/preview/2019-09-16/windowsesu.json
 ```
 
 ---

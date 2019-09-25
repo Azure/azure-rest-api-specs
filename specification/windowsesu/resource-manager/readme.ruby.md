@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2019-09-16 --ruby` is specified on
 Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
 
 ```yaml $(tag) == 'package-2019-09-16' && $(ruby)
-namespace: Microsoft.WindowsExtendedSecurityUpdates
+namespace: Microsoft.WindowsESU
 output-folder: $(ruby-sdks-folder)/windowsesu
 ```

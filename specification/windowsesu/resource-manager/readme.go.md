@@ -14,6 +14,6 @@ These settings apply only when `--tag=package-2019-09-16 --go` is specified on t
 Please also specify `--go-sdks-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ```yaml $(tag) == 'package-2019-09-16' && $(go)
-namespace: Microsoft.WindowsExtendedSecurityUpdates
+namespace: Microsoft.WindowsESU
 output-folder: $(go-sdks-folder)/windowsesu/Generated
 ```

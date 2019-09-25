@@ -8,7 +8,7 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: Microsoft.WindowsExtendedSecurityUpdates
+  namespace: Microsoft.WindowsESU
   package-name: windowsesu
   package-version: 2019-09-16
   clear-output-folder: true
