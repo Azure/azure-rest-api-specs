@@ -398,7 +398,7 @@
         },
         "x-ms-examples": {
           "Get Keys from Model": {
-            "$ref": "./examples/GetOperationResult.json"
+            "$ref": "./examples/CopyOperationResult.json"
           }
         }
       }
@@ -554,6 +554,12 @@
     "ModelInfo":{
       "description": "A pdf document or image (jpg,png,tiff) file to analyze.",
       "type":"object",
+      "required": [
+        "modelId",
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ],
       "properties": {      
         "modelId": {
           "description": "Get or set model identifier.",
@@ -615,10 +621,6 @@
       "description": "Result of a model status query operation.",
       "type": "object",
       "required": [
-        "modelId",
-        "status",
-        "createdDateTime",
-        "lastUpdatedDateTime",
         "keys"
       ],
       "properties": {
@@ -1294,7 +1296,7 @@
           "type": "object",
           "properties":{
             "endpoint": {
-              "description": "Get or set enpoint path.",
+              "description": "Get or set endpoint path.",
               "maxLength": 2048,
               "minLength": 0,
               "type": "string"
@@ -1320,7 +1322,7 @@
               "default":false
             },
             "supportCrossTenetCopy": {
-              "description": "Indicate copy target tenency requirement.",
+              "description": "Indicate copy target tenancy requirement.",
               "type": "boolean",
               "default":false
             },
