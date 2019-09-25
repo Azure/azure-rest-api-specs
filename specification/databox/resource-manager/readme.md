@@ -37,7 +37,14 @@ These settings apply only when `--tag=package-2018-01` is specified on the comma
 input-file:
 - Microsoft.DataBox/stable/2018-01-01/databox.json
 ```
+### Tag: package-2019-09
 
+These settings apply only when `--tag=package-2019-09` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-09'
+input-file:
+- Microsoft.DataBox/stable/2019-09-01/databox.json
+```
 ---
 # Code Generation
 
@@ -118,6 +125,7 @@ go:
 ``` yaml $(go) && $(multiapi)
 batch:
   - tag: package-2018-01
+  - tag: package-2019-09
 ```
 
 ### Tag: package-2018-01 and go
@@ -127,6 +135,15 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 
 ``` yaml $(tag) == 'package-2018-01' && $(go)
 output-folder: $(go-sdk-folder)/services/databox/mgmt/2018-01-01/databox
+```
+
+### Tag: package-2019-09 and go
+
+These settings apply only when `--tag=package-2019-09 --go` is specified on the command line.
+Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(go)
+output-folder: $(go-sdk-folder)/services/databox/mgmt/2019-09-01/databox
 ```
 
 ## Ruby
@@ -144,6 +161,7 @@ azure-arm: true
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: package-2018-01
+  - tag: package-2019-09
 ```
 
 ### Tag: package-2018-01 and ruby
@@ -153,6 +171,16 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'package-2018-01' && $(ruby)
 namespace: "Azure::Compute::Mgmt::V2018_01_01"
+output-folder: $(ruby-sdks-folder)/management/azure_mgmt_databox/lib
+```
+
+### Tag: package-2019-09 and ruby
+
+These settings apply only when `--tag=package-2019-09 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(ruby)
+namespace: "Azure::Compute::Mgmt::V2019_09_01"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_databox/lib
 ```
 
@@ -176,6 +204,7 @@ java:
 ``` yaml $(java) && $(multiapi)
 batch:
   - tag: package-2018-01
+  - tag: package-2019-09
 ```
 
 ### Tag: package-2018-01 and java
@@ -187,6 +216,19 @@ Please also specify `--azure-libraries-for-java-folder=<path to the root directo
 java:
   namespace: com.microsoft.azure.management.databox.v2018_01_01
   output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2018_01_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-09 and java
+
+These settings apply only when `--tag=package-2019-09-java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-09' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.databox.v2019_09-01
+  output-folder: $(azure-libraries-for-java-folder)/databox/resource-manager/v2019_09_01
 regenerate-manager: true
 generate-interface: true
 ```
