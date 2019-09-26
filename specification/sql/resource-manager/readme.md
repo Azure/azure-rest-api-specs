@@ -24,7 +24,7 @@ These are the global settings for the Sql API.
 title: SqlManagementClient
 description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-preview-2019-06
+tag: package-composite-v3
 ```
 
 ## Composite packages
@@ -32,27 +32,6 @@ tag: package-preview-2019-06
 The following packages may be composed from multiple api-versions.
 
 
-### Tag: package-preview-2019-06
-
-These settings apply only when `--tag=package-preview-2019-06` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2019-06'
-input-file:
-  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSchema.json
-  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSecurityAlertPolicies.json
-  - Microsoft.Sql/preview/2019-06-01-preview/FailoverDatabases.json
-  - Microsoft.Sql/preview/2019-06-01-preview/FailoverElasticPools.json
-  - Microsoft.Sql/preview/2019-06-01-preview/ManagedDatabaseSchema.json
-  - Microsoft.Sql/preview/2019-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
-  - Microsoft.Sql/preview/2019-06-01-preview/PrivateEndpointConnections.json
-  - Microsoft.Sql/preview/2019-06-01-preview/PrivateLinkResources.json
-  - Microsoft.Sql/preview/2019-06-01-preview/ServerVulnerabilityAssessments.json
-  - Microsoft.Sql/preview/2019-06-01-preview/instancePools.json
-  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabaseSensitivityLabels.json
-  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
-  - Microsoft.Sql/preview/2019-06-01-preview/managedInstances.json
-  - Microsoft.Sql/preview/2019-06-01-preview/usages.json
-```
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
@@ -156,6 +135,8 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadClassifiers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -254,6 +235,8 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadClassifiers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -343,6 +326,8 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadGroups.json
+- Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadClassifiers.json
 
 # Needed when there is more than one input file
 override-info:
@@ -490,6 +475,30 @@ override-info:
 ## Pure package versions
 
 The following packages are each composed of all apis from only one api-version.
+
+### Tag: package-pure-2019-06-preview
+
+These settings apply only when `--tag=package-pure-2019-06-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-06'
+input-file:
+  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSchema.json
+  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSecurityAlertPolicies.json
+  - Microsoft.Sql/preview/2019-06-01-preview/FailoverDatabases.json
+  - Microsoft.Sql/preview/2019-06-01-preview/FailoverElasticPools.json
+  - Microsoft.Sql/preview/2019-06-01-preview/ManagedDatabaseSchema.json
+  - Microsoft.Sql/preview/2019-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
+  - Microsoft.Sql/preview/2019-06-01-preview/PrivateEndpointConnections.json
+  - Microsoft.Sql/preview/2019-06-01-preview/PrivateLinkResources.json
+  - Microsoft.Sql/preview/2019-06-01-preview/ServerVulnerabilityAssessments.json
+  - Microsoft.Sql/preview/2019-06-01-preview/instancePools.json
+  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabaseSensitivityLabels.json
+  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+  - Microsoft.Sql/preview/2019-06-01-preview/managedInstances.json
+  - Microsoft.Sql/preview/2019-06-01-preview/usages.json
+  - Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadGroups.json
+  - Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadClassifiers.json
+```
 
 ### Tag: package-pure-2018-06-preview
 
