@@ -183,8 +183,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.ResourceHealth/stable/2017-07-01/resourcehealth.json
   - $(this-folder)/Microsoft.ResourceHealth/stable/2015-01-01/resourcehealth.json
-  - $(this-folder)/Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
   - $(this-folder)/Microsoft.ResourceHealth/preview/2018-08-01/ResourceHealth.json
+  - $(this-folder)/Microsoft.ResourceHealth/stable/2018-07-01/ResourceHealth.json
 
 ```
 
