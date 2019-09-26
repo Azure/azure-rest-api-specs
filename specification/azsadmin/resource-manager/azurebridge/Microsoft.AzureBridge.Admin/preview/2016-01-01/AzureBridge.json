@@ -207,6 +207,10 @@
         "productProperties": {
           "description": "the product properties. At the moment only VirtualMachineProductProperties is allowed.",
           "$ref": "#/definitions/ProductProperties"
+        },
+        "compatibility": {
+          "description": "Product compatibility with current device.",
+          "$ref": "#/definitions/Compatibility"
         }
       }
     },
@@ -265,6 +269,31 @@
       "type": "array",
       "items": {
         "$ref": "#/definitions/ProductLink"
+      }
+    },
+    "Compatibility": {
+      "description": "Product compatibility",
+      "type": "object",
+      "properties": {
+        "isCompatible": {
+          "description": "Tells if product is compatible with current device",
+          "type": "boolean"
+        },
+        "message": {
+          "description": "Short error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "description": {
+          "description": "Full error message if any compatibility issues are found",
+          "type": "string"
+        },
+        "issues": {
+          "description": "List of all issues found",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CompatibilityIssue"
+          }
+        }
       }
     }
   },
