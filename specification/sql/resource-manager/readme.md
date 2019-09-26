@@ -22,15 +22,37 @@ These are the global settings for the Sql API.
 
 ``` yaml
 title: SqlManagementClient
-description: The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.
+description: 'The Azure SQL Database management API provides a RESTful set of web services that interact with Azure SQL Database services to manage your databases. The API enables you to create, retrieve, update, and delete databases.'
 openapi-type: arm
-tag: package-composite-v3
+tag: package-preview-2019-06
 ```
 
 ## Composite packages
 
 The following packages may be composed from multiple api-versions.
 
+
+### Tag: package-preview-2019-06
+
+These settings apply only when `--tag=package-preview-2019-06` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-06'
+input-file:
+  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSchema.json
+  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSecurityAlertPolicies.json
+  - Microsoft.Sql/preview/2019-06-01-preview/FailoverDatabases.json
+  - Microsoft.Sql/preview/2019-06-01-preview/FailoverElasticPools.json
+  - Microsoft.Sql/preview/2019-06-01-preview/ManagedDatabaseSchema.json
+  - Microsoft.Sql/preview/2019-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
+  - Microsoft.Sql/preview/2019-06-01-preview/PrivateEndpointConnections.json
+  - Microsoft.Sql/preview/2019-06-01-preview/PrivateLinkResources.json
+  - Microsoft.Sql/preview/2019-06-01-preview/ServerVulnerabilityAssessments.json
+  - Microsoft.Sql/preview/2019-06-01-preview/instancePools.json
+  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabaseSensitivityLabels.json
+  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+  - Microsoft.Sql/preview/2019-06-01-preview/managedInstances.json
+  - Microsoft.Sql/preview/2019-06-01-preview/usages.json
+```
 ### Tag: package-composite-v3
 
 These settings apply only when `--tag=package-composite-v3` is specified on the command line.
@@ -39,18 +61,27 @@ This section contains the "composite-v3" set of APIs, which is composed from a s
 
 APIs must only be added to this section when the API is publicly available in at least 1 production region and at least 1 generated client has been tested end-to-end.
 
-
 Differences in v3 (compared to v2):
- - Decoupled database and recommended elastic pool APIs
-   - `-2014-04-01/recommendedElasticPools.json`
-   - `+2014-04-01/recommendedElasticPoolsDecoupled.json`
- - Updated to new Sku-based API for databases and elastic pools
-   - `-2014-04-01/capabilities.json`
-   - `-2014-04-01/databases.json`
-   - `-2014-04-01/elasticPools.json`
-   - `+2017-10-01-preview/capabilities.json`
-   - `+2017-10-01-preview/databases.json`
-   - `+2017-10-01-preview/elasticPools.json`
+
+* Decoupled database and recommended elastic pool APIs
+
+  * `-2014-04-01/recommendedElasticPools.json`
+
+  * `+2014-04-01/recommendedElasticPoolsDecoupled.json`
+
+* Updated to new Sku-based API for databases and elastic pools
+
+  * `-2014-04-01/capabilities.json`
+
+  * `-2014-04-01/databases.json`
+
+  * `-2014-04-01/elasticPools.json`
+
+  * `+2017-10-01-preview/capabilities.json`
+
+  * `+2017-10-01-preview/databases.json`
+
+  * `+2017-10-01-preview/elasticPools.json`
 
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
@@ -141,10 +172,13 @@ APIs must only be added to this section when the API is publicly available in at
 
 Differences in v2 (compared to v1):
 
-- Updated to LTRv2
-  - `-201 4-04-01/backupLongTermRetentionPolicies.json`
-  - `-2014-04-01/backupLongTermRetentionVaults.json`
-  - `+2017-03-01-preview/longTermRetention.json`
+* Updated to LTRv2
+
+  * `-201 4-04-01/backupLongTermRetentionPolicies.json`
+
+  * `-2014-04-01/backupLongTermRetentionVaults.json`
+
+  * `+2017-03-01-preview/longTermRetention.json`
 
 ``` yaml $(tag) == 'package-composite-v2'
 input-file:
@@ -484,7 +518,7 @@ input-file:
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
-  ```
+```
 
 ### Tag: package-pure-2017-10-preview
 
@@ -641,6 +675,7 @@ override-info:
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: TrackedResourcePatchOperation
@@ -649,6 +684,7 @@ directive:
 ```
 
 ---
+
 ## Code Generation
 
 ### Swagger to SDK
@@ -733,7 +769,7 @@ directive:
     reason: This warning gives many positives for existing APIs that cannot be changed.
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -926,11 +962,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
