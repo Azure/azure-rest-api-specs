@@ -704,6 +704,12 @@
           "Create a AML Compute": {
             "$ref": "./examples/createBasicAmlCompute.json"
           },
+          "Create an AmlInstance Compute with minimal inputs": {
+            "$ref": "./examples/createAmlInstanceComputeMinimal.json"
+          },
+          "Create an AmlInstance Compute": {
+            "$ref": "./examples/createAmlInstanceCompute.json"
+          },
           "Create AKS Compute": {
             "$ref": "./examples/createBasicAKSCompute.json"
           },
@@ -2182,15 +2188,18 @@
                 },
                 "state": {
                   "description": "The current state of this AmlInstance.",
-                  "$ref": "#/definitions/AmlInstanceState"
+                  "$ref": "#/definitions/AmlInstanceState",
+                  "readOnly": true
                 },
                 "lastOperation": {
                   "description": "Last operation performed on this AmlInstance",
-                  "$ref": "#/definitions/AmlInstanceLastOperation"
+                  "$ref": "#/definitions/AmlInstanceLastOperation",
+                  "readOnly": true
                 },
                 "lastOperationStatus": {
                   "description": "Status of last operation performed on this AmlInstance",
-                  "$ref": "#/definitions/AmlInstanceLastOperationStatus"
+                  "$ref": "#/definitions/AmlInstanceLastOperationStatus",
+                  "readOnly": true
                 }
               }
             }
