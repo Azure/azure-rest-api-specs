@@ -2263,6 +2263,18 @@
                   "items": {
                     "$ref": "#/definitions/MachineLearningServiceError"
                   }
+                },
+                "state": {
+                  "description": "The current state of this AmlInstance.",
+                  "$ref": "#/definitions/AmlInstanceState"
+                },
+                "lastOperation": {
+                  "description": "Last operation performed on this AmlInstance",
+                  "$ref": "#/definitions/AmlInstanceLastOperation"
+                },
+                "lastOperationStatus": {
+                  "description": "Status of last operation performed on this AmlInstance",
+                  "$ref": "#/definitions/AmlInstanceLastOperationStatus"
                 }
               }
             }
@@ -2899,6 +2911,58 @@
           "type": "string",
           "description": "Detailed description of the available SDK update."
         }
+      }
+    },
+    "AmlInstanceState": {
+      "type": "string",
+      "description": "Current state of an AmlInstance compute.",
+      "enum": [
+        "Creating",
+        "Deleting",
+        "Ready",
+        "Restarting",
+        "Running",
+        "SettingUp",
+        "SetupFailed",
+        "Starting",
+        "Stopped",
+        "Stopping",
+        "UserSettingUp",
+        "UserSetupFailed",
+        "Unknown",
+        "Unusable"
+      ],
+      "x-ms-enum": {
+        "name": "AmlInstanceState",
+        "modelAsString": true
+      }
+    },
+    "AmlInstanceLastOperation": {
+      "type": "string",
+      "description": "Last operation performed on this AmlInstance compute.",
+      "enum": [
+        "Create",
+        "Delete",
+        "Restart",
+        "Start",
+        "Stop"
+      ],
+      "x-ms-enum": {
+        "name": "AmlInstanceLastOperation",
+        "modelAsString": true
+      }
+    },
+    "AmlInstanceLastOperationStatus": {
+      "type": "string",
+      "description": "Describes status of last operation performed on this AmlInstance compute.",
+      "enum": [
+        "Failed",
+        "InProgress",
+        "Succeeded"
+      ],
+      "x-ms-enum": {
+        "name": "AmlInstanceLastOperationStatus",
+        "modelAsString": true
       }
     }
   }
