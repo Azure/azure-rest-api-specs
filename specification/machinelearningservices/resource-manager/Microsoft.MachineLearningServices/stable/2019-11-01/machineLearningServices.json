@@ -2032,13 +2032,16 @@
                   "properties": {
                     "startupScript": {
                       "type": "object",
-                      "scriptLocation": {
-                        "type": "string",
-                        "description": "The location of customization script. Could be a URI or a relative file path in the default fileshare in the parent workspace."
-                      },
-                      "scriptParameters": {
-                        "type": "string",
-                        "description": "Parameters required for this script if any."
+                      "description": "Specifies properties of initialization script to be run during every start of this instance.",
+                      "properties": {
+                        "scriptLocation": {
+                          "type": "string",
+                          "description": "The location of customization script. Could be a URI or a relative file path in the default fileshare in the parent workspace."
+                        },
+                        "scriptParameters": {
+                          "type": "string",
+                          "description": "Parameters required for this script if any."
+                        }
                       }
                     }
                   }
