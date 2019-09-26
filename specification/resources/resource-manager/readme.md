@@ -40,16 +40,12 @@ tag: package-locks-2016-09
 tag: package-policy-2019-06
 ```
 
-``` yaml $(package-policy)
-tag: package-policy-2019-01
-```
-
 ``` yaml $(package-resources)
 tag: package-resources-2019-08
 ```
 
 ``` yaml $(package-subscriptions)
-tag: package-subscriptions-2018-06
+tag: package-subscriptions-2019-06
 ```
 
 ``` yaml $(package-links)
@@ -57,18 +53,9 @@ tag: package-links-2016-09
 ```
 
 ``` yaml $(package-managedapplications)
-tag: package-2019-06
+tag: package-managedapplications-2018-06
 ```
 
-
-### Tag: package-2019-06
-
-These settings apply only when `--tag=package-2019-06` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-06'
-input-file:
-  - Microsoft.Resources/stable/2019-06-01/subscriptions.json
-```
 ### Tag: package-features-2015-12
 
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
@@ -325,6 +312,15 @@ input-file:
 - Microsoft.Resources/stable/2015-11-01/resources.json
 ```
 
+### Tag: package-subscriptions-2019-06
+
+These settings apply only when `--tag=package-subscriptions-2019-06` is specified on the command line.
+
+``` yaml $(tag) == 'package-subscriptions-2019-06'
+input-file:
+- Microsoft.Resources/stable/2019-06-01/subscriptions.json
+```
+
 ### Tag: package-subscriptions-2018-06
 
 These settings apply only when `--tag=package-subscriptions-2018-06` is specified on the command line.
@@ -533,7 +529,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Resources/stable/2019-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
@@ -567,6 +562,7 @@ input-file:
   - $(this-folder)/Microsoft.Resources/stable/2016-07-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2016-02-01/resources.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/resources.json
+  - $(this-folder)/Microsoft.Resources/stable/2019-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2018-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2016-06-01/subscriptions.json
   - $(this-folder)/Microsoft.Resources/stable/2015-11-01/subscriptions.json
