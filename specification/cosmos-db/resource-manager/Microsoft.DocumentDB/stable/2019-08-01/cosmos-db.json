@@ -100,7 +100,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The database account update operation will complete asynhconously.",
+            "description": "The database account update operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountGetResults"
             }
@@ -5048,7 +5048,7 @@
           "$ref": "#/definitions/ConnectorOffer"
         },
         "disableKeyBasedMetadataWriteAccess": {
-          "description": "Disable metadata write access via keys.",
+          "description": "Disable write operations on metadata resources (databases, containers, throughput) via account keys",
           "type": "boolean"
         }
       }
@@ -5111,7 +5111,7 @@
           "$ref": "#/definitions/ConnectorOffer"
         },
         "disableKeyBasedMetadataWriteAccess": {
-          "description": "Disable metadata write access via keys.",
+          "description": "Disable write operations on metadata resources (databases, containers, throughput) via account keys",
           "type": "boolean"
         }
       },
@@ -5206,7 +5206,7 @@
           "$ref": "#/definitions/ConnectorOffer"
         },
         "disableKeyBasedMetadataWriteAccess": {
-          "description": "Disable metadata write access via keys.",
+          "description": "Disable write operations on metadata resources (databases, containers, throughput) via account keys",
           "type": "boolean"
         }
       }
@@ -5997,6 +5997,13 @@
             "name": "PartitionKind",
             "modelAsString": true
           }
+        },
+        "version": {
+          "description": "Indicates the version of the partition key definition",
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 2,
+          "format": "int32"
         }
       }
     },
