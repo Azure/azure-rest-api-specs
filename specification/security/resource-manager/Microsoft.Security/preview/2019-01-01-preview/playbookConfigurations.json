@@ -441,7 +441,7 @@
         "actionType": {
           "type": "string",
           "description": "type of action that will be triggered by the PlaybookConfiguration",
-          "enum": ["LogicApp", "EventHub"],
+          "enum": ["LogicApp", "EventHub", "SecurityEmail"],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": true,
@@ -451,6 +451,9 @@
               },
               {
                 "value": "EventHub"
+              },
+              {
+                "value": "SecurityEmail"
               }
             ]
           }
@@ -491,6 +494,37 @@
         "connectionString": {
           "type": "string",
           "description": "The event hub connection string(the primary or secondary key)."
+        }
+      }
+    },
+    "PlaybookConfigurationActionSecurityEmail": {
+      "type": "object",
+      "description": "The Security Email action that should be triggered.",
+      "x-ms-discriminator-value": "SecurityEmail",
+      "allOf": [{
+        "$ref": "#/definitions/PlaybookConfigurationAction"
+      }],
+      "properties": {
+        "subscriptionRbacRoles": {
+          "type": "array",
+          "description": "A list of RBAC roles of the subscription for the email to be sent to.",
+          "items": {
+            "type":"string",
+            "enum":[
+              "AccountAdmin",
+              "ServiceAdmin",
+              "Owner",
+              "Contributor"
+            ]
+          } 
+        },
+        "emailAddresses": {
+          "type": "array",
+          "description": "A list of email addresses for the email to be sent to.",
+          "items": {
+              "type": "string",
+              "format": "email"
+          }
         }
       }
     },
