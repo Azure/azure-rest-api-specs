@@ -2156,136 +2156,20 @@
                   "$ref": "#/definitions/ResourceId"
                 },
                 "dataStoresMountSettings": {
-                  "type": "object",
                   "description": "Describes what data stores will be mounted on this compute instance.",
-                  "properties": {
-                    "dataStoreSelection": {
-                      "type": "string",
-                      "description": "Allows users to select between mounting All vs Selected datastores from the parent workspace. The 'All' setting also implies that any datastores that later become part of the workspace will be automatically mounted to the compute instance on next start.",
-                      "default": "All",
-                      "enum": [
-                        "All",
-                        "UserSpecified"
-                      ],
-                      "x-ms-enum": {
-                        "name": "dataStoreSelection",
-                        "modelAsString": true
-                      }
-                    },
-                    "dataStores": {
-                      "description": "Specifies the set of data stores that will be mounted on this compute instance. This should only be specified if dataStoreSelection is set to 'UserSpecified'.",
-                      "type": "array",
-                      "items": {
-                        "$ref": "#/definitions/AmlInstanceDatastore"
-                      }
-                    }
-                  }
+                  "$ref": "#/definitions/AmlInstanceDataStoresMountSettings"
                 },
                 "customScriptSettings": {
-                  "type": "object",
                   "description": "Specification for initialization scripts to customize this AmlInstance.",
-                  "properties": {
-                    "startupScript": {
-                      "type": "object",
-                      "description": "Specifies properties of initialization script to be run during every start of this instance.",
-                      "properties": {
-                        "scriptLocation": {
-                          "type": "string",
-                          "description": "The location of customization script. Could be a URI or a relative file path in the default fileshare in the parent workspace."
-                        },
-                        "scriptParameters": {
-                          "type": "string",
-                          "description": "Parameters required for this script if any."
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/definitions/AmlInstanceCustomScriptSettings"
                 },
                 "softwareUpdateSettings": {
-                  "type": "object",
                   "description": "Specifies policies for operating system and Azure ML environment (example packages and SDK) updates.",
-                  "properties": {
-                    "osUpdateSettings": {
-                      "type": "object",
-                      "description": "Specifies policy for installing operation system updates.",
-                      "properties": {
-                        "osUpdateType": {
-                          "type": "string",
-                          "default": "Recommended",
-                          "title": "Type of automatic operating system updates to install",
-                          "enum": [
-                            "Critical",
-                            "Recommended"
-                          ],
-                          "x-ms-enum": {
-                            "name": "osUpdateType",
-                            "modelAsString": true
-                          }
-                        },
-                        "updateFrequencyInDays": {
-                          "type": "integer",
-                          "format": "int64",
-                          "description": "Frequency of update checks and installation. Maximum allowable frequency is 30 days."
-                        },
-                        "updateHourInUtc": {
-                          "type": "integer",
-                          "format": "int64",
-                          "description": "Hour of the day (0-23) in Universal Time at which software updates can be installed, potentially requiring VM reboot."
-                        }
-                      }
-                    },
-                    "sdkUpdateSettings": {
-                      "type": "object",
-                      "description": "Specifies policy for installing Azure ML environment (example packages and SDK) updates.",
-                      "properties": {
-                        "updateOnNextStart": {
-                          "type": "string",
-                          "description": "Specifies if any available Azure ML environment updates should be installed on next instance start.",
-                          "default": "Disabled",
-                          "enum": [
-                            "Disabled",
-                            "Enabled"
-                          ],
-                          "x-ms-enum": {
-                            "name": "updateOnNextStart",
-                            "modelAsString": true
-                          }
-                        },
-                        "availableUpdates": {
-                          "type": "array",
-                          "readOnly": true,
-                          "description": "Describes available SDK updates for this compute instance.",
-                          "items": {
-                            "$ref": "#/definitions/AmlInstanceSdkUpdate"
-                          }
-                        }
-                      }
-                    }
-                  }
+                  "$ref": "#/definitions/AmlInstanceSoftwareUpdateSettings"
                 },
                 "sshSettings": {
-                  "type": "object",
                   "description": "Specifies policy and settings for SSH access.",
-                  "properties": {
-                    "sshPublicAccess": {
-                      "type": "string",
-                      "default": "Disabled",
-                      "title": "Access policy for SSH",
-                      "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.",
-                      "enum": [
-                        "Enabled",
-                        "Disabled"
-                      ],
-                      "x-ms-enum": {
-                        "name": "sshPublicAccess",
-                        "modelAsString": true
-                      }
-                    },
-                    "adminPublicKey": {
-                      "type": "string",
-                      "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
-                    }
-                  }
+                  "$ref": "#/definitions/AmlInstanceSshSettings"
                 },
                 "errors": {
                   "readOnly": true,
@@ -2931,6 +2815,81 @@
         }
       }
     },
+    "AmlInstanceDataStoresMountSettings": {
+      "type": "object",
+      "description": "Describes what data stores will be mounted on this compute instance.",
+      "properties": {
+        "dataStoreSelection": {
+          "type": "string",
+          "description": "Allows users to select between mounting All vs Selected datastores from the parent workspace. The 'All' setting also implies that any datastores that later become part of the workspace will be automatically mounted to the compute instance on next start.",
+          "default": "All",
+          "enum": [
+            "All",
+            "UserSpecified"
+          ],
+          "x-ms-enum": {
+            "name": "dataStoreSelection",
+            "modelAsString": true
+          }
+        },
+        "dataStores": {
+          "description": "Specifies the set of data stores that will be mounted on this compute instance. This should only be specified if dataStoreSelection is set to 'UserSpecified'.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AmlInstanceDatastore"
+          }
+        }
+      }
+    },
+    "AmlInstanceCustomScriptSettings": {
+      "type": "object",
+      "description": "Specification for initialization scripts to customize this AmlInstance.",
+      "properties": {
+        "startupScript": {
+          "type": "object",
+          "description": "Specifies properties of initialization script to be run during every start of this instance.",
+          "properties": {
+            "scriptLocation": {
+              "type": "string",
+              "description": "The location of customization script. Could be a URI or a relative file path in the default fileshare in the parent workspace."
+            },
+            "scriptParameters": {
+              "type": "string",
+              "description": "Parameters required for this script if any."
+            }
+          }
+        }
+      }
+    },
+    "AmlInstanceOSUpdateSettings": {
+      "type": "object",
+      "description": "Specifies policy for installing operation system updates.",
+      "properties": {
+        "osUpdateType": {
+          "type": "string",
+          "default": "Recommended",
+          "title": "Type of automatic operating system updates to install",
+          "enum": [
+            "Critical",
+            "Recommended"
+          ],
+          "x-ms-enum": {
+            "name": "osUpdateType",
+            "modelAsString": true
+          }
+        },
+        "updateFrequencyInDays": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Frequency of update checks and installation. Maximum allowable frequency is 30 days."
+        },
+        "updateHourInUtc": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Hour of the day (0-23) in Universal Time at which software updates can be installed, potentially requiring VM reboot."
+        }
+      }
+    },
     "AmlInstanceSdkUpdate": {
       "type": "object",
       "description": "Describes a specific update for AmlInstance SDK.",
@@ -2943,6 +2902,71 @@
         "updateDescription": {
           "type": "string",
           "description": "Detailed description of the available SDK update."
+        }
+      }
+    },
+    "AmlInstanceSdkUpdateSettings": {
+      "type": "object",
+      "description": "Specifies policy for installing Azure ML environment (example packages and SDK) updates.",
+      "properties": {
+        "updateOnNextStart": {
+          "type": "string",
+          "description": "Specifies if any available Azure ML environment updates should be installed on next instance start.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "updateOnNextStart",
+            "modelAsString": true
+          }
+        },
+        "availableUpdates": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Describes available SDK updates for this compute instance.",
+          "items": {
+            "$ref": "#/definitions/AmlInstanceSdkUpdate"
+          }
+        }
+      }
+    },
+    "AmlInstanceSoftwareUpdateSettings": {
+      "type": "object",
+      "description": "Specifies policies for operating system and Azure ML environment (example packages and SDK) updates.",
+      "properties": {
+        "osUpdateSettings": {
+          "description": "Specifies policy for installing operation system updates.",
+          "$ref": "#/definitions/AmlInstanceOSUpdateSettings"
+        },
+        "sdkUpdateSettings": {
+          "description": "Specifies policy for installing Azure ML environment (example packages and SDK) updates.",
+          "$ref": "#/definitions/AmlInstanceSdkUpdateSettings"
+        }
+      }
+    },
+    "AmlInstanceSshSettings": {
+      "type": "object",
+      "description": "Specifies policy and settings for SSH access.",
+      "properties": {
+        "sshPublicAccess": {
+          "type": "string",
+          "default": "Disabled",
+          "title": "Access policy for SSH",
+          "description": "State of the public SSH port. Possible values are: Disabled - Indicates that the public ssh port is closed on this instance. Enabled - Indicates that the public ssh port is open and accessible according to the VNet/subnet policy if applicable.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "sshPublicAccess",
+            "modelAsString": true
+          }
+        },
+        "adminPublicKey": {
+          "type": "string",
+          "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
         }
       }
     },
