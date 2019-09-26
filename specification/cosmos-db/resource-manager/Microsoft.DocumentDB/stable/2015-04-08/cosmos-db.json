@@ -4325,6 +4325,14 @@
             "$ref": "#/definitions/Location"
           }
         },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
         "failoverPolicies": {
           "type": "array",
           "readOnly": true,
@@ -4351,6 +4359,10 @@
         "connectorOffer": {
           "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
           "$ref": "#/definitions/ConnectorOffer"
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable metadata write access via keys.",
+          "type": "boolean"
         }
       }
     },
@@ -4423,6 +4435,10 @@
         "connectorOffer": {
           "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
           "$ref": "#/definitions/ConnectorOffer"
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable metadata write access via keys.",
+          "type": "boolean"
         }
       },
       "required": [

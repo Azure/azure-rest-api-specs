@@ -67,13 +67,13 @@
         }
       },
       "patch": {
-        "operationId": "DatabaseAccounts_Patch",
+        "operationId": "DatabaseAccounts_Update",
         "x-ms-examples": {
           "CosmosDBDatabaseAccountPatch": {
             "$ref": "./examples/CosmosDBDatabaseAccountPatch.json"
           }
         },
-        "description": "Patches the properties of an existing Azure Cosmos DB database account.",
+        "description": "Updates the properties of an existing Azure Cosmos DB database account.",
         "x-ms-long-running-operation": true,
         "parameters": [
           {
@@ -93,14 +93,14 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseAccountPatchParameters"
+              "$ref": "#/definitions/DatabaseAccountUpdateParameters"
             },
-            "description": "The tags parameter to patch for the current database account."
+            "description": "The parameters to provide for the current database account."
           }
         ],
         "responses": {
           "200": {
-            "description": "The properties of the database account were patched successfully.",
+            "description": "The database account update operation will complete asynhconously.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountGetResults"
             }
@@ -108,7 +108,7 @@
         }
       },
       "put": {
-        "operationId": "DatabaseAccounts_CreateOrUpdate",
+        "operationId": "DatabaseAccounts_Create",
         "x-ms-examples": {
           "CosmosDBDatabaseAccountCreateMin": {
             "$ref": "./examples/CosmosDBDatabaseAccountCreateMin.json"
@@ -133,18 +133,18 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createUpdateParameters",
+            "name": "createParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseAccountCreateUpdateParameters"
+              "$ref": "#/definitions/DatabaseAccountCreateParameters"
             },
             "description": "The parameters to provide for the current database account."
           }
         ],
         "responses": {
           "200": {
-            "description": "The database account create or update operation will complete asynchronously.",
+            "description": "The database account create operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountGetResults"
             }
@@ -5012,6 +5012,14 @@
             "$ref": "#/definitions/Location"
           }
         },
+        "locations": {
+          "type": "array",
+          "readOnly": true,
+          "description": "An array that contains all of the locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
         "failoverPolicies": {
           "type": "array",
           "readOnly": true,
@@ -5038,24 +5046,15 @@
         "connectorOffer": {
           "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
           "$ref": "#/definitions/ConnectorOffer"
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable metadata write access via keys.",
+          "type": "boolean"
         }
       }
     },
-    "DatabaseAccountPatchProperties": {
-      "description": "Properties to update Azure Cosmos DB database accounts.",
-      "type": "object",
-      "properties": {
-        "capabilities": {
-          "type": "array",
-          "description": "List of Cosmos DB capabilities for the account",
-          "items": {
-            "$ref": "#/definitions/Capability"
-          }
-        }
-      }
-    },
-    "DatabaseAccountCreateUpdateProperties": {
-      "description": "Properties to create and update Azure Cosmos DB database accounts.",
+    "DatabaseAccountCreateProperties": {
+      "description": "Properties to create Azure Cosmos DB database accounts.",
       "type": "object",
       "properties": {
         "consistencyPolicy": {
@@ -5110,6 +5109,10 @@
         "connectorOffer": {
           "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
           "$ref": "#/definitions/ConnectorOffer"
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable metadata write access via keys.",
+          "type": "boolean"
         }
       },
       "required": [
@@ -5117,8 +5120,8 @@
         "databaseAccountOfferType"
       ]
     },
-    "DatabaseAccountCreateUpdateParameters": {
-      "description": "Parameters to create and update Cosmos DB database accounts.",
+    "DatabaseAccountCreateParameters": {
+      "description": "Parameters to create Cosmos DB database accounts.",
       "type": "object",
       "properties": {
         "kind": {
@@ -5137,7 +5140,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
+          "$ref": "#/definitions/DatabaseAccountCreateProperties"
         }
       },
       "allOf": [
@@ -5149,16 +5152,79 @@
         "properties"
       ]
     },
-    "DatabaseAccountPatchParameters": {
+    "DatabaseAccountUpdateProperties": {
+      "description": "Properties to update Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "consistencyPolicy": {
+          "description": "The consistency policy for the Cosmos DB account.",
+          "$ref": "#/definitions/ConsistencyPolicy"
+        },
+        "locations": {
+          "type": "array",
+          "description": "An array that contains the georeplication locations enabled for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/Location"
+          }
+        },
+        "ipRangeFilter": {
+          "description": "Cosmos DB Firewall Support: This value specifies the set of IP addresses or IP address ranges in CIDR form to be included as the allowed list of client IPs for a given database account. IP addresses/ranges must be comma separated and must not contain any spaces.",
+          "$ref": "#/definitions/IPRangeFilter"
+        },
+        "isVirtualNetworkFilterEnabled": {
+          "description": "Flag to indicate whether to enable/disable Virtual Network ACL rules.",
+          "type": "boolean"
+        },
+        "enableAutomaticFailover": {
+          "description": "Enables automatic failover of the write region in the rare event that the region is unavailable due to an outage. Automatic failover will result in a new write region for the account and is chosen based on the failover priorities configured for the account.",
+          "type": "boolean"
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of Cosmos DB capabilities for the account",
+          "items": {
+            "$ref": "#/definitions/Capability"
+          }
+        },
+        "virtualNetworkRules": {
+          "type": "array",
+          "description": "List of Virtual Network ACL rules configured for the Cosmos DB account.",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkRule"
+          }
+        },
+        "enableMultipleWriteLocations": {
+          "description": "Enables the account to write in multiple locations",
+          "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
+        },
+        "disableKeyBasedMetadataWriteAccess": {
+          "description": "Disable metadata write access via keys.",
+          "type": "boolean"
+        }
+      }
+    },
+    "DatabaseAccountUpdateParameters": {
       "description": "Parameters for patching Azure Cosmos DB database account properties.",
       "type": "object",
       "properties": {
         "tags": {
           "$ref": "#/definitions/Tags"
         },
+        "location": {
+          "type": "string",
+          "description": "The location of the resource group to which the resource belongs."
+        },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseAccountPatchProperties"
+          "$ref": "#/definitions/DatabaseAccountUpdateProperties"
         }
       }
     },
