@@ -3361,6 +3361,12 @@
           },
           "404": {
             "description": "Function with a name of {functionName} does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         }
       },
@@ -3413,6 +3419,12 @@
           },
           "404": {
             "description": "Function with a name of {functionName} does not exist."
+          },
+          "default": {
+            "description": "App Service error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
           }
         }
       }
@@ -20274,59 +20286,37 @@
     "FunctionStatus": {
       "description": "Function status.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "FunctionStatus resource specific properties",
-          "properties": {
-            "errors": {
-              "description": "Collection of initialization errors for the function.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
+        "errors": {
+          "description": "Collection of initialization errors for the function.",
+          "type": "array",
+          "items": {
+             "type": "string"
+           }
         }
-      }
+      }  
     },
     "HostKeys": {
       "description": "Functions host level keys.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "HostKeys resource specific properties",
-          "properties": {
-            "masterKey": {
-              "description": "Secret key.",
-              "type": "string"
-            },
-            "functionKeys": {
-              "description": "Host level function keys.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            },
-            "systemKeys": {
-              "description": "System keys.",
-              "type": "object",
-              "additionalProperties": {
-                "type": "string"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
+        "masterKey": {
+          "description": "Secret key.",
+          "type": "string"
+        },
+        "functionKeys": {
+          "description": "Host level function keys.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemKeys": {
+          "description": "System keys.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -20473,40 +20463,29 @@
     "HostStatus": {
       "description": "Function host status.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "HostStatus resource specific properties",
-          "properties": {
-            "id": {
-              "description": "The host id.",
-              "type": "string"
-            },
-            "state": {
-              "description": "The current host state.",
-              "type": "string"
-            },
-            "version": {
-              "description": "The Function runtime version.",
-              "type": "string"
-            },
-            "versionDetails": {
-              "description": "The Function runtime version details.",
-              "type": "string"
-            },
-            "errors": {
-              "description": "Collection of initialization errors for the host.",
-              "type": "array",
-              "items": {
-                "type": "string"
-              }
-            }
-          },
-          "x-ms-client-flatten": true
+        "id": {
+          "description": "The host id.",
+          "type": "string"
+        },
+        "state": {
+          "description": "The current host state.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The Function runtime version.",
+          "type": "string"
+        },
+        "versionDetails": {
+          "description": "The Function runtime version details.",
+          "type": "string"
+        },
+        "errors": {
+          "description": "Collection of initialization errors for the host.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -20527,25 +20506,14 @@
     "KeyInfo": {
       "description": "Function key info.",
       "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
       "properties": {
-        "properties": {
-          "description": "KeyInfo resource specific properties",
-          "properties": {
-            "name": {
-              "description": "Key name",
-              "type": "string"
-            },
-            "value": {
-              "description": "Key value",
-              "type": "string"
-            }
-          },
-          "x-ms-client-flatten": true
+        "name": {
+          "description": "Key name",
+          "type": "string"
+        },
+        "value": {
+          "description": "Key value",
+          "type": "string"
         }
       }
     },
