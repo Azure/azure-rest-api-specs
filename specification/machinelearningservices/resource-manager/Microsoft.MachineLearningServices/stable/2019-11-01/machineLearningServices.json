@@ -2710,39 +2710,43 @@
     "AmlInstanceDatastore": {
       "type": "object",
       "description": "Represents specification for datastore requested to be mounted on an AzureML instance as well as its mounting status.",
-      "name": {
+      "properties": {
+        "name": {
         "type": "string",
         "description": "Name of the datastore to be mounted on an AzureML instance."
-      },
-      "state": {
-        "type": "string",
-        "description": "Current state of the datastore on the parent AzureML instance.",
-        "enum": [
-          "Mounted",
-          "MountFailed"
-        ],
-        "x-ms-enum": {
-          "name": "datastoreState",
-          "modelAsString": true
         },
-        "readonly": true
-      },
-      "error": {
-        "type": "string",
-        "description": "Describes the error if datastore could not be successfully mounted on the parent AzureML instance.",
-        "readonly": true
+        "state": {
+          "type": "string",
+          "description": "Current state of the datastore on the parent AzureML instance.",
+          "enum": [
+            "Mounted",
+            "MountFailed"
+          ],
+          "x-ms-enum": {
+            "name": "datastoreState",
+            "modelAsString": true
+          },
+          "readonly": true
+        },
+        "error": {
+          "type": "string",
+          "description": "Describes the error if datastore could not be successfully mounted on the parent AzureML instance.",
+          "readonly": true
+        }
       }
     },
     "AmlInstanceSdkUpdate": {
       "type": "object",
       "readonly": true,
-      "updateName": {
-        "type": "string",
-        "description": "Short name of the update."
-      },
-      "updateDescription": {
-        "type": "string",
-        "description": "Detailed description of the available SDK update."
+      "properties": {
+        "updateName": {
+          "type": "string",
+          "description": "Short name of the update."
+        },
+        "updateDescription": {
+          "type": "string",
+          "description": "Detailed description of the available SDK update."
+        }
       }
     }
   }
