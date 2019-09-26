@@ -476,11 +476,11 @@ override-info:
 
 The following packages are each composed of all apis from only one api-version.
 
-### Tag: package-pure-2019-06-preview
+### Tag: package-preview-2019-06
 
-These settings apply only when `--tag=package-pure-2019-06-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2019-06` is specified on the command line.
 
-```yaml $(tag) == 'package-pure-2019-06-preview'
+```yaml $(tag) == 'package-preview-2019-06'
 input-file:
   - Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadGroups.json
   - Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadClassifiers.json
