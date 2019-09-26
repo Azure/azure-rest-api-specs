@@ -997,6 +997,14 @@
         "zoneRedundant": {
           "type": "boolean",
           "description": "Enabling this property creates a Premium Service Bus Namespace in regions supported availability zones."
+        },
+        "identity": {
+          "$ref": "#/definitions/Identity",
+          "description": "Properties of BYOK Identity description"
+        },
+        "encryption": {
+          "$ref": "#/definitions/Encryption",
+          "description": "Properties of BYOK Encryption description"
         }
       },
       "description": "Properties of the namespace."
@@ -1277,6 +1285,67 @@
         }
       ],
       "description": "Description of topic resource."
+    },
+    "Identity": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId from the KeyVault"
+        },
+        "type": {
+          "type": "string",
+          "description": "Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'",
+          "default": "SystemAssigned",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Identity for Bring your Own Keys"
+    },
+    "Encryption": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
     }
   },
   "parameters": {
