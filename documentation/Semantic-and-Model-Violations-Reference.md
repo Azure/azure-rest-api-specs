@@ -1,7 +1,7 @@
 # Semantic and Model Violations Reference
 This document lists the set of automated rules that can be validated against swagger spec by running [OAV](https://github.com/Azure/oav) tool. This document also have some *tips for the fix*. Most of the time, the error information has the position of violations in swagger. If the error is internal error and doesn't have much meaningful infomation toward the fix, please create an issue [here](https://github.com/azure/oav/issues).
 
-### Model/Semantic Validation Errors
+### Validation Errors
 
 | Code | Id |
 | --- | --- |
@@ -89,7 +89,7 @@ This document lists the set of automated rules that can be validated against swa
 | [RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE](#RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE) | [OAV111](#RESPONSE_STATUS_CODE_NOT_IN_EXAMPLE) |
 
 
-### Model/Semantic Validation Warnings
+### Validation Warnings
 
 | Code | Id |
 | --- | --- |
