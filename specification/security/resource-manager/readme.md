@@ -324,6 +324,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/regulatoryCompliance.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/pricings.json
   - $(this-folder)/Microsoft.Security/preview/2017-08-01-preview/securityContacts.json
@@ -355,7 +356,6 @@ input-file:
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutions.json
   - $(this-folder)/Microsoft.Security/stable/2019-08-01/iotSecuritySolutionAnalytics.json
   - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/serverVulnerabilityAssessments.json
-  - $(this-folder)/Microsoft.Security/preview/2019-01-01-preview/subAssessments.json
 
 ```
 
