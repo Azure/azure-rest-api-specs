@@ -283,6 +283,10 @@ directive:
     reason: 'Already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.'
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: kusto.json
+    where: $.definitions.Database
+    reason: 'Action is expected to receive a subclass of Database'
+  - suppress: OBJECT_ADDITIONAL_PROPERTIES
+    from: kusto.json
     where: $.definitions.EventHubDataConnection
     reason: |-
       Action is expected to receive a subclass of DataConnection.
