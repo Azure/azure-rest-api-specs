@@ -2509,6 +2509,22 @@
           "$ref": "#/definitions/ScaleSettings",
           "title": "Scale settings.",
           "description": "Desired scale settings for the amlCompute."
+        },
+        "dataStoresMountSettings": {
+          "description": "Describes what data stores will be mounted on this compute instance.",
+          "$ref": "#/definitions/AmlInstanceDataStoresMountSettings"
+        },
+        "customScriptSettings": {
+          "description": "Specification for initialization scripts to customize this AmlInstance.",
+          "$ref": "#/definitions/AmlInstanceCustomScriptSettings"
+        },
+        "softwareUpdateSettings": {
+          "description": "Specifies policies for operating system and Azure ML environment (example packages and SDK) updates.",
+          "$ref": "#/definitions/AmlInstanceSoftwareUpdateSettings"
+        },
+        "sshSettings": {
+          "description": "Specifies policy and settings for SSH access.",
+          "$ref": "#/definitions/AmlInstanceSshSettings"
         }
       },
       "description": "The properties of a amlCompute that need to be updated."
