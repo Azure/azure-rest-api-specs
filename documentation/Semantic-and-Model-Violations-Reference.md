@@ -1,5 +1,5 @@
 # Semantic and Model Violations Reference
-This document lists the set of automated rules that can be validated against swagger spec by running [Semantic or Model validation tools](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Tools). This document also have some *tips for the fix*. Most of the time, the error information has the position of violations in swagger. If the error is internal error and doesn't have much meaningful infomation toward the fix, please create an issue for OAV tool [here](https://github.com/azure/oav/issues).
+This document lists the set of automated rules that can be validated against swagger spec by running [OAV](https://github.com/Azure/oav) tool. This document also have some *tips for the fix*. Most of the time, the error information has the position of violations in swagger. If the error is internal error and doesn't have much meaningful infomation toward the fix, please create an issue [here](https://github.com/azure/oav/issues).
 
 ### Model/Semantic Validation Errors
 
