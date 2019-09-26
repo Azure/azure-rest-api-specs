@@ -480,22 +480,8 @@ The following packages are each composed of all apis from only one api-version.
 
 These settings apply only when `--tag=package-pure-2019-06-preview` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-06'
+```yaml $(tag) == 'package-pure-2019-06-preview'
 input-file:
-  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSchema.json
-  - Microsoft.Sql/preview/2019-06-01-preview/DatabaseSecurityAlertPolicies.json
-  - Microsoft.Sql/preview/2019-06-01-preview/FailoverDatabases.json
-  - Microsoft.Sql/preview/2019-06-01-preview/FailoverElasticPools.json
-  - Microsoft.Sql/preview/2019-06-01-preview/ManagedDatabaseSchema.json
-  - Microsoft.Sql/preview/2019-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
-  - Microsoft.Sql/preview/2019-06-01-preview/PrivateEndpointConnections.json
-  - Microsoft.Sql/preview/2019-06-01-preview/PrivateLinkResources.json
-  - Microsoft.Sql/preview/2019-06-01-preview/ServerVulnerabilityAssessments.json
-  - Microsoft.Sql/preview/2019-06-01-preview/instancePools.json
-  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabaseSensitivityLabels.json
-  - Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
-  - Microsoft.Sql/preview/2019-06-01-preview/managedInstances.json
-  - Microsoft.Sql/preview/2019-06-01-preview/usages.json
   - Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadGroups.json
   - Microsoft.Sql/preview/2019-06-01-preview/DataWarehouseWorkloadClassifiers.json
 ```
