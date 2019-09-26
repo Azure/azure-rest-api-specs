@@ -5,7 +5,6 @@
     "api-version": "2019-07-01",
     "diskEncryptionSetName": "myDiskEncryptionSet",
     "diskEncryptionSet": {
-      "name": "myDiskEncryptionSet",
       "location": "West US",
       "identity": {
         "type": "SystemAssigned"
@@ -23,41 +22,37 @@
   "responses": {
     "201": {
       "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
         "properties": {
-          "name": "myDiskEncryptionSet",
-          "location": "West US",
-          "identity": {
-            "type": "SystemAssigned"
-          },
-          "properties": {
-            "activeKey": {
-              "sourceVault": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault" 
-              },
-              "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
             },
-            "previousKeys": []
-          }
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "previousKeys": []
         }
       }
     },
     "200": {
       "body": {
+        "name": "myDiskEncryptionSet",
+        "location": "West US",
+        "identity": {
+          "type": "SystemAssigned"
+        },
         "properties": {
-          "name": "myDiskEncryptionSet",
-          "location": "West US",
-          "identity": {
-            "type": "SystemAssigned"
-          },
-          "properties": {
-            "activeKey": {
-              "sourceVault": {
-                "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault" 
-              },
-              "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          "activeKey": {
+            "sourceVault": {
+              "id": "/subscriptions/{subscriptionId}/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myVMVault"
             },
-            "previousKeys": []
-          }
+            "keyUrl": "https://myvmvault.vault-int.azure-int.net/keys/{key}"
+          },
+          "previousKeys": []
         }
       }
     }
