@@ -482,18 +482,23 @@
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "accountEndpoint": {
+          "description": "The endpoint of the Azure CosmosDB account. Type: string (or Expression with resultType string)",
+          "type": "object"
+        },
+        "database": {
+          "description": "The name of the database. Type: string (or Expression with resultType string)",
+          "type": "object"
+        },
         "accountKey": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
-          "description": "The Azure key vault secret reference of accountKey in connection string."
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The account key of the Azure CosmosDB account. Type: SecureString or AzureKeyVaultSecretReference."
         },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "DynamicsLinkedService": {
       "x-ms-discriminator-value": "Dynamics",
