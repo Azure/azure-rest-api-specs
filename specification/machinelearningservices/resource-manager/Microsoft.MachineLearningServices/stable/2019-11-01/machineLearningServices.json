@@ -2828,7 +2828,8 @@
           "description": "Current state of the datastore on the parent AzureML instance.",
           "enum": [
             "Mounted",
-            "MountFailed"
+            "MountFailed",
+            "Unmounted"
           ],
           "x-ms-enum": {
             "name": "datastoreState",
@@ -2884,6 +2885,11 @@
             "scriptParameters": {
               "type": "string",
               "description": "Parameters required for this script if any."
+            },
+            "scriptLogLocation": {
+              "type": "string",
+              "description": "Location of the script's output logs in the default fileshare."
+              "readOnly": true
             }
           }
         }
