@@ -6,12 +6,22 @@
     "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [{
-    "azure_auth": ["user_impersonation"]
-  }],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
@@ -31,7 +41,9 @@
             "$ref": "./examples/SubAssessments/ListSubscriptionSubAssessments_example.json"
           }
         },
-        "tags": ["SubAssessments"],
+        "tags": [
+          "SubAssessments"
+        ],
         "description": "Get security sub-assessments on all your scanned resources inside a subscription scope",
         "operationId": "SubAssessments_ListAll",
         "parameters": [
@@ -61,14 +73,16 @@
         }
       }
     },
-	"/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/subAssessments": {
+    "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/subAssessments": {
       "get": {
         "x-ms-examples": {
           "List security sub-assessments": {
             "$ref": "./examples/SubAssessments/ListSubAssessments_example.json"
           }
         },
-        "tags": ["SubAssessments"],
+        "tags": [
+          "SubAssessments"
+        ],
         "description": "Get security sub-assessments on all your scanned resources inside a scope",
         "operationId": "SubAssessments_List",
         "parameters": [
@@ -101,28 +115,32 @@
         }
       }
     },
-   "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/subAssessments/{subAssessmentName}": {
+    "/{scope}/providers/Microsoft.Security/assessments/{assessmentName}/subAssessments/{subAssessmentName}": {
       "get": {
         "x-ms-examples": {
           "Get security recommendation task from security data location": {
             "$ref": "./examples/SubAssessments/GetSubAssessment_example.json"
           }
         },
-        "tags": ["SubAssessments"],
+        "tags": [
+          "SubAssessments"
+        ],
         "description": "Get a security sub-assessment on your scanned resource",
         "operationId": "SubAssessments_Get",
-        "parameters": [{
-          "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-        },
-        {
-          "$ref": "../../../common/v1/types.json#/parameters/Scope"
-        },
-		{
-          "$ref": "#/parameters/AssessmentName"
-        },
-        {
-          "$ref": "#/parameters/SubAssessmentName"
-        }],
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/Scope"
+          },
+          {
+            "$ref": "#/parameters/AssessmentName"
+          },
+          {
+            "$ref": "#/parameters/SubAssessmentName"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -168,9 +186,11 @@
           "$ref": "#/definitions/SecuritySubAssessmentProperties"
         }
       },
-      "allOf": [{
-        "$ref": "../../../common/v1/types.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Resource"
+        }
+      ]
     },
     "SecuritySubAssessmentProperties": {
       "type": "object",
@@ -188,7 +208,6 @@
         },
         "status": {
           "$ref": "#/definitions/SubAssessmentStatus"
-          
         },
         "remediation": {
           "readOnly": true,
@@ -233,7 +252,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The platform where the assessed resource resides",
-          "enum": ["Azure", "Aws"],
+          "enum": [
+            "Azure",
+            "Aws"
+          ],
           "x-ms-enum": {
             "name": "Source",
             "modelAsString": true,
@@ -253,9 +275,11 @@
       "type": "object",
       "description": "Details of the resource that was assessed",
       "x-ms-discriminator-value": "Azure",
-      "allOf": [{
-        "$ref": "#/definitions/ResourceDetails"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
       "properties": {
         "id": {
           "readOnly": true,
@@ -268,9 +292,11 @@
       "type": "object",
       "description": "Details of the resource that was assessed",
       "x-ms-discriminator-value": "Aws",
-      "allOf": [{
-        "$ref": "#/definitions/ResourceDetails"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceDetails"
+        }
+      ],
       "properties": {
         "accountId": {
           "readOnly": true,
@@ -293,7 +319,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Sub-assessment resource type",
-          "enum": ["SqlServerVulnerability", "ContainerRegistryVulnerability", "ServerVulnerability"],
+          "enum": [
+            "SqlServerVulnerability",
+            "ContainerRegistryVulnerability",
+            "ServerVulnerability"
+          ],
           "x-ms-enum": {
             "name": "AssessedResourceType",
             "modelAsString": true,
@@ -320,7 +350,11 @@
           "readOnly": true,
           "type": "string",
           "description": "Programmatic code for the status of the assessment",
-          "enum": ["Healthy", "Unhealthy", "NotApplicable"],
+          "enum": [
+            "Healthy",
+            "Unhealthy",
+            "NotApplicable"
+          ],
           "x-ms-enum": {
             "name": "SubAssessmentStatusCode",
             "modelAsString": true,
@@ -354,9 +388,10 @@
           "readOnly": true,
           "type": "string",
           "enum": [
-          "Low",
-          "Medium",
-          "High"],
+            "Low",
+            "Medium",
+            "High"
+          ],
           "x-ms-enum": {
             "name": "severity",
             "modelAsString": true,
@@ -380,9 +415,11 @@
       "type": "object",
       "description": "Details of the resource that was assessed",
       "x-ms-discriminator-value": "SqlServerVulnerability",
-      "allOf": [{
-        "$ref": "#/definitions/AdditionalData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalData"
+        }
+      ],
       "properties": {
         "type": {
           "readOnly": true,
@@ -400,9 +437,11 @@
       "type": "object",
       "description": "Additional context fields for container registry Vulnerability assessment",
       "x-ms-discriminator-value": "ContainerRegistryVulnerability",
-      "allOf": [{
-        "$ref": "#/definitions/AdditionalData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalData"
+        }
+      ],
       "properties": {
         "type": {
           "readOnly": true,
@@ -413,8 +452,7 @@
           "readOnly": true,
           "type": "object",
           "description": "Dictionary from cvss version to cvss details object",
-          "additionalProperties":
-          {
+          "additionalProperties": {
             "$ref": "#/definitions/CVSS"
           }
         },
@@ -460,9 +498,11 @@
       "type": "object",
       "description": "Additional context fields for server vulnerability assessment",
       "x-ms-discriminator-value": "ServerVulnerabilityAssessment",
-      "allOf": [{
-        "$ref": "#/definitions/AdditionalData"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AdditionalData"
+        }
+      ],
       "properties": {
         "type": {
           "readOnly": true,
@@ -473,8 +513,7 @@
           "readOnly": true,
           "type": "object",
           "description": "Dictionary from cvss version to cvss details object",
-          "additionalProperties":
-          {
+          "additionalProperties": {
             "$ref": "#/definitions/CVSS"
           }
         },
@@ -556,7 +595,7 @@
     }
   },
   "parameters": {
-   "AssessmentName": {
+    "AssessmentName": {
       "name": "assessmentName",
       "in": "path",
       "required": true,
