@@ -4,16 +4,20 @@
     "resourceGroupName": "testrg123",
     "workspaceName": "workspaces123",
     "computeName": "compute123",
-    "api-version": "2019-10-01",
+    "api-version": "2019-11-01",
     "parameters": {
-      "id": "compute123",
       "location": "eastus",
       "properties": {
-        "description": "some compute",
-        "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-        "computeType": "AKS",
+        "computeType": "AmlCompute",
         "properties": {
-          "agentCount": 4
+          "vmSize": "STANDARD_NC6",
+          "vmPriority": "Dedicated",
+          "scaleSettings": {
+            "maxNodeCount": 1,
+            "minNodeCount": 0,
+            "nodeIdleTimeBeforeScaleDown": "PT5M"
+          },
+          "remoteLoginPortPublicAccess": "NotSpecified"
         }
       }
     }
@@ -26,10 +30,8 @@
         "name": "compute123",
         "location": "eastus",
         "properties": {
-          "description": "some compute",
-          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-          "computeType": "AKS",
-          "provisioningState": "Updating"
+          "computeType": "AmlCompute",
+          "provisioningState": "Creating"
         }
       }
     },
@@ -40,10 +42,8 @@
         "name": "compute123",
         "location": "eastus",
         "properties": {
-          "description": "some compute",
-          "resourceId": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourcegroups/testrg123/providers/Microsoft.ContainerService/managedClusters/compute123-56826-c9b00420020b2",
-          "computeType": "AKS",
-          "provisioningState": "Updating"
+          "computeType": "AmlCompute",
+          "provisioningState": "Creating"
         }
       },
       "headers": {
