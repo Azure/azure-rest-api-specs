@@ -5943,7 +5943,16 @@
         "paymentMethodFamily": {
           "description": "The payment method family.",
           "type": "string",
-          "readOnly": true
+          "enum": [
+            "Credits",
+            "CheckWire",
+            "CreditCard",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "PaymentMethodFamily",
+            "modelAsString": true
+          }
         },
         "paymentMethodType": {
           "description": "The type of payment method.",
