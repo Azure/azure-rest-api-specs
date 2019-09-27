@@ -201,7 +201,7 @@
         ]
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerId}/providers/Microsoft.Subscription/createSubscription": {
+    "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "The operation to create a new CSP subscription.",
         "operationId": "Subscriptions_CreateCspSubscription",
@@ -247,9 +247,9 @@
             "type": "string"
           },
           {
-            "name": "customerId",
+            "name": "customerName",
             "in": "path",
-            "description": "Customer's invoice section id.",
+            "description": "The name of the customer.",
             "required": true,
             "type": "string"
           },
