@@ -214,7 +214,8 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "tags": ["MultipleActivationKeys"],
@@ -357,10 +358,25 @@
               ],
               "type": "string",
               "x-ms-enum": {
-                "name": "installedServerNumberRange",
+                "name": "InstalledServerNumberRange",
                 "modelAsString": false
               },
               "x-ms-mutability": ["create", "read"]
+            },
+            "provisioningState": {
+              "type": "string",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Accepted",
+                "Provisioning"
+              ],
+              "x-ms-enum": {
+                "name": "ProvisioningState",
+                "modelAsString": true
+              },
+              "readOnly": true
             }
           }
         }
