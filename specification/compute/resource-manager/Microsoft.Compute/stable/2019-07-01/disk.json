@@ -1305,9 +1305,9 @@
     },
     "EncryptionSetProperties": {
       "properties": {
-        "activeKey":  
-        {
-          "$ref": "#/definitions/KeyVaultAndKeyReference"
+        "activeKey": {
+          "$ref": "#/definitions/KeyVaultAndKeyReference",
+          "description": "The key vault key which is currently used by this disk encryption set."
         },
         "previousKeys": {
           "type": "array",
@@ -1416,14 +1416,24 @@
         },
         "type": {
           "type": "string",
-          "description": "The type of key used for encryption at rest of the disk.",
+          "description": "The type of key used to encrypt the data of the disk.",
           "enum": [ 
             "EncryptionAtRestWithPlatformKey", 
             "EncryptionAtRestWithCustomerKey" 
           ],
           "x-ms-enum": {
             "name": "EncryptionType",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "EncryptionAtRestWithPlatformKey",
+                "description": "Disk is encrypted with XStore managed key at rest. It is the default encryption type."
+              },
+              {
+                "value": "EncryptionAtRestWithCustomerKey",
+                "description": "Disk is encrypted with Customer managed key at rest."
+              }
+            ]
           }
         }
       },
@@ -1719,7 +1729,8 @@
           "type": "string",
           "description": "The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-identity-principal-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
         }
-      }
+      },
+      "description": "The managed identity for the disk encryption set. It should be given permisiion on the key vault before it can be used to encrypt disks."
     },
     "DiskEncryptionSet": {
       "properties": {
@@ -1736,7 +1747,7 @@
           "$ref": "#/definitions/Resource"
         }
       ],
-      "description": "Describes the parameter of customer managed disk encryption set resource id that can be specified for disk. <br><br> NOTE: The disk encryption set resource id can only be specified for managed disk. Please refer https://aka.ms/mdssewithcmkoverview for more details."
+      "description": "disk encryption set resource."
     },
     "DiskEncryptionSetUpdate": {
       "properties": {
