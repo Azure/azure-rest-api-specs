@@ -59,13 +59,13 @@ input-file:
 - Microsoft.Migrate/stable/2018-02-02/migrate.json
 ```
 
-### Tag: package-2019-05
+### Tag: package-2019-10
 
-These settings apply only when `--tag=package-2019-05` is specified on the command line.
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-05'
+``` yaml $(tag) == 'package-2019-10'
 input-file:
-- Microsoft.Migrate/stable/2019-05-01/migrate.json
+- Microsoft.Migrate/stable/2019-10-01/migrate.json
 ```
 
 # Code Generation
@@ -98,7 +98,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Migrate/stable/2018-02-02/migrate.json
-  - $(this-folder)/Microsoft.Migrate/stable/2019-05-01/migrate.json
+  - $(this-folder)/Microsoft.Migrate/stable/2019-10-01/migrate.json
 
 ```
 

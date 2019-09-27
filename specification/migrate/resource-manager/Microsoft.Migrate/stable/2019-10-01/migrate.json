@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-05-01",
+    "version": "2019-10-01",
     "title": "Azure Migrate V2",
-    "description": "Move your workloads to Azure.",
+    "description": "Assess your workloads for Azure.",
     "contact": {
       "name": "Microsoft",
       "email": "azuremigrate@microsoft.com"
@@ -98,7 +98,7 @@
       "in": "query",
       "required": true,
       "enum": [
-        "2019-05-01"
+        "2019-10-01"
       ]
     },
     "acceptLanguage": {
@@ -2059,9 +2059,9 @@
         }
       }
     },
-    "AssessmentOptions": {
+    "AssessmentOptionsProperties": {
       "type": "object",
-      "description": "The assessment options.",
+      "description": "Assessment options properties.",
       "properties": {
         "vmFamilies": {
           "type": "array",
@@ -2079,6 +2079,73 @@
             "type": "string",
             "description": "Azure VM family name.",
             "readOnly": true
+          }
+        },
+        "reservedInstanceSupportedLocations": {
+          "type": "array",
+          "description": "List of supported Azure regions for reserved instances.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "Azure region name.",
+            "readOnly": true
+          }
+        },
+        "reservedInstanceSupportedCurrencies": {
+          "type": "array",
+          "description": "List of supported currencies for reserved instances.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "Currency to report prices in.",
+            "readOnly": true
+          }
+        },
+        "reservedInstanceSupportedOffers": {
+          "type": "array",
+          "description": "List of supported Azure offer codes for reserved instances.",
+          "readOnly": true,
+          "items": {
+            "type": "string",
+            "description": "Azure offer code to be used for cost estimation",
+            "readOnly": true
+          }
+        }
+      }
+    },
+    "AssessmentOptions": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "description": "Assessment options.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique name of an assessment options.",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier of an assessment options.",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Properties of the assessment options.",
+          "$ref": "#/definitions/AssessmentOptionsProperties"
+        }
+      }
+    },
+    "AssessmentOptionsResultList": {
+      "type": "object",
+      "description": "List of API operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations.",
+          "items": {
+            "$ref": "#/definitions/AssessmentOptions"
           }
         }
       }
@@ -2135,7 +2202,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Projects_List": {
@@ -2184,7 +2251,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Projects_List": {
@@ -2411,7 +2478,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/assessmentOptions": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/assessmentOptions/{assessmentOptionsName}": {
       "get": {
         "summary": "Get all available options for the properties of an assessment on a project.",
         "description": "Get all available options for the properties of an assessment on a project.",
@@ -2456,6 +2523,58 @@
         "x-ms-examples": {
           "AssessmentOptions_Get": {
             "$ref": "./examples/AssessmentOptions_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/assessmentOptions": {
+      "get": {
+        "summary": "Gets list of all available options for the properties of an assessment on a project.",
+        "description": "Gets list of all available options for the properties of an assessment on a project.",
+        "operationId": "Project_AssessmentOptionsList",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/projectName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/acceptLanguage"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "headers": {
+              "x-ms-request-id": {
+                "type": "string",
+                "description": "Service generated Request ID."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/AssessmentOptionsResultList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "AssessmentOptions_Get": {
+            "$ref": "./examples/AssessmentOptions_List.json"
           }
         }
       }
@@ -2607,7 +2726,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Groups_ListByProject": {
@@ -2889,7 +3008,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Assessments_ListByGroup": {
@@ -2941,7 +3060,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Assessments_ListByProject": {
@@ -3345,7 +3464,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "HyperVCollectors_ListByProject": {
@@ -3569,7 +3688,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "VMwareCollectors_ListByProject": {
@@ -3764,7 +3883,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
           "Operations_List": {
