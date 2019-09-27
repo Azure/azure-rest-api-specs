@@ -33,7 +33,7 @@
     "/custom/models": {
       "post": {
         "summary": "Train Custom Model",
-        "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be directly under the source folder. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored.",
+        "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure Storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or subfolders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored.",
         "operationId": "TrainCustomModel",
         "consumes": [
           "application/json"
@@ -55,7 +55,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "Location and Id of model being trained. Trained model status is specified in Status field in result."
+                "description": "Location and ID of model being trained. Trained model status is specified in Status field in result."
               }
             }
           },
@@ -110,6 +110,9 @@
             }
           }
         },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },        
         "x-ms-examples": {
           "Get Model from id": {
             "$ref": "./examples/GetModels.json"
@@ -165,7 +168,7 @@
       },
       "delete": {
         "summary": "Delete Model",
-        "description": "Delete model artifacts. Model status is marked as tombstoned. Artifacts of tombstoned model are deleted within 48 hours.",
+        "description": "Mark model for deletion. Model artifacts will be permenantly removed within predetermined period.",
         "operationId": "DeleteCustomModel",
         "consumes": [],
         "produces": [
@@ -182,8 +185,8 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "Successfully tombstoned model and its artifacts will be removed within 48 hours."
+          "200": {
+            "description": "Successfully marked model for deletion. Model artifacts will be removed within predefined time period."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -202,7 +205,7 @@
     "/custom/models/{modelId}/analyze": {
       "post": {
         "summary": "Analyze Form",
-        "description": "Extract key-value pairs from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/jiff'. Alternatively, use 'application/json' format to specify location (URI or local path) of document to be analyzed.",
+        "description": "Extract key-value pairs and table(s) from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify location (URI or local path) of document to be analyzed.",
         "operationId": "AnalyzeWithCustomModelAsync",
         "consumes": [
           "application/pdf",
@@ -238,7 +241,7 @@
             "headers": {
               "Location": {
                 "type": "string",
-                "description": "Result id to track the progress of analyze operation. Result of analyze operation can be obtained only when the operation status becomes \"succeeded\" in status field."
+                "description": "URL containing Result id to track the progress of analyze operation. Result of analyze operation can be obtained only when the operation status becomes \"succeeded\" in status field."
               }
             }
           },
@@ -298,7 +301,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Keys from Model": {
+          "Get Model": {
             "$ref": "./examples/AnalyzeOperationResult.json"
           }
         }
@@ -349,7 +352,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Model from id": {
+          "Copy Model": {
             "$ref": "./examples/CopyBatch.json"
           }
         }
@@ -397,7 +400,7 @@
           }
         },
         "x-ms-examples": {
-          "Get Keys from Model": {
+          "Get copy operation results": {
             "$ref": "./examples/CopyOperationResult.json"
           }
         }
@@ -571,10 +574,8 @@
           "description": "Get or set the status of model.",
           "enum": [
             "creating",
-            "created",
             "ready",
-            "invalid",
-            "tombstoned"
+            "invalid"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -604,6 +605,30 @@
         "modelList"
       ],
       "properties": {
+        "summary": {
+          "description": "Result of query operation to fetch summery of models.",
+          "type": "object",
+          "x-nullable": true,
+          "properties": { 
+            "count": {
+              "description": "Current count of trained models.",
+              "type": "string",
+              "format": "int32",
+              "x-nullable": false
+            },
+            "limit": {
+              "description": "Max number of models that can be trained for this subscription.",
+              "type": "string",
+              "format": "int32",
+              "x-nullable": false
+            },
+            "lastUpdatedDateTime": {
+              "format": "date-time",
+              "description": "Get or set the summary last updated datetime.",
+              "type": "string"
+            }
+          }
+        },        
         "modelList": {
           "description": "Collection of models.",
           "type": "array",
@@ -611,7 +636,7 @@
             "$ref": "#/definitions/ModelInfo"
           }
         },
-        "@nextLink": {
+        "nextLink": {
           "description": "Next link",
           "type": "string"
         }
