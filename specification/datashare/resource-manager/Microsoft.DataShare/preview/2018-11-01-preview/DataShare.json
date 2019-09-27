@@ -576,6 +576,12 @@
         "x-ms-examples": {
           "DataSets_Create": {
             "$ref": "./examples/DataSets_Create.json"
+          },
+          "DataSets_SqlDWTable_Create": {
+            "$ref": "./examples/DataSets_SqlDWTable_Create.json"
+          },
+          "DataSets_SqlDBTable_Create": {
+            "$ref": "./examples/DataSets_SqlDBTable_Create.json"
           }
         }
       },
@@ -818,6 +824,15 @@
         "x-ms-examples": {
           "DataSetMappings_Create": {
             "$ref": "./examples/DataSetMappings_Create.json"
+          },
+          "DataSetMappings_SqlDW_Create": {
+            "$ref": "./examples/DataSetMappings_SqlDW_Create.json"
+          },
+          "DataSetMappings_SqlDB_Create": {
+            "$ref": "./examples/DataSetMappings_SqlDB_Create.json"
+          },
+          "DataSetMappings_AdlsGen2File_Create": {
+            "$ref": "./examples/DataSetMappings_AdlsGen2File_Create.json"
           }
         }
       },
@@ -3250,7 +3265,9 @@
             "AdlsGen2Folder",
             "AdlsGen2File",
             "AdlsGen1Folder",
-            "AdlsGen1File"
+            "AdlsGen1File",
+            "SqlDBTable",
+            "SqlDWTable"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3299,7 +3316,9 @@
             "BlobFolder",
             "AdlsGen2FileSystem",
             "AdlsGen2Folder",
-            "AdlsGen2File"
+            "AdlsGen2File",
+            "SqlDBTable",
+            "SqlDWTable"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3806,7 +3825,9 @@
             "AdlsGen2Folder",
             "AdlsGen2File",
             "AdlsGen1Folder",
-            "AdlsGen1File"
+            "AdlsGen1File",
+            "SqlDBTable",
+            "SqlDWTable"
           ],
           "type": "string",
           "readOnly": true,
@@ -3847,6 +3868,18 @@
         "name": {
           "description": "name of dataSet",
           "type": "string",
+          "readOnly": true
+        },
+        "rowsCopied": {
+          "format": "int64",
+          "description": "The number of files copied into the sink dataset.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "rowsRead": {
+          "format": "int64",
+          "description": "The number of rows read from the source dataset.",
+          "type": "integer",
           "readOnly": true
         },
         "sizeRead": {
@@ -4142,7 +4175,9 @@
             "AdlsGen2Folder",
             "AdlsGen2File",
             "AdlsGen1Folder",
-            "AdlsGen1File"
+            "AdlsGen1File",
+            "SqlDBTable",
+            "SqlDWTable"
           ],
           "type": "string",
           "readOnly": true,
@@ -4592,7 +4627,7 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -4650,7 +4685,7 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -4707,7 +4742,7 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -4757,7 +4792,7 @@
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -4815,7 +4850,7 @@
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -4872,7 +4907,7 @@
       "type": "object",
       "properties": {
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -4929,7 +4964,7 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -4983,7 +5018,7 @@
           "type": "string"
         },
         "dataSetId": {
-          "description": "Unique DataSet id.",
+          "description": "Unique id for identifying a data set resource",
           "type": "string",
           "readOnly": true
         },
@@ -5001,6 +5036,86 @@
         },
         "subscriptionId": {
           "description": "Subscription id of ADLS account.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlDWTableDataSet": {
+      "description": "A SQL DW table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDWTableProperties",
+          "description": "SQL DW table dataset properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDWTable"
+    },
+    "SqlDWTableProperties": {
+      "description": "Properties of the SQL DW table data set.",
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "dataWarehouseName": {
+          "description": "DataWarehouse name of the source data set",
+          "type": "string"
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DW table name.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlDBTableDataSet": {
+      "description": "A SQL DB table dataset.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSet"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDBTableProperties",
+          "description": "SQL DB table dataset properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDBTable"
+    },
+    "SqlDBTableProperties": {
+      "description": "Properties of the SQL DB table data set.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "Database name of the source data set",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Unique id for identifying a data set resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DB table name.",
           "type": "string"
         }
       }
@@ -5059,6 +5174,18 @@
         "filePath": {
           "description": "File path within the source data set",
           "type": "string"
+        },
+        "outputType": {
+          "description": "File output type",
+          "enum": [
+            "Csv",
+            "Parquet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "outputType",
+            "modelAsString": true
+          }
         },
         "resourceGroup": {
           "description": "Resource group of storage account.",
@@ -5262,6 +5389,18 @@
           "description": "File system to which the file belongs.",
           "type": "string"
         },
+        "outputType": {
+          "description": "Type of output file",
+          "enum": [
+            "Csv",
+            "Parquet"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "outputType",
+            "modelAsString": true
+          }
+        },
         "resourceGroup": {
           "description": "Resource group of storage account.",
           "type": "string"
@@ -5405,6 +5544,124 @@
         },
         "subscriptionId": {
           "description": "Subscription id of storage account.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlDWTableDataSetMapping": {
+      "description": "A SQL DW Table dataset mapping.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDWTableDataSetMappingProperties",
+          "description": "Sql DW dataset mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDWTable"
+    },
+    "SqlDWTableDataSetMappingProperties": {
+      "description": "Properties of the SQL DW table data set mapping.",
+      "required": [
+        "dataWarehouseName",
+        "tableName",
+        "sqlServerResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "dataSetId": {
+          "description": "Gets the id of source dataset.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the dataset mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "dataWarehouseName": {
+          "description": "DataWarehouse name of the source data set",
+          "type": "string"
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DW table name.",
+          "type": "string"
+        }
+      }
+    },
+    "SqlDBTableDataSetMapping": {
+      "description": "A SQL DB Table dataset mapping.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DataSetMapping"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SqlDBTableDataSetMappingProperties",
+          "description": "Sql DB dataset mapping properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-discriminator-value": "SqlDBTable"
+    },
+    "SqlDBTableDataSetMappingProperties": {
+      "description": "Properties of the SQL DB table data set mapping.",
+      "required": [
+        "databaseName",
+        "tableName",
+        "sqlServerResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "description": "DatabaseName name of the sink data set",
+          "type": "string"
+        },
+        "dataSetId": {
+          "description": "Gets the id of source dataset.",
+          "type": "string"
+        },
+        "dataSetMappingStatus": {
+          "description": "Gets the status of the dataset mapping.",
+          "enum": [
+            "Ok",
+            "Broken"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "dataSetMappingStatus",
+            "modelAsString": true
+          }
+        },
+        "sqlServerResourceId": {
+          "description": "Resource id of SQL server",
+          "type": "string"
+        },
+        "tableName": {
+          "description": "SQL DB table name.",
           "type": "string"
         }
       }

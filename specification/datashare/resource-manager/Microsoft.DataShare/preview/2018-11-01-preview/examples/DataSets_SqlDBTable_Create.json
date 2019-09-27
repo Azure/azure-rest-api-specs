@@ -7,13 +7,11 @@
     "dataSetName": "Dataset1",
     "api-version": "2018-11-01-preview",
     "dataSet": {
-      "kind": "Blob",
+      "kind": "SqlDBTable",
       "properties": {
-        "storageAccountName": "storage2",
-        "filePath": "file21",
-        "containerName": "C1",
-        "subscriptionId": "433a8dfd-e5d5-4e77-ad86-90acdc75eb1a",
-        "resourceGroup": "SampleResourceGroup"
+        "sqlServerResourceId": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1",
+        "databaseName": "SqlDB1",
+        "tableName": "Table1"
       }
     }
   },
@@ -27,16 +25,14 @@
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
       },
       "body": {
-        "kind": "Blob",
+        "kind": "SqlDBTable",
         "properties": {
           "dataSetId": "a08f184b-0567-4b11-ba22-a1199336d226",
-          "storageAccountName": "adspipelinemetadatatable",
-          "containerName": "C1",
-          "filePath": "inputpath",
-          "subscriptionId": "433a8dfd-e5d5-4e77-ad86-90acdc75eb1a",
-          "resourceGroup": "SampleResourceGroup"
+          "sqlServerResourceId": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1",
+          "databaseName": "SqlDB1",
+          "tableName": "Table1"
         },
-        "id": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/testrg/providers/Microsoft.DataShare/accounts/{{accountName}}/shares/share1/datasets/dataset1new",
+        "id": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1",
         "name": null,
         "type": "Microsoft.DataShare/DataSets"
       }
@@ -50,13 +46,12 @@
         "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
       },
       "body": {
-        "kind": "Blob",
+        "kind": "SqlDBTable",
         "properties": {
-          "storageAccountName": "storage2",
-          "filePath": "file21",
-          "containerName": "C1",
-          "subscriptionId": "433a8dfd-e5d5-4e77-ad86-90acdc75eb1a",
-          "resourceGroup": "SampleResourceGroup"
+          "dataSetId": "a08f184b-0567-4b11-ba22-a1199336d226",
+          "sqlServerResourceId": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.Sql/servers/Server1",
+          "databaseName": "SqlDB1",
+          "tableName": "Table1"
         },
         "id": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/datasets/Dataset1",
         "name": "Dataset1",
