@@ -1,0 +1,85 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2016-01-01",
+    "title": "AzureBridgeAdminClient",
+    "description": "AzureBridge Admin Client."
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/configuration": {
+      "get": {
+        "x-ms-examples": {
+          "Return product name.": {
+            "$ref": "./examples/Configuration/Read.json"
+          }
+        },
+        "description": "Return azure stack configuration data.",
+        "tags": [
+          "Configuration"
+        ],
+        "operationId": "Configuration_Get",
+        "parameters": [
+          {
+            "$ref": "AzureBridge.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "AzureBridge.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AzureStackConfiguration"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ]
+      }
+    }
+  },
+  "definitions": {
+    "AzureStackConfiguration": {
+      "description": "Azure stack configuration.",
+      "type": "object",
+      "properties": {
+        "deviceVersion": {
+          "description": "Device version.",
+          "type": "string"
+        },
+        "identitySystem": {
+          "description": "Device identity system.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}
