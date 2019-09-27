@@ -321,7 +321,7 @@
           }
         },
         "x-ms-pageable": {
-          "nextLinkName": null
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -689,7 +689,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK -- Get managementpolicy successfully.",
+            "description": "OK -- Put managementpolicy successfully.",
             "schema": {
               "$ref": "#/definitions/ManagementPolicy"
             }
@@ -1381,6 +1381,18 @@
           "type": "boolean",
           "x-ms-client-name": "IsHnsEnabled",
           "description": "Account HierarchicalNamespace enabled if sets to true."
+        },
+        "largeFileSharesState": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LargeFileSharesState",
+            "modelAsString": true
+          },
+          "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
         }
       },
       "description": "The parameters used to create the storage account."
@@ -1656,6 +1668,18 @@
           "x-ms-client-name": "FailoverInProgress",
           "description": "If the failover is in progress, the value will be true, otherwise, it will be null.",
           "readOnly": true
+        },
+        "largeFileSharesState": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LargeFileSharesState",
+            "modelAsString": true
+          },
+          "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
         }
       },
       "description": "Properties of the storage account."
@@ -1737,6 +1761,11 @@
             "$ref": "#/definitions/StorageAccount"
           },
           "description": "Gets the list of storage accounts and their properties."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Request URL that can be used to query next page of storage accounts. Returned when total number of requested storage accounts exceed maximum page size.",
+          "readOnly": true
         }
       },
       "description": "The response from the List Storage Accounts operation."
@@ -1801,6 +1830,18 @@
           "description": "Network rule set",
           "x-ms-client-name": "NetworkRuleSet",
           "$ref": "#/definitions/NetworkRuleSet"
+        },
+        "largeFileSharesState": {
+          "type": "string",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "LargeFileSharesState",
+            "modelAsString": true
+          },
+          "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
         }
       },
       "description": "The parameters used when updating a storage account."

@@ -4,11 +4,11 @@
 
 Configuration for generating Computer Vision SDK.
 
-The current release is `release_2_0`.
+The current release is `release_2_1`.
 
 ``` yaml
 
-tag: release_2_0
+tag: release_2_1
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -21,6 +21,15 @@ These settings apply only when `--tag=release_2_0` is specified on the command l
 input-file:
   - stable/v2.0/ComputerVision.json
   - stable/v2.0/Ocr.json
+```
+
+### Release 2.1
+These settings apply only when `--tag=release_2_1` is specified on the command line.
+
+``` yaml $(tag) == 'release_2_1'
+input-file:
+  - stable/v2.1/ComputerVision.json
+  - stable/v2.1/Ocr.json
 ```
 
 ## Swagger to SDK
@@ -135,6 +144,8 @@ require: $(this-folder)/../../../../profiles/readme.md
 input-file:
   - $(this-folder)/stable/v2.0/ComputerVision.json
   - $(this-folder)/stable/v2.0/Ocr.json
+  - $(this-folder)/stable/v2.1/ComputerVision.json
+  - $(this-folder)/stable/v2.1/Ocr.json
 
 ```
 

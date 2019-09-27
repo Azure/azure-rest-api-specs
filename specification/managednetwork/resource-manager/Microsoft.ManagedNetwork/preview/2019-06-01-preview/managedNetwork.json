@@ -991,7 +991,6 @@
       "type": "object",
       "properties": {
         "scope": {
-          "readOnly": true,
           "$ref": "#/definitions/Scope",
           "description": "The collection of management groups, subscriptions, virtual networks, and subnets by the Managed Network. This is a read-only property that is reflective of all ScopeAssignments for this Managed Network"
         },
@@ -1012,9 +1011,16 @@
       "type": "object",
       "properties": {
         "tags": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/TagsObject",
-          "description": "Updates the tags property of the Managed Network"
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "description": "Update Tags of Managed Network"
@@ -1230,9 +1236,8 @@
       "description": "The Managed Network Peering Policy resource"
     },
     "ManagedNetworkPeeringPolicyProperties": {
-      "discriminator": "peeringPolicyType",
       "properties": {
-        "peeringPolicyType": {
+        "type": {
           "type": "string",
           "enum": [
             "HubAndSpokeTopology",
@@ -1269,7 +1274,7 @@
         }
       ],
       "required": [
-        "peeringPolicyType"
+        "type"
       ],
       "description": "Properties of a Managed Network Peering Policy"
     },
@@ -1405,6 +1410,14 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
         }
       },
       "x-ms-azure-resource": true
@@ -1414,23 +1427,15 @@
       "properties": {
         "tags": {
           "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
           "x-ms-mutability": [
             "read",
             "create",
             "update"
           ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "required": [
@@ -1458,13 +1463,6 @@
         }
       },
       "description": "Generic pointer to a resource"
-    },
-    "TagsObject": {
-      "type": "object",
-      "additionalProperties": {
-        "type": "string"
-      },
-      "description": "Resource tags."
     },
     "ResourceProperties": {
       "properties": {

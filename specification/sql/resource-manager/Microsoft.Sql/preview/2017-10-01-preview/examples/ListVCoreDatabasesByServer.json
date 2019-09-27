@@ -3,7 +3,7 @@
     "subscriptionId": "00000000-1111-2222-3333-444444444444",
     "resourceGroupName": "Default-SQL-SouthEastAsia",
     "serverName": "testsvr",
-    "api-version": "2017-03-01-preview"
+    "api-version": "2017-10-01-preview"
   },
   "responses": {
     "200": {
@@ -11,7 +11,7 @@
         "value": [
           {
             "sku": {
-              "name": "BC_Gen4_2",
+              "name": "BC_Gen4",
               "tier": "BusinessCritical",
               "capacity": 2
             },
@@ -26,7 +26,9 @@
               "defaultSecondaryLocation": "North Europe",
               "catalogCollation": "SQL_Latin1_General_CP1_CI_AS",
               "licenseType": "LicenseIncluded",
-              "maxLogSizeBytes": 104857600
+              "maxLogSizeBytes": 104857600,
+              "readScale": "Enabled",
+              "readReplicaCount": 1
             },
             "location": "southeastasia",
             "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-SouthEastAsia/providers/Microsoft.Sql/servers/testsvr/databases/testdb",
