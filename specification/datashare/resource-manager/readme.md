@@ -82,19 +82,19 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.DataShare
-  package-name: azure-mgmt-DataShare
+  namespace: azure.mgmt.datashare
+  package-name: azure-mgmt-datashare
   clear-output-folder: true
 ```
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-DataShare/azure/mgmt/DataShare
+  output-folder: $(python-sdks-folder)/datashare/azure-mgmt-datashare/azure/mgmt/datashare
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-DataShare
+  output-folder: $(python-sdks-folder)/datashare/azure-mgmt-datashare
 ```
 
 
