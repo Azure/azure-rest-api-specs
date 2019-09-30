@@ -84,6 +84,10 @@ csharp:
 
 See configuration in [readme.python.md](./readme.python.md)
 
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
 ## Go
 
 See configuration in [readme.go.md](./readme.go.md)
