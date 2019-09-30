@@ -580,7 +580,7 @@
           "type": "string"
         },
         "resourceState": {
-          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeletd, Deleted}",
+          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeleted, Deleted}",
           "type": "string"
         },
         "resourceStateSyncTime": {
@@ -887,7 +887,7 @@
           "type": "number"
         },
         "taskExecutionDetails": {
-          "description": "Details about execution of the task.\r\neg: number of bytes transfered etc",
+          "description": "Details about execution of the task.\r\neg: number of bytes transferred etc",
           "type": "string"
         }
       }
@@ -1618,7 +1618,7 @@
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
     },
     "AzureWorkloadSQLRecoveryPoint": {
-      "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint alongwith extended info",
+      "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info",
       "type": "object",
       "allOf": [
         {
@@ -2359,7 +2359,7 @@
           "type": "string"
         },
         "jobType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -2415,8 +2415,7 @@
             "Backup",
             "Restore",
             "DisableBackup",
-            "DeleteBackupData",
-            "CrossRegionRestore",
+            "DeleteBackupData",           
             "Undelete"
           ],
           "type": "string",
@@ -2496,7 +2495,7 @@
       }
     },
     "KeyAndSecretDetails": {
-      "description": "BEK is bitlocker key.\r\nKEK is encryption key for BEK\r\nIf the VM was encrypted then we will store following details :\r\n1. Secret(BEK) - Url + Backup Data + vaultId.\r\n2. Key(KEK) - Url + Backup Data + vaultId.\r\n3. EncryptionMechanism\r\nBEK and KEK can potentiallty have different vault ids.",
+      "description": "BEK is bitlocker key.\r\nKEK is encryption key for BEK\r\nIf the VM was encrypted then we will store following details :\r\n1. Secret(BEK) - Url + Backup Data + vaultId.\r\n2. Key(KEK) - Url + Backup Data + vaultId.\r\n3. EncryptionMechanism\r\nBEK and KEK can potentially have different vault ids.",
       "type": "object",
       "properties": {
         "kekDetails": {
@@ -2998,7 +2997,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -3172,7 +3171,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
