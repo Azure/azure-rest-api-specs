@@ -1943,25 +1943,34 @@
       },
       "x-ms-discriminator-value": "AzureFileShareProtectedItem"
     },
-    "AzureFileshareProtectedItemExtendedInfo": {
+   AzureFileshareProtectedItemExtendedInfo": {
       "description": "Additional information about Azure File Share backup item.",
       "type": "object",
-      "properties": {
-        "oldestRecoveryPoint": {
-          "format": "date-time",
-          "description": "The oldest backup copy available for this item in the service.",
-          "type": "string"
-        },
-        "recoveryPointCount": {
-          "format": "int32",
-          "description": "Number of available backup copies associated with this backup item.",
-          "type": "integer"
-        },
-        "policyState": {
-          "description": "Indicates consistency of policy object and policy applied to this backup item.",
-          "type": "string"
-        }
+    "properties": {
+      "oldestRecoveryPoint": {
+        "format": "date-time",
+        "description": "The oldest backup copy available for this item in the service.",
+        "type": "string"
+      },
+      "recoveryPointCount": {
+        "format": "int32",
+        "description": "Number of available backup copies associated with this backup item.",
+        "type": "integer"
+      },
+      "policyState": {
+        "description": "Indicates consistency of policy object and policy applied to this backup item.",
+        "type": "string"
+      },
+      "resourceState": {
+        "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeleted, Deleted}",
+        "type": "string"
+      },
+      "resourceStateSyncTime": {
+        "format": "date-time",
+        "description": "The resource state sync time for this backup item.",
+        "type": "string"
       }
+    }
     },
     "AzureFileShareProtectionPolicy": {
       "description": "AzureStorage backup policy.",
