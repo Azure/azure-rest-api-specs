@@ -31,6 +31,21 @@ openapi-type: arm
 tag: package-2019-05
 ```
 
+### Tag: package-2019-11
+
+These settings apply only when `--tag=package-2019-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11'
+input-file:
+- Microsoft.Network/stable/2019-11-01/network.json
+- Microsoft.Network/stable/2019-11-01/networkexperiment.json
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - OperationsAPIImplementation
+```
+
 ### Tag: package-2019-05
 
 These settings apply only when `--tag=package-2019-05` is specified on the command line.
@@ -178,6 +193,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
+  - $(this-folder)/Microsoft.Network/stable/2019-11-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-05-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-05-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
