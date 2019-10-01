@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2019-06-01",
+    "version": "2019-09-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -80,7 +80,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -142,7 +142,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -192,7 +192,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -247,7 +247,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -335,7 +335,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -383,7 +383,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -432,7 +432,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -484,7 +484,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -527,7 +527,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -535,6 +535,15 @@
     }
   },
   "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from a policy operation."
+    },
     "PolicyAssignmentProperties": {
       "properties": {
         "displayName": {
@@ -689,24 +698,6 @@
         }
       },
       "description": "Identity for the resource."
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "httpStatus": {
-          "description": "Http status code.",
-          "type": "string"
-        },
-        "errorCode": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {

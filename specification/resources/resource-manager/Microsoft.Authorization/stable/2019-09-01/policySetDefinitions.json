@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2019-06-01",
+    "version": "2019-09-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -45,6 +45,9 @@
         "x-ms-examples": {
           "Create or update a policy set definition": {
             "$ref": "./examples/createOrUpdatePolicySetDefinition.json"
+          },
+          "Create or update a policy set definition with groups": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionWithGroups.json"
           }
         },
         "parameters": [
@@ -87,7 +90,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -129,7 +132,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -171,7 +174,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -212,7 +215,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -249,7 +252,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -286,7 +289,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -306,6 +309,9 @@
         "x-ms-examples": {
           "Create or update a policy set definition at management group level": {
             "$ref": "./examples/createOrUpdatePolicySetDefinitionAtManagementGroup.json"
+          },
+          "Create or update a policy set definition with groups at management group level": {
+            "$ref": "./examples/createOrUpdatePolicySetDefinitionWithGroupsAtManagementGroup.json"
           }
         },
         "parameters": [
@@ -348,7 +354,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -390,7 +396,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -432,7 +438,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -469,7 +475,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -480,15 +486,25 @@
     }
   },
   "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from a policy operation."
+    },
     "PolicySetDefinitionProperties": {
       "properties": {
         "policyType": {
           "type": "string",
-          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, and Custom.",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static.",
           "enum": [
             "NotSpecified",
             "BuiltIn",
-            "Custom"
+            "Custom",
+            "Static"
           ],
           "x-ms-enum": {
             "name": "policyType",
@@ -517,6 +533,13 @@
             "$ref": "#/definitions/PolicyDefinitionReference"
           },
           "description": "An array of policy definition references."
+        },
+        "policyDefinitionGroups": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyDefinitionGroup"
+          },
+          "description": "The metadata describing groups of policy definition references within the policy set definition."
         }
       },
       "required": [
@@ -533,9 +556,44 @@
         "parameters": {
           "type": "object",
           "description": "Required if a parameter is used in policy rule."
+        },
+        "policyDefinitionReferenceId": {
+          "type": "string",
+          "description": "A unique id (within the policy set definition) for this policy definition reference."
+        },
+        "groupName": {
+          "type": "string",
+          "description": "The name of the group that this policy definition reference belongs to."
         }
       },
+      "required": [ "policyDefinitionId" ],
       "description": "The policy definition reference."
+    },
+    "PolicyDefinitionGroup": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the group."
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The group's display name."
+        },
+        "category": {
+          "type": "string",
+          "description": "The group's category."
+        },
+        "description": {
+          "type": "string",
+          "description": "The group's description."
+        },
+        "additionalMetadataId": {
+          "type": "string",
+          "description": "A resource ID of a resource that contains additional metadata about the group."
+        }
+      },
+      "required": [ "name" ],
+      "description": "The policy definition group."
     },
     "PolicySetDefinition": {
       "properties": {
@@ -578,24 +636,6 @@
         }
       },
       "description": "List of policy set definitions."
-    },
-    "ErrorResponse": {
-      "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message.",
-      "type": "object",
-      "properties": {
-        "httpStatus": {
-          "description": "Http status code.",
-          "type": "string"
-        },
-        "errorCode": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "errorMessage": {
-          "description": "Error message indicating why the operation failed.",
-          "type": "string"
-        }
-      }
     }
   },
   "parameters": {

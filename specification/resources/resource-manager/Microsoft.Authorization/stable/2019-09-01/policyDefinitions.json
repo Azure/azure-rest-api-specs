@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "PolicyClient",
-    "version": "2019-06-01",
+    "version": "2019-09-01",
     "description": "To manage and control access to your resources, you can define customized policies and assign them at a scope."
   },
   "host": "management.azure.com",
@@ -77,6 +77,12 @@
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -113,6 +119,12 @@
           },
           "200": {
             "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -149,6 +161,12 @@
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -183,6 +201,12 @@
             "description": "OK - Returns information about the built-in policy definition.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         }
@@ -231,6 +255,12 @@
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -267,6 +297,12 @@
           },
           "200": {
             "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       },
@@ -303,6 +339,12 @@
             "schema": {
               "$ref": "#/definitions/PolicyDefinition"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         }
       }
@@ -334,6 +376,12 @@
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -364,6 +412,12 @@
             "description": "OK - Returns an array of built-in policy definitions.",
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -399,6 +453,12 @@
             "schema": {
               "$ref": "#/definitions/PolicyDefinitionListResult"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
         "x-ms-pageable": {
@@ -408,15 +468,25 @@
     }
   },
   "definitions": {
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response from a policy operation."
+    },
     "PolicyDefinitionProperties": {
       "properties": {
         "policyType": {
           "type": "string",
-          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, and Custom.",
+          "description": "The type of policy definition. Possible values are NotSpecified, BuiltIn, Custom, and Static.",
           "enum": [
             "NotSpecified",
             "BuiltIn",
-            "Custom"
+            "Custom",
+            "Static"
           ],
           "x-ms-enum": {
             "name": "policyType",
