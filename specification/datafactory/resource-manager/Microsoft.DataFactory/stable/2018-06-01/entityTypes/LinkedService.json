@@ -482,18 +482,23 @@
           "description": "The connection string. Type: string, SecureString or AzureKeyVaultSecretReference.",
           "type": "object"
         },
+        "accountEndpoint": {
+          "description": "The endpoint of the Azure CosmosDB account. Type: string (or Expression with resultType string)",
+          "type": "object"
+        },
+        "database": {
+          "description": "The name of the database. Type: string (or Expression with resultType string)",
+          "type": "object"
+        },
         "accountKey": {
-          "$ref": "../datafactory.json#/definitions/AzureKeyVaultSecretReference",
-          "description": "The Azure key vault secret reference of accountKey in connection string."
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The account key of the Azure CosmosDB account. Type: SecureString or AzureKeyVaultSecretReference."
         },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
         }
-      },
-      "required": [
-        "connectionString"
-      ]
+      }
     },
     "DynamicsLinkedService": {
       "x-ms-discriminator-value": "Dynamics",
@@ -844,6 +849,91 @@
       "required": [
         "host"
       ]
+    },
+    "AzureFileStorageLinkedService": {
+      "x-ms-discriminator-value": "AzureFileStorage",
+      "description": "Azure File Storage linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure File Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureFileStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureFileStorageLinkedServiceTypeProperties": {
+      "description": "Azure File Storage linked service properties.",
+      "properties": {
+        "host": {
+          "type": "object",
+          "description": "Host name of the server. Type: string (or Expression with resultType string)."
+        },
+        "userId": {
+          "type": "object",
+          "description": "User ID to logon the server. Type: string (or Expression with resultType string)."
+        },
+        "password": {
+          "description": "Password to logon the server.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "host"
+      ]
+    },
+    "GoogleCloudStorageLinkedService": {
+      "x-ms-discriminator-value": "GoogleCloudStorage",
+      "description": "Linked service for Google Cloud Storage.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Google Cloud Storage linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GoogleCloudStorageLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "GoogleCloudStorageLinkedServiceTypeProperties": {
+      "description": "Google Cloud Storage linked service properties.",
+      "properties": {
+        "accessKeyId": {
+          "type": "object",
+          "description": "The access key identifier of the Google Cloud Storage Identity and Access Management (IAM) user. Type: string (or Expression with resultType string)."
+        },
+        "secretAccessKey": {
+          "description": "The secret access key of the Google Cloud Storage Identity and Access Management (IAM) user.",
+          "$ref": "../datafactory.json#/definitions/SecretBase"
+        },
+        "serviceUrl": {
+          "type": "object",
+          "description": "This value specifies the endpoint to access with the Google Cloud Storage Connector. This is an optional property; change it only if you want to try a different service endpoint or want to switch between https and http. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      }
     },
     "OracleLinkedService": {
       "x-ms-discriminator-value": "Oracle",
@@ -4971,19 +5061,23 @@
         },
         "existingClusterId": {
           "type": "object",
-          "description": "The id of an existing cluster that will be used for all runs of this job. Type: string (or Expression with resultType string)."
+          "description": "The id of an existing interactive cluster that will be used for all runs of this activity. Type: string (or Expression with resultType string)."
+        },
+        "instancePoolId": {
+          "type": "object",
+          "description": "The id of an existing instance pool that will be used for all runs of this activity. Type: string (or Expression with resultType string)."
         },
         "newClusterVersion": {
           "type": "object",
-          "description": "The Spark version of new cluster. Type: string (or Expression with resultType string)."
+          "description": "If not using an existing interactive cluster, this specifies the Spark version of a new job cluster or instance pool nodes created for each run of this activity. Required if instancePoolId is specified. Type: string (or Expression with resultType string)."
         },
         "newClusterNumOfWorker": {
           "type": "object",
-          "description": "Number of worker nodes that new cluster should have. A string formatted Int32, like '1' means numOfWorker is 1 or '1:10' means auto-scale from 1 as min and 10 as max. Type: string (or Expression with resultType string)."
+          "description": "If not using an existing interactive cluster, this specifies the number of worker nodes to use for the new job cluster or instance pool. For new job clusters, this a string-formatted Int32, like '1' means numOfWorker is 1 or '1:10' means auto-scale from 1 (min) to 10 (max). For instance pools, this is a string-formatted Int32, and can only specify a fixed number of worker nodes, such as '2'. Required if newClusterVersion is specified. Type: string (or Expression with resultType string)."
         },
         "newClusterNodeType": {
           "type": "object",
-          "description": "The node types of new cluster. Type: string (or Expression with resultType string)."
+          "description": "The node type of the new job cluster. This property is required if newClusterVersion is specified and instancePoolId is not specified. If instancePoolId is specified, this property is ignored. Type: string (or Expression with resultType string)."
         },
         "newClusterSparkConf": {
           "description": "A set of optional, user-specified Spark configuration key-value pairs.",
@@ -5002,7 +5096,7 @@
           }
         },
         "newClusterCustomTags": {
-          "description": "Additional tags for cluster resources.",
+          "description": "Additional tags for cluster resources. This property is ignored in instance pool configurations.",
           "type": "object",
           "additionalProperties": {
             "type": "object",
@@ -5011,7 +5105,7 @@
         },
         "newClusterDriverNodeType": {
           "type": "object",
-          "description": "The driver node type for the new cluster. Type: string (or Expression with resultType string)."
+          "description": "The driver node type for the new job cluster. This property is ignored in instance pool configurations. Type: string (or Expression with resultType string)."
         },
         "newClusterInitScripts": {
           "type": "object",
@@ -5019,7 +5113,7 @@
         },
         "newClusterEnableElasticDisk": {
           "type": "object",
-          "description": "Enable the elastic disk on the new cluster. Type: boolean (or Expression with resultType boolean)."
+          "description": "Enable the elastic disk on the new cluster. This property is now ignored, and takes the default elastic disk behavior in Databricks (elastic disks are always enabled). Type: boolean (or Expression with resultType boolean)."
         },
         "encryptedCredential": {
           "type": "object",
