@@ -1962,7 +1962,7 @@
           "type": "string"
         },
         "resourceState": {
-          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeletd, Deleted}",
+          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeleted, Deleted}",
           "type": "string"
         },
         "resourceStateSyncTime": {
@@ -2487,10 +2487,6 @@
         "prebackupvalidation": {
           "$ref": "#/definitions/PreBackupValidation",
           "description": "Pre-backup validation for protectable objects"
-        },
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
         }
       },
       "x-ms-discriminator-value": "AzureVmWorkloadProtectableItem"
@@ -2669,43 +2665,7 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
-      "properties": {
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
-        },
-        "backupManagementType": {
-          "description": "Type of backup management to backup an item.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of workload for the backup management",
-          "type": "string"
-        },
-        "protectableItemType": {
-          "description": "Type of the backup item.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "State of the back up item.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "SAPAseDatabase"
-    },
-    "AzureVmWorkloadSAPAseDatabaseProtectedItem": {
-      "description": "Azure VM workload-specific protected item representing SAP ASE Database.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureVmWorkloadSAPAseDatabase"
     },
     "AzureVmWorkloadSAPAseDatabaseWorkloadItem": {
       "description": "Azure VM workload-specific workload item representing SAP ASE Database.",
@@ -2725,32 +2685,6 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
-      "properties": {
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
-        },
-        "backupManagementType": {
-          "description": "Type of backup management to backup an item.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of workload for the backup management",
-          "type": "string"
-        },
-        "protectableItemType": {
-          "description": "Type of the backup item.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "State of the back up item.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "SAPAseSystem"
     },
     "AzureVmWorkloadSAPAseSystemWorkloadItem": {
@@ -2771,43 +2705,7 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
-      "properties": {
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
-        },
-        "backupManagementType": {
-          "description": "Type of backup management to backup an item.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of workload for the backup management",
-          "type": "string"
-        },
-        "protectableItemType": {
-          "description": "Type of the backup item.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "State of the back up item.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "SAPHanaDatabase"
-    },
-    "AzureVmWorkloadSAPHanaDatabaseProtectedItem": {
-      "description": "Azure VM workload-specific protected item representing SAP HANA Database.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureVmWorkloadSAPHanaDatabase"
     },
     "AzureVmWorkloadSAPHanaDatabaseWorkloadItem": {
       "description": "Azure VM workload-specific workload item representing SAP HANA Database.",
@@ -2827,32 +2725,6 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
-      "properties": {
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
-        },
-        "backupManagementType": {
-          "description": "Type of backup management to backup an item.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of workload for the backup management",
-          "type": "string"
-        },
-        "protectableItemType": {
-          "description": "Type of the backup item.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "State of the back up item.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "SAPHanaSystem"
     },
     "AzureVmWorkloadSAPHanaSystemWorkloadItem": {
@@ -2873,32 +2745,6 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
-      "properties": {
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
-        },
-        "backupManagementType": {
-          "description": "Type of backup management to backup an item.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of workload for the backup management",
-          "type": "string"
-        },
-        "protectableItemType": {
-          "description": "Type of the backup item.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "State of the back up item.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "SQLAvailabilityGroupContainer"
     },
     "AzureVmWorkloadSQLDatabaseProtectableItem": {
@@ -2909,43 +2755,7 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
-      "properties": {
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
-        },
-        "backupManagementType": {
-          "description": "Type of backup management to backup an item.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of workload for the backup management",
-          "type": "string"
-        },
-        "protectableItemType": {
-          "description": "Type of the backup item.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "State of the back up item.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "SQLDataBase"
-    },
-    "AzureVmWorkloadSQLDatabaseProtectedItem": {
-      "description": "Azure VM workload-specific protected item representing SQL Database.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureVmWorkloadProtectedItem"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureVmWorkloadSQLDatabase"
     },
     "AzureVmWorkloadSQLDatabaseWorkloadItem": {
       "description": "Azure VM workload-specific workload item representing SQL Database.",
@@ -2965,32 +2775,6 @@
           "$ref": "#/definitions/AzureVmWorkloadProtectableItem"
         }
       ],
-      "properties": {
-        "IsProtectable": {
-          "description": "Indicated if item present in inquiry is protectable.\r\nIf this is unprotectable, preBackupValidation will have the additional details why its unprotectable.",
-          "type": "boolean"
-        },
-        "backupManagementType": {
-          "description": "Type of backup management to backup an item.",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Type of workload for the backup management",
-          "type": "string"
-        },
-        "protectableItemType": {
-          "description": "Type of the backup item.",
-          "type": "string"
-        },
-        "friendlyName": {
-          "description": "Friendly name of the backup item.",
-          "type": "string"
-        },
-        "protectionState": {
-          "description": "State of the back up item.",
-          "type": "string"
-        }
-      },
       "x-ms-discriminator-value": "SQLInstance"
     },
     "AzureVmWorkloadSQLInstanceWorkloadItem": {
