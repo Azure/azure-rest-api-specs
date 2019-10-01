@@ -14,6 +14,7 @@ python:
   package-name: azure-mgmt-web
   package-version: 0.42.0
   clear-output-folder: true
+  no-namespace-folders: true
 ```
 
 ### Python multi-api
