@@ -753,28 +753,35 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "Gets the peering service prefix.",
-        "operationId": "PeeringServicePrefixes_Get",
+        "description": "Gets an existing prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_Get",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "prefixName",
             "in": "path",
-            "description": "The prefix name.",
+            "description": "The name of the prefix.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The properties to be expanded.",
+            "required": false,
             "type": "string"
           },
           {
@@ -808,34 +815,34 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "Creates or updates the peering prefix.",
-        "operationId": "PeeringServicePrefixes_CreateOrUpdate",
+        "description": "Creates a new prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_CreateOrUpdate",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "prefixName",
             "in": "path",
-            "description": "The prefix name",
+            "description": "The name of the prefix.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServicePrefix",
             "in": "body",
-            "description": "The IP prefix for an peering",
+            "description": "The properties needed to create a prefix.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PeeringServicePrefix"
@@ -878,27 +885,27 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "removes the peering prefix.",
-        "operationId": "PeeringServicePrefixes_Delete",
+        "description": "Deletes an existing prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_Delete",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "prefixName",
             "in": "path",
-            "description": "The prefix name",
+            "description": "The name of the prefix.",
             "required": true,
             "type": "string"
           },
@@ -935,20 +942,20 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "Lists the peerings prefix in the resource group.",
+        "description": "Lists all prefixes under the given subscription, resource group and peering service.",
         "operationId": "Prefixes_ListByPeeringService",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
             "type": "string"
           },
@@ -2240,6 +2247,14 @@
           "type": "string",
           "readOnly": true
         },
+        "events": {
+          "description": "The list of events for peering service prefix",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringServicePrefixEvent"
+          },
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
           "enum": [
@@ -2254,6 +2269,38 @@
             "name": "provisioningState",
             "modelAsString": true
           }
+        }
+      }
+    },
+    "PeeringServicePrefixEvent": {
+      "description": "The peering service prefix event class.",
+      "type": "object",
+      "properties": {
+        "eventType": {
+          "description": "The event type of the peering service prefix event",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventTimeStamp": {
+          "format": "date-time",
+          "description": "The event timestamp of the peering service prefix event",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The event description of the peering service prefix event",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventLevel": {
+          "description": "The event level of the peering service prefix event",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional information for the peering service prefix event",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
