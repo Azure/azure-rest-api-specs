@@ -960,6 +960,13 @@
             "type": "string"
           },
           {
+            "name": "$expand",
+            "in": "query",
+            "description": "The properties to be expanded.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -2273,50 +2280,50 @@
       }
     },
     "PeeringServicePrefixEvent": {
-      "description": "The peering service prefix event class.",
+      "description": "The details of the event associated with a prefix.",
       "type": "object",
       "properties": {
-        "eventType": {
-          "description": "The event type of the peering service prefix event",
-          "type": "string",
-          "readOnly": true
-        },
-        "eventTimeStamp": {
+        "eventTimestamp": {
           "format": "date-time",
-          "description": "The event timestamp of the peering service prefix event",
+          "description": "The timestamp of the event associated with a prefix.",
           "type": "string",
           "readOnly": true
         },
-        "description": {
-          "description": "The event description of the peering service prefix event",
+        "eventType": {
+          "description": "The type of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventSummary": {
+          "description": "The summary of the event associated with a prefix.",
           "type": "string",
           "readOnly": true
         },
         "eventLevel": {
-          "description": "The event level of the peering service prefix event",
+          "description": "The level of the event associated with a prefix.",
           "type": "string",
           "readOnly": true
         },
-        "additionalInfo": {
-          "description": "Additional information for the peering service prefix event",
+        "eventDescription": {
+          "description": "The description of the event associated with a prefix.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "PeeringServicePrefixListResult": {
-      "description": "The paginated list of [T].",
+      "description": "The paginated list of peering service prefixes.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of [T].",
+          "description": "The list of peering service prefixes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServicePrefix"
           }
         },
         "nextLink": {
-          "description": "The link to fetch the next page of [T].",
+          "description": "The link to fetch the next page of peering service prefixes.",
           "type": "string"
         }
       }
