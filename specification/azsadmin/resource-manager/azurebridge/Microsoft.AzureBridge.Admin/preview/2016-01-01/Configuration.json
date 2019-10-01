@@ -61,7 +61,15 @@
         },
         "identitySystem": {
           "description": "Device identity system.",
-          "type": "string"
+          "enum": [
+            "AzureAD",
+            "ADFS"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
         }
       }
     }

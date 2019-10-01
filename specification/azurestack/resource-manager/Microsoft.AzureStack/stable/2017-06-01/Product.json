@@ -266,7 +266,7 @@
             "$ref": "AzureStack.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/MarketplaceProductLogUpdate"
+            "$ref": "#/parameters/MarketplaceProductLogUpdateParameter"
           }
         ],
         "responses": {
@@ -678,7 +678,15 @@
         },
         "identitySystem": {
           "description": "Identity system of the device.",
+          "enum": [
+            "AzureAD",
+            "ADFS"
+          ],
           "type": "string",
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          },
           "readOnly": true
         }
       }
@@ -788,7 +796,7 @@
         "$ref": "#/definitions/DeviceConfiguration"
       }
     },
-    "MarketplaceProductLogUpdate": {
+    "MarketplaceProductLogUpdateParameter": {
       "description": "Update details for product log.",
       "name": "marketplaceProductLogUpdate",
       "in": "body",
