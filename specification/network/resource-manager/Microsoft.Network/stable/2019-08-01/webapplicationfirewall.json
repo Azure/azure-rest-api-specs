@@ -283,6 +283,9 @@
     },
     "WebApplicationFirewallPolicyPropertiesFormat": {
       "description": "Defines web application firewall policy properties.",
+      "required": [
+        "managedRules"
+      ],
       "properties": {
         "policySettings": {
           "description": "Describes policySettings for policy.",
@@ -374,6 +377,13 @@
     },
     "PolicySettings": {
       "description": "Defines contents of a web application firewall global configuration.",
+      "required": [
+        "state",
+        "mode",
+        "requestBodyCheck",
+        "maxRequestBodySizeInKb",
+        "fileUploadLimitInMb"
+      ],
       "properties": {
         "state": {
           "description": "Describes if the policy is in enabled state or disabled state.",
