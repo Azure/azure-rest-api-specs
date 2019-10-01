@@ -193,8 +193,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - $(this-folder)/Microsoft.Network/stable/2019-11-01/network.json
+  - $(this-folder)/Microsoft.Network/stable/2019-11-01/networkexperiment.json
   - $(this-folder)/Microsoft.Network/stable/2019-05-01/frontdoor.json
   - $(this-folder)/Microsoft.Network/stable/2019-05-01/network.json
   - $(this-folder)/Microsoft.Network/stable/2019-03-01/webapplicationfirewall.json
