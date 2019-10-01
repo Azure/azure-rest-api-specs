@@ -961,19 +961,27 @@
 			"description": "The on actions for auto quota increase.",
 			"properties": {
 				"emailActions": {
-					"description": "The list of email actions.",
-					"type": "array",
-					"items": {
-						"description": "The email recipients.",
-						"$ref": "#/definitions/EmailAction"
+					"properties": {
+						"value": {
+							"description": "The list of email actions.",
+							"type": "array",
+							"items": {
+								"description": "The email recipients.",
+								"$ref": "#/definitions/EmailAction"
+							}
+						}
 					}
 				},
 				"phoneActions": {
-					"description": "The list of phone actions.",
-					"type": "array",
-					"items": {
-						"description": "The email recipients.",
-						"$ref": "#/definitions/PhoneAction"
+					"properties": {
+						"value": {
+							"description": "The list of phone actions.",
+							"type": "array",
+							"items": {
+								"description": "The email recipients.",
+								"$ref": "#/definitions/PhoneAction"
+							}
+						}
 					}
 				}
 			}
