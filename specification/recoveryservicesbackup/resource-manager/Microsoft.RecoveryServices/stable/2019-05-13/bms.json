@@ -162,79 +162,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "ProtectedItemOperationResults"
-        ],
-        "description": "Fetches the result of any operation on the backup item.",
-        "operationId": "ProtectedItemOperationResults_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backup item.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backup item.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backup item name whose details are to be fetched.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "OperationID which represents the operation whose result needs to be fetched.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ProtectedItemResource"
-            }
-          },
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Get Operation Results of Protected Vm": {
-            "$ref": "./examples/AzureIaasVm/ProtectedItemOperationResults.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints": {
       "get": {
         "tags": [
@@ -512,50 +439,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Triggers export of jobs specified by filters and returns an OperationID to track.",
-        "operationId": "Jobs_Export",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-odata": "#/definitions/JobQueryObject",
-        "x-ms-examples": {
-          "Export Jobs": {
-            "$ref": "./examples/Common/TriggerExportJobs.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems": {
       "get": {
         "tags": [
@@ -697,7 +580,7 @@
           "type": "string"
         },
         "resourceState": {
-          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeleted, Deleted}",
+          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeletd, Deleted}",
           "type": "string"
         },
         "resourceStateSyncTime": {
@@ -1735,7 +1618,7 @@
       "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
     },
     "AzureWorkloadSQLRecoveryPoint": {
-      "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint along with extended info",
+      "description": "SQL specific recoverypoint, specifically encapsulates full/diff recoverypoint alongwith extended info",
       "type": "object",
       "allOf": [
         {
@@ -2476,7 +2359,7 @@
           "type": "string"
         },
         "jobType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
           "type": "string"
         }
       },
@@ -2532,7 +2415,8 @@
             "Backup",
             "Restore",
             "DisableBackup",
-            "DeleteBackupData",           
+            "DeleteBackupData",
+            "CrossRegionRestore",
             "Undelete"
           ],
           "type": "string",
@@ -2678,7 +2562,7 @@
         },
         "deferredDeleteSyncTimeInUTC": {
           "format": "int64",
-          "description": "Sync time for deferred deletion.",
+          "description": "Sync time for deferred deletion in UTC",
           "type": "integer"
         },
         "extendedInfo": {
@@ -3114,7 +2998,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
           "type": "string"
         }
       },
@@ -3288,7 +3172,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
           "type": "string"
         }
       },
