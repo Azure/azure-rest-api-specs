@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2019-11-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "profileName": "Profile1",
+    "experimentName": "Experiment1",
+    "parameters": {
+      "properties": {
+        "description": "string",
+        "enabledState": "enabled"
+       }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/NetworkExperimentProfiles/Profile1/Experiments/Experiment1",
+        "name": "Experiment1",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "description": "this is my first experiment!",
+          "endpointA": {
+            "name": "endpoint A",
+            "endpoint": "endpointA.net"
+          },
+          "endpointB": {
+            "name": "endpoint B",
+            "endpoint": "endpointB.net"
+          },
+          "enabledState": "enabled",
+          "resourceState": "creating",
+          "status": "ongoing",
+          "scriptFileUri": "www.myScript.com"
+        }
+      }
+    },
+    "202": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/NetworkExperimentProfiles/Profile1/Experiments/Experiment1",
+        "name": "Experiment1",
+        "type": "Microsoft.Network/NetworkExperimentprofiles",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "location": "WestUs",
+        "properties": {
+          "description": "this is my first experiment!",
+          "endpointA": {
+            "name": "endpoint A",
+            "endpoint": "endpointA.net"
+          },
+          "endpointB": {
+            "name": "endpoint B",
+            "endpoint": "endpointB.net"
+          },
+          "enabledState": "enabled",
+          "resourceState": "creating",
+          "status": "ongoing",
+          "scriptFileUri": "www.myScript.com"
+        }
+      }
+    }
+  }
+}
