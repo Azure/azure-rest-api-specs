@@ -90,7 +90,7 @@
 					"QuotaRequests"
 				],
 				"summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
-				"description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
+				"description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified. The location header in the response will be used to track the status of the quota request.",
 				"operationId": "QuotaRequest_Create",
 				"x-ms-examples": {
 					"Quotas_Request_listForCompute": {
@@ -132,10 +132,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK. Returns Quota requests details.",
-						"schema": {
-							"$ref": "#/definitions/QuotaRequestDetails"
-						}
+						"description": "OK. Returns, when Quota request completed. Check the url provided in location header to get the details."
 					},
 					"202": {
 						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
@@ -253,10 +250,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK. Returns Quota requests details.",
-						"schema": {
-							"$ref": "#/definitions/QuotaRequestDetails"
-						}
+						"description": "OK. Returns Quota requests details."
 					},
 					"202": {
 						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
@@ -316,10 +310,7 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK. Returns Quota requests details.",
-						"schema": {
-							"$ref": "#/definitions/QuotaRequestDetails"
-						}
+						"description": "OK. Returns Quota requests details."
 					},
 					"202": {
 						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
@@ -606,8 +597,7 @@
 		"SubRequest": {
 			"description": "The sub-request submitted with the quota request.",
 			"properties": {
-				"subRequestId":
-				{
+				"subRequestId": {
 					"description": "Sub request id for individual request.",
 					"type": "string",
 					"readOnly": true
@@ -655,6 +645,21 @@
 					"description": "The quota request id. Please use the requestId to check the request status.",
 					"type": "string",
 					"readOnly": true
+				},
+				"name": {
+					"description": "The operation Id",
+					"type": "string",
+					"readOnly": true
+				},
+				"status": {
+					"description": "The quota request status.",
+					"$ref": "#/definitions/QuotaRequestState"
+				},
+				"startTime": {
+					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+					"type": "string",
+					"readOnly": true,
+					"format": "date-time"
 				}
 			}
 		},
@@ -786,30 +791,29 @@
 			"type": "object",
 			"description": "Actions for auto quota increase.",
 			"properties": {
-				"enabled": {
-					"description": "If the subscription has enabled automatic quota increase.",
-					"type": "boolean"
+				"settings": {
+					"description": "Settings for automatic quota increase.",
+					"$ref": "#/definitions/aqiSettings"
 				},
-				"emailAction": {
-					"description": "The email actions based on success an failure.",
-					"$ref": "#/definitions/EmailActions"
+				"onFailure": {
+					"description": "The on failure Actions.",
+					"$ref": "#/definitions/onFailure"
 				},
-				"supportRequestAction": {
-					"description": "The support request action.",
+				"onSuccess": {
+					"description": "The on success Actions.",
+					"$ref": "#/definitions/onSuccess"
+				},
+				"supportTicketAction": {
+					"description": "The support ticket action.",
 					"$ref": "#/definitions/SupportRequestAction"
 				}
 			}
 		},
-		"emailRecipientsList": {
-			"description": "The list of email recipients.",
+		"aqiSettings": {
 			"properties": {
-				"value": {
-					"description": "The list of recipients.",
-					"type": "array",
-					"items": {
-						"description": "User email address.",
-						"type": "string"
-					}
+				"enabled": {
+					"description": "If the subscription has enabled automatic quota increase.",
+					"type": "boolean"
 				}
 			}
 		},
@@ -823,33 +827,6 @@
 			"x-ms-enum": {
 				"name": "SupportContactType",
 				"modelAsString": true
-			}
-		},
-		"supportRecipient": {
-			"description": "Support recipient",
-			"type": "object",
-			"properties": {
-				"recipientType": {
-					"description": "The recipient type",
-					"$ref": "#/definitions/SupportContactTypes"
-				},
-				"recipient": {
-					"description": "The recipient contact information based on the recipient type.",
-					"type": "string"
-				}
-			}
-		},
-		"supportRecipientsList": {
-			"description": "The list of recipients for support.",
-			"properties": {
-				"value": {
-					"description": "The list of recipients for support.",
-					"type": "array",
-					"items": {
-						"description": "Support recipients List.",
-						"$ref": "#/definitions/supportRecipient"
-					}
-				}
 			}
 		},
 		"EmailActions": {
@@ -868,52 +845,136 @@
 		"SupportRequestAction": {
 			"description": "The SupportRequest action.",
 			"properties": {
-				"recipients": {
-					"description": "The support request recipients.",
-					"$ref": "#/definitions/supportRecipientsList"
+				"enabled": {
+					"description": "Is support request action enabled.",
+					"type": "boolean"
 				},
 				"severity": {
 					"description": "The support request severity.",
 					"$ref": "#/definitions/SeverityTypes"
 				},
-				"supportLanguage": {
+				"firstName": {
+					"description": "The first name of the recipient.",
 					"type": "string"
+				},
+				"lastName": {
+					"description": "The last name of the recipient.",
+					"type": "string"
+				},
+				"country": {
+					"description": "The country of the recipient.",
+					"type": "string"
+				},
+				"phoneNumber": {
+					"description": "The phone number of the recipient.",
+					"type": "string"
+				},
+				"primaryEmailAddress": {
+					"description": "The primary email addresses of the recipients.",
+					"type": "string"
+				},
+				"supportLanguage": {
+					"description": "The support language.",
+					"type": "string"
+				},
+				"preferredContactMethod": {
+					"description": "The preferred communication channel.",
+					"$ref": "#/definitions/ContactMethod"
+				},
+				"alternateEmailAddresses": {
+					"description": "The alternate email address of the recipient.",
+					"type": "array",
+					"items": {
+						"description": "The email recipients.",
+						"type": "string"
+					}
 				}
 			}
 		},
 		"SeverityTypes": {
 			"description": "The Severity types.",
 			"enum": [
-				"SevA",
-				"SevB",
-				"SevC"
+				"Critical",
+				"Moderate",
+				"Minimal"
 			],
 			"x-ms-enum": {
 				"name": "SeverityType",
 				"modelAsString": true
 			}
 		},
-		"ActionTypes": {
-			"description": "The Action types.",
+		"ContactMethod": {
+			"description": "The contact method.",
 			"enum": [
-				"OnSuccess",
-				"OnFailure"
+				"Email",
+				"Phone"
 			],
 			"x-ms-enum": {
-				"name": "ActionType",
+				"name": "ContactMethodType",
 				"modelAsString": true
 			}
 		},
-		"EmailAction": {
-			"description": "Email Action based on the actionType",
+		"PhoneAction": {
+			"description": "Phone Action.",
 			"properties": {
-				"actionType": {
-					"description": "The action type.",
-					"$ref": "#/definitions/ActionTypes"
+				"phoneNumber": {
+					"description": "The phone number for the action.",
+					"type": "string"
 				},
-				"emailRecipients": {
-					"description": "The email recipients for the actions type.",
-					"$ref": "#/definitions/emailRecipientsList"
+				"PreferredChannel": {
+					"description": "The preferred communication channel.",
+					"$ref": "#/definitions/ContactMethod"
+				}
+			}
+		},
+		"EmailAction": {
+			"description": "Email Action.",
+			"properties": {
+				"emailAddress": {
+					"description": "The email address for the action.",
+					"type": "string"
+				}
+			}
+		},
+		"onFailure": {
+			"description": "The on failure action for auto quota increase.",
+			"$ref": "#/definitions/Actions"
+		},
+		"onSuccess": {
+			"description": "The on success action for auto quota increase.",
+			"$ref": "#/definitions/Actions"
+		},
+		"PhoneActions": {
+			"description": "The list of phone actions.",
+			"properties": {
+				"value": {
+					"description": "The list of phone actions..",
+					"type": "array",
+					"items": {
+						"description": "The email recipients.",
+						"$ref": "#/definitions/PhoneAction"
+					}
+				}
+			}
+		},
+		"Actions": {
+			"description": "The on actions for auto quota increase.",
+			"properties": {
+				"EmailActions": {
+					"description": "The list of email actions.",
+					"type": "array",
+					"items": {
+						"description": "The email recipients.",
+						"$ref": "#/definitions/EmailAction"
+					}
+				},
+				"PhoneActions": {
+					"description": "The list of phone actions.",
+					"type": "array",
+					"items": {
+						"description": "The email recipients.",
+						"$ref": "#/definitions/PhoneAction"
+					}
 				}
 			}
 		},
@@ -1024,9 +1085,8 @@
 			"minimum": 1,
 			"x-ms-parameter-location": "method"
 		},
-		"SkipTokenParameter":
-		{
-			"name": "$skiptoken",	
+		"SkipTokenParameter": {
+			"name": "$skiptoken",
 			"in": "query",
 			"type": "string",
 			"required": false,

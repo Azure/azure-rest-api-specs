@@ -10,42 +10,47 @@
 				"type": "Microsoft.Capacity/autoQuotaIncrease",
 				"name": "Automatic Quota Increase",
 				"properties": {
-					"enabled": true,
-					"emailAction": {
-						
-							"value": [
-								{
-									"actionType": "OnSuccess",
-									"emailRecipients": [
-										"admin2@contoso.com",
-										"itsupport@contoso.com"
-									]
-								},
-								{
-									"actionType": "OnFailure",
-									"emailRecipients": [
-										"admin2@contoso.com",
-										"itsupport@contoso.com"
-									]
-								}
-							]
-						
+					"settings": {
+						"enabled": true
 					},
-					"supportRequestAction": {
-						"severity": "SevB",
-						"supportLanguage": "en-us",
-						"recipients": {
+					"OnSuccess": {
+						"EmailActions": {
 							"value": [
 								{
-									"recipientType": "email",
-									"recipient": "admin2@contoso.com"
+									"emailAddress": "itsupport@contoso.com"
 								},
 								{
-									"recipientType": "phone",
-									"recipient": "+1-206-999-9999"
+									"emailAddress": "admin2@contoso.com"
 								}
 							]
 						}
+					},
+					"OnFailure": {
+						"EmailActions": {
+							"value": [
+								{
+									"emailAddress": "itsupport@contoso.com"
+								},
+								{
+									"emailAddress": "admin2@contoso.com"
+								}
+							]
+						}
+					},
+					"supportTicketAction": {
+						"Enabled": true,
+						"Severity": "Minimal",
+						"FirstName": "FN",
+						"LastName": "LN",
+						"Country": "US",
+						"Language": "en-us",
+						"PhoneNumber": "123-456-7890",
+						"PrimaryEmailAddress": "admin2@contoso.com",
+						"AlternateEmailAddresses": [
+							"admin@contoso.com",
+							"admin3@contoso.com"
+						],
+						"PreferredContactMethod": "Phone"
 					}
 				}
 			}
