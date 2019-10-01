@@ -107,15 +107,3 @@ python:
   namespace: azure.mgmt.web.v2015_04_01
   output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2015_04_01
 ```
-
-
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web
-```
