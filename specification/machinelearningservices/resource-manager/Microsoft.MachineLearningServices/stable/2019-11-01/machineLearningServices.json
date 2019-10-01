@@ -2180,6 +2180,16 @@
                   "description": "Specifies policy and settings for SSH access.",
                   "$ref": "#/definitions/AmlInstanceSshSettings"
                 },
+                "connectivityEndpoints": {
+                  "readOnly": true,
+                  "description": "Describes all connectivity endpoints available for this AmlInstance compute.",
+                  "$ref": "#/definitions/AmlInstanceConnectivityEndpoints"
+                },
+				"createdBy": {
+				  "readOnly": true,
+                  "description": "Describes information on user who created this AmlInstance compute.",
+                  "$ref": "#/definitions/AmlInstanceCreatedBy"
+				},
                 "errors": {
                   "readOnly": true,
                   "title": "Errors.",
@@ -3054,6 +3064,62 @@
       "x-ms-enum": {
         "name": "AmlInstanceLastOperationStatus",
         "modelAsString": true
+      }
+    },
+    "AmlInstanceApplicationUri": {
+      "type": "object",
+      "description": "Defines an Aml Instance application and its connectivity endpoint URI.",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Name of the AmlInstance application."
+        },
+        "applicationUri": {
+          "type": "string",
+          "description": "Application' endpoint URI."
+        }
+      }
+    },
+    "AmlInstanceConnectivityEndpoints": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Defines all connectivity endpoints and properties for an AmlInstance compute.",
+      "properties": {
+        "publicIpAddress": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Public IP Address of this AmlInstance."
+        },
+        "applicationUris": {
+          "type": "array",
+          "readOnly": true,
+          "description": "Describes available applications and their connectivity endpoint URIs.",
+          "items": {
+            "$ref": "#/definitions/AmlInstanceApplicationUri"
+          }
+        }
+      }
+    },
+    "AmlInstanceCreatedBy": {
+      "type": "object",
+      "readOnly": true,
+      "description": "Describes information on user who created this AmlInstance compute.",
+      "properties": {
+        "userName": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Name of the user."
+        },
+        "userOrgId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Uniquely identifies user' Azure Active Directory organization."
+        },
+        "userId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Uniquely identifies the user within his/her organization."
+        }
       }
     }
   }
