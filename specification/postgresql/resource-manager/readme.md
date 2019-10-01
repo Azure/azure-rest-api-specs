@@ -134,6 +134,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 
 ```
 
