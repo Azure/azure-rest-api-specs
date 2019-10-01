@@ -60,20 +60,20 @@ swagger-to-sdk:
 
 ## Go
 
-See configuration in [readme.go.md](https://github.com/Azure/adx-documentation-pr/blob/master/samplefiles/readme.go.md)
+See configuration in [readme.go.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.go.md)
 
 ## Python
 
-See configuration in [readme.python.md](https://github.com/Azure/adx-documentation-pr/blob/master/samplefiles/readme.python.md)
+See configuration in [readme.python.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.python.md)
 
 ## Ruby
 
-See configuration in [readme.ruby.md](https://github.com/Azure/adx-documentation-pr/blob/master/samplefiles/readme.ruby.md)
+See configuration in [readme.ruby.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.ruby.md)
 
 ## TypeScript
 
-See configuration in [readme.typescript.md](https://github.com/Azure/adx-documentation-pr/blob/master/samplefiles/readme.typescript.md)
+See configuration in [readme.typescript.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.typescript.md)
 
 ## CSharp
 
-See configuration in [readme.csharp.md](https://github.com/Azure/adx-documentation-pr/blob/master/samplefiles/readme.chsarp.md)
+See configuration in [readme.csharp.md](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/samplefiles/readme.chsarp.md)
