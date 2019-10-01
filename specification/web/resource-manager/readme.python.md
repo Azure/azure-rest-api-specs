@@ -39,7 +39,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-11-only' && $(python)
 python:
   namespace: azure.mgmt.web.v2018_11_01
-  output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2018_11_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2018_11_01
 ```
 
 ### Tag: package-2018-02-only and python
@@ -50,7 +50,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2018-02-only' && $(python)
 python:
   namespace: azure.mgmt.web.v2018_02_01
-  output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2018_02_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2018_02_01
 ```
 
 ### Tag: package-2016-09-only and python
@@ -61,7 +61,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2016-09-only' && $(python)
 python:
   namespace: azure.mgmt.web.v2016_09_01
-  output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2016_09_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2016_09_01
 ```
 
 ### Tag: package-2016-08-only and python
@@ -72,7 +72,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2016-08-only' && $(python)
 python:
   namespace: azure.mgmt.web.v2016_08_01
-  output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2016_08_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2016_08_01
 ```
 
 ### Tag: package-2016-03-only and python
@@ -83,7 +83,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2016-03-only' && $(python)
 python:
   namespace: azure.mgmt.web.v2016_03_01
-  output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2016_03_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2016_03_01
 ```
 
 ### Tag: package-2015-08-only and python
@@ -94,7 +94,7 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2015-08-only' && $(python)
 python:
   namespace: azure.mgmt.web.v2015_08_01
-  output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2015_08_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2015_08_01
 ```
 
 ### Tag: package-2015-04-only and python
@@ -105,5 +105,5 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-2015-04-only' && $(python)
 python:
   namespace: azure.mgmt.web.v2015_04_01
-  output-folder: $(python-sdks-folder)/web/azure-mgmt-web/azure/mgmt/web/v2015_04_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2015_04_01
 ```
