@@ -3547,6 +3547,7 @@
           }
         },
         "description": "Creates a data flow debug session.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3751,6 +3752,7 @@
           }
         },
         "description": "Execute a data flow debug command.",
+        "x-ms-long-running-operation": true,
         "parameters": [
           {
             "$ref": "#/parameters/subscriptionId"
@@ -3867,6 +3869,15 @@
         }
       },
       "x-ms-azure-resource": true
+    },
+    "SubResourceDebugResource": {
+      "description": "Azure Data Factory nested debug resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The resource name."
+        }
+      }
     },
     "Expression": {
       "description": "Azure Data Factory expression definition.",
@@ -4019,6 +4030,23 @@
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/IntegrationRuntime.json#/definitions/IntegrationRuntime",
+          "description": "Integration runtime properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "IntegrationRuntimeDebugResource": {
+      "description": "Integration runtime debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
         }
       ],
       "properties": {
@@ -4745,6 +4773,23 @@
         "properties"
       ]
     },
+    "DatasetDebugResource": {
+      "description": "Dataset debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/Dataset.json#/definitions/Dataset",
+          "description": "Dataset properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
     "LinkedServiceReference": {
       "description": "Linked service reference type.",
       "properties": {
@@ -4774,6 +4819,23 @@
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/LinkedService.json#/definitions/LinkedService",
+          "description": "Properties of linked service."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "LinkedServiceDebugResource": {
+      "description": "Linked service debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
         }
       ],
       "properties": {
@@ -5594,7 +5656,7 @@
         },
         "integrationRuntime": {
           "description": "Set to use integration runtime setting for data flow debug session.",
-          "$ref": "#/definitions/IntegrationRuntimeResource"
+          "$ref": "#/definitions/IntegrationRuntimeDebugResource"
         }
       }
     },
@@ -5652,20 +5714,20 @@
         },
         "dataFlow": {
           "description": "Data flow instance.",
-          "$ref": "#/definitions/DataFlowResource"
+          "$ref": "#/definitions/DataFlowDebugResource"
         },
         "datasets": {
           "type": "array",
           "description": "List of datasets.",
           "items": {
-            "$ref": "#/definitions/DatasetResource"
+            "$ref": "#/definitions/DatasetDebugResource"
           }
         },
         "linkedServices": {
           "type": "array",
           "description": "List of linked services.",
           "items": {
-            "$ref": "#/definitions/LinkedServiceResource"
+            "$ref": "#/definitions/LinkedServiceDebugResource"
           }
         },
         "staging": {
@@ -5867,6 +5929,23 @@
       "allOf": [
         {
           "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "./entityTypes/DataFlow.json#/definitions/DataFlow",
+          "description": "Data flow properties."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "DataFlowDebugResource": {
+      "description": "Data flow debug resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResourceDebugResource"
         }
       ],
       "properties": {
