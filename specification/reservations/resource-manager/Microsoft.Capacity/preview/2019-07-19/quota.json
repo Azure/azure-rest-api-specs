@@ -134,7 +134,7 @@
 					"200": {
 						"description": "OK. Returns Quota requests details.",
 						"schema": {
-							"$ref": "#/definitions/QuotaRequestDetails"
+							"$ref": "#/definitions/CurrentQuotaLimit"
 						}
 					},
 					"201": {
@@ -255,7 +255,7 @@
 					"200": {
 						"description": "OK. Returns Quota requests details.",
 						"schema": {
-							"$ref": "#/definitions/QuotaRequestDetails"
+							"$ref": "#/definitions/CurrentQuotaLimit"
 						}
 					},
 					"201": {
@@ -318,7 +318,7 @@
 					"200": {
 						"description": "OK. Returns Quota requests details.",
 						"schema": {
-							"$ref": "#/definitions/QuotaRequestDetails"
+							"$ref": "#/definitions/CurrentQuotaLimit"
 						}
 					},
 					"201": {
@@ -542,8 +542,7 @@
 				},
 				"currentValue": {
 					"description": "The current resource usages information.",
-					"type": "integer",
-					"readOnly": true
+					"type": "integer"
 				},
 				"name": {
 					"description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
@@ -572,7 +571,8 @@
 				},
 				"properties": {
 					"description": "Additional properties for the specific resource provider.",
-					"type": "object"
+					"type": "object",
+					"x-ms-client-flatten": true
 				}
 			}
 		},
@@ -658,6 +658,11 @@
 				},
 				"name": {
 					"description": "The operation Id",
+					"type": "string",
+					"readOnly": true
+				},
+				"type": {
+					"description": "The resource type",
 					"type": "string",
 					"readOnly": true
 				},
@@ -814,10 +819,12 @@
 			}
 		},
 		"aqiSettings": {
+			"type": "object",
+			"description": "Settings for auto quota increase.",
 			"properties": {
-				"enabled": {
+				"autoQuotaIncreaseState": {
 					"description": "If the subscription has enabled automatic quota increase.",
-					"type": "boolean"
+					"$ref": "#/definitions/AqiState"
 				}
 			}
 		},
@@ -850,9 +857,9 @@
 			"description": "The SupportRequest action.",
 			"type": "object",
 			"properties": {
-				"enabled": {
+				"autoQuotaIncreaseState": {
 					"description": "Is support request action enabled.",
-					"type": "boolean"
+					"$ref": "#/definitions/AqiState"
 				},
 				"severity": {
 					"description": "The support request severity.",
@@ -919,6 +926,17 @@
 				"modelAsString": true
 			}
 		},
+		"AqiState": {
+			"description": "The Auto quota increase state.",
+			"enum": [
+				"enabled",
+				"disbaled"
+			],
+			"x-ms-enum": {
+				"name": "AqiStateType",
+				"modelAsString": true
+			}
+		},
 		"PhoneAction": {
 			"description": "Phone Action.",
 			"properties": {
@@ -954,6 +972,7 @@
 			"type": "object",
 			"properties": {
 				"emailActions": {
+				"description": "The email actions for auto quota increase.",
 					"properties": {
 						"value": {
 							"description": "The list of email actions.",
@@ -966,6 +985,7 @@
 					}
 				},
 				"phoneActions": {
+					"description": "The phone actions for auto quota increase.",
 					"properties": {
 						"value": {
 							"description": "The list of phone actions.",
