@@ -69,6 +69,10 @@ csharp:
   clear-output-folder: true
 ```
 
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
