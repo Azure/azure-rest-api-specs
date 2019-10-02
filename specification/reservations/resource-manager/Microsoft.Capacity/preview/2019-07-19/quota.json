@@ -132,12 +132,15 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK. Returns, when Quota request completed. Check the url provided in location header to get the details."
+							"description": "OK. Returns Quota requests details.",
+							"schema" :{
+								"$ref": "#/definitions/QuotaRequestDetails"
+							}
 					},
-					"202": {
+					"201": {
 						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
 						"schema": {
-							"$ref": "#/definitions/QuotaRequestSubmitResponse"
+							"$ref": "#/definitions/QuotaRequestSubmitResponse201"
 						}
 					},
 					"default": {
@@ -250,12 +253,15 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK. Returns Quota requests details."
+						"description": "OK. Returns Quota requests details.",
+						"schema" :{
+							"$ref": "#/definitions/QuotaRequestDetails"
+						}
 					},
-					"202": {
+					"201": {
 						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
 						"schema": {
-							"$ref": "#/definitions/QuotaRequestSubmitResponse"
+							"$ref": "#/definitions/QuotaRequestSubmitResponse201"
 						}
 					},
 					"default": {
@@ -310,12 +316,15 @@
 				],
 				"responses": {
 					"200": {
-						"description": "OK. Returns Quota requests details."
+						"description": "OK. Returns Quota requests details.",
+							"schema" :{
+								"$ref": "#/definitions/QuotaRequestDetails"
+							}
 					},
-					"202": {
+					"201": {
 						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
 						"schema": {
-							"$ref": "#/definitions/QuotaRequestSubmitResponse"
+							"$ref": "#/definitions/QuotaRequestSubmitResponse201"
 						}
 					},
 					"default": {
@@ -533,7 +542,8 @@
 				},
 				"currentValue": {
 					"description": "The current resource usages information.",
-					"type": "integer"
+					"type": "integer",
+					"readOnly": true
 				},
 				"name": {
 					"description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
@@ -638,7 +648,7 @@
 				}
 			}
 		},
-		"QuotaRequestSubmitResponse": {
+		"QuotaRequestSubmitResponse201": {
 			"description": "The quota request submit response with request id.",
 			"properties": {
 				"id": {
@@ -651,17 +661,19 @@
 					"type": "string",
 					"readOnly": true
 				},
-				"status": {
+				"provisioningState": {
 					"description": "The quota request status.",
 					"$ref": "#/definitions/QuotaRequestState"
 				},
-				"startTime": {
-					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+				"message": {
+					"description": "A user friendly message.",
 					"type": "string",
-					"readOnly": true,
-					"format": "date-time"
+					"readOnly": true
 				}
 			}
+		
+			
+			
 		},
 		"QuotaRequestDetails": {
 			"type": "object",
@@ -675,11 +687,6 @@
 				},
 				"name": {
 					"description": "The name of the quota request.",
-					"type": "string",
-					"readOnly": true
-				},
-				"type": {
-					"description": "The type of the resource",
 					"type": "string",
 					"readOnly": true
 				},
@@ -710,20 +717,20 @@
 			"type": "object",
 			"description": "The details of quota request.",
 			"properties": {
-				"requestSubmitTime": {
-					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
-					"type": "string",
-					"readOnly": true,
-					"format": "date-time"
+				"provisioningState": {
+					"description": "The quota request status.",
+					"$ref": "#/definitions/QuotaRequestState"
 				},
 				"message": {
 					"description": "User friendly status message.",
 					"type": "string",
 					"readOnly": true
 				},
-				"requestStatus": {
-					"description": "The quota request status.",
-					"$ref": "#/definitions/QuotaRequestState"
+				"requestSubmitTime": {
+					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+					"type": "string",
+					"readOnly": true,
+					"format": "date-time"
 				},
 				"value": {
 					"description": "The quotaRequests.",
@@ -739,7 +746,7 @@
 			"enum": [
 				"Accepted",
 				"Invalid",
-				"Success",
+				"Succeeded",
 				"Failed",
 				"InProgress"
 			],
