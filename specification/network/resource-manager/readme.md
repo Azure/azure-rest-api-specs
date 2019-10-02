@@ -41,6 +41,7 @@ input-file:
   - Microsoft.Network/stable/2019-08-01/applicationGateway.json
   - Microsoft.Network/stable/2019-08-01/applicationSecurityGroup.json
   - Microsoft.Network/stable/2019-08-01/availableDelegations.json
+  - Microsoft.Network/stable/2019-08-01/availableServiceAliases.json
   - Microsoft.Network/stable/2019-08-01/azureFirewall.json
   - Microsoft.Network/stable/2019-08-01/azureFirewallFqdnTag.json
   - Microsoft.Network/stable/2019-08-01/bastionHost.json
