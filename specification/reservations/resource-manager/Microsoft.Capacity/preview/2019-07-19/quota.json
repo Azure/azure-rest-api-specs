@@ -569,10 +569,14 @@
 					"description": "The quota period over which the usage values are summarized, such as - P1D (Per one day), PT1M (Per one minute), PT1S (Per one second). This parameter is optional because, for some resources like compute, the period doesn’t matter.",
 					"type": "string"
 				},
+				"additionalProperties": {
+					"description": "addition properties for the resource.",
+					"$ref": "#/definitions/QuotaRequestStatusDetails",
+					"x-ms-client-flatten": true
+				  },
 				"properties": {
 					"description": "Additional properties for the specific resource provider.",
-					"type": "object",
-					"x-ms-client-flatten": true
+					"type": "object"
 				}
 			}
 		},
@@ -666,6 +670,16 @@
 					"type": "string",
 					"readOnly": true
 				},
+				"properties": {
+					"description": "The quota request status.",
+					"$ref": "#/definitions/QuotaRequestStatusDetails",
+					"x-ms-client-flatten": true
+				}
+			}
+		},
+		"QuotaRequestStatusDetails" : {
+			"description": "The quota request status details.",
+			"properties": {
 				"provisioningState": {
 					"description": "The quota request status.",
 					"$ref": "#/definitions/QuotaRequestState"
