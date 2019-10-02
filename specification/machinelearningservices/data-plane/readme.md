@@ -1,70 +1,38 @@
-# Auto Generate Rest Client with AutoRest
+# AzureMachineLearning
+
 > see https://aka.ms/autorest
 
-**Warnings: DO NOT manually edit auto-generated files**.
+This is the AutoRest configuration file for AzureMachineLearning.
 
-
+---
 ## Getting Started
+To build the SDK for AzureMachineLearning, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
-To build the SDKs for Rest APIs, simply install AutoRest via `npm` (`npm install -g autorest`), move command prompt to 'AzureMlRestAPISwaggers' folder, and run:
-> `autorest readme.md`
+> `autorest`
 
 To see additional help and options, run:
+
 > `autorest --help`
+---
 
-For other options on installation see [Installing AutoRest](https://aka.ms/autorest/install) on the AutoRest github page.
+## Configuration
 
-## Revert the auto generated changes for [\_restclient\\_\_init__.py](_restclient\__init__.py) and [\_restclient\version.py.](_restclient\version.py.)
-We want to keep the version number as the same as SDK, not the swagger file version, so revert the autogen changes to [\_restclient\\_\_init__.py](_restclient\__init__.py) and [\_restclient\version.py.](_restclient\version.py.)
 
-## Edit Swagger Specification File for Update
-- These input files are listed in swagger_files_new folder. Edit these files for updating client definition.
-- You can learn [how to write this specification](https://github.com/Azure/autorest/blob/master/docs/developer/guide/defining-clients-swagger.md)
 
-## Inputs
-We want a single client to be created from the following OpenAPI definition files:
+### Basic Information
+These are the global settings for the AzureMachineLearning API.
 
 ``` yaml
-azure-arm: false
-openapi-type: data-plane
-azure-validator: true
-tag: package-2019-09-30
-```
-
-### Tag: package-2019-09-30
-
-These settings apply only when `--tag=package-2019-09-30` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-09-30'
-input-file:
-  - Microsoft.MachineLearningServices\preview\2019-09-30\artifact.json
-  - Microsoft.MachineLearningServices\preview\2019-09-30\datastore.json
-  - Microsoft.MachineLearningServices\preview\2019-09-30\execution.json
-  - Microsoft.MachineLearningServices\preview\2019-09-30\hyperdrive.json
-  - Microsoft.MachineLearningServices\preview\2019-09-30\modelManagement.json
-  - Microsoft.MachineLearningServices\preview\2019-09-30\runHistory.json
-```
-### Tag: package-2019-08-01
-
-These settings apply only when `--tag=package-2019-08-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2019-08-01'
-input-file:
-  - Microsoft.MachineLearningServices\preview\2019-08-01\execution.json
-  - Microsoft.MachineLearningServices\preview\2019-08-01\modelManagement.json
-  - Microsoft.MachineLearningServices\preview\2019-08-01\runHistory.json
-  - Microsoft.MachineLearningServices\preview\2019-08-01\datastore.json
-  - Microsoft.MachineLearningServices\preview\2019-08-01\artifact.json
-  - Microsoft.MachineLearningServices\preview\2019-08-01\hyperdrive.json
-```
-
-Since the info sections of the OpenAPI definition files differ, we choose a new title for the overall client:
-```yaml
 title: Azure Machine Learning Service
 description: These APIs allow end users to manage Azure Machine Learning Services.
+openapi-type: data-plane
+tag: package-2019-08-preview
+use-internal-constructors: true
+add-credentials: true
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: AvoidNestedProperties
@@ -80,38 +48,88 @@ directive:
     reason: Existing service; would be a breaking change
 ```
 
-## Generation
-```yaml
-#csharp:
-#    add-credentials: true
-#    namespace: Azure.MachineLearning.Services.Generated
-#    license-header: MICROSOFT_MIT
-#    base-folder: dotnet\Client
-#    output-folder: Generated
+### Tag: package-2019-08-preview
+
+These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview'
+input-file:
+  - Microsoft.MachineLearningServices/preview/2019-08-01/execution.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/modelManagement.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/runHistory.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/datastore.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/artifact.json
+  - Microsoft.MachineLearningServices/preview/2019-08-01/hyperdrive.json
+```
+
+
+---
+# Code Generation
+
+
+## Swagger to SDK
+
+Swagger to SDK has been intentionally disabled for this spec.
+
+## C#
+
+These settings apply only when `--csharp` is specified on the command line.
+Please also specify `--csharp-sdks-folder=<path to "SDKs" directory of your azure-sdk-for-net clone>`.
+
+``` yaml $(csharp)
+csharp:
+  azure-arm: true
+  license-header: MICROSOFT_MIT_NO_VERSION
+  namespace: Microsoft.Azure.MachineLearning.Services
+  output-folder: $(csharp-sdks-folder)/MachineLearning/Services/Generated
+  clear-output-folder: true
+```
+
+
+## Python
+
+Python generation is intentionally disabled.  Please use the published Python package for Azure Machine Learning on PyPi.
+
+
+## Java
+
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  namespace: com.microsoft.azure.machinelearning.services
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  output-folder: $(azure-libraries-for-java-folder)/azure-machinelearning-services
+```
+
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/execution.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/modelManagement.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/runHistory.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/datastore.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/artifact.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/hyperdrive.json
 
 ```
 
-## Temporary output folder to save output-artifact and source maps files. Please do not check in these files.
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
 
-``` yaml
-output-folder: swagger_generation_log
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
 
-### Fully resolved OpenAPI definition
-
-To support tools unable to process multiple OpenAPI definitions or definitions with external references (`$ref: "<URI to another OpenAPI definition>#/definitions/SomeModel"`), AutoRest allows exporting a single, fully resolved OpenAPI definition without any external references that tools should be able to consume.
-
-``` yaml
-output-artifact:
-  - swagger-document.norm.json
-```
-
-### Source maps
-
-AutoRest tries to create source maps for output artifacts. These will relate the artifact with the original input files which may be helpful for tools created around AutoRest.
-For example, AutoRest uses the source map internally in order to relate validation messages back to the original files.
-
-``` yaml
-output-artifact:
-  - swagger-document.norm.json.map
-```
