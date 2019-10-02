@@ -1,0 +1,382 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "ManagedServicesClient",
+    "version": "2019-09-01",
+    "description": "Specification for ManagedServices."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitions_List",
+        "description": "Gets a list of the marketplace registration definitions for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketplaceIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the marketplace registration definitions.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Registration Definitions": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitions.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.ManagedServices/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of the operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registration Operations": {
+            "$ref": "./examples/GetOperations.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RegistrationDefinition": {
+      "properties": {
+        "properties": {
+          "description": "Properties of a registration definition.",
+          "$ref": "#/definitions/RegistrationDefinitionProperties"
+        },
+        "plan": {
+          "description": "Plan details for the managed services.",
+          "$ref": "#/definitions/Plan"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified path of the registration definition."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the registration definition."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "description": "Registration definition."
+    },
+    "RegistrationDefinitionProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the registration definition."
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Authorization"
+          },
+          "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+        },
+        "registrationDefinitionName": {
+          "type": "string",
+          "description": "Name of the registration definition."
+        },
+        "managedByTenantId": {
+          "type": "string",
+          "description": "Id of the managedBy tenant."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current state of the registration definition.",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "managedByTenantName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the managedBy tenant."
+        }
+      },
+      "required": [
+        "managedByTenantId",
+        "authorizations"
+      ],
+      "type": "object",
+      "description": "Properties of a registration definition."
+    },
+    "RegistrationDefinitionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegistrationDefinition"
+          },
+          "description": "List of registration definitions."
+        },
+        "nextLink": {
+          "description": "Link to next page of registration definitions.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "List of registration definitions."
+    },
+    "MarketplaceRegistrationDefinitionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegistrationDefinition"
+          },
+          "description": "List of marketplace registration definitions."
+        },
+        "nextLink": {
+          "description": "Link to next page of marketplace registration definitions.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "List of marketplace registration definitions."
+    },
+    "Plan": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The plan name."
+        },
+        "publisher": {
+          "type": "string",
+          "description": "The publisher ID."
+        },
+        "product": {
+          "type": "string",
+          "description": "The product code."
+        },
+        "version": {
+          "type": "string",
+          "description": "The plan's version."
+        }
+      },
+      "required": [
+        "name",
+        "publisher",
+        "product",
+        "version"
+      ],
+      "type": "object",
+      "description": "Plan details for the managed services."
+    },
+    "Operation": {
+      "properties": {
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "readOnly": true,
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "type": "string",
+              "description": "Service provider: Microsoft.ManagedServices"
+            },
+            "resource": {
+              "type": "string",
+              "description": "Resource on which the operation is performed: Registration definition, registration assignment etc."
+            },
+            "operation": {
+              "type": "string",
+              "description": "Operation type: Read, write, delete, etc."
+            },
+            "description": {
+              "type": "string",
+              "description": "Description of the operation."
+            }
+          }
+        }
+      },
+      "type": "object",
+      "description": "Object that describes a single Microsoft.ManagedServices operation."
+    },
+    "OperationList": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "description": "List of Microsoft.ManagedServices operations."
+        }
+      },
+      "type": "object",
+      "description": "List of the operations."
+    },
+    "Authorization": {
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "Principal Id of the security group/service principal/user that would be assigned permissions to the projected subscription"
+        },
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The role definition identifier. This role will define all the permissions that the security group/service principal/user must have on the projected subscription. This role cannot be an owner role."
+        }
+      },
+      "required": [
+        "principalId",
+        "roleDefinitionId"
+      ],
+      "type": "object",
+      "description": "Authorization tuple containing principal Id (of user/service principal/security group) and role definition id."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "error": {
+          "readOnly": true,
+          "properties": {
+            "code": {
+              "type": "string",
+              "description": "Error code."
+            },
+            "message": {
+              "type": "string",
+              "description": "Error message indicating why the operation failed."
+            }
+          },
+          "required": [
+            "code",
+            "message"
+          ],
+          "type": "object",
+          "description": "Error response indicates Azure Resource Manager is not able to process the incoming request. The reason is provided in the error message."
+        }
+      },
+      "description": "Error response."
+    }
+  },
+  "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "description": "Scope of the resource."
+    },
+    "MarketplaceIdentifier": {
+      "name": "marketplaceIdentifier",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "description": "Market place identifer. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    }
+  }
+}
