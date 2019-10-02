@@ -40,19 +40,6 @@
         ],
         "parameters": [
           {
-            "name": "labelFile",
-            "in": "query",
-            "description": "Specify if label file should be used for training.",
-            "required": false,
-            "schema": {
-              "type": "string",
-              "enum": [
-                "yes",
-                "no"
-              ]
-            }
-          },
-          {
             "name": "trainRequest",
             "in": "body",
             "description": "Input for training custom model.",
@@ -562,6 +549,17 @@
         "sourceFilter": {
           "$ref": "#/definitions/TrainSourceFilter",
           "description": "Get or set filter to further search the\r\nsource path for content."
+        },
+        "labelFile": {
+          "description": "Specify if label file should be used for training.",
+          "required": false,
+          "schema": {
+            "type": "string",
+            "enum": [
+              "yes",
+              "no"
+            ]
+          }
         }
       }
     },
