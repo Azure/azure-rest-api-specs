@@ -5,11 +5,23 @@
     "Ocp-Apim-Subscription-Key": "{API key}",
     "modelId": "{Model Id}",
     "body": {
+      "copyRequest": {
+        "targetInformation":{
+          "endpoint":"",
+          "resourceId":""
+        },
+        "copyConfig":{
+          "deleteSource":false
+        }
+      }
     }
   },
   "responses": {
     "201": {
-      "Location": "{Endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/copyResults/{resultId}"
+      "headers": {
+        "Location": "{Endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/copyResults/{resultId}"
+      }, 
+      "body":{}
     }
   }
 }

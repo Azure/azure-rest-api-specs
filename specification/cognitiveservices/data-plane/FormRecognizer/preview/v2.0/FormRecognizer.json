@@ -40,6 +40,19 @@
         ],
         "parameters": [
           {
+            "name": "labelFile",
+            "in": "query",
+            "description": "Specify if label file should be used for training.",
+            "required": false,
+            "schema": {
+              "type": "string",
+              "enum": [
+                "yes",
+                "no"
+              ]
+            }
+          },
+          {
             "name": "trainRequest",
             "in": "body",
             "description": "Input for training custom model.",
@@ -168,7 +181,7 @@
       },
       "delete": {
         "summary": "Delete Model",
-        "description": "Mark model for deletion. Model artifacts will be permenantly removed within predetermined period.",
+        "description": "Mark model for deletion. Model artifacts will be permanently removed within predetermined period.",
         "operationId": "DeleteCustomModel",
         "consumes": [],
         "produces": [
@@ -405,6 +418,90 @@
           }
         }
       }
+    },
+    "/prebuilt/receipt/analyze": {
+      "post": {
+        "summary": "Analyze Receipt",
+        "description": "Extract field text and semantic values from a given receipt document.",
+        "operationId": "AnalyzeReceiptAsync",
+        "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/FileStream"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Request to analyze receipt queued successfully.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "Operation location with an operation id used to track the progress of analyze operation. The returned id is the operation id. Result of analyze operation can be obtained only when the operation status becomes \"succeeded\" in OperationStatus - Get."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze receipt": {
+            "$ref": "./examples/ReceiptsBatch.json"
+          }
+        }
+      }
+    },
+    "/prebuilt/receipt/analyzeResults/{resultId}": {
+      "get": {
+        "summary": "Get Receipt Result",
+        "description": "Retrieve analyze receipt operation result.",
+        "operationId": "GetAnalyzeReceiptOpResult",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeOperationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze receipt": {
+            "$ref": "./examples/ReceiptsBatchResult.json"
+          }
+        }
+      }
     }
   },  
   "definitions": {
@@ -458,7 +555,9 @@
       "properties": {
         "source": {
           "description": "Get or set source path.",
-          "$ref": "#/definitions/SourcePath"
+          "maxLength": 2048,
+          "minLength": 0,
+          "type": "string"
         },
         "sourceFilter": {
           "$ref": "#/definitions/TrainSourceFilter",
@@ -646,7 +745,7 @@
       "description": "Result of a model status query operation.",
       "type": "object",
       "required": [
-        "keys"
+        "modelInfo"
       ],
       "properties": {
         "modelInfo":{
@@ -799,7 +898,6 @@
       "type": "object",
       "required": [
         "version",
-        "readResults",
         "pageResults",
         "documentResults"
       ],
