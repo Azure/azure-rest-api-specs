@@ -4,15 +4,14 @@
     "Content-Type": "application/json",
     "Ocp-Apim-Subscription-Key": "{API key}",
     "modelId": "{Model Id}",
-    "body": {
-      "copyRequest": {
-        "targetInformation":{
-          "endpoint":"",
-          "resourceId":""
-        },
-        "copyConfig":{
-          "deleteSource":false
-        }
+    "body": {},
+    "copyRequest": {
+      "targetInformation":{
+        "endpoint":"",
+        "resourceId":""
+      },
+      "copyConfig":{
+        "deleteSource":false
       }
     }
   },
@@ -20,8 +19,7 @@
     "201": {
       "headers": {
         "Location": "{Endpoint}/formrecognizer/v2.0-preview/custom/models/{modelId}/copyResults/{resultId}"
-      }, 
-      "body":{}
+      }
     }
   }
 }
