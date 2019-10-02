@@ -1295,6 +1295,7 @@ input-file:
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/applicationGateway.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/applicationSecurityGroup.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/availableDelegations.json
+  - $(this-folder)/Microsoft.Network/stable/2019-08-01/availableServiceAliases.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/azureFirewall.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/azureFirewallFqdnTag.json
   - $(this-folder)/Microsoft.Network/stable/2019-08-01/bastionHost.json
