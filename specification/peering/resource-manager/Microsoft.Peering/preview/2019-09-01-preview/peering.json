@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-08-01-preview",
+    "version": "2019-09-01-preview",
     "title": "PeeringManagementClient",
     "description": "APIs to manage Peering resources through the Azure Resource Manager."
   },
@@ -27,7 +27,7 @@
           {
             "name": "checkServiceProviderAvailabilityInput",
             "in": "body",
-            "description": "The CheckServiceProviderAvailabilityInput\r\n            indicating customer location and service provider.",
+            "description": "The CheckServiceProviderAvailabilityInput indicating customer location and service provider.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/CheckServiceProviderAvailabilityInput"
@@ -46,7 +46,7 @@
             "schema": {
               "enum": [
                 "Available",
-                "UnAvailable"
+                "Unavailable"
               ],
               "type": "string"
             }
@@ -753,28 +753,35 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "Gets the peering service prefix.",
-        "operationId": "PeeringServicePrefixes_Get",
+        "description": "Gets an existing prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_Get",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "prefixName",
             "in": "path",
-            "description": "The prefix name.",
+            "description": "The name of the prefix.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The properties to be expanded.",
+            "required": false,
             "type": "string"
           },
           {
@@ -808,34 +815,34 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "Creates or updates the peering prefix.",
-        "operationId": "PeeringServicePrefixes_CreateOrUpdate",
+        "description": "Creates a new prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_CreateOrUpdate",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "prefixName",
             "in": "path",
-            "description": "The prefix name",
+            "description": "The name of the prefix.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServicePrefix",
             "in": "body",
-            "description": "The IP prefix for an peering",
+            "description": "The properties needed to create a prefix.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PeeringServicePrefix"
@@ -878,27 +885,27 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "removes the peering prefix.",
-        "operationId": "PeeringServicePrefixes_Delete",
+        "description": "Deletes an existing prefix with the specified name under the given subscription, resource group and peering service.",
+        "operationId": "Prefixes_Delete",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
             "type": "string"
           },
           {
             "name": "prefixName",
             "in": "path",
-            "description": "The prefix name",
+            "description": "The name of the prefix.",
             "required": true,
             "type": "string"
           },
@@ -935,21 +942,28 @@
         "tags": [
           "PeeringServicePrefixes"
         ],
-        "description": "Lists the peerings prefix in the resource group.",
+        "description": "Lists all prefixes under the given subscription, resource group and peering service.",
         "operationId": "Prefixes_ListByPeeringService",
         "parameters": [
           {
             "name": "resourceGroupName",
             "in": "path",
-            "description": "The resource group name.",
+            "description": "The name of the resource group.",
             "required": true,
             "type": "string"
           },
           {
             "name": "peeringServiceName",
             "in": "path",
-            "description": "The peering service name.",
+            "description": "The name of the peering service.",
             "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "description": "The properties to be expanded.",
+            "required": false,
             "type": "string"
           },
           {
@@ -1515,7 +1529,8 @@
         },
         "useForPeeringService": {
           "description": "The flag that indicates whether or not the peering is used for peering service.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "peerAsn": {
           "$ref": "#/definitions/SubResource",
@@ -1566,7 +1581,8 @@
         "provisionedBandwidthInMbps": {
           "format": "int32",
           "description": "The bandwidth that is actually provisioned.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "sessionAddressProvider": {
           "description": "The field indicating if Microsoft provides session ip addresses.",
@@ -1615,6 +1631,11 @@
         "connectionIdentifier": {
           "description": "The unique identifier (GUID) for the connection.",
           "type": "string"
+        },
+        "errorMessage": {
+          "description": "The error message related to the connection state, if any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1663,6 +1684,11 @@
         "connectionIdentifier": {
           "description": "The unique identifier (GUID) for the connection.",
           "type": "string"
+        },
+        "errorMessage": {
+          "description": "The error message related to the connection state, if any.",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -1866,6 +1892,11 @@
             "name": "validationState",
             "modelAsString": true
           }
+        },
+        "errorMessage": {
+          "description": "The error message for the validation state",
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -2183,7 +2214,7 @@
       "type": "object",
       "properties": {
         "prefix": {
-          "description": "Valid route prefix",
+          "description": "The prefix from which your traffic originates.",
           "type": "string"
         },
         "prefixValidationState": {
@@ -2194,9 +2225,11 @@
             "Verified",
             "Failed",
             "Pending",
+            "Warning",
             "Unknown"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "prefixValidationState",
             "modelAsString": true
@@ -2206,14 +2239,28 @@
           "description": "The prefix learned type",
           "enum": [
             "None",
-            "ViaPartner",
+            "ViaServiceProvider",
             "ViaSession"
           ],
           "type": "string",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "learnedType",
             "modelAsString": true
           }
+        },
+        "errorMessage": {
+          "description": "The error message for validation state",
+          "type": "string",
+          "readOnly": true
+        },
+        "events": {
+          "description": "The list of events for peering service prefix",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PeeringServicePrefixEvent"
+          },
+          "readOnly": true
         },
         "provisioningState": {
           "description": "The provisioning state of the resource.",
@@ -2232,19 +2279,51 @@
         }
       }
     },
+    "PeeringServicePrefixEvent": {
+      "description": "The details of the event associated with a prefix.",
+      "type": "object",
+      "properties": {
+        "eventTimestamp": {
+          "format": "date-time",
+          "description": "The timestamp of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventType": {
+          "description": "The type of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventSummary": {
+          "description": "The summary of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventLevel": {
+          "description": "The level of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        },
+        "eventDescription": {
+          "description": "The description of the event associated with a prefix.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "PeeringServicePrefixListResult": {
-      "description": "The paginated list of [T].",
+      "description": "The paginated list of peering service prefixes.",
       "type": "object",
       "properties": {
         "value": {
-          "description": "The list of [T].",
+          "description": "The list of peering service prefixes.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/PeeringServicePrefix"
           }
         },
         "nextLink": {
-          "description": "The link to fetch the next page of [T].",
+          "description": "The link to fetch the next page of peering service prefixes.",
           "type": "string"
         }
       }
