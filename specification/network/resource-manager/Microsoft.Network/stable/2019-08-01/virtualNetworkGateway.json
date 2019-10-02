@@ -2071,6 +2071,15 @@
           "type": "boolean",
           "description": "ActiveActive flag."
         },
+        "enableDnsForwarding": {
+          "type": "boolean",
+          "description": "Whether dns forwarding is enabled or not."
+        },
+        "inboundDnsForwardingEndpoint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The IP address allocated by the gateway to which dns requests can be sent."
+        },
         "gatewayDefaultSite": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the LocalNetworkGateway resource which represents local network site having default routes. Assign Null value in case of removing existing default site setting."
