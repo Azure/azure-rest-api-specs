@@ -21,8 +21,19 @@
               "resourceState": "Enabled",
               "provisioningState": "Succeeded",
               "policySettings": {
-                "enabledState": "Enabled",
-                "mode": "Prevention"
+                "state": "Enabled",
+                "mode": "Detection",
+                "maxRequestBodySizeInKb": 128,
+                "fileUploadLimitInMb": 750,
+                "requestBodyCheck" : true
+              },
+              "managedRules": {
+                "managedRuleSets": [
+                  {
+                    "ruleSetType" : "OWASP",
+                    "ruleSetVersion" : "3.0"
+                  }
+                ]
               },
               "customRules": [
                 {
