@@ -574,7 +574,7 @@
 					"description": "addition properties for the resource.",
 					"$ref": "#/definitions/QuotaRequestStatusDetails",
 					"x-ms-client-flatten": true
-				  },
+				},
 				"properties": {
 					"description": "Additional properties for the specific resource provider.",
 					"type": "object"
@@ -653,9 +653,9 @@
 				}
 			}
 		},
-		"QuotaRequestOneResourceSubmitResponse" : {
+		"QuotaRequestOneResourceSubmitResponse": {
 			"description": "Quota submit request response",
-			"type" : "object",
+			"type": "object",
 			"x-ms-azure-resource": true,
 			"properties": {
 				"id": {
@@ -677,12 +677,12 @@
 					"type": "string",
 					"readOnly": true,
 					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
-				  }
+				}
 			}
 		},
-		"QuotaRequestSubmitResponse" : {
+		"QuotaRequestSubmitResponse": {
 			"description": "Quota submit request response",
-			"type" : "object",
+			"type": "object",
 			"x-ms-azure-resource": true,
 			"properties": {
 				"id": {
@@ -704,7 +704,7 @@
 					"type": "string",
 					"readOnly": true,
 					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
-				  }
+				}
 			}
 		},
 		"QuotaRequestSubmitResponse201": {
@@ -732,7 +732,7 @@
 				}
 			}
 		},
-		"QuotaRequestStatusDetails" : {
+		"QuotaRequestStatusDetails": {
 			"description": "The quota request status details.",
 			"properties": {
 				"provisioningState": {
@@ -769,7 +769,7 @@
 					"type": "string",
 					"readOnly": true,
 					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
-				  }
+				}
 			}
 		},
 		"QuotaRequestDetailsList": {
@@ -835,12 +835,11 @@
 					"readOnly": true,
 					"format": "date-time"
 				},
-				"properties":
-				{
+				"properties": {
 					"description": "The quota request addition properties.",
+					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/CurrentQuotaLimit"
 				}
-				
 			}
 		},
 		"QuotaRequestState": {
@@ -1072,7 +1071,7 @@
 			"type": "object",
 			"properties": {
 				"emailActions": {
-				"description": "The email actions for auto quota increase.",
+					"description": "The email actions for auto quota increase.",
 					"properties": {
 						"value": {
 							"description": "The list of email actions.",
