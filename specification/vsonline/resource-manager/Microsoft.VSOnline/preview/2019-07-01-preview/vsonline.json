@@ -441,9 +441,20 @@
       ],
       "properties": {
         "properties":{
+          "type": "object",
           "description": "Additional VS Online Account properties.",
-          "title":"VS Online Additional properties",
-          "x-ms-client-flatten": true
+          "title": "VS Online Additional properties",
+          "properties": {
+            "userId": {
+              "type": "string",
+              "description": "unique user assigned id."
+            },
+            "serviceUri": {
+              "type": "string",
+              "readOnly": true,
+              "description": "Service endpoint."
+            }
+          }
         }
       }
     },
