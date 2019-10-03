@@ -701,14 +701,12 @@
           "properties": { 
             "count": {
               "description": "Current count of trained models.",
-              "type": "string",
-              "format": "int32",
+              "type":"integer",
               "x-nullable": false
             },
             "limit": {
               "description": "Max number of models that can be trained for this subscription.",
-              "type": "string",
-              "format": "int32",
+              "type": "integer",
               "x-nullable": false
             },
             "lastUpdatedDateTime": {
@@ -1485,15 +1483,15 @@
           "$ref": "#/definitions/OperationStatus"
         },
         "createdDateTime": {
+          "type": "string",
           "format": "date-time",
           "description": "Get date time the copy operation was submitted.",
-          "type": "string",
           "x-nullable": false
         },
         "lastUpdatedDateTime": {
+          "type": "string",
           "format": "date-time",
           "description": "Get last status update date time of this copy operation.",
-          "type": "string",
           "x-nullable": false
         },
         "copyResult": {
