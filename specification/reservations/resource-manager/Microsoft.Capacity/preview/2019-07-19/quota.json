@@ -538,6 +538,22 @@
 			"description": "Quota limits.",
 			"x-ms-azure-resource": true,
 			"properties": {
+				"quotaInformation": {
+					"description": "Quota information detail.",
+					"$ref": "#/definitions/CurrentQuotaLimitBase"
+				},
+				"properties": {
+					"description": "addition properties for the resource.",
+					"$ref": "#/definitions/QuotaRequestStatusDetails",
+					"x-ms-client-flatten": true
+				}
+			}
+		},
+		"CurrentQuotaLimitBase": {
+			"type": "object",
+			"description": "Quota limits.",
+			"x-ms-azure-resource": true,
+			"properties": {
 				"limit": {
 					"description": "The quota limit.",
 					"type": "integer"
@@ -570,11 +586,6 @@
 				"quotaPeriod": {
 					"description": "The quota period over which the usage values are summarized, such as - P1D (Per one day), PT1M (Per one minute), PT1S (Per one second). This parameter is optional because, for some resources like compute, the period doesn’t matter.",
 					"type": "string"
-				},
-				"additionalProperties": {
-					"description": "addition properties for the resource.",
-					"$ref": "#/definitions/QuotaRequestStatusDetails",
-					"x-ms-client-flatten": true
 				},
 				"properties": {
 					"description": "Additional properties for the specific resource provider.",
@@ -671,15 +682,15 @@
 					"type": "string",
 					"readOnly": true
 				},
-				"properties": {
-					"description": "The quota request details.",
-					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/quotaRequestOneResourceProperties"
-				},
 				"type": {
 					"type": "string",
 					"readOnly": true,
 					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+				},
+				"properties": {
+					"description": "The quota request details.",
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/quotaRequestOneResourceProperties"
 				}
 			}
 		},
@@ -700,13 +711,13 @@
 				},
 				"properties": {
 					"description": "The quota request details.",
-					"type" : "object",
+					"type": "object",
 					"$ref": "#/definitions/QuotaRequestProperties"
 				},
 				"type": {
 					"type": "string",
 					"readOnly": true,
-					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+					"description": "Type of resource. \"Microsoft.Capacity/serviceLimits\""
 				}
 			}
 		},
@@ -738,7 +749,7 @@
 		},
 		"QuotaRequestStatusDetails": {
 			"description": "The quota request status details.",
-			"type" : "object",
+			"type": "object",
 			"properties": {
 				"provisioningState": {
 					"description": "The quota request status.",
@@ -829,6 +840,7 @@
 			"properties": {
 				"provisioningState": {
 					"description": "The quota request status.",
+					"readOnly": true,
 					"$ref": "#/definitions/QuotaRequestState"
 				},
 				"message": {
@@ -845,7 +857,7 @@
 				"properties": {
 					"description": "The quota request addition properties.",
 					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/CurrentQuotaLimit"
+					"$ref": "#/definitions/CurrentQuotaLimitBase"
 				}
 			}
 		},
