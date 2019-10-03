@@ -1032,7 +1032,7 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
-        }		
+        }
       },
       "delete": {
         "operationId": "VpnServerConfigurations_Delete",
@@ -1166,7 +1166,7 @@
         }
       }
     },
-	"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}": {
       "get": {
         "operationId": "VirtualHubs_Get",
         "x-ms-examples": {
@@ -1847,7 +1847,7 @@
             "schema": {
               "$ref": "./ddosCustomPolicy.json#/definitions/CloudError"
             }
-          }	  
+          }
         },
         "x-ms-examples": {
           "ResetVpnGateway": {
@@ -2650,7 +2650,7 @@
             "schema": {
               "$ref": "./ddosCustomPolicy.json#/definitions/CloudError"
             }
-          }		  
+          }
         },
         "x-ms-examples": {
           "GenerateP2SVpnGatewayVPNProfile": {
@@ -2730,7 +2730,7 @@
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },		
+          },
           {
             "name": "resourceGroupName",
             "in": "path",
@@ -2753,7 +2753,7 @@
               "$ref": "#/definitions/P2SVpnConnectionHealthRequest"
             },
             "description": "Request parameters supplied to get p2s vpn connections detailed health."
-          },		  
+          },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
@@ -2823,7 +2823,7 @@
             "schema": {
               "$ref": "#/definitions/VpnServerConfigurationsResponse"
             }
-          },  
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously. Follow the location header for list of associated VpnServerConfigurations list."
           },
@@ -2875,7 +2875,7 @@
               "$ref": "#/definitions/VirtualWanVpnProfileParameters"
             },
             "description": "Parameters supplied to the generate VirtualWan VPN profile generation operation."
-          },		  
+          },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
           }
@@ -2886,7 +2886,7 @@
             "schema": {
               "$ref": "#/definitions/VpnProfileResponse"
             }
-          },  
+          },
           "202": {
             "description": "Accepted and the operation will complete asynchronously."
           },
@@ -2902,7 +2902,241 @@
           "final-state-via": "location"
         }
       }
-    }	
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables/{routeTableName}": {
+      "get": {
+        "operationId": "VirtualHubTableV2s_Get",
+        "x-ms-examples": {
+          "VirtualHubVirtualHubRouteTableV2Get": {
+            "$ref": "./examples/VirtualHubRouteTableV2Get.json"
+          }
+        },
+        "description": "Retrieves the details of a VirtualHubRouteTableV2.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHubRouteTableV2."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHubRouteTableV2."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualHubRouteTableV2 retrieved.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "VirtualHubRouteTableV2s_CreateOrUpdate",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Put": {
+            "$ref": "./examples/VirtualHubRouteTableV2Put.json"
+          }
+        },
+        "description": "Creates a VirtualHubRouteTableV2 resource if it doesn't exist else updates the existing VirtualHubRouteTableV2.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHubRouteTableV2."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "virtualHubRouteTableV2Parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            },
+            "description": "Parameters supplied to create or update VirtualHubRouteTableV2."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of the VirtualHubRouteTableV2 created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "201": {
+            "description": "Request received successfully. Returns the details of the VirtualHubRouteTableV2 created or updated.",
+            "schema": {
+              "$ref": "#/definitions/VirtualHubRouteTableV2"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        }
+      },
+      "delete": {
+        "operationId": "VirtualHubRouteTableV2s_Delete",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2Delete": {
+            "$ref": "./examples/VirtualHubRouteTableV2Delete.json"
+          }
+        },
+        "description": "Deletes a VirtualHubRouteTableV2.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHubRouteTableV2."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "name": "routeTableName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHubRouteTableV2."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. VirtualHubRouteTableV2 deleted."
+          },
+          "202": {
+            "description": "Request received successfully. VirtualHubRouteTableV2 deletion is in progress; follow the Location header to poll for final outcome."
+          },
+          "204": {
+            "description": "No VirtualHubRouteTableV2s exist by the name provided."
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables": {
+      "get": {
+        "operationId": "VirtualHubRouteTableV2s_List",
+        "x-ms-examples": {
+          "VirtualHubRouteTableV2List": {
+            "$ref": "./examples/VirtualHubRouteTableV2List.json"
+          }
+        },
+        "description": "Retrieves the details of all VirtualHubRouteTableV2s.",
+        "parameters": [
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource group name of the VirtualHub."
+          },
+          {
+            "name": "virtualHubName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VirtualHub."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. Returns the details of all the VirtualHubRouteTableV2s for the VirtualHub.",
+            "schema": {
+              "$ref": "#/definitions/ListHubVirtualNetworkConnectionsResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./ddosCustomPolicy.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
   },
   "definitions": {
     "VirtualWanProperties": {
@@ -3180,6 +3414,13 @@
           "description": "List of all vnet connections with this VirtualHub.",
           "items": {
             "$ref": "#/definitions/HubVirtualNetworkConnection"
+          }
+        },
+        "virtualHubRouteTableV2s": {
+          "type": "array",
+          "description": "List of all virtual hub route table v2s associated with this VirtualHub.",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRouteTableV2"
           }
         },
         "addressPrefix": {
@@ -3738,7 +3979,7 @@
         "name": "HubVirtualNetworkConnectionStatus",
         "modelAsString": true
       }
-    }, 
+    },
     "OfficeTrafficCategory": {
       "type": "string",
       "description": "The office traffic category.",
@@ -3766,13 +4007,13 @@
         "name": "VirtualWanSecurityProviderType",
         "modelAsString": true
       }
-    },	
-	"VpnServerConfigVpnClientRootCertificate": {
+    },
+    "VpnServerConfigVpnClientRootCertificate": {
       "properties": {
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },  
+        },
         "publicCertData": {
           "type": "string",
           "description": "The certificate public data."
@@ -3785,7 +4026,7 @@
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },	  
+        },
         "publicCertData": {
           "type": "string",
           "description": "The certificate public data."
@@ -3798,7 +4039,7 @@
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },		  
+        },
         "thumbprint": {
           "type": "string",
           "description": "The revoked VPN client certificate thumbprint."
@@ -3811,7 +4052,7 @@
         "name": {
           "type": "string",
           "description": "The certificate name."
-        },	  
+        },
         "thumbprint": {
           "type": "string",
           "description": "The Radius client root certificate thumbprint."
@@ -3866,7 +4107,7 @@
             "enum": [
               "Certificate",
               "Radius",
-              "AAD"			  
+              "AAD"
             ],
             "x-ms-enum": {
               "name": "VpnAuthenticationType",
@@ -3931,7 +4172,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-		    "$ref": "#/definitions/P2SVpnGateway"
+            "$ref": "#/definitions/P2SVpnGateway"
           },
           "description": "List of references to P2SVpnGateways."
         },
@@ -4023,7 +4264,7 @@
           "items": {
             "$ref": "#/definitions/P2SConnectionConfiguration"
           }
-        },		
+        },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the P2S VPN gateway resource."
@@ -4034,7 +4275,7 @@
           "description": "The scale unit for this p2s vpn gateway."
         },
         "vpnServerConfiguration": {
-		  "$ref": "#/definitions/VpnServerConfiguration",
+          "$ref": "#/definitions/VpnServerConfiguration",
           "description": "The VpnServerConfiguration to which the p2sVpnGateway is attached to."
         },
         "vpnClientConnectionHealth": {
@@ -4136,7 +4377,7 @@
           "type": "array",
           "items": {
             "type": "string",
-			"description": "VpnServerConfiguration partial resource uri."
+            "description": "VpnServerConfiguration partial resource uri."
           },
           "description": "List of VpnServerConfigurations associated with VirtualWan."
         }
@@ -4152,7 +4393,7 @@
         "authenticationMethod": {
           "$ref": "./network.json#/definitions/AuthenticationMethod",
           "description": "VPN client authentication method."
-        }	
+        }
       },
       "description": "Virtual Wan Vpn profile parameters Vpn profile generation."
     },
@@ -4162,14 +4403,14 @@
           "type": "array",
           "items": {
             "type": "string",
-			"description": "P2S vpn user name."
+            "description": "P2S vpn user name."
           },
           "description": "The list of p2s vpn user names whose p2s vpn connection detailed health to retrieve for."
         },
         "outputBlobSasUrl": {
           "type": "string",
           "description": "The sas-url to download the P2S Vpn connection health detail."
-        }	
+        }
       },
       "description": "List of P2S Vpn connection health request."
     },
@@ -4218,6 +4459,80 @@
         }
       ],
       "description": "P2SConnectionConfiguration Resource."
+    },
+    "VirtualHubRouteTableV2Properties": {
+      "properties": {
+        "routes": {
+          "type": "array",
+          "description": "List of all routes.",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRouteV2"
+          }
+        },
+        "attachedConnections": {
+          "type": "array",
+          "description": "List of all connections attached to this route table v2.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "./network.json#/definitions/ProvisioningState",
+          "description": "The provisioning state of the virtual hub route table v2 resource."
+        }
+      },
+      "description": "Parameters for VirtualHubRouteTableV2."
+    },
+    "VirtualHubRouteTableV2": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualHubRouteTableV2Properties",
+          "description": "Properties of the virtual hub route table v2."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "A unique read-only string that changes whenever the resource is updated."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./network.json#/definitions/SubResource"
+        }
+      ],
+      "description": "VirtualHubRouteTableV2 Resource."
+    },
+    "VirtualHubRouteV2": {
+      "properties": {
+        "destinationType": {
+          "type": "string",
+          "description": "The type of destinations"
+        },
+        "destinations": {
+          "type": "array",
+          "description": "List of all destinations.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "nextHopType": {
+          "type": "string",
+          "description": "The type of next hops"
+        },
+        "nextHops": {
+          "type": "array",
+          "description": "NextHops ip address.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "description": "VirtualHubRouteTableV2 route."
     }
   }
 }
