@@ -130,7 +130,7 @@ python:
 
 ### Tag: package-2019-09-preview-only and python
 
-These settings apply only when `--tag=package-2019-08-preview-only --python` is specified on the command line.
+These settings apply only when `--tag=package-2019-09-preview-only --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2019-09-preview-only' && $(python)
