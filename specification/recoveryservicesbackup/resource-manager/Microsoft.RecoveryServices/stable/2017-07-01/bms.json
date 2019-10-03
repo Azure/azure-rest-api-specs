@@ -412,50 +412,6 @@
         }
       }
     },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
-      "post": {
-        "tags": [
-          "Jobs"
-        ],
-        "description": "Triggers export of jobs specified by filters and returns an OperationID to track.",
-        "operationId": "Jobs_Export",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "OData filter options.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          }
-        },
-        "x-ms-odata": "#/definitions/JobQueryObject",
-        "x-ms-examples": {
-          "Export Jobs": {
-            "$ref": "./examples/Common/TriggerExportJobs.json"
-          }
-        }
-      }
-    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies": {
       "get": {
         "tags": [
@@ -510,6 +466,50 @@
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}": {
+      "get": {
+        "tags": [
+          "ProtectionPolicies"
+        ],
+        "description": "Provides the details of the backup policies associated to Recovery Services Vault. This is an asynchronous\r\noperation. Status of the operation can be fetched using GetPolicyOperationResult API.",
+        "operationId": "ProtectionPolicies_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "Backup policy information to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Azure IaasVm Protection Policy Details": {
+            "$ref": "./examples/AzureIaasVm/ProtectionPolicies_Get.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "ProtectionPolicies"
@@ -569,6 +569,59 @@
           },
           "Create or Update Full Azure Workload Protection Policy": {
             "$ref": "./examples/AzureWorkload/ProtectionPolicies_CreateOrUpdate_Complex.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies/{policyName}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ProtectionPolicyOperationResults"
+        ],
+        "description": "Provides the result of an operation.",
+        "operationId": "ProtectionPolicyOperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "policyName",
+            "in": "path",
+            "description": "Backup policy name whose operation's result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID which represents the operation whose result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectionPolicyResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Protection Policy Operation Results": {
+            "$ref": "./examples/AzureIaasVm/ProtectionPolicyOperationResults_Get.json"
           }
         }
       }
@@ -689,54 +742,6 @@
           }
         }
       }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperation": {
-      "post": {
-        "tags": [
-          "Operation"
-        ],
-        "description": "Validate operation for specified backed up item. This is a synchronous operation.",
-        "operationId": "Operation_Validate",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "resource validate operation request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ValidateOperationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ValidateOperationsResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Validate Operation": {
-            "$ref": "./examples/AzureIaasVm/ValidateOperation_RestoreDisk.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -798,76 +803,6 @@
         }
       },
       "x-ms-discriminator-value": "AzureStorage"
-    },
-    "AzureFileShareRestoreRequest": {
-      "description": "AzureFileShare Restore Request",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RestoreRequest"
-        }
-      ],
-      "properties": {
-        "recoveryType": {
-          "description": "Type of this recovery.",
-          "enum": [
-            "Invalid",
-            "OriginalLocation",
-            "AlternateLocation",
-            "RestoreDisks",
-            "Offline"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecoveryType",
-            "modelAsString": true
-          }
-        },
-        "sourceResourceId": {
-          "description": "Source storage account ARM Id",
-          "type": "string"
-        },
-        "copyOptions": {
-          "description": "Options to resolve copy conflicts.",
-          "enum": [
-            "Invalid",
-            "CreateCopy",
-            "Skip",
-            "Overwrite",
-            "FailOnConflict"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CopyOptions",
-            "modelAsString": true
-          }
-        },
-        "restoreRequestType": {
-          "description": "Restore Type (FullShareRestore or ItemLevelRestore)",
-          "enum": [
-            "Invalid",
-            "FullShareRestore",
-            "ItemLevelRestore"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RestoreRequestType",
-            "modelAsString": true
-          }
-        },
-        "restoreFileSpecs": {
-          "description": "List of Source Files/Folders(which need to recover) and TargetFolderPath details",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RestoreFileSpecs"
-          }
-        },
-        "targetDetails": {
-          "$ref": "#/definitions/TargetAFSRestoreInfo",
-          "description": "Target File Share Details"
-        }
-      },
-      "x-ms-discriminator-value": "AzureFileShareRestoreRequest"
     },
     "AzureIaaSVMErrorInfo": {
       "description": "Azure IaaS VM workload-specific error information.",
@@ -1430,96 +1365,6 @@
         }
       }
     },
-    "AzureWorkloadPointInTimeRestoreRequest": {
-      "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
-        }
-      ],
-      "properties": {
-        "pointInTime": {
-          "format": "date-time",
-          "description": "PointInTime value",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadPointInTimeRestoreRequest"
-    },
-    "AzureWorkloadRestoreRequest": {
-      "description": "AzureWorkload-specific restore.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RestoreRequest"
-        }
-      ],
-      "properties": {
-        "recoveryType": {
-          "description": "Type of this recovery.",
-          "enum": [
-            "Invalid",
-            "OriginalLocation",
-            "AlternateLocation",
-            "RestoreDisks",
-            "Offline"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecoveryType",
-            "modelAsString": true
-          }
-        },
-        "sourceResourceId": {
-          "description": "Fully qualified ARM ID of the VM on which workload that was running is being recovered.",
-          "type": "string"
-        },
-        "propertyBag": {
-          "description": "Workload specific property bag.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "targetInfo": {
-          "$ref": "#/definitions/TargetRestoreInfo",
-          "description": "Details of target database"
-        },
-        "recoveryMode": {
-          "description": "Defines whether the current recovery mode is file restore or database restore",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
-    },
-    "AzureWorkloadSAPHanaPointInTimeRestoreRequest": {
-      "description": "AzureWorkload SAP Hana -specific restore. Specifically for PointInTime/Log restore",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadSAPHanaRestoreRequest"
-        }
-      ],
-      "properties": {
-        "pointInTime": {
-          "format": "date-time",
-          "description": "PointInTime value",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadSAPHanaPointInTimeRestoreRequest"
-    },
-    "AzureWorkloadSAPHanaRestoreRequest": {
-      "description": "AzureWorkload SAP Hana-specific restore.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "AzureWorkloadSAPHanaRestoreRequest"
-    },
     "AzureWorkloadSQLAutoProtectionIntent": {
       "description": "Azure Workload SQL Auto Protection intent item.",
       "type": "object",
@@ -1548,50 +1393,6 @@
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLAutoProtectionIntent"
-    },
-    "AzureWorkloadSQLPointInTimeRestoreRequest": {
-      "description": "AzureWorkload SQL -specific restore. Specifically for PointInTime/Log restore",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadSQLRestoreRequest"
-        }
-      ],
-      "properties": {
-        "pointInTime": {
-          "format": "date-time",
-          "description": "PointInTime value",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadSQLPointInTimeRestoreRequest"
-    },
-    "AzureWorkloadSQLRestoreRequest": {
-      "description": "AzureWorkload SQL -specific restore. Specifically for full/diff restore",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/AzureWorkloadRestoreRequest"
-        }
-      ],
-      "properties": {
-        "shouldUseAlternateTargetLocation": {
-          "description": "Default option set to true. If this is set to false, alternate data directory must be provided",
-          "type": "boolean"
-        },
-        "isNonRecoverable": {
-          "description": "SQL specific property where user can chose to set no-recovery when restore operation is tried",
-          "type": "boolean"
-        },
-        "alternateDirectoryPaths": {
-          "description": "Data directory details",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SQLDataDirectoryMapping"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "AzureWorkloadSQLRestoreRequest"
     },
     "BackupManagementUsage": {
       "description": "Backup management usages of a vault.",
@@ -1687,10 +1488,6 @@
         "poLogicalName": {
           "description": "Protectable Item Logical Name",
           "type": "string"
-        },
-        "poPublicUri": {
-          "$ref": "#/definitions/PublicUri",
-          "description": "Public URI of the resource if available."
         }
       }
     },
@@ -1950,53 +1747,6 @@
         }
       }
     },
-    "EncryptionDetails": {
-      "description": "Details needed if the VM was encrypted at the time of backup.",
-      "type": "object",
-      "properties": {
-        "encryptionEnabled": {
-          "description": "Identifies whether this backup copy represents an encrypted VM at the time of backup.",
-          "type": "boolean"
-        },
-        "kekUrl": {
-          "description": "Key Url.",
-          "type": "string"
-        },
-        "secretKeyUrl": {
-          "description": "Secret Url.",
-          "type": "string"
-        },
-        "kekVaultId": {
-          "description": "ID of Key Vault where KEK is stored.",
-          "type": "string"
-        },
-        "secretKeyVaultId": {
-          "description": "ID of Key Vault where Secret is stored.",
-          "type": "string"
-        }
-      }
-    },
-    "ErrorDetail": {
-      "description": "Error Detail class which encapsulates Code, Message and Recommendations.",
-      "type": "object",
-      "properties": {
-        "code": {
-          "description": "Error code.",
-          "type": "string"
-        },
-        "message": {
-          "description": "Error Message related to the Code.",
-          "type": "string"
-        },
-        "recommendations": {
-          "description": "List of recommendation strings.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      }
-    },
     "ExportJobsOperationResultInfo": {
       "description": "This class is used to send blob details after exporting jobs.",
       "type": "object",
@@ -2062,93 +1812,6 @@
         }
       },
       "x-ms-discriminator-value": "GenericProtectionPolicy"
-    },
-    "IaasVMRestoreRequest": {
-      "description": "IaaS VM workload-specific restore.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/RestoreRequest"
-        }
-      ],
-      "properties": {
-        "recoveryPointId": {
-          "description": "ID of the backup copy to be recovered.",
-          "type": "string"
-        },
-        "recoveryType": {
-          "description": "Type of this recovery.",
-          "enum": [
-            "Invalid",
-            "OriginalLocation",
-            "AlternateLocation",
-            "RestoreDisks",
-            "Offline"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RecoveryType",
-            "modelAsString": true
-          }
-        },
-        "sourceResourceId": {
-          "description": "Fully qualified ARM ID of the VM which is being recovered.",
-          "type": "string"
-        },
-        "targetVirtualMachineId": {
-          "description": "This is the complete ARM Id of the VM that will be created.\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}/provider/Microsoft.Compute/virtualmachines/{vm}",
-          "type": "string"
-        },
-        "targetResourceGroupId": {
-          "description": "This is the ARM Id of the resource group that you want to create for this Virtual machine and other artifacts.\r\nFor e.g. /subscriptions/{subId}/resourcegroups/{rg}",
-          "type": "string"
-        },
-        "storageAccountId": {
-          "description": "Fully qualified ARM ID of the storage account to which the VM has to be restored.",
-          "type": "string"
-        },
-        "virtualNetworkId": {
-          "description": "This is the virtual network Id of the vnet that will be attached to the virtual machine.\r\nUser will be validated for join action permissions in the linked access.",
-          "type": "string"
-        },
-        "subnetId": {
-          "description": "Subnet ID, is the subnet ID associated with the to be restored VM. For Classic VMs it would be\r\n{VnetID}/Subnet/{SubnetName} and, for the Azure Resource Manager VMs it would be ARM resource ID used to represent\r\nthe subnet.",
-          "type": "string"
-        },
-        "targetDomainNameId": {
-          "description": "Fully qualified ARM ID of the domain name to be associated to the VM being restored. This applies only to Classic\r\nVirtual Machines.",
-          "type": "string"
-        },
-        "region": {
-          "description": "Region in which the virtual machine is restored.",
-          "type": "string"
-        },
-        "affinityGroup": {
-          "description": "Affinity group associated to VM to be restored. Used only for Classic Compute Virtual Machines.",
-          "type": "string"
-        },
-        "createNewCloudService": {
-          "description": "Should a new cloud service be created while restoring the VM. If this is false, VM will be restored to the same\r\ncloud service as it was at the time of backup.",
-          "type": "boolean"
-        },
-        "originalStorageAccountOption": {
-          "description": "Original Storage Account Option",
-          "type": "boolean"
-        },
-        "encryptionDetails": {
-          "$ref": "#/definitions/EncryptionDetails",
-          "description": "Details needed if the VM was encrypted at the time of backup."
-        },
-        "restoreDiskLunList": {
-          "description": "List of Disk LUNs for partial restore",
-          "type": "array",
-          "items": {
-            "format": "int32",
-            "type": "integer"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "IaasVMRestoreRequest"
     },
     "InstantRPAdditionalDetails": {
       "type": "object",
@@ -2219,86 +1882,6 @@
         }
       },
       "discriminator": "jobType"
-    },
-    "JobQueryObject": {
-      "description": "Filters to list the jobs.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status of the job.",
-          "enum": [
-            "Invalid",
-            "InProgress",
-            "Completed",
-            "Failed",
-            "CompletedWithWarnings",
-            "Cancelled",
-            "Cancelling"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobStatus",
-            "modelAsString": true
-          }
-        },
-        "backupManagementType": {
-          "description": "Type of backup management for the job.",
-          "enum": [
-            "Invalid",
-            "AzureIaasVM",
-            "MAB",
-            "DPM",
-            "AzureBackupServer",
-            "AzureSql",
-            "AzureStorage",
-            "AzureWorkload",
-            "DefaultBackup"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BackupManagementType",
-            "modelAsString": true
-          }
-        },
-        "operation": {
-          "description": "Type of operation.",
-          "enum": [
-            "Invalid",
-            "Register",
-            "UnRegister",
-            "ConfigureBackup",
-            "Backup",
-            "Restore",
-            "DisableBackup",
-            "DeleteBackupData",
-            "CrossRegionRestore",
-            "Undelete"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "JobOperationType",
-            "modelAsString": true
-          }
-        },
-        "jobId": {
-          "description": "JobID represents the job uniquely.",
-          "type": "string"
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Job has started at this time. Value is in UTC.",
-          "type": "string"
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Job has ended at this time. Value is in UTC.",
-          "type": "string"
-        },
-        "generateExcelFileForExportJobs": {
-          "description": "True if excel file should be generated.",
-          "type": "boolean"
-        }
-      }
     },
     "JobResource": {
       "description": "Defines workload agnostic properties for a job.",
@@ -3052,16 +2635,6 @@
         }
       }
     },
-    "PublicUri": {
-      "description": "Base class for Public Uri.",
-      "type": "object",
-      "properties": {
-        "publicUriType": {
-          "description": "public uri type.",
-          "type": "string"
-        }
-      }
-    },
     "Resource": {
       "description": "ARM Resource.",
       "type": "object",
@@ -3108,38 +2681,6 @@
           "type": "string"
         }
       }
-    },
-    "RestoreFileSpecs": {
-      "description": "Restore file specs like file path, type and target folder path info.",
-      "type": "object",
-      "properties": {
-        "path": {
-          "description": "Source File/Folder path",
-          "type": "string"
-        },
-        "fileSpecType": {
-          "description": "Indicates what the Path variable stands for",
-          "type": "string"
-        },
-        "targetFolderPath": {
-          "description": "Destination folder path in target FileShare",
-          "type": "string"
-        }
-      }
-    },
-    "RestoreRequest": {
-      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
-          "type": "string"
-        }
-      },
-      "discriminator": "objectType"
     },
     "RetentionDuration": {
       "description": "Retention duration.",
@@ -3287,37 +2828,6 @@
       },
       "x-ms-discriminator-value": "SimpleSchedulePolicy"
     },
-    "SQLDataDirectoryMapping": {
-      "description": "Encapsulates information regarding data directory",
-      "type": "object",
-      "properties": {
-        "mappingType": {
-          "description": "Type of data directory mapping",
-          "enum": [
-            "Invalid",
-            "Data",
-            "Log"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SQLDataDirectoryType",
-            "modelAsString": true
-          }
-        },
-        "sourceLogicalName": {
-          "description": "Restore source logical name path",
-          "type": "string"
-        },
-        "sourcePath": {
-          "description": "Restore source path",
-          "type": "string"
-        },
-        "targetPath": {
-          "description": "Target path",
-          "type": "string"
-        }
-      }
-    },
     "SubProtectionPolicy": {
       "description": "Sub-protection policy which includes schedule and retention",
       "type": "object",
@@ -3346,115 +2856,6 @@
           "description": "Retention policy with the details on backup copy retention ranges."
         }
       }
-    },
-    "TargetAFSRestoreInfo": {
-      "description": "Target Azure File Share Info.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "File share name",
-          "type": "string"
-        },
-        "targetResourceId": {
-          "description": "Target file share resource ARM ID",
-          "type": "string"
-        }
-      }
-    },
-    "TargetRestoreInfo": {
-      "description": "Details about target workload during restore operation.",
-      "type": "object",
-      "properties": {
-        "overwriteOption": {
-          "description": "Can Overwrite if Target DataBase already exists",
-          "enum": [
-            "Invalid",
-            "FailOnConflict",
-            "Overwrite"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "OverwriteOptions",
-            "modelAsString": true
-          }
-        },
-        "containerId": {
-          "description": "Resource Id name of the container in which Target DataBase resides",
-          "type": "string"
-        },
-        "databaseName": {
-          "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
-          "type": "string"
-        },
-        "targetDirectoryMapping": {
-          "description": "This will contain the target folder mapping for the Full/Diff/Log/Incremental pits.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "ValidateIaasVMRestoreOperationRequest": {
-      "description": "AzureRestoreValidation request.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ValidateRestoreOperationRequest"
-        }
-      ],
-      "x-ms-discriminator-value": "ValidateIaasVMRestoreOperationRequest"
-    },
-    "ValidateOperationRequest": {
-      "description": "Base class for validate operation request.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
-          "type": "string"
-        }
-      },
-      "discriminator": "objectType"
-    },
-    "ValidateOperationResponse": {
-      "description": "Base class for validate operation response.",
-      "type": "object",
-      "properties": {
-        "validationResults": {
-          "description": "Gets the validation result",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDetail"
-          }
-        }
-      }
-    },
-    "ValidateOperationsResponse": {
-      "type": "object",
-      "properties": {
-        "validateOperationResponse": {
-          "$ref": "#/definitions/ValidateOperationResponse"
-        }
-      }
-    },
-    "ValidateRestoreOperationRequest": {
-      "description": "AzureRestoreValidation request.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ValidateOperationRequest"
-        }
-      ],
-      "properties": {
-        "restoreRequest": {
-          "$ref": "#/definitions/RestoreRequest",
-          "description": "Sets restore request to be validated"
-        }
-      },
-      "x-ms-discriminator-value": "ValidateRestoreOperationRequest"
     },
     "WeeklyRetentionFormat": {
       "description": "Weekly retention format.",

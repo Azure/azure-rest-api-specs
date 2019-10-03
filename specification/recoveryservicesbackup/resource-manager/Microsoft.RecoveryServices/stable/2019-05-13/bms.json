@@ -162,6 +162,79 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ProtectedItemOperationResults"
+        ],
+        "description": "Fetches the result of any operation on the backup item.",
+        "operationId": "ProtectedItemOperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backup item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with the backup item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backup item name whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the operation whose result needs to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ProtectedItemResource"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Get Operation Results of Protected Vm": {
+            "$ref": "./examples/AzureIaasVm/ProtectedItemOperationResults.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/recoveryPoints": {
       "get": {
         "tags": [
@@ -439,6 +512,50 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
+      "post": {
+        "tags": [
+          "Jobs"
+        ],
+        "description": "Triggers export of jobs specified by filters and returns an OperationID to track.",
+        "operationId": "Jobs_Export",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "OData filter options.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-odata": "#/definitions/JobQueryObject",
+        "x-ms-examples": {
+          "Export Jobs": {
+            "$ref": "./examples/Common/TriggerExportJobs.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems": {
       "get": {
         "tags": [
@@ -492,6 +609,54 @@
         "x-ms-examples": {
           "List protected items with backupManagementType filter as AzureIaasVm": {
             "$ref": "./examples/AzureIaasVm/BackupProtectedItems_List.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperation": {
+      "post": {
+        "tags": [
+          "Operation"
+        ],
+        "description": "Validate operation for specified backed up item. This is a synchronous operation.",
+        "operationId": "Operation_Validate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "resource validate operation request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ValidateOperationsResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Validate Operation": {
+            "$ref": "./examples/AzureIaasVm/ValidateOperation_RestoreDisk.json"
           }
         }
       }
@@ -1529,7 +1694,16 @@
         },
         "recoveryMode": {
           "description": "Defines whether the current recovery mode is file restore or database restore",
-          "type": "string"
+          "enum": [
+            "Invalid",
+            "FileRecovery",
+            "WorkloadRecovery"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RecoveryMode",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRestoreRequest"
@@ -2212,7 +2386,7 @@
           "description": "OS type",
           "type": "string"
         },
-        "rpDiskConfiguration": {
+        "recoveryPointDiskConfiguration": {
           "$ref": "#/definitions/RecoveryPointDiskConfiguration",
           "description": "Disk configuration"
         }
@@ -2438,10 +2612,6 @@
           "format": "date-time",
           "description": "Job has ended at this time. Value is in UTC.",
           "type": "string"
-        },
-        "generateExcelFileForExportJobs": {
-          "description": "True if excel file should be generated.",
-          "type": "boolean"
         }
       }
     },
@@ -3288,15 +3458,69 @@
         "databaseName": {
           "description": "Database name InstanceName/DataBaseName for SQL or System/DbName for SAP Hana",
           "type": "string"
-        },
-        "targetDirectoryMapping": {
-          "description": "This will contain the target folder mapping for the Full/Diff/Log/Incremental pits.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
+        }
+      }
+    },
+    "ValidateIaasVMRestoreOperationRequest": {
+      "description": "AzureRestoreValidation request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidateRestoreOperationRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "ValidateIaasVMRestoreOperationRequest"
+    },
+    "ValidateOperationRequest": {
+      "description": "Base class for validate operation request.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "ValidateOperationResponse": {
+      "description": "Base class for validate operation response.",
+      "type": "object",
+      "properties": {
+        "validationResults": {
+          "description": "Gets the validation result",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorDetail"
           }
         }
       }
+    },
+    "ValidateOperationsResponse": {
+      "type": "object",
+      "properties": {
+        "validateOperationResponse": {
+          "$ref": "#/definitions/ValidateOperationResponse"
+        }
+      }
+    },
+    "ValidateRestoreOperationRequest": {
+      "description": "AzureRestoreValidation request.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ValidateOperationRequest"
+        }
+      ],
+      "properties": {
+        "restoreRequest": {
+          "$ref": "#/definitions/RestoreRequest",
+          "description": "Sets restore request to be validated"
+        }
+      },
+      "x-ms-discriminator-value": "ValidateRestoreOperationRequest"
     }
   },
   "parameters": {
