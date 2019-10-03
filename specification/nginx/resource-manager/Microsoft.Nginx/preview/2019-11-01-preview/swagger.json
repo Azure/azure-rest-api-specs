@@ -11,11 +11,11 @@
                     "Nginx"
                 ],
                 "operationId": "Operations_List",
-                "consumes": [],
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
-                    "text/plain",
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "parameters": [],
                 "responses": {
@@ -43,11 +43,11 @@
                     "Nginx"
                 ],
                 "operationId": "Frontends_List",
-                "consumes": [],
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
-                    "text/plain",
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "parameters": [
                     {
@@ -82,11 +82,11 @@
                     "Nginx"
                 ],
                 "operationId": "Frontends_ListByResourceGroup",
-                "consumes": [],
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
-                    "text/plain",
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "parameters": [
                     {
@@ -127,11 +127,11 @@
                     "Nginx"
                 ],
                 "operationId": "Frontends_Get",
-                "consumes": [],
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
-                    "text/plain",
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "parameters": [
                     {
@@ -173,11 +173,11 @@
                     "Nginx"
                 ],
                 "operationId": "Frontends_Create",
-                "consumes": [],
+                "consumes": [
+                    "application/json"
+                ],
                 "produces": [
-                    "text/plain",
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "parameters": [
                     {
@@ -197,6 +197,14 @@
                         "in": "path",
                         "required": true,
                         "type": "string"
+                    },
+                    {
+                        "name": "resource",
+                        "in": "body",
+                        "required": false,
+                        "schema": {
+                            "$ref": "#/definitions/NginxResource"
+                        }
                     }
                 ],
                 "responses": {
@@ -225,8 +233,12 @@
                     "Nginx"
                 ],
                 "operationId": "Frontends_Delete",
-                "consumes": [],
-                "produces": [],
+                "consumes": [
+                    "application/json"
+                ],
+                "produces": [
+                    "application/json"
+                ],
                 "parameters": [
                     {
                         "name": "subscriptionId",
@@ -268,15 +280,10 @@
                 ],
                 "operationId": "Frontends_Update",
                 "consumes": [
-                    "application/json-patch+json",
-                    "application/json",
-                    "text/json",
-                    "application/*+json"
+                    "application/json"
                 ],
                 "produces": [
-                    "text/plain",
-                    "application/json",
-                    "text/json"
+                    "application/json"
                 ],
                 "parameters": [
                     {
@@ -308,12 +315,6 @@
                 ],
                 "responses": {
                     "200": {
-                        "description": "Success",
-                        "schema": {
-                            "$ref": "#/definitions/NginxResource"
-                        }
-                    },
-                    "202": {
                         "description": "Success",
                         "schema": {
                             "$ref": "#/definitions/NginxResource"
@@ -482,6 +483,10 @@
                     "type": "integer"
                 },
                 "instanceSize": {
+                    "enum": [
+                        "Basic",
+                        "Premium"
+                    ],
                     "type": "string"
                 },
                 "networkProperties": {
@@ -515,21 +520,19 @@
                     "type": "integer"
                 },
                 "protocol": {
-                    "format": "int32",
                     "enum": [
-                        0,
-                        1
+                        "TCP",
+                        "UDP"
                     ],
-                    "type": "integer"
+                    "type": "string"
                 },
                 "sessionPersistence": {
-                    "format": "int32",
                     "enum": [
-                        0,
-                        1,
-                        2
+                        "None",
+                        "ClientIP",
+                        "ClientIPAndProtocol"
                     ],
-                    "type": "integer"
+                    "type": "string"
                 },
                 "idleTimeout": {
                     "format": "int32",
