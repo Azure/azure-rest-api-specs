@@ -134,7 +134,7 @@
 					"200": {
 						"description": "OK. Returns Quota requests details.",
 						"schema": {
-							"$ref": "#/definitions/CurrentQuotaLimit"
+							"$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
 						}
 					},
 					"201": {
@@ -255,7 +255,7 @@
 					"200": {
 						"description": "OK. Returns Quota requests details.",
 						"schema": {
-							"$ref": "#/definitions/CreateGenericQuotaRequestParameters"
+							"$ref": "#/definitions/QuotaRequestSubmitResponse"
 						}
 					},
 					"201": {
@@ -318,7 +318,7 @@
 					"200": {
 						"description": "OK. Returns Quota requests details.",
 						"schema": {
-							"$ref": "#/definitions/CreateGenericQuotaRequestParameters"
+							"$ref": "#/definitions/QuotaRequestSubmitResponse"
 						}
 					},
 					"201": {
@@ -653,6 +653,60 @@
 				}
 			}
 		},
+		"QuotaRequestOneResourceSubmitResponse" : {
+			"description": "Quota submit request response",
+			"type" : "object",
+			"x-ms-azure-resource": true,
+			"properties": {
+				"id": {
+					"description": "The quota request Id.",
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"description": "The name of the quota request.",
+					"type": "string",
+					"readOnly": true
+				},
+				"properties": {
+					"description": "The quota request details.",
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/quotaRequestOneResourceProperties"
+				},
+				"type": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+				  }
+			}
+		},
+		"QuotaRequestSubmitResponse" : {
+			"description": "Quota submit request response",
+			"type" : "object",
+			"x-ms-azure-resource": true,
+			"properties": {
+				"id": {
+					"description": "The quota request Id.",
+					"type": "string",
+					"readOnly": true
+				},
+				"name": {
+					"description": "The name of the quota request.",
+					"type": "string",
+					"readOnly": true
+				},
+				"properties": {
+					"description": "The quota request details.",
+					"x-ms-client-flatten": true,
+					"$ref": "#/definitions/quotaRequestProperties"
+				},
+				"type": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+				  }
+			}
+		},
 		"QuotaRequestSubmitResponse201": {
 			"description": "The quota request submit response with request id.",
 			"properties": {
@@ -710,7 +764,12 @@
 					"description": "The quota request details.",
 					"x-ms-client-flatten": true,
 					"$ref": "#/definitions/quotaRequestProperties"
-				}
+				},
+				"type": {
+					"type": "string",
+					"readOnly": true,
+					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
+				  }
 			}
 		},
 		"QuotaRequestDetailsList": {
@@ -755,6 +814,33 @@
 						"$ref": "#/definitions/SubRequest"
 					}
 				}
+			}
+		},
+		"quotaRequestOneResourceProperties": {
+			"type": "object",
+			"description": "The details of quota request.",
+			"properties": {
+				"provisioningState": {
+					"description": "The quota request status.",
+					"$ref": "#/definitions/QuotaRequestState"
+				},
+				"message": {
+					"description": "User friendly status message.",
+					"type": "string",
+					"readOnly": true
+				},
+				"requestSubmitTime": {
+					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+					"type": "string",
+					"readOnly": true,
+					"format": "date-time"
+				},
+				"properties":
+				{
+					"description": "The quota request addition properties.",
+					"$ref": "#/definitions/CurrentQuotaLimit"
+				}
+				
 			}
 		},
 		"QuotaRequestState": {
