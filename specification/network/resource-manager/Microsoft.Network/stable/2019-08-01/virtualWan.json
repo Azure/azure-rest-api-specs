@@ -2908,7 +2908,7 @@
     "get": {
       "operationId": "VirtualHubTableV2s_Get",
       "x-ms-examples": {
-        "VirtualHubVirtualHubRouteTableV2GetGet": {
+        "VirtualHubVirtualHubRouteTableV2Get": {
           "$ref": "./examples/VirtualHubRouteTableV2Get.json"
         }
       },
@@ -3085,6 +3085,56 @@
       "x-ms-long-running-operation": true,
       "x-ms-long-running-operation-options": {
         "final-state-via": "location"
+      }
+    }
+  },
+  "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualHubs/{virtualHubName}/routeTables": {
+    "get": {
+      "operationId": "VirtualHubRouteTableV2s_List",
+      "x-ms-examples": {
+        "VirtualHubRouteTableV2List": {
+          "$ref": "./examples/VirtualHubRouteTableV2List.json"
+        }
+      },
+      "description": "Retrieves the details of all VirtualHubRouteTableV2s.",
+      "parameters": [
+        {
+          "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+        },
+        {
+          "name": "resourceGroupName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The resource group name of the VirtualHub."
+        },
+        {
+          "name": "virtualHubName",
+          "in": "path",
+          "required": true,
+          "type": "string",
+          "description": "The name of the VirtualHub."
+        },
+        {
+          "$ref": "./network.json#/parameters/ApiVersionParameter"
+        }
+      ],
+      "responses": {
+        "200": {
+          "description": "Request successful. Returns the details of all the VirtualHubRouteTableV2s for the VirtualHub.",
+          "schema": {
+            "$ref": "#/definitions/ListHubVirtualNetworkConnectionsResult"
+          }
+        },
+        "default": {
+          "description": "Error response describing why the operation failed.",
+          "schema": {
+            "$ref": "./ddosCustomPolicy.json#/definitions/CloudError"
+          }
+        }
+      },
+      "x-ms-pageable": {
+        "nextLinkName": "nextLink"
       }
     }
   },
@@ -4428,10 +4478,10 @@
         },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the hub virtual network connection resource."
+          "description": "The provisioning state of the virtual hub route table v2 resource."
         }
       },
-      "description": "Parameters for HubVirtualNetworkConnection."
+      "description": "Parameters for VirtualHubRouteTableV2."
     },
     "VirtualHubRouteTableV2": {
       "properties": {
