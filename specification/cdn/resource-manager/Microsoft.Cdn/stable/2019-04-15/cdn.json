@@ -2290,6 +2290,8 @@
             "UrlPath",
             "UrlFileExtension",
             "UrlFileName",
+            "HttpVersion",
+            "Cookies",
             "IsDevice"
           ],
           "x-ms-enum": {
@@ -2494,6 +2496,42 @@
         "parameters": {
           "description": "Defines the parameters for the condition.",
           "$ref": "#/definitions/UrlFileNameMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleHttpVersionCondition": {
+      "description": "Defines the HttpVersion condition for the delivery rule.",
+      "x-ms-discriminator-value": "HttpVersion",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/HttpVersionMatchConditionParameters"
+        }
+      }
+    },
+    "DeliveryRuleCookiesCondition": {
+      "description": "Defines the Cookies condition for the delivery rule.",
+      "x-ms-discriminator-value": "Cookies",
+      "allOf": [
+        {
+          "$ref": "#/definitions/DeliveryRuleCondition"
+        }
+      ],
+      "required": [
+        "parameters"
+      ],
+      "properties": {
+        "parameters": {
+          "description": "Defines the parameters for the condition.",
+          "$ref": "#/definitions/CookiesMatchConditionParameters"
         }
       }
     },
@@ -3059,6 +3097,102 @@
           ],
           "x-ms-enum": {
             "name": "UrlFileNameOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "transforms": {
+          "description": "List of transforms",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/transform"
+          }
+        }
+      }
+    },
+    "HttpVersionMatchConditionParameters": {
+      "description": "Defines the parameters for HttpVersion match conditions",
+      "required": [
+        "operator",
+        "matchValues",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleHttpVersionConditionParameters"
+          ]
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Equal"
+          ],
+          "x-ms-enum": {
+            "name": "HttpVersionOperator",
+            "modelAsString": true
+          }
+        },
+        "negateCondition": {
+          "description": "Describes if this is negate condition or not",
+          "type": "boolean"
+        },
+        "matchValues": {
+          "description": "The match value for the condition of the delivery rule",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "CookiesMatchConditionParameters": {
+      "description": "Defines the parameters for Cookies match conditions",
+      "required": [
+        "operator",
+        "matchValues",
+        "selector",
+        "@odata.type"
+      ],
+      "properties": {
+        "@odata.type": {
+          "type": "string",
+          "enum": [
+            "#Microsoft.Azure.Cdn.Models.DeliveryRuleCookiesConditionParameters"
+          ]
+        },
+        "selector": {
+          "description": "Name of Cookies to be matched",
+          "type": "string"
+        },
+        "operator": {
+          "description": "Describes operator to be matched",
+          "type": "string",
+          "enum": [
+            "Any",
+            "Equal",
+            "Contains",
+            "BeginsWith",
+            "EndsWith",
+            "LessThan",
+            "LessThanOrEqual",
+            "GreaterThan",
+            "GreaterThanOrEqual"
+          ],
+          "x-ms-enum": {
+            "name": "CookiesOperator",
             "modelAsString": true
           }
         },
