@@ -582,7 +582,6 @@
       "type": "object",
       "required": [
         "trainingDocuments",
-        "trainingFields",
         "errors"
       ],
       "properties": {
@@ -888,7 +887,8 @@
       "description": "Analyze API call result.",
       "type": "object",
       "required": [
-        "version",
+        "version", 
+	      "readResults",
         "pageResults",
         "documentResults"
       ],
@@ -935,8 +935,8 @@
         "angle",
         "width",
         "height",
-        "unit",
-        "language"
+        "unit"
+
       ],
       "properties": {
         "page": {
@@ -1130,8 +1130,7 @@
       "description": "Information about the extracted key or value in a key-value pair.",
       "type": "object",
       "required": [
-        "text",
-        "boundingBox"
+        "text"
       ],
       "properties": {
         "text": {
@@ -1147,13 +1146,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ElementReference"
-          }
-        },
-        "words": {
-          "description": "List of words in the text content of the key or value.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextWord"
           }
         }
       }
@@ -1242,13 +1234,6 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ElementReference"
-          }
-        },
-        "words": {
-          "description": "List of words in the text content of the cell.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/TextWord"
           }
         },
         "isHeader": {
