@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure Log Analytics",
-    "description": "Azure Log Analytics API reference for LinkTargets, StorageInsightConfigs and SavedSearches.",
+    "description": "Azure Log Analytics API reference.",
     "version": "2015-03-20"
   },
   "host": "management.azure.com",
@@ -413,49 +413,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/savedSearches/{savedSearchId}/results": {
-      "get": {
-        "tags": [
-          "SavedSearches"
-        ],
-        "x-ms-examples": {
-          "SaveSearchesListResults": {
-            "$ref": "./examples/SavedSearchesGetResults.json"
-          }
-        },
-        "operationId": "SavedSearches_GetResults",
-        "description": "Gets the results from a saved search for a given workspace.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "savedSearchId",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the saved search."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/SearchResultsResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/schema": {
       "post": {
         "tags": [
@@ -492,104 +449,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search": {
-      "post": {
-        "tags": [
-          "Workspaces"
-        ],
-        "x-ms-examples": {
-          "WorkspacesGetSearchResults": {
-            "$ref": "./examples/WorkspacesGetSearchResults.json"
-          }
-        },
-        "operationId": "Workspaces_GetSearchResults",
-        "description": "Submit a search for a given workspace. The response will contain an id to track the search. User can use the id to poll the search status and get the full search result later if the search takes long time to finish. ",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SearchParameters"
-            },
-            "description": "The parameters required to execute a search query."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/SearchResultsResponse"
-            }
-          },
-          "202": {
-            "description": "Accepted response definition"
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/search/{id}": {
-      "post": {
-        "tags": [
-          "Workspaces"
-        ],
-        "x-ms-examples": {
-          "WorkspacesUpdateSearchResults": {
-            "$ref": "./examples/WorkspacesUpdateSearchResults.json"
-          }
-        },
-        "operationId": "Workspaces_UpdateSearchResults",
-        "description": "Gets updated search results for a given search query.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkspaceNameParameter"
-          },
-          {
-            "name": "id",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The id of the search that will have results updated. You can get the id from the response of the GetResults call."
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK response definition.",
-            "schema": {
-              "$ref": "#/definitions/SearchResultsResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/purge": {
       "post": {
         "tags": [
           "Workspaces"
         ],
-        "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.",
+        "description": "Purges data in an Log Analytics workspace by a set of user-defined filters.\n\nIn order to manage system resources, purge requests are throttled at 50 requests per hour. You should batch the execution of purge requests by sending a single command whose predicate includes all user identities that require purging. Use the in operator to specify multiple identities. You should run the query prior to using for a purge request to verify that the results are expected.",
         "operationId": "Workspaces_Purge",
         "parameters": [
           {
@@ -1095,7 +960,7 @@
         "__metadata": {
           "x-ms-client-name": "Metadata",
           "$ref": "#/definitions/SearchMetadata",
-          "description": "The metadata from search results."
+          "description": "Unused legacy property, kept here for backward compatibility."
         },
         "value": {
           "type": "array",
@@ -1106,45 +971,6 @@
         }
       },
       "description": "The saved search list operation response."
-    },
-    "SearchError": {
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The error type."
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message."
-        }
-      },
-      "description": "Details for a search error."
-    },
-    "SearchResultsResponse": {
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true,
-          "description": "The id of the search, which includes the full url."
-        },
-        "metaData": {
-          "x-ms-client-name": "Metadata",
-          "$ref": "#/definitions/SearchMetadata",
-          "description": "The metadata from search results."
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "type": "object"
-          },
-          "description": "The array of result values."
-        },
-        "error": {
-          "$ref": "#/definitions/SearchError",
-          "description": "The error."
-        }
-      },
-      "description": "The get search result operation response."
     },
     "SearchSchemaValue": {
       "properties": {
@@ -1203,50 +1029,6 @@
         }
       },
       "description": "The get schema operation response."
-    },
-    "SearchHighlight": {
-      "properties": {
-        "pre": {
-          "type": "string",
-          "description": "The string that is put before a matched result."
-        },
-        "post": {
-          "type": "string",
-          "description": "The string that is put after a matched result."
-        }
-      },
-      "description": "Highlight details."
-    },
-    "SearchParameters": {
-      "properties": {
-        "top": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The number to get from the top."
-        },
-        "highlight": {
-          "$ref": "#/definitions/SearchHighlight",
-          "description": "The highlight that looks for all occurrences of a string."
-        },
-        "query": {
-          "type": "string",
-          "description": "The query to search."
-        },
-        "start": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The start date filter, so the only query results returned are after this date."
-        },
-        "end": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The end date filter, so the only query results returned are before this date."
-        }
-      },
-      "required": [
-        "query"
-      ],
-      "description": "Parameters specifying the search query and range."
     },
     "StorageAccount": {
       "properties": {
