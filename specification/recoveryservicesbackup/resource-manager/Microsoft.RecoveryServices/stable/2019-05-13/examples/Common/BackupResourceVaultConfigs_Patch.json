@@ -3,7 +3,13 @@
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "SwaggerTestRg",
     "vaultName": "SwaggerTest",
-    "api-version": "2016-12-01"
+    "api-version": "2019-05-13",
+    "parameters": {
+      "properties": {
+        "enhancedSecurityState": "Enabled",
+        "softDeleteState": "Disabled"
+      }
+    }
   },
   "responses": {
     "200": {
@@ -12,7 +18,8 @@
         "name": "vaultconfig",
         "type": "Microsoft.RecoveryServices/vaults/backupconfig",
         "properties": {
-          "enhancedSecurityState": "Enabled"
+          "enhancedSecurityState": "Enabled",
+          "softDeleteState": "Disabled"
         }
       }
     }
