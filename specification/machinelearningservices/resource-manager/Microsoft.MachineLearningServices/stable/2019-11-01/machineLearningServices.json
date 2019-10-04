@@ -659,8 +659,8 @@
           "Get a AML Compute": {
             "$ref": "./examples/getAmlCompute.json"
           },
-          "Get an AmlInstance compute": {
-            "$ref": "./examples/getAmlInstanceCompute.json"
+          "Get an ComputeInstance": {
+            "$ref": "./examples/getComputeInstance.json"
           }
         },
         "parameters": [
@@ -707,11 +707,11 @@
           "Create a AML Compute": {
             "$ref": "./examples/createBasicAmlCompute.json"
           },
-          "Create an AmlInstance Compute with minimal inputs": {
-            "$ref": "./examples/createAmlInstanceComputeMinimal.json"
+          "Create an ComputeInstance Compute with minimal inputs": {
+            "$ref": "./examples/createComputeInstanceMinimal.json"
           },
-          "Create an AmlInstance Compute": {
-            "$ref": "./examples/createAmlInstanceCompute.json"
+          "Create an ComputeInstance Compute": {
+            "$ref": "./examples/createComputeInstance.json"
           },
           "Create AKS Compute": {
             "$ref": "./examples/createBasicAKSCompute.json"
@@ -986,8 +986,8 @@
         "operationId": "MachineLearningCompute_Start",
         "description": "Posts a start action to a compute instance",
         "x-ms-examples": {
-          "Start AmlInstance Compute": {
-            "$ref": "./examples/startAmlInstanceCompute.json"
+          "Start ComputeInstance Compute": {
+            "$ref": "./examples/startComputeInstance.json"
           }
         },
         "parameters": [
@@ -1032,8 +1032,8 @@
         "operationId": "MachineLearningCompute_Stop",
         "description": "Posts a stop action to a compute instance",
         "x-ms-examples": {
-          "Stop AmlInstance Compute": {
-            "$ref": "./examples/stopAmlInstanceCompute.json"
+          "Stop ComputeInstance Compute": {
+            "$ref": "./examples/stopComputeInstance.json"
           }
         },
         "parameters": [
@@ -1078,8 +1078,8 @@
         "operationId": "MachineLearningCompute_Restart",
         "description": "Posts a restart action to a compute instance",
         "x-ms-examples": {
-          "Restart AmlInstance Compute": {
-            "$ref": "./examples/restartAmlInstanceCompute.json"
+          "Restart ComputeInstance Compute": {
+            "$ref": "./examples/restartComputeInstance.json"
           }
         },
         "parameters": [
@@ -2142,7 +2142,7 @@
       ],
       "x-ms-discriminator-value": "AmlCompute"
     },
-    "AmlInstance": {
+    "ComputeInstance": {
       "description": "An Azure Machine Learning instance.",
       "allOf": [
         {
@@ -2166,29 +2166,29 @@
                 },
                 "datastoresMountSettings": {
                   "description": "Describes what data stores will be mounted on this compute instance.",
-                  "$ref": "#/definitions/AmlInstanceDatastoresMountSettings"
+                  "$ref": "#/definitions/ComputeInstanceDatastoresMountSettings"
                 },
                 "customScriptSettings": {
-                  "description": "Specification for initialization scripts to customize this AmlInstance.",
-                  "$ref": "#/definitions/AmlInstanceCustomScriptSettings"
+                  "description": "Specification for initialization scripts to customize this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceCustomScriptSettings"
                 },
                 "softwareUpdateSettings": {
                   "description": "Specifies policies for operating system and Azure ML environment (example packages and SDK) updates.",
-                  "$ref": "#/definitions/AmlInstanceSoftwareUpdateSettings"
+                  "$ref": "#/definitions/ComputeInstanceSoftwareUpdateSettings"
                 },
                 "sshSettings": {
                   "description": "Specifies policy and settings for SSH access.",
-                  "$ref": "#/definitions/AmlInstanceSshSettings"
+                  "$ref": "#/definitions/ComputeInstanceSshSettings"
                 },
                 "connectivityEndpoints": {
                   "readOnly": true,
-                  "description": "Describes all connectivity endpoints available for this AmlInstance compute.",
-                  "$ref": "#/definitions/AmlInstanceConnectivityEndpoints"
+                  "description": "Describes all connectivity endpoints available for this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
                 },
                 "createdBy": {
                   "readOnly": true,
-                  "description": "Describes information on user who created this AmlInstance compute.",
-                  "$ref": "#/definitions/AmlInstanceCreatedBy"
+                  "description": "Describes information on user who created this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceCreatedBy"
                 },
                 "errors": {
                   "readOnly": true,
@@ -2200,8 +2200,8 @@
                   }
                 },
                 "state": {
-                  "description": "The current state of this AmlInstance.",
-                  "$ref": "#/definitions/AmlInstanceState",
+                  "description": "The current state of this ComputeInstance.",
+                  "$ref": "#/definitions/ComputeInstanceState",
                   "readOnly": true
                 }
               }
@@ -2209,7 +2209,7 @@
           }
         }
       ],
-      "x-ms-discriminator-value": "AmlInstance"
+      "x-ms-discriminator-value": "ComputeInstance"
     },
     "VirtualMachine": {
       "description": "A Machine Learning compute based on Azure Virtual Machines.",
@@ -2524,19 +2524,19 @@
         },
         "datastoresMountSettings": {
           "description": "Describes what data stores will be mounted on this compute instance.",
-          "$ref": "#/definitions/AmlInstanceDatastoresMountSettings"
+          "$ref": "#/definitions/ComputeInstanceDatastoresMountSettings"
         },
         "customScriptSettings": {
-          "description": "Specification for initialization scripts to customize this AmlInstance.",
-          "$ref": "#/definitions/AmlInstanceCustomScriptSettings"
+          "description": "Specification for initialization scripts to customize this ComputeInstance.",
+          "$ref": "#/definitions/ComputeInstanceCustomScriptSettings"
         },
         "softwareUpdateSettings": {
           "description": "Specifies policies for operating system and Azure ML environment (example packages and SDK) updates.",
-          "$ref": "#/definitions/AmlInstanceSoftwareUpdateSettings"
+          "$ref": "#/definitions/ComputeInstanceSoftwareUpdateSettings"
         },
         "sshSettings": {
           "description": "Specifies policy and settings for SSH access.",
-          "$ref": "#/definitions/AmlInstanceSshSettings"
+          "$ref": "#/definitions/ComputeInstanceSshSettings"
         }
       },
       "description": "The properties of a amlCompute that need to be updated."
@@ -2750,7 +2750,7 @@
       "enum": [
         "AKS",
         "AmlCompute",
-        "AmlInstance",
+        "ComputeInstance",
         "DataFactory",
         "VirtualMachine",
         "HDInsight",
@@ -2815,7 +2815,7 @@
         "message"
       ]
     },
-    "AmlInstanceDatastore": {
+    "ComputeInstanceDatastore": {
       "type": "object",
       "description": "Represents specification for datastore requested to be mounted on an AzureML instance as well as its mounting status.",
       "properties": {
@@ -2844,7 +2844,7 @@
         }
       }
     },
-    "AmlInstanceDatastoresMountSettings": {
+    "ComputeInstanceDatastoresMountSettings": {
       "type": "object",
       "description": "Describes what data stores will be mounted on this compute instance.",
       "properties": {
@@ -2865,14 +2865,14 @@
           "description": "Specifies the set of data stores that will be mounted on this compute instance. This should only be specified if dataStoreSelection is set to 'UserSpecified'.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AmlInstanceDatastore"
+            "$ref": "#/definitions/ComputeInstanceDatastore"
           }
         }
       }
     },
-    "AmlInstanceCustomScriptSettings": {
+    "ComputeInstanceCustomScriptSettings": {
       "type": "object",
-      "description": "Specification for initialization scripts to customize this AmlInstance.",
+      "description": "Specification for initialization scripts to customize this ComputeInstance.",
       "properties": {
         "startupScript": {
           "type": "object",
@@ -2890,7 +2890,7 @@
         }
       }
     },
-    "AmlInstanceOSUpdateSettings": {
+    "ComputeInstanceOSUpdateSettings": {
       "type": "object",
       "description": "Specifies policy for installing operation system updates.",
       "properties": {
@@ -2899,7 +2899,7 @@
           "default": "Recommended",
           "title": "Type of automatic operating system updates to install",
           "enum": [
-            "Critical",
+            "Security",
             "Recommended"
           ],
           "x-ms-enum": {
@@ -2919,9 +2919,9 @@
         }
       }
     },
-    "AmlInstanceSdkUpdate": {
+    "ComputeInstanceSdkUpdate": {
       "type": "object",
-      "description": "Describes a specific update for AmlInstance SDK.",
+      "description": "Describes a specific update for ComputeInstance SDK.",
       "readOnly": true,
       "properties": {
         "updateName": {
@@ -2938,7 +2938,7 @@
         }
       }
     },
-    "AmlInstanceSdkUpdateSettings": {
+    "ComputeInstanceSdkUpdateSettings": {
       "type": "object",
       "description": "Specifies policy for installing Azure ML environment (example packages and SDK) updates.",
       "properties": {
@@ -2960,26 +2960,26 @@
           "readOnly": true,
           "description": "Describes available SDK updates for this compute instance.",
           "items": {
-            "$ref": "#/definitions/AmlInstanceSdkUpdate"
+            "$ref": "#/definitions/ComputeInstanceSdkUpdate"
           }
         }
       }
     },
-    "AmlInstanceSoftwareUpdateSettings": {
+    "ComputeInstanceSoftwareUpdateSettings": {
       "type": "object",
       "description": "Specifies policies for operating system and Azure ML environment (example packages and SDK) updates.",
       "properties": {
         "osUpdateSettings": {
           "description": "Specifies policy for installing operation system updates.",
-          "$ref": "#/definitions/AmlInstanceOSUpdateSettings"
+          "$ref": "#/definitions/ComputeInstanceOSUpdateSettings"
         },
         "sdkUpdateSettings": {
           "description": "Specifies policy for installing Azure ML environment (example packages and SDK) updates.",
-          "$ref": "#/definitions/AmlInstanceSdkUpdateSettings"
+          "$ref": "#/definitions/ComputeInstanceSdkUpdateSettings"
         }
       }
     },
-    "AmlInstanceSshSettings": {
+    "ComputeInstanceSshSettings": {
       "type": "object",
       "description": "Specifies policy and settings for SSH access.",
       "properties": {
@@ -3008,9 +3008,9 @@
         }
       }
     },
-    "AmlInstanceState": {
+    "ComputeInstanceState": {
       "type": "string",
-      "description": "Current state of an AmlInstance compute.",
+      "description": "Current state of an ComputeInstance.",
       "enum": [
         "Creating",
         "CreateFailed",
@@ -3030,17 +3030,17 @@
         "Unusable"
       ],
       "x-ms-enum": {
-        "name": "AmlInstanceState",
+        "name": "ComputeInstanceState",
         "modelAsString": true
       }
     },
-    "AmlInstanceApplicationUri": {
+    "ComputeInstanceApplicationUri": {
       "type": "object",
       "description": "Defines an Aml Instance application and its connectivity endpoint URI.",
       "properties": {
         "applicationName": {
           "type": "string",
-          "description": "Name of the AmlInstance application."
+          "description": "Name of the ComputeInstance application."
         },
         "applicationUri": {
           "type": "string",
@@ -3048,30 +3048,30 @@
         }
       }
     },
-    "AmlInstanceConnectivityEndpoints": {
+    "ComputeInstanceConnectivityEndpoints": {
       "type": "object",
       "readOnly": true,
-      "description": "Defines all connectivity endpoints and properties for an AmlInstance compute.",
+      "description": "Defines all connectivity endpoints and properties for an ComputeInstance.",
       "properties": {
         "publicIpAddress": {
           "type": "string",
           "readOnly": true,
-          "description": "Public IP Address of this AmlInstance."
+          "description": "Public IP Address of this ComputeInstance."
         },
         "applicationUris": {
           "type": "array",
           "readOnly": true,
           "description": "Describes available applications and their connectivity endpoint URIs.",
           "items": {
-            "$ref": "#/definitions/AmlInstanceApplicationUri"
+            "$ref": "#/definitions/ComputeInstanceApplicationUri"
           }
         }
       }
     },
-    "AmlInstanceCreatedBy": {
+    "ComputeInstanceCreatedBy": {
       "type": "object",
       "readOnly": true,
-      "description": "Describes information on user who created this AmlInstance compute.",
+      "description": "Describes information on user who created this ComputeInstance.",
       "properties": {
         "userName": {
           "type": "string",
