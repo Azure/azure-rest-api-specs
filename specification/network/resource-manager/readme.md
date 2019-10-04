@@ -131,6 +131,7 @@ input-file:
   - Microsoft.Network/stable/2019-08-01/vmssPublicIpAddress.json
   - Microsoft.Network/stable/2019-08-01/webapplicationfirewall.json
 ```
+
 ### Tag: package-2019-07
 
 These settings apply only when `--tag=package-2019-07` is specified on the command line.
