@@ -2143,7 +2143,7 @@
       "x-ms-discriminator-value": "AmlCompute"
     },
     "ComputeInstance": {
-      "description": "An Azure Machine Learning instance.",
+      "description": "An Azure Machine Learning compute instance.",
       "allOf": [
         {
           "$ref": "#/definitions/Compute"
@@ -2152,7 +2152,7 @@
           "type": "object",
           "properties": {
             "properties": {
-              "description": "AML Instance properties",
+              "description": "Compute Instance properties",
               "type": "object",
               "properties": {
                 "vmSize": {
@@ -2163,6 +2163,20 @@
                   "title": "Subnet.",
                   "description": "Virtual network subnet resource ID the compute nodes belong to.",
                   "$ref": "#/definitions/ResourceId"
+                },
+                "instanceSharing": {
+                  "type": "string",
+                  "default": "Disabled",
+                  "title": "Sharing policy for this compute instance",
+                  "description": "Policy for sharing this compute instance among users of parent workspace. If Disabled, only the creator can access applications on this compute instance. When enabled any workspace user can access applications on this instance depending on his/her assigned role.",
+                  "enum": [
+                    "Enabled",
+                    "Disabled"
+                  ],
+                  "x-ms-enum": {
+                    "name": "instanceSharing",
+                    "modelAsString": true
+                  }
                 },
                 "datastoresMountSettings": {
                   "description": "Describes what data stores will be mounted on this compute instance.",
@@ -2997,9 +3011,9 @@
             "modelAsString": true
           }
         },
-		"adminUserName": {
+        "adminUserName": {
           "type": "string",
-		  "readOnly": true,
+          "readOnly": true,
           "description": "Describes the admin user name."
         },
         "adminPublicKey": {
