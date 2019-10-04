@@ -701,6 +701,157 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/cancel": {
+      "post": {
+        "tags": [
+          "JobCancellations"
+        ],
+        "description": "Cancels a job. This is an asynchronous operation. To know the status of the cancellation, call\r\nGetCancelOperationResult API.",
+        "operationId": "JobCancellations_Trigger",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Name of the job to cancel.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          }
+        },
+        "x-ms-examples": {
+          "Cancel Job": {
+            "$ref": "./examples/Common/TriggerCancelJob.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "JobOperationResults"
+        ],
+        "description": "Fetches the result of any operation.",
+        "operationId": "JobOperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Job name whose operation result has to be fetched.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the operation whose result has to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Cancel Job Operation Result": {
+            "$ref": "./examples/Common/CancelJobOperationResult.json"
+          }
+        }
+      }
+    },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}": {
+      "get": {
+        "tags": [
+          "ExportJobsOperationResults"
+        ],
+        "description": "Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also\r\ncontains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.",
+        "operationId": "ExportJobsOperationResults_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "OperationID which represents the export job.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/OperationResultInfoBaseResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/OperationResultInfoBaseResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Export Jobs Operation Results": {
+            "$ref": "./examples/Common/ExportJobsOperationResult.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
       "post": {
         "tags": [
@@ -2519,6 +2670,34 @@
         }
       }
     },
+    "ExportJobsOperationResultInfo": {
+      "description": "This class is used to send blob details after exporting jobs.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResultInfoBase"
+        }
+      ],
+      "properties": {
+        "blobUrl": {
+          "description": "URL of the blob into which the serialized string of list of jobs is exported.",
+          "type": "string"
+        },
+        "blobSasKey": {
+          "description": "SAS key to access the blob. It expires in 15 mins.",
+          "type": "string"
+        },
+        "excelFileBlobUrl": {
+          "description": "URL of the blob into which the ExcelFile is uploaded.",
+          "type": "string"
+        },
+        "excelFileBlobSasKey": {
+          "description": "SAS key to access the blob. It expires in 15 mins.",
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "ExportJobsOperationResultInfo"
+    },
     "ExtendedProperties": {
       "description": "Extended Properties for Azure IaasVM Backup.",
       "type": "object",
@@ -3213,6 +3392,126 @@
         "status": {
           "description": "The status.",
           "type": "string"
+        }
+      }
+    },
+    "OperationResultInfo": {
+      "description": "Operation result info.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationResultInfoBase"
+        }
+      ],
+      "properties": {
+        "jobList": {
+          "description": "List of jobs created by this operation.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "x-ms-discriminator-value": "OperationResultInfo"
+    },
+    "OperationResultInfoBase": {
+      "description": "Base class for operation result info.",
+      "required": [
+        "objectType"
+      ],
+      "type": "object",
+      "properties": {
+        "objectType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "objectType"
+    },
+    "OperationResultInfoBaseResource": {
+      "description": "Base class for operation result info.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OperationWorkerResponse"
+        }
+      ],
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/OperationResultInfoBase",
+          "description": "OperationResultInfoBaseResource operation"
+        }
+      }
+    },
+    "OperationWorkerResponse": {
+      "description": "This is the base class for operation result responses.",
+      "type": "object",
+      "properties": {
+        "statusCode": {
+          "description": "HTTP Status Code of the operation.",
+          "enum": [
+            "Continue",
+            "SwitchingProtocols",
+            "OK",
+            "Created",
+            "Accepted",
+            "NonAuthoritativeInformation",
+            "NoContent",
+            "ResetContent",
+            "PartialContent",
+            "MultipleChoices",
+            "Ambiguous",
+            "MovedPermanently",
+            "Moved",
+            "Found",
+            "Redirect",
+            "SeeOther",
+            "RedirectMethod",
+            "NotModified",
+            "UseProxy",
+            "Unused",
+            "TemporaryRedirect",
+            "RedirectKeepVerb",
+            "BadRequest",
+            "Unauthorized",
+            "PaymentRequired",
+            "Forbidden",
+            "NotFound",
+            "MethodNotAllowed",
+            "NotAcceptable",
+            "ProxyAuthenticationRequired",
+            "RequestTimeout",
+            "Conflict",
+            "Gone",
+            "LengthRequired",
+            "PreconditionFailed",
+            "RequestEntityTooLarge",
+            "RequestUriTooLong",
+            "UnsupportedMediaType",
+            "RequestedRangeNotSatisfiable",
+            "ExpectationFailed",
+            "UpgradeRequired",
+            "InternalServerError",
+            "NotImplemented",
+            "BadGateway",
+            "ServiceUnavailable",
+            "GatewayTimeout",
+            "HttpVersionNotSupported"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HttpStatusCode",
+            "modelAsString": false
+          }
+        },
+        "headers": {
+          "description": "HTTP headers associated with this operation.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
         }
       }
     },

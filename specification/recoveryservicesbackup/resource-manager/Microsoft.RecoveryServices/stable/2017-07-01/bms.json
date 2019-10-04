@@ -313,58 +313,6 @@
           }
         }
       }
-    },   
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/operationResults/{operationId}": {
-      "get": {
-        "tags": [
-          "ExportJobsOperationResults"
-        ],
-        "description": "Gets the operation result of operation triggered by Export Jobs API. If the operation is successful, then it also\r\ncontains URL of a Blob and a SAS key to access the same. The blob contains exported jobs in JSON serialized format.",
-        "operationId": "ExportJobsOperationResults_Get",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "operationId",
-            "in": "path",
-            "description": "OperationID which represents the export job.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/OperationResultInfoBaseResource"
-            }
-          },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/OperationResultInfoBaseResource"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Export Jobs Operation Results": {
-            "$ref": "./examples/Common/ExportJobsOperationResult.json"
-          }
-        }
-      }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupPolicies": {
       "get": {
@@ -765,22 +713,26 @@
         "errorCode": {
           "format": "int32",
           "description": "Error code.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "errorTitle": {
           "description": "Title: Typically, the entity that the error pertains to.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "errorString": {
           "description": "Localized error string.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recommendations": {
           "description": "List of localized recommendations for above error code.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1700,35 +1652,7 @@
           "type": "string"
         }
       }
-    },
-    "ExportJobsOperationResultInfo": {
-      "description": "This class is used to send blob details after exporting jobs.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationResultInfoBase"
-        }
-      ],
-      "properties": {
-        "blobUrl": {
-          "description": "URL of the blob into which the serialized string of list of jobs is exported.",
-          "type": "string"
-        },
-        "blobSasKey": {
-          "description": "SAS key to access the blob. It expires in 15 mins.",
-          "type": "string"
-        },
-        "excelFileBlobUrl": {
-          "description": "URL of the blob into which the ExcelFile is uploaded.",
-          "type": "string"
-        },
-        "excelFileBlobSasKey": {
-          "description": "SAS key to access the blob. It expires in 15 mins.",
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "ExportJobsOperationResultInfo"
-    },
+    },   
     "FeatureSupportRequest": {
       "description": "Base class for feature request",
       "type": "object",
@@ -1912,14 +1836,16 @@
       "properties": {
         "errorString": {
           "description": "Localized error string.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recommendations": {
           "description": "List of localized recommendations.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2146,127 +2072,7 @@
           "type": "string"
         }
       }
-    },
-    "OperationResultInfo": {
-      "description": "Operation result info.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationResultInfoBase"
-        }
-      ],
-      "properties": {
-        "jobList": {
-          "description": "List of jobs created by this operation.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "x-ms-discriminator-value": "OperationResultInfo"
-    },
-    "OperationResultInfoBase": {
-      "description": "Base class for operation result info.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
-          "type": "string"
-        }
-      },
-      "discriminator": "objectType"
-    },
-    "OperationResultInfoBaseResource": {
-      "description": "Base class for operation result info.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OperationWorkerResponse"
-        }
-      ],
-      "properties": {
-        "operation": {
-          "$ref": "#/definitions/OperationResultInfoBase",
-          "description": "OperationResultInfoBaseResource operation"
-        }
-      }
-    },
-    "OperationWorkerResponse": {
-      "description": "This is the base class for operation result responses.",
-      "type": "object",
-      "properties": {
-        "statusCode": {
-          "description": "HTTP Status Code of the operation.",
-          "enum": [
-            "Continue",
-            "SwitchingProtocols",
-            "OK",
-            "Created",
-            "Accepted",
-            "NonAuthoritativeInformation",
-            "NoContent",
-            "ResetContent",
-            "PartialContent",
-            "MultipleChoices",
-            "Ambiguous",
-            "MovedPermanently",
-            "Moved",
-            "Found",
-            "Redirect",
-            "SeeOther",
-            "RedirectMethod",
-            "NotModified",
-            "UseProxy",
-            "Unused",
-            "TemporaryRedirect",
-            "RedirectKeepVerb",
-            "BadRequest",
-            "Unauthorized",
-            "PaymentRequired",
-            "Forbidden",
-            "NotFound",
-            "MethodNotAllowed",
-            "NotAcceptable",
-            "ProxyAuthenticationRequired",
-            "RequestTimeout",
-            "Conflict",
-            "Gone",
-            "LengthRequired",
-            "PreconditionFailed",
-            "RequestEntityTooLarge",
-            "RequestUriTooLong",
-            "UnsupportedMediaType",
-            "RequestedRangeNotSatisfiable",
-            "ExpectationFailed",
-            "UpgradeRequired",
-            "InternalServerError",
-            "NotImplemented",
-            "BadGateway",
-            "ServiceUnavailable",
-            "GatewayTimeout",
-            "HttpVersionNotSupported"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "HttpStatusCode",
-            "modelAsString": false
-          }
-        },
-        "headers": {
-          "description": "HTTP headers associated with this operation.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "array",
-            "items": {
-              "type": "string"
-            }
-          }
-        }
-      }
-    },
+    },   
     "PreValidateEnableBackupRequest": {
       "description": "Contract to validate if backup can be enabled on the given resource in a given vault and given configuration.\r\nIt will validate followings\r\n1. Vault capacity\r\n2. VM is already protected\r\n3. Any VM related configuration passed in properties.",
       "type": "object",
