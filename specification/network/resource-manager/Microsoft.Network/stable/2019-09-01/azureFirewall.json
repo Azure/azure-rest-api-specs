@@ -596,6 +596,13 @@
             "type": "string"
           }
         },
+        "sourceIpTags": {
+          "type": "array",
+          "description": "List of source IP Tags for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
         "protocols": {
           "type": "array",
           "items": {
@@ -693,6 +700,13 @@
         "destinationAddresses": {
           "type": "array",
           "description": "List of destination IP addresses for this rule. Supports IP ranges, prefixes, and service tags.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sourceIpTags": {
+          "type": "array",
+          "description": "List of source IP Tags for this rule.",
           "items": {
             "type": "string"
           }
@@ -827,6 +841,20 @@
             "type": "string"
           }
         },
+        "sourceIpTags": {
+          "type": "array",
+          "description": "List of source IP Tags for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationIpTags": {
+          "type": "array",
+          "description": "List of destination IP Tags for this rule.",
+          "items": {
+            "type": "string"
+          }
+        },
         "destinationPorts": {
           "type": "array",
           "description": "List of destination ports.",
@@ -892,7 +920,7 @@
           "description": "Name of an Azure Firewall SKU.",
           "enum": [
             "AZFW_VNet",
-            "AZFW_Hub"  
+            "AZFW_Hub"
           ],
           "x-ms-enum": {
             "name": "AzureFirewallSkuName",

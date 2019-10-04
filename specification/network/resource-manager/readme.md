@@ -54,6 +54,7 @@ input-file:
   - Microsoft.Network/stable/2019-09-01/expressRouteGateway.json
   - Microsoft.Network/stable/2019-09-01/expressRoutePort.json
   - Microsoft.Network/stable/2019-09-01/firewallPolicy.json
+  - Microsoft.Network/stable/2019-09-01/ipTags.json
   - Microsoft.Network/stable/2019-09-01/loadBalancer.json
   - Microsoft.Network/stable/2019-09-01/natGateway.json
   - Microsoft.Network/stable/2019-09-01/network.json
