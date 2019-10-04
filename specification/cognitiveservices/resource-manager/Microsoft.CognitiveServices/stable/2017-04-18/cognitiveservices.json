@@ -675,6 +675,46 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/checkDomainAvailability": {
+      "post": {
+        "tags": [
+          "CognitiveServicesAccounts"
+        ],
+        "operationId": "CheckDomainAvailability",
+        "description": "Check whether a domain is available.",
+        "x-ms-examples": {
+          "Check SKU Availability": {
+            "$ref": "./examples/CheckDomainAvailability.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "x-ms-client-flatten": true,
+            "schema": {
+              "$ref": "#/definitions/CheckDomainAvailabilityParameter"
+            },
+            "description": "Check Domain Availability parameter."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/CheckDomainAvailabilityResult"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -1179,6 +1219,44 @@
         }
       }
     },
+    "CheckDomainAvailabilityParameter": {
+      "description": "Check Domain availability parameter.",
+      "properties": {
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      },
+      "required": [
+        "subdomainName",
+        "type"
+      ]
+    },
+    "CheckDomainAvailabilityResult": {
+      "description": "Check Domain availability result.",
+      "properties": {
+        "isSubdomainAvailable": {
+          "type": "boolean",
+          "description": "Indicates the given SKU is available or not."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason why the SKU is not available."
+        },
+        "subdomainName": {
+          "type": "string",
+          "description": "The subdomain name to use."
+        },
+        "type": {
+          "type": "string",
+          "description": "The Type of the resource."
+        }
+      }
+    },
     "ResourceSkuRestrictions": {
       "properties": {
         "type": {
@@ -1303,7 +1381,7 @@
       ],
       "description": "The Get Skus operation response."
     },
-	  "NetworkRuleSet": {
+    "NetworkRuleSet": {
       "properties": {
         "bypass": {
           "type": "string",

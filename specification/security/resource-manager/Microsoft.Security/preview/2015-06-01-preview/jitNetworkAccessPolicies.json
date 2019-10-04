@@ -474,6 +474,10 @@
           "items": {
             "$ref": "#/definitions/JitNetworkAccessPortRule"
           }
+        },
+        "publicIpAddress": {
+          "type": "string",
+          "description": "Public IP address of the Azure Firewall that is linked to this policy, if applicable"
         }
       }
     },
@@ -547,6 +551,10 @@
         "requestor": {
           "type": "string",
           "description": "The identity of the person who made the request"
+        },
+        "justification": {
+          "type": "string",
+          "description": "The justification for making the initiate request"
         }
       },
       "required": [
@@ -641,6 +649,10 @@
               }
             ]
           }
+        },
+        "mappedPort": {
+          "type": "integer",
+          "description": "The port which is mapped to this port's `number` in the Azure Firewall, if applicable"
         }
       },
       "required": [
@@ -659,6 +671,10 @@
           "items": {
             "$ref": "#/definitions/JitNetworkAccessPolicyInitiateVirtualMachine"
           }
+        },
+        "justification": {
+          "type": "string",
+          "description": "The justification for making the initiate request"
         }
       },
       "required": [

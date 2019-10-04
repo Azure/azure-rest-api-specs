@@ -3,22 +3,24 @@
     "api-version": "2019-04-01",
     "reservationOrderId": "a075419f-44cc-497f-b68a-14ee811d48b9",
     "body": {
-        "sku": {
-            "name": "standard_D1"
+      "sku": {
+        "name": "standard_D1"
+      },
+      "location": "westus",
+      "properties": {
+        "reservedResourceType": "VirtualMachines",
+        "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
+        "term": "P1Y",
+        "billingPlan": "Monthly",
+        "quantity": "1",
+        "displayName": "TestReservationOrder",
+        "appliedScopes": null,
+        "appliedScopeType": "Shared",
+        "reservedResourceProperties": {
+          "instanceFlexibility": "On"
         },
-        "location": "westus",
-        "properties": {
-            "reservedResourceType": "VirtualMachines",
-            "billingScopeId": "/subscriptions/ed3a1871-612d-abcd-a849-c2542a68be83",
-            "term": "P1Y",
-            "quantity": "1",
-            "displayName": "TestReservationOrder",
-            "appliedScopes": null,
-            "appliedScopeType": "Shared",
-            "reservedResourceProperties": {
-                "instanceFlexibility": "On"
-            }
-        }
+        "renew": false
+      }
     }
   },
   "responses": {
@@ -34,6 +36,7 @@
           "createdDateTime": "2017-08-30T03:51:49.8083758Z",
           "expiryDate": "2018-08-30",
           "term": "P1Y",
+          "billingPlan": "Monthly",
           "provisioningState": "Succeeded",
           "reservations": [
             {
@@ -52,6 +55,7 @@
         "etag": 7,
         "properties": {
           "displayName": "cabri",
+          "billingPlan": "Monthly",
           "requestDateTime": "2017-08-30T03:49:19.0252126Z",
           "createdDateTime": "2017-08-30T03:51:49.8083758Z",
           "expiryDate": "2018-08-30",

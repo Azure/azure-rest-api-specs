@@ -1011,7 +1011,7 @@
       "type": "object",
       "description": "Information about migration eligibility of a server object",
       "properties": {
-        "isEligibileForMigration": {
+        "isEligibleForMigration": {
           "type": "boolean",
           "description": "Whether object is eligible for migration or not.",
           "readOnly": true
@@ -1180,6 +1180,61 @@
       ],
       "x-ms-enum": {
         "name": "DatabaseMigrationState",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationInfo": {
+      "type": "object",
+      "description": "SSIS migration info with SSIS store type, overwrite policy.",
+      "properties": {
+        "ssisStoreType": {
+          "$ref": "#/definitions/SsisStoreType",
+          "description": "The SSIS store type of source, only SSIS catalog is supported now in DMS"
+        },
+        "projectOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS project migration"
+        },
+        "environmentOverwriteOption": {
+          "$ref": "#/definitions/SsisMigrationOverwriteOption",
+          "description": "The overwrite option for the SSIS environment migration"
+        }
+      }
+    },
+    "SsisStoreType": {
+      "type": "string",
+      "description": "An enumeration of supported source SSIS store type in DMS",
+      "enum": [
+        "SsisCatalog"
+      ],
+      "x-ms-enum": {
+        "name": "SsisStoreType",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationOverwriteOption": {
+      "type": "string",
+      "description": "The overwrite option for SSIS object migration, only ignore and overwrite are supported in DMS now and future may add Reuse option for container object",
+      "enum": [
+        "Ignore",
+        "Overwrite"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationOverwriteOption",
+        "modelAsString": true
+      }
+    },
+    "SsisMigrationStage": {
+      "type": "string",
+      "description": "Current stage of SSIS migration",
+      "enum": [
+        "None",
+        "Initialize",
+        "InProgress",
+        "Completed"
+      ],
+      "x-ms-enum": {
+        "name": "SsisMigrationStage",
         "modelAsString": true
       }
     }
