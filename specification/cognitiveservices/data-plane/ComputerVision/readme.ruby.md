@@ -19,6 +19,7 @@ directive:
 ``` yaml $(ruby) && $(multiapi)
 batch:
   - tag: release_2_1
+  - tag: release_3_0
 ```
 
 ### Tag: release_2_1 and ruby
@@ -28,6 +29,17 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 ``` yaml $(tag) == 'release_2_1' && $(ruby)
 namespace: "Azure::CognitiveServices::ComputerVision::V2_1"
+output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_computervision/lib
+title: "ComputerVisionClient"
+```
+
+### Tag: release_3_0 and ruby
+
+These settings apply only when `--tag=release_3_0 --ruby` is specified on the command line.
+Please also specify `--ruby-sdks-folder=<path to the root directory of your azure-sdk-for-ruby clone>`.
+
+``` yaml $(tag) == 'release_3_0' && $(ruby)
+namespace: "Azure::CognitiveServices::ComputerVision::V3_0"
 output-folder: $(ruby-sdks-folder)/data/azure_cognitiveservices_computervision/lib
 title: "ComputerVisionClient"
 ```
