@@ -62,7 +62,61 @@
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
+      },
+      "delete": {
+        "tags": [ "Doinc" ],
+        "summary": "Deletes a Transparent cache Node resource.",
+        "description": "Deletes an existing Transparent Cache Node.",
+        "operationId": "Operations_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the Transparent Cache Node is deleted."
+          },
+          "204": {
+            "description": "The request was successful; Transparent Cache Node does not exist."
+          },
+          "default": {
+            "description": "Error response describing the reason for operation failure. 409 - Conflict" 
+          },
+          "x-ms-examples": {
+          }
+        }
+      },
+      "patch": {
+      "tags": [
+        "Doinc"
+      ],
+      "summary": "updates an existing Transparent Cache Node resource",
+      "description": "updates an existing Transparent Cache Node.",
+      "operationId": "Operations_Patch",
+      "parameters": [
+      ],
+      "responses": {
+        "200": {
+          "description": "The request was successful; response contains the updated Transparent Cache node.",
+          "schema": {
+            "$ref": "#/definitions/Doinc"
+          }
+        },
+        "201": {
+          "description": "The request was successful; response contains the updated Transparent Cache node.",
+          "schema": {
+            "$ref": "#/definitions/Doinc"
+          }
+        },
+        "default": {
+          "description": "Error response describing the reason for operation failure. 404 - NotFound (Transparent Cache Node does not exist.)",
+          "schema": {
+            "$ref": "#/definitions/DoincErrorResponse"
+          }
+        }
       }
+    }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Doinc/accounts/{accountName}": {
       "get": {
@@ -143,17 +197,23 @@
               "$ref": "#/definitions/Doinc"
             }
           },
-          "default": {
-            "description": "Error response describing the reason for operation failure. 404 - NotFound (Doinc could not be created/updated)",
-            "schema": {
-              "$ref": "#/definitions/DoincErrorResponse"
+           "201": {
+              "description": "The request was successful; response contains the updated Transparent Cache node.",
+              "schema": {
+                "$ref": "#/definitions/Doinc"
+              }
+            },
+            "default": {
+              "description": "Error response describing the reason for operation failure. 404 - NotFound (Doinc could not be created/updated)",
+              "schema": {
+                "$ref": "#/definitions/DoincErrorResponse"
+              }
             }
+          },
+          "x-ms-examples": {
+            "DoincCreate": null
           }
-        },
-        "x-ms-examples": {
-          "DoincCreate": null
         }
-      }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Doinc/accounts/": {
       "get": {
@@ -230,14 +290,9 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DoincGet": {
-            "$ref": "./examples/DoincListBySub_example.json"
-          }
+        }        
         }
       }
-    }
   },
   "definitions": {    
     "DoincErrorResponse": {
@@ -322,49 +377,27 @@
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/CacheNode"
         }
       ],
       "properties": {
         "properties": {
           "description": "Additional Doinc properties.",
           "title": "Doinc Additional properties",
-          "x-ms-client-flatten": true
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CacheNode"
         }
       }
     },  
     "CacheNode": {
       "type": "object",
       "description": "Model representing Cache Node for Doinc resource",
-      "required": [
-        "name"
-      ],
+      "required": ["name"],
       "properties": {
         "name": {
-          "description": "The name of the Cache Node for Doinc resource",
-          "enum": [
-            "Free"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CacheNode",
-            "modelAsString": true
-          }
-        },
-        "tier": {
-          "description": "The tier of the Cache node for Doinc.",
-          "enum": [
-            "Standard"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CacheNodeTier",
-            "modelAsString": true
-          }
+          "description": "The name of the Cache Node for Doinc resource",         
+          "type": "string"
         }
-      }
+        }
     },
     "ResourceProviderOperationList": {
       "description": "List containing this Resource Provider's available operations.",
