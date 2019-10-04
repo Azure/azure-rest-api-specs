@@ -1267,6 +1267,15 @@
       ],
       "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
     },
+    "WarmStoreConfiguration": {
+      "type": "object",
+      "properties": {
+        "dataRetention": {
+          "type": "string",
+          "description": "The data retention in ISO8601 duration for the Warm Store configuration."
+        }
+      }
+    },
     "LongTermStorageConfigurationOutput": {
       "type": "object",
       "properties": {
@@ -1552,6 +1561,10 @@
         "storageConfiguration": {
           "$ref": "#/definitions/LongTermStorageConfigurationInput",
           "description": "The storage configuration provides the connection details that allows the Time Series Insights service to connect to the customer storage account that is used to store the environment's data."
+        },
+        "warmStoreConfiguration": {
+          "$ref": "#/definitions/WarmStoreConfiguration",
+          "description": "Define a warm store for higher performance and unlimited queries."
         }
       },
       "required": [
