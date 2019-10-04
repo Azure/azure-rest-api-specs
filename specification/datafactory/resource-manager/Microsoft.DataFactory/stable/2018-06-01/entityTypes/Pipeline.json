@@ -4833,6 +4833,7 @@
           "type": "array",
           "description": "List of cases that correspond to expected values of the 'on' property. This is an optional property and if not provided, the activity will execute activities provided in defaultActivites.",
           "items": {
+            "x-ms-client-flatten": true,
             "$ref": "#/definitions/SwitchCase"
           }
         },
@@ -4849,7 +4850,7 @@
       ]
     },
     "SwitchCase": {
-      "equals": {
+      "value": {
         "description": "Expected value that satisfies the expression result of the 'on' property.",
         "type": "string"
       },
