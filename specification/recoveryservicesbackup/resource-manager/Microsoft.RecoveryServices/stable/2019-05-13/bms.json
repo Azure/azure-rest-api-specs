@@ -245,6 +245,64 @@
             "$ref": "./examples/AzureIaasVm/StopProtection.json"
           }
         }
+      },
+      "delete": {
+        "tags": [
+          "ProtectedItems"
+        ],
+        "description": "Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the\r\nrequest, call the GetItemOperationResult API.",
+        "operationId": "ProtectedItems_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "fabricName",
+            "in": "path",
+            "description": "Fabric name associated with the backed up item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "containerName",
+            "in": "path",
+            "description": "Container name associated with the backed up item.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "protectedItemName",
+            "in": "path",
+            "description": "Backed up item to be deleted.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "NoContent"
+          }
+        },
+        "x-ms-examples": {
+          "Delete Protection from Azure Virtual Machine": {
+            "$ref": "./examples/Common/ProtectedItem_Delete.json"
+          }
+        }
       }
     },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/operationResults/{operationId}": {
@@ -597,6 +655,52 @@
         }
       }
     },
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobs/{jobName}": {
+      "get": {
+        "tags": [
+          "JobDetails"
+        ],
+        "description": "Gets extended information associated with the job.",
+        "operationId": "JobDetails_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "#/parameters/VaultName"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionId"
+          },
+          {
+            "name": "jobName",
+            "in": "path",
+            "description": "Name of the job whose details are to be fetched.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/JobResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Job Details": {
+            "$ref": "./examples/Common/GetJobDetails.json"
+          }
+        }
+      }
+    },
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
       "post": {
         "tags": [
@@ -916,12 +1020,14 @@
         },
         "resourceState": {
           "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeleted, Deleted}",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "resourceStateSyncTime": {
           "format": "date-time",
           "description": "The resource state sync time for this backup item.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         }
       }
     },
@@ -936,21 +1042,25 @@
       "properties": {
         "recoveryPointType": {
           "description": "Type of the backup copy. Specifies whether it is a crash consistent backup or app consistent.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recoveryPointTime": {
           "format": "date-time",
           "description": "Time at which this backup copy was created.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "fileShareSnapshotUri": {
           "description": "Contains Url to the snapshot of fileshare, if applicable",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recoveryPointSizeInGB": {
           "format": "int32",
           "description": "Contains recovery point size",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "AzureFileShareRecoveryPoint"
@@ -1052,22 +1162,26 @@
         "errorCode": {
           "format": "int32",
           "description": "Error code.",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "errorTitle": {
           "description": "Title: Typically, the entity that the error pertains to.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "errorString": {
           "description": "Localized error string.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recommendations": {
           "description": "List of localized recommendations for above error code.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1078,22 +1192,26 @@
         "code": {
           "format": "int32",
           "description": "Health Code",
-          "type": "integer"
+          "type": "integer",
+          "readOnly": true
         },
         "title": {
           "description": "Health Title",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Health Message",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recommendations": {
           "description": "Health Recommended Actions",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -1804,7 +1922,8 @@
         "recoveryPointTimeInUTC": {
           "format": "date-time",
           "description": "UTC time at which recovery point was created",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "type": {
           "description": "Type of restore point",
@@ -1818,7 +1937,8 @@
           "x-ms-enum": {
             "name": "RestorePointType",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         }
       },
       "x-ms-discriminator-value": "AzureWorkloadRecoveryPoint"
@@ -1984,14 +2104,16 @@
         "dataDirectoryTimeInUTC": {
           "format": "date-time",
           "description": "UTC time at which data directory info was captured",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "dataDirectoryPaths": {
           "description": "List of data directory paths during restore operation.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/SQLDataDirectory"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2379,18 +2501,21 @@
       "properties": {
         "code": {
           "description": "Error code.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "message": {
           "description": "Error Message related to the Code.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recommendations": {
           "description": "List of recommendation strings.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -2506,24 +2631,29 @@
       "properties": {
         "recoveryPointType": {
           "description": "Type of the backup copy.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recoveryPointTime": {
           "format": "date-time",
           "description": "Time at which this backup copy was created.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recoveryPointAdditionalInfo": {
           "description": "Additional information associated with this backup copy.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "sourceVMStorageType": {
           "description": "Storage type of the VM whose backup copy is created.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "isSourceVMEncrypted": {
           "description": "Identifies whether the VM was encrypted when the backup copy is created.",
-          "type": "boolean"
+          "type": "boolean",
+          "readOnly": true
         },
         "keyAndSecret": {
           "$ref": "#/definitions/KeyAndSecretDetails",
@@ -2859,14 +2989,16 @@
       "properties": {
         "errorString": {
           "description": "Localized error string.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "recommendations": {
           "description": "List of localized recommendations.",
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "readOnly": true
         }
       }
     },

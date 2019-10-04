@@ -607,67 +607,7 @@
           }
         }
       }
-    },
-    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}": {
-      "delete": {
-        "tags": [
-          "ProtectedItems"
-        ],
-        "description": "Used to disable backup of an item within a container. This is an asynchronous operation. To know the status of the\r\nrequest, call the GetItemOperationResult API.",
-        "operationId": "ProtectedItems_Delete",
-        "produces": [
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "#/parameters/VaultName"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SubscriptionId"
-          },
-          {
-            "name": "fabricName",
-            "in": "path",
-            "description": "Fabric name associated with the backed up item.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "containerName",
-            "in": "path",
-            "description": "Container name associated with the backed up item.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "protectedItemName",
-            "in": "path",
-            "description": "Backed up item to be deleted.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted"
-          },
-          "204": {
-            "description": "NoContent"
-          }
-        },
-        "x-ms-examples": {
-          "Delete Protection from Azure Virtual Machine": {
-            "$ref": "./examples/Common/ProtectedItem_Delete.json"
-          }
-        }
-      }
-    },
+    },    
     "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectionContainers/{containerName}/protectedItems/{protectedItemName}/backup": {
       "post": {
         "tags": [
