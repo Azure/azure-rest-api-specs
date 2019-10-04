@@ -3416,13 +3416,6 @@
             "$ref": "#/definitions/HubVirtualNetworkConnection"
           }
         },
-        "virtualHubRouteTableV2s": {
-          "type": "array",
-          "description": "List of all virtual hub route table v2s associated with this VirtualHub.",
-          "items": {
-            "$ref": "#/definitions/VirtualHubRouteTableV2"
-          }
-        },
         "addressPrefix": {
           "type": "string",
           "description": "Address-prefix for this VirtualHub."
@@ -3438,6 +3431,13 @@
         "securityProviderName": {
           "type": "string",
           "description": "The Security Provider name."
+        },
+        "virtualHubRouteTableV2s": {
+          "type": "array",
+          "description": "List of all virtual hub route table v2s associated with this VirtualHub.",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRouteTableV2"
+          }
         }
       },
       "description": "Parameters for VirtualHub."
@@ -4478,6 +4478,7 @@
         },
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
+          "readOnly": true,
           "description": "The provisioning state of the virtual hub route table v2 resource."
         }
       },
