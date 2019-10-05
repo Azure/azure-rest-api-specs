@@ -34,12 +34,12 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2018-12
+tag: package-2019-08
 ```
 
 ### Tag: package-2019-08
 
-These settings apply only when `--tag=package-2018-02` is specified on the command line.
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
 
 ``` yaml $(tag) == 'package--2019-08'
 input-file:
