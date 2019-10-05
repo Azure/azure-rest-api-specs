@@ -59,6 +59,7 @@ input-file:
 - Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
 - Microsoft.Web/stable/2019-08-01/AppServicePlans.json
 - Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
+```
 
 ### Tag: package-2018-12
 
