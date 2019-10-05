@@ -37,6 +37,29 @@ openapi-type: arm
 tag: package-2018-12
 ```
 
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2018-02` is specified on the command line.
+
+``` yaml $(tag) == 'package--2019-08'
+input-file:
+- Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2019-08-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2019-08-01/Domains.json
+- Microsoft.DomainRegistration/stable/2019-08-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2019-08-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2019-08-01/Certificates.json
+- Microsoft.Web/stable/2019-08-01/CommonDefinitions.json
+- Microsoft.Web/stable/2019-08-01/DeletedWebApps.json
+- Microsoft.Web/stable/2019-08-01/Diagnostics.json
+- Microsoft.Web/stable/2019-08-01/Provider.json
+- Microsoft.Web/stable/2019-08-01/Recommendations.json
+- Microsoft.Web/stable/2019-08-01/ResourceProvider.json
+- Microsoft.Web/stable/2019-08-01/WebApps.json
+- Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2019-08-01/AppServicePlans.json
+- Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
+
 ### Tag: package-2018-12
 
 These settings apply only when `--tag=package-2018-12` is specified on the command line.
