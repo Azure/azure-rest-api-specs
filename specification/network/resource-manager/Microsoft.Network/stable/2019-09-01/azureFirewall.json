@@ -715,6 +715,10 @@
           "type": "string",
           "description": "The translated address for this NAT rule."
         },
+        "translatedFqdn": {
+          "type": "string",
+          "description": "The translated FQDN for this NAT rule."
+        },
         "translatedPort": {
           "type": "string",
           "description": "The translated port for this NAT rule."
@@ -823,6 +827,13 @@
         "destinationAddresses": {
           "type": "array",
           "description": "List of destination IP addresses.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "description": "List of destination FQDNs.",
           "items": {
             "type": "string"
           }
