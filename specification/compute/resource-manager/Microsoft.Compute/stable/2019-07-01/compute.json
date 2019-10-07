@@ -4469,12 +4469,12 @@
         }
       }
     },
-    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/vmExtensionName": {
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}": {
       "put": {
         "tags": [
             "VirtualMachineScaleSetVMExtensions"
         ],
-        "operationId": "VirtualMachineScaleSetVMs_CreateOrUpdate",
+        "operationId": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
         "description": "The operation to create or update the extension.",
         "parameters": [
           {
@@ -4541,7 +4541,7 @@
         "tags": [
             "VirtualMachineScaleSetVMExtensions"
         ],
-        "operationId": "VirtualMachineScaleSetVMs_Update",
+        "operationId": "VirtualMachineScaleSetVMExtensions_Update",
         "description": "The operation to update the extension.",
         "parameters": [
           {
@@ -4602,7 +4602,7 @@
         "tags": [
           "VirtualMachineScaleSetVMExtensions"
         ],
-        "operationId": "VirtualMachineScaleSetVMs__Delete",
+        "operationId": "VirtualMachineScaleSetVMExtensions_Delete",
         "description": "The operation to delete the extension.",
         "parameters": [
           {
@@ -4657,7 +4657,7 @@
         "tags": [
           "VirtualMachineScaleSetVMExtensions"
         ],
-        "operationId": "VirtualMachineScaleSetVMs_Get",
+        "operationId": "VirtualMachineScaleSetVMExtensions_Get",
         "description": "The operation to get the extension.",
         "parameters": [
           {
@@ -4707,6 +4707,59 @@
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/VirtualMachineExtension"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions": {
+      "get": {
+        "tags": [
+            "VirtualMachineScaleSetVMExtensions"
+        ],
+        "operationId": "VirtualMachineScaleSetVMExtensions_List",
+        "description": "The operation to get all extensions of an instance in Virtual Machine Scaleset.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "vmScaleSetName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the VM scale set."
+          },
+          {
+            "name": "instanceId",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The instance ID of the virtual machine."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The expand expression to apply on the operation."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineExtensionsListResult"
             }
           }
         }
