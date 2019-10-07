@@ -4850,15 +4850,18 @@
       ]
     },
     "SwitchCase": {
-      "value": {
-        "description": "Expected value that satisfies the expression result of the 'on' property.",
-        "type": "string"
-      },
-      "activities": {
-        "type": "array",
-        "description": "List of activities to execute for satisfied case condition.",
-        "items": {
-          "$ref": "#/definitions/Activity"
+      "description": "Switch cases with have a value and corresponding activities.",
+      "properties": {
+        "value": {
+          "description": "Expected value that satisfies the expression result of the 'on' property.",
+          "type": "string"
+        },
+        "activities": {
+          "type": "array",
+          "description": "List of activities to execute for satisfied case condition.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
         }
       }
     },
