@@ -628,17 +628,6 @@
           "readOnly": true,
           "type": "string",
           "description": "Log analytics query for getting the list of affected devices/alerts."
-        }
-      }
-    },
-    "IoTSecurityAggregatedRecommendation": {
-      "type": "object",
-      "description": "IoT Security solution recommendation information.",
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "description": "Security Solution data",
-          "$ref": "#/definitions/IoTSecurityAggregatedRecommendationProperties"
         },
         "topDevicesList": {
           "description": "10 devices with the highest number of occurrences of this alert type, on this day.",
@@ -662,6 +651,17 @@
               "description": "Most recent time this alert was raised for this device, on this day."
             }
           }
+        }
+      }
+    },
+    "IoTSecurityAggregatedRecommendation": {
+      "type": "object",
+      "description": "IoT Security solution recommendation information.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security Solution data",
+          "$ref": "#/definitions/IoTSecurityAggregatedRecommendationProperties"
         }
       },
       "allOf": [
