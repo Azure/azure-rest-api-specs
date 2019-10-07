@@ -45,6 +45,16 @@ input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
 ```
 
+### Tag: package-2019-08-preview
+
+These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview'
+input-file:
+- Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+```
+
 ### Tag: package-2015-04
 
 These settings apply only when `--tag=package-2015-04` is specified on the command line.
