@@ -639,6 +639,29 @@
           "x-ms-client-flatten": true,
           "description": "Security Solution data",
           "$ref": "#/definitions/IoTSecurityAggregatedRecommendationProperties"
+        },
+        "topDevicesList": {
+          "description": "10 devices with the highest number of occurrences of this alert type, on this day.",
+          "type": "array",
+          "required": false,
+          "readOnly": true,
+          "items": {
+            "deviceId": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Name of the device."
+            },
+            "alertsCount": {
+              "readOnly": true,
+              "type": "integer",
+              "description": "Number of alerts raised for this device."
+            },
+            "lastOccurrence": {
+              "type": "string",
+              "format": "time",
+              "description": "Most recent time this alert was raised for this device, on this day."
+            }
+          }
         }
       },
       "allOf": [
