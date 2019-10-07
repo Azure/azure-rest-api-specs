@@ -592,48 +592,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/metricdefinitions": {
-      "get": {
-        "tags": [
-          "AppServiceEnvironments"
-        ],
-        "summary": "Get global metric definitions of an App Service Environment.",
-        "description": "Description for Get global metric definitions of an App Service Environment.",
-        "operationId": "AppServiceEnvironments_ListMetricDefinitions",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service Environment.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/MetricDefinition"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/hostingEnvironments/{name}/multiRolePools": {
       "get": {
         "tags": [
@@ -869,7 +827,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ResourceMetricDefinitionCollection"
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
             }
           },
           "default": {
@@ -914,7 +872,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ResourceMetricDefinitionCollection"
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
             }
           },
           "default": {
@@ -1668,7 +1626,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ResourceMetricDefinitionCollection"
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
             }
           },
           "default": {
@@ -1720,7 +1678,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ResourceMetricDefinitionCollection"
+              "$ref": "#/definitions/ResourceMetricDefinitionCollection"
             }
           },
           "default": {
@@ -2033,60 +1991,6 @@
         }
       }
     },
-    "MetricAvailabilily": {
-      "description": "Metric availability and retention.",
-      "type": "object",
-      "properties": {
-        "timeGrain": {
-          "description": "Time grain.",
-          "type": "string"
-        },
-        "retention": {
-          "description": "Retention period for the current time grain.",
-          "type": "string"
-        }
-      }
-    },
-    "MetricDefinition": {
-      "description": "Metadata for a metric.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "MetricDefinition resource specific properties",
-          "properties": {
-            "unit": {
-              "description": "Unit of the metric.",
-              "type": "string",
-              "readOnly": true
-            },
-            "primaryAggregationType": {
-              "description": "Primary aggregation type.",
-              "type": "string",
-              "readOnly": true
-            },
-            "metricAvailabilities": {
-              "description": "List of time grains supported for the metric together with retention period.",
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/MetricAvailabilily"
-              },
-              "readOnly": true
-            },
-            "displayName": {
-              "description": "Friendly name shown in the UI.",
-              "type": "string",
-              "readOnly": true
-            }
-          },
-          "x-ms-client-flatten": true
-        }
-      }
-    },
     "OutboundEnvironmentEndpoint": {
       "description": "Endpoints accessed for a common purpose that the App Service Environment requires outbound network access to.",
       "type": "object",
@@ -2116,6 +2020,91 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/OutboundEnvironmentEndpoint"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricAvailability": {
+      "description": "Metrics availability and retention.",
+      "type": "object",
+      "properties": {
+        "timeGrain": {
+          "description": "Time grain .",
+          "type": "string",
+          "readOnly": true
+        },
+        "retention": {
+          "description": "Retention period for the current time grain.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourceMetricDefinition": {
+      "description": "Metadata for the metrics.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "./CommonDefinitions.json#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "ResourceMetricDefinition resource specific properties",
+          "properties": {
+            "unit": {
+              "description": "Unit of the metric.",
+              "type": "string",
+              "readOnly": true
+            },
+            "primaryAggregationType": {
+              "description": "Primary aggregation type.",
+              "type": "string",
+              "readOnly": true
+            },
+            "metricAvailabilities": {
+              "description": "List of time grains supported for the metric together with retention period.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ResourceMetricAvailability"
+              },
+              "readOnly": true
+            },
+            "resourceUri": {
+              "description": "Resource URI.",
+              "type": "string",
+              "readOnly": true
+            },
+            "properties": {
+              "description": "Resource metric definition properties.",
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "readOnly": true
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ResourceMetricDefinitionCollection": {
+      "description": "Collection of metric definitions.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceMetricDefinition"
           }
         },
         "nextLink": {
