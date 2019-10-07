@@ -1535,7 +1535,7 @@
         },
         "changeStep": {
           "format": "double",
-          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \n<code>MinReroutePercentage</code> or <code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specificed in <code>ChangeIntervalInMinutes</code>.\nCustom decision algorithm can be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
+          "description": "In auto ramp up scenario this is the step to add/remove from <code>ReroutePercentage</code> until it reaches \\n<code>MinReroutePercentage</code> or \n<code>MaxReroutePercentage</code>. Site metrics are checked every N minutes specified in <code>ChangeIntervalInMinutes</code>.\\nCustom decision algorithm \ncan be provided in TiPCallback site extension which URL can be specified in <code>ChangeDecisionCallbackUrl</code>.",
           "type": "number"
         },
         "changeIntervalInMinutes": {
@@ -1617,65 +1617,6 @@
       },
       "x-ms-azure-resource": true
     },
-    "ResourceMetric": {
-      "description": "Object representing a metric for any resource .",
-      "type": "object",
-      "properties": {
-        "name": {
-          "$ref": "#/definitions/ResourceMetricName",
-          "description": "Name of metric.",
-          "readOnly": true
-        },
-        "unit": {
-          "description": "Metric unit.",
-          "type": "string",
-          "readOnly": true
-        },
-        "timeGrain": {
-          "description": "Metric granularity. E.g PT1H, PT5M, P1D",
-          "type": "string",
-          "readOnly": true
-        },
-        "startTime": {
-          "format": "date-time",
-          "description": "Metric start time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "endTime": {
-          "format": "date-time",
-          "description": "Metric end time.",
-          "type": "string",
-          "readOnly": true
-        },
-        "resourceId": {
-          "description": "Metric resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "id": {
-          "description": "Resource Id.",
-          "type": "string",
-          "readOnly": true
-        },
-        "metricValues": {
-          "description": "Metric values.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceMetricValue"
-          },
-          "readOnly": true
-        },
-        "properties": {
-          "description": "Resource metric properties collection.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceMetricProperty"
-          },
-          "readOnly": true
-        }
-      }
-    },
     "ResourceMetricAvailability": {
       "description": "Metrics availability and retention.",
       "type": "object",
@@ -1687,27 +1628,6 @@
         },
         "retention": {
           "description": "Retention period for the current time grain.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceMetricCollection": {
-      "description": "Collection of metric responses.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Collection of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceMetric"
-          }
-        },
-        "nextLink": {
-          "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
         }
@@ -1778,85 +1698,6 @@
         "nextLink": {
           "description": "Link to next page of resources.",
           "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceMetricName": {
-      "description": "Name of a metric for any resource .",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "metric name value.",
-          "type": "string",
-          "readOnly": true
-        },
-        "localizedValue": {
-          "description": "Localized metric name value.",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "ResourceMetricProperty": {
-      "description": "Resource metric property.",
-      "type": "object",
-      "properties": {
-        "key": {
-          "description": "Key for resource metric property.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Value of pair.",
-          "type": "string"
-        }
-      }
-    },
-    "ResourceMetricValue": {
-      "description": "Value of resource metric.",
-      "type": "object",
-      "properties": {
-        "timestamp": {
-          "description": "Value timestamp.",
-          "type": "string",
-          "readOnly": true
-        },
-        "average": {
-          "format": "float",
-          "description": "Value average.",
-          "type": "number",
-          "readOnly": true
-        },
-        "minimum": {
-          "format": "float",
-          "description": "Value minimum.",
-          "type": "number",
-          "readOnly": true
-        },
-        "maximum": {
-          "format": "float",
-          "description": "Value maximum.",
-          "type": "number",
-          "readOnly": true
-        },
-        "total": {
-          "format": "float",
-          "description": "Value total.",
-          "type": "number",
-          "readOnly": true
-        },
-        "count": {
-          "format": "float",
-          "description": "Value count.",
-          "type": "number",
-          "readOnly": true
-        },
-        "properties": {
-          "description": "Resource metric properties collection.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ResourceMetricProperty"
-          },
           "readOnly": true
         }
       }

@@ -722,64 +722,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/metrics": {
-      "get": {
-        "tags": [
-          "AppServicePlans"
-        ],
-        "summary": "Get metrics for an App Service plan.",
-        "description": "Description for Get metrics for an App Service plan.",
-        "operationId": "AppServicePlans_ListMetrics",
-        "parameters": [
-          {
-            "$ref": "#/parameters/resourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the App Service plan.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "details",
-            "in": "query",
-            "description": "Specify <code>true</code> to include instance details. The default is <code>false</code>.",
-            "type": "boolean"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "Return only usages/metrics specified in the filter. Filter conforms to odata syntax. Example: $filter=(name.value eq 'Metric1' or name.value eq 'Metric2') and startTime eq 2014-01-01T00:00:00Z and endTime eq 2014-12-31T23:59:59Z and timeGrain eq duration'[Hour|Minute|Day]'.",
-            "type": "string",
-            "x-ms-skip-url-encoding": true
-          },
-          {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/ResourceMetricCollection"
-            }
-          },
-          "default": {
-            "description": "App Service error response.",
-            "schema": {
-              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/restartSites": {
       "post": {
         "tags": [
