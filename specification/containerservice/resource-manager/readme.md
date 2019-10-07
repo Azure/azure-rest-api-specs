@@ -373,10 +373,11 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
-  - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-06-01/location.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-06-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-04-01/managedClusters.json
@@ -390,7 +391,6 @@ input-file:
   - $(this-folder)/Microsoft.ContainerService/stable/2017-01-31/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2016-09-30/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2016-03-30/containerService.json
-  - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
 
 ```
 
