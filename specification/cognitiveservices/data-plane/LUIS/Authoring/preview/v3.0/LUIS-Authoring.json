@@ -1546,6 +1546,366 @@
         }
       }
     },
+    "/apps/{appId}/versions/{versionId}/intents/{intentId}/features": {
+      "post": {
+        "description": "Adds a new feature relation to be used by the intent in a version of the application.",
+        "operationId": "Features_AddIntentFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "featureRelationCreateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A Feature relation information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Add Feature Relation request": {
+            "$ref": "./examples/features/SuccessfulAddFeatureRelationRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the information of the features used by the intent in a version of the application.",
+        "operationId": "Model_GetIntentFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          }
+        ],
+        "responses": {
+         "200": {
+           "description": "A list of feature information objects for the intent.",
+           "schema": {
+             "$ref": "#/definitions/FeaturesPerModelResponseObject"
+           }
+         },
+         "default": {
+           "description": "Error Response.",
+           "schema": {
+             "$ref": "#/definitions/ErrorResponse"
+           }
+         }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Features information request": {
+            "$ref": "./examples/model/SuccessfulGetFeaturesInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the information of the features used by the intent in a version of the application.",
+        "operationId": "Model_ReplaceIntentFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationsUpdateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            },
+            "description": "A list of feature information objects containing the new feature relations."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Replace Features request": {
+            "$ref": "./examples/model/SuccessfulReplaceFeaturesRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a relation from the feature relations used by the intent in a version of the application.",
+        "operationId": "Model_DeleteIntentFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationDeleteObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A feature information object containing the feature relation to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Delete feature relation request": {
+            "$ref": "./examples/model/SuccessfulDeleteFeatureRelationRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities/{entityId}/features": {
+      "post": {
+        "description": "Adds a new feature relation to be used by the entity in a version of the application.",
+        "operationId": "Features_AddEntityFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "name": "featureRelationCreateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A Feature relation information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Add Feature Relation request": {
+            "$ref": "./examples/features/SuccessfulAddFeatureRelationRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the information of the features used by the entity in a version of the application.",
+        "operationId": "Model_GetEntityFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          }
+        ],
+        "responses": {
+         "200": {
+           "description": "A list of feature information objects for the entity.",
+           "schema": {
+             "$ref": "#/definitions/FeaturesPerModelResponseObject"
+           }
+         },
+         "default": {
+           "description": "Error Response.",
+           "schema": {
+             "$ref": "#/definitions/ErrorResponse"
+           }
+         }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Features information request": {
+            "$ref": "./examples/model/SuccessfulGetFeaturesInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the information of the features used by the entity in a version of the application.",
+        "operationId": "Model_ReplaceEntityFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationsUpdateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            },
+            "description": "A list of feature information objects containing the new feature relations."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Replace Features request": {
+            "$ref": "./examples/model/SuccessfulReplaceFeaturesRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a relation from the feature relations used by the entity in a version of the application.",
+        "operationId": "Model_DeleteEntityFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationDeleteObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A feature information object containing the feature relation to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Delete feature relation request": {
+            "$ref": "./examples/model/SuccessfulDeleteFeatureRelationRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/hierarchicalentities/{hEntityId}": {
       "get": {
         "description": "Gets information about a hierarchical entity in a version of the application.",
@@ -8086,6 +8446,11 @@
           "description": "Indicates if the Pattern feature is enabled.",
           "default": true,
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Pattern feature is enabled for all models in the application.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -8385,6 +8750,11 @@
         },
         "isExchangeable": {
           "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
+          "default": true,
+          "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
           "default": true,
           "type": "boolean"
         }
@@ -9213,6 +9583,10 @@
         "isActive": {
           "description": "Indicates if the feature is enabled.",
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the feature is enabled for all models in the application.",
+          "type": "boolean"
         }
       }
     },
@@ -10019,6 +10393,27 @@
         "text": {
           "type": "string",
           "description": "The text of the label."
+        }
+      }
+    },
+    "FeaturesPerModelResponseObject":{
+      "description": "A list of feature information objects per model.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ModelFeatureInformation"
+      }
+    },
+    "ModelFeatureInformation":{
+      "description": "An object containing the model feature information either the model name or feature name.",
+      "type": "object",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used."
+        },
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature used."
         }
       }
     },
