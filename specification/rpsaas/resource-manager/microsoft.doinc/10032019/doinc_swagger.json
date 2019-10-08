@@ -392,9 +392,9 @@
     "CacheNode": {
       "type": "object",
       "description": "Model representing Cache Node for Doinc resource",
-      "required": ["name"],
+      "required": ["cacheNodename"],
       "properties": {
-        "name": {
+        "cacheNodename": {
           "description": "The name of the Cache Node for Doinc resource",         
           "type": "string"
         }
@@ -499,16 +499,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the Doinc",
+      "description": "Name of the Doinc account",
       "pattern": "^[a-zA-Z0-9]",
       "x-ms-parameter-location": "method"
     },
     "DoincUpdateParameter": {
-      "name": "accountName",
+      "name": "DoincResourceName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the Doinc",
+      "description": "Name of the Doinc resource",
       "pattern": "^[a-zA-Z0-9]",
       "x-ms-parameter-location": "method"
     }
