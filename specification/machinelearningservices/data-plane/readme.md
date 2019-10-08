@@ -129,6 +129,12 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\execution.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\modelManagement.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\runHistory.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\datastore.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\artifact.json
+  - $(this-folder)/Microsoft.MachineLearningServices\preview\2019-09-30\hyperdrive.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/execution.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/modelManagement.json
   - $(this-folder)/Microsoft.MachineLearningServices/preview/2019-08-01/runHistory.json
