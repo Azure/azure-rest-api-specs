@@ -1057,6 +1057,46 @@
         }
       }
     },
+    "/providers": {
+      "get": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "Providers_ListAtTenantScope",
+        "description": "Gets all resource providers for the tenant.",
+        "parameters": [
+          {
+            "name": "$top",
+            "in": "query",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "description": "The number of results to return. If null is passed returns all providers."
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The properties to include in the results. For example, use &$expand=metadata in the query string to retrieve resource provider metadata. To include property aliases in response, use $expand=resourceTypes/aliases."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns an array of resource providers.",
+            "schema": {
+              "$ref": "#/definitions/ProviderListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/{resourceProviderNamespace}": {
       "get": {
         "tags": [
@@ -1084,6 +1124,42 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns information about the resource provider.",
+            "schema": {
+              "$ref": "#/definitions/Provider"
+            }
+          }
+        }
+      }
+    },
+    "/providers/{resourceProviderNamespace}": {
+      "get": {
+        "tags": [
+          "Providers"
+        ],
+        "operationId": "Providers_GetAtTenantScope",
+        "description": "Gets the specified resource provider at the tenant level.",
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand query parameter. For example, to include property aliases in response, use $expand=resourceTypes/aliases."
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -2590,6 +2666,48 @@
           "nextLinkName": "nextLink"
         }
       }
+    },
+    "/providers/Microsoft.Resources/calculateTemplateHash": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_CalculateTemplateHash",
+        "description": "Calculate the hash of the given template.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "template",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "type": "object"
+            },
+            "description": "The template provided to calculate hash."
+          }
+        ],
+        "x-ms-examples": {
+          "Calculate template hash": {
+            "$ref": "./examples/CalculateTemplateHash.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK - Returns the hash.",
+            "schema": {
+              "$ref": "#/definitions/TemplateHashResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2741,6 +2859,15 @@
         }
       },
       "description": "The deployment export result. "
+    },
+    "CloudError": {
+      "x-ms-external": true,
+      "properties": {
+        "error": {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ErrorResponse"
+        }
+      },
+      "description": "An error response for a resource management request."
     },
     "ResourceManagementErrorWithDetails": {
       "properties": {
@@ -3714,6 +3841,19 @@
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
+    },
+    "TemplateHashResult": {
+      "description": "Result of the request to calculate template hash. It contains a string of minified template and its hash.",
+      "properties": {
+        "minifiedTemplate": {
+          "type": "string",
+          "description": "The minified template string."
+        },
+        "templateHash": {
+          "type": "string",
+          "description": "The template hash."
         }
       }
     }
