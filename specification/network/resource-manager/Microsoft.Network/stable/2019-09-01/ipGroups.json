@@ -34,13 +34,13 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ipTags/{ipTagName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ipGroups/{ipGroupsName}": {
       "get": {
         "tags": [
-          "IpTags"
+          "IpGroups"
         ],
-        "operationId": "IpTags_Get",
-        "description": "Gets the specified ipTag.",
+        "operationId": "IpGroups_Get",
+        "description": "Gets the specified ipGroups.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -50,11 +50,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ipTagName",
+            "name": "ipGroupsName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ipTag."
+            "description": "The name of the ipGroups."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -67,14 +67,14 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Expands resourceIds (of Firewalls/Network Security Groups etc.) back referenced by the IpTags resource."
+            "description": "Expands resourceIds (of Firewalls/Network Security Groups etc.) back referenced by the IpGroups resource."
           }
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting IpTags resource.",
+            "description": "Request successful. The operation returns the resulting IpGroups resource.",
             "schema": {
-              "$ref": "#/definitions/IpTags"
+              "$ref": "#/definitions/IpGroups"
             }
           },
           "default": {
@@ -85,17 +85,17 @@
           }
         },
         "x-ms-examples": {
-          "Get_IpTag": {
-            "$ref": "./examples/IpTagsGet.json"
+          "Get_IpGroups": {
+            "$ref": "./examples/IpGroupsGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "IpTags"
+          "IpGroups"
         ],
-        "operationId": "IpTags_CreateOrUpdate",
-        "description": "Creates or updates an ipTag in a specified resource group.",
+        "operationId": "IpGroups_CreateOrUpdate",
+        "description": "Creates or updates an ipGroups in a specified resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -105,20 +105,20 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ipTagName",
+            "name": "ipGroupsName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ipTag."
+            "description": "The name of the ipGroups."
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IpTags"
+              "$ref": "#/definitions/IpGroups"
             },
-            "description": "Parameters supplied to the create or update IpTags operation."
+            "description": "Parameters supplied to the create or update IpGroups operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -129,15 +129,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting ipTag resource.",
+            "description": "Request successful. The operation returns the resulting ipGroups resource.",
             "schema": {
-              "$ref": "#/definitions/IpTags"
+              "$ref": "#/definitions/IpGroups"
             }
           },
           "201": {
-            "description": "Create successful. The operation returns the resulting ipTag resource.",
+            "description": "Create successful. The operation returns the resulting ipGroups resource.",
             "schema": {
-              "$ref": "#/definitions/IpTags"
+              "$ref": "#/definitions/IpGroups"
             }
           },
           "default": {
@@ -152,17 +152,17 @@
           "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
-          "CreateOrUpdate_IpTag": {
-            "$ref": "./examples/IpTagsCreate.json"
+          "CreateOrUpdate_IpGroups": {
+            "$ref": "./examples/IpGroupsCreate.json"
           }
         }
       },
       "patch": {
         "tags": [
-          "IpTags"
+          "IpGroups"
         ],
-        "operationId": "IpTags_UpdateTags",
-        "description": "Updates an ipTag Tags.",
+        "operationId": "IpGroups_UpdateGroups",
+        "description": "Updates an IpGroups",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -172,11 +172,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ipTagName",
+            "name": "ipGroupsName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ipTag."
+            "description": "The name of the ipGroups."
           },
           {
             "name": "parameters",
@@ -185,7 +185,7 @@
             "schema": {
               "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to the update ipTag operation."
+            "description": "Parameters supplied to the update ipGroups operation."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -196,9 +196,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns the resulting ipTag resource.",
+            "description": "Request successful. The operation returns the resulting ipGroups resource.",
             "schema": {
-              "$ref": "#/definitions/IpTags"
+              "$ref": "#/definitions/IpGroups"
             }
           },
           "default": {
@@ -209,17 +209,17 @@
           }
         },
         "x-ms-examples": {
-          "Update_IpTags": {
-            "$ref": "./examples/IpTagsUpdateTags.json"
+          "Update_IpGroups": {
+            "$ref": "./examples/IpGroupsUpdateTags.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "IpTags"
+          "IpGroups"
         ],
-        "operationId": "IpTags_Delete",
-        "description": "Deletes the specified ipTag.",
+        "operationId": "IpGroups_Delete",
+        "description": "Deletes the specified ipGroups.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -229,11 +229,11 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "ipTagName",
+            "name": "ipGroupsName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the ipTag."
+            "description": "The name of the ipGroups."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -260,8 +260,8 @@
           }
         },
         "x-ms-examples": {
-          "Delete_IpTags": {
-            "$ref": "./examples/IpTagsDelete.json"
+          "Delete_IpGroups": {
+            "$ref": "./examples/IpGroupsDelete.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -270,13 +270,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ipTags": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/ipGroups": {
       "get": {
         "tags": [
-          "IpTags"
+          "IpGroups"
         ],
-        "operationId": "IpTags_ListByResourceGroup",
-        "description": "Gets all IpTags in a resource group.",
+        "operationId": "IpGroups_ListByResourceGroup",
+        "description": "Gets all IpGroups in a resource group.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -294,9 +294,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of ipTag resources.",
+            "description": "Request successful. The operation returns a list of ipGroups resources.",
             "schema": {
-              "$ref": "#/definitions/IpTagsListResult"
+              "$ref": "#/definitions/IpGroupsListResult"
             }
           },
           "default": {
@@ -307,8 +307,8 @@
           }
         },
         "x-ms-examples": {
-          "ListByResourceGroup_IpTags": {
-            "$ref": "./examples/IpTagsListByResourceGroup.json"
+          "ListByResourceGroup_IpGroups": {
+            "$ref": "./examples/IpGroupsListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
@@ -316,13 +316,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ipTags": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Network/ipGroups": {
       "get": {
         "tags": [
-          "IpTags"
+          "IpGroups"
         ],
-        "operationId": "IpTags_List",
-        "description": "Gets all IpTags in a subscription.",
+        "operationId": "IpGroups_List",
+        "description": "Gets all IpGroups in a subscription.",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -333,9 +333,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Request successful. The operation returns a list of ipTag resources.",
+            "description": "Request successful. The operation returns a list of ipGroups resources.",
             "schema": {
-              "$ref": "#/definitions/IpTagsListResult"
+              "$ref": "#/definitions/IpGroupsListResult"
             }
           },
           "default": {
@@ -346,8 +346,8 @@
           }
         },
         "x-ms-examples": {
-          "List_IpTags": {
-            "$ref": "./examples/IpTagsListBySubscription.json"
+          "List_IpGroups": {
+            "$ref": "./examples/IpGroupsListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -357,12 +357,12 @@
     }
   },
   "definitions": {
-    "IpTags": {
+    "IpGroups": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/IpTagsPropertiesFormat",
-          "description": "Properties of the IpTags."
+          "$ref": "#/definitions/IpGroupsPropertiesFormat",
+          "description": "Properties of the IpGroups."
         },
         "etag": {
           "type": "string",
@@ -375,29 +375,29 @@
           "$ref": "./network.json#/definitions/Resource"
         }
       ],
-      "description": "The IpTags resource information."
+      "description": "The IpGroups resource information."
     },
-    "IpTagsListResult": {
+    "IpGroupsListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/IpTags"
+            "$ref": "#/definitions/IpGroups"
           },
-          "description": "The list of Iptags information resources."
+          "description": "The list of IpGroups information resources."
         },
         "nextLink": {
           "type": "string",
           "description": "URL to get the next set of results."
         }
       },
-      "description": "Response for the ListIpTags API service call."
+      "description": "Response for the ListIpGroups API service call."
     },
-    "IpTagsPropertiesFormat": {
+    "IpGroupsPropertiesFormat": {
       "properties": {
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the IpTags resource.",
+          "description": "The provisioning state of the IpGroups resource.",
           "readOnly": true
         },
         "ipAddresses": {
@@ -405,18 +405,18 @@
           "items": {
             "type": "string"
           },
-          "description": "IpAddresses/IpAddressPrefixes in the IpTags resource."
+          "description": "IpAddresses/IpAddressPrefixes in the IpGroups resource."
         },
         "referenceResources": {
           "type": "array",
           "readOnly": true,
-          "description": "List of references to Azure resources that this IpTags is associated with",
+          "description": "List of references to Azure resources that this IpGroups is associated with",
           "items": {
             "$ref": "./network.json#/definitions/SubResource"
           }
         }
       },
-      "description": "The Iptags property information."
+      "description": "The IpGroups property information."
     }
   }
 }

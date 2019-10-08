@@ -1,17 +1,27 @@
 {
     "parameters": {
+      "ipGroupsName": "ipGroups1",
+      "resourceGroupName": "myResourceGroup",
       "api-version": "2019-09-01",
       "subscriptionId": "subId",
-      "resourceGroupName": "myResourceGroup",
-      "ipTagName": "ipTags1"
+      "parameters": {
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        }
+      }
     },
     "responses": {
       "200": {
         "body": {
-          "name": "ipTags1",
-          "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipTags/ipTags1",
-          "type": "Microsoft.Network/ipTags",
+          "name": "ipGroups1",
+          "id": "/subscriptions/subId/providers/Microsoft.Network/resourceGroup/myResourceGroup/ipGroups/ipGroups1",
+          "type": "Microsoft.Network/ipGroups",
           "location": "westcentralus",
+          "tags": {
+            "key1": "value1",
+            "key2": "value2"
+          },
           "properties": {
             "provisioningState": "Succeeded",
             "ipAddresses": [
