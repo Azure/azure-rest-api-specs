@@ -10,6 +10,10 @@ cli:
   debug: true
   adjustments:
     "/sku": "Sku*/"
+    "/properties/exchange": "Exchange*/"
+    "/properties/direct": "Direct*/"
+    "/properties/peercontactinfo/": "*/"
+    
   test-setup:
     - name: Create or Update a service with all parameters
 ```
