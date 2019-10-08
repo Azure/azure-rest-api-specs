@@ -184,6 +184,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/cluster.json
+  - $(this-folder)/Microsoft.ServiceFabric/preview/2019-06-01-preview/application.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2019-03-01/cluster.json
   - $(this-folder)/Microsoft.ServiceFabric/stable/2019-03-01/application.json
   - $(this-folder)/Microsoft.ServiceFabric/preview/2019-03-01-preview/cluster.json
