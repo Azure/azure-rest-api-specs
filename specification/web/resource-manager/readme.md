@@ -41,7 +41,8 @@ tag: package-2019-08
 
 These settings apply only when `--tag=package-2019-08` is specified on the command line.
 
-``` yaml $(tag) == 'package--2019-08'
+``` yaml $(tag) == 'package-2019-08'
+
 input-file:
 - Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
 - Microsoft.CertificateRegistration/stable/2019-08-01/CertificateRegistrationProvider.json
