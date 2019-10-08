@@ -1217,91 +1217,6 @@
     }
   },
   "definitions": {
-    "BackupResourceVaultConfig": {
-      "description": "Backup resource vault config details.",
-      "type": "object",
-      "properties": {
-        "storageModelType": {
-          "description": "Storage type.",
-          "enum": [
-            "Invalid",
-            "GeoRedundant",
-            "LocallyRedundant"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "storageType": {
-          "description": "Storage type.",
-          "enum": [
-            "Invalid",
-            "GeoRedundant",
-            "LocallyRedundant"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageType",
-            "modelAsString": true
-          }
-        },
-        "storageTypeState": {
-          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
-          "enum": [
-            "Invalid",
-            "Locked",
-            "Unlocked"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "StorageTypeState",
-            "modelAsString": true
-          }
-        },
-        "enhancedSecurityState": {
-          "description": "Enabled or Disabled.",
-          "enum": [
-            "Invalid",
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "EnhancedSecurityState",
-            "modelAsString": true
-          }
-        },
-        "softDeleteFeatureState": {
-          "description": "Soft Delete feature state",
-          "enum": [
-            "Invalid",
-            "Enabled",
-            "Disabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "SoftDeleteFeatureState",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "BackupResourceVaultConfigResource": {
-      "description": "Backup resource vault config details.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/BackupResourceVaultConfig",
-          "description": "BackupResourceVaultConfigResource properties"
-        }
-      }
-    },
     "AzureFileshareProtectedItem": {
       "description": "Azure File Share workload-specific backup item.",
       "type": "object",
@@ -2655,6 +2570,91 @@
       },
       "x-ms-discriminator-value": "AzureWorkloadSQLRestoreRequest"
     },
+    "BackupResourceVaultConfig": {
+      "description": "Backup resource vault config details.",
+      "type": "object",
+      "properties": {
+        "storageModelType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageType": {
+          "description": "Storage type.",
+          "enum": [
+            "Invalid",
+            "GeoRedundant",
+            "LocallyRedundant"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageType",
+            "modelAsString": true
+          }
+        },
+        "storageTypeState": {
+          "description": "Locked or Unlocked. Once a machine is registered against a resource, the storageTypeState is always Locked.",
+          "enum": [
+            "Invalid",
+            "Locked",
+            "Unlocked"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageTypeState",
+            "modelAsString": true
+          }
+        },
+        "enhancedSecurityState": {
+          "description": "Enabled or Disabled.",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnhancedSecurityState",
+            "modelAsString": true
+          }
+        },
+        "softDeleteFeatureState": {
+          "description": "Soft Delete feature state",
+          "enum": [
+            "Invalid",
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "SoftDeleteFeatureState",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "BackupResourceVaultConfigResource": {
+      "description": "Backup resource vault config details.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BackupResourceVaultConfig",
+          "description": "BackupResourceVaultConfigResource properties"
+        }
+      }
+    },
     "BEKDetails": {
       "description": "BEK is bitlocker encryption key.",
       "type": "object",
@@ -3559,6 +3559,42 @@
         }
       }
     },
+    "KEKDetails": {
+      "description": "KEK is encryption key for BEK.",
+      "type": "object",
+      "properties": {
+        "keyUrl": {
+          "description": "Key is KEK.",
+          "type": "string"
+        },
+        "keyVaultId": {
+          "description": "Key Vault ID where this Key is stored.",
+          "type": "string"
+        },
+        "keyBackupData": {
+          "description": "KEK data.",
+          "type": "string"
+        }
+      }
+    },
+    "KeyAndSecretDetails": {
+      "description": "BEK is bitlocker key.\r\nKEK is encryption key for BEK\r\nIf the VM was encrypted then we will store following details :\r\n1. Secret(BEK) - Url + Backup Data + vaultId.\r\n2. Key(KEK) - Url + Backup Data + vaultId.\r\n3. EncryptionMechanism\r\nBEK and KEK can potentially have different vault ids.",
+      "type": "object",
+      "properties": {
+        "kekDetails": {
+          "$ref": "#/definitions/KEKDetails",
+          "description": "KEK is encryption key for BEK."
+        },
+        "bekDetails": {
+          "$ref": "#/definitions/BEKDetails",
+          "description": "BEK is bitlocker encryption key."
+        },
+        "encryptionMechanism": {
+          "description": "Encryption mechanism: None/ SinglePass/ DoublePass",
+          "type": "string"
+        }
+      }
+    },
     "LogSchedulePolicy": {
       "description": "Log policy schedule.",
       "type": "object",
@@ -3613,43 +3649,6 @@
         }
       ],
       "x-ms-discriminator-value": "LongTermSchedulePolicy"
-    },
-
-    "KEKDetails": {
-      "description": "KEK is encryption key for BEK.",
-      "type": "object",
-      "properties": {
-        "keyUrl": {
-          "description": "Key is KEK.",
-          "type": "string"
-        },
-        "keyVaultId": {
-          "description": "Key Vault ID where this Key is stored.",
-          "type": "string"
-        },
-        "keyBackupData": {
-          "description": "KEK data.",
-          "type": "string"
-        }
-      }
-    },
-    "KeyAndSecretDetails": {
-      "description": "BEK is bitlocker key.\r\nKEK is encryption key for BEK\r\nIf the VM was encrypted then we will store following details :\r\n1. Secret(BEK) - Url + Backup Data + vaultId.\r\n2. Key(KEK) - Url + Backup Data + vaultId.\r\n3. EncryptionMechanism\r\nBEK and KEK can potentially have different vault ids.",
-      "type": "object",
-      "properties": {
-        "kekDetails": {
-          "$ref": "#/definitions/KEKDetails",
-          "description": "KEK is encryption key for BEK."
-        },
-        "bekDetails": {
-          "$ref": "#/definitions/BEKDetails",
-          "description": "BEK is bitlocker encryption key."
-        },
-        "encryptionMechanism": {
-          "description": "Encryption mechanism: None/ SinglePass/ DoublePass",
-          "type": "string"
-        }
-      }
     },
     "MabErrorInfo": {
       "description": "MAB workload-specific error information.",
@@ -4309,6 +4308,111 @@
         }
       }
     },
+    "ProtectionPolicy": {
+      "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
+      "required": [
+        "backupManagementType"
+      ],
+      "type": "object",
+      "properties": {
+        "protectedItemsCount": {
+          "format": "int32",
+          "description": "Number of items associated with this policy.",
+          "type": "integer"
+        },
+        "backupManagementType": {
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
+          "type": "string"
+        }
+      },
+      "discriminator": "backupManagementType"
+    },
+    "ProtectionPolicyQueryObject": {
+      "description": "Filters the list backup policies API.",
+      "type": "object",
+      "properties": {
+        "backupManagementType": {
+          "description": "Backup management type for the backup policy.",
+          "enum": [
+            "Invalid",
+            "AzureIaasVM",
+            "MAB",
+            "DPM",
+            "AzureBackupServer",
+            "AzureSql",
+            "AzureStorage",
+            "AzureWorkload",
+            "DefaultBackup"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "BackupManagementType",
+            "modelAsString": true
+          }
+        },
+        "fabricName": {
+          "description": "Fabric name for filter",
+          "type": "string"
+        },
+        "workloadType": {
+          "description": "Workload type for the backup policy.",
+          "enum": [
+            "Invalid",
+            "VM",
+            "FileFolder",
+            "AzureSqlDb",
+            "SQLDB",
+            "Exchange",
+            "Sharepoint",
+            "VMwareVM",
+            "SystemState",
+            "Client",
+            "GenericDataSource",
+            "SQLDataBase",
+            "AzureFileShare",
+            "SAPHanaDatabase",
+            "SAPAseDatabase"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
+    "ProtectionPolicyResource": {
+      "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ProtectionPolicy",
+          "description": "ProtectionPolicyResource properties"
+        }
+      }
+    },
+    "ProtectionPolicyResourceList": {
+      "description": "List of ProtectionPolicy resources",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceList"
+        }
+      ],
+      "properties": {
+        "value": {
+          "description": "List of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ProtectionPolicyResource"
+          }
+        }
+      }
+    },
     "RecoveryPoint": {
       "description": "Base class for backup copies. Workload-specific backup copies are derived from this class.",
       "required": [
@@ -4465,81 +4569,40 @@
         }
       }
     },
-    "ProtectionPolicy": {
-      "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
+    "RestoreFileSpecs": {
+      "description": "Restore file specs like file path, type and target folder path info.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "description": "Source File/Folder path",
+          "type": "string"
+        },
+        "fileSpecType": {
+          "description": "Indicates what the Path variable stands for",
+          "type": "string"
+        },
+        "targetFolderPath": {
+          "description": "Destination folder path in target FileShare",
+          "type": "string"
+        }
+      }
+    },
+    "RestoreRequest": {
+      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
       "required": [
-        "backupManagementType"
+        "objectType"
       ],
       "type": "object",
       "properties": {
-        "protectedItemsCount": {
-          "format": "int32",
-          "description": "Number of items associated with this policy.",
-          "type": "integer"
-        },
-        "backupManagementType": {
+        "objectType": {
           "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
-      "discriminator": "backupManagementType"
+      "discriminator": "objectType"
     },
-    "ProtectionPolicyQueryObject": {
-      "description": "Filters the list backup policies API.",
-      "type": "object",
-      "properties": {
-        "backupManagementType": {
-          "description": "Backup management type for the backup policy.",
-          "enum": [
-            "Invalid",
-            "AzureIaasVM",
-            "MAB",
-            "DPM",
-            "AzureBackupServer",
-            "AzureSql",
-            "AzureStorage",
-            "AzureWorkload",
-            "DefaultBackup"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "BackupManagementType",
-            "modelAsString": true
-          }
-        },
-        "fabricName": {
-          "description": "Fabric name for filter",
-          "type": "string"
-        },
-        "workloadType": {
-          "description": "Workload type for the backup policy.",
-          "enum": [
-            "Invalid",
-            "VM",
-            "FileFolder",
-            "AzureSqlDb",
-            "SQLDB",
-            "Exchange",
-            "Sharepoint",
-            "VMwareVM",
-            "SystemState",
-            "Client",
-            "GenericDataSource",
-            "SQLDataBase",
-            "AzureFileShare",
-            "SAPHanaDatabase",
-            "SAPAseDatabase"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "WorkloadType",
-            "modelAsString": true
-          }
-        }
-      }
-    },
-    "ProtectionPolicyResource": {
-      "description": "Base class for backup policy. Workload-specific backup policies are derived from this class.",
+    "RestoreRequestResource": {
+      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -4547,26 +4610,8 @@
       ],
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ProtectionPolicy",
-          "description": "ProtectionPolicyResource properties"
-        }
-      }
-    },
-    "ProtectionPolicyResourceList": {
-      "description": "List of ProtectionPolicy resources",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceList"
-        }
-      ],
-      "properties": {
-        "value": {
-          "description": "List of resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProtectionPolicyResource"
-          }
+          "$ref": "#/definitions/RestoreRequest",
+          "description": "RestoreRequestResource properties"
         }
       }
     },
@@ -4624,49 +4669,21 @@
       },
       "discriminator": "schedulePolicyType"
     },
-    "RestoreFileSpecs": {
-      "description": "Restore file specs like file path, type and target folder path info.",
+    "Settings": {
+      "description": "Common settings field for backup management",
       "type": "object",
       "properties": {
-        "path": {
-          "description": "Source File/Folder path",
+        "timeZone": {
+          "description": "TimeZone optional input as string. For example: TimeZone = \"Pacific Standard Time\".",
           "type": "string"
         },
-        "fileSpecType": {
-          "description": "Indicates what the Path variable stands for",
-          "type": "string"
+        "issqlcompression": {
+          "description": "SQL compression flag",
+          "type": "boolean"
         },
-        "targetFolderPath": {
-          "description": "Destination folder path in target FileShare",
-          "type": "string"
-        }
-      }
-    },
-    "RestoreRequest": {
-      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
-      "required": [
-        "objectType"
-      ],
-      "type": "object",
-      "properties": {
-        "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
-          "type": "string"
-        }
-      },
-      "discriminator": "objectType"
-    },
-    "RestoreRequestResource": {
-      "description": "Base class for restore request. Workload-specific restore requests are derived from this class.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RestoreRequest",
-          "description": "RestoreRequestResource properties"
+        "isCompression": {
+          "description": "Workload compression flag. This has been added so that 'isSqlCompression'\r\nwill be deprecated once clients upgrade to consider this flag.",
+          "type": "boolean"
         }
       }
     },
@@ -4770,154 +4787,6 @@
         "retentionPolicy": {
           "$ref": "#/definitions/RetentionPolicy",
           "description": "Retention policy with the details on backup copy retention ranges."
-        }
-      }
-    },
-    "WeeklyRetentionFormat": {
-      "description": "Weekly retention format.",
-      "type": "object",
-      "properties": {
-        "daysOfTheWeek": {
-          "description": "List of days of the week.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DayOfWeek",
-              "modelAsString": false
-            }
-          }
-        },
-        "weeksOfTheMonth": {
-          "description": "List of weeks of month.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "First",
-              "Second",
-              "Third",
-              "Fourth",
-              "Last",
-              "Invalid"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "WeekOfMonth",
-              "modelAsString": false
-            }
-          }
-        }
-      }
-    },
-    "WeeklyRetentionSchedule": {
-      "description": "Weekly retention schedule.",
-      "type": "object",
-      "properties": {
-        "daysOfTheWeek": {
-          "description": "List of days of week for weekly retention policy.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "Sunday",
-              "Monday",
-              "Tuesday",
-              "Wednesday",
-              "Thursday",
-              "Friday",
-              "Saturday"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "DayOfWeek",
-              "modelAsString": false
-            }
-          }
-        },
-        "retentionTimes": {
-          "description": "Retention times of retention policy.",
-          "type": "array",
-          "items": {
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "retentionDuration": {
-          "$ref": "#/definitions/RetentionDuration",
-          "description": "Retention duration of retention Policy."
-        }
-      }
-    },
-    "YearlyRetentionSchedule": {
-      "description": "Yearly retention schedule.",
-      "type": "object",
-      "properties": {
-        "retentionScheduleFormatType": {
-          "description": "Retention schedule format for yearly retention policy.",
-          "enum": [
-            "Invalid",
-            "Daily",
-            "Weekly"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "RetentionScheduleFormat",
-            "modelAsString": true
-          }
-        },
-        "monthsOfYear": {
-          "description": "List of months of year of yearly retention policy.",
-          "type": "array",
-          "items": {
-            "enum": [
-              "Invalid",
-              "January",
-              "February",
-              "March",
-              "April",
-              "May",
-              "June",
-              "July",
-              "August",
-              "September",
-              "October",
-              "November",
-              "December"
-            ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "MonthOfYear",
-              "modelAsString": false
-            }
-          }
-        },
-        "retentionScheduleDaily": {
-          "$ref": "#/definitions/DailyRetentionFormat",
-          "description": "Daily retention format for yearly retention policy."
-        },
-        "retentionScheduleWeekly": {
-          "$ref": "#/definitions/WeeklyRetentionFormat",
-          "description": "Weekly retention format for yearly retention policy."
-        },
-        "retentionTimes": {
-          "description": "Retention times of retention policy.",
-          "type": "array",
-          "items": {
-            "format": "date-time",
-            "type": "string"
-          }
-        },
-        "retentionDuration": {
-          "$ref": "#/definitions/RetentionDuration",
-          "description": "Retention duration of retention Policy."
         }
       }
     },
@@ -5080,6 +4949,154 @@
         }
       },
       "x-ms-discriminator-value": "ValidateRestoreOperationRequest"
+    },
+    "WeeklyRetentionFormat": {
+      "description": "Weekly retention format.",
+      "type": "object",
+      "properties": {
+        "daysOfTheWeek": {
+          "description": "List of days of the week.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": false
+            }
+          }
+        },
+        "weeksOfTheMonth": {
+          "description": "List of weeks of month.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "First",
+              "Second",
+              "Third",
+              "Fourth",
+              "Last",
+              "Invalid"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "WeekOfMonth",
+              "modelAsString": false
+            }
+          }
+        }
+      }
+    },
+    "WeeklyRetentionSchedule": {
+      "description": "Weekly retention schedule.",
+      "type": "object",
+      "properties": {
+        "daysOfTheWeek": {
+          "description": "List of days of week for weekly retention policy.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Sunday",
+              "Monday",
+              "Tuesday",
+              "Wednesday",
+              "Thursday",
+              "Friday",
+              "Saturday"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": false
+            }
+          }
+        },
+        "retentionTimes": {
+          "description": "Retention times of retention policy.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "retentionDuration": {
+          "$ref": "#/definitions/RetentionDuration",
+          "description": "Retention duration of retention Policy."
+        }
+      }
+    },
+    "YearlyRetentionSchedule": {
+      "description": "Yearly retention schedule.",
+      "type": "object",
+      "properties": {
+        "retentionScheduleFormatType": {
+          "description": "Retention schedule format for yearly retention policy.",
+          "enum": [
+            "Invalid",
+            "Daily",
+            "Weekly"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RetentionScheduleFormat",
+            "modelAsString": true
+          }
+        },
+        "monthsOfYear": {
+          "description": "List of months of year of yearly retention policy.",
+          "type": "array",
+          "items": {
+            "enum": [
+              "Invalid",
+              "January",
+              "February",
+              "March",
+              "April",
+              "May",
+              "June",
+              "July",
+              "August",
+              "September",
+              "October",
+              "November",
+              "December"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "name": "MonthOfYear",
+              "modelAsString": false
+            }
+          }
+        },
+        "retentionScheduleDaily": {
+          "$ref": "#/definitions/DailyRetentionFormat",
+          "description": "Daily retention format for yearly retention policy."
+        },
+        "retentionScheduleWeekly": {
+          "$ref": "#/definitions/WeeklyRetentionFormat",
+          "description": "Weekly retention format for yearly retention policy."
+        },
+        "retentionTimes": {
+          "description": "Retention times of retention policy.",
+          "type": "array",
+          "items": {
+            "format": "date-time",
+            "type": "string"
+          }
+        },
+        "retentionDuration": {
+          "$ref": "#/definitions/RetentionDuration",
+          "description": "Retention duration of retention Policy."
+        }
+      }
     }
   },
   "parameters": {
