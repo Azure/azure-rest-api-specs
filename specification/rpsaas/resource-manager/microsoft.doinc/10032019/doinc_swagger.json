@@ -38,6 +38,9 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DoincUpdateParameter"
           }
         ],
         "responses": {
@@ -52,11 +55,6 @@
             "schema": {
               "$ref": "#/definitions/DoincErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DoincGet": {
-            "$ref": "./examples/OperationGroupGet.json"
           }
         },
         "x-ms-pageable": {
@@ -82,8 +80,6 @@
           },
           "default": {
             "description": "Error response describing the reason for operation failure. 409 - Conflict" 
-          },
-          "x-ms-examples": {
           }
         }
       },
@@ -93,9 +89,24 @@
       ],
       "summary": "updates an existing Transparent Cache Node resource",
       "description": "updates an existing Transparent Cache Node.",
-      "operationId": "Operations_Patch",
+      "operationId": "Operations_Update",
       "parameters": [
-      ],
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/DoincUpdateParameter"
+          },
+          {
+            "name": "Doinc",
+            "in": "body",
+            "description": "Doinc create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Doinc"
+            }
+          }
+        ],
       "responses": {
         "200": {
           "description": "The request was successful; response contains the updated Transparent Cache node.",
@@ -138,6 +149,9 @@
           },
           {
             "$ref": "#/parameters/AcctNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DoincUpdateParameter"
           }
         ],
         "responses": {
@@ -152,11 +166,6 @@
             "schema": {
               "$ref": "#/definitions/DoincErrorResponse"
             }
-          }
-        },
-        "x-ms-examples": {
-          "DoincGet": {
-            "$ref": "./examples/DoincGet_example.json"
           }
         }
       },
@@ -197,21 +206,18 @@
               "$ref": "#/definitions/Doinc"
             }
           },
-           "201": {
+          "201": {
               "description": "The request was successful; response contains the updated Transparent Cache node.",
               "schema": {
                 "$ref": "#/definitions/Doinc"
               }
             },
-            "default": {
+          "default": {
               "description": "Error response describing the reason for operation failure. 404 - NotFound (Doinc could not be created/updated)",
               "schema": {
                 "$ref": "#/definitions/DoincErrorResponse"
               }
             }
-          },
-          "x-ms-examples": {
-            "DoincCreate": null
           }
         }
     },
@@ -250,11 +256,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "DoincGet": {
-            "$ref": "./examples/DoincListGet_example.json"
-          }
         }
       }
     },
@@ -494,6 +495,15 @@
       "description": "The API version to be used with the HTTP request."
     },
     "AcctNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the Doinc",
+      "pattern": "^[a-zA-Z0-9]",
+      "x-ms-parameter-location": "method"
+    },
+    "DoincUpdateParameter": {
       "name": "accountName",
       "in": "path",
       "required": true,
