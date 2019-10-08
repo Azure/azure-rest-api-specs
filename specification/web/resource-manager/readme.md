@@ -34,7 +34,32 @@ These are the global settings for the Web API.
 title: WebSiteManagementClient
 description: WebSite Management Client
 openapi-type: arm
-tag: package-2018-12
+tag: package-2019-08
+```
+
+### Tag: package-2019-08
+
+These settings apply only when `--tag=package-2019-08` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08'
+
+input-file:
+- Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
+- Microsoft.CertificateRegistration/stable/2019-08-01/CertificateRegistrationProvider.json
+- Microsoft.DomainRegistration/stable/2019-08-01/Domains.json
+- Microsoft.DomainRegistration/stable/2019-08-01/TopLevelDomains.json
+- Microsoft.DomainRegistration/stable/2019-08-01/DomainRegistrationProvider.json
+- Microsoft.Web/stable/2019-08-01/Certificates.json
+- Microsoft.Web/stable/2019-08-01/CommonDefinitions.json
+- Microsoft.Web/stable/2019-08-01/DeletedWebApps.json
+- Microsoft.Web/stable/2019-08-01/Diagnostics.json
+- Microsoft.Web/stable/2019-08-01/Provider.json
+- Microsoft.Web/stable/2019-08-01/Recommendations.json
+- Microsoft.Web/stable/2019-08-01/ResourceProvider.json
+- Microsoft.Web/stable/2019-08-01/WebApps.json
+- Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
+- Microsoft.Web/stable/2019-08-01/AppServicePlans.json
+- Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
 ```
 
 ### Tag: package-2018-12
@@ -380,10 +405,24 @@ directive:
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-08
   - tag: package-2018-02
   - tag: package-2016-03-01-web
   - tag: package-2016-08-01-web
   - tag: package-2016-09-01-web
+```
+
+### Tag: package-2019-08 and java
+
+These settings apply only when `--tag=package-2019-08 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-08' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.appservice.v2019_08_01
+  output-folder: $(azure-libraries-for-java-folder)/appservice/resource-manager/v2019_08_01
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-02 and java
