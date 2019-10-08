@@ -4803,6 +4803,68 @@
         "expression"
       ]
     },
+    "SwitchActivity": {
+      "x-ms-discriminator-value": "Switch",
+      "description": "This activity evaluates an expression and executes activities under the cases property that correspond to the expression evaluation expected in the equals property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Switch activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SwitchActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SwitchActivityTypeProperties": {
+      "description": "Switch activity properties.",
+      "properties": {
+        "on": {
+          "description": "An expression that would evaluate to a string or integer. This is used to determine the block of activities in cases that will be executed.",
+          "$ref": "../datafactory.json#/definitions/Expression"
+        },
+        "cases": {
+          "type": "array",
+          "description": "List of cases that correspond to expected values of the 'on' property. This is an optional property and if not provided, the activity will execute activities provided in defaultActivities.",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SwitchCase"
+          }
+        },
+        "defaultActivities": {
+          "type": "array",
+          "description": "List of activities to execute if no case condition is satisfied. This is an optional property and if not provided, the activity will exit without any action.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        }
+      },
+      "required": [
+        "on"
+      ]
+    },
+    "SwitchCase": {
+      "description": "Switch cases with have a value and corresponding activities.",
+      "properties": {
+        "value": {
+          "description": "Expected value that satisfies the expression result of the 'on' property.",
+          "type": "string"
+        },
+        "activities": {
+          "type": "array",
+          "description": "List of activities to execute for satisfied case condition.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        }
+      }
+    },
     "ForEachActivity": {
       "x-ms-discriminator-value": "ForEach",
       "description": "This activity is used for iterating over a collection and execute given activities.",
