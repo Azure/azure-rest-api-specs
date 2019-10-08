@@ -38,9 +38,6 @@
         "parameters": [
           {
             "$ref": "#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/DoincUpdateParameter"
           }
         ],
         "responses": {
@@ -95,9 +92,6 @@
             "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/DoincUpdateParameter"
-          },
-          {
             "name": "Doinc",
             "in": "body",
             "description": "Doinc create parameters.",
@@ -129,7 +123,7 @@
       }
     }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Doinc/accounts/{accountName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Doinc/accounts/{doincName}": {
       "get": {
         "tags": [
           "Doinc"
@@ -146,9 +140,6 @@
           },
           {
             "$ref": "#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AcctNameParameter"
           },
           {
             "$ref": "#/parameters/DoincUpdateParameter"
@@ -187,7 +178,7 @@
             "$ref": "#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/AcctNameParameter"
+            "$ref": "#/parameters/DoincUpdateParameter"
           },
           {
             "name": "Doinc",
@@ -493,18 +484,9 @@
       "required": true,
       "type": "string",
       "description": "The API version to be used with the HTTP request."
-    },
-    "AcctNameParameter": {
-      "name": "accountName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "Name of the Doinc account",
-      "pattern": "^[a-zA-Z0-9]",
-      "x-ms-parameter-location": "method"
-    },
+    },    
     "DoincUpdateParameter": {
-      "name": "DoincResourceName",
+      "name": "doincName",
       "in": "path",
       "required": true,
       "type": "string",
