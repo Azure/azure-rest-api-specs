@@ -523,6 +523,22 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
+  - $(this-folder)/Microsoft.CertificateRegistration/stable/2019-08-01/CertificateRegistrationProvider.json
+  - $(this-folder)/Microsoft.DomainRegistration/stable/2019-08-01/Domains.json
+  - $(this-folder)/Microsoft.DomainRegistration/stable/2019-08-01/TopLevelDomains.json
+  - $(this-folder)/Microsoft.DomainRegistration/stable/2019-08-01/DomainRegistrationProvider.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/Certificates.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/CommonDefinitions.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/DeletedWebApps.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/Diagnostics.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/Provider.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/Recommendations.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/ResourceProvider.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/WebApps.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/AppServiceEnvironments.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/AppServicePlans.json
+  - $(this-folder)/Microsoft.Web/stable/2019-08-01/ResourceHealthMetadata.json
   - $(this-folder)/Microsoft.CertificateRegistration/stable/2018-02-01/AppServiceCertificateOrders.json
   - $(this-folder)/Microsoft.CertificateRegistration/stable/2018-02-01/CertificateRegistrationProvider.json
   - $(this-folder)/Microsoft.DomainRegistration/stable/2018-02-01/Domains.json
