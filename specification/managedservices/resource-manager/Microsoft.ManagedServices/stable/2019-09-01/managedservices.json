@@ -380,6 +380,87 @@
         }
       }
     },
+    "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitions_List",
+        "description": "Gets a list of the marketplace registration definitions for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/Filter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns a list of the marketplace registration definitions.",
+            "schema": {
+              "$ref": "#/definitions/MarketplaceRegistrationDefinitionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Get Registration Definitions": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinitions.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.ManagedServices/marketplaceRegistrationDefinitions/{marketplaceIdentifier}": {
+      "get": {
+        "tags": [
+          "MarketplaceRegistrationDefinitions"
+        ],
+        "operationId": "MarketplaceRegistrationDefinitions_Get",
+        "description": "Get the marketplace registration definition for the marketplace identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/MarketplaceIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns the details of the marketplace registration definition.",
+            "schema": {
+              "$ref": "#/definitions/RegistrationDefinition"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Registration Definitions": {
+            "$ref": "./examples/GetMarketplaceRegistrationDefinition.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.ManagedServices/operations": {
       "get": {
         "tags": [
@@ -684,6 +765,24 @@
       },
       "description": "List of registration assignments."
     },
+    "MarketplaceRegistrationDefinitionList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/RegistrationDefinition"
+          },
+          "description": "List of marketplace registration definitions."
+        },
+        "nextLink": {
+          "description": "Link to next page of marketplace registration definitions.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "List of marketplace registration definitions."
+    },
     "Plan": {
       "properties": {
         "name": {
@@ -812,6 +911,14 @@
       "type": "string",
       "description": "Scope of the resource."
     },
+    "MarketplaceIdentifier": {
+      "name": "marketplaceIdentifier",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "Market place identifer. Expected Formats - {publisher}.{product[-preview]}.{planName}.{version} or {publisher}.{product[-preview]}.{planName} or {publisher}.{product[-preview]} or {publisher})."
+    },
     "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
@@ -841,6 +948,13 @@
       "x-ms-parameter-location": "method",
       "type": "boolean",
       "description": "Tells whether to return registration definition details also along with registration assignment details."
+    },
+    "Filter": {
+      "name": "$filter",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "description": "The filter query parameter. Might be used to filter marketplace registration definition by plan identifier, publisher, version etc."
     }
   }
 }
