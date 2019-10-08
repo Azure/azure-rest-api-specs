@@ -5,20 +5,21 @@
     "siteName": "SampleApp",
     "slot": "staging",
     "diagnosticCategory": "availability",
+    "analysisName": "appanalysis",
     "api-version": "2019-08-01"
   },
   "responses": {
     "200": {
       "body": {
-        "value": {
-          "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/slots/staging/diagnostics/availability/analyses/apprestartanalyses",
-          "name": "apprestartanalysis",
-          "properties": {
-            "analysisName": "apprestartanalysis",
-            "description": "Find the reasons that your app restarted"
-          }
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/Sample-WestUSResourceGroup/providers/Microsoft.Web/sites/SampleApp/slots/staging/diagnostics/availability/analyses/appanalysis",
+        "name": "appanalysis",
+        "properties": {
+          "payload": [
+            {
+              "source" : "Cpu Percentage"
+            }
+          ]
         }
-      }
     }
   }
 }
