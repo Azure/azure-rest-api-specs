@@ -4,30 +4,30 @@
     "billingAccountId": "70664866",
     "enrollmentAccountId": "456",
     "scope": "providers/Microsoft.Billing/billingAccounts/100/enrollmentAccounts/456",
-    "parameters":{
-        "type": "Usage",
-        "timeframe": "TheLastMonth",
-        "dataset": {
-          "granularity": "Daily",
-          "aggregation": {
-            "totalCost": {
-              "name": "PreTaxCost",
-              "function": "Sum"
-            }
-          },
-          "grouping": [
-            {
-              "type": "Dimension",
-              "name": "ResourceGroup"
-            }
-          ],
-          "sorting": [
-            {
-              "name": "ResourceGroup"
-            }
-          ]      
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "TheLastMonth",
+      "dataset": {
+        "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "ResourceGroup"
+          }
+        ],
+        "sorting": [
+          {
+            "name": "ResourceGroup"
+          }
+        ]
       }
-    }    
+    }
   },
   "responses": {
     "200": {
