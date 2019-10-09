@@ -734,6 +734,119 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Get",
+        "description": "Gets the specified private endpoint connection associated with the storage account.",
+        "x-ms-examples": {
+          "StorageAccountGetPrivateEndpointConnection": {
+            "$ref": "./examples/StorageAccountGetPrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        }
+      },
+
+      "delete": {
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "operationId": "PrivateEndpointConnections_Delete",
+        "description": "Deletes the specified private endpoint connection associated with the storage account.",
+        "x-ms-examples": {
+          "StorageAccountDeletePrivateEndpointConnection": {
+            "$ref": "./examples/StorageAccountDeletePrivateEndpointConnection.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Delete the private endpoint connection successfully."
+          },
+          "204": {
+            "description": "No Content -- The private endpoint connection does not exist."
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "operationId": "PrivateLinkResources_Get",
+        "description": "Gets the available private link resources for the storage account.",
+        "x-ms-examples": {
+          "StorageAccountGetGroupId": {
+            "$ref": "./examples/StorageAccountGetGroupId.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/StorageAccountName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the private endpoint connection properties successfully.",
+            "schema": {
+              "$ref": "#/definitions/GroupIdInformationResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Storage/storageAccounts/{accountName}/revokeUserDelegationKeys": {
       "post": {
         "tags": [
@@ -1680,6 +1793,14 @@
             "modelAsString": true
           },
           "description": "Allow large file shares if sets to Enabled. It cannot be disabled once it is enabled."
+        },
+        "privateEndpointConnections": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "List of private endpoint connection associated with the specified storage account"
         }
       },
       "description": "Properties of the storage account."
@@ -2381,6 +2502,138 @@
         "daysAfterCreationGreaterThan"
       ],
       "description": "Object to define the number of days after creation."
+    },
+    "PrivateEndpointConnection": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "x-ms-client-flatten": true,
+          "description": "Returns the Storage Account Private Endpoint Connection."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The Private Endpoint Connection."
+    },
+    "PrivateEndpointConnectionProperties": {
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Get the provisioning State of the private endpoint connection at the time operation was called.",
+          "enum": [
+            "Creating",
+            "Succeeded",
+            "Failed",
+            "Deleting"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint",
+          "description": "The Private Endpoint id corresponding to Private Endpoint Connection."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/EndpointServiceConnectionState",
+          "description": "The Private Endpoint Connection state."
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ],
+      "description": "The Private Endpoint Connection properties."
+    },
+    "PrivateEndpoint": {
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ARM identifier for Private Endpoint"
+        }
+      },
+      "description": "The Private Endpoint."
+    },
+    "EndpointServiceConnectionState": {
+      "properties": {
+        "description":{
+          "type": "string",
+          "description": "Description provided to approve/reject a connection."
+        },
+        "actionRequired": {
+          "type": "string",
+          "description": "Any action required on this connection."
+        },
+        "status": {
+          "type": "string",
+          "enum": [
+            "Pending",
+            "Approved",
+            "Rejected"
+          ],
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          },
+          "description": "Status of this connection."
+        }
+      },
+      "description": "The Private Endpoint Connection state information."
+    },
+    "GroupIdInformationResponse": {
+      "description": "Result of the request to list Storage operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GroupIdInformation"
+          },
+          "description": "Get PrivateLinkResources response."
+        }
+      }
+    },
+    "GroupIdInformation": {
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/GroupIdInformationProperties",
+          "x-ms-client-flatten": true,
+          "description": "GroupIdInformation properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ],
+      "description": "The GroupIdInformation."
+    },
+    "GroupIdInformationProperties": {
+      "properties": {
+        "groupId": {
+          "type": "string",
+          "description": "GroupId for the PrivateLinkResources"
+        },
+        "requiredMembers": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "PrivateLinkResources dns names for the groupId."
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Private link DNS name for the groupId."
+        }
+      },
+      "description": "The GroupIdInformationProperties"
     }
   },
   "parameters": {
@@ -2418,6 +2671,14 @@
         "name": "ManagementPolicyName",
         "modelAsString": true
       },
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection associated with the Storage Account",
       "x-ms-parameter-location": "method"
     }
   },
