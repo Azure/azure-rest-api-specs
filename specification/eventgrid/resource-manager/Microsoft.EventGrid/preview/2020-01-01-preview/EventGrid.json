@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-02-01-preview",
+    "version": "2020-01-01-preview",
     "title": "EventGridManagementClient",
     "description": "Azure EventGrid Management Client"
   },
@@ -2353,7 +2353,7 @@
           "enum": [
             "EventGridSchema",
             "CustomEventSchema",
-            "CloudEventV01Schema"
+            "CloudEventSchemaV1_0"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2687,8 +2687,8 @@
           "description": "The event delivery schema for the event subscription.",
           "enum": [
             "EventGridSchema",
-            "CloudEventV01Schema",
-            "CustomInputSchema"
+            "CustomInputSchema",
+            "CloudEventSchemaV1_0"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -2767,6 +2767,20 @@
           "description": "The base URL that represents the endpoint of the destination of an event subscription.",
           "type": "string",
           "readOnly": true
+        },
+        "maxEventsPerBatch": {
+          "format": "int32",
+          "description": "Maximum number of events per batch.",
+          "type": "integer"
+        },
+        "preferredBatchSizeInKilobytes": {
+          "format": "int32",
+          "description": "Preferred batch size in Kilobytes.",
+          "type": "integer"
+        },
+        "azureActiveDirectoryApplicationObjectId": {
+          "description": "The active directory application id to get access token that is included as the bearer token in delivery requests.",
+          "type": "string"
         }
       }
     },
@@ -3206,6 +3220,70 @@
       },
       "x-ms-discriminator-value": "ServiceBusQueue"
     },
+    "ServiceBusTopicEventSubscriptionDestinationProperties": {
+      "description": "The properties that represent the Service Bus Topic destination of an event subscription.",
+      "type": "object",
+      "properties": {
+          "resourceId": {
+              "description": "The Azure Resource Id that represents the endpoint of the Service Bus Topic destination of an event subscription.",
+              "type": "string"
+           }
+       }
+    },
+    "ServiceBusTopicEventSubscriptionDestination": {
+      "description": "Information about the service bus topic destination for an event subscription.",
+      "type": "object",
+      "allOf": [
+          {
+              "$ref": "#/definitions/EventSubscriptionDestination"
+          }
+      ],
+      "properties": {
+          "properties": {
+              "$ref": "#/definitions/ServiceBusTopicEventSubscriptionDestinationProperties",
+              "description": "Service Bus Topic Properties of the event subscription destination.",
+              "x-ms-client-flatten": true
+          }
+      },
+      "x-ms-discriminator-value": "ServiceBusTopic"
+    },
+    "AzureFunctionEventSubscriptionDestinationProperties": {
+      "description": "The properties that represent the Azure Function destination of an event subscription.",
+      "type": "object",
+      "properties": {
+          "resourceId": {
+              "description": "The Azure Resource Id that represents the endpoint of the Azure Function destination of an event subscription.",
+              "type": "string"
+          },
+          "maxEventsPerBatch": {
+            "format": "int32",
+            "description": "Maximum number of events per batch.",
+            "type": "integer"
+          },
+          "preferredBatchSizeInKilobytes": {
+            "format": "int32",
+            "description": "Preferred batch size in Kilobytes.",
+            "type": "integer"
+          }
+      }
+    },
+    "AzureFunctionEventSubscriptionDestination": {
+      "description": "Information about the azure function destination for an event subscription.",
+      "type": "object",
+      "allOf": [
+          {
+              "$ref": "#/definitions/EventSubscriptionDestination"
+          }
+      ],
+      "properties": {
+          "properties": {
+              "$ref": "#/definitions/AzureFunctionEventSubscriptionDestinationProperties",
+              "description": "Azure Function Properties of the event subscription destination.",
+              "x-ms-client-flatten": true
+          }
+      },
+      "x-ms-discriminator-value": "AzureFunction"
+    },
     "EventSubscriptionDestination": {
       "description": "Information about the destination for an event subscription",
       "required": [
@@ -3220,7 +3298,9 @@
             "EventHub",
             "StorageQueue",
             "HybridConnection",
-            "ServiceBusQueue"
+            "ServiceBusQueue",
+            "ServiceBusTopic",
+            "AzureFunction"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3275,8 +3355,8 @@
           "description": "The event delivery schema for the event subscription.",
           "enum": [
             "EventGridSchema",
-            "CloudEventV01Schema",
-            "CustomInputSchema"
+            "CustomInputSchema",
+            "CloudEventSchemaV1_0"
           ],
           "type": "string",
           "x-ms-enum": {
@@ -3410,7 +3490,7 @@
           "enum": [
             "EventGridSchema",
             "CustomEventSchema",
-            "CloudEventV01Schema"
+            "CloudEventSchemaV1_0"
           ],
           "type": "string",
           "x-ms-enum": {
