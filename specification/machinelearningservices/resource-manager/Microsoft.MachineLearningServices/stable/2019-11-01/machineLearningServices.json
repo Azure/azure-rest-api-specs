@@ -2164,17 +2164,17 @@
                   "description": "Virtual network subnet resource ID the compute nodes belong to.",
                   "$ref": "#/definitions/ResourceId"
                 },
-                "instanceSharing": {
+                "applicationSharingPolicy": {
                   "type": "string",
-                  "default": "Disabled",
-                  "title": "Sharing policy for this compute instance",
-                  "description": "Policy for sharing this compute instance among users of parent workspace. If Disabled, only the creator can access applications on this compute instance. When enabled any workspace user can access applications on this instance depending on his/her assigned role.",
+                  "default": "Shared",
+                  "title": "Sharing policy for applictions on this compute instance",
+                  "description": "Policy for sharing applications on this compute instance among users of parent workspace. If Personal, only the creator can access applications on this compute instance. When Shared, any workspace user can access applications on this instance depending on his/her assigned role.",
                   "enum": [
-                    "Enabled",
-                    "Disabled"
+                    "Personal",
+                    "Shared"
                   ],
                   "x-ms-enum": {
-                    "name": "instanceSharing",
+                    "name": "applicationSharingPolicy",
                     "modelAsString": true
                   }
                 },
@@ -2198,6 +2198,14 @@
                   "readOnly": true,
                   "description": "Describes all connectivity endpoints available for this ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
+                },
+                "applicationUris": {
+                  "type": "array",
+                  "readOnly": true,
+                  "description": "Describes available applications and their endpoints on this ComputeInstance.",
+                  "items": {
+                    "$ref": "#/definitions/ComputeInstanceApplicationUri"
+                  }
                 },
                 "createdBy": {
                   "readOnly": true,
@@ -3016,6 +3024,12 @@
           "readOnly": true,
           "description": "Describes the admin user name."
         },
+        "sshPort": {
+          "type": "integer",
+          "format": "int32",
+          "readOnly": true,
+          "description": "Describes the port for connecting through SSH."
+        },
         "adminPublicKey": {
           "type": "string",
           "description": "Specifies the SSH rsa public key file as a string. Use \"ssh-keygen -t rsa -b 2048\" to generate your SSH key pairs."
@@ -3072,13 +3086,10 @@
           "readOnly": true,
           "description": "Public IP Address of this ComputeInstance."
         },
-        "applicationUris": {
-          "type": "array",
+        "privateIpAddress": {
+          "type": "string",
           "readOnly": true,
-          "description": "Describes available applications and their connectivity endpoint URIs.",
-          "items": {
-            "$ref": "#/definitions/ComputeInstanceApplicationUri"
-          }
+          "description": "Private IP Address of this ComputeInstance (local to the VNET in which the compute instance is deployed)."
         }
       }
     },
