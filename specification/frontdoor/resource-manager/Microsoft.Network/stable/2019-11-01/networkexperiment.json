@@ -726,7 +726,7 @@
               "Monthly"
             ],
             "x-ms-enum": {
-              "name": "aggregationInterval",
+              "name": "latencyScorecardAggregationInterval",
               "modelAsString": true
             },
             "required": true
@@ -805,7 +805,7 @@
               "Daily"
             ],
             "x-ms-enum": {
-              "name": "aggregationInterval",
+              "name": "timeseriesAggregationInterval",
               "modelAsString": true
             },
             "required": true
@@ -817,10 +817,12 @@
             "description": "The type of Timeseries",
             "enum": [
               "MeasurementCounts",
-              "LatencyP50"
+              "LatencyP50",
+              "LatencyP75",
+              "LatencyP95" 
             ],
             "x-ms-enum": {
-              "name": "timeseriesTypes",
+              "name": "timeseriesType",
               "modelAsString": true
             },
             "required": true
@@ -868,14 +870,14 @@
       "properties": {
         "resourceState": {
           "description": "Resource status.",
-          "$ref": "#/definitions/ResourceState"
+          "$ref": "#/definitions/NetworkExperimentResourceState"
         },
         "enabledState": {
           "type": "string",
           "description": "The state of the Experiment",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -946,8 +948,8 @@
           "type": "string",
           "description": "The enabled state of the Profile",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -986,8 +988,8 @@
           "type": "string",
           "description": "The state of the Experiment",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -1034,8 +1036,8 @@
           "type": "string",
           "description": "The state of the Experiment",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -1044,7 +1046,7 @@
         },
         "resourceState": {
           "description": "Resource status.",
-          "$ref": "#/definitions/ResourceState"
+          "$ref": "#/definitions/NetworkExperimentResourceState"
         },
         "status": {
           "description": "The description of Experiment status from the server side",
@@ -1110,20 +1112,20 @@
         }
       ]
     },
-    "ResourceState": {
+    "NetworkExperimentResourceState": {
       "description": "Defines the server side resource status",
       "readOnly": true,
       "enum": [
-        "creating",
-        "enabling",
-        "enabled",
-        "disabling",
-        "disabled",
-        "deleting"
+        "Creating",
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Deleting"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "NetworkExperimentationResourceState",
+        "name": "NetworkExperimentResourceState",
         "modelAsString": true
       }
     },
@@ -1286,10 +1288,12 @@
           "description": "The type of Timeseries",
           "enum": [
             "MeasurementCounts",
-            "LatencyP50"
-          ],
+            "LatencyP50",
+            "LatencyP75",
+            "LatencyP95" 
+        ],
           "x-ms-enum": {
-            "name": "timeseriesTypes",
+            "name": "timeseriesType",
             "modelAsString": true
           }
         },
