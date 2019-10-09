@@ -692,35 +692,16 @@
             }
           },
           {
-            "name": "position",
-            "in": "query",
-            "description": "This parameter allows the caller to upload data in parallel and control the order in which it is appended to the file.  It is required when uploading data to be appended to the file and when flushing previously uploaded data to the file.  The value must be the position where the data is to be appended.  Uploaded data is not immediately flushed, or written, to the file.  To flush, the previously uploaded data must be contiguous, the position parameter must be specified and equal to the length of the file after all data has been written, and there must not be a request entity body included with the request.",
-            "format": "int64",
-            "required": false,
-            "type": "integer"
+            "$ref": "#/parameters/Position"
           },
           {
-            "name": "retainUncommittedData",
-            "in": "query",
-            "description": "Valid only for flush operations.  If \"true\", uncommitted data is retained after the flush operation completes; otherwise, the uncommitted data is deleted after the flush operation.  The default is false.  Data at offsets less than the specified position are written to the file when flush succeeds, but this optional parameter allows data after the flush position to be retained for a future flush operation.",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/RetainUncommittedData"
           },
           {
-            "name": "close",
-            "in": "query",
-            "description": "Azure Storage Events allow applications to receive notifications when files change. When Azure Storage Events are enabled, a file changed event is raised. This event has a property indicating whether this is the final change to distinguish the difference between an intermediate flush to a file stream and the final close of a file stream. The close query parameter is valid only when the action is \"flush\" and change notifications are enabled. If the value of close is \"true\" and the flush operation completes successfully, the service raises a file change notification with a property indicating that this is the final update (the file stream has been closed). If \"false\" a change notification is raised indicating the file has changed. The default is false. This query parameter is set to true by the Hadoop ABFS driver to indicate that the file stream has been closed.\"",
-            "required": false,
-            "type": "boolean"
+            "$ref": "#/parameters/Close"
           },
           {
-            "name": "Content-Length",
-            "in": "header",
-            "description": "Required for \"Append Data\" and \"Flush Data\".  Must be 0 for \"Flush Data\".  Must be the length of the request content in bytes for \"Append Data\".",
-            "minimum": 0,
-            "required": false,
-            "type": "integer",
-            "format": "int64"
+            "$ref": "#/parameters/ContentLength"
           },
           {
             "$ref": "#/parameters/ContentMD5"
@@ -1636,6 +1617,11 @@
                 "format": "date-time-rfc1123",
                 "description": "The data and time the file or directory was last modified. Write operations on the file or directory update the last modified time."
               },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
               "x-ms-request-id": {
                 "x-ms-client-name": "RequestId",
                 "type": "string",
@@ -1681,6 +1667,244 @@
           "type": "string",
           "enum": [
             "setAccessControl"
+          ]
+        }
+      ]
+    },
+    "/{filesystem}/{path}?action=flush": {
+      "patch": {
+        "tags": [
+          "directory"
+        ],
+        "operationId": "Path_FlushData",
+        "description": "Set the owner, group, permissions, or access control list for a path.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/Position"
+          },
+          {
+            "$ref": "#/parameters/RetainUncommittedData"
+          },
+          {
+            "$ref": "#/parameters/Close"
+          },
+          {
+            "$ref": "#/parameters/ContentLength"
+          },
+          {
+            "$ref": "#/parameters/ContentMD5"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/CacheControl"
+          },
+          {
+            "$ref": "#/parameters/ContentType"
+          },
+          {
+            "$ref": "#/parameters/ContentDisposition"
+          },
+          {
+            "$ref": "#/parameters/ContentEncoding"
+          },
+          {
+            "$ref": "#/parameters/ContentLanguage"
+          },
+          {
+            "$ref": "#/parameters/IfMatch"
+          },
+          {
+            "$ref": "#/parameters/IfNoneMatch"
+          },
+          {
+            "$ref": "#/parameters/IfModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/IfUnmodifiedSince"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The data was flushed (written) to the file successfully.",
+            "headers": {
+              "Date": {
+                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated.",
+                "type": "string",
+                "format": "date-time-rfc1123"
+              },
+              "ETag": {
+                "description": "An HTTP entity tag associated with the file or directory.",
+                "format": "etag",
+                "type": "string"
+              },
+              "Last-Modified": {
+                "description": "The data and time the file or directory was last modified.  Write operations on the file or directory update the last modified time.",
+                "format": "date-time-rfc1123",
+                "type": "string"
+              },
+              "Content-Length": {
+                "description": "The size of the resource in bytes.",
+                "type": "integer",
+                "format": "int64"
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation.",
+                "pattern": "^[{(]?[0-9a-f]{8}[-]?([0-9a-f]{4}[-]?){3}[0-9a-f]{12}[)}]?$",
+                "type": "string"
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "description": "The version of the REST protocol used to process the request.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "The version of the REST protocol used to process the request."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "action",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "flush"
+          ]
+        }
+      ]
+    },
+    "/{filesystem}/{path}?action=append": {
+      "patch": {
+        "tags": [
+          "directory"
+        ],
+        "operationId": "Path_AppendData",
+        "description": "Append data to the file.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Position"
+          },
+          {
+            "$ref": "#/parameters/Timeout"
+          },
+          {
+            "$ref": "#/parameters/ContentLength"
+          },
+          {
+            "$ref": "#/parameters/ContentMD5"
+          },
+          {
+            "$ref": "#/parameters/LeaseIdOptional"
+          },
+          {
+            "$ref": "#/parameters/Body"
+          },
+          {
+            "$ref": "#/parameters/ClientRequestId"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Append data to file control response.",
+            "headers": {
+              "Date": {
+                "type": "string",
+                "format": "date-time-rfc1123",
+                "description": "A UTC date/time value generated by the service that indicates the time at which the response was initiated."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
+              },
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "The version of the REST protocol used to process the request."
+              }
+            }
+          },
+          "default": {
+            "description": "Failure",
+            "headers": {
+              "x-ms-client-request-id": {
+                "x-ms-client-name": "ClientRequestId",
+                "type": "string",
+                "description": "If a client request id header is sent in the request, this header will be present in the response with the same value."
+              },
+              "x-ms-request-id": {
+                "x-ms-client-name": "RequestId",
+                "type": "string",
+                "description": "A server-generated UUID recorded in the analytics logs for troubleshooting and correlation."
+              },
+              "x-ms-version": {
+                "x-ms-client-name": "Version",
+                "type": "string",
+                "description": "The version of the REST protocol used to process the request."
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/StorageError"
+            }
+          }
+        }
+      },
+      "parameters": [
+        {
+          "name": "action",
+          "in": "query",
+          "required": true,
+          "type": "string",
+          "enum": [
+            "append"
           ]
         }
       ]
@@ -1866,7 +2090,8 @@
       "in": "query",
       "description": "Filters results to filesystems within the specified prefix.",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "MaxResults": {
       "name": "maxResults",
@@ -1875,7 +2100,8 @@
       "format": "int32",
       "minimum": 1,
       "required": false,
-      "type": "integer"
+      "type": "integer",
+      "x-ms-parameter-location": "method"
     },
     "Properties": {
       "name": "x-ms-properties",
@@ -1883,7 +2109,8 @@
       "description": "Optional. User-defined properties to be stored with the filesystem, in the format of a comma-separated list of name and value pairs \"n1=v1, n2=v2, ...\", where each value is a base64 encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.  If the filesystem exists, any properties not included in the list will be removed.  All properties are removed if the header is omitted.  To merge new and existing properties, first get all existing properties and the current E-Tag, then make a conditional request with the E-Tag and include values for all properties.",
       "in": "header",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "SourceIfMatch": {
       "name": "x-ms-source-if-match",
@@ -2100,8 +2327,43 @@
       "in": "query",
       "description": "Optional. Valid only when Hierarchical Namespace is enabled for the account. If \"true\", the user identity values returned in the x-ms-owner, x-ms-group, and x-ms-acl response headers will be transformed from Azure Active Directory Object IDs to User Principal Names.  If \"false\", the values will be returned as Azure Active Directory Object IDs. The default value is false. Note that group and application Object IDs are not translated because they do not have unique friendly names.",
       "required": false,
-      "type": "boolean"
-    }
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "Position": {
+      "name": "position",
+      "in": "query",
+      "description": "This parameter allows the caller to upload data in parallel and control the order in which it is appended to the file.  It is required when uploading data to be appended to the file and when flushing previously uploaded data to the file.  The value must be the position where the data is to be appended.  Uploaded data is not immediately flushed, or written, to the file.  To flush, the previously uploaded data must be contiguous, the position parameter must be specified and equal to the length of the file after all data has been written, and there must not be a request entity body included with the request.",
+      "format": "int64",
+      "required": false,
+      "type": "integer",
+      "x-ms-parameter-location": "method"
+    },
+    "RetainUncommittedData": {
+      "name": "retainUncommittedData",
+      "in": "query",
+      "description": "Valid only for flush operations.  If \"true\", uncommitted data is retained after the flush operation completes; otherwise, the uncommitted data is deleted after the flush operation.  The default is false.  Data at offsets less than the specified position are written to the file when flush succeeds, but this optional parameter allows data after the flush position to be retained for a future flush operation.",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "Close": {
+      "name": "close",
+      "in": "query",
+      "description": "Azure Storage Events allow applications to receive notifications when files change. When Azure Storage Events are enabled, a file changed event is raised. This event has a property indicating whether this is the final change to distinguish the difference between an intermediate flush to a file stream and the final close of a file stream. The close query parameter is valid only when the action is \"flush\" and change notifications are enabled. If the value of close is \"true\" and the flush operation completes successfully, the service raises a file change notification with a property indicating that this is the final update (the file stream has been closed). If \"false\" a change notification is raised indicating the file has changed. The default is false. This query parameter is set to true by the Hadoop ABFS driver to indicate that the file stream has been closed.\"",
+      "required": false,
+      "type": "boolean",
+      "x-ms-parameter-location": "method"
+    },
+    "ContentLength": {
+      "name": "Content-Length",
+      "in": "header",
+      "description": "Required for \"Append Data\" and \"Flush Data\".  Must be 0 for \"Flush Data\".  Must be the length of the request content in bytes for \"Append Data\".",
+      "minimum": 0,
+      "required": false,
+      "type": "integer",
+      "format": "int64"
+     }
   },
   "definitions": {
     "Path": {
