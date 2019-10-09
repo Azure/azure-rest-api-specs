@@ -5018,6 +5018,61 @@
         "trainedModelFilePath"
       ]
     },
+    "AzureMLExecutePipelineActivity": {
+      "description": "Azure ML Execute Pipeline activity.",
+      "x-ms-discriminator-value": "AzureMLExecutePipeline",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure ML Execute Pipeline activity properties.",
+          "$ref": "#/definitions/AzureMLExecutePipelineActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMLExecutePipelineActivityTypeProperties": {
+      "description": "Azure ML Execute Pipeline activity properties.",
+      "properties": {
+        "mlPipelineId": {
+          "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "experimentName": {
+          "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "mlPipelineParameters": {
+          "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "type": "object"
+        },
+        "mlParentRunId": {
+          "description": "The parent Azure ML Service pipeline run id. This information will be passed in the ParentRunId property of the published pipeline execution request. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "continueOnStepFailure": {
+          "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "mlPipelineId"
+      ]
+    },
+    "AzureMLPipelineParameters": {
+      "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Type: string (or Expression with resultType string)."
+      }
+    },
     "DataLakeAnalyticsUSQLActivity": {
       "description": "Data Lake Analytics U-SQL activity.",
       "x-ms-discriminator-value": "DataLakeAnalyticsU-SQL",

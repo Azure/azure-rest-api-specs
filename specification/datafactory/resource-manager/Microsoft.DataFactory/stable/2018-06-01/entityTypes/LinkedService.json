@@ -1279,7 +1279,7 @@
     },
     "AzureMLLinkedService": {
       "x-ms-discriminator-value": "AzureML",
-      "description": "Azure ML Web Service linked service.",
+      "description": "Azure ML Studio Web Service linked service.",
       "type": "object",
       "allOf": [
         {
@@ -1288,7 +1288,7 @@
       ],
       "properties": {
         "typeProperties": {
-          "description": "Azure ML Web Service linked service properties.",
+          "description": "Azure ML Studio Web Service linked service properties.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/AzureMLLinkedServiceTypeProperties"
         }
@@ -1298,11 +1298,11 @@
       ]
     },
     "AzureMLLinkedServiceTypeProperties": {
-      "description": "Azure ML Web Service linked service properties.",
+      "description": "Azure ML Studio Web Service linked service properties.",
       "properties": {
         "mlEndpoint": {
           "type": "object",
-          "description": "The Batch Execution REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string)."
+          "description": "The Batch Execution REST URL for an Azure ML Studio Web Service endpoint. Type: string (or Expression with resultType string)."
         },
         "apiKey": {
           "description": "The API key for accessing the Azure ML model endpoint.",
@@ -1310,15 +1310,15 @@
         },
         "updateResourceEndpoint": {
           "type": "object",
-          "description": "The Update Resource REST URL for an Azure ML Web Service endpoint. Type: string (or Expression with resultType string)."
+          "description": "The Update Resource REST URL for an Azure ML Studio Web Service endpoint. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalId": {
           "type": "object",
-          "description": "The ID of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service. Type: string (or Expression with resultType string)."
+          "description": "The ID of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML Studio web service. Type: string (or Expression with resultType string)."
         },
         "servicePrincipalKey": {
           "$ref": "../datafactory.json#/definitions/SecretBase",
-          "description": "The key of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML web service."
+          "description": "The key of the service principal used to authenticate against the ARM-based updateResourceEndpoint of an Azure ML Studio web service."
         },
         "tenant": {
           "type": "object",
@@ -1332,6 +1332,64 @@
       "required": [
         "mlEndpoint",
         "apiKey"
+      ]
+    },
+    "AzureMLServiceLinkedService": {
+      "x-ms-discriminator-value": "AzureMLService",
+      "description": "Azure ML Service linked service.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/LinkedService"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Azure ML Service linked service properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AzureMLServiceLinkedServiceTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMLServiceLinkedServiceTypeProperties": {
+      "description": "Azure ML Service linked service properties.",
+      "properties": {
+        "subscriptionId": {
+          "type": "object",
+          "description": "Azure ML Service workspace subscription ID. Type: string (or Expression with resultType string)."
+        },
+        "resourceGroupName": {
+          "type": "object",
+          "description": "Azure ML Service workspace resource group name. Type: string (or Expression with resultType string)."
+        },
+        "mlWorkspaceName": {
+          "type": "object",
+          "description": "Azure ML Service workspace name. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The ID of the service principal used to authenticate against the endpoint of a published Azure ML Service pipeline. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalKey": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The key of the service principal used to authenticate against the endpoint of a published Azure ML Service pipeline."
+        },
+        "tenant": {
+          "type": "object",
+          "description": "The name or ID of the tenant to which the service principal belongs. Type: string (or Expression with resultType string)."
+        },
+        "encryptedCredential": {
+          "type": "object",
+          "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
+        }
+      },
+      "required": [
+        "subscriptionId",
+        "resourceGroupName",
+        "mlWorkspaceName"
       ]
     },
     "OdbcLinkedService": {
