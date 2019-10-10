@@ -37,18 +37,18 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Security/iotSecuritySolutions": {
       "get": {
         "x-ms-examples": {
-          "Get Security Solutions list": {
+          "List IoT Security solutions by subscription": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsList.json"
           },
-          "Get Security Solutions list By IotHub": {
+          "List IoT Security solutions by IoT Hub": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHub.json"
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
-        "description": "List of security solutions",
-        "operationId": "IoTSecuritySolutions_List",
+        "description": "Use this method to get the list of IoT Security solutions by subscription.",
+        "operationId": "IotSecuritySolution_ListBySubscription",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -82,18 +82,18 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions": {
       "get": {
         "x-ms-examples": {
-          "Get Security Solutions list": {
+          "List IoT Security solutions by resource group": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByRg.json"
           },
-          "Get Security Solutions list By IotHub": {
+          "List IoT Security solutions by resource group and IoT Hub": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolutionsListByIotHubAndRg.json"
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
-        "description": "List of security solutions",
-        "operationId": "IoTSecuritySolutionsResourceGroup_List",
+        "description": "Use this method to get the list IoT Security solutions organized by resource group.",
+        "operationId": "IotSecuritySolution_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -130,14 +130,14 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}": {
       "get": {
         "x-ms-examples": {
-          "Get an iot security solution": {
+          "Get a IoT security solution": {
             "$ref": "./examples/IoTSecuritySolutions/GetIoTSecuritySolution.json"
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
-        "description": "Details of a specific iot security solution",
+        "description": "User this method to get details of a specific IoT Security solution based on solution name",
         "operationId": "IotSecuritySolution_Get",
         "parameters": [
           {
@@ -170,15 +170,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create an iot security solution": {
+          "Create or update a IoT security solution": {
             "$ref": "./examples/IoTSecuritySolutions/CreateIoTSecuritySolution.json"
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
-        "description": "Create new solution manager",
-        "operationId": "IotSecuritySolution_Create",
+        "description": "Use this method to create or update yours IoT Security solution",
+        "operationId": "IotSecuritySolution_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -219,14 +219,14 @@
       },
       "patch": {
         "x-ms-examples": {
-          "Update an iot security solution": {
+          "Use this method to update existing IoT Security solution": {
             "$ref": "./examples/IoTSecuritySolutions/UpdateIoTSecuritySolution.json"
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
-        "description": "update existing Security Solution tags or user defined resources. To update other fields use the CreateOrUpdate method",
+        "description": "Use this method to update existing IoT Security solution tags or user defined resources. To update other fields use the CreateOrUpdate method.",
         "operationId": "IotSecuritySolution_Update",
         "parameters": [
           {
@@ -262,14 +262,14 @@
       },
       "delete": {
         "x-ms-examples": {
-          "Create an iot security solution": {
+          "Delete an IoT security solution": {
             "$ref": "./examples/IoTSecuritySolutions/DeleteIoTSecuritySolution.json"
           }
         },
         "tags": [
-          "IoT Security Solutions"
+          "IoT Security Solution"
         ],
-        "description": "Create new solution manager",
+        "description": "Use this method to delete yours IoT Security solution",
         "operationId": "IotSecuritySolution_Delete",
         "parameters": [
           {
@@ -287,10 +287,10 @@
         ],
         "responses": {
           "200": {
-            "description": "Security Solution deleted"
+            "description": "Security Solution deleted."
           },
           "204": {
-            "description": "Security Solution was not exists"
+            "description": "Security Solution does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -316,14 +316,14 @@
       "description": "A container holding only the Tags for a resource, allowing the user to update the tags."
     },
     "IoTSecuritySolutionsList": {
-      "description": "List of iot solutions",
+      "description": "List of IoT Security solutions.",
       "required": [
         "value"
       ],
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of security solutions",
+          "description": "List of IoT Security solutions",
           "items": {
             "$ref": "#/definitions/IoTSecuritySolutionModel"
           }
@@ -337,7 +337,7 @@
     },
     "IoTSecuritySolutionModel": {
       "type": "object",
-      "description": "Security Solution",
+      "description": "IoT Security solution configuration and resource information.",
       "properties": {
         "location": {
           "type": "string",
@@ -358,6 +358,18 @@
         }
       ]
     },
+    "UpdateIoTSecuritySolutionProperties": {
+      "type": "object",
+      "description": "Update Security Solution setting data",
+      "properties": {
+        "userDefinedResources": {
+          "$ref": "#/definitions/UserDefinedResourcesProperties"
+        },
+        "recommendationsConfiguration": {
+          "$ref": "#/definitions/RecommendationConfigurationList"
+        }
+      }
+    },
     "IoTSecuritySolutionProperties": {
       "type": "object",
       "description": "Security Solution setting data",
@@ -377,7 +389,7 @@
             "Disabled"
           ],
           "default": "Enabled",
-          "description": "Security solution status",
+          "description": "Status of the IoT Security solution.",
           "x-ms-enum": {
             "name": "SecuritySolutionStatus",
             "modelAsString": true
@@ -401,7 +413,7 @@
               ]
             }
           },
-          "description": "List of additional export to workspace data options"
+          "description": "List of additional options for exporting to workspace data."
         },
         "disabledDataSources": {
           "type": "array",
@@ -453,7 +465,7 @@
     },
     "UserDefinedResourcesProperties": {
       "type": "object",
-      "description": "Properties of the solution's user defined resources.",
+      "description": "Properties of the IoT Security solution's user defined resources.",
       "properties": {
         "query": {
           "type": "string",
@@ -477,11 +489,11 @@
     },
     "RecommendationConfigurationProperties": {
       "type": "object",
-      "description": "Recommendation configuration",
+      "description": "The type of IoT Security recommendation.",
       "properties": {
         "recommendationType": {
           "type": "string",
-          "description": "The recommendation type.",
+          "description": "The type of IoT Security recommendation.",
           "enum": [
             "IoT_ACRAuthentication",
             "IoT_AgentSendsUnutilizedMessages",
@@ -582,7 +594,7 @@
             "Enabled"
           ],
           "default": "Enabled",
-          "description": "Recommendation status. The recommendation is not generated when the status is disabled",
+          "description": "Recommendation status. When the recommendation status is disabled recommendations are not generated.",
           "x-ms-enum": {
             "name": "RecommendationConfigStatus",
             "modelAsString": true
@@ -596,7 +608,7 @@
     },
     "RecommendationConfigurationList": {
       "type": "array",
-      "description": "List of recommendation configuration",
+      "description": "List of the configuration status for each recommendation type.",
       "items": {
         "$ref": "#/definitions/RecommendationConfigurationProperties"
       }
@@ -604,11 +616,10 @@
     "UpdateIotSecuritySolutionData": {
       "type": "object",
       "properties": {
-        "userDefinedResources": {
-          "$ref": "#/definitions/UserDefinedResourcesProperties"
-        },
-        "recommendationsConfiguration": {
-          "$ref": "#/definitions/RecommendationConfigurationList"
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security Solution data",
+          "$ref": "#/definitions/UpdateIoTSecuritySolutionProperties"
         }
       },
       "allOf": [
@@ -623,7 +634,7 @@
       "name": "solutionName",
       "in": "path",
       "required": true,
-      "description": "The solution manager name",
+      "description": "The name of the IoT Security solution.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
@@ -641,7 +652,7 @@
       "name": "$filter",
       "in": "query",
       "required": false,
-      "description": "filter the Security Solution with OData syntax. supporting filter by iotHubs",
+      "description": "Filter the IoT Security solution with OData syntax. Supports filtering by iotHubs.",
       "type": "string",
       "x-ms-parameter-location": "method"
     },
