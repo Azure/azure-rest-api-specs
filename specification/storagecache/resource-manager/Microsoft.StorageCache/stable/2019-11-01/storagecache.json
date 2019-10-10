@@ -47,13 +47,13 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The request has succeeded.",
+            "description": "The list of available Resource Provider operations.",
             "schema": {
               "$ref": "#/definitions/ApiOperationListResult"
             }
           },
           "default": {
-            "description": "Resource Provider error response describing why the operation failed.",
+            "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
@@ -62,7 +62,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "Lists all of the available RP operations.",
+        "description": "Lists all of the available Resource Provider operations.",
         "x-ms-examples": {
           "StorageTargets_List": {
             "$ref": "./examples/Operations_List.json"
@@ -245,7 +245,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Returns all Caches the user has access to under a resource group and subscription.",
+        "description": "Returns all Caches the user has access to under a resource group.",
         "operationId": "Caches_ListByResourceGroup"
       }
     },
@@ -338,7 +338,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the Cache object corresponding to cacheId.",
+            "description": "Returns the Cache object corresponding to cacheName.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
@@ -471,7 +471,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Patched the Cache.",
+            "description": "Updated the Cache.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
@@ -525,11 +525,11 @@
         ],
         "responses": {
           "200": {
-            "description": "All cache data is clean.",
+            "description": "All cache data has been flushed to the storage targets.",
             "schema": {}
           },
           "202": {
-            "description": "Cache has started flushing.",
+            "description": "Cache has started flushing to its storage targets. Poll the Cache's state field to monitor.",
             "schema": {}
           },
           "default": {
@@ -696,7 +696,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the list of storage targets defined by cacheId.",
+            "description": "Returns the list of storage targets defined by cacheName.",
             "schema": {
               "$ref": "#/definitions/StorageTargetsResult"
             }
@@ -1054,7 +1054,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells a cache to upgrade its firmware.",
+        "description": "Upgrade a cache's firmware if a new version is available. Otherwise, this operation has no effect.",
         "operationId": "Caches_UpgradeFirmware"
       }
     }
@@ -1170,7 +1170,7 @@
           "description": "Properties for the cache.",
           "properties": {
             "cacheSizeGB": {
-              "description": "The size of this cache's cache, in GB.",
+              "description": "The size of this cache, in GB.",
               "type": "integer"
             },
             "health": {
