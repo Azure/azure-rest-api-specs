@@ -2267,7 +2267,8 @@
       "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. When creating a file or directory and the parent folder does not have a default ACL, the umask restricts the permissions of the file or directory to be created.  The resulting permission is given by p bitwise and not u, where p is the permission and u is the umask.  For example, if p is 0777 and u is 0057, then the resulting permission is 0720.  The default permission is 0777 for a directory and 0666 for a file.  The default umask is 0027.  The umask must be specified in 4-digit octal notation (e.g. 0766).",
       "in": "header",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "Permissions": {
       "name": "x-ms-permissions",
@@ -2275,7 +2276,8 @@
       "description": "Optional and only valid if Hierarchical Namespace is enabled for the account. Sets POSIX access permissions for the file owner, the file owning group, and others. Each class may be granted read, write, or execute permission.  The sticky bit is also supported.  Both symbolic (rwxrw-rw-) and 4-digit octal notation (e.g. 0766) are supported.",
       "in": "header",
       "required": false,
-      "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "RenameSource": {
       "name": "x-ms-rename-source",
@@ -2283,7 +2285,8 @@
       "in": "header",
       "description": "An optional file or directory to be renamed.  The value must have the following format: \"/{filesystem}/{path}\".  If \"x-ms-properties\" is specified, the properties will overwrite the existing properties; otherwise, the existing properties will be preserved. This value must be a URL percent-encoded string. Note that the string may only contain ASCII characters in the ISO-8859-1 character set.",
       "required": false,
-     "type": "string"
+      "type": "string",
+      "x-ms-parameter-location": "method"
     },
     "Owner": {
       "name": "x-ms-owner",
@@ -2363,7 +2366,8 @@
       "minimum": 0,
       "required": false,
       "type": "integer",
-      "format": "int64"
+      "format": "int64",
+      "x-ms-parameter-location": "method"
      }
   },
   "definitions": {
