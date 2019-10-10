@@ -24,7 +24,7 @@
             "mode": "Prevention",
             "maxRequestBodySizeInKb": 128,
             "fileUploadLimitInMb": 750,
-            "requestBodyCheck" : true
+            "requestBodyCheck": true
           },
           "customRules": [
             {
@@ -86,34 +86,34 @@
             }
           ],
           "managedRules": {
-            "managedRuleSets" : [
+            "managedRuleSets": [
               {
-                "ruleSetType" : "OWASP",
-                "ruleSetVersion" : "3.0",
-                "ruleGroupOverrides" : [
+                "ruleSetType": "OWASP",
+                "ruleSetVersion": "3.0",
+                "ruleGroupOverrides": [
                   {
-                    "ruleGroupName" : "REQUEST-942-APPLICATION-ATTACK-SQLI",
-                    "rules" : [
+                    "ruleGroupName": "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                    "rules": [
                       {
-                        "ruleId" : "942130",
-                        "state" :  "Disabled"
+                        "ruleId": "942130",
+                        "state": "Disabled"
                       },
                       {
-                        "ruleId" : "942110",
-                        "state" :  "Disabled"
+                        "ruleId": "942110",
+                        "state": "Disabled"
                       }
                     ]
                   },
                   {
-                    "ruleGroupName" : "REQUEST-920-PROTOCOL-ENFORCEMENT",
-                    "rules" : [
+                    "ruleGroupName": "REQUEST-920-PROTOCOL-ENFORCEMENT",
+                    "rules": [
                       {
-                        "ruleId" : "920100",
-                        "state" :  "Disabled"
+                        "ruleId": "920100",
+                        "state": "Disabled"
                       },
                       {
-                        "ruleId" : "920120",
-                        "state" :  "Disabled"
+                        "ruleId": "920120",
+                        "state": "Disabled"
                       }
                     ]
                   }
@@ -122,14 +122,14 @@
             ],
             "exclusions": [
               {
-                "matchVariable" : "RequestHeaderNames",
-                "selectorMatchOperator" : "Equals",
-                "selector" : "testHeader1"
+                "matchVariable": "RequestHeaderNames",
+                "selectorMatchOperator": "Equals",
+                "selector": "testHeader1"
               },
               {
-                "matchVariable" : "RequestHeaderNames",
-                "selectorMatchOperator" : "StartsWith",
-                "selector" : "testHeader2"
+                "matchVariable": "RequestHeaderNames",
+                "selectorMatchOperator": "StartsWith",
+                "selector": "testHeader2"
               }
             ]
           }
