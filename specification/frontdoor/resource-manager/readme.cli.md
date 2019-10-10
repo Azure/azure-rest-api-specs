@@ -7,7 +7,7 @@ cli:
   cli-name: networkexperiment
   namespace: azure.mgmt.frontdoor
   package-name: azure-mgmt-frontdoor
-  debug: true
+  debug: false
   cmd-override:
     "^.*frontdoor.*$": "-"
     "^.*[/]networkexperimentprofiles([/][^/]*)?$": "networkexperiment profiles"
