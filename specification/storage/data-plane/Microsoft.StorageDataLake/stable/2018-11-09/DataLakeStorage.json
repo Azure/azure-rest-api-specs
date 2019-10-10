@@ -109,7 +109,7 @@
               }
             },
             "schema": {
-              "$ref": "#/definitions/FilesystemList"
+              "$ref": "#/definitions/FileSystemList"
             }
           },
           "default": {
@@ -131,9 +131,9 @@
       "put": {
         "operationId": "FileSystem_Create",
         "summary": "Create FileSystem",
-        "description": "Create a filesystem rooted at the specified location. If the filesystem already exists, the operation fails.  This operation does not support conditional HTTP requests.",
+        "description": "Create a FileSystem rooted at the specified location. If the FileSystem already exists, the operation fails.  This operation does not support conditional HTTP requests.",
         "tags": [
-          "Filesystem Operations"
+          "FileFystem Operations"
         ],
         "parameters": [
           {
@@ -150,7 +150,7 @@
                 "format": "date-time-rfc1123"
               },
               "ETag": {
-                "description": "An HTTP entity tag associated with the filesystem.",
+                "description": "An HTTP entity tag associated with the FileSystem.",
                 "format": "etag",
                 "type": "string"
               },
@@ -194,9 +194,9 @@
       "patch": {
         "operationId": "FileSystem_SetProperties",
         "summary": "Set FileSystem Properties",
-        "description": "Set properties for the filesystem.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Set properties for the FileSystem.  This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
-          "Filesystem Operations"
+          "FileSystem Operations"
         ],
         "parameters": [
           {
@@ -260,7 +260,7 @@
         "summary": "Get FileSystem Properties.",
         "description": "All system and user-defined filesystem properties are specified in the response headers.",
         "tags": [
-          "Filesystem Operations"
+          "FileSystem Operations"
         ],
         "responses": {
           "200": {
@@ -321,9 +321,9 @@
       "delete": {
         "operationId": "FileSystem_Delete",
         "summary": "Delete FileSystem",
-        "description": "Marks the filesystem for deletion.  When a filesystem is deleted, a filesystem with the same identifier cannot be created for at least 30 seconds. While the filesystem is being deleted, attempts to create a filesystem with the same identifier will fail with status code 409 (Conflict), with the service returning additional error information indicating that the filesystem is being deleted. All other operations, including operations on any files or directories within the filesystem, will fail with status code 404 (Not Found) while the filesystem is being deleted. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
+        "description": "Marks the FileSystem for deletion.  When a FileSystem is deleted, a FileSystem with the same identifier cannot be created for at least 30 seconds. While the filesystem is being deleted, attempts to create a filesystem with the same identifier will fail with status code 409 (Conflict), with the service returning additional error information indicating that the filesystem is being deleted. All other operations, including operations on any files or directories within the filesystem, will fail with status code 404 (Not Found) while the filesystem is being deleted. This operation supports conditional HTTP requests.  For more information, see [Specifying Conditional Headers for Blob Service Operations](https://docs.microsoft.com/en-us/rest/api/storageservices/specifying-conditional-headers-for-blob-service-operations).",
         "tags": [
-          "Filesystem Operations"
+          "FileSystem Operations"
         ],
         "responses": {
           "202": {
@@ -380,7 +380,7 @@
             "filesystem"
           ],
           "x-ms-enum": {
-            "name": "FilesystemResourceType",
+            "name": "FileSystemResourceType",
             "modelAsString": false
           }
         },
@@ -399,13 +399,13 @@
       "get": {
         "operationId": "FileSystem_ListPaths",
         "summary": "List Paths",
-        "description": "List filesystem paths and their properties.",
+        "description": "List FileSystem paths and their properties.",
         "x-ms-pageable": {
           "itemName": "paths",
           "nextLinkName": null
         },
         "tags": [
-          "Filesystem Operations"
+          "FileSystem Operations"
         ],
         "parameters": [
           {
@@ -489,7 +489,7 @@
             "filesystem"
           ],
           "x-ms-enum": {
-            "name": "FilesystemResourceType",
+            "name": "FileSystemResourceType",
             "modelAsString": false
           }
         },
@@ -2173,8 +2173,9 @@
       "x-ms-parameter-location": "method",
       "description": "A lease ID for the source path. If specified, the source path must have an active lease and the leaase ID must match."
     },
-    "Filesystem": {
+    "FileSystem": {
       "name": "filesystem",
+      "x-ms-client-name": "fileSystem",
       "in": "path",
       "description": "The filesystem identifier.",
       "pattern": "^[$a-z0-9](?!.*--)[-a-z0-9]{1,61}[a-z0-9]$",
@@ -2408,7 +2409,7 @@
         }
       }
     },
-    "Filesystem": {
+    "FileSystem": {
       "type": "object",
       "properties": {
         "name": {
@@ -2422,13 +2423,13 @@
         }
       }
     },
-    "FilesystemList": {
+    "FileSystemList": {
       "type": "object",
       "properties": {
         "filesystems": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Filesystem"
+            "$ref": "#/definitions/FileSystem"
           }
         }
       }
