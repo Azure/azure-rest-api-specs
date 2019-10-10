@@ -488,11 +488,44 @@
           "enum": [
             "Allow",
             "Block",
-            "Log"
+            "Log",
+            "Skip"
           ],
           "x-ms-enum": {
             "name": "WebApplicationFirewallAction",
             "modelAsString": true
+          }
+        },
+        "skippedManagedRuleSets": {
+          "description": "List of managed rule sets, managed rule groups and managed rules to be skipped. (Skip action only)",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkipActionRuleSet"
+          }
+        }
+      }
+    },
+    "SkipActionRuleSet": {
+      "description": "Identifies a Rule Set which should be skipped.",
+      "type": "object",
+      "required": [
+        "ruleSetType",
+        "ruleSetVersion"
+      ],
+      "properties": {
+        "ruleSetType": {
+          "description": "Defines the Rule Set type.",
+          "type": "string"
+        },
+        "ruleSetVersion": {
+          "description": "Defines the Rule Set version.",
+          "type": "string"
+        },
+        "ruleGroups": {
+          "description": "List of Rule Groups which should be skipped.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleGroupOverride"
           }
         }
       }
