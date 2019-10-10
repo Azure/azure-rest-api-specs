@@ -481,7 +481,34 @@
           },
           "ChangesForBillingPeriodByDepartment": {
             "$ref": "./examples/ChargesForBillingPeriodByDepartment.json"
-          }
+          },
+		  "ChargesListByBillingAccount": {
+		    "$ref": "./examples/ChargesListByBillingAccount.json"
+		  },
+		  "ChargesListByBillingAccountGroupByBillingProfileId": {
+		    "$ref": "./examples/ChargesListByBillingAccountGroupByBillingProfileId.json"
+		  },
+		  "ChargesListByBillingAccountGroupByInvoiceSectionId": {
+		    "$ref": "./examples/ChargesListByBillingAccountGroupByInvoiceSectionId.json"
+		  },
+		  "ChargesListByBillingAccountGroupByCustomerId": {
+		    "$ref": "./examples/ChargesListByBillingAccountGroupByCustomerId.json"
+		  },
+		  "ChargesListByBillingProfile": {
+		    "$ref": "./examples/ChargesListByBillingProfile.json"
+		  },
+		  "ChargesListByBillingProfileGroupByInvoiceSectionId": {
+		    "$ref": "./examples/ChargesListByBillingProfileGroupByInvoiceSectionId.json"
+		  },
+  		  "ChargesListByBillingProfileInvoiceSection": {
+		    "$ref": "./examples/ChargesListByBillingProfileInvoiceSection.json"
+		  },
+		  "ChargesListByInvoiceSection": {
+		    "$ref": "./examples/ChargesListByInvoiceSection.json"
+		  }		  ,
+		  "ChargesListByCustomer": {
+		    "$ref": "./examples/ChargesListByCustomer.json"
+		  }
         },
         "parameters": [
           {
@@ -490,13 +517,34 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
+		  {
+			"name": "startDate",
+			"in": "query",
+			"description": "Start date. This is used for MCA, Modern Commerce Account for billingAccount, billingProfile, invoiceSection, customer (specific for partners) scopes.",
+			"required": true,
+			"type": "string"
+		  },
+		  {
+			"name": "endDate",
+			"in": "query",
+			"description": "End date. This is used for MCA, Modern Commerce Account for billingAccount, billingProfile, invoiceSection, customer (specific for partners) scopes.",
+			"required": true,
+			"type": "string"
+		  },
           {
             "name": "$filter",
             "description": "May be used to filter charges by properties/usageEnd (Utc time), properties/usageStart (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
-          }
+          },
+	      {
+			"name": "$apply",
+			"description": "May be used to group charges for billingAccount scope by properties/billingProfileId, properties/invoiceSectionId, properties/customerId (specific for partners), or for billingProfile scope by properties/invoiceSectionId.",
+			"in": "query",
+			"required": false,
+			"type": "string"
+		  }
         ],
         "responses": {
           "200": {
@@ -1370,6 +1418,144 @@
           }
         }
       }
+    },
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/events": {
+	  "get": {
+		"tags": [
+		  "Events"
+		],
+		"operationId": "EventsByBillingProfile_List",
+		"description": "Lists the events by billingAccountId and billingProfileId for given start and end date.",
+		"externalDocs": {
+		  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+		},
+		"x-ms-examples": {
+		  "EventsListByBillingProfile": {
+			"$ref": "./examples/EventsListByBillingProfile.json"
+		  }
+		},
+		"parameters": [
+		  {
+		    "$ref": "#/parameters/billingAccountIdParameter"
+		  }, 
+		  {
+			"$ref": "#/parameters/billingProfileIdParameter"
+		  }, 
+		  {
+			"$ref": "#/parameters/apiVersionParameter"
+		  {
+		  },
+			"$ref": "#/parameters/startDateParameter"
+		  }, 
+		  {
+			"$ref": "#/parameters/endDateParameter"
+		  }
+		],
+		"responses": {
+		  "200": {
+			"description": "OK. The request has succeeded.",
+			"schema": {
+			  "$ref": "#/definitions/Events"
+			  }
+		  },
+		  "default": {
+			"description": "Error response describing why the operation failed.",
+			"schema": {
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
+		},
+		"x-ms-pageable": {
+		  "nextLinkName": "nextLink"
+		}
+	  }
+	},
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/lots": {
+	  "get": {
+		"tags": [
+		  "Lots"
+		],
+		"operationId": "LotsByBillingProfile_List",
+		"description": "Lists the lots by billingAccountId and billingProfileId.",
+		"externalDocs": {
+		  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+		},
+		"x-ms-examples": {
+		  "EventsListByBillingProfile": {
+		    "$ref": "./examples/LotsListByBillingProfile.json"
+		  }
+		},
+		"parameters": [
+		  {
+			"$ref": "#/parameters/billingAccountIdParameter"
+		  }, 
+		  {
+			"$ref": "#/parameters/billingProfileIdParameter"
+		  },
+		  {
+			"$ref": "#/parameters/apiVersionParameter"
+		  }
+		],
+		"responses": {
+		  "200": {
+			"description": "OK. The request has succeeded.",
+			"schema": {
+			  "$ref": "#/definitions/Lots"
+			}
+		  },
+		  "default": {
+		    "description": "Error response describing why the operation failed.",
+			"schema": {
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
+		},
+		"x-ms-pageable": {
+		  "nextLinkName": "nextLink"
+		}
+	  }
+	},
+	"/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/providers/Microsoft.Consumption/credits/balanceSummary": {
+	  "get": {
+		"tags": [
+		  "Credits"
+		],
+		"operationId": "CreditSummaryByBillingProfile_Get",
+		"description": "The credit summary by billingAccountId and billingProfileId.",
+		"externalDocs": {
+		  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
+		},
+		"x-ms-examples": {
+		  "CreditSummaryByBillingProfile": {
+			"$ref": "./examples/CreditSummaryByBillingProfile.json"
+		  }
+		},
+		"parameters": [
+		  {
+			"$ref": "#/parameters/billingAccountIdParameter"
+		  },
+		  {
+			"$ref": "#/parameters/billingProfileIdParameter"
+   		  },
+		  {
+			"$ref": "#/parameters/apiVersionParameter"
+  		  }
+		],
+		"responses": {
+		  "200": {
+		    "description": "OK. The request has succeeded.",
+			"schema": {
+			  "$ref": "#/definitions/CreditSummary"
+			}
+		  },
+		  "default": {
+			"description": "Error response describing why the operation failed.",
+			"schema": {
+			  "$ref": "#/definitions/ErrorResponse"
+			}
+		  }
+		}
+	  }
     }
   },
   "definitions": {
@@ -3125,6 +3311,11 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
+        },
+        "isInvoiced": {
+          "description": "Shows if it is invoiced or not.",
+          "type": "boolean",
+          "readOnly": true
         }
       }
     },
@@ -3232,6 +3423,224 @@
         }
       }
     },
+	"Events": {
+	  "description": "Result of listing event summary.",
+	  "properties": {
+		"value": {
+			"description": "The list of event summary.",
+			"type": "array",
+			"readOnly": true,
+			"items": {
+				"$ref": "#/definitions/EventSummary"
+			}
+		},
+		"nextLink": {
+			"description": "The link (url) to the next page of results.",
+			"type": "string",
+			"readOnly": true
+		}
+	  }
+	},
+	"EventSummary": {
+	  "description": "An event summary resource.",
+		"type": "object",
+		"allOf": [{
+		  "$ref": "#/definitions/Resource"
+			}
+		],
+		"properties": {
+		  "properties": {
+			"x-ms-client-flatten": true,
+			  "$ref": "#/definitions/EventProperties",
+			  "title": "Event summary properties"
+		}
+	  }
+	},
+	"EventProperties": {
+      "description": "The event properties.",
+	  "properties": {
+		"transactionDate": {
+			"description": "Transaction Date.",
+			"type": "string",
+			"format": "date-time",
+			"readOnly": true
+		},
+		"description": {
+			"description": "Transaction description.",
+			"type": "string",
+			"format": "string",
+			"readOnly": true
+		},
+		"newCredit": {
+			"description": "New Credit.",
+			"readOnly": true,
+			"$ref": "#/definitions/amount"
+		},
+		"adjustments": {
+			"description": "Adjustments.",
+			"readOnly": true,
+			"$ref": "#/definitions/amount"
+		},
+		"creditExpired": {
+			"description": "Credit Expired.",
+			"readOnly": true,
+			"$ref": "#/definitions/amount"
+		},
+		"charges": {
+			"description": "Charges.",
+			"readOnly": true,
+			"$ref": "#/definitions/amount"
+		},
+		"closedBalance": {
+			"description": "Closed Balance.",
+			"readOnly": true,
+			"$ref": "#/definitions/amount"
+		},
+		"eventType": {
+			"description": "The type of event.",
+			"type": "string",
+			"enum": [
+				"SettledCharges",
+				"PendingCharges",
+				"PendingAdjustments",
+				"PendingNewCredit",
+				"PendingExpiredCredit",
+				"UnKnown",
+				"NewCredit"
+			],
+			"x-ms-enum": {
+				"name": "EventType",
+				"modelAsString": true
+			}
+		},
+		"invoiceNumber": {
+			"description": "Invoice Number.",
+			"type": "string",
+			"format": "string",
+			"readOnly": true
+		}
+	  }
+	},
+	"Lots": {
+	  "description": "Result of listing lot summary.",
+	  "properties": {
+		"value": {
+		  "description": "The list of lot summary.",
+			"type": "array",
+			"readOnly": true,
+			"items": {
+				"$ref": "#/definitions/LotSummary"
+		  }
+		},
+		"nextLink": {
+		  "description": "The link (url) to the next page of results.",
+			"type": "string",
+			"readOnly": true
+		}
+  	  }
+	},
+	"LotSummary": {
+	  "description": "A lot summary resource.",
+	  "type": "object",
+	  "allOf": [
+	    {
+		  "$ref": "#/definitions/Resource"
+	    }
+	  ],
+	  "properties": {
+	    "properties": {
+		  "x-ms-client-flatten": true,
+		    "$ref": "#/definitions/LotProperties",
+			"title": "Lot summary properties"
+		}
+	  }
+	},
+	"LotProperties": {
+	  "description": "The lot properties.",
+	  "properties": {
+		"originalAmount": {
+		  "description": "Original Amount.",
+		  "readOnly": true,
+		  "$ref": "#/definitions/amount"
+		},
+		"closedBalance": {
+		  "description": "Closed Balance.",
+		  "readOnly": true,
+		  "$ref": "#/definitions/amount"
+		},
+		"source": {
+		  "description": "Lot source.",
+	      "type": "string",
+		  "enum": [
+			"PurchasedCredit",
+			"PromotionalCredit"
+		  ],
+		  "x-ms-enum": {
+			"name": "LotSource",
+			"modelAsString": true
+		  },
+			"readOnly": true
+		},
+		"startDate": {
+		  "description": "Start Date.",
+		  "type": "string",
+		  "format": "date-time",
+		  "readOnly": true
+		},
+		"expirationDate": {
+		  "description": "Expiration Date.",
+		  "type": "string",
+		  "format": "date-time",
+		  "readOnly": true
+		},
+		"poNumber": {
+		  "description": "PO Number.",
+		  "type": "string",
+		  "format": "string",
+		  "readOnly": true
+		}
+	  }
+	},
+	"CreditSummary": {
+	  "description": "A credit summary resource.",
+	  "type": "object",
+	  "allOf": [
+	    {
+		  "$ref": "#/definitions/Resource"
+		}
+	],
+	"properties": {
+	  "properties": {
+		"x-ms-client-flatten": true,
+		  "$ref": "#/definitions/CreditSummaryProperties",
+		  "title": "Credit summary properties"
+		}
+	  }
+	},
+	"CreditSummaryProperties": {
+	  "description": "The properties of the credit summary.",
+	  "properties": {
+		"BalanceSummary": {
+		  "description": "Summary of balances associated with this credit summary.",
+		  "$ref": "#/definitions/CreditBalanceSummary"
+		},
+		"pendingCreditAdjustments": {
+		  "description": "Pending Credit Adjustments.",
+		  "readOnly": true,
+		  "$ref": "#/definitions/amount"
+		},
+		"expiredCredit": {
+		"description": "Expired Credit.",
+		"readOnly": true,
+		"$ref": "#/definitions/amount"
+		},
+		"pendingEligibleCharges": {
+		"description": "Pending Eligible Charges.",
+		"readOnly": true,
+		"$ref": "#/definitions/amount"
+		}
+	  }
+	},
     "Resource": {
       "description": "The Resource model definition.",
       "properties": {
@@ -3308,7 +3717,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with usage details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
+      "description": "The scope associated with charges operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId} for customer scope speicific for Partner Led. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -3317,7 +3726,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and management group, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
+      "description": "The scope associated with usage details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and management group, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. Also, Modern Commerce Account scopes are '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId} speicific for Partner Led.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -3478,6 +3887,20 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+	"startDateParameter": {
+	  "name": "startDate",
+	  "in": "query",
+	  "description": "Start date",
+	  "required": true,
+	  "type": "string"
+	},
+	"endDateParameter": {
+	  "name": "endDate",
+	  "in": "query",
+	  "description": "End date",
+	  "required": true,
+	  "type": "string"
+	},
     "metricParameter": {
       "name": "metric",
       "in": "query",
