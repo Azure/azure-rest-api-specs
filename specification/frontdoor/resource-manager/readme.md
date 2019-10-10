@@ -171,6 +171,10 @@ See configuration in [readme.go.md](./readme.go.md)
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
 ``` yaml $(java)
 java:
   azure-arm: true
