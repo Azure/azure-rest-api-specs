@@ -17,7 +17,7 @@ cli:
     "/sku": "Sku*/"
     "/properties/exchange": "Exchange*/"
     "/properties/direct": "Direct*/"
-    "/properties/peercontactinfo/": "*/"
+    "/properties/peercontactinfo": "*/"
     
   test-setup:
     - name: Create or Update a service with all parameters
