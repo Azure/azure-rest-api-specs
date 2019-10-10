@@ -17,7 +17,7 @@ The structure of the directory should strictly follow these rules:
 
 1. **Profile**: The profile holder contains the profiles' definition MD files. these files will contain information and references to the snapshots of the RPs' Resource types or Dataplane API versions that represent a specific profile.
 
-1. **Specification**: This folder the is root folder for all Specs (Management and Dataplane) related docs.
+1. **Specification**: This folder is the root folder for all Specs (Management and Dataplane) related docs.
 
 1. **{RP-Name} Folders** - each RP will have a separate folder
 
