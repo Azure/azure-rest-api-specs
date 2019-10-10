@@ -87,7 +87,7 @@
           "200": {
             "description": "OK - Returns a JSON object",
             "schema": {
-              "$ref": "#/definitions/GetSerialConsoleResult"
+              "$ref": "#/definitions/GetSerialConsoleDisabledResult"
             }
           },
           "404": {
@@ -180,12 +180,12 @@
     }
   },
   "definitions": {
-    "GetSerialConsoleResult": {
+    "GetSerialConsoleDisabledResult": {
       "title": "Serial Console GET Result",
       "description": "Returns whether or not Serial Console is disabled.",
       "type": "object",
       "properties": {
-        "value": {
+        "disabled": {
           "description": "Whether or not Serial Console is disabled.",
           "type": "boolean"
         }
@@ -196,7 +196,7 @@
       "description": "Returns whether or not Serial Console is disabled.",
       "type": "object",
       "properties": {
-        "value": {
+        "disabled": {
           "description": "Whether or not Serial Console is disabled.",
           "type": "boolean"
         }
@@ -207,7 +207,7 @@
       "description": "Returns whether or not Serial Console is disabled (enabled).",
       "type": "object",
       "properties": {
-        "value": {
+        "disabled": {
           "description": "Whether or not Serial Console is disabled (enabled).",
           "type": "boolean"
         }
@@ -219,8 +219,8 @@
       "type": "object",
       "properties": {
         "value": {
-          "description": "Serial Console operations",
-          "type": "string"
+          "description": "A list of Serial Console operations",
+          "type": "array"
         }
       }
     },
@@ -229,8 +229,12 @@
       "description": "Error saying that the provided subscription could not be found",
       "type": "object",
       "properties": {
-        "value": {
-          "description": "Error saying that the provided subscription could not be found",
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Subscription not found message",
           "type": "string"
         }
       }
