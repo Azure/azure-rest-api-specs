@@ -8,6 +8,13 @@ cli:
   namespace: azure.mgmt.frontdoor
   package-name: azure-mgmt-frontdoor
   debug: true
+  cmd-override:
+    "^.*frontdoor.*$": "-"
+    "^.*[/]networkexperimentprofiles([/][^/]*)?$": "networkexperiment profiles"
+    "^.*[/]networkexperimentprofiles[/].*[/]preconfiguredendpoints[/].*$": "networkexperiment profile preconfiguredendpoint"
+    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/]([/][^/]*)?$": "networkexperiment profile experiment"
+    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]latencyscorecard$": "networkexperiment profile experiment latencyscorecard"
+    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]timeseries$": "networkexperiment profile experiment timeseries"
   adjustments:
     "/sku": "Sku*/"
   test-setup:
