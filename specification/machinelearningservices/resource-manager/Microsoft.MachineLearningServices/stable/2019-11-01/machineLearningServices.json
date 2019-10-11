@@ -2187,12 +2187,12 @@
                   "description": "Describes all connectivity endpoints available for this ComputeInstance.",
                   "$ref": "#/definitions/ComputeInstanceConnectivityEndpoints"
                 },
-                "applicationUris": {
+                "applications": {
                   "type": "array",
                   "readOnly": true,
                   "description": "Describes available applications and their endpoints on this ComputeInstance.",
                   "items": {
-                    "$ref": "#/definitions/ComputeInstanceApplicationUri"
+                    "$ref": "#/definitions/ComputeInstanceApplication"
                   }
                 },
                 "createdBy": {
@@ -2870,15 +2870,15 @@
         "modelAsString": true
       }
     },
-    "ComputeInstanceApplicationUri": {
+    "ComputeInstanceApplication": {
       "type": "object",
       "description": "Defines an Aml Instance application and its connectivity endpoint URI.",
       "properties": {
-        "applicationName": {
+        "displayName": {
           "type": "string",
           "description": "Name of the ComputeInstance application."
         },
-        "applicationUri": {
+        "endpointUri": {
           "type": "string",
           "description": "Application' endpoint URI."
         }
