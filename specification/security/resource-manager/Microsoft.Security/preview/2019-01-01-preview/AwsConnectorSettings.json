@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider.",
     "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
@@ -27,7 +27,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -44,7 +44,7 @@
         "tags": [
           "AwsConnectorSettings"
         ],
-        "description": "Exposes the aws connectors settings at the tenant",
+        "description": "Exposes the aws connectors settings at the tenant.",
         "operationId": "AwsConnectorSettings_List",
         "parameters": [
           {
@@ -83,7 +83,7 @@
         "tags": [
           "AwsConnectorSettings"
         ],
-        "description": "Details of the aws connector settings at the tenants",
+        "description": "Details of the aws connector settings at the tenants.",
         "operationId": "AwsConnectorSettings_Get",
         "parameters": [
           {
@@ -120,7 +120,7 @@
         "tags": [
           "AwsConnectorSettings"
         ],
-        "description": "Details of a specific aws connector setting",
+        "description": "Details of a specific aws connector setting.",
         "operationId": "AwsConnectorSettings_Create",
         "parameters": [
           {
@@ -156,10 +156,10 @@
   "definitions": {
     "AwsConnectorSettingList": {
       "type": "object",
-      "description": "List of all the aws connectors settings response",
+      "description": "List of all the aws connectors settings response.",
       "properties": {
         "value": {
-          "description": "List of all the aws connectors settings",
+          "description": "List of all the aws connectors settings.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/AwsConnectorSetting"
@@ -174,11 +174,11 @@
     },
     "AwsConnectorSetting": {
       "type": "object",
-      "description": "aws connector setting",
+      "description": "aws connector setting.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "aws connector credentials settings",
+          "description": "aws connector credentials settings.",
           "$ref": "#/definitions/AwsConnectorSettingProperties"
         }
       },
@@ -190,23 +190,23 @@
     },
     "AwsConnectorSettingProperties": {
       "type": "object",
-      "description": "aws connector credentials",
+      "description": "aws connector credentials.",
       "properties": {
         "connectorId": {
           "type": "string",
-          "description": "azure aws connector id"
+          "description": "azure aws connector id."
         },
         "awsAccountID": {
           "type": "string",
-          "description": "aws account id"
+          "description": "aws account id."
         },
         "accessKeyID": {
           "type": "string",
-          "description": "aws access key id"
+          "description": "aws access key id."
         },
         "secretAccessKey": {
           "type": "string",
-          "description": "aws secret access key"
+          "description": "aws secret access key."
         }
       },
       "required": [
@@ -221,14 +221,14 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Aws connector name",
+      "description": "Aws connector name.",
       "x-ms-parameter-location": "method"
     },
     "AwsConnectorSetting": {
       "name": "awsConnectorSetting",
       "in": "body",
       "required": true,
-      "description": "Aws connector credentials Setting",
+      "description": "Aws connector credentials Setting.",
       "schema": {
         "$ref": "#/definitions/AwsConnectorSetting"
       },

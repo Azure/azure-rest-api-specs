@@ -2,8 +2,8 @@
   "swagger": "2.0",
   "info": {
     "title": "Security Center",
-    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
-    "version": "2017-08-01-preview"
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider.",
+    "version": "2019-01-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -27,25 +27,25 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoProvisioningSettings": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connector/AWS/autoProvisioningSettings": {
       "get": {
         "x-ms-examples": {
-          "Get auto provisioning settings for subscription": {
-            "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingsSubscription_example.json"
+          "Get aws auto provisioning settings for subscription": {
+            "$ref": "./examples/AwsAutoProvisioningSettings/GetAwsAutoProvisioningSettingsSubscription_example.json"
           }
         },
         "tags": [
-          "AutoProvisioningSettings"
+          "AwsAutoProvisioningSettings"
         ],
-        "description": "Exposes the auto provisioning settings of the subscriptions",
-        "operationId": "AutoProvisioningSettings_List",
+        "description": "Exposes the aws auto provisioning settings of the subscription.",
+        "operationId": "AwsAutoProvisioningSettings_List",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -58,7 +58,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoProvisioningSettingList"
+              "$ref": "#/definitions/AwsAutoProvisioningSettingList"
             }
           },
           "default": {
@@ -73,18 +73,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/autoProvisioningSettings/{settingName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/connector/AWS/autoProvisioningSettings/{awsSettingName}": {
       "get": {
         "x-ms-examples": {
-          "Get an auto provisioning setting for subscription": {
-            "$ref": "./examples/AutoProvisioningSettings/GetAutoProvisioningSettingSubscription_example.json"
+          "Get an aws auto provisioning setting for a subscription": {
+            "$ref": "./examples/AwsAutoProvisioningSettings/GetAwsAutoProvisioningSettingSubscription_example.json"
           }
         },
         "tags": [
-          "AutoProvisioningSettings"
+          "AwsAutoProvisioningSettings"
         ],
-        "description": "Details of a specific setting",
-        "operationId": "AutoProvisioningSettings_Get",
+        "description": "Details of an aws specific setting.",
+        "operationId": "AwsAutoProvisioningSettings_Get",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -93,14 +93,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoProvisioningSettingName"
+            "$ref": "#/parameters/AwsAutoProvisioningSettingName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoProvisioningSetting"
+              "$ref": "#/definitions/AwsAutoProvisioningSetting"
             }
           },
           "default": {
@@ -113,15 +113,15 @@
       },
       "put": {
         "x-ms-examples": {
-          "Create auto provisioning settings for subscription": {
-            "$ref": "./examples/AutoProvisioningSettings/CreateAutoProvisioningSettingsSubscription_example.json"
+          "Create aws auto provisioning settings for subscription": {
+            "$ref": "./examples/AwsAutoProvisioningSettings/CreateAwsAutoProvisioningSettingsSubscription_example.json"
           }
         },
         "tags": [
-          "AutoProvisioningSettings"
+          "AwsAutoProvisioningSettings"
         ],
-        "description": "Details of a specific setting",
-        "operationId": "AutoProvisioningSettings_Create",
+        "description": "Details of an aws specific setting",
+        "operationId": "AwsAutoProvisioningSettings_Create",
         "parameters": [
           {
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -130,17 +130,17 @@
             "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
           },
           {
-            "$ref": "#/parameters/AutoProvisioningSettingName"
+            "$ref": "#/parameters/AwsAutoProvisioningSettingName"
           },
           {
-            "$ref": "#/parameters/AutoProvisioningSetting"
+            "$ref": "#/parameters/AwsAutoProvisioningSetting"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/AutoProvisioningSetting"
+              "$ref": "#/definitions/AwsAutoProvisioningSetting"
             }
           },
           "default": {
@@ -154,15 +154,15 @@
     }
   },
   "definitions": {
-    "AutoProvisioningSettingList": {
+    "AwsAutoProvisioningSettingList": {
       "type": "object",
-      "description": "List of all the auto provisioning settings response",
+      "description": "List of all the aws auto provisioning settings response.",
       "properties": {
         "value": {
-          "description": "List of all the auto provisioning settings",
+          "description": "List of all the aws auto provisioning settings.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AutoProvisioningSetting"
+            "$ref": "#/definitions/AwsAutoProvisioningSetting"
           }
         },
         "nextLink": {
@@ -172,14 +172,14 @@
         }
       }
     },
-    "AutoProvisioningSetting": {
+    "AwsAutoProvisioningSetting": {
       "type": "object",
-      "description": "Auto provisioning setting",
+      "description": "Aws auto provisioning setting",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Auto provisioning setting data",
-          "$ref": "#/definitions/AutoProvisioningSettingProperties"
+          "description": "Aws auto provisioning setting data",
+          "$ref": "#/definitions/AwsAutoProvisioningSettingProperties"
         }
       },
       "allOf": [
@@ -188,13 +188,17 @@
         }
       ]
     },
-    "AutoProvisioningSettingProperties": {
+    "AwsAutoProvisioningSettingProperties": {
       "type": "object",
-      "description": "describes properties of an auto provisioning setting",
+      "description": "Describes properties of an aws auto provisioning setting",
       "properties": {
+        "connectorId": {
+          "type": "string",
+          "description": "Aws connector id in Azure."
+        },
         "autoProvision": {
           "type": "string",
-          "description": "Describes what kind of security agent provisioning action to take",
+          "description": "Describes what kind of security agent provisioning action to take.",
           "enum": [
             "On",
             "Off"
@@ -205,11 +209,11 @@
             "values": [
               {
                 "value": "On",
-                "description": "Install missing security agent on VMs automatically"
+                "description": "Install missing security agent on EC2's automatically."
               },
               {
                 "value": "Off",
-                "description": "Do not install security agent on the VMs automatically"
+                "description": "Do not install security agent on the EC2's automatically."
               }
             ]
           }
@@ -221,21 +225,21 @@
     }
   },
   "parameters": {
-    "AutoProvisioningSettingName": {
-      "name": "settingName",
+    "AwsAutoProvisioningSettingName": {
+      "name": "awsSettingName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Auto provisioning setting key",
+      "description": "Aws auto provisioning setting key.",
       "x-ms-parameter-location": "method"
     },
-    "AutoProvisioningSetting": {
+    "AwsAutoProvisioningSetting": {
       "name": "setting",
       "in": "body",
       "required": true,
-      "description": "Auto provisioning setting key",
+      "description": "Aws auto provisioning setting key.",
       "schema": {
-        "$ref": "#/definitions/AutoProvisioningSetting"
+        "$ref": "#/definitions/AwsAutoProvisioningSetting"
       },
       "x-ms-parameter-location": "method"
     }
