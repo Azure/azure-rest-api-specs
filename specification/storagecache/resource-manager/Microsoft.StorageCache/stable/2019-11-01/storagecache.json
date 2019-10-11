@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage caches.",
+    "description": "A Storage Cache provides scalable caching service for NAS clients, serving data from either NFSv3 or Blob at-rest storage (referred to as \"Storage Targets\"). These operations allow you to manage Caches.",
     "title": "Storage Cache Mgmt Client",
     "version": "2019-11-01"
   },
@@ -28,7 +28,7 @@
       "type": "oauth2",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
+      "description": "Azure Active Directory OAuth2 Flow.",
       "scopes": {
         "user_impersonation": "impersonate your user account"
       }
@@ -154,7 +154,7 @@
         "tags": [
           "UsageModels"
         ],
-        "description": "Get the list of cache Usage Models available to this subscription.",
+        "description": "Get the list of Cache Usage Models available to this subscription.",
         "operationId": "UsageModels_List"
       }
     },
@@ -173,7 +173,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of Cache objects.  Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of Cache objects. Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
               "$ref": "#/definitions/CachesListResult"
             }
@@ -222,7 +222,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A list of Cache objects.  Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
+            "description": "A list of Cache objects. Note that entity references might replace complete Cache objects, as described in http://docs.oasis-open.org/odata/odata-json-format/v4.01/cs01/odata-json-format-v4.01-cs01.html#sec_EntityReference",
             "schema": {
               "$ref": "#/definitions/CachesListResult"
             }
@@ -263,7 +263,7 @@
             "type": "string"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -283,7 +283,7 @@
             "schema": {}
           },
           "202": {
-            "description": "Started the Cache's transition to Deleted state.",
+            "description": "Started the Cache's transition to Deleted state. Poll the Cache to monitor.",
             "schema": {}
           },
           "204": {
@@ -322,7 +322,7 @@
             "type": "string"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -383,7 +383,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -391,7 +391,7 @@
             "type": "string"
           },
           {
-            "description": "Object containing the user selectable properties of the new cache.  If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user-selectable properties of the new Cache. If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
             "name": "cache",
             "schema": {
@@ -407,7 +407,7 @@
             }
           },
           "201": {
-            "description": "Cache creation has been initiated.  Poll the new Cache's provisioningState property to monitor creation progress.",
+            "description": "Cache creation has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
@@ -453,7 +453,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -461,7 +461,7 @@
             "type": "string"
           },
           {
-            "description": "Object containing the user selectable properties of the new cache.  If read-only properties are included, they must match the existing values of those properties.",
+            "description": "Object containing the user-selectable properties of the Cache. If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
             "name": "cache",
             "schema": {
@@ -515,7 +515,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -525,11 +525,11 @@
         ],
         "responses": {
           "200": {
-            "description": "All cache data has been flushed to the storage targets.",
+            "description": "All cached data has been flushed to the Storage Target(s).",
             "schema": {}
           },
           "202": {
-            "description": "Cache has started flushing to its storage targets. Poll the Cache's state field to monitor.",
+            "description": "Cache has started flushing to its Storage Target(s). Poll the Cache's state field to monitor.",
             "schema": {}
           },
           "default": {
@@ -548,7 +548,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells a cache to write all dirty data to the StorageTarget(s).  During the flush, clients will see errors returned until the flush is complete.",
+        "description": "Tells a Cache to write all dirty data to the Storage Target(s). During the flush, clients will see errors returned until the flush is complete.",
         "operationId": "Caches_Flush"
       }
     },
@@ -572,7 +572,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -586,7 +586,7 @@
             "schema": {}
           },
           "202": {
-            "description": "Cache has started the transition to Active.",
+            "description": "Cache has started the transition to Active. Poll the Cache's state field to monitor.",
             "schema": {}
           },
           "default": {
@@ -605,7 +605,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells a Stopped state cache to transition to Active state.",
+        "description": "Tells a Stopped state Cache to transition to Active state.",
         "operationId": "Caches_Start"
       }
     },
@@ -629,7 +629,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -643,7 +643,7 @@
             "schema": {}
           },
           "202": {
-            "description": "Cache has started the transition to Stopped.",
+            "description": "Cache has started the transition to Stopped. Poll the Cache's state field to monitor.",
             "schema": {}
           },
           "default": {
@@ -662,7 +662,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Tells an Active cache to transition to Stopped state.",
+        "description": "Tells an Active Cache to transition to Stopped state.",
         "operationId": "Caches_Stop"
       }
     },
@@ -686,7 +686,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -696,7 +696,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Returns the list of storage targets defined by cacheName.",
+            "description": "Returns the list of Storage Targets defined by cacheName.",
             "schema": {
               "$ref": "#/definitions/StorageTargetsResult"
             }
@@ -719,7 +719,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Returns the StorageTargets for this cache in the subscription and resource group.",
+        "description": "Returns a list of Storage Targets for the specified Cache.",
         "operationId": "StorageTargets_ListByCache"
       }
     },
@@ -743,7 +743,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -751,7 +751,7 @@
             "type": "string"
           },
           {
-            "description": "Name of storage target.",
+            "description": "Name of Storage Target.",
             "in": "path",
             "name": "storageTargetName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -765,11 +765,11 @@
             "schema": {}
           },
           "202": {
-            "description": "Started the storage target's deletion.",
+            "description": "Started the Storage Target's deletion. Poll the Cache's Storage Targets to monitor.",
             "schema": {}
           },
           "204": {
-            "description": "Storage target deleted.",
+            "description": "Storage Target deleted.",
             "schema": {}
           },
           "default": {
@@ -788,7 +788,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Removes a storage target from a cache.  This operation is allowed at any time, but if the cache is down or unhealthy, the actual removal of the storage target may be delayed until the cache is healthy again.",
+        "description": "Removes a Storage Target from a Cache. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual removal of the Storage Target may be delayed until the Cache is healthy again. Note that if the Cache has data to flush to the Storage Target, the data will be flushed before the Storage Target will be deleted.",
         "operationId": "StorageTargets_Delete"
       },
       "get": {
@@ -810,7 +810,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -818,7 +818,7 @@
             "type": "string"
           },
           {
-            "description": "Name of storage target.",
+            "description": "Name of the Storage Target.",
             "in": "path",
             "name": "storageTargetName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -848,7 +848,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Returns a storage target from a cache.",
+        "description": "Returns a Storage Target from a Cache.",
         "operationId": "StorageTargets_Get"
       },
       "put": {
@@ -873,7 +873,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -881,7 +881,7 @@
             "type": "string"
           },
           {
-            "description": "Name of storage target.",
+            "description": "Name of the Storage Target.",
             "in": "path",
             "name": "storageTargetName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -889,7 +889,7 @@
             "type": "string"
           },
           {
-            "description": "Object containing the definition of a storage target.",
+            "description": "Object containing the definition of a Storage Target.",
             "in": "body",
             "name": "storagetarget",
             "schema": {
@@ -905,7 +905,7 @@
             }
           },
           "201": {
-            "description": "Storage Target creation has been initiated.  Poll the new Storage Target's provisioningState property to monitor creation progress.",
+            "description": "Storage Target creation has been initiated. Poll the new Storage Target's provisioningState property to monitor creation progress.",
             "schema": {
               "$ref": "#/definitions/StorageTarget"
             }
@@ -926,7 +926,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Create/update a storage target.  This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cache is healthy again.",
+        "description": "Create/update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.",
         "operationId": "StorageTargets_Create"
       },
       "patch": {
@@ -951,7 +951,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -959,7 +959,7 @@
             "type": "string"
           },
           {
-            "description": "Name of storage target.",
+            "description": "Name of the Storage Target.",
             "in": "path",
             "name": "storageTargetName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -967,7 +967,7 @@
             "type": "string"
           },
           {
-            "description": "Object containing the definition of a storage target.",
+            "description": "Object containing the user-selectable properties of the Storage Target. If read-only properties are included, they must match the existing values of those properties.",
             "in": "body",
             "name": "storagetarget",
             "schema": {
@@ -997,7 +997,7 @@
         "tags": [
           "StorageTargets"
         ],
-        "description": "Update a storage target.  This operation is allowed at any time, but if the cache is down or unhealthy, the actual creation/modification of the storage target may be delayed until the cache is healthy again.",
+        "description": "Update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.",
         "operationId": "StorageTargets_Update"
       }
     },
@@ -1021,7 +1021,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "description": "Name of cache.",
+            "description": "Name of Cache.",
             "in": "path",
             "name": "cacheName",
             "pattern": "^[-0-9a-zA-Z_]{1,31}$",
@@ -1035,7 +1035,7 @@
             "schema": {}
           },
           "202": {
-            "description": "Cache has started the upgrade.",
+            "description": "Cache has started the upgrade. Poll the Cache's state field to monitor.",
             "schema": {}
           },
           "default": {
@@ -1054,7 +1054,7 @@
         "tags": [
           "Caches"
         ],
-        "description": "Upgrade a cache's firmware if a new version is available. Otherwise, this operation has no effect.",
+        "description": "Upgrade a Cache's firmware if a new version is available. Otherwise, this operation has no effect.",
         "operationId": "Caches_UpgradeFirmware"
       }
     }
@@ -1075,7 +1075,7 @@
               "type": "string"
             },
             "resource": {
-              "description": "Resource on which the operation is performed: cache, etc.",
+              "description": "Resource on which the operation is performed: Cache, etc.",
               "type": "string"
             }
           }
@@ -1140,14 +1140,14 @@
       "type": "object"
     },
     "Cache": {
-      "description": "A cache instance.  Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
+      "description": "A Cache instance. Follows Azure Resource Manager standards: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/resource-api-reference.md",
       "properties": {
         "tags": {
           "description": "ARM tags as name/value pairs.",
           "type": "object"
         },
         "id": {
-          "description": "Fully qualified URL of the cache.",
+          "description": "Resource ID of the Cache.",
           "readOnly": true,
           "$ref": "#/definitions/URLString"
         },
@@ -1156,25 +1156,25 @@
           "type": "string"
         },
         "name": {
-          "description": "Name of cache.",
+          "description": "Name of Cache.",
           "readOnly": true,
           "$ref": "#/definitions/ResourceName"
         },
         "type": {
-          "description": "Type for the cache; Microsoft.StorageCache/Cache",
+          "description": "Type of the Cache; Microsoft.StorageCache/Cache",
           "readOnly": true,
           "type": "string"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties for the cache.",
+          "description": "Properties of the Cache.",
           "properties": {
             "cacheSizeGB": {
-              "description": "The size of this cache, in GB.",
+              "description": "The size of this Cache, in GB.",
               "type": "integer"
             },
             "health": {
-              "description": "Health of the cache.",
+              "description": "Health of the Cache.",
               "readOnly": true,
               "$ref": "#/definitions/CacheHealth"
             },
@@ -1203,21 +1203,21 @@
               "type": "string"
             },
             "subnet": {
-              "description": "Subnet used for the cache.",
+              "description": "Subnet used for the Cache.",
               "$ref": "#/definitions/URLString"
             },
             "upgradeStatus": {
-              "description": "Upgrade status of the cache.",
+              "description": "Upgrade status of the Cache.",
               "$ref": "#/definitions/CacheUpgradeStatus"
             }
           },
           "type": "object"
         },
         "sku": {
-          "description": "Sku for the cache.",
+          "description": "SKU for the Cache.",
           "properties": {
             "name": {
-              "description": "Sku name for this cache.",
+              "description": "SKU name for this Cache.",
               "type": "string"
             }
           },
@@ -1228,14 +1228,14 @@
       "type": "object"
     },
     "CachesListResult": {
-      "description": "Result of the request to list caches. It contains a list of caches and a URL link to get the next set of results.",
+      "description": "Result of the request to list Caches. It contains a list of Caches and a URL link to get the next set of results.",
       "properties": {
         "nextLink": {
-          "description": "URL to get the next set of cache list results if there are any.",
+          "description": "URL to get the next set of Cache list results, if there are any.",
           "type": "string"
         },
         "value": {
-          "description": "List of caches.",
+          "description": "List of Caches.",
           "items": {
             "$ref": "#/definitions/Cache"
           },
@@ -1245,10 +1245,10 @@
       "type": "object"
     },
     "CacheHealth": {
-      "description": "An indication of cache health.  Gives more information about health than just that related to provisioning.",
+      "description": "An indication of Cache health. Gives more information about health than just that related to provisioning.",
       "properties": {
         "state": {
-          "description": "List of cache health states.",
+          "description": "List of Cache health states.",
           "enum": [
             "Unknown",
             "Healthy",
@@ -1273,15 +1273,15 @@
       }
     },
     "CacheUpgradeStatus": {
-      "description": "Properties describing the software upgrade state of the cache",
+      "description": "Properties describing the software upgrade state of the Cache.",
       "properties": {
         "currentFirmwareVersion": {
-          "description": "Version string of the firmware currently installed on this cache.",
+          "description": "Version string of the firmware currently installed on this Cache.",
           "type": "string",
           "readOnly": true
         },
         "firmwareUpdateStatus": {
-          "description": "True if there is a firmware update ready to install on this cache.  The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
+          "description": "True if there is a firmware update ready to install on this Cache. The firmware will automatically be installed after firmwareUpdateDeadline if not triggered earlier via the upgrade operation.",
           "enum": [
             "available",
             "unavailable"
@@ -1294,7 +1294,7 @@
           "type": "string"
         },
         "firmwareUpdateDeadline": {
-          "description": "Time at which the pending firmware update will automatically be installed on the cache.",
+          "description": "Time at which the pending firmware update will automatically be installed on the Cache.",
           "format": "date-time",
           "type": "string",
           "readOnly": true
@@ -1314,22 +1314,22 @@
       "type": "object"
     },
     "UnknownProperties": {
-      "description": "Properties of an unknown type of StorageTarget",
+      "description": "Properties of an unknown type of Storage Target.",
       "type": "object",
       "additionalProperties": {
         "type": "string"
       }
     },
     "Nfs3Target": {
-      "description": "An NFS mount point for use as a StorageTarget.",
+      "description": "An NFSv3 mount point for use as a Storage Target.",
       "properties": {
         "target": {
-          "description": "IP or name of an NFS Storage Target host, ie: 10.0.44.44",
+          "description": "IP address or host name of an NFSv3 host (e.g., 10.0.44.44).",
           "pattern": "^[-.0-9a-zA-Z]+$",
           "type": "string"
         },
         "usageModel": {
-          "description": "Identifies the primary usage model to be used for this storage target.   GET choices from .../usageModels",
+          "description": "Identifies the primary usage model to be used for this Storage Target. Get choices from .../usageModels",
           "type": "string"
         }
       },
@@ -1337,10 +1337,10 @@
       "type": "object"
     },
     "ClfsTarget": {
-      "description": "Storage container for use as a CLFS StorageTarget.",
+      "description": "Storage container for use as a CLFS Storage Target.",
       "properties": {
         "target": {
-          "description": "URL of storage container.",
+          "description": "Resource ID of storage container.",
           "$ref": "#/definitions/URLString"
         }
       },
@@ -1348,10 +1348,10 @@
       "type": "object"
     },
     "UnknownTarget": {
-      "description": "Storage container for use as a Unknown StorageTarget.",
+      "description": "Storage container for use as an Unknown Storage Target.",
       "properties": {
         "unknownMap": {
-          "description": "Dictionary of string->string pairs containing information about the StorageTarget.",
+          "description": "Dictionary of string->string pairs containing information about the Storage Target.",
           "$ref": "#/definitions/UnknownProperties"
         }
       },
@@ -1359,20 +1359,20 @@
       "type": "object"
     },
     "ResourceName": {
-      "description": "Schema for the name of resources served by this provider.   Note that objects will contain an odata @id annotation as appropriate, this will contain the complete URL of the object.   These names are case-preserving, but not case sensitive.",
+      "description": "Schema for the name of resources served by this provider. Note that objects will contain an odata @id annotation as appropriate. This will contain the complete URL of the object. These names are case-preserving, but not case sensitive.",
       "pattern": "^[-0-9a-zA-Z_]{1,31}$",
       "type": "string"
     },
     "ResourceSku": {
-      "description": "A resource SKU",
+      "description": "A resource SKU.",
       "properties": {
         "resourceType": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of resource the sku applies to."
+          "description": "The type of resource the SKU applies to."
         },
         "capabilities": {
-          "description": "A list of capabilities of this SKU, such as throughput or ops/sec",
+          "description": "A list of capabilities of this SKU, such as throughput or ops/sec.",
           "items": {
             "$ref": "#/definitions/ResourceSkuCapabilities"
           },
@@ -1384,7 +1384,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
+          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g., West US, East US, Southeast Asia, etc.)."
         },
         "locationInfo": {
           "description": "The set of locations that the SKU is available.",
@@ -1394,7 +1394,7 @@
           "type": "array"
         },
         "name": {
-          "description": "The name of this sku.",
+          "description": "The name of this SKU.",
           "type": "string"
         },
         "restrictions": {
@@ -1402,7 +1402,7 @@
           "items": {
             "$ref": "#/definitions/Restriction"
           },
-          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
+          "description": "The restrictions preventing this SKU from being used. This is empty if there are no restrictions."
         }
       },
       "type": "object"
@@ -1412,7 +1412,7 @@
         "type": {
           "readOnly": true,
           "type": "string",
-          "description": "The type of restrictions. As of now only possible value for this is location."
+          "description": "The type of restrictions. In this version, the only possible value for this is location."
         },
         "values": {
           "readOnly": true,
@@ -1420,7 +1420,7 @@
           "items": {
             "type": "string"
           },
-          "description": "The value of restrictions. If the restriction type is set to location. This would be different locations where the SKU is restricted."
+          "description": "The value of restrictions. If the restriction type is set to location, then this would be the different locations where the SKU is restricted."
         },
         "reasonCode": {
           "type": "string",
@@ -1432,20 +1432,20 @@
             "name": "ReasonCode",
             "modelAsString": true
           },
-          "description": "The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". Quota Id is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. The \"NotAvailableForSubscription\" is related to capacity at DC."
+          "description": "The reason for the restriction. As of now this can be \"QuotaId\" or \"NotAvailableForSubscription\". \"QuotaId\" is set when the SKU has requiredQuotas parameter as the subscription does not belong to that quota. \"NotAvailableForSubscription\" is related to capacity at the datacenter."
         }
       },
-      "description": "The restriction because of which SKU cannot be used."
+      "description": "The restrictions preventing this SKU from being used."
     },
     "ResourceSkuCapabilities": {
       "description": "A resource SKU capability.",
       "properties": {
         "name": {
-          "description": "Name of a capability, such as ops/sec",
+          "description": "Name of a capability, such as ops/sec.",
           "type": "string"
         },
         "value": {
-          "description": "Quantity, if the capability is measured by quantity",
+          "description": "Quantity, if the capability is measured by quantity.",
           "type": "string"
         }
       },
@@ -1455,7 +1455,7 @@
       "description": "Resource SKU location information.",
       "properties": {
         "location": {
-          "description": "Location where this Sku is available",
+          "description": "Location where this SKU is available.",
           "type": "string"
         },
         "zones": {
@@ -1472,11 +1472,11 @@
       "description": "The response from the List Cache SKUs operation.",
       "properties": {
         "nextLink": {
-          "description": "The uri to fetch the next page of cache Skus.",
+          "description": "The URI to fetch the next page of Cache SKUs.",
           "type": "string"
         },
         "value": {
-          "description": "The list of skus available for the subscription.",
+          "description": "The list of SKUs available for the subscription.",
           "readOnly": true,
           "items": {
             "$ref": "#/definitions/ResourceSku"
@@ -1491,34 +1491,34 @@
       "discriminator": "targetType",
       "properties": {
         "name": {
-          "description": "A fully qualified URL.",
+          "description": "Name of the Storage Target.",
           "readOnly": true,
           "$ref": "#/definitions/ResourceName"
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id"
+          "description": "Resource ID of the Storage Target."
         },
         "type": {
-          "description": "Type for the storage target; Microsoft.StorageCache/Cache/StorageTarget",
+          "description": "Type of the Storage Target; Microsoft.StorageCache/Cache/StorageTarget",
           "readOnly": true,
           "type": "string"
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Properties of the storage target.",
+          "description": "Properties of the Storage Target.",
           "type": "object",
           "properties": {
             "junctions": {
-              "description": "List of cache namespace to target namespace associations.",
+              "description": "List of Cache namespace junctions to target for namespace associations.",
               "type": "array",
               "items": {
                 "$ref": "#/definitions/NamespaceJunction"
               }
             },
             "targetType": {
-              "description": "Type for storage target.",
+              "description": "Type of the Storage Target.",
               "enum": [
                 "nfs3",
                 "clfs",
@@ -1547,15 +1547,15 @@
               "type": "string"
             },
             "nfs3": {
-              "description": "Properties when nfs3 target.",
+              "description": "Properties when targetType is nfs3.",
               "$ref": "#/definitions/Nfs3Target"
             },
             "clfs": {
-              "description": "Properties when clfs target.",
+              "description": "Properties when targetType is clfs.",
               "$ref": "#/definitions/ClfsTarget"
             },
             "unknown": {
-              "description": "Properties when unknown target.",
+              "description": "Properties when targetType is unknown.",
               "$ref": "#/definitions/UnknownTarget"
             }
           }
@@ -1568,11 +1568,11 @@
       "type": "object",
       "properties": {
         "namespacePath": {
-          "description": "Namespace path on a cache for a storage target.",
+          "description": "Namespace path on a Cache for a Storage Target.",
           "type": "string"
         },
         "targetPath": {
-          "description": "Path in storage target to which namespacePath points.",
+          "description": "Path in Storage Target to which namespacePath points.",
           "type": "string"
         },
         "nfsExport": {
@@ -1582,14 +1582,14 @@
       }
     },
     "StorageTargetsResult": {
-      "description": "A list of storage targets.",
+      "description": "A list of Storage Targets.",
       "properties": {
         "nextLink": {
-          "description": "The uri to fetch the next page of storage targets.",
+          "description": "The URI to fetch the next page of Storage Targets.",
           "type": "string"
         },
         "value": {
-          "description": "The list of storage targets defined for the cache.",
+          "description": "The list of Storage Targets defined for the Cache.",
           "items": {
             "$ref": "#/definitions/StorageTarget"
           },
@@ -1616,21 +1616,21 @@
           }
         },
         "modelName": {
-          "description": "Non localized keyword naming this usage model.",
+          "description": "Non-localized keyword name for this usage model.",
           "type": "string"
         },
         "targetType": {
-          "description": "The type of Storage Target to which this model is applicable (only nfs for now)",
+          "description": "The type of Storage Target to which this model is applicable (only nfs3 as of this version).",
           "type": "string"
         }
       },
       "type": "object"
     },
     "UsageModelsResult": {
-      "description": "A list of cache usage models.",
+      "description": "A list of Cache usage models.",
       "properties": {
         "nextLink": {
-          "description": "The uri to fetch the next page of cache usage models.",
+          "description": "The URI to fetch the next page of Cache usage models.",
           "type": "string"
         },
         "value": {
@@ -1657,7 +1657,7 @@
       "in": "query",
       "required": true,
       "type": "string",
-      "description": "Client Api Version."
+      "description": "Client API version."
     }
   }
 }
