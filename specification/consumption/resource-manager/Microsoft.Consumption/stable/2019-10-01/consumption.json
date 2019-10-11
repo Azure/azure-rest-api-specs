@@ -3548,21 +3548,6 @@
 		}
 	  }
 	},
-	"CreditBalanceSummary": {
-  	  "description": "Summary of credit balances.",
-	  "properties": {
-		"estimatedBalance": {
-		  "description": "Estimated balance.",
-		  "readOnly": true,
-		  "$ref": "#/definitions/amount"
-		},
-		"currentBalance": {
-		  "description": "Current balance.",
-		  "readOnly": true,
-		  "$ref": "#/definitions/amount"
-		}
-	  }
-	},
 	"CreditSummary": {
 	  "description": "A credit summary resource.",
 	  "type": "object",
@@ -3572,13 +3557,16 @@
 		}
 	],
 	"properties": {
-  	  "x-ms-client-flatten": true,
-		"$ref": "#/definitions/CreditSummaryProperties",
-	    "title": "Credit summary properties"
+	  "properties": {
+  	    "x-ms-client-flatten": true,
+		  "$ref": "#/definitions/CreditSummaryProperties",
+	      "title": "Credit summary properties"
+	    }
 	  }
 	},
 	"CreditSummaryProperties": {
 	  "description": "The properties of the credit summary.",
+	  "type": "object",
 	  "properties": {
 		"BalanceSummary": {
 		  "description": "Summary of balances associated with this credit summary.",
@@ -3596,6 +3584,21 @@
 		},
 		"pendingEligibleCharges": {
 		  "description": "Pending eligible charges.",
+		  "readOnly": true,
+		  "$ref": "#/definitions/amount"
+		}
+	  }
+	},
+	"CreditBalanceSummary": {
+  	  "description": "Summary of credit balances.",
+	  "properties": {
+		"estimatedBalance": {
+		  "description": "Estimated balance.",
+		  "readOnly": true,
+		  "$ref": "#/definitions/amount"
+		},
+		"currentBalance": {
+		  "description": "Current balance.",
 		  "readOnly": true,
 		  "$ref": "#/definitions/amount"
 		}
