@@ -147,6 +147,7 @@ require: $(this-folder)/../../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/v2.0/LUIS-Authoring.json
+  - $(this-folder)/preview/v3.0/LUIS-Authoring.json
 
 ```
 
