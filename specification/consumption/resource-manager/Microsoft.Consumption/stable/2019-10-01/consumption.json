@@ -481,34 +481,7 @@
           },
           "ChangesForBillingPeriodByDepartment": {
             "$ref": "./examples/ChargesForBillingPeriodByDepartment.json"
-          },
-		  "ChargesListByBillingAccount": {
-		    "$ref": "./examples/ChargesListByBillingAccount.json"
-		  },
-		  "ChargesListByBillingAccountGroupByBillingProfileId": {
-		    "$ref": "./examples/ChargesListByBillingAccountGroupByBillingProfileId.json"
-		  },
-		  "ChargesListByBillingAccountGroupByInvoiceSectionId": {
-		    "$ref": "./examples/ChargesListByBillingAccountGroupByInvoiceSectionId.json"
-		  },
-		  "ChargesListByBillingAccountGroupByCustomerId": {
-		    "$ref": "./examples/ChargesListByBillingAccountGroupByCustomerId.json"
-		  },
-		  "ChargesListByBillingProfile": {
-		    "$ref": "./examples/ChargesListByBillingProfile.json"
-		  },
-		  "ChargesListByBillingProfileGroupByInvoiceSectionId": {
-		    "$ref": "./examples/ChargesListByBillingProfileGroupByInvoiceSectionId.json"
-		  },
-  		  "ChargesListByBillingProfileInvoiceSection": {
-		    "$ref": "./examples/ChargesListByBillingProfileInvoiceSection.json"
-		  },
-		  "ChargesListByInvoiceSection": {
-		    "$ref": "./examples/ChargesListByInvoiceSection.json"
-		  }		  ,
-		  "ChargesListByCustomer": {
-		    "$ref": "./examples/ChargesListByCustomer.json"
-		  }
+          }
         },
         "parameters": [
           {
@@ -517,36 +490,13 @@
           {
             "$ref": "#/parameters/apiVersionParameter"
           },
-		  {
-			"name": "startDate",
-			"in": "query",
-			"description": "Start date. This is used for MCA, Modern Commerce Account for billingAccount, billingProfile, invoiceSection, customer (specific for partners) scopes.",
-			"required": false,
-			"type": "date-time",
-			"x-ms-parameter-location":"method"
-		  },
-		  {
-			"name": "endDate",
-			"in": "query",
-			"description": "End date. This is used for MCA, Modern Commerce Account for billingAccount, billingProfile, invoiceSection, customer (specific for partners) scopes.",
-			"required": false,
-			"type": "date-time",
-			"x-ms-parameter-location":"method"
-		  },
           {
             "name": "$filter",
             "description": "May be used to filter charges by properties/usageEnd (Utc time), properties/usageStart (Utc time). The filter supports 'eq', 'lt', 'gt', 'le', 'ge', and 'and'. It does not currently support 'ne', 'or', or 'not'. Tag filter is a key value pair string where key and value is separated by a colon (:).",
             "in": "query",
             "required": false,
             "type": "string"
-          },
-	      {
-			"name": "$apply",
-			"description": "May be used to group charges for billingAccount scope by properties/billingProfileId, properties/invoiceSectionId, properties/customerId (specific for partners), or for billingProfile scope by properties/invoiceSectionId.",
-			"in": "query",
-			"required": false,
-			"type": "string"
-		  }
+          }
         ],
         "responses": {
           "200": {
@@ -3313,11 +3263,6 @@
           "description": "Currency Code",
           "type": "string",
           "readOnly": true
-        },
-        "isInvoiced": {
-          "description": "Shows if it is invoiced or not.",
-          "type": "boolean",
-          "readOnly": true
         }
       }
     },
@@ -3740,7 +3685,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with charges operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for billingAccount scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' for customer scope specific for partners. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
+      "description": "The scope associated with charges operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope. For department and enrollment accounts, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
