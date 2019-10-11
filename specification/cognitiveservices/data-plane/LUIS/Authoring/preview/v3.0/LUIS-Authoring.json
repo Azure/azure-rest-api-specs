@@ -1225,55 +1225,55 @@
       }
     },
     "/apps/{appId}/versions/{versionId}/models/{modelId}/examples": {
-     "get": {
-       "description": "Gets the example utterances for the given intent or entity model in a version of the application.",
-       "operationId": "Model_Examples",
-       "parameters": [
-         {
-           "$ref": "#/parameters/AppIdInPath"
-         },
-         {
-           "$ref": "#/parameters/VersionIdInPath"
-         },
-         {
+      "get": {
+        "description": "Gets the example utterances for the given intent or entity model in a version of the application.",
+        "operationId": "Model_Examples",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
             "name": "modelId",
             "in": "path",
             "required": true,
             "type": "string",
             "description": "The ID (GUID) of the model.",
             "x-ms-parameter-location": "method"
-           },
-         {
-           "$ref": "#/parameters/SkipInPath"
-         },
-         {
-           "$ref": "#/parameters/TakeInPath"
-         }
-       ],
-       "responses": {
-         "200": {
-           "description": "A list of example utterances for the model.",
-           "schema": {
-             "$ref": "#/definitions/ExamplesPerModelResponseObject"
-           }
-         },
-         "default": {
-           "description": "Error Response.",
-           "schema": {
-             "$ref": "#/definitions/ErrorResponse"
-           }
-         }
-       },
-       "produces": [
-         "application/json"
-       ],
-       "x-ms-examples": {
-         "Successful Get Examples Per Model Request": {
-           "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
-         }
-       }
-     }
-   },
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of example utterances for the model.",
+            "schema": {
+              "$ref": "#/definitions/ExamplesPerModelResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Examples Per Model Request": {
+            "$ref": "./examples/model/SuccessfulGetExamplesPerModelRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/intents/{intentId}": {
       "get": {
         "description": "Gets information about the intent model in a version of the application.",
@@ -1514,7 +1514,7 @@
             "in": "body",
             "required": true,
             "schema": {
-                "$ref": "#/definitions/EntityModelUpdateObject"
+              "$ref": "#/definitions/EntityModelUpdateObject"
             },
             "description": "A model object containing the name new entity extractor or the name and instance of model of a child entity extractor "
           }
@@ -2101,7 +2101,7 @@
             "description": "The sublist ID.",
             "required": true,
             "type": "integer",
-            "format":  "int64"
+            "format": "int64"
           }
         ],
         "responses": {
@@ -2676,7 +2676,7 @@
           {
             "name": "versionCloneObject",
             "in": "body",
-            "required":  true,
+            "required": true,
             "schema": {
               "$ref": "#/definitions/TaskUpdateObject"
             },
@@ -3952,7 +3952,7 @@
             "in": "body",
             "required": true,
             "schema": {
-                "$ref": "#/definitions/ChildEntityModelCreateObject"
+              "$ref": "#/definitions/ChildEntityModelCreateObject"
             },
             "description": "A model object containing the name of the new child model and its children."
           }
@@ -8669,7 +8669,7 @@
       "properties": {
         "text": {
           "type": "string",
-          "description":  "The utterance. For example, \"What's the weather like in seattle?\""
+          "description": "The utterance. For example, \"What's the weather like in seattle?\""
         },
         "tokenizedText": {
           "type": "array",
@@ -10001,14 +10001,14 @@
         "$ref": "#/definitions/PatternRuleInfo"
       }
     },
-    "ExamplesPerModelResponseObject":{
+    "ExamplesPerModelResponseObject": {
       "description": "A list of example utterances per model.",
       "type": "array",
       "items": {
         "$ref": "#/definitions/LabelTextObject"
       }
     },
-    "LabelTextObject":{
+    "LabelTextObject": {
       "description": "An object containing the example utterance's text.",
       "type": "object",
       "properties": {
