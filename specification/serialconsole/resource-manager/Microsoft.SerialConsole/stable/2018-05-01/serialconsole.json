@@ -67,7 +67,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/default": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}": {
       "get": {
         "tags": [
           "SerialConsole"
@@ -81,6 +81,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/defaultParameter"
           }
         ],
         "responses": {
@@ -104,7 +107,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/default/disableConsole": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/disableConsole": {
       "post": {
         "tags": [
           "SerialConsole"
@@ -118,6 +121,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/defaultParameter"
           }
         ],
         "responses": {
@@ -141,7 +147,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/default/enableConsole": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SerialConsole/consoleServices/{default}/enableConsole": {
       "post": {
         "tags": [
           "SerialConsole"
@@ -155,6 +161,9 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/defaultParameter"
           }
         ],
         "responses": {
@@ -282,6 +291,13 @@
       "required": true,
       "type": "string",
       "description": "Subscription ID which uniquely identifies the Microsoft Azure subscription. The subscription ID forms part of the URI for every service call requiring it."
+    },
+    "defaultParameter": {
+      "name": "default",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Default parameter. Leave the value as \"default\"."
     }
   }
 }
