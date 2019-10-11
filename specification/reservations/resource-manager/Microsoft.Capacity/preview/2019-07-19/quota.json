@@ -150,6 +150,72 @@
 						}
 					}
 				}
+			},
+			"patch": {
+				"tags": [
+					"QuotaRequests"
+				],
+				"summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
+				"description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified. The location header in the response will be used to track the status of the quota request.",
+				"operationId": "QuotaRequest_Patch",
+				"x-ms-examples": {
+					"Quotas_Request_listForCompute": {
+						"$ref": "./examples/patchComputeQuotaRequest.json"
+					}
+				},
+				"x-ms-long-running-operation": true,
+				"x-ms-long-running-operation-options": {
+					"final-state-via": "location"
+				},
+				"parameters": [
+					{
+						"$ref": "#/parameters/SubscriptionIdInParameters"
+					},
+					{
+						"$ref": "#/parameters/ProviderIdInParameters"
+					},
+					{
+						"$ref": "#/parameters/LocationIdInParameters"
+					},
+					{
+						"$ref": "#/parameters/ResourceNameInParameters"
+					},
+					{
+						"$ref": "#/parameters/ApiVersionParameter"
+					},
+					{
+						"name": "createQuotaRequest",
+						"in": "body",
+						"description": "Quota requests payload.",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/CurrentQuotaLimitBase"
+						}
+					},
+					{
+						"$ref": "#/parameters/IfMatchRequiredParameter"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "OK. Returns Quota requests details.",
+						"schema": {
+							"$ref": "#/definitions/QuotaRequestOneResourceSubmitResponse"
+						}
+					},
+					"201": {
+						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
+						"schema": {
+							"$ref": "#/definitions/QuotaRequestSubmitResponse201"
+						}
+					},
+					"default": {
+						"description": "Error response describing why the operation failed.",
+						"schema": {
+							"$ref": "#/definitions/ExceptionResponse"
+						}
+					}
+				}
 			}
 		},
 		"/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/providers/{providerId}/locations/{location}/serviceLimits": {
@@ -207,132 +273,6 @@
 				},
 				"x-ms-pageable": {
 					"nextLinkName": "nextLink"
-				}
-			},
-			"put": {
-				"tags": [
-					"QuotaRequests"
-				],
-				"summary": "Submits Quota Requests for the resources by a resource provider at the specified location.",
-				"description": "Submits Quota change requests for the resources by a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified. For updating only few resources, please use Patch.",
-				"operationId": "QuotaRequests_Create",
-				"x-ms-examples": {
-					"Quotas_Request_listServiceLimits": {
-						"$ref": "./examples/putComputeQuotaRequest.json"
-					}
-				},
-				"x-ms-long-running-operation": true,
-				"x-ms-long-running-operation-options": {
-					"final-state-via": "location"
-				},
-				"parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdInParameters"
-					},
-					{
-						"$ref": "#/parameters/ProviderIdInParameters"
-					},
-					{
-						"$ref": "#/parameters/LocationIdInParameters"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					},
-					{
-						"name": "createQuotaRequests",
-						"in": "body",
-						"description": "Quota requests payload.",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/CreateGenericQuotaRequestParameters"
-						}
-					},
-					{
-						"$ref": "#/parameters/IfMatchRequiredParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Returns Quota requests details.",
-						"schema": {
-							"$ref": "#/definitions/QuotaRequestSubmitResponse"
-						}
-					},
-					"201": {
-						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
-						"schema": {
-							"$ref": "#/definitions/QuotaRequestSubmitResponse201"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ExceptionResponse"
-						}
-					}
-				}
-			},
-			"patch": {
-				"tags": [
-					"QuotaRequests"
-				],
-				"summary": "Submits a Quota Requests for multiple resources by a resource provider at the specified location.",
-				"description": "Submits Quota change requests for multiple resources by a resource provider for the specified location. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which require an update to their quotas, update their limit fields in the response from the Get request to their new values, remove the values which doesn't require any update. Then, submit this updated JSON object to this quota request API. This will update the quotas to the values specified.",
-				"operationId": "QuotaRequests_Update",
-				"x-ms-examples": {
-					"Quotas_listUpdates": {
-						"$ref": "./examples/patchComputeQuotaRequest.json"
-					}
-				},
-				"x-ms-long-running-operation": true,
-				"x-ms-long-running-operation-options": {
-					"final-state-via": "location"
-				},
-				"parameters": [
-					{
-						"$ref": "#/parameters/SubscriptionIdInParameters"
-					},
-					{
-						"$ref": "#/parameters/ProviderIdInParameters"
-					},
-					{
-						"$ref": "#/parameters/LocationIdInParameters"
-					},
-					{
-						"$ref": "#/parameters/ApiVersionParameter"
-					},
-					{
-						"name": "createQuotaRequests",
-						"in": "body",
-						"description": "Quota requests payload.",
-						"required": true,
-						"schema": {
-							"$ref": "#/definitions/CreateGenericQuotaRequestParameters"
-						}
-					},
-					{
-						"$ref": "#/parameters/IfMatchRequiredParameter"
-					}
-				],
-				"responses": {
-					"200": {
-						"description": "OK. Returns Quota requests details.",
-						"schema": {
-							"$ref": "#/definitions/QuotaRequestSubmitResponse"
-						}
-					},
-					"201": {
-						"description": "The request is accepted and is being processed. Please use requestId to check the status.",
-						"schema": {
-							"$ref": "#/definitions/QuotaRequestSubmitResponse201"
-						}
-					},
-					"default": {
-						"description": "Error response describing why the operation failed.",
-						"schema": {
-							"$ref": "#/definitions/ExceptionResponse"
-						}
-					}
 				}
 			}
 		},
