@@ -357,19 +357,38 @@
               "type": "string",
               "readOnly": true
             },
+            "osType": {
+              "description": "Type of OS for which the key is requrested.",
+              "type": "string",
+              "enum": [
+                "Windows7",
+                "WindowsServer2008",
+                "WindowsServer2008R2"
+              ],
+              "x-ms-enum": {
+                "name": "OsType",
+                "modelAsString": false
+              },
+              "x-ms-mutability": ["create", "read"]
+            },
             "installedServerNumberRange": {
               "description": "Number of activations/servers using the MAK key.",
               "enum": [
-                "LessThan10",
-                "From10To100",
-                "From100To1000",
-                "MoreThan1000"
+                "500",
+                "1000",
+                "2500",
+                "5000"
               ],
               "type": "string",
               "x-ms-enum": {
                 "name": "InstalledServerNumberRange",
-                "modelAsString": false
+                "modelAsString": true
               },
+              "x-ms-mutability": ["create", "read"]
+            },
+            "agreementNumber": {
+              "description": "Agreement number under which the key is requested.",
+              "type": "string",
               "x-ms-mutability": ["create", "read"]
             },
             "provisioningState": {
