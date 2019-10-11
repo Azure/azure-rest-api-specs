@@ -3570,6 +3570,7 @@
 	  "properties": {
 		"BalanceSummary": {
 		  "description": "Summary of balances associated with this credit summary.",
+		  "readOnly": true,
 		  "$ref": "#/definitions/CreditBalanceSummary"
 		},
 		"pendingCreditAdjustments": {
@@ -3591,17 +3592,15 @@
 	},
 	"CreditBalanceSummary": {
   	  "description": "Summary of credit balances.",
-	  "properties": {
-		"estimatedBalance": {
-		  "description": "Estimated balance.",
-		  "readOnly": true,
-		  "$ref": "#/definitions/amount"
-		},
-		"currentBalance": {
-		  "description": "Current balance.",
-		  "readOnly": true,
-		  "$ref": "#/definitions/amount"
-		}
+	  "estimatedBalance": {
+		"description": "Estimated balance.",
+		"readOnly": true,
+		"$ref": "#/definitions/amount"
+	  },
+	  "currentBalance": {
+		"description": "Current balance.",
+		"readOnly": true,
+		"$ref": "#/definitions/amount"
 	  }
 	},
 	"amount": {
