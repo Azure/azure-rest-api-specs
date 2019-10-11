@@ -166,6 +166,10 @@ csharp:
 
 See configuration in [readme.go.md](./readme.go.md)
 
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
 ## Java
 
 These settings apply only when `--java` is specified on the command line.
