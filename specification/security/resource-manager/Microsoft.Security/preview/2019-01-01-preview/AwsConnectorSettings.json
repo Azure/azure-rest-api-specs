@@ -1,0 +1,234 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.ManagementGroups/{tenantId}/Microsoft.Security/connector/AWS/": {
+      "get": {
+        "x-ms-examples": {
+          "Get aws connectors settings for a tenant": {
+            "$ref": "./examples/AwsConnectorSettings/GetAwsConnectorSettingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AwsConnectorSettings"
+        ],
+        "description": "Exposes the aws connectors settings at the tenant",
+        "operationId": "AwsConnectorSettings_List",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/TenantId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AwsConnectorSettingList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.ManagementGroups/{tenantId}/Microsoft.Security/connector/AWS/{awsConnectorName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get the aws connector settings for a tenant": {
+            "$ref": "./examples/AwsConnectorSettings/GetAwsConnectorSettingSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AwsConnectorSettings"
+        ],
+        "description": "Details of the aws connector settings at the tenants",
+        "operationId": "AwsConnectorSettings_Get",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/TenantId"
+          },
+          {
+            "$ref": "#/parameters/AwsConnectorName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AwsConnectorSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create an aws connector settings at tenant": {
+            "$ref": "./examples/AwsConnectorSettings/CreateAwsConnectorSettingsSubscription_example.json"
+          }
+        },
+        "tags": [
+          "AwsConnectorSettings"
+        ],
+        "description": "Details of a specific aws connector setting",
+        "operationId": "AwsConnectorSettings_Create",
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/TenantId"
+          },
+          {
+            "$ref": "#/parameters/AwsConnectorName"
+          },
+          {
+            "$ref": "#/parameters/AwsConnectorSetting"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/AwsConnectorSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "AwsConnectorSettingList": {
+      "type": "object",
+      "description": "List of all the aws connectors settings response",
+      "properties": {
+        "value": {
+          "description": "List of all the aws connectors settings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AwsConnectorSetting"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "AwsConnectorSetting": {
+      "type": "object",
+      "description": "aws connector setting",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "aws connector credentials settings",
+          "$ref": "#/definitions/AwsConnectorSettingProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/Connector"
+        }
+      ]
+    },
+    "AwsConnectorSettingProperties": {
+      "type": "object",
+      "description": "aws connector credentials",
+      "properties": {
+        "awsAccountID": {
+          "type": "string",
+          "description": "aws account id"
+        },
+        "accessKeyID": {
+          "type": "string",
+          "description": "aws access key id"
+        },
+        "secretAccessKey": {
+          "type": "string",
+          "description": "aws secret access key"
+        }
+      },
+      "required": [
+        "accessKeyID",
+        "secretAccessKey"
+      ]
+    }
+  },
+  "parameters": {
+    "AwsConnectorName": {
+      "name": "awsConnectorName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Aws connector name",
+      "x-ms-parameter-location": "method"
+    },
+    "AwsConnectorSetting": {
+      "name": "awsConnectorSetting",
+      "in": "body",
+      "required": true,
+      "description": "Aws connector credentials Setting",
+      "schema": {
+        "$ref": "#/definitions/AwsConnectorSetting"
+      },
+      "x-ms-parameter-location": "method"
+    }
+  }
+}
