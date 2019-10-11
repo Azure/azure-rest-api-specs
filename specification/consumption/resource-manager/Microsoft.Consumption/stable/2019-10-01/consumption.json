@@ -3604,10 +3604,20 @@
 	  }
 	},
 	"amount": {
-	  "description": "The amount.",
-      "type": "number",
-      "format": "decimal",
-      "readOnly": true
+	  "description": "The amount plus currency .",
+	  "properties": {
+	    "currency":{
+		  "readOnly": true,
+          "type": "string",
+          "description": "Amount currency."
+	    },
+	    "value":{
+          "readOnly": true,
+          "type": "number",
+          "format": "decimal",
+		  "description": "Amount."
+	    }
+	  }
 	},
     "Resource": {
       "description": "The Resource model definition.",
