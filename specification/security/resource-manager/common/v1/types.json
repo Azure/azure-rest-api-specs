@@ -117,6 +117,14 @@
     }
   },
   "parameters": {
+    "TenantId": {
+      "name": "tenantId",
+      "in": "path",
+      "required": true,
+      "pattern": "^[0-9A-Fa-f]{8}-([0-9A-Fa-f]{4}-){3}[0-9A-Fa-f]{12}$",
+      "type": "string",
+      "description": "Azure tenant ID"
+    },
     "SubscriptionId": {
       "name": "subscriptionId",
       "in": "path",
