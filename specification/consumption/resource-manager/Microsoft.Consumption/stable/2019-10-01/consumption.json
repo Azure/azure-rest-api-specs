@@ -3568,7 +3568,7 @@
 	  "description": "The properties of the credit summary.",
 	  "type": "object",
 	  "properties": {
-		"BalanceSummary": {
+		"balanceSummary": {
 		  "description": "Summary of balances associated with this credit summary.",
 		  "readOnly": true,
 		  "$ref": "#/definitions/CreditBalanceSummary"
@@ -3592,15 +3592,17 @@
 	},
 	"CreditBalanceSummary": {
   	  "description": "Summary of credit balances.",
-	  "estimatedBalance": {
-		"description": "Estimated balance.",
-		"readOnly": true,
-		"$ref": "#/definitions/amount"
-	  },
-	  "currentBalance": {
-		"description": "Current balance.",
-		"readOnly": true,
-		"$ref": "#/definitions/amount"
+	  "properties": {
+		"estimatedBalance": {
+		  "description": "Estimated balance.",
+		  "readOnly": true,
+		  "$ref": "#/definitions/amount"
+		},
+		"currentBalance": {
+		  "description": "Current balance.",
+		  "readOnly": true,
+		  "$ref": "#/definitions/amount"
+		}
 	  }
 	},
 	"amount": {
