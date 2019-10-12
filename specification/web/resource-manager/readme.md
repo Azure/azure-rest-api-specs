@@ -1022,6 +1022,7 @@ swagger-to-sdk:
       use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-web
+      - python ./scripts/trim_aio.py ./sdk/network/azure-mgmt-web
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
