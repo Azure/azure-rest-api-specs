@@ -61,7 +61,7 @@ input-file:
   - Microsoft.Network/stable/2019-09-01/networkProfile.json
   - Microsoft.Network/stable/2019-09-01/networkSecurityGroup.json
   - Microsoft.Network/stable/2019-09-01/networkWatcher.json
-  - Microsoft.Network/stable/2019-06-01/networkWatcherConnectionMonitorV1.json
+  - Microsoft.Network/stable/2019-09-01/networkWatcherConnectionMonitorV1.json
   - Microsoft.Network/stable/2019-09-01/operation.json
   - Microsoft.Network/stable/2019-09-01/privateEndpoint.json
   - Microsoft.Network/stable/2019-09-01/privateLinkService.json
