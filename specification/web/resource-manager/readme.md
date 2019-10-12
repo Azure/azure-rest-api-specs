@@ -1018,6 +1018,8 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-web
   - repo: azure-sdk-for-java
