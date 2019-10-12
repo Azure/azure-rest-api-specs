@@ -1,0 +1,41 @@
+{
+  "parameters": {
+    "api-version": "2019-01-01",
+    "billingAccountId": "100",
+    "departmentId": "123",
+    "$expand": "properties/data",
+    "$top": 5,
+    "$filter": "properties/category eq 'resourceId'",
+    "scope": "providers/Microsoft.Billing/billingAccounts/100/departments/123"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "providers/Microsoft.Billing/billingAccounts/100/departments/123/providers/microsoft.CostManagement/dimensions_ResourceId_2018-05-01_2018-05-31_5",
+            "name": "dimensions_ResourceId_2018-05-01_2018-05-31_5",
+            "type": "microsoft.CostManagement/dimensions",
+            "properties": {
+              "data": [
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/urphealthaccount",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/system.orlando/providers/microsoft.storage/storageaccounts/srphytenaccount",
+                "/subscriptions/67e24f6b-1ec2-4c90-993a-dc2d25b00b6c/resourcegroups/defaultresourcegroup-eus/providers/microsoft.operationalinsights/workspaces/defaultworkspace-67e24f6b-1ec2-4c90-993a-dc2d25b00b6c-eus",
+                "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/rg-sql-ha/providers/microsoft.compute/virtualmachines/sql-4qqp1",
+                "/subscriptions/a98d6dc5-eb8f-46cf-8938-f1fb08f03706/resourcegroups/databricks-rg-testwsp-xijmsdubneexm/providers/microsoft.compute/disks/488cdb42bf74474a98075415be3f806c-containerrootvolume"
+              ],
+              "total": 1409,
+              "category": "ResourceId",
+              "usageStart": "2018-05-01T00:00:00-07:00",
+              "usageEnd": "2018-05-31T00:00:00-07:00",
+              "description": "Resource Id",
+              "filterEnabled": true,
+              "groupingEnabled": true,
+              "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/100/departments/123/providers/Microsoft.CostManagement/Dimensions?$filter=properties/category eq 'resourceId'&$top=5&api-version=2019-01-01&$expand=properties/data&$skiptoken=AQAAAA%3D%3D"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

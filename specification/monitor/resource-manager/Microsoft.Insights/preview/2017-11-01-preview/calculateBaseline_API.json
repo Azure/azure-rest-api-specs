@@ -1,0 +1,226 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2017-11-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/calculatebaseline": {
+      "post": {
+        "tags": [
+          "Baseline"
+        ],
+        "operationId": "MetricBaseline_CalculateBaseline",
+        "description": "**Lists the baseline values for a resource**.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ExtendedResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "TimeSeriesInformation",
+            "description": "Information that need to be specified to calculate a baseline on a time series.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TimeSeriesInformation"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get the list of metric values.",
+            "schema": {
+              "$ref": "#/definitions/CalculateBaselineResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Calculate baseline": {
+            "$ref": "./examples/CalculateBaseline.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "TimeSeriesInformation": {
+      "properties": {
+        "sensitivities": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "the requested sensitivity for calculating the baseline."
+          },
+          "description": "the list of sensitivities for calculating the baseline."
+        },
+        "values": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double",
+            "description": "A single metric value."
+          },
+          "description": "The metric values to calculate the baseline."
+        },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "the timestamp for the baseline value in ISO 8601 format."
+          },
+          "description": "the array of timestamps of the baselines."
+        }
+      },
+      "required": [
+        "sensitivities",
+        "values"
+      ],
+      "description": "The time series info needed for calculating the baseline."
+    },
+    "CalculateBaselineResponse": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "the resource type of the baseline resource."
+        },
+        "timestamps": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "format": "date-time",
+            "description": "the timestamp for the baseline value in ISO 8601 format."
+          },
+          "description": "the array of timestamps of the baselines."
+        },
+        "baseline": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Baseline"
+          },
+          "description": "the baseline values for each sensitivity."
+        }
+      },
+      "required": [
+        "type",
+        "baseline"
+      ],
+      "description": "The response to a calculate baseline call."
+    },
+    "Baseline": {
+      "type": "object",
+      "properties": {
+        "sensitivity": {
+          "type": "string",
+          "enum": [
+            "Low",
+            "Medium",
+            "High"
+          ],
+          "x-ms-enum": {
+            "name": "Sensitivity",
+            "modelAsString": false
+          },
+          "description": "the sensitivity of the baseline."
+        },
+        "lowThresholds": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double",
+            "description": "A single low threshold value."
+          },
+          "description": "The low thresholds of the baseline."
+        },
+        "highThresholds": {
+          "type": "array",
+          "items": {
+            "type": "number",
+            "format": "double",
+            "description": "A single high threshold value."
+          },
+          "description": "The high thresholds of the baseline."
+        }
+      },
+      "required": [
+        "sensitivity",
+        "lowThresholds",
+        "highThresholds"
+      ],
+      "description": "The baseline values for a single sensitivity value."
+    }
+  },
+  "parameters": {
+    "ExtendedResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource. It has the following structure: subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/{providerName}/{resourceName}. For example: subscriptions/b368ca2f-e298-46b7-b0ab-012281956afa/resourceGroups/vms/providers/Microsoft.Compute/virtualMachines/vm1",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

@@ -1,0 +1,109 @@
+{
+  "parameters": {
+    "api-version": "2018-07-01",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "vpngw1",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw1",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "type": "Microsoft.Network/virtualNetworkGateways",
+            "location": "loc1",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
+              "ipConfigurations": [
+                {
+                  "name": "default",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw1/ipConfigurations/default",
+                  "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "publicIPAddress": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/vpngw1-ip"
+                    },
+                    "subnet": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet1/subnets/GatewaySubnet"
+                    }
+                  }
+                }
+              ],
+              "sku": {
+                "name": "VpnGw1",
+                "tier": "VpnGw1",
+                "capacity": 2
+              },
+              "gatewayType": "Vpn",
+              "vpnType": "RouteBased",
+              "enableBgp": false,
+              "activeActive": false,
+              "vpnClientConfiguration": {
+                "vpnClientProtocols": [],
+                "vpnClientRootCertificates": [],
+                "vpnClientRevokedCertificates": []
+              },
+              "bgpSettings": {
+                "asn": 65515,
+                "bgpPeeringAddress": "10.0.0.14",
+                "peerWeight": 0
+              }
+            }
+          },
+          {
+            "name": "vpngw2",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw2",
+            "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+            "type": "Microsoft.Network/virtualNetworkGateways",
+            "location": "loc2",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "resourceGuid": "00000000-0000-0000-0000-000000000000",
+              "ipConfigurations": [
+                {
+                  "name": "default",
+                  "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworkGateways/vpngw2/ipConfigurations/default",
+                  "etag": "W/\"00000000-0000-0000-0000-000000000000\"",
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateIPAllocationMethod": "Dynamic",
+                    "publicIPAddress": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/publicIPAddresses/vpngw2-ip"
+                    },
+                    "subnet": {
+                      "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet2/subnets/GatewaySubnet"
+                    }
+                  }
+                }
+              ],
+              "sku": {
+                "name": "VpnGw1",
+                "tier": "VpnGw1",
+                "capacity": 2
+              },
+              "gatewayType": "Vpn",
+              "vpnType": "RouteBased",
+              "enableBgp": false,
+              "activeActive": false,
+              "vpnClientConfiguration": {
+                "vpnClientProtocols": [],
+                "vpnClientRootCertificates": [],
+                "vpnClientRevokedCertificates": []
+              },
+              "bgpSettings": {
+                "asn": 65515,
+                "bgpPeeringAddress": "10.1.0.46",
+                "peerWeight": 0
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}

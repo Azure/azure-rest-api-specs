@@ -1,0 +1,81 @@
+{
+  "operationId": "Gateway_ListBySubscriptionId",
+  "description": "This example shows how to list all gateway resources for a specified subscription.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "Microsoft.ServiceFabricMesh/gateways",
+            "location": "EastUS",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/gateways/sampleGateway",
+            "name": "sampleGateway",
+            "tags": {},
+            "properties": {
+              "provisioningState": "Succeeded",
+              "description": "Service Fabric Mesh sample gateway.",
+              "sourceNetwork": {
+                "name": "Open"
+              },
+              "destinationNetwork": {
+                "name": "helloWorldNetwork"
+              },
+              "tcp": [
+                {
+                  "name": "web",
+                  "port": 80,
+                  "destination": {
+                    "applicationName": "helloWorldApp",
+                    "serviceName": "helloWorldService",
+                    "endpointName": "helloWorldListener"
+                  }
+                }
+              ],
+              "http": [
+                {
+                  "name": "contosoWebsite",
+                  "port": 8081,
+                  "hosts": [
+                    {
+                      "name": "contoso.com",
+                      "routes": [
+                        {
+                          "name": "index",
+                          "match": {
+                            "path": {
+                              "value": "/index",
+                              "rewrite": "/",
+                              "type": "prefix"
+                            },
+                            "headers": [
+                              {
+                                "name": "accept",
+                                "value": "application/json",
+                                "type": "exact"
+                              }
+                            ]
+                          },
+                          "destination": {
+                            "applicationName": "httpHelloWorldApp",
+                            "serviceName": "indexService",
+                            "endpointName": "indexHttpEndpoint"
+                          }
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ],
+              "ipAddress": "192.168.1.1",
+              "status": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

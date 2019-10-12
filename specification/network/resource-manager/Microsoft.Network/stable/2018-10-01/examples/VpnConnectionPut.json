@@ -1,0 +1,64 @@
+{
+  "parameters": {
+    "connectionName": "vpnConnection1",
+    "gatewayName": "gateway1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-10-01",
+    "subscriptionId": "subid",
+    "VpnConnectionParameters": {
+      "properties": {
+        "remoteVpnSite": {
+          "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+        },
+        "vpnConnectionProtocolType": "IKEv1",
+        "sharedKey": "key"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "vpnConnection1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "remoteVpnSite": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+          },
+          "connectionStatus": "Connected",
+          "vpnConnectionProtocolType": "IKEv1",
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0,
+          "routingWeight": 0,
+          "connectionBandwidth": 100,
+          "sharedKey": "key",
+          "enableBgp": false,
+          "ipsecPolicies": []
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "vpnConnection1",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnGateways/gateway1/vpnConnections/vpnConnection1",
+        "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "remoteVpnSite": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/vpnSites/vpnSite1"
+          },
+          "connectionStatus": "Connected",
+          "vpnConnectionProtocolType": "IKEv1",
+          "ingressBytesTransferred": 0,
+          "egressBytesTransferred": 0,
+          "routingWeight": 0,
+          "connectionBandwidth": 100,
+          "sharedKey": "key",
+          "enableBgp": false,
+          "ipsecPolicies": []
+        }
+      }
+    }
+  }
+}

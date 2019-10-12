@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "resourceGroupName": "demo_resource_group",
+    "fileServerName": "demo_nfs",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2018-03-01",
+    "parameters": {
+      "location": "eastus",
+      "properties": {
+        "sshConfiguration": {
+          "userAccountSettings": {
+            "adminUserPassword": "admin_user_password",
+            "adminUserName": "admin_user_name"
+          }
+        },
+        "dataDisks": {
+          "diskSizeInGB": 10,
+          "storageAccountType": "Standard_LRS",
+          "diskCount": 2
+        },
+        "vmSize": "STANDARD_NC6"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.BatchAI/fileservers/fileservercedd134b",
+        "name": "demo_nfs",
+        "type": "Microsoft.BatchAI/FileServers",
+        "location": "eastus",
+        "properties": {
+          "provisioningState": "succeeded",
+          "creationTime": "2017-09-27T21:45:28.159Z",
+          "provisioningStateTransitionTime": "2017-09-27T21:49:25.416Z",
+          "vmSize": "STANDARD_NC6",
+          "sshConfiguration": {
+            "userAccountSettings": {
+              "adminUserName": "admin_user_name"
+            }
+          },
+          "dataDisks": {
+            "diskSizeInGB": 10,
+            "cachingType": "none",
+            "diskCount": 2,
+            "storageAccountType": "Standard_LRS"
+          },
+          "subnet": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/demo_resource_group/providers/Microsoft.Network/virtualNetworks/7feb1976-8c31-4f1f-bea2-86cb1839a7bavnet/subnets/Subnet-1"
+          },
+          "mountSettings": {
+            "mountPoint": "/mnt/data",
+            "fileServerPublicIP": "13.90.141.66",
+            "fileServerInternalIP": "10.0.0.4",
+            "fileServerType": "nfs"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.BatchAI/locations/eastus/operationresults/7e69f371-db62-4183-bba0-5ee577d43bd7?api-version=2018-03-01",
+        "Retry-After": 15
+      }
+    }
+  }
+}

@@ -1,0 +1,163 @@
+{
+  "parameters": {
+    "Endpoint": "{Endpoint}",
+    "Content-Type": "application/json",
+    "Ocp-Apim-Subscription-Key": "{API key}",
+    "kbId": "9d091697-fb8c-4ed5-9ac0-35bf8273bfff",
+    "updateKb": {
+      "add": {
+        "qnaList": [
+          {
+            "id": 0,
+            "answer": "You can change the default message if you use the QnAMakerDialog. See this for details: https://docs.botframework.com/en-us/azure-bot-service/templates/qnamaker/#navtitle",
+            "source": "Custom Editorial",
+            "questions": [
+              "How can I change the default message from QnA Maker?"
+            ],
+            "metadata": []
+          }
+        ],
+        "urls": [
+          "https://docs.microsoft.com/en-us/azure/cognitive-services/Emotion/FAQ"
+        ],
+        "files": [
+          {
+            "fileName": "SurfaceManual.pdf",
+            "fileUri": "https://download.microsoft.com/download/2/9/B/29B20383-302C-4517-A006-B0186F04BE28/surface-pro-4-user-guide-EN.pdf"
+          }
+        ]
+      },
+      "delete": {
+        "ids": [
+          13,
+          35
+        ]
+      },
+      "update": {
+        "name": "QnA Maker FAQ Prompts Bot",
+        "qnaList": [
+          {
+            "id": 2,
+            "answer": "You can use our REST apis to create a KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/create",
+            "source": "Custom Editorial",
+            "questions": {
+              "add": [],
+              "delete": []
+            },
+            "metadata": {
+              "add": [],
+              "delete": []
+            },
+            "alternateQuestionClusters": {
+              "delete": []
+            },
+            "context": {
+              "isContextOnly": false,
+              "promptsToAdd": [
+                {
+                  "displayText": "Add Prompts",
+                  "displayOrder": 0,
+                  "qna": {
+                    "id": 0,
+                    "answer": "Click here to know more https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/multiturn-conversation",
+                    "source": "Editorial",
+                    "questions": [
+                      "How can I add prompts?"
+                    ],
+                    "metadata": [],
+                    "alternateQuestionClusters": [],
+                    "context": {
+                      "isContextOnly": false,
+                      "prompts": []
+                    }
+                  },
+                  "qnaId": 0
+                },
+                {
+                  "displayText": "Delete Prompts",
+                  "displayOrder": 0,
+                  "qna": {
+                    "id": 0,
+                    "answer": "Click here to know more https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/multiturn-conversation",
+                    "source": "Editorial",
+                    "questions": [
+                      "How can I delete delete prompts?"
+                    ],
+                    "metadata": [],
+                    "alternateQuestionClusters": [],
+                    "context": {
+                      "isContextOnly": false,
+                      "prompts": []
+                    }
+                  },
+                  "qnaId": 0
+                },
+                {
+                  "displayText": "Update Knowledgebase",
+                  "displayOrder": 0,
+                  "qna": null,
+                  "qnaId": 3
+                }
+              ],
+              "promptsToDelete": [
+                3
+              ]
+            }
+          },
+          {
+            "id": 3,
+            "answer": "You can use our REST apis to update your KB. See here for details: https://docs.microsoft.com/en-us/rest/api/cognitiveservices/qnamaker/knowledgebase/update",
+            "source": "Custom Editorial",
+            "questions": {
+              "add": [],
+              "delete": []
+            },
+            "metadata": {
+              "delete": [
+                {
+                  "name": "category",
+                  "value": "api"
+                }
+              ],
+              "add": [
+                {
+                  "name": "category",
+                  "value": "programmatic"
+                }
+              ]
+            },
+            "alternateQuestionClusters": {
+              "delete": []
+            },
+            "context": {
+              "isContextOnly": false,
+              "promptsToAdd": [
+                {
+                  "displayText": "Regenerate Endpoint keys",
+                  "displayOrder": 1,
+                  "qna": null,
+                  "qnaId": 4
+                }
+              ],
+              "promptsToDelete": [
+                4
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {},
+      "body": {
+        "operationState": "NotStarted",
+        "createdTimestamp": "2018-03-19T07:38:46Z",
+        "lastActionTimestamp": "2018-03-19T07:39:29Z",
+        "userId": "86bb8390-56c0-42c2-9f81-3de161981191",
+        "operationId": "03a4f4ce-30a6-4ec6-b436-02bcdf6153e1"
+      }
+    }
+  }
+}

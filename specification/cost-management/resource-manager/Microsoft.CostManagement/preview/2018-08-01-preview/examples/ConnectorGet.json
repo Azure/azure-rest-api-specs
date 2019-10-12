@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2018-08-01-preview",
+    "subscriptionId": "01234567-89ab-cdef-0123-456789abcdef",
+    "resourceGroupName": "rg1",
+    "connectorName": "AWSBillingAccount"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "kind": "aws",
+        "id": "/subscriptions/01234567-89ab-cdef-0123-456789abcdef/resourceGroups/rg1/providers/Microsoft.CostManagement/connectors/AWSBillingAccount",
+        "name": "AWSBillingAccount",
+        "type": "Microsoft.CostManagement/connectors",
+        "location": "westus",
+        "properties": {
+          "displayName": "AWS-Consolidated-1",
+          "credentialsKey": "arn:aws:iam::123456789012:role/AzureCostManagementRole",
+          "reportId": "HourlyWithResources",
+          "createdOn": "2018-05-15T13:25:48Z",
+          "modifiedOn": "2018-05-23T09:21:11Z",
+          "status": "active",
+          "collection": {
+            "lastRun": "2018-06-15T03:21:08Z",
+            "sourceLastUpdated": "2018-06-12T16:41:28Z",
+            "lastUpdated": "2018-06-12T17:25:28Z",
+            "error": {
+              "errorMessage": "Insufficient access to assume role arn:aws:iam::123456789012:role/AzureCostManagementRole",
+              "errorCode": "AwsPermissionDenied",
+              "errorStartTime": "2018-06-12T21:41:03Z"
+            }
+          }
+        }
+      }
+    }
+  }
+}

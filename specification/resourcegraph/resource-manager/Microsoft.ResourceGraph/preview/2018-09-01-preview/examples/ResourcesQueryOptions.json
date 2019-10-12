@@ -1,0 +1,67 @@
+{
+  "title": "Query options",
+  "description": "A query on resources specifying paging and max rows through query options",
+  "parameters": {
+    "api-version": "2018-09-01-preview",
+    "query": {
+      "subscriptions": [
+        "cfbbd179-59d2-4052-aa06-9270a38aa9d6"
+      ],
+      "query": "where name contains 'test' | project id, name, type, location",
+      "options": {
+        "$top": 3,
+        "$skip": 10
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "totalRecords": 386,
+        "count": 3,
+        "resultTruncated": "false",
+        "$skipToken": "eyAibm8yIjogImx1Y2syIiwgImJ1dDIiOiAibmljZTIiLCAidHJ5MiI6ICIhIiB9",
+        "data": {
+          "columns": [
+            {
+              "name": "id",
+              "type": "string"
+            },
+            {
+              "name": "name",
+              "type": "string"
+            },
+            {
+              "name": "type",
+              "type": "string"
+            },
+            {
+              "name": "location",
+              "type": "string"
+            }
+          ],
+          "rows": [
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG4/providers/Microsoft.Compute/disks/yetanothertest_OsDisk_1_f396cbcb625a457bb69fe2abf5975820",
+              "yetanothertest_OsDisk_1_f396cbcb625a457bb69fe2abf5975820",
+              "microsoft.compute/disks",
+              "eastus"
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG5/providers/Microsoft.Automation/automationAccounts/TestAA",
+              "TestAA",
+              "microsoft.automation/automationaccounts",
+              "westcentralus"
+            ],
+            [
+              "/subscriptions/cfbbd179-59d2-4052-aa06-9270a38aa9d6/resourceGroups/RG5/providers/Microsoft.Automation/automationAccounts/TestAA/runbooks/TestRB",
+              "TestRB",
+              "microsoft.automation/automationaccounts/runbooks",
+              "westcentralus"
+            ]
+          ]
+        }
+      }
+    }
+  }
+}

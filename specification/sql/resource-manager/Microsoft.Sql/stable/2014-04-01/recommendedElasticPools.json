@@ -1,0 +1,317 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure SQL Database",
+    "description": "Provides create, read, update and delete functionality for Azure SQL Database resources including recommendations and operations.",
+    "version": "2014-04-01"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}": {
+      "get": {
+        "tags": [
+          "RecommendedElasticPools"
+        ],
+        "operationId": "RecommendedElasticPools_Get",
+        "description": "Gets a recommended elastic pool.",
+        "x-ms-examples": {
+          "Get a recommended elastic pool": {
+            "$ref": "./examples/RecommendedElasticPoolGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "recommendedElasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the recommended elastic pool to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendedElasticPool"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools": {
+      "get": {
+        "tags": [
+          "RecommendedElasticPools"
+        ],
+        "operationId": "RecommendedElasticPools_ListByServer",
+        "description": "Returns recommended elastic pools.",
+        "x-ms-examples": {
+          "List recommended elastic pools": {
+            "$ref": "./examples/RecommendedElasticPoolList.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendedElasticPoolListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/recommendedElasticPools/{recommendedElasticPoolName}/metrics": {
+      "get": {
+        "tags": [
+          "RecommendedElasticPools"
+        ],
+        "operationId": "RecommendedElasticPools_ListMetrics",
+        "description": "Returns recommended elastic pool metrics.",
+        "x-ms-examples": {
+          "Get recommended elastic pool metrics": {
+            "$ref": "./examples/RecommendedElasticPoolListMetrics.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "name": "recommendedElasticPoolName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the recommended elastic pool to be retrieved."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/RecommendedElasticPoolListMetricsResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "RecommendedElasticPoolMetric": {
+      "properties": {
+        "dateTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of metric (ISO8601 format)."
+        },
+        "dtu": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets the DTUs (Database Transaction Units). See https://azure.microsoft.com/documentation/articles/sql-database-what-is-a-dtu/"
+        },
+        "sizeGB": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets or sets size in gigabytes."
+        }
+      },
+      "description": "Represents recommended elastic pool metric."
+    },
+    "RecommendedElasticPoolProperties": {
+      "properties": {
+        "databaseEdition": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The edition of the recommended elastic pool. The ElasticPoolEdition enumeration contains all the valid editions.",
+          "enum": [
+            "Basic",
+            "Standard",
+            "Premium",
+            "GeneralPurpose",
+            "BusinessCritical"
+          ],
+          "x-ms-enum": {
+            "name": "ElasticPoolEdition",
+            "modelAsString": true
+          }
+        },
+        "dtu": {
+          "type": "number",
+          "format": "double",
+          "description": "The DTU for the recommended elastic pool."
+        },
+        "databaseDtuMin": {
+          "type": "number",
+          "format": "double",
+          "description": "The minimum DTU for the database."
+        },
+        "databaseDtuMax": {
+          "type": "number",
+          "format": "double",
+          "description": "The maximum DTU for the database."
+        },
+        "storageMB": {
+          "type": "number",
+          "format": "double",
+          "description": "Gets storage size in megabytes."
+        },
+        "observationPeriodStart": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The observation period start (ISO8601 format)."
+        },
+        "observationPeriodEnd": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The observation period start (ISO8601 format)."
+        },
+        "maxObservedDtu": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "Gets maximum observed DTU."
+        },
+        "maxObservedStorageMB": {
+          "readOnly": true,
+          "type": "number",
+          "format": "double",
+          "description": "Gets maximum observed storage in megabytes."
+        },
+        "databases": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./databases.json#/definitions/Database"
+          },
+          "description": "The list of databases in this pool. Expanded property"
+        },
+        "metrics": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedElasticPoolMetric"
+          },
+          "description": "The list of databases housed in the server. Expanded property"
+        }
+      },
+      "description": "Represents the properties of a recommended elastic pool."
+    },
+    "RecommendedElasticPool": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/RecommendedElasticPoolProperties",
+          "description": "The properties representing the resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a recommended elastic pool."
+    },
+    "RecommendedElasticPoolListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedElasticPool"
+          },
+          "description": "The list of recommended elastic pools hosted in the server."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Represents the response to a list recommended elastic pool request."
+    },
+    "RecommendedElasticPoolListMetricsResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RecommendedElasticPoolMetric"
+          },
+          "description": "The list of recommended elastic pools metrics."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "Represents the response to a list recommended elastic pool metrics request."
+    }
+  },
+  "parameters": {
+    "ServerNameParameter": {
+      "name": "serverName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the server.",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  }
+}

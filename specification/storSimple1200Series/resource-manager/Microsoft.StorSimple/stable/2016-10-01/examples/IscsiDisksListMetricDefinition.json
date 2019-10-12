@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "subscriptionId": "9eb689cd-7243-43b4-b6f6-5c65cb296641",
+    "resourceGroupName": "ResourceGroupForSDKTest",
+    "managerName": "hAzureSDKOperations",
+    "deviceName": "HSDK-WSJQERQW3F",
+    "iscsiServerName": "HSDK-WSJQERQW3F",
+    "diskName": "TieredIscsiDiskForSDKTest",
+    "api-version": "2016-10-01",
+    "x-ms-client-request-id": [
+      "66ca4528-bb27-4ee3-b9a5-fe6490a8078e"
+    ],
+    "accept-language": [
+      "en-US"
+    ],
+    "User-Agent": [
+      "FxVersion/4.6.25211.01",
+      "Microsoft.Azure.Management.StorSimple1200Series.StorSimple1200SeriesManagementClient/1.0.0.0"
+    ]
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": {
+              "value": "HostUsedStorage",
+              "localizedValue": "Primary Storage Used"
+            },
+            "unit": "Bytes",
+            "primaryAggregationType": "Average",
+            "resourceId": "https://pod01-cis2.sea.storsimple.windowsazure.com/managers/4239154091695873374/devices/HSDK-WSJQERQW3F/iscsiservers/HSDK-WSJQERQW3F/disks/TieredIscsiDiskForSDKTest",
+            "metricAvailabilities": [
+              {
+                "timeGrain": "PT1M",
+                "retention": "PT6H"
+              },
+              {
+                "timeGrain": "PT1H",
+                "retention": "P7D"
+              },
+              {
+                "timeGrain": "P1D",
+                "retention": "P1Y"
+              }
+            ],
+            "dimensions": [
+              {
+                "name": "Disk",
+                "value": "TieredIscsiDiskForSDKTest"
+              }
+            ],
+            "type": "Microsoft.StorSimple/managers/devices/iscsiServers/disks/metricsDefinitions"
+          }
+        ]
+      }
+    }
+  }
+}

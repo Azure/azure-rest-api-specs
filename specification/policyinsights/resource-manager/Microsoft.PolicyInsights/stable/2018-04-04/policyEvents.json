@@ -1,0 +1,954 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PolicyEventsClient",
+    "version": "2018-04-04"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/{managementGroupsNamespace}/managementGroups/{managementGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForManagementGroup",
+        "description": "Queries policy events for the resources under the management group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupsNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/managementGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at management group scope": {
+            "$ref": "./examples/PolicyEvents_QueryManagementGroupScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForSubscription",
+        "description": "Queries policy events for the resources under the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at subscription scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionScope.json"
+          },
+          "Time range; sort, select and limit": {
+            "$ref": "./examples/PolicyEvents_TimeRangeSortSelectTop.json"
+          },
+          "Filter and group with aggregate": {
+            "$ref": "./examples/PolicyEvents_FilterAndGroupByWithAggregate.json"
+          },
+          "Filter and group without aggregate": {
+            "$ref": "./examples/PolicyEvents_FilterAndGroupByWithoutAggregate.json"
+          },
+          "Filter and aggregate only": {
+            "$ref": "./examples/PolicyEvents_FilterAndAggregateOnly.json"
+          },
+          "Filter and multiple groups": {
+            "$ref": "./examples/PolicyEvents_FilterAndMultipleGroups.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForResourceGroup",
+        "description": "Queries policy events for the resources under the resource group.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at resource group scope": {
+            "$ref": "./examples/PolicyEvents_QueryResourceGroupScope.json"
+          }
+        }
+      }
+    },
+    "/{resourceId}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForResource",
+        "description": "Queries policy events for the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at resource scope": {
+            "$ref": "./examples/PolicyEvents_QueryResourceScope.json"
+          },
+          "Query at subscription level resource scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelResourceScope.json"
+          },
+          "Query at nested resource scope": {
+            "$ref": "./examples/PolicyEvents_QueryNestedResourceScope.json"
+          },
+          "Query at subscription level nested resource scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelNestedResourceScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policySetDefinitions/{policySetDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForPolicySetDefinition",
+        "description": "Queries policy events for the subscription level policy set definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policySetDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at subscription level policy set definition scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicySetDefinitionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyDefinitions/{policyDefinitionName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForPolicyDefinition",
+        "description": "Queries policy events for the subscription level policy definition.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policyDefinitionNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at subscription level policy definition scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyDefinitionScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForSubscriptionLevelPolicyAssignment",
+        "description": "Queries policy events for the subscription level policy assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policyAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at subscription level policy assignment scope": {
+            "$ref": "./examples/PolicyEvents_QuerySubscriptionLevelPolicyAssignmentScope.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{authorizationNamespace}/policyAssignments/{policyAssignmentName}/providers/Microsoft.PolicyInsights/policyEvents/{policyEventsResource}/queryResults": {
+      "post": {
+        "operationId": "PolicyEvents_ListQueryResultsForResourceGroupLevelPolicyAssignment",
+        "description": "Queries policy events for the resource group level policy assignment.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/policyEventsResourceParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/authorizationNamespaceParameter"
+          },
+          {
+            "$ref": "#/parameters/policyAssignmentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/topParameter"
+          },
+          {
+            "$ref": "#/parameters/orderByParameter"
+          },
+          {
+            "$ref": "#/parameters/selectParameter"
+          },
+          {
+            "$ref": "#/parameters/fromParameter"
+          },
+          {
+            "$ref": "#/parameters/toParameter"
+          },
+          {
+            "$ref": "#/parameters/filterParameter"
+          },
+          {
+            "$ref": "#/parameters/applyParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Query results.",
+            "schema": {
+              "$ref": "#/definitions/PolicyEventsQueryResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Query at resource group level policy assignment scope": {
+            "$ref": "./examples/PolicyEvents_QueryResourceGroupLevelPolicyAssignmentScope.json"
+          }
+        }
+      }
+    },
+    "/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata": {
+      "get": {
+        "operationId": "PolicyEvents_GetMetadata",
+        "description": "Gets OData metadata XML document.",
+        "produces": [
+          "application/xml"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/scopeParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OData metadata XML document.",
+            "schema": {
+              "$ref": "#/definitions/MetadataDocument"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/QueryFailure"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get metadata": {
+            "$ref": "./examples/PolicyEvents_GetMetadata.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "PolicyEventsQueryResults": {
+      "description": "Query results.",
+      "properties": {
+        "@odata.context": {
+          "description": "OData context string; used by OData clients to resolve type information based on metadata.",
+          "type": "string"
+        },
+        "@odata.count": {
+          "description": "OData entity count; represents the number of policy event records returned.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "value": {
+          "description": "Query results.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyEvent"
+          }
+        }
+      }
+    },
+    "PolicyEvent": {
+      "type": "object",
+      "description": "Policy event record.",
+      "properties": {
+        "@odata.id": {
+          "description": "OData entity ID; always set to null since policy event records do not have an entity ID.",
+          "type": "string"
+        },
+        "@odata.context": {
+          "description": "OData context string; used by OData clients to resolve type information based on metadata.",
+          "type": "string"
+        },
+        "timestamp": {
+          "description": "Timestamp for the policy event record.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "resourceId": {
+          "description": "Resource ID.",
+          "type": "string"
+        },
+        "policyAssignmentId": {
+          "description": "Policy assignment ID.",
+          "type": "string"
+        },
+        "policyDefinitionId": {
+          "description": "Policy definition ID.",
+          "type": "string"
+        },
+        "effectiveParameters": {
+          "description": "Effective parameters for the policy assignment.",
+          "type": "string"
+        },
+        "isCompliant": {
+          "description": "Flag which states whether the resource is compliant against the policy assignment it was evaluated against.",
+          "type": "boolean"
+        },
+        "subscriptionId": {
+          "description": "Subscription ID.",
+          "type": "string"
+        },
+        "resourceType": {
+          "description": "Resource type.",
+          "type": "string"
+        },
+        "resourceLocation": {
+          "description": "Resource location.",
+          "type": "string"
+        },
+        "resourceGroup": {
+          "description": "Resource group name.",
+          "type": "string"
+        },
+        "resourceTags": {
+          "description": "List of resource tags.",
+          "type": "string"
+        },
+        "policyAssignmentName": {
+          "description": "Policy assignment name.",
+          "type": "string"
+        },
+        "policyAssignmentOwner": {
+          "description": "Policy assignment owner.",
+          "type": "string"
+        },
+        "policyAssignmentParameters": {
+          "description": "Policy assignment parameters.",
+          "type": "string"
+        },
+        "policyAssignmentScope": {
+          "description": "Policy assignment scope.",
+          "type": "string"
+        },
+        "policyDefinitionName": {
+          "description": "Policy definition name.",
+          "type": "string"
+        },
+        "policyDefinitionAction": {
+          "description": "Policy definition action, i.e. effect.",
+          "type": "string"
+        },
+        "policyDefinitionCategory": {
+          "description": "Policy definition category.",
+          "type": "string"
+        },
+        "policySetDefinitionId": {
+          "description": "Policy set definition ID, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionName": {
+          "description": "Policy set definition name, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionOwner": {
+          "description": "Policy set definition owner, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionCategory": {
+          "description": "Policy set definition category, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "policySetDefinitionParameters": {
+          "description": "Policy set definition parameters, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "managementGroupIds": {
+          "description": "Comma separated list of management group IDs, which represent the hierarchy of the management groups the resource is under.",
+          "type": "string"
+        },
+        "policyDefinitionReferenceId": {
+          "description": "Reference ID for the policy definition inside the policy set, if the policy assignment is for a policy set.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "Tenant ID for the policy event record.",
+          "type": "string"
+        },
+        "principalOid": {
+          "description": "Principal object ID for the user who initiated the resource operation that triggered the policy event.",
+          "type": "string"
+        }
+      },
+      "additionalProperties": {
+        "description": "The list of key/value pairs for the additional properties, in the format 'key':'value' where key = the field name, and value = the field value. By default this is not populated"
+      }
+    },
+    "QueryFailure": {
+      "description": "Error response.",
+      "properties": {
+        "error": {
+          "description": "Error definition.",
+          "properties": {
+            "code": {
+              "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+              "type": "string",
+              "readOnly": true
+            },
+            "message": {
+              "description": "Description of the error.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
+        }
+      }
+    },
+    "MetadataDocument": {
+      "description": "Metadata XML document.",
+      "type": "string"
+    }
+  },
+  "parameters": {
+    "policyEventsResourceParameter": {
+      "name": "policyEventsResource",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "description": "The name of the virtual resource under PolicyEvents resource type; only \"default\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupsNamespaceParameter": {
+      "name": "managementGroupsNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.Management"
+      ],
+      "description": "The namespace for Microsoft Management RP; only \"Microsoft.Management\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "managementGroupNameParameter": {
+      "name": "managementGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Management group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Microsoft Azure subscription ID.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource group name.",
+      "x-ms-parameter-location": "method"
+    },
+    "resourceIdParameter": {
+      "name": "resourceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Resource ID.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "authorizationNamespaceParameter": {
+      "name": "authorizationNamespace",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "Microsoft.Authorization"
+      ],
+      "description": "The namespace for Microsoft Authorization resource provider; only \"Microsoft.Authorization\" is allowed.",
+      "x-ms-parameter-location": "method"
+    },
+    "policySetDefinitionNameParameter": {
+      "name": "policySetDefinitionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Policy set definition name.",
+      "x-ms-parameter-location": "method"
+    },
+    "policyDefinitionNameParameter": {
+      "name": "policyDefinitionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Policy definition name.",
+      "x-ms-parameter-location": "method"
+    },
+    "policyAssignmentNameParameter": {
+      "name": "policyAssignmentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Policy assignment name.",
+      "x-ms-parameter-location": "method"
+    },
+    "scopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "A valid scope, i.e. management group, subscription, resource group, or resource ID. Scope used has no effect on metadata returned.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "API version to use with the client requests.",
+      "x-ms-parameter-location": "client"
+    },
+    "topParameter": {
+      "name": "$top",
+      "in": "query",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "minimum": 0,
+      "description": "Maximum number of records to return.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Top"
+    },
+    "orderByParameter": {
+      "name": "$orderby",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Ordering expression using OData notation. One or more comma-separated column names with an optional \"desc\" (the default) or \"asc\", e.g. \"$orderby=PolicyAssignmentId, ResourceId asc\".",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "OrderBy"
+    },
+    "selectParameter": {
+      "name": "$select",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "Select expression using OData notation. Limits the columns on each record to just those requested, e.g. \"$select=PolicyAssignmentId, ResourceId\".",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Select"
+    },
+    "fromParameter": {
+      "name": "$from",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted timestamp specifying the start time of the interval to query. When not specified, the service uses ($to - 1-day).",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "From"
+    },
+    "toParameter": {
+      "name": "$to",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "format": "date-time",
+      "description": "ISO 8601 formatted timestamp specifying the end time of the interval to query. When not specified, the service uses request time.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "To"
+    },
+    "filterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData filter expression.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Filter"
+    },
+    "applyParameter": {
+      "name": "$apply",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "OData apply expression for aggregations.",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "QueryOptions"
+      },
+      "x-ms-client-name": "Apply"
+    }
+  }
+}

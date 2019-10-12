@@ -1,0 +1,48 @@
+{
+  "operationId": "GetReplica",
+  "description": "This example shows how to get the description of the specified service in an application resource.",
+  "parameters": {
+    "api-version": "6.3-preview",
+    "applicationResourceName": "helloWorldApp",
+    "serviceResourceName": "helloWorldService",
+    "replicaName": "0"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "osType": "Linux",
+        "codePackages": [
+          {
+            "name": "helloWorldCode",
+            "image": "seabreeze/sbz-helloworld:1.0-alpine",
+            "endpoints": [
+              {
+                "name": "helloWorldListener",
+                "port": 80
+              }
+            ],
+            "resources": {
+              "requests": {
+                "memoryInGB": 1,
+                "cpu": 1
+              }
+            },
+            "instanceView": {
+              "restartCount": 1,
+              "currentState": {
+                "state": "Running",
+                "exitCode": "0"
+              },
+              "previousState": {
+                "state": "NotSpecified",
+                "exitCode": "0"
+              }
+            }
+          }
+        ],
+        "networkRefs": [],
+        "replicaName": "0s"
+      }
+    }
+  }
+}

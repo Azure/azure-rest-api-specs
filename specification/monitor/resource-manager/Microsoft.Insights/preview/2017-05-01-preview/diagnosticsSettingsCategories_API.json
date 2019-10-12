@@ -1,0 +1,223 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "MonitorManagementClient",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2017-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/{resourceUri}/providers/microsoft.insights/diagnosticSettingsCategories/{name}": {
+      "get": {
+        "tags": [
+          "DiagnosticSettingsCategories"
+        ],
+        "operationId": "DiagnosticSettingsCategory_Get",
+        "description": "Gets the diagnostic settings category for the specified resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/NameParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about diagnostic setting category",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsCategoryResource"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic setting": {
+            "$ref": "./examples/getDiagnosticSettingsCategory.json"
+          }
+        }
+      }
+    },
+    "/{resourceUri}/providers/microsoft.insights/diagnosticSettingsCategories": {
+      "get": {
+        "tags": [
+          "DiagnosticSettingsCategories"
+        ],
+        "operationId": "DiagnosticSettingsCategory_List",
+        "description": "Lists the diagnostic settings categories for the specified resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceUriParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          },
+          "200": {
+            "description": "Successful request to get more information about diagnostic setting category",
+            "schema": {
+              "$ref": "#/definitions/DiagnosticSettingsCategoryResourceCollection"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets the diagnostic setting": {
+            "$ref": "./examples/listDiagnosticSettingsCategories.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ProxyOnlyResource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "A proxy only azure resource object"
+    },
+    "DiagnosticSettingsCategory": {
+      "properties": {
+        "categoryType": {
+          "enum": [
+            "Metrics",
+            "Logs"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "categoryType"
+          },
+          "x-nullable": false,
+          "description": "The type of the diagnostic settings category."
+        }
+      },
+      "description": "The diagnostic settings Category."
+    },
+    "DiagnosticSettingsCategoryResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DiagnosticSettingsCategory",
+          "description": "The properties of a Diagnostic Settings Category."
+        }
+      },
+      "description": "The diagnostic settings category resource."
+    },
+    "DiagnosticSettingsCategoryResourceCollection": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticSettingsCategoryResource"
+          },
+          "description": "The collection of diagnostic settings category resources."
+        }
+      },
+      "description": "Represents a collection of diagnostic setting category resources."
+    },
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    },
+    "ResourceUriParameter": {
+      "name": "resourceUri",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The identifier of the resource.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+    "NameParameter": {
+      "name": "name",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the diagnostic setting.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

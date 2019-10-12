@@ -1,0 +1,3954 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SeaBreezeManagementClient",
+    "description": "APIs to deploy and manage resources to SeaBreeze.",
+    "version": "2018-09-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "type": "oauth2"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.ServiceFabricMesh/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Lists all of the available operations.",
+        "description": "Lists all the available operations provided by Service Fabric SeaBreeze resource provider.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/secrets/{secretResourceName}": {
+      "put": {
+        "operationId": "Secret_Create",
+        "x-ms-examples": {
+          "CreateOrUpdateSecret": {
+            "$ref": "./examples/secrets/create_update.json"
+          }
+        },
+        "summary": "Creates or updates a secret resource.",
+        "description": "Creates a secret resource with the specified name, description and properties. If a secret resource with the same name exists, then it is updated with the specified description and properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceDescriptionRequiredBodyParam"
+          }
+        ],
+        "tags": [
+          "Secrets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SecretResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-sf-codegen": {
+          "Powershell": {
+            "skipGeneration": "true"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Secret_Get",
+        "x-ms-examples": {
+          "GetSecret": {
+            "$ref": "./examples/secrets/get.json"
+          }
+        },
+        "summary": "Gets the secret resource with the given name.",
+        "description": "Gets the information about the secret resource with the given name. The information include the description and other properties of the secret.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Secrets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Secret_Delete",
+        "x-ms-examples": {
+          "DeleteSecret": {
+            "$ref": "./examples/secrets/delete.json"
+          }
+        },
+        "summary": "Deletes the secret resource.",
+        "description": "Deletes the secret resource identified by the name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Secrets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content - the specified secret was not found."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/secrets": {
+      "get": {
+        "operationId": "Secret_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListSecretsByResourceGroup": {
+            "$ref": "./examples/secrets/list_byResourceGroup.json"
+          }
+        },
+        "summary": "Gets all the secret resources in a given resource group.",
+        "description": "Gets the information about all secret resources in a given resource group. The information include the description and other properties of the Secret.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Secrets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabricMesh/secrets": {
+      "get": {
+        "operationId": "Secret_ListBySubscription",
+        "x-ms-examples": {
+          "ListSecretsBySubscriptionId": {
+            "$ref": "./examples/secrets/list_bySubscriptionId.json"
+          }
+        },
+        "summary": "Gets all the secret resources in a given subscription.",
+        "description": "Gets the information about all secret resources in a given resource group. The information include the description and other properties of the secret.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "tags": [
+          "Secrets"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/secrets/{secretResourceName}/values/{secretValueResourceName}": {
+      "put": {
+        "operationId": "SecretValue_Create",
+        "x-ms-examples": {
+          "CreateSecretValue": {
+            "$ref": "./examples/secrets/values/create.json"
+          }
+        },
+        "summary": "Adds the specified value as a new version of the specified secret resource.",
+        "description": "Creates a new value of the specified secret resource. The name of the value is typically the version identifier. Once created the value cannot be changed.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretValueResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretValueResourceDescriptionRequiredBodyParam"
+          }
+        ],
+        "tags": [
+          "SecretValues"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretValueResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SecretValueResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-sf-codegen": {
+          "Powershell": {
+            "skipGeneration": "true"
+          }
+        }
+      },
+      "get": {
+        "operationId": "SecretValue_Get",
+        "x-ms-examples": {
+          "GetSecretValue": {
+            "$ref": "./examples/secrets/values/get.json"
+          }
+        },
+        "summary": "Gets the specified secret value resource.",
+        "description": "Get the information about the specified named secret value resources. The information does not include the actual value of the secret.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretValueResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "SecretValues"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretValueResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SecretValue_Delete",
+        "x-ms-examples": {
+          "DeleteSecretValue": {
+            "$ref": "./examples/secrets/values/delete.json"
+          }
+        },
+        "summary": "Deletes the specified  value of the named secret resource.",
+        "description": "Deletes the secret value resource identified by the name. The name of the resource is typically the version associated with that value. Deletion will fail if the specified value is in use.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretValueResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "SecretValues"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content - the specified named secret value was not found."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/secrets/{secretResourceName}/values": {
+      "get": {
+        "operationId": "SecretValue_List",
+        "x-ms-examples": {
+          "ListSecretValues": {
+            "$ref": "./examples/secrets/values/list.json"
+          }
+        },
+        "summary": "List names of all values of the specified secret resource.",
+        "description": "Gets information about all secret value resources of the specified secret resource. The information includes the names of the secret value resources, but not the actual values.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "SecretValues"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretValueResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/secrets/{secretResourceName}/values/{secretValueResourceName}/list_value": {
+      "post": {
+        "operationId": "SecretValue_ListValue",
+        "x-ms-examples": {
+          "ListSecretValue": {
+            "$ref": "./examples/secrets/values/list_value.json"
+          }
+        },
+        "summary": "Lists the specified value of the secret resource.",
+        "description": "Lists the decrypted value of the specified named value of the secret resource. This is a privileged operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/SecretValueResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "SecretValues"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecretValue"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/volumes/{volumeResourceName}": {
+      "put": {
+        "operationId": "Volume_Create",
+        "x-ms-examples": {
+          "CreateOrUpdateVolume": {
+            "$ref": "./examples/volumes/create_update.json"
+          }
+        },
+        "summary": "Creates or updates a volume resource.",
+        "description": "Creates a volume resource with the specified name, description and properties. If a volume resource with the same name exists, then it is updated with the specified description and properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/VolumeResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/VolumeResourceDescriptionRequiredBodyParam"
+          }
+        ],
+        "tags": [
+          "Volumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VolumeResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/VolumeResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-sf-codegen": {
+          "Powershell": {
+            "skipGeneration": "true"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Volume_Get",
+        "x-ms-examples": {
+          "GetVolume": {
+            "$ref": "./examples/volumes/get.json"
+          }
+        },
+        "summary": "Gets the volume resource with the given name.",
+        "description": "Gets the information about the volume resource with the given name. The information include the description and other properties of the volume.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/VolumeResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Volumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VolumeResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Volume_Delete",
+        "x-ms-examples": {
+          "DeleteVolume": {
+            "$ref": "./examples/volumes/delete.json"
+          }
+        },
+        "summary": "Deletes the volume resource.",
+        "description": "Deletes the volume resource identified by the name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/VolumeResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Volumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content - the specified volume was not found."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/volumes": {
+      "get": {
+        "operationId": "Volume_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListVolumesByResourceGroup": {
+            "$ref": "./examples/volumes/list_byResourceGroup.json"
+          }
+        },
+        "summary": "Gets all the volume resources in a given resource group.",
+        "description": "Gets the information about all volume resources in a given resource group. The information include the description and other properties of the Volume.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Volumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VolumeResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabricMesh/volumes": {
+      "get": {
+        "operationId": "Volume_ListBySubscription",
+        "x-ms-examples": {
+          "ListVolumesBySubscriptionId": {
+            "$ref": "./examples/volumes/list_bySubscriptionId.json"
+          }
+        },
+        "summary": "Gets all the volume resources in a given subscription.",
+        "description": "Gets the information about all volume resources in a given resource group. The information include the description and other properties of the volume.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "tags": [
+          "Volumes"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/VolumeResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/networks/{networkResourceName}": {
+      "put": {
+        "operationId": "Network_Create",
+        "x-ms-examples": {
+          "CreateOrUpdateNetwork": {
+            "$ref": "./examples/networks/create_update.json"
+          }
+        },
+        "summary": "Creates or updates a network resource.",
+        "description": "Creates a network resource with the specified name, description and properties. If a network resource with the same name exists, then it is updated with the specified description and properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/NetworkResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/NetworkResourceDescriptionRequiredBodyParam"
+          }
+        ],
+        "tags": [
+          "Networks"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-sf-codegen": {
+          "Powershell": {
+            "skipGeneration": "true"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Network_Get",
+        "x-ms-examples": {
+          "GetNetwork": {
+            "$ref": "./examples/networks/get.json"
+          }
+        },
+        "summary": "Gets the network resource with the given name.",
+        "description": "Gets the information about the network resource with the given name. The information include the description and other properties of the network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/NetworkResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Networks"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Network_Delete",
+        "x-ms-examples": {
+          "DeleteNetwork": {
+            "$ref": "./examples/networks/delete.json"
+          }
+        },
+        "summary": "Deletes the network resource.",
+        "description": "Deletes the network resource identified by the name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/NetworkResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Networks"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content - the specified network was not found."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/networks": {
+      "get": {
+        "operationId": "Network_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListNetworksByResourceGroup": {
+            "$ref": "./examples/networks/list_byResourceGroup.json"
+          }
+        },
+        "summary": "Gets all the network resources in a given resource group.",
+        "description": "Gets the information about all network resources in a given resource group. The information include the description and other properties of the Network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Networks"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabricMesh/networks": {
+      "get": {
+        "operationId": "Network_ListBySubscription",
+        "x-ms-examples": {
+          "ListNetworksBySubscriptionId": {
+            "$ref": "./examples/networks/list_bySubscriptionId.json"
+          }
+        },
+        "summary": "Gets all the network resources in a given subscription.",
+        "description": "Gets the information about all network resources in a given resource group. The information include the description and other properties of the network.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "tags": [
+          "Networks"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/NetworkResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/gateways/{gatewayResourceName}": {
+      "put": {
+        "operationId": "Gateway_Create",
+        "x-ms-examples": {
+          "CreateOrUpdateGateway": {
+            "$ref": "./examples/gateways/create_update.json"
+          }
+        },
+        "summary": "Creates or updates a gateway resource.",
+        "description": "Creates a gateway resource with the specified name, description and properties. If a gateway resource with the same name exists, then it is updated with the specified description and properties. Use gateway resources to create a gateway for public connectivity for services within your application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/GatewayResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/GatewayResourceDescriptionRequiredBodyParam"
+          }
+        ],
+        "tags": [
+          "Gateways"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GatewayResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/GatewayResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-sf-codegen": {
+          "Powershell": {
+            "skipGeneration": "true"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Gateway_Get",
+        "x-ms-examples": {
+          "GetGateway": {
+            "$ref": "./examples/gateways/get.json"
+          }
+        },
+        "summary": "Gets the gateway resource with the given name.",
+        "description": "Gets the information about the gateway resource with the given name. The information include the description and other properties of the gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/GatewayResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Gateways"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GatewayResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Gateway_Delete",
+        "x-ms-examples": {
+          "DeleteGateway": {
+            "$ref": "./examples/gateways/delete.json"
+          }
+        },
+        "summary": "Deletes the gateway resource.",
+        "description": "Deletes the gateway resource identified by the name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/GatewayResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Gateways"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content - the specified gateway was not found."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/gateways": {
+      "get": {
+        "operationId": "Gateway_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListGatewaysByResourceGroup": {
+            "$ref": "./examples/gateways/list_byResourceGroup.json"
+          }
+        },
+        "summary": "Gets all the gateway resources in a given resource group.",
+        "description": "Gets the information about all gateway resources in a given resource group. The information include the description and other properties of the Gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Gateways"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GatewayResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabricMesh/gateways": {
+      "get": {
+        "operationId": "Gateway_ListBySubscription",
+        "x-ms-examples": {
+          "ListGatewaysBySubscriptionId": {
+            "$ref": "./examples/gateways/list_bySubscriptionId.json"
+          }
+        },
+        "summary": "Gets all the gateway resources in a given subscription.",
+        "description": "Gets the information about all gateway resources in a given resource group. The information include the description and other properties of the gateway.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "tags": [
+          "Gateways"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/GatewayResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/applications/{applicationResourceName}": {
+      "put": {
+        "operationId": "Application_Create",
+        "x-ms-examples": {
+          "CreateOrUpdateApplication": {
+            "$ref": "./examples/applications/create_update.json"
+          }
+        },
+        "summary": "Creates or updates an application resource.",
+        "description": "Creates an application resource with the specified name, description and properties. If an application resource with the same name exists, then it is updated with the specified description and properties.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceDescriptionRequiredBodyParam"
+          }
+        ],
+        "tags": [
+          "Applications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceDescription"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceDescription"
+            }
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-sf-codegen": {
+          "Powershell": {
+            "skipGeneration": "true"
+          }
+        }
+      },
+      "get": {
+        "operationId": "Application_Get",
+        "x-ms-examples": {
+          "GetApplication": {
+            "$ref": "./examples/applications/get.json"
+          }
+        },
+        "summary": "Gets the application resource with the given name.",
+        "description": "Gets the information about the application resource with the given name. The information include the description and other properties of the application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Applications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Application_Delete",
+        "x-ms-examples": {
+          "DeleteApplication": {
+            "$ref": "./examples/applications/delete.json"
+          }
+        },
+        "summary": "Deletes the application resource.",
+        "description": "Deletes the application resource identified by the name.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Applications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content - the specified application was not found."
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/applications": {
+      "get": {
+        "operationId": "Application_ListByResourceGroup",
+        "x-ms-examples": {
+          "ListApplicationsByResourceGroup": {
+            "$ref": "./examples/applications/list_byResourceGroup.json"
+          }
+        },
+        "summary": "Gets all the application resources in a given resource group.",
+        "description": "Gets the information about all application resources in a given resource group. The information include the description and other properties of the Application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Applications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ServiceFabricMesh/applications": {
+      "get": {
+        "operationId": "Application_ListBySubscription",
+        "x-ms-examples": {
+          "ListApplicationsBySubscriptionId": {
+            "$ref": "./examples/applications/list_bySubscriptionId.json"
+          }
+        },
+        "summary": "Gets all the application resources in a given subscription.",
+        "description": "Gets the information about all application resources in a given resource group. The information include the description and other properties of the application.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          }
+        ],
+        "tags": [
+          "Applications"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ApplicationResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/applications/{applicationResourceName}/services/{serviceResourceName}": {
+      "get": {
+        "operationId": "Service_Get",
+        "x-ms-examples": {
+          "GetService": {
+            "$ref": "./examples/applications/services/get.json"
+          }
+        },
+        "summary": "Gets the service resource with the given name.",
+        "description": "Gets the information about the service resource with the given name. The information include the description and other properties of the service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ServiceResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Services"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/applications/{applicationResourceName}/services": {
+      "get": {
+        "operationId": "Service_List",
+        "x-ms-examples": {
+          "ListServices": {
+            "$ref": "./examples/applications/services/list.json"
+          }
+        },
+        "summary": "Lists all the service resources.",
+        "description": "Gets the information about all services of an application resource. The information include the description and other properties of the Service.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "Services"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceResourceDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/applications/{applicationResourceName}/services/{serviceResourceName}/replicas/{replicaName}": {
+      "get": {
+        "operationId": "ServiceReplica_Get",
+        "x-ms-examples": {
+          "ReplicaGet": {
+            "$ref": "./examples/applications/services/replicas/get.json"
+          }
+        },
+        "summary": "Gets the given replica of the service of an application.",
+        "description": "Gets the information about the service replica with the given name. The information include the description and other properties of the service replica.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ServiceResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ReplicaNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "ServiceReplicas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceReplicaDescription"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/applications/{applicationResourceName}/services/{serviceResourceName}/replicas": {
+      "get": {
+        "operationId": "ServiceReplica_List",
+        "x-ms-examples": {
+          "ReplicasGetAll": {
+            "$ref": "./examples/applications/services/replicas/list.json"
+          }
+        },
+        "summary": "Gets replicas of a given service.",
+        "description": "Gets the information about all replicas of a given service of an application. The information includes the runtime properties of the replica instance.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ServiceResourceNameRequiredPathParam"
+          }
+        ],
+        "tags": [
+          "ServiceReplicas"
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServiceReplicaDescriptionList"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabricMesh/applications/{applicationResourceName}/services/{serviceResourceName}/replicas/{replicaName}/codePackages/{codePackageName}/logs": {
+      "get": {
+        "operationId": "CodePackage_GetContainerLogs",
+        "x-ms-examples": {
+          "GetContainerLogs": {
+            "$ref": "./examples/applications/services/replicas/codepackages/get_logs.json"
+          }
+        },
+        "summary": "Gets the logs from the container.",
+        "description": "Gets the logs for the container of the specified code package of the service replica.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/api-versionRequiredQueryParam"
+          },
+          {
+            "$ref": "#/parameters/ApplicationResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ServiceResourceNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/ReplicaNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/CodePackageNameRequiredPathParam"
+          },
+          {
+            "$ref": "#/parameters/TailOptionalQueryParam"
+          }
+        ],
+        "tags": [
+          "CodePackages"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful response",
+            "schema": {
+              "$ref": "#/definitions/ContainerLogs"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "#/definitions/ErrorModel"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ResourceStatus": {
+      "description": "Status of the resource.",
+      "type": "string",
+      "enum": [
+        "Unknown",
+        "Ready",
+        "Upgrading",
+        "Creating",
+        "Deleting",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "ResourceStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Unknown",
+            "description": "Indicates the resource status is unknown. The value is zero."
+          },
+          {
+            "value": "Ready",
+            "description": "Indicates the resource is ready. The value is 1."
+          },
+          {
+            "value": "Upgrading",
+            "description": "Indicates the resource is upgrading. The value is 2."
+          },
+          {
+            "value": "Creating",
+            "description": "Indicates the resource is being created. The value is 3."
+          },
+          {
+            "value": "Deleting",
+            "description": "Indicates the resource is being deleted. The value is 4."
+          },
+          {
+            "value": "Failed",
+            "description": "Indicates the resource is not functional due to persistent failures. See statusDetails property for more details. The value is 5."
+          }
+        ]
+      }
+    },
+    "HealthState": {
+      "type": "string",
+      "description": "The health state of a Service Fabric entity such as Cluster, Node, Application, Service, Partition, Replica etc.",
+      "enum": [
+        "Invalid",
+        "Ok",
+        "Warning",
+        "Error",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "HealthState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Invalid",
+            "description": "Indicates an invalid health state. All Service Fabric enumerations have the invalid type. The value is zero."
+          },
+          {
+            "value": "Ok",
+            "description": "Indicates the health state is okay. The value is 1."
+          },
+          {
+            "value": "Warning",
+            "description": "Indicates the health state is at a warning level. The value is 2."
+          },
+          {
+            "value": "Error",
+            "description": "Indicates the health state is at an error level. Error health state should be investigated, as they can impact the correct functionality of the cluster. The value is 3."
+          },
+          {
+            "value": "Unknown",
+            "description": "Indicates an unknown health status. The value is 65535."
+          }
+        ]
+      }
+    },
+    "AvailableOperationDisplay": {
+      "properties": {
+        "provider": {
+          "type": "string",
+          "description": "Name of the operation provider."
+        },
+        "resource": {
+          "type": "string",
+          "description": "Name of the resource on which the operation is available."
+        },
+        "operation": {
+          "type": "string",
+          "description": "Name of the available operation."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the available operation."
+        }
+      },
+      "description": "An operation available at the listed Azure resource provider."
+    },
+    "ErrorModel": {
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ErrorErrorModel",
+          "description": "Error model information"
+        }
+      },
+      "description": "The error details.",
+      "required": [
+        "error"
+      ]
+    },
+    "ErrorErrorModel": {
+      "description": "Error model information",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        },
+        "innerError": {
+          "type": "string"
+        },
+        "details": {
+          "type": "array",
+          "description": "List of error message details.",
+          "items": {
+            "$ref": "#/definitions/ErrorDetailsModel"
+          }
+        }
+      },
+      "required": [
+        "code"
+      ]
+    },
+    "ErrorDetailsModel": {
+      "description": "Error model details information",
+      "properties": {
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string",
+          "description": "Error message."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "OperationListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of Service Fabric operations supported by the Microsoft.ServiceFabric resource provider.",
+          "items": {
+            "$ref": "#/definitions/OperationResult"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any.",
+          "readOnly": true
+        }
+      },
+      "description": "Describes the result of the request to list Service Fabric operations."
+    },
+    "OperationResult": {
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the operation."
+        },
+        "display": {
+          "$ref": "#/definitions/AvailableOperationDisplay",
+          "description": "The object that represents the operation."
+        },
+        "origin": {
+          "type": "string",
+          "description": "Origin result"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to use for getting the next set of results."
+        }
+      },
+      "description": "List of operations available at the listed Azure resource provider."
+    },
+    "ProvisionedResourceProperties": {
+      "description": "Describes common properties of a provisioned resource.",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "description": "State of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ProxyResource": {
+      "description": "The resource model definition for Azure Resource Manager proxy resource. It will have everything other than required location and tags.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
+    "ManagedProxyResource": {
+      "description": "The resource model definition for Azure Resource Manager proxy resource. It will have everything other than required location and tags. This proxy resource is explicitly created or updated by including it in the parent resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified identifier for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "Resource": {
+      "description": "The resource model definition for Azure Resource Manager resource.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified identifier for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the resource",
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts.",
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for Azure Resource Manager tracked top-level resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "description": "Resource tags."
+        },
+        "location": {
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "The geo-location where the resource lives"
+        }
+      },
+      "required": [
+        "location"
+      ]
+    },
+    "SecretKind": {
+      "type": "string",
+      "description": "Describes the kind of secret.",
+      "enum": [
+        "inlinedValue"
+      ],
+      "x-ms-enum": {
+        "name": "SecretKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "inlinedValue",
+            "description": "A simple secret resource whose plaintext value is provided by the user."
+          }
+        ]
+      }
+    },
+    "SecretResourceProperties": {
+      "description": "Describes the properties of a secret resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretResourcePropertiesBase"
+        }
+      ],
+      "properties": {
+        "description": {
+          "description": "User readable description of the secret.",
+          "type": "string"
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Status of the resource."
+        },
+        "statusDetails": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gives additional information about the current status of the secret."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The type of the content stored in the secret value. The value of this property is opaque to Service Fabric. Once set, the value of this property cannot be changed."
+        }
+      }
+    },
+    "InlinedValueSecretResourceProperties": {
+      "description": "Describes the properties of a secret resource whose value is provided explicitly as plaintext. The secret resource may have multiple values, each being uniquely versioned. The secret value of each version is stored encrypted, and delivered as plaintext into the context of applications referencing it.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SecretResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "inlinedValue"
+    },
+    "SecretResourcePropertiesBase": {
+      "discriminator": "kind",
+      "description": "This type describes the properties of a secret resource, including its kind.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceProperties"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/SecretKind",
+          "description": "Describes the kind of secret."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "SecretResourceDescription": {
+      "description": "This type describes a secret resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SecretResourceProperties",
+          "description": "Describes the properties of a secret resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SecretResourceDescriptionList": {
+      "description": "A pageable list of secret resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretResourceDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "SecretValue": {
+      "type": "object",
+      "description": "This type represents the unencrypted value of the secret.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The actual value of the secret."
+        }
+      }
+    },
+    "SecretValueProperties": {
+      "type": "object",
+      "description": "This type describes properties of secret value resource.",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The actual value of the secret."
+        }
+      }
+    },
+    "SecretValueResourceProperties": {
+      "description": "This type describes properties of a secret value resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/SecretValueProperties"
+        }
+      ]
+    },
+    "SecretValueResourceDescription": {
+      "description": "This type describes a value of a secret resource. The name of this resource is the version identifier corresponding to this secret value.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SecretValueResourceProperties",
+          "description": "This type describes properties of a secret value resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SecretValueResourceDescriptionList": {
+      "description": "A pageable list of values of a secret resource. The information does not include only the name of the value and not the actual unencrypted value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecretValueResourceDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "VolumeProperties": {
+      "description": "Describes properties of a volume resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "User readable description of the volume."
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Status of the volume."
+        },
+        "statusDetails": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gives additional information about the current status of the volume."
+        },
+        "provider": {
+          "$ref": "#/definitions/VolumeProvider",
+          "description": "Provider of the volume."
+        },
+        "azureFileParameters": {
+          "$ref": "#/definitions/VolumeProviderParametersAzureFile",
+          "description": "This type describes a volume provided by an Azure Files file share."
+        }
+      },
+      "required": [
+        "provider"
+      ]
+    },
+    "VolumeProvider": {
+      "type": "string",
+      "description": "Describes the provider of the volume resource.",
+      "enum": [
+        "SFAzureFile"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeProvider",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "SFAzureFile",
+            "description": "Provides volumes that are backed by Azure Files."
+          }
+        ]
+      }
+    },
+    "VolumeProviderParametersAzureFile": {
+      "description": "This type describes a volume provided by an Azure Files file share.",
+      "properties": {
+        "accountName": {
+          "description": "Name of the Azure storage account for the File Share.",
+          "type": "string"
+        },
+        "accountKey": {
+          "description": "Access key of the Azure storage account for the File Share.",
+          "type": "string"
+        },
+        "shareName": {
+          "description": "Name of the Azure Files file share that provides storage for the volume.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "accountName",
+        "shareName"
+      ]
+    },
+    "VolumeReference": {
+      "description": "Describes a reference to a volume resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the volume being referenced."
+        },
+        "readOnly": {
+          "type": "boolean",
+          "description": "The flag indicating whether the volume is read only. Default is 'false'."
+        },
+        "destinationPath": {
+          "type": "string",
+          "description": "The path within the container at which the volume should be mounted. Only valid path characters are allowed."
+        }
+      },
+      "required": [
+        "name",
+        "destinationPath"
+      ]
+    },
+    "ApplicationScopedVolume": {
+      "description": "Describes a volume whose lifetime is scoped to the application's lifetime.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/VolumeReference"
+        }
+      ],
+      "properties": {
+        "creationParameters": {
+          "$ref": "#/definitions/ApplicationScopedVolumeCreationParameters",
+          "description": "Describes parameters for creating application-scoped volumes."
+        }
+      },
+      "required": [
+        "creationParameters"
+      ]
+    },
+    "ApplicationScopedVolumeCreationParameters": {
+      "description": "Describes parameters for creating application-scoped volumes.",
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/ApplicationScopedVolumeKind",
+          "description": "Specifies the application-scoped volume kind."
+        },
+        "description": {
+          "description": "User readable description of the volume.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "ApplicationScopedVolumeCreationParametersServiceFabricVolumeDisk": {
+      "description": "Describes parameters for creating application-scoped volumes provided by Service Fabric Volume Disks",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationScopedVolumeCreationParameters"
+        }
+      ],
+      "properties": {
+        "sizeDisk": {
+          "description": "Volume size",
+          "type": "string",
+          "enum": [
+            "Small",
+            "Medium",
+            "Large"
+          ],
+          "x-ms-enum": {
+            "name": "SizeTypes",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "sizeDisk"
+      ],
+      "x-ms-discriminator-value": "ServiceFabricVolumeDisk"
+    },
+    "ApplicationScopedVolumeKind": {
+      "description": "Specifies the application-scoped volume kind.",
+      "type": "string",
+      "enum": [
+        "ServiceFabricVolumeDisk"
+      ],
+      "x-ms-enum": {
+        "name": "ApplicationScopedVolumeKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "ServiceFabricVolumeDisk",
+            "description": "Provides Service Fabric High Availability Volume Disk"
+          }
+        ]
+      }
+    },
+    "VolumeResourceProperties": {
+      "description": "This type describes properties of a volume resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/VolumeProperties"
+        }
+      ]
+    },
+    "VolumeResourceDescription": {
+      "description": "This type describes a volume resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VolumeResourceProperties",
+          "description": "This type describes properties of a volume resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "VolumeResourceDescriptionList": {
+      "description": "A pageable list of volume resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeResourceDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "NetworkKind": {
+      "type": "string",
+      "description": "The type of a Service Fabric container network.",
+      "enum": [
+        "Local"
+      ],
+      "x-ms-enum": {
+        "name": "NetworkKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Local",
+            "description": "Indicates a container network local to a single Service Fabric cluster. The value is 1."
+          }
+        ]
+      }
+    },
+    "NetworkResourceProperties": {
+      "description": "Describes properties of a network resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkResourcePropertiesBase"
+        }
+      ],
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "User readable description of the network."
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Status of the network."
+        },
+        "statusDetails": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gives additional information about the current status of the network."
+        }
+      }
+    },
+    "LocalNetworkResourceProperties": {
+      "description": "Information about a Service Fabric container network local to a single Service Fabric cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkResourceProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "Local",
+      "properties": {
+        "networkAddressPrefix": {
+          "$ref": "#/definitions/NetworkAddressPrefix",
+          "description": "Address space for the local container network."
+        }
+      }
+    },
+    "NetworkAddressPrefix": {
+      "type": "string",
+      "description": "Address space for a container network. This is expressed in CIDR notation."
+    },
+    "NetworkRef": {
+      "description": "Describes a network reference in a service.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the network"
+        },
+        "endpointRefs": {
+          "description": "A list of endpoints that are exposed on this network.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointRef"
+          }
+        }
+      }
+    },
+    "EndpointRef": {
+      "description": "Describes a reference to a service endpoint.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the endpoint."
+        }
+      }
+    },
+    "NetworkResourcePropertiesBase": {
+      "discriminator": "kind",
+      "description": "This type describes the properties of a network resource, including its kind.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceProperties"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/NetworkKind",
+          "description": "The type of a Service Fabric container network."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "NetworkResourceDescription": {
+      "description": "This type describes a network resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NetworkResourceProperties",
+          "description": "Describes properties of a network resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "NetworkResourceDescriptionList": {
+      "description": "A pageable list of network resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkResourceDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "GatewayDestination": {
+      "description": "Describes destination endpoint for routing traffic.",
+      "type": "object",
+      "properties": {
+        "applicationName": {
+          "type": "string",
+          "description": "Name of the service fabric Mesh application."
+        },
+        "serviceName": {
+          "type": "string",
+          "description": "service that contains the endpoint."
+        },
+        "endpointName": {
+          "type": "string",
+          "description": "name of the endpoint in the service."
+        }
+      },
+      "required": [
+        "applicationName",
+        "endpointName",
+        "serviceName"
+      ]
+    },
+    "GatewayProperties": {
+      "description": "Describes properties of a gateway resource.",
+      "properties": {
+        "description": {
+          "description": "User readable description of the gateway.",
+          "type": "string"
+        },
+        "sourceNetwork": {
+          "$ref": "#/definitions/NetworkRef",
+          "description": "Network the gateway should listen on for requests."
+        },
+        "destinationNetwork": {
+          "$ref": "#/definitions/NetworkRef",
+          "description": "Network that the Application is using."
+        },
+        "tcp": {
+          "description": "Configuration for tcp connectivity for this gateway.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TcpConfig"
+          }
+        },
+        "http": {
+          "description": "Configuration for http connectivity for this gateway.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpConfig"
+          }
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Status of the resource."
+        },
+        "statusDetails": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gives additional information about the current status of the gateway."
+        },
+        "ipAddress": {
+          "readOnly": true,
+          "type": "string",
+          "description": "IP address of the gateway. This is populated in the response and is ignored for incoming requests."
+        }
+      },
+      "required": [
+        "destinationNetwork",
+        "sourceNetwork"
+      ]
+    },
+    "HttpConfig": {
+      "description": "Describes the http configuration for external connectivity for this network.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "http gateway config name."
+        },
+        "port": {
+          "type": "integer",
+          "description": "Specifies the port at which the service endpoint below needs to be exposed."
+        },
+        "hosts": {
+          "type": "array",
+          "description": "description for routing.",
+          "items": {
+            "$ref": "#/definitions/HttpHostConfig"
+          }
+        }
+      },
+      "required": [
+        "hosts",
+        "name",
+        "port"
+      ]
+    },
+    "HttpHostConfig": {
+      "description": "Describes the hostname properties for http routing.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "http hostname config name."
+        },
+        "routes": {
+          "type": "array",
+          "description": "Route information to use for routing. Routes are processed in the order they are specified. Specify routes that are more specific before routes that can handle general cases.",
+          "items": {
+            "$ref": "#/definitions/HttpRouteConfig"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "routes"
+      ]
+    },
+    "HttpRouteConfig": {
+      "description": "Describes the hostname properties for http routing.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "http route name."
+        },
+        "match": {
+          "$ref": "#/definitions/HttpRouteMatchRule",
+          "description": "Describes a rule for http route matching."
+        },
+        "destination": {
+          "$ref": "#/definitions/GatewayDestination",
+          "description": "Describes destination endpoint for routing traffic."
+        }
+      },
+      "required": [
+        "destination",
+        "match",
+        "name"
+      ]
+    },
+    "HttpRouteMatchHeader": {
+      "description": "Describes header information for http route matching.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of header to match in request."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value of header to match in request."
+        },
+        "type": {
+          "type": "string",
+          "description": "how to match header value",
+          "enum": [
+            "exact"
+          ],
+          "x-ms-enum": {
+            "name": "HeaderMatchType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "HttpRouteMatchPath": {
+      "description": "Path to match for routing.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "Uri path to match for request."
+        },
+        "rewrite": {
+          "type": "string",
+          "description": "replacement string for matched part of the Uri."
+        },
+        "type": {
+          "type": "string",
+          "description": "how to match value in the Uri",
+          "enum": [
+            "prefix"
+          ],
+          "x-ms-enum": {
+            "name": "PathMatchType",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "type",
+        "value"
+      ]
+    },
+    "HttpRouteMatchRule": {
+      "description": "Describes a rule for http route matching.",
+      "type": "object",
+      "properties": {
+        "path": {
+          "$ref": "#/definitions/HttpRouteMatchPath",
+          "description": "Path to match for routing."
+        },
+        "headers": {
+          "type": "array",
+          "description": "headers and their values to match in request.",
+          "items": {
+            "$ref": "#/definitions/HttpRouteMatchHeader"
+          }
+        }
+      },
+      "required": [
+        "path"
+      ]
+    },
+    "TcpConfig": {
+      "description": "Describes the tcp configuration for external connectivity for this network.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "tcp gateway config name."
+        },
+        "port": {
+          "type": "integer",
+          "description": "Specifies the port at which the service endpoint below needs to be exposed."
+        },
+        "destination": {
+          "$ref": "#/definitions/GatewayDestination",
+          "description": "Describes destination endpoint for routing traffic."
+        }
+      },
+      "required": [
+        "destination",
+        "name",
+        "port"
+      ]
+    },
+    "GatewayResourceProperties": {
+      "description": "This type describes properties of a gateway resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/GatewayProperties"
+        }
+      ]
+    },
+    "GatewayResourceDescription": {
+      "description": "This type describes a gateway resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GatewayResourceProperties",
+          "description": "This type describes properties of a gateway resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "GatewayResourceDescriptionList": {
+      "description": "A pageable list of gateway resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GatewayResourceDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "ApplicationProperties": {
+      "description": "Describes properties of a application resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "User readable description of the application."
+        },
+        "services": {
+          "type": "array",
+          "description": "Describes the services in the application. This property is used to create or modify services of the application. On get only the name of the service is returned. The service description can be obtained by querying for the service resource.",
+          "items": {
+            "$ref": "#/definitions/ServiceResourceDescription"
+          }
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/DiagnosticsDescription",
+          "description": "Describes the diagnostics definition and usage for an application resource."
+        },
+        "debugParams": {
+          "description": "Internal - used by Visual Studio to setup the debugging session on the local development environment.",
+          "type": "string"
+        },
+        "serviceNames": {
+          "readOnly": true,
+          "description": "Names of the services in the application.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Status of the application."
+        },
+        "statusDetails": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gives additional information about the current status of the application."
+        },
+        "healthState": {
+          "readOnly": true,
+          "$ref": "#/definitions/HealthState",
+          "description": "Describes the health state of an application resource."
+        },
+        "unhealthyEvaluation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "When the application's health state is not 'Ok', this additional details from service fabric Health Manager for the user to know why the application is marked unhealthy."
+        }
+      }
+    },
+    "AzureInternalMonitoringPipelineSinkDescription": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/DiagnosticsSinkProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "AzureInternalMonitoringPipeline",
+      "description": "Diagnostics settings for Geneva.",
+      "properties": {
+        "accountName": {
+          "description": "Azure Internal monitoring pipeline account.",
+          "type": "string"
+        },
+        "namespace": {
+          "description": "Azure Internal monitoring pipeline account namespace.",
+          "type": "string"
+        },
+        "maConfigUrl": {
+          "description": "Azure Internal monitoring agent configuration.",
+          "type": "string"
+        },
+        "fluentdConfigUrl": {
+          "description": "Azure Internal monitoring agent fluentd configuration."
+        },
+        "autoKeyConfigUrl": {
+          "description": "Azure Internal monitoring pipeline autokey associated with the certificate.",
+          "type": "string"
+        }
+      }
+    },
+    "DiagnosticsDescription": {
+      "description": "Describes the diagnostics options available",
+      "properties": {
+        "sinks": {
+          "description": "List of supported sinks that can be referenced.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DiagnosticsSinkProperties"
+          }
+        },
+        "enabled": {
+          "description": "Status of whether or not sinks are enabled.",
+          "type": "boolean"
+        },
+        "defaultSinkRefs": {
+          "description": "The sinks to be used if diagnostics is enabled. Sink choices can be overridden at the service and code package level.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DiagnosticsRef": {
+      "description": "Reference to sinks in DiagnosticsDescription.",
+      "properties": {
+        "enabled": {
+          "description": "Status of whether or not sinks are enabled.",
+          "type": "boolean"
+        },
+        "sinkRefs": {
+          "description": "List of sinks to be used if enabled. References the list of sinks in DiagnosticsDescription.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "DiagnosticsSinkKind": {
+      "type": "string",
+      "description": "The kind of DiagnosticsSink.",
+      "enum": [
+        "Invalid",
+        "AzureInternalMonitoringPipeline"
+      ],
+      "x-ms-enum": {
+        "name": "DiagnosticsSinkKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Invalid",
+            "description": "Indicates an invalid sink kind. All Service Fabric enumerations have the invalid type."
+          },
+          {
+            "value": "AzureInternalMonitoringPipeline",
+            "description": "Diagnostics settings for Geneva."
+          }
+        ]
+      }
+    },
+    "DiagnosticsSinkProperties": {
+      "description": "Properties of a DiagnosticsSink.",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/DiagnosticsSinkKind",
+          "description": "The kind of DiagnosticsSink."
+        },
+        "name": {
+          "description": "Name of the sink. This value is referenced by DiagnosticsReferenceDescription",
+          "type": "string"
+        },
+        "description": {
+          "description": "A description of the sink.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "ApplicationResourceProperties": {
+      "description": "This type describes properties of an application resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/ApplicationProperties"
+        }
+      ]
+    },
+    "ApplicationResourceDescription": {
+      "description": "This type describes an application resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ApplicationResourceProperties",
+          "description": "This type describes properties of an application resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ApplicationResourceDescriptionList": {
+      "description": "A pageable list of application resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationResourceDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "AddRemoveReplicaScalingMechanism": {
+      "description": "Describes the horizontal auto scaling mechanism that adds or removes replicas (containers or container groups).",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutoScalingMechanism"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "x-ms-discriminator-value": "AddRemoveReplica",
+      "properties": {
+        "minCount": {
+          "type": "integer",
+          "description": "Minimum number of containers (scale down won't be performed below this number)."
+        },
+        "maxCount": {
+          "type": "integer",
+          "description": "Maximum number of containers (scale up won't be performed above this number)."
+        },
+        "scaleIncrement": {
+          "type": "integer",
+          "description": "Each time auto scaling is performed, this number of containers will be added or removed."
+        }
+      },
+      "required": [
+        "minCount",
+        "maxCount",
+        "scaleIncrement"
+      ]
+    },
+    "AutoScalingMechanism": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "Describes the mechanism for performing auto scaling operation. Derived classes will describe the actual mechanism.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AutoScalingMechanismKind",
+          "description": "The type of auto scaling mechanism."
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AutoScalingMechanismKind": {
+      "type": "string",
+      "description": "Enumerates the mechanisms for auto scaling.",
+      "enum": [
+        "AddRemoveReplica"
+      ],
+      "x-ms-enum": {
+        "name": "AutoScalingMechanismKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AddRemoveReplica",
+            "description": "Indicates that scaling should be performed by adding or removing replicas."
+          }
+        ]
+      }
+    },
+    "AutoScalingMetric": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "Describes the metric that is used for triggering auto scaling operation. Derived classes will describe resources or metrics.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AutoScalingMetricKind",
+          "description": "The type of auto scaling metric"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AutoScalingMetricKind": {
+      "type": "string",
+      "description": "Enumerates the metrics that are used for triggering auto scaling.",
+      "enum": [
+        "Resource"
+      ],
+      "x-ms-enum": {
+        "name": "AutoScalingMetricKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Resource",
+            "description": "Indicates that the metric is one of resources, like cpu or memory."
+          }
+        ]
+      }
+    },
+    "AutoScalingPolicy": {
+      "description": "Describes the auto scaling policy",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the auto scaling policy.",
+          "type": "string"
+        },
+        "trigger": {
+          "$ref": "#/definitions/AutoScalingTrigger",
+          "description": "Determines when auto scaling operation will be invoked."
+        },
+        "mechanism": {
+          "$ref": "#/definitions/AutoScalingMechanism",
+          "description": "The mechanism that is used to scale when auto scaling operation is invoked."
+        }
+      },
+      "required": [
+        "name",
+        "trigger",
+        "mechanism"
+      ]
+    },
+    "AutoScalingResourceMetric": {
+      "description": "Describes the resource that is used for triggering auto scaling.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutoScalingMetric"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "x-ms-discriminator-value": "Resource",
+      "properties": {
+        "name": {
+          "$ref": "#/definitions/AutoScalingResourceMetricName",
+          "description": "Name of the resource."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "AutoScalingResourceMetricName": {
+      "type": "string",
+      "description": "Enumerates the resources that are used for triggering auto scaling.",
+      "enum": [
+        "cpu",
+        "memoryInGB"
+      ],
+      "x-ms-enum": {
+        "name": "AutoScalingResourceMetricName",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "cpu",
+            "description": "Indicates that the resource is CPU cores."
+          },
+          {
+            "value": "memoryInGB",
+            "description": "Indicates that the resource is memory in GB."
+          }
+        ]
+      }
+    },
+    "AutoScalingTrigger": {
+      "type": "object",
+      "discriminator": "kind",
+      "description": "Describes the trigger for performing auto scaling operation.",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AutoScalingTriggerKind",
+          "description": "The type of auto scaling trigger"
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "AutoScalingTriggerKind": {
+      "type": "string",
+      "description": "Enumerates the triggers for auto scaling.",
+      "enum": [
+        "AverageLoad"
+      ],
+      "x-ms-enum": {
+        "name": "AutoScalingTriggerKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AverageLoad",
+            "description": "Indicates that scaling should be performed based on average load of all replicas in the service."
+          }
+        ]
+      }
+    },
+    "ContainerCodePackageProperties": {
+      "description": "Describes a container and its runtime properties.",
+      "properties": {
+        "name": {
+          "description": "The name of the code package.",
+          "type": "string"
+        },
+        "image": {
+          "description": "The Container image to use.",
+          "type": "string"
+        },
+        "imageRegistryCredential": {
+          "$ref": "#/definitions/ImageRegistryCredential",
+          "description": "Image registry credential."
+        },
+        "entrypoint": {
+          "description": "Override for the default entry point in the container.",
+          "type": "string"
+        },
+        "commands": {
+          "description": "Command array to execute within the container in exec form.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "environmentVariables": {
+          "description": "The environment variables to set in this container",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EnvironmentVariable"
+          }
+        },
+        "settings": {
+          "description": "The settings to set in this container. The setting file path can be fetched from environment variable \"Fabric_SettingPath\". The path for Windows container is \"C:\\\\secrets\". The path for Linux container is \"/var/secrets\".",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Setting"
+          }
+        },
+        "labels": {
+          "description": "The labels to set in this container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerLabel"
+          }
+        },
+        "endpoints": {
+          "description": "The endpoints exposed by this container.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EndpointProperties"
+          }
+        },
+        "resources": {
+          "description": "The resources required by this container.",
+          "$ref": "#/definitions/ResourceRequirements"
+        },
+        "volumeRefs": {
+          "description": "Volumes to be attached to the container. The lifetime of these volumes is independent of the application's lifetime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VolumeReference"
+          }
+        },
+        "volumes": {
+          "description": "Volumes to be attached to the container. The lifetime of these volumes is scoped to the application's lifetime.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ApplicationScopedVolume"
+          }
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/DiagnosticsRef",
+          "description": "Reference to sinks in DiagnosticsDescription."
+        },
+        "reliableCollectionsRefs": {
+          "description": "A list of ReliableCollection resources used by this particular code package. Please refer to ReliableCollectionsRef for more details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReliableCollectionsRef"
+          }
+        },
+        "instanceView": {
+          "readOnly": true,
+          "$ref": "#/definitions/ContainerInstanceView",
+          "description": "Runtime information of a container instance."
+        }
+      },
+      "required": [
+        "name",
+        "image",
+        "resources"
+      ]
+    },
+    "ContainerEvent": {
+      "description": "A container event.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the container event."
+        },
+        "count": {
+          "type": "integer",
+          "description": "The count of the event."
+        },
+        "firstTimestamp": {
+          "type": "string",
+          "description": "Date/time of the first event."
+        },
+        "lastTimestamp": {
+          "type": "string",
+          "description": "Date/time of the last event."
+        },
+        "message": {
+          "type": "string",
+          "description": "The event message"
+        },
+        "type": {
+          "type": "string",
+          "description": "The event type."
+        }
+      }
+    },
+    "ContainerInstanceView": {
+      "description": "Runtime information of a container instance.",
+      "properties": {
+        "restartCount": {
+          "type": "integer",
+          "description": "The number of times the container has been restarted."
+        },
+        "currentState": {
+          "$ref": "#/definitions/ContainerState",
+          "description": "Current container instance state."
+        },
+        "previousState": {
+          "$ref": "#/definitions/ContainerState",
+          "description": "Previous container instance state."
+        },
+        "events": {
+          "description": "The events of this container instance.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerEvent"
+          }
+        }
+      }
+    },
+    "ContainerLabel": {
+      "description": "Describes a container label.",
+      "properties": {
+        "name": {
+          "description": "The name of the container label.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the container label.",
+          "type": "string"
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
+    "ContainerState": {
+      "description": "The container state.",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "The state of this container"
+        },
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date/time when the container state started."
+        },
+        "exitCode": {
+          "type": "string",
+          "description": "The container exit code."
+        },
+        "finishTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Date/time when the container state finished."
+        },
+        "detailStatus": {
+          "description": "Human-readable status of this state.",
+          "type": "string"
+        }
+      }
+    },
+    "EndpointProperties": {
+      "description": "Describes a container endpoint.",
+      "properties": {
+        "name": {
+          "description": "The name of the endpoint.",
+          "type": "string"
+        },
+        "port": {
+          "description": "Port used by the container.",
+          "type": "integer"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "EnvironmentVariable": {
+      "description": "Describes an environment variable for the container.",
+      "properties": {
+        "name": {
+          "description": "The name of the environment variable.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the environment variable.",
+          "type": "string"
+        }
+      }
+    },
+    "ImageRegistryCredential": {
+      "description": "Image registry credential.",
+      "properties": {
+        "server": {
+          "type": "string",
+          "description": "Docker image registry server, without protocol such as `http` and `https`."
+        },
+        "username": {
+          "type": "string",
+          "description": "The username for the private registry."
+        },
+        "password": {
+          "type": "string",
+          "description": "The password for the private registry. The password is required for create or update operations, however it is not returned in the get or list operations."
+        }
+      },
+      "required": [
+        "server",
+        "username"
+      ]
+    },
+    "OperatingSystemType": {
+      "type": "string",
+      "description": "The operation system required by the code in service.",
+      "enum": [
+        "Linux",
+        "Windows"
+      ],
+      "x-ms-enum": {
+        "name": "OperatingSystemType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Linux",
+            "description": "The required operating system is Linux."
+          },
+          {
+            "value": "Windows",
+            "description": "The required operating system is Windows."
+          }
+        ]
+      }
+    },
+    "ReliableCollectionsRef": {
+      "description": "Specifying this parameter adds support for reliable collections",
+      "properties": {
+        "name": {
+          "description": "Name of ReliableCollection resource. Right now it's not used and you can use any string.",
+          "type": "string"
+        },
+        "doNotPersistState": {
+          "description": "False (the default) if ReliableCollections state is persisted to disk as usual. True if you do not want to persist state, in which case replication is still enabled and you can use ReliableCollections as distributed cache.",
+          "type": "boolean"
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "ResourceLimits": {
+      "description": "This type describes the resource limits for a given container. It describes the most amount of resources a container is allowed to use before being restarted.",
+      "properties": {
+        "memoryInGB": {
+          "description": "The memory limit in GB.",
+          "type": "number",
+          "format": "double"
+        },
+        "cpu": {
+          "description": "CPU limits in cores. At present, only full cores are supported.",
+          "type": "number",
+          "format": "double"
+        }
+      }
+    },
+    "ResourceRequests": {
+      "description": "This type describes the requested resources for a given container. It describes the least amount of resources required for the container. A container can consume more than requested resources up to the specified limits before being restarted. Currently, the requested resources are treated as limits.",
+      "properties": {
+        "memoryInGB": {
+          "description": "The memory request in GB for this container.",
+          "type": "number",
+          "format": "double"
+        },
+        "cpu": {
+          "description": "Requested number of CPU cores. At present, only full cores are supported.",
+          "type": "number",
+          "format": "double"
+        }
+      },
+      "required": [
+        "memoryInGB",
+        "cpu"
+      ]
+    },
+    "ResourceRequirements": {
+      "description": "This type describes the resource requirements for a container or a service.",
+      "properties": {
+        "requests": {
+          "$ref": "#/definitions/ResourceRequests",
+          "description": "Describes the requested resources for a given container."
+        },
+        "limits": {
+          "$ref": "#/definitions/ResourceLimits",
+          "description": "Describes the maximum limits on the resources for a given container."
+        }
+      },
+      "required": [
+        "requests"
+      ]
+    },
+    "ServiceProperties": {
+      "description": "Describes properties of a service resource.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "User readable description of the service."
+        },
+        "replicaCount": {
+          "type": "integer",
+          "description": "The number of replicas of the service to create. Defaults to 1 if not specified."
+        },
+        "autoScalingPolicies": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AutoScalingPolicy"
+          },
+          "description": "Auto scaling policies"
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceStatus",
+          "description": "Status of the service."
+        },
+        "statusDetails": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Gives additional information about the current status of the service."
+        },
+        "healthState": {
+          "readOnly": true,
+          "$ref": "#/definitions/HealthState",
+          "description": "Describes the health state of an application resource."
+        },
+        "unhealthyEvaluation": {
+          "readOnly": true,
+          "type": "string",
+          "description": "When the service's health state is not 'Ok', this additional details from service fabric Health Manager for the user to know why the service is marked unhealthy."
+        }
+      }
+    },
+    "ServiceReplicaProperties": {
+      "description": "Describes the properties of a service replica.",
+      "properties": {
+        "osType": {
+          "$ref": "#/definitions/OperatingSystemType",
+          "description": "The operation system required by the code in service."
+        },
+        "codePackages": {
+          "description": "Describes the set of code packages that forms the service. A code package describes the container and the properties for running it. All the code packages are started together on the same host and share the same context (network, process etc.).",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContainerCodePackageProperties"
+          }
+        },
+        "networkRefs": {
+          "type": "array",
+          "description": "The names of the private networks that this service needs to be part of.",
+          "items": {
+            "$ref": "#/definitions/NetworkRef"
+          }
+        },
+        "diagnostics": {
+          "$ref": "#/definitions/DiagnosticsRef",
+          "description": "Reference to sinks in DiagnosticsDescription."
+        }
+      },
+      "required": [
+        "osType",
+        "codePackages"
+      ]
+    },
+    "Setting": {
+      "description": "Describes a setting for the container. The setting file path can be fetched from environment variable \"Fabric_SettingPath\". The path for Windows container is \"C:\\\\secrets\". The path for Linux container is \"/var/secrets\".",
+      "properties": {
+        "name": {
+          "description": "The name of the setting.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The value of the setting.",
+          "type": "string"
+        }
+      }
+    },
+    "ServiceReplicaDescription": {
+      "description": "Describes a replica of a service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ServiceReplicaProperties"
+        }
+      ],
+      "properties": {
+        "replicaName": {
+          "type": "string",
+          "description": "Name of the replica."
+        }
+      },
+      "required": [
+        "replicaName"
+      ]
+    },
+    "AverageLoadScalingTrigger": {
+      "description": "Describes the average load trigger used for auto scaling.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutoScalingTrigger"
+        },
+        {
+          "type": "object"
+        }
+      ],
+      "x-ms-discriminator-value": "AverageLoad",
+      "properties": {
+        "metric": {
+          "$ref": "#/definitions/AutoScalingMetric",
+          "description": "Description of the metric that is used for scaling."
+        },
+        "lowerLoadThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Lower load threshold (if average load is below this threshold, service will scale down)."
+        },
+        "upperLoadThreshold": {
+          "type": "number",
+          "format": "double",
+          "description": "Upper load threshold (if average load is above this threshold, service will scale up)."
+        },
+        "scaleIntervalInSeconds": {
+          "type": "integer",
+          "description": "Scale interval that indicates how often will this trigger be checked.",
+          "minimum": 60
+        }
+      },
+      "required": [
+        "metric",
+        "lowerLoadThreshold",
+        "upperLoadThreshold",
+        "scaleIntervalInSeconds"
+      ]
+    },
+    "ServiceResourceProperties": {
+      "description": "This type describes properties of a service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProvisionedResourceProperties"
+        },
+        {
+          "$ref": "#/definitions/ServiceReplicaProperties"
+        },
+        {
+          "$ref": "#/definitions/ServiceProperties"
+        }
+      ]
+    },
+    "ServiceResourceDescription": {
+      "description": "This type describes a service resource.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ServiceResourceProperties",
+          "description": "This type describes properties of a service resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "ServiceResourceDescriptionList": {
+      "description": "A pageable list of service resources.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceResourceDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "ServiceReplicaDescriptionList": {
+      "description": "A pageable list of service replicas.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ServiceReplicaDescription"
+          },
+          "description": "One page of the list."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URI to fetch the next page of the list."
+        }
+      }
+    },
+    "ContainerLogs": {
+      "description": "Container logs.",
+      "properties": {
+        "content": {
+          "type": "string",
+          "description": "Container logs."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "CodePackageNameRequiredPathParam": {
+      "name": "codePackageName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "required": true,
+      "description": "The name of code package of the service."
+    },
+    "api-versionRequiredQueryParam": {
+      "name": "api-version",
+      "in": "query",
+      "type": "string",
+      "enum": [
+        "2018-09-01-preview"
+      ],
+      "default": "2018-09-01-preview",
+      "description": "The version of the API. This parameter is required and its value must be `2018-09-01-preview`.",
+      "required": true,
+      "x-ms-enum": {
+        "name": "2018-09-01-preview",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "2018-09-01-preview",
+            "description": "The `2018-09-01-preview` version of the API."
+          }
+        ]
+      }
+    },
+    "subscriptionIdRequiredPathParam": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The customer subscription identifier",
+      "required": true,
+      "type": "string"
+    },
+    "ResourceGroupNameRequiredPathParam": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "description": "Azure resource group name",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SecretResourceDescriptionRequiredBodyParam": {
+      "name": "secretResourceDescription",
+      "in": "body",
+      "description": "Description for creating a secret resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/SecretResourceDescription"
+      }
+    },
+    "SecretResourceNameRequiredPathParam": {
+      "name": "secretResourceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "The name of the secret resource."
+    },
+    "SecretValueResourceDescriptionRequiredBodyParam": {
+      "name": "secretValueResourceDescription",
+      "in": "body",
+      "description": "Description for creating a value of a secret resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/SecretValueResourceDescription"
+      }
+    },
+    "SecretValueResourceNameRequiredPathParam": {
+      "name": "secretValueResourceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "The name of the secret resource value which is typically the version identifier for the value."
+    },
+    "VolumeResourceDescriptionRequiredBodyParam": {
+      "name": "volumeResourceDescription",
+      "in": "body",
+      "description": "Description for creating a Volume resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/VolumeResourceDescription"
+      }
+    },
+    "VolumeResourceNameRequiredPathParam": {
+      "name": "volumeResourceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "The identity of the volume."
+    },
+    "NetworkResourceDescriptionRequiredBodyParam": {
+      "name": "networkResourceDescription",
+      "in": "body",
+      "description": "Description for creating a Network resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/NetworkResourceDescription"
+      }
+    },
+    "NetworkResourceNameRequiredPathParam": {
+      "name": "networkResourceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "The identity of the network."
+    },
+    "GatewayResourceDescriptionRequiredBodyParam": {
+      "name": "gatewayResourceDescription",
+      "in": "body",
+      "description": "Description for creating a Gateway resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/GatewayResourceDescription"
+      }
+    },
+    "GatewayResourceNameRequiredPathParam": {
+      "name": "gatewayResourceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "The identity of the gateway."
+    },
+    "ApplicationResourceDescriptionRequiredBodyParam": {
+      "name": "applicationResourceDescription",
+      "in": "body",
+      "description": "Description for creating a Application resource.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "schema": {
+        "$ref": "#/definitions/ApplicationResourceDescription"
+      }
+    },
+    "ApplicationResourceNameRequiredPathParam": {
+      "name": "applicationResourceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "The identity of the application."
+    },
+    "ServiceResourceNameRequiredPathParam": {
+      "name": "serviceResourceName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "The identity of the service."
+    },
+    "ReplicaNameRequiredPathParam": {
+      "name": "replicaName",
+      "in": "path",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true,
+      "type": "string",
+      "required": true,
+      "description": "Service Fabric replica name."
+    },
+    "TailOptionalQueryParam": {
+      "name": "tail",
+      "in": "query",
+      "x-ms-parameter-location": "method",
+      "type": "integer",
+      "required": false,
+      "description": "Number of lines to show from the end of the logs. Default is 100."
+    }
+  }
+}

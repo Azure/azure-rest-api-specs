@@ -1,0 +1,59 @@
+{
+  "parameters": {
+    "api-version": "2018-04-16",
+    "subscriptionId": "subid",
+    "resourceGroupName": "my-resource-group",
+    "ruleName": "logalertfoo",
+    "parameters": {
+      "properties": {
+        "enabled": "true"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/scheduledQueryRules/logalertfoo",
+        "name": "logalertfoo",
+        "type": "Microsoft.Insights/scheduledQueryRules",
+        "location": "West US",
+        "tags": {},
+        "properties": {
+          "description": "log alert description",
+          "enabled": "true",
+          "lastUpdatedTime": "2017-06-23T21:23:52.0221265Z",
+          "provisioningState": "Succeeded",
+          "source": {
+            "query": "requests",
+            "dataSourceId": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/components/sampleAI",
+            "queryType": "ResultCount"
+          },
+          "schedule": {
+            "frequencyInMinutes": 15,
+            "timeWindowInMinutes": 15
+          },
+          "action": {
+            "odata.type": "Microsoft.WindowsAzure.Management.Monitoring.Alerts.Models.Microsoft.AppInsights.Nexus.DataContracts.Resources.ScheduledQueryRules.AlertingAction",
+            "severity": "1",
+            "aznsAction": {
+              "actionGroup": [],
+              "emailSubject": "Email Header",
+              "customWebhookPayload": "{}"
+            },
+            "trigger": {
+              "thresholdOperator": "GreaterThan",
+              "threshold": 3,
+              "metricTrigger": {
+                "thresholdOperator": "GreaterThan",
+                "threshold": 5,
+                "metricTriggerType": "Consecutive",
+                "metricColumn": "ColumnName"
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

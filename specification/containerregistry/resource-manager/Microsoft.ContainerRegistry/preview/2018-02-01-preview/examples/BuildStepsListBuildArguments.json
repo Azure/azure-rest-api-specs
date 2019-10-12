@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "subscriptionId": "4385cf00-2d3a-425a-832f-f4285b1c9dce",
+    "resourceGroupName": "myResourceGroup",
+    "registryName": "myRegistry",
+    "api-version": "2018-02-01-preview",
+    "buildTaskName": "myBuildTask",
+    "stepName": "myStep"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "type": "DockerBuildArgument",
+            "name": "mytestargument",
+            "value": "mytestvalue",
+            "isSecret": false
+          },
+          {
+            "type": "DockerBuildArgument",
+            "name": "mysecrettestargument",
+            "value": "mysecrettestvalue",
+            "isSecret": true
+          }
+        ]
+      }
+    }
+  }
+}

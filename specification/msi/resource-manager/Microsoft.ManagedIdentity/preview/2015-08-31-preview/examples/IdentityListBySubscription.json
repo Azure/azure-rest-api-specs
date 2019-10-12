@@ -1,0 +1,31 @@
+{
+  "parameters": {
+    "api-version": "2015-08-31-preview",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/subid/resourcegroups/rgName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName",
+            "location": "cus",
+            "name": "identityName",
+            "properties": {
+              "clientId": "clientGUID",
+              "clientSecretUrl": "https://serviceRoot/subscriptions/subscriptionId/resourcegroups/rgName/providers/Microsoft.ManagedIdentity/userAssignedIdentities/identityName/credentials?tid=tenantId&oid=principalId&aid=clientId",
+              "principalId": "identityObjectID",
+              "tenantId": "tenantGUID"
+            },
+            "tags": {
+              "key1": "value1",
+              "key2": "value2"
+            },
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ],
+        "nextLink": "https://serviceRoot/subscriptions/subId/providers/Microsoft.ManagedIdentity/userAssignedIdentities?api-version=2015-08-31-preview&$skiptoken=X'12345'"
+      }
+    }
+  }
+}

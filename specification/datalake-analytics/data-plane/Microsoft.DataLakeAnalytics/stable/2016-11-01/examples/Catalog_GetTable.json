@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2016-11-01",
+    "accountName": "contosoadla",
+    "adlaCatalogDnsSuffix": "azuredatalakeanalytics.net",
+    "databaseName": "master",
+    "schemaName": "dbo",
+    "tableName": "test_table_name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "computeAccountName": "contosoadla",
+        "version": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+        "databaseName": "master",
+        "schemaName": "dbo",
+        "tableName": "test_table_name",
+        "columnList": [
+          {
+            "name": "test_column_name",
+            "type": "test_type"
+          }
+        ],
+        "indexList": [
+          {
+            "name": "test_index_name",
+            "indexKeys": [
+              {
+                "name": "test_index_key",
+                "descending": false
+              }
+            ],
+            "columns": [
+              "test_column"
+            ],
+            "distributionInfo": {
+              "type": 1,
+              "keys": [
+                {
+                  "name": "test_key",
+                  "descending": false
+                }
+              ],
+              "count": 1,
+              "dynamicCount": 1
+            },
+            "partitionFunction": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab346",
+            "partitionKeyList": [
+              "test_partition_key"
+            ],
+            "streamNames": [
+              "test_stream_name"
+            ],
+            "isColumnstore": false,
+            "indexId": 1,
+            "isUnique": false
+          }
+        ],
+        "partitionKeyList": [
+          "test_partition_key"
+        ],
+        "externalTable": {
+          "tableName": "test_table_name",
+          "dataSource": {
+            "name": {
+              "firstPart": "test_first_part",
+              "secondPart": "test_second_part",
+              "thirdPart": "test_third_part",
+              "server": "test_server"
+            },
+            "version": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+          }
+        },
+        "distributionInfo": {
+          "type": 1,
+          "keys": [
+            {
+              "name": "test_key",
+              "descending": false
+            }
+          ],
+          "count": 1,
+          "dynamicCount": 1
+        }
+      }
+    }
+  }
+}

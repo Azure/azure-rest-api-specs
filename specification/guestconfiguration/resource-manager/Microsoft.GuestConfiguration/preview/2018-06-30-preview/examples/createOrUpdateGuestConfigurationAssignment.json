@@ -1,0 +1,72 @@
+{
+  "parameters": {
+    "subscriptionId": "mySubscriptionId",
+    "resourceGroupName": "myResourceGroupName",
+    "vmName": "myVMName",
+    "guestConfigurationAssignmentName": "SecureProtocol",
+    "api-version": "2018-06-30-preview",
+    "parameters": {
+      "location": "westcentralus",
+      "name": "multiconfigassignment2",
+      "properties": {
+        "context": "Azure policy",
+        "guestConfiguration": {
+          "name": "AuditSecureProtocol",
+          "version": "1.0.0.3"
+        }
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": null,
+        "name": "multiconfigassignment2",
+        "properties": {
+          "complianceStatus": "Pending",
+          "assignmentHash": null,
+          "latestReportId": null,
+          "lastComplianceStatusChecked": null,
+          "context": "Azure policy A",
+          "guestConfiguration": {
+            "kind": null,
+            "name": "AuditSecureProtocol",
+            "version": "1.0.0.3",
+            "contentUri": null,
+            "contentHash": null,
+            "configurationParameter": null,
+            "configurationSetting": null
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "200": {
+      "headers": {},
+      "body": {
+        "location": "westcentralus",
+        "id": null,
+        "name": "multiconfigassignment2",
+        "properties": {
+          "complianceStatus": "Pending",
+          "assignmentHash": null,
+          "latestReportId": null,
+          "lastComplianceStatusChecked": null,
+          "context": "Azure policy A",
+          "guestConfiguration": {
+            "kind": null,
+            "name": "AuditSecureProtocol",
+            "version": "1.0.0.3",
+            "contentUri": null,
+            "contentHash": null,
+            "configurationParameter": null,
+            "configurationSetting": null
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

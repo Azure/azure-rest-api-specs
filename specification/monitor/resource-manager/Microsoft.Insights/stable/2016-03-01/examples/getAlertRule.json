@@ -1,0 +1,42 @@
+{
+  "parameters": {
+    "subscriptionId": "b67f7fec-69fc-4974-9099-a26bd6ffeda3",
+    "resourceGroupName": "Rac46PostSwapRG",
+    "ruleName": "chiricutin",
+    "api-version": "2016-03-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/microsoft.insights/alertrules/chiricutin",
+        "name": "chiricutin",
+        "type": "Microsoft.Insights/alertRules",
+        "location": "West US",
+        "tags": {
+          "$type": "Microsoft.WindowsAzure.Management.Common.Storage.CasePreservedDictionary, Microsoft.WindowsAzure.Management.Common.Storage",
+          "hidden-link:/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest": "Resource"
+        },
+        "properties": {
+          "name": "chiricutin",
+          "description": "Pura Vida",
+          "isEnabled": true,
+          "condition": {
+            "odata.type": "Microsoft.Azure.Management.Insights.Models.ThresholdRuleCondition",
+            "dataSource": {
+              "odata.type": "Microsoft.Azure.Management.Insights.Models.RuleMetricDataSource",
+              "resourceUri": "/subscriptions/b67f7fec-69fc-4974-9099-a26bd6ffeda3/resourceGroups/Rac46PostSwapRG/providers/Microsoft.Web/sites/leoalerttest",
+              "metricName": "Requests"
+            },
+            "operator": "GreaterThan",
+            "threshold": 3.0,
+            "windowSize": "PT5M",
+            "timeAggregation": "Total"
+          },
+          "lastUpdatedTime": "2016-11-23T21:23:52.0221265Z",
+          "actions": []
+        }
+      }
+    }
+  }
+}

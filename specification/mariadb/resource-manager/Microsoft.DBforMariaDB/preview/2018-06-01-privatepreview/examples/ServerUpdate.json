@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "serverName": "mariadbtestsvc4",
+    "resourceGroupName": "testrg",
+    "api-version": "2018-06-01",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "parameters": {
+      "properties": {
+        "administratorLoginPassword": "newpa$$w0rd",
+        "sslEnforcement": "Disabled"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "sku": {
+          "name": "GP_Gen4_2",
+          "tier": "GeneralPurpose",
+          "family": "Gen4",
+          "capacity": 2
+        },
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "storageProfile": {
+            "storageMB": 128000,
+            "backupRetentionDays": 7,
+            "geoRedundantBackup": "Enabled"
+          },
+          "version": "5.7",
+          "sslEnforcement": "Disabled",
+          "userVisibleState": "Ready",
+          "fullyQualifiedDomainName": "mariadbtestsvc4.mariadb.database.azure.com",
+          "earliestRestoreDate": "2018-03-14T18:02:41.577+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "ElasticServer": "1"
+        },
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMariaDB/servers/mariadbtestsvc4",
+        "name": "mariadbtestsvc4",
+        "type": "Microsoft.DBforMariaDB/servers"
+      }
+    },
+    "202": {}
+  }
+}

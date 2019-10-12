@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+    "metric": "BlobCapacity",
+    "$filter": "BlobType eq '*'",
+    "top": "3",
+    "orderby": "Average asc",
+    "aggregation": "Average,count",
+    "interval": "PT1M",
+    "resulttype": "metadata",
+    "resourceUri": "subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default",
+    "api-version": "2017-05-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timespan": "2017-04-14T02:20:00Z/2017-04-14T04:20:00Z",
+        "value": [
+          {
+            "id": "/subscriptions/b324c52b-4073-4807-93af-e07d289c093e/resourceGroups/test/providers/Microsoft.Storage/storageAccounts/larryshoebox/blobServices/default/providers/Microsoft.Insights/metrics/BlobCapacity",
+            "type": "Microsoft.Insights/metrics",
+            "name": {
+              "value": "BlobCapacity",
+              "localizedValue": "Blob Capacity"
+            },
+            "unit": "Bytes",
+            "timeseries": [
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "BlockBlob"
+                  }
+                ]
+              },
+              {
+                "metadatavalues": [
+                  {
+                    "name": {
+                      "value": "blobtype",
+                      "localizedValue": "blobtype"
+                    },
+                    "value": "PageBlob"
+                  }
+                ]
+              }
+            ]
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "zoneName": "zone1",
+    "resourceGroupName": "rg1",
+    "api-version": "2018-03-01-preview",
+    "subscriptionId": "subid",
+    "relativeRecordSetName": "record1",
+    "recordType": "MX"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/dnsZones/zone1/MX/record1",
+        "etag": "00000000-0000-0000-0000-000000000000",
+        "name": "record1",
+        "type": "Microsoft.Network/dnsZones/MX",
+        "properties": {
+          "metadata": {
+            "key1": "value1"
+          },
+          "TTL": 3600,
+          "fqdn": "record1.zone1",
+          "MXRecords": [
+            {
+              "preference": 0,
+              "exchange": "mail.contoso.com"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

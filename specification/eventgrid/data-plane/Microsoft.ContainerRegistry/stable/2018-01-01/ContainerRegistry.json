@@ -1,0 +1,219 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-01-01",
+    "title": "Schema of Azure Container Registry events published to Azure Event Grid",
+    "description": "Describes the schema of the Azure Container Registry events published to Azure Event Grid. This corresponds to the Data property of an EventGridEvent."
+  },
+  "paths": {},
+  "definitions": {
+    "ContainerRegistryImagePushedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImagePushed event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerRegistryEventData"
+        }
+      ],
+      "properties": {}
+    },
+    "ContainerRegistryImageDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ImageDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerRegistryEventData"
+        }
+      ],
+      "properties": {}
+    },
+    "ContainerRegistryChartPushedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartPushed event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerRegistryArtifactEventData"
+        }
+      ],
+      "properties": {}
+    },
+    "ContainerRegistryChartDeletedEventData": {
+      "description": "Schema of the Data property of an EventGridEvent for a Microsoft.ContainerRegistry.ChartDeleted event.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ContainerRegistryArtifactEventData"
+        }
+      ],
+      "properties": {}
+    },
+    "ContainerRegistryEventData": {
+      "description": "The content of the event request message.",
+      "properties": {
+        "id": {
+          "description": "The event ID.",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "The time at which the event occurred.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action that encompasses the provided event.",
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/definitions/ContainerRegistryEventTarget",
+          "description": "The target of the event."
+        },
+        "request": {
+          "$ref": "#/definitions/ContainerRegistryEventRequest",
+          "description": "The request that generated the event."
+        },
+        "actor": {
+          "$ref": "#/definitions/ContainerRegistryEventActor",
+          "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request."
+        },
+        "source": {
+          "$ref": "#/definitions/ContainerRegistryEventSource",
+          "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it."
+        }
+      }
+    },
+    "ContainerRegistryArtifactEventData": {
+      "description": "The content of the event request message.",
+      "properties": {
+        "id": {
+          "description": "The event ID.",
+          "type": "string"
+        },
+        "timestamp": {
+          "format": "date-time",
+          "description": "The time at which the event occurred.",
+          "type": "string"
+        },
+        "action": {
+          "description": "The action that encompasses the provided event.",
+          "type": "string"
+        },
+        "target": {
+          "$ref": "#/definitions/ContainerRegistryArtifactEventTarget",
+          "description": "The target of the event."
+        }
+      }
+    },
+    "ContainerRegistryEventTarget": {
+      "description": "The target of the event.",
+      "properties": {
+        "mediaType": {
+          "description": "The MIME type of the referenced object.",
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "description": "The number of bytes of the content. Same as Length field.",
+          "type": "integer"
+        },
+        "digest": {
+          "description": "The digest of the content, as defined by the Registry V2 HTTP API Specification.",
+          "type": "string"
+        },
+        "length": {
+          "format": "int64",
+          "description": "The number of bytes of the content. Same as Size field.",
+          "type": "integer"
+        },
+        "repository": {
+          "description": "The repository name.",
+          "type": "string"
+        },
+        "url": {
+          "description": "The direct URL to the content.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "The tag name.",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerRegistryArtifactEventTarget": {
+      "description": "The target of the event.",
+      "properties": {
+        "mediaType": {
+          "description": "The MIME type of the artifact.",
+          "type": "string"
+        },
+        "size": {
+          "format": "int64",
+          "description": "The size in bytes of the artifact.",
+          "type": "integer"
+        },
+        "digest": {
+          "description": "The digest of the artifact.",
+          "type": "string"
+        },
+        "repository": {
+          "description": "The repository name of the artifact.",
+          "type": "string"
+        },
+        "tag": {
+          "description": "The tag of the artifact.",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the artifact.",
+          "type": "string"
+        },
+        "version": {
+          "description": "The version of the artifact.",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerRegistryEventRequest": {
+      "description": "The request that generated the event.",
+      "properties": {
+        "id": {
+          "description": "The ID of the request that initiated the event.",
+          "type": "string"
+        },
+        "addr": {
+          "description": "The IP or hostname and possibly port of the client connection that initiated the event. This is the RemoteAddr from the standard http request.",
+          "type": "string"
+        },
+        "host": {
+          "description": "The externally accessible hostname of the registry instance, as specified by the http host header on incoming requests.",
+          "type": "string"
+        },
+        "method": {
+          "description": "The request method that generated the event.",
+          "type": "string"
+        },
+        "useragent": {
+          "description": "The user agent header of the request.",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerRegistryEventActor": {
+      "description": "The agent that initiated the event. For most situations, this could be from the authorization context of the request.",
+      "properties": {
+        "name": {
+          "description": "The subject or username associated with the request context that generated the event.",
+          "type": "string"
+        }
+      }
+    },
+    "ContainerRegistryEventSource": {
+      "description": "The registry node that generated the event. Put differently, while the actor initiates the event, the source generates it.",
+      "properties": {
+        "addr": {
+          "description": "The IP or hostname and the port of the registry node that generated the event. Generally, this will be resolved by os.Hostname() along with the running port.",
+          "type": "string"
+        },
+        "instanceID": {
+          "description": "The running instance of an application. Changes after each restart.",
+          "type": "string"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,32 @@
+{
+  "parameters": {
+    "api-version": "2017-11-11-preview",
+    "managementGroupsNamespace": "Microsoft.Management",
+    "managementGroupName": "ContosoOnlineGroup",
+    "blueprintName": "simpleBlueprint",
+    "versionId": "V2",
+    "artifactName": "costCenterPolicy"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "displayName": "force costCenter tag on all resources",
+          "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/1e30110a-5ceb-460c-a204-c1c3969c6d62",
+          "parameters": {
+            "tagName": {
+              "value": "costCenter"
+            },
+            "tagValue": {
+              "value": "[parameter('costCenter')]"
+            }
+          }
+        },
+        "kind": "policyAssignment",
+        "id": "/providers/Microsoft.Management/managementGroups/ContosoOnlineGroup/providers/Microsoft.Blueprint/blueprints/simpleBlueprint/versions/V2/artifacts/costCenterPolicy",
+        "type": "Microsoft.Blueprint/blueprints/versions/artifacts",
+        "name": "costCenterPolicy"
+      }
+    }
+  }
+}

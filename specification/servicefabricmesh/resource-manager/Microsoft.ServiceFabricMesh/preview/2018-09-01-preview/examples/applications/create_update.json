@@ -1,0 +1,94 @@
+{
+  "operationId": "Application_Create",
+  "description": "This example shows how to create or update a application resource.",
+  "parameters": {
+    "api-version": "2018-09-01-privatepreview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "applicationResourceName": "sampleApplication",
+    "applicationResourceDescription": {
+      "properties": {
+        "description": "Service Fabric Mesh sample application.",
+        "services": [
+          {
+            "name": "helloWorldService",
+            "properties": {
+              "description": "SeaBreeze Hello World Service.",
+              "osType": "Linux",
+              "codePackages": [
+                {
+                  "name": "helloWorldCode",
+                  "image": "seabreeze/sbz-helloworld:1.0-alpine",
+                  "endpoints": [
+                    {
+                      "name": "helloWorldListener",
+                      "port": 80
+                    }
+                  ],
+                  "resources": {
+                    "requests": {
+                      "memoryInGB": 1,
+                      "cpu": 1
+                    }
+                  }
+                }
+              ],
+              "networkRefs": [
+                {
+                  "name": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/sampleNetwork",
+                  "endpointRefs": [
+                    {
+                      "name": "helloWorldListener"
+                    }
+                  ]
+                }
+              ],
+              "replicaCount": 1
+            }
+          }
+        ]
+      },
+      "tags": {},
+      "location": "EastUS"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/applications",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/sampleApplication",
+        "name": "sampleApplication",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Ok",
+          "status": "Ready"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/applications",
+        "location": "EastUS",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/applications/sampleApplication",
+        "name": "sampleApplication",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Updating",
+          "description": "Service Fabric Mesh sample application.",
+          "serviceNames": [
+            "helloWorldService"
+          ],
+          "healthState": "Unknown",
+          "status": "Creating"
+        }
+      }
+    },
+    "202": {}
+  }
+}

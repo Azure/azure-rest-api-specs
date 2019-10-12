@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "name": "{devtestlab-name}",
+    "api-version": "2018-09-15",
+    "labVirtualMachineCreationParameter": {
+      "properties": {
+        "osType": "Linux",
+        "size": "Standard_A2_v2",
+        "userName": "{user-name}",
+        "password": "{user-password}",
+        "labSubnetName": "{virtualnetwork-subnet-name}",
+        "labVirtualNetworkId": "/subscriptions/{subscription-id}/resourcegroups/myResourceGroup/providers/microsoft.devtestlab/labs/{devtestlab-name}/virtualnetworks/{virtualnetwork-name}",
+        "disallowPublicIpAddress": true,
+        "galleryImageReference": {
+          "offer": "UbuntuServer",
+          "publisher": "Canonical",
+          "sku": "16.04-LTS",
+          "osType": "Linux",
+          "version": "Latest"
+        },
+        "allowClaim": true,
+        "storageType": "Standard"
+      },
+      "name": "{virtualmachine-name}",
+      "location": "{azure-location}",
+      "tags": {
+        "MyTag": "MyValue"
+      }
+    }
+  },
+  "responses": {
+    "200": {},
+    "202": {}
+  }
+}

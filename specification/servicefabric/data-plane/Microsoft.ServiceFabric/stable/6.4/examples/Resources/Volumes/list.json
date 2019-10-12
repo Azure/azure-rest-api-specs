@@ -1,0 +1,30 @@
+{
+  "operationId": "MeshVolume_List",
+  "description": "This example shows how to list all volume resources.",
+  "parameters": {
+    "api-version": "6.4-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "name": "sampleVolume",
+            "properties": {
+              "description": "Service Fabric Mesh sample volume.",
+              "provider": "SFAzureFile",
+              "azureFileParameters": {
+                "accountName": "sbzdemoaccount",
+                "accountKey": null,
+                "shareName": "sharel"
+              },
+              "status": "Ready"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

@@ -1,0 +1,580 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Guest Diagnostic Settings API",
+    "description": "API to Add/Remove/List Guest Diagnostics Configuration to Azure Resources",
+    "x-ms-code-generation-settings": {
+      "name": "MonitorManagementClient"
+    },
+    "version": "2018-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettings/{diagnosticSettingsName}": {
+      "put": {
+        "description": "Creates or updates guest diagnostics settings.",
+        "tags": [
+          "GuestDiagnosticsSettings"
+        ],
+        "operationId": "guestDiagnosticsSettings_CreateOrUpdate",
+        "x-ms-examples": {
+          "Create or update a guest diagnostic settings": {
+            "$ref": "./examples/createOrUpdateGuestDiagnosticSettings.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "diagnosticSettings",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+            },
+            "description": "The configuration to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An existing guest diagnostic settings was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+            }
+          },
+          "201": {
+            "description": "A new guest diagnostic settings was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the guest diagnostic settings could not be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "get": {
+        "description": "Gets guest diagnostics settings.",
+        "tags": [
+          "GuestDiagnosticsSettings"
+        ],
+        "operationId": "guestDiagnosticsSettings_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the diagnostic settings could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "description": "Updates guest diagnostics settings.",
+        "operationId": "guestDiagnosticsSettings_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsPatchResource"
+            },
+            "description": "The configuration to patch."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "An existing guest diagnostic settings was successfully updated.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+            }
+          },
+          "201": {
+            "description": "A new guest diagnostic settings was successfully created.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the guest diagnostic settings could not be created or updated.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete guest diagnostics settings.",
+        "tags": [
+          "GuestDiagnosticsSettings"
+        ],
+        "operationId": "guestDiagnosticsSettings_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DiagnosticSettingNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The diagnostic settings was successfully deleted."
+          },
+          "204": {
+            "description": "The diagnostic settings does not exist. It may have already been deleted."
+          },
+          "default": {
+            "description": "An error occurred and the diagnostic settings could not be deleted.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.insights/guestDiagnosticSettings": {
+      "get": {
+        "description": "Get a list of all guest diagnostic settings in a subscription.",
+        "operationId": "guestDiagnosticsSettings_List",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsList"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the list of guest diagnostic settings could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.insights/guestDiagnosticSettings": {
+      "get": {
+        "description": "Get a list of all guest diagnostic settings in a resource group.",
+        "operationId": "guestDiagnosticsSettings_ListByResourceGroup",
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request succeeded.",
+            "schema": {
+              "$ref": "#/definitions/GuestDiagnosticSettingsList"
+            }
+          },
+          "default": {
+            "description": "An error occurred and the list of guest diagnostic settings could not be retrieved.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ErrorResponse": {
+      "description": "Describes the format of Error response.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
+    "GuestDiagnosticSettingsList": {
+      "description": "A list of guest diagnostic settings.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GuestDiagnosticSettingsResource"
+          },
+          "description": "The list of guest diagnostic settings."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Provides the link to retrieve the next set of elements."
+        }
+      }
+    },
+    "GuestDiagnosticSettingsResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GuestDiagnosticSettings",
+          "description": "The diagnostic settings to be applied to azure resources."
+        }
+      },
+      "description": "Virtual machine guest diagnostics settings resource."
+    },
+    "GuestDiagnosticSettings": {
+      "description": "Virtual machine diagnostic settings",
+      "properties": {
+        "osType": {
+          "type": "string",
+          "enum": [
+            "Windows",
+            "Linux"
+          ],
+          "description": "Operating system type for the configuration"
+        },
+        "dataSources": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DataSource"
+          },
+          "description": "the array of data source object which are configured to collect and send data"
+        },
+        "proxySetting": {
+          "type": "string"
+        }
+      }
+    },
+    "GuestDiagnosticSettingsPatchResource": {
+      "description": "An diagnostic settings object for the body of patch operations.",
+      "properties": {
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GuestDiagnosticSettings",
+          "description": "The diagnostic settings for an update operation."
+        }
+      }
+    },
+    "DataSource": {
+      "type": "object",
+      "required": [
+        "kind",
+        "configuration",
+        "sinks"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "PerformanceCounter",
+            "ETWProviders",
+            "WindowsEventLogs"
+          ],
+          "description": "Datasource kind"
+        },
+        "configuration": {
+          "type": "object",
+          "$ref": "#/definitions/DataSourceConfiguration"
+        },
+        "sinks": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SinkConfiguration"
+          }
+        }
+      },
+      "description": "Data source object contains configuration to collect telemetry and one or more sinks to send that telemetry data to"
+    },
+    "SinkConfiguration": {
+      "type": "object",
+      "required": [
+        "kind"
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "enum": [
+            "EventHub",
+            "ApplicationInsights",
+            "LogAnalytics"
+          ]
+        }
+      }
+    },
+    "DataSourceConfiguration": {
+      "type": "object",
+      "properties": {
+        "providers": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EtwProviderConfiguration"
+          },
+          "description": "ETW providers configuration"
+        },
+        "perfCounters": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PerformanceCounterConfiguration"
+          },
+          "description": "Performance counter configuration"
+        },
+        "eventLogs": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EventLogConfiguration"
+          },
+          "description": "Windows event logs configuration."
+        }
+      }
+    },
+    "EtwEventConfiguration": {
+      "type": "object",
+      "required": [
+        "name",
+        "id"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "id": {
+          "type": "integer"
+        },
+        "filter": {
+          "type": "string"
+        }
+      }
+    },
+    "EtwProviderConfiguration": {
+      "type": "object",
+      "required": [
+        "id",
+        "events"
+      ],
+      "properties": {
+        "id": {
+          "type": "string"
+        },
+        "events": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EtwEventConfiguration"
+          }
+        }
+      }
+    },
+    "PerformanceCounterConfiguration": {
+      "type": "object",
+      "required": [
+        "name",
+        "samplingPeriod"
+      ],
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "samplingPeriod": {
+          "type": "string"
+        },
+        "instance": {
+          "type": "string"
+        }
+      }
+    },
+    "EventLogConfiguration": {
+      "type": "object",
+      "required": [
+        "logName"
+      ],
+      "properties": {
+        "logName": {
+          "type": "string"
+        },
+        "filter": {
+          "type": "string"
+        }
+      }
+    },
+    "Resource": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource Id"
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Azure resource type"
+        },
+        "location": {
+          "type": "string",
+          "description": "Resource location",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "tags": {
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
+      "required": [
+        "location"
+      ],
+      "x-ms-azure-resource": true,
+      "description": "An azure resource object"
+    }
+  },
+  "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The Azure subscription Id."
+    },
+    "ResourceGroupNameParameter": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group.",
+      "x-ms-parameter-location": "method"
+    },
+    "DiagnosticSettingNameParameter": {
+      "name": "diagnosticSettingsName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the diagnostic setting.",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "Client Api Version."
+    }
+  }
+}

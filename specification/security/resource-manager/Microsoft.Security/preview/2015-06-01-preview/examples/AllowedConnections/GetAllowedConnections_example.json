@@ -1,0 +1,63 @@
+{
+  "parameters": {
+    "api-version": "2015-06-01-preview",
+    "subscriptionId": "3eeab341-f466-499c-a8be-85427e154bad",
+    "resourceGroupName": "myResourceGroup",
+    "ascLocation": "centralus",
+    "connectionType": "Internal"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Security/locations/allowedConnections",
+        "properties": {
+          "calculatedDateTime": "2018-08-06T14:55:32.3518545Z",
+          "connectableResources": [
+            {
+              "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtaulMachine1",
+              "inboundConnectedResources": [
+                {
+                  "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtaulMachine2",
+                  "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                  "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                }
+              ],
+              "outboundConnectedResources": [
+                {
+                  "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtaulMachine2",
+                  "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                  "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                }
+              ]
+            },
+            {
+              "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtaulMachine2",
+              "inboundConnectedResources": [
+                {
+                  "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtaulMachine1",
+                  "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                  "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                }
+              ],
+              "outboundConnectedResources": [
+                {
+                  "connectedResourceId": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtaulMachine1",
+                  "tcpPorts": "[0-21,23-3388,3390-5984,5987-65535]",
+                  "udpPorts": "[0-21,23-3388,3390-5984,5987-65535]"
+                }
+              ]
+            },
+            {
+              "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/virtaulMachine3",
+              "inboundConnectedResources": [],
+              "outboundConnectedResources": []
+            }
+          ]
+        },
+        "id": "/subscriptions/3eeab341-f466-499c-a8be-85427e154baf/resourceGroups/myResourceGroup/providers/Microsoft.Security/locations/centralus/allowedConnections/Internal",
+        "name": "Internal",
+        "location": "centralus"
+      }
+    }
+  }
+}

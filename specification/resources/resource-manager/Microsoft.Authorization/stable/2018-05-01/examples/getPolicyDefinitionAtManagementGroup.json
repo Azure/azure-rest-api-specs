@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "managementGroupId": "MyManagementGroup",
+    "policyDefinitionName": "ResourceNaming",
+    "api-version": "2018-05-01"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/providers/Microsoft.Management/managementgroups/MyManagementGroup/providers/Microsoft.Authorization/policyDefinitions/ResourceNaming",
+        "type": "Microsoft.Authorization/policyDefinitions",
+        "name": "ResourceNaming",
+        "properties": {
+          "displayName": "Naming Convention",
+          "description": "Force resource names to begin with 'prefix' and end with 'suffix'",
+          "metadata": {
+            "category": "Naming"
+          },
+          "policyRule": {
+            "if": {
+              "not": {
+                "field": "name",
+                "like": "[concat(parameters('prefix'), '*', parameters('suffix'))]"
+              }
+            },
+            "then": {
+              "effect": "deny"
+            }
+          },
+          "parameters": {
+            "prefix": {
+              "type": "String",
+              "metadata": {
+                "displayName": "Prefix",
+                "description": "Resource name prefix"
+              }
+            },
+            "suffix": {
+              "type": "String",
+              "metadata": {
+                "displayName": "Suffix",
+                "description": "Resource name suffix"
+              }
+            }
+          },
+          "policyType": "Custom"
+        }
+      }
+    }
+  }
+}

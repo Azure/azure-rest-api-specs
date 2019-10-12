@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "api-version": "2017-08-31",
+    "subscriptionId": "subid1",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "parameters": {
+      "location": "location1",
+      "properties": {
+        "dnsPrefix": "dnsprefix1",
+        "agentPoolProfiles": [
+          {
+            "count": 1,
+            "name": "agentpool1",
+            "vmSize": "Standard_D2_v2"
+          }
+        ],
+        "kubernetesVersion": "1.7.7"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "name": "mycluster1",
+        "properties": {
+          "agentPoolProfiles": [
+            {
+              "count": 1,
+              "dnsPrefix": "agentpool1dnsPrefix",
+              "fqdn": "agentpool1fqdn",
+              "name": "agentpool1",
+              "osType": "Linux",
+              "ports": [
+                1
+              ],
+              "storageProfile": "ManagedDisks",
+              "vmSize": "Standard_D2_v2"
+            }
+          ],
+          "dnsPrefix": "dnsprefix1",
+          "fqdn": "dnsprefix1-123456.abc.location1.azmk8s.io",
+          "kubernetesVersion": "1.7.7",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          }
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/ManagedClusters"
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/managedClusters/clustername1",
+        "location": "location1",
+        "name": "mycluster1",
+        "properties": {
+          "agentPoolProfiles": [
+            {
+              "count": 1,
+              "dnsPrefix": "agentpool1dnsPrefix",
+              "fqdn": "agentpool1fqdn",
+              "name": "agentpool1",
+              "osType": "Linux",
+              "ports": [
+                1
+              ],
+              "storageProfile": "ManagedDisks",
+              "vmSize": "Standard_D2_v2"
+            }
+          ],
+          "dnsPrefix": "dnsprefix1",
+          "fqdn": "dnsprefix1-123456.abc.location1.azmk8s.io",
+          "kubernetesVersion": "1.7.7",
+          "linuxProfile": {
+            "adminUsername": "azureuser",
+            "ssh": {
+              "publicKeys": [
+                {
+                  "keyData": "keydata"
+                }
+              ]
+            }
+          },
+          "provisioningState": "Succeeded",
+          "servicePrincipalProfile": {
+            "clientId": "clientid"
+          }
+        },
+        "tags": {
+          "archv2": "",
+          "tier": "production"
+        },
+        "type": "Microsoft.ContainerService/ManagedClusters"
+      }
+    }
+  }
+}
