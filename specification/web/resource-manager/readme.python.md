@@ -10,7 +10,6 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.web
   package-name: azure-mgmt-web
   package-version: 0.42.0
   clear-output-folder: true
