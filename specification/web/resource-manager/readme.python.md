@@ -10,7 +10,6 @@ python:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   payload-flattening-threshold: 2
-  namespace: azure.mgmt.web
   package-name: azure-mgmt-web
   package-version: 0.42.0
   clear-output-folder: true
@@ -23,6 +22,7 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2019-08-only
   - tag: package-2018-11-only
   - tag: package-2018-02-only
   - tag: package-2016-09-only
@@ -30,6 +30,17 @@ batch:
   - tag: package-2016-03-only
   - tag: package-2015-08-only
   - tag: package-2015-04-only
+```
+
+### Tag: package-2019-08-only and python
+
+These settings apply only when `--tag=package-2019-08-only --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2019-08-only' && $(python)
+python:
+  namespace: azure.mgmt.web.v2019_08_01
+  output-folder: $(python-sdks-folder)/appservice/azure-mgmt-web/azure/mgmt/web/v2019_08_01
 ```
 
 ### Tag: package-2018-11-only and python

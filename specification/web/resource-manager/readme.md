@@ -39,9 +39,10 @@ tag: package-2019-08
 
 ### Tag: package-2019-08
 
-These settings apply only when `--tag=package-2019-08` is specified on the command line.
+These settings apply only when `--tag=package-2019-08` or `--tag=package-2019-08-only` is specified on the command line.
+NOTE: Currently these tags are the same, but it will need to be split if any files from folders other than 2019-08-01 are included.
 
-``` yaml $(tag) == 'package-2019-08'
+``` yaml $(tag) == 'package-2019-08' || $(tag) == 'package-2019-08-only' 
 
 input-file:
 - Microsoft.CertificateRegistration/stable/2019-08-01/AppServiceCertificateOrders.json
@@ -1017,8 +1018,11 @@ This is not used by Autorest itself.
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
+    autorest_options:
+      use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
       - python ./scripts/multiapi_init_gen.py azure-mgmt-web
+      - python ./scripts/trim_aio.py ./sdk/appservice/azure-mgmt-web
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
