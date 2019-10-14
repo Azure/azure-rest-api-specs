@@ -90,13 +90,22 @@ input-file:
 - preview/2015-02-28/searchservice.json
 ```
 
+### Tag: track1-package-2019-05
+
+These settings apply only when `--tag=track1-package-2019-05` is specified on the command line.
+It is meant to be used for generating Track 1 .NET SDK only!
+
+``` yaml $(tag) == 'track1-package-2019-05'
+input-file:
+- track1/stable/2019-05-06/searchservice.json
+```
+
 ---
 # Code Generation
 
 !!! READ THIS !!!
 This swagger is not yet ready for languages other than C#.
 !!! READ THIS !!!
-
 
 ## C# 
 
@@ -176,4 +185,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
