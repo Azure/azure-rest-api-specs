@@ -819,28 +819,36 @@
 					"readOnly": true,
 					"description": "Type of resource. \"Microsoft.Capacity/ServiceLimits\""
 				},
-				"provisioningState": {
-					"description": "The quota request status.",
-					"readOnly": true,
-					"$ref": "#/definitions/QuotaRequestState"
-				},
-				"message": {
-					"description": "User friendly status message.",
-					"type": "string",
-					"readOnly": true
-				},
-				"requestSubmitTime": {
-					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
-					"type": "string",
-					"readOnly": true,
-					"format": "date-time"
-				},
 				"properties": {
-					"description": "The quota request addition properties.",
 					"x-ms-client-flatten": true,
-					"$ref": "#/definitions/CurrentQuotaLimitBase"
+          			"$ref": "#/definitions/QuotaProperties"
 				}
 			}
+		},
+		"QuotaProperties": {
+			"properties" :{
+			"provisioningState": {
+				"description": "The quota request status.",
+				"readOnly": true,
+				"$ref": "#/definitions/QuotaRequestState"
+			},
+			"message": {
+				"description": "User friendly status message.",
+				"type": "string",
+				"readOnly": true
+			},
+			"requestSubmitTime": {
+				"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+				"type": "string",
+				"readOnly": true,
+				"format": "date-time"
+			},
+			"properties": {
+				"description": "The quota request addition properties.",
+				"x-ms-client-flatten": true,
+				"$ref": "#/definitions/CurrentQuotaLimitBase"
+			}
+		}
 		},
 		"QuotaRequestState": {
 			"description": "The quota request status.",
