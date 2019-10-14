@@ -625,7 +625,6 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/operations.json
  - ./Microsoft.Sql/stable/2014-04-01/queries.json
  - ./Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
- - ./Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
  - ./Microsoft.Sql/stable/2014-04-01/replicationLinks.json
  - ./Microsoft.Sql/stable/2014-04-01/restorePoints.json
  - ./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
