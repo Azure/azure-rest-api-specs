@@ -34,6 +34,42 @@
     }
   },
   "paths": {
+    "{scope}/providers/Microsoft.ManagedIdentity/identities": {
+      "get": {
+        "operationId": "SystemAssignedIdentities_ListByScope",
+        "description": "Lists all the systemAssignedIdentities available under the specified RP scope.",
+        "x-ms-examples": {
+          "IdentityListBySubscription": {
+            "$ref": "./examples/IdentityListBySubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ScopeParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The list of systemAssignedIdentities was retrieved and returned successfully.",
+            "schema": {
+              "$ref": "#/definitions/SystemAssignedIdentitiesListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/providers/Microsoft.ManagedIdentity/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -388,7 +424,7 @@
         "clientSecretUrl": {
           "type": "string",
           "readOnly": true,
-          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials."
+          "description": " The ManagedServiceIdentity DataPlane URL that can be queried to obtain the identity credentials. If identity is user assigned, then the clientSecretUrl will not be present in the response, otherwise it will be present."
         }
       }
     },
@@ -400,6 +436,22 @@
             "$ref": "#/definitions/Identity"
           },
           "description": "The collection of userAssignedIdentities returned by the listing operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The url to get the next page of results, if any."
+        }
+      },
+      "description": "Values returned by the List operation."
+    },
+    "SystemAssignedIdentitiesListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Identity"
+          },
+          "description": "The collection of systemAssignedIdentities returned by the listing operation."
         },
         "nextLink": {
           "type": "string",
@@ -507,6 +559,15 @@
     }
   },
   "parameters": {
+    "ScopeParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope of the resource. Parent  resource being extended by Managed Identities.",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
     "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
