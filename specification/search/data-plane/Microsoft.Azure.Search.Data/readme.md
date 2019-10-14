@@ -89,6 +89,17 @@ input-file:
 - preview/2015-02-28/searchindex.json
 ```
 
+
+### Tag: track1-package-2019-05
+
+These settings apply only when `--tag=track1-package-2019-05` is specified on the command line. It is meant to be used for
+generating Track 1 .NET SDK only!
+
+``` yaml $(tag) == 'track1-package-2019-05'
+input-file:
+- track1/stable/2019-05-06/searchindex.json
+```
+
 ---
 # Code Generation
 
@@ -303,6 +314,7 @@ input-file:
   - $(this-folder)/preview/2016-09-01/searchindex.json
   - $(this-folder)/preview/2015-02-28-preview/searchindex.json
   - $(this-folder)/preview/2015-02-28/searchindex.json
+  - $(this-folder)/track1/stable/2019-05-06/searchindex.json
 
 ```
 
