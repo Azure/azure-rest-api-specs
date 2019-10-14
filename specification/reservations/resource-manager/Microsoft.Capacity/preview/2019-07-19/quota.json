@@ -821,34 +821,69 @@
 				},
 				"properties": {
 					"x-ms-client-flatten": true,
-          			"$ref": "#/definitions/QuotaProperties"
+					"$ref": "#/definitions/QuotaProperties"
 				}
 			}
 		},
 		"QuotaProperties": {
-			"properties" :{
-			"provisioningState": {
-				"description": "The quota request status.",
-				"readOnly": true,
-				"$ref": "#/definitions/QuotaRequestState"
-			},
-			"message": {
-				"description": "User friendly status message.",
-				"type": "string",
-				"readOnly": true
-			},
-			"requestSubmitTime": {
-				"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
-				"type": "string",
-				"readOnly": true,
-				"format": "date-time"
-			},
 			"properties": {
-				"description": "The quota request addition properties.",
-				"x-ms-client-flatten": true,
-				"$ref": "#/definitions/CurrentQuotaLimitBase"
+				"provisioningState": {
+					"description": "The quota request status.",
+					"readOnly": true,
+					"$ref": "#/definitions/QuotaRequestState"
+				},
+				"message": {
+					"description": "User friendly status message.",
+					"type": "string",
+					"readOnly": true
+				},
+				"requestSubmitTime": {
+					"description": "The quota request submit time. The date conforms to the following format: yyyy-MM-ddTHH:mm:ssZ as specified by the ISO 8601 standard.",
+					"type": "string",
+					"readOnly": true,
+					"format": "date-time"
+				},
+				"limit": {
+					"description": "The quota limit.",
+					"type": "integer"
+				},
+				"currentValue": {
+					"description": "The current resource usages information.",
+					"type": "integer",
+					"readOnly": true
+				},
+				"unit": {
+					"description": " The units of the limit, such as - Count, Bytes, etc. Use the unit field provided in the Get quota response.",
+					"type": "string"
+				},
+				"name": {
+					"description": "Name of the resource provide by the resource Provider. Please use this name property for quotaRequests.",
+					"properties": {
+						"value": {
+							"description": "Resource name.",
+							"type": "string"
+						},
+						"localizedValue": {
+							"description": "Resource display name.",
+							"type": "string"
+						}
+					}
+				},
+				"resourceType": {
+					"description": "The Resource Type Name.",
+					"$ref": "#/definitions/ResourceTypesName",
+					"readOnly": true
+				},
+				"quotaPeriod": {
+					"description": "The quota period over which the usage values are summarized, such as - P1D (Per one day), PT1M (Per one minute), PT1S (Per one second). This parameter is optional because, for some resources like compute, the period doesn’t matter.",
+					"type": "string",
+					"readOnly": true
+				},
+				"properties": {
+					"description": "Additional properties for the specific resource provider.",
+					"type": "object"
+				}
 			}
-		}
 		},
 		"QuotaRequestState": {
 			"description": "The quota request status.",
