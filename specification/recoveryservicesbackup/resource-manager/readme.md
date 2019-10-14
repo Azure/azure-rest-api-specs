@@ -53,6 +53,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
 - Microsoft.RecoveryServices/stable/2019-05-13/bms.json
+- Microsoft.RecoveryServices/stable/2018-12-20/bms.json
 - Microsoft.RecoveryServices/stable/2017-07-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-12-01/bms.json
 - Microsoft.RecoveryServices/stable/2016-08-10/operations.json
@@ -154,6 +155,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.RecoveryServices/stable/2019-05-13/bms.json
+  - $(this-folder)/Microsoft.RecoveryServices/stable/2018-12-20/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2017-07-01/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-12-01/bms.json
   - $(this-folder)/Microsoft.RecoveryServices/stable/2016-08-10/operations.json
