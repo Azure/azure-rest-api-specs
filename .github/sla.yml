@@ -2,7 +2,7 @@
 - scheduleTask:
     action: sendEmailToAssignee
     args:
-      booleanFilterExpression: "!(WaitForARMFeedback||DoNotMerge||WaitingForAzureAPIBoard)"
+      booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard)"
       repoWhitelist:
         - Azure/azure-rest-api-specs
       limit: 48h
@@ -14,7 +14,7 @@
 - scheduleTask:
     action: sendEmailToAssignee
     args:
-      booleanFilterExpression: "!(WaitForARMFeedback||DoNotMerge||WaitingForAzureAPIBoard)"
+      booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard)"
       repoWhitelist:
         - Azure/azure-rest-api-specs
       limit: 5d
@@ -26,7 +26,7 @@
 - scheduleTask:
     action: sendEmailToAssignee
     args:
-      booleanFilterExpression: "!(WaitForARMFeedback||DoNotMerge||WaitingForAzureAPIBoard||Approved-OkToMerge)"
+      booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard||Approved-OkToMerge)"
       repoWhitelist:
         - Azure/azure-rest-api-specs-pr
       limit: 48h
@@ -38,7 +38,7 @@
 - scheduleTask:
     action: sendEmailToAssignee
     args:
-      booleanFilterExpression: "!(WaitForARMFeedback||DoNotMerge||WaitingForAzureAPIBoard||Approved-OkToMerge)"
+      booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard||Approved-OkToMerge)"
       repoWhitelist:
         - Azure/azure-rest-api-specs-pr
       limit: 5d
@@ -51,9 +51,9 @@
     action: sendEmail
     args:
       booleanFilterExpression: "(WaitForARMFeedback&&!ARMSignedOff&&!ARMChangesRequested&&!ARMReviewInProgress)"
-      limit: 5d
+      limit: 3d
       subject: "ARM team notification email"
-      message: "Dear ARM team, This is a notification email for the ARM team in testing. The PR ${PR_URL} is waiting on ARM team review. Please response to the PR. After response to the PR, please remove WaitForARMFeedback label and the bot won't send notification email about the PR to you again."
-      to: ruowan@microsoft.com
+      message: "Dear ARM team, This is a notification email. The PR ${PR_URL} is waiting on ARM team review over 3 days. Please response to the PR. After response to the PR, please remove WaitForARMFeedback label and the bot won't send notification email about the PR to you again. This is a test email. If you have any suggestion about email template, pls contact to Ruoxuan.Wang(ruowan@microsoft.com)"
+      to: yungez@microsoft.com
     description: "send email to ARM team for over 5 days PRs labelled with WaitForARMFeedback"
     name: "send email to ARM team"
