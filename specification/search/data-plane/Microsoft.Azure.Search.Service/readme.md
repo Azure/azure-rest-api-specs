@@ -92,8 +92,8 @@ input-file:
 
 ### Tag: track1-package-2019-05
 
-These settings apply only when `--tag=track1-package-2019-05` is specified on the command line. It is meant to be used for
-generating Track 1 .NET SDK only!
+These settings apply only when `--tag=track1-package-2019-05` is specified on the command line.
+It is meant to be used for generating Track 1 .NET SDK only!
 
 ``` yaml $(tag) == 'track1-package-2019-05'
 input-file:
@@ -106,7 +106,6 @@ input-file:
 !!! READ THIS !!!
 This swagger is not yet ready for languages other than C#.
 !!! READ THIS !!!
-
 
 ## C# 
 
