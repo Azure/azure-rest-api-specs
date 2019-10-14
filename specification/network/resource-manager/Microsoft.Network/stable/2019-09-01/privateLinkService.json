@@ -622,6 +622,7 @@
           "description": "Properties of the private link service."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -658,10 +659,12 @@
           "description": "An array of references to the network interfaces created for this private link service."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private link service resource."
         },
         "privateEndpointConnections": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
@@ -759,6 +762,7 @@
           "description": "Whether the ip configuration is primary or not."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private link service IP configuration resource."
         },
@@ -801,6 +805,7 @@
     "PrivateEndpointConnectionProperties": {
       "properties": {
         "privateEndpoint": {
+          "readOnly": true,
           "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint",
           "description": "The resource of private end point."
         },
@@ -809,6 +814,7 @@
           "description": "A collection of information about the state of the connection between service consumer and provider."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private endpoint connection resource."
         }

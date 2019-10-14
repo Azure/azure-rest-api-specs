@@ -989,6 +989,7 @@
           "description": "Reference of the subnet resource. A subnet from where application gateway gets its private address."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the application gateway IP configuration resource."
         }
@@ -1007,10 +1008,12 @@
           "description": "Name of the IP configuration that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1029,6 +1032,7 @@
           "description": "Certificate public data."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the authentication certificate resource."
         }
@@ -1047,10 +1051,12 @@
           "description": "Name of the authentication certificate that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1073,6 +1079,7 @@
           "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the trusted root certificate resource."
         }
@@ -1091,10 +1098,12 @@
           "description": "Name of the trusted root certificate that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1117,6 +1126,7 @@
           "description": "Password for the pfx file specified in data. Only applicable in PUT request."
         },
         "publicCertData": {
+          "readOnly": true,
           "type": "string",
           "description": "Base-64 encoded Public cert data corresponding to pfx specified in data. Only applicable in GET request."
         },
@@ -1125,6 +1135,7 @@
           "description": "Secret Id of (base-64 encoded unencrypted pfx) 'Secret' or 'Certificate' object stored in KeyVault."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the SSL certificate resource."
         }
@@ -1143,10 +1154,12 @@
           "description": "Name of the SSL certificate that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1177,6 +1190,7 @@
           "description": "Reference of the PublicIP resource."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the frontend IP configuration resource."
         }
@@ -1195,10 +1209,12 @@
           "description": "Name of the frontend IP configuration that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1218,6 +1234,7 @@
           "description": "Frontend port."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the frontend port resource."
         }
@@ -1236,10 +1253,12 @@
           "description": "Name of the frontend port that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1267,6 +1286,7 @@
     "ApplicationGatewayBackendAddressPoolPropertiesFormat": {
       "properties": {
         "backendIPConfigurations": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
@@ -1281,6 +1301,7 @@
           "description": "Backend addresses."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the backend address pool resource."
         }
@@ -1299,10 +1320,12 @@
           "description": "Name of the backend address pool that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1385,6 +1408,7 @@
           "description": "Path which should be used as a prefix for all HTTP requests. Null means no path will be prefixed. Default value is null."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the backend HTTP settings resource."
         }
@@ -1403,10 +1427,12 @@
           "description": "Name of the backend http settings that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1445,6 +1471,7 @@
           "description": "Applicable only if protocol is https. Enables SNI for multi-hosting."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the HTTP listener resource."
         },
@@ -1474,10 +1501,12 @@
           "description": "Name of the HTTP listener that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1515,10 +1544,11 @@
           "description": "Rewrite rule set resource of URL path map path rule."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the path rule resource."
         },
-         "firewallPolicy": {
+        "firewallPolicy": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to the FirewallPolicy resource."
         }
@@ -1537,10 +1567,12 @@
           "description": "Name of the path rule that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1595,6 +1627,7 @@
           "description": "Criterion for classifying a healthy probe response."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the probe resource."
         },
@@ -1636,10 +1669,12 @@
           "description": "Name of the probe that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1699,6 +1734,7 @@
           "description": "Redirect configuration resource of the application gateway."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the request routing rule resource."
         }
@@ -1717,10 +1753,12 @@
           "description": "Name of the request routing rule that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -1910,10 +1948,12 @@
           "description": "Name of the redirect configuration that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -2069,10 +2109,12 @@
           "description": "Autoscale Configuration."
         },
         "resourceGuid": {
+          "readOnly": true,
           "type": "string",
           "description": "The resource GUID property of the application gateway resource."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the application gateway resource."
         },
@@ -2094,6 +2136,7 @@
           "description": "Properties of the application gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
@@ -2158,6 +2201,7 @@
           "description": "Path rule of URL path map resource."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the URL path map resource."
         }
@@ -2176,10 +2220,12 @@
           "description": "Name of the URL path map that is unique within an Application Gateway."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Type of the resource."
         }
@@ -2407,6 +2453,7 @@
     "ApplicationGatewayFirewallRuleSetPropertiesFormat": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the web application firewall rule set."
         },
