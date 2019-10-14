@@ -83,6 +83,63 @@
                 }
               ],
               "action": "Block"
+            },
+            {
+              "name": "Rule3",
+              "priority": 3,
+              "ruleType": "MatchRule",
+              "matchConditions": [
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RemoteAddr",
+                      "selector": null
+                    }
+                  ],
+                  "operator": "IPMatch",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "192.168.1.0/24"
+                  ]
+                },
+                {
+                  "matchVariables": [
+                    {
+                      "variableName": "RequestHeader",
+                      "selector": "UserAgent"
+                    }
+                  ],
+                  "operator": "Contains",
+                  "negationConditon": false,
+                  "matchValues": [
+                    "Windows"
+                  ]
+                }
+              ],
+              "action": "Skip",
+              "skippedManagedRulesets": [
+                {
+                  "ruleSetType": "Microsoft_BotManagerRuleSet",
+                  "ruleSetVersion": "0.1"
+                },
+                {
+                  "ruleSetType": "OWASP",
+                  "ruleSetVersion": "3.0",
+                  "ruleGroups": [
+                    {
+                      "ruleGroupName" : "REQUEST-942-APPLICATION-ATTACK-SQLI",
+                      "rules" : [
+                        {
+                          "ruleId" : "942130"
+                        },
+                        {
+                          "ruleId" : "942110"
+                        }
+                      ]
+                    }  
+                  ]
+                }
+              ]
             }
           ],
           "managedRules": {
