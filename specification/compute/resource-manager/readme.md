@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Compute.
+This is the AutoRest configuration file for Compute
 
 
 The compute RP comprises of small services where each service has its own tag.
