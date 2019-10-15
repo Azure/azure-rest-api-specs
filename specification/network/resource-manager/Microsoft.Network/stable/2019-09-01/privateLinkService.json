@@ -810,6 +810,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The alias of the private link service."
+        },
+        "enableProxyProtocol": {
+          "type": "boolean",
+          "description": "Whether the private link service is enabled for proxy protocol or not."
         }
       },
       "description": "Properties of the private link service."
@@ -926,6 +930,11 @@
         "provisioningState": {
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "linkIdentifier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The consumer link id."
         }
       },
       "description": "Properties of the PrivateEndpointConnectProperties."
@@ -979,7 +988,7 @@
           "readOnly": true
         }
       },
-      "description": "Response for the ListPrivateLinkService API service call."
+      "description": "Response for the ListPrivateEndpointConnection API service call."
     },
     "CheckPrivateLinkServiceVisibilityRequest": {
       "properties": {
