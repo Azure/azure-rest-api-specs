@@ -498,7 +498,7 @@
           "description": "List of the documents used to train the model and any errors reported in each document.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/FormDocumentReport"
+            "$ref": "#/definitions/TrainingDocumentInfo"
           }
         },
         "fields": {
@@ -995,6 +995,10 @@
         "confidence"
       ],
       "properties": {
+        "label": {
+          "description": "A user defined label for the key/value pair entry.",
+          "type": "string"
+        },
         "key": {
           "description": "Information about the extracted key in a key-value pair.",
           "$ref": "#/definitions/KeyValueElement"
@@ -1244,7 +1248,7 @@
             "$ref": "#/definitions/ElementReference"
           }
         },
-        "pageNumber": {
+        "page": {
           "description": "The 1-based page number in the input document.",
           "type": "integer",
           "minimum": 1,
