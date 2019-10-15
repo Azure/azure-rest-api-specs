@@ -2,10 +2,10 @@
   "swagger": "2.0",
   "info": {
     "title": "LUIS Runtime Client",
-    "version": "3.0-preview"
+    "version": "3.0"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/luis/v3.0-preview",
+    "hostTemplate": "{Endpoint}/luis/prediction/v3.0",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -335,17 +335,12 @@
     "Prediction": {
       "description": "Represents the prediction of a query.",
       "required": [
-        "normalizedQuery",
         "topIntent",
         "intents",
         "entities"
       ],
       "type": "object",
       "properties": {
-        "normalizedQuery": {
-          "description": "The query after pre-processing and normalization.",
-          "type": "string"
-        },
         "alteredQuery": {
           "description": "The query after spell checking. Only set if spell check was enabled and a spelling mistake was found.",
           "type": "string"
@@ -362,7 +357,7 @@
           }
         },
         "entities": {
-          "description": "The dictionary representing the entities that fired.",
+          "description": "A dictionary representing the entities that fired.",
           "type": "object",
           "additionalProperties": {}
         },
@@ -475,7 +470,7 @@
           "description": "The reference DateTime used for predicting datetime entities.",
           "type": "string"
         },
-        "overridePredictions": {
+        "preferExternalEntities": {
           "description": "Whether to make the external entities resolution override the predictions if an overlap occurs.",
           "type": "boolean"
         }
@@ -506,6 +501,11 @@
         },
         "resolution": {
           "description": "A user supplied custom resolution to return as the entity's prediction."
+        },
+        "score": {
+          "format": "float",
+          "description": "A user supplied score to return as the entity's prediction score.",
+          "type": "number"
         }
       }
     },
