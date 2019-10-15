@@ -462,7 +462,7 @@
           "description": "Filter to apply to the documents in the source path for training."
         },
         "useLabelFile": {
-          "description": "Specify if label file should be used for training.",
+          "description": "Use label file for training a model.",
           "type": "boolean",
           "default": false,
           "x-nullable": false
@@ -501,27 +501,6 @@
             "$ref": "#/definitions/FormDocumentReport"
           }
         },
-        "trainingFields": {
-          "description": "List of trained fields.",
-          "$ref": "#/definitions/TrainingFields"
-        },
-        "errors": {
-          "description": "Errors returned during the training operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FormOperationError"
-          }
-        }
-      }
-    },
-    "TrainingFields": {
-      "description": "List of trained field.",
-      "type": "object",
-      "required": [
-        "fields",
-        "averageModelAccuracy"
-      ],
-      "properties": {
         "fields": {
           "description": "List of fields used to train the model and the train operation error reported by each.",
           "type": "array",
@@ -533,6 +512,13 @@
           "description": "Average accuracy.",
           "type": "number",
           "x-nullable": false
+        },
+        "errors": {
+          "description": "Errors returned during the training operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormOperationError"
+          }
         }
       }
     },
@@ -681,7 +667,7 @@
         }
       }
     },
-    "FormDocumentReport": {
+    "TrainingDocumentInfo": {
       "description": "Report for a custom model training document.",
       "type": "object",
       "required": [
@@ -702,7 +688,7 @@
           "x-nullable": false
         },
         "errors": {
-          "description": "List of errors per page.",
+          "description": "List of errors.",
           "type": "array",
           "items": {
             "type": "string"
@@ -1188,7 +1174,6 @@
       "type": "object",
       "required": [
         "type",
-        "text",
         "confidence"
       ],
       "properties": {
@@ -1258,6 +1243,12 @@
           "items": {
             "$ref": "#/definitions/ElementReference"
           }
+        },
+        "pageNumber": {
+          "description": "The 1-based page number in the input document.",
+          "type": "integer",
+          "minimum": 1,
+          "x-nullable": false
         }
       }
     },
