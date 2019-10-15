@@ -2577,7 +2577,7 @@
           "Get Virtual Machine Instance View.": {
             "$ref": "./examples/GetVirtualMachineInstanceView.json"
           }
-        }		
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/convertToManagedDisks": {
@@ -2992,7 +2992,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3995,7 +3995,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -5390,7 +5390,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -7121,7 +7121,7 @@
           "readOnly": true,          
           "format": "int64",
           "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set."
-        }        
+        }
       },
       "required": [
         "lun",
@@ -7369,6 +7369,10 @@
         "allowExtensionOperations": {
           "type": "boolean",
           "description": "Specifies whether extension operations should be allowed on the virtual machine. <br><br>This may only be set to False when no extensions are present on the virtual machine."
+        },
+        "requireGuestProvisionSignal": {
+          "type": "boolean",
+          "description": "Specifies whether the guest provision signal is required from the virtual machine."
         }
       },
       "description": "Specifies the operating system settings for the virtual machine."
@@ -7968,14 +7972,14 @@
               "Default",
               "OldestVM",
               "NewestVM"
-           ],
-           "x-ms-enum": {
-             "name": "VirtualMachineScaleSetScaleInRules",
-             "modelAsString": true
-           }
+            ],
+            "x-ms-enum": {
+              "name": "VirtualMachineScaleSetScaleInRules",
+              "modelAsString": true
+            }
           },
-          "description": "The rules to be followed when scaling-in a virtual machine scale set. <br><br> Possible values are: <br><br> **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. <br><br> **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. <br><br> **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. <br><br>" 
-        } 
+          "description": "The rules to be followed when scaling-in a virtual machine scale set. <br><br> Possible values are: <br><br> **Default** When a virtual machine scale set is scaled in, the scale set will first be balanced across zones if it is a zonal scale set. Then, it will be balanced across Fault Domains as far as possible. Within each Fault Domain, the virtual machines chosen for removal will be the newest ones that are not protected from scale-in. <br><br> **OldestVM** When a virtual machine scale set is being scaled-in, the oldest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the oldest virtual machines that are not protected will be chosen for removal. <br><br> **NewestVM** When a virtual machine scale set is being scaled-in, the newest virtual machines that are not protected from scale-in will be chosen for removal. For zonal virtual machine scale sets, the scale set will first be balanced across zones. Within each zone, the newest virtual machines that are not protected will be chosen for removal. <br><br>"
+        }
       },
       "description": "Describes a scale-in policy for a virtual machine scale set."
     },
@@ -8873,6 +8877,10 @@
     },
     "VirtualMachineScaleSetUpdateNetworkProfile": {
       "properties": {
+        "healthProbe": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
+        },
         "networkInterfaceConfigurations": {
           "type": "array",
           "items": {
