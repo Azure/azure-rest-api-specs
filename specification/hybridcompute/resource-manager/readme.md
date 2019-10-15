@@ -105,12 +105,18 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-hybridcompute/azure/mgmt/hybridcompute
+  output-folder: $(python-sdks-folder)/hybridcompute/azure-mgmt-hybridcompute/azure/mgmt/hybridcompute
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
   output-folder: $(python-sdks-folder)/azure-mgmt-hybridcompute
+directive:
+  - remove-operation: 
+    - Machines_Reconnect
+    - Machines_CreateOrUpdate
+    - Machines_Update
+    - Machines_Delete
 ```
 
 ## Go
@@ -138,7 +144,7 @@ These settings apply only when `--tag=package-2019-03 --go` is specified on the 
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
 ``` yaml $(tag)=='package-2019-03' && $(go)
-output-folder: $(go-sdk-folder)/services/preview/hybridcompute/mgmt/2019-03-18/hybridcompute
+output-folder: $(go-sdk-folder)/services/preview/hybridcompute/mgmt/2019-03-18-preview/hybridcompute
 ```
 
 ## Java
