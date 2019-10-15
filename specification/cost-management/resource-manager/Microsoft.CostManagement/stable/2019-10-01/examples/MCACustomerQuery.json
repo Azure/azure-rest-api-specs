@@ -1,8 +1,9 @@
 {
   "parameters": {
     "api-version": "2019-10-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "scope": "subscriptions/00000000-0000-0000-0000-000000000000",
+    "billingAccountId": "12345:6789",
+    "customerId": "5678",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789/customers/5678",
     "parameters": {
       "type": "Usage",
       "timeframe": "MonthToDate",
@@ -44,24 +45,18 @@
               }
             }
           ]
-        },
-        "sorting": [
-          {
-            "name": "UsageDate",
-            "querySortingDirection": "Ascending"
-          }
-        ]
+        }
       }
     }
   },
   "responses": {
     "200": {
       "body": {
-	    "id": "subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.CostManagement/Query/00000000-0000-0000-0000-000000000000",
-	    "name": "55312978-ba1b-415c-9304-cfd9c43c0481",
+	    "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/customers/5678/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+	    "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
 	    "type": "microsoft.costmanagement/Query",
 	    "properties": {
-		  "nextLink": null,
+		  "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/customers/5678/providers/Microsoft.CostManagement/Query?api-version=2019-10-01&$skiptoken=AQAAAA%3D%3D",
 		  "columns": [
 		    {
 			  "name": "PreTaxCost",
@@ -77,32 +72,32 @@
 		    },
 		    {
 			  "name": "Currency",
-		  	  "type": "String"
+			  "type": "String"
 		    }
 		  ],
 		  "rows": [
 		    [
-			  2.10333307059661,
-			  "ScreenSharingTest-peer",
+			  19.545363672276512,
+			  "JapanUnifia-Trial",
 			  20180331,
 			  "USD"
 		    ],
 		    [
-			  218.68795741935486,
-			  "Ict_StratAndPlan_GoldSprova_Prod",
+			  173.41979241290323,
+			  "RVIIOT-TRIAL",
 			  20180331,
 			  "USD"
 		    ],
 		    [
-			  0.14384913581657052,
-			  "ssbciotelement01",
-			  20180401,
+			  20.359416562625452,
+			  "VSTSHOL-1595322048000",
+			  20180331,
 			  "USD"
 		    ],
 		    [
-			  0.009865586851323632,
-			  "ict_stratandplan_goldsprova_prod",
-			  20180429,
+			  0.16677720329728665,
+			  "gs-stms-dev",
+			  20180331,
 			  "USD"
 		    ]
 		  ]

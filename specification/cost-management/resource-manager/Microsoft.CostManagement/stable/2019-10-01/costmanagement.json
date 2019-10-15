@@ -86,6 +86,42 @@
           },
           "BillingAccountDimensionsListWithFilter": {
             "$ref": "./examples/BillingAccountDimensionsListWithFilter.json"
+          },
+          "MCABillingAccountDimensionsList": {
+            "$ref": "./examples/MCABillingAccountDimensionsList.json"
+          },
+          "MCABillingAccountDimensionsListExpandAndTop": {
+            "$ref": "./examples/MCABillingAccountDimensionsListExpandAndTop.json"
+          },
+          "MCABillingAccountDimensionsListWithFilter": {
+            "$ref": "./examples/MCABillingAccountDimensionsListWithFilter.json"
+          },
+          "MCABillingProfileDimensionsList": {
+            "$ref": "./examples/MCABillingProfileDimensionsList.json"
+          },
+          "MCABillingProfileDimensionsListExpandAndTop": {
+            "$ref": "./examples/MCABillingProfileDimensionsListExpandAndTop.json"
+          },
+          "MCABillingProfileDimensionsListWithFilter": {
+            "$ref": "./examples/MCABillingProfileDimensionsListWithFilter.json"
+          },
+          "MCAInvoiceSectionDimensionsList": {
+            "$ref": "./examples/MCAInvoiceSectionDimensionsList.json"
+          },
+          "MCAInvoiceSectionDimensionsListExpandAndTop": {
+            "$ref": "./examples/MCAInvoiceSectionDimensionsListExpandAndTop.json"
+          },
+          "MCAInvoiceSectionDimensionsListWithFilter": {
+            "$ref": "./examples/MCAInvoiceSectionDimensionsListWithFilter.json"
+          },
+          "MCACustomerDimensionsList": {
+            "$ref": "./examples/MCACustomerDimensionsList.json"
+          },
+          "MCACustomerDimensionsListExpandAndTop": {
+            "$ref": "./examples/MCACustomerDimensionsListExpandAndTop.json"
+          },
+          "MCAInvoiceSectionDimensionsListWithFilter": {
+            "$ref": "./examples/MCACustomerDimensionsListWithFilter.json"
           }
         },
         "parameters": [
@@ -191,6 +227,30 @@
           },
           "ManagementGroupQueryGrouping": {
             "$ref": "./examples/ManagementGroupQueryGrouping.json"
+          },
+          "MCABillingAccountQuery": {
+            "$ref": "./examples/MCABillingAccountQuery.json"
+          },
+          "MCABillingAccountQueryGrouping": {
+            "$ref": "./examples/MCABillingAccountQueryGrouping.json"
+          },
+          "MCABillingProfileQuery": {
+            "$ref": "./examples/MCABillingProfileQuery.json"
+          },
+          "MCABillingProfileQueryGrouping": {
+            "$ref": "./examples/MCABillingProfileQueryGrouping.json"
+          },
+          "MCAInvoiceSectionQuery": {
+            "$ref": "./examples/MCAInvoiceSectionQuery.json"
+          },
+          "MCAInvoiceSectionQueryGrouping": {
+            "$ref": "./examples/MCAInvoiceSectionQueryGrouping.json"
+          },
+          "MCACustomerQuery": {
+            "$ref": "./examples/MCACustomerQuery.json"
+          },
+          "MCACustomerQueryGrouping": {
+            "$ref": "./examples/MCACustomerQueryGrouping.json"
           }
         },
         "parameters": [
@@ -729,19 +789,6 @@
     },
     "QueryResult": {
       "description": "Result of query. It contains all columns listed under groupings and aggregation.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "The list of usage data.",
-          "type": "array",
-          "readOnly": true,
-          "items": {
-            "$ref": "#/definitions/Query"
-          }
-        }
-      }
-    },
-    "Query": {
       "type": "object",
       "allOf": [
         {
@@ -1362,7 +1409,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with dimension operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope..",
+      "description": "The scope associated with dimension operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' speicific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -1371,7 +1418,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope..",
+      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' speicific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
