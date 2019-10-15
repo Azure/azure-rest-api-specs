@@ -2814,7 +2814,7 @@
           }
         ],
         "responses": {
-		 "200": {
+          "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ReplicationProtectedItem"
@@ -3316,7 +3316,7 @@
           }
         ],
         "responses": {
-		 "200": {
+          "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ReplicationProtectedItem"
@@ -3535,7 +3535,7 @@
           }
         ],
         "responses": {
-		 "200": {
+          "200": {
             "description": "OK",
             "schema": {
               "$ref": "#/definitions/ReplicationProtectedItem"
@@ -6990,7 +6990,7 @@
         }
       }
     },
-	"/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationSupportedOperatingSystems": {
+    "/Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{resourceName}/replicationSupportedOperatingSystems": {
       "get": {
         "tags": [
           "SupportedOperatingSystems"
@@ -7853,7 +7853,7 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
-	"A2ARemoveDisksInput": {
+    "A2ARemoveDisksInput": {
       "description": "A2A remove disk(s) input.",
       "type": "object",
       "allOf": [
@@ -7892,6 +7892,16 @@
           "description": "The fabric specific object Id of the virtual machine.",
           "type": "string"
         },
+        "initialPrimaryFabricLocation": {
+          "description": "The initial primary fabric location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "initialRecoveryFabricLocation": {
+          "description": "The initial recovery fabric location.",
+          "type": "string",
+          "readOnly": true
+        },
         "multiVmGroupId": {
           "description": "The multi vm group Id.",
           "type": "string"
@@ -7923,7 +7933,7 @@
             "$ref": "#/definitions/A2AProtectedDiskDetails"
           }
         },
-		"unprotectedDisks": {
+        "unprotectedDisks": {
           "description": "The list of unprotected disks.",
           "type": "array",
           "items": {
@@ -8043,6 +8053,20 @@
         "recoveryAvailabilityZone": {
           "description": "The recovery availability zone.",
           "type": "string"
+        },
+        "vmEncryptionType": {
+          "description": "The encryption type of the VM.",
+          "type": "string",
+          "readOnly": true,
+          "enum": [
+            "NotEncrypted",
+            "OnePassEncrypted",
+            "TwoPassEncrypted"
+          ],
+          "x-ms-enum": {
+            "name": "VmEncryptionType",
+            "modelAsString": true
+          }
         }
       },
       "x-ms-discriminator-value": "A2A"
@@ -8140,7 +8164,7 @@
       },
       "x-ms-discriminator-value": "A2A"
     },
-     "A2AUnprotectedDiskDetails": {
+    "A2AUnprotectedDiskDetails": {
       "description": "A2A unprotected disk details.",
       "type": "object",
       "properties": {
@@ -8151,7 +8175,7 @@
         }
       }
     },
-	"A2AUpdateContainerMappingInput": {
+    "A2AUpdateContainerMappingInput": {
       "description": "A2A update protection container mapping.",
       "type": "object",
       "allOf": [
@@ -8255,6 +8279,10 @@
         "recoveryTargetDiskAccountType": {
           "description": "The target disk type after failover. Its an optional value and will be same as source disk type if not user provided.",
           "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for one / single pass flows)."
         }
       }
     },
@@ -8273,10 +8301,14 @@
         "recoveryReplicaDiskAccountType": {
           "description": "The replica disk type before failover.",
           "type": "string"
+        },
+        "diskEncryptionInfo": {
+          "$ref": "#/definitions/DiskEncryptionInfo",
+          "description": "The recovery disk encryption information (for one / single pass flows)."
         }
       }
     },
-	 "AddDisksInput": {
+    "AddDisksInput": {
       "description": "Input for add disk(s) operation.",
       "type": "object",
       "properties": {
@@ -9789,12 +9821,12 @@
           "description": "ID of the entity.",
           "type": "string"
         },
-		 "errorId": {
+        "errorId": {
           "description": "The health error unique id.",
           "type": "string"
         },
         "customerResolvability": {
-		 "description": "Value indicating whether the health error is customer resolvable.",
+          "description": "Value indicating whether the health error is customer resolvable.",
           "enum": [
             "Allowed",
             "NotAllowed"
@@ -13361,7 +13393,6 @@
         },
         "productType": {
           "description": "Product type.",
-
           "type": "string"
         },
         "osEdition": {
@@ -14935,7 +14966,7 @@
         }
       }
     },
-	"RemoveDisksInput": {
+    "RemoveDisksInput": {
       "description": "Input for remove disk(s) operation.",
       "type": "object",
       "properties": {
@@ -15226,7 +15257,7 @@
       },
       "discriminator": "instanceType"
     },
-	"ResolveHealthError": {
+    "ResolveHealthError": {
       "description": "Resolve health errors input properties.",
       "type": "object",
       "properties": {
@@ -16718,6 +16749,21 @@
           "description": "IP allocation type for recovery VM.",
           "type": "string"
         },
+        "recoveryPublicIpAddressId": {
+          "description": "The id of the public IP address resource associated with the NIC.",
+          "type": "string"
+        },
+        "recoveryNetworkSecurityGroupId": {
+          "description": "The id of the NSG associated with the NIC.",
+          "type": "string"
+        },
+        "recoveryLBBackendAddressPoolIds": {
+          "description": "The target backend address pools for the NIC.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "A value indicating whether the NIC has accelerated networking enabled.",
           "type": "boolean"
@@ -16743,6 +16789,21 @@
         "selectionType": {
           "description": "Selection type for failover.",
           "type": "string"
+        },
+        "recoveryPublicIpAddressId": {
+          "description": "The id of the public IP address resource associated with the NIC.",
+          "type": "string"
+        },
+        "recoveryNetworkSecurityGroupId": {
+          "description": "The id of the NSG associated with the NIC.",
+          "type": "string"
+        },
+        "recoveryLBBackendAddressPoolIds": {
+          "description": "The target backend address pools for the NIC.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "enableAcceleratedNetworkingOnRecovery": {
           "description": "Whether the NIC has accelerated networking enabled.",

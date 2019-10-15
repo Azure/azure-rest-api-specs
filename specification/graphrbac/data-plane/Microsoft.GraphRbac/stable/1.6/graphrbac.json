@@ -2000,7 +2000,9 @@
         ],
         "operationId": "OAuth2PermissionGrant_List",
         "description": "Queries OAuth2 permissions grants for the relevant SP ObjectId of an app.",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "name": "$filter",
@@ -2034,10 +2036,14 @@
         "tags": [
           "OAuth2PermissionGrant_Create"
         ],
-        "consumes": [ "application/json" ],
+        "consumes": [
+          "application/json"
+        ],
         "operationId": "OAuth2PermissionGrant_Create",
         "description": "Grants OAuth2 permissions for the relevant resource Ids of an app.",
-        "produces": [ "application/json" ],
+        "produces": [
+          "application/json"
+        ],
         "parameters": [
           {
             "in": "body",
@@ -2107,48 +2113,48 @@
   },
   "x-ms-paths": {
     "/{tenantID}/{nextLink}?OAuth2PermissionGrant_ListNext": {
-        "get": {
-          "tags": [
-            "OAuth2PermissionGrant_ListNext"
-          ],
-          "operationId": "OAuth2PermissionGrant_ListNext",
-          "description": "Gets the next page of OAuth2 permission grants",
-          "parameters": [
-            {
-              "name": "nextLink",
-              "in": "path",
-              "required": true,
-              "type": "string",
-              "description": "Next link for the list operation.",
-              "x-ms-skip-url-encoding": true
-            },
-            {
-              "$ref": "#/parameters/ApiVersionParameter"
-            },
-            {
-              "$ref": "#/parameters/tenantIDInPath"
-            }
-          ],
-          "responses": {
-            "200": {
-              "description": "OK. The operation was successful.",
-              "schema": {
-                "$ref": "#/definitions/OAuth2PermissionGrantListResult"
-              }
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "#/definitions/GraphError"
-              }
+      "get": {
+        "tags": [
+          "OAuth2PermissionGrant_ListNext"
+        ],
+        "operationId": "OAuth2PermissionGrant_ListNext",
+        "description": "Gets the next page of OAuth2 permission grants",
+        "parameters": [
+          {
+            "name": "nextLink",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "Next link for the list operation.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/tenantIDInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The operation was successful.",
+            "schema": {
+              "$ref": "#/definitions/OAuth2PermissionGrantListResult"
             }
           },
-          "x-ms-pageable": {
-            "nextLinkName": "odata.nextLink",
-            "operationName": "OAuth2PermissionGrant_ListNext"
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/GraphError"
+            }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "odata.nextLink",
+          "operationName": "OAuth2PermissionGrant_ListNext"
         }
-      },
+      }
+    },
     "/{tenantID}/{nextLink}?SignedInUser_ListOwnedObjectsNext": {
       "get": {
         "tags": [
@@ -3232,10 +3238,10 @@
       "type": "object",
       "properties": {
         "value": {
-            "type": "string",
-            "description": "The Object ID of the service principal with the specified application ID."
+          "type": "string",
+          "description": "The Object ID of the service principal with the specified application ID."
         },
-       "odata.metadata": {
+        "odata.metadata": {
           "type": "string",
           "description": "The URL representing edm equivalent."
         }
@@ -3391,7 +3397,9 @@
         "mailEnabled": {
           "type": "boolean",
           "description": "Whether the group is mail-enabled. Must be false. This is because only pure security groups can be created using the Graph API.",
-          "enum": [ false ]
+          "enum": [
+            false
+          ]
         },
         "mailNickname": {
           "type": "string",
@@ -3400,7 +3408,9 @@
         "securityEnabled": {
           "type": "boolean",
           "description": "Whether the group is a security group. Must be true. This is because only pure security groups can be created using the Graph API.",
-          "enum": [ true ]
+          "enum": [
+            true
+          ]
         }
       },
       "required": [
@@ -3658,7 +3668,6 @@
         "logoutUrl": {
           "type": "string",
           "description": "A URL provided by the author of the associated application to logout"
-
         },
         "oauth2Permissions": {
           "description": "The OAuth 2.0 permissions exposed by the associated application.",

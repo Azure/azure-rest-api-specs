@@ -33,16 +33,19 @@
       }
     }
   },
-  "paths" : {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/remoteRenderingAccounts" : {
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
       "get": {
         "operationId": "RemoteRenderingAccounts_ListBySubscription",
         "tags": [
-          "Resource", "Proxy"
+          "Resource",
+          "Proxy"
         ],
         "description": "List Remote Rendering Accounts by Subscription",
         "x-ms-examples": {
-          "RemoteRenderingAccountPageBySubscription": { "$ref": "./examples/remote-rendering/GetBySubscription.json" }
+          "RemoteRenderingAccountPageBySubscription": {
+            "$ref": "./examples/remote-rendering/GetBySubscription.json"
+          }
         },
         "parameters": [
           {
@@ -71,7 +74,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts": {
       "get": {
         "operationId": "RemoteRenderingAccounts_ListByResourceGroup",
         "tags": [
@@ -79,7 +82,9 @@
         ],
         "description": "List Resources by Resource Group",
         "x-ms-examples": {
-          "ResourceGet": { "$ref": "./examples/remote-rendering/GetByResourceGroup.json" }
+          "ResourceGet": {
+            "$ref": "./examples/remote-rendering/GetByResourceGroup.json"
+          }
         },
         "parameters": [
           {
@@ -111,7 +116,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}": {
       "delete": {
         "operationId": "RemoteRenderingAccounts_Delete",
         "tags": [
@@ -119,7 +124,9 @@
         ],
         "description": "Delete a Remote Rendering Account.",
         "x-ms-examples": {
-          "ResourceDelete": { "$ref": "./examples/remote-rendering/Delete.json" }
+          "ResourceDelete": {
+            "$ref": "./examples/remote-rendering/Delete.json"
+          }
         },
         "parameters": [
           {
@@ -157,7 +164,9 @@
         ],
         "description": "Retrieve a Remote Rendering Account.",
         "x-ms-examples": {
-          "ResourceGet": { "$ref": "./examples/remote-rendering/Get.json" }
+          "ResourceGet": {
+            "$ref": "./examples/remote-rendering/Get.json"
+          }
         },
         "parameters": [
           {
@@ -195,7 +204,9 @@
         ],
         "description": "Updating a Remote Rendering Account",
         "x-ms-examples": {
-          "ResourceCreateOrUpdate": { "$ref": "./examples/remote-rendering/Patch.json" }
+          "ResourceCreateOrUpdate": {
+            "$ref": "./examples/remote-rendering/Patch.json"
+          }
         },
         "parameters": [
           {
@@ -236,7 +247,9 @@
         ],
         "description": "Creating or Updating a Remote Rendering Account.",
         "x-ms-examples": {
-          "ResourceCreate": { "$ref": "./examples/remote-rendering/Put.json" }
+          "ResourceCreate": {
+            "$ref": "./examples/remote-rendering/Put.json"
+          }
         },
         "parameters": [
           {
@@ -277,7 +290,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/keys" : {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MixedReality/remoteRenderingAccounts/{accountName}/keys": {
       "get": {
         "operationId": "RemoteRenderingAccounts_GetKeys",
         "tags": [
@@ -285,7 +298,9 @@
         ],
         "description": "Get Both of the 2 Keys of a Remote Rendering Account",
         "x-ms-examples": {
-          "ResourceGetKey": { "$ref": "./examples/remote-rendering/GetKeys.json" }
+          "ResourceGetKey": {
+            "$ref": "./examples/remote-rendering/GetKeys.json"
+          }
         },
         "parameters": [
           {
@@ -323,7 +338,9 @@
         ],
         "description": "Regenerate specified Key of a Remote Rendering Account",
         "x-ms-examples": {
-          "ResourceRegenerateKey": { "$ref": "./examples/remote-rendering/RegenerateKey.json" }
+          "ResourceRegenerateKey": {
+            "$ref": "./examples/remote-rendering/RegenerateKey.json"
+          }
         },
         "parameters": [
           {
@@ -359,12 +376,16 @@
       }
     }
   },
-  "definitions" : {
-    "RemoteRenderingAccount" : {
-      "allOf" : [{ "$ref" : "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"}],
+  "definitions": {
+    "RemoteRenderingAccount": {
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/TrackedResource"
+        }
+      ],
       "description": "RemoteRenderingAccount Response.",
       "type": "object",
-      "properties" :{
+      "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Property bag.",
@@ -396,7 +417,7 @@
       "description": "Remote Rendering Account parameter.",
       "in": "body",
       "schema": {
-          "$ref": "#/definitions/RemoteRenderingAccount"
+        "$ref": "#/definitions/RemoteRenderingAccount"
       },
       "required": true,
       "x-ms-parameter-location": "method"

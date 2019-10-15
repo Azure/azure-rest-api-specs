@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-serialconsole/azure/mgmt/serialconsole
+  output-folder: $(python-sdks-folder)/serialconsole/azure-mgmt-serialconsole/azure/mgmt/serialconsole
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-serialconsole
+  output-folder: $(python-sdks-folder)/serialconsole/azure-mgmt-serialconsole
 ```

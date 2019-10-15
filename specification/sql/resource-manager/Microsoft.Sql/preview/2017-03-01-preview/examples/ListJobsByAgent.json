@@ -1,63 +1,63 @@
 {
-    "parameters":{
-        "subscriptionId":"00000000-1111-2222-3333-444444444444",
-        "resourceGroupName":"group1",
-        "serverName":"server1",
-        "jobAgentName":"agent1",
-        "api-version":"2017-03-01-preview"
-    },
-    "responses":{
-        "200":{
-            "body":{
-                "value":[
-                    {
-                        "id":"/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job1",
-                        "name":"job1",
-                        "type":"Microsoft.Sql/servers/jobAccounts/jobs",
-                        "properties":{
-                            "description":"my favourite job",
-                            "version":0,
-                            "schedule":{
-                                "startTime":"2015-09-24T18:30:01Z",
-                                "endTime":"2015-09-24T23:59:59Z",
-                                "type":"Recurring",
-                                "interval":"PT5M",
-                                "enabled":true
-                            }
-                        }
-                    },
-                    {
-                        "id":"/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job3",
-                        "name":"job3",
-                        "type":"Microsoft.Sql/servers/jobAccounts/jobs",
-                        "properties":{
-                            "description":"this job will be scheduled once",
-                            "version":1,
-                            "schedule":{
-                                "startTime":"2017-07-01T03:45:00Z",
-                                "endTime":"2017-12-27T06:00:00Z",
-                                "type":"Once",
-                                "enabled":true
-                            }
-                        }
-                    },
-                    {
-                        "id":"/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job2",
-                        "name":"job2",
-                        "type":"Microsoft.Sql/servers/jobAccounts/jobs",
-                        "properties":{
-                            "description":"this job will never be automatically scheduled",
-                            "version":1,
-                            "schedule":{
-                                "startTime":"2017-07-01T03:45:00Z",
-                                "endTime":"2017-12-27T06:00:00Z",
-                                "type":"Once",
-                                "enabled":false
-                            }
-                        }
-                    }
-                ]
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "group1",
+    "serverName": "server1",
+    "jobAgentName": "agent1",
+    "api-version": "2017-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job1",
+            "name": "job1",
+            "type": "Microsoft.Sql/servers/jobAccounts/jobs",
+            "properties": {
+              "description": "my favourite job",
+              "version": 0,
+              "schedule": {
+                "startTime": "2015-09-24T18:30:01Z",
+                "endTime": "2015-09-24T23:59:59Z",
+                "type": "Recurring",
+                "interval": "PT5M",
+                "enabled": true
+              }
             }
-        }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job3",
+            "name": "job3",
+            "type": "Microsoft.Sql/servers/jobAccounts/jobs",
+            "properties": {
+              "description": "this job will be scheduled once",
+              "version": 1,
+              "schedule": {
+                "startTime": "2017-07-01T03:45:00Z",
+                "endTime": "2017-12-27T06:00:00Z",
+                "type": "Once",
+                "enabled": true
+              }
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/group1/providers/Microsoft.Sql/servers/server1/jobAgents/agent1/jobs/job2",
+            "name": "job2",
+            "type": "Microsoft.Sql/servers/jobAccounts/jobs",
+            "properties": {
+              "description": "this job will never be automatically scheduled",
+              "version": 1,
+              "schedule": {
+                "startTime": "2017-07-01T03:45:00Z",
+                "endTime": "2017-12-27T06:00:00Z",
+                "type": "Once",
+                "enabled": false
+              }
+            }
+          }
+        ]
+      }
     }
+  }
 }

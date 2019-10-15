@@ -5,36 +5,47 @@
     "description": "Mixed Reality Resource Provider API",
     "version": "2019-12-02-preview"
   },
-  "definitions" : {
-    "AccountKeys" : {
+  "definitions": {
+    "AccountKeys": {
       "description": "Developer Keys of account",
       "type": "object",
       "properties": {
-        "primaryKey" : {
+        "primaryKey": {
           "description": "value of primary key.",
           "readOnly": true,
           "type": "string"
         },
-        "secondaryKey" : {
+        "secondaryKey": {
           "description": "value of secondary key.",
           "readOnly": true,
           "type": "string"
         }
       }
     },
-    "AccountKeyRegenerateRequest" : {
+    "AccountKeyRegenerateRequest": {
       "description": "Request for account key regeneration",
       "type": "object",
       "properties": {
-        "serial" : {
-          "type" : "integer",
-          "enum": [1, 2],
-          "default" : 1,
-          "x-ms-enum" : {
-            "name" : "Serial",
-            "values" : [
-              {"value": 1, "description": "The Primary Key", "name": "Primary"},
-              {"value": 2, "description": "The Secondary Key", "name": "Secondary"}
+        "serial": {
+          "type": "integer",
+          "enum": [
+            1,
+            2
+          ],
+          "default": 1,
+          "x-ms-enum": {
+            "name": "Serial",
+            "values": [
+              {
+                "value": 1,
+                "description": "The Primary Key",
+                "name": "Primary"
+              },
+              {
+                "value": 2,
+                "description": "The Secondary Key",
+                "name": "Secondary"
+              }
             ]
           },
           "description": "serial of key to be regenerated"
@@ -44,7 +55,10 @@
     "ErrorResponse": {
       "description": "Response on Error",
       "type": "object",
-      "required" : ["message", "code"],
+      "required": [
+        "message",
+        "code"
+      ],
       "properties": {
         "message": {
           "description": "Describes the error in detail and provides debugging information",

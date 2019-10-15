@@ -1,43 +1,43 @@
 {
-    "parameters": {
-      "subscriptionId": "00000000-0000-0000-0000-000000000000",
-      "resourceGroupName": "resRg",
-      "resourceName": "myIoTSpacesService",
-      "api-version": "2017-10-01-preview",
-      "iotSpacePatchDescription": {
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "resourceName": "myIoTSpacesService",
+    "api-version": "2017-10-01-preview",
+    "iotSpacePatchDescription": {
+      "properties": {
+        "storageContainer": {
+          "connectionString": "string",
+          "subscriptionId": "string",
+          "resourceGroup": "string",
+          "containerName": "string"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTSpaces/IoTSpacesService/myIoTSpacesService",
+        "location": "westus",
+        "type": "Microsoft.IoTSpaces/IoTSpacesService",
+        "name": "myIoTSpacesService",
         "properties": {
+          "provisioningState": "Succeeded",
+          "managementApiUrl": "myIoTSpacesService-management.AzureIoTSpaces.net",
+          "webPortalUrl": "myIoTSpacesService-webportal.AzureIoTSpaces.net",
           "storageContainer": {
-            "connectionString": "string",
-            "subscriptionId": "string",
-            "resourceGroup": "string",
-            "containerName": "string"
+            "subscriptionId": "00000000-0000-0000-0000-000000000000",
+            "resourceGroup": "resReg",
+            "containerName": "myStorageContainer"
           }
+        },
+        "sku": {
+          "name": "F1"
         }
       }
     },
-    "responses": {
-      "200": {
-        "headers": {},
-        "body": {
-          "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.IoTSpaces/IoTSpacesService/myIoTSpacesService",
-          "location": "westus",
-          "type": "Microsoft.IoTSpaces/IoTSpacesService",
-          "name": "myIoTSpacesService",
-          "properties": {
-            "provisioningState": "Succeeded",
-            "managementApiUrl": "myIoTSpacesService-management.AzureIoTSpaces.net",
-            "webPortalUrl": "myIoTSpacesService-webportal.AzureIoTSpaces.net",
-            "storageContainer": {
-              "subscriptionId": "00000000-0000-0000-0000-000000000000",
-              "resourceGroup": "resReg",
-              "containerName": "myStorageContainer"
-            }
-          },
-          "sku": {
-            "name": "F1"
-          }
-        }
-      },
-      "202":{}
-    }
+    "202": {}
   }
+}

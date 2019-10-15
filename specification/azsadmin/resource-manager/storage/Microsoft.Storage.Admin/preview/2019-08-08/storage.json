@@ -1,0 +1,205 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-08-08-preview",
+    "title": "StorageManagementClient",
+    "description": "The Admin Storage Management Client."
+  },
+  "host": "adminmanagement.local.azurestack.external",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Storage.Admin/operations": {
+      "get": {
+        "x-ms-examples": {
+          "Get the list of support rest operations.": {
+            "$ref": "./examples/Operations/List.json"
+          }
+        },
+        "description": "Get the list of support rest operations.",
+        "tags": [
+          "Commerce"
+        ],
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- The list of operations has been returned.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Operation": {
+      "description": "Describes the supported REST operation.",
+      "properties": {
+        "name": {
+          "description": "The name of the operation being performed on this particular object. It should match the action name that appears in RBAC / the event service.",
+          "type": "string",
+          "readOnly": true
+        },
+        "display": {
+          "description": "Contains the localized display information for this particular operation / action.",
+          "$ref": "#/definitions/Display",
+          "readOnly": true
+        }
+      }
+    },
+    "Display": {
+      "description": "Contains the localized display information for this particular operation / action.",
+      "properties": {
+        "provider": {
+          "description": "The localized friendly form of the resource provider name – it is expected to also include the publisher/company responsible. It should use Title Casing and begin with \"Microsoft\" for 1st party services. e.g. \"Microsoft Monitoring Insights\" or \"Microsoft Compute.\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The localized friendly form of the resource type related to this action/operation – it should match the public documentation for the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation, as it should be shown to the user.",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "The localized friendly description for the operation, as it should be shown to the user. It should be thorough, yet concise – it will be used in tool tips and detailed views.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationList": {
+      "description": "Pageable list of supported operations.",
+      "properties": {
+        "value": {
+          "description": "List of operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "The error response for request which failed.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "The error description code.",
+          "type": "string",
+          "readOnly": true
+        },
+        "message": {
+          "description": "The error description message.",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "The error target description.",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "The error details information.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Resource": {
+      "description": "Base resource object.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Resource Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "Resource Type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Resource Location.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    }
+  },
+  "parameters": {
+    "ApiVersionParameter": {
+      "description": "REST Api Version.",
+      "name": "api-version",
+      "type": "string",
+      "in": "query",
+      "required": true
+    },
+    "LocationParameter": {
+      "description": "Resource location.",
+      "name": "location",
+      "type": "string",
+      "in": "path",
+      "required": true,
+      "x-ms-parameter-location": "method"
+    },
+    "SubscriptionIdParameter": {
+      "description": "Subscription Id.",
+      "name": "subscriptionId",
+      "type": "string",
+      "in": "path",
+      "required": true
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Authorization uses an Azure Active Directory OAuth2 flow.",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

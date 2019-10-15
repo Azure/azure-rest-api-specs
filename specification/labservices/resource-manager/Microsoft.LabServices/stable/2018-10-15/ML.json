@@ -6,29 +6,53 @@
     "description": "The Managed Labs Client."
   },
   "host": "management.azure.com",
-  "schemes": [ "https" ],
-  "consumes": [ "application/json" ],
-  "produces": [ "application/json" ],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
     "/providers/Microsoft.LabServices/operations": {
       "get": {
-        "tags": [ "ProviderOperations" ],
+        "tags": [
+          "ProviderOperations"
+        ],
         "description": "Result of the request to list REST API operations",
         "operationId": "ProviderOperations_List",
-        "parameters": [ { "$ref": "#/parameters/api-version" } ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
-            "schema": { "$ref": "#/definitions/ProviderOperationResult" }
+            "schema": {
+              "$ref": "#/definitions/ProviderOperationResult"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" }
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/getEnvironment": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Gets the virtual machine details",
         "operationId": "GlobalUsers_GetEnvironment",
         "parameters": [
@@ -44,7 +68,9 @@
             "in": "body",
             "description": "Represents payload for any Environment operations like get, start, stop, connect",
             "required": true,
-            "schema": { "$ref": "#/definitions/EnvironmentOperationsPayload" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOperationsPayload"
+            }
           },
           {
             "name": "$expand",
@@ -53,24 +79,38 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/GetEnvironmentResponse" }
+            "schema": {
+              "$ref": "#/definitions/GetEnvironmentResponse"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/getOperationBatchStatus": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Get batch operation status",
         "operationId": "GlobalUsers_GetOperationBatchStatus",
         "parameters": [
@@ -86,26 +126,42 @@
             "in": "body",
             "description": "Payload to get the status of an operation",
             "required": true,
-            "schema": { "$ref": "#/definitions/OperationBatchStatusPayload" }
+            "schema": {
+              "$ref": "#/definitions/OperationBatchStatusPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/OperationBatchStatusResponse" }
+            "schema": {
+              "$ref": "#/definitions/OperationBatchStatusResponse"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/getOperationStatus": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Gets the status of long running operation",
         "operationId": "GlobalUsers_GetOperationStatus",
         "parameters": [
@@ -121,26 +177,42 @@
             "in": "body",
             "description": "Payload to get the status of an operation",
             "required": true,
-            "schema": { "$ref": "#/definitions/OperationStatusPayload" }
+            "schema": {
+              "$ref": "#/definitions/OperationStatusPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/OperationStatusResponse" }
+            "schema": {
+              "$ref": "#/definitions/OperationStatusResponse"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/getPersonalPreferences": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Get personal preferences for a user",
         "operationId": "GlobalUsers_GetPersonalPreferences",
         "parameters": [
@@ -156,26 +228,42 @@
             "in": "body",
             "description": "Represents payload for any Environment operations like get, start, stop, connect",
             "required": true,
-            "schema": { "$ref": "#/definitions/PersonalPreferencesOperationsPayload" }
+            "schema": {
+              "$ref": "#/definitions/PersonalPreferencesOperationsPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/GetPersonalPreferencesResponse" }
+            "schema": {
+              "$ref": "#/definitions/GetPersonalPreferencesResponse"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/listEnvironments": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "List Environments for the user",
         "operationId": "GlobalUsers_ListEnvironments",
         "parameters": [
@@ -191,26 +279,42 @@
             "in": "body",
             "description": "Represents the payload to list environments owned by a user",
             "required": true,
-            "schema": { "$ref": "#/definitions/ListEnvironmentsPayload" }
+            "schema": {
+              "$ref": "#/definitions/ListEnvironmentsPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ListEnvironmentsResponse" }
+            "schema": {
+              "$ref": "#/definitions/ListEnvironmentsResponse"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/listLabs": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "List labs for the user.",
         "operationId": "GlobalUsers_ListLabs",
         "parameters": [
@@ -221,24 +325,38 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ListLabsResponse" }
+            "schema": {
+              "$ref": "#/definitions/ListLabsResponse"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/register": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Register a user to a managed lab",
         "operationId": "GlobalUsers_Register",
         "parameters": [
@@ -254,23 +372,39 @@
             "in": "body",
             "description": "Represents payload for Register action.",
             "required": true,
-            "schema": { "$ref": "#/definitions/RegisterPayload" }
+            "schema": {
+              "$ref": "#/definitions/RegisterPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/resetPassword": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Resets the user password on an environment This operation can take a while to complete",
         "operationId": "GlobalUsers_ResetPassword",
         "parameters": [
@@ -286,25 +420,43 @@
             "in": "body",
             "description": "Represents the payload for resetting passwords.",
             "required": true,
-            "schema": { "$ref": "#/definitions/ResetPasswordPayload" }
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/startEnvironment": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Starts an environment by starting all resources inside the environment. This operation can take a while to complete",
         "operationId": "GlobalUsers_StartEnvironment",
         "parameters": [
@@ -320,25 +472,43 @@
             "in": "body",
             "description": "Represents payload for any Environment operations like get, start, stop, connect",
             "required": true,
-            "schema": { "$ref": "#/definitions/EnvironmentOperationsPayload" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOperationsPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/providers/Microsoft.LabServices/users/{userName}/stopEnvironment": {
       "post": {
-        "tags": [ "GlobalUsers" ],
+        "tags": [
+          "GlobalUsers"
+        ],
         "description": "Stops an environment by stopping all resources inside the environment This operation can take a while to complete",
         "operationId": "GlobalUsers_StopEnvironment",
         "parameters": [
@@ -354,29 +524,49 @@
             "in": "body",
             "description": "Represents payload for any Environment operations like get, start, stop, connect",
             "required": true,
-            "schema": { "$ref": "#/definitions/EnvironmentOperationsPayload" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentOperationsPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/labaccounts": {
       "get": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "List lab accounts in a subscription.",
         "operationId": "LabAccounts_ListBySubscription",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
           {
             "name": "$expand",
             "in": "query",
@@ -406,31 +596,51 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ResponseWithContinuation[LabAccount]" }
+            "schema": {
+              "$ref": "#/definitions/ResponseWithContinuation[LabAccount]"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/LabAccount"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.LabServices/locations/{locationName}/operations/{operationName}": {
       "get": {
-        "tags": [ "Operations" ],
+        "tags": [
+          "Operations"
+        ],
         "description": "Get operation",
         "operationId": "Operations_Get",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/locationName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/locationName"
+          },
           {
             "name": "operationName",
             "in": "path",
@@ -438,29 +648,47 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/OperationResult" }
+            "schema": {
+              "$ref": "#/definitions/OperationResult"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts": {
       "get": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "List lab accounts in a resource group.",
         "operationId": "LabAccounts_ListByResourceGroup",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "$expand",
             "in": "query",
@@ -490,31 +718,51 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ResponseWithContinuation[LabAccount]" }
+            "schema": {
+              "$ref": "#/definitions/ResponseWithContinuation[LabAccount]"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/LabAccount"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}": {
       "get": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "Get lab account",
         "operationId": "LabAccounts_Get",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -529,27 +777,45 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/LabAccount" }
+            "schema": {
+              "$ref": "#/definitions/LabAccount"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "put": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "Create or replace an existing Lab Account.",
         "operationId": "LabAccounts_CreateOrUpdate",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -562,33 +828,55 @@
             "in": "body",
             "description": "Represents a lab account.",
             "required": true,
-            "schema": { "$ref": "#/definitions/LabAccount" }
+            "schema": {
+              "$ref": "#/definitions/LabAccount"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/LabAccount" }
+            "schema": {
+              "$ref": "#/definitions/LabAccount"
+            }
           },
           "201": {
             "description": "Created",
-            "schema": { "$ref": "#/definitions/LabAccount" }
+            "schema": {
+              "$ref": "#/definitions/LabAccount"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "delete": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "Delete lab account. This operation can take a while to complete",
         "operationId": "LabAccounts_Delete",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -596,26 +884,46 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "202": { "description": "Accepted" },
-          "204": { "description": "No Content" },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "Modify properties of lab accounts.",
         "operationId": "LabAccounts_Update",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -628,31 +936,51 @@
             "in": "body",
             "description": "Represents a lab account.",
             "required": true,
-            "schema": { "$ref": "#/definitions/LabAccountFragment" }
+            "schema": {
+              "$ref": "#/definitions/LabAccountFragment"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/LabAccount" }
+            "schema": {
+              "$ref": "#/definitions/LabAccount"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/createLab": {
       "post": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "Create a lab in a lab account.",
         "operationId": "LabAccounts_CreateLab",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -665,28 +993,48 @@
             "in": "body",
             "description": "Properties for creating a managed lab and a default environment setting",
             "required": true,
-            "schema": { "$ref": "#/definitions/CreateLabProperties" }
+            "schema": {
+              "$ref": "#/definitions/CreateLabProperties"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/galleryimages": {
       "get": {
-        "tags": [ "GalleryImages" ],
+        "tags": [
+          "GalleryImages"
+        ],
         "description": "List gallery images in a given lab account.",
         "operationId": "GalleryImages_List",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -723,31 +1071,51 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ResponseWithContinuation[GalleryImage]" }
+            "schema": {
+              "$ref": "#/definitions/ResponseWithContinuation[GalleryImage]"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/GalleryImage"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/galleryimages/{galleryImageName}": {
       "get": {
-        "tags": [ "GalleryImages" ],
+        "tags": [
+          "GalleryImages"
+        ],
         "description": "Get gallery image",
         "operationId": "GalleryImages_Get",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -769,27 +1137,45 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/GalleryImage" }
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "put": {
-        "tags": [ "GalleryImages" ],
+        "tags": [
+          "GalleryImages"
+        ],
         "description": "Create or replace an existing Gallery Image.",
         "operationId": "GalleryImages_CreateOrUpdate",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -809,33 +1195,55 @@
             "in": "body",
             "description": "Represents an image from the Azure Marketplace",
             "required": true,
-            "schema": { "$ref": "#/definitions/GalleryImage" }
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/GalleryImage" }
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
           },
           "201": {
             "description": "Created",
-            "schema": { "$ref": "#/definitions/GalleryImage" }
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "delete": {
-        "tags": [ "GalleryImages" ],
+        "tags": [
+          "GalleryImages"
+        ],
         "description": "Delete gallery image.",
         "operationId": "GalleryImages_Delete",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -850,25 +1258,45 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "204": { "description": "No Content" },
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "patch": {
-        "tags": [ "GalleryImages" ],
+        "tags": [
+          "GalleryImages"
+        ],
         "description": "Modify properties of gallery images.",
         "operationId": "GalleryImages_Update",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -888,31 +1316,51 @@
             "in": "body",
             "description": "Represents an image from the Azure Marketplace",
             "required": true,
-            "schema": { "$ref": "#/definitions/GalleryImageFragment" }
+            "schema": {
+              "$ref": "#/definitions/GalleryImageFragment"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/GalleryImage" }
+            "schema": {
+              "$ref": "#/definitions/GalleryImage"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/getRegionalAvailability": {
       "post": {
-        "tags": [ "LabAccounts" ],
+        "tags": [
+          "LabAccounts"
+        ],
         "description": "Get regional availability information for each size category configured under a lab account",
         "operationId": "LabAccounts_GetRegionalAvailability",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -920,29 +1368,47 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/GetRegionalAvailabilityResponse" }
+            "schema": {
+              "$ref": "#/definitions/GetRegionalAvailabilityResponse"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs": {
       "get": {
-        "tags": [ "Labs" ],
+        "tags": [
+          "Labs"
+        ],
         "description": "List labs in a given lab account.",
         "operationId": "Labs_List",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -979,32 +1445,56 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ResponseWithContinuation[Lab]" }
+            "schema": {
+              "$ref": "#/definitions/ResponseWithContinuation[Lab]"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/Lab",
-        "x-ms-examples": { "Labs_List": { "$ref": "./examples/Labs_List.json" } }
+        "x-ms-examples": {
+          "Labs_List": {
+            "$ref": "./examples/Labs_List.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}": {
       "get": {
-        "tags": [ "Labs" ],
+        "tags": [
+          "Labs"
+        ],
         "description": "Get lab",
         "operationId": "Labs_Get",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1026,27 +1516,45 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Lab" }
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "put": {
-        "tags": [ "Labs" ],
+        "tags": [
+          "Labs"
+        ],
         "description": "Create or replace an existing Lab.",
         "operationId": "Labs_CreateOrUpdate",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1066,33 +1574,55 @@
             "in": "body",
             "description": "Represents a lab.",
             "required": true,
-            "schema": { "$ref": "#/definitions/Lab" }
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Lab" }
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
           },
           "201": {
             "description": "Created",
-            "schema": { "$ref": "#/definitions/Lab" }
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "delete": {
-        "tags": [ "Labs" ],
+        "tags": [
+          "Labs"
+        ],
         "description": "Delete lab. This operation can take a while to complete",
         "operationId": "Labs_Delete",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1107,26 +1637,46 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "202": { "description": "Accepted" },
-          "204": { "description": "No Content" },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [ "Labs" ],
+        "tags": [
+          "Labs"
+        ],
         "description": "Modify properties of labs.",
         "operationId": "Labs_Update",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1146,31 +1696,51 @@
             "in": "body",
             "description": "Represents a lab.",
             "required": true,
-            "schema": { "$ref": "#/definitions/LabFragment" }
+            "schema": {
+              "$ref": "#/definitions/LabFragment"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Lab" }
+            "schema": {
+              "$ref": "#/definitions/Lab"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/addUsers": {
       "post": {
-        "tags": [ "Labs" ],
+        "tags": [
+          "Labs"
+        ],
         "description": "Add users to a lab",
         "operationId": "Labs_AddUsers",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1190,28 +1760,48 @@
             "in": "body",
             "description": "Payload for Add Users operation on a Lab.",
             "required": true,
-            "schema": { "$ref": "#/definitions/AddUsersPayload" }
+            "schema": {
+              "$ref": "#/definitions/AddUsersPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings": {
       "get": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "List environment setting in a given lab.",
         "operationId": "EnvironmentSettings_List",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1255,31 +1845,51 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ResponseWithContinuation[EnvironmentSetting]" }
+            "schema": {
+              "$ref": "#/definitions/ResponseWithContinuation[EnvironmentSetting]"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/EnvironmentSetting"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}": {
       "get": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Get environment setting",
         "operationId": "EnvironmentSettings_Get",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1308,27 +1918,45 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/EnvironmentSetting" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSetting"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "put": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Create or replace an existing Environment Setting. This operation can take a while to complete",
         "operationId": "EnvironmentSettings_CreateOrUpdate",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1355,34 +1983,56 @@
             "in": "body",
             "description": "Represents settings of an environment, from which environment instances would be created",
             "required": true,
-            "schema": { "$ref": "#/definitions/EnvironmentSetting" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSetting"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/EnvironmentSetting" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSetting"
+            }
           },
           "201": {
             "description": "Created",
-            "schema": { "$ref": "#/definitions/EnvironmentSetting" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSetting"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Delete environment setting. This operation can take a while to complete",
         "operationId": "EnvironmentSettings_Delete",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1404,26 +2054,46 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "202": { "description": "Accepted" },
-          "204": { "description": "No Content" },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Modify properties of environment setting.",
         "operationId": "EnvironmentSettings_Update",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1450,31 +2120,51 @@
             "in": "body",
             "description": "Represents settings of an environment, from which environment instances would be created",
             "required": true,
-            "schema": { "$ref": "#/definitions/EnvironmentSettingFragment" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSettingFragment"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/EnvironmentSetting" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentSetting"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/claimAny": {
       "post": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Claims a random environment for a user in an environment settings",
         "operationId": "EnvironmentSettings_ClaimAny",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1496,26 +2186,44 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/environments": {
       "get": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "List environments in a given environment setting.",
         "operationId": "Environments_List",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1566,31 +2274,51 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ResponseWithContinuation[Environment]" }
+            "schema": {
+              "$ref": "#/definitions/ResponseWithContinuation[Environment]"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/Environment"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/environments/{environmentName}": {
       "get": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Get environment",
         "operationId": "Environments_Get",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1626,27 +2354,45 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Environment" }
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "put": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Create or replace an existing Environment.",
         "operationId": "Environments_CreateOrUpdate",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1680,33 +2426,55 @@
             "in": "body",
             "description": "Represents an environment instance",
             "required": true,
-            "schema": { "$ref": "#/definitions/Environment" }
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Environment" }
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
           },
           "201": {
             "description": "Created",
-            "schema": { "$ref": "#/definitions/Environment" }
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "delete": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Delete environment. This operation can take a while to complete",
         "operationId": "Environments_Delete",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1735,26 +2503,46 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "202": { "description": "Accepted" },
-          "204": { "description": "No Content" },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Modify properties of environments.",
         "operationId": "Environments_Update",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1788,31 +2576,51 @@
             "in": "body",
             "description": "Represents an environment instance",
             "required": true,
-            "schema": { "$ref": "#/definitions/EnvironmentFragment" }
+            "schema": {
+              "$ref": "#/definitions/EnvironmentFragment"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/Environment" }
+            "schema": {
+              "$ref": "#/definitions/Environment"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/environments/{environmentName}/claim": {
       "post": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Claims the environment and assigns it to the user",
         "operationId": "Environments_Claim",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1841,26 +2649,44 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/environments/{environmentName}/resetPassword": {
       "post": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Resets the user password on an environment This operation can take a while to complete",
         "operationId": "Environments_ResetPassword",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1894,30 +2720,52 @@
             "in": "body",
             "description": "Represents the payload for resetting passwords.",
             "required": true,
-            "schema": { "$ref": "#/definitions/ResetPasswordPayload" }
+            "schema": {
+              "$ref": "#/definitions/ResetPasswordPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/environments/{environmentName}/start": {
       "post": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Starts an environment by starting all resources inside the environment. This operation can take a while to complete",
         "operationId": "Environments_Start",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1946,28 +2794,48 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/environments/{environmentName}/stop": {
       "post": {
-        "tags": [ "Environments" ],
+        "tags": [
+          "Environments"
+        ],
         "description": "Stops an environment by stopping all resources inside the environment This operation can take a while to complete",
         "operationId": "Environments_Stop",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -1996,28 +2864,48 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/publish": {
       "post": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Provisions/deprovisions required resources for an environment setting based on current state of the lab/environment setting.",
         "operationId": "EnvironmentSettings_Publish",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2044,28 +2932,48 @@
             "in": "body",
             "description": "Payload for Publish operation on EnvironmentSetting.",
             "required": true,
-            "schema": { "$ref": "#/definitions/PublishPayload" }
+            "schema": {
+              "$ref": "#/definitions/PublishPayload"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/start": {
       "post": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Starts a template by starting all resources inside the template. This operation can take a while to complete",
         "operationId": "EnvironmentSettings_Start",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2087,28 +2995,48 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/environmentsettings/{environmentSettingName}/stop": {
       "post": {
-        "tags": [ "EnvironmentSettings" ],
+        "tags": [
+          "EnvironmentSettings"
+        ],
         "description": "Starts a template by starting all resources inside the template. This operation can take a while to complete",
         "operationId": "EnvironmentSettings_Stop",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2130,28 +3058,48 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
-          "202": { "description": "Accepted" },
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/register": {
       "post": {
-        "tags": [ "Labs" ],
+        "tags": [
+          "Labs"
+        ],
         "description": "Register to managed lab.",
         "operationId": "Labs_Register",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2166,26 +3114,44 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "200": { "description": "OK" },
+          "200": {
+            "description": "OK"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/users": {
       "get": {
-        "tags": [ "Users" ],
+        "tags": [
+          "Users"
+        ],
         "description": "List users in a given lab.",
         "operationId": "Users_List",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2229,31 +3195,51 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/ResponseWithContinuation[User]" }
+            "schema": {
+              "$ref": "#/definitions/ResponseWithContinuation[User]"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
-        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
         "x-ms-odata": "#/definitions/User"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.LabServices/labaccounts/{labAccountName}/labs/{labName}/users/{userName}": {
       "get": {
-        "tags": [ "Users" ],
+        "tags": [
+          "Users"
+        ],
         "description": "Get user",
         "operationId": "Users_Get",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2282,27 +3268,45 @@
             "required": false,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "put": {
-        "tags": [ "Users" ],
+        "tags": [
+          "Users"
+        ],
         "description": "Create or replace an existing User.",
         "operationId": "Users_CreateOrUpdate",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2329,33 +3333,55 @@
             "in": "body",
             "description": "The User registered to a lab",
             "required": true,
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "201": {
             "description": "Created",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       },
       "delete": {
-        "tags": [ "Users" ],
+        "tags": [
+          "Users"
+        ],
         "description": "Delete user. This operation can take a while to complete",
         "operationId": "Users_Delete",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2377,26 +3403,46 @@
             "required": true,
             "type": "string"
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
-          "202": { "description": "Accepted" },
-          "204": { "description": "No Content" },
+          "202": {
+            "description": "Accepted"
+          },
+          "204": {
+            "description": "No Content"
+          },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ],
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ],
         "x-ms-long-running-operation": true
       },
       "patch": {
-        "tags": [ "Users" ],
+        "tags": [
+          "Users"
+        ],
         "description": "Modify properties of users.",
         "operationId": "Users_Update",
         "parameters": [
-          { "$ref": "#/parameters/subscriptionId" },
-          { "$ref": "#/parameters/resourceGroupName" },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
           {
             "name": "labAccountName",
             "in": "path",
@@ -2423,61 +3469,94 @@
             "in": "body",
             "description": "The User registered to a lab",
             "required": true,
-            "schema": { "$ref": "#/definitions/UserFragment" }
+            "schema": {
+              "$ref": "#/definitions/UserFragment"
+            }
           },
-          { "$ref": "#/parameters/api-version" }
+          {
+            "$ref": "#/parameters/api-version"
+          }
         ],
         "responses": {
           "200": {
             "description": "OK",
-            "schema": { "$ref": "#/definitions/User" }
+            "schema": {
+              "$ref": "#/definitions/User"
+            }
           },
           "default": {
             "description": "BadRequest",
-            "schema": { "$ref": "#/definitions/CloudError" }
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
           }
         },
-        "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+        "security": [
+          {
+            "azure_auth": [
+              "user_impersonation"
+            ]
+          }
+        ]
       }
     }
   },
   "definitions": {
     "AddUsersPayload": {
       "description": "Payload for Add Users operation on a Lab.",
-      "required": [ "emailAddresses" ],
+      "required": [
+        "emailAddresses"
+      ],
       "type": "object",
       "properties": {
         "emailAddresses": {
           "description": "List of user emails addresses to add to the lab.",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
     "CloudError": {
       "description": "Error from a REST request.",
       "type": "object",
-      "properties": { "error": { "$ref": "#/definitions/CloudErrorBody" } },
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/CloudErrorBody"
+        }
+      },
       "x-ms-external": true
     },
     "CloudErrorBody": {
       "description": "Body of an error from a REST request.",
       "type": "object",
       "properties": {
-        "code": { "type": "string" },
-        "message": { "type": "string" },
-        "target": { "type": "string" },
+        "code": {
+          "type": "string"
+        },
+        "message": {
+          "type": "string"
+        },
+        "target": {
+          "type": "string"
+        },
         "details": {
           "description": "Inner errors.",
           "type": "array",
-          "items": { "$ref": "#/definitions/CloudErrorBody" }
+          "items": {
+            "$ref": "#/definitions/CloudErrorBody"
+          }
         }
       },
       "x-ms-external": true
     },
     "CreateLabProperties": {
       "description": "Properties for creating a managed lab and a default environment setting",
-      "required": [ "labCreationParameters", "name" ],
+      "required": [
+        "labCreationParameters",
+        "name"
+      ],
       "type": "object",
       "properties": {
         "environmentSettingCreationParameters": {
@@ -2499,14 +3578,20 @@
         "tags": {
           "description": "The tags of the resource.",
           "type": "object",
-          "additionalProperties": { "type": "string" }
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
     "Environment": {
       "description": "Represents an environment instance",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnvironmentProperties",
@@ -2571,7 +3656,11 @@
     "EnvironmentFragment": {
       "description": "Represents an environment instance",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnvironmentPropertiesFragment",
@@ -2582,7 +3671,9 @@
     },
     "EnvironmentOperationsPayload": {
       "description": "Represents payload for any Environment operations like get, start, stop, connect",
-      "required": [ "environmentId" ],
+      "required": [
+        "environmentId"
+      ],
       "type": "object",
       "properties": {
         "environmentId": {
@@ -2677,7 +3768,11 @@
     "EnvironmentSetting": {
       "description": "Represents settings of an environment, from which environment instances would be created",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnvironmentSettingProperties",
@@ -2688,7 +3783,9 @@
     },
     "EnvironmentSettingCreationParameters": {
       "description": "Settings related to creating an environment setting",
-      "required": [ "resourceSettingCreationParameters" ],
+      "required": [
+        "resourceSettingCreationParameters"
+      ],
       "type": "object",
       "properties": {
         "resourceSettingCreationParameters": {
@@ -2700,7 +3797,11 @@
     "EnvironmentSettingFragment": {
       "description": "Represents settings of an environment, from which environment instances would be created",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/EnvironmentSettingPropertiesFragment",
@@ -2711,12 +3812,20 @@
     },
     "EnvironmentSettingProperties": {
       "description": "Properties of an environment setting",
-      "required": [ "resourceSettings" ],
+      "required": [
+        "resourceSettings"
+      ],
       "type": "object",
       "properties": {
         "publishingState": {
           "description": "Describes the readiness of this environment setting",
-          "enum": [ "Draft", "Publishing", "Published", "PublishFailed", "Scaling" ],
+          "enum": [
+            "Draft",
+            "Publishing",
+            "Published",
+            "PublishFailed",
+            "Scaling"
+          ],
           "type": "string",
           "readOnly": true,
           "x-ms-enum": {
@@ -2748,7 +3857,10 @@
         },
         "configurationState": {
           "description": "Describes the user's progress in configuring their environment setting",
-          "enum": [ "NotApplicable", "Completed" ],
+          "enum": [
+            "NotApplicable",
+            "Completed"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ConfigurationState",
@@ -2810,7 +3922,10 @@
       "properties": {
         "configurationState": {
           "description": "Describes the user's progress in configuring their environment setting",
-          "enum": [ "NotApplicable", "Completed" ],
+          "enum": [
+            "NotApplicable",
+            "Completed"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ConfigurationState",
@@ -2855,7 +3970,11 @@
       "properties": {
         "name": {
           "description": "The size category",
-          "enum": [ "Basic", "Standard", "Performance" ],
+          "enum": [
+            "Basic",
+            "Standard",
+            "Performance"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedLabVmSize",
@@ -2879,7 +3998,9 @@
         "vmSizes": {
           "description": "Represents a set of compute sizes that can serve this given size type",
           "type": "array",
-          "items": { "$ref": "#/definitions/SizeInfo" }
+          "items": {
+            "$ref": "#/definitions/SizeInfo"
+          }
         },
         "maxPrice": {
           "format": "decimal",
@@ -2907,7 +4028,11 @@
       "properties": {
         "name": {
           "description": "The size category",
-          "enum": [ "Basic", "Standard", "Performance" ],
+          "enum": [
+            "Basic",
+            "Standard",
+            "Performance"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedLabVmSize",
@@ -2931,14 +4056,20 @@
         "vmSizes": {
           "description": "Represents a set of compute sizes that can serve this given size type",
           "type": "array",
-          "items": { "$ref": "#/definitions/SizeInfoFragment" }
+          "items": {
+            "$ref": "#/definitions/SizeInfoFragment"
+          }
         }
       }
     },
     "GalleryImage": {
       "description": "Represents an image from the Azure Marketplace",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImageProperties",
@@ -2950,7 +4081,11 @@
     "GalleryImageFragment": {
       "description": "Represents an image from the Azure Marketplace",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/GalleryImagePropertiesFragment",
@@ -3121,7 +4256,9 @@
         "favoriteLabResourceIds": {
           "description": "Array of favorite lab resource ids",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3132,14 +4269,20 @@
         "regionalAvailability": {
           "description": "Availability information for different size categories per region",
           "type": "array",
-          "items": { "$ref": "#/definitions/RegionalAvailability" }
+          "items": {
+            "$ref": "#/definitions/RegionalAvailability"
+          }
         }
       }
     },
     "Lab": {
       "description": "Represents a lab.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/LabProperties",
@@ -3151,7 +4294,11 @@
     "LabAccount": {
       "description": "Represents a lab account.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/LabAccountProperties",
@@ -3163,7 +4310,11 @@
     "LabAccountFragment": {
       "description": "Represents a lab account.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/LabAccountPropertiesFragment",
@@ -3256,7 +4407,11 @@
     "LabFragment": {
       "description": "Represents a lab.",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/LabPropertiesFragment",
@@ -3297,7 +4452,10 @@
         },
         "userAccessMode": {
           "description": "Lab user access mode (open to all vs. restricted to those listed on the lab).",
-          "enum": [ "Restricted", "Open" ],
+          "enum": [
+            "Restricted",
+            "Open"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "LabUserAccessMode",
@@ -3356,7 +4514,10 @@
         },
         "userAccessMode": {
           "description": "Lab user access mode (open to all vs. restricted to those listed on the lab).",
-          "enum": [ "Restricted", "Open" ],
+          "enum": [
+            "Restricted",
+            "Open"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "LabUserAccessMode",
@@ -3441,7 +4602,9 @@
         "environments": {
           "description": "List of all the environments",
           "type": "array",
-          "items": { "$ref": "#/definitions/EnvironmentDetails" }
+          "items": {
+            "$ref": "#/definitions/EnvironmentDetails"
+          }
         }
       }
     },
@@ -3452,7 +4615,9 @@
         "labs": {
           "description": "List of all the labs",
           "type": "array",
-          "items": { "$ref": "#/definitions/LabDetails" }
+          "items": {
+            "$ref": "#/definitions/LabDetails"
+          }
         }
       }
     },
@@ -3489,13 +4654,17 @@
     },
     "OperationBatchStatusPayload": {
       "description": "Payload to get the status of an operation",
-      "required": [ "urls" ],
+      "required": [
+        "urls"
+      ],
       "type": "object",
       "properties": {
         "urls": {
           "description": "The operation url of long running operation",
           "type": "array",
-          "items": { "type": "string" }
+          "items": {
+            "type": "string"
+          }
         }
       }
     },
@@ -3506,7 +4675,9 @@
         "items": {
           "description": "Gets a collection of items that contain the operation url and status.",
           "type": "array",
-          "items": { "$ref": "#/definitions/OperationBatchStatusResponseItem" },
+          "items": {
+            "$ref": "#/definitions/OperationBatchStatusResponseItem"
+          },
           "readOnly": true
         }
       }
@@ -3593,7 +4764,9 @@
     },
     "OperationStatusPayload": {
       "description": "Payload to get the status of an operation",
-      "required": [ "operationUrl" ],
+      "required": [
+        "operationUrl"
+      ],
       "type": "object",
       "properties": {
         "operationUrl": {
@@ -3623,7 +4796,10 @@
         },
         "addRemove": {
           "description": "Enum indicating if user is adding or removing a favorite lab",
-          "enum": [ "Add", "Remove" ],
+          "enum": [
+            "Add",
+            "Remove"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "AddRemove",
@@ -3653,7 +4829,9 @@
         "value": {
           "description": "List of operations supported by the resource provider.",
           "type": "array",
-          "items": { "$ref": "#/definitions/OperationMetadata" }
+          "items": {
+            "$ref": "#/definitions/OperationMetadata"
+          }
         },
         "nextLink": {
           "description": "URL to get the next set of operation list results if there are any.",
@@ -3674,7 +4852,9 @@
     },
     "ReferenceVm": {
       "description": "Details of a Reference Vm",
-      "required": [ "userName" ],
+      "required": [
+        "userName"
+      ],
       "type": "object",
       "properties": {
         "userName": {
@@ -3699,7 +4879,10 @@
     },
     "ReferenceVmCreationParameters": {
       "description": "Creation parameters for Reference Vm",
-      "required": [ "userName", "password" ],
+      "required": [
+        "userName",
+        "password"
+      ],
       "type": "object",
       "properties": {
         "userName": {
@@ -3737,7 +4920,9 @@
         "sizeAvailabilities": {
           "description": "List of all the size information for the region",
           "type": "array",
-          "items": { "$ref": "#/definitions/SizeAvailability" }
+          "items": {
+            "$ref": "#/definitions/SizeAvailability"
+          }
         }
       }
     },
@@ -3753,7 +4938,9 @@
     },
     "ResetPasswordPayload": {
       "description": "Represents the payload for resetting passwords.",
-      "required": [ "environmentId" ],
+      "required": [
+        "environmentId"
+      ],
       "type": "object",
       "properties": {
         "environmentId": {
@@ -3796,7 +4983,9 @@
         "tags": {
           "description": "The tags of the resource.",
           "type": "object",
-          "additionalProperties": { "type": "string" }
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "x-ms-azure-resource": true
@@ -3831,7 +5020,10 @@
     },
     "ResourceSettingCreationParameters": {
       "description": "Represents resource specific settings",
-      "required": [ "galleryImageResourceId", "referenceVmCreationParameters" ],
+      "required": [
+        "galleryImageResourceId",
+        "referenceVmCreationParameters"
+      ],
       "type": "object",
       "properties": {
         "location": {
@@ -3848,7 +5040,11 @@
         },
         "size": {
           "description": "The size of the virtual machine",
-          "enum": [ "Basic", "Standard", "Performance" ],
+          "enum": [
+            "Basic",
+            "Standard",
+            "Performance"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedLabVmSize",
@@ -3877,7 +5073,9 @@
     },
     "ResourceSettings": {
       "description": "Represents resource specific settings",
-      "required": [ "referenceVm" ],
+      "required": [
+        "referenceVm"
+      ],
       "type": "object",
       "properties": {
         "id": {
@@ -3896,7 +5094,11 @@
         },
         "size": {
           "description": "The size of the virtual machine",
-          "enum": [ "Basic", "Standard", "Performance" ],
+          "enum": [
+            "Basic",
+            "Standard",
+            "Performance"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedLabVmSize",
@@ -3939,7 +5141,11 @@
         },
         "size": {
           "description": "The size of the virtual machine",
-          "enum": [ "Basic", "Standard", "Performance" ],
+          "enum": [
+            "Basic",
+            "Standard",
+            "Performance"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedLabVmSize",
@@ -3973,7 +5179,9 @@
         "value": {
           "description": "Results of the list operation.",
           "type": "array",
-          "items": { "$ref": "#/definitions/Environment" }
+          "items": {
+            "$ref": "#/definitions/Environment"
+          }
         },
         "nextLink": {
           "description": "Link for next set of results.",
@@ -3988,7 +5196,9 @@
         "value": {
           "description": "Results of the list operation.",
           "type": "array",
-          "items": { "$ref": "#/definitions/EnvironmentSetting" }
+          "items": {
+            "$ref": "#/definitions/EnvironmentSetting"
+          }
         },
         "nextLink": {
           "description": "Link for next set of results.",
@@ -4003,7 +5213,9 @@
         "value": {
           "description": "Results of the list operation.",
           "type": "array",
-          "items": { "$ref": "#/definitions/GalleryImage" }
+          "items": {
+            "$ref": "#/definitions/GalleryImage"
+          }
         },
         "nextLink": {
           "description": "Link for next set of results.",
@@ -4018,7 +5230,9 @@
         "value": {
           "description": "Results of the list operation.",
           "type": "array",
-          "items": { "$ref": "#/definitions/Lab" }
+          "items": {
+            "$ref": "#/definitions/Lab"
+          }
         },
         "nextLink": {
           "description": "Link for next set of results.",
@@ -4033,7 +5247,9 @@
         "value": {
           "description": "Results of the list operation.",
           "type": "array",
-          "items": { "$ref": "#/definitions/LabAccount" }
+          "items": {
+            "$ref": "#/definitions/LabAccount"
+          }
         },
         "nextLink": {
           "description": "Link for next set of results.",
@@ -4048,7 +5264,9 @@
         "value": {
           "description": "Results of the list operation.",
           "type": "array",
-          "items": { "$ref": "#/definitions/User" }
+          "items": {
+            "$ref": "#/definitions/User"
+          }
         },
         "nextLink": {
           "description": "Link for next set of results.",
@@ -4062,7 +5280,11 @@
       "properties": {
         "sizeCategory": {
           "description": "The category of the size (Basic, Standard, Performance).",
-          "enum": [ "Basic", "Standard", "Performance" ],
+          "enum": [
+            "Basic",
+            "Standard",
+            "Performance"
+          ],
           "type": "string",
           "x-ms-enum": {
             "name": "ManagedLabVmSize",
@@ -4096,7 +5318,9 @@
         "environmentSizes": {
           "description": "Represents a list of size categories supported by this Lab Account (Small, Medium, Large)",
           "type": "array",
-          "items": { "$ref": "#/definitions/EnvironmentSize" }
+          "items": {
+            "$ref": "#/definitions/EnvironmentSize"
+          }
         }
       }
     },
@@ -4107,7 +5331,9 @@
         "environmentSizes": {
           "description": "Represents a list of size categories supported by this Lab Account (Small, Medium, Large)",
           "type": "array",
-          "items": { "$ref": "#/definitions/EnvironmentSizeFragment" }
+          "items": {
+            "$ref": "#/definitions/EnvironmentSizeFragment"
+          }
         }
       }
     },
@@ -4164,7 +5390,11 @@
     "User": {
       "description": "The User registered to a lab",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/UserProperties",
@@ -4176,7 +5406,11 @@
     "UserFragment": {
       "description": "The User registered to a lab",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/Resource" } ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/UserPropertiesFragment",
@@ -4351,8 +5585,16 @@
       "description": "OAuth2 Implicit Grant",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "scopes": { "user_impersonation": "Access Microsoft Azure" }
+      "scopes": {
+        "user_impersonation": "Access Microsoft Azure"
+      }
     }
   },
-  "security": [ { "azure_auth": [ "user_impersonation" ] } ]
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
