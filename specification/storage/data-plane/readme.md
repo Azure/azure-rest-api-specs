@@ -26,9 +26,18 @@ These are the global settings for the DataLakeStorage API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-2018-11
+tag: package-2019-10
 use-internal-constructors: true
 add-credentials: true
+```
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10'
+input-file:
+- Microsoft.StorageDataLake/stable/2019-10-31/DataLakeStorage.json
 ```
 
 ### Tag: package-2018-11
@@ -95,8 +104,19 @@ Generate all API versions currently shipped for this package
 
 ```yaml $(python) && $(multiapi)
 batch:
+  - tag: package-2019-10
   - tag: package-2018-11
   - tag: package-2018-06-preview
+```
+
+### Tag: package-2019-10 and python
+
+These settings apply only when `--tag=package-2019-10 --python` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10' && $(python)
+python:
+  namespace: azure.datalake.storage.v2019_10_31
+  output-folder: $(python-sdks-folder)/azure-datalake-storage/azure/datalake/storage/v2019_10_31
 ```
 
 ### Tag: package-2018-11 and python
@@ -148,6 +168,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.StorageDataLake/stable/2019-10-31/DataLakeStorage.json
   - $(this-folder)/Microsoft.StorageDataLake/stable/2018-11-09/DataLakeStorage.json
   - $(this-folder)/Microsoft.StorageDataLake/preview/2018-06-17/DataLakeStorage.json
 
