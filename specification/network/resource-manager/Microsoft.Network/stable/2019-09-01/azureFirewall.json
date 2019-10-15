@@ -718,6 +718,10 @@
         "translatedPort": {
           "type": "string",
           "description": "The translated port for this NAT rule."
+        },
+        "translatedFqdn": {
+          "type": "string",
+          "description": "The translated FQDN for this NAT rule."
         }
       },
       "description": "Properties of a NAT rule."
@@ -833,6 +837,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "description": "List of destination FQDNs.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Properties of the network rule."
@@ -892,7 +903,7 @@
           "description": "Name of an Azure Firewall SKU.",
           "enum": [
             "AZFW_VNet",
-            "AZFW_Hub"  
+            "AZFW_Hub"
           ],
           "x-ms-enum": {
             "name": "AzureFirewallSkuName",
