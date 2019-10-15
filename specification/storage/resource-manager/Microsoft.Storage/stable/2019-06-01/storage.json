@@ -2596,7 +2596,7 @@
     "PrivateLinkServiceConnectionState": {
       "properties": {
         "status": {
-          "type": "string",
+          "$ref": "#/definitions/PrivateEndpointServiceConnectionStatus",
           "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service."
         },
         "description": {
@@ -2609,6 +2609,19 @@
         }
       },
       "description": "A collection of information about the state of the connection between service consumer and provider."
+    },
+    "PrivateEndpointServiceConnectionStatus": {
+      "type": "string",
+      "description": "The private endpoint connection status.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected"
+      ],
+      "x-ms-enum": {
+        "name": "PrivateEndpointServiceConnectionStatus",
+        "modelAsString": true
+      }
     },
     "PrivateEndpointConnectionProvisioningState": {
       "type": "string",
