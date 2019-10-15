@@ -30,6 +30,12 @@ openapi-type: arm
 tag: package-2019-10
 ```
 
+``` yaml
+title: PolicyInsightsClient
+openapi-type: arm
+tag: package-2018-07
+```
+
 ### Validations
 Run validations when `--validate` is specified on command line
 
