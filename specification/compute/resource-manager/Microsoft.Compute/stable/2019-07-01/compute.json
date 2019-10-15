@@ -2528,6 +2528,11 @@
               "$ref": "#/definitions/VirtualMachine"
             }
           }
+        },
+        "x-ms-examples": {
+          "Get a Virtual Machine.": {
+            "$ref": "./examples/GetVirtualMachine.json"
+          }
         }
       }
     },
@@ -2567,7 +2572,12 @@
               "$ref": "#/definitions/VirtualMachineInstanceView"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Get Virtual Machine Instance View.": {
+            "$ref": "./examples/GetVirtualMachineInstanceView.json"
+          }
+        }		
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{vmName}/convertToManagedDisks": {
@@ -2734,6 +2744,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "statusOnly",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "statusOnly=true enables fetching run time status of all Virtual Machines in the subscription."
           }
         ],
         "responses": {
@@ -7092,7 +7109,19 @@
         "toBeDetached": {
           "type": "boolean",
           "description": "Specifies whether the data disk is in process of detachment from the VirtualMachine/VirtualMachineScaleset"
-        }
+        },
+        "diskIOPSReadWrite": {
+          "type": "integer",
+          "readOnly": true,          
+          "format": "int64",
+          "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set."
+        },
+        "diskMBpsReadWrite": {
+          "type": "integer",
+          "readOnly": true,          
+          "format": "int64",
+          "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set."
+        }        
       },
       "required": [
         "lun",
@@ -8383,6 +8412,16 @@
         "managedDisk": {
           "description": "The managed disk parameters.",
           "$ref": "#/definitions/VirtualMachineScaleSetManagedDiskParameters"
+        },
+        "diskIOPSReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the Read-Write IOPS for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB."
+        },
+        "diskMBpsReadWrite": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Specifies the bandwidth in MB per second for the managed disk. Should be used only when StorageAccountType is UltraSSD_LRS. If not specified, a default value would be assigned based on diskSizeGB."
         }
       },
       "required": [
