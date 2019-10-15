@@ -30,7 +30,7 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -40,6 +40,9 @@
               "$ref": "#/definitions/OperationListResult"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -57,13 +60,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/requestIdParameter"
+            "$ref": "#/parameters/RequestIdParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {  
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -80,7 +83,7 @@
           "Requests"
         ],
         "description": "Update Customer Lockbox request approval status API",
-        "operationId": "Requesets_Patch_RequestStatus",
+        "operationId": "Requesets_UpdateRequestStatus",
         "x-ms-examples": {
           "Update a lockbox request status": {
             "$ref": "./examples/Requests_UpdateStatus.json"
@@ -97,20 +100,20 @@
             }
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/requestIdParameter"
+            "$ref": "#/parameters/RequestIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Update of Request Status successful",
             "schema": {
-              "$ref": "#/definitions/ApprovalResponse"
+              "$ref": "#/definitions/LockboxRequestResponse"
             }
           }
         }
@@ -122,7 +125,7 @@
           "Requests"
         ],
         "description": "Get Customer Lockbox request",
-        "operationId": "Requests_Get_InResouceGroup",
+        "operationId": "Requests_GetInResouceGroup",
         "x-ms-examples": {
           "Get a lockbox request in a resource group": {
             "$ref": "./examples/Requests_Get_InResourcegroup.json"
@@ -137,13 +140,13 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/requestIdParameter"
+            "$ref": "#/parameters/RequestIdParameter"
           },
           {
-            "$ref": "#/parameters/apiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -190,7 +193,7 @@
             "description": "The $filter OData query parameter. Only filter by request status is supported, e.g $filter=properties/status eq 'Pending'"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -218,7 +221,12 @@
                 "items": {
                   "$ref": "#/definitions/Operation"
                 }
-            }
+            },
+            "nextLink": {
+                "description": "URL to get the next set of operation list results if there are any.",
+                "type": "string",
+                "readOnly": true
+              }
           }
       },
     "Operation": {
@@ -237,7 +245,30 @@
           "readOnly": true
         },
         "display": {
-          "$ref": "#/definitions/OperationDisplay"
+          "description": "Contains the localized display information for this particular operation / action.",
+          "readOnly": true,
+          "properties": {
+            "provider": {
+              "description": "The localized friendly form of the resource provider name.",
+              "type": "string",
+              "readOnly": true
+            },
+            "resource": {
+              "description": "The localized friendly form of the resource type related to this action/operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "operation": {
+              "description": "The localized friendly name for the operation.",
+              "type": "string",
+              "readOnly": true
+            },
+            "description": {
+              "description": "The localized friendly description for the operation.",
+              "type": "string",
+              "readOnly": true
+            }
+          }
         },
         "properties": {
           "description": "Gets or sets properties",
@@ -246,33 +277,6 @@
         },
         "origin": {
           "description": "Gets or sets origin",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "OperationDisplay": {
-      "description": "Contains the localized display information for this particular operation / action.  ",
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "provider": {
-          "description": "Gets or sets RP friendly name",
-          "type": "string",
-          "readOnly": true
-        },
-        "resource": {
-          "description": "Gets or sets Resource type friendly name",
-          "type": "string",
-          "readOnly": true
-        },
-        "operation": {
-          "description": "Gets or sets operation name",
-          "type": "string",
-          "readOnly": true
-        },
-        "description": {
-          "description": "Gets or sets operation description",
           "type": "string",
           "readOnly": true
         }
@@ -292,7 +296,7 @@
             "nextLink": {
                 "type": "string",
                 "readOnly": true,
-                "description": "The link (url) to the next page of results."
+                "description": "URL to get the next set of operation list results if there are any."
             }
           }
     },
@@ -316,12 +320,13 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/LockboxRequestResponseProperties"
+          "$ref": "#/definitions/LockboxRequestResponseProperties",
+          "description": "The properties that are associated with a lockbox request."
         }
       }
     },
     "LockboxRequestResponseProperties": {
-      "description": "A Lockbox request properties object, containing all detailed information associated with the request.",
+      "description": "The properties that are associated with a lockbox request.",
       "type": "object",
       "properties": {
         "requestId": {
@@ -349,7 +354,11 @@
             "Unknown"
           ],
           "type": "string",
-          "description": "The status of the request."
+          "description": "The status of the request.",
+          "x-ms-enum": {
+            "name": "Status",
+            "modelAsString": true
+          }
         },
         "createdDateTime": {
           "format": "date-time",
@@ -397,10 +406,6 @@
       }
     },
     "Approval": {
-      "required": [
-        "decision",
-        "reason"
-      ],
       "description": "Request content object, in the use of Approve or Deny a Lockbox request.",
       "type": "object",
       "properties": {
@@ -410,34 +415,11 @@
             "Deny"
           ],
           "type": "string",
-          "description": "Current status of the request."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Reason of the decision"
-        }
-      }
-    },
-    "ApprovalResponse": {
-      "type": "object",
-      "description": "Reponse object of Approval update request.",
-      "properties": {
-        "status": {
-          "enum": [
-            "Initializing",
-            "Pending",
-            "Approving",
-            "Denying",
-            "Approved",
-            "Denied",
-            "Expired",
-            "Revoking",
-            "Revoked",
-            "Error",
-            "Unknown"
-          ],
-          "type": "string",
-          "description": "The current status of the request."
+          "description": "Current status of the request.",
+          "x-ms-enum": {
+            "name": "Decision",
+            "modelAsString": true
+          }
         },
         "reason": {
           "type": "string",
@@ -447,21 +429,21 @@
     }
   },
   "parameters": {
-    "subscriptionIdParameter": {
+    "SubscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
       "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
       "required": true,
       "type": "string"
     },
-    "apiVersionParameter": {
+    "ApiVersionParameter": {
       "name": "api-version",
       "in": "query",
       "description": "The API version to be used with the HTTP request.",
       "required": true,
       "type": "string"
     },
-    "requestIdParameter": {
+    "RequestIdParameter": {
       "name": "requestId",
       "in": "path",
       "description": "The Lockbox request ID.",
