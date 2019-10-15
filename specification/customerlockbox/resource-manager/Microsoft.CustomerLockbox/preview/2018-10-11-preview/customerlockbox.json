@@ -2,131 +2,490 @@
   "swagger": "2.0",
   "info": {
     "version": "2018-10-11-preview",
-    "title": "customerlockbox",
-    "description": "Description of the new service",
-    "x-ms-code-generation-settings": {
-      "name": "customerlockboxClient"
-    }
+    "title": "Customer Lockbox",
+    "description": "Azure Customer Lockbox API Reference"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
-  "security": [
-    {
-      "azure_auth": ["user_impersonation"]
-    }
+  "schemes": [
+    "https"
   ],
-  "securityDefinitions": {
-    "azure_auth": {
-      "type": "oauth2",
-      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
-      "flow": "implicit",
-      "description": "Azure Active Directory OAuth2 Flow",
-      "scopes": {
-        "user_impersonation": "impersonate your user account"
-      }
-    }
-  },
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerLockbox/operations": {
+    "/providers/Microsoft.CustomerLockbox/operations": {
       "get": {
-        "tags": ["Tag1"],
-        "operationId": "OperationGroup_Get",
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available REST API operations.",
+        "operationId": "Operations_List",
         "x-ms-examples": {
-          "BatchAccountDelete": { "$ref": "./examples/OperationGroupGet.json" }
+          "List available operations for the Customer Lockbox resource provider": {
+            "$ref": "./examples/Operations_List.json"
+          }
         },
-        "description": "This is a sample get operation, please see guidelines in azure-rest-api-specs repository for more info",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/apiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Describe the result of a successful operation.",
+            "description": "OK. Successfully retrieved operation list.",
             "schema": {
-              "$ref": "#/definitions/Result"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
+              "$ref": "#/definitions/OperationListResult"
             }
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests/{requestId}": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Get Customer Lockbox request",
+        "operationId": "Requests_Get",
+        "x-ms-examples": {
+          "Get a lockbox request in subscription scope": {
+            "$ref": "./examples/GetRequestInSubscriptionScope.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/requestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {  
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieval of Customer Lockbox request successful.",
+            "schema": {
+              "$ref": "#/definitions/LockboxRequestResponse"
+            }
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Update Customer Lockbox request approval status API",
+        "operationId": "Requesets_Patch_RequestStatus",
+        "x-ms-examples": {
+          "Update a lockbox request status": {
+            "$ref": "./examples/Requests_UpdateStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "approval",
+            "in": "body",
+            "description": "The approval object to update request status.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Approval"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/requestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Update of Request Status successful",
+            "schema": {
+              "$ref": "#/definitions/ApprovalResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CustomerLockbox/requests/{requestId}": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Get Customer Lockbox request",
+        "operationId": "Requests_Get_InResouceGroup",
+        "x-ms-examples": {
+          "Get a lockbox request in a resource group": {
+            "$ref": "./examples/Requests_Get_InResourcegroup.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "description": "The Azure Resource Group containing the request ID.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/requestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retrieval of Customer Lockbox request successful.",
+            "schema": {
+              "$ref": "#/definitions/LockboxRequestResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CustomerLockbox/requests": {
+      "get": {
+        "tags": [
+          "Requests"
+        ],
+        "description": "Lists all of the Lockbox requests in the given subscription.",
+        "operationId": "Requests_List",
+        "x-ms-examples": {
+          "List lockbox requests in a subscription with default parameters (no OData $expand and $filters applied)": {
+            "$ref": "./examples/Requests_List_NoExpand.json"
+          },
+          "List lockbox requests in a subscription with $expand=properties": {
+              "$ref": "./examples/Requests_List_Expand.json"
+            },
+          "List lockbox requests in a subscription with expand and filter by request status (eg. $expand=properties&$filter=properties/status eq 'Pending')": {
+              "$ref": "./examples/Requests_List_Expand_FilterByStatus.json"
+          }
+        },
+        "parameters": [
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $expand OData query parameter. Set $expand=properties to include the lockbox request properties which contains the request details in the response. The default only retunrs the direct members (frist-level) properties of each Lockbox request"
+          }, 
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The $filter OData query parameter. Only filter by request status is supported, e.g $filter=properties/status eq 'Pending'"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully listed the Lockbox requests under the given subscription.",
+            "schema": {
+              "$ref": "#/definitions/RequestListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+                "nextLinkName": "nextLink"
+            }
+      }
     }
   },
   "definitions": {
-    "Result": {
-      "description": "Sample result definition",
+    "OperationListResult": {
+          "description": "Result of the request to list Customer Lockbox operations. It contains a list of operations.",
+          "properties": {
+            "value": {
+                "description": "List of Customer Lockbox operations supported by the Microsoft.StreamAnalytics resource provider.",
+                "type": "array",
+                "readOnly": true,
+                "items": {
+                  "$ref": "#/definitions/Operation"
+                }
+            }
+          }
+      },
+    "Operation": {
+      "description": "Operation result model for ARM RP",
+      "type": "object",
+      "readOnly": true,
       "properties": {
-        "sampleProperty": {
-          "type": "string",
-          "description": "Sample property of type string"
-        }
-      }
-    },
-    "ErrorResponse": {
-      "description": "Error response.",
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/ErrorDefinition",
-          "description": "The error details."
-        }
-      }
-    },
-    "ErrorDefinition": {
-      "description": "Error definition.",
-      "properties": {
-        "code": {
-          "description": "Service specific error code which serves as the substatus for the HTTP error code.",
+        "name": {
+          "description": "Gets or sets action name",
           "type": "string",
           "readOnly": true
         },
-        "message": {
-          "description": "Description of the error.",
+        "isDataAction": {
+          "description": "Gets or sets a value indicating whether it is a data plane action",
           "type": "string",
           "readOnly": true
         },
-        "details": {
-          "description": "Internal error details.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ErrorDefinition"
-          },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "properties": {
+          "description": "Gets or sets properties",
+          "type": "string",
           "readOnly": true
+        },
+        "origin": {
+          "description": "Gets or sets origin",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "Contains the localized display information for this particular operation / action.  ",
+      "type": "object",
+      "readOnly": true,
+      "properties": {
+        "provider": {
+          "description": "Gets or sets RP friendly name",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "Gets or sets Resource type friendly name",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "Gets or sets operation name",
+          "type": "string",
+          "readOnly": true
+        },
+        "description": {
+          "description": "Gets or sets operation description",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "RequestListResult":{
+      "description": "Object containing a list of streaming jobs.",
+      "properties": {
+            "value": {
+                "type": "array",
+                "description": "A list of Lockbox requests. Populated by a 'List' operation.",
+                "items": {
+                  "$ref": "#/definitions/LockboxRequestResponse"
+                },
+                "readOnly": true
+            },
+            "nextLink": {
+                "type": "string",
+                "readOnly": true,
+                "description": "The link (url) to the next page of results."
+            }
+          }
+    },
+    "LockboxRequestResponse": {
+      "description": "A Lockbox request response object, containing all information associated with the request.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The Arm resource id of the Lockbox request.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Lockbox request.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the Lockbox request.",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/LockboxRequestResponseProperties"
+        }
+      }
+    },
+    "LockboxRequestResponseProperties": {
+      "description": "A Lockbox request properties object, containing all detailed information associated with the request.",
+      "type": "object",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The Lockbox request ID."
+        },
+        "justification": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The justification of the requestor."
+        },
+        "status": {
+          "enum": [
+            "Initializing",
+            "Pending",
+            "Approving",
+            "Denying",
+            "Approved",
+            "Denied",
+            "Expired",
+            "Revoking",
+            "Revoked",
+            "Error",
+            "Unknown"
+          ],
+          "type": "string",
+          "description": "The status of the request."
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The creation time of the request.",
+          "readOnly": true
+        },
+        "expirationDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The expiration time of the request.",
+          "readOnly": true
+        },
+        "duration": {
+          "format": "int32",
+          "type": "integer",
+          "description": "The duration of the request in hours.",
+          "readOnly": true
+        },
+        "resourceIds": {
+          "type": "string",
+          "description": "A list of resource IDs associated with the Lockbox request separated by ','.",
+          "readOnly": true
+        },
+        "resourceType": {
+          "type": "string",
+          "description": "The resource type of the requested resources.",
+          "readOnly": true
+        },
+        "supportRequest": {
+          "type": "string",
+          "description": "The id of the support request associated.",
+          "readOnly": true
+        },
+        "supportCaseUrl": {
+          "type": "string",
+          "description": "The url of the support case.",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID.",
+          "readOnly": true
+        }
+      }
+    },
+    "Approval": {
+      "required": [
+        "decision",
+        "reason"
+      ],
+      "description": "Request content object, in the use of Approve or Deny a Lockbox request.",
+      "type": "object",
+      "properties": {
+        "decision": {
+          "enum": [
+            "Approve",
+            "Deny"
+          ],
+          "type": "string",
+          "description": "Current status of the request."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason of the decision"
+        }
+      }
+    },
+    "ApprovalResponse": {
+      "type": "object",
+      "description": "Reponse object of Approval update request.",
+      "properties": {
+        "status": {
+          "enum": [
+            "Initializing",
+            "Pending",
+            "Approving",
+            "Denying",
+            "Approved",
+            "Denied",
+            "Expired",
+            "Revoking",
+            "Revoked",
+            "Error",
+            "Unknown"
+          ],
+          "type": "string",
+          "description": "The current status of the request."
+        },
+        "reason": {
+          "type": "string",
+          "description": "Reason of the decision"
         }
       }
     }
   },
   "parameters": {
-    "SubscriptionIdParameter": {
+    "subscriptionIdParameter": {
       "name": "subscriptionId",
       "in": "path",
+      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)",
       "required": true,
-      "type": "string",
-      "description": "The Azure subscription ID. This is a GUID-formatted string (e.g. 00000000-0000-0000-0000-000000000000)"
+      "type": "string"
     },
-    "ResourceGroupNameParameter": {
-      "name": "resourceGroupName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "The name of the resource group.",
-      "x-ms-parameter-location": "method"
-    },
-    "ApiVersionParameter": {
+    "apiVersionParameter": {
       "name": "api-version",
       "in": "query",
+      "description": "The API version to be used with the HTTP request.",
+      "required": true,
+      "type": "string"
+    },
+    "requestIdParameter": {
+      "name": "requestId",
+      "in": "path",
+      "description": "The Lockbox request ID.",
       "required": true,
       "type": "string",
-      "description": "The API version to be used with the HTTP request."
+      "x-ms-parameter-location": "method"
     }
-  }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
