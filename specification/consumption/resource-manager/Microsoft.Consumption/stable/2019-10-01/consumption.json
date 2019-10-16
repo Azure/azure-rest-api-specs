@@ -45,50 +45,62 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "UsageDetailsList": {
+          "UsageDetailsList-Legacy": {
             "$ref": "./examples/UsageDetailsList.json"
           },
-          "UsageDetailsListFilterByTag": {
+          "UsageDetailsListFilterByTag-Legacy": {
             "$ref": "./examples/UsageDetailsListFilterByTag.json"
           },
-          "UsageDetailsListForBillingPeriod": {
+          "UsageDetailsListForBillingPeriod-Legacy": {
             "$ref": "./examples/UsageDetailsListForBillingPeriod.json"
           },
-          "UsageDetailsExpand": {
+          "UsageDetailsExpand-Legacy": {
             "$ref": "./examples/UsageDetailsExpand.json"
           },
-          "UsageDetailsListByMetricActualCost": {
+          "UsageDetailsListByMetricActualCost-Legacy": {
             "$ref": "./examples/UsageDetailsListByMetricActualCost.json"
           },
-          "UsageDetailsListByMetricAmortizedCost": {
+          "UsageDetailsListByMetricAmortizedCost-Legacy": {
             "$ref": "./examples/UsageDetailsListByMetricAmortizedCost.json"
           },
-          "UsageDetailsListByMetricUsage": {
+          "UsageDetailsListByMetricUsage-Legacy": {
             "$ref": "./examples/UsageDetailsListByMetricUsage.json"
           },
-          "BillingAccountUsageDetailsList": {
+          "BillingAccountUsageDetailsList-Legacy": {
             "$ref": "./examples/UsageDetailsListByBillingAccount.json"
           },
-          "BillingAccountUsageDetailsListForBillingPeriod": {
+          "BillingAccountUsageDetailsListForBillingPeriod-Legacy": {
             "$ref": "./examples/UsageDetailsListForBillingPeriodByBillingAccount.json"
           },
-          "DepartmentUsageDetailsList": {
+          "DepartmentUsageDetailsList-Legacy": {
             "$ref": "./examples/UsageDetailsListByDepartment.json"
           },
-          "DepartmentUsageDetailsListForBillingPeriod": {
+          "DepartmentUsageDetailsListForBillingPeriod-Legacy": {
             "$ref": "./examples/UsageDetailsListForBillingPeriodByDepartment.json"
           },
-          "EnrollmentAccountUsageDetailsList": {
+          "EnrollmentAccountUsageDetailsList-Legacy": {
             "$ref": "./examples/UsageDetailsListByEnrollmentAccount.json"
           },
-          "EnrollmentAccountUsageDetailsListForBillingPeriod": {
+          "EnrollmentAccountUsageDetailsListForBillingPeriod-Legacy": {
             "$ref": "./examples/UsageDetailsListForBillingPeriodByEnrollmentAccount.json"
           },
-          "ManagementGroupUsageDetailsList": {
+          "ManagementGroupUsageDetailsList-Legacy": {
             "$ref": "./examples/UsageDetailsListByManagementGroup.json"
           },
-          "ManagementGroupUsageDetailsListForBillingPeriod": {
+          "ManagementGroupUsageDetailsListForBillingPeriod-Legacy": {
             "$ref": "./examples/UsageDetailsListForBillingPeriodByManagementGroup.json"
+          },
+          "BillingAccountUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCABillingAccount.json"
+          },
+          "MCABillingProfileUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCABillingProfile.json"
+          },
+          "MCAInvoiceSectionUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCAInvoiceSection.json"
+          },
+          "MCACustomerUsageDetailsList-Modern": {
+            "$ref": "./examples/UsageDetailsListByMCACustomer.json"
           }
         },
         "parameters": [
@@ -1564,20 +1576,31 @@
       }
     },
     "UsageDetail": {
-      "description": "An usage detail resource.",
       "type": "object",
+      "discriminator": "kind",
+      "description": "An usage detail resource.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
         }
       ],
       "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/UsageDetailProperties",
-          "title": "Usage detail properties"
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of usage details.",
+          "enum": [
+            "legacy",
+            "modern"
+          ],
+          "x-ms-enum": {
+            "name": "UsageDetailsKind",
+            "modelAsString": true
+          }
         }
-      }
+      },
+      "required": [
+        "kind"
+      ]
     },
     "UsageDetailsListResult": {
       "description": "Result of listing usage details. It contains a list of available usage details in reverse chronological order by billing period.",
@@ -1597,8 +1620,28 @@
         }
       }
     },
-    "UsageDetailProperties": {
-      "description": "The properties of the usage detail.",
+    "LegacyUsageDetail": {
+      "description": "Legacy usage detail.",
+      "type": "object",
+      "x-ms-discriminator-value": "legacy",
+      "properties": {
+        "properties": {
+          "description": "Properties for legacy usage details",
+          "$ref": "#/definitions/LegacyUsageDetailProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UsageDetail"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "LegacyUsageDetailProperties": {
+      "description": "The properties of the legacy usage detail.",
       "properties": {
         "billingAccountId": {
           "description": "Billing Account identifier.",
@@ -1815,6 +1858,371 @@
         },
         "frequency": {
           "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ModernUsageDetail": {
+      "description": "Modern usage detail.",
+      "type": "object",
+      "x-ms-discriminator-value": "modern",
+      "properties": {
+        "properties": {
+          "description": "Properties for modern usage details",
+          "$ref": "#/definitions/ModernUsageDetailProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UsageDetail"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+	"ModernUsageDetailProperties": {
+      "description": "The properties of the usage detail.",
+      "properties": {
+       "billingAccountId": {
+          "description": "Billing Account identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingAccountName": {
+          "description": "Billing Account Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingPeriodStartDate": {
+          "description": "The billing period start date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingPeriodEndDate": {
+          "description": "The billing period end date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "billingProfileId": {
+          "description": "Billing Profile identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingProfileName": {
+          "description": "Billing Profile Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionGuid": {
+          "description": "Subscription guid.",
+          "type": "string",
+          "readOnly": true
+        },
+        "subscriptionName": {
+          "description": "Subscription name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "date": {
+          "description": "Date for the usage record.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "product": {
+          "description": "Product name for the consumed service or purchase. Not available for Marketplace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id (GUID). Not available for marketplace. For reserved instance this represents the primary meter for which the reservation was purchased. For the actual VM Size for which the reservation is purchased see productOrderName.",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "meterName": {
+          "description": "Meter Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterRegion": {
+          "description": "Meter Region.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterCategory": {
+          "description": "Meter Category.",
+          "type": "string",
+          "readOnly": true
+        },
+        "meterSubCategory": {
+          "description": "Meter SubCategory.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceFamily": {
+          "description": "Service Family.",
+          "type": "string",
+          "readOnly": true
+        },
+        "quantity": {
+          "description": "The usage quantity.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unitOfMeasure": {
+          "description": "Unit Of Measure.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceName": {
+          "description": "Instance Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costInUSD": {
+          "description": "The amount of cost before tax.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "unitPrice": {
+          "description": "Unit Price is the price applicable to you. (your EA or other contract price).",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "billingCurrencyCode": {
+          "description": "Billing Currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocation": {
+          "description": "Resource Location.",
+          "type": "string",
+          "readOnly": true
+        },
+        "consumedService": {
+          "description": "Consumed service name. Name of the azure resource provider that emits the usage or was purchased. This value is not provided for marketplace usage.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceInfo1": {
+          "description": "Service Info 1.",
+          "type": "string",
+          "readOnly": true
+        },
+        "serviceInfo2": {
+          "description": "Service Info 2.",
+          "type": "string",
+          "readOnly": true
+        },
+        "additionalInfo": {
+          "description": "Additional details of this usage item. By default this is not populated, unless it's specified in $expand. Use this field to get usage line item specific details such as the actual VM Size (ServiceType) or the ratio in which the reservation discount is applied.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionId": {
+          "description": "Invoice Section Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "invoiceSectionName": {
+          "description": "Invoice Section Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costCenter": {
+          "description": "The cost center of this department if it is a department and a cost center is provided.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceGroup": {
+          "description": "Resource Group Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationId": {
+          "description": "ARM resource id of the reservation. Only applies to records relevant to reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "reservationName": {
+          "description": "User provided display name of the reservation. Last known name for a particular day is populated in the daily data. Only applies to records relevant to reservations.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productOrderId": {
+          "description": "Product Order Id. For reservations this is the Reservation Order ID.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productOrderName": {
+          "description": "Product Order Name. For reservations this is the SKU that was purchased.",
+          "type": "string",
+          "readOnly": true
+        },
+        "isAzureCreditEligible": {
+          "description": "Is Azure Credit Eligible.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "term": {
+          "description": "Term (in months). 1 month for monthly recurring purchase. 12 months for a 1 year reservation. 36 months for a 3 year reservation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherName": {
+          "description": "Publisher Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherType": {
+          "description": "Publisher Type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "chargeType": {
+          "description": "Indicates a charge represents credits, usage, a Marketplace purchase, a reservation fee, or a refund.",
+          "type": "string",
+          "readOnly": true
+        },
+        "frequency": {
+          "description": "Indicates how frequently this charge will occur. OneTime for purchases which only happen once, Monthly for fees which recur every month, and UsageBased for charges based on how much a service is used.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costInBillingCurrency": {
+          "description": "The amount of cost before tax in billing currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }, 
+        "costInPricingCurrency": {
+          "description": "The amount of cost before tax in pricing currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        }, 
+        "exchangeRate": {
+          "description": "Exchange Rate.",
+          "type": "string",
+          "readOnly": true
+        },
+		"exchangeRateDate": {
+          "description": "Exchange Rate Date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "invoiceId": {
+          "description": "InvoiceId.",
+          "type": "string",
+          "readOnly": true
+        },
+        "previousInvoiceId": {
+          "description": "Previous Invoice Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "pricingCurrencyCode": {
+          "description": "Pricing Billing Currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "productIdentifier": {
+          "description": "Product Identifier.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourceLocationNormalized": {
+          "description": "Resource Location Normalized.",
+          "type": "string",
+          "readOnly": true
+        },
+	    "servicePeriodStartDate": {
+          "description": "Service Period Start Date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+	    "servicePeriodEndDate": {
+          "description": "Service Period End Date.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "customerTenantId": {
+          "description": "Customer Tenant Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "customerName": {
+          "description": "Customer Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerTenantId": {
+          "description": "Partner Tenant Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerName": {
+          "description": "Partner Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resellerMpnId": {
+          "description": "Reseller Mpn Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resellerName": {
+          "description": "Reseller Name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publisherId": {
+          "description": "Publisher Id.",
+          "type": "string",
+          "readOnly": true
+        },
+        "marketPrice": {
+          "description": "Market Price that's charged for the usage.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "exchangeRatePricingToBilling": {
+          "description": "Exchange Rate from pricing currency to billing currency.",
+          "type": "string",
+          "readOnly": true
+        },
+        "paygCostInBillingCurrency": {
+          "description": "The amount of PayG cost before tax in billing currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "paygCostInUSD": {
+          "description": "The amount of PayG cost before tax in US Dollar currency.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "partnerEarnedCreditRate": {
+          "description": "Partner earned credit rate.",
+          "type": "string",
+          "readOnly": true
+        },
+        "partnerEarnedCreditApplied": {
+          "description": "Partner earned credit applied.",
           "type": "string",
           "readOnly": true
         }
