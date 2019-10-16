@@ -6,7 +6,7 @@
     "$from": "2019-10-05T18:00:00Z",
     "$to": "2019-10-06T18:00:00Z",
     "$orderby": "Timestamp desc, PolicyAssignmentId asc, SubscriptionId asc, ResourceGroup asc, ResourceId",
-    "$select": "Timestamp, PolicyAssignmentId, PolicyDefinitionId, SubscriptionId, ResourceGroup, ResourceId",
+    "$select": "Timestamp, PolicyAssignmentId, PolicyDefinitionId, SubscriptionId, ResourceGroup, ResourceId, policyDefinitionGroupNames",
     "$top": 2
   },
   "responses": {
@@ -23,7 +23,8 @@
             "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/655cb504-bcee-4362-bd4c-402e6aa38759",
             "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
             "resourceGroup": "myrg1",
-            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/mysa1"
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg1/providers/Microsoft.Storage/storageAccounts/mysa1",
+            "policyDefinitionGroupNames": ["myGroup"]
           },
           {
             "@odata.id": null,
@@ -33,7 +34,8 @@
             "policyDefinitionId": "/providers/Microsoft.Authorization/policyDefinitions/655cb504-bcee-4362-bd4c-402e6aa38759",
             "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
             "resourceGroup": "myrg2",
-            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg2/providers/Microsoft.Storage/storageAccounts/mysa2"
+            "resourceId": "/subscriptions/fffedd8f-ffff-fffd-fffd-fffed2f84852/resourceGroups/myrg2/providers/Microsoft.Storage/storageAccounts/mysa2",
+            "policyDefinitionGroupNames": []
           }
         ]
       }

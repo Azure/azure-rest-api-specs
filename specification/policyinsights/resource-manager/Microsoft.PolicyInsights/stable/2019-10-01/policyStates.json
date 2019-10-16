@@ -998,45 +998,9 @@
           }
         }
       }
-    },
-    "/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata": {
-      "get": {
-        "operationId": "PolicyStates_GetMetadata",
-        "description": "Gets OData metadata XML document.",
-        "produces": [
-          "application/xml"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/scopeParameter"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OData metadata XML document.",
-            "schema": {
-              "$ref": "#/definitions/MetadataDocument"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/QueryFailure"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get metadata": {
-            "$ref": "./examples/PolicyStates_GetMetadata.json"
-          }
-        }
-      }
-    }
-  },
-  "definitions": {
+    }    
+  },     
+    "definitions": {
     "PolicyStatesQueryResults": {
       "description": "Query results.",
       "properties": {
@@ -1320,13 +1284,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
-        },
-        "nonCompliantPolicyGroups": {
-          "description": "Number of non-compliant groups.",
-          "type": "integer",
-          "format": "int32",
-          "minimum": 0
-        },
+        },        
         "resourceDetails": {
           "description": "The resources summary at this level.",
           "type": "array",
