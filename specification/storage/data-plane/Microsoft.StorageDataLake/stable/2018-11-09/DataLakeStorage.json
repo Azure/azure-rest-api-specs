@@ -371,18 +371,7 @@
       },
       "parameters": [
         {
-          "name": "resource",
-          "in": "query",
-          "description": "The value must be \"filesystem\" for all filesystem operations.",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "filesystem"
-          ],
-          "x-ms-enum": {
-            "name": "FileSystemResourceType",
-            "modelAsString": false
-          }
+          "$ref": "#/parameters/FileSystemResource"
         },
         {
           "$ref": "#/parameters/ClientRequestId"
@@ -480,18 +469,7 @@
       },
       "parameters": [
         {
-          "name": "resource",
-          "in": "query",
-          "description": "The value must be \"filesystem\" for all filesystem operations.",
-          "required": true,
-          "type": "string",
-          "enum": [
-            "filesystem"
-          ],
-          "x-ms-enum": {
-            "name": "FileSystemResourceType",
-            "modelAsString": false
-          }
+          "$ref": "#/parameters/FileSystemResource"
         },
         {
           "$ref": "#/parameters/ClientRequestId"
@@ -1919,6 +1897,20 @@
       "in": "path",
       "x-ms-skip-url-encoding": true
     },
+	"FileSystemResource": {
+	  "name": "resource",
+	  "in": "query",
+	  "description": "The value must be \"filesystem\" for all filesystem operations.",
+	  "required": true,
+	  "type": "string",
+	  "enum": [
+		"filesystem"
+	  ],
+	  "x-ms-enum": {
+		"name": "FileSystemResourceType",
+		"modelAsString": false
+	  }
+	},
     "ApiVersionParameter": {
       "name": "x-ms-version",
       "x-ms-client-name": "version",
@@ -2259,6 +2251,9 @@
       "type": "string",
       "format": "byte",
       "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "path-HTTP-headers"
+      },
       "description": "Specify the transactional md5 for the body, to be validated by the service."
     },
     "Umask": {
