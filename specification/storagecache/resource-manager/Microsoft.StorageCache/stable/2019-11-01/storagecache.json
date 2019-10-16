@@ -401,13 +401,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Cache created or already exists.",
+            "description": "Cache created or updated.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
           },
           "201": {
-            "description": "Cache creation has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
+            "description": "Cache creation or update has been initiated. Poll the new Cache's provisioningState property to monitor creation progress.",
             "schema": {
               "$ref": "#/definitions/Cache"
             }
@@ -420,16 +420,16 @@
           }
         },
         "x-ms-examples": {
-          "Caches_Create": {
-            "$ref": "./examples/Caches_Create.json"
+          "Caches_CreateOrUpdate": {
+            "$ref": "./examples/Caches_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
         "tags": [
           "Caches"
         ],
-        "description": "Create/update a Cache instance.",
-        "operationId": "Caches_Create"
+        "description": "Create or update a Cache.",
+        "operationId": "Caches_CreateOrUpdate"
       },
       "patch": {
         "consumes": [
@@ -899,13 +899,13 @@
         ],
         "responses": {
           "200": {
-            "description": "Storage Target has been created.",
+            "description": "Storage Target has been created or updated.",
             "schema": {
               "$ref": "#/definitions/StorageTarget"
             }
           },
           "201": {
-            "description": "Storage Target creation has been initiated. Poll the new Storage Target's provisioningState property to monitor creation progress.",
+            "description": "Storage Target creation or update has been initiated. Poll the new Storage Target's provisioningState property to monitor creation progress.",
             "schema": {
               "$ref": "#/definitions/StorageTarget"
             }
@@ -918,16 +918,16 @@
           }
         },
         "x-ms-examples": {
-          "StorageTargets_Create": {
-            "$ref": "./examples/StorageTargets_Create.json"
+          "StorageTargets_CreateOrUpdate": {
+            "$ref": "./examples/StorageTargets_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation": true,
         "tags": [
           "StorageTargets"
         ],
-        "description": "Create/update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.",
-        "operationId": "StorageTargets_Create"
+        "description": "Create or update a Storage Target. This operation is allowed at any time, but if the Cache is down or unhealthy, the actual creation/modification of the Storage Target may be delayed until the Cache is healthy again.",
+        "operationId": "StorageTargets_CreateOrUpdate"
       }
     },
     "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.StorageCache/caches/{cacheName}/upgrade": {
