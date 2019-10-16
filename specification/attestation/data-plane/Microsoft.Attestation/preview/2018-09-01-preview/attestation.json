@@ -6,21 +6,6 @@
         "version": "2018-09-01-preview"
         
     },   
-    "x-ms-parameterized-host": {
-    "hostTemplate": "{tenantBaseUrl}",
-    "useSchemePrefix": false,
-    "positionInOperation": "first",
-    "parameters": [
-      {
-        "name": "tenanturi",
-        "description": "The tenant name, for example https://mytenant.tenant.azure.net.",
-        "required": true,
-        "type": "string",
-        "in": "path",
-        "x-ms-skip-url-encoding": true
-      }
-    ]
-  },
   "consumes": [
     "application/json"
   ],
@@ -71,12 +56,12 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
+                  "200": {
+                    "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
+                    "schema": {
+                      "$ref": "#/definitions/AttestationPolicy"
+                    }
+                  },
                     "400": {
                         "description": "Bad request",
                         "schema": {
@@ -84,10 +69,7 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "description": "Request is unauthorized"
                     }
                 },
                 "x-ms-examples": {
@@ -105,7 +87,6 @@
                         ],
                 "summary": "Retrieves the current policy for a given kind of TEE.",
                 "operationId": "GetPolicy",
-                "consumes": [ "text/plain" ],
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -131,10 +112,7 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "description": "Request is unauthorized"
                     }
                 },
                 "x-ms-examples": {
@@ -183,10 +161,7 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "description": "Request is unauthorized"
                     }
                 },
                 "x-ms-examples": {
@@ -225,12 +200,12 @@
                     }
                 ],
                 "responses": {
-                    "200": {
-                        "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
-                        "schema": {
-                            "type": "string"
-                        }
-                    },
+                  "200": {
+                    "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
+                    "schema": {
+                      "$ref": "#/definitions/AttestationPolicy"
+                    }
+                  },
                     "400": {
                         "description": "Bad request",
                         "schema": {
@@ -238,10 +213,7 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized",
-                        "schema": {
-                            "type": "string"
-                        }
+                        "description": "Request is unauthorized"
                     }
                 },
                 "x-ms-examples": {

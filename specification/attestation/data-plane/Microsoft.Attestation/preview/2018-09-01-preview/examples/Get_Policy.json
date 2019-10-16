@@ -1,22 +1,22 @@
 {
   "parameters": {
     "api-version": "2018-09-01-preview",
-    "authorizationName": "authorization",
-    "teekindrName": "tee"
+    "authorization": "authorizationname",
+    "tee": "SgxEnclave"
   },
   "responses": {
     "200": {
       "body": {
-        "Policy": "String-encoded attestation policy document",
-        "name": "codes1",
-        "type": "Microsoft.Attestation/attestationProviders",
-        "properties": {
-          "status": "Ready"
-        }
+        "policy": "testpolicy"
       }
     },
     "400": {
-      "description": "The input is not valid"
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "error message"
+        }
+      }
     },
     "401": {
       "description": "Request is unauthorized"

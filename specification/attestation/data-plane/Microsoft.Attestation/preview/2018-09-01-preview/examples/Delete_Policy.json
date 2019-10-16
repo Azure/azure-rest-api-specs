@@ -1,16 +1,23 @@
 {
   "parameters": {
     "api-version": "2018-09-01-preview",
-    "authorizationName": "authorization",
-    "teekindrName": "tee",
-    "name": "PolicyJws"
+    "authorization": "authorizationname",
+    "tee": "SgxEnclave",
+    "PolicyJws": "PolicyJwsname"
   },
   "responses": {
-    "202": {
-      "description": "Success"
+    "200": {
+      "body": {
+        "policy": "testpolicy"
+      }
     },
     "400": {
-      "description": "The input is not valid"
+      "body": {
+        "error": {
+          "code": "400",
+          "message": "error message"
+        }
+      }
     },
     "401": {
       "description": "Request is unauthorized"
