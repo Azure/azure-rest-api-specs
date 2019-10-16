@@ -39,7 +39,7 @@
           "Dimensions"
         ],
         "x-ms-odata": "#/definitions/Dimension",
-        "operationId": "Dimensions_ListBySubscription",
+        "operationId": "Dimensions_ListByScope",
         "description": "Lists the dimensions by the defined scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
@@ -87,40 +87,40 @@
           "BillingAccountDimensionsListWithFilter": {
             "$ref": "./examples/BillingAccountDimensionsListWithFilter.json"
           },
-          "MCABillingAccountDimensionsList": {
+          "BillingAccountDimensionsList(ModernCommerceAccount)": {
             "$ref": "./examples/MCABillingAccountDimensionsList.json"
           },
-          "MCABillingAccountDimensionsListExpandAndTop": {
+          "BillingAccountDimensionsListExpandAndTop(ModernCommerceAccount)": {
             "$ref": "./examples/MCABillingAccountDimensionsListExpandAndTop.json"
           },
-          "MCABillingAccountDimensionsListWithFilter": {
+          "BillingAccountDimensionsListWithFilter(ModernCommerceAccount)": {
             "$ref": "./examples/MCABillingAccountDimensionsListWithFilter.json"
           },
-          "MCABillingProfileDimensionsList": {
+          "BillingProfileDimensionsList((ModernCommerceAccount))": {
             "$ref": "./examples/MCABillingProfileDimensionsList.json"
           },
-          "MCABillingProfileDimensionsListExpandAndTop": {
+          "BillingProfileDimensionsListExpandAndTop((ModernCommerceAccount))": {
             "$ref": "./examples/MCABillingProfileDimensionsListExpandAndTop.json"
           },
-          "MCABillingProfileDimensionsListWithFilter": {
+          "BillingProfileDimensionsListWithFilter((ModernCommerceAccount))": {
             "$ref": "./examples/MCABillingProfileDimensionsListWithFilter.json"
           },
-          "MCAInvoiceSectionDimensionsList": {
+          "InvoiceSectionDimensionsList((ModernCommerceAccount))": {
             "$ref": "./examples/MCAInvoiceSectionDimensionsList.json"
           },
-          "MCAInvoiceSectionDimensionsListExpandAndTop": {
+          "InvoiceSectionDimensionsListExpandAndTop((ModernCommerceAccount))": {
             "$ref": "./examples/MCAInvoiceSectionDimensionsListExpandAndTop.json"
           },
-          "MCAInvoiceSectionDimensionsListWithFilter": {
+          "InvoiceSectionDimensionsListWithFilter((ModernCommerceAccount))": {
             "$ref": "./examples/MCAInvoiceSectionDimensionsListWithFilter.json"
           },
-          "MCACustomerDimensionsList": {
+          "CustomerDimensionsList((ModernCommerceAccount))": {
             "$ref": "./examples/MCACustomerDimensionsList.json"
           },
-          "MCACustomerDimensionsListExpandAndTop": {
+          "CustomerDimensionsListExpandAndTop((ModernCommerceAccount))": {
             "$ref": "./examples/MCACustomerDimensionsListExpandAndTop.json"
           },
-          "MCACustomerDimensionsListWithFilter": {
+          "CustomerDimensionsListWithFilter((ModernCommerceAccount))": {
             "$ref": "./examples/MCACustomerDimensionsListWithFilter.json"
           }
         },
@@ -228,28 +228,28 @@
           "ManagementGroupQueryGrouping": {
             "$ref": "./examples/ManagementGroupQueryGrouping.json"
           },
-          "MCABillingAccountQuery": {
+          "BillingAccountQuery(ModernCommerceAccount)": {
             "$ref": "./examples/MCABillingAccountQuery.json"
           },
-          "MCABillingAccountQueryGrouping": {
+          "BillingAccountQueryGrouping(ModernCommerceAccount)": {
             "$ref": "./examples/MCABillingAccountQueryGrouping.json"
           },
-          "MCABillingProfileQuery": {
+          "BillingProfileQuery(ModernCommerceAccount)": {
             "$ref": "./examples/MCABillingProfileQuery.json"
           },
-          "MCABillingProfileQueryGrouping": {
+          "BillingProfileQueryGrouping(ModernCommerceAccount)": {
             "$ref": "./examples/MCABillingProfileQueryGrouping.json"
           },
-          "MCAInvoiceSectionQuery": {
+          "InvoiceSectionQuery(ModernCommerceAccount)": {
             "$ref": "./examples/MCAInvoiceSectionQuery.json"
           },
-          "MCAInvoiceSectionQueryGrouping": {
+          "InvoiceSectionQueryGrouping(ModernCommerceAccount)": {
             "$ref": "./examples/MCAInvoiceSectionQueryGrouping.json"
           },
-          "MCACustomerQuery": {
+          "CustomerQuery(ModernCommerceAccount)": {
             "$ref": "./examples/MCACustomerQuery.json"
           },
-          "MCACustomerQueryGrouping": {
+          "CustomerQueryGrouping(ModernCommerceAccount)": {
             "$ref": "./examples/MCACustomerQueryGrouping.json"
           }
         },
@@ -1415,7 +1415,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
