@@ -750,37 +750,55 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string"
+		  "description": "Dimension description.", 
+          "type": "string",
+		  "readOnly": true
         },
         "filterEnabled": {
-          "type": "boolean"
+		  "description": "Filter enabled.", 
+          "type": "boolean",
+		  "readOnly": true
         },
         "groupingEnabled": {
-          "type": "boolean"
+          "description": "Grouping enabled.",
+		  "type": "boolean",
+		  "readOnly": true
         },
         "data": {
           "type": "array",
           "items": {
-            "type": "string"
+            "description": "Dimension data item.",
+            "type": "string",
+		    "readOnly": true
           }
         },
         "total": {
+          "description": "Total number of data for the dimension.",
           "format": "int32",
-          "type": "integer"
-        },
+          "type": "integer",
+ 		  "readOnly": true
+       },
         "category": {
-          "type": "string"
+          "description": "Dimension category.",
+          "type": "string",
+		  "readOnly": true
         },
         "usageStart": {
+          "description": "Usage start.",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+		  "readOnly": true
         },
         "usageEnd": {
+          "description": "Usage end.",
           "format": "date-time",
-          "type": "string"
+          "type": "string",
+		  "readOnly": true
         },
         "nextLink": {
-          "type": "string"
+          "description": "The link (url) to the next page of results.",
+          "type": "string",
+		  "readOnly": true
         }
       }
     },
@@ -804,6 +822,7 @@
       "type": "object",
       "properties": {
         "nextLink": {
+		  "description": "The link (url) to the next page of results.",
           "type": "string"
         },
         "columns": {
@@ -814,6 +833,7 @@
           }
         },
         "rows": {
+          "description": "Array of rows",
           "type": "array",
           "items": {
             "type": "array",
@@ -826,10 +846,12 @@
       "type": "object",
       "properties": {
         "name": {
-          "type": "string"
+          "description": "The name of column.",
+		  "type": "string"
         },
         "type": {
-          "type": "string"
+          "description": "The type of column.",
+         "type": "string"
         }
       }
     },
@@ -1406,7 +1428,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with dimension operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "description": "The scope associated with dimension operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
@@ -1415,7 +1437,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
+      "description": "The scope associated with query and export operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope, '/providers/Microsoft.Management/managementGroups/{managementGroupId} for Management Group scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope, 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}/invoiceSections/{invoiceSectionId}' for invoiceSection scope, and 'providers/Microsoft.Billing/billingAccounts/{billingAccountId}/customers/{customerId}' specific for partners.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
