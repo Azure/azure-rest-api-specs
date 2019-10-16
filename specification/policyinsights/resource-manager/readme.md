@@ -68,6 +68,9 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-10'
 input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
+- Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
 - Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
 ```
 

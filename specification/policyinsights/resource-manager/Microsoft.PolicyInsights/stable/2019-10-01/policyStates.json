@@ -237,9 +237,9 @@
             "$ref": "#/parameters/toParameter"
           },
           {
-            "$ref": "#/parameters/filterParameter"
+            "$ref": "#/parameters/filterParameter"            
           }
-        ],
+        ],        
         "responses": {
           "200": {
             "description": "Summarize results.",
@@ -257,6 +257,9 @@
         "x-ms-examples": {
           "Summarize at subscription scope": {
             "$ref": "./examples/PolicyStates_SummarizeSubscriptionScope.json"
+          },
+          "Summarize at subscription scope for a policy definition group": {
+            "$ref": "./examples/PolicyStates_SummarizeSubscriptionScopeForPolicyGroup.json"
           }
         }
       }
@@ -1090,8 +1093,8 @@
           "type": "string"
         },
         "isCompliant": {
-          "description": "Flag which states whether the resource is compliant against the policy assignment it was evaluated against.",
-          "type": "boolean"
+          "description": "Flag which states whether the resource is compliant against the policy assignment it was evaluated against. This property is deprecated; please use ComplianceState instead.",
+          "type": "boolean"          
         },
         "subscriptionId": {
           "description": "Subscription ID.",
@@ -1177,6 +1180,13 @@
           "description": "Policy evaluation details.",
           "type": "object",
           "$ref": "#/definitions/PolicyEvaluationDetails"
+        },
+        "policyDefinitionGroupNames": {
+          "description": "Policy definition group names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "additionalProperties": {
@@ -1280,7 +1290,7 @@
           "type": "string"
         },
         "results": {
-          "description": "Non-compliance summary for all policy assignments.",
+          "description": "Compliance summary for all policy assignments.",
           "$ref": "#/definitions/SummaryResults"
         },
         "policyAssignments": {
@@ -1293,10 +1303,10 @@
       }
     },
     "SummaryResults": {
-      "description": "Non-compliance summary on a particular summary level.",
+      "description": "Compliance summary on a particular summary level.",
       "properties": {
         "queryResultsUri": {
-          "description": "HTTP POST URI for queryResults action on Microsoft.PolicyInsights to retrieve raw results for the non-compliance summary.",
+          "description": "HTTP POST URI for queryResults action on Microsoft.PolicyInsights to retrieve raw results for the compliance summary. This property will not be available by default in future API versions, but could be queried explicitly.",
           "type": "string"
         },
         "nonCompliantResources": {
@@ -1310,8 +1320,49 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
+        },
+        "nonCompliantPolicyGroups": {
+          "description": "Number of non-compliant groups.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "resourceDetails": {
+          "description": "The resources summary at this level.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceDetail"
+          }
+        },
+        "policyDetails": {
+          "description": "The policy artifact summary at this level. For query scope level, it represents policy assignment summary. For policy assignment level, it represents policy definitions summary.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceDetail"
+          }          
+        },
+        "policyGroupDetails": {
+          "description": "The policy definition group summary at this level.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ComplianceDetail"
+          }          
         }
       }
+    },
+    "ComplianceDetail": {
+      "description": "The compliance state rollup.",
+      "properties": {
+        "complianceState": {
+          "description": "The compliance state.",
+          "type": "string"          
+        },
+        "count": {
+          "description": "Summarized count value for this compliance state.",
+          "type": "integer",
+          "format": "int32"
+        }
+      }      
     },
     "PolicyAssignmentSummary": {
       "description": "Policy assignment summary.",
@@ -1325,7 +1376,7 @@
           "type": "string"
         },
         "results": {
-          "description": "Non-compliance summary for the policy assignment.",
+          "description": "Compliance summary for the policy assignment.",
           "$ref": "#/definitions/SummaryResults"
         },
         "policyDefinitions": {
@@ -1333,6 +1384,13 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/PolicyDefinitionSummary"
+          }
+        },
+        "policyGroups": {
+          "description": "Policy definition group summary.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PolicyGroupSummary"
           }
         }
       }
@@ -1348,12 +1406,32 @@
           "description": "Policy definition reference ID.",
           "type": "string"
         },
+        "policyDefinitionGroupNames": {
+          "description": "Policy definition group names.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
         "effect": {
           "description": "Policy effect, i.e. policy definition action.",
           "type": "string"
         },
         "results": {
-          "description": "Non-compliance summary for the policy definition.",
+          "description": "Compliance summary for the policy definition.",
+          "$ref": "#/definitions/SummaryResults"
+        }
+      }
+    },
+    "PolicyGroupSummary": {
+      "description": "Policy definition group summary.",
+      "properties": {
+        "policyGroupName": {
+          "description": "Policy group name.",
+          "type": "string"
+        },        
+        "results": {
+          "description": "Compliance summary for the policy definition group.",
           "$ref": "#/definitions/SummaryResults"
         }
       }

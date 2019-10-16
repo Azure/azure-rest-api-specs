@@ -2,8 +2,8 @@
   "parameters": {
     "policyStatesResource": "latest",
     "subscriptionId": "fffedd8f-ffff-fffd-fffd-fffed2f84852",
-    "api-version": "2018-07-01-preview",
-    "$from": "2018-02-05T18:00:00Z",
+    "api-version": "2019-10-01",
+    "$from": "2019-10-05T18:00:00Z",
     "$filter": "IsCompliant eq false and (PolicyDefinitionAction eq 'audit' or PolicyDefinitionAction eq 'deny')",
     "$apply": "groupby((PolicyAssignmentId, PolicyDefinitionId, PolicyDefinitionAction, ResourceId), aggregate($count as NumAuditDenyNonComplianceRecords))",
     "$orderby": "NumAuditDenyNonComplianceRecords desc",
