@@ -1177,8 +1177,7 @@
       "description": "Recognized field value.",
       "type": "object",
       "required": [
-        "type",
-        "confidence"
+        "type"
       ],
       "properties": {
         "type": {
@@ -1281,125 +1280,6 @@
       "minimum": 0,
       "maximum": 1,
       "x-nullable": false
-    },
-    "CopyRequest": {
-      "description": "Copy custom model request parameters.",
-      "type": "object",
-      "properties": {
-        "targetInformation": {
-          "description": "Subscription information about the copy target.",
-          "type": "object",
-          "properties":{
-            "endpoint": {
-              "description": "Endpoint path.",
-              "maxLength": 2048,
-              "minLength": 0,
-              "type": "string"
-            },
-            "resourceId": {
-              "description": "Resource identifier.",
-              "maxLength": 2048,
-              "minLength": 0,
-              "type": "string"
-            }
-          }
-        },
-        "copyConfig": {
-          "description": "Copy custom model operation options.",
-          "type": "object",
-          "properties":{
-            "deleteSource": {
-              "description": "Delete the source model artifacts after successful copy.",
-              "type": "boolean",
-              "default": false,
-              "x-nullable": false
-            },
-            "supportCrossTenantCopy": {
-              "description": "Indicate copy target tenancy requirement.",
-              "type": "boolean",
-              "default": false,
-              "x-nullable": false
-            },
-            "targetModelMetadata": {
-              "description": "Metadata to apply to the copy target model.",
-              "type": "object",
-              "properties":{
-                "name": {
-                  "description": "Name to assign to the copy target model.",
-                  "maxLength": 128,
-                  "minLength": 0,
-                  "type": "string"
-                },
-                "description": {
-                  "description": "Description to apply to the copy target model.",
-                  "maxLength": 1024,
-                  "minLength": 0,
-                  "type": "string"
-                },
-                "tags": {
-                  "description": "Tags to apply to the copy target model",
-                  "type": "array",
-                  "items": {
-                    "type": "string"
-                  }
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "CopyResult": {
-      "description": "Result of the copy custom model operation.",
-      "type": "object",
-      "required": [
-        "resourceLocation"
-      ],
-      "properties": {
-        "resourceLocation": {
-          "description": "Target location of copied model",
-          "type": "string"
-        },
-        "errors": {
-          "description": "List of errors reported during copy operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FormOperationError"
-          }
-        }
-      }
-    },
-    "CopyOperationResult": {
-      "description": "Status and result of copy custom model operation.",
-      "type": "object",
-      "required": [
-        "status",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "copyResult"
-      ],
-      "properties": {
-        "status": {
-          "description": "Get status of copy custom model operation.",
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time (UTC) when the copy custom model operation was submitted.",
-          "x-nullable": false
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Date and time (UTC) when the status is last updated.",
-          "x-nullable": false
-        },
-        "copyResult": {
-          "description": "Copy custom model operation result.",
-          "$ref": "#/definitions/CopyResult"
-        }
-      }
     }
   },
   "parameters": {
