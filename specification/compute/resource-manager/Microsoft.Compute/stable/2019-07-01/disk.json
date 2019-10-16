@@ -1726,12 +1726,14 @@
           "description": "The type of Managed Identity used by the DiskEncryptionSet. Only SystemAssigned is supported."
         },
         "principalId": {
+          "readOnly": true,
           "type": "string",
-          "description": "The object id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
+          "description": "The object id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-identity-principal-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
         },
         "tenantId": {
+          "readOnly": true,
           "type": "string",
-          "description": "The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the x-ms-identity-principal-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
+          "description": "The tenant id of the Managed Identity Resource. This will be sent to the RP from ARM via the  x-ms-client-tenant-id header in the PUT request if the resource has a systemAssigned(implicit) identity"
         }
       },
       "description": "The managed identity for the disk encryption set. It should be given permission on the key vault before it can be used to encrypt disks."
