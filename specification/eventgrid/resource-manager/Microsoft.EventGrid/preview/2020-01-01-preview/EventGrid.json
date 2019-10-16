@@ -816,8 +816,17 @@
           "EventSubscriptions_CreateOrUpdateForResource": {
             "$ref": "./examples/EventSubscriptions_CreateOrUpdateForResource.json"
           },
-          "EventSubscriptions_CreateOrUpdateForCustomTopic": {
-            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic.json"
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_WebhookDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_EventHubDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_HybridConnectionDestination.json"
+          },
+          "EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination": {
+            "$ref": "./examples/EventSubscriptions_CreateOrUpdateForCustomTopic_StorageQueueDestination.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -1036,9 +1045,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1093,9 +1099,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1150,9 +1153,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1214,9 +1214,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1271,9 +1268,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1335,9 +1329,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1399,9 +1390,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1470,9 +1458,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1548,9 +1533,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -1619,9 +1601,6 @@
           },
           {
             "$ref": "#/parameters/TopParameter"
-          },
-          {
-            "$ref": "#/parameters/LabelFilterParameter"
           }
         ],
         "responses": {
@@ -3740,7 +3719,7 @@
     "FilterParameter": {
       "name": "$filter",
       "in": "query",
-      "description": "Filter the results using OData syntax.",
+      "description": "The query used to filter the search results using OData syntax. Filtering is permitted on the 'name' property only and with limited number of OData operations. These operations are: the 'contains' function as well as the following logical operations: not, and, or, eq (for equal), and ne (for not equal). No arithmetic operations are supported. The following is a valid filter example: $filter=contains(namE, 'PATTERN') and name ne 'PATTERN-1'. The following is not a valid filter example: $filter=location eq 'westus'.",
       "required": false,
       "type": "string",
       "x-ms-parameter-location": "method"
@@ -3748,17 +3727,9 @@
     "TopParameter": {
       "name": "$top",
       "in": "query",
-      "description": "The number of results to return.",
+      "description": "The number of results to return per page for the list operation. Valid range for top parameter is 1 to 100. If not specified, the default number of results to be returned is 20 items per page.",
       "required": false,
       "type": "integer",
-      "x-ms-parameter-location": "method"
-    },
-    "LabelFilterParameter": {
-      "name": "label",
-      "in": "query",
-      "description": "The label used to filter the results for event subscriptions list.",
-      "required": false,
-      "type": "string",
       "x-ms-parameter-location": "method"
     }
   },
