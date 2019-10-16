@@ -4132,28 +4132,28 @@
           },
           "description": "VPN authentication types for the VpnServerConfiguration."
         },
-        "vpnServerConfigVpnClientRootCertificates": {
+        "vpnClientRootCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigVpnClientRootCertificate"
           },
           "description": "VPN client root certificate of VpnServerConfiguration."
         },
-        "vpnServerConfigVpnClientRevokedCertificates": {
+        "vpnClientRevokedCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigVpnClientRevokedCertificate"
           },
           "description": "VPN client revoked certificate of VpnServerConfiguration."
         },
-        "vpnServerConfigRadiusServerRootCertificates": {
+        "radiusServerRootCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigRadiusServerRootCertificate"
           },
           "description": "Radius Server root certificate of VpnServerConfiguration."
         },
-        "vpnServerConfigRadiusClientRootCertificates": {
+        "radiusClientRootCertificates": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/VpnServerConfigRadiusClientRootCertificate"
@@ -4293,7 +4293,7 @@
           "description": "The scale unit for this p2s vpn gateway."
         },
         "vpnServerConfiguration": {
-          "$ref": "#/definitions/VpnServerConfiguration",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The VpnServerConfiguration to which the p2sVpnGateway is attached to."
         },
         "vpnClientConnectionHealth": {
