@@ -58,7 +58,7 @@
           "NetworkExperimentProfiles"
         ],
         "summary": "Gets a list of Network Experiment Profiles under a subscription",
-        "operationId": "Profiles_List",
+        "operationId": "NetworkExperimentProfiles_List",
         "produces": [
           "application/json"
         ],
@@ -100,7 +100,7 @@
           "NetworkExperimentProfiles"
         ],
         "summary": "Gets a list of Network Experiment Profiles within a resource group under a subscription",
-        "operationId": "Profiles_ListByResourceGroup",
+        "operationId": "NetworkExperimentProfiles_ListByResourceGroup",
         "produces": [
           "application/json"
         ],
@@ -145,7 +145,7 @@
           "NetworkExperimentProfiles"
         ],
         "summary": "Gets an NetworkExperiment Profile by ProfileName",
-        "operationId": "GetNetworkExperimentProfilesByProfileName",
+        "operationId": "NetworkExperimentProfiles_Get",
         "produces": [
           "application/json"
         ],
@@ -188,7 +188,7 @@
           "NetworkExperimentProfiles"
         ],
         "summary": "Creates an NetworkExperiment Profile",
-        "operationId": "createOrUpdateNetworkExperimentProfiles",
+        "operationId": "NetworkExperimentProfiles_CreateOrUpdate",
         "produces": [
           "application/json"
         ],
@@ -254,7 +254,7 @@
         ],
         "description": "Updates an NetworkExperimentProfiles",
         "summary": "Updates an NetworkExperimentProfiles by NetworkExperimentProfile name",
-        "operationId": "updateNetworkExperimentProfilesByProfilesName",
+        "operationId": "NetworkExperimentProfiles_Update",
         "produces": [
           "application/json"
         ],
@@ -313,7 +313,7 @@
           "NetworkExperimentProfiles"
         ],
         "summary": "Deletes an NetworkExperiment Profile by ProfileName",
-        "operationId": "deleteNetworkExperimentProfiles",
+        "operationId": "NetworkExperimentProfiles_Delete",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -455,7 +455,7 @@
           "Experiments"
         ],
         "summary": "Gets an Experiment by ExperimentName",
-        "operationId": "getExperimentsByExperimentName",
+        "operationId": "Experiments_Get",
         "produces": [
           "application/json"
         ],
@@ -501,7 +501,7 @@
           "Experiments"
         ],
         "summary": "Creates or updates an Experiment",
-        "operationId": "createOrUpdateExperiments",
+        "operationId": "Experiments_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "./network.json#/parameters/SubscriptionIdParameter"
@@ -567,7 +567,7 @@
         ],
         "description": "Updates an Experiment",
         "summary": "Updates an Experiment by Experiment id",
-        "operationId": "updateExperimentsByExperimentName",
+        "operationId": "Experiments_Update",
         "produces": [
           "application/json"
         ],
@@ -629,7 +629,7 @@
           "Experiments"
         ],
         "summary": "Deletes an Experiment",
-        "operationId": "deleteExperiments",
+        "operationId": "Experiments_Delete",
         "produces": [
           "application/json"
         ],
@@ -681,7 +681,7 @@
           "Reports"
         ],
         "summary": "Gets a Latency Scorecard for a given Experiment",
-        "operationId": "getLatencyScorecards",
+        "operationId": "Reports_GetLatencyScorecards",
         "produces": [
           "application/json"
         ],
@@ -726,7 +726,7 @@
               "Monthly"
             ],
             "x-ms-enum": {
-              "name": "aggregationInterval",
+              "name": "latencyScorecardAggregationInterval",
               "modelAsString": true
             },
             "required": true
@@ -759,7 +759,7 @@
           "Reports"
         ],
         "summary": "Gets a Timeseries for a given Experiment",
-        "operationId": "getTimeseries",
+        "operationId": "Reports_GetTimeseries",
         "produces": [
           "application/json"
         ],
@@ -805,7 +805,7 @@
               "Daily"
             ],
             "x-ms-enum": {
-              "name": "aggregationInterval",
+              "name": "timeseriesAggregationInterval",
               "modelAsString": true
             },
             "required": true
@@ -817,10 +817,12 @@
             "description": "The type of Timeseries",
             "enum": [
               "MeasurementCounts",
-              "LatencyP50"
+              "LatencyP50",
+              "LatencyP75",
+              "LatencyP95"
             ],
             "x-ms-enum": {
-              "name": "timeseriesTypes",
+              "name": "timeseriesType",
               "modelAsString": true
             },
             "required": true
@@ -868,14 +870,14 @@
       "properties": {
         "resourceState": {
           "description": "Resource status.",
-          "$ref": "#/definitions/ResourceState"
+          "$ref": "#/definitions/NetworkExperimentResourceState"
         },
         "enabledState": {
           "type": "string",
           "description": "The state of the Experiment",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -946,8 +948,8 @@
           "type": "string",
           "description": "The enabled state of the Profile",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -986,8 +988,8 @@
           "type": "string",
           "description": "The state of the Experiment",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -1034,8 +1036,8 @@
           "type": "string",
           "description": "The state of the Experiment",
           "enum": [
-            "enabled",
-            "disabled"
+            "Enabled",
+            "Disabled"
           ],
           "x-ms-enum": {
             "name": "state",
@@ -1044,7 +1046,7 @@
         },
         "resourceState": {
           "description": "Resource status.",
-          "$ref": "#/definitions/ResourceState"
+          "$ref": "#/definitions/NetworkExperimentResourceState"
         },
         "status": {
           "description": "The description of Experiment status from the server side",
@@ -1110,20 +1112,20 @@
         }
       ]
     },
-    "ResourceState": {
+    "NetworkExperimentResourceState": {
       "description": "Defines the server side resource status",
       "readOnly": true,
       "enum": [
-        "creating",
-        "enabling",
-        "enabled",
-        "disabling",
-        "disabled",
-        "deleting"
+        "Creating",
+        "Enabling",
+        "Enabled",
+        "Disabling",
+        "Disabled",
+        "Deleting"
       ],
       "type": "string",
       "x-ms-enum": {
-        "name": "NetworkExperimentationResourceState",
+        "name": "NetworkExperimentResourceState",
         "modelAsString": true
       }
     },
@@ -1286,10 +1288,12 @@
           "description": "The type of Timeseries",
           "enum": [
             "MeasurementCounts",
-            "LatencyP50"
+            "LatencyP50",
+            "LatencyP75",
+            "LatencyP95"
           ],
           "x-ms-enum": {
-            "name": "timeseriesTypes",
+            "name": "timeseriesType",
             "modelAsString": true
           }
         },
