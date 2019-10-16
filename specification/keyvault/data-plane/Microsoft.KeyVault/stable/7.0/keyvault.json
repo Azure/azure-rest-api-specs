@@ -3763,8 +3763,20 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "Supported key operations."
-          }
+            "enum": [
+              "encrypt",
+              "decrypt",
+              "sign",
+              "verify",
+              "wrapKey",
+              "unwrapKey"
+            ],
+            "x-ms-enum": {
+              "name": "JsonWebKeyOperation",
+              "modelAsString": true
+            }
+          },
+          "description": "Json web key operations. For more information on possible key operations, see JsonWebKeyOperation."
         },
         "n": {
           "type": "string",
