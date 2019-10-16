@@ -28,7 +28,7 @@ Please also specify the `--azure-libraries-for-java-folder=<path to the root dir
 ``` yaml $(tag) == 'package-storagecache-2019-11-01' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.storagecache.v2019_11_01
-  output-folder: $(azure-libraries-for-java-folder)/netapp/resource-manager/v2019_11_01
+  output-folder: $(azure-libraries-for-java-folder)/storagecache/resource-manager/v2019_11_01
 regenerate-manager: true
 generate-interface: true
 ```
