@@ -617,7 +617,7 @@
             "$ref": "./examples/SearchServiceCreateOrUpdateSkillset.json"
           }
         },
-        "description": "Creates a new cognitive skillset in a search service or updates the skillset if it already exists.",
+        "description": "Creates a new skillset in a search service or updates the skillset if it already exists.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/update-skillset"
         },
@@ -636,7 +636,7 @@
             "schema": {
               "$ref": "#/definitions/Skillset"
             },
-            "description": "The skillset containing one or more cognitive skills to create or update in a search service."
+            "description": "The skillset containing one or more skills to create or update in a search service."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -674,7 +674,7 @@
             "$ref": "./examples/SearchServiceDeleteSkillset.json"
           }
         },
-        "description": "Deletes a cognitive skillset in a search service.",
+        "description": "Deletes a skillset in a search service.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/delete-skillset"
         },
@@ -713,7 +713,7 @@
             "$ref": "./examples/SearchServiceGetSkillset.json"
           }
         },
-        "description": "Retrieves a cognitive skillset in a search service.",
+        "description": "Retrieves a skillset in a search service.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/get-skillset"
         },
@@ -754,7 +754,7 @@
             "$ref": "./examples/SearchServiceListSkillsets.json"
           }
         },
-        "description": "List all cognitive skillsets in a search service.",
+        "description": "List all skillsets in a search service.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/list-skillset"
         },
@@ -793,7 +793,7 @@
             "$ref": "./examples/SearchServiceCreateSkillset.json"
           }
         },
-        "description": "Creates a new cognitive skillset in a search service.",
+        "description": "Creates a new skillset in a search service.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/searchservice/create-skillset"
         },
@@ -805,7 +805,7 @@
             "schema": {
               "$ref": "#/definitions/Skillset"
             },
-            "description": "The skillset containing one or more cognitive skills to create in a search service."
+            "description": "The skillset containing one or more skills to create in a search service."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -3708,7 +3708,7 @@
         },
         "skillsetName": {
           "type": "string",
-          "description": "The name of the cognitive skillset executing with this indexer."
+          "description": "The name of the skillset executing with this indexer."
         },
         "targetIndexName": {
           "type": "string",
@@ -4555,7 +4555,7 @@
       "externalDocs": {
         "url": "https://docs.microsoft.com/azure/search/cognitive-search-tutorial-blob"
       },
-      "description": "A list of cognitive skills."
+      "description": "A list of skills."
     },
     "CognitiveServices": {
       "discriminator": "@odata.type",
@@ -5564,7 +5564,7 @@
       "required": true,
       "type": "string",
       "x-ms-skip-url-encoding": true,
-      "description": "The name of the Azure Cognitive Search service.",
+      "description": "The name of the search service.",
       "x-ms-parameter-location": "client"
     },
     "SearchDnsSuffixParameter": {
@@ -5574,7 +5574,7 @@
       "type": "string",
       "default": "search.windows.net",
       "x-ms-skip-url-encoding": true,
-      "description": "The DNS suffix of the Azure Cognitive Search service. The default is search.windows.net.",
+      "description": "The DNS suffix of the search service. The default is search.windows.net.",
       "x-ms-parameter-location": "client"
     }
   }
