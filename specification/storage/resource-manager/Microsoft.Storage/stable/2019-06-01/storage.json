@@ -769,6 +769,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -815,6 +821,12 @@
             "schema": {
               "$ref": "#/definitions/PrivateEndpointConnection"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       },
@@ -852,6 +864,12 @@
           },
           "204": {
             "description": "No Content -- The private endpoint connection does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         }
       }
@@ -2689,6 +2707,19 @@
         }
       },
       "description": "Properties of a private link resource."
+    },
+    "ErrorResponse": {
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message describing the error, intended to be suitable for display in a user interface."
+        }
+      },
+      "description": "An error response from the storage resource provider."
     }
   },
   "parameters": {
