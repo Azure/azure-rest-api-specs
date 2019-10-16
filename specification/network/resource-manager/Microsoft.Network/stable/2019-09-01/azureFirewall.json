@@ -126,6 +126,9 @@
           },
           "Get Azure Firewall With Zones": {
             "$ref": "./examples/AzureFirewallGetWithZones.json"
+          },
+          "Get Azure Firewall With Additional Properties": {
+            "$ref": "./examples/AzureFirewallGetWithAdditionalProperties.json"
           }
         }
       },
@@ -189,6 +192,9 @@
           },
           "Create Azure Firewall in virtual Hub": {
             "$ref": "./examples/AzureFirewallPutInHub.json"
+          },
+          "Create Azure Firewall With Additional Properties": {
+            "$ref": "./examples/AzureFirewallPutWithAdditionalProperties.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -450,6 +456,10 @@
         "sku": {
           "description": "The Azure Firewall Resource SKU.",
           "$ref": "#/definitions/AzureFirewallSku"
+        },
+        "additionalProperties": {
+          "$ref": "#/definitions/AzureFirewallAdditionalProperties",
+          "description": "The additional properties used to further config this azure firewall "
         }
       },
       "description": "Properties of the Azure Firewall."
@@ -509,6 +519,13 @@
         "name": "AzureFirewallThreatIntelMode",
         "modelAsString": true
       }
+    },
+    "AzureFirewallAdditionalProperties": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "The additional properties of azure firewall"
     },
     "AzureFirewallApplicationRuleCollectionPropertiesFormat": {
       "properties": {
