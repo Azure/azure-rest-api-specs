@@ -1286,11 +1286,11 @@
           "description": "List of address prefixes for the subnet."
         },
         "networkSecurityGroup": {
-          "$ref": "./networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the NetworkSecurityGroup resource."
         },
         "routeTable": {
-          "$ref": "./routeTable.json#/definitions/RouteTable",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the RouteTable resource."
         },
         "natGateway": {
@@ -1307,7 +1307,7 @@
         "serviceEndpointPolicies": {
           "type": "array",
           "items": {
-            "$ref": "./serviceEndpointPolicy.json#/definitions/ServiceEndpointPolicy"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "An array of service endpoint policies."
         },
@@ -1315,7 +1315,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "An array of references to private endpoints."
         },
@@ -1323,7 +1323,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./networkInterface.json#/definitions/IPConfiguration"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "An array of references to the network interface IP configurations using subnet."
         },
@@ -1331,7 +1331,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./networkProfile.json#/definitions/IPConfigurationProfile"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Array of IP configuration profiles which reference this subnet."
         },
@@ -1807,7 +1807,7 @@
           "description": "The name of the Network Intent Policy for storing in target subscription."
         },
         "sourceNetworkIntentPolicy": {
-          "$ref": "#/definitions/NetworkIntentPolicy",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Source network intent policy."
         }
       },

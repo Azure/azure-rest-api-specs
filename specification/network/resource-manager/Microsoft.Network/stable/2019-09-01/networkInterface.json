@@ -823,7 +823,7 @@
     "NetworkInterfaceTapConfigurationPropertiesFormat": {
       "properties": {
         "virtualNetworkTap": {
-          "$ref": "./virtualNetworkTap.json#/definitions/VirtualNetworkTap",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the Virtual Network Tap resource."
         },
         "provisioningState": {
@@ -839,28 +839,28 @@
         "virtualNetworkTaps": {
           "type": "array",
           "items": {
-            "$ref": "./virtualNetworkTap.json#/definitions/VirtualNetworkTap"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The reference to Virtual Network Taps."
         },
         "applicationGatewayBackendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "./applicationGateway.json#/definitions/ApplicationGatewayBackendAddressPool"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The reference of ApplicationGatewayBackendAddressPool resource."
         },
         "loadBalancerBackendAddressPools": {
           "type": "array",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/BackendAddressPool"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "The reference of LoadBalancerBackendAddressPool resource."
         },
         "loadBalancerInboundNatRules": {
           "type": "array",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/InboundNatRule"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "A list of references of LoadBalancerInboundNatRules."
         },
@@ -877,7 +877,7 @@
           "description": "Whether the specific IP configuration is IPv4 or IPv6. Default is IPv4."
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Subnet bound to the IP configuration."
         },
         "primary": {
@@ -885,13 +885,13 @@
           "description": "Whether this is a primary customer address on the network interface."
         },
         "publicIPAddress": {
-          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Public IP address bound to the IP configuration."
         },
         "applicationSecurityGroups": {
           "type": "array",
           "items": {
-            "$ref": "./applicationSecurityGroup.json#/definitions/ApplicationSecurityGroup"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Application security groups in which the IP configuration is included."
         },
@@ -997,12 +997,12 @@
           "readOnly": true
         },
         "networkSecurityGroup": {
-          "$ref": "./networkSecurityGroup.json#/definitions/NetworkSecurityGroup",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the NetworkSecurityGroup resource."
         },
         "privateEndpoint": {
           "readOnly": true,
-          "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "A reference to the private endpoint to which the network interface is linked."
         },
         "ipConfigurations": {
@@ -1390,11 +1390,11 @@
           "description": "The private IP address allocation method."
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the subnet resource."
         },
         "publicIPAddress": {
-          "$ref": "./publicIpAddress.json#/definitions/PublicIPAddress",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the public IP resource."
         },
         "provisioningState": {

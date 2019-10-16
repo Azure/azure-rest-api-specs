@@ -410,14 +410,14 @@
     "PrivateEndpointProperties": {
       "properties": {
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The ID of the subnet from which the private IP will be allocated."
         },
         "networkInterfaces": {
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterface"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "An array of references to the network interfaces created for this private endpoint."
         },

@@ -392,11 +392,11 @@
       "properties": {
         "containerNetworkInterfaceConfiguration": {
           "readOnly": true,
-          "$ref": "#/definitions/ContainerNetworkInterfaceConfiguration",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Container network interface configuration from which this container network interface is created."
         },
         "container": {
-          "$ref": "#/definitions/Container",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to the container to which this container network interface is attached."
         },
         "ipConfigurations": {
@@ -500,7 +500,7 @@
     "IPConfigurationProfilePropertiesFormat": {
       "properties": {
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference of the subnet resource to create a container network interface ip configuration."
         },
         "provisioningState": {

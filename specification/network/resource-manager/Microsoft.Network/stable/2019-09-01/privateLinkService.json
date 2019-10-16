@@ -639,7 +639,7 @@
         "loadBalancerFrontendIpConfigurations": {
           "type": "array",
           "items": {
-            "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "An array of references to the load balancer IP configurations."
         },
@@ -654,7 +654,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterface"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "An array of references to the network interfaces created for this private link service."
         },
@@ -754,7 +754,7 @@
           "description": "The private IP address allocation method."
         },
         "subnet": {
-          "$ref": "./virtualNetwork.json#/definitions/Subnet",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference to the subnet resource."
         },
         "primary": {
@@ -806,7 +806,7 @@
       "properties": {
         "privateEndpoint": {
           "readOnly": true,
-          "$ref": "./privateEndpoint.json#/definitions/PrivateEndpoint",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The resource of private end point."
         },
         "privateLinkServiceConnectionState": {

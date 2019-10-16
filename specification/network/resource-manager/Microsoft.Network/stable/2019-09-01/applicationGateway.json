@@ -815,7 +815,7 @@
     "ApplicationGatewayBackendHealthOnDemand": {
       "properties": {
         "backendAddressPool": {
-          "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference of an ApplicationGatewayBackendAddressPool resource."
         },
         "backendHealthHttpSettings": {
@@ -840,7 +840,7 @@
     "ApplicationGatewayBackendHealthPool": {
       "properties": {
         "backendAddressPool": {
-          "$ref": "#/definitions/ApplicationGatewayBackendAddressPool",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference of an ApplicationGatewayBackendAddressPool resource."
         },
         "backendHttpSettingsCollection": {
@@ -856,7 +856,7 @@
     "ApplicationGatewayBackendHealthHttpSettings": {
       "properties": {
         "backendHttpSettings": {
-          "$ref": "#/definitions/ApplicationGatewayBackendHttpSettings",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference of an ApplicationGatewayBackendHttpSettings resource."
         },
         "servers": {
@@ -876,7 +876,7 @@
           "description": "IP address or FQDN of backend server."
         },
         "ipConfiguration": {
-          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference of IP configuration of backend server."
         },
         "health": {
@@ -1289,7 +1289,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration"
+            "$ref": "./network.json#/definitions/SubResource"
           },
           "description": "Collection of references to IPs defined in network interfaces."
         },

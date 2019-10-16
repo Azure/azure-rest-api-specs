@@ -342,7 +342,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "./networkInterface.json#/definitions/NetworkInterfaceTapConfiguration",
+            "$ref": "./network.json#/definitions/SubResource",
             "description": "The reference of the Network Interface."
           },
           "description": "Specifies the list of resource IDs for the network interface IP configuration that needs to be tapped."
@@ -358,11 +358,11 @@
           "description": "The provisioning state of the virtual network tap resource."
         },
         "destinationNetworkInterfaceIPConfiguration": {
-          "$ref": "./networkInterface.json#/definitions/NetworkInterfaceIPConfiguration",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference to the private IP Address of the collector nic that will receive the tap."
         },
         "destinationLoadBalancerFrontEndIPConfiguration": {
-          "$ref": "./loadBalancer.json#/definitions/FrontendIPConfiguration",
+          "$ref": "./network.json#/definitions/SubResource",
           "description": "The reference to the private IP address on the internal Load Balancer that will receive the tap."
         },
         "destinationPort": {
