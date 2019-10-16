@@ -271,6 +271,7 @@
           "description": "Properties of the web application firewall policy."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -332,6 +333,22 @@
         "managedRules": {
           "description": "Describes the managedRules structure",
           "$ref": "#/definitions/ManagedRulesDefinition"
+        },
+        "httpListeners": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "A collection of references to application gateway http listeners."
+        },
+        "pathBasedRules": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "./network.json#/definitions/SubResource"
+          },
+          "description": "A collection of references to application gateway path rules."
         }
       }
     },
@@ -367,7 +384,7 @@
           "description": "Describes the Exclusions that are applied on the policy."
         },
         "managedRuleSets": {
-          "type" : "array",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/ManagedRuleSet"
           },

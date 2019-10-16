@@ -339,6 +339,7 @@
           "description": "Reference of the PublicIP resource. This field is a mandatory input if subnet is not null."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the Azure firewall IP configuration resource."
         }
@@ -425,6 +426,7 @@
           "description": "IP configuration of the Azure Firewall resource."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the Azure firewall resource."
         },
@@ -531,6 +533,7 @@
           "description": "Collection of rules used by a application rule collection."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the application rule collection resource."
         }
@@ -643,6 +646,7 @@
           "description": "Collection of rules used by a NAT rule collection."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the NAT rule collection resource."
         }
@@ -718,6 +722,10 @@
         "translatedPort": {
           "type": "string",
           "description": "The translated port for this NAT rule."
+        },
+        "translatedFqdn": {
+          "type": "string",
+          "description": "The translated FQDN for this NAT rule."
         }
       },
       "description": "Properties of a NAT rule."
@@ -766,6 +774,7 @@
           "description": "Collection of rules used by a network rule collection."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network rule collection resource."
         }
@@ -833,6 +842,13 @@
           "items": {
             "type": "string"
           }
+        },
+        "destinationFqdns": {
+          "type": "array",
+          "description": "List of destination FQDNs.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "description": "Properties of the network rule."
@@ -892,7 +908,7 @@
           "description": "Name of an Azure Firewall SKU.",
           "enum": [
             "AZFW_VNet",
-            "AZFW_Hub"  
+            "AZFW_Hub"
           ],
           "x-ms-enum": {
             "name": "AzureFirewallSkuName",

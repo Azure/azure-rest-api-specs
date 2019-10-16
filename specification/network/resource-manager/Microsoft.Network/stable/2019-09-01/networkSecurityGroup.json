@@ -741,6 +741,7 @@
           "description": "The direction of the rule. The direction specifies if rule will be evaluated on incoming or outgoing traffic."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the security rule resource."
         }
@@ -764,6 +765,7 @@
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -801,6 +803,7 @@
           "description": "A collection of security rules of the network security group."
         },
         "defaultSecurityRules": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/SecurityRule"
@@ -824,10 +827,12 @@
           "description": "A collection of references to subnets."
         },
         "resourceGuid": {
+          "readOnly": true,
           "type": "string",
           "description": "The resource GUID property of the network security group resource."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network security group resource."
         }
@@ -842,6 +847,7 @@
           "description": "Properties of the network security group."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }

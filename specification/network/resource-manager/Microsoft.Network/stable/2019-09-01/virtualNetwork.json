@@ -1162,6 +1162,7 @@
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "type": {
+          "readOnly": true,
           "type": "string",
           "description": "Resource type."
         }
@@ -1232,6 +1233,7 @@
           "description": "The name of the service to whom the subnet should be delegated (e.g. Microsoft.Sql/servers)."
         },
         "actions": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "type": "string"
@@ -1258,6 +1260,7 @@
           "description": "The name of the resource that is unique within a subnet. This name can be used to access the resource."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -1333,6 +1336,7 @@
           "description": "Array of IP configuration profiles which reference this subnet."
         },
         "resourceNavigationLinks": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ResourceNavigationLink"
@@ -1340,6 +1344,7 @@
           "description": "An array of references to the external resources using subnet."
         },
         "serviceAssociationLinks": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "$ref": "#/definitions/ServiceAssociationLink"
@@ -1359,6 +1364,7 @@
           "description": "A read-only string identifying the intention of use for this subnet based on delegations and other user-defined properties."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the subnet resource."
         },
@@ -1387,6 +1393,7 @@
           "description": "A list of locations."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the service endpoint resource."
         }
@@ -1433,6 +1440,7 @@
           }
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual network peering resource."
         }
@@ -1451,6 +1459,7 @@
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -1474,6 +1483,7 @@
           "description": "The name of the resource that is unique within a resource group. This name can be used to access the resource."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -1576,10 +1586,12 @@
           "description": "A list of peerings in a Virtual Network."
         },
         "resourceGuid": {
+          "readOnly": true,
           "type": "string",
           "description": "The resourceGuid property of the Virtual Network resource."
         },
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the virtual network resource."
         },
@@ -1614,6 +1626,7 @@
           "description": "Properties of the virtual network."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }
@@ -1671,8 +1684,7 @@
           "type": "string",
           "description": "The BGP community associated with the virtual network"
         },
-        "regionalCommunity":
-        {
+        "regionalCommunity": {
           "type": "string",
           "readOnly": true,
           "description": "The BGP community associated with the region of the virtual network"
@@ -1804,6 +1816,7 @@
     "NetworkIntentPolicy": {
       "properties": {
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         }

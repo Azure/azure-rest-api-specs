@@ -1541,6 +1541,7 @@
     "NetworkWatcher": {
       "properties": {
         "etag": {
+          "readOnly": true,
           "type": "string",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
@@ -1560,6 +1561,7 @@
     "NetworkWatcherPropertiesFormat": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the network watcher resource."
         }
@@ -2022,8 +2024,8 @@
           "description": "ID of the packet capture operation."
         },
         "etag": {
+          "readOnly": true,
           "type": "string",
-          "default": "A unique read-only string that changes whenever the resource is updated.",
           "description": "A unique read-only string that changes whenever the resource is updated."
         },
         "properties": {
@@ -2037,6 +2039,7 @@
     "PacketCaptureResultProperties": {
       "properties": {
         "provisioningState": {
+          "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the packet capture session."
         }
