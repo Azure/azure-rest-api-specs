@@ -367,7 +367,7 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_ListKeys",
-        "description": "Lists the access keys for the specified storage account.",
+        "description": "Lists the access keys or Kerberos keys (if active directory enabled) for the specified storage account.",
         "x-ms-examples": {
           "StorageAccountListKeys": {
             "$ref": "./examples/StorageAccountListKeys.json"
@@ -385,6 +385,19 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "kerb"
+            ],
+            "x-ms-enum": {
+              "name": "ListKeyExpand"
+            },
+            "description": "Specifies type of the key to be listed. Possible value is kerb."
           }
         ],
         "responses": {
@@ -403,10 +416,13 @@
           "StorageAccounts"
         ],
         "operationId": "StorageAccounts_RegenerateKey",
-        "description": "Regenerates one of the access keys for the specified storage account.",
+        "description": "Regenerates one of the access keys or Kerberos keys for the specified storage account.",
         "x-ms-examples": {
           "StorageAccountRegenerateKey": {
             "$ref": "./examples/StorageAccountRegenerateKey.json"
+          },
+          "StorageAccountRegenerateKerbKey": {
+            "$ref": "./examples/StorageAccountRegenerateKerbKey.json"
           }
         },
         "parameters": [
@@ -423,7 +439,7 @@
             "schema": {
               "$ref": "#/definitions/StorageAccountRegenerateKeyParameters"
             },
-            "description": "Specifies name of the key which should be regenerated -- key1 or key2."
+            "description": "Specifies name of the key which should be regenerated -- key1, key2, kerb1, kerb2."
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -1328,18 +1344,60 @@
           "description": "Indicates the directory service used.",
           "enum": [
             "None",
-            "AADDS"
+            "AADDS",
+            "AD"
           ],
           "x-ms-enum": {
             "name": "DirectoryServiceOptions",
             "modelAsString": true
           }
+        },
+        "activeDirectoryProperties": {
+          "$ref": "#/definitions/ActiveDirectoryProperties",
+          "description": "Required if choose AD."
         }
       },
       "required": [
         "directoryServiceOptions"
       ],
       "description": "Settings for Azure Files identity based authentication."
+    },
+    "ActiveDirectoryProperties": {
+      "properties": {
+        "domainName": {
+          "type": "string",
+          "description": "Specifies the primary domain that the AD DNS server is authoritative for."
+        },
+        "netBiosDomainName": {
+          "type": "string",
+          "description": "Specifies the NetBIOS domain name."
+        },
+        "forestName": {
+          "type": "string",
+          "description": "Specifies the Active Directory forest to get."
+        },
+        "domainGuid": {
+          "type": "string",
+          "description": "Specifies the domain GUID."
+        },
+        "domainSid": {
+          "type": "string",
+          "description": "Specifies the security identifier (SID)."
+        },
+        "azureStorageSid": {
+          "type": "string",
+          "description": "Specifies the security identifier (SID) for Azure Storage."
+        }
+      },
+      "required": [
+        "domainName",
+        "netBiosDomainName",
+        "forestName",
+        "domainGuid",
+        "domainSid",
+        "azureStorageSid"
+      ],
+      "description": "Settings properties for Active Directory (AD)."
     },
     "StorageAccountPropertiesCreateParameters": {
       "properties": {
@@ -1787,7 +1845,7 @@
       "properties": {
         "keyName": {
           "type": "string",
-          "description": "The name of storage keys that want to be regenerated, possible values are key1, key2."
+          "description": "The name of storage keys that want to be regenerated, possible values are key1, key2, kerb1, kerb2."
         }
       },
       "required": [
