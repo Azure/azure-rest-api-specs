@@ -167,24 +167,14 @@
         "description": "Lists all of the Lockbox requests in the given subscription.",
         "operationId": "Requests_List",
         "x-ms-examples": {
-          "List lockbox requests in a subscription with default parameters (no OData $expand and $filters applied)": {
-            "$ref": "./examples/Requests_List_NoExpand.json"
+          "List lockbox requests with no filters": {
+            "$ref": "./examples/Requests_List.json"
           },
-          "List lockbox requests in a subscription with $expand=properties": {
-              "$ref": "./examples/Requests_List_Expand.json"
-            },
-          "List lockbox requests in a subscription with expand and filter by request status (eg. $expand=properties&$filter=properties/status eq 'Pending')": {
-              "$ref": "./examples/Requests_List_Expand_FilterByStatus.json"
+          "List lockbox requests in a subscription with filter by request status (eg. $expand=properties&$filter=properties/status eq 'Pending')": {
+              "$ref": "./examples/Requests_List_FilterByStatus.json"
           }
         },
         "parameters": [
-          {
-            "name": "$expand",
-            "in": "query",
-            "required": false,
-            "type": "string",
-            "description": "The $expand OData query parameter. Set $expand=properties to include the lockbox request properties which contains the request details in the response. The default only retunrs the direct members (frist-level) properties of each Lockbox request"
-          }, 
           {
             "name": "$filter",
             "in": "query",
