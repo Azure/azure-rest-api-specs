@@ -41,7 +41,7 @@
 				],
 				"summary": "Gets the current quota limit and usages for the resource provider for the specified location for the specific resource in the parameter.",
 				"description": "This API gets the current quota limit and usages for the specific resource for resource provider for the specified location. This response can be used to submit quotaRequests.",
-				"operationId": "Quota_listStatus",
+				"operationId": "Quota_GetStatus",
 				"x-ms-examples": {
 					"Quotas_Request_ForCompute": {
 						"$ref": "./examples/getComputeOneSkuUsages.json"
@@ -91,7 +91,7 @@
 				],
 				"summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
 				"description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which requires an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit individual request for each resource using the updated JSON object to this quota request API. This will update the quotas to the values specified. The AzureAsyncOperation header in the response will be used to track the status of the quota request. Please poll the url provided in AzureAsyncOperation Header to get the status. ",
-				"operationId": "QuotaRequest_Create",
+				"operationId": "Quotas_Create",
 				"x-ms-examples": {
 					"Quotas_Request_listForCompute": {
 						"$ref": "./examples/putComputeOneSkuQuotaRequest.json"
@@ -157,7 +157,7 @@
 				],
 				"summary": "Submits a Quota Request for a resource provider at the specified location for the specific resource in the parameter.",
 				"description": "Submits Quota change request for a resource provider for the specified location for the specific resource in the parameter. To use, first make a Get request to get quota information. This information consists of a list of resources and information regarding those resources. For all the resources in that list which requires an update to their quotas, update their limit fields in the response from the Get request to their new values. Then, submit individual request for each resource using the updated JSON object to this quota request API. This will update the quotas to the values specified. The AzureAsyncOperation header in the response will be used to track the status of the quota request. Please poll the url provided in AzureAsyncOperation Header to get the status.",
-				"operationId": "QuotaRequest_Update",
+				"operationId": "Quotas_Update",
 				"x-ms-examples": {
 					"Quotas_Request_listForCompute": {
 						"$ref": "./examples/patchComputeQuotaRequest.json"
