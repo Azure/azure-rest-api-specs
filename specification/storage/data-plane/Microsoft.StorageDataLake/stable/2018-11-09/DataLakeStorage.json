@@ -1809,7 +1809,7 @@
             "$ref": "#/parameters/ContentLength"
           },
           {
-            "$ref": "#/parameters/ContentMD5"
+            "$ref": "#/parameters/TransactionalContentMD5"
           },
           {
             "$ref": "#/parameters/LeaseIdOptional"
@@ -2243,9 +2243,22 @@
       },
       "description": "Optional. Sets the blob's content type. If specified, this property is stored with the blob and returned with a read request."
     },
-    "ContentMD5": {
+    "TransactionalContentMD5": {
       "name": "Content-MD5",
-      "x-ms-client-name": "transactionalContentMD5",
+      "x-ms-client-name": "transactionalContentHash",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "byte",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "path-HTTP-headers"
+      },
+      "description": "Specify the transactional md5 for the body, to be validated by the service."
+    },
+    "ContentMD5": {
+      "name": "x-ms-content-md5",
+      "x-ms-client-name": "contentMD5",
       "in": "header",
       "required": false,
       "type": "string",
