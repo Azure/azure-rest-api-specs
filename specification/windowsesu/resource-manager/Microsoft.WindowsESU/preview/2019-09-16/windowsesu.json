@@ -352,13 +352,13 @@
               "readOnly": true
             },
             "expirationDate": {
-              "description": "Expiration date of the MAK key.",
+              "description": "End of support of security updates activated by the MAK key.",
               "format": "date-time",
               "type": "string",
               "readOnly": true
             },
             "osType": {
-              "description": "Type of OS for which the key is requrested.",
+              "description": "Type of OS for which the key is requested.",
               "type": "string",
               "enum": [
                 "Windows7",
@@ -367,28 +367,39 @@
               ],
               "x-ms-enum": {
                 "name": "OsType",
-                "modelAsString": false
+                "modelAsString": true
+              },
+              "x-ms-mutability": ["create", "read"]
+            },
+            "supportType": {
+              "description": "Type of support",
+              "type": "string",
+              "enum": [
+                "SupplementalServicing",
+                "PremiumAssurance"
+              ],
+              "default": "SupplementalServicing",
+              "x-ms-enum": {
+                "name": "SupportType",
+                "modelAsString": true
               },
               "x-ms-mutability": ["create", "read"]
             },
             "installedServerNumber": {
               "description": "Number of activations/servers using the MAK key.",
-              "enum": [
-                "500",
-                "1000",
-                "2500",
-                "5000"
-              ],
-              "type": "string",
-              "x-ms-enum": {
-                "name": "installedServerNumber",
-                "modelAsString": true
-              },
+              "type": "integer",
+              "minimum": 1,
+              "maximum": 5000,
               "x-ms-mutability": ["create", "read"]
             },
             "agreementNumber": {
               "description": "Agreement number under which the key is requested.",
               "type": "string",
+              "x-ms-mutability": ["create", "read"]
+            },
+            "isEligible": {
+              "description": "<code> true </code> if user has eligible on-premises Windows physical or virtual machines, and that the requested key will only be used in their organization; <code> false </code> otherwise.",
+              "type": "boolean",
               "x-ms-mutability": ["create", "read"]
             },
             "provisioningState": {
