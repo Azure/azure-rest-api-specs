@@ -558,10 +558,11 @@
           },
           "enum": [
             "Office365",
-            "Ifd"
+            "Ifd",
+            "AADServicePrincipal"
           ],
           "type": "object",
-          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Dynamics server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -571,6 +572,26 @@
           "description": "Password to access the Dynamics instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredentialType": {
+          "x-ms-enum": {
+            "name": "DynamicsServicePrincipalCredentialType",
+            "modelAsString": true
+          },
+          "enum": [
+            "ServicePrincipalKey",
+            "ServicePrincipalCert"
+          ],
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -578,8 +599,7 @@
       },
       "required": [
         "deploymentType",
-        "authenticationType",
-        "username"
+        "authenticationType"
       ]
     },
     "DynamicsCrmLinkedService": {
@@ -640,10 +660,11 @@
           },
           "enum": [
             "Office365",
-            "Ifd"
+            "Ifd",
+            "AADServicePrincipal"
           ],
           "type": "string",
-          "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Dynamics CRM server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario, 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -653,6 +674,26 @@
           "description": "Password to access the Dynamics CRM instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredentialType": {
+          "x-ms-enum": {
+            "name": "DynamicsServicePrincipalCredentialType",
+            "modelAsString": true
+          },
+          "enum": [
+            "ServicePrincipalKey",
+            "ServicePrincipalCert"
+          ],
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -660,8 +701,7 @@
       },
       "required": [
         "deploymentType",
-        "authenticationType",
-        "username"
+        "authenticationType"
       ]
     },
     "CommonDataServiceForAppsLinkedService": {
@@ -722,10 +762,11 @@
           },
           "enum": [
             "Office365",
-            "Ifd"
+            "Ifd",
+            "AADServicePrincipal"
           ],
           "type": "string",
-          "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. Type: string (or Expression with resultType string)."
+          "description": "The authentication type to connect to Common Data Service for Apps server. 'Office365' for online scenario, 'Ifd' for on-premises with Ifd scenario. 'AADServicePrincipal' for Server-To-Server authentication in online scenario. Type: string (or Expression with resultType string)."
         },
         "username": {
           "type": "object",
@@ -735,6 +776,26 @@
           "description": "Password to access the Common Data Service for Apps instance.",
           "$ref": "../datafactory.json#/definitions/SecretBase"
         },
+        "servicePrincipalId": {
+          "type": "object",
+          "description": "The client ID of the application in Azure Active Directory used for Server-To-Server authentication. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredentialType": {
+          "x-ms-enum": {
+            "name": "DynamicsServicePrincipalCredentialType",
+            "modelAsString": true
+          },
+          "enum": [
+            "ServicePrincipalKey",
+            "ServicePrincipalCert"
+          ],
+          "type": "object",
+          "description": "The service principal credential type to use in Server-To-Server authentication. 'ServicePrincipalKey' for key/secret, 'ServicePrincipalCert' for certificate. Type: string (or Expression with resultType string)."
+        },
+        "servicePrincipalCredential": {
+          "$ref": "../datafactory.json#/definitions/SecretBase",
+          "description": "The credential of the service principal object in Azure Active Directory. If servicePrincipalCredentialType is 'ServicePrincipalKey', servicePrincipalCredential can be SecureString or AzureKeyVaultSecretReference. If servicePrincipalCredentialType is 'ServicePrincipalCert', servicePrincipalCredential can only be AzureKeyVaultSecretReference."
+        },
         "encryptedCredential": {
           "type": "object",
           "description": "The encrypted credential used for authentication. Credentials are encrypted using the integration runtime credential manager. Type: string (or Expression with resultType string)."
@@ -742,8 +803,7 @@
       },
       "required": [
         "deploymentType",
-        "authenticationType",
-        "username"
+        "authenticationType"
       ]
     },
     "HDInsightLinkedService": {
