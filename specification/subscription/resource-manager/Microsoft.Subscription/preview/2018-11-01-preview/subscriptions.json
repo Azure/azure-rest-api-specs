@@ -63,7 +63,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "The operation to create a new WebDirect or EA Azure subscription.",
-        "operationId": "Subscriptions_CreateSubscription",
+        "operationId": "SubscriptionFactory_CreateSubscription",
         "x-ms-examples": {
           "createSubscription": {
             "$ref": "./examples/createSubscription.json"
@@ -128,7 +128,7 @@
             "description": "The subscription creation parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/SubscriptionCreationParameters"
+              "$ref": "#/definitions/ModernSubscriptionCreationParameters"
             }
           }
         ]
@@ -137,7 +137,7 @@
     "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/customers/{customerName}/providers/Microsoft.Subscription/createSubscription": {
       "post": {
         "description": "The operation to create a new CSP subscription.",
-        "operationId": "Subscriptions_CreateCspSubscription",
+        "operationId": "SubscriptionFactory_CreateCspSubscription",
         "x-ms-examples": {
           "createSubscription": {
             "$ref": "./examples/createCspSubscription.json"
@@ -195,7 +195,7 @@
             "description": "The subscription creation parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/CspSubscriptionCreationParameters"
+              "$ref": "#/definitions/ModernCspSubscriptionCreationParameters"
             }
           }
         ]
@@ -212,7 +212,7 @@
         }
       }
     },
-    "SubscriptionCreationParameters": {
+    "ModernSubscriptionCreationParameters": {
       "description": "The parameters required to create a new subscription.",
       "required": [
         "displayName",
@@ -253,7 +253,7 @@
         }
       }
     },
-    "CspSubscriptionCreationParameters": {
+    "ModernCspSubscriptionCreationParameters": {
       "description": "The parameters required to create a new CSP subscription.",
       "required": [
         "displayName",
