@@ -31,7 +31,7 @@
                          "policy"
                         ],
                 "summary": "Accepts a new policy document and returns a JWT which expresses  used in preparation to set attestation policy.",
-                "operationId": "PrepareToSetPolicy",
+                "operationId": "Policy_PrepareToSet",
                 "consumes": [ "text/plain" ],
                 "produces": [ "text/plain", "application/json" ],
                 "parameters": [
@@ -59,7 +59,8 @@
                   "200": {
                     "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
                     "schema": {
-                      "$ref": "#/definitions/AttestationPolicy"
+                        "type": "string",
+                        "example": "some string type result"
                     }
                   },
                     "400": {
@@ -69,7 +70,17 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized"
+                        "description": "Request is unauthorized",
+                        "schema": {
+                            "type": "string",
+                            "example": "some string type result"
+                        }
+                    },
+                    "default": {
+                        "description": "error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
                     }
                 },
                 "x-ms-examples": {
@@ -86,7 +97,7 @@
                          "policy"
                         ],
                 "summary": "Retrieves the current policy for a given kind of TEE.",
-                "operationId": "GetPolicy",
+                "operationId": "Policy_Get",
                 "parameters": [
                     {
                         "$ref": "#/parameters/ApiVersionParameter"
@@ -112,7 +123,17 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized"
+                        "description": "Request is unauthorized",
+                        "schema": {
+                            "type": "string",
+                            "example": "some string type result"
+                        }
+                    },
+                    "default": {
+                        "description": "error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
                     }
                 },
                 "x-ms-examples": {
@@ -127,7 +148,7 @@
                          "policy"
                         ],
                 "summary": "Sets the policy for a given kind of TEE.",
-                "operationId": "SetPolicy",
+                "operationId": "Policy_Set",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                         {
@@ -161,7 +182,17 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized"
+                        "description": "Request is unauthorized",
+                        "schema": {
+                            "type": "string",
+                            "example": "some string type result"
+                        }
+                    },
+                    "default": {
+                        "description": "error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
                     }
                 },
                 "x-ms-examples": {
@@ -176,7 +207,7 @@
                          "policy"
                         ],
                 "summary": "Deletes the attestation policy for the specified tenant and reverts to the default policy.",
-                "operationId": "DeletePolicy",
+                "operationId": "Policy_Delete",
                 "consumes": [ "text/plain" ],
                 "parameters": [
                     {
@@ -203,7 +234,8 @@
                   "200": {
                     "description": "Success - Returns a JWT signed by the metadata signing key that contains the hash of the supplied policy to be set.",
                     "schema": {
-                      "$ref": "#/definitions/AttestationPolicy"
+                        "type": "string",
+                        "example": "some string type result"
                     }
                   },
                     "400": {
@@ -213,7 +245,17 @@
                         }
                     },
                     "401": {
-                        "description": "Request is unauthorized"
+                        "description": "Request is unauthorized",
+                        "schema": {
+                            "type": "string",
+                            "example": "some string type result"
+                        }
+                    },
+                    "default": {
+                        "description": "error response describing why the operation failed",
+                        "schema": {
+                            "$ref": "#/definitions/CloudError"
+                        }
                     }
                 },
                 "x-ms-examples": {
@@ -276,7 +318,7 @@
             "x-ms-parameter-location": "method",
             "x-ms-enum": {
                 "name": "TeeKind",
-                "modelAsString": false,
+                "modelAsString": true,
                 "values":
                 [
                     { "value": "SgxEnclave", "description": "Intel Software Guard eXtensions" },
