@@ -27,14 +27,14 @@
     ]
   },
   "host": "westcentralus.api.cognitive.microsoft.com",
-  "basePath": "/vision/v3.0",
+  "basePath": "/vision/v3.0-preview",
   "schemes": [
     "https"
   ],
   "paths": {
     "/read/core/analyze": {
       "post": {
-        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
+        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
         "operationId": "Read",
         "parameters": [
           {
@@ -68,7 +68,7 @@
           }
         },
         "x-ms-examples": {
-          "Successful Analyse request": {
+          "Successful Analyze request": {
             "$ref": "./examples/SuccessfulBatchReadFileWithUrl.json"
           }
         }
@@ -116,9 +116,12 @@
   "x-ms-paths": {
     "/read/core/analyze?overload=stream": {
       "post": {
-        "description": "Use this interface to get the result of a Read Document operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read Document interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'Get Read Result operation' to access OCR results.​",
+        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
         "operationId": "ReadInStream",
         "parameters": [
+          {
+            "$ref": "#/parameters/OcrDetectionLanguage"
+          },
           {
             "$ref": "#/parameters/ImageStream"
           }
