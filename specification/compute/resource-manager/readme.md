@@ -134,6 +134,10 @@ directive:
       - $.definitions.DedicatedHostUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.DiskEncryptionSetParameters
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
 
   - where:
       - $.definitions.VirtualMachineScaleSetVM
@@ -156,10 +160,6 @@ directive:
     suppress:
       - TrackedResourcePatchOperation
   - where:
-      - $.definitions.VirtualMachineImageResource
-    suppress:
-      - TrackedResourceGetOperation
-  - where:
       - $.definitions.Gallery
     suppress:
       - TrackedResourcePatchOperation
@@ -172,19 +172,29 @@ directive:
     suppress:
       - TrackedResourcePatchOperation
 
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourceGetOperation
 
   - where:
       - $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
     suppress:
       - DefinitionsPropertiesNamesCamelCase
-
-
   - where:
       - $.definitions.DiskProperties.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
   - where:
       - $.definitions.DiskUpdateProperties.properties.diskIOPSReadWrite
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
+      - $.definitions.DataDisk.properties.diskIOPSReadWrite
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
+      - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
 
