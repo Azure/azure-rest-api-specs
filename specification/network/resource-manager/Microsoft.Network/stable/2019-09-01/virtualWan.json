@@ -3122,7 +3122,7 @@
           "200": {
             "description": "Request successful. Returns the details of all the VirtualHubRouteTableV2s for the VirtualHub.",
             "schema": {
-              "$ref": "#/definitions/ListHubVirtualNetworkConnectionsResult"
+              "$ref": "#/definitions/ListVirtualHubRouteTableV2sResult"
             }
           },
           "default": {
@@ -4553,6 +4553,22 @@
         }
       },
       "description": "VirtualHubRouteTableV2 route."
+    },
+    "ListVirtualHubRouteTableV2sResult": {
+      "description": "List of VirtualHubRouteTableV2s and a URL nextLink to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualHubRouteTableV2"
+          },
+          "description": "List of VirtualHubRouteTableV2s."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      }
     }
   }
 }
