@@ -476,7 +476,7 @@
         "tags": [
           "Charges"
         ],
-        "operationId": "Charges_ListByScope",
+        "operationId": "Charges_List",
         "description": "Lists the charges based for the defined scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -775,7 +775,7 @@
         "tags": [
           "ReservationSummaries"
         ],
-        "operationId": "ReservationsSummaries_ListByScope",
+        "operationId": "ReservationsSummaries_List",
         "description": "Lists the reservations summaries for the defined scope daily or monthly grain.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -953,7 +953,7 @@
         "tags": [
           "ReservationDetails"
         ],
-        "operationId": "ReservationsDetails_ListByScope",
+        "operationId": "ReservationsDetails_List",
         "description": "Lists the reservations details for the defined scope and provided date range.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1021,7 +1021,7 @@
         "tags": [
           "ReservationRecommendations"
         ],
-        "operationId": "ReservationRecommendations_ListByScope",
+        "operationId": "ReservationRecommendations_List",
         "description": "List of recommendations for purchasing reserved instances.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1080,7 +1080,7 @@
         "tags": [
           "ReservationTransactions"
         ],
-        "operationId": "ReservationTransactions_ListByBillingAccountId",
+        "operationId": "ReservationTransactions_List",
         "description": "List of transactions for reserved instances on billing account scope",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1437,7 +1437,7 @@
 		"tags": [
 		  "Events"
 		],
-		"operationId": "EventsByBillingProfile_List",
+		"operationId": "Events_List",
 		"description": "Lists the events by billingAccountId and billingProfileId for given start and end date.",
 		"externalDocs": {
 		  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1488,7 +1488,7 @@
 		"tags": [
 		  "Lots"
 		],
-		"operationId": "LotsByBillingProfile_List",
+		"operationId": "Lots_List",
 		"description": "Lists the lots by billingAccountId and billingProfileId.",
 		"externalDocs": {
 		  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -1533,7 +1533,7 @@
 		"tags": [
 		  "Credits"
 		],
-		"operationId": "CreditSummaryByBillingProfile_Get",
+		"operationId": "Credits_Get",
 		"description": "The credit summary by billingAccountId and billingProfileId.",
 		"externalDocs": {
 		  "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
@@ -2073,7 +2073,7 @@
           "readOnly": true
         },
         "additionalInfo": {
-          "description": "Additional details of this usage item. By default this is not populated, unless it's specified in $expand. Use this field to get usage line item specific details such as the actual VM Size (ServiceType) or the ratio in which the reservation discount is applied.",
+          "description": "Additional details of this usage item. Use this field to get usage line item specific details such as the actual VM Size (ServiceType) or the ratio in which the reservation discount is applied.",
           "type": "string",
           "readOnly": true
         },
@@ -2123,7 +2123,7 @@
           "readOnly": true
         },
         "term": {
-          "description": "Term (in months). Displays the term for the validity of the offer. For example. In case of reserved instances it displays 12 months for yearly term of reserved instance. For one time purchases or recurring purchases, the terms displays 1 month )(SaaS, Marketplace Support) (1 month); This is not applicable for Azure consumption.",
+          "description": "Term (in months). Displays the term for the validity of the offer. For example. In case of reserved instances it displays 12 months for yearly term of reserved instance. For one time purchases or recurring purchases, the terms displays 1 month; This is not applicable for Azure consumption.",
           "type": "string",
           "readOnly": true
         },
