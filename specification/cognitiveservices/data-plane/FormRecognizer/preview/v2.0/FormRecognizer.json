@@ -413,11 +413,7 @@
         ],
         "parameters": [
           {
-            "name": "language",
-            "in": "query",
-            "description": "The IETF RFC 5646 language code of the text to be detected in the image. \"en\" (English) and \"es\" (Spanish) are supported.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/OcrLanguage"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -994,7 +990,7 @@
       }
     },
     "AnalyzeLayoutResult": {
-      "description": "Analyze operation result.",
+      "description": "Analyze layout operation result.",
       "type": "object",
       "required": [
         "version",
@@ -1446,6 +1442,22 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "OcrLanguage": {
+      "name": "language",
+      "in": "query",
+      "description": "The BCP-47 language code of the text to be detected in the image.",
+      "required": true,
+      "x-ms-parameter-location": "method",
+      "type": "string",
+      "x-ms-enum": {
+        "name": "OcrDetectionLanguage",
+        "modelAsString": true
+      },
+      "enum": [
+        "en",
+        "es"
+      ]
     },
     "FileStream": {
       "name": "fileStream",
