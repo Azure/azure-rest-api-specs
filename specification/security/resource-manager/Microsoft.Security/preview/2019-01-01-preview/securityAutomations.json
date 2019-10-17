@@ -1,0 +1,618 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Center",
+    "description": "API spec for Microsoft.Security (Azure Security Center) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": ["https"],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "security": [{
+    "azure_auth": ["user_impersonation"]
+  }],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityAutomations": {
+      "get": {
+        "x-ms-examples": {
+          "Get security automations of subscription": {
+            "$ref": "./examples/SecurityAutomations/GetSecurityAutomationsSubscription_example.json"
+          }
+        },
+        "tags": ["SecurityAutomations"],
+        "description": "Get all security automations in a subscription.",
+        "operationId": "SecurityAutomations_List",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAutomationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityAutomations": {
+      "get": {
+        "x-ms-examples": {
+          "Get security automations of a single resource group": {
+            "$ref": "./examples/SecurityAutomations/GetSecurityAutomationsResourceGroup_example.json"
+          }
+        },
+        "tags": ["SecurityAutomations"],
+        "description": "Get all security automations in a resource group.",
+        "operationId": "SecurityAutomations_ListByResourceGroup",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAutomationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityAutomations/{securityAutomationName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get a single security automation details": {
+            "$ref": "./examples/SecurityAutomations/GetSecurityAutomationResourceGroup_example.json"
+          }
+        },
+        "tags": ["SecurityAutomations"],
+        "description": "Get the details of a security automation.",
+        "operationId": "SecurityAutomations_Get",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAutomation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "put": {
+        "x-ms-examples": {
+          "Create or update a single security automation": {
+            "$ref": "./examples/SecurityAutomations/PutSecurityAutomation_example.json"
+          }
+        },
+        "tags": ["SecurityAutomations"],
+        "description": "Create or update a security automation. If a security automation is already created and a subsequent create request is issued with different properties, the security automation properties will be updated.",
+        "operationId": "SecurityAutomations_CreateOrUpdate",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAutomation"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/SecurityAutomation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "patch": {
+        "x-ms-examples": {
+          "Create or update a single security automation": {
+            "$ref": "./examples/SecurityAutomations/PatchSecurityAutomation_example.json"
+          }
+        },
+        "tags": ["SecurityAutomations"],
+        "description": "Patch an existing security automation. Supports only Tags",
+        "operationId": "SecurityAutomations_Patch",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAutomation"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Delete a single security automation": {
+            "$ref": "./examples/SecurityAutomations/DeleteSecurityAutomation_example.json"
+          }
+        },
+        "tags": ["SecurityAutomations"],
+        "operationId": "SecurityAutomations_Delete",
+        "description": "Delete a security automation.",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationName"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "NoContent"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityAutomations/{securityAutomationName}/validate": {
+      "post": {
+        "x-ms-examples": {
+          "Validate the security automation model before create or update": {
+            "$ref": "./examples/SecurityAutomations/ValidateSecurityAutomation_example.json"
+          }
+        },
+        "tags": ["SecurityAutomations"],
+        "description": "Validate the security automation model before create or update. Any validation errors are returned to the client.",
+        "operationId": "SecurityAutomations_Validate",
+        "parameters": [{
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationName"
+          },
+          {
+            "$ref": "#/parameters/SecurityAutomationInBody"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/SecurityAutomationValidationStatus"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SecurityAutomationList": {
+      "description": "List of security automations response.",
+      "required": ["value"],
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of security automations under the given scope.",
+          "items": {
+            "$ref": "#/definitions/SecurityAutomation"
+          }
+        },
+        "nextLink": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The URI to fetch the next page."
+        }
+      }
+    },
+    "SecurityAutomation": {
+      "type": "object",
+      "description": "The security automation resource.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Security automation data",
+          "$ref": "#/definitions/SecurityAutomationProperties"
+        }
+      },
+      "allOf": [{
+        "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+      }]
+    },
+    "SecurityAutomationProperties": {
+      "type": "object",
+      "description": "The security automation data.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The security automation description."
+        },
+        "isEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the security automation is enabled."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "The metadata of the security automation resource.",
+          "$ref": "#/definitions/SecurityAutomationMetadata"
+        },
+        "scopes": {
+          "type": "array",
+          "description": "A collection of the subscription's resources  scopes on which the security automations logic is applied.",
+          "items": {
+            "$ref": "#/definitions/SecurityAutomationScope"
+          }
+        },
+        "sources": {
+          "type": "array",
+          "description": "A collection of the source event types which evaluate the security automation set of rules.",
+          "items": {
+            "$ref": "#/definitions/SecurityAutomationSource"
+          }
+        },
+        "actions": {
+          "type": "array",
+          "description": "A collection of the actions which are triggered if all the configured rule set evaluation is true.",
+          "items": {
+            "$ref": "#/definitions/SecurityAutomationAction"
+          }
+        }
+      }
+    },
+    "SecurityAutomationMetadata": {
+      "type": "object",
+      "description": "The metadata of the security automation resource.",
+      "properties": {
+        "createdDateTimeUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The security automation creation date."
+        },
+        "createdBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The AAD object ID of the entity that created the security automation."
+        },
+        "lastUpdatedDateTimeUtc": {
+          "readOnly": true,
+          "type": "string",
+          "format": "date-time",
+          "description": "The security automation last updated date."
+        },
+        "lastUpdatedBy": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The AAD object ID of the entity that last updated the security automation."
+        }
+      }
+    },
+    "SecurityAutomationSource": {
+      "type": "object",
+      "description": "The source event types which evaluate the security automation set of rules. For example - security alerts and recommended tasks.",
+      "properties": {
+        "eventSource": {
+          "type": "string",
+          "description": "A valid event source type."
+        },
+        "ruleSets": {
+          "type": "array",
+          "description": "A set of rules which evaluate upon event interception.",
+          "items": {
+            "$ref": "#/definitions/SecurityAutomationRuleSet"
+          }
+        }
+      }
+    },
+    "SecurityAutomationScope": {
+      "type": "object",
+      "description": "The subscription's resources scope",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "The resources scope description."
+        },
+        "scopePath": {
+          "type": "string",
+          "description": "The resources scope path."
+        }
+      }
+    },
+    "SecurityAutomationAction": {
+      "type": "object",
+      "description": "The action that should be triggered.",
+      "discriminator": "actionType",
+      "properties": {
+        "actionType": {
+          "type": "string",
+          "description": "type of action that will be triggered by the SecurityAutomation",
+          "enum": ["LogicApp", "EventHub", "SecurityEmail"],
+          "x-ms-enum": {
+            "name": "ActionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "LogicApp"
+              },
+              {
+                "value": "EventHub"
+              },
+              {
+                "value": "SecurityEmail"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "SecurityAutomationActionLogicApp": {
+      "type": "object",
+      "description": "The logic app action that should be triggered.",
+      "x-ms-discriminator-value": "LogicApp",
+      "allOf": [{
+        "$ref": "#/definitions/SecurityAutomationAction"
+      }],
+      "properties": {
+        "logicAppResourceId": {
+          "type": "string",
+          "description": "The triggered resource id."
+        },
+        "uri": {
+          "type": "string",
+          "description": "The uri that should be triggered by an Http GET request.",
+          "format": "uri"
+        }
+      }
+    },
+    "SecurityAutomationActionEventHub": {
+      "type": "object",
+      "description": "The event hub action that should be triggered.",
+      "x-ms-discriminator-value": "EventHub",
+      "allOf": [{
+        "$ref": "#/definitions/SecurityAutomationAction"
+      }],
+      "properties": {
+        "eventHubResourceId": {
+          "type": "string",
+          "description": "The event hub resource id."
+        },
+        "connectionString": {
+          "type": "string",
+          "description": "The event hub connection string(the primary or secondary key)."
+        }
+      }
+    },
+    "SecurityAutomationActionSecurityEmail": {
+      "type": "object",
+      "description": "The Security Email action that should be triggered.",
+      "x-ms-discriminator-value": "SecurityEmail",
+      "allOf": [{
+        "$ref": "#/definitions/SecurityAutomationAction"
+      }],
+      "properties": {
+        "subscriptionRbacRoles": {
+          "type": "array",
+          "description": "A list of RBAC roles of the subscription for the email to be sent to.",
+          "items": {
+            "type":"string",
+            "enum":[
+              "AccountAdmin",
+              "ServiceAdmin",
+              "Owner",
+              "Contributor"
+            ]
+          } 
+        },
+        "emailAddresses": {
+          "type": "array",
+          "description": "A list of email addresses for the email to be sent to.",
+          "items": {
+              "type": "string",
+              "format": "email"
+          }
+        }
+      }
+    },
+    "SecurityAutomationRuleSet": {
+      "type": "object",
+      "description": "A rule set which evaluates all its rules upon an event interception.",
+      "properties": {
+        "rules": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityAutomationTriggeringRule"
+          }
+        }
+      }
+    },
+    "SecurityAutomationTriggeringRule": {
+      "type": "object",
+      "description": "A logic rule which evaluates upon event interception. The rule is configured by comparing the specified expected value, in an expected property within the event model, by the specified operator.",
+      "properties": {
+        "propertyJPath": {
+          "type": "string",
+          "description": "The JPath of the entity model property that should be checked."
+        },
+        "propertyType": {
+          "type": "string",
+          "description": "The data type of the compared operands.",
+          "enum": [
+            "string",
+            "integer",
+            "number",
+            "boolean"
+          ]
+        },
+        "expectedValue": {
+          "type": "string",
+          "description": "The expected value."
+        },
+        "operator": {
+          "type": "string",
+          "description": "A valid comparer operator to use.",
+          "enum": [
+            "Equals",
+            "EqualsIgnoreCase",
+            "GreaterThan",
+            "GreaterThanOrEqualTo",
+            "LesserThan",
+            "LesserThanOrEqualTo",
+            "NotEquals",
+            "NotEqualsIgnoreCase",
+            "Contains",
+            "StartsWith",
+            "EndsWith"
+          ]
+        }
+      }
+    },
+    "SecurityAutomationValidationStatus": {
+      "type": "object",
+      "description": "The security automation model state property bag.",
+      "properties": {
+        "isValid": {
+          "type": "boolean",
+          "description": "Indicates whether the model is valid or not."
+        },
+        "message": {
+          "type": "string",
+          "description": "The validation message."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "SecurityAutomationName": {
+      "name": "securityAutomationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The security automation name.",
+      "x-ms-parameter-location": "method"
+    },
+    "SecurityAutomationInBody": {
+      "name": "SecurityAutomation",
+      "in": "body",
+      "required": true,
+      "description": "The security automation resource",
+      "schema": {
+        "$ref": "#/definitions/SecurityAutomation"
+      }
+    }
+  }
+}
