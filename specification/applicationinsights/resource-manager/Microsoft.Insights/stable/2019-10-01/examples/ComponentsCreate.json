@@ -7,9 +7,10 @@
     "InsightProperties": {
       "location": "South Central US",
       "kind": "web",
-      "tags": {
-        "ApplicationGatewayType": "Internal-Only",
-        "BillingEntity": "Self"
+      "properties": {
+        "Application_Type": "web",
+        "Flow_Type": "Bluefield",
+        "Request_Source": "rest"
       }
     }
   },
@@ -20,10 +21,7 @@
         "name": "my-component",
         "type": "Microsoft.Insights/components",
         "location": "South Central US",
-        "tags": {
-          "ApplicationGatewayType": "Internal-Only",
-          "BillingEntity": "Self"
-        },
+        "tags": "",
         "kind": "web",
         "properties": {
           "ApplicationId": "my-component",
@@ -37,7 +35,8 @@
           "HockeyAppId": "",
           "HockeyAppToken": "",
           "provisioningState": "Succeeded",
-          "SamplingPercentage": 100.0
+          "SamplingPercentage": 100.0,
+          "RetentionInDays": 90
         }
       }
     }
