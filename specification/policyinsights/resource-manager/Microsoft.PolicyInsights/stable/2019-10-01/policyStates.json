@@ -237,9 +237,9 @@
             "$ref": "#/parameters/toParameter"
           },
           {
-            "$ref": "#/parameters/filterParameter"            
+            "$ref": "#/parameters/filterParameter"
           }
-        ],        
+        ],
         "responses": {
           "200": {
             "description": "Summarize results.",
@@ -998,9 +998,9 @@
           }
         }
       }
-    }    
-  },     
-    "definitions": {
+    }
+  },
+  "definitions": {
     "PolicyStatesQueryResults": {
       "description": "Query results.",
       "properties": {
@@ -1058,7 +1058,7 @@
         },
         "isCompliant": {
           "description": "Flag which states whether the resource is compliant against the policy assignment it was evaluated against. This property is deprecated; please use ComplianceState instead.",
-          "type": "boolean"          
+          "type": "boolean"
         },
         "subscriptionId": {
           "description": "Subscription ID.",
@@ -1284,7 +1284,7 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
-        },        
+        },
         "resourceDetails": {
           "description": "The resources summary at this level.",
           "type": "array",
@@ -1297,14 +1297,14 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComplianceDetail"
-          }          
+          }
         },
         "policyGroupDetails": {
           "description": "The policy definition group summary at this level.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComplianceDetail"
-          }          
+          }
         }
       }
     },
@@ -1313,14 +1313,14 @@
       "properties": {
         "complianceState": {
           "description": "The compliance state.",
-          "type": "string"          
+          "type": "string"
         },
         "count": {
           "description": "Summarized count value for this compliance state.",
           "type": "integer",
           "format": "int32"
         }
-      }      
+      }
     },
     "PolicyAssignmentSummary": {
       "description": "Policy assignment summary.",
@@ -1387,7 +1387,7 @@
         "policyGroupName": {
           "description": "Policy group name.",
           "type": "string"
-        },        
+        },
         "results": {
           "description": "Compliance summary for the policy definition group.",
           "$ref": "#/definitions/SummaryResults"
