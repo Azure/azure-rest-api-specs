@@ -437,7 +437,7 @@
           }
         },
         "x-ms-examples": {
-          "Analyze Layout": {
+          "Analyze layout": {
             "$ref": "./examples/LayoutBatch.json"
           }
         }
@@ -446,6 +446,7 @@
     "/layout/analyzeResults/{resultId}": {
       "get": {
         "summary": "Get Analyze Layout Result",
+        "description": "Track the progress and obtain the result of the analyze layout operation",
         "operationId": "GetAnalyzeLayoutResult",
         "consumes": [],
         "produces": [
@@ -465,7 +466,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AnalyzeLayoutOperationResult"
+              "$ref": "#/definitions/AnalyzeOperationResult"
             }
           },
           "default": {
@@ -958,72 +959,6 @@
         }
       }
     },
-    "AnalyzeLayoutOperationResult": {
-      "description": "Status and result of the queued analyze layout operation.",
-      "type": "object",
-      "required": [
-        "status",
-        "createdDateTime",
-        "lastUpdatedDateTime"
-      ],
-      "properties": {
-        "status": {
-          "description": "Operation status.",
-          "$ref": "#/definitions/OperationStatus"
-        },
-        "createdDateTime": {
-          "format": "date-time",
-          "description": "Date and time (UTC) the analyze operation was submitted.",
-          "type": "string",
-          "x-nullable": false
-        },
-        "lastUpdatedDateTime": {
-          "format": "date-time",
-          "description": "Date and time (UTC) when the status is last updated.",
-          "type": "string",
-          "x-nullable": false
-        },
-        "analyzeResult": {
-          "description": "Results of the analyze layout operation.",
-          "$ref": "#/definitions/AnalyzeLayoutResult"
-        }
-      }
-    },
-    "AnalyzeLayoutResult": {
-      "description": "Analyze layout operation result.",
-      "type": "object",
-      "required": [
-        "version",
-        "readResults"
-      ],
-      "properties": {
-        "version": {
-          "description": "Version of schema used for this result.",
-          "type": "string"
-        },
-        "readResults": {
-          "description": "Text extracted from the input.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ReadResult"
-          }
-        },
-        "pageResults": {
-          "description": "Page-level information extracted from the input.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/PageResult"
-          }
-        },
-        "errors": {
-          "description": "List of errors reported during the analyze operation.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/FormOperationError"
-          }
-        }
-      }
-    },
     "Language": {
       "description": "Language code",
       "type": "string",
@@ -1451,7 +1386,7 @@
       "x-ms-parameter-location": "method",
       "type": "string",
       "x-ms-enum": {
-        "name": "OcrDetectionLanguage",
+        "name": "Language",
         "modelAsString": true
       },
       "enum": [
