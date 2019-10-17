@@ -492,64 +492,6 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
-      },
-      "patch": {
-        "tags": [
-          "RouteFilterRules"
-        ],
-        "operationId": "RouteFilterRules_UpdateTags",
-        "description": "Updates tags of a route filter rule.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeFilterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route filter."
-          },
-          {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route filter rule."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to update route filter rule tags."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Update successful. The operation returns the resulting Route Filter Rule resource.",
-            "schema": {
-              "$ref": "#/definitions/RouteFilterRule"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update route filter rule tags": {
-            "$ref": "./examples/RouteFilterRuleUpdateTags.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
