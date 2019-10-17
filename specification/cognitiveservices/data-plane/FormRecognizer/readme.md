@@ -101,6 +101,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/preview/v2.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizer.json
   - $(this-folder)/preview/v1.0/FormRecognizerReceipt.json
   - $(this-folder)/preview/v1.0/FormRecognizerReceiptOcr.json
