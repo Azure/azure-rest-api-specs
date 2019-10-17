@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "3.0",
+    "version": "3.0-preview",
     "title": "Computer Vision Client",
     "description": "The Computer Vision API provides state-of-the-art algorithms to process images and return information. For example, it can be used to determine if an image contains mature content, or it can be used to find all the faces in an image.  It also has other features like estimating dominant and accent colors, categorizing the content of images, and describing an image with complete English sentences.  Additionally, it can also intelligently generate images thumbnails for displaying large images effectively."
   },
@@ -34,7 +34,7 @@
   "paths": {
     "/read/core/analyze": {
       "post": {
-        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called 'location'. The 'location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
+        "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read File interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
         "operationId": "Read",
         "parameters": [
           {
@@ -54,7 +54,7 @@
           "202": {
             "description": "The service has accepted the request and will start processing later.",
             "headers": {
-              "location": {
+              "Operation-Location": {
                 "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
                 "type": "string"
               }
@@ -76,7 +76,7 @@
     },
     "/read/core/{operationId}": {
       "get": {
-        "description": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from 'location' field returned from Read interface.",
+        "description": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from 'Operation-Location' field returned from Read interface.",
         "operationId": "GetReadResult",
         "parameters": [
           {
@@ -84,7 +84,8 @@
             "in": "path",
             "description": "Id of read operation returned in the response of the 'Read' interface.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uuid"
           }
         ],
         "produces": [
@@ -115,7 +116,7 @@
   "x-ms-paths": {
     "/read/core/analyze?overload=stream": {
       "post": {
-        "description": "Use this interface to get the result of a Read Document operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read Document interface, the response contains a field called 'location'. The 'location' field contains the URL that you must use for your 'Get Read Result operation' to access OCR results.​",
+        "description": "Use this interface to get the result of a Read Document operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read Document interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'Get Read Result operation' to access OCR results.​",
         "operationId": "ReadInStream",
         "parameters": [
           {
@@ -132,7 +133,7 @@
           "202": {
             "description": "The service has accepted the request and will start processing later.",
             "headers": {
-              "location": {
+              "Operation-Location": {
                 "description": "URL to query for status of the operation. The operation ID will expire in 48 hours. ",
                 "type": "string"
               }
