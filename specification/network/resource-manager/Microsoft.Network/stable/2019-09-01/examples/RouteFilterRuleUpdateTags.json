@@ -5,14 +5,9 @@
     "resourceGroupName": "rg1",
     "api-version": "2019-09-01",
     "subscriptionId": "subid",
-    "routeFilterRuleParameters": {
-      "properties": {
-        "access": "Allow",
-        "routeFilterRuleType": "Community",
-        "communities": [
-          "12076:5030",
-          "12076:5040"
-        ]
+    "parameters": {
+      "tags": {
+        "key1": "value1"
       }
     }
   },
@@ -22,6 +17,9 @@
         "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/routeFilters/filterName/routeFilterRules/ruleName",
         "etag": "w/\\00000000-0000-0000-0000-000000000000\\",
         "name": "ruleName",
+        "tags": {
+          "key1": "value1"
+        },
         "properties": {
           "provisioningState": "Succeeded",
           "access": "Allow",

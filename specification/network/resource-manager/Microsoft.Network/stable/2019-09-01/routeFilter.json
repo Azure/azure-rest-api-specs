@@ -198,13 +198,8 @@
         "tags": [
           "RouteFilters"
         ],
-        "operationId": "RouteFilters_Update",
-        "x-ms-examples": {
-          "RouteFilterUpdate": {
-            "$ref": "./examples/RouteFilterUpdate.json"
-          }
-        },
-        "description": "Updates a route filter in a specified resource group.",
+        "operationId": "RouteFilters_UpdateTags",
+        "description": "Updates tags of a route filter.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -221,13 +216,13 @@
             "description": "The name of the route filter."
           },
           {
-            "name": "routeFilterParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchRouteFilter"
+              "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to the update route filter operation."
+            "description": "Parameters supplied to update route filter tags."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -242,6 +237,11 @@
             "schema": {
               "$ref": "#/definitions/RouteFilter"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Update route filter tags": {
+            "$ref": "./examples/RouteFilterUpdateTags.json"
           }
         }
       }
@@ -497,13 +497,8 @@
         "tags": [
           "RouteFilterRules"
         ],
-        "operationId": "RouteFilterRules_Update",
-        "x-ms-examples": {
-          "RouteFilterRuleUpdate": {
-            "$ref": "./examples/RouteFilterRuleUpdate.json"
-          }
-        },
-        "description": "Updates a route in the specified route filter.",
+        "operationId": "RouteFilterRules_UpdateTags",
+        "description": "Updates tags of a route filter rule.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -527,13 +522,13 @@
             "description": "The name of the route filter rule."
           },
           {
-            "name": "routeFilterRuleParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchRouteFilterRule"
+              "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to the update route filter rule operation."
+            "description": "Parameters supplied to update route filter rule tags."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -550,7 +545,11 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Update route filter rule tags": {
+            "$ref": "./examples/RouteFilterRuleUpdateTags.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
