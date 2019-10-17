@@ -183,46 +183,6 @@
           }
         }
       },
-      "patch": {
-        "x-ms-examples": {
-          "Create or update a single security automation": {
-            "$ref": "./examples/SecurityAutomations/PatchSecurityAutomation_example.json"
-          }
-        },
-        "tags": ["SecurityAutomations"],
-        "description": "Patch an existing security automation. Supports only Tags",
-        "operationId": "SecurityAutomations_Patch",
-        "parameters": [{
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionId"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/SecurityAutomationName"
-          },
-          {
-            "$ref": "#/parameters/SecurityAutomationInBody"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/SecurityAutomation"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../common/v1/types.json#/definitions/CloudError"
-            }
-          }
-        }
-      },
       "delete": {
         "x-ms-examples": {
           "Delete a single security automation": {
