@@ -417,7 +417,7 @@
             "in": "query",
             "description": "The IETF RFC 5646 language code of the text to be detected in the image. \"en\" (English) and \"es\" (Spanish) are supported.",
             "required": true,
-            "$ref": "#/definitions/Language"
+            "type": "string"
           },
           {
             "$ref": "#/parameters/FileStream"
@@ -469,7 +469,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AnalyzeOperationResult"
+              "$ref": "#/definitions/AnalyzeLayoutOperationResult"
             }
           },
           "default": {
@@ -958,6 +958,72 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/TextLine"
+          }
+        }
+      }
+    },
+    "AnalyzeLayoutOperationResult": {
+      "description": "Status and result of the queued analyze layout operation.",
+      "type": "object",
+      "required": [
+        "status",
+        "createdDateTime",
+        "lastUpdatedDateTime"
+      ],
+      "properties": {
+        "status": {
+          "description": "Operation status.",
+          "$ref": "#/definitions/OperationStatus"
+        },
+        "createdDateTime": {
+          "format": "date-time",
+          "description": "Date and time (UTC) the analyze operation was submitted.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "lastUpdatedDateTime": {
+          "format": "date-time",
+          "description": "Date and time (UTC) when the status is last updated.",
+          "type": "string",
+          "x-nullable": false
+        },
+        "analyzeResult": {
+          "description": "Results of the analyze layout operation.",
+          "$ref": "#/definitions/AnalyzeLayoutResult"
+        }
+      }
+    },
+    "AnalyzeLayoutResult": {
+      "description": "Analyze operation result.",
+      "type": "object",
+      "required": [
+        "version",
+        "readResults"
+      ],
+      "properties": {
+        "version": {
+          "description": "Version of schema used for this result.",
+          "type": "string"
+        },
+        "readResults": {
+          "description": "Text extracted from the input.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ReadResult"
+          }
+        },
+        "pageResults": {
+          "description": "Page-level information extracted from the input.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PageResult"
+          }
+        },
+        "errors": {
+          "description": "List of errors reported during the analyze operation.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FormOperationError"
           }
         }
       }
