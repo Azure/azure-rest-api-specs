@@ -770,31 +770,53 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationSummaries": {
+    "/{scope}/providers/Microsoft.Consumption/reservationSummaries": {
       "get": {
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "ReservationsSummaries_ListByBillingAccountId",
-        "description": "Lists the reservations summaries for daily or monthly grain.",
+        "operationId": "ReservationsSummaries_ListByScope",
+        "description": "Lists the reservations summaries for the defined scope daily or monthly grain.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "ReservationSummariesDailyWithReservationId": {
+          "ReservationSummariesDailyWithBillingAccountId": {
             "$ref": "./examples/ReservationSummariesDailyWithBillingAccountId.json"
           },
-          "ReservationSummariesMonthlyWithReservationId": {
+          "ReservationSummariesMonthlyWithBillingAccountId": {
             "$ref": "./examples/ReservationSummariesMonthlyWithBillingAccountId.json"
+          },
+          "ReservationSummariesDailyWithBillingProfileId": {
+            "$ref": "./examples/ReservationSummariesDailyWithBillingProfileId.json"
+          },
+          "ReservationSummariesMonthlyWithBillingProfileId": {
+            "$ref": "./examples/ReservationSummariesMonthlyWithBillingProfileId.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/scopeReservationsSummariesParameter"
           },
           {
             "$ref": "#/parameters/grainParameter"
           },
+		  {
+		    "name": "startDate",
+		    "in": "query",
+		    "description": "Start date",
+		    "required": false,
+		    "type": "string",
+		    "x-ms-parameter-location": "method"
+		  },
+		  {
+		    "name": "endDate",
+		    "in": "query",
+		    "description": "End date",
+		    "required": false,
+		    "type": "string",
+		    "x-ms-parameter-location": "method"
+		  },
           {
             "name": "$filter",
             "description": "Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'",
@@ -926,30 +948,49 @@
         }
       }
     },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/Microsoft.Consumption/reservationDetails": {
+    "/{scope}/providers/Microsoft.Consumption/reservationDetails": {
       "get": {
         "tags": [
           "ReservedInstances"
         ],
-        "operationId": "ReservationsDetails_ListByBillingAccountId",
-        "description": "Lists the reservations details for provided date range.",
+        "operationId": "ReservationsDetails_ListByScope",
+        "description": "Lists the reservations details for the defined scope and provided date range.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "ReservationDetails": {
+          "ReservationDetailsByBillingAccountId": {
             "$ref": "./examples/ReservationDetailsByBillingAccountId.json"
+          },
+          "ReservationDetailsByBillingProfileId": {
+            "$ref": "./examples/ReservationDetailsByBillingProfileId.json"
           }
         },
         "parameters": [
           {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/scopeReservationDetailsParameter"
           },
+  		  {
+		    "name": "startDate",
+		    "in": "query",
+		    "description": "Start date",
+		    "required": false,
+		    "type": "string",
+		    "x-ms-parameter-location": "method"
+		  },
+		  {
+		    "name": "endDate",
+		    "in": "query",
+		    "description": "End date",
+		    "required": false,
+		    "type": "string",
+		    "x-ms-parameter-location": "method"
+		  },
           {
             "name": "$filter",
             "description": "Filter reservation details by date range. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge' ",
             "in": "query",
-            "required": true,
+            "required": false,
             "type": "string"
           },
           {
@@ -975,7 +1016,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Consumption/reservationRecommendations": {
+    "/{scope}/providers/Microsoft.Consumption/reservationRecommendations": {
       "get": {
         "tags": [
           "ReservationRecommendations"
@@ -986,12 +1027,19 @@
           "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
         },
         "x-ms-examples": {
-          "ReservationRecommendations": {
-            "$ref": "./examples/ReservationRecommendationsList.json"
+          "ReservationRecommendationsBySubscription-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsBySubscription.json"
           },
-          "ReservationRecommendationsFilterByScopeLookBackPeriod": {
-            "$ref": "./examples/ReservationRecommendationsFilterByScopeLookBackPeriod.json"
+          "ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsFilterBySubscriptionForScopeLookBackPeriod.json"
+          },
+		  "ReservationRecommendationsByBillingAccount-Legacy": {
+            "$ref": "./examples/ReservationRecommendationsByBillingAccount.json"
+          },
+ 		  "ReservationRecommendationsByBillingProfile-Modern": {
+            "$ref": "./examples/ReservationRecommendationsByBillingProfile.json"
           }
+
         },
         "parameters": [
           {
@@ -1005,56 +1053,7 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "$ref": "#/parameters/subscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK. The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ReservationRecommendationsListResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/providers/microsoft.consumption/ReservationRecommendations": {
-      "get": {
-        "tags": [
-          "ReservationRecommendations"
-        ],
-        "operationId": "ReservationRecommendations_ListByBillingAccountId",
-        "description": "List of recommendations for purchasing reserved instances on billing account scope",
-        "externalDocs": {
-          "url": "https://docs.microsoft.com/en-us/rest/api/consumption/"
-        },
-        "x-ms-examples": {
-          "ReservationRecommendations": {
-            "$ref": "./examples/ReservationRecommendationsByBillingAccountList.json"
-          }
-        },
-        "parameters": [
-          {
-            "name": "$filter",
-            "description": "May be used to filter reservationRecommendations by properties/scope and properties/lookBackPeriod.",
-            "in": "query",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/billingAccountIdParameter"
+            "$ref": "#/parameters/scopeReservationRecommendationsParameter"
           }
         ],
         "responses": {
@@ -2823,25 +2822,6 @@
         }
       }
     },
-    "ReservationRecommendation": {
-      "description": "Reservation recommendation resource.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Resource"
-        },
-        {
-          "$ref": "#/definitions/ResourceAttributes"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/ReservationRecommendationProperties",
-          "title": "Reservation Recommendation properties"
-        }
-      }
-    },
     "ReservationRecommendationsListResult": {
       "description": "Result of listing reservation recommendations.",
       "properties": {
@@ -2860,7 +2840,57 @@
         }
       }
     },
-    "ReservationRecommendationProperties": {
+	"ReservationRecommendation": {
+      "description": "A reservation recommendation resource.",
+      "type": "object",
+      "discriminator": "kind",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        },
+        {
+          "$ref": "#/definitions/ResourceAttributes"
+        }
+      ],
+      "properties": {
+        "kind": {
+          "type": "string",
+          "description": "Specifies the kind of reservation recommendation.",
+          "enum": [
+            "legacy",
+            "modern"
+          ],
+          "x-ms-enum": {
+            "name": "ReservationRecommendationKind",
+            "modelAsString": true
+          }
+        }
+      },
+      "required": [
+        "kind"
+      ]
+    },
+    "LegacyReservationRecommendation": {
+      "description": "Legacy reservation recommendation.",
+      "type": "object",
+      "x-ms-discriminator-value": "legacy",
+      "properties": {
+        "properties": {
+          "description": "Properties for legacy reservation recommendation",
+          "$ref": "#/definitions/LegacyReservationRecommendationProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReservationRecommendation"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "LegacyReservationRecommendationProperties": {
       "description": "The properties of the reservation recommendation.",
       "properties": {
         "lookBackPeriod": {
@@ -2955,6 +2985,107 @@
         "value": {
           "description": "The value of sku property.",
           "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+	"ModernReservationRecommendation": {
+      "description": "Modern reservation recommendation.",
+      "type": "object",
+      "x-ms-discriminator-value": "modern",
+      "properties": {
+        "properties": {
+          "description": "Properties for modern reservation recommendation",
+          "$ref": "#/definitions/ModernReservationRecommendationProperties",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ReservationRecommendation"
+        }
+      ],
+      "required": [
+        "properties"
+      ]
+    },
+    "ModernReservationRecommendationProperties": {
+      "description": "The properties of the reservation recommendation.",
+      "properties": {
+        "lookBackPeriod": {
+          "description": "The number of days of usage to look back for recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "instanceFlexibilityRatio": {
+          "description": "The instance Flexibility Ratio.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "instanceFlexibilityGroup": {
+          "description": "The instance Flexibility Group.",
+          "type": "string",
+          "readOnly": true
+        },
+        "normalizedSize": {
+          "description": "The normalized Size.",
+          "type": "string",
+          "readOnly": true
+        },
+        "recommendedQuantityNormalized": {
+          "description": "The recommended Quantity Normalized.",
+          "type": "number",
+          "readOnly": true
+        },
+        "meterId": {
+          "description": "The meter id (GUID)",
+          "type": "string",
+          "format": "uuid",
+          "readOnly": true
+        },
+        "term": {
+          "description": "RI recommendations in one or three year terms.",
+          "type": "string",
+          "readOnly": true
+        },
+        "costWithNoReservedInstances": {
+          "description": "The total amount of cost without reserved instances.",
+          "$ref": "#/definitions/amount",
+          "readOnly": true
+        },
+        "recommendedQuantity": {
+          "description": "Recommended quality for reserved instances.",
+          "type": "number",
+          "format": "decimal",
+          "readOnly": true
+        },
+        "totalCostWithReservedInstances": {
+          "description": "The total amount of cost with reserved instances.",
+          "$ref": "#/definitions/amount",
+          "readOnly": true
+        },
+        "netSavings": {
+          "description": "Total estimated savings with reserved instances.",
+          "$ref": "#/definitions/amount",
+          "readOnly": true
+        },
+        "firstUsageDate": {
+          "description": "The usage date for looking back.",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "scope": {
+          "description": "Shared or single recommendation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "skuProperties": {
+          "description": "List of sku properties",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuProperty"
+          },
           "readOnly": true
         }
       }
@@ -4303,6 +4434,33 @@
       "required": true,
       "type": "string",
       "description": "The scope associated with tags operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope..",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+	"scopeReservationsSummariesParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservations summaries operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern). ",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+	"scopeReservationDetailsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern). ",
+      "x-ms-parameter-location": "method",
+      "x-ms-skip-url-encoding": true
+    },
+	"scopeReservationRecommendationsParameter": {
+      "name": "scope",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The scope associated with reservation recommendations operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
