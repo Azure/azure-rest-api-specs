@@ -45,7 +45,6 @@ input-file:
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/LogicalSubnet.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/MacAddressPool.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/NetworkOperationResults.json
-  - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnit.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/ScaleUnitNode.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/SlbMuxInstance.json
   - $(this-folder)/Microsoft.Fabric.Admin/preview/2016-05-01/StorageOperationResults.json
