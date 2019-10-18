@@ -416,6 +416,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Consumption/stable/2019-10-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/stable/2019-06-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/stable/2019-05-01/consumption.json
   - $(this-folder)/Microsoft.Consumption/preview/2019-05-01-preview/consumption.json
