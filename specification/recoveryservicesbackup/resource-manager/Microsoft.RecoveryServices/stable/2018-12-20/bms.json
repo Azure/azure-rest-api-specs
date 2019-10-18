@@ -89,6 +89,10 @@
             "description":"Accepted"
           }
         },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
+        },
         "x-ms-examples":{
           "Trigger Cross Region Restore":{
             "$ref":"./examples/AzureIaasVm/TriggerCrossRegionRestore_Post.json"
@@ -102,7 +106,7 @@
           "CrrJobDetails"
         ],
         "summary":"Get CRR job details from target region.",
-        "operationId":"CrrJobDetails_Get",
+        "operationId":"BackupCrrJobDetails_Get",
         "produces":[
           "application/json"
         ],
@@ -203,10 +207,11 @@
           },
           "202":{
             "description":"Accepted"
-          },
-          "500":{
-            "description":"InternalServerError"
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+        "final-state-via": "azure-async-operation"
         },
         "x-ms-examples":{
           "Get Operation Status for Cross Region Restore":{
@@ -571,7 +576,7 @@
           "type": "string"
         },
         "resourceState": {
-          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeletd, Deleted}",
+          "description": "Indicates the state of this resource. Possible values are from enum ResourceState {Invalid, Active, SoftDeleted, Deleted}",
           "type": "string"
         },
         "resourceStateSyncTime": {
@@ -2514,7 +2519,7 @@
           "type": "string"
         },
         "jobType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -2892,7 +2897,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -3230,7 +3235,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
@@ -3404,7 +3409,7 @@
       "type": "object",
       "properties": {
         "objectType": {
-          "description": "This property will be used as the discriminator for deciding the specific types in the polymorhpic chain of types.",
+          "description": "This property will be used as the discriminator for deciding the specific types in the polymorphic chain of types.",
           "type": "string"
         }
       },
