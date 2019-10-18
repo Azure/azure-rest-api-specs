@@ -32,7 +32,7 @@
     "https"
   ],
   "paths": {
-    "/read/core/analyze": {
+    "/read/analyze": {
       "post": {
         "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
         "operationId": "Read",
@@ -74,7 +74,7 @@
         }
       }
     },
-    "/read/core/{operationId}": {
+    "/read/analyzeResults/{operationId}": {
       "get": {
         "description": "This interface is used for getting OCR results of Read operation. The URL to this interface should be retrieved from 'Operation-Location' field returned from Read interface.",
         "operationId": "GetReadResult",
@@ -114,7 +114,7 @@
     }
   },
   "x-ms-paths": {
-    "/read/core/analyze?overload=stream": {
+    "/read/analyze?overload=stream": {
       "post": {
         "description": "Use this interface to get the result of a Read operation, employing the state-of-the-art Optical Character Recognition (OCR) algorithms optimized for text-heavy documents. When you use the Read interface, the response contains a field called 'Operation-Location'. The 'Operation-Location' field contains the URL that you must use for your 'GetReadResult' operation to access OCR results.​",
         "operationId": "ReadInStream",
@@ -399,8 +399,9 @@
     "OcrDetectionLanguage": {
       "name": "language",
       "in": "query",
-      "description": "The BCP-47 language code of the text to be detected in the image.",
-      "required": true,
+      "description": "The BCP-47 language code of the text to be detected in the image. In future versions, when language parameter is not passed, language detection will be used to determine the language. However, in the current version, missing language parameter will cause English to be used. To ensure that your document is always parsed in English without the use of language detection in the future, pass “en” in the language parameter",
+      "required": false,
+      "default": "en",
       "x-ms-parameter-location": "method",
       "type": "string",
       "x-ms-enum": {
