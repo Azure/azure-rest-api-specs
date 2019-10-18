@@ -133,18 +133,18 @@
             "$ref": "#/parameters/apiVersionParameter"
           },
           {
-            "name": "createParameters",
+            "name": "createUpdateParameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DatabaseAccountCreateParameters"
+              "$ref": "#/definitions/DatabaseAccountCreateUpdateParameters"
             },
             "description": "The parameters to provide for the current database account."
           }
         ],
         "responses": {
           "200": {
-            "description": "The database account create operation will complete asynchronously.",
+            "description": "The database account create or update operation will complete asynchronously.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountGetResults"
             }
@@ -5053,7 +5053,7 @@
         }
       }
     },
-    "DatabaseAccountCreateProperties": {
+    "DatabaseAccountCreateUpdateProperties": {
       "description": "Properties to create Azure Cosmos DB database accounts.",
       "type": "object",
       "properties": {
@@ -5120,8 +5120,8 @@
         "databaseAccountOfferType"
       ]
     },
-    "DatabaseAccountCreateParameters": {
-      "description": "Parameters to create Cosmos DB database accounts.",
+    "DatabaseAccountCreateUpdateParameters": {
+      "description": "Parameters to create or update Cosmos DB database accounts.",
       "type": "object",
       "properties": {
         "kind": {
@@ -5140,7 +5140,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DatabaseAccountCreateProperties"
+          "$ref": "#/definitions/DatabaseAccountCreateUpdateProperties"
         }
       },
       "allOf": [
