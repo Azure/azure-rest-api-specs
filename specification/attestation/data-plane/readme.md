@@ -85,7 +85,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
+  - /Microsoft.Attestation/preview/2018-09-01-preview/attestation.json
 
 ```
 
