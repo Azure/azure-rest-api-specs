@@ -332,6 +332,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.CostManagement/stable/2019-10-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-09-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/preview/2019-04-01-preview/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
