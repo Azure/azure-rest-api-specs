@@ -294,6 +294,9 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Storage/stable/2019-06-01/storage.json
+  - $(this-folder)/Microsoft.Storage/stable/2019-06-01/blob.json
+  - $(this-folder)/Microsoft.Storage/stable/2019-06-01/file.json
   - $(this-folder)/Microsoft.Storage/stable/2019-04-01/storage.json
   - $(this-folder)/Microsoft.Storage/stable/2019-04-01/blob.json
   - $(this-folder)/Microsoft.Storage/stable/2019-04-01/file.json
