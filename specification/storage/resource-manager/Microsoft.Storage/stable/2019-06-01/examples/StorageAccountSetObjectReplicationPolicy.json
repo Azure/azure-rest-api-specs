@@ -1,0 +1,67 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "res7687",
+    "accountName": "sto9699",
+    "objectReplicationPolicyId": "default",
+    "api-version": "2019-06-01",
+    "monitor": "true",
+    "properties": {
+      "properties": {
+        "sourceAccount": "sto9699",
+        "destinationAccount": "destAccount1",
+        "rules": [
+          {
+            "sourceContainer": "sourceContainer1",
+            "destinationContainer": "destContainer1",
+            "filter": {
+              "prefixMatch": [ "blobA", "blobB" ],
+              "tag": [ "tagA", "tagB" ]
+            }
+          },
+          {
+            "sourceContainer": "sourceContainer1",
+            "destinationContainer": "destContainer1",
+            "filter": {
+              "prefixMatch": [ "blobC", "blobD" ],
+              "tag": [ "tagC", "tagD" ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/res7687/providers/Microsoft.Storage/storageAccounts/sto9699/objectReplicationPolicies/2a20bb73-5717-4635-985a-5d4cf777438f",
+        "name": "{objectReplicationPolicy-Id}",
+        "type": "Microsoft.Storage/storageAccounts/objectReplicationPolicies",
+        "properties": {
+          "policyId": "2a20bb73-5717-4635-985a-5d4cf777438f",
+          "enabledTime": "2019-06-08T03:01:55.7168089Z",
+          "sourceAccount": "sto9699",
+          "destinationAccount": "destAccount1",
+          "rules": [
+            {
+              "sourceContainer": "sourceContainer1",
+              "destinationContainer": "destContainer1",
+              "filter": {
+                "prefixMatch": [ "blobA", "blobB" ],
+                "tag": [ "tagA", "tagB" ]
+              }
+            },
+            {
+              "sourceContainer": "sourceContainer1",
+              "destinationContainer": "destContainer1",
+              "filter": {
+                "prefixMatch": [ "blobC", "blobD" ],
+                "tag": [ "tagC", "tagD" ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}
