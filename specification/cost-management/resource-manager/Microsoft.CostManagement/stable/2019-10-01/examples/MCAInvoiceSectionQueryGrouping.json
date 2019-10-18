@@ -1,0 +1,71 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "billingAccountId": "12345:6789",
+    "billingProfileId": "13579",
+    "invoiceSectionId": "9876",
+    "scope": "providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/invoiceSections/9876",
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "TheLastMonth",
+      "dataset": {
+        "granularity": "None",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
+        },
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "ResourceGroup"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+	    "id": "providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/invoiceSections/9876/providers/Microsoft.CostManagement/Query/ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+	    "name": "ad67fd91-c131-4bda-9ba9-7187ecb1cebd",
+	    "type": "microsoft.costmanagement/Query",
+	    "properties": {
+		  "nextLink": "https://management.azure.com/providers/Microsoft.Billing/billingAccounts/12345:6789/billingProfiles/13579/invoiceSections/9876/providers/Microsoft.CostManagement/Query?api-version=2019-10-01&$skiptoken=AQAAAA%3D%3D",
+		  "columns": [
+		    {
+		 	  "name": "PreTaxCost",
+			  "type": "Number"
+		    },
+		    {
+			  "name": "ResourceGroup",
+			  "type": "String"
+		    },
+		    {
+			  "name": "Currency",
+			  "type": "String"
+		    }
+		  ],
+		  "rows": [
+		    [
+			  19.545363672276512,
+			  "JapanUnifia-Trial",
+			  "USD"
+		    ],
+		    [
+			  173.41979241290323,
+			  "RVIIOT-TRIAL",
+			  "USD"
+		    ],
+		    [
+			  20.359416562625452,
+			  "VSTSHOL-1595322048000",
+			  "USD"
+		    ]
+		  ]
+	    }
+      }
+    }
+  }
+}
