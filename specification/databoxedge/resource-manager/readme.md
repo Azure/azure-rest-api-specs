@@ -180,8 +180,8 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
-  - Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
+  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-07-01/databoxedge.json
+  - $(this-folder)/Microsoft.DataBoxEdge/stable/2019-03-01/databoxedge.json
 
 ```
 

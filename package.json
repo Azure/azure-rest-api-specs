@@ -17,7 +17,7 @@
     "@ts-common/iterator": "^0.3.6",
     "@types/js-yaml": "^3.12.1",
     "@types/mocha": "^5.2.6",
-    "cspell": "^4.0.12",
+    "cspell": "^4.0.30",
     "js-yaml": "^3.13.1",
     "json-schema-ref-parser": "^6.1.0",
     "mocha": "*",
@@ -36,7 +36,7 @@
   "scripts": {
     "postinstall": "scripts/switch-to-preproduction.sh",
     "test": "tsc && mocha -t 500000 --reporter min",
-    "spellcheck": "cspell \"specification/**/*.json\"",
+    "spellcheck": "ts-node ./scripts/spellcheck.ts",
     "tsc": "tsc",
     "multiapi": "ts-node ./scripts/multiapi.ts"
   }

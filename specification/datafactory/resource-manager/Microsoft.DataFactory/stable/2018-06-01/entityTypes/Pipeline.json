@@ -412,6 +412,80 @@
         }
       }
     },
+    "AzureFileStorageReadSettings": {
+      "description": "Azure File Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Azure File Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Azure File Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
+    "GoogleCloudStorageReadSettings": {
+      "description": "Google Cloud Storage read settings.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/StoreReadSettings"
+        }
+      ],
+      "properties": {
+        "recursive": {
+          "type": "object",
+          "description": "If true, files under the folder path will be read recursively. Default is true. Type: boolean (or Expression with resultType boolean)."
+        },
+        "wildcardFolderPath": {
+          "type": "object",
+          "description": "Google Cloud Storage wildcardFolderPath. Type: string (or Expression with resultType string)."
+        },
+        "wildcardFileName": {
+          "type": "object",
+          "description": "Google Cloud Storage wildcardFileName. Type: string (or Expression with resultType string)."
+        },
+        "prefix": {
+          "type": "object",
+          "description": "The prefix filter for the Google Cloud Storage object name. Type: string (or Expression with resultType string)."
+        },
+        "enablePartitionDiscovery": {
+          "type": "boolean",
+          "description": "Indicates whether to enable partition discovery."
+        },
+        "modifiedDatetimeStart": {
+          "type": "object",
+          "description": "The start of file's modified datetime. Type: string (or Expression with resultType string)."
+        },
+        "modifiedDatetimeEnd": {
+          "type": "object",
+          "description": "The end of file's modified datetime. Type: string (or Expression with resultType string)."
+        }
+      }
+    },
     "FtpReadSettings": {
       "description": "Ftp read settings.",
       "type": "object",
@@ -990,12 +1064,27 @@
         }
       }
     },
+    "TabularSource": {
+      "description": "Copy activity sources of tabular type.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
     "AzureTableSource": {
       "description": "A copy activity Azure Table source.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1048,6 +1137,33 @@
         "nestingSeparator": {
           "type": "object",
           "description": "Nested properties separator. Type: string (or Expression with resultType string)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
+        }
+      }
+    },
+    "CosmosDbSqlApiSource": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection source.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySource"
+        }
+      ],
+      "properties": {
+        "query": {
+          "type": "object",
+          "description": "SQL API query. Type: string (or Expression with resultType string)."
+        },
+        "pageSize": {
+          "type": "object",
+          "description": "Page size of the result. Type: integer (or Expression with resultType integer)."
+        },
+        "preferredRegions": {
+          "type": "object",
+          "description": "Preferred regions. Type: array of strings (or Expression with resultType array of strings)."
         }
       }
     },
@@ -1116,7 +1232,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1146,7 +1262,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1161,7 +1277,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1176,7 +1292,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1191,7 +1307,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1206,7 +1322,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1221,7 +1337,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1251,7 +1367,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1305,7 +1421,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1320,7 +1436,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1335,7 +1451,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1354,7 +1470,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1373,7 +1489,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1485,7 +1601,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1511,7 +1627,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1541,7 +1657,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1571,7 +1687,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1601,7 +1717,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1680,7 +1796,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1783,7 +1899,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1843,7 +1959,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -1908,6 +2024,10 @@
         "batchSize": {
           "type": "object",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -1931,6 +2051,10 @@
         "batchSize": {
           "type": "object",
           "description": "Specifies the number of documents to return in each batch of the response from MongoDB instance. In most cases, modifying the batch size will not affect the user or the application. This property's main purpose is to avoid hit the limitation of response size. Type: integer (or Expression with resultType integer)."
+        },
+        "queryTimeout": {
+          "type": "object",
+          "description": "Query timeout. Type: string (or Expression with resultType string), pattern: ((\\d+)\\.)?(\\d\\d):(60|([0-5][0-9])):(60|([0-5][0-9]))."
         }
       }
     },
@@ -2052,7 +2176,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2067,7 +2191,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2112,7 +2236,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2127,7 +2251,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2142,7 +2266,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2157,7 +2281,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2172,7 +2296,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2187,7 +2311,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2202,7 +2326,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2217,7 +2341,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2232,7 +2356,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2247,7 +2371,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2262,7 +2386,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2277,7 +2401,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2292,7 +2416,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2307,7 +2431,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2322,7 +2446,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2337,7 +2461,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2352,7 +2476,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2367,7 +2491,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2382,7 +2506,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2397,7 +2521,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2412,7 +2536,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2427,7 +2551,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2442,7 +2566,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2457,7 +2581,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2472,7 +2596,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2487,7 +2611,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2537,7 +2661,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2552,7 +2676,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2567,7 +2691,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2582,7 +2706,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2597,7 +2721,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2612,7 +2736,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2627,7 +2751,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/CopySource"
+          "$ref": "#/definitions/TabularSource"
         }
       ],
       "properties": {
@@ -2906,7 +3030,22 @@
         },
         "writeBehavior": {
           "type": "object",
-          "description": "Describes how to write data to Azure Cosmos DB. Allowed values: insert and upsert."
+          "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
+        }
+      }
+    },
+    "CosmosDbSqlApiSink": {
+      "description": "A copy activity Azure CosmosDB (SQL API) Collection sink.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/CopySink"
+        }
+      ],
+      "properties": {
+        "writeBehavior": {
+          "type": "object",
+          "description": "Describes how to write data to Azure Cosmos DB. Type: string (or Expression with resultType string). Allowed values: insert and upsert."
         }
       }
     },
@@ -3330,6 +3469,10 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -3359,6 +3502,10 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -3388,6 +3535,10 @@
         "ignoreNullValues": {
           "type": "object",
           "description": "The flag indicating whether to ignore null values from input dataset (except key fields) during write operation. Default is false. Type: boolean (or Expression with resultType boolean)."
+        },
+        "alternateKeyName": {
+          "type": "object",
+          "description": "The logical name of the alternate key which will be used when upserting records. Type: string (or Expression with resultType string)."
         }
       },
       "required": [
@@ -3652,12 +3803,8 @@
           }
         },
         "arguments": {
-          "description": "User specified arguments to HDInsightActivity.",
-          "type": "array",
-          "items": {
-            "type": "object",
-            "description": "Type: string (or Expression with resultType string)."
-          }
+          "type": "object",
+          "description": "User specified arguments to HDInsightActivity. Type: array (or Expression with resultType array)."
         },
         "getDebugInfo": {
           "$ref": "#/definitions/HDInsightActivityDebugInfoOption",
@@ -4048,7 +4195,7 @@
       "type": "object",
       "properties": {
         "packagePassword": {
-          "$ref": "../datafactory.json#/definitions/SecureString",
+          "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "Password of the package."
         },
         "accessCredential": {
@@ -4134,7 +4281,7 @@
           "description": "UseName for windows authentication."
         },
         "password": {
-          "$ref": "../datafactory.json#/definitions/SecureString",
+          "$ref": "../datafactory.json#/definitions/SecretBase",
           "description": "Password for windows authentication."
         }
       },
@@ -4652,6 +4799,68 @@
         "expression"
       ]
     },
+    "SwitchActivity": {
+      "x-ms-discriminator-value": "Switch",
+      "description": "This activity evaluates an expression and executes activities under the cases property that correspond to the expression evaluation expected in the equals property.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ControlActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "description": "Switch activity properties.",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SwitchActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "SwitchActivityTypeProperties": {
+      "description": "Switch activity properties.",
+      "properties": {
+        "on": {
+          "description": "An expression that would evaluate to a string or integer. This is used to determine the block of activities in cases that will be executed.",
+          "$ref": "../datafactory.json#/definitions/Expression"
+        },
+        "cases": {
+          "type": "array",
+          "description": "List of cases that correspond to expected values of the 'on' property. This is an optional property and if not provided, the activity will execute activities provided in defaultActivities.",
+          "items": {
+            "x-ms-client-flatten": true,
+            "$ref": "#/definitions/SwitchCase"
+          }
+        },
+        "defaultActivities": {
+          "type": "array",
+          "description": "List of activities to execute if no case condition is satisfied. This is an optional property and if not provided, the activity will exit without any action.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        }
+      },
+      "required": [
+        "on"
+      ]
+    },
+    "SwitchCase": {
+      "description": "Switch cases with have a value and corresponding activities.",
+      "properties": {
+        "value": {
+          "description": "Expected value that satisfies the expression result of the 'on' property.",
+          "type": "string"
+        },
+        "activities": {
+          "type": "array",
+          "description": "List of activities to execute for satisfied case condition.",
+          "items": {
+            "$ref": "#/definitions/Activity"
+          }
+        }
+      }
+    },
     "ForEachActivity": {
       "x-ms-discriminator-value": "ForEach",
       "description": "This activity is used for iterating over a collection and execute given activities.",
@@ -4804,6 +5013,61 @@
         "trainedModelLinkedServiceName",
         "trainedModelFilePath"
       ]
+    },
+    "AzureMLExecutePipelineActivity": {
+      "description": "Azure ML Execute Pipeline activity.",
+      "x-ms-discriminator-value": "AzureMLExecutePipeline",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Azure ML Execute Pipeline activity properties.",
+          "$ref": "#/definitions/AzureMLExecutePipelineActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "AzureMLExecutePipelineActivityTypeProperties": {
+      "description": "Azure ML Execute Pipeline activity properties.",
+      "properties": {
+        "mlPipelineId": {
+          "description": "ID of the published Azure ML pipeline. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "experimentName": {
+          "description": "Run history experiment name of the pipeline run. This information will be passed in the ExperimentName property of the published pipeline execution request. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "mlPipelineParameters": {
+          "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request. Type: object with key value pairs (or Expression with resultType object).",
+          "type": "object"
+        },
+        "mlParentRunId": {
+          "description": "The parent Azure ML Service pipeline run id. This information will be passed in the ParentRunId property of the published pipeline execution request. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "continueOnStepFailure": {
+          "description": "Whether to continue execution of other steps in the PipelineRun if a step fails. This information will be passed in the continueOnStepFailure property of the published pipeline execution request. Type: boolean (or Expression with resultType boolean).",
+          "type": "object"
+        }
+      },
+      "required": [
+        "mlPipelineId"
+      ]
+    },
+    "AzureMLPipelineParameters": {
+      "description": "Key,Value pairs to be passed to the published Azure ML pipeline endpoint. Keys must match the names of pipeline parameters defined in the published pipeline. Values will be passed in the ParameterAssignments property of the published pipeline execution request.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "description": "Type: string (or Expression with resultType string)."
+      }
     },
     "DataLakeAnalyticsUSQLActivity": {
       "description": "Data Lake Analytics U-SQL activity.",
@@ -5358,6 +5622,45 @@
       "required": [
         "method",
         "url"
+      ]
+    },
+    "ExecuteDataFlowActivity": {
+      "description": "Execute data flow activity.",
+      "x-ms-discriminator-value": "ExecuteDataFlow",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ExecutionActivity"
+        }
+      ],
+      "properties": {
+        "typeProperties": {
+          "x-ms-client-flatten": true,
+          "description": "Execute data flow activity properties.",
+          "$ref": "#/definitions/ExecuteDataFlowActivityTypeProperties"
+        }
+      },
+      "required": [
+        "typeProperties"
+      ]
+    },
+    "ExecuteDataFlowActivityTypeProperties": {
+      "description": "Execute data flow activity properties.",
+      "properties": {
+        "dataFlow": {
+          "description": "Data flow reference.",
+          "$ref": "../datafactory.json#/definitions/DataFlowReference"
+        },
+        "staging": {
+          "description": "Staging info for execute data flow activity.",
+          "$ref": "../datafactory.json#/definitions/DataFlowStagingInfo"
+        },
+        "integrationRuntime": {
+          "description": "The integration runtime reference.",
+          "$ref": "../datafactory.json#/definitions/IntegrationRuntimeReference"
+        }
+      },
+      "required": [
+        "dataFlow"
       ]
     }
   }

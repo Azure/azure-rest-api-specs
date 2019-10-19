@@ -3212,6 +3212,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceBus/namespaces/{namespaceName}/networkRuleSets": {
+      "get": {
+        "tags": [
+          "Namespaces"
+        ],
+        "x-ms-examples": {
+          "NameSpaceNetworkRuleSetList": {
+            "$ref": "./examples/NameSpaces/VirtualNetworkRule/SBNetworkRuleSetList.json"
+          }
+        },
+        "operationId": "Namespaces_ListNetworkRuleSets",
+        "description": "Gets list of NetworkRuleSet for a Namespace.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/NamespaceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of NetworkRuleSets for Namespace successfully returned.",
+            "schema": {
+              "$ref": "#/definitions/NetworkRuleSetListResult"
+            }
+          },
+          "default": {
+            "description": "ServiceBus error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
     }
   },
   "definitions": {
@@ -4185,10 +4230,11 @@
           "description": "The SQL expression. e.g. MyProperty='ABC'"
         },
         "compatibilityLevel": {
-          "readOnly": true,
           "format": "int32",
           "type": "integer",
           "default": 20,
+          "minimum": 20,
+          "maximum": 20,
           "description": "This property is reserved for future use. An integer value showing the compatibility level, currently hard-coded to 20."
         },
         "requiresPreprocessing": {
@@ -4716,6 +4762,22 @@
         }
       ],
       "description": "Description of NetworkRuleSet resource."
+    },
+    "NetworkRuleSetListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkRuleSet"
+          },
+          "description": "Result of the List NetworkRuleSet operation."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Link to the next set of results. Not empty if Value contains incomplete list of NetworkRuleSet."
+        }
+      },
+      "description": "The response of the List NetworkRuleSet operation."
     }
   },
   "parameters": {

@@ -1011,12 +1011,16 @@
       "type": "object",
       "properties": {
         "tags": {
-          "type": "array",
-          "items": {
-            "x-ms-client-flatten": true,
-            "$ref": "#/definitions/TagsObject"
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "additionalProperties": {
+            "type": "string"
           },
-          "description": "Updates the tags property of the Managed Network"
+          "description": "Resource tags"
         }
       },
       "description": "Update Tags of Managed Network"
@@ -1406,24 +1410,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The type of the resource. Ex- Microsoft.Compute/virtualMachines or Microsoft.Storage/storageAccounts."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TrackedResource": {
-      "description": "The resource model definition for a ARM tracked top level resource",
-      "properties": {
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "x-ms-mutability": [
-              "read",
-              "create",
-              "update"
-            ]
-          },
-          "description": "Resource tags."
         },
         "location": {
           "type": "string",
@@ -1432,6 +1418,24 @@
             "create"
           ],
           "description": "The geo-location where the resource lives"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "TrackedResource": {
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
         }
       },
       "required": [
@@ -1459,10 +1463,6 @@
         }
       },
       "description": "Generic pointer to a resource"
-    },
-    "TagsObject": {
-      "type": "string",
-      "description": "Resource tags."
     },
     "ResourceProperties": {
       "properties": {
