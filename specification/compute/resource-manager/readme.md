@@ -34,7 +34,7 @@ These are the global settings for the Compute API.
 title: ComputeManagementClient
 description: Compute Client
 openapi-type: arm
-tag: package-2019-07-01
+tag: package-2019-07
 
 directive:
   - where:
@@ -134,6 +134,10 @@ directive:
       - $.definitions.DedicatedHostUpdate
     suppress:
       - RequiredPropertiesMissingInResourceModel
+  - where:
+      - $.definitions.DiskEncryptionSetParameters
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
 
   - where:
       - $.definitions.VirtualMachineScaleSetVM
@@ -156,10 +160,6 @@ directive:
     suppress:
       - TrackedResourcePatchOperation
   - where:
-      - $.definitions.VirtualMachineImageResource
-    suppress:
-      - TrackedResourceGetOperation
-  - where:
       - $.definitions.Gallery
     suppress:
       - TrackedResourcePatchOperation
@@ -172,19 +172,29 @@ directive:
     suppress:
       - TrackedResourcePatchOperation
 
+  - where:
+      - $.definitions.VirtualMachineImageResource
+    suppress:
+      - TrackedResourceGetOperation
 
   - where:
       - $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
     suppress:
       - DefinitionsPropertiesNamesCamelCase
-
-
   - where:
       - $.definitions.DiskProperties.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
   - where:
       - $.definitions.DiskUpdateProperties.properties.diskIOPSReadWrite
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
+      - $.definitions.DataDisk.properties.diskIOPSReadWrite
+    suppress:
+      - DefinitionsPropertiesNamesCamelCase
+  - where:
+      - $.definitions.VirtualMachineScaleSetDataDisk.properties.diskIOPSReadWrite
     suppress:
       - DefinitionsPropertiesNamesCamelCase
 
@@ -196,6 +206,20 @@ directive:
       - ACS service is deprecated so a PATCH endpoint won't be implemented
 
 ```
+### Tag: package-2019-07
+
+These settings apply only when `--tag=package-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-07'
+input-file:
+- Microsoft.Compute/stable/2019-07-01/compute.json
+- Microsoft.Compute/stable/2019-07-01/runCommands.json
+- Microsoft.Compute/stable/2019-04-01/skus.json
+- Microsoft.Compute/stable/2019-07-01/disk.json
+- Microsoft.Compute/stable/2019-07-01/gallery.json
+- Microsoft.ContainerService/stable/2017-01-31/containerService.json
+```
+
 ### Tag: package-2019-07-01
 
 These settings apply only when `--tag=package-2019-07-01` is specified on the command line.
@@ -205,7 +229,7 @@ input-file:
 - Microsoft.Compute/stable/2019-03-01/compute.json
 - Microsoft.Compute/stable/2019-03-01/runCommands.json
 - Microsoft.Compute/stable/2019-04-01/skus.json
-- Microsoft.Compute/stable/2019-03-01/disk.json
+- Microsoft.Compute/stable/2019-07-01/disk.json
 - Microsoft.Compute/stable/2019-07-01/gallery.json
 - Microsoft.ContainerService/stable/2017-01-31/containerService.json
 ```

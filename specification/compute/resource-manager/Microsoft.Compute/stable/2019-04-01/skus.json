@@ -48,6 +48,13 @@
           },
           {
             "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "The filter to apply on the operation."
           }
         ],
         "responses": {
@@ -64,6 +71,9 @@
         "x-ms-examples": {
           "Lists all available Resource SKUs": {
             "$ref": "./examples/ListAvailableResourceSkus.json"
+          },
+          "Lists all available Resource SKUs for the specified region": {
+            "$ref": "./examples/ListAvailableResourceSkusForARegion.json"
           }
         }
       }
