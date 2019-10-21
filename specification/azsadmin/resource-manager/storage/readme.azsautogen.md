@@ -33,7 +33,6 @@ These settings apply only when `--tag=package-2019-08-08` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-08-08'
 input-file:
-    - "Microsoft.Storage.Admin/preview/2019-08-08/quotas.json"
 ```
 
 ---
