@@ -1484,6 +1484,13 @@
         "firewallPolicy": {
           "$ref": "./network.json#/definitions/SubResource",
           "description": "Reference to the FirewallPolicy resource."
+        },
+        "hostnames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of Host names for HTTP Listener that allows special wildcard characters as well."
         }
       },
       "description": "Properties of HTTP listener of an application gateway."
