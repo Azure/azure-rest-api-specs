@@ -118,6 +118,38 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "x-ms-examples": {
+          "Removes a product package.": {
+            "$ref": "./examples/ProductPackage/Delete.json"
+          }
+        },
+        "description": "Deletes a product package.",
+        "tags": [
+          "ProductPackages"
+        ],
+        "operationId": "ProductPackages_Delete",
+        "parameters": [
+          {
+            "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ProductIdParameter"
+          },
+          {
+            "$ref": "Deployment.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not found"
+          }
+        },
+        "x-ms-long-running-operation": true
       }
     }
   },
@@ -128,7 +160,8 @@
       "properties": {
         "properties": {
           "description": "Properties of a product package.",
-          "$ref": "#/definitions/ProductPackageProperties"
+          "$ref": "#/definitions/ProductPackageProperties",
+          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -154,6 +187,8 @@
       }
     },
     "ProductPackageProperties": {
+      "type": "object",
+      "description": "Properties for Product package.",
       "properties": {
         "fileContainerId": {
           "description": "File container resource identifier containing product manifest.",

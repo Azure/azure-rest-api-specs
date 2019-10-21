@@ -20,7 +20,7 @@
       "get": {
         "x-ms-examples": {
           "Lists the action plan operations": {
-            "$ref": "./examples/ActionPlanOperations/Get.json"
+            "$ref": "./examples/ActionPlanOperations/List.json"
           }
         },
         "description": "Lists the action plan operations",
@@ -108,21 +108,9 @@
       }
     },
     "ActionPlanOperationResourceEntity": {
-      "description": "Action Plan Operation Resource Entity",
       "type": "object",
+      "description": "Action Plan Operation Resource Entity",
       "properties": {
-        "actionPlanInstanceId": {
-          "description": "Action plan instance identifier",
-          "type": "string"
-        },
-        "actionPlanOperationId": {
-          "description": "Action plan operation identifier",
-          "type": "string"
-        },
-        "blobContainerName": {
-          "description": "Blob container name storing the deployment data",
-          "type": "string"
-        },
         "properties": {
           "description": "Action Plan Properties",
           "$ref": "#/definitions/ActionPlanOperationAdminProperties",
@@ -181,6 +169,18 @@
         },
         "provisioningState": {
           "description": "The provisioning state",
+          "type": "string"
+        },
+        "actionPlanInstanceId": {
+          "description": "Action plan instance identifier",
+          "type": "string"
+        },
+        "actionPlanOperationId": {
+          "description": "Action plan operation identifier",
+          "type": "string"
+        },
+        "blobContainerName": {
+          "description": "Blob container name storing the deployment data",
           "type": "string"
         }
       }

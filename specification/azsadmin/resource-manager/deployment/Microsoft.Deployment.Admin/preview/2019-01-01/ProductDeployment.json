@@ -28,7 +28,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_List",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -42,6 +43,9 @@
               "$ref": "#/definitions/ProductDeploymentsList"
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -57,7 +61,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -92,7 +97,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_BootStrap",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -128,7 +134,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_Deploy",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -164,7 +171,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_Remove",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -197,7 +205,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_RotateSecrets",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -230,7 +239,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_Unlock",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -262,7 +272,8 @@
           "ProductDeployments"
         ],
         "operationId": "ProductDeployments_Lock",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -301,26 +312,20 @@
       "type": "object",
       "description": "Product deployment entity",
       "properties": {
-        "productId": {
-          "description": "The product identifier",
-          "type": "string"
-        },
         "properties": {
           "description": "Product deployment resource properties",
           "$ref": "#/definitions/ProductDeploymentsProperties",
           "x-ms-client-flatten": true
         },
-        "internalState": {
-          "description": "Product deployment resource internal state",
-          "$ref": "#/definitions/ProductDeploymentsInternalState"
-        },
         "eTag": {
           "description": "entity tag"
         }
       },
-      "allOf": [{
-        "$ref": "Deployment.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
     },
     "ProductDeploymentsProperties": {
       "type": "object",
@@ -360,6 +365,10 @@
         },
         "provisioningState": {
           "description": "The provisioning state",
+          "type": "string"
+        },
+        "productId": {
+          "description": "The product identifier",
           "type": "string"
         }
       }
@@ -544,9 +553,11 @@
       }
     }
   },
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }]
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
