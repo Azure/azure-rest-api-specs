@@ -2215,7 +2215,12 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" }
+        "x-ms-pageable": { "nextLinkName": "nextLink" },
+        "x-ms-examples": {
+          "UserGetAllInDevice": {
+            "$ref": "./examples/UserGetAllInDevice.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataBoxEdge/dataBoxEdgeDevices/{deviceName}/users/{name}": {
@@ -2250,6 +2255,11 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": { "$ref": "#/definitions/CloudError" }
+          }
+        },
+        "x-ms-examples": {
+          "UserGet": {
+            "$ref": "./examples/UserGet.json"
           }
         }
       },
@@ -2294,7 +2304,12 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UserPut": {
+            "$ref": "./examples/UserPut.json"
+          }
+        }
       },
       "delete": {
         "tags": [ "Users" ],
@@ -2328,7 +2343,12 @@
             "schema": { "$ref": "#/definitions/CloudError" }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "UserDelete": {
+            "$ref": "./examples/UserDelete.json"
+          }
+        }
       }
     }
   },
