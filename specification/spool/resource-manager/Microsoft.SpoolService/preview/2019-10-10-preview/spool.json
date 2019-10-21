@@ -35,6 +35,12 @@
             "schema": {
               "$ref": "#/definitions/OperationList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [ "application/json" ],
@@ -72,6 +78,12 @@
             "schema": {
               "$ref": "#/definitions/NameAvailability"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [ "application/json" ],
@@ -82,7 +94,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/Spool": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SpoolService/spools": {
       "get": {
         "description": "Handles requests to list all resources in a subscription.",
         "operationId": "Spool_ListBySubscription",
@@ -102,6 +114,12 @@
             "schema": {
               "$ref": "#/definitions/SpoolResourceList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [ "application/json" ],
@@ -115,7 +133,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/Spool": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools": {
       "get": {
         "description": "Handles requests to list all resources in a resource group.",
         "operationId": "Spool_ListByResourceGroup",
@@ -138,6 +156,12 @@
             "schema": {
               "$ref": "#/definitions/SpoolResourceList"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-pageable": {
@@ -151,7 +175,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/Spool/{resourceName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}": {
       "patch": {
         "description": "Operation to update an exiting Spool service.",
         "operationId": "Spool_Update",
@@ -164,7 +188,7 @@
             "description": "Parameters for the update operation",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/SpoolUpdateParameters"
+              "$ref": "#/definitions/SpoolResource"
             }
           },
           {
@@ -185,6 +209,12 @@
             "description": "Success. The response describes a Spool service which is not up-to-date.",
             "schema": {
               "$ref": "#/definitions/SpoolResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,6 +250,12 @@
             "schema": {
               "$ref": "#/definitions/SpoolResource"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [ "application/json" ],
@@ -230,7 +266,7 @@
         }
       },
       "put": {
-        "description": "Create a new Spool service and update an exiting Spool service.",
+        "description": "Create a new Spool service or update an existing Spool service.",
         "operationId": "Spool_CreateOrUpdate",
         "summary": "Create Or Update",
         "tags": [ "Spool CRUD" ],
@@ -241,7 +277,7 @@
             "description": "Parameters for the create or update operation",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/SpoolCreateParameters"
+              "$ref": "#/definitions/SpoolResource"
             }
           },
           {
@@ -259,6 +295,12 @@
         ],
         "consumes": [ "application/json" ],
         "responses": {
+          "200": {
+            "description": "An existing resource was updated. The response describes the existing service and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/SpoolResource"
+            }
+          },
           "201": {
             "description": "Created. The response describes the new service and contains a Location header to query the operation result.",
             "schema": {
@@ -266,7 +308,13 @@
             }
           },
           "202": {
-            "description": "Accepted. The response indicates the existing Spool service is now updating  and contains a Location header to query the operation result."
+            "description": "Accepted. The response indicates the existing Spool service is now updating and contains a Location header to query the operation result."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [ "application/json" ],
@@ -302,6 +350,12 @@
           },
           "204": {
             "description": "Success. The response indicates the resource is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -313,7 +367,7 @@
       }
     },
     
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/Spool/{resourceName}/listKeys": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/listKeys": {
       "post": {
         "description": "Get the access keys of the Spool resource.",
         "operationId": "Spool_ListKeys",
@@ -339,6 +393,12 @@
             "schema": {
               "$ref": "#/definitions/SpoolKeys"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "produces": [ "application/json" ],
@@ -349,7 +409,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/Spool/{resourceName}/regenerateKey": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SpoolService/spools/{resourceName}/regenerateKey": {
       "post": {
         "description": "Regenerate Spool service access key. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
         "operationId": "Spool_RegenerateKey",
@@ -384,6 +444,12 @@
             "schema": {
               "$ref": "#/definitions/SpoolKeys"
             }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
           }
         },
         "consumes": [ "application/json" ],
@@ -397,6 +463,20 @@
     }
   },
   "definitions": {
+    "ErrorResponse": {
+      "description": "Error response indicating why the requested operation could not be performed.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
+        }
+      }
+    },
     "OperationList": {
       "description": "Result of the request to list REST API operations. It contains a list of operations.",
       "type": "object",
@@ -565,7 +645,7 @@
       "type": "object",
       "properties": {
         "type": {
-          "description": "The resource type. Should be always \"Microsoft.SpoolService/Spool\".",
+          "description": "The resource type. Should be always \"Microsoft.SpoolService/spools\".",
           "type": "string"
         },
         "name": {
@@ -663,7 +743,7 @@
           "readOnly": true
         },
         "type": {
-          "description": "The type of the service - e.g. \"Microsoft.SpoolService/Spool\"",
+          "description": "The type of the service - e.g. \"Microsoft.SpoolService/spools\"",
           "type": "string",
           "readOnly": true
         }
@@ -671,7 +751,7 @@
       "x-ms-azure-resource": true
     },
     "SpoolProperties": {
-      "description": "A class that describes the properties of the Spool service that should contain more read-only properties than AzSpool.Models.SpoolCreateOrUpdateProperties",
+      "description": "A class that describes the properties of the Spool service.",
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -694,6 +774,10 @@
             "modelAsString": true
           }
         },
+        "hostNamePrefix": {
+          "description": "Prefix for the hostName of the Spool service. \r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.spool.azure.net.",
+          "type": "string"
+        },
         "hostName": {
           "description": "FQDN of the Spool service instance. Format: xxx.service.Spool.net",
           "type": "string",
@@ -701,21 +785,33 @@
         },
         "version": {
           "description": "Version of the Spool resource. Probably you need the same or higher version of client SDKs.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "location": {
           "description": "The Azure location where the Spool service is running.",
           "type": "string"
         },
-        "smsEnabled": {
-          "description": "Enable SMS",
-          "type": "boolean"
-        },
-        "pstnEnabled": {
-          "description": "Enable PSTN",
-          "type": "string"
+        "optionalFeatures": {
+          "description": "Features that may optionally be enabled on a Spool instance.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "SMS",
+              "PSTN"
+            ],
+            "x-ms-enum": {
+              "name": "OptionalFeature",
+              "modelAsString": true
+            }
+          }
         }
-      }
+      },
+      "required": [
+        "hostNamePrefix",
+        "location"
+      ]
     },
     "SpoolKeys": {
       "description": "A class representing the access keys of Spool service.",
@@ -756,61 +852,6 @@
           }
         }
       }
-    },
-    "SpoolCreateParameters": {
-      "description": "Parameters for Spool service create/update operation.\r\n\r\nKeep the same schema as AzSpool.Models.SpoolResource",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/SpoolUpdateParameters"
-        }
-      ],
-      "properties": {
-        "enableSms": {
-          "description": "Enable SMS",
-          "type": "boolean"
-        },
-        "enablePstn": {
-          "description": "Enable PSTN",
-          "type": "string"
-        }
-      }
-    },
-    "SpoolUpdateParameters": {
-      "description": "Parameters for Spool service update operation",
-      "type": "object",
-      "properties": {
-        "tags": {
-          "description": "A list of key value pairs that describe the resource.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "$ref": "#/definitions/SpoolCreateOrUpdateProperties",
-          "description": "Settings used to provision or configure the resource",
-          "x-ms-client-flatten": false
-        }
-      }
-    },
-    "SpoolCreateOrUpdateProperties": {
-      "description": "Settings used to provision or configure the resource.",
-      "type": "object",
-      "properties": {
-        "hostNamePrefix": {
-          "description": "Prefix for the hostName of the Spool service. \r\nThe hostname will be of format: &lt;hostNamePrefix&gt;.spool.azure.net.",
-          "type": "string"
-        },
-        "location": {
-          "description": "The Azure location where the Spool service is created.",
-          "type": "string"
-        }
-      },
-      "required": [
-        "hostNamePrefix",
-        "location"
-      ]
     }
   },
   "parameters": {
