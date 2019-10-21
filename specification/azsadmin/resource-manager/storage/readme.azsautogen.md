@@ -24,7 +24,6 @@ These are the global settings for the Storage API.
 title: StorageAdminClient
 description: Storage Admin Client
 openapi-type: arm
-tag: package-2019-08-08
 ```
 
 ``` yaml
