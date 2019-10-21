@@ -31,6 +31,8 @@ input-file:
     - "$(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/storageaccounts.json"
     - "$(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/quotas.json"
     - "$(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/settings.json"
+    - "$(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/storage.json"
+    - "$(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/acquisitions.json"
 ```
 
 ---
