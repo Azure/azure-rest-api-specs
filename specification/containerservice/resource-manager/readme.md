@@ -56,7 +56,9 @@ These settings apply only when `--tag=package-2019-10` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-10'
 input-file:
-  - Microsoft.ContainerService/stable/2019-10-01/location.json
+  - Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
   - Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
 ```
 ### Tag: package-2019-08
@@ -170,6 +172,15 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
 - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+```
+
+### Tag: package-2019-10-01-only
+
+These settings apply only when `--tag=package-2019-10-01-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-01-only'
+input-file:
+- Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
 ```
 
 ### Tag: package-2019-08-01-only
@@ -384,6 +395,8 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
+  - $(this-folder)/Microsoft.ContainerService/stable/2019-04-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/location.json
