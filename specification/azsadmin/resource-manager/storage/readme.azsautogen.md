@@ -27,11 +27,7 @@ openapi-type: arm
 tag: package-2019-08-08
 ```
 
-### Tag: package-2019-08-08
-
-These settings apply only when `--tag=package-2019-08-08` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-08-08'
+``` yaml
 input-file:
     - "Microsoft.Storage.Admin/preview/2019-08-08/storageaccounts.json"
 ```
