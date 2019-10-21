@@ -145,63 +145,6 @@
           }
         }
       },
-      "patch": {
-        "tags": [
-          "VirtualRouters"
-        ],
-        "operationId": "VirtualRouters_Update",
-        "description": "Updates a Virtual Router.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group name of the Virtual Router."
-          },
-          {
-            "name": "virtualRouterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Virtual Router being updated."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "./network.json#/definitions/TagsObject"
-            },
-            "description": "Parameters supplied to Update Virtual Router Tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. Returns the details of the Virtual Router updated.",
-            "schema": {
-              "$ref": "#/definitions/VirtualRouter"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update VirtualRouter": {
-            "$ref": "./examples/VirtualRouterUpdateTags.json"
-          }
-        }
-      },
       "put": {
         "tags": [
           "VirtualRouters"
@@ -470,70 +413,6 @@
         "x-ms-examples": {
           "Get Virtual Router Peering": {
             "$ref": "./examples/VirtualRouterPeeringGet.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "VirtualRouterPeerings"
-        ],
-        "operationId": "VirtualRouterPeerings_Update",
-        "description": "Updates a Virtual Router Peering.",
-        "parameters": [
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource group name of the Virtual Router Peering."
-          },
-          {
-            "name": "virtualRouterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Virtual Router."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "peeringName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the Virtual Router Peering being updated."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualRouterPeering"
-            },
-            "description": "Parameters supplied to update Virtual Router Peering operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Request successful. Returns the details of the Virtual Router Peering updated.",
-            "schema": {
-              "$ref": "#/definitions/VirtualRouterPeering"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/Error"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Update VirtualRouter Peering": {
-            "$ref": "./examples/VirtualRouterPeeringUpdate.json"
           }
         }
       },

@@ -216,13 +216,8 @@
         "tags": [
           "RouteFilters"
         ],
-        "operationId": "RouteFilters_Update",
-        "x-ms-examples": {
-          "RouteFilterUpdate": {
-            "$ref": "./examples/RouteFilterUpdate.json"
-          }
-        },
-        "description": "Updates a route filter in a specified resource group.",
+        "operationId": "RouteFilters_UpdateTags",
+        "description": "Updates tags of a route filter.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -239,13 +234,13 @@
             "description": "The name of the route filter."
           },
           {
-            "name": "routeFilterParameters",
+            "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PatchRouteFilter"
+              "$ref": "./network.json#/definitions/TagsObject"
             },
-            "description": "Parameters supplied to the update route filter operation."
+            "description": "Parameters supplied to update route filter tags."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -268,7 +263,11 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-examples": {
+          "Update route filter tags": {
+            "$ref": "./examples/RouteFilterUpdateTags.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters": {
@@ -547,71 +546,6 @@
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         }
-      },
-      "patch": {
-        "tags": [
-          "RouteFilterRules"
-        ],
-        "operationId": "RouteFilterRules_Update",
-        "x-ms-examples": {
-          "RouteFilterRuleUpdate": {
-            "$ref": "./examples/RouteFilterRuleUpdate.json"
-          }
-        },
-        "description": "Updates a route in the specified route filter.",
-        "parameters": [
-          {
-            "name": "resourceGroupName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource group."
-          },
-          {
-            "name": "routeFilterName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route filter."
-          },
-          {
-            "name": "ruleName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the route filter rule."
-          },
-          {
-            "name": "routeFilterRuleParameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatchRouteFilterRule"
-            },
-            "description": "Parameters supplied to the update route filter rule operation."
-          },
-          {
-            "$ref": "./network.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Update successful. The operation returns the resulting Route Filter Rule resource.",
-            "schema": {
-              "$ref": "#/definitions/RouteFilterRule"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./network.json#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/routeFilters/{routeFilterName}/routeFilterRules": {
