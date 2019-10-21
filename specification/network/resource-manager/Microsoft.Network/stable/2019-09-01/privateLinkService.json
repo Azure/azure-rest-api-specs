@@ -299,6 +299,68 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections/{peConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateLinkServices"
+        ],
+        "operationId": "PrivateLinkServices_GetPrivateEndpointConnection",
+        "description": "Get the specific private end point connection by specific private link service in the resource group.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private link service."
+          },
+          {
+            "name": "peConnectionName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private end point connection."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "$expand",
+            "in": "query",
+            "required": false,
+            "type": "string",
+            "description": "Expands referenced resources."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns the resulting private end point connection resource.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get private end point connection": {
+            "$ref": "./examples/PrivateLinkServiceGetPrivateEndpointConnection.json"
+          }
+        }
+      },
       "put": {
         "tags": [
           "PrivateLinkServices"
@@ -423,6 +485,59 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/privateLinkServices/{serviceName}/privateEndpointConnections" : {
+      "get": {
+        "tags": [
+          "PrivateLinkServices"
+        ],
+        "operationId": "PrivateLinkServices_ListPrivateEndpointConnections",
+        "description": "Gets all private end point connections for a specific private link service.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group."
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the private link service."
+          },
+          {
+            "$ref": "./network.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./network.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Request successful. The operation returns a list of private end point connection resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error.",
+            "schema": {
+              "$ref": "./network.json#/definitions/Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List private link service in resource group": {
+            "$ref": "./examples/PrivateLinkServiceListPrivateEndpointConnection.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -698,6 +813,10 @@
           "readOnly": true,
           "type": "string",
           "description": "The alias of the private link service."
+        },
+        "enableProxyProtocol": {
+          "type": "boolean",
+          "description": "Whether the private link service is enabled for proxy protocol or not."
         }
       },
       "description": "Properties of the private link service."
@@ -817,6 +936,11 @@
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
           "description": "The provisioning state of the private endpoint connection resource."
+        },
+        "linkIdentifier": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The consumer link id."
         }
       },
       "description": "Properties of the PrivateEndpointConnectProperties."
@@ -854,6 +978,23 @@
         }
       },
       "description": "Response for the ListPrivateLinkService API service call."
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "description": "A list of PrivateEndpointConnection resources for a specific private link service."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results.",
+          "readOnly": true
+        }
+      },
+      "description": "Response for the ListPrivateEndpointConnection API service call."
     },
     "CheckPrivateLinkServiceVisibilityRequest": {
       "properties": {
