@@ -29,6 +29,7 @@ openapi-type: arm
 ``` yaml
 input-file:
     - "$(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/storageaccounts.json"
+    - "$(this-folder)/Microsoft.Storage.Admin/preview/2019-08-08/quotas.json"
 ```
 
 ---
