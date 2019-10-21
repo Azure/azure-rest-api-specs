@@ -1328,6 +1328,9 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
             "name": "featureRelationCreateObject",
             "in": "body",
             "required": true,
@@ -1359,7 +1362,7 @@
         ],
         "x-ms-examples": {
           "Successful Add Feature Relation request": {
-            "$ref": "./examples/features/SuccessfulAddFeatureRelationRequest.json"
+            "$ref": "./examples/model/SuccessfulAddIntentFeatureRelationRequest.json"
           }
         }
       },
@@ -1396,7 +1399,7 @@
         ],
         "x-ms-examples": {
           "Successful Get Features information request": {
-            "$ref": "./examples/model/SuccessfulGetFeaturesInfoRequest.json"
+            "$ref": "./examples/model/SuccessfulGetIntentFeaturesInfoRequest.json"
           }
         }
       },
@@ -1445,7 +1448,7 @@
         ],
         "x-ms-examples": {
           "Successful Replace Features request": {
-            "$ref": "./examples/model/SuccessfulReplaceFeaturesRequest.json"
+            "$ref": "./examples/model/SuccessfulReplaceIntentFeaturesRequest.json"
           }
         }
       },
@@ -1491,7 +1494,7 @@
         ],
         "x-ms-examples": {
           "Successful Delete feature relation request": {
-            "$ref": "./examples/model/SuccessfulDeleteFeatureRelationRequest.json"
+            "$ref": "./examples/model/SuccessfulDeleteIntentFeatureRelationRequest.json"
           }
         }
       }
@@ -1506,6 +1509,9 @@
           },
           {
             "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
           },
           {
             "name": "featureRelationCreateObject",
@@ -1539,7 +1545,7 @@
         ],
         "x-ms-examples": {
           "Successful Add Feature Relation request": {
-            "$ref": "./examples/features/SuccessfulAddFeatureRelationRequest.json"
+            "$ref": "./examples/model/SuccessfulAddEntityFeatureRelationRequest.json"
           }
         }
       },
@@ -1554,7 +1560,7 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "$ref": "#/parameters/IntentIdInPath"
+            "$ref": "#/parameters/EntityIdInPath"
           }
         ],
         "responses": {
@@ -1576,7 +1582,7 @@
         ],
         "x-ms-examples": {
           "Successful Get Features information request": {
-            "$ref": "./examples/model/SuccessfulGetFeaturesInfoRequest.json"
+            "$ref": "./examples/model/SuccessfulGetEntityFeaturesInfoRequest.json"
           }
         }
       },
@@ -1591,7 +1597,7 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "$ref": "#/parameters/IntentIdInPath"
+            "$ref": "#/parameters/EntityIdInPath"
           },
           {
             "name": "featureRelationsUpdateObject",
@@ -1625,7 +1631,7 @@
         ],
         "x-ms-examples": {
           "Successful Replace Features request": {
-            "$ref": "./examples/model/SuccessfulReplaceFeaturesRequest.json"
+            "$ref": "./examples/model/SuccessfulReplaceEntityFeaturesRequest.json"
           }
         }
       },
@@ -1640,7 +1646,7 @@
             "$ref": "#/parameters/VersionIdInPath"
           },
           {
-            "$ref": "#/parameters/IntentIdInPath"
+            "$ref": "#/parameters/EntityIdInPath"
           },
           {
             "name": "featureRelationDeleteObject",
@@ -1671,7 +1677,7 @@
         ],
         "x-ms-examples": {
           "Successful Delete feature relation request": {
-            "$ref": "./examples/model/SuccessfulDeleteFeatureRelationRequest.json"
+            "$ref": "./examples/model/SuccessfulDeleteEntityFeatureRelationRequest.json"
           }
         }
       }
@@ -10302,6 +10308,15 @@
       "name": "intentId",
       "in": "path",
       "description": "The intent classifier ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityIdInPath": {
+      "name": "entityId",
+      "in": "path",
+      "description": "The entity extractor ID.",
       "required": true,
       "type": "string",
       "format": "uuid",
