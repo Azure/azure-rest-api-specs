@@ -1124,7 +1124,7 @@
         "properties": {
           "properties": {
             "cors": {
-              "$ref": "#/definitions/CorsRules",
+              "$ref": "./common.json#/definitions/CorsRules",
               "description": "Specifies CORS rules for the Blob service. You can include up to five CorsRule elements in the request. If no CorsRule elements are included in the request body, all CORS rules will be deleted, and CORS will be disabled for the Blob service."
             },
             "defaultServiceVersion": {
@@ -1191,72 +1191,6 @@
         }
       },
       "description": "The blob service properties for soft delete."
-    },
-    "CorsRules": {
-      "properties": {
-        "corsRules": {
-          "type": "array",
-          "items": {
-            "description": "Specifies a CORS rule for the Blob service. ",
-            "$ref": "#/definitions/CorsRule"
-          },
-          "description": "The List of CORS rules. You can include up to five CorsRule elements in the request. "
-        }
-      },
-      "description": "Sets the CORS rules. You can include up to five CorsRule elements in the request. "
-    },
-    "CorsRule": {
-      "properties": {
-        "allowedOrigins": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Required if CorsRule element is present. A list of origin domains that will be allowed via CORS, or \"*\" to allow all domains"
-        },
-        "allowedMethods": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "enum": [
-              "DELETE",
-              "GET",
-              "HEAD",
-              "MERGE",
-              "POST",
-              "OPTIONS",
-              "PUT"
-            ]
-          },
-          "description": "Required if CorsRule element is present. A list of HTTP methods that are allowed to be executed by the origin."
-        },
-        "maxAgeInSeconds": {
-          "type": "integer",
-          "description": "Required if CorsRule element is present. The number of seconds that the client/browser should cache a preflight response."
-        },
-        "exposedHeaders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Required if CorsRule element is present. A list of response headers to expose to CORS clients."
-        },
-        "allowedHeaders": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "Required if CorsRule element is present. A list of headers allowed to be part of the cross-origin request."
-        }
-      },
-      "required": [
-        "allowedOrigins",
-        "allowedMethods",
-        "maxAgeInSeconds",
-        "exposedHeaders",
-        "allowedHeaders"
-      ],
-      "description": "Specifies a CORS rule for the Blob service."
     },
     "LeaseContainerRequest": {
       "properties": {
