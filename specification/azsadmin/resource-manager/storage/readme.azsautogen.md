@@ -35,7 +35,6 @@ These settings apply only when `--tag=package-2019-08-08` is specified on the co
 input-file:
     - "Microsoft.Storage.Admin/preview/2019-08-08/quotas.json"
     - "Microsoft.Storage.Admin/preview/2019-08-08/settings.json"
-    - "Microsoft.Storage.Admin/preview/2019-08-08/acquisitions.json"
 ```
 
 ---
