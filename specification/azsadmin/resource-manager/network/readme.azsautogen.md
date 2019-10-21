@@ -29,11 +29,11 @@ tag: package-2015-06-15
 
 ``` yaml
 input-file:
-    - "Microsoft.Network.Admin/preview/2015-06-15/Network.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/LoadBalancers.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/Quotas.json"
-    - "Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json"
+    - "$(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/Network.json"
+    - "$(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/LoadBalancers.json"
+    - "$(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/PublicIpAddresses.json"
+    - "$(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/Quotas.json"
+    - "$(this-folder)/Microsoft.Network.Admin/preview/2015-06-15/VirtualNetworks.json"
 ```
 
 ---
