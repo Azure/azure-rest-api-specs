@@ -9,7 +9,7 @@ cli:
     "^.*[/]peerasns[/].*$": "peering asn"
     "^.*[/]peerings[/].*$": "peering"
     "^.*[/]legacypeerings$": "peering legacy"
-    "^.*[/]peeringlocations$": "peering locations"
+    "^.*[/]peeringlocations$": "peering location"
     "^.*[/]peeringservicelocations$": "peering service location"
     "^.*[/]peeringserviceproviders$": "peering service provider"
     "^.*[/]peeringservices([/][^/]*)?$": "peering service"
