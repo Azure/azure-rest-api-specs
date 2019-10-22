@@ -8,6 +8,6 @@ csharp:
   payload-flattening-threshold: 1
   clear-output-folder: true
   client-side-validation: false
-  namespace: Microsoft.Azure.Management.Storagecache
-  output-folder: $(csharp-sdks-folder)/storagecache/Microsoft.Azure.Management.Storagecache/src/Generated
+  namespace: Microsoft.Azure.Management.StorageCache
+  output-folder: $(csharp-sdks-folder)/storagecache/Microsoft.Azure.Management.StorageCache/src/Generated
 ```

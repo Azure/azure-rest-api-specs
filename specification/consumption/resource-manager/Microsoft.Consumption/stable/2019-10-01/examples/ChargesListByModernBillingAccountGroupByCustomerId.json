@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "scope": "providers/Microsoft.Billing/billingAccounts/1234:56789",
+    "startDate": "2019-09-01",
+    "endDate": "2019-09-30",
+	"$apply": "groupby((properties/customerId))"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:56789/customers/67890/providers/Microsoft.Consumption/charges/chargeSummaryId1",
+            "name": "chargeSummaryId1",
+            "type": "Microsoft.Consumption/charges",
+            "kind": "modern",
+            "properties": {
+			  "customerId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/customers/67890",
+              "isInvoiced": false,			
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Billing/billingPeriods/201909",
+              "usageStart": "2019-09-01",
+              "usageEnd": "2019-09-30",
+              "azureCharges": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "chargesBilledSeparately": {
+                "currency": "USD",
+                "value": 60.90
+              },
+              "marketplaceCharges": {
+                "currency": "USD",
+                "value": 100.00
+              },
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/1234:56789",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/billingProfiles/42425",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/invoiceSections/67890"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/BillingAccounts/1234:56789/customers/123456/providers/Microsoft.Consumption/charges/chargeSummaryId2",
+            "name": "chargeSummaryId2",
+            "type": "Microsoft.Consumption/charges",
+            "kind": "modern",
+            "properties": {
+			  "customerId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/customers/123456",
+              "isInvoiced": false,			
+              "billingPeriodId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/providers/Microsoft.Billing/billingPeriods/201909",
+              "usageStart": "2019-09-01",
+              "usageEnd": "2019-09-30",
+              "azureCharges": {
+                "currency": "USD",
+                "value": 5000.00
+              },
+              "chargesBilledSeparately": {
+                "currency": "USD",
+                "value": 60.90
+              },
+              "marketplaceCharges": {
+                "currency": "USD",
+                "value": 100.00
+              },
+              "billingAccountId": "/providers/Microsoft.Billing/billingAccounts/1234:56789",
+              "billingProfileId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/billingProfiles/42425",
+              "invoiceSectionId": "/providers/Microsoft.Billing/billingAccounts/1234:56789/invoiceSections/67890"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

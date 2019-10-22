@@ -1,10 +1,10 @@
 ---
 - scheduleTask:
     action: sendEmailToAssignee
+    repoWhitelist:
+      - Azure/azure-rest-api-specs
     args:
       booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard)"
-      repoWhitelist:
-        - Azure/azure-rest-api-specs
       limit: 48h
       message: '<p> Dear Swagger reviewer, <br> <br> Please response to the PR ${PR_URL}. The PR isn''t updated in 48 hours. <br> <hr /> <br> Quick info. <ul> <li>If no response from ARM review board, please send email to armapireview@microsoft.com.</li> <li>If need immediate ARM review, please get ARM review oncall contact point from ICM https://icm.ad.msft.net/imp/v3/oncall/current under Service "Azure Resource Manager" and Team "RP Manifest Approvers"</li> <li>If no response from Azure API review board, please send email to azureapirbcore@microsoft.com.</li> <li>If you have problem to fix CI task errors, please send email to Visual Studio China Swagger and Tool team vscswagger@microsoft.com.</li> <li>If you want to opt out from Swagger reviewing for out of office period, please set vacation date at https://inframonitorweb1.azurewebsites.net/Home/MyView.</li> <li>Pls refer to <a href="onenote:https://microsoft.sharepoint.com/teams/IoTToolingTeam/SiteAssets/IoT Tooling Team Notebook/Azure Management Experience - transition.one#Swagger%20reviewing%20process§ion-id={ECE847C4-519B-4448-A1A0-8E84A7EFE8AB}&page-id={F6E345FE-46E1-420F-B837-6BF76167DE05}&end">Swagger review process (onenote)</a> for more about Swagger review process.</li> </ul> Best regards, <br> Azure Management Experience </p>'
       subject: "Action Required: Please respond to PR ${PR_URL}"
@@ -13,22 +13,10 @@
 
 - scheduleTask:
     action: sendEmailToAssignee
-    args:
-      booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard)"
-      repoWhitelist:
-        - Azure/azure-rest-api-specs
-      limit: 5d
-      message: '<p> Dear Swagger reviewer, <br> <br> Please response to the PR ${PR_URL}. The PR isn''t updated in 5 days. <br> <hr /> <br> Quick info. <ul> <li>If no response from ARM review board, please send email to armapireview@microsoft.com.</li> <li>If need immediate ARM review, please get ARM review oncall contact point from ICM https://icm.ad.msft.net/imp/v3/oncall/current under Service "Azure Resource Manager" and Team "RP Manifest Approvers"</li> <li>If no response from Azure API review board, please send email to azureapirbcore@microsoft.com.</li> <li>If you have problem to fix CI task errors, please send email to Visual Studio China Swagger and Tool team vscswagger@microsoft.com.</li> <li>If you want to opt out from Swagger reviewing for out of office period, please set vacation date at https://inframonitorweb1.azurewebsites.net/Home/MyView.</li> <li>Pls refer to <a href="onenote:https://microsoft.sharepoint.com/teams/IoTToolingTeam/SiteAssets/IoT Tooling Team Notebook/Azure Management Experience - transition.one#Swagger%20reviewing%20process§ion-id={ECE847C4-519B-4448-A1A0-8E84A7EFE8AB}&page-id={F6E345FE-46E1-420F-B837-6BF76167DE05}&end">Swagger review process (onenote)</a> for more about Swagger review process.</li> </ul> Best regards, <br> Azure Management Experience </p>'
-      subject: "Action Required: Please respond to PR ${PR_URL}"
-    description: "None update in PR in 5 days"
-    name: "[PUBLIC] no update over 5 days notification"
-
-- scheduleTask:
-    action: sendEmailToAssignee
+    repoWhitelist:
+      - Azure/azure-rest-api-specs-pr
     args:
       booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard||Approved-OkToMerge)"
-      repoWhitelist:
-        - Azure/azure-rest-api-specs-pr
       limit: 48h
       message: '<p> Dear Swagger reviewer, <br> <br> Please response to the PR ${PR_URL}. The PR isn''t updated in 48 hours. <br> <hr /> <br> Quick info. <ul> <li>If no response from ARM review board, please send email to armapireview@microsoft.com.</li> <li>If need immediate ARM review, please get ARM review oncall contact point from ICM https://icm.ad.msft.net/imp/v3/oncall/current under Service "Azure Resource Manager" and Team "RP Manifest Approvers"</li> <li>If no response from Azure API review board, please send email to azureapirbcore@microsoft.com.</li> <li>If you have problem to fix CI task errors, please send email to Visual Studio China Swagger and Tool team vscswagger@microsoft.com.</li> <li>If you want to opt out from Swagger reviewing for out of office period, please set vacation date at https://inframonitorweb1.azurewebsites.net/Home/MyView.</li> <li>Pls refer to <a href="onenote:https://microsoft.sharepoint.com/teams/IoTToolingTeam/SiteAssets/IoT Tooling Team Notebook/Azure Management Experience - transition.one#Swagger%20reviewing%20process§ion-id={ECE847C4-519B-4448-A1A0-8E84A7EFE8AB}&page-id={F6E345FE-46E1-420F-B837-6BF76167DE05}&end">Swagger review process (onenote)</a> for more about Swagger review process.</li> </ul> Best regards, <br> Azure Management Experience </p>'
       subject: "Action Required: Please respond to PR ${PR_URL}"
@@ -36,24 +24,14 @@
     name: "[PRIVATE] initial response notification"
 
 - scheduleTask:
-    action: sendEmailToAssignee
-    args:
-      booleanFilterExpression: "!(WaitForARMFeedback||WaitingForAzureAPIBoard||Approved-OkToMerge)"
-      repoWhitelist:
-        - Azure/azure-rest-api-specs-pr
-      limit: 5d
-      message: '<p> Dear Swagger reviewer, <br> <br> Please response to the PR ${PR_URL}. The PR isn''t updated in 5 days. <br> <hr /> <br> Quick info. <ul> <li>If no response from ARM review board, please send email to armapireview@microsoft.com.</li> <li>If need immediate ARM review, please get ARM review oncall contact point from ICM https://icm.ad.msft.net/imp/v3/oncall/current under Service "Azure Resource Manager" and Team "RP Manifest Approvers"</li> <li>If no response from Azure API review board, please send email to azureapirbcore@microsoft.com.</li> <li>If you have problem to fix CI task errors, please send email to Visual Studio China Swagger and Tool team vscswagger@microsoft.com.</li> <li>If you want to opt out from Swagger reviewing for out of office period, please set vacation date at https://inframonitorweb1.azurewebsites.net/Home/MyView.</li> <li>Pls refer to <a href="onenote:https://microsoft.sharepoint.com/teams/IoTToolingTeam/SiteAssets/IoT Tooling Team Notebook/Azure Management Experience - transition.one#Swagger%20reviewing%20process§ion-id={ECE847C4-519B-4448-A1A0-8E84A7EFE8AB}&page-id={F6E345FE-46E1-420F-B837-6BF76167DE05}&end">Swagger review process (onenote)</a> for more about Swagger review process.</li> </ul> Best regards, <br> Azure Management Experience </p>'
-      subject: "Action Required: Please respond to PR ${PR_URL}"
-    description: "None update in PR in 5 days. For private repo"
-    name: "[PRIVATE] no update over 5 days notification"
-
-- scheduleTask:
     action: sendEmail
+    repoWhitelist:
+      - Azure/azure-rest-api-specs
     args:
       booleanFilterExpression: "(WaitForARMFeedback&&!ARMSignedOff&&!ARMChangesRequested&&!ARMReviewInProgress)"
       limit: 3d
-      subject: "ARM team notification email"
-      message: "Dear ARM team, This is a notification email. The PR ${PR_URL} is waiting on ARM team review over 3 days. Please response to the PR. After response to the PR, please remove WaitForARMFeedback label and the bot won't send notification email about the PR to you again. This is a test email. If you have any suggestion about email template, pls contact to Ruoxuan.Wang(ruowan@microsoft.com)"
+      subject: "Action Required: Please help to review PR ${PR_URL}"
+      message: "<p> Dear ARM review board, <br> <br>Please review PR ${PR_URL}, the PR is waiting for ARM review over 3 days. Thanks.<br><hr /> <br>Quick info<ul><li>If you have feedback about the notification email, please contact us at vscswagger@microsoft.com.</li><li>After reviewing, please remove “WaitForARMFeedback” label from PR to avoid receiving notification on the same PR.</li><li>Please do not reply to this email, this is an automatic generated email.</li></ul>Best regards,<br> Azure Management Experience</p>"
       to: yungez@microsoft.com
     description: "send email to ARM team for over 5 days PRs labelled with WaitForARMFeedback"
     name: "send email to ARM team"

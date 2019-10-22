@@ -27,6 +27,12 @@ These are the global settings for the PolicyInsights API.
 ``` yaml
 title: PolicyInsightsClient
 openapi-type: arm
+tag: package-2019-10
+```
+
+``` yaml
+title: PolicyInsightsClient
+openapi-type: arm
 tag: package-2018-07
 ```
 
@@ -55,6 +61,17 @@ directive:
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyEvents/$metadata"].get.produces[0]
       - $.paths["/{scope}/providers/Microsoft.PolicyInsights/policyStates/$metadata"].get.produces[0]
 
+```
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10'
+input-file:
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
+- Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
+- Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
+- Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
 ```
 
 ### Tag: package-2018-07
@@ -197,9 +214,24 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-policyinsights
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-10
   - tag: package-2018-07
   - tag: package-2018-04
 ```
+
+### Tag: package-2019-10 and java
+
+These settings apply only when `--tag=package-2019-10 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-10' && $(java)
+java:
+  namespace: com.microsoft.azure.management.policyinsights.v2019_10_01
+  output-folder: $(azure-libraries-for-java-folder)/policyinsights/resource-manager/v2019_10_01
+regenerate-manager: true
+generate-interface: true
+```
+
 
 ### Tag: package-2018-07 and java
 
@@ -243,6 +275,7 @@ input-file:
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyTrackedResources.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/remediations.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyEvents.json
+  - $(this-folder)/Microsoft.PolicyInsights/stable/2019-10-01/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2018-07-01-preview/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/stable/2018-04-04/policyStates.json
   - $(this-folder)/Microsoft.PolicyInsights/preview/2017-12-12-preview/policyEvents.json
