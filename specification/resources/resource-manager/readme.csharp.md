@@ -23,6 +23,7 @@ batch:
   - package-resources: true
   - package-subscriptions: true
   - package-links: true
+  - package-deploymentscripts: true
 #  - package-managedapplications: true
 ```
 
