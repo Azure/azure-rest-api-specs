@@ -12,21 +12,39 @@
     }
   },
   "responses": {
-    "201": {
+    "200": {
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/12345/providers/Microsoft.SpoolService/operations/67890"
+      },
       "body": {
-        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.SpoolService/Spool/MySpoolResource",
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.SpoolService/spools/MySpoolResource",
         "name": "MySpoolResource",
-        "type": "Microsoft.SpoolService/Spool",
+        "type": "Microsoft.SpoolService/spools",
+        "location": "West US",
         "properties": {
-          "provisioningState": "Running",
+          "provisioningState": "Updating",
           "hostName": "MySpoolService.service.spool.net",
-          "location": "West US",
           "version": "0.2.0",
           "optionalFeatures": []
         }
       }
     },
-    "202": {
+    "201": {
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/12345/providers/Microsoft.SpoolService/operations/67890"
+      },
+      "body": {
+        "id": "/subscriptions/12345/resourceGroups/MyResourceGroup/providers/Microsoft.SpoolService/spools/MySpoolResource",
+        "name": "MySpoolResource",
+        "type": "Microsoft.SpoolService/spools",
+        "location": "West US",
+        "properties": {
+          "provisioningState": "Creating",
+          "hostName": "MySpoolService.service.spool.net",
+          "version": "0.2.0",
+          "optionalFeatures": []
+        }
+      }
     }
   }
 }

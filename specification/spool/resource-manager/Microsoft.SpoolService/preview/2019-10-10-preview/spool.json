@@ -296,19 +296,16 @@
         "consumes": [ "application/json" ],
         "responses": {
           "200": {
-            "description": "An existing resource was updated. The response describes the existing service and contains a Location header to query the operation result.",
+            "description": "An existing resource was updated. The response describes the existing service and contains an Azure-AsyncOperation header to query the operation result.",
             "schema": {
               "$ref": "#/definitions/SpoolResource"
             }
           },
           "201": {
-            "description": "Created. The response describes the new service and contains a Location header to query the operation result.",
+            "description": "Created. The response describes the new service and contains an Azure-AsyncOperation header to query the operation result.",
             "schema": {
               "$ref": "#/definitions/SpoolResource"
             }
-          },
-          "202": {
-            "description": "Accepted. The response indicates the existing Spool service is now updating and contains a Location header to query the operation result."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -345,11 +342,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "The resource has been deleted successfully."
+          },
           "202": {
-            "description": "Accepted. The response indicates the delete operation is performed in the background."
+            "description": "The delete operation is being performed in the background."
           },
           "204": {
-            "description": "Success. The response indicates the resource is already deleted."
+            "description": "The resource did not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -440,7 +440,7 @@
         ],
         "responses": {
           "201": {
-            "description": "Created and an async operation is executing in background to make the new key take effect. The response contains new keys and a Location header to query the async operation result.",
+            "description": "Created and an async operation is executing in background to make the new key take effect. The response contains new keys and an Azure-AsyncOperation header to query the async operation result.",
             "schema": {
               "$ref": "#/definitions/SpoolKeys"
             }
@@ -746,6 +746,10 @@
           "description": "The type of the service - e.g. \"Microsoft.SpoolService/spools\"",
           "type": "string",
           "readOnly": true
+        },
+        "location": {
+          "description": "The Azure location where the Spool service is running.",
+          "type": "string"
         }
       },
       "x-ms-azure-resource": true
@@ -788,10 +792,6 @@
           "type": "string",
           "readOnly": true
         },
-        "location": {
-          "description": "The Azure location where the Spool service is running.",
-          "type": "string"
-        },
         "optionalFeatures": {
           "description": "Features that may optionally be enabled on a Spool instance.",
           "type": "array",
@@ -809,8 +809,7 @@
         }
       },
       "required": [
-        "hostNamePrefix",
-        "location"
+        "hostNamePrefix"
       ]
     },
     "SpoolKeys": {
