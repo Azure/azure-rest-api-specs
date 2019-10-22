@@ -28,9 +28,11 @@
           "Deployment"
         ],
         "operationId": "Operations_List",
-        "parameters": [{
-          "$ref": "#/parameters/ApiVersionParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK",
@@ -110,6 +112,10 @@
         "display": {
           "description": "Contains the localized display information for this particular operation or action.",
           "$ref": "#/definitions/Display"
+        },
+        "origin": {
+          "description": "Origin for the operation. Eg. User, System",
+          "type": "string"
         }
       }
     },
@@ -196,9 +202,11 @@
       }
     }
   },
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }]
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
