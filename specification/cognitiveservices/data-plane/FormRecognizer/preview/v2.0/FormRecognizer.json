@@ -413,9 +413,6 @@
         ],
         "parameters": [
           {
-            "$ref": "#/parameters/OcrLanguage"
-          },
-          {
             "$ref": "#/parameters/FileStream"
           }
         ],
@@ -1377,22 +1374,6 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
-    },
-    "OcrLanguage": {
-      "name": "language",
-      "in": "query",
-      "description": "The BCP-47 language code of the text to be detected in the image.",
-      "required": true,
-      "x-ms-parameter-location": "method",
-      "type": "string",
-      "x-ms-enum": {
-        "name": "Language",
-        "modelAsString": true
-      },
-      "enum": [
-        "en",
-        "es"
-      ]
     },
     "FileStream": {
       "name": "fileStream",
