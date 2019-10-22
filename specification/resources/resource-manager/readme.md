@@ -56,6 +56,18 @@ tag: package-links-2016-09
 tag: package-managedapplications-2018-06
 ```
 
+``` yaml $(package-deploymentscripts)
+tag: package-deploymentscripts-2019-10-preview
+```
+
+### Tag: package-resources-2019-10-preview
+These settings apply only when `--tag=package-deploymentscripts-2019-10-preview` is specified on the command line.
+ 
+``` yaml $(tag) == 'package-deploymentscripts-2019-10-preview'
+input-file:
+- Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
+```
+
 ### Tag: package-features-2015-12
 
 These settings apply only when `--tag=package-features-2015-12` is specified on the command line.
@@ -452,6 +464,26 @@ directive:
     from: managedapplications.json
     where: $.definitions.GenericResource.properties
     reason: managedBy is a top level property
+  - from: deploymentScripts.json
+    suppress: TrackedResourceGetOperation 
+    where: $.definitions.AzureCliScript
+    reason: Tooling issue.
+  - from: deploymentScripts.json
+    suppress: TrackedResourcePatchOperation 
+    where: $.definitions.AzureCliScript
+    reason: Tooling issue.
+  - from: deploymentScripts.json
+    suppress: TrackedResourceGetOperation 
+    where: $.definitions.AzurePowerShellScript
+    reason: Tooling issue
+  - from: deploymentScripts.json
+    suppress: TrackedResourcePatchOperation 
+    where: $.definitions.AzurePowerShellScript
+    reason: Tooling issue
+  - from: deploymentScripts.json
+    suppress: OperationsAPIImplementation
+    where: $.paths
+    reason: OperationsAPI will come from Resources
 ```
 
 ---
@@ -529,6 +561,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Resources/preview/2019-10-01-preview/deploymentScripts.json
   - $(this-folder)/Microsoft.Features/stable/2015-12-01/features.json
   - $(this-folder)/Microsoft.Authorization/stable/2016-09-01/locks.json
   - $(this-folder)/Microsoft.Authorization/stable/2015-01-01/locks.json
