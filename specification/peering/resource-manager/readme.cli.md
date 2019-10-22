@@ -8,8 +8,13 @@ cli:
   cmd-override:
     "^.*[/]peerasns[/].*$": "peering asn"
     "^.*[/]peerings[/].*$": "peering"
+    "^.*[/]legacypeerings$": "peering legacy"
+    "^.*[/]peeringlocations$": "peering location"
+    "^.*[/]peeringservicelocations$": "peering service location"
+    "^.*[/]peeringserviceproviders$": "peering service provider"
     "^.*[/]peeringservices([/][^/]*)?$": "peering service"
     "^.*[/]peeringservices[/].*prefixes.*$": "peering service prefix"
+    "^.*[/]operations$": "-"
   namespace: azure.mgmt.peering
   package-name: azure-mgmt-peering
   debug: true
