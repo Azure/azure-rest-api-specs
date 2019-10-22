@@ -24,16 +24,16 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/securityAutomations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/automations": {
       "get": {
         "x-ms-examples": {
           "Get security automations of subscription": {
-            "$ref": "./examples/SecurityAutomations/GetSecurityAutomationsSubscription_example.json"
+            "$ref": "./examples/Automations/GetAutomationsSubscription_example.json"
           }
         },
-        "tags": ["SecurityAutomations"],
+        "tags": ["Automations"],
         "description": "Get all security automations in a subscription.",
-        "operationId": "SecurityAutomations_List",
+        "operationId": "Automations_List",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
@@ -45,7 +45,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAutomationList"
+              "$ref": "#/definitions/AutomationList"
             }
           },
           "default": {
@@ -60,16 +60,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityAutomations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/automations": {
       "get": {
         "x-ms-examples": {
           "Get security automations of a single resource group": {
-            "$ref": "./examples/SecurityAutomations/GetSecurityAutomationsResourceGroup_example.json"
+            "$ref": "./examples/Automations/GetAutomationsResourceGroup_example.json"
           }
         },
-        "tags": ["SecurityAutomations"],
+        "tags": ["Automations"],
         "description": "Get all security automations in a resource group.",
-        "operationId": "SecurityAutomations_ListByResourceGroup",
+        "operationId": "Automations_ListByResourceGroup",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
@@ -84,7 +84,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAutomationList"
+              "$ref": "#/definitions/AutomationList"
             }
           },
           "default": {
@@ -99,16 +99,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityAutomations/{securityAutomationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/automations/{automationName}": {
       "get": {
         "x-ms-examples": {
           "Get a single security automation details": {
-            "$ref": "./examples/SecurityAutomations/GetSecurityAutomationResourceGroup_example.json"
+            "$ref": "./examples/Automations/GetAutomationResourceGroup_example.json"
           }
         },
-        "tags": ["SecurityAutomations"],
+        "tags": ["Automations"],
         "description": "Get the details of a security automation.",
-        "operationId": "SecurityAutomations_Get",
+        "operationId": "Automations_Get",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
@@ -119,14 +119,14 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SecurityAutomationName"
+            "$ref": "#/parameters/AutomationName"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAutomation"
+              "$ref": "#/definitions/Automation"
             }
           },
           "default": {
@@ -140,12 +140,12 @@
       "put": {
         "x-ms-examples": {
           "Create or update a single security automation": {
-            "$ref": "./examples/SecurityAutomations/PutSecurityAutomation_example.json"
+            "$ref": "./examples/Automations/PutAutomation_example.json"
           }
         },
-        "tags": ["SecurityAutomations"],
+        "tags": ["Automations"],
         "description": "Create or update a security automation. If a security automation is already created and a subsequent create request is issued with different properties, the security automation properties will be updated.",
-        "operationId": "SecurityAutomations_CreateOrUpdate",
+        "operationId": "Automations_CreateOrUpdate",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
@@ -156,23 +156,23 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SecurityAutomationName"
+            "$ref": "#/parameters/AutomationName"
           },
           {
-            "$ref": "#/parameters/SecurityAutomationInBody"
+            "$ref": "#/parameters/AutomationInBody"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAutomation"
+              "$ref": "#/definitions/Automation"
             }
           },
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/SecurityAutomation"
+              "$ref": "#/definitions/Automation"
             }
           },
           "default": {
@@ -186,11 +186,11 @@
       "delete": {
         "x-ms-examples": {
           "Delete a single security automation": {
-            "$ref": "./examples/SecurityAutomations/DeleteSecurityAutomation_example.json"
+            "$ref": "./examples/Automations/DeleteAutomation_example.json"
           }
         },
-        "tags": ["SecurityAutomations"],
-        "operationId": "SecurityAutomations_Delete",
+        "tags": ["Automations"],
+        "operationId": "Automations_Delete",
         "description": "Delete a security automation.",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
@@ -202,7 +202,7 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SecurityAutomationName"
+            "$ref": "#/parameters/AutomationName"
           }
         ],
         "responses": {
@@ -218,16 +218,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityAutomations/{securityAutomationName}/validate": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/automations/{automationName}/validate": {
       "post": {
         "x-ms-examples": {
           "Validate the security automation model before create or update": {
-            "$ref": "./examples/SecurityAutomations/ValidateSecurityAutomation_example.json"
+            "$ref": "./examples/Automations/ValidateAutomation_example.json"
           }
         },
-        "tags": ["SecurityAutomations"],
+        "tags": ["Automations"],
         "description": "Validate the security automation model before create or update. Any validation errors are returned to the client.",
-        "operationId": "SecurityAutomations_Validate",
+        "operationId": "Automations_Validate",
         "parameters": [{
             "$ref": "../../../common/v1/types.json#/parameters/ApiVersion"
           },
@@ -238,17 +238,17 @@
             "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "#/parameters/SecurityAutomationName"
+            "$ref": "#/parameters/AutomationName"
           },
           {
-            "$ref": "#/parameters/SecurityAutomationInBody"
+            "$ref": "#/parameters/AutomationInBody"
           }
         ],
         "responses": {
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/SecurityAutomationValidationStatus"
+              "$ref": "#/definitions/AutomationValidationStatus"
             }
           },
           "default": {
@@ -262,7 +262,7 @@
     }
   },
   "definitions": {
-    "SecurityAutomationList": {
+    "AutomationList": {
       "description": "List of security automations response.",
       "required": ["value"],
       "properties": {
@@ -270,7 +270,7 @@
           "type": "array",
           "description": "The list of security automations under the given scope.",
           "items": {
-            "$ref": "#/definitions/SecurityAutomation"
+            "$ref": "#/definitions/Automation"
           }
         },
         "nextLink": {
@@ -280,21 +280,21 @@
         }
       }
     },
-    "SecurityAutomation": {
+    "Automation": {
       "type": "object",
       "description": "The security automation resource.",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Security automation data",
-          "$ref": "#/definitions/SecurityAutomationProperties"
+          "$ref": "#/definitions/AutomationProperties"
         }
       },
       "allOf": [{
         "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
       }]
     },
-    "SecurityAutomationProperties": {
+    "AutomationProperties": {
       "type": "object",
       "description": "The security automation data.",
       "properties": {
@@ -309,32 +309,32 @@
         "metadata": {
           "type": "object",
           "description": "The metadata of the security automation resource.",
-          "$ref": "#/definitions/SecurityAutomationMetadata"
+          "$ref": "#/definitions/AutomationMetadata"
         },
         "scopes": {
           "type": "array",
           "description": "A collection of the subscription's resources  scopes on which the security automations logic is applied.",
           "items": {
-            "$ref": "#/definitions/SecurityAutomationScope"
+            "$ref": "#/definitions/AutomationScope"
           }
         },
         "sources": {
           "type": "array",
           "description": "A collection of the source event types which evaluate the security automation set of rules.",
           "items": {
-            "$ref": "#/definitions/SecurityAutomationSource"
+            "$ref": "#/definitions/AutomationSource"
           }
         },
         "actions": {
           "type": "array",
           "description": "A collection of the actions which are triggered if all the configured rule set evaluation is true.",
           "items": {
-            "$ref": "#/definitions/SecurityAutomationAction"
+            "$ref": "#/definitions/AutomationAction"
           }
         }
       }
     },
-    "SecurityAutomationMetadata": {
+    "AutomationMetadata": {
       "type": "object",
       "description": "The metadata of the security automation resource.",
       "properties": {
@@ -362,9 +362,9 @@
         }
       }
     },
-    "SecurityAutomationSource": {
+    "AutomationSource": {
       "type": "object",
-      "description": "The source event types which evaluate the security automation set of rules. For example - security alerts and recommended tasks.",
+      "description": "The source event types which evaluate the security automation set of rules. For example - security alerts and security assessments.",
       "properties": {
         "eventSource": {
           "type": "string",
@@ -374,12 +374,12 @@
           "type": "array",
           "description": "A set of rules which evaluate upon event interception.",
           "items": {
-            "$ref": "#/definitions/SecurityAutomationRuleSet"
+            "$ref": "#/definitions/AutomationRuleSet"
           }
         }
       }
     },
-    "SecurityAutomationScope": {
+    "AutomationScope": {
       "type": "object",
       "description": "The subscription's resources scope",
       "properties": {
@@ -393,14 +393,14 @@
         }
       }
     },
-    "SecurityAutomationAction": {
+    "AutomationAction": {
       "type": "object",
       "description": "The action that should be triggered.",
       "discriminator": "actionType",
       "properties": {
         "actionType": {
           "type": "string",
-          "description": "type of action that will be triggered by the SecurityAutomation",
+          "description": "type of action that will be triggered by the Automation",
           "enum": ["LogicApp", "EventHub", "SecurityEmail"],
           "x-ms-enum": {
             "name": "ActionType",
@@ -420,12 +420,12 @@
         }
       }
     },
-    "SecurityAutomationActionLogicApp": {
+    "AutomationActionLogicApp": {
       "type": "object",
       "description": "The logic app action that should be triggered.",
       "x-ms-discriminator-value": "LogicApp",
       "allOf": [{
-        "$ref": "#/definitions/SecurityAutomationAction"
+        "$ref": "#/definitions/AutomationAction"
       }],
       "properties": {
         "logicAppResourceId": {
@@ -439,12 +439,12 @@
         }
       }
     },
-    "SecurityAutomationActionEventHub": {
+    "AutomationActionEventHub": {
       "type": "object",
       "description": "The event hub action that should be triggered.",
       "x-ms-discriminator-value": "EventHub",
       "allOf": [{
-        "$ref": "#/definitions/SecurityAutomationAction"
+        "$ref": "#/definitions/AutomationAction"
       }],
       "properties": {
         "eventHubResourceId": {
@@ -457,12 +457,12 @@
         }
       }
     },
-    "SecurityAutomationActionSecurityEmail": {
+    "AutomationActionSecurityEmail": {
       "type": "object",
       "description": "The Security Email action that should be triggered.",
       "x-ms-discriminator-value": "SecurityEmail",
       "allOf": [{
-        "$ref": "#/definitions/SecurityAutomationAction"
+        "$ref": "#/definitions/AutomationAction"
       }],
       "properties": {
         "subscriptionRbacRoles": {
@@ -488,19 +488,19 @@
         }
       }
     },
-    "SecurityAutomationRuleSet": {
+    "AutomationRuleSet": {
       "type": "object",
       "description": "A rule set which evaluates all its rules upon an event interception.",
       "properties": {
         "rules": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/SecurityAutomationTriggeringRule"
+            "$ref": "#/definitions/AutomationTriggeringRule"
           }
         }
       }
     },
-    "SecurityAutomationTriggeringRule": {
+    "AutomationTriggeringRule": {
       "type": "object",
       "description": "A logic rule which evaluates upon event interception. The rule is configured by comparing the specified expected value, in an expected property within the event model, by the specified operator.",
       "properties": {
@@ -541,7 +541,7 @@
         }
       }
     },
-    "SecurityAutomationValidationStatus": {
+    "AutomationValidationStatus": {
       "type": "object",
       "description": "The security automation model state property bag.",
       "properties": {
@@ -557,21 +557,21 @@
     }
   },
   "parameters": {
-    "SecurityAutomationName": {
-      "name": "securityAutomationName",
+    "AutomationName": {
+      "name": "automationName",
       "in": "path",
       "required": true,
       "type": "string",
       "description": "The security automation name.",
       "x-ms-parameter-location": "method"
     },
-    "SecurityAutomationInBody": {
-      "name": "SecurityAutomation",
+    "AutomationInBody": {
+      "name": "Automation",
       "in": "body",
       "required": true,
       "description": "The security automation resource",
       "schema": {
-        "$ref": "#/definitions/SecurityAutomation"
+        "$ref": "#/definitions/Automation"
       }
     }
   }
