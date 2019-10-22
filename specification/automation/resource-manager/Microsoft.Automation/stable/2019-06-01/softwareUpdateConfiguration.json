@@ -706,30 +706,16 @@
         "properties"
       ]
     },
-    "collectionItemUpdateConfiguration": {
-      "description": "Object returned when requesting a collection of software update configurations.",
-      "properties": {
-        "azureVirtualMachines": {
-          "type": "array",
-          "description": "List of azure resource IDs for azure virtual machines targeted by the software update configuration.",
-          "items": {
-            "type": "string",
-            "description": "Azure Resource Manager ID for a virtual machine."
-          }
-        },
-        "duration": {
-          "type": "string",
-          "format": "duration",
-          "description": "Maximum time allowed for the software update configuration run. Duration needs to be specified using the format PT[n]H[n]M[n]S as per ISO8601."
-        }
-      }
-    },
     "softwareUpdateConfigurationCollectionItemProperties": {
       "description": "Software update configuration collection item properties.",
       "properties": {
         "updateConfiguration": {
           "description": "Update specific properties of the software update configuration.",
-          "$ref": "#/definitions/collectionItemUpdateConfiguration"
+          "$ref": "#/definitions/updateConfiguration"
+        },
+        "tasks": {
+          "description": "Tasks information for the software update configuration.",
+          "$ref": "#/definitions/softwareUpdateConfigurationTasks"
         },
         "frequency": {
           "description": "Execution frequency of the schedule associated with the software update configuration.",
