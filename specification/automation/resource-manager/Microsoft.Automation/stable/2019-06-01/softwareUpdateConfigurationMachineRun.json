@@ -2,10 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Update Management API",
-    "description": "APIs for managing software update configurations.",
-    "contact": {
-      "name": "Mohamed Enein"
-    },
+    "description": "APIs for managing software update configuration machine runs.",
     "version": "2019-06-01",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
@@ -46,7 +43,7 @@
         "tags": [
           "Software Update Configuration Machine Run"
         ],
-        "description": "Get a single software update configuration machine run by Id.",
+        "description": "Get a single software update configuration machine run by ID.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
@@ -68,7 +65,7 @@
           },
           {
             "name": "softwareUpdateConfigurationMachineRunId",
-            "description": "The Id of the software update configuration machine run.",
+            "description": "The ID of the software update configuration machine run.",
             "type": "string",
             "required": true,
             "in": "path",
@@ -136,21 +133,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. You can use the following filters: 'properties/osType', 'properties/status', 'properties/startTime', and 'properties/softwareUpdateConfiguration/name'"
+            "description": "The filter to apply on the operation. You can use the following filters: 'properties/osType', 'properties/status', 'properties/startTime', and 'properties/softwareUpdateConfiguration/name'."
           },
           {
             "name": "$skip",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "number of entries you skip before returning results"
+            "description": "Number of entries you skip before returning results."
           },
           {
             "name": "$top",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Maximum number of entries returned in the results collection"
+            "description": "Maximum number of entries returned in the results collection."
           }
         ],
         "responses": {
@@ -182,12 +179,12 @@
         "name": {
           "readOnly": true,
           "type": "string",
-          "description": "Name of the software update configuration machine run"
+          "description": "Name of the software update configuration machine run."
         },
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id of the software update configuration machine run"
+          "description": "Resource ID of the software update configuration machine run."
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -197,10 +194,10 @@
       }
     },
     "softwareUpdateConfigurationMachineRunListResult": {
-      "description": "result of listing all software update configuration machine runs",
+      "description": "Result of listing all software update configuration machine runs.",
       "properties": {
         "value": {
-          "description": "outer object returned when listing all software update configuration machine runs",
+          "description": "Outer object returned when listing all software update configuration machine runs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/softwareUpdateConfigurationMachineRun"
@@ -208,7 +205,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "link to next page of results."
+          "description": "Link to next page of results."
         }
       }
     },
@@ -217,16 +214,16 @@
       "properties": {
         "targetComputer": {
           "type": "string",
-          "description": "name of the updated computer",
+          "description": "Name of the updated computer.",
           "readOnly": true
         },
         "targetComputerType": {
           "type": "string",
-          "description": "type of the updated computer.",
+          "description": "Type of the updated computer.",
           "readOnly": true
         },
         "softwareUpdateConfiguration": {
-          "description": "software update configuration triggered this run",
+          "description": "Software update configuration triggered this run.",
           "$ref": "#/definitions/updateConfigurationNavigation"
         },
         "status": {
@@ -236,19 +233,19 @@
         },
         "osType": {
           "type": "string",
-          "description": "Operating system target of the software update configuration triggered this run",
+          "description": "Operating system target of the software update configuration triggered this run.",
           "readOnly": true
         },
         "correlationId": {
           "type": "string",
           "format": "uuid",
-          "description": "correlation id of the software update configuration machine run",
+          "description": "Correlation ID of the software update configuration machine run",
           "readOnly": true
         },
         "sourceComputerId": {
           "type": "string",
           "format": "uuid",
-          "description": "source computer id of the software update configuration machine run",
+          "description": "Source computer ID of the software update configuration machine run.",
           "readOnly": true
         },
         "startTime": {
@@ -267,7 +264,7 @@
         },
         "configuredDuration": {
           "type": "string",
-          "description": "configured duration for the software update configuration run.",
+          "description": "Configured duration for the software update configuration run.",
           "readOnly": true
         },
         "job": {
@@ -299,7 +296,7 @@
           "readOnly": true
         },
         "error": {
-          "description": "Details of provisioning error",
+          "description": "Details of provisioning error.",
           "$ref": "../../common/v1/definitions.json#/definitions/ErrorResponse"
         }
       }
@@ -309,7 +306,7 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the software update configuration triggered the software update configuration run",
+          "description": "Name of the software update configuration triggered the software update configuration run.",
           "type": "string",
           "readOnly": true
         }
@@ -320,7 +317,7 @@
       "type": "object",
       "properties": {
         "id": {
-          "description": "Id of the job associated with the software update configuration run",
+          "description": "ID of the job associated with the software update configuration run.",
           "type": "string",
           "readOnly": true
         }

@@ -2,10 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Update Management API",
-    "description": "APIs for managing software update configurations.",
-    "contact": {
-      "name": "Mohamed Enein"
-    },
+    "description": "APIs for managing software update configuration runs.",
     "version": "2019-06-01",
     "x-ms-code-generation-settings": {
       "useDateTimeOffset": true
@@ -46,12 +43,12 @@
         "tags": [
           "Software Update Configuration Run"
         ],
-        "description": "Get a single software update configuration Run by Id.",
+        "description": "Get a single software update configuration run by ID.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationrunoperations"
         },
         "x-ms-examples": {
-          "Get software update configuration runs by Id": {
+          "Get software update configuration runs by ID": {
             "$ref": "./examples/softwareUpdateConfigurationRun/getSoftwareUpdateConfigurationRunById.json"
           }
         },
@@ -68,7 +65,7 @@
           },
           {
             "name": "softwareUpdateConfigurationRunId",
-            "description": "The Id of the software update configuration run.",
+            "description": "The ID of the software update configuration run.",
             "type": "string",
             "required": true,
             "in": "path",
@@ -83,7 +80,7 @@
         ],
         "responses": {
           "200": {
-            "description": "A single software update configuration Run.",
+            "description": "A single software update configuration run.",
             "schema": {
               "$ref": "#/definitions/softwareUpdateConfigurationRun"
             }
@@ -102,7 +99,7 @@
         "tags": [
           "Software Update Configuration Run"
         ],
-        "description": "Return list of software update configuration runs",
+        "description": "Return list of software update configuration runs.",
         "externalDocs": {
           "url": "http://aka.ms/azureautomationsdk/softwareupdateconfigurationoperations"
         },
@@ -136,21 +133,21 @@
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "The filter to apply on the operation. You can use the following filters: 'properties/osType', 'properties/status', 'properties/startTime', and 'properties/softwareUpdateConfiguration/name'"
+            "description": "The filter to apply on the operation. You can use the following filters: 'properties/osType', 'properties/status', 'properties/startTime', and 'properties/softwareUpdateConfiguration/name'."
           },
           {
             "name": "$skip",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Number of entries you skip before returning results"
+            "description": "Number of entries you skip before returning results."
           },
           {
             "name": "$top",
             "in": "query",
             "required": false,
             "type": "string",
-            "description": "Maximum number of entries returned in the results collection"
+            "description": "Maximum number of entries returned in the results collection."
           }
         ],
         "responses": {
@@ -175,7 +172,7 @@
   },
   "definitions": {
     "softwareUpdateConfigurationRun": {
-      "description": "Software update configuration Run properties.",
+      "description": "Software update configuration run properties.",
       "x-ms-azure-resource": false,
       "type": "object",
       "properties": {
@@ -187,11 +184,11 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Resource Id of the software update configuration run"
+          "description": "Resource ID of the software update configuration run."
         },
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Software update configuration Run properties.",
+          "description": "Software update configuration run properties.",
           "$ref": "#/definitions/softwareUpdateConfigurationRunProperties"
         }
       }
@@ -200,7 +197,7 @@
       "description": "Software update configuration properties.",
       "properties": {
         "softwareUpdateConfiguration": {
-          "description": "software update configuration triggered this run",
+          "description": "Software update configuration triggered this run.",
           "$ref": "#/definitions/updateConfigurationNavigation"
         },
         "status": {
@@ -300,7 +297,7 @@
         },
         "jobId": {
           "type": "string",
-          "description": "The job id of the task."
+          "description": "The job ID of the task."
         }
       }
     },
@@ -309,17 +306,17 @@
       "type": "object",
       "properties": {
         "name": {
-          "description": "Name of the software update configuration triggered the software update configuration run",
+          "description": "Name of the software update configuration triggered the software update configuration run.",
           "type": "string",
           "readOnly": true
         }
       }
     },
     "softwareUpdateConfigurationRunListResult": {
-      "description": "result of listing all software update configuration runs",
+      "description": "Result of listing all software update configuration runs.",
       "properties": {
         "value": {
-          "description": "outer object returned when listing all software update configuration runs",
+          "description": "Outer object returned when listing all software update configuration runs.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/softwareUpdateConfigurationRun"
@@ -327,7 +324,7 @@
         },
         "nextLink": {
           "type": "string",
-          "description": "link to next page of results."
+          "description": "Link to next page of results."
         }
       }
     }
