@@ -8,8 +8,9 @@ cli:
   namespace: azure.mgmt.managednetwork
   package-name: azure-mgmt-managednetwork
   debug: true
-  adjustments:
-    "/sku": "Sku*/"
+  cmd-override:
+    "^.*[/]microsoft.managednetwork/scopeassignments([/][^/]*)?$": "managednetwork scope-assignment"
+  flatten-all: true
   test-setup:
     - name: Create or Update a service with all parameters
 ```
