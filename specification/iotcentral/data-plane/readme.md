@@ -20,6 +20,20 @@ To see additional help and options, run:
 ## Configuration
 These are the global settings for the IoT Central API.
 
+``` yaml
+openapi-type: data-plane
+tag: package-2019-10-28-preview
+```
+
+### Tag: package-2019-10-28-preview
+
+These settings apply only when `--tag=package-2019-10-28-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-28-preview'
+input-file:
+- Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
+```
+
 ```yaml
 version: latest
 clear-output-folder: true
