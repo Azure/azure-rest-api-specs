@@ -122,6 +122,125 @@
       ],
       "additionalProperties": true
     },
+    "Endpoint":{
+      "type":"object",
+      "properties":{
+         "type":{
+            "description":"Type of the endpoint.",
+            "type":"string"
+         },
+         "connectionString":{
+            "description":"Information for connecting to the endpoint.",
+            "type":"string"
+         },
+         "name":{
+            "description":"Name of the entity to send data to.",
+            "type":"string"
+         }
+      },
+      "required":[
+         "type",
+         "connectionString",
+         "name"
+      ],
+      "discriminator":"type"
+   },
+   "StorageEndpoint":{
+      "allOf":[
+         {
+            "$ref":"#/definitions/Endpoint"
+         }
+      ]
+   },
+   "EventHubsEndpoint":{
+      "allOf":[
+         {
+            "$ref":"#/definitions/Endpoint"
+         }
+      ]
+   },
+   "ServiceBusQueueEndpoint":{
+      "allOf":[
+         {
+            "$ref":"#/definitions/Endpoint"
+         }
+      ]
+   },
+   "ServiceBusTopicEndpoint":{
+      "allOf":[
+         {
+            "$ref":"#/definitions/Endpoint"
+         }
+      ]
+   },
+   "ContinuousDataExport":{
+      "type":"object",
+      "properties":{
+         "id":{
+            "description":"Unique ID of the continuous data export.",
+            "type":"string",
+            "readOnly":true
+         },
+         "etag":{
+            "description":"ETag used to prevent conflict in continuous data export updates.",
+            "type":"string"
+         },
+         "displayName":{
+            "description":"Display name of the continuous data export.",
+            "type":"string"
+         },
+         "endpoint":{
+            "description":"Location where exported data should be sent.",
+            "$ref":"#/definitions/Endpoint"
+         },
+         "status":{
+            "description":"Indicates whether the continuous data export is starting, running, etc.",
+            "type":"string",
+            "readOnly":true
+         },
+         "enabled":{
+            "description":"Boolean indicating whether the continuous data export should be running or not.",
+            "type":"boolean"
+         },
+         "sources":{
+            "description":"Data sources to export to the endpoint.",
+            "type":"array",
+            "items":{
+               "type":"string",
+               "enum":[
+                  "devices",
+                  "deviceTemplates",
+                  "telemetry"
+               ]
+            },
+            "minItems":1
+         }
+      },
+      "required":[
+         "endpoint",
+         "enabled",
+         "sources"
+      ]
+   },
+   "ContinuousDataExportCollection":{
+      "type":"object",
+      "properties":{
+         "value":{
+            "description":"The collection of continuous data exports.",
+            "type":"array",
+            "items":{
+               "$ref":"#/definitions/ContinuousDataExport"
+            }
+         },
+         "nextLink":{
+            "description":"URL to get the next page of continuous data exports.",
+            "type":"string"
+         }
+      },
+      "required":[
+         "value"
+      ]
+   },
     "Device": {
       "type": "object",
       "properties": {
@@ -715,6 +834,97 @@
         }
       ]
     },
+    "/continuousDataExports":{
+      "get":{
+         "operationId":"ContinuousDataExports_List",
+         "summary":"Get the list of continuous data exports in an application.",
+         "x-ms-examples": {
+          "List exports": {
+            "$ref": "./examples/continuousdataexports_list.json"
+          }
+        },
+         "responses":{
+            "200":{
+               "description":"Success",
+               "schema":{
+                  "$ref":"#/definitions/ContinuousDataExportCollection"
+               }
+            }
+         },
+         "x-ms-pageable":{
+            "nextLinkName":"nextLink"
+         }
+      }
+   },
+   "/continuousDataExports/{export_id}":{
+      "get":{
+         "operationId":"ContinuousDataExports_Get",
+         "summary":"Get a continuous data export by ID.",
+         "x-ms-examples": {
+          "Get export": {
+            "$ref": "./examples/continuousdataexports_get.json"
+          }
+        },
+         "responses":{
+            "200":{
+               "description":"Success",
+               "schema":{
+                  "$ref":"#/definitions/ContinuousDataExport"
+               }
+            }
+         }
+      },
+      "put":{
+         "operationId":"ContinuousDataExports_Set",
+         "summary":"Create a new continuous data export or update an existing one by ID.",
+         "x-ms-examples": {
+          "Create or update export": {
+            "$ref": "./examples/continuousdataexports_set.json"
+          }
+        },
+         "parameters":[
+            {
+               "name":"body",
+               "in":"body",
+               "description":"Data export body.",
+               "required":true,
+               "schema":{
+                  "$ref":"#/definitions/ContinuousDataExport"
+               }
+            }
+         ],
+         "responses":{
+            "200":{
+               "description":"Success",
+               "schema":{
+                  "$ref":"#/definitions/ContinuousDataExport"
+               }
+            }
+         }
+      },
+      "delete":{
+         "operationId":"ContinuousDataExports_Remove",
+         "summary":"Delete a continuous data export.",
+         "Delete export": {
+          "$ref": "./examples/continuousdataexports_delete.json"
+        }
+      },
+         "responses":{
+            "204":{
+               "description":"Success"
+            }
+         }
+      },
+      "parameters":[
+         {
+            "in":"path",
+            "name":"export_id",
+            "description":"Unique ID for the continuous data export.",
+            "type":"string",
+            "required":true
+         }
+      ]
+   },
     "/deviceTemplates": {
       "get": {
         "operationId": "DeviceTemplates_List",
@@ -833,7 +1043,7 @@
         "operationId": "DeviceTemplates_ListDevices",
         "summary": "Get devices for a template",
         "x-ms-examples": {
-          "List devices assocated to a device template": {
+          "List devices associated to a device template": {
             "$ref": "./examples/devices_list_by_template.json"
           }
         },
