@@ -46,16 +46,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/CategoryParameter"
-          },
-          {
             "$ref": "#/parameters/TagsParameter"
-          },
-          {
-            "$ref": "#/parameters/SourceIdParameter"
-          },
-          {
-            "$ref": "#/parameters/CanFetchWorkbookContentParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -284,10 +275,9 @@
     "WorkbookProperties": {
       "description": "Properties that contain a workbook.",
       "required": [
-        "displayName",
-        "category",
-        "serializedData",
-        "userId"
+        "id",
+        "templateData",
+        "galleries"
       ],
       "properties": {
         "id": {
@@ -459,40 +449,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the Application Insights component resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "CategoryParameter": {
-      "name": "category",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "enum": [
-        "workbook",
-        "TSG",
-        "performance",
-        "retention"
-      ],
-      "x-ms-enum": {
-        "name": "CategoryType",
-        "modelAsString": true
-      },
-      "description": "Category of workbook to return.",
-      "x-ms-parameter-location": "method"
-    },
-    "SourceIdParameter": {
-      "name": "sourceId",
-      "in": "query",
-      "required": true,
-      "type": "string",
-      "description": "Azure Resource Id that will fetch all related workbooks.",
-      "x-ms-parameter-location": "method"
-    },
-    "CanFetchWorkbookContentParameter": {
-      "name": "canFetchContent",
-      "in": "query",
-      "required": false,
-      "type": "boolean",
-      "description": "Flag indicating whether or not to return the full content for each applicable workbook. If false, only return summary content for workbooks.",
       "x-ms-parameter-location": "method"
     },
     "TagsParameter": {
