@@ -28,6 +28,14 @@ directive:
     from: securityContacts.json
     where: $.definitions.SecurityContactProperties.properties.email.format
     reason: email format is allowed
+  - suppress: ValidFormats
+    from: automations.json
+    where: $.definitions.AutomationActionSecurityEmail.properties.emailAddresses.items.format
+    reason: email format is allowed
+  - suppress: ValidFormats
+    from: automations.json
+    where: $.definitions.AutomationActionLogicApp.properties.uri.format
+    reason: uri format is allowed
   - suppress: PageableOperation
     from: iotSecuritySolutionAnalytics.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/iotSecuritySolutions/{solutionName}/analyticsModels"].get'
