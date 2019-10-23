@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-04-15",
+    "api-version": "2019-12-31",
     "subscriptionId": "subid",
     "resourceGroupName": "RG",
     "profileName": "profile1",
@@ -13,6 +13,9 @@
           {
             "name": "www-someDomain-net",
             "location": "WestUs",
+            "tags": {
+              "key1": "value1"
+            },
             "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
             "type": "Microsoft.Cdn/profiles/endpoints/origins",
             "properties": {
@@ -20,7 +23,11 @@
               "resourceState": "Active",
               "hostName": "www.someDomain.net",
               "httpPort": null,
-              "httpsPort": null
+              "httpsPort": null,
+			        "originHostHeader": "www.someDomain.net",
+              "priority": 1,
+              "weight": 50,
+              "enabled": true
             }
           }
         ]

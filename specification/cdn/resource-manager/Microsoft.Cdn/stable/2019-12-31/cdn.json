@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2019-04-15",
+    "version": "2019-12-31",
     "title": "CdnManagementClient",
     "description": "Use these APIs to manage Azure CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure."
   },
@@ -20,6 +20,7 @@
       "azure_auth": [
         "user_impersonation"
       ]
+
     }
   ],
   "securityDefinitions": {
@@ -651,7 +652,7 @@
         "tags": [
           "Endpoints"
         ],
-        "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags and Origin HostHeader can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update custom domains, use the Update Custom Domain operation.",
+        "description": "Updates an existing CDN endpoint with the specified endpoint name under the specified subscription, resource group and profile. Only tags can be updated after creating an endpoint. To update origins, use the Update Origin operation. To update origin groups, use the Update Origin group operation. To update custom domains, use the Update Custom Domain operation.",
         "operationId": "Endpoints_Update",
         "x-ms-examples": {
           "Endpoints_Update": {
@@ -1246,6 +1247,86 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Origins"
+        ],
+        "description": "Creates a new origin within the specified endpoint.",
+        "operationId": "Origins_Create",
+        "x-ms-examples": {
+          "Origins_Create": {
+            "$ref": "./examples/Origins_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+		      {
+            "name": "originName",
+            "in": "path",
+            "description": "Name of the origin that is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "origin",
+            "in": "body",
+            "description": "Origin properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Origin"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Origin"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new origin has been created.",
+            "schema": {
+              "$ref": "#/definitions/Origin"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/Origin"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "patch": {
         "tags": [
           "Origins"
@@ -1319,7 +1400,395 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Origins"
+        ],
+        "description": "Deletes an existing origin within an endpoint.",
+        "operationId": "Origins_Delete",
+        "x-ms-examples": {
+        "Origins_Delete": {
+          "$ref": "./examples/Origins_Delete.json"
+         }
+        },
+        "parameters": [
+        {
+          "$ref": "#/parameters/resourceGroupNameParameter"
+        },
+        {
+          "name": "profileName",
+          "in": "path",
+          "description": "Name of the CDN profile which is unique within the resource group.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "endpointName",
+          "in": "path",
+          "description": "Name of the endpoint under the profile which is unique globally.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "originName",
+          "in": "path",
+          "description": "Name of the origin which is unique within the endpoint.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "$ref": "#/parameters/subscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/apiVersionParameter"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "Accepted and the operation will complete asynchronously."
+        },
+        "204": {
+          "description": "No Content. The request has been accepted but the origin was not found."
+        },
+        "default": {
+          "description": "CDN error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true
+     }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/originGroups": {
+      "get": {
+        "tags": [
+          "OriginGroups"
+        ],
+        "description": "Lists all of the existing origin groups within an endpoint.",
+        "operationId": "OriginGroups_ListByEndpoint",
+        "x-ms-examples": {
+          "OriginsGroups_ListByEndpoint": {
+            "$ref": "./examples/OriginGroups_ListByEndpoint.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OriginGroupListResult"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/originGroups/{originGroupName}": {
+      "get": {
+        "tags": [
+          "OriginGroups"
+        ],
+        "description": "Gets an existing origin group within an endpoint.",
+        "operationId": "OriginGroups_Get",
+        "x-ms-examples": {
+          "OriginGroups_Get": {
+            "$ref": "./examples/OriginGroups_Get.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OriginGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "OriginGroups"
+        ],
+        "description": "Creates a new origin group within the specified endpoint.",
+        "operationId": "OriginGroups_Create",
+        "x-ms-examples": {
+          "OriginGroups_Create": {
+            "$ref": "./examples/OriginGroups_Create.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+		      {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroup",
+            "in": "body",
+            "description": "Origin group properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OriginGroup"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OriginGroup"
+            }
+          },
+          "201": {
+            "description": "Created. The request has been fulfilled and a new origin group has been created.",
+            "schema": {
+              "$ref": "#/definitions/OriginGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/OriginGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "tags": [
+          "OriginGroups"
+        ],
+        "description": "Updates an existing origin group within an endpoint.",
+        "operationId": "OriginGroups_Update",
+        "x-ms-examples": {
+          "OriginGroups_Update": {
+            "$ref": "./examples/OriginGroups_Update.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "Name of the CDN profile which is unique within the resource group.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "Name of the endpoint under the profile which is unique globally.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupName",
+            "in": "path",
+            "description": "Name of the origin group which is unique within the endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "originGroupUpdateProperties",
+            "in": "body",
+            "description": "Origin group properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OriginGroupUpdateParameters"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OriginGroup"
+            }
+          },
+          "202": {
+            "description": "Accepted and the operation will complete asynchronously.",
+            "schema": {
+              "$ref": "#/definitions/OriginGroup"
+            }
+          },
+          "default": {
+            "description": "CDN error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "OriginGroups"
+        ],
+        "description": "Deletes an existing origin group within an endpoint.",
+        "operationId": "OriginGroups_Delete",
+        "x-ms-examples": {
+        "OriginGroups_Delete": {
+          "$ref": "./examples/OriginGroups_Delete.json"
+         }
+        },
+        "parameters": [
+        {
+          "$ref": "#/parameters/resourceGroupNameParameter"
+        },
+        {
+          "name": "profileName",
+          "in": "path",
+          "description": "Name of the CDN profile which is unique within the resource group.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "endpointName",
+          "in": "path",
+          "description": "Name of the endpoint under the profile which is unique globally.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "name": "originGroupName",
+          "in": "path",
+          "description": "Name of the origin group which is unique within the endpoint.",
+          "required": true,
+          "type": "string"
+        },
+        {
+          "$ref": "#/parameters/subscriptionIdParameter"
+        },
+        {
+          "$ref": "#/parameters/apiVersionParameter"
+        }
+      ],
+      "responses": {
+        "202": {
+          "description": "Accepted and the operation will complete asynchronously."
+        },
+        "204": {
+          "description": "No Content. The request has been accepted but the origin was not found."
+        },
+        "default": {
+          "description": "CDN error response describing why the operation failed.",
+          "schema": {
+            "$ref": "#/definitions/ErrorResponse"
+          }
+        }
+      },
+      "x-ms-long-running-operation": true
+     }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/endpoints/{endpointName}/customDomains": {
       "get": {
@@ -2106,6 +2575,13 @@
             "$ref": "#/definitions/DeepCreatedOrigin"
           }
         },
+	      "originGroups": {
+          "description": "The origin groups comprising of origins that are used for load balancing the traffic based on availability.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeepCreatedOriginGroup"
+          }
+        },
         "resourceState": {
           "description": "Resource status of the endpoint.",
           "readOnly": true,
@@ -2168,10 +2644,6 @@
     "EndpointPropertiesUpdateParameters": {
       "description": "The JSON object containing endpoint update parameters.",
       "properties": {
-        "originHostHeader": {
-          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
-          "type": "string"
-        },
         "originPath": {
           "description": "A directory path on the origin that CDN can use to retrieve content from, e.g. contoso.cloudapp.net/originpath.",
           "type": "string"
@@ -2182,6 +2654,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "originHostHeader": {
+          "description": "The host header value sent to the origin with each request. This proerty at Endpoint is only allowed when endpoint uses single origin and can be overridden by the same property specified at origin.If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
+          "type": "string"
         },
         "isCompressionEnabled": {
           "description": "Indicates whether content compression is enabled on CDN. Default value is false. If compression is enabled, content will be served as compressed if user requests for a compressed version. Content won't be compressed on CDN when requested content is smaller than 1 byte or larger than 1 MB.",
@@ -2204,7 +2680,7 @@
           "$ref": "#/definitions/OptimizationType"
         },
         "probePath": {
-          "description": "Path to a file hosted on the origin which helps accelerate delivery of the dynamic content and calculate the most optimal routes for the CDN. This is relative to the origin path.",
+          "description": "Path to a file hosted on the origin which helps accelerate delivery of the dynamic content and calculate the most optimal routes for the CDN. This is relative to the origin path. This property is only relevant when using a single origin.",
           "type": "string"
         },
         "geoFilters": {
@@ -2213,6 +2689,11 @@
           "items": {
             "$ref": "#/definitions/GeoFilter"
           }
+        },
+        "defaultOriginGroup":{
+          "description": "A reference to the origin group.",
+          "type": "object",
+          "$ref": "#/definitions/ResourceReference"
         },
         "deliveryPolicy": {
           "description": "A policy that specifies the delivery rules to be used for an endpoint.",
@@ -3620,7 +4101,7 @@
       ],
       "properties": {
         "name": {
-          "description": "Origin name",
+          "description": "Origin name which must be unique within the endpoint. ",
           "type": "string"
         },
         "properties": {
@@ -3638,11 +4119,11 @@
       ],
       "properties": {
         "hostName": {
-          "description": "The address of the origin. It can be a domain name, IPv4 address, or IPv6 address.",
+          "description": "The address of the origin. It can be a domain name, IPv4 address, or IPv6 address. This should be unique across all origins in an endpoint.",
           "type": "string"
         },
         "httpPort": {
-          "description": "The value of the HTTP port. Must be between 1 and 65535",
+          "description": "The value of the HTTP port. Must be between 1 and 65535.",
           "type": "integer",
           "maximum": 65535,
           "exclusiveMaximum": false,
@@ -3650,14 +4131,96 @@
           "exclusiveMinimum": false
         },
         "httpsPort": {
-          "description": "The value of the HTTPS port. Must be between 1 and 65535",
+          "description": "The value of the HTTPS port. Must be between 1 and 65535.",
           "type": "integer",
           "maximum": 65535,
           "exclusiveMaximum": false,
           "minimum": 1,
           "exclusiveMinimum": false
+        },
+        "originHostHeader": {
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default.",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5.",
+          "type": "integer",
+          "maximum": 5,
+          "minimum": 1
+        },
+        "weight": {
+          "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000",
+          "type": "integer",
+          "maximum": 1000,
+          "minimum": 1
+        },
+        "enabled": {
+          "description": "Origin is enabled for load balancing or not. By default, origin is always enabled.",
+          "type": "boolean"
         }
       },
+      "x-ms-azure-resource": true
+    },
+    "DeepCreatedOriginGroup": {
+      "description": "The origin group for CDN content which is added when creating a CDN endpoint. Traffic is sent to the origins within the origin group based on origin health.",
+      "type": "object",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "name": {
+          "description": "Origin group name which must be unique within the endpoint.",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DeepCreatedOriginGroupProperties"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DeepCreatedOriginGroupProperties": {
+      "description": "Properties of the origin group created on the CDN endpoint.",
+      "type": "object",
+      "required": [
+        "origins"
+      ],
+      "properties": {
+        "healthProbeSettings": {
+          "description": "Health probe settings to the origin that is used to determine the health of the origin.",
+          "type": "object",
+          "$ref": "#/definitions/HealthProbeParameters"
+        },
+        "origins": {
+          "description": "The source of the content being delivered via CDN within given origin group.",
+          "type": "array",
+          "items": {
+            "description": "A reference to a origin.",
+            "$ref": "#/definitions/ResourceReference"
+          }
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
+          "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
+          "type": "integer",
+          "maximum": 50,
+          "minimum": 0
+        },
+        "responseBasedOriginErrorDetectionSettings":{
+          "description": "The JSON object that contains the properties to determine origin health using real requests/responses.This property is currently not supported.",
+          "type": "object",
+          "$ref": "#/definitions/ResponseBasedOriginErrorDetectionParameters"
+        } 
+      },
+      "x-ms-azure-resource": true
+    },
+    "ResourceReference": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Resource ID."
+        }
+      },
+      "description": "Reference to another resource.",
       "x-ms-azure-resource": true
     },
     "GeoFilter": {
@@ -3746,27 +4309,12 @@
       "required": [
         "hostName"
       ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OriginUpdatePropertiesParameters"
+        }
+      ],
       "properties": {
-        "hostName": {
-          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.",
-          "type": "string"
-        },
-        "httpPort": {
-          "description": "The value of the HTTP port. Must be between 1 and 65535.",
-          "type": "integer",
-          "maximum": 65535,
-          "exclusiveMaximum": false,
-          "minimum": 1,
-          "exclusiveMinimum": false
-        },
-        "httpsPort": {
-          "description": "The value of the https port. Must be between 1 and 65535.",
-          "type": "integer",
-          "maximum": 65535,
-          "exclusiveMaximum": false,
-          "minimum": 1,
-          "exclusiveMinimum": false
-        },
         "resourceState": {
           "description": "Resource status of the origin.",
           "readOnly": true,
@@ -3790,20 +4338,27 @@
     },
     "OriginUpdateParameters": {
       "type": "object",
-      "description": "Origin properties needed for origin creation or update.",
+      "description": "Origin properties needed for origin update.",
       "properties": {
+        "tags": {
+          "description": "Origin tags.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/OriginPropertiesParameters"
+          "$ref": "#/definitions/OriginUpdatePropertiesParameters"
         }
       },
       "x-ms-azure-resource": true
     },
-    "OriginPropertiesParameters": {
+    "OriginUpdatePropertiesParameters": {
       "description": "The JSON object that contains the properties of the origin.",
       "properties": {
         "hostName": {
-          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.",
+          "description": "The address of the origin. Domain names, IPv4 addresses, and IPv6 addresses are supported.This should be unique across all origins in an endpoint.",
           "type": "string"
         },
         "httpPort": {
@@ -3821,6 +4376,26 @@
           "exclusiveMaximum": false,
           "minimum": 1,
           "exclusiveMinimum": false
+        },
+        "originHostHeader": {
+          "description": "The host header value sent to the origin with each request. If you leave this blank, the request hostname determines this value. Azure CDN origins, such as Web Apps, Blob Storage, and Cloud Services require this host header value to match the origin hostname by default. This overrides the host header defined at Endpoint",
+          "type": "string"
+        },
+        "priority": {
+          "description": "Priority of origin in given origin group for load balancing. Higher priorities will not be used for load balancing if any lower priority origin is healthy.Must be between 1 and 5",
+          "type": "integer",
+          "maximum": 5,
+          "minimum": 1
+        },
+        "weight": {
+          "description": "Weight of the origin in given origin group for load balancing. Must be between 1 and 1000",
+          "type": "integer",
+          "maximum": 1000,
+          "minimum": 1
+        },
+        "enabled": {
+          "description": "Origin is enabled for load balancing or not",
+          "type": "boolean"
         }
       }
     },
@@ -3834,6 +4409,200 @@
             "$ref": "#/definitions/Origin"
           },
           "description": "List of CDN origins within an endpoint"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of origin objects if there are any."
+        }
+      }
+    },
+    "OriginGroup": {
+      "description": "Origin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OriginGroupProperties"
+        }
+      }
+    },
+    "OriginGroupProperties": {
+      "description": "The JSON object that contains the properties of the origin group.",
+      "type": "object",
+      "required": [
+        "origins"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/OriginGroupUpdatePropertiesParameters"
+        }
+      ],
+      "properties": {
+        "resourceState": {
+          "description": "Resource status of the origin group.",
+          "readOnly": true,
+          "enum": [
+            "Creating",
+            "Active",
+            "Deleting"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "OriginGroupResourceState",
+            "modelAsString": true
+          }
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "description": "Provisioning status of the origin group.",
+          "type": "string"
+        }
+      }
+    },
+	 "OriginGroupUpdateParameters": {
+      "type": "object",
+      "description": "Origin group properties needed for origin group creation or update.",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/OriginGroupUpdatePropertiesParameters"
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "OriginGroupUpdatePropertiesParameters": {
+      "description": "The JSON object that contains the properties of the origin group.",
+      "properties": {
+        "healthProbeSettings": {
+          "description": "Health probe settings to the origin that is used to determine the health of the origin.",
+          "type": "object",
+          "$ref": "#/definitions/HealthProbeParameters"
+        },
+        "origins": {
+          "description": "The source of the content being delivered via CDN within given origin group.",
+          "type": "array",
+          "items": {
+            "description": "A reference to a origin.",
+            "$ref": "#/definitions/ResourceReference"
+          }
+        },
+        "trafficRestorationTimeToHealedOrNewEndpointsInMinutes": {
+          "description": "Time in minutes to shift the traffic to the endpoint gradually when an unhealthy endpoint comes healthy or a new endpoint is added. Default is 10 mins. This property is currently not supported.",
+          "type": "integer",
+          "maximum": 50,
+          "minimum": 0
+        },
+        "responseBasedOriginErrorDetectionSettings":{
+          "description": "The JSON object that contains the properties to determine origin health using real requests/responses. This property is currently not supported.",
+          "type": "object",
+          "$ref": "#/definitions/ResponseBasedOriginErrorDetectionParameters"
+        } 
+      }
+    },
+    "HealthProbeParameters": {
+      "description": "The JSON object that contains the properties to send health probes to origin.",
+      "properties": {
+        "probePath": {
+          "description": "The path relative to the origin that is used to determine the health of the origin.",
+          "type": "string"
+        },
+        "probeRequestType": {
+          "description": "The type of health probe request that is made.",
+          "enum": [
+             "NotSet",
+             "GET",
+             "HEAD"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "HealthProbeRequestType",
+            "modelAsString": false
+          }
+        },
+        "probeProtocol": {
+          "description": "Protocol to use for health probe.",
+          "type": "string",
+          "enum": [
+            "NotSet",
+            "Http",
+            "Https"
+          ],
+          "x-ms-enum": {
+            "name": "ProbeProtocol",
+            "modelAsString": false
+          }
+        },
+        "probeIntervalInSeconds": {
+          "description": "The number of seconds between health probes.Default is 240sec.",
+          "type": "integer",
+          "maximum": 255,
+          "minimum": 1
+        }
+      }
+    },
+    "ResponseBasedOriginErrorDetectionParameters": {
+      "description": "The JSON object that contains the properties to determine origin health using real requests/responses.",
+      "properties": {
+        "responseBasedDetectedErrorTypes": {
+          "description": "Type of response errors for real user requests for which origin will be deemed unhealthy",
+          "type": "string",
+          "enum": [
+            "None",
+            "TcpErrorsOnly",
+            "TcpAndHttpErrors"
+          ],
+          "x-ms-enum": {
+            "name": "ResponseBasedDetectedErrorTypes",
+            "modelAsString": false
+          }
+        },
+        "responseBasedFailoverThresholdPercentage": {
+          "description": "The percentage of failed requests in the sample where failover should trigger.",
+          "type": "integer",
+          "maximum": 100,
+          "minimum": 0
+        },
+        "httpErrorRanges" : {
+          "description": "The list of Http status code ranges that are considered as server errors for origin to be deeemed unhealthy.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HttpErrorRangeParameters"
+          }
+        }
+      }
+    },
+    "HttpErrorRangeParameters": {
+      "description": "The JSON object that represents the range for http status codes",
+      "properties": {
+        "begin": {
+          "description": "The inclusive start of the http status code range.",
+          "type": "integer",
+          "maximum": 999,
+          "minimum": 100
+        },
+        "end": {
+          "description": "The inclusive end of the http status code range.",
+          "type": "integer",
+          "maximum": 999,
+          "minimum": 100
+        }
+      }
+    },
+	  "OriginGroupListResult": {
+      "description": "Result of the request to list origin groups. It contains a list of origin groups objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/OriginGroup"
+          },
+          "description": "List of CDN origin groups within an endpoint"
         },
         "nextLink": {
           "type": "string",
@@ -3980,6 +4749,19 @@
           "x-ms-enum": {
             "name": "ProtocolType",
             "modelAsString": true
+          }
+        },
+        "minimumTlsVersion": {
+          "description": "TLS protocol version that will be used for Https",
+          "enum": [
+            "None",
+            "TLS10",
+            "TLS12"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": false
           }
         }
       }

@@ -1,6 +1,6 @@
 {
   "parameters": {
-    "api-version": "2019-04-15",
+    "api-version": "2019-12-31",
     "subscriptionId": "subid",
     "resourceGroupName": "RG",
     "profileName": "profile1",
@@ -29,15 +29,42 @@
               "properties": {
                 "hostName": "www.bing.com",
                 "httpPort": 80,
-                "httpsPort": 443
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50,
+                "enabled": true 
               }
             }
+          ],
+          "originGroups": [
+            {
+              "name": "originGroup1",
+                  "properties": {
+                     "healthProbeSettings":
+                      {
+                        "probePath": "/health.aspx",
+                        "probeRequestType": "GET",
+                        "probeProtocol": "Http",
+                        "probeIntervalInSeconds": 120
+                      },
+                      "origins": [
+                       {
+                         "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-bing-com"
+                       }
+                      ]
+                   }
+             }
           ],
           "contentTypesToCompress": [],
           "isCompressionEnabled": false,
           "optimizationType": "DynamicSiteAcceleration",
           "probePath": "/image",
-          "geoFilters": []
+          "geoFilters": [],
+          "defaultOriginGroup": 
+          {
+            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+          }
         }
       }
     }

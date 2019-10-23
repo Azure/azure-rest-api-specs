@@ -6,18 +6,20 @@
     "profileName": "profile1",
     "endpointName": "endpoint1",
     "originName": "www-someDomain-net",
-    "originUpdateProperties": {
+    "origin": {
+      "location": "WestUs",
       "tags": {
-        "key1": "value1"
-      },
-      "properties": {
-        "httpPort": 42,
-        "httpsPort": 43,
-		    "originHostHeader": "www.someDomain2.net",
-        "priority": 1,
-        "weight": 50,
-        "enabled": true
-      }
+          "key1": "value1"
+       },
+       "properties": {
+         "hostName": "www.someDomain.net",
+         "httpPort": 80,
+         "httpsPort": 443,
+         "originHostHeader": "www.someDomain.net",
+         "priority": 1,
+         "weight": 50,
+         "enabled": true
+       }
     }
   },
   "responses": {
@@ -34,31 +36,53 @@
           "provisioningState": "Succeeded",
           "resourceState": "Active",
           "hostName": "www.someDomain.net",
-          "httpPort": 42,
-          "httpsPort": 43,
-		      "originHostHeader": "www.someDomain2.net",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originHostHeader": "www.someDomain.net",
           "priority": 1,
           "weight": 50,
-          "enabled": true
-        }
+          "enabled": true     
+      }
       }
     },
-    "202": {
+    "201": {
       "body": {
         "name": "www-someDomain-net",
-        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
         "location": "WestUs",
         "tags": {
           "key1": "value1"
         },
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
         "type": "Microsoft.Cdn/profiles/endpoints/origins",
         "properties": {
           "provisioningState": "Succeeded",
           "resourceState": "Active",
           "hostName": "www.someDomain.net",
-          "httpPort": 42,
-          "httpsPort": 43,
-		      "originHostHeader": "www.someDomain2.net",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originHostHeader": "www.someDomain.net",
+          "priority": 1,
+          "weight": 50,
+          "enabled": true     
+      }
+      }
+    },
+    "202": {
+      "body": {
+        "name": "www-someDomain-net",
+        "location": "WestUs",
+        "tags": {
+          "key1": "value1"
+        },
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/origins",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "hostName": "www.someDomain.net",
+          "httpPort": 80,
+          "httpsPort": 443,
+          "originHostHeader": "www.someDomain.net",
           "priority": 1,
           "weight": 50,
           "enabled": true
