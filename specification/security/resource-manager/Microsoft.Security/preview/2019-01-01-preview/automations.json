@@ -329,7 +329,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "A collection of the actions which are triggered if all the configured rule set evaluation is true.",
+          "description": "A collection of the actions which are triggered if all the configured rules evaluations, within a ruleset, are true.",
           "items": {
             "$ref": "#/definitions/AutomationAction"
           }
@@ -370,7 +370,20 @@
       "properties": {
         "eventSource": {
           "type": "string",
-          "description": "A valid event source type."
+          "description": "A valid event source type.",
+          "enum": [ "Assessments", "Alerts" ],
+          "x-ms-enum": {
+            "name": "EventSource",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Assessments"
+              },
+              {
+                "value": "Alerts"
+              }
+            ]
+          }
         },
         "ruleSets": {
           "type": "array",
@@ -402,7 +415,7 @@
       "properties": {
         "actionType": {
           "type": "string",
-          "description": "type of action that will be triggered by the Automation",
+          "description": "The type of the action that will be triggered by the Automation",
           "enum": [ "LogicApp", "EventHub", "SecurityEmail", "Workspace" ],
           "x-ms-enum": {
             "name": "ActionType",
@@ -478,7 +491,7 @@
       "properties": {
         "subscriptionRbacRoles": {
           "type": "array",
-          "description": "A list of allowed RBAC roles of the subscription for the email to be sent to.",
+          "description": "A list of RBAC roles which indicate the relevant users that will receive the event data via email.",
           "items": {
             "type": "string",
             "enum": [
@@ -561,26 +574,26 @@
           "type": "string",
           "description": "The data type of the compared operands.",
           "enum": [
-            "string",
-            "integer",
-            "number",
-            "boolean"
+            "String",
+            "Integer",
+            "Number",
+            "Boolean"
           ],
           "x-ms-enum": {
             "name": "PropertyType",
             "modelAsString": true,
             "values": [
               {
-                "value": "string"
+                "value": "String"
               },
               {
-                "value": "integer"
+                "value": "Integer"
               },
               {
-                "value": "number"
+                "value": "Number"
               },
               {
-                "value": "boolean"
+                "value": "Boolean"
               }
             ]
           }
