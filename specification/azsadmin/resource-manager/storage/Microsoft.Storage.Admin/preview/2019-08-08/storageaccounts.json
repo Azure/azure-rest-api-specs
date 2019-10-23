@@ -279,39 +279,6 @@
         "modelAsString": true
       }
     },
-    "WacAccountPermissions": {
-      "description": "Current operation being performed on Storage Account",
-      "type": "string",
-      "enum": [
-        "Empty",
-        "None",
-        "Read",
-        "Delete",
-        "Write",
-        "Full"
-      ],
-      "x-ms-enum": {
-        "name": "WacAccountPermissions",
-        "modelAsString": true
-      }
-    },
-    "WacAccountStates": {
-      "description": "Current operation being performed on Storage Account",
-      "type": "string",
-      "enum": [
-        "None",
-        "Active",
-        "Deleted",
-        "AboveQuota",
-        "Suspended",
-        "All",
-        "GcReadyState"
-      ],
-      "x-ms-enum": {
-        "name": "WacAccountStates",
-        "modelAsString": true
-      }
-    },
     "StorageEncryptionSetting": {
       "description": "Storage Encryption setting",
       "type": "object",
@@ -462,22 +429,17 @@
           "type": "boolean",
           "readOnly": true
         },
-        "kind": {
-          "description": "Indicates the type of storage account",
-          "$ref": "#/definitions/StorageAccountKind",
-          "readOnly": true
-        },
         "accessTier": {
           "description": "Required for storage accounts where kind = BlobStorage.",
           "$ref": "#/definitions/StorageAccountAccessTier",
           "readOnly": true
         },
-        "isOverQuota": {
+        "overQuota": {
           "description": "Storage account is in an over quota state.",
           "type": "boolean",
           "readOnly": true
         },
-        "isSuspended": {
+        "suspended": {
           "description": "Storage account is in suspended state.",
           "type": "boolean",
           "readOnly": true
@@ -492,6 +454,11 @@
           "description": "Properties of the storage account.",
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/StorageAccountProperties",
+          "readOnly": true
+        },
+        "kind": {
+          "description": "Indicates the type of storage account",
+          "$ref": "#/definitions/StorageAccountKind",
           "readOnly": true
         },
         "tags": {
