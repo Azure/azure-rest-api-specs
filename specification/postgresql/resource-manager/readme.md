@@ -29,6 +29,16 @@ openapi-type: arm
 tag: package-2017-12-01
 ```
 
+### Tag: package-2018-06-01-privatepreview
+
+These settings apply only when `--tag=package-2018-06-01-privatepreview` is specified on the command line.
+
+
+``` yaml $(tag) == 'package-2018-06-01-privatepreview'
+input-file:
+- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+- Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
+```
 
 ### Tag: package-2017-12-01-preview
 
@@ -134,6 +144,8 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2017-12-01-preview/postgresql.json
   - $(this-folder)/Microsoft.DBforPostgreSQL/stable/2017-12-01/postgresql.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateEndpointConnections.json
+  - $(this-folder)/Microsoft.DBforPostgreSQL/preview/2018-06-01-privatepreview/PrivateLinkResources.json
 
 ```
 
