@@ -12,9 +12,9 @@ cli:
     "^.*frontdoor.*$": "-"
     "^.*[/]networkexperimentprofiles([/][^/]*)?$": "internet-analyzer profile"
     "^.*[/]networkexperimentprofiles[/].*[/]preconfiguredendpoints[/].*$": "internet-analyzer profile preconfigured-endpoint"
-    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/]([/][^/]*)?$": "internet-analyzer profile experiment"
-    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]latencyscorecard$": "internet-analyzer profile experiment latency-scorecard"
-    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]timeseries$": "internet-analyzer profile experiment timeseries"
+    "^.*[/]networkexperimentprofiles[/].*[/]experiments([/][^/]*)?$": "internet-analyzer test"
+    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]latencyscorecard$": "internet-analyzer scorecard latency"
+    "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]timeseries$": "internet-analyzer scorecard timeseries"
   adjustments:
     "/sku": "Sku*/"
     "/properties/endpointa": "endpointA_*/"
