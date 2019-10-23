@@ -264,6 +264,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -2599,6 +2604,9 @@
           },
           "Create a scale set with ephemeral os disks.": {
             "$ref": "./examples/CreateAScaleSetWithDiffOsDisk.json"
+          },
+          "Create a scale set with automatic repairs enabled": {
+            "$ref": "./examples/CreateAScaleSetWithAutomaticRepairs.json"
           }
         }
       },
@@ -6071,6 +6079,23 @@
       },
       "description": "Specifies the operating system settings for the virtual machine."
     },
+    "AutomaticRepairsPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The default value is 5 minutes (PT5M)."
+        },
+        "maxInstanceRepairsPercent": {
+          "type": "integer",
+          "description": "The percentage (capacity of scaleset) of virtual machines that will be simultaneously repaired. The default value is 20%."
+        }
+      },
+      "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
+    },
     "NetworkInterfaceReferenceProperties": {
       "properties": {
         "primary": {
@@ -7673,6 +7698,10 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
         },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
           "description": "The virtual machine profile."
@@ -7720,6 +7749,10 @@
         "upgradePolicy": {
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
+        },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
         },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",

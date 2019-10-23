@@ -1,0 +1,141 @@
+{
+  "parameters": {
+    "api-version": "2019-10-01",
+    "billingAccountId": "1234:5678",
+    "billingProfileId": "4268",
+    "startDate": "2019-09-01",
+    "endDate": "2019-10-31"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/4268/providers/Microsoft.Consumption/events/event1",
+            "name": "event1",
+            "type": "Microsoft.Consumption/events",
+            "properties": {
+              "transactionDate": "2019-07-01T00:00:00Z",
+              "description": "Settled invoice #312033",
+              "newCredit": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "adjustments": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "creditExpired": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "charges": {
+                "currency": "USD",
+                "value": 500.00
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 500.00
+              },
+              "eventType": "SettledCharges",
+              "invoiceNumber": "3301"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/4268/providers/Microsoft.Consumption/events/event2",
+            "name": "event2",
+            "type": "Microsoft.Consumption/events",
+            "properties": {
+              "transactionDate": "2019-08-01T00:00:00Z",
+              "description": "New credits added",
+              "newCredit": {
+                "currency": "USD",
+                "value": 400.00
+              },
+              "adjustments": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "creditExpired": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "charges": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 900.00
+              },
+              "eventType": "NewCredit",
+              "invoiceNumber": "3302"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/4268/providers/Microsoft.Consumption/events/event3",
+            "name": "event3",
+            "type": "Microsoft.Consumption/events",
+            "properties": {
+              "transactionDate": "2019-09-01T00:00:00Z",
+              "description": "Credits Expired",
+              "newCredit": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "adjustments": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "creditExpired": {
+                "currency": "USD",
+                "value": 300.00
+              },
+              "charges": {
+                "currency": "USD",
+                "value": 0.00
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 600.00
+              },
+              "eventType": "ExpiredCredit",
+              "invoiceNumber": ""
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Billing/billingAccounts/1234:5678/billingProfiles/4268/providers/Microsoft.Consumption/events/event4",
+            "name": "event4",
+            "type": "Microsoft.Consumption/events",
+            "properties": {
+              "transactionDate": "2019-10-01T00:00:00Z",
+              "description": "Settled invoice #212033",
+              "newCredit": {
+                "currency": "USD",
+                "value": 300.00
+              },
+              "adjustments": {
+                "currency": "USD",
+                "value": -200.00
+              },
+              "creditExpired": {
+                "currency": "USD",
+                "value": 100.00
+              },
+              "charges": {
+                "currency": "USD",
+                "value": 300.00
+              },
+              "closedBalance": {
+                "currency": "USD",
+                "value": 700.00
+              },
+              "eventType": "SettledCharges",
+              "invoiceNumber": "3303"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
