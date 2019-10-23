@@ -434,8 +434,7 @@
         },
         "uri": {
           "type": "string",
-          "description": "The uri that should be triggered by an Http GET request.",
-          "format": "uri"
+          "description": "The uri that should be triggered by an Http GET request."
         }
       }
     },
@@ -500,8 +499,7 @@
           "type": "array",
           "description": "A list of email addresses for the email to be sent to.",
           "items": {
-              "type": "string",
-              "format": "email"
+              "type": "string"
           }
         }
       }
@@ -647,7 +645,8 @@
       "description": "The security automation resource",
       "schema": {
         "$ref": "#/definitions/Automation"
-      }
+      },
+      "x-ms-parameter-location": "method"
     }
   }
 }
