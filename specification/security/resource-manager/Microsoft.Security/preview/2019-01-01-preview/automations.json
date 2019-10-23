@@ -313,7 +313,7 @@
         },
         "scopes": {
           "type": "array",
-          "description": "A collection of the subscription's resources  scopes on which the security automations logic is applied.",
+          "description": "A collection of the subscription's resources scopes on which the security automations logic is applied.",
           "items": {
             "$ref": "#/definitions/AutomationScope"
           }
@@ -469,13 +469,31 @@
           "type": "array",
           "description": "A list of RBAC roles of the subscription for the email to be sent to.",
           "items": {
-            "type":"string",
-            "enum":[
+            "type": "string",
+            "enum": [
               "AccountAdmin",
               "ServiceAdmin",
               "Owner",
               "Contributor"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "SubscriptionRbacRoles",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "AccountAdmin"
+                },
+                {
+                  "value": "ServiceAdmin"
+                },
+                {
+                  "value": "Owner"
+                },
+                {
+                  "value": "Contributor"
+                }
+              ]
+            }
           } 
         },
         "emailAddresses": {
@@ -516,7 +534,25 @@
             "integer",
             "number",
             "boolean"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "PropertyType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "string"
+              },
+              {
+                "value": "integer"
+              },
+              {
+                "value": "number"
+              },
+              {
+                "value": "boolean"
+              }
+            ]
+          }
         },
         "expectedValue": {
           "type": "string",
@@ -537,7 +573,46 @@
             "Contains",
             "StartsWith",
             "EndsWith"
-          ]
+          ],
+          "x-ms-enum": {
+            "name": "Operator",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Equals"
+              },
+              {
+                "value": "EqualsIgnoreCase"
+              },
+              {
+                "value": "GreaterThan"
+              },
+              {
+                "value": "GreaterThanOrEqualTo"
+              },
+              {
+                "value": "LesserThan"
+              },
+              {
+                "value": "LesserThanOrEqualTo"
+              },
+              {
+                "value": "NotEquals"
+              },
+              {
+                "value": "NotEqualsIgnoreCase"
+              },
+              {
+                "value": "Contains"
+              },
+              {
+                "value": "StartsWith"
+              },
+              {
+                "value": "EndsWith"
+              }
+            ]
+          }
         }
       }
     },
