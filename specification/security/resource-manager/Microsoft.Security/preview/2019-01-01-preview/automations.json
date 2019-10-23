@@ -264,7 +264,7 @@
   "definitions": {
     "AutomationList": {
       "description": "List of security automations response.",
-      "required": ["value"],
+      "required": [ "value" ],
       "properties": {
         "value": {
           "type": "array",
@@ -290,9 +290,11 @@
           "$ref": "#/definitions/AutomationProperties"
         }
       },
-      "allOf": [{
-        "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
-      }]
+      "allOf": [
+        {
+          "$ref": "../../../common/v1/types.json#/definitions/TrackedResource"
+        }
+      ]
     },
     "AutomationProperties": {
       "type": "object",
@@ -401,7 +403,7 @@
         "actionType": {
           "type": "string",
           "description": "type of action that will be triggered by the Automation",
-          "enum": ["LogicApp", "EventHub", "SecurityEmail"],
+          "enum": [ "LogicApp", "EventHub", "SecurityEmail", "Workspace" ],
           "x-ms-enum": {
             "name": "ActionType",
             "modelAsString": true,
@@ -414,6 +416,9 @@
               },
               {
                 "value": "SecurityEmail"
+              },
+              {
+                "value": "Workspace"
               }
             ]
           }
@@ -424,9 +429,11 @@
       "type": "object",
       "description": "The logic app action that should be triggered.",
       "x-ms-discriminator-value": "LogicApp",
-      "allOf": [{
-        "$ref": "#/definitions/AutomationAction"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationAction"
+        }
+      ],
       "properties": {
         "logicAppResourceId": {
           "type": "string",
@@ -443,9 +450,11 @@
       "type": "object",
       "description": "The event hub action that should be triggered.",
       "x-ms-discriminator-value": "EventHub",
-      "allOf": [{
-        "$ref": "#/definitions/AutomationAction"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationAction"
+        }
+      ],
       "properties": {
         "eventHubResourceId": {
           "type": "string",
@@ -461,13 +470,15 @@
       "type": "object",
       "description": "The Security Email action that should be triggered.",
       "x-ms-discriminator-value": "SecurityEmail",
-      "allOf": [{
-        "$ref": "#/definitions/AutomationAction"
-      }],
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationAction"
+        }
+      ],
       "properties": {
         "subscriptionRbacRoles": {
           "type": "array",
-          "description": "A list of RBAC roles of the subscription for the email to be sent to.",
+          "description": "A list of allowed RBAC roles of the subscription for the email to be sent to.",
           "items": {
             "type": "string",
             "enum": [
@@ -494,15 +505,35 @@
                 }
               ]
             }
-          } 
+          }
         },
         "emailAddresses": {
           "type": "array",
-          "description": "A list of email addresses for the email to be sent to.",
+          "description": "A list of email addresses that should receive the event data.",
           "items": {
             "type": "string",
             "format": "email"
           }
+        }
+      }
+    },
+    "AutomationActionWorkspace": {
+      "type": "object",
+      "description": "The log analytics workspace action that should be triggered.",
+      "x-ms-discriminator-value": "Workspace",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AutomationAction"
+        }
+      ],
+      "properties": {
+        "workspaceResourceId": {
+          "type": "string",
+          "description": "The log analytics workspace resource id."
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The log analytics id in a GUID format."
         }
       }
     },
