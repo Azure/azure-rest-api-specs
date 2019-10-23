@@ -331,7 +331,7 @@
           "description": "Id of the workbook template. This is GUID value."
         },
         "priority": {
-          "type": "string",
+          "type": "integer",
           "description": "Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode."
         },
         "author": {
@@ -375,6 +375,10 @@
         "type": {
           "type": "string",
           "description": "Type of workbook supported by the workbook template."
+        },
+        "order": {
+          "type": "integer",
+          "description": "Order of the template within the gallery."
         },
         "resourceType": {
           "type": "string",
@@ -460,18 +464,6 @@
       "required": true,
       "type": "string",
       "description": "The name of the Application Insights component resource.",
-      "x-ms-parameter-location": "method"
-    },
-    "TagsParameter": {
-      "name": "tags",
-      "in": "query",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
-      "description": "Tags presents on each workbook returned.",
       "x-ms-parameter-location": "method"
     }
   }
