@@ -54,7 +54,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2019-10-28/iotcentral.json
+  - $(this-folder)/Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
 
 ```
 
