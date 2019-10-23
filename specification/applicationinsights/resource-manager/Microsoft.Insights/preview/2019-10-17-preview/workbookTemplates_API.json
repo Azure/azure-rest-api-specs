@@ -202,6 +202,52 @@
             "$ref": "./examples/WorkbookTemplateAdd.json"
           }
         }
+      },
+      "patch": {
+        "description": "Updates a workbook template that has already been added.",
+        "operationId": "WorkbookTemplates_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/WorkbookResourceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "WorkbookTemplateUpdateParameters",
+            "description": "Properties that need to be specified to create a new workbook.",
+            "in": "body",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/WorkbookTemplateUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The workbook template definition updated.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookTemplate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/WorkbookError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "WorkbookUpdate": {
+            "$ref": "./examples/WorkbookUpdate.json"
+          }
+        }
       }
     }
   },
@@ -268,12 +314,12 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook template for an Azure resource.",
-          "$ref": "#/definitions/WorkbookProperties"
+          "$ref": "#/definitions/WorkbookTemplateProperties"
         }
       }
     },
-    "WorkbookProperties": {
-      "description": "Properties that contain a workbook.",
+    "WorkbookTemplateProperties": {
+      "description": "Properties that contain a workbook template.",
       "required": [
         "id",
         "templateData",
@@ -351,20 +397,8 @@
         }
       }
     },
-    "WorkbookUpdateParameters": {
+    "WorkbookTemplateUpdateParameters": {
       "properties": {
-        "kind": {
-          "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
-          "enum": [
-            "user",
-            "shared"
-          ],
-          "x-ms-enum": {
-            "name": "SharedTypeKind",
-            "modelAsString": true
-          }
-        },
         "tags": {
           "type": "object",
           "additionalProperties": {
@@ -375,34 +409,10 @@
         "properties": {
           "x-ms-client-flatten": true,
           "description": "Metadata describing a workbook for an Azure resource.",
-          "$ref": "#/definitions/WorkbookPropertiesUpdateParameters"
+          "$ref": "#/definitions/WorkbookTemplateProperties"
         }
       },
-      "description": "The parameters that can be provided when updating workbook properties properties."
-    },
-    "WorkbookPropertiesUpdateParameters": {
-      "description": "Properties that contain a workbook for PATCH operation.",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "The user-defined name (display name) of the workbook."
-        },
-        "serializedData": {
-          "type": "string",
-          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
-        },
-        "category": {
-          "type": "string",
-          "description": "Workbook category, as defined by the user at creation time."
-        },
-        "tags": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "A list of 0 or more tags that are associated with this workbook definition"
-        }
-      }
+      "description": "The parameters that can be provided when updating workbook template."
     },
     "ErrorFieldContract": {
       "properties": {
