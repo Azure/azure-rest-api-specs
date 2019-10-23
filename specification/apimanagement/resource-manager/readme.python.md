@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-apimanagement/azure/mgmt/apimanagement
+  output-folder: $(python-sdks-folder)/apimanagement/azure-mgmt-apimanagement/azure/mgmt/apimanagement
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-apimanagement
+  output-folder: $(python-sdks-folder)/apimanagement/azure-mgmt-apimanagement
 ```

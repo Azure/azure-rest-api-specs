@@ -14,7 +14,7 @@ csharp:
 
 ``` yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 namespace: Microsoft.Azure.Management.KeyVault
-output-folder: $(csharp-sdks-folder)/KeyVault/Management/Management.KeyVault/Generated
+output-folder: $(csharp-sdks-folder)/keyvault/Microsoft.Azure.Management.KeyVault/src/Generated
 ```
 
 ## Batch settings

@@ -3,34 +3,34 @@
     "api-version": "2018-12-01-preview",
     "billingAccountId": "70664866",
     "enrollmentAccountId": "456",
-    "parameters":{
-        "type": "Usage",
-        "timeframe": "Custom",
-        "timePeriod": {
-          "from": "2018-08-01T00:00:00.000Z",
-          "to": "2018-10-31T00:00:00.000Z"
+    "parameters": {
+      "type": "Usage",
+      "timeframe": "Custom",
+      "timePeriod": {
+        "from": "2018-08-01T00:00:00.000Z",
+        "to": "2018-10-31T00:00:00.000Z"
+      },
+      "dataset": {
+        "granularity": "Daily",
+        "aggregation": {
+          "totalCost": {
+            "name": "PreTaxCost",
+            "function": "Sum"
+          }
         },
-        "dataset": {
-          "granularity": "Daily",
-          "aggregation": {
-            "totalCost": {
-              "name": "PreTaxCost",
-              "function": "Sum"
-            }
-          },
-          "grouping": [
-            {
-              "type": "Dimension",
-              "name": "SubscriptionName"
-            }
-          ],
-          "sorting": [
-            {
-              "name": "UsageDate"
-            }
-          ]      
+        "grouping": [
+          {
+            "type": "Dimension",
+            "name": "SubscriptionName"
+          }
+        ],
+        "sorting": [
+          {
+            "name": "UsageDate"
+          }
+        ]
       }
-    }    
+    }
   },
   "responses": {
     "200": {
@@ -54,7 +54,7 @@
                 {
                   "name": "UsageDate",
                   "type": "Number"
-                },              
+                },
                 {
                   "name": "Currency",
                   "type": "String"
@@ -64,21 +64,21 @@
                 [
                   19.545363672276512,
                   "Azure Dev Subscription",
-                  20180831,                  
+                  20180831,
                   "USD"
                 ],
                 [
                   173.41979241290323,
                   "Azure PPE Subscription",
-                  20180930,                
+                  20180930,
                   "USD"
                 ],
                 [
                   20.359416562625452,
                   "Azure Prod Subscription",
-                  20181031,                 
+                  20181031,
                   "USD"
-                ]                
+                ]
               ]
             }
           }

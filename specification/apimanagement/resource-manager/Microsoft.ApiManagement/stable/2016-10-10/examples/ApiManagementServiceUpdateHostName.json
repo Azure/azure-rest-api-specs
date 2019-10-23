@@ -5,86 +5,82 @@
     "api-version": "2016-10-10",
     "subscriptionId": "subid",
     "parameters": {
-        "update": [
-            {
-            "type": "Proxy",
-                "hostname": "internalproxy2.contoso.com",
-                "certificate": 
-                {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                "subject": "CN=*.contoso.com"
-                }
-            },
-            {
-            "type": "Portal",
-                "hostname": "internalportal2.contoso.com",
-                "certificate": 
-                {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                "subject": "CN=*.contoso.com"
-                }
-            },
-            {
-            "type": "Management",
-                "hostname": "internalmgmt2.contoso.com",
-                "certificate": 
-                {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                "subject": "CN=*.contoso.com"
-                }
-            },
-            {
-            "type": "Scm",
-                "hostname": "internalscm2.contoso.com",
-                "certificate": 
-                {
-                "expiry": "2018-03-17T21:55:07+00:00",
-                "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
-                "subject": "CN=*.contoso.com"
-                }
-            }
-        ]
+      "update": [
+        {
+          "type": "Proxy",
+          "hostname": "internalproxy2.contoso.com",
+          "certificate": {
+            "expiry": "2018-03-17T21:55:07+00:00",
+            "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "subject": "CN=*.contoso.com"
+          }
+        },
+        {
+          "type": "Portal",
+          "hostname": "internalportal2.contoso.com",
+          "certificate": {
+            "expiry": "2018-03-17T21:55:07+00:00",
+            "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "subject": "CN=*.contoso.com"
+          }
+        },
+        {
+          "type": "Management",
+          "hostname": "internalmgmt2.contoso.com",
+          "certificate": {
+            "expiry": "2018-03-17T21:55:07+00:00",
+            "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "subject": "CN=*.contoso.com"
+          }
+        },
+        {
+          "type": "Scm",
+          "hostname": "internalscm2.contoso.com",
+          "certificate": {
+            "expiry": "2018-03-17T21:55:07+00:00",
+            "thumbprint": "xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx",
+            "subject": "CN=*.contoso.com"
+          }
+        }
+      ]
     }
   },
   "responses": {
     "202": {
-        "headers": {
-         "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2016-10-10"   
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/operationresults/dGVjaGVkX01hbmFnZVJvbGVfNWRiNGI3Ng==?api-version=2016-10-10"
+      },
+      "body": {
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
+        "tags": {
+          "TestExpiration": "Tue, 22 Sep 2015 02:52:00 GMT",
+          "Pool": "Manual",
+          "TestSuiteExpiration": "Tue, 22 Sep 2015 05:10:46 GMT"
         },
-        "body": {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1",
-            "tags": {
-                "TestExpiration": "Tue, 22 Sep 2015 02:52:00 GMT",
-                "Pool": "Manual",
-                "TestSuiteExpiration": "Tue, 22 Sep 2015 05:10:46 GMT"
-            },
-            "location": "West US",
-            "etag": "AAAAAAAV8ZY=",
-            "properties": {
-                "publisherEmail": "admin@live.com",
-                "publisherName": "Contoso",                
-                "provisioningState": "Succeeded",
-                "targetProvisioningState": "",
-                "createdAtUtc": "2015-09-22T01:52:02.4307221Z",
-                "runtimeUrl": "https://apimService1.azure-api.net",
-                "portalUrl": "https://apimService1.portal.azure-api.net",
-                "managementApiUrl": "https://apimService1.management.azure-api.net",
-                "scmUrl": "https://apimService1.scm.azure-api.net",
-                "staticIPs": [
-                  "xx.xx.xxxx.xxxx"
-                ],
-                "vpnType": "None"
-            },
-            "sku": {
-                "name": "Premium",
-                "capacity": 1
-            },
-            "name": "apimService1",
-            "type": "Microsoft.ApiManagement/service"
-            }
+        "location": "West US",
+        "etag": "AAAAAAAV8ZY=",
+        "properties": {
+          "publisherEmail": "admin@live.com",
+          "publisherName": "Contoso",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2015-09-22T01:52:02.4307221Z",
+          "runtimeUrl": "https://apimService1.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "staticIPs": [
+            "xx.xx.xxxx.xxxx"
+          ],
+          "vpnType": "None"
+        },
+        "sku": {
+          "name": "Premium",
+          "capacity": 1
+        },
+        "name": "apimService1",
+        "type": "Microsoft.ApiManagement/service"
+      }
     },
     "200": {
       "body": {
@@ -92,70 +88,70 @@
         "name": "apimService1",
         "type": "Microsoft.ApiManagement/service",
         "tags": {
-            "TestExpiration": "Tue, 22 Sep 2015 02:52:00 GMT",
-            "Pool": "Manual",
-            "TestSuiteExpiration": "Tue, 22 Sep 2015 05:10:46 GMT"
+          "TestExpiration": "Tue, 22 Sep 2015 02:52:00 GMT",
+          "Pool": "Manual",
+          "TestSuiteExpiration": "Tue, 22 Sep 2015 05:10:46 GMT"
         },
         "location": "West US",
         "etag": "AAAAAAAV8aU=",
         "properties": {
-            "publisherEmail": "admin@live.com",
-            "publisherName": "Contoso",
-            "provisioningState": "Succeeded",
-            "targetProvisioningState": "",
-            "createdAtUtc": "2015-09-22T01:52:02.4307221Z",
-            "runtimeUrl": "https://apimService1.azure-api.net",
-            "portalUrl": "https://apimService1.portal.azure-api.net",
-            "managementApiUrl": "https://apimService1.management.azure-api.net",
-            "scmUrl": "https://apimService1.scm.azure-api.net",            
-            "hostnameConfigurations": [
-                {
-                    "type": "Portal",
-                    "hostname": "internalportal2.contoso.com",
-                    "certificate": {
-                    "expiry": "2018-03-17T21:55:07+00:00",
-                    "thumbprint": "*******************************",
-                    "subject": "CN=*.contoso.com"
-                    }
-                },
-                {
-                    "type": "Proxy",
-                    "hostname": "internalproxy2.contoso.com",
-                    "certificate": {
-                    "expiry": "2018-03-17T21:55:07+00:00",
-                    "thumbprint": "*******************************",
-                    "subject": "CN=*.contoso.com"
-                    }
-                },
-                {
-                    "type": "Management",
-                    "hostname": "internalmgmt2.contoso.com",
-                    "certificate": {
-                    "expiry": "2018-03-17T21:55:07+00:00",
-                    "thumbprint": "*******************************",
-                    "subject": "CN=*.contoso.com"
-                    }
-                },
-                {
-                    "type": "Scm",
-                    "hostname": "internalscm2.contoso.com",
-                    "certificate": {
-                    "expiry": "2018-03-17T21:55:07+00:00",
-                    "thumbprint": "*******************************",
-                    "subject": "CN=*.contoso.com"
-                    }
-                }
-            ],
-            "staticIPs": [
-                "xx.xxx.xx.xxx"
-            ],
-            "vpnType": "None"
+          "publisherEmail": "admin@live.com",
+          "publisherName": "Contoso",
+          "provisioningState": "Succeeded",
+          "targetProvisioningState": "",
+          "createdAtUtc": "2015-09-22T01:52:02.4307221Z",
+          "runtimeUrl": "https://apimService1.azure-api.net",
+          "portalUrl": "https://apimService1.portal.azure-api.net",
+          "managementApiUrl": "https://apimService1.management.azure-api.net",
+          "scmUrl": "https://apimService1.scm.azure-api.net",
+          "hostnameConfigurations": [
+            {
+              "type": "Portal",
+              "hostname": "internalportal2.contoso.com",
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "*******************************",
+                "subject": "CN=*.contoso.com"
+              }
+            },
+            {
+              "type": "Proxy",
+              "hostname": "internalproxy2.contoso.com",
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "*******************************",
+                "subject": "CN=*.contoso.com"
+              }
+            },
+            {
+              "type": "Management",
+              "hostname": "internalmgmt2.contoso.com",
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "*******************************",
+                "subject": "CN=*.contoso.com"
+              }
+            },
+            {
+              "type": "Scm",
+              "hostname": "internalscm2.contoso.com",
+              "certificate": {
+                "expiry": "2018-03-17T21:55:07+00:00",
+                "thumbprint": "*******************************",
+                "subject": "CN=*.contoso.com"
+              }
+            }
+          ],
+          "staticIPs": [
+            "xx.xxx.xx.xxx"
+          ],
+          "vpnType": "None"
         },
         "sku": {
-            "name": "Premium",
-            "capacity": 1        
-         }
+          "name": "Premium",
+          "capacity": 1
         }
+      }
     }
   }
 }

@@ -6,12 +6,20 @@
     "version": "2015-06-01-preview"
   },
   "host": "management.azure.com",
-  "schemes": ["https"],
-  "consumes": ["application/json"],
-  "produces": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ],
   "securityDefinitions": {
@@ -33,7 +41,9 @@
             "$ref": "./examples/Alerts/GetAlertsSubscription_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "List all the alerts that are associated with the subscription",
         "operationId": "Alerts_List",
         "parameters": [
@@ -79,7 +89,9 @@
             "$ref": "./examples/Alerts/GetAlertsResourceGroup_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "List all the alerts that are associated with the resource group",
         "operationId": "Alerts_ListByResourceGroup",
         "parameters": [
@@ -128,7 +140,9 @@
             "$ref": "./examples/Alerts/GetAlertsSubscriptionsLocation_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "List all the alerts that are associated with the subscription that are stored in a specific location",
         "operationId": "Alerts_ListSubscriptionLevelAlertsByRegion",
         "parameters": [
@@ -177,7 +191,9 @@
             "$ref": "./examples/Alerts/GetAlertsResourceGroupLocation_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "List all the alerts that are associated with the resource group that are stored in a specific location",
         "operationId": "Alerts_ListResourceGroupLevelAlertsByRegion",
         "parameters": [
@@ -229,7 +245,9 @@
             "$ref": "./examples/Alerts/GetAlertSubscriptionLocation_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "Get an alert that is associated with a subscription",
         "operationId": "Alerts_GetSubscriptionLevelAlert",
         "parameters": [
@@ -269,7 +287,9 @@
             "$ref": "./examples/Alerts/GetAlertResourceGroupLocation_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "Get an alert that is associated a resource group or a resource in a resource group",
         "operationId": "Alerts_GetResourceGroupLevelAlerts",
         "parameters": [
@@ -312,7 +332,9 @@
             "$ref": "./examples/Alerts/UpdateAlertSubscriptionLocation_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateSubscriptionLevelAlertState",
         "parameters": [
@@ -352,7 +374,9 @@
             "$ref": "./examples/Alerts/UpdateAlertResourceGroupLocation_example.json"
           }
         },
-        "tags": ["Alerts"],
+        "tags": [
+          "Alerts"
+        ],
         "description": "Update the alert's state",
         "operationId": "Alerts_UpdateResourceGroupLevelAlertState",
         "parameters": [
@@ -476,7 +500,12 @@
         "reportedSeverity": {
           "readOnly": true,
           "type": "string",
-          "enum": ["Silent", "Information", "Low", "High"],
+          "enum": [
+            "Silent",
+            "Information",
+            "Low",
+            "High"
+          ],
           "x-ms-enum": {
             "name": "reportedSeverity",
             "modelAsString": true,
@@ -617,7 +646,10 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "enum": ["Dismiss", "Reactivate"],
+      "enum": [
+        "Dismiss",
+        "Reactivate"
+      ],
       "description": "Type of the action to do on the alert",
       "x-ms-parameter-location": "method"
     }
