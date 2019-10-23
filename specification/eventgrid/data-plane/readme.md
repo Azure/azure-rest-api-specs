@@ -56,6 +56,7 @@ input-file:
 - Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
 - Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
 - Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+- Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
 ```
 
 ---
