@@ -1,10 +1,11 @@
 {
   "parameters": {
     "api-version": "2018-11-01-preview",
+    "storeType": "warmstore",
     "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
     "continuationToken": "aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=",
     "parameters": {
-      "getEvents": {
+      "getSeries": {
         "timeSeriesId": [
           "006dfc2d-0324-4937-998c-d16f3b4f1952",
           "T1"
@@ -13,20 +14,22 @@
           "from": "2016-08-01T00:00:00Z",
           "to": "2016-08-01T00:16:50Z"
         },
-        "filter": {
-          "tsx": "($event.Value.Double != null) OR ($event.Status.String = 'Good')"
-        },
-        "projectedProperties": [
-          {
-            "name": "Building",
-            "type": "String"
-          },
-          {
-            "name": "Temperature",
-            "type": "Double"
+        "filter": null,
+        "inlineVariables": {
+          "temperatures": {
+            "kind": "numeric",
+            "value": {
+              "tsx": "$event.Temperature"
+            },
+            "filter": null,
+            "aggregation": {
+              "tsx": "avg($value)"
+            }
           }
-        ],
-        "take": 10
+        },
+        "projectedVariables": [
+          "temperatures"
+        ]
       }
     }
   },
@@ -43,27 +46,12 @@
           "2016-08-01T00:00:16Z",
           "2016-08-01T00:00:17Z",
           "2016-08-01T00:00:18Z",
-          "2016-08-01T00:00:19Z"
+          "2016-08-01T00:00:19Z",
+          "2016-08-01T00:00:20Z"
         ],
         "properties": [
           {
-            "name": "Building",
-            "type": "String",
-            "values": [
-              "Millenium",
-              "Millenium",
-              "Millenium",
-              "Millenium",
-              "Millenium",
-              "Millenium",
-              "Millenium",
-              "Millenium",
-              "Millenium",
-              "Millenium"
-            ]
-          },
-          {
-            "name": "Temperature",
+            "name": "temperatures",
             "type": "Double",
             "values": [
               65.125,
@@ -75,11 +63,13 @@
               66.625,
               66.875,
               67.125,
-              67.375
+              67.375,
+              67.625
             ]
           }
         ],
-        "progress": 100.0
+        "progress": 50.0,
+        "continuationToken": "aXsic2tpcCI6MTAxYZwidGFrZSI6MTAwMH0="
       }
     }
   }

@@ -1,0 +1,69 @@
+﻿{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "continuationToken": "aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=",
+    "parameters": {
+      "aggregateSeries": {
+        "searchSpan": {
+          "from": "2019-10-10T23:42:00.000Z",
+          "to": "2019-10-10T23:42:20.000Z"
+        },
+        "timeSeriesId": [ "Sensor_58" ],
+        "interval": "PT2S",
+        "inlineVariables": {
+          "Status": {
+            "kind": "categorical",
+            "value": { "tsx": "$event.[ThreeCategoryField].String" },
+            "categories": [
+              {
+                "label": "Good",
+                "values": [ "Good", "Very Good", "Excellent" ]
+              },
+              {
+                "label": "Bad",
+                "values": [ "Bad", "OK" ]
+              },
+              {
+                "label": "Other",
+                "values": [ "Other" ]
+              }
+            ],
+            "defaultCategory": { "label": "Unknown" }
+          }
+        },
+        "projectedVariables": [ "Status" ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timestamps": [ "2019-10-10T23:42:00Z", "2019-10-10T23:42:02Z", "2019-10-10T23:42:04Z", "2019-10-10T23:42:06Z", "2019-10-10T23:42:08Z", "2019-10-10T23:42:10Z", "2019-10-10T23:42:12Z", "2019-10-10T23:42:14Z", "2019-10-10T23:42:16Z", "2019-10-10T23:42:18Z" ],
+        "properties": [
+          {
+            "values": [ 5, 8, 4, 6, 9, 8, 3, 6, 5, 8 ],
+            "name": "Status[Good]",
+            "type": "Double"
+          },
+          {
+            "values": [ 4, 3, 3, 5, 5, 3, 9, 7, 7, 7 ],
+            "name": "Status[Bad]",
+            "type": "Double"
+          },
+          {
+            "values": [ 11, 9, 13, 9, 6, 9, 8, 7, 8, 5 ],
+            "name": "Status[Other]",
+            "type": "Double"
+          },
+          {
+            "values": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            "name": "Status[Unknown]",
+            "type": "Double"
+          }
+        ],
+        "progress": 100.0
+      }
+    }
+  }
+}

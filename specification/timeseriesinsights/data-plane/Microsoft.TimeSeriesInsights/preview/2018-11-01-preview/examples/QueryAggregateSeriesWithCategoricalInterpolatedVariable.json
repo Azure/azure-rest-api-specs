@@ -1,0 +1,73 @@
+﻿{
+  "parameters": {
+    "api-version": "2018-11-01-preview",
+    "environmentFqdn": "10000000-0000-0000-0000-100000000109.env.timeseries.azure.com",
+    "continuationToken": "aXsic2tpcCI6MTAwMCwidGFrZSI6MTAwMH0=",
+    "parameters": {
+      "aggregateSeries": {
+        "searchSpan": {
+          "from": "2019-10-10T23:41:04.021Z",
+          "to": "2019-10-10T23:42:22.846Z"
+        },
+        "timeSeriesId": [ "Sensor_58" ],
+        "interval": "PT2S",
+        "inlineVariables": {
+          "Status": {
+            "kind": "categorical",
+            "value": { "tsx": "$event.[Status].String" },
+            "interpolation": {
+              "kind": "step",
+              "boundary": { "span": "PT5S" }
+            },
+            "categories": [
+              {
+                "label": "Good",
+                "values": [ "Good", "Very Good", "Excellent" ]
+              },
+              {
+                "label": "Bad",
+                "values": [ "Bad", "OK" ]
+              },
+              {
+                "label": "Other",
+                "values": [ "Other" ]
+              }
+            ],
+            "defaultCategory": { "label": "Unknown" }
+          }
+        },
+        "projectedVariables": [ "Status" ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "timestamps": [ "2019-10-10T23:41:04Z", "2019-10-10T23:41:06Z", "2019-10-10T23:41:08Z", "2019-10-10T23:41:10Z", "2019-10-10T23:41:12Z", "2019-10-10T23:41:14Z", "2019-10-10T23:41:16Z", "2019-10-10T23:41:18Z", "2019-10-10T23:41:20Z", "2019-10-10T23:41:22Z"],
+        "properties": [
+          {
+            "values": [ 0.203, 0.141, 0.268, 0.398, 0.402, 0.047, 0.1245, 0.75, 0.206, 0.2635],
+            "name": "Status[Good]",
+            "type": "Double"
+          },
+          {
+            "values": [ 0.266, 0.1955, 0.242, 0.148, 0.25, 0.055, 0.6295, 0.109, 0.41, 0.2125],
+            "name": "Status[Bad]",
+            "type": "Double"
+          },
+          {
+            "values": [ 0.5205, 0.6635, 0.49, 0.454, 0.348, 0.898, 0.246, 0.141, 0.384, 0.524],
+            "name": "Status[Other]",
+            "type": "Double"
+          },
+          {
+            "values": [ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0],
+            "name": "Status[Unknown]",
+            "type": "Double"
+          }
+        ],
+        "progress": 100.0
+      }
+    }
+  }
+}
