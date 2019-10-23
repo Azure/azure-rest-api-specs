@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ApplicationInsightsManagementClient",
-    "description": "Azure Application Insights workbook type.",
+    "description": "Azure Application Insights workbook template type.",
     "version": "2019-10-17-preview"
   },
   "host": "management.azure.com",
@@ -34,10 +34,10 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks": {
+    "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooktemplates": {
       "get": {
-        "description": "Get all Workbooks defined within a specified resource group and category.",
-        "operationId": "Workbooks_ListByResourceGroup",
+        "description": "Get all Workbook templates defined within a specified resource group and category.",
+        "operationId": "WorkbookTemplates_ListByResourceGroup",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -63,9 +63,9 @@
         ],
         "responses": {
           "200": {
-            "description": "A list containing 0 or more workbook definitions.",
+            "description": "A list containing 0 or more workbook template definitions.",
             "schema": {
-              "$ref": "#/definitions/WorkbooksListResult"
+              "$ref": "#/definitions/WorkbookTemplatesListResult"
             }
           },
           "default": {
@@ -79,16 +79,16 @@
           "nextLinkName": null
         },
         "x-ms-examples": {
-          "WorkbooksList": {
-            "$ref": "./examples/WorkbooksList.json"
+          "WorkbookTemplatesList": {
+            "$ref": "./examples/WorkbookTemplatesList.json"
           }
         }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/microsoft.insights/workbooks/{resourceName}": {
       "get": {
-        "description": "Get a single workbook by its resourceName.",
-        "operationId": "Workbooks_Get",
+        "description": "Get a single workbook template by its resourceName.",
+        "operationId": "WorkbookTemplates_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -97,7 +97,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
+            "$ref": "#/parameters/WorkbookTemplateResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -105,9 +105,9 @@
         ],
         "responses": {
           "200": {
-            "description": "A workbook definition.",
+            "description": "A workbook template definition.",
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/WorkbookTemplate"
             }
           },
           "default": {
@@ -118,14 +118,14 @@
           }
         },
         "x-ms-examples": {
-          "WorkbookGet": {
-            "$ref": "./examples/WorkbookGet.json"
+          "WorkbookTemplateGet": {
+            "$ref": "./examples/WorkbookTemplateGet.json"
           }
         }
       },
       "delete": {
-        "description": "Delete a workbook.",
-        "operationId": "Workbooks_Delete",
+        "description": "Delete a workbook template.",
+        "operationId": "WorkbookTemplates_Delete",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -134,7 +134,7 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
+            "$ref": "#/parameters/WorkbookTemplateResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
@@ -142,7 +142,7 @@
         ],
         "responses": {
           "201": {
-            "description": "The workbook has been successfully deleted."
+            "description": "The workbook template has been successfully deleted."
           },
           "204": {
             "description": "The resource doesn't exist."
@@ -155,14 +155,14 @@
           }
         },
         "x-ms-examples": {
-          "WorkbookDelete": {
-            "$ref": "./examples/WorkbookDelete.json"
+          "WorkbookTemplateDelete": {
+            "$ref": "./examples/WorkbookTemplateDelete.json"
           }
         }
       },
       "put": {
-        "description": "Create a new workbook.",
-        "operationId": "Workbooks_CreateOrUpdate",
+        "description": "Create a new workbook template.",
+        "operationId": "WorkbookTemplates_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
@@ -171,35 +171,32 @@
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SourceIdParameter"
+            "$ref": "#/parameters/WorkbookTemplateResourceNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "name": "workbookProperties",
+            "name": "workbookTemplateProperties",
             "description": "Properties that need to be specified to create a new workbook.",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/WorkbookTemplate"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "The newly created workbook.",
+            "description": "The newly created workbook template.",
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/WorkbookTemplate"
             }
           },
           "201": {
-            "description": "The newly created workbook.",
+            "description": "The newly created workbook template.",
             "schema": {
-              "$ref": "#/definitions/Workbook"
+              "$ref": "#/definitions/WorkbookTemplate"
             }
           },
           "default": {
@@ -210,57 +207,8 @@
           }
         },
         "x-ms-examples": {
-          "WorkbookAdd": {
-            "$ref": "./examples/WorkbookAdd.json"
-          }
-        }
-      },
-      "patch": {
-        "description": "Updates a workbook that has already been added.",
-        "operationId": "Workbooks_Update",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/WorkbookResourceNameParameter"
-          },
-          {
-            "$ref": "#/parameters/SourceIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "WorkbookUpdateParameters",
-            "description": "Properties that need to be specified to create a new workbook.",
-            "in": "body",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/WorkbookUpdateParameters"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The workbook definition updated.",
-            "schema": {
-              "$ref": "#/definitions/Workbook"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/WorkbookError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "WorkbookUpdate": {
-            "$ref": "./examples/WorkbookUpdate.json"
+          "WorkbookTemplateAdd": {
+            "$ref": "./examples/WorkbookTemplateAdd.json"
           }
         }
       }
@@ -269,7 +217,7 @@
   "definitions": {
     "Resource": {
       "properties": {
-        "id": {
+        "resourceId": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource Id"
@@ -277,24 +225,12 @@
         "name": {
           "type": "string",
           "readOnly": true,
-          "description": "Azure resource name. This is GUID value. The display name should be assigned within properties field."
+          "description": "Azure resource name."
         },
         "type": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource type"
-        },
-        "kind": {
-          "type": "string",
-          "description": "The kind of workbook. Choices are user and shared.",
-          "enum": [
-            "user",
-            "shared"
-          ],
-          "x-ms-enum": {
-            "name": "SharedTypeKind",
-            "modelAsString": true
-          }
         },
         "location": {
           "type": "string",
@@ -318,20 +254,20 @@
       "x-ms-azure-resource": true,
       "description": "An azure resource object"
     },
-    "WorkbooksListResult": {
+    "WorkbookTemplatesListResult": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Workbook"
+            "$ref": "#/definitions/WorkbookTemplate"
           },
-          "description": "An array of workbooks."
+          "description": "An array of workbook templates."
         }
       },
-      "description": "Workbook list result."
+      "description": "WorkbookTemplate list result."
     },
-    "Workbook": {
-      "description": "An Application Insights workbook definition.",
+    "WorkbookTemplate": {
+      "description": "An Application Insights workbook Template definition.",
       "allOf": [
         {
           "$ref": "#/definitions/Resource"
@@ -340,7 +276,7 @@
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "description": "Metadata describing a workbook for an Azure resource.",
+          "description": "Metadata describing a workbook template for an Azure resource.",
           "$ref": "#/definitions/WorkbookProperties"
         }
       }
@@ -354,37 +290,74 @@
         "userId"
       ],
       "properties": {
-        "displayName": {
+        "id": {
           "type": "string",
-          "description": "The user-defined name (display name) of the workbook."
+          "description": "Id of the workbook template. This is GUID value."
         },
-        "serializedData": {
+        "priority": {
           "type": "string",
-          "description": "Configuration of this particular workbook. Configuration data is a string containing valid JSON"
+          "description": "Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode."
         },
-        "timeModified": {
+        "author": {
           "type": "string",
-          "description": "Date and time in UTC of the last modification that was made to this workbook definition.",
-          "readOnly": true
+          "description": "Information about the author of the workbook template."
+        },
+        "templateData": {
+          "type": "object",
+          "description": "Valid JSON object containing workbook template payload."
+        },
+        "galleries": {
+          "type": "array",
+          "description": "Workbook galleries supported by the template.",
+          "items": {
+            "$ref": "#/definitions/WorkbookTemplateGallery"
+          }
+        },
+        "localized": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/WorkbookTemplateLocalizedGallery"
+            }
+          }
+        }
+      }
+    },
+    "WorkbookTemplateGallery": {
+      "description": "Gallery information for a workbook template.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the workbook template in the gallery."
         },
         "category": {
           "type": "string",
-          "description": "Workbook category, as defined by the user at creation time."
+          "description": "Category for the gallery."
         },
-        "version": {
+        "type": {
           "type": "string",
-          "description": "Workbook version"
+          "description": "Type of workbook supported by the workbook template."
         },
-        "tags": {
+        "resourceType": {
+          "type": "string",
+          "description": "Azure resource type supported by the gallery."
+        }
+      }
+    },
+    "WorkbookTemplateLocalizedGallery": {
+      "description": "Localized tempalte data and gallery information.",
+      "properties": {
+        "templateData": {
+          "type": "object",
+          "description": "Valid JSON object containing workbook template payload."
+        },
+        "galleries": {
           "type": "array",
+          "description": "Workbook galleries supported by the template.",
           "items": {
-            "type": "string"
-          },
-          "description": "A list of 0 or more tags that are associated with this workbook definition"
-        },
-        "userId": {
-          "type": "string",
-          "description": "Unique user id of the specific user that owns this workbook."
+            "$ref": "#/definitions/WorkbookTemplateGallery"
+          }
         }
       }
     },
@@ -480,7 +453,7 @@
     }
   },
   "parameters": {
-    "WorkbookResourceNameParameter": {
+    "WorkbookTemplateResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
       "required": true,
