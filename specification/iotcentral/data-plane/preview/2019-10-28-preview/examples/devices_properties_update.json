@@ -2,8 +2,10 @@
     "title": "Update device properties",
     "description": "Update the values of read-write properties of a device",
     "parameters": {
-      "subdomain": "{app-subdomain}",
+      "centralDnsSuffixInPath": "azureiotcentral.com",
+      "subdomain": "appsubdomain",
         "device_id": "mx1",
+        "body":{
         "device_info": {
             "manufacturer": "manufacturer",
             "model": "model",
@@ -13,10 +15,10 @@
             "processorManufacturer": "processorManufacturer",
             "totalStorage": 24,
             "totalMemory": 18
-        }
+        }}
     },
     "responses": {
-      "200": {
+      "202": {
         "body": {
             "deviceinfo": {
                 "manufacturer": "TODO",
@@ -32,4 +34,3 @@
     }
   }
 }
-  

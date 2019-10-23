@@ -2,8 +2,14 @@
     "title": "Get API tokens in your application",
     "description": "Get a list of API tokens in your application.",
     "parameters": {
-      "subdomain": "{app-subdomain}",
-        "token_id": "testtoken"
+      "centralDnsSuffixInPath": "azureiotcentral.com",
+      "subdomain": "appsubdomain",
+        "token_id": "testtoken",
+        "body":        {
+          "roles": [
+              "c7be2c6b-797e-4551-bb24-33709f6b2e20"
+          ]
+      }
     },
     "responses": {
       "200": {
@@ -17,4 +23,3 @@
       }
     }
   }
-  
