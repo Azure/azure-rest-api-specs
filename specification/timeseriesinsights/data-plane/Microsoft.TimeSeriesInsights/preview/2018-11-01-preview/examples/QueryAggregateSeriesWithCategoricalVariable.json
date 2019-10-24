@@ -12,9 +12,9 @@
         "timeSeriesId": [ "Sensor_58" ],
         "interval": "PT2S",
         "inlineVariables": {
-          "Status": {
+          "Status_String": {
             "kind": "categorical",
-            "value": { "tsx": "$event.[ThreeCategoryField].String" },
+            "value": { "tsx": "$event.[Status].String" },
             "categories": [
               {
                 "label": "Good",
@@ -30,9 +30,28 @@
               }
             ],
             "defaultCategory": { "label": "Unknown" }
+          },
+          "Status_Long": {
+            "kind": "categorical",
+            "value": { "tsx": "tolong($event.[Status].Double)" },
+            "categories": [
+              {
+                "label": "Good",
+                "values": [ 0, 1, 2 ]
+              },
+              {
+                "label": "Bad",
+                "values": [ 3, 4 ]
+              },
+              {
+                "label": "Other",
+                "values": [ 5 ]
+              }
+            ],
+            "defaultCategory": { "label": "Unknown" }
           }
         },
-        "projectedVariables": [ "Status" ]
+        "projectedVariables": [ "Status_String", "Status_Long" ]
       }
     }
   },
@@ -43,22 +62,42 @@
         "properties": [
           {
             "values": [ 5, 8, 4, 6, 9, 8, 3, 6, 5, 8 ],
-            "name": "Status[Good]",
+            "name": "Status_String[Good]",
             "type": "Double"
           },
           {
             "values": [ 4, 3, 3, 5, 5, 3, 9, 7, 7, 7 ],
-            "name": "Status[Bad]",
+            "name": "Status_String[Bad]",
             "type": "Double"
           },
           {
             "values": [ 11, 9, 13, 9, 6, 9, 8, 7, 8, 5 ],
-            "name": "Status[Other]",
+            "name": "Status_String[Other]",
             "type": "Double"
           },
           {
             "values": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
-            "name": "Status[Unknown]",
+            "name": "Status_String[Unknown]",
+            "type": "Double"
+          },
+          {
+            "values": [ 5, 8, 4, 6, 9, 8, 3, 6, 5, 8 ],
+            "name": "Status_Long[Good]",
+            "type": "Double"
+          },
+          {
+            "values": [ 4, 3, 3, 5, 5, 3, 9, 7, 7, 7 ],
+            "name": "Status_Long[Bad]",
+            "type": "Double"
+          },
+          {
+            "values": [ 11, 9, 13, 9, 6, 9, 8, 7, 8, 5 ],
+            "name": "Status_Long[Other]",
+            "type": "Double"
+          },
+          {
+            "values": [ 0, 0, 0, 0, 0, 0, 0, 0, 0, 0 ],
+            "name": "Status_Long[Unknown]",
             "type": "Double"
           }
         ],
