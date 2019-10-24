@@ -1106,20 +1106,21 @@
 				}
 			}
 		},
-		"TestResultFileResponse": {
-			"description": "Test result",
-			"type": "object",
-			"properties": {
-				"data": {
-					"description": "Base 64 encoded file contents",
-					"type": "string"
-				},
-				"nextLink": {
-					"description": "the next link.",
-					"type": "string"
-				}
-			}
-		}
+    "TestResultFileResponse": {
+      "description": "Test result",
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "data": {
+          "description": "File contents",
+          "type": "string"
+        },
+        "nextLink": {
+          "description": "the next link.",
+          "type": "string"
+        }
+      }
+    }
 	},
 	"parameters": {
 		"SubscriptionIdParameter": {
