@@ -121,6 +121,12 @@
           },
           "EventSchemaGetEmpty": {
             "$ref": "./examples/EventSchemaGetEmpty.json"
+          },
+          "ColdStoreEventSchemaGet": {
+            "$ref": "./examples/ColdStoreEventSchemaGet.json"
+          },
+          "WarmStoreEventSchemaGet": {
+            "$ref": "./examples/WarmStoreEventSchemaGet.json"
           }
         },
         "parameters": [
@@ -1344,7 +1350,7 @@
           "type": "object",
           "properties": {
             "value": {
-              "description": "Value time series expression is used to represent the value of the signal that is going to be categorized. It can evaluate to only 'String' or 'Long' type for categorical variables. For example, status values from the event is represented like this: \"$event.Status.String\" or \"tolong($event.StatusEnum.Double)\" .",
+              "description": "Value time series expression is used to represent the value of the signal that is going to be categorized. It can evaluate to only 'String' or 'Long' type for categorical variables.",
               "$ref": "#/definitions/Tsx"
             },
             "interpolation": {
