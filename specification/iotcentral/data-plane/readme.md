@@ -32,6 +32,7 @@ These settings apply only when `--tag=package-2019-10-28-preview` is specified o
 ``` yaml $(tag) == 'package-2019-10-28-preview'
 input-file:
 - Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentral.json
+- Microsoft.IoTCentral/preview/2019-10-28-preview/iotcentralapps.json
 ```
 
 ```yaml
