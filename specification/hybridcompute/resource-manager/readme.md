@@ -67,7 +67,6 @@ directive:
     - Machines_Reconnect
     - Machines_CreateOrUpdate
     - Machines_Update
-    - Machines_Delete
 ```
 
 ## PowerShell
@@ -82,7 +81,6 @@ directive:
     - Machines_Reconnect
     - Machines_CreateOrUpdate
     - Machines_Update
-    - Machines_Delete
 ```
 
 
@@ -116,7 +114,6 @@ directive:
     - Machines_Reconnect
     - Machines_CreateOrUpdate
     - Machines_Update
-    - Machines_Delete
 ```
 
 ## Go
