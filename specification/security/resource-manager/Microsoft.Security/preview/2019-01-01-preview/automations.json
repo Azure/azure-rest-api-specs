@@ -298,7 +298,7 @@
     },
     "AutomationProperties": {
       "type": "object",
-      "description": "The security automation data.",
+      "description": "A set of properties that defines the behavior of the automation configuration. To learn more about the supported security events data models schemas � please visit https://aka.ms/ASCAutomationSchemas.",
       "properties": {
         "description": {
           "type": "string",
@@ -315,7 +315,7 @@
         },
         "scopes": {
           "type": "array",
-          "description": "A collection of the subscription's resources scopes on which the security automations logic is applied.",
+          "description": "A collection of scopes on which the security automations logic is applied. Supported scopes are the subscription itself or a resource group under that subscription. The automation will only apply on defined scopes.",
           "items": {
             "$ref": "#/definitions/AutomationScope"
           }
@@ -329,7 +329,7 @@
         },
         "actions": {
           "type": "array",
-          "description": "A collection of the actions which are triggered if all the configured rules evaluations, within a ruleset, are true.",
+          "description": "A collection of the actions which are triggered if all the configured rules evaluations, within at least one ruleset, are true.",
           "items": {
             "$ref": "#/definitions/AutomationAction"
           }
@@ -366,7 +366,7 @@
     },
     "AutomationSource": {
       "type": "object",
-      "description": "The source event types which evaluate the security automation set of rules. For example - security alerts and security assessments.",
+      "description": "The source event types which evaluate the security automation set of rules. For example - security alerts and security assessments. To learn more about the supported security events data models schemas � please visit https://aka.ms/ASCAutomationSchemas.",
       "properties": {
         "eventSource": {
           "type": "string",
@@ -387,7 +387,7 @@
         },
         "ruleSets": {
           "type": "array",
-          "description": "A set of rules which evaluate upon event interception.",
+          "description": "A set of rules which evaluate upon event interception. A logical disjunction is applied between defined rule sets (logical �or�).",
           "items": {
             "$ref": "#/definitions/AutomationRuleSet"
           }
@@ -396,7 +396,7 @@
     },
     "AutomationScope": {
       "type": "object",
-      "description": "The subscription's resources scope",
+      "description": "A single automation scope.",
       "properties": {
         "description": {
           "type": "string",
@@ -404,7 +404,7 @@
         },
         "scopePath": {
           "type": "string",
-          "description": "The resources scope path."
+          "description": "The resources scope path. Can be the subscription on which the automation is defined on or a resource group under that subscription (fully qualified Azure resource IDs)."
         }
       }
     },
@@ -450,18 +450,18 @@
       "properties": {
         "logicAppResourceId": {
           "type": "string",
-          "description": "The triggered resource id."
+          "description": "The triggered Logic App Azure Resource ID. This can also reside on other subscriptions, given that you have permissions to trigger the Logic App"
         },
         "uri": {
           "type": "string",
-          "description": "The uri that should be triggered by an Http GET request.",
+          "description": "The Logic App trigger URI endpoint.",
           "format": "uri"
         }
       }
     },
     "AutomationActionEventHub": {
       "type": "object",
-      "description": "The event hub action that should be triggered.",
+      "description": "The target Event Hub to which event data will be exported.",
       "x-ms-discriminator-value": "EventHub",
       "allOf": [
         {
@@ -471,17 +471,17 @@
       "properties": {
         "eventHubResourceId": {
           "type": "string",
-          "description": "The event hub resource id."
+          "description": "The Event Hub Azure Resource ID."
         },
         "connectionString": {
           "type": "string",
-          "description": "The event hub connection string(the primary or secondary key)."
+          "description": "The Event Hub connection string."
         }
       }
     },
     "AutomationActionSecurityEmail": {
       "type": "object",
-      "description": "The Security Email action that should be triggered.",
+      "description": "An action that triggers sending of Security emails. Emails can be sent to users with specific roles on the subscription (for example, subscription owners) or to user-provided emails.",
       "x-ms-discriminator-value": "SecurityEmail",
       "allOf": [
         {
@@ -491,7 +491,7 @@
       "properties": {
         "subscriptionRbacRoles": {
           "type": "array",
-          "description": "A list of RBAC roles which indicate the relevant users that will receive the event data via email.",
+          "description": "A list of user roles which indicate the relevant users that will receive the event data via email.",
           "items": {
             "type": "string",
             "enum": [
@@ -532,7 +532,7 @@
     },
     "AutomationActionWorkspace": {
       "type": "object",
-      "description": "The log analytics workspace action that should be triggered.",
+      "description": "The Log Analytics Workspace to which event data will be exported. Security alerts data will reside in the 'SecurityAlert' table and the assessments data will reside in the 'SecurityRecommendation' table (under the 'Security'/'SecurityCenterFree' solutions). Note that in order to view the data in the workspace, the Security Center Log Analytics free/standard solution needs to be enabled on that workspace.",
       "x-ms-discriminator-value": "Workspace",
       "allOf": [
         {
@@ -542,17 +542,17 @@
       "properties": {
         "workspaceResourceId": {
           "type": "string",
-          "description": "The log analytics workspace resource id."
+          "description": "The fully qualified Log Analytics Workspace Azure Resource ID."
         },
         "workspaceId": {
           "type": "string",
-          "description": "The log analytics id in a GUID format."
+          "description": "The Log Analytics Workspace ID in a GUID format."
         }
       }
     },
     "AutomationRuleSet": {
       "type": "object",
-      "description": "A rule set which evaluates all its rules upon an event interception.",
+      "description": "A rule set which evaluates all its rules upon an event interception. Only when all the included rules in the rule set will be evaluated as 'true', will the event trigger the defined actions.",
       "properties": {
         "rules": {
           "type": "array",
@@ -564,7 +564,7 @@
     },
     "AutomationTriggeringRule": {
       "type": "object",
-      "description": "A logic rule which evaluates upon event interception. The rule is configured by comparing the specified expected value, in an expected property within the event model, by the specified operator.",
+      "description": "A rule which is evaluated upon event interception. The rule is configured by comparing a specific value from the event model to an expected value. This comparison is done by using one of the supported operators set.",
       "properties": {
         "propertyJPath": {
           "type": "string",
@@ -572,7 +572,7 @@
         },
         "propertyType": {
           "type": "string",
-          "description": "The data type of the compared operands.",
+          "description": "The data type of the compared operands (string, integer, floating point number or a boolean [true/false]]",
           "enum": [
             "String",
             "Integer",
@@ -607,13 +607,11 @@
           "description": "A valid comparer operator to use.",
           "enum": [
             "Equals",
-            "EqualsIgnoreCase",
             "GreaterThan",
             "GreaterThanOrEqualTo",
             "LesserThan",
             "LesserThanOrEqualTo",
             "NotEquals",
-            "NotEqualsIgnoreCase",
             "Contains",
             "StartsWith",
             "EndsWith"
@@ -624,9 +622,6 @@
             "values": [
               {
                 "value": "Equals"
-              },
-              {
-                "value": "EqualsIgnoreCase"
               },
               {
                 "value": "GreaterThan"
@@ -642,9 +637,6 @@
               },
               {
                 "value": "NotEquals"
-              },
-              {
-                "value": "NotEqualsIgnoreCase"
               },
               {
                 "value": "Contains"
