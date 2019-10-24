@@ -45,7 +45,7 @@ The various tools mentioned above are also available for local download.
      - `npm install -g oad@0.1.7`
      - `bash-3.2$ oad compare <old-spec> <new-spec>`
 
-## I don't agree with the reported errors, how do I suppress them? ## (for MS FTEs)
+## I don't agree with the reported errors, how do I suppress them? (for MS FTEs)
 
 If you believe that the errors reported are false positives or don't apply for your specs, you might consider reviewing the validation errors [suppression process](https://github.com/Azure/adx-documentation-pr/wiki/Swagger-Validation-Errors-Suppression) and request suppression of these errors.
 
