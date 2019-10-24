@@ -1132,8 +1132,8 @@
               "description": "DefaultServiceVersion indicates the default version to use for requests to the Blob service if an incoming request’s version is not specified. Possible values include version 2008-10-27 and all more recent versions."
             },
             "deleteRetentionPolicy": {
-              "$ref": "#/definitions/DeleteRetentionPolicy",
-              "description": "The blob service properties for soft delete."
+              "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
+              "description": "The blob service properties for blob soft delete."
             },
             "automaticSnapshotPolicyEnabled": {
               "type": "boolean",
@@ -1142,6 +1142,10 @@
             "changeFeed": {
               "$ref": "#/definitions/ChangeFeed",
               "description": "The blob service properties for change feed events."
+            },
+            "containerDeleteRetentionPolicy": {
+              "$ref": "./common.json#/definitions/DeleteRetentionPolicy",
+              "description": "The blob service properties for container soft delete."
             }
           },
           "x-ms-client-flatten": true,
@@ -1176,21 +1180,6 @@
         }
       },
       "description": "The blob service properties for change feed events."
-    },
-    "DeleteRetentionPolicy": {
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Indicates whether DeleteRetentionPolicy is enabled for the Blob service."
-        },
-        "days": {
-          "type": "integer",
-          "minimum": 1,
-          "maximum": 365,
-          "description": "Indicates the number of days that the deleted blob should be retained. The minimum specified value can be 1 and the maximum value can be 365."
-        }
-      },
-      "description": "The blob service properties for soft delete."
     },
     "LeaseContainerRequest": {
       "properties": {
