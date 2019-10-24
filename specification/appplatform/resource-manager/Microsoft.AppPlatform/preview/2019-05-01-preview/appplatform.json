@@ -482,12 +482,22 @@
               "$ref": "#/definitions/AppResource"
             }
           },
+          "201": {
+            "description": "Created. The response describes the new App and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Apps_CreateOrUpdate": {
@@ -577,12 +587,22 @@
               "$ref": "#/definitions/AppResource"
             }
           },
+          "202": {
+            "description": "Accepted. The response indicates the exiting App is now updating and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/AppResource"
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         },
         "x-ms-examples": {
           "Apps_Update": {
@@ -2053,7 +2073,9 @@
           "description": "Provisioning state of the App",
           "enum": [
             "Succeeded",
-            "Failed"
+            "Failed",
+            "Creating",
+            "Updating"
           ],
           "type": "string",
           "readOnly": true,
@@ -2300,15 +2322,11 @@
           "type": "string",
           "readOnly": true
         },
-        "deploymentSettings": {
-          "$ref": "#/definitions/DeploymentSettings",
-          "description": "Deployment settings of the Deployment"
-        },
         "provisioningState": {
           "description": "Provisioning state of the Deployment",
           "enum": [
             "Creating",
-            "Processing",
+            "Updating",
             "Succeeded",
             "Failed"
           ],
@@ -2319,6 +2337,10 @@
             "modelAsString": true
           }
         },
+        "deploymentSettings": {
+          "$ref": "#/definitions/DeploymentSettings",
+          "description": "Deployment settings of the Deployment"
+        },
         "status": {
           "description": "Status of the Deployment",
           "enum": [
@@ -2326,7 +2348,6 @@
             "Stopped",
             "Running",
             "Failed",
-            "Processing",
             "Allocating",
             "Upgrading",
             "Compiling"
