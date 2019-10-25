@@ -303,6 +303,10 @@
               "description": "The blob path must end with the pattern provided for trigger to fire. For example, 'december/boxes.csv' will only fire the trigger for blobs named boxes in a december folder. At least one of these must be provided: blobPathBeginsWith, blobPathEndsWith.",
               "type": "string"
             },
+            "ignoreEmptyBlobs": {
+              "description": "If set to true, blobs with zero bytes will be ignored.",
+              "type": "boolean"
+            },
             "events": {
               "description": "The type of events that cause this trigger to fire.",
               "$ref": "#/definitions/BlobEventTypes"
