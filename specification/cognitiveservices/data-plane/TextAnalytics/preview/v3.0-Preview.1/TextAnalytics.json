@@ -34,7 +34,7 @@
   "paths" : {
     "/entities/recognition/general" : {
       "post" : {
-        "summary" : "Entities from open domain",
+        "summary" : "Named Entity Recognition",
         "description" : "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/how-tos/text-analytics-how-to-entity-linking#supported-types-for-named-entity-recognition\">Supported Entity Types in Text Analytics API</a>. For the list of enabled languages, check <a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\">Supported languages in Text Analytics API</a>.\n",
         "operationId" : "/entities/recognition/general",
         "consumes" : [ "application/json", "text/json" ],
@@ -108,7 +108,7 @@
     },
     "/entities/recognition/pii" : {
       "post" : {
-        "summary" : "Entities from Personally Identifiable Information (PII) domain",
+        "summary" : "Entities containing Personally Identifiable Information (PII)",
         "description" : "The API returns a list of personally identifiable information (PII) entities (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. See the &lt;a href=\"https://docs.microsoft.com/en-us/azure/cognitive-services/text-analytics/text-analytics-supported-languages\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.\n",
         "operationId" : "/entities/recognition/pii",
         "consumes" : [ "application/json", "text/json" ],
@@ -134,7 +134,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "A successful call results in a list of recognized entities returned for each valid document",
+            "description" : "A successful call results in a list of entities containing personally identifiable information returned for each valid document",
             "examples" : {
               "application/json" : {
                 "documents" : [ {
@@ -202,7 +202,7 @@
         } ],
         "responses" : {
           "200" : {
-            "description" : "A successful call results in a list of recognized entities returned for each valid document",
+            "description" : "A successful call results in a list of recognized entities with links to a well-known knowledge base returned for each valid document",
             "examples" : {
               "application/json" : {
                 "documents" : [ {
