@@ -80,6 +80,11 @@ directive:
     - Machines_Reconnect
     - Machines_CreateOrUpdate
     - Machines_Update
+    - MachineExtensions_CreateOrUpdate
+    - MachineExtensions_Update
+    - MachineExtensions_Delete
+    - MachineExtensions_Get
+    - MachineExtensions_List
 ```
 
 ## PowerShell
@@ -94,6 +99,11 @@ directive:
     - Machines_Reconnect
     - Machines_CreateOrUpdate
     - Machines_Update
+    - MachineExtensions_CreateOrUpdate
+    - MachineExtensions_Update
+    - MachineExtensions_Delete
+    - MachineExtensions_Get
+    - MachineExtensions_List
 ```
 
 
@@ -117,6 +127,16 @@ python:
 python:
   no-namespace-folders: true
   output-folder: $(python-sdks-folder)/hybridcompute/azure-mgmt-hybridcompute/azure/mgmt/hybridcompute
+directive:
+  - remove-operation: 
+    - Machines_Reconnect
+    - Machines_CreateOrUpdate
+    - Machines_Update
+    - MachineExtensions_CreateOrUpdate
+    - MachineExtensions_Update
+    - MachineExtensions_Delete
+    - MachineExtensions_Get
+    - MachineExtensions_List
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
@@ -127,6 +147,11 @@ directive:
     - Machines_Reconnect
     - Machines_CreateOrUpdate
     - Machines_Update
+    - MachineExtensions_CreateOrUpdate
+    - MachineExtensions_Update
+    - MachineExtensions_Delete
+    - MachineExtensions_Get
+    - MachineExtensions_List
 ```
 
 ## Go
