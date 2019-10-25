@@ -677,6 +677,15 @@
             "$ref": "./examples/apitoken_get.json"
           }
         },
+        "parameters": [
+          {
+            "in": "path",
+            "name": "token_id",
+            "description": "Unique ID for the API token.",
+            "type": "string",
+            "required": true
+          }
+        ],
         "responses": {
           "200": {
             "description": "Success",
@@ -695,6 +704,13 @@
           }
         },
         "parameters": [
+          {
+            "in": "path",
+            "name": "token_id",
+            "description": "Unique ID for the API token.",
+            "type": "string",
+            "required": true
+          },
           {
             "name": "body",
             "in": "body",
@@ -717,6 +733,15 @@
       "delete": {
         "operationId": "ApiTokens_Remove",
         "summary": "Delete an API token.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "token_id",
+            "description": "Unique ID for the API token.",
+            "type": "string",
+            "required": true
+          }
+        ],
         "x-ms-examples": {
           "Delete API token": {
             "$ref": "./examples/apitoken_delete.json"
@@ -727,16 +752,7 @@
             "description": "Success"
           }
         }
-      },
-      "parameters": [
-        {
-          "in": "path",
-          "name": "token_id",
-          "description": "Unique ID for the API token.",
-          "type": "string",
-          "required": true
-        }
-      ]
+      }
     },
     "/devices": {
       "get": {
