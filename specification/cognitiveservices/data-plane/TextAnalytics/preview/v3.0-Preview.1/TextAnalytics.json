@@ -702,7 +702,7 @@
           "$ref" : "#/definitions/DocumentStatistics"
         },
         "documentScores" : {
-          "description" : "Document level sentiment confidence scores for each sentiment class."
+          "description" : "Document level sentiment confidence scores between 0 and 1 for each sentiment class."
         },
         "sentences" : {
           "type" : "array",
@@ -786,7 +786,7 @@
           "format" : "double"
         }
       },
-      "description" : "Represents the confidence scores across all sentiment classes: positive, neutral, negative."
+      "description" : "Represents the confidence scores between 0 and 1 across all sentiment classes: positive, neutral, negative."
     },
     "SentenceSentiment" : {
       "type" : "object",
@@ -804,7 +804,7 @@
           "enum" : [ "positive", "neutral", "negative" ]
         },
         "sentenceScores" : {
-          "description" : "The sentiment confidence score for the sentence for all classes."
+          "description" : "The sentiment confidence score between 0 and 1 for the sentence for all classes."
         },
         "offset" : {
           "type" : "integer",
@@ -915,7 +915,7 @@
         "score" : {
           "type" : "number",
           "format" : "double",
-          "description" : "Confidence score of the extracted entity."
+          "description" : "Confidence score between 0 and 1 of the extracted entity."
         }
       }
     },
@@ -1026,7 +1026,7 @@
         "score" : {
           "type" : "number",
           "format" : "double",
-          "description" : "(Optional) If a well-known item is recognized, a decimal number denoting the confidence level will be returned."
+          "description" : "(Optional) If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
         },
         "text" : {
           "type" : "string",
