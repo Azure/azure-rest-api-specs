@@ -395,6 +395,90 @@
           }
         }
       }
+    },
+    "/layout/analyze": {
+      "post": {
+        "summary": "Analyze Layout",
+        "description": "Extract text and layout information from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
+        "operationId": "AnalyzeLayoutAsync",
+        "consumes": [
+          "application/pdf",
+          "application/json",
+          "image/jpeg",
+          "image/png",
+          "image/tiff"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/FileStream"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request is queued successfully.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "description": "URL containing the resultId used to track the progress and obtain the result of the analyze operation."
+              }
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Analyze layout": {
+            "$ref": "./examples/LayoutBatch.json"
+          }
+        }
+      }
+    },
+    "/layout/analyzeResults/{resultId}": {
+      "get": {
+        "summary": "Get Analyze Layout Result",
+        "description": "Track the progress and obtain the result of the analyze layout operation",
+        "operationId": "GetAnalyzeLayoutResult",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "resultId",
+            "in": "path",
+            "description": "Analyze operation result identifier.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AnalyzeOperationResult"
+            }
+          },
+          "default": {
+            "description": "Response entity accompanying non-successful responses containing additional details about the error.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get analyze layout result": {
+            "$ref": "./examples/LayoutBatchResult.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
