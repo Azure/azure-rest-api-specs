@@ -46,23 +46,23 @@
         },
         "parameters": [
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
+            "$ref": "#/parameters/accountNameParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved private link resources.",
+            "description": "Successfully retrieved private endpoint connections.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/PrivateEndpointConnectionListResult"
             }
           }
         },
@@ -82,26 +82,26 @@
         "operationId": "PrivateEndpointConnections_Get",
         "parameters": [
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Successfully retrieved a specified private endpoint connection.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnection"
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/PrivateEndpointConnection"
             }
           }
         },
@@ -119,29 +119,43 @@
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/PrivateEndpointConnectionNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/PrivateEndpointConnection"
+            }
           }
         ],
         "responses": {
+          "200": {
+            "description": "Successfully approved or rejected private endpoint connection.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/PrivateEndpointConnection"
+            }
+          },
           "202": {
             "description": "Accepted. The private endpoint connection update will complete asynchronously."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../stable/2019-08-01/cosmos-db.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/ErrorResponse"
             }
           }
         },
@@ -160,19 +174,19 @@
         "operationId": "PrivateEndpointConnections_Delete",
         "parameters": [
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/subscriptionIdParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/resourceGroupNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/apiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../stable/2019-08-01/cosmos-db.json#/parameters/accountNameParameter"
+            "$ref": "#/parameters/accountNameParameter"
           },
           {
-            "$ref": "#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/PrivateEndpointConnectionNameParameter"
           }
         ],
         "responses": {
@@ -199,87 +213,31 @@
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionListResult": {
-      "description": "A list of private endpoint connections",
-      "type": "object",
+    "ErrorResponse": {
       "properties": {
-        "value": {
-          "type": "array",
-          "description": "Array of private endpoint connections",
-          "items": {
-            "$ref": "#/definitions/PrivateEndpointConnection"
-          }
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "description": "A private endpoint connection",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
-          "description": "Resource properties.",
-          "x-ms-client-flatten": true
+        "code": {
+          "description": "Error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error message indicating why the operation failed.",
+          "type": "string"
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../stable/2019-08-01/cosmos-db.json#/definitions/ARMProxyResource"
-        }
-      ]
-    },
-    "PrivateEndpointConnectionProperties": {
-      "description": "Properties of a private endpoint connection.",
-      "type": "object",
-      "properties": {
-        "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointProperty",
-          "description": "Private endpoint which the connection belongs to."
-        },
-        "privateLinkServiceConnectionState": {
-          "$ref": "#/definitions/PrivateLinkServiceConnectionStateProperty",
-          "description": "Connection State of the Private Endpoint Connection."
-        }
-      }
-    },
-    "PrivateEndpointProperty": {
-      "type": "object",
-      "description": "Private endpoint which the connection belongs to.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource id of the private endpoint."
-        }
-      }
-    },
-    "PrivateLinkServiceConnectionStateProperty": {
-      "type": "object",
-      "description": "Connection State of the Private Endpoint Connection.",
-      "properties": {
-        "status": {
-          "type": "string",
-          "description": "The private link service connection status."
-        },
-        "description": {
-          "type": "string",
-          "description": "The private link service connection description."
-        },
-        "actionsRequired": {
-          "type": "string",
-          "description": "Any action that is required beyond basic workflow (approve/ reject/ disconnect)",
-          "readOnly": true
-        }
-      }
+      "description": "Error Response."
     }
   },
   "parameters": {
-    "PrivateEndpointConnectionNameParameter": {
-      "name": "privateEndpointConnectionName",
+    "accountNameParameter": {
+      "name": "accountName",
       "in": "path",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method",
-      "description": "The name of the private endpoint connection."
+      "description": "Cosmos DB database account name.",
+      "minLength": 3,
+      "maxLength": 50,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
     }
   }
 }
