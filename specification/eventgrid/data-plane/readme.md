@@ -136,6 +136,7 @@ input-file:
   - $(this-folder)/Microsoft.AppConfiguration/stable/2018-01-01/AppConfiguration.json
   - $(this-folder)/Microsoft.SignalRService/stable/2018-01-01/SignalRService.json
   - $(this-folder)/Microsoft.KeyVault/stable/2018-01-01/KeyVault.json
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-01-01/MachineLearningServices.json
 
 ```
 
