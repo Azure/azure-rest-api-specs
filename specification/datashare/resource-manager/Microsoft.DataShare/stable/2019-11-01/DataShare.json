@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2018-11-01-preview",
+    "version": "2019-11-01",
     "title": "DataShareManagementClient",
     "description": "Creates a Microsoft.DataShare management client."
   },
@@ -2000,6 +2000,59 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions": {
+      "get": {
+        "tags": [
+          "ShareSubscription"
+        ],
+        "summary": "List of available share subscriptions under an account.",
+        "description": "List share subscriptions in an account",
+        "operationId": "ShareSubscriptions_ListByAccount",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/accountName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "Continuation Token",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ShareSubscriptionList"
+            }
+          },
+          "default": {
+            "description": "An error response received from the Microsoft.DataShare resource provider.",
+            "schema": {
+              "$ref": "#/definitions/DataShareError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ShareSubscriptions_ListByAccount": {
+            "$ref": "./examples/ShareSubscriptions_ListByAccount.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions/{shareSubscriptionName}/ConsumerSourceDataSets": {
       "get": {
         "tags": [
@@ -2383,59 +2436,6 @@
         "x-ms-examples": {
           "ShareSubscriptions_CancelSynchronization": {
             "$ref": "./examples/ShareSubscriptions_CancelSynchronization.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataShare/accounts/{accountName}/shareSubscriptions": {
-      "get": {
-        "tags": [
-          "ShareSubscription"
-        ],
-        "summary": "List of available share subscriptions under an account.",
-        "description": "List share subscriptions in an account",
-        "operationId": "ShareSubscriptions_ListByAccount",
-        "parameters": [
-          {
-            "$ref": "#/parameters/subscriptionId"
-          },
-          {
-            "$ref": "#/parameters/resourceGroupName"
-          },
-          {
-            "$ref": "#/parameters/accountName"
-          },
-          {
-            "$ref": "#/parameters/api-version"
-          },
-          {
-            "name": "$skipToken",
-            "in": "query",
-            "description": "Continuation Token",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/ShareSubscriptionList"
-            }
-          },
-          "default": {
-            "description": "An error response received from the Microsoft.DataShare resource provider.",
-            "schema": {
-              "$ref": "#/definitions/DataShareError"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "ShareSubscriptions_ListByAccount": {
-            "$ref": "./examples/ShareSubscriptions_ListByAccount.json"
           }
         }
       }
@@ -4094,7 +4094,8 @@
     "ShareSubscriptionProperties": {
       "description": "Share subscription property bag.",
       "required": [
-        "invitationId"
+        "invitationId",
+        "sourceShareLocation"
       ],
       "type": "object",
       "properties": {
@@ -4182,6 +4183,10 @@
           "type": "string",
           "readOnly": true
         },
+        "sourceShareLocation": {
+          "description": "Source share location.",
+          "type": "string"
+        },
         "userEmail": {
           "description": "Email of the user who created the resource",
           "type": "string",
@@ -4191,6 +4196,27 @@
           "description": "Name of the user who created the resource",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "ShareSubscriptionList": {
+      "description": "List response for get ShareSubscription.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The Url of next result page.",
+          "type": "string"
+        },
+        "value": {
+          "description": "Collection of items of type DataTransferObjects.",
+          "uniqueItems": false,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareSubscription"
+          }
         }
       }
     },
@@ -4409,27 +4435,6 @@
           "x-ms-enum": {
             "name": "synchronizationMode",
             "modelAsString": true
-          }
-        }
-      }
-    },
-    "ShareSubscriptionList": {
-      "description": "List response for get ShareSubscription.",
-      "required": [
-        "value"
-      ],
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The Url of next result page.",
-          "type": "string"
-        },
-        "value": {
-          "description": "Collection of items of type DataTransferObjects.",
-          "uniqueItems": false,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ShareSubscription"
           }
         }
       }
