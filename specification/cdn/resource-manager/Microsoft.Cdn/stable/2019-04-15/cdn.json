@@ -3917,6 +3917,10 @@
             "modelAsString": true
           }
         },
+        "customHttpsParameters": {
+          "description": "Certificate parameters for securing custom HTTPS",
+          "$ref": "#/definitions/CustomDomainHttpsParameters"
+        },
         "validationData": {
           "description": "Special validation or data may be required when delivering CDN to some regions due to local compliance reasons. E.g. ICP license number of a custom domain is required to deliver content in China.",
           "type": "string"
@@ -3980,6 +3984,19 @@
           "x-ms-enum": {
             "name": "ProtocolType",
             "modelAsString": true
+          }
+        },
+        "minimumTlsVersion": {
+          "description": "TLS protocol version that will be used for Https",
+          "enum": [
+            "None",
+            "TLS10",
+            "TLS12"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "minimumTlsVersion",
+            "modelAsString": false
           }
         }
       }
