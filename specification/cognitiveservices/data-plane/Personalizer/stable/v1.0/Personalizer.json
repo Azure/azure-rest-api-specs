@@ -3,7 +3,7 @@
   "info": {
     "version": "v1.0",
     "title": "Personalizer Client",
-    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns your content in a ranked list. As rewards are sent in response to the ranked list, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
+    "description": "Personalizer Service is an Azure Cognitive Service that makes it easy to target content and experiences without complex pre-analysis or cleanup of past data. Given a context and featurized content, the Personalizer Service returns which content item to show to users in rewardActionId. As rewards are sent in response to the use of rewardActionId, the reinforcement learning algorithm will improve the model and improve performance of future rank calls."
   },
   "basePath": "/personalizer/v1.0",
   "paths": {
@@ -86,7 +86,7 @@
           "Configurations"
         ],
         "summary": "Get Policy.",
-        "description": "Get the current policy configuration of the Personalizer service.",
+        "description": "Get the Learning settings currently used by the Personalizer service.",
         "operationId": "Policy_Get",
         "consumes": [
           
@@ -116,7 +116,7 @@
           "Configurations"
         ],
         "summary": "Update Policy.",
-        "description": "Update the current policy configuration of the Personalizer service.",
+        "description": "Update the Learning settings that the Personalizer service will use to train models.",
         "operationId": "Policy_Update",
         "consumes": [
           "application/json"
@@ -128,7 +128,7 @@
           {
             "name": "policy",
             "in": "body",
-            "description": "The policy configuration.",
+            "description": "The Learning settings.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/PolicyContract"
@@ -157,7 +157,7 @@
           "Configurations"
         ],
         "summary": "Delete Policy.",
-        "description": "Resets the current policy configuration of the Personalizer service to default.",
+        "description": "Resets the Learning settings of the Personalizer service to default.",
         "operationId": "Policy_Delete",
         "consumes": [
           
@@ -1088,7 +1088,7 @@
           "readOnly": true
         },
         "rewardActionId": {
-          "description": "The action chosen by the Personalizer service. This is the action for which to report the reward. This might not be the\r\nfirst found in \u0027ranking\u0027 if an action in the request in first position was part of the excluded ids.",
+          "description": "The action chosen by the Personalizer service. This is the action your application should display, and for which to report the reward. This might not be the\r\nfirst found in \u0027ranking\u0027 if an action in the request in first position was part of the excluded ids.",
           "maxLength": 256,
           "type": "string",
           "readOnly": true
