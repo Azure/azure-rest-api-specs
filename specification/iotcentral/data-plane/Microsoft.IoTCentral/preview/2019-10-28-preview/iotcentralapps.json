@@ -87,6 +87,15 @@
           "get": {
               "operationId": "Applications_Get",
               "summary": "Get an application by ID",
+              "parameters": [
+                  {
+                      "in": "path",
+                      "name": "application_id",
+                      "description": "Unique ID of the application.",
+                      "type": "string",
+                      "required": true
+                  }
+              ],
               "responses": {
                   "200": {
                       "description": "Success",
@@ -101,16 +110,7 @@
                 }
               }
 
-          },
-          "parameters": [
-              {
-                  "in": "path",
-                  "name": "application_id",
-                  "description": "Unique ID of the application.",
-                  "type": "string",
-                  "required": true
-              }
-          ]
+          }
       }
   },
   "parameters": {
