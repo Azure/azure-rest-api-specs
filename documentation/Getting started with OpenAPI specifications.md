@@ -19,5 +19,5 @@ Currently, we only support `OpenAPI Specification 2.0` or `Swagger V2.0`.
    * [`Validation checks through automated tools`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-automated-guidelines.md)
    * [`Validation checks done manually`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/openapi-authoring-manual-guidelines.md)
    * [`OAV Validation checks`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Semantic-and-Model-Violations-Reference.md)
-* **[`Breaking Changes guidelines`](https://github.com/Azure/adx-documentation-pr/wiki/Breaking-changes-guidelines)**
+* **[`Breaking Changes guidelines`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Breaking%20changes%20guidelines.md)**
 * **[`x-ms-examples`](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/x-ms-examples.md)**
