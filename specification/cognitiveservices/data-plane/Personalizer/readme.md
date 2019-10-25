@@ -1,22 +1,29 @@
 # Cognitive Services Personalizer SDK
 
+## Releases
+
 > see https://aka.ms/autorest
 
-Configuration for generating Personalizer SDK.
-
-The current release is `release_1_0`.
+The current release is `release_1_0`. A preview release release_1_0 is also available
 
 ``` yaml
 tag: release_1_0
 add-credentials: true
 openapi-type: data-plane
 ```
-# Releases
 
 ### Release 1.0
 These settings apply only when `--tag=release_1_0` is specified on the command line.
 
 ``` yaml $(tag) == 'release_1_0'
+input-file: 
+  - stable/v1.0/Personalizer.json
+```
+
+### Release 1.0-Preview
+These settings apply only when `--tag=release_1_0_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_1_0_preview'
 input-file: 
   - preview/v1.0/Personalizer.json
 ```
@@ -37,7 +44,6 @@ swagger-to-sdk:
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_cognitiveservices_personalizer']
 ```
-
 
 ## CSharp Settings
 These settings apply only when `--csharp` is specified on the command line.
