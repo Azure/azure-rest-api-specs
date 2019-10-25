@@ -19,10 +19,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers/{workloadClassifierName}": {
       "get": {
         "tags": [
-          "DataWarehouseWorkloadClassifiers"
+          "WorkloadClassifiers"
         ],
         "description": "Gets a workload classifier",
-        "operationId": "DataWarehouseWorkloadClassifiers_Get",
+        "operationId": "WorkloadClassifiers_Get",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -58,11 +58,11 @@
           "200": {
             "description": "Successfully retrieved the specifies workload classifier.",
             "schema": {
-              "$ref": "#/definitions/DataWarehouseWorkloadClassifier"
+              "$ref": "#/definitions/WorkloadClassifier"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The specified resource was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-examples": {
@@ -73,10 +73,10 @@
       },
       "put": {
         "tags": [
-          "DataWarehouseWorkloadClassifiers"
+          "WorkloadClassifiers"
         ],
         "description": "Creates or updates a workload classifier.",
-        "operationId": "DataWarehouseWorkloadClassifiers_CreateOrUpdate",
+        "operationId": "WorkloadClassifiers_CreateOrUpdate",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -107,7 +107,7 @@
             "description": "The properties of the workload classifier.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataWarehouseWorkloadClassifier"
+              "$ref": "#/definitions/WorkloadClassifier"
             }
           },
           {
@@ -121,11 +121,11 @@
           "200": {
             "description": "Successfully updated the workload classifier.",
             "schema": {
-              "$ref": "#/definitions/DataWarehouseWorkloadClassifier"
+              "$ref": "#/definitions/WorkloadClassifier"
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidWorkloadGroupRequest - The request for the workload group is invalid.\n\n * 400 InvalidWorkloadGroupParameters - One or more parameters for workload group creation are incorrect.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The specified resource was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 400 InvalidWorkloadClassifierParameters - One or more parameters for in workload classifier specification are not valid.\n\n * 400 InvalidResourceRequestBody - The resource or resource properties in the request body is empty or invalid.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Create or update for the workload classifier is in progress."
@@ -133,7 +133,7 @@
           "201": {
             "description": "Successfully created the workload classifier.",
             "schema": {
-              "$ref": "#/definitions/DataWarehouseWorkloadClassifier"
+              "$ref": "#/definitions/WorkloadClassifier"
             }
           }
         },
@@ -149,10 +149,10 @@
       },
       "delete": {
         "tags": [
-          "DataWarehouseWorkloadClassifiers"
+          "WorkloadClassifiers"
         ],
         "description": "Deletes a workload classifier.",
-        "operationId": "DataWarehouseWorkloadClassifiers_Delete",
+        "operationId": "WorkloadClassifiers_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -189,7 +189,7 @@
             "description": "Successfully deleted the workload classifier."
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The specified resource was not found.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 404 OperationIdNotFound - The operation with Id does not exist.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 409 OperationCancelled - The operation has been cancelled by user.\n\n * 409 OperationInterrupted - The operation on the resource could not be completed because it was interrupted by another operation on the same resource.\n\n * 500 OperationTimedOut - The operation timed out and automatically rolled back. Please retry the operation.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           },
           "202": {
             "description": "Deleting the workload classifier is in progress."
@@ -209,10 +209,10 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/databases/{databaseName}/workloadGroups/{workloadGroupName}/workloadClassifiers": {
       "get": {
         "tags": [
-          "DataWarehouseWorkloadClassifiers"
+          "WorkloadClassifiers"
         ],
         "description": "Gets the list of workload classifiers for a workload group",
-        "operationId": "DataWarehouseWorkloadClassifiers_ListByWorkloadGroup",
+        "operationId": "WorkloadClassifiers_ListByWorkloadGroup",
         "parameters": [
           {
             "$ref": "#/parameters/ResourceGroupParameter"
@@ -245,7 +245,7 @@
             }
           },
           "default": {
-            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The specified resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
+            "description": "*** Error Responses: ***\n\n * 400 FeatureDisabledOnSelectedEdition - User attempted to use a feature which is disabled on current database edition.\n\n * 400 OperationNotAllowedOnPausedDatabase - Operation is not allowed on a paused database.\n\n * 404 ServerNotInSubscriptionResourceGroup - Specified server does not exist in the specified resource group and subscription.\n\n * 404 SubscriptionDoesNotHaveServer - The requested server was not found\n\n * 404 DatabaseDoesNotExist - User has specified a database name that does not exist on this server instance.\n\n * 404 ResourceNotFound - The requested resource was not found.\n\n * 409 ConflictingSystemOperationInProgress - A system maintenance operation is in progress on the database and further operations need to wait until it is completed.\n\n * 409 ConflictingDatabaseOperation - There is already some operation on the database and the current operation should wait till it is done.\n\n * 503 DatabaseUnavailable - The operation failed because the database is unavailable.\n\n * 503 TooManyRequests - Requests beyond max requests that can be processed by available resources.\n\n * 504 RequestTimeout - Service request exceeded the allowed timeout."
           }
         },
         "x-ms-pageable": {
@@ -349,7 +349,7 @@
       ],
       "properties": {}
     },
-    "DataWarehouseWorkloadClassifier": {
+    "WorkloadClassifier": {
       "description": "Workload classifier operations for a data warehouse",
       "type": "object",
       "allOf": [
@@ -373,7 +373,7 @@
           "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/DataWarehouseWorkloadClassifier"
+            "$ref": "#/definitions/WorkloadClassifier"
           },
           "readOnly": true
         },
