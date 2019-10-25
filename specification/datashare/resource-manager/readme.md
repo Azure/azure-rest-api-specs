@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2019-11-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2019-11-01'
 input-file:
-- Microsoft.DataShare/preview/2019-11-01/DataShare.json
+- Microsoft.DataShare/stable/2019-11-01/DataShare.json
 ```
 
 ---
@@ -123,7 +123,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.DataShare/preview/2019-11-01/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/stable/2019-11-01/DataShare.json
   - $(this-folder)/Microsoft.DataShare/preview/2018-11-01-preview/DataShare.json
 
 ```
