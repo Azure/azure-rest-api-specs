@@ -11,7 +11,8 @@
             "id": "/subscriptions/e4272367-5645-4c4e-9c67-3b74b59a6982/resourceGroups/exampleResourceGroup/providers/Microsoft.Security/automations/exampleAutomation",
             "name": "exampleAutomation",
             "type": "Microsoft.Security/automations",
-            "location": "Central US",            
+            "etag": "etag value",
+            "location": "Central US",
             "tags": {},
             "properties": {
               "description": "An example of a security automation that triggers two LogicApp resources (myTest1 and myTest2) on any security assessment of type customAssessment",
@@ -42,7 +43,7 @@
                           "propertyJPath": "$.Entity.AssessmentType",
                           "propertyType": "String",
                           "expectedValue": "customAssessment",
-                          "operator": "EqualsIgnoreCase"
+                          "operator": "Equals"
                         }
                       ]
                     }
