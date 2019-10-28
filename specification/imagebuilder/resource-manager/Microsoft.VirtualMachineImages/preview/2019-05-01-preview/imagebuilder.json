@@ -639,6 +639,10 @@
           "type": "string",
           "description": "URI of the shell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
         },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the shell script provided in the scriptUri field"
+        },
         "inline": {
           "type": "array",
           "description": "Array of shell commands to execute",
@@ -684,12 +688,20 @@
           "type": "string",
           "description": "URI of the PowerShell script to be run for customizing. It can be a github link, SAS URI for Azure Storage, etc"
         },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the power shell script provided in the scriptUri field above"
+        },
         "inline": {
           "type": "array",
           "description": "Array of PowerShell commands to execute",
           "items": {
             "type": "string"
           }
+        },
+        "runElevated": {
+          "type": "boolean",
+          "description": "If specified, the PowerShell script will be run with elevated privileges"
         },
         "validExitCodes": {
           "type": "array",
@@ -712,6 +724,10 @@
         "sourceUri": {
           "type": "string",
           "description": "The URI of the file to be uploaded for customizing the VM. It can be a github link, SAS URI for Azure Storage, etc"
+        },
+        "sha256Checksum": {
+          "type": "string",
+          "description": "SHA256 checksum of the file provided in the sourceUri field above"
         },
         "destination": {
           "type": "string",
