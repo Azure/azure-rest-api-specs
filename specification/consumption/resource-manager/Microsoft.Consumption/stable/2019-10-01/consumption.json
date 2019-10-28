@@ -1450,16 +1450,16 @@
 		"parameters": [
 		  {
 		    "$ref": "#/parameters/billingAccountIdParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/billingProfileIdParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/apiVersionParameter"
 		  },
 		  {
 			"$ref": "#/parameters/startDateParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/endDateParameter"
 		  }
@@ -1501,7 +1501,7 @@
 		"parameters": [
 		  {
 			"$ref": "#/parameters/billingAccountIdParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/billingProfileIdParameter"
 		  },
@@ -2152,13 +2152,13 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
-        }, 
+        },
         "costInPricingCurrency": {
           "description": "ExtendedCost or blended cost before tax in pricing currency to correlate with prices.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
-        }, 
+        },
         "exchangeRate": {
           "description": "Exchange rate used in conversion from pricing currency to billing currency.",
           "type": "string",
@@ -3189,6 +3189,11 @@
         },
         "currentEnrollment": {
           "description": "The current enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "The billing frequency, which can be either one-time or recurring.",
           "type": "string",
           "readOnly": true
         }
@@ -4277,7 +4282,7 @@
 		  "description": "Pending credit adjustments.",
 		  "readOnly": true,
 		  "$ref": "#/definitions/amount"
-		}, 
+		},
 		"expiredCredit": {
 		  "description": "Expired credit.",
 		  "readOnly": true,
