@@ -1450,16 +1450,16 @@
 		"parameters": [
 		  {
 		    "$ref": "#/parameters/billingAccountIdParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/billingProfileIdParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/apiVersionParameter"
 		  },
 		  {
 			"$ref": "#/parameters/startDateParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/endDateParameter"
 		  }
@@ -1501,7 +1501,7 @@
 		"parameters": [
 		  {
 			"$ref": "#/parameters/billingAccountIdParameter"
-		  }, 
+		  },
 		  {
 			"$ref": "#/parameters/billingProfileIdParameter"
 		  },
@@ -2152,13 +2152,13 @@
           "type": "number",
           "format": "decimal",
           "readOnly": true
-        }, 
+        },
         "costInPricingCurrency": {
           "description": "ExtendedCost or blended cost before tax in pricing currency to correlate with prices.",
           "type": "number",
           "format": "decimal",
           "readOnly": true
-        }, 
+        },
         "exchangeRate": {
           "description": "Exchange rate used in conversion from pricing currency to billing currency.",
           "type": "string",
@@ -3189,6 +3189,11 @@
         },
         "currentEnrollment": {
           "description": "The current enrollment.",
+          "type": "string",
+          "readOnly": true
+        },
+        "billingFrequency": {
+          "description": "The billing frequency, which can be either one-time or recurring.",
           "type": "string",
           "readOnly": true
         }
@@ -4277,7 +4282,7 @@
 		  "description": "Pending credit adjustments.",
 		  "readOnly": true,
 		  "$ref": "#/definitions/amount"
-		}, 
+		},
 		"expiredCredit": {
 		  "description": "Expired credit.",
 		  "readOnly": true,
@@ -4415,7 +4420,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope associated with marketplace operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resourceGroup scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and ManagementGroup, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
+      "description": "The scope associated with marketplace operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for Billing Account scope, '/providers/Microsoft.Billing/departments/{departmentId}' for Department scope, '/providers/Microsoft.Billing/enrollmentAccounts/{enrollmentAccountId}' for EnrollmentAccount scope and '/providers/Microsoft.Management/managementGroups/{managementGroupId}' for Management Group scope. For subscription, billing account, department, enrollment account and ManagementGroup, you can also add billing period to the scope using '/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'. For e.g. to specify billing period at department scope use '/providers/Microsoft.Billing/departments/{departmentId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}'",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
