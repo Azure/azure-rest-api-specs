@@ -3733,7 +3733,7 @@
             "oct"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeyType",
+            "name": "KeyType",
             "modelAsString": true,
             "values": [
               {
@@ -3822,7 +3822,7 @@
         },
         "crv": {
           "type": "string",
-          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "description": "Elliptic curve name. For valid values, see KeyCurveName.",
           "enum": [
             "P-256",
             "P-384",
@@ -3830,7 +3830,7 @@
             "P-256K"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeyCurveName",
+            "name": "KeyCurveName",
             "modelAsString": true,
             "values": [
               {
@@ -4438,7 +4438,7 @@
             "oct"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeyType",
+            "name": "KeyType",
             "modelAsString": true
           }
         },
@@ -4454,7 +4454,7 @@
         "crv": {
           "x-ms-client-name": "curve",
           "type": "string",
-          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "description": "Elliptic curve name. For valid values, see KeyCurveName.",
           "enum": [
             "P-256",
             "P-384",
@@ -4462,7 +4462,7 @@
             "P-256K"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeyCurveName",
+            "name": "KeyCurveName",
             "modelAsString": true
           }
         }
@@ -4761,7 +4761,7 @@
         "kty": {
           "type": "string",
           "minLength": 1,
-          "description": "The type of key to create. For valid values, see JsonWebKeyType.",
+          "description": "The type of key to create. For valid values, see KeyType.",
           "enum": [
             "EC",
             "EC-HSM",
@@ -4770,7 +4770,7 @@
             "oct"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeyType",
+            "name": "KeyType",
             "modelAsString": true
           }
         },
@@ -4783,7 +4783,7 @@
           "type": "array",
           "items": {
             "type": "string",
-            "description": "JSON web key operations. For more information, see JsonWebKeyOperation.",
+            "description": "JSON web key operations. For more information, see KeyOperation.",
             "enum": [
               "encrypt",
               "decrypt",
@@ -4793,7 +4793,7 @@
               "unwrapKey"
             ],
             "x-ms-enum": {
-              "name": "JsonWebKeyOperation",
+              "name": "KeyOperation",
               "modelAsString": true
             }
           }
@@ -4812,7 +4812,7 @@
         "crv": {
           "x-ms-client-name": "curve",
           "type": "string",
-          "description": "Elliptic curve name. For valid values, see JsonWebKeyCurveName.",
+          "description": "Elliptic curve name. For valid values, see KeyCurveName.",
           "enum": [
             "P-256",
             "P-384",
@@ -4820,7 +4820,7 @@
             "P-256K"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeyCurveName",
+            "name": "KeyCurveName",
             "modelAsString": true
           }
         }
@@ -4871,7 +4871,7 @@
             "RSA1_5"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeyEncryptionAlgorithm",
+            "name": "EncryptionAlgorithm",
             "modelAsString": true
           }
         },
@@ -4892,7 +4892,7 @@
           "x-ms-client-name": "algorithm",
           "type": "string",
           "minLength": 1,
-          "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm identifier. For more information on possible algorithm types, see SignatureAlgorithm.",
           "enum": [
             "PS256",
             "PS384",
@@ -4907,7 +4907,7 @@
             "ES256K"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeySignatureAlgorithm",
+            "name": "SignatureAlgorithm",
             "modelAsString": true,
             "values": [
               {
@@ -4974,7 +4974,7 @@
           "x-ms-client-name": "algorithm",
           "type": "string",
           "minLength": 1,
-          "description": "The signing/verification algorithm. For more information on possible algorithm types, see JsonWebKeySignatureAlgorithm.",
+          "description": "The signing/verification algorithm. For more information on possible algorithm types, see SignatureAlgorithm.",
           "enum": [
             "PS256",
             "PS384",
@@ -4989,7 +4989,7 @@
             "ES256K"
           ],
           "x-ms-enum": {
-            "name": "JsonWebKeySignatureAlgorithm",
+            "name": "SignatureAlgorithm",
             "modelAsString": true
           }
         },
@@ -5027,11 +5027,11 @@
               "unwrapKey"
             ],
             "x-ms-enum": {
-              "name": "JsonWebKeyOperation",
+              "name": "KeyOperation",
               "modelAsString": true
             }
           },
-          "description": "Json web key operations. For more information on possible key operations, see JsonWebKeyOperation."
+          "description": "Json web key operations. For more information on possible key operations, see KeyOperation."
         },
         "attributes": {
           "x-ms-client-name": "keyAttributes",
