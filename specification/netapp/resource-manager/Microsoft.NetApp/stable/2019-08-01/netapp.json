@@ -3,7 +3,7 @@
   "info": {
     "title": "Microsoft NetApp",
     "description": "Microsoft NetApp Azure Resource Provider specification",
-    "version": "2019-07-01",
+    "version": "2019-08-01",
     "x-ms-code-generation-settings": {
       "name": "AzureNetAppFilesManagementClient"
     }
@@ -1515,7 +1515,7 @@
         },
         "dns": {
           "type": "string",
-          "description": "Comma separated list of DNS server IP addresses for the Active Directory domain"
+          "description": "Comma separated list of DNS server IP addresses (IPv4 only) for the Active Directory domain"
         },
         "status": {
           "type": "string",
@@ -1878,10 +1878,7 @@
           "items": {
             "type": "string"
           },
-          "example": [
-            "NFSv3",
-            "NFSv4.1"
-          ]
+          "example": [ "NFSv4.1" ]
         },
         "provisioningState": {
           "type": "string",
@@ -1917,6 +1914,23 @@
           "items": {
             "$ref": "#/definitions/mountTargetList"
           }
+        },
+        "volumeType": {
+          "type": "string",
+          "description": "What type of volume is this",
+          "example": "DataProtection"
+        },
+        "dataProtection": {
+          "title": "DataProtection",
+          "description": "DataProtection volume, can have a replication object",
+          "properties": {
+            "replication": {
+              "title": "Replication",
+              "description": "Replication properties",
+              "type": "object",
+              "$ref": "#/definitions/replicationObject"
+            }
+          }
         }
       }
     },
@@ -1951,6 +1965,39 @@
         "allowedClients": {
           "type": "string",
           "description": "Client ingress specification as comma separated string with IPv4 CIDRs, IPv4 host addresses and host names"
+        }
+      }
+    },
+    "replicationObject": {
+      "description": "Replication properties",
+      "type": "object",
+      "required": [
+        "endpointType",
+        "remoteVolumeResourceId",
+        "replicationSchedule"
+      ],
+      "properties": {
+        "replicationId": {
+          "title": "replicationId",
+          "type": "string",
+          "description": "Id"
+        },
+        "endpointType": {
+          "title": "endpointType",
+          "type": "string",
+          "description": "Indicates whether the local volume is the source or destination for the Volume Replication",
+          "example": "src, dst"
+        },
+        "replicationSchedule": {
+          "title": "replicationSchedule",
+          "type": "string",
+          "description": "Schedule",
+          "example": "10minutely, hourly, daily, weekly, monthly"
+        },
+        "remoteVolumeResourceId": {
+          "title": "remoteVolumeResourceId",
+          "type": "string",
+          "description": "The resouce ID of the remote volume."
         }
       }
     },
@@ -2352,7 +2399,7 @@
       "in": "query",
       "type": "string",
       "required": true,
-      "default": "2019-07-01"
+      "default": "2019-08-01"
     }
   }
 }
