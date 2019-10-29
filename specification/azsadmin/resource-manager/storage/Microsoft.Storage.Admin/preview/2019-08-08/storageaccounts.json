@@ -206,8 +206,7 @@
       "type": "string",
       "enum": [
         "Creating",
-        "Succeeded",
-        "Suspended"
+        "Succeeded"
       ],
       "x-ms-enum": {
         "name": "StorageAccountState",
@@ -276,6 +275,20 @@
       ],
       "x-ms-enum": {
         "name": "StorageAccountAccessTier",
+        "modelAsString": true
+      }
+    },
+    "StorageAccountHealthState": {
+      "description": "Health state for storage account",
+      "type": "string",
+      "enum": [
+        "Healthy", 
+        "Suspended",
+        "OverQuota",
+        "SuspendedAndOverQuota"
+      ],
+      "x-ms-enum": {
+        "name": "StorageAccountHealthState",
         "modelAsString": true
       }
     },
@@ -434,14 +447,9 @@
           "$ref": "#/definitions/StorageAccountAccessTier",
           "readOnly": true
         },
-        "overQuota": {
-          "description": "Storage account is in an over quota state.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "suspended": {
-          "description": "Storage account is in suspended state.",
-          "type": "boolean",
+        "healthState": {
+          "description": "The internal health state for storage account.",
+          "$ref": "#/definitions/StorageAccountHealthState",
           "readOnly": true
         }
       }
