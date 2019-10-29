@@ -33,36 +33,34 @@
                 "originHostHeader": "www.someDomain2.net",
                 "priority": 2,
                 "weight": 50,
-                "enabled": true 
+                "enabled": true
               }
             }
           ],
           "originGroups": [
             {
               "name": "originGroup1",
-                  "properties": {
-                     "healthProbeSettings":
-                      {
-                        "probePath": "/health.aspx",
-                        "probeRequestType": "GET",
-                        "probeProtocol": "Http",
-                        "probeIntervalInSeconds": 120
-                      },
-                      "origins": [
-                       {
-                         "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-bing-com"
-                       }
-                      ]
-                   }
-             }
+              "properties": {
+                "healthProbeSettings": {
+                  "probePath": "/health.aspx",
+                  "probeRequestType": "GET",
+                  "probeProtocol": "Http",
+                  "probeIntervalInSeconds": 120
+                },
+                "origins": [
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-bing-com"
+                  }
+                ]
+              }
+            }
           ],
           "contentTypesToCompress": [],
           "isCompressionEnabled": false,
           "optimizationType": "DynamicSiteAcceleration",
           "probePath": "/image",
           "geoFilters": [],
-          "defaultOriginGroup": 
-          {
+          "defaultOriginGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
           }
         }
