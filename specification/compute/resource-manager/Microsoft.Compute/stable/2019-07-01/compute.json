@@ -4498,7 +4498,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions/{vmExtensionName}": {
       "put": {
         "tags": [
-            "VirtualMachineScaleSetVMExtensions"
+          "VirtualMachineScaleSetVMExtensions"
         ],
         "operationId": "VirtualMachineScaleSetVMExtensions_CreateOrUpdate",
         "description": "The operation to create or update the VMSS VM extension.",
@@ -4576,7 +4576,7 @@
       },
       "patch": {
         "tags": [
-            "VirtualMachineScaleSetVMExtensions"
+          "VirtualMachineScaleSetVMExtensions"
         ],
         "operationId": "VirtualMachineScaleSetVMExtensions_Update",
         "description": "The operation to update the VMSS VM extension.",
@@ -4785,7 +4785,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachineScaleSets/{vmScaleSetName}/virtualMachines/{instanceId}/extensions": {
       "get": {
         "tags": [
-            "VirtualMachineScaleSetVMExtensions"
+          "VirtualMachineScaleSetVMExtensions"
         ],
         "operationId": "VirtualMachineScaleSetVMExtensions_List",
         "description": "The operation to get all extensions of an instance in Virtual Machine Scaleset.",
@@ -7151,13 +7151,13 @@
         },
         "diskIOPSReadWrite": {
           "type": "integer",
-          "readOnly": true,          
+          "readOnly": true,
           "format": "int64",
           "description": "Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set."
         },
         "diskMBpsReadWrite": {
           "type": "integer",
-          "readOnly": true,          
+          "readOnly": true,
           "format": "int64",
           "description": "Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set."
         }
@@ -7427,7 +7427,7 @@
           "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The default value is 5 minutes (PT5M)."
         },
         "maxInstanceRepairsPercent": {
-          "type": "integer", 
+          "type": "integer",
           "description": "The percentage (capacity of scaleset) of virtual machines that will be simultaneously repaired. The default value is 20%."
         }
       },
@@ -8067,9 +8067,9 @@
         }
       },
       "allOf": [
-          {
-            "$ref": "#/definitions/ImageDisk"
-          }
+        {
+          "$ref": "#/definitions/ImageDisk"
+        }
       ],
       "required": [
         "osType",
@@ -8086,9 +8086,9 @@
         }
       },
       "allOf": [
-          {
-            "$ref": "#/definitions/ImageDisk"
-          }
+        {
+          "$ref": "#/definitions/ImageDisk"
+        }
       ],
       "required": [
         "lun"
@@ -8097,7 +8097,7 @@
     },
     "ImageDisk": {
       "properties": {
-         "snapshot": {
+        "snapshot": {
           "$ref": "#/definitions/SubResource",
           "description": "The snapshot."
         },
