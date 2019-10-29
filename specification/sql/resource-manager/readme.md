@@ -125,6 +125,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -220,7 +221,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
-- Microsoft.Sql/preview/2018-06-01-preview/administrators.json
+- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -310,7 +311,7 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
-- Microsoft.Sql/preview/2018-06-01-preview/administrators.json
+- Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -482,7 +483,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
- - ./Microsoft.Sql/preview/2018-06-01-preview/administrators.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
 
 # Needed when there is more than one input file
 override-info:
@@ -844,7 +845,7 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
-  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/administrators.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
