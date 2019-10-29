@@ -10,6 +10,7 @@
   "description": "Tests for Azure REST API Specifications",
   "license": "MIT",
   "devDependencies": {
+    "@types/prettier": "^1.18.3",
     "@azure/avocado": "^0.6.0",
     "@azure/rest-api-specs-scripts": "^0.4.0",
     "@ts-common/commonmark-to-markdown": "^1.2.0",
@@ -23,7 +24,8 @@
     "mocha": "*",
     "ts-node": "^8.1.0",
     "tslib": "^1.10.0",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "prettier": "^1.18.2"
   },
   "homepage": "https://github.com/azure/azure-rest-api-specs",
   "repository": {
@@ -37,6 +39,8 @@
     "postinstall": "scripts/switch-to-preproduction.sh",
     "test": "tsc && mocha -t 500000 --reporter min",
     "spellcheck": "ts-node ./scripts/spellcheck.ts",
+    "prettier-check": "tsc && ts-node ./scripts/prettier-check.ts",
+    "prettier": "prettier",
     "tsc": "tsc",
     "multiapi": "ts-node ./scripts/multiapi.ts"
   }
