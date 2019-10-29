@@ -5,7 +5,7 @@
     "version": "3.0-preview"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/luis/authoring/v3.0-preview",
+    "hostTemplate": "{Endpoint}/luis/api/v3.0-preview",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -114,6 +114,48 @@
         }
       }
     },
+    "/apps/{appId}/versions/{versionId}/features": {
+      "get": {
+        "description": "Gets all the extraction phraselist and pattern features in a version of the application.",
+        "operationId": "Features_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/SkipInPath"
+          },
+          {
+            "$ref": "#/parameters/TakeInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of all phraselist features and a list of all pattern features.",
+            "schema": {
+              "$ref": "#/definitions/FeaturesResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Application Version Features request": {
+            "$ref": "./examples/features/SuccessfulGetApplicationVersionFeaturesRequest.json"
+          }
+        }
+      }
+    },
     "/apps/{appId}/versions/{versionId}/phraselists/{phraselistId}": {
       "get": {
         "description": "Gets phraselist feature info in a version of the application.",
@@ -156,7 +198,7 @@
           }
         }
       },
-      "patch": {
+      "put": {
         "description": "Updates the phrases, the state and the name of the phraselist feature in a version of the application.",
         "operationId": "Features_UpdatePhraseList",
         "parameters": [
