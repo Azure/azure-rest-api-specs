@@ -170,6 +170,7 @@ require: $(this-folder)/../../../profiles/readme.md
 input-file:
   - $(this-folder)/Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+  - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 
 ```
