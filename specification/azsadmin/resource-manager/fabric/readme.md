@@ -116,6 +116,15 @@ input-file:
     - "Microsoft.Fabric.Admin/preview/2019-05-01/Volume.json"
 ```
 
+## Suppression
+``` yaml
+directive:
+  - from: FabricLocation.json
+    suppress: 
+      - L1624
+    reason: The fields may have customized names, no camel case
+```
+
 ---
 # Code Generation
 
