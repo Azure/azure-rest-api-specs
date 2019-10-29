@@ -53,6 +53,7 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
 ### Tag: package-2015-04
