@@ -16,28 +16,27 @@
         "properties": {
           "provisioningState": "Succeeded",
           "resourceState": "Active",
-          "healthProbeSettings":
-          {
+          "healthProbeSettings": {
             "probePath": "/health.aspx",
             "probeRequestType": "GET",
             "probeProtocol": "Http",
             "probeIntervalInSeconds": 120
           },
           "origins": [
-          {
-            "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
-          }
+            {
+              "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+            }
           ],
-          "responseBasedOriginErrorDetectionSettings":{
+          "responseBasedOriginErrorDetectionSettings": {
             "responseBasedDetectedErrorTypes": "TcpAndHttpErrors",
-            "responseBasedFailoverThresholdPercentage" : 10,
+            "responseBasedFailoverThresholdPercentage": 10,
             "httpErrorRanges": [
               {
                 "begin": 500,
                 "end": 505
               }
             ]
-         }
+          }
         }
       }
     }
