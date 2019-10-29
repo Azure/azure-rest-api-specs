@@ -121,7 +121,7 @@ input-file:
 directive:
   - from: FabricLocation.json
     suppress: 
-      - NO_CAMEL_CASE
+      - R3016
     where: $.definitions.FabricLocationModel
     reason: The fields may have customized names, no camel case
 ```
