@@ -119,13 +119,14 @@ input-file:
 ## Suppression
 ``` yaml
 directive:
-  - from: FabricLocation.json
-    suppress: 
-      - R3016
-    where: 
-      - $.definitions.FabricLocationModel.externalDNSIPAddress01
-      - $.definitions.FabricLocationModel.externalDNSIPAddress02
-    reason: externalDNSIPAddress01 and externalDNSIPAddress02 are customized names, no camel case restriction needed.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress01      
+    reason: externalDNSIPAddress01 is a customized name, no camel case restriction needed.
+  - suppress: DefinitionsPropertiesNamesCamelCase
+    from: FabricLocation.json
+    where: $.definitions.FabricLocationModel.properties.externalDNSIPAddress02      
+    reason: externalDNSIPAddress02 is a customized name, no camel case restriction needed.
 ```
 
 ---
