@@ -70,7 +70,7 @@
       "post": {
         "summary": "Check resource name availability",
         "description": "Check if a resource name is available.",
-        "operationId": "CheckNameAvailability",
+        "operationId": "NetAppResource_CheckNameAvailability",
         "parameters": [
           {
             "name": "body",
@@ -114,7 +114,7 @@
       "post": {
         "summary": "Check file path availability",
         "description": "Check if a file path is available.",
-        "operationId": "CheckFilePathAvailability",
+        "operationId": "NetAppResource_CheckFilePathAvailability",
         "parameters": [
           {
             "name": "body",
@@ -1787,8 +1787,11 @@
       }
     },
     "resourceTags": {
-      "description": "Resource tags",
-      "type": "object"
+      "type": "object",
+      "additionalProperties": {
+        "type": "string"
+      },
+      "description": "Tags are a list of key-value pairs that describe the resource"
     },
     "volumeProperties": {
       "description": "Volume properties",
@@ -2130,6 +2133,11 @@
           "type": "string",
           "readOnly": true,
           "description": "Resource name"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource type"
         },
         "tags": {
           "description": "Resource tags",
