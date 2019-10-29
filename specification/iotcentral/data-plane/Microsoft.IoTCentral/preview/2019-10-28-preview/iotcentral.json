@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "1.0.0",
+    "version": "preview",
     "title": "Azure IoT Central",
     "description": "Azure IoT Central is a service that makes it easy to connect, monitor, and manage your IoT devices at scale."
   },
@@ -41,8 +41,7 @@
             }
           }
         }
-      ],
-      "additionalProperties": true
+      ]
     },
     "ApiTokenCollection": {
       "type": "object",
@@ -59,6 +58,23 @@
         "value"
       ]
     },
+    "Capability": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NamedEntity"
+        },
+        {
+          "properties": {
+            "name": {
+              "description": "The programmatic name of the named entity.",
+              "type": "string"
+            }
+          }
+        }
+      ],
+      "additionalProperties": true
+    },
     "Interface": {
       "type": "object",
       "allOf": [
@@ -71,7 +87,7 @@
               "description": "The data definitions contained by the interface.",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/NamedEntity"
+                "$ref": "#/definitions/Capability"
               }
             }
           }
@@ -118,128 +134,127 @@
             }
           }
         }
-      ],
-      "additionalProperties": true
+      ]
     },
-    "Endpoint":{
-      "type":"object",
-      "properties":{
-         "type":{
-            "description":"Type of the endpoint.",
-            "type":"string"
-         },
-         "connectionString":{
-            "description":"Information for connecting to the endpoint.",
-            "type":"string"
-         },
-         "name":{
-            "description":"Name of the entity to send data to.",
-            "type":"string"
-         }
+    "Endpoint": {
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Type of the endpoint.",
+          "type": "string"
+        },
+        "connectionString": {
+          "description": "Information for connecting to the endpoint.",
+          "type": "string"
+        },
+        "name": {
+          "description": "Name of the entity to send data to.",
+          "type": "string"
+        }
       },
-      "required":[
-         "type",
-         "connectionString",
-         "name"
+      "required": [
+        "type",
+        "connectionString",
+        "name"
       ],
-      "discriminator":"type"
-   },
-   "StorageEndpoint":{
-      "allOf":[
-         {
-            "$ref":"#/definitions/Endpoint"
-         }
+      "discriminator": "type"
+    },
+    "StorageEndpoint": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
       ]
-   },
-   "EventHubsEndpoint":{
-      "allOf":[
-         {
-            "$ref":"#/definitions/Endpoint"
-         }
+    },
+    "EventHubsEndpoint": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
       ]
-   },
-   "ServiceBusQueueEndpoint":{
-      "allOf":[
-         {
-            "$ref":"#/definitions/Endpoint"
-         }
+    },
+    "ServiceBusQueueEndpoint": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
       ]
-   },
-   "ServiceBusTopicEndpoint":{
-      "allOf":[
-         {
-            "$ref":"#/definitions/Endpoint"
-         }
+    },
+    "ServiceBusTopicEndpoint": {
+      "allOf": [
+        {
+          "$ref": "#/definitions/Endpoint"
+        }
       ]
-   },
-   "ContinuousDataExport":{
-      "type":"object",
-      "properties":{
-         "id":{
-            "description":"Unique ID of the continuous data export.",
-            "type":"string",
-            "readOnly":true
-         },
-         "etag":{
-            "description":"ETag used to prevent conflict in continuous data export updates.",
-            "type":"string"
-         },
-         "displayName":{
-            "description":"Display name of the continuous data export.",
-            "type":"string"
-         },
-         "endpoint":{
-            "description":"Location where exported data should be sent.",
-            "$ref":"#/definitions/Endpoint"
-         },
-         "status":{
-            "description":"Indicates whether the continuous data export is starting, running, etc.",
-            "type":"string",
-            "readOnly":true
-         },
-         "enabled":{
-            "description":"Boolean indicating whether the continuous data export should be running or not.",
-            "type":"boolean"
-         },
-         "sources":{
-            "description":"Data sources to export to the endpoint.",
-            "type":"array",
-            "items":{
-               "type":"string",
-               "enum":[
-                  "devices",
-                  "deviceTemplates",
-                  "telemetry"
-               ]
-            },
-            "minItems":1
-         }
+    },
+    "ContinuousDataExport": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique ID of the continuous data export.",
+          "type": "string",
+          "readOnly": true
+        },
+        "etag": {
+          "description": "ETag used to prevent conflict in continuous data export updates.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Display name of the continuous data export.",
+          "type": "string"
+        },
+        "endpoint": {
+          "description": "Location where exported data should be sent.",
+          "$ref": "#/definitions/Endpoint"
+        },
+        "status": {
+          "description": "Indicates whether the continuous data export is starting, running, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "enabled": {
+          "description": "Boolean indicating whether the continuous data export should be running or not.",
+          "type": "boolean"
+        },
+        "sources": {
+          "description": "Data sources to export to the endpoint.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "devices",
+              "deviceTemplates",
+              "telemetry"
+            ]
+          },
+          "minItems": 1
+        }
       },
-      "required":[
-         "endpoint",
-         "enabled",
-         "sources"
+      "required": [
+        "endpoint",
+        "enabled",
+        "sources"
       ]
-   },
-   "ContinuousDataExportCollection":{
-      "type":"object",
-      "properties":{
-         "value":{
-            "description":"The collection of continuous data exports.",
-            "type":"array",
-            "items":{
-               "$ref":"#/definitions/ContinuousDataExport"
-            }
-         },
-         "nextLink":{
-            "description":"URL to get the next page of continuous data exports.",
-            "type":"string"
-         }
+    },
+    "ContinuousDataExportCollection": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The collection of continuous data exports.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContinuousDataExport"
+          }
+        },
+        "nextLink": {
+          "description": "URL to get the next page of continuous data exports.",
+          "type": "string"
+        }
       },
-      "required":[
-         "value"
+      "required": [
+        "value"
       ]
-   },
+    },
     "Device": {
       "type": "object",
       "properties": {
@@ -443,6 +458,9 @@
     "Entity": {
       "type": "object",
       "properties": {
+        "@context": {
+          "description": "JSON-LD context for the entity."
+        },
         "@id": {
           "description": "Unique ID of the entity.",
           "type": "string"
@@ -452,7 +470,8 @@
           "type": "array",
           "items": {
             "type": "string"
-          }
+          },
+          "minItems": 1
         },
         "displayName": {
           "description": "Display name of the entity.",
@@ -488,8 +507,7 @@
             "name"
           ]
         }
-      ],
-      "additionalProperties": true
+      ]
     },
     "Permission": {
       "type": "object",
@@ -557,7 +575,7 @@
               "description": "The cloud properties defined by the solution model.",
               "type": "array",
               "items": {
-                "$ref": "#/definitions/NamedEntity"
+                "$ref": "#/definitions/Capability"
               }
             },
             "initialValues": {
@@ -618,8 +636,20 @@
             "unit": {
               "description": "The overridden unit.",
               "type": "string"
+            },
+            "valueDetail": {
+              "$ref": "#/definitions/ValueDetail"
             }
           }
+        }
+      ]
+    },
+    "ValueDetail": {
+      "description": "Visualization details for the referenced capability.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Entity"
         }
       ],
       "additionalProperties": true
@@ -781,12 +811,11 @@
         "operationId": "Devices_Get",
         "summary": "Get a device by ID",
         "description": "Get details about an existing device by device ID.",
-
-      "parameters": [
-        {
-          "$ref": "#/parameters/DeviceId"
-        }
-      ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/DeviceId"
+          }
+        ],
         "x-ms-examples": {
           "Get device by Id": {
             "$ref": "./examples/devices_get.json"
@@ -854,114 +883,114 @@
         }
       }
     },
-    "/continuousDataExports":{
-      "get":{
-         "operationId":"ContinuousDataExports_List",
-         "summary":"Get the list of continuous data exports in an application.",
-         "x-ms-examples": {
+    "/continuousDataExports": {
+      "get": {
+        "operationId": "ContinuousDataExports_List",
+        "summary": "Get the list of continuous data exports in an application.",
+        "x-ms-examples": {
           "List exports": {
             "$ref": "./examples/continuousdataexports_list.json"
           }
         },
-         "responses":{
-            "200":{
-               "description":"Success",
-               "schema":{
-                  "$ref":"#/definitions/ContinuousDataExportCollection"
-               }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExportCollection"
             }
-         },
-         "x-ms-pageable":{
-            "nextLinkName":"nextLink"
-         }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
-   },
-   "/continuousDataExports/{export_id}":{
-      "get":{
-         "operationId":"ContinuousDataExports_Get",
-         "summary":"Get a continuous data export by ID.",
-         "parameters":[
-            {
-               "in":"path",
-               "name":"export_id",
-               "description":"Unique ID for the continuous data export.",
-               "type":"string",
-               "required":true
-            }
-         ],
-         "x-ms-examples": {
+    },
+    "/continuousDataExports/{export_id}": {
+      "get": {
+        "operationId": "ContinuousDataExports_Get",
+        "summary": "Get a continuous data export by ID.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "export_id",
+            "description": "Unique ID for the continuous data export.",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "x-ms-examples": {
           "Get export": {
             "$ref": "./examples/continuousdataexports_get.json"
           }
         },
-         "responses":{
-            "200":{
-               "description":"Success",
-               "schema":{
-                  "$ref":"#/definitions/ContinuousDataExport"
-               }
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExport"
             }
-         }
+          }
+        }
       },
-      "put":{
-         "operationId":"ContinuousDataExports_Set",
-         "summary":"Create a new continuous data export or update an existing one by ID.",
-         "x-ms-examples": {
+      "put": {
+        "operationId": "ContinuousDataExports_Set",
+        "summary": "Create a new continuous data export or update an existing one by ID.",
+        "x-ms-examples": {
           "Create or update export": {
             "$ref": "./examples/continuousdataexports_set.json"
           }
         },
-         "parameters":[
+        "parameters": [
           {
-            "in":"path",
-            "name":"export_id",
-            "description":"Unique ID for the continuous data export.",
-            "type":"string",
-            "required":true
-         },
-            {
-               "name":"body",
-               "in":"body",
-               "description":"Data export body.",
-               "required":true,
-               "schema":{
-                  "$ref":"#/definitions/ContinuousDataExport"
-               }
-            }
-         ],
-         "responses":{
-            "200":{
-               "description":"Success",
-               "schema":{
-                  "$ref":"#/definitions/ContinuousDataExport"
-               }
-            }
-         }
-      },
-      "delete":{
-         "operationId":"ContinuousDataExports_Remove",
-         "summary":"Delete a continuous data export.",
-         "parameters":[
+            "in": "path",
+            "name": "export_id",
+            "description": "Unique ID for the continuous data export.",
+            "type": "string",
+            "required": true
+          },
           {
-             "in":"path",
-             "name":"export_id",
-             "description":"Unique ID for the continuous data export.",
-             "type":"string",
-             "required":true
+            "name": "body",
+            "in": "body",
+            "description": "Data export body.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExport"
+            }
           }
-       ],
-         "x-ms-examples": {
-         "Delete export": {
-          "$ref": "./examples/continuousdataexports_delete.json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/ContinuousDataExport"
+            }
+          }
         }
       },
-         "responses":{
-            "204":{
-               "description":"Success"
-            }
-         }
+      "delete": {
+        "operationId": "ContinuousDataExports_Remove",
+        "summary": "Delete a continuous data export.",
+        "parameters": [
+          {
+            "in": "path",
+            "name": "export_id",
+            "description": "Unique ID for the continuous data export.",
+            "type": "string",
+            "required": true
+          }
+        ],
+        "x-ms-examples": {
+          "Delete export": {
+            "$ref": "./examples/continuousdataexports_delete.json"
+          }
+        },
+        "responses": {
+          "204": {
+            "description": "Success"
+          }
+        }
       }
-   },
+    },
     "/deviceTemplates": {
       "get": {
         "operationId": "DeviceTemplates_List",
@@ -1516,7 +1545,7 @@
       "type": "string",
       "default": "azureiotcentral.com",
       "x-ms-skip-url-encoding": true,
-      "description": "The DNS suffix used as the base for all Azure Data Lake Analytics Job service requests.",
+      "description": "The DNS suffix used as the base for all Azure IoT Central service requests.",
       "x-ms-parameter-location": "client"
     }
   },
