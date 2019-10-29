@@ -1,0 +1,3873 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2019-04-01",
+    "title": "VMwareCloudSimple",
+    "description": "Description of the new service",
+    "x-ms-code-generation-settings": {
+      "name": "VMwareCloudSimpleClient"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/providers/Microsoft.VMwareCloudSimple/operations": {
+      "get": {
+        "description": "Return list of operations",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Implements list of available operations",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/AvailableOperationsListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListOperations": {
+            "$ref": "./examples/ListOperations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes": {
+      "get": {
+        "description": "Returns list of dedicate cloud nodes within subscription",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudNodes"
+        ],
+        "summary": "Implements list of dedicated cloud nodes within subscription method",
+        "operationId": "DedicatedCloudNodes_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation",
+            "name": "$filter",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return",
+            "name": "$top",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "to be used by nextLink implementation",
+            "name": "$skipToken",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudNodeListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListDedicatedCloudNodes": {
+            "$ref": "./examples/ListDedicatedCloudNodes.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices": {
+      "get": {
+        "description": "Returns list of dedicated cloud services within a subscription",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudServices"
+        ],
+        "summary": "Implements list of dedicatedCloudService objects within subscription method",
+        "operationId": "DedicatedCloudServices_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation",
+            "name": "$filter",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return",
+            "name": "$top",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "to be used by nextLink implementation",
+            "name": "$skipToken",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListDedicatedCloudServices": {
+            "$ref": "./examples/ListDedicatedCloudServices.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/availabilities": {
+      "get": {
+        "description": "Returns list of available resources in region",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "AvailabilityUsages"
+        ],
+        "summary": "Implements SkuAvailability List method",
+        "operationId": "SkusAvailability_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "type": "string",
+            "description": "sku id, if no sku is passed availability for all skus will be returned",
+            "name": "skuId",
+            "in": "query"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/SkuAvailabilityListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListAvailabilities": {
+            "$ref": "./examples/ListAvailabilities.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/operationResults/{operationId}": {
+      "get": {
+        "description": "Return an async operation",
+        "tags": [
+          "Operations"
+        ],
+        "summary": "Implements get of async operation",
+        "operationId": "Operations_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/referer"
+          },
+          {
+            "type": "string",
+            "description": "operation id",
+            "name": "operationId",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "schema": {
+              "$ref": "#/definitions/OperationResource"
+            }
+          },
+          "202": {
+            "description": "Operation is still running",
+            "headers": {
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetFailedOperationResult": {
+            "$ref": "./examples/GetFailedOperationResult.json"
+          },
+          "GetOperationResult": {
+            "$ref": "./examples/GetOperationResult.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds": {
+      "get": {
+        "description": "Returns list of private clouds in particular region",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "Implements private cloud list GET method",
+        "operationId": "PrivateClouds_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PrivateCloudList"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListPrivateCloudInLocation": {
+            "$ref": "./examples/ListPrivateCloudInLocation.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}": {
+      "get": {
+        "description": "Returns private cloud by its name",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "PrivateClouds"
+        ],
+        "summary": "Implements private cloud GET method",
+        "operationId": "PrivateClouds_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/PrivateCloud"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetPrivateCloud": {
+            "$ref": "./examples/GetPrivateCloud.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/customizationPolicies": {
+      "get": {
+        "description": "Returns list of customization policies in region for private cloud",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "customizationPolicies"
+        ],
+        "summary": "Implements get of customization policies list",
+        "operationId": "customizationPolicies_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. only type is allowed here as a filter e.g. $filter=type eq 'xxxx'",
+            "name": "$filter",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomizationPoliciesListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListCustomizationPolicies": {
+            "$ref": "./examples/ListCustomizationPolicies.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/customizationPolicies/{customizationPolicyName}": {
+      "get": {
+        "description": "Returns customization policy by its name",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "customizationPolicies"
+        ],
+        "summary": "Implements get of customization policy",
+        "operationId": "customizationPolicies_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "type": "string",
+            "description": "customization policy name",
+            "name": "customizationPolicyName",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/CustomizationPolicy"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetCustomizationPolicy": {
+            "$ref": "./examples/GetCustomizationPolicy.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools": {
+      "get": {
+        "description": "Returns list of resource pools in region for private cloud",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "ResourcePools"
+        ],
+        "summary": "Implements get of resource pools list",
+        "operationId": "ResourcePools_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ResourcePoolsListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListResourcePools": {
+            "$ref": "./examples/ListResourcePools.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools/{resourcePoolName}": {
+      "get": {
+        "description": "Returns resource pool templates by its name",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "ResourcePools"
+        ],
+        "summary": "Implements get of resource pool",
+        "operationId": "ResourcePools_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "type": "string",
+            "description": "resource pool id (vsphereId)",
+            "name": "resourcePoolName",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/ResourcePool"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetResourcePool": {
+            "$ref": "./examples/GetResourcePool.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates": {
+      "get": {
+        "description": "Returns list of virtual machine templates in region for private cloud",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Implements list of available VM templates",
+        "operationId": "VirtualMachineTemplates_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "type": "string",
+            "description": "Resource pool used to derive vSphere cluster which contains VM templates",
+            "name": "resourcePoolName",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplateListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualMachineTemplates": {
+            "$ref": "./examples/ListVirtualMachineTemplates.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualMachineTemplates/{virtualMachineTemplateName}": {
+      "get": {
+        "description": "Returns virtual machine templates by its name",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachineTemplates"
+        ],
+        "summary": "Implements virtual machine template GET method",
+        "operationId": "VirtualMachineTemplates_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "type": "string",
+            "description": "virtual machine template id (vsphereId)",
+            "name": "virtualMachineTemplateName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineTemplate"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualMachineTemplate": {
+            "$ref": "./examples/GetVirtualMachineTemplate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks": {
+      "get": {
+        "description": "Return list of virtual networks in location for private cloud",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Implements list available virtual networks within a subscription method",
+        "operationId": "VirtualNetworks_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "Resource pool used to derive vSphere cluster which contains virtual networks",
+            "name": "resourcePoolName",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworkListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualNetworks": {
+            "$ref": "./examples/ListVirtualNetworks.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/virtualNetworks/{virtualNetworkName}": {
+      "get": {
+        "description": "Return virtual network by its name",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "summary": "Implements virtual network GET method",
+        "operationId": "VirtualNetworks_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "type": "string",
+            "description": "virtual network id (vsphereId)",
+            "name": "virtualNetworkName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualNetwork"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualNetwork": {
+            "$ref": "./examples/GetVirtualNetwork.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/usages": {
+      "get": {
+        "description": "Returns list of usage in region",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "AvailabilityUsages"
+        ],
+        "summary": "Implements Usages List method",
+        "operationId": "Usages_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation. only name.value is allowed here as a filter e.g. $filter=name.value eq 'xxxx'",
+            "name": "$filter",
+            "in": "query"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/UsageListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListUsages": {
+            "$ref": "./examples/ListUsages.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/virtualMachines": {
+      "get": {
+        "description": "Returns list virtual machine within subscription",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements list virtual machine within subscription method",
+        "operationId": "VirtualMachines_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation",
+            "name": "$filter",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return",
+            "name": "$top",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "to be used by nextLink implementation",
+            "name": "$skipToken",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListVirtualMachines": {
+            "$ref": "./examples/ListVirtualMachines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes": {
+      "get": {
+        "description": "Returns list of dedicate cloud nodes within resource group",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudNodes"
+        ],
+        "summary": "Implements list of dedicated cloud nodes within RG method",
+        "operationId": "DedicatedCloudNodes_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation",
+            "name": "$filter",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return",
+            "name": "$top",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "to be used by nextLink implementation",
+            "name": "$skipToken",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudNodeListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListRGDedicatedCloudNodes": {
+            "$ref": "./examples/ListRGDedicatedCloudNodes.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudNodes/{dedicatedCloudNodeName}": {
+      "get": {
+        "description": "Returns dedicated cloud node",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudNodes"
+        ],
+        "summary": "Implements dedicated cloud node GET method",
+        "operationId": "DedicatedCloudNodes_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "type": "string",
+            "description": "dedicated cloud node name",
+            "name": "dedicatedCloudNodeName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudNode"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDedicatedCloudNode": {
+            "$ref": "./examples/GetDedicatedCloudNode.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Returns dedicated cloud node by its name",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudNodes"
+        ],
+        "summary": "Implements dedicated cloud node PUT method",
+        "operationId": "DedicatedCloudNodes_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/referer"
+          },
+          {
+            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "type": "string",
+            "description": "dedicated cloud node name",
+            "name": "dedicatedCloudNodeName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create Dedicated Cloud Node request",
+            "name": "dedicatedCloudNodeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudNode"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created or updated successfully, 200 should be returned",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudNode"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateDedicatedCloudNode": {
+            "$ref": "./examples/CreateDedicatedCloudNode.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Delete dedicated cloud node",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudNodes"
+        ],
+        "summary": "Implements dedicated cloud node DELETE method",
+        "operationId": "DedicatedCloudNodes_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "type": "string",
+            "description": "dedicated cloud node name",
+            "name": "dedicatedCloudNodeName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content. resource does not exist and the request is well formed"
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDedicatedCloudNode": {
+            "$ref": "./examples/DeleteDedicatedCloudNode.json"
+          }
+        }
+      },
+      "patch": {
+        "description": "Patches dedicated node properties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudNodes"
+        ],
+        "summary": "Implements dedicated cloud node PATCH method",
+        "operationId": "DedicatedCloudNodes_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "type": "string",
+            "description": "dedicated cloud node name",
+            "name": "dedicatedCloudNodeName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Patch Dedicated Cloud Node request",
+            "name": "dedicatedCloudNodeRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchPayload"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created or updated successfully, 200 should be returned",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudNode"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchDedicatedCloudNode": {
+            "$ref": "./examples/PatchDedicatedCloudNode.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices": {
+      "get": {
+        "description": "Returns list of dedicated cloud services within a resource group",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudServices"
+        ],
+        "summary": "Implements list of dedicatedCloudService objects within RG method",
+        "operationId": "DedicatedCloudServices_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation",
+            "name": "$filter",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return",
+            "name": "$top",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "to be used by nextLink implementation",
+            "name": "$skipToken",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudServiceListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListRGDedicatedCloudServices": {
+            "$ref": "./examples/ListRGDedicatedCloudServices.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/dedicatedCloudServices/{dedicatedCloudServiceName}": {
+      "get": {
+        "description": "Returns Dedicate Cloud Service",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudServices"
+        ],
+        "summary": "Implements dedicatedCloudService GET method",
+        "operationId": "DedicatedCloudServices_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "type": "string",
+            "description": "dedicated cloud Service name",
+            "name": "dedicatedCloudServiceName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudService"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetDedicatedCloudService": {
+            "$ref": "./examples/GetDedicatedCloudService.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create dedicate cloud service",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudServices"
+        ],
+        "summary": "Implements dedicated cloud service PUT method",
+        "operationId": "DedicatedCloudServices_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "type": "string",
+            "description": "dedicated cloud Service name",
+            "name": "dedicatedCloudServiceName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create Dedicated Cloud Service request",
+            "name": "dedicatedCloudServiceRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudService"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created or updated successfully, 200 should be returned",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudService"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateDedicatedCloudService": {
+            "$ref": "./examples/CreateDedicatedCloudService.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Delete dedicate cloud service",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudServices"
+        ],
+        "summary": "Implements dedicatedCloudService DELETE method",
+        "operationId": "DedicatedCloudServices_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "type": "string",
+            "description": "dedicated cloud service name",
+            "name": "dedicatedCloudServiceName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "no content. resource does not exist and the request is well formed"
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteDedicatedCloudService": {
+            "$ref": "./examples/DeleteDedicatedCloudService.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Patch dedicated cloud service's properties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "DedicatedCloudServices"
+        ],
+        "summary": "Implements dedicatedCloudService PATCH method",
+        "operationId": "DedicatedCloudServices_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "type": "string",
+            "description": "dedicated cloud service name",
+            "name": "dedicatedCloudServiceName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Patch Dedicated Cloud Service request",
+            "name": "dedicatedCloudServiceRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchPayload"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created or updated successfully, 200 should be returned",
+            "schema": {
+              "$ref": "#/definitions/DedicatedCloudService"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchDedicatedService": {
+            "$ref": "./examples/PatchDedicatedService.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines": {
+      "get": {
+        "description": "Returns list of virtual machine within resource group",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements list virtual machine within RG method",
+        "operationId": "VirtualMachines_ListByResourceGroup",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "The filter to apply on the list operation",
+            "name": "$filter",
+            "in": "query"
+          },
+          {
+            "type": "integer",
+            "format": "int32",
+            "description": "The maximum number of record sets to return",
+            "name": "$top",
+            "in": "query"
+          },
+          {
+            "type": "string",
+            "description": "to be used by nextLink implementation",
+            "name": "$skipToken",
+            "in": "query"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineListResponse"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListRGVirtualMachines": {
+            "$ref": "./examples/ListRGVirtualMachines.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}": {
+      "get": {
+        "description": "Get virtual machine",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements virtual machine GET method",
+        "operationId": "VirtualMachines_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "type": "string",
+            "description": "virtual machine name",
+            "name": "virtualMachineName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetVirtualMachine": {
+            "$ref": "./examples/GetVirtualMachine.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Create Or Update Virtual Machine",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements virtual machine PUT method",
+        "operationId": "VirtualMachines_CreateOrUpdate",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/referer"
+          },
+          {
+            "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+            "type": "string",
+            "description": "virtual machine name",
+            "name": "virtualMachineName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Create or Update Virtual Machine request",
+            "name": "virtualMachineRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created or updated successfully, 200 should be returned",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "201": {
+            "description": "If resource is created or updated successfully, 201 should be returned. provisionedState would of VirtualMachineProperties object would reflect the state of the resource",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CreateVirtualMachine": {
+            "$ref": "./examples/CreateVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "description": "Delete virtual machine",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements virtual machine DELETE method",
+        "operationId": "VirtualMachines_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/referer"
+          },
+          {
+            "type": "string",
+            "description": "virtual machine name",
+            "name": "virtualMachineName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "accepted. the operation will complete asynchronously",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer"
+              }
+            }
+          },
+          "204": {
+            "description": "no content. resource does not exist and the request is well formed"
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DeleteVirtualMachine": {
+            "$ref": "./examples/DeleteVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "description": "Patch virtual machine properties",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements virtual machine PATCH method",
+        "operationId": "VirtualMachines_Update",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "type": "string",
+            "description": "virtual machine name",
+            "name": "virtualMachineName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "Patch virtual machine request",
+            "name": "virtualMachineRequest",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PatchPayload"
+            }
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "If resource is created or updated successfully, 200 should be returned",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachine"
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PatchVirtualMachine": {
+            "$ref": "./examples/PatchVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}/start": {
+      "post": {
+        "description": "Power on virtual machine",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements a start method for a virtual machine",
+        "operationId": "VirtualMachines_Start",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/referer"
+          },
+          {
+            "type": "string",
+            "description": "virtual machine name",
+            "name": "virtualMachineName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. the operation will complete asynchronously",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StartVirtualMachine": {
+            "$ref": "./examples/StartVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.VMwareCloudSimple/virtualMachines/{virtualMachineName}/stop": {
+      "post": {
+        "description": "Power off virtual machine, options: shutdown, poweroff, and suspend",
+        "consumes": [
+          "application/json"
+        ],
+        "tags": [
+          "VirtualMachines"
+        ],
+        "summary": "Implements shutdown, poweroff, and suspend method for a virtual machine",
+        "operationId": "VirtualMachines_Stop",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/referer"
+          },
+          {
+            "type": "string",
+            "description": "virtual machine name",
+            "name": "virtualMachineName",
+            "in": "path",
+            "required": true
+          },
+          {
+            "description": "body stop mode parameter (reboot, shutdown, etc...)",
+            "name": "m",
+            "in": "body",
+            "schema": {
+              "$ref": "#/definitions/VirtualMachineStopMode"
+            }
+          },
+          {
+            "enum": [
+              "reboot",
+              "suspend",
+              "shutdown",
+              "poweroff"
+            ],
+            "type": "string",
+            "x-ms-enum": {
+              "modelAsString": false,
+              "name": "StopMode"
+            },
+            "description": "query stop mode parameter (reboot, shutdown, etc...)",
+            "name": "mode",
+            "in": "query"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "202": {
+            "description": "Accepted. the operation will complete asynchronously",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer"
+              }
+            }
+          },
+          "default": {
+            "description": "General Error",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            },
+            "headers": {
+              "Content-Type": {
+                "type": "string",
+                "default": "application/json"
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StopInBodyVirtualMachine": {
+            "$ref": "./examples/StopInBodyVirtualMachine.json"
+          },
+          "StopInQueryVirtualMachine": {
+            "$ref": "./examples/StopInQueryVirtualMachine.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AvailableOperation": {
+      "description": "Resource provider available operation model",
+      "properties": {
+        "display": {
+          "description": "The list of operations",
+          "$ref": "#/definitions/AvailableOperationDisplay"
+        },
+        "isDataAction": {
+          "description": "Indicating whether the operation is a data action or not",
+          "type": "boolean",
+          "default": false
+        },
+        "name": {
+          "description": "{resourceProviderNamespace}/{resourceType}/{read|write|delete|action}",
+          "type": "string"
+        },
+        "origin": {
+          "description": "The origin of operation",
+          "type": "string",
+          "enum": [
+            "user",
+            "system",
+            "user,system"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "OperationOrigin"
+          }
+        },
+        "properties": {
+          "description": "The list of operation properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/AvailableOperationDisplayPropertyServiceSpecification"
+        }
+      }
+    },
+    "AvailableOperationDisplay": {
+      "description": "Resource provider available operation display model",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the operation for display purposes",
+          "type": "string"
+        },
+        "operation": {
+          "description": "Name of the operation for display purposes",
+          "type": "string"
+        },
+        "provider": {
+          "description": "Name of the provider for display purposes",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Name of the resource type for display purposes",
+          "type": "string"
+        }
+      }
+    },
+    "AvailableOperationDisplayPropertyServiceSpecification": {
+      "description": "Available operation display property service specification model",
+      "properties": {
+        "serviceSpecification": {
+          "description": "The list of specification's service metrics",
+          "$ref": "#/definitions/AvailableOperationDisplayPropertyServiceSpecificationMetricsList"
+        }
+      }
+    },
+    "AvailableOperationDisplayPropertyServiceSpecificationMetricsItem": {
+      "description": "Available operation display property service specification metrics item",
+      "required": [
+        "name",
+        "displayName",
+        "displayDescription",
+        "unit",
+        "aggregationType"
+      ],
+      "properties": {
+        "aggregationType": {
+          "description": "Metric's aggregation type for e.g. (Average, Total)",
+          "type": "string",
+          "enum": [
+            "Average",
+            "Total"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "AggregationType"
+          }
+        },
+        "displayDescription": {
+          "description": "Metric's description",
+          "type": "string",
+          "example": "Average disk throughput due to read operations over the sample period."
+        },
+        "displayName": {
+          "description": "Human readable metric's name",
+          "type": "string",
+          "example": "Disk Read Bytes/Sec"
+        },
+        "name": {
+          "description": "Metric's name/id",
+          "type": "string",
+          "example": "DiskReadBytesPerSecond"
+        },
+        "unit": {
+          "description": "Metric's unit",
+          "type": "string",
+          "example": "BytePerSecond"
+        }
+      }
+    },
+    "AvailableOperationDisplayPropertyServiceSpecificationMetricsList": {
+      "description": "List of available operation display property service specification metrics",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Metric specifications of operation",
+          "type": "array",
+          "items": {
+            "description": "The list of specification's metrics",
+            "$ref": "#/definitions/AvailableOperationDisplayPropertyServiceSpecificationMetricsItem"
+          }
+        }
+      }
+    },
+    "AvailableOperationsListResponse": {
+      "description": "List of available operations",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of available operations",
+          "type": "string"
+        },
+        "value": {
+          "description": "Returns a list of available operations",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableOperation"
+          }
+        }
+      }
+    },
+    "CSRPError": {
+      "description": "General error model",
+      "properties": {
+        "error": {
+          "description": "Error's body",
+          "$ref": "#/definitions/CSRPErrorBody"
+        }
+      }
+    },
+    "CSRPErrorBody": {
+      "description": "Error properties",
+      "properties": {
+        "code": {
+          "description": "Error's code",
+          "type": "string",
+          "readOnly": true
+        },
+        "details": {
+          "description": "Error's details",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CSRPErrorBody"
+          },
+          "readOnly": true
+        },
+        "message": {
+          "description": "Error's message",
+          "type": "string",
+          "readOnly": true
+        },
+        "target": {
+          "description": "Error's target",
+          "type": "string"
+        }
+      }
+    },
+    "CustomizationHostName": {
+      "description": "Host name model",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Hostname",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of host name",
+          "type": "string",
+          "enum": [
+            "USER_DEFINED",
+            "PREFIX_BASED",
+            "FIXED",
+            "VIRTUAL_MACHINE_NAME",
+            "CUSTOM_NAME"
+          ]
+        }
+      }
+    },
+    "CustomizationIPAddress": {
+      "type": "object",
+      "properties": {
+        "argument": {
+          "description": "Argument when Custom ip type is selected",
+          "type": "string"
+        },
+        "ipAddress": {
+          "description": "Defined Ip Address when Fixed ip type is selected",
+          "type": "string"
+        },
+        "type": {
+          "description": "Customization Specification ip type",
+          "type": "string",
+          "enum": [
+            "CUSTOM",
+            "DHCP_IP",
+            "FIXED_IP",
+            "USER_DEFINED"
+          ]
+        }
+      }
+    },
+    "CustomizationIPSettings": {
+      "type": "object",
+      "properties": {
+        "gateway": {
+          "description": "The list of gateways",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "ip": {
+          "description": "Ip address customization settings",
+          "$ref": "#/definitions/CustomizationIPAddress"
+        },
+        "subnetMask": {
+          "description": "Adapter subnet mask",
+          "type": "string"
+        }
+      }
+    },
+    "CustomizationIdentity": {
+      "type": "object",
+      "properties": {
+        "data": {
+          "description": "Windows Text Identity. Prepared data",
+          "type": "string"
+        },
+        "hostName": {
+          "description": "Virtual machine host name settings",
+          "$ref": "#/definitions/CustomizationHostName"
+        },
+        "type": {
+          "description": "Identity type",
+          "type": "string",
+          "enum": [
+            "WINDOWS_TEXT",
+            "WINDOWS",
+            "LINUX"
+          ]
+        },
+        "userData": {
+          "description": "Windows Identity. User data customization",
+          "type": "object",
+          "properties": {
+            "isPasswordPredefined": {
+              "description": "Is password predefined in customization policy",
+              "type": "boolean",
+              "default": false
+            }
+          }
+        }
+      }
+    },
+    "CustomizationNicSetting": {
+      "type": "object",
+      "properties": {
+        "adapter": {
+          "description": "The list of adapters' settings",
+          "$ref": "#/definitions/CustomizationIPSettings"
+        },
+        "macAddress": {
+          "description": "NIC mac address",
+          "type": "string"
+        }
+      }
+    },
+    "CustomizationPoliciesListResponse": {
+      "description": "List of customization polices response model",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of the Customization policy",
+          "type": "string"
+        },
+        "value": {
+          "description": "List of the customization policies",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationPolicy"
+          }
+        }
+      }
+    },
+    "CustomizationPolicy": {
+      "description": "The virtual machine customization policy",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Customization policy azure id",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string"
+        },
+        "name": {
+          "description": "Customization policy name",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Customization Policy properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomizationPolicyProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "CustomizationPolicyProperties": {
+      "description": "The properties of Customization policy",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Policy description",
+          "type": "string"
+        },
+        "privateCloudId": {
+          "description": "The Private cloud id",
+          "type": "string"
+        },
+        "specification": {
+          "description": "Detailed customization policy specification",
+          "$ref": "#/definitions/CustomizationSpecification"
+        },
+        "type": {
+          "description": "The type of customization (Linux or Windows)",
+          "type": "string",
+          "enum": [
+            "LINUX",
+            "WINDOWS"
+          ]
+        },
+        "version": {
+          "description": "Policy version",
+          "type": "string"
+        }
+      }
+    },
+    "CustomizationSpecification": {
+      "description": "The specification for Customization Policy",
+      "type": "object",
+      "properties": {
+        "identity": {
+          "description": "Customization Identity. It contains data about user and hostname",
+          "$ref": "#/definitions/CustomizationIdentity"
+        },
+        "nicSettings": {
+          "description": "Network interface settings",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomizationNicSetting"
+          }
+        }
+      }
+    },
+    "DedicatedCloudNode": {
+      "description": "Dedicated cloud node model",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/dedicatedCloudNodes/{dedicatedCloudNodeName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "description": "{dedicatedCloudNodeName}",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Dedicated Cloud Nodes properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedCloudNodeProperties"
+        },
+        "sku": {
+          "description": "Dedicated Cloud Nodes SKU",
+          "$ref": "#/definitions/Sku"
+        },
+        "tags": {
+          "description": "Dedicated Cloud Nodes tags",
+          "$ref": "#/definitions/Tags"
+        },
+        "type": {
+          "description": "{resourceProviderNamespace}/{resourceType}",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DedicatedCloudNodeListResponse": {
+      "description": "List of dedicated nodes response model",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of DedicatedCloudNode",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the DedicatedCloudNode list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedCloudNode"
+          }
+        }
+      }
+    },
+    "DedicatedCloudNodeProperties": {
+      "description": "Properties of dedicated cloud node",
+      "required": [
+        "placementGroupId",
+        "availabilityZoneId",
+        "purchaseId",
+        "nodesCount"
+      ],
+      "properties": {
+        "availabilityZoneId": {
+          "description": "Availability Zone id, e.g. \"az1\"",
+          "type": "string"
+        },
+        "availabilityZoneName": {
+          "description": "Availability Zone name, e.g. \"Availability Zone 1\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "cloudRackName": {
+          "description": "VMWare Cloud Rack Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "created": {
+          "description": "date time the resource was created",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "nodesCount": {
+          "description": "count of nodes to create",
+          "type": "integer"
+        },
+        "placementGroupId": {
+          "description": "Placement Group id, e.g. \"n1\"",
+          "type": "string"
+        },
+        "placementGroupName": {
+          "description": "Placement Name, e.g. \"Placement Group 1\"",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateCloudId": {
+          "description": "Private Cloud Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateCloudName": {
+          "description": "Resource Pool Name",
+          "type": "string",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchaseId": {
+          "description": "purchase id",
+          "type": "string",
+          "format": "uuid"
+        },
+        "skuDescription": {
+          "description": "Dedicated Cloud Nodes SKU's description",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SkuDescription"
+        },
+        "status": {
+          "description": "Node status, indicates is private cloud set up on this node or not",
+          "type": "string",
+          "enum": [
+            "unused",
+            "used"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "NodeStatus"
+          },
+          "readOnly": true
+        },
+        "vmwareClusterName": {
+          "description": "VMWare Cluster Name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "DedicatedCloudService": {
+      "description": "Dedicated cloud service model",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/dedicatedCloudServices/{dedicatedCloudServiceName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "description": "{dedicatedCloudServiceName}",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The properties of Dedicated Node Service",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/DedicatedCloudServiceProperties"
+        },
+        "tags": {
+          "description": "The list of tags",
+          "$ref": "#/definitions/Tags"
+        },
+        "type": {
+          "description": "{resourceProviderNamespace}/{resourceType}",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "DedicatedCloudServiceListResponse": {
+      "description": "List of dedicated cloud services",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of DedicatedCloudNode",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the DedicatedCloudService list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedCloudService"
+          }
+        }
+      }
+    },
+    "DedicatedCloudServiceProperties": {
+      "description": "Properties of dedicated cloud service",
+      "required": [
+        "gatewaySubnet"
+      ],
+      "properties": {
+        "gatewaySubnet": {
+          "description": "gateway Subnet for the account. It will collect the subnet address and always treat it as /28",
+          "type": "string"
+        },
+        "isAccountOnboarded": {
+          "description": "indicates whether account onboarded or not in a given region",
+          "type": "string",
+          "enum": [
+            "notOnBoarded",
+            "onBoarded",
+            "onBoardingFailed",
+            "onBoarding"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "OnboardingStatus"
+          },
+          "readOnly": true
+        },
+        "nodes": {
+          "description": "total nodes purchased",
+          "type": "integer",
+          "readOnly": true
+        },
+        "serviceURL": {
+          "description": "link to a service management web portal",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "GuestOSCustomization": {
+      "description": "Guest OS Customization properties",
+      "properties": {
+        "dnsServers": {
+          "description": "List of dns servers to use",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPV4Address"
+          }
+        },
+        "hostName": {
+          "description": "Virtual Machine hostname",
+          "type": "string"
+        },
+        "password": {
+          "description": "Password for login",
+          "type": "string"
+        },
+        "policyId": {
+          "description": "id of customization policy",
+          "type": "string"
+        },
+        "username": {
+          "description": "Username for login",
+          "type": "string"
+        }
+      }
+    },
+    "GuestOSNICCustomization": {
+      "description": "Guest OS nic customization",
+      "properties": {
+        "allocation": {
+          "description": "IP address allocation method",
+          "type": "string",
+          "enum": [
+            "static",
+            "dynamic"
+          ]
+        },
+        "dnsServers": {
+          "description": "List of dns servers to use",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPV4Address"
+          }
+        },
+        "gateway": {
+          "description": "Gateway addresses assigned to nic",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPV4Address"
+          }
+        },
+        "ipAddress": {
+          "description": "Static ip address for nic",
+          "$ref": "#/definitions/IPV4Address"
+        },
+        "mask": {
+          "description": "Network mask for nic",
+          "$ref": "#/definitions/IPV4Address"
+        },
+        "primaryWinsServer": {
+          "description": "primary WINS server for Windows",
+          "$ref": "#/definitions/IPV4Address"
+        },
+        "secondaryWinsServer": {
+          "description": "secondary WINS server for Windows",
+          "$ref": "#/definitions/IPV4Address"
+        }
+      }
+    },
+    "IPV4Address": {
+      "type": "string",
+      "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])[.]){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$"
+    },
+    "OperationError": {
+      "description": "Operation error model",
+      "properties": {
+        "code": {
+          "description": "Error's code",
+          "type": "string"
+        },
+        "message": {
+          "description": "Error's message",
+          "type": "string"
+        }
+      }
+    },
+    "OperationResource": {
+      "description": "Operation status response",
+      "properties": {
+        "endTime": {
+          "description": "End time of the operation",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "error": {
+          "description": "Error Message if operation failed",
+          "$ref": "#/definitions/OperationError"
+        },
+        "id": {
+          "description": "Operation Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "Operation ID",
+          "type": "string",
+          "readOnly": true
+        },
+        "startTime": {
+          "description": "Start time of the operation",
+          "type": "string",
+          "format": "date-time",
+          "readOnly": true
+        },
+        "status": {
+          "description": "Operation status",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "PatchPayload": {
+      "description": "General patch payload modal",
+      "properties": {
+        "tags": {
+          "description": "The tags key:value pairs",
+          "$ref": "#/definitions/Tags"
+        }
+      }
+    },
+    "PrivateCloud": {
+      "description": "Private cloud model",
+      "properties": {
+        "id": {
+          "description": "Azure Id, e.g. \"/subscriptions/4da99247-a172-4ed6-8ae9-ebed2d12f839/providers/Microsoft.VMwareCloudSimple/privateClouds/cloud123\"",
+          "type": "string"
+        },
+        "location": {
+          "description": "Location where private cloud created, e.g \"westus\"",
+          "type": "string"
+        },
+        "name": {
+          "description": "Private cloud name",
+          "type": "string"
+        },
+        "properties": {
+          "description": "Private cloud properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateCloudProperties"
+        },
+        "type": {
+          "description": "Azure Resource type",
+          "type": "string",
+          "enum": [
+            "Microsoft.VMwareCloudSimple/privateClouds"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "PrivateCloudResourceType"
+          }
+        }
+      }
+    },
+    "PrivateCloudList": {
+      "description": "List of private clouds",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of Private Clouds",
+          "type": "string"
+        },
+        "value": {
+          "description": "the list of private clouds",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateCloud"
+          }
+        }
+      }
+    },
+    "PrivateCloudProperties": {
+      "description": "Properties of private",
+      "properties": {
+        "availabilityZoneId": {
+          "description": "Availability Zone id, e.g. \"az1\"",
+          "type": "string"
+        },
+        "availabilityZoneName": {
+          "description": "Availability Zone name, e.g. \"Availability Zone 1\"",
+          "type": "string"
+        },
+        "clustersNumber": {
+          "description": "Number of clusters",
+          "type": "integer"
+        },
+        "createdBy": {
+          "description": "User's emails who created cloud",
+          "type": "string"
+        },
+        "createdOn": {
+          "description": "When private cloud was created",
+          "type": "string",
+          "format": "date-time"
+        },
+        "dnsServers": {
+          "description": "Array of DNS servers",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "expires": {
+          "description": "Expiration date of PC",
+          "type": "string"
+        },
+        "nsxType": {
+          "description": "Nsx Type, e.g. \"Advanced\"",
+          "type": "string"
+        },
+        "placementGroupId": {
+          "description": "Placement Group id, e.g. \"n1\"",
+          "type": "string"
+        },
+        "placementGroupName": {
+          "description": "Placement Group name",
+          "type": "string"
+        },
+        "privateCloudId": {
+          "description": "Id of a private cloud",
+          "type": "string",
+          "format": "uuid"
+        },
+        "resourcePools": {
+          "description": "The list of Resource Pools",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourcePool"
+          }
+        },
+        "state": {
+          "description": "Private Cloud state, e.g. \"operational\"",
+          "type": "string"
+        },
+        "totalCpuCores": {
+          "description": "Number of cores",
+          "type": "integer"
+        },
+        "totalNodes": {
+          "description": "Number of nodes",
+          "type": "integer"
+        },
+        "totalRam": {
+          "description": "Memory size",
+          "type": "integer"
+        },
+        "totalStorage": {
+          "description": "Disk space in TB",
+          "type": "number"
+        },
+        "type": {
+          "description": "Virtualization type e.g. \"vSphere\"",
+          "type": "string"
+        },
+        "vSphereVersion": {
+          "description": "e.g. \"6.5u2\"",
+          "type": "string"
+        },
+        "vcenterFqdn": {
+          "description": "FQDN for vcenter access",
+          "type": "string"
+        },
+        "vcenterRefid": {
+          "description": "Vcenter ip address",
+          "type": "string"
+        },
+        "virtualMachineTemplates": {
+          "description": "The list of Virtual Machine Templates",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineTemplate"
+          }
+        },
+        "virtualNetworks": {
+          "description": "The list of Virtual Networks",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetwork"
+          }
+        },
+        "vrOpsEnabled": {
+          "description": "Is Vrops enabled/disabled",
+          "type": "boolean"
+        }
+      }
+    },
+    "ResourcePool": {
+      "description": "Resource pool model",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "resource pool id (privateCloudId:vsphereId)",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "{ResourcePoolName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateCloudId": {
+          "description": "The Private Cloud Id",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Resource pool properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ResourcePoolProperties"
+        },
+        "type": {
+          "description": "{resourceProviderNamespace}/{resourceType}",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourcePoolProperties": {
+      "description": "Properties of resource pool",
+      "properties": {
+        "fullName": {
+          "description": "Hierarchical resource pool name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ResourcePoolsListResponse": {
+      "description": "List of resource pools response model",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of ResourcePoolsList",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the Resource pools list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourcePool"
+          }
+        }
+      }
+    },
+    "Sku": {
+      "description": "The purchase SKU for CloudSimple paid resources",
+      "required": [
+        "name"
+      ],
+      "properties": {
+        "capacity": {
+          "description": "The capacity of the SKU",
+          "type": "string"
+        },
+        "description": {
+          "description": "dedicatedCloudNode example: 8 x Ten-Core Intel® Xeon® Processor E5-2640 v4 2.40GHz 25MB Cache (90W); 12 x 64GB PC4-19200 2400MHz DDR4 ECC Registered DIMM, ...",
+          "type": "string"
+        },
+        "family": {
+          "description": "If the service has different generations of hardware, for the same SKU, then that can be captured here",
+          "type": "string"
+        },
+        "name": {
+          "description": "The name of the SKU for VMWare CloudSimple Node",
+          "type": "string"
+        },
+        "tier": {
+          "description": "The tier of the SKU",
+          "type": "string"
+        }
+      }
+    },
+    "SkuAvailability": {
+      "description": "SKU availability model",
+      "required": [
+        "limit"
+      ],
+      "properties": {
+        "dedicatedAvailabilityZoneId": {
+          "description": "CloudSimple Availability Zone id",
+          "type": "string"
+        },
+        "dedicatedAvailabilityZoneName": {
+          "description": "CloudSimple Availability Zone Name",
+          "type": "string"
+        },
+        "dedicatedPlacementGroupId": {
+          "description": "CloudSimple Placement Group Id",
+          "type": "string"
+        },
+        "dedicatedPlacementGroupName": {
+          "description": "CloudSimple Placement Group name",
+          "type": "string"
+        },
+        "limit": {
+          "description": "indicates how many resources of a given SKU is available in a AZ->PG",
+          "type": "integer"
+        },
+        "resourceType": {
+          "description": "resource type e.g. DedicatedCloudNodes",
+          "type": "string"
+        },
+        "skuId": {
+          "description": "sku id",
+          "type": "string"
+        },
+        "skuName": {
+          "description": "sku name",
+          "type": "string"
+        }
+      }
+    },
+    "SkuAvailabilityListResponse": {
+      "description": "List of SKU availabilities",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of DedicatedCloudNode",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the DedicatedPlacementGroupSkuAvailability list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SkuAvailability"
+          }
+        }
+      }
+    },
+    "SkuDescription": {
+      "description": "The purchase SKU for CloudSimple paid resources",
+      "required": [
+        "name",
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "SKU's id",
+          "type": "string"
+        },
+        "name": {
+          "description": "SKU's name",
+          "type": "string"
+        }
+      }
+    },
+    "Tags": {
+      "description": "Tags model",
+      "additionalProperties": {
+        "type": "string"
+      }
+    },
+    "Usage": {
+      "description": "Usage model",
+      "required": [
+        "currentValue",
+        "limit"
+      ],
+      "properties": {
+        "currentValue": {
+          "description": "The current usage value",
+          "type": "integer",
+          "default": 0
+        },
+        "limit": {
+          "description": "limit of a given sku in a region for a subscription. The maximum permitted value for the usage quota. If there is no limit, this value will be -1",
+          "type": "integer",
+          "default": 0
+        },
+        "name": {
+          "description": "Usage name value and localized name",
+          "$ref": "#/definitions/UsageName"
+        },
+        "unit": {
+          "description": "The usages' unit",
+          "type": "string",
+          "enum": [
+            "Count",
+            "Bytes",
+            "Seconds",
+            "Percent",
+            "CountPerSecond",
+            "BytesPerSecond"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "UsageCount"
+          }
+        }
+      }
+    },
+    "UsageListResponse": {
+      "description": "List of usages",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of DedicatedCloudNode",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of usages",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "UsageName": {
+      "description": "User name model",
+      "properties": {
+        "localizedValue": {
+          "description": "e.g. \"Virtual Machines\"",
+          "type": "string"
+        },
+        "value": {
+          "description": "resource type or resource type sku name, e.g. virtualMachines",
+          "type": "string"
+        }
+      }
+    },
+    "VirtualDisk": {
+      "description": "Virtual disk model",
+      "required": [
+        "totalSize",
+        "independenceMode",
+        "controllerId"
+      ],
+      "properties": {
+        "controllerId": {
+          "description": "Disk's Controller id",
+          "type": "string"
+        },
+        "independenceMode": {
+          "description": "Disk's independence mode type",
+          "type": "string",
+          "enum": [
+            "persistent",
+            "independent_persistent",
+            "independent_nonpersistent"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "DiskIndependenceMode"
+          }
+        },
+        "totalSize": {
+          "description": "Disk's total size",
+          "type": "integer"
+        },
+        "virtualDiskId": {
+          "description": "Disk's id",
+          "type": "string"
+        },
+        "virtualDiskName": {
+          "description": "Disk's display name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualDiskController": {
+      "description": "Virtual disk controller model",
+      "properties": {
+        "id": {
+          "description": "Controller's id",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The display name of Controller",
+          "type": "string",
+          "readOnly": true
+        },
+        "subType": {
+          "description": "dik controller subtype (VMWARE_PARAVIRTUAL, BUS_PARALLEL, LSI_PARALLEL, LSI_SAS)",
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "description": "disk controller type (SCSI)",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachine": {
+      "description": "Virtual machine model",
+      "required": [
+        "location"
+      ],
+      "properties": {
+        "id": {
+          "description": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/virtualMachines/{virtualMachineName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "name": {
+          "description": "{virtualMachineName}",
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Virtual machine properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineProperties"
+        },
+        "tags": {
+          "description": "The list of tags",
+          "$ref": "#/definitions/Tags"
+        },
+        "type": {
+          "description": "{resourceProviderNamespace}/{resourceType}",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "VirtualMachineListResponse": {
+      "description": "List of virtual machines",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of VirtualMachines",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the VirtualMachine list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachine"
+          }
+        }
+      }
+    },
+    "VirtualMachineProperties": {
+      "description": "Properties of virtual machine",
+      "required": [
+        "numberOfCores",
+        "amountOfRam",
+        "privateCloudId"
+      ],
+      "properties": {
+        "amountOfRam": {
+          "description": "The amount of memory",
+          "type": "integer"
+        },
+        "controllers": {
+          "description": "The list of Virtual Disks' Controllers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDiskController"
+          },
+          "readOnly": true
+        },
+        "customization": {
+          "description": "Virtual machine properties",
+          "$ref": "#/definitions/GuestOSCustomization"
+        },
+        "disks": {
+          "description": "The list of Virtual Disks",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDisk"
+          }
+        },
+        "dnsname": {
+          "description": "The DNS name of Virtual Machine in VCenter",
+          "type": "string",
+          "readOnly": true
+        },
+        "exposeToGuestVM": {
+          "description": "Expose Guest OS or not",
+          "type": "boolean"
+        },
+        "folder": {
+          "description": "The path to virtual machine folder in VCenter",
+          "type": "string",
+          "readOnly": true
+        },
+        "guestOS": {
+          "description": "The name of Guest OS",
+          "type": "string",
+          "readOnly": true
+        },
+        "guestOSType": {
+          "description": "The Guest OS type",
+          "type": "string",
+          "enum": [
+            "linux",
+            "windows",
+            "other"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "GuestOSType"
+          },
+          "readOnly": true
+        },
+        "nics": {
+          "description": "The list of Virtual NICs",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNic"
+          }
+        },
+        "numberOfCores": {
+          "description": "The number of CPU cores",
+          "type": "integer"
+        },
+        "password": {
+          "description": "Password for login. Deprecated - use customization property",
+          "type": "string"
+        },
+        "privateCloudId": {
+          "description": "Private Cloud Id",
+          "type": "string"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "publicIP": {
+          "description": "The public ip of Virtual Machine",
+          "type": "string",
+          "readOnly": true
+        },
+        "resourcePool": {
+          "description": "Virtual Machines Resource Pool",
+          "$ref": "#/definitions/ResourcePool"
+        },
+        "status": {
+          "description": "The status of Virtual machine",
+          "type": "string",
+          "enum": [
+            "running",
+            "suspended",
+            "poweredoff",
+            "updating",
+            "deallocating",
+            "deleting"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "VirtualMachineStatus"
+          },
+          "readOnly": true
+        },
+        "templateId": {
+          "description": "Virtual Machine Template Id",
+          "type": "string"
+        },
+        "username": {
+          "description": "Username for login. Deprecated - use customization property",
+          "type": "string"
+        },
+        "vSphereNetworks": {
+          "description": "The list of Virtual VSphere Networks",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmId": {
+          "description": "The internal id of Virtual Machine in VCenter",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmwaretools": {
+          "description": "VMware tools version",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineStopMode": {
+      "description": "List of virtual machine stop modes",
+      "properties": {
+        "mode": {
+          "description": "mode indicates a type of stop operation - reboot, suspend, shutdown or power-off",
+          "type": "string",
+          "enum": [
+            "reboot",
+            "suspend",
+            "shutdown",
+            "poweroff"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "StopMode"
+          }
+        }
+      }
+    },
+    "VirtualMachineTemplate": {
+      "description": "Virtual machine template model",
+      "properties": {
+        "id": {
+          "description": "virtual machine template id (privateCloudId:vsphereId)",
+          "type": "string",
+          "readOnly": true
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string"
+        },
+        "name": {
+          "description": "{virtualMachineTemplateName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "The Virtual Machine Template properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualMachineTemplateProperties"
+        },
+        "type": {
+          "description": "{resourceProviderNamespace}/{resourceType}",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualMachineTemplateListResponse": {
+      "description": "List of virtual machine templates",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of VirtualMachineTemplate",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the VM template list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineTemplate"
+          }
+        }
+      }
+    },
+    "VirtualMachineTemplateProperties": {
+      "description": "Properties of virtual machine template",
+      "required": [
+        "privateCloudId"
+      ],
+      "properties": {
+        "amountOfRam": {
+          "description": "The amount of memory",
+          "type": "integer"
+        },
+        "controllers": {
+          "description": "The list of Virtual Disk Controllers",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDiskController"
+          }
+        },
+        "description": {
+          "description": "The description of Virtual Machine Template",
+          "type": "string"
+        },
+        "disks": {
+          "description": "The list of Virtual Disks",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualDisk"
+          }
+        },
+        "exposeToGuestVM": {
+          "description": "Expose Guest OS or not",
+          "type": "boolean"
+        },
+        "guestOS": {
+          "description": "The Guest OS",
+          "type": "string",
+          "readOnly": true
+        },
+        "guestOSType": {
+          "description": "The Guest OS types",
+          "type": "string",
+          "readOnly": true
+        },
+        "nics": {
+          "description": "The list of Virtual NICs",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNic"
+          }
+        },
+        "numberOfCores": {
+          "description": "The number of CPU cores",
+          "type": "integer"
+        },
+        "path": {
+          "description": "path to folder",
+          "type": "string",
+          "example": "Datacenter/Workload VMs"
+        },
+        "privateCloudId": {
+          "description": "The Private Cloud Id",
+          "type": "string"
+        },
+        "vSphereNetworks": {
+          "description": "The list of VSphere networks",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vSphereTags": {
+          "description": "The tags from VSphere",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vmwaretools": {
+          "description": "The VMware tools version",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetwork": {
+      "description": "Virtual network model",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "assignable": {
+          "description": "can be used in vm creation/deletion",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "id": {
+          "description": "virtual network id (privateCloudId:vsphereId)",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "{VirtualNetworkName}",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Virtual Network properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/VirtualNetworkProperties"
+        },
+        "type": {
+          "description": "{resourceProviderNamespace}/{resourceType}",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkListResponse": {
+      "description": "List of virtual networks",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of VirtualNetwork",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the VirtualNetwork list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VirtualNetwork"
+          }
+        }
+      }
+    },
+    "VirtualNetworkProperties": {
+      "description": "Properties of virtual network",
+      "properties": {
+        "privateCloudId": {
+          "description": "The Private Cloud id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNic": {
+      "description": "Virtual NIC model",
+      "required": [
+        "nicType",
+        "network"
+      ],
+      "properties": {
+        "customization": {
+          "description": "guest OS customization for nic",
+          "$ref": "#/definitions/GuestOSNICCustomization"
+        },
+        "ipAddresses": {
+          "description": "NIC ip address",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "macAddress": {
+          "description": "NIC MAC address",
+          "type": "string"
+        },
+        "network": {
+          "description": "Virtual Network",
+          "$ref": "#/definitions/VirtualNetwork"
+        },
+        "nicType": {
+          "description": "NIC type",
+          "type": "string",
+          "enum": [
+            "E1000",
+            "E1000E",
+            "PCNET32",
+            "VMXNET",
+            "VMXNET2",
+            "VMXNET3"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false,
+            "name": "NICType"
+          }
+        },
+        "powerOnBoot": {
+          "description": "Is NIC powered on/off on boot",
+          "type": "boolean"
+        },
+        "virtualNicId": {
+          "description": "NIC id",
+          "type": "string"
+        },
+        "virtualNicName": {
+          "description": "NIC name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionId": {
+      "type": "string",
+      "description": "The subscription ID.",
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true
+    },
+    "api-version": {
+      "type": "string",
+      "description": "Client API version.",
+      "name": "api-version",
+      "in": "query",
+      "required": true
+    },
+    "pcName": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The private cloud name",
+      "name": "pcName",
+      "in": "path",
+      "required": true
+    },
+    "referer": {
+      "type": "string",
+      "x-ms-parameter-location": "client",
+      "description": "referer url",
+      "name": "Referer",
+      "in": "header",
+      "required": true
+    },
+    "regionId": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The region Id (westus, eastus)",
+      "name": "regionId",
+      "in": "path",
+      "required": true
+    },
+    "resourceGroupName": {
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The name of the resource group",
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true
+    }
+  },
+  "tags": [
+    {
+      "description": "Subscription life cycle",
+      "name": "Subscription"
+    },
+    {
+      "description": "Virtual machine resource operations",
+      "name": "VirtualMachines"
+    },
+    {
+      "description": "Virtual networks functions",
+      "name": "VirtualNetwork"
+    },
+    {
+      "description": "VM templates functions",
+      "name": "VirtualMachineTemplates"
+    },
+    {
+      "description": "available operations function",
+      "name": "Operations"
+    },
+    {
+      "description": "Resource pools operations",
+      "name": "ResourcePools"
+    },
+    {
+      "description": "dedicated cloud nodes operations",
+      "name": "DedicatedCloudNodes"
+    },
+    {
+      "description": "Azure Service object operations",
+      "name": "AzureService"
+    },
+    {
+      "description": "operations related to availability and usage",
+      "name": "AvailabilityUsages"
+    },
+    {
+      "description": "Customization policies operations",
+      "name": "CustomizationPolicies"
+    }
+  ]
+}

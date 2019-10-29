@@ -288,7 +288,7 @@
         }
       }
     },
-	"DatabaseTable": {
+    "DatabaseTable": {
       "type": "object",
       "description": "Table properties",
       "properties": {
@@ -322,7 +322,7 @@
         "projectLocation"
       ]
     },
-	"SqlServerSqlMISyncTaskInput": {
+    "SqlServerSqlMISyncTaskInput": {
       "type": "object",
       "description": "Input for task that migrates SQL Server databases to Azure SQL Database Managed Instance online scenario.",
       "properties": {
@@ -342,16 +342,16 @@
           "description": "Fully qualified resourceId of storage"
         },
         "sourceConnectionInfo": {
-            "$ref": "./Common.json#/definitions/SqlConnectionInfo",
-            "description": "Connection information for source SQL Server"
+          "$ref": "./Common.json#/definitions/SqlConnectionInfo",
+          "description": "Connection information for source SQL Server"
         },
         "targetConnectionInfo": {
-            "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
-            "description": "Connection information for Azure SQL Database Managed Instance"
+          "$ref": "./Common.json#/definitions/MiSqlConnectionInfo",
+          "description": "Connection information for Azure SQL Database Managed Instance"
         },
-        "azureApp":{
-            "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
-            "description" : "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
+        "azureApp": {
+          "$ref": "./Common.json#/definitions/AzureActiveDirectoryApp",
+          "description": "Azure Active Directory Application the DMS instance will use to connect to the target instance of Azure SQL Database Managed Instance and the Azure Storage Account"
         }
       },
       "required": [
@@ -417,7 +417,7 @@
         "targetConnectionInfo"
       ]
     },
-	"MigrateSqlServerSqlDbDatabaseInput": {
+    "MigrateSqlServerSqlDbDatabaseInput": {
       "type": "object",
       "description": "Database specific information for SQL to Azure SQL DB migration task inputs",
       "properties": {
@@ -508,7 +508,7 @@
         }
       }
     },
-	"NonSqlMigrationTaskInput": {
+    "NonSqlMigrationTaskInput": {
       "type": "object",
       "description": "Base class for non sql migration task input",
       "properties": {
@@ -692,7 +692,7 @@
         "modelAsString": true
       }
     },
-	"MigrateSqlServerSqlMIDatabaseInput": {
+    "MigrateSqlServerSqlMIDatabaseInput": {
       "type": "object",
       "description": "Database specific information for SQL to Azure SQL DB Managed Instance migration task inputs",
       "properties": {
@@ -822,7 +822,7 @@
         "modelAsString": true
       }
     },
-	"ConnectToSourceNonSqlTaskOutput": {
+    "ConnectToSourceNonSqlTaskOutput": {
       "type": "object",
       "description": "Output for connect to Oracle, MySQL type source",
       "properties": {
@@ -911,7 +911,7 @@
         "modelAsString": true
       }
     },
-	"SchemaMigrationStage": {
+    "SchemaMigrationStage": {
       "type": "string",
       "description": "Current stage of schema migration",
       "enum": [
@@ -1003,7 +1003,7 @@
       ],
       "x-ms-enum": {
         "name": "LoginType",
-		"modelAsString": true
+        "modelAsString": true
       }
     },
     "LoginMigrationStage": {
@@ -1022,14 +1022,14 @@
       ],
       "x-ms-enum": {
         "name": "LoginMigrationStage",
-		"modelAsString": true
+        "modelAsString": true
       }
     },
     "MigrationEligibilityInfo": {
       "type": "object",
       "description": "Information about migration eligibility of a server object",
       "properties": {
-        "isEligibileForMigration": {
+        "isEligibleForMigration": {
           "type": "boolean",
           "description": "Whether object is eligible for migration or not.",
           "readOnly": true
@@ -1043,7 +1043,7 @@
           "readOnly": true
         }
       }
-	},
+    },
     "SyncDatabaseMigrationReportingState": {
       "type": "string",
       "description": "Enum of the different state of database level online migration.",
@@ -1180,7 +1180,7 @@
         "name": "BackupType",
         "modelAsString": true
       }
-	},
+    },
     "DatabaseMigrationState": {
       "type": "string",
       "description": "Database level migration state.",

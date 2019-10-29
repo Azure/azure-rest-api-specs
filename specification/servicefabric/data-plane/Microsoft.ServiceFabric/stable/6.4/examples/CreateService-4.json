@@ -1,44 +1,46 @@
 {
-    "operationId": "CreateService",
-    "description": "This example shows how to create a stateful Service Fabric service with named partitions and scaling enabled based on memory usage.",
-    "parameters": {
-        "applicationId": "test",
-        "api-version": "6.0",
-        "ServiceDescription": {
-            "ServiceKind": "Stateful",
-            "ApplicationName": "fabric:\/test",
-            "ServiceName": "fabric:\/test\/test2",
-            "ServiceTypeName": "StatefulBackendService",
-            "InitializationData": [],
-            "PartitionDescription": {
-                "PartitionScheme": "NamedPartitionSchemeDescription",
-                "Count" : 1,
-                "Names" : ["0"]
-            },
-            "TargetReplicaSetSize": 3,
-            "MinReplicaSetSize" : 2,
-            "HasPersistedState" : true,
-            "ServicePackageActivationMode": "ExclusiveProcess",
-            "ScalingPolicies": [
-                {
-                    "ScalingTrigger": {
-                        "Kind": "AverageServiceLoad",
-                        "MetricName": "servicefabric:\/_MemoryInMB",
-                        "LowerLoadThreshold": 500,
-                        "UpperLoadThreshold": 900,
-                        "ScaleIntervalInSeconds": 600
-                    },
-                    "ScalingMechanism": {
-                        "Kind": "AddRemoveIncrementalNamedPartition",
-                        "MinPartitionCount": 1,
-                        "MaxPartitionCount": 3,
-                        "ScaleIncrement": 1
-                    }
-                }
-            ]
+  "operationId": "CreateService",
+  "description": "This example shows how to create a stateful Service Fabric service with named partitions and scaling enabled based on memory usage.",
+  "parameters": {
+    "applicationId": "test",
+    "api-version": "6.0",
+    "ServiceDescription": {
+      "ServiceKind": "Stateful",
+      "ApplicationName": "fabric:/test",
+      "ServiceName": "fabric:/test/test2",
+      "ServiceTypeName": "StatefulBackendService",
+      "InitializationData": [],
+      "PartitionDescription": {
+        "PartitionScheme": "NamedPartitionSchemeDescription",
+        "Count": 1,
+        "Names": [
+          "0"
+        ]
+      },
+      "TargetReplicaSetSize": 3,
+      "MinReplicaSetSize": 2,
+      "HasPersistedState": true,
+      "ServicePackageActivationMode": "ExclusiveProcess",
+      "ScalingPolicies": [
+        {
+          "ScalingTrigger": {
+            "Kind": "AverageServiceLoad",
+            "MetricName": "servicefabric:/_MemoryInMB",
+            "LowerLoadThreshold": 500,
+            "UpperLoadThreshold": 900,
+            "ScaleIntervalInSeconds": 600
+          },
+          "ScalingMechanism": {
+            "Kind": "AddRemoveIncrementalNamedPartition",
+            "MinPartitionCount": 1,
+            "MaxPartitionCount": 3,
+            "ScaleIncrement": 1
+          }
         }
-    },
-    "responses": {
-        "202": {}
+      ]
     }
+  },
+  "responses": {
+    "202": {}
+  }
 }

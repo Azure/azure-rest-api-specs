@@ -70,6 +70,42 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.EventHub/availableClusterRegions": {
+      "get": {
+        "tags": [
+          "Event Hubs Clusters"
+        ],
+        "operationId": "Clusters_ListAvailableClusters",
+        "x-ms-examples": {
+          "ListAvailableClusters": {
+            "$ref": "./examples/Clusters/ListAvailableClustersGet.json"
+          }
+        },
+        "description": "List the quantity of available pre-provisioned Event Hubs Clusters, indexed by Azure region.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Available clusters listed successfully.",
+            "schema": {
+              "$ref": "#/definitions/AvailableClustersList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why available clusters could not be successfully listed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters": {
       "get": {
         "tags": [
@@ -153,6 +189,56 @@
           }
         }
       },
+      "put": {
+        "tags": [
+          "Event Hubs Cluster"
+        ],
+        "operationId": "Clusters_Put",
+        "x-ms-examples": {
+          "ClusterPut": {
+            "$ref": "./examples/Clusters/ClusterPut.json"
+          }
+        },
+        "description": "Creates or updates an instance of an Event Hubs Cluster.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster successfully created or updated.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "201": {
+            "description": "Event Hubs Cluster create or update request accepted.",
+            "schema": {
+              "$ref": "#/definitions/Cluster"
+            }
+          },
+          "202": {
+            "description": "Event Hubs Cluster create or update request accepted."
+          },
+          "default": {
+            "description": "Event Hubs error response detailing why the Event Hubs Cluster create or update operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      },
       "patch": {
         "tags": [
           "Event Hubs Cluster"
@@ -211,6 +297,92 @@
           }
         },
         "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "tags": [
+          "Event Hubs Cluster"
+        ],
+        "operationId": "Clusters_Delete",
+        "x-ms-examples": {
+          "ClusterDelete": {
+            "$ref": "./examples/Clusters/ClusterDelete.json"
+          }
+        },
+        "description": "Deletes an existing Event Hubs Cluster. This operation is idempotent.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Event Hubs Cluster successfully deleted."
+          },
+          "202": {
+            "description": "Event Hubs Cluster delete request accepted."
+          },
+          "204": {
+            "description": "No content."
+          },
+          "default": {
+            "description": "Event Hubs error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/namespaces": {
+      "get": {
+        "tags": [
+          "Event Hubs Namespace Enumeration in Cluster"
+        ],
+        "operationId": "Clusters_ListNamespaces",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/resourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/clusterNameParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "description": "List all Event Hubs Namespace IDs in an Event Hubs Dedicated Cluster.",
+        "x-ms-examples": {
+          "ListNamespacesInCluster": {
+            "$ref": "./examples/Clusters/ListNamespacesInClusterGet.json"
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "List of Namespace IDs in Cluster successfully delivered.",
+            "schema": {
+              "$ref": "#/definitions/EHNamespaceIdListResult"
+            }
+          },
+          "default": {
+            "description": "Event Hubs Cluster error response detailing why this operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.EventHub/clusters/{clusterName}/quotaConfiguration/default": {
@@ -436,14 +608,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Namespace create request accepted.",
+          "200": {
+            "description": "Namespace successfully created.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
           },
-          "200": {
-            "description": "Namespace successfully created.",
+          "201": {
+            "description": "Namespace create request accepted.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
@@ -486,14 +658,14 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Namespace successfully deleted."
           },
           "202": {
             "description": "Namespace delete request accepted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -585,14 +757,14 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Namespace update request accepted.",
+          "200": {
+            "description": "Namespace successfully updated.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
           },
-          "200": {
-            "description": "Namespace successfully updated.",
+          "201": {
+            "description": "Namespace update request accepted.",
             "schema": {
               "$ref": "#/definitions/EHNamespace"
             }
@@ -736,11 +908,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Namespace IpFilterRule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -921,11 +1093,11 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "No content."
-          },
           "200": {
             "description": "Namespace VirtualNetworkRule successfully deleted."
+          },
+          "204": {
+            "description": "No content."
           },
           "default": {
             "description": "Eventhub error response describing why the operation failed.",
@@ -1144,6 +1316,11 @@
               "readOnly": true,
               "type": "string",
               "description": "The metric ID of the cluster resource. Provided by the service and not modifiable by the user."
+            },
+            "status": {
+              "readOnly": true,
+              "type": "string",
+              "description": "Status of the Cluster resource"
             }
           },
           "description": "Event Hubs Cluster properties supplied in responses in List or Get operations."
@@ -1155,6 +1332,27 @@
         }
       ],
       "description": "Single Event Hubs Cluster resource in List or Get operations."
+    },
+    "AvailableClustersList": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AvailableCluster"
+          },
+          "description": "The count of readily available and pre-provisioned Event Hubs Clusters per region."
+        }
+      },
+      "description": "The response of the List Available Clusters operation."
+    },
+    "AvailableCluster": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Location fo the Available Cluster"
+        }
+      },
+      "description": "Pre-provisioned and readily available Event Hubs Cluster count per region."
     },
     "ClusterListResult": {
       "properties": {
@@ -1276,6 +1474,28 @@
       ],
       "description": "SKU parameters particular to a cluster instance."
     },
+    "EHNamespaceIdListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/EHNamespaceIdContainer"
+          },
+          "description": "Result of the List Namespace IDs operation"
+        }
+      },
+      "description": "The response of the List Namespace IDs operation"
+    },
+    "EHNamespaceIdContainer": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "id parameter"
+        }
+      },
+      "description": "The full ARM ID of an Event Hubs Namespace"
+    },
     "EHNamespaceListResult": {
       "properties": {
         "value": {
@@ -1323,6 +1543,10 @@
               "type": "string",
               "description": "Endpoint you can use to perform Service Bus operations."
             },
+            "clusterArmId": {
+              "type": "string",
+              "description": "Cluster ARM ID of the Namespace."
+            },
             "metricId": {
               "readOnly": true,
               "type": "string",
@@ -1346,6 +1570,14 @@
             "zoneRedundant": {
               "type": "boolean",
               "description": "Enabling this property creates a Standard Event Hubs Namespace in regions supported availability zones."
+            },
+            "identity": {
+              "$ref": "#/definitions/Identity",
+              "description": "Properties of BYOK Identity description"
+            },
+            "encryption": {
+              "$ref": "#/definitions/Encryption",
+              "description": "Properties of BYOK Encryption description"
             }
           },
           "description": "Namespace properties supplied for create namespace operation."
@@ -1571,6 +1803,67 @@
         }
       ],
       "description": "Description of topic resource."
+    },
+    "Identity": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "principalId": {
+          "type": "string",
+          "description": "ObjectId from the KeyVault"
+        },
+        "tenantId": {
+          "type": "string",
+          "description": "TenantId from the KeyVault"
+        },
+        "type": {
+          "type": "string",
+          "description": "Enumerates the possible value Identity type, which currently supports only 'SystemAssigned'",
+          "default": "SystemAssigned",
+          "enum": [
+            "SystemAssigned"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityType",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Identity for Bring your Own Keys"
+    },
+    "Encryption": {
+      "x-ms-client-flatten": true,
+      "properties": {
+        "keyVaultProperties": {
+          "$ref": "#/definitions/KeyVaultProperties",
+          "description": "Properties of KeyVault"
+        },
+        "keySource": {
+          "type": "string",
+          "description": "Enumerates the possible value of keySource for Encryption",
+          "default": "Microsoft.KeyVault",
+          "enum": [
+            "Microsoft.KeyVault"
+          ],
+          "x-ms-enum": {
+            "name": "keySource",
+            "modelAsString": false
+          }
+        }
+      },
+      "description": "Properties to configure Encryption"
+    },
+    "KeyVaultProperties": {
+      "properties": {
+        "keyName": {
+          "type": "string",
+          "description": "Name of the Key from KeyVault"
+        },
+        "keyVaultUri": {
+          "type": "string",
+          "description": "Uri of KeyVault"
+        }
+      },
+      "description": "Properties to configure keyVault Properties"
     }
   },
   "parameters": {

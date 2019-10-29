@@ -6,23 +6,24 @@ This is the AutoRest configuration file for DNS.
 
 ## Common C# Settings
 
-``` yaml $(csharp)
+```yaml $(csharp)
 csharp:
   azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION  
+  license-header: MICROSOFT_MIT_NO_VERSION
   clear-output-folder: true
 ```
 
-``` yaml $(csharp) && !$(multiapi) && !$(profile)
+```yaml $(csharp) && !$(multiapi) && !$(csharp-profile)
 payload-flattening-threshold: 2
 namespace: Microsoft.Azure.Management.Storage
-output-folder: $(csharp-sdks-folder)/Storage/Management.Storage/Generated
+output-folder: $(csharp-sdks-folder)/storage/Microsoft.Azure.Management.Storage/src/Generated
 ```
 
 ## Batch settings
+
 These settings are for batch mode only: (ie, add `--multiapi` to the command line )
 
-``` yaml $(multiapi)
+```yaml $(multiapi)
 namespace: Microsoft.Azure.Management.Storage.$(ApiVersionName)
 output-folder: $(csharp-sdks-folder)/$(ApiVersionName)/Generated
 
@@ -36,11 +37,11 @@ batch:
 
 ### Profile: hybrid_2018_03_01
 
-These settings apply only when `--profile=hybrid_2018_03_01` is specified on the command line.
+These settings apply only when `--csharp-profile=hybrid_2018_03_01` is specified on the command line.
 
-```yaml $(profile)=='hybrid_2018_03_01'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Storage
-output-folder: $(csharp-sdks-folder)/$(profile)/Storage/Management.Storage/Generated
+```yaml $(csharp-profile)=='hybrid_2018_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Storage
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.Management.Storage/src/Generated
 batch:
   - tag: package-2018-03
   - tag: package-2018-02
@@ -50,11 +51,22 @@ batch:
 
 ### Profile: profile_2017_03_09
 
-These settings apply only when `--profile=profile_2017_03_09` is specified on the command line.
+These settings apply only when `--csharp-profile=profile_2017_03_09` is specified on the command line.
 
-```yaml $(profile)=='profile_2017_03_09'
-namespace: Microsoft.Azure.Management.Profiles.$(profile).Storage
-output-folder: $(csharp-sdks-folder)/$(profile)/Storage/Management.Storage/Generated
+```yaml $(csharp-profile)=='profile_2017_03_09'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Storage
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.Management.Storage/src/Generated
 batch:
   - tag: package-2016-01
+```
+
+### Profile: hybrid_2019_03_01
+
+These settings apply only when `--csharp-profile=hybrid_2019_03_01` is specified on the command line.
+
+```yaml $(csharp-profile)=='hybrid_2019_03_01'
+namespace: Microsoft.Azure.Management.Profiles.$(csharp-profile).Storage
+output-folder: $(csharp-sdks-folder)/$(csharp-profile)/storage/Microsoft.Azure.Management.Storage/src/Generated
+batch:
+  - tag: profile-hybrid-2019-03-01
 ```

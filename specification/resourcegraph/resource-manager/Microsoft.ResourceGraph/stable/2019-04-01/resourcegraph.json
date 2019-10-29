@@ -74,17 +74,39 @@
           }
         },
         "x-ms-examples": {
-          "Basic query": { "$ref": "./examples/ResourcesBasicQuery.json" },
-          "Filter resources": { "$ref": "./examples/ResourcesFilterQuery.json" },
-          "Summarize resources by location": { "$ref": "./examples/ResourcesSummarizeQuery.json" },
-          "Complex query": { "$ref": "./examples/ResourcesComplexQuery.json" },
-          "Access a properties field": { "$ref": "./examples/ResourcesPropertiesQuery.json" },
-          "Access a properties field through alias": { "$ref": "./examples/ResourcesAliasQuery.json" },
-          "Query with a facet request": { "$ref": "./examples/ResourcesFacetQuery.json" },
-          "Query options": { "$ref": "./examples/ResourcesQueryOptions.json" },
-          "First page query": { "$ref": "./examples/ResourcesFirstPageQuery.json" },
-          "Next page query": { "$ref": "./examples/ResourcesNextPageQuery.json" },
-          "Random page query": { "$ref": "./examples/ResourcesRandomPageQuery.json" }
+          "Basic query": {
+            "$ref": "./examples/ResourcesBasicQuery.json"
+          },
+          "Filter resources": {
+            "$ref": "./examples/ResourcesFilterQuery.json"
+          },
+          "Summarize resources by location": {
+            "$ref": "./examples/ResourcesSummarizeQuery.json"
+          },
+          "Complex query": {
+            "$ref": "./examples/ResourcesComplexQuery.json"
+          },
+          "Access a properties field": {
+            "$ref": "./examples/ResourcesPropertiesQuery.json"
+          },
+          "Access a properties field through alias": {
+            "$ref": "./examples/ResourcesAliasQuery.json"
+          },
+          "Query with a facet request": {
+            "$ref": "./examples/ResourcesFacetQuery.json"
+          },
+          "Query options": {
+            "$ref": "./examples/ResourcesQueryOptions.json"
+          },
+          "First page query": {
+            "$ref": "./examples/ResourcesFirstPageQuery.json"
+          },
+          "Next page query": {
+            "$ref": "./examples/ResourcesNextPageQuery.json"
+          },
+          "Random page query": {
+            "$ref": "./examples/ResourcesRandomPageQuery.json"
+          }
         }
       }
     },
@@ -96,7 +118,9 @@
         "description": "Lists all of the available REST API operations.",
         "operationId": "Operations_List",
         "x-ms-examples": {
-          "OperationsList": { "$ref": "./examples/OperationsList.json" }
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
         },
         "parameters": [
           {
@@ -170,6 +194,18 @@
           "type": "integer",
           "format": "int32",
           "minimum": 0
+        },
+        "resultFormat": {
+          "description": "Defines in which format query result returned.",
+          "type": "string",
+          "enum": [
+            "table",
+            "objectArray"
+          ],
+          "x-ms-enum": {
+            "name": "ResultFormat",
+            "modelAsString": false
+          }
         }
       }
     },
@@ -254,8 +290,7 @@
           "type": "string"
         },
         "data": {
-          "description": "Query output in tabular format.",
-          "$ref": "#/definitions/Table"
+          "description": "Query output in tabular format."
         },
         "facets": {
           "description": "Query facets.",
@@ -358,7 +393,7 @@
       ],
       "discriminator": "resultType"
     },
-    "FacetResult" : {
+    "FacetResult": {
       "x-ms-discriminator-value": "FacetResult",
       "description": "Successfully executed facet containing additional statistics on the response of a query.",
       "type": "object",
@@ -374,8 +409,7 @@
           "format": "int32"
         },
         "data": {
-          "description": "A table containing the desired facets. Only present if the facet is valid.",
-          "$ref": "#/definitions/Table"
+          "description": "A table containing the desired facets. Only present if the facet is valid."
         }
       },
       "required": [
@@ -389,7 +423,7 @@
         }
       ]
     },
-    "FacetError" : {
+    "FacetError": {
       "x-ms-discriminator-value": "FacetError",
       "description": "A facet whose execution resulted in an error.",
       "type": "object",
@@ -473,7 +507,7 @@
       ]
     },
     "OperationListResult": {
-     "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
+      "description": "Result of the request to list Resource Graph operations. It contains a list of operations and a URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
@@ -513,7 +547,7 @@
           }
         },
         "origin": {
-          "type" : "string",
+          "type": "string",
           "description": "The origin of operations."
         }
       }

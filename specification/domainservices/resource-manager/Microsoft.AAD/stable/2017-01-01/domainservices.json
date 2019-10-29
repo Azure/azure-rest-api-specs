@@ -244,10 +244,7 @@
         ],
         "responses": {
           "202": {
-            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously.",
-            "schema": {
-              "$ref": "#/definitions/DomainService"
-            }
+            "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
           "204": {
             "description": "HTTP 204 (Not Content) should be used if the resource does not exist and the request is well formed."
@@ -335,7 +332,10 @@
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability":["read", "create"]
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "tags": {
           "type": "object",
@@ -598,24 +598,24 @@
       "properties": {
         "notifyGlobalAdmins": {
           "type": "string",
-		  "enum": [
+          "enum": [
             "Enabled",
             "Disabled"
           ],
           "description": "Should global admins be notified",
-		  "x-ms-enum": {
+          "x-ms-enum": {
             "name": "notifyGlobalAdmins",
             "modelAsString": true
           }
         },
         "notifyDcAdmins": {
           "type": "string",
-		  "enum": [
+          "enum": [
             "Enabled",
             "Disabled"
           ],
           "description": "Should domain controller admins be notified",
-		  "x-ms-enum": {
+          "x-ms-enum": {
             "name": "notifyDcAdmins",
             "modelAsString": true
           }

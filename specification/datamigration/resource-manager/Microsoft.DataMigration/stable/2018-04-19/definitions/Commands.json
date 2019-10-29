@@ -20,7 +20,6 @@
     "CommandProperties": {
       "type": "object",
       "description": "Base class for all types of DMS command properties. If command is not supported by current client, this object is returned.",
-      "x-ms-discriminator-value": "Unknown",
       "properties": {
         "commandType": {
           "description": "Command type.",
@@ -51,7 +50,9 @@
           "readOnly": true
         }
       },
-      "required": [ "commandType" ],
+      "required": [
+        "commandType"
+      ],
       "discriminator": "commandType"
     },
     "MigrateSyncCompleteCommandProperties": {
@@ -96,7 +97,7 @@
     "MigrateSyncCompleteCommandOutput": {
       "type": "object",
       "description": "Output for command that completes sync migration for a database.",
-	  "properties": {
+      "properties": {
         "id": {
           "type": "string",
           "description": "Result identifier",

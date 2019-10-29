@@ -19,16 +19,40 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
 These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-03-preview
+tag: package-2019-06-01
 ```
 
+### Tag: package-2019-06-01
+
+These settings apply only when `--tag=package-2019-06-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-06-01'
+input-file:
+- Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
+```
+
+### Tag: package-2019-05-01
+
+These settings apply only when `--tag=package-2019-05-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-05-01'
+input-file:
+- Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
+```
+
+### Tag: package-2018-11-19
+
+These settings apply only when `--tag=package-2018-11-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2018-11-19'
+input-file:
+- Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+```
 
 ### Tag: package-2018-03-preview
 
@@ -50,6 +74,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-js
@@ -67,37 +92,10 @@ csharp:
   azure-arm: true
   license-header: MICROSOFT_MIT_NO_VERSION
   namespace: Microsoft.Azure.Management.MachineLearningServices
-  output-folder: $(csharp-sdks-folder)/MachineLearningServices/Management.MachineLearningServices/Generated
+  output-folder: $(csharp-sdks-folder)/machinelearningservices/Microsoft.Azure.Management.MachineLearningServices/src/Generated
   clear-output-folder: true
 ```
 
-## Python
-
-These settings apply only when `--python` is specified on the command line.
-Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
-Use `--python-mode=update` if you already have a setup.py and just want to update the code itself.
-
-``` yaml $(python)
-python-mode: create
-python:
-  azure-arm: true
-  license-header: MICROSOFT_MIT_NO_VERSION
-  payload-flattening-threshold: 2
-  namespace: azure.mgmt.machinelearningservices
-  package-name: azure-mgmt-machinelearningservices
-  package-version: 0.1.0
-  clear-output-folder: true
-```
-``` yaml $(python) && $(python-mode) == 'update'
-python:
-  no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-machinelearningservices/azure/mgmt/machinelearningservices
-```
-``` yaml $(python) && $(python-mode) == 'create'
-python:
-  basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-machinelearningservices
-```
 
 ## Go
 
@@ -121,7 +119,49 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-machinelearning/ser
 
 ``` yaml $(java) && $(multiapi)
 batch:
+  - tag: package-2019-06-01
+  - tag: package-2019-05-01
+  - tag: package-2018-11-19
   - tag: package-2018-03-preview
+```
+
+### Tag: package-2019-06-01 and java
+
+These settings apply only when `--tag=package-2019-05-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-06-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2019_06_01
+  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_06_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2019-05-01 and java
+
+These settings apply only when `--tag=package-2019-05-01 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2019-05-01' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2019_05_01
+  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2019_05_01
+regenerate-manager: true
+generate-interface: true
+```
+
+### Tag: package-2018-11-19 and java
+
+These settings apply only when `--tag=package-2018-11-19 --java` is specified on the command line.
+Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
+
+``` yaml $(tag) == 'package-2018-11-19' && $(java) && $(multiapi)
+java:
+  namespace: com.microsoft.azure.management.machinelearningservices.v2018_11_19
+  output-folder: $(azure-libraries-for-java-folder)/machinelearningservices/resource-manager/v2018_11_19
+regenerate-manager: true
+generate-interface: true
 ```
 
 ### Tag: package-2018-03-preview and java
@@ -137,4 +177,30 @@ regenerate-manager: true
 generate-interface: true
 ```
 
+## Multi-API/Profile support for AutoRest v3 generators 
+
+AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
+
+This block is updated by an automatic script. Edits may be lost!
+
+``` yaml $(tag) == 'all-api-versions' /* autogenerated */
+# include the azure profile definitions from the standard location
+require: $(this-folder)/../../../profiles/readme.md
+
+# all the input files across all versions
+input-file:
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-06-01/machineLearningServices.json
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2019-05-01/machineLearningServices.json
+  - $(this-folder)/Microsoft.MachineLearningServices/stable/2018-11-19/machineLearningServices.json
+  - $(this-folder)/Microsoft.MachineLearningServices/preview/2018-03-01-preview/machineLearningServices.json
+
+```
+
+If there are files that should not be in the `all-api-versions` set, 
+uncomment the  `exclude-file` section below and add the file paths.
+
+``` yaml $(tag) == 'all-api-versions'
+#exclude-file: 
+#  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
+```
 
