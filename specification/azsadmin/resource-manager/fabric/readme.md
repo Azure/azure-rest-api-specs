@@ -121,7 +121,8 @@ input-file:
 directive:
   - from: FabricLocation.json
     suppress: 
-      - LintDiff
+      - NO_CAMEL_CASE
+    where: $.definitions.FabricLocationModel
     reason: The fields may have customized names, no camel case
 ```
 
