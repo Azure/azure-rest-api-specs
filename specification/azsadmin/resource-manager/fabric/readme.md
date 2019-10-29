@@ -121,7 +121,7 @@ input-file:
 directive:
   - from: FabricLocation.json
     suppress: 
-      - L1624
+      - LintDiff
     reason: The fields may have customized names, no camel case
 ```
 
