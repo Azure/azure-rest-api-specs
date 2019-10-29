@@ -59,9 +59,18 @@
       ]
     },
     "Capability": {
+      "type": "object",
       "allOf": [
         {
           "$ref": "#/definitions/NamedEntity"
+        },
+        {
+          "properties": {
+            "test": {
+              "description": "Test whether this helps linter",
+              "type": "string"
+            }
+          }
         }
       ],
       "additionalProperties": true
