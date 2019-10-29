@@ -67,6 +67,21 @@ directive:
       return $;
 ```
 
+## Java
+These settings apply only when `--java` is specified on the command line.
+Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
+
+``` yaml $(java)
+java:
+  azure-arm: true
+  namespace: com.microsoft.azure.cognitiveservices.personalizer
+  license-header: MICROSOFT_MIT_NO_CODEGEN
+  payload-flattening-threshold: 1
+  output-folder: $(azure-libraries-for-java-folder)/cognitiveservices/data-plane/personalizer
+  with-optional-parameters: true
+  with-single-async-method: true
+```
+
 ## Multi-API/Profile support for AutoRest v3 generators 
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
