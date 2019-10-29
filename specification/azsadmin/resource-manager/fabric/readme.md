@@ -122,8 +122,10 @@ directive:
   - from: FabricLocation.json
     suppress: 
       - R3016
-    where: $.definitions.FabricLocationModel
-    reason: The fields may have customized names, no camel case
+    where: 
+      - $.definitions.FabricLocationModel.externalDNSIPAddress01
+      - $.definitions.FabricLocationModel.externalDNSIPAddress02
+    reason: externalDNSIPAddress01 and externalDNSIPAddress02 are customized names, no camel case restriction needed.
 ```
 
 ---
