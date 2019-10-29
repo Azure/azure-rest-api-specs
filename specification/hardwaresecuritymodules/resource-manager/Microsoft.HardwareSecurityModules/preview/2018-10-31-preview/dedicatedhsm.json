@@ -28,6 +28,31 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.HardwareSecurityModules/operations": {
+      "get": {
+        "tags": [
+          "DedicatedHsmOperations"
+        ],
+        "operationId": "Operations_List",
+        "description": "Gets a list of Dedicated HSM operations.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/DedicatedHsmOperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HardwareSecurityModules/dedicatedHSMs/{name}": {
       "put": {
         "tags": [
@@ -392,6 +417,45 @@
     }
   },
   "definitions": {
+    "DedicatedHsmOperation": {
+      "description": "REST API operation",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the Dedicated HSM Resource Provider Operation.",
+          "type": "string"
+        },
+        "display": {
+          "description": "The object that represents the operation.",
+          "properties": {
+            "provider": {
+              "description": "The Resource Provider of the operation",
+              "type": "string"
+            },
+            "resource": {
+              "description": "Resource on which the operation is performed.",
+              "type": "string"
+            },
+            "operation": {
+              "description": "Operation type: Read, write, delete, etc.",
+              "type": "string"
+            }
+          }
+        }
+      }
+    },
+    "DedicatedHsmOperationListResult": {
+      "description": "Result of the request to list Dedicated HSM Provider operations. It contains a list of operations.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DedicatedHsmOperation"
+          },
+          "description": "List of Dedicated HSM Resource Provider operations."
+        }
+      }
+    },
     "ApiEntityReference": {
       "properties": {
         "id": {
