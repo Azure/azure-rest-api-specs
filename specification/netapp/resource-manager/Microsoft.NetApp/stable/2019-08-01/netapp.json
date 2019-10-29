@@ -8,21 +8,13 @@
       "name": "AzureNetAppFilesManagementClient"
     }
   },
-  "consumes": [
-    "application/json"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "schemes": [
-    "https"
-  ],
+  "consumes": ["application/json"],
+  "produces": ["application/json"],
+  "schemes": ["https"],
   "host": "management.azure.com",
   "security": [
     {
-      "azure_auth": [
-        "user_impersonation"
-      ]
+      "azure_auth": ["user_impersonation"]
     }
   ],
   "securityDefinitions": {
@@ -39,9 +31,7 @@
   "paths": {
     "/providers/Microsoft.NetApp/operations": {
       "get": {
-        "tags": [
-          "Operations"
-        ],
+        "tags": ["Operations"],
         "summary": "Describes the Resource Provider",
         "description": "Lists all of the available Microsoft.NetApp Rest API operations",
         "operationId": "Operations_List",
@@ -158,9 +148,7 @@
       "get": {
         "summary": "Describe all NetApp Accounts in a resource group",
         "description": "List and describe all NetApp accounts in the resource group",
-        "tags": [
-          "NetApp Accounts"
-        ],
+        "tags": ["NetApp Accounts"],
         "operationId": "Accounts_List",
         "parameters": [
           {
@@ -198,9 +186,7 @@
       "get": {
         "summary": "Describe a NetApp Account",
         "description": "Get the NetApp account",
-        "tags": [
-          "NetApp Accounts"
-        ],
+        "tags": ["NetApp Accounts"],
         "operationId": "Accounts_Get",
         "parameters": [
           {
@@ -234,9 +220,7 @@
         }
       },
       "put": {
-        "tags": [
-          "NetApp Accounts"
-        ],
+        "tags": ["NetApp Accounts"],
         "operationId": "Accounts_CreateOrUpdate",
         "summary": "Create or update a NetApp account",
         "description": "Create or update the specified NetApp account within the resource group",
@@ -291,9 +275,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "NetApp Accounts"
-        ],
+        "tags": ["NetApp Accounts"],
         "operationId": "Accounts_Delete",
         "summary": "Delete a NetApp account",
         "parameters": [
@@ -330,9 +312,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "NetApp Accounts"
-        ],
+        "tags": ["NetApp Accounts"],
         "operationId": "Accounts_Update",
         "summary": "Update a NetApp account",
         "description": "Patch the specified NetApp account",
@@ -384,9 +364,7 @@
       "get": {
         "summary": "Describe all Capacity Pools",
         "description": "List all capacity pools in the NetApp Account",
-        "tags": [
-          "Capacity Pools"
-        ],
+        "tags": ["Capacity Pools"],
         "operationId": "Pools_List",
         "parameters": [
           {
@@ -427,9 +405,7 @@
       "get": {
         "summary": "Describe a Capacity Pool",
         "description": "Get details of the specified capacity pool",
-        "tags": [
-          "Capacity Pools"
-        ],
+        "tags": ["Capacity Pools"],
         "operationId": "Pools_Get",
         "parameters": [
           {
@@ -466,9 +442,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Capacity Pools"
-        ],
+        "tags": ["Capacity Pools"],
         "operationId": "Pools_CreateOrUpdate",
         "summary": "Create or Update the specified capacity pool within the resource group",
         "description": "Create or Update a capacity pool",
@@ -526,9 +500,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Capacity Pools"
-        ],
+        "tags": ["Capacity Pools"],
         "operationId": "Pools_Update",
         "summary": "Update a capacity pool",
         "description": "Patch the specified capacity pool",
@@ -579,9 +551,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Capacity Pools"
-        ],
+        "tags": ["Capacity Pools"],
         "operationId": "Pools_Delete",
         "summary": "Delete a capacity pool",
         "description": "Delete the specified capacity pool",
@@ -642,9 +612,7 @@
             "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
-        "tags": [
-          "Volumes"
-        ],
+        "tags": ["Volumes"],
         "operationId": "Volumes_List",
         "x-ms-pageable": {
           "nextLinkName": null
@@ -669,9 +637,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}": {
       "get": {
-        "tags": [
-          "Volumes"
-        ],
+        "tags": ["Volumes"],
         "operationId": "Volumes_Get",
         "summary": "Describe a volume",
         "description": "Get the details of the specified volume",
@@ -713,9 +679,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Volumes"
-        ],
+        "tags": ["Volumes"],
         "operationId": "Volumes_CreateOrUpdate",
         "summary": "Create or Update a volume",
         "description": "Create or update the specified volume within the capacity pool",
@@ -776,9 +740,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Volumes"
-        ],
+        "tags": ["Volumes"],
         "operationId": "Volumes_Update",
         "summary": "Update a volume",
         "description": "Patch the specified volume",
@@ -832,9 +794,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Volumes"
-        ],
+        "tags": ["Volumes"],
         "operationId": "Volumes_Delete",
         "summary": "Delete a volume",
         "description": "Delete the specified volume",
@@ -879,9 +839,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/mountTargets": {
       "get": {
-        "tags": [
-          "MountTargets"
-        ],
+        "tags": ["MountTargets"],
         "operationId": "MountTargets_List",
         "summary": "Describe all mount targets",
         "parameters": [
@@ -928,9 +886,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots": {
       "get": {
-        "tags": [
-          "Snapshots"
-        ],
+        "tags": ["Snapshots"],
         "operationId": "Snapshots_List",
         "summary": "Describe all snapshots",
         "parameters": [
@@ -977,9 +933,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.NetApp/netAppAccounts/{accountName}/capacityPools/{poolName}/volumes/{volumeName}/snapshots/{snapshotName}": {
       "get": {
-        "tags": [
-          "Snapshots"
-        ],
+        "tags": ["Snapshots"],
         "operationId": "Snapshots_Get",
         "summary": "Describe a snapshot",
         "description": "Get details of the specified snapshot",
@@ -1024,9 +978,7 @@
         }
       },
       "put": {
-        "tags": [
-          "Snapshots"
-        ],
+        "tags": ["Snapshots"],
         "operationId": "Snapshots_Create",
         "summary": "Create a snapshot",
         "description": "Create the specified snapshot within the given volume",
@@ -1084,9 +1036,7 @@
         }
       },
       "patch": {
-        "tags": [
-          "Snapshots"
-        ],
+        "tags": ["Snapshots"],
         "operationId": "Snapshots_Update",
         "summary": "Update a snapshot",
         "description": "Patch a snapshot",
@@ -1143,9 +1093,7 @@
         }
       },
       "delete": {
-        "tags": [
-          "Snapshots"
-        ],
+        "tags": ["Snapshots"],
         "operationId": "Snapshots_Delete",
         "summary": "Delete a snapshot",
         "description": "Delete snapshot",
@@ -1336,10 +1284,7 @@
         },
         "reason": {
           "description": "<code>Invalid</code> indicates the name provided does not match Azure App Service naming requirements. <code>AlreadyExists</code> indicates that the name is already in use and is therefore unavailable.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
+          "enum": ["Invalid", "AlreadyExists"],
           "type": "string",
           "x-ms-enum": {
             "name": "InAvailabilityReasonType",
@@ -1354,11 +1299,7 @@
     },
     "ResourceNameAvailabilityRequest": {
       "description": "Resource name availability request content.",
-      "required": [
-        "name",
-        "type",
-        "resourceGroup"
-      ],
+      "required": ["name", "type", "resourceGroup"],
       "type": "object",
       "properties": {
         "name": {
@@ -1402,17 +1343,12 @@
       "description": "NetApp account resource",
       "type": "object",
       "x-ms-azure-resource": true,
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "properties": {
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "id": {
           "type": "string",
@@ -1548,18 +1484,12 @@
       "description": "Capacity pool resource",
       "type": "object",
       "x-ms-azure-resource": true,
-      "required": [
-        "location",
-        "properties"
-      ],
+      "required": ["location", "properties"],
       "properties": {
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "id": {
           "type": "string",
@@ -1590,10 +1520,7 @@
     "poolProperties": {
       "description": "Pool properties",
       "type": "object",
-      "required": [
-        "size",
-        "serviceLevel"
-      ],
+      "required": ["size", "serviceLevel"],
       "properties": {
         "poolId": {
           "title": "poolId",
@@ -1617,11 +1544,7 @@
           "title": "serviceLevel",
           "type": "string",
           "description": "The service level of the file system",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra"
-          ],
+          "enum": ["Standard", "Premium", "Ultra"],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
@@ -1702,11 +1625,7 @@
           "title": "serviceLevel",
           "type": "string",
           "description": "The service level of the file system",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra"
-          ],
+          "enum": ["Standard", "Premium", "Ultra"],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
@@ -1747,18 +1666,12 @@
       "description": "Volume resource",
       "type": "object",
       "x-ms-azure-resource": true,
-      "required": [
-        "location",
-        "properties"
-      ],
+      "required": ["location", "properties"],
       "properties": {
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "id": {
           "type": "string",
@@ -1796,11 +1709,7 @@
     "volumeProperties": {
       "description": "Volume properties",
       "type": "object",
-      "required": [
-        "creationToken",
-        "usageThreshold",
-        "subnetId"
-      ],
+      "required": ["creationToken", "usageThreshold", "subnetId"],
       "properties": {
         "fileSystemId": {
           "title": "FileSystem ID",
@@ -1824,11 +1733,7 @@
           "title": "serviceLevel",
           "type": "string",
           "description": "The service level of the file system",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra"
-          ],
+          "enum": ["Standard", "Premium", "Ultra"],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
@@ -1881,7 +1786,7 @@
           "items": {
             "type": "string"
           },
-          "example": [ "NFSv4.1" ]
+          "example": ["NFSv4.1"]
         },
         "provisioningState": {
           "type": "string",
@@ -2000,7 +1905,7 @@
         "remoteVolumeResourceId": {
           "title": "remoteVolumeResourceId",
           "type": "string",
-          "description": "The resource ID of the remote volume."
+          "description": "The resouce ID of the remote volume."
         }
       }
     },
@@ -2047,11 +1952,7 @@
           "title": "serviceLevel",
           "type": "string",
           "description": "The service level of the file system",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra"
-          ],
+          "enum": ["Standard", "Premium", "Ultra"],
           "x-ms-enum": {
             "name": "ServiceLevel",
             "modelAsString": true,
@@ -2115,10 +2016,7 @@
     "mountTarget": {
       "description": "Mount Target",
       "type": "object",
-      "required": [
-        "location",
-        "properties"
-      ],
+      "required": ["location", "properties"],
       "properties": {
         "location": {
           "type": "string",
@@ -2154,9 +2052,7 @@
     "mountTargetProperties": {
       "description": "Mount target properties",
       "type": "object",
-      "required": [
-        "fileSystemId"
-      ],
+      "required": ["fileSystemId"],
       "properties": {
         "mountTargetId": {
           "title": "mountTargetId",
@@ -2244,17 +2140,12 @@
       "description": "Snapshot of a Volume",
       "type": "object",
       "x-ms-azure-resource": true,
-      "required": [
-        "location"
-      ],
+      "required": ["location"],
       "properties": {
         "location": {
           "type": "string",
           "description": "Resource location",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "x-ms-mutability": ["read", "create"]
         },
         "id": {
           "type": "string",
