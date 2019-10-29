@@ -6,11 +6,11 @@
     "profileName": "profile1",
     "endpointName": "endpoint1",
     "endpoint": {
-	  "location": "WestUs",
-    "tags": {
+      "location": "WestUs",
+      "tags": {
         "key1": "value1"
-    },
-    "properties": {
+      },
+      "properties": {
         "originHostHeader": "www.bing.com",
         "originPath": "/photos",
         "contentTypesToCompress": [
@@ -21,8 +21,7 @@
         "isHttpAllowed": true,
         "isHttpsAllowed": true,
         "queryStringCachingBehavior": "BypassCaching",
-        "defaultOriginGroup": 
-        {
+        "defaultOriginGroup": {
           "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
         },
         "deliveryPolicy": {
@@ -81,54 +80,53 @@
           {
             "name": "origin1",
             "properties": {
-               "hostName": "www.someDomain1.net",
-               "httpPort": 80,
-               "httpsPort": 443,
-               "originHostHeader": "www.someDomain1.net",
-               "priority": 1,
-               "weight": 50,
-               "enabled": true
-             }
+              "hostName": "www.someDomain1.net",
+              "httpPort": 80,
+              "httpsPort": 443,
+              "originHostHeader": "www.someDomain1.net",
+              "priority": 1,
+              "weight": 50,
+              "enabled": true
+            }
           },
-		      {
+          {
             "name": "origin2",
             "properties": {
-               "hostName": "www.someDomain2.net",
-               "httpPort": 80,
-               "httpsPort": 443,
-               "originHostHeader": "www.someDomain2.net",
-               "priority": 2,
-               "weight": 50,
-               "enabled": true
-             }
+              "hostName": "www.someDomain2.net",
+              "httpPort": 80,
+              "httpsPort": 443,
+              "originHostHeader": "www.someDomain2.net",
+              "priority": 2,
+              "weight": 50,
+              "enabled": true
+            }
           }
         ],
-		    "originGroups": [
-		     {
-		        "name": "originGroup1",
+        "originGroups": [
+          {
+            "name": "originGroup1",
             "properties": {
-            "healthProbeSettings":
-            {
+              "healthProbeSettings": {
                 "probePath": "/health.aspx",
                 "probeRequestType": "GET",
                 "probeProtocol": "Http",
                 "probeIntervalInSeconds": 120
-            },
-            "origins": [
-                 {
-                   "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
-                 },
-				         {
-                   "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
-                 }
-                ],
-            "responseBasedOriginErrorDetectionSettings":{
+              },
+              "origins": [
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+                },
+                {
+                  "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
+                }
+              ],
+              "responseBasedOriginErrorDetectionSettings": {
                 "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
-                "responseBasedFailoverThresholdPercentage" : 10
-             }  
-		        }
-		      }
-		    ]
+                "responseBasedFailoverThresholdPercentage": 10
+              }
+            }
+          }
+        ]
       }
     }
   },
@@ -151,62 +149,60 @@
           "isHttpsAllowed": true,
           "queryStringCachingBehavior": "BypassCaching",
           "originPath": "/photos",
-          "defaultOriginGroup": 
-          {
+          "defaultOriginGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
           },
           "origins": [
-          {
-            "name": "origin1",
-            "properties": {
-               "hostName": "www.someDomain1.net",
-               "httpPort": 80,
-               "httpsPort": 443,
-               "originHostHeader": "www.someDomain1.net",
-               "priority": 1,
-               "weight": 50,
-               "enabled": true
-             }
-          },
-		      {
-            "name": "origin2",
-            "properties": {
-               "hostName": "www.someDomain2.net",
-               "httpPort": 80,
-               "httpsPort": 443,
-               "originHostHeader": "www.someDomain2.net",
-               "priority": 2,
-               "weight": 50,
-               "enabled": true 
-             }
-          }
+            {
+              "name": "origin1",
+              "properties": {
+                "hostName": "www.someDomain1.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain1.net",
+                "priority": 1,
+                "weight": 50,
+                "enabled": true
+              }
+            },
+            {
+              "name": "origin2",
+              "properties": {
+                "hostName": "www.someDomain2.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50,
+                "enabled": true
+              }
+            }
           ],
-		      "originGroups": [
-		      {
-		        "name": "originGroup1",
-            "properties": {
-               "healthProbeSettings":
-                {
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
                   "probePath": "/health.aspx",
                   "probeRequestType": "GET",
                   "probeProtocol": "Http",
                   "probeIntervalInSeconds": 120
                 },
                 "origins": [
-                 {
-                   "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
-                 },
-				         {
-                   "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
-                 }
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
+                  }
                 ],
-                "responseBasedOriginErrorDetectionSettings":{
+                "responseBasedOriginErrorDetectionSettings": {
                   "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
-                  "responseBasedFailoverThresholdPercentage" : 10
+                  "responseBasedFailoverThresholdPercentage": 10
                 }
-		         }
-		      }
-		      ],
+              }
+            }
+          ],
           "contentTypesToCompress": [
             "text/html",
             "application/octet-stream"
@@ -289,62 +285,60 @@
           "isHttpsAllowed": true,
           "queryStringCachingBehavior": "BypassCaching",
           "originPath": "/photos",
-          "defaultOriginGroup": 
-          {
+          "defaultOriginGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
           },
           "origins": [
-          {
-            "name": "origin1",
-            "properties": {
-               "hostName": "www.someDomain1.net",
-               "httpPort": 80,
-               "httpsPort": 443,
-               "originHostHeader": "www.someDomain1.net",
-               "priority": 1,
-               "weight": 50,
-               "enabled": true
-             }
-          },
-		      {
-            "name": "origin2",
-            "properties": {
-               "hostName": "www.someDomain2.net",
-               "httpPort": 80,
-               "httpsPort": 443,
-               "originHostHeader": "www.someDomain2.net",
-               "priority": 2,
-               "weight": 50,
-               "enabled": true 
-             }
-          }
+            {
+              "name": "origin1",
+              "properties": {
+                "hostName": "www.someDomain1.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain1.net",
+                "priority": 1,
+                "weight": 50,
+                "enabled": true
+              }
+            },
+            {
+              "name": "origin2",
+              "properties": {
+                "hostName": "www.someDomain2.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50,
+                "enabled": true
+              }
+            }
           ],
-		      "originGroups": [
-		      {
-		        "name": "originGroup1",
-            "properties": {
-               "healthProbeSettings":
-                {
+          "originGroups": [
+            {
+              "name": "originGroup1",
+              "properties": {
+                "healthProbeSettings": {
                   "probePath": "/health.aspx",
                   "probeRequestType": "GET",
                   "probeProtocol": "Http",
                   "probeIntervalInSeconds": 120
                 },
                 "origins": [
-                 {
-                   "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
-                 },
-			           {
-                   "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
-                 }
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
+                  },
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
+                  }
                 ],
-                "responseBasedOriginErrorDetectionSettings":{
+                "responseBasedOriginErrorDetectionSettings": {
                   "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
-                  "responseBasedFailoverThresholdPercentage" : 10
+                  "responseBasedFailoverThresholdPercentage": 10
                 }
-		         }
-		      }
-		      ],
+              }
+            }
+          ],
           "contentTypesToCompress": [
             "text/html",
             "application/octet-stream"
@@ -427,62 +421,60 @@
           "isHttpsAllowed": true,
           "queryStringCachingBehavior": "BypassCaching",
           "originPath": "/photos",
-          "defaultOriginGroup": 
-          {
+          "defaultOriginGroup": {
             "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
           },
           "origins": [
             {
               "name": "origin1",
               "properties": {
-                 "hostName": "www.someDomain1.net",
-                 "httpPort": 80,
-                 "httpsPort": 443,
-                 "originHostHeader": "www.someDomain1.net",
-                 "priority": 1,
-                 "weight": 50,
-                 "enabled": true
-               }
+                "hostName": "www.someDomain1.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain1.net",
+                "priority": 1,
+                "weight": 50,
+                "enabled": true
+              }
             },
             {
               "name": "origin2",
               "properties": {
-                 "hostName": "www.someDomain2.net",
-                 "httpPort": 80,
-                 "httpsPort": 443,
-                 "originHostHeader": "www.someDomain2.net",
-                 "priority": 2,
-                 "weight": 50,
-                 "enabled": true 
-               }
+                "hostName": "www.someDomain2.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "www.someDomain2.net",
+                "priority": 2,
+                "weight": 50,
+                "enabled": true
+              }
             }
           ],
           "originGroups": [
             {
               "name": "originGroup1",
               "properties": {
-                  "healthProbeSettings":
+                "healthProbeSettings": {
+                  "probePath": "/health.aspx",
+                  "probeRequestType": "GET",
+                  "probeProtocol": "Http",
+                  "probeIntervalInSeconds": 120
+                },
+                "origins": [
                   {
-                    "probePath": "/health.aspx",
-                    "probeRequestType": "GET",
-                    "probeProtocol": "Http",
-                    "probeIntervalInSeconds": 120
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
                   },
-                  "origins": [
-                   {
-                     "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
-                   },
-                   {
-                     "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
-                   }
-                  ],
-                  "responseBasedOriginErrorDetectionSettings":{
-                    "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
-                    "responseBasedFailoverThresholdPercentage" : 10
+                  {
+                    "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin2"
                   }
-               }
+                ],
+                "responseBasedOriginErrorDetectionSettings": {
+                  "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+                  "responseBasedFailoverThresholdPercentage": 10
+                }
+              }
             }
-           ],
+          ],
           "contentTypesToCompress": [
             "text/html",
             "application/octet-stream"
