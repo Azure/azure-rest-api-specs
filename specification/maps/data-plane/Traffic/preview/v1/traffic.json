@@ -42,10 +42,6 @@
   "responses": {
     "202": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
-      "schema": {
-        "type": "object",
-        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry."
-      },
       "headers": {
         "Location": {
           "type": "string",
@@ -430,7 +426,7 @@
           {
             "name": "thickness",
             "in": "query",
-            "description": "The segment width multiplier. Default: 10, minimum: 1 and maximum: 20",
+            "description": "The value of the width of the line representing traffic. This value is a multiplier and the accepted values range from 1 - 20. The default value is 10.",
             "required": false,
             "type": "integer",
             "default": 10,
@@ -474,7 +470,7 @@
     "/traffic/incident/tile/{format}": {
       "get": {
         "x-publish": true,
-        "description": "__Traffic Incident Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis API provides information on traffic incidents inside a given bounding box, based on the current Traffic Model ID. The Traffic Model ID is available to grant synchronization of data between calls and API's.  The Traffic Model ID is a key value for determining the currency of traffic incidents. It is updated every  minute, and is valid for two minutes before it times out. It is used in rendering  [traffictiles](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidenttile). It can be  obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport).",
+        "description": "__Traffic Incident Tile__\n\n\n**Applies to**: S0 and S1 pricing tiers.\n\nThis service serves 256 x 256 pixel tiles showing traffic incidents. All tiles use the same grid system. Because the traffic tiles use transparent images, they can be layered on top of map tiles to create a compound display. Traffic tiles render graphics to indicate traffic on the roads in the specified area.",
         "operationId": "Traffic_GetTrafficIncidentTile",
         "x-ms-examples": {
           "GetTrafficIncidentTile": {
@@ -653,14 +649,14 @@
           {
             "name": "trafficmodelid",
             "in": "query",
-            "description": "Number referencing traffic model. This can be obtained from the Viewport API. It is updated every minute, and is valid for two minutes before it times out. If the wrong Traffic Model ID is specified, the correct one will be returned by the interface. A value of -1 will always invoke the most recent traffic model",
+            "description": "Number referencing traffic model. This can be obtained from the [Viewport API](https://docs.microsoft.com/en-us/rest/api/maps/traffic/gettrafficincidentviewport). It is updated every minute, and is valid for two minutes before it times out. If the wrong Traffic Model ID is specified, the correct one will be returned by the interface. A value of -1 will always invoke the most recent traffic model",
             "required": true,
             "type": "string"
           },
           {
             "name": "language",
             "in": "query",
-            "description": "ISO 639-1 code for the output language. Supported languages are ar, ca, cs, da, de, el, en, en-GB, en-US, es, et, fi, fr, he, hu, id, in*, it, lt, lv, nb, nl, no, pl, pt, ro, ru, sk, sv, th, tr, zh",
+            "description": "[ISO 639-1 code](https://en.wikipedia.org/wiki/List_of_ISO_639-1_codes) for the output language. Supported languages are ar, ca, cs, da, de, el, en, en-GB, en-US, es, et, fi, fr, he, hu, id, in*, it, lt, lv, nb, nl, no, pl, pt, ro, ru, sk, sv, th, tr, zh.\n\nPlease refer to [Supported Languages](https://docs.microsoft.com/en-us/azure/azure-maps/supported-languages) for details. When invalid language code is provided response is returned in English. When incident cause or description does not have translation, English description is returned.",
             "required": false,
             "type": "string"
           },
@@ -711,7 +707,7 @@
           {
             "name": "originalPosition",
             "in": "query",
-            "description": "Boolean on whether to return the original position of the incident (<op>) as well as the one shifted to the beginning of the traffic tube (<p>)",
+            "description": "Boolean on whether to return the original position of the incident (<op>) as well as the one shifted to the beginning of the traffic tube (<op>)",
             "required": false,
             "type": "boolean",
             "default": false

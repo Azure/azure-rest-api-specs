@@ -130,13 +130,13 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "Language": {
+    "MobilityLanguage": {
       "name": "language",
       "description": "Language in which search results will be returned.  Only NGT is supported. Please refer to [Supported languages](https://docs.microsoft.com/azure/azure-maps/supported-languages) for details.",
       "type": "string",
       "in": "query",
       "required": false,
-      "x-ms-parameter-location": "client"
+      "x-ms-parameter-location": "method"
     }
   },
   "paths": {
@@ -182,7 +182,7 @@
               "countryCode"
             ],
             "x-ms-enum": {
-              "name": "QueryType",
+              "name": "MetroAreaQueryType",
               "modelAsString": false,
               "values": [
                 {
@@ -198,7 +198,7 @@
             "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -254,46 +254,49 @@
             "description": "metroId. The unique id of the metro area. Required parameter specifying the required metro area to search in. Can be retrieved via [Get Metro Area API](https://aka.ms/AzureMapsMobilityTransitRoute).",
             "in": "query",
             "required": true,
-            "type": "string"
+            "type": "integer"
           },
           {
             "name": "detailType",
             "description": "Specify details requested respective to the metro area as a comma separated list.",
             "in": "query",
             "required": true,
-            "type": "string",
-            "enum": [
-              "agencies",
-              "alerts",
-              "alertDetails",
-              "transitTypes"
-            ],
-            "x-ms-enum": {
-              "name": "DetailType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "agencies",
-                  "description": "Return a list of all public transit agencies operating in the given metro area."
-                },
-                {
-                  "value": "alerts",
-                  "description": "Returns a list of all active service alerts, that are defined in the metro or agency level, and are not connected to a specific line or stop."
-                },
-                {
-                  "value": "alertDetails",
-                  "description": "Applicable only when alerts are requested. Returns details of the alerts."
-                },
-                {
-                  "value": "transitTypes",
-                  "description": "Returns a list of all supported transit types in the given metro area."
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "agencies",
+                "alerts",
+                "alertDetails",
+                "transitTypes"
+              ],
+              "x-ms-enum": {
+                "name": "MetroAreaDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "agencies",
+                    "description": "Return a list of all public transit agencies operating in the given metro area."
+                  },
+                  {
+                    "value": "alerts",
+                    "description": "Returns a list of all active service alerts, that are defined in the metro or agency level, and are not connected to a specific line or stop."
+                  },
+                  {
+                    "value": "alertDetails",
+                    "description": "Applicable only when alerts are requested. Returns details of the alerts."
+                  },
+                  {
+                    "value": "transitTypes",
+                    "description": "Returns a list of all supported transit types in the given metro area."
+                  }
+                ]
+              }
             },
             "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -373,63 +376,66 @@
             "description": "Comma separated list of transit object types. By default, objectType is set to stop.",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "stop",
-              "docklessBike",
-              "docklessElectricBike",
-              "docklessElectricScooter",
-              "docklessScooter",
-              "docklessMoped",
-              "carShare",
-              "docklessVehicle",
-              "dockedBike"
-            ],
-            "x-ms-enum": {
-              "name": "ObjectType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "stop",
-                  "description": "Stop"
-                },
-                {
-                  "value": "docklessBike",
-                  "description": "Dockless bike"
-                },
-                {
-                  "value": "docklessElectricBike",
-                  "description": "Dockless electric bike"
-                },
-                {
-                  "value": "docklessElectricScooter",
-                  "description": "Dockless electric scooter"
-                },
-                {
-                  "value": "docklessScooter",
-                  "description": "Dockless scooter"
-                },
-                {
-                  "value": "docklessMoped",
-                  "description": "Dockless moped"
-                },
-                {
-                  "value": "carShare",
-                  "description": "Car Share"
-                },
-                {
-                  "value": "docklessVehicle",
-                  "description": "Dockless Vehicle"
-                },
-                {
-                  "value": "dockedBike",
-                  "description": "Docked Bike"
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "stop",
+                "docklessBike",
+                "docklessElectricBike",
+                "docklessElectricScooter",
+                "docklessScooter",
+                "docklessMoped",
+                "carShare",
+                "docklessVehicle",
+                "bikeDock"
+              ],
+              "x-ms-enum": {
+                "name": "ObjectType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "stop",
+                    "description": "Stop"
+                  },
+                  {
+                    "value": "docklessBike",
+                    "description": "Dockless bike"
+                  },
+                  {
+                    "value": "docklessElectricBike",
+                    "description": "Dockless electric bike"
+                  },
+                  {
+                    "value": "docklessElectricScooter",
+                    "description": "Dockless electric scooter"
+                  },
+                  {
+                    "value": "docklessScooter",
+                    "description": "Dockless scooter"
+                  },
+                  {
+                    "value": "docklessMoped",
+                    "description": "Dockless moped"
+                  },
+                  {
+                    "value": "carShare",
+                    "description": "Car Share"
+                  },
+                  {
+                    "value": "docklessVehicle",
+                    "description": "Dockless Vehicle"
+                  },
+                  {
+                    "value": "bikeDock",
+                    "description": "Docked Bike"
+                  }
+                ]
+              }
             }
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -488,7 +494,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -547,7 +553,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -613,48 +619,51 @@
             "description": "Specify additional details requested respective to the line group as a comma separated list. As a default service returns line basic info.",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "alerts",
-              "alertDetails",
-              "lines",
-              "stops",
-              "schedule",
-              "patterns"
-            ],
-            "x-ms-enum": {
-              "name": "DetailType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "alerts",
-                  "description": "Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert."
-                },
-                {
-                  "value": "alertDetails",
-                  "description": "Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts."
-                },
-                {
-                  "value": "lines",
-                  "description": "Return transit lines that stops at the specified stop."
-                },
-                {
-                  "value": "stops",
-                  "description": "Return list of stops the line group goes through."
-                },
-                {
-                  "value": "schedule",
-                  "description": "Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day. Data is guaranteed to be returned only between the current day and 3 days forward."
-                },
-                {
-                  "value": "patterns",
-                  "description": "Return list of patterns this group is comprised of. A pattern consists of a stop sequence and shape per line."
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "alerts",
+                "alertDetails",
+                "lines",
+                "stops",
+                "schedule",
+                "patterns"
+              ],
+              "x-ms-enum": {
+                "name": "TransitLineDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "alerts",
+                    "description": "Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert."
+                  },
+                  {
+                    "value": "alertDetails",
+                    "description": "Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts."
+                  },
+                  {
+                    "value": "lines",
+                    "description": "Return transit lines that stops at the specified stop."
+                  },
+                  {
+                    "value": "stops",
+                    "description": "Return list of stops the line group goes through."
+                  },
+                  {
+                    "value": "schedule",
+                    "description": "Return a 24h static schedule for the specified line group from the current time of the day to the end of the current day. Data is guaranteed to be returned only between the current day and 3 days forward."
+                  },
+                  {
+                    "value": "patterns",
+                    "description": "Return list of patterns this group is comprised of. A pattern consists of a stop sequence and shape per line."
+                  }
+                ]
+              }
             }
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -727,7 +736,7 @@
             ],
             "default": "stopId",
             "x-ms-enum": {
-              "name": "QueryType",
+              "name": "TransitStopQueryType",
               "modelAsString": false,
               "values": [
                 {
@@ -747,38 +756,41 @@
             "description": "Specify additional details requested respective to the transit stop as a commma separated list.",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "alerts",
-              "alertDetails",
-              "lines",
-              "lineGroups"
-            ],
-            "x-ms-enum": {
-              "name": "DetailType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "alerts",
-                  "description": "Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert."
-                },
-                {
-                  "value": "alertDetails",
-                  "description": "Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts."
-                },
-                {
-                  "value": "lines",
-                  "description": "Return transit lines that stops at the specified stop."
-                },
-                {
-                  "value": "lineGroups",
-                  "description": "Return line groups that stops at the specified stop."
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "alerts",
+                "alertDetails",
+                "lines",
+                "lineGroups"
+              ],
+              "x-ms-enum": {
+                "name": "TransitStopDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "alerts",
+                    "description": "Return any active service alerts for the specified stop. Response provides brief information for disruption in service and all basic data associated with the alert."
+                  },
+                  {
+                    "value": "alertDetails",
+                    "description": "Can only be used in conjunction with detailType=alerts.Return additional details associated with the active service alerts."
+                  },
+                  {
+                    "value": "lines",
+                    "description": "Return transit lines that stops at the specified stop."
+                  },
+                  {
+                    "value": "lineGroups",
+                    "description": "Return line groups that stops at the specified stop."
+                  }
+                ]
+              }
             }
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -914,30 +926,33 @@
             "name": "modeType",
             "description": "The mode of travel for the requested route; as comma separated list. If not specified, all modes will be allowed. All modes might not be available in all metro areas. If valid trip is not found, empty result will be returned.",
             "required": false,
-            "type": "string",
             "in": "query",
-            "enum": [
-              "walk",
-              "bike",
-              "publicTransit"
-            ],
-            "x-ms-enum": {
-              "name": "ModeType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "walk",
-                  "description": "walk (pedestrian)"
-                },
-                {
-                  "value": "bike",
-                  "description": "bike"
-                },
-                {
-                  "value": "publicTransit",
-                  "description": "public transit"
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "walk",
+                "bike",
+                "publicTransit"
+              ],
+              "x-ms-enum": {
+                "name": "ModeType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "walk",
+                    "description": "walk (pedestrian)"
+                  },
+                  {
+                    "value": "bike",
+                    "description": "bike"
+                  },
+                  {
+                    "value": "publicTransit",
+                    "description": "public transit"
+                  }
+                ]
+              }
             },
             "x-ms-parameter-location": "method"
           },
@@ -946,54 +961,57 @@
             "description": "Applicable only with modeType = publicTransit. Allow only a specific set of public transit types (as a comma separated list) to be returned for the route. Note that the requested transitType may not be available for the entire route. If not specified, all modes will be allowed.",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "bus",
-              "cableCar",
-              "ferry",
-              "funicular",
-              "gondola",
-              "rail",
-              "tram",
-              "subway"
-            ],
-            "x-ms-enum": {
-              "name": "TransitTypeFilter",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "bus",
-                  "description": "bus"
-                },
-                {
-                  "value": "cableCar",
-                  "description": "cableCar"
-                },
-                {
-                  "value": "ferry",
-                  "description": "ferry"
-                },
-                {
-                  "value": "funicular",
-                  "description": "funicular"
-                },
-                {
-                  "value": "gondola",
-                  "description": "gondola"
-                },
-                {
-                  "value": "rail",
-                  "description": "rail"
-                },
-                {
-                  "value": "tram",
-                  "description": "tram"
-                },
-                {
-                  "value": "subway",
-                  "description": "subway"
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bus",
+                "cableCar",
+                "ferry",
+                "funicular",
+                "gondola",
+                "rail",
+                "tram",
+                "subway"
+              ],
+              "x-ms-enum": {
+                "name": "TransitTypeFilter",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "bus",
+                    "description": "bus"
+                  },
+                  {
+                    "value": "cableCar",
+                    "description": "cableCar"
+                  },
+                  {
+                    "value": "ferry",
+                    "description": "ferry"
+                  },
+                  {
+                    "value": "funicular",
+                    "description": "funicular"
+                  },
+                  {
+                    "value": "gondola",
+                    "description": "gondola"
+                  },
+                  {
+                    "value": "rail",
+                    "description": "rail"
+                  },
+                  {
+                    "value": "tram",
+                    "description": "tram"
+                  },
+                  {
+                    "value": "subway",
+                    "description": "subway"
+                  }
+                ]
+              }
             },
             "x-ms-parameter-location": "method"
           },
@@ -1002,7 +1020,10 @@
             "description": "Specifies whether to prefer routes from a specific set of agencies if possible; as a comma separated list. If valid trip isn’t found with the preferred agency, or only one with very long trips or with large number of transfers, itineraries with other agencies will be returned.",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "agencyType",
@@ -1087,7 +1108,7 @@
               "leastTransfers"
             ],
             "x-ms-enum": {
-              "name": "RouteType",
+              "name": "TransitRouteType",
               "modelAsString": false,
               "values": [
                 {
@@ -1131,7 +1152,7 @@
             }
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -1193,30 +1214,33 @@
             "name": "detailType",
             "description": "Specify additional details returned in the transit route itinerary response, as a comma separated list.",
             "required": false,
-            "type": "string",
             "in": "query",
-            "enum": [
-              "geometry",
-              "schedule"
-            ],
-            "x-ms-enum": {
-              "name": "DetailType",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "geometry",
-                  "description": "Shape of an in GeoJSON format. For public transit legs will return also the stops that the leg passes through. For walk and bike legs, will return also the turn-by-turn navigation data."
-                },
-                {
-                  "value": "schedule",
-                  "description": "Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day. Data is guaranteed to be returned only between the current day and 3 days forward."
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "geometry",
+                "schedule"
+              ],
+              "x-ms-enum": {
+                "name": "TransitItineraryDetailType",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "geometry",
+                    "description": "Shape of an in GeoJSON format. For public transit legs will return also the stops that the leg passes through. For walk and bike legs, will return also the turn-by-turn navigation data."
+                  },
+                  {
+                    "value": "schedule",
+                    "description": "Static schedule data as to all departures of Public Transit legs from the current time of the day to the end of the current day. Data is guaranteed to be returned only between the current day and 3 days forward."
+                  }
+                ]
+              }
             },
             "x-ms-parameter-location": "method"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -1291,7 +1315,7 @@
             ],
             "default": "stops",
             "x-ms-enum": {
-              "name": "QueryType",
+              "name": "RealTimeArrivalsQueryType",
               "modelAsString": false,
               "values": [
                 {
@@ -1360,54 +1384,57 @@
             "description": "Type of public transit user is requesting respective transit stop, as a comma separated list. If not specified, all will be allowed. This parameter can only be used in conjunction with queryType=stops. Supported transit types are Tram, Subway, Rail, Bus, Ferry, CableCar, Gondola, Funicular. For example, transitType=Bus,Subway.",
             "in": "query",
             "required": false,
-            "type": "string",
-            "enum": [
-              "bus",
-              "cableCar",
-              "ferry",
-              "funicular",
-              "gondola",
-              "rail",
-              "tram",
-              "subway"
-            ],
-            "x-ms-enum": {
-              "name": "TransitTypeFilter",
-              "modelAsString": false,
-              "values": [
-                {
-                  "value": "bus",
-                  "description": "bus"
-                },
-                {
-                  "value": "cableCar",
-                  "description": "cableCar"
-                },
-                {
-                  "value": "ferry",
-                  "description": "ferry"
-                },
-                {
-                  "value": "funicular",
-                  "description": "funicular"
-                },
-                {
-                  "value": "gondola",
-                  "description": "gondola"
-                },
-                {
-                  "value": "rail",
-                  "description": "rail"
-                },
-                {
-                  "value": "tram",
-                  "description": "tram"
-                },
-                {
-                  "value": "subway",
-                  "description": "subway"
-                }
-              ]
+            "type": "array",
+            "items": {
+              "type": "string",
+              "enum": [
+                "bus",
+                "cableCar",
+                "ferry",
+                "funicular",
+                "gondola",
+                "rail",
+                "tram",
+                "subway"
+              ],
+              "x-ms-enum": {
+                "name": "TransitTypeFilter",
+                "modelAsString": false,
+                "values": [
+                  {
+                    "value": "bus",
+                    "description": "bus"
+                  },
+                  {
+                    "value": "cableCar",
+                    "description": "cableCar"
+                  },
+                  {
+                    "value": "ferry",
+                    "description": "ferry"
+                  },
+                  {
+                    "value": "funicular",
+                    "description": "funicular"
+                  },
+                  {
+                    "value": "gondola",
+                    "description": "gondola"
+                  },
+                  {
+                    "value": "rail",
+                    "description": "rail"
+                  },
+                  {
+                    "value": "tram",
+                    "description": "tram"
+                  },
+                  {
+                    "value": "subway",
+                    "description": "subway"
+                  }
+                ]
+              }
             },
             "x-ms-parameter-location": "method"
           },
@@ -1416,7 +1443,10 @@
             "description": "In case you prefer routes from a specific set of agencies to be returned. Specified as a comma separated string.",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
           },
           {
             "name": "agencyType",
@@ -1455,10 +1485,10 @@
             "description": "Time in seconds within which if the provider doesn’t respond, end point will return static data.",
             "in": "query",
             "required": false,
-            "type": "string"
+            "type": "integer"
           },
           {
-            "$ref": "#/parameters/Language"
+            "$ref": "#/parameters/MobilityLanguage"
           }
         ],
         "responses": {
@@ -1605,11 +1635,7 @@
               "description": "Coordinates for the `Polygon` geometry type.",
               "type": "array",
               "items": {
-                "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
-                "type": "array",
-                "items": {
-                  "$ref": "#/definitions/GeoJSONPosition"
-                }
+                "$ref": "#/definitions/GeoJSONLinearRing"
               }
             }
           },
@@ -1645,6 +1671,13 @@
           ]
         }
       ]
+    },
+    "GeoJSONLinearRing": {
+      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GeoJSONPosition"
+      }
     },
     "GeoJSONPosition": {
       "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
@@ -1856,6 +1889,7 @@
       "properties": {
         "results": {
           "description": "Results array. Contains results related details.",
+          "type": "array",
           "items": {
             "$ref": "#/definitions/RealTimeArrivalResult"
           }

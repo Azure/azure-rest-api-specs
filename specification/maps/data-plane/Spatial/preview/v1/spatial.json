@@ -42,10 +42,6 @@
   "responses": {
     "202": {
       "description": "Request Accepted: The request has been accepted for processing. Please use the URL in the Location Header to retry or access the results.",
-      "schema": {
-        "type": "object",
-        "description": "This object is returned when the request is accepted but the processing has not been completed. The location header in the response contains the new URL to retry."
-      },
       "headers": {
         "Location": {
           "type": "string",
@@ -174,7 +170,7 @@
         "EnterAndExit"
       ],
       "x-ms-enum": {
-        "name": "Mode",
+        "name": "GeofenceMode",
         "modelAsString": false,
         "values": [
           {
@@ -410,7 +406,7 @@
             "description": "The geofencing GeoJSON data.",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/GeoJSONFeatureCollection"
             }
           }
         ],
@@ -616,10 +612,10 @@
           {
             "name": "closestPointRequestBody",
             "in": "body",
-            "description": "The set of coordinates from which closest point to source point should be determined.",
+            "description": "The FeatureCollection of Point geometries from which closest point to source point should be determined. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ClosestPointRequestBody"
+              "$ref": "#/definitions/GeoJSONFeatureCollection"
             }
           }
         ],
@@ -765,10 +761,10 @@
           {
             "name": "pointInPolygonRequestBody",
             "in": "body",
-            "description": "The point coordinate and the coordinates of a polygon to determine if the point is inside the polygon.",
+            "description": "A FeatureCollection with a set of Polygon/MultiPolygon geometries. The maximum number of vertices accepted to form a Polygon is 10,000. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/PointInPolygonRequestBody"
+              "$ref": "#/definitions/GeoJSONFeatureCollection"
             }
           }
         ],
@@ -953,7 +949,7 @@
         }
       }
     },
-    "Coordinate": {
+    "SpatialCoordinate": {
       "description": "A location represented as a latitude and longitude",
       "type": "object",
       "properties": {
@@ -972,7 +968,221 @@
       }
     },
     "GeoJSONFeatureCollection": {
-      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details. All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive."
+      "description": "A valid `GeoJSON FeatureCollection` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.3) for details.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "Specifies the `type` for the object. Value should always be equal to \"FeatureCollection\".",
+          "type": "string"
+        },
+        "features": {
+          "description": "Contains a list of valid `GeoJSON Feature` objects.",
+          "type": "array",
+          "items": {
+            "description": "A valid `GeoJSON Feature` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.2) for details.",
+            "type": "object",
+            "properties": {
+              "type": {
+                "description": "Specifies the `type` for the object. Value should always be equal to \"Feature\".",
+                "type": "string"
+              },
+              "geometry": {
+                "$ref": "#/definitions/GeoJSONGeometry"
+              },
+              "properties": {
+                "description": "Properties can contain any additional metadata about the `Feature`. Value can be any JSON object or a JSON null value",
+                "type": "object"
+              }
+            }
+          }
+        }
+      },
+      "required": [
+        "features",
+        "type"
+      ]
+    },
+    "GeoJSONGeometry": {
+      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJSONGeometryType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry."
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry."
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry."
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry."
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry."
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry."
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "Point": {
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "$ref": "#/definitions/GeoJSONPosition"
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "MultiLineString": {
+      "description": "A valid `GeoJSON MultiLineString` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.5) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"MultiLineString\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `MultiLineString` geometry.",
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/GeoJSONPosition"
+                }
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "Polygon": {
+      "description": "A valid `GeoJSON Polygon` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.    ",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the object. Value should always be equal to \"Polygon\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Coordinates for the `Polygon` geometry type.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/GeoJSONLinearRing"
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "MultiPolygon": {
+      "description": "A valid `GeoJSON MultiPolygon` object type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.7) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the object. Value should always be equal to \"MultiPolygon\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "description": "Contains a list of valid `GeoJSON` Polygon objects.",
+              "type": "array",
+              "items": {
+                "type": "array",
+                "items": {
+                  "$ref": "#/definitions/GeoJSONLinearRing"
+                }
+              }
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
+    },
+    "GeoJSONLinearRing": {
+      "description": "Though a linear ring is not explicitly represented as a GeoJSON geometry type, it helps in defining the polygon as an array of linear rings. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.6) for details.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/GeoJSONPosition"
+      }
+    },
+    "GeoJSONPosition": {
+      "description": "A valid `GeoJSON Position` geometry type. A `Position` is an array of numbers with two or more elements. The first two elements are _longitude_ and _latitude_, precisely in that order. _Altitude/Elevation_ is an optional third element. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.1) for details.",
+      "type": "array",
+      "items": {
+        "type": "number",
+        "format": "double"
+      }
     },
     "GeofenceGeometry": {
       "description": "The geofencing geometry.",
@@ -1047,7 +1257,7 @@
       }
     },
     "BufferRequestBody": {
-      "description": "An object with a FeatureCollection and a list of distances.",
+      "description": "An object with a FeatureCollection and a list of distances.  All the feature's properties should contain `geometryId`, which is used for identifying the geometry and is case-sensitive.",
       "type": "object",
       "properties": {
         "geometries": {
@@ -1056,7 +1266,6 @@
         "distances": {
           "description": "List of the distances to compute the buffer for, one-to-one per Feature in the collection, or one for all Features in the collection.",
           "type": "array",
-          "readOnly": true,
           "items": {
             "type": "number"
           }
@@ -1086,15 +1295,6 @@
         },
         "result": {
           "description": "The FeatureCollection of buffers for the input.",
-          "type": "object"
-        }
-      }
-    },
-    "ClosestPointRequestBody": {
-      "description": "An object with a set of Point geometries",
-      "type": "object",
-      "properties": {
-        "geometries": {
           "$ref": "#/definitions/GeoJSONFeatureCollection"
         }
       }
@@ -1129,7 +1329,7 @@
       "readOnly": true,
       "properties": {
         "sourcePoint": {
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "#/definitions/SpatialCoordinate"
         },
         "udid": {
           "description": "A unique data id (udid) for the uploaded content",
@@ -1149,7 +1349,7 @@
       "readOnly": true,
       "properties": {
         "sourcePoint": {
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "#/definitions/SpatialCoordinate"
         },
         "udid": {
           "description": "A unique data id (udid) for the uploaded content. Udid is not applicable for POST spatial operations(set to null)",
@@ -1181,21 +1381,12 @@
           "readOnly": true
         },
         "position": {
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "#/definitions/SpatialCoordinate"
         },
         "geometryId": {
           "description": "The unique id identifies a geometry",
           "type": "string",
           "readOnly": true
-        }
-      }
-    },
-    "PointInPolygonRequestBody": {
-      "description": "An object with a set of Polygon/MultiPolygon geometries. The maximum number of vertices accepted to form a Polygon is 10,000",
-      "type": "object",
-      "properties": {
-        "geometries": {
-          "$ref": "#/definitions/GeoJSONFeatureCollection"
         }
       }
     },
@@ -1229,7 +1420,7 @@
       "readOnly": true,
       "properties": {
         "sourcePoint": {
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "#/definitions/SpatialCoordinate"
         },
         "udid": {
           "description": "A unique data id (udid) for the uploaded content",
@@ -1249,7 +1440,7 @@
       "readOnly": true,
       "properties": {
         "sourcePoint": {
-          "$ref": "#/definitions/Coordinate"
+          "$ref": "#/definitions/SpatialCoordinate"
         },
         "udid": {
           "description": "A unique data id (udid) for the uploaded content. Udid is not applicable for POST spatial operations(set to null)",
@@ -1277,12 +1468,12 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/Geometry"
+            "$ref": "#/definitions/GeometryId"
           }
         }
       }
     },
-    "Geometry": {
+    "GeometryId": {
       "description": "The Spatial geometry",
       "type": "string",
       "readOnly": true
@@ -1297,10 +1488,10 @@
           "readOnly": true,
           "properties": {
             "sourcePoint": {
-              "$ref": "#/definitions/Coordinate"
+              "$ref": "#/definitions/SpatialCoordinate"
             },
             "targetPoint": {
-              "$ref": "#/definitions/Coordinate"
+              "$ref": "#/definitions/SpatialCoordinate"
             }
           }
         },

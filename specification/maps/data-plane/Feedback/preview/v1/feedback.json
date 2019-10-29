@@ -77,6 +77,22 @@
     }
   },
   "parameters": {
+    "ClientId": {
+      "name": "x-ms-client-id",
+      "description": "Specifies which account is intended for usage in conjunction with the Azure AD security model.  It represents a unique ID for the Azure Maps account and can be retrieved from Azure Maps management  plane Account API. To use Azure AD security in Azure Maps see the following [articles](https://aka.ms/amauthdetails) for guidance.    ",
+      "type": "string",
+      "in": "header",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
+    "SubscriptionKey": {
+      "name": "subscription-key",
+      "description": "One of the Azure Maps keys provided from an Azure Map Account. Refer to the subscription-key security definition.",
+      "type": "string",
+      "in": "query",
+      "required": false,
+      "x-ms-parameter-location": "client"
+    },
     "ApiVersion": {
       "name": "api-version",
       "description": "Version number of Azure Maps API. Current version is 1.0",
@@ -88,396 +104,14 @@
     }
   },
   "paths": {
-    "/feedback/{feedbackId}": {
-      "get": {
-        "x-publish": false,
-        "operationId": "Feedback_GetFeedbackStatus",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackStatus": {
-            "$ref": "./examples/GetFeedbackStatus.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackId",
-            "description": "temp",
-            "in": "path",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/feedback/poi/add": {
-      "post": {
-        "x-publish": false,
-        "operationId": "Feedback_PostAddPoi",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackAddPoi": {
-            "$ref": "./examples/PostFeedbackAddPoi.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackAddPoiRequestBody",
-            "in": "body",
-            "description": "temp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FeedbackAddPoiRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/feedback/poi/fix": {
-      "post": {
-        "x-publish": false,
-        "operationId": "Feedback_PostFixPoi",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackFixPoi": {
-            "$ref": "./examples/PostFeedbackFixPoi.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackFixPoiRequestBody",
-            "in": "body",
-            "description": "temp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FeedbackFixPoiRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/feedback/poi/delete": {
-      "post": {
-        "x-publish": false,
-        "operationId": "Feedback_PostDeletePoi",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackDeletePoi": {
-            "$ref": "./examples/PostFeedbackDeletePoi.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackDeletePoiRequestBody",
-            "in": "body",
-            "description": "temp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FeedbackDeletePoiRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/feedback/address/add": {
-      "post": {
-        "x-publish": false,
-        "operationId": "Feedback_PostAddAddress",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackAddAddress": {
-            "$ref": "./examples/PostFeedbackAddAddress.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackAddAddressRequestBody",
-            "in": "body",
-            "description": "temp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FeedbackAddAddressRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/feedback/address/fix": {
-      "post": {
-        "x-publish": false,
-        "operationId": "Feedback_PostFixAddress",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackFixAddress": {
-            "$ref": "./examples/PostFeedbackFixAddress.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackFixAddressRequestBody",
-            "in": "body",
-            "description": "temp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FeedbackFixAddressRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/feedback/address/delete": {
-      "post": {
-        "x-publish": false,
-        "operationId": "Feedback_PostDeleteAddress",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackDeleteAddress": {
-            "$ref": "./examples/PostFeedbackDeleteAddress.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackDeleteAddressRequestBody",
-            "in": "body",
-            "description": "temp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FeedbackDeleteAddressRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    },
-    "/feedback/other/fix": {
-      "post": {
-        "x-publish": false,
-        "operationId": "Feedback_PostFixOther",
-        "description": "temp",
-        "x-ms-examples": {
-          "FeedbackFixOther": {
-            "$ref": "./examples/PostFeedbackFixOther.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "#/parameters/ApiVersion"
-          },
-          {
-            "name": "feedbackFixOtherRequestBody",
-            "in": "body",
-            "description": "temp",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/FeedbackFixOtherRequestBody"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/FeedbackStatusResponse"
-            }
-          },
-          "400": {
-            "$ref": "#/responses/400"
-          },
-          "401": {
-            "$ref": "#/responses/401"
-          },
-          "403": {
-            "$ref": "#/responses/403"
-          },
-          "404": {
-            "$ref": "#/responses/404"
-          },
-          "500": {
-            "$ref": "#/responses/500"
-          }
-        }
-      }
-    }
+    "/feedback/status": {},
+    "/feedback/poi/add": {},
+    "/feedback/poi/fix": {},
+    "/feedback/poi/delete": {},
+    "/feedback/address/add": {},
+    "/feedback/address/fix": {},
+    "/feedback/address/delete": {},
+    "/feedback/other/fix": {}
   },
   "definitions": {
     "ErrorResponse": {
@@ -513,18 +147,85 @@
         "format": "double"
       }
     },
-    "GeoJSONPoint": {
-      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+    "GeoJSONGeometry": {
+      "description": "A valid `GeoJSON` geometry object. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1) for details.",
       "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
       "properties": {
         "type": {
-          "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
-          "type": "string"
-        },
-        "coordinates": {
-          "$ref": "#/definitions/GeoJSONPosition"
+          "description": "Specifies the `GeoJSON` geometry type. Must be one of the seven valid GeoJSON geometry types - Point, MultiPoint, LineString, MultiLineString, Polygon, MultiPolygon and GeometryCollection.",
+          "type": "string",
+          "enum": [
+            "Point",
+            "MultiPoint",
+            "LineString",
+            "MultiLineString",
+            "Polygon",
+            "MultiPolygon",
+            "GeometryCollection"
+          ],
+          "x-ms-enum": {
+            "name": "GeoJSONGeometryType",
+            "modelAsString": false,
+            "values": [
+              {
+                "value": "Point",
+                "description": "`GeoJSON Point` geometry."
+              },
+              {
+                "value": "MultiPoint",
+                "description": "`GeoJSON MultiPoint` geometry."
+              },
+              {
+                "value": "LineString",
+                "description": "`GeoJSON LineString` geometry."
+              },
+              {
+                "value": "MultiLineString",
+                "description": "`GeoJSON MultiLineString` geometry."
+              },
+              {
+                "value": "Polygon",
+                "description": "`GeoJSON Polygon` geometry."
+              },
+              {
+                "value": "MultiPolygon",
+                "description": "`GeoJSON MultiPolygon` geometry."
+              },
+              {
+                "value": "GeometryCollection",
+                "description": "`GeoJSON GeometryCollection` geometry."
+              }
+            ]
+          }
         }
       }
+    },
+    "Point": {
+      "description": "A valid `GeoJSON Point` geometry type. Please refer to [RFC 7946](https://tools.ietf.org/html/rfc7946#section-3.1.2) for details.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/GeoJSONGeometry"
+        },
+        {
+          "properties": {
+            "type": {
+              "description": "Specifies the `type` for the geometry. Value should always be equal to \"Point\".",
+              "type": "string"
+            },
+            "coordinates": {
+              "$ref": "#/definitions/GeoJSONPosition"
+            }
+          },
+          "required": [
+            "coordinates"
+          ]
+        }
+      ]
     },
     "GeoJsonBoundingBox": {
       "description": "Bounding Box. The bounding box is an array of length 2*n where n is\nthe number of dimensions represented in the contained geometries,\nwith all axes of the most southwesterly point followed by all axes\nof the more northeasterly point.  The axes order of a bbox follows\nthe axes order of geometries.\n\nThe edges of the bounding box follow lines of constant longitude,\nlatitude, and elevation.",
@@ -582,6 +283,9 @@
         "feature"
       ],
       "properties": {
+        "isMock": {
+          "type": "boolean"
+        },
         "location": {
           "$ref": "#/definitions/GeoJSONPosition"
         },
@@ -607,6 +311,9 @@
         "feature"
       ],
       "properties": {
+        "isMock": {
+          "type": "boolean"
+        },
         "location": {
           "$ref": "#/definitions/GeoJSONPosition"
         },
@@ -632,6 +339,9 @@
         "feature"
       ],
       "properties": {
+        "isMock": {
+          "type": "boolean"
+        },
         "location": {
           "$ref": "#/definitions/GeoJSONPosition"
         },
@@ -700,7 +410,7 @@
           "type": "string"
         },
         "geometry": {
-          "$ref": "#/definitions/GeoJSONPoint"
+          "$ref": "#/definitions/Point"
         }
       }
     },
@@ -767,6 +477,9 @@
         "feature"
       ],
       "properties": {
+        "isMock": {
+          "type": "boolean"
+        },
         "location": {
           "$ref": "#/definitions/GeoJSONPosition"
         },
@@ -792,6 +505,9 @@
         "feature"
       ],
       "properties": {
+        "isMock": {
+          "type": "boolean"
+        },
         "location": {
           "$ref": "#/definitions/GeoJSONPosition"
         },
@@ -817,6 +533,9 @@
         "feature"
       ],
       "properties": {
+        "isMock": {
+          "type": "boolean"
+        },
         "location": {
           "$ref": "#/definitions/GeoJSONPosition"
         },
@@ -866,7 +585,7 @@
           "type": "string"
         },
         "geometry": {
-          "$ref": "#/definitions/GeoJSONPoint"
+          "$ref": "#/definitions/Point"
         }
       }
     },
@@ -913,6 +632,9 @@
         "bbox"
       ],
       "properties": {
+        "isMock": {
+          "type": "boolean"
+        },
         "location": {
           "$ref": "#/definitions/GeoJSONPosition"
         },

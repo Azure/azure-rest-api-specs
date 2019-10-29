@@ -34,8 +34,14 @@ These settings apply only when `--tag=ts` is specified on the command line
 input-file: 
   - ./search/preview/v1/search.json
   - ./route/preview/v1/route.json
+  - ./timezone/preview/v1/timezone.json
+  - ./render/preview/v1/render.json
+  - ./mobility/preview/v1/mobility.json
+  - ./spatial/preview/v1/spatial.json
 
-typescript: true
+typescript:
+  enum-types: true
+  azure-arm: true
 
 directive:
     - from: swagger-document
@@ -58,14 +64,6 @@ directive:
       transform: $.default = undefined;
       reason: Our APIs have mutually exclusive parameters. Removing all non-required defaults to prevent 4XX failures.
     - from: swagger-document
-      where: $.paths.*[?(@.operationId.includes("Preview"))]
-      transform: $ = undefined;
-      reason: Not including Preview APIs in SDK
-    - from: swagger-document
-      where: $.paths.*[?(@.x-ms-long-running-operation)]
-      transform: $ = undefined;
-      reason: Not including Long Running APIs in SDK
-    - from: swagger-document
       where: $.securityDefinitions
       transform: $ = undefined;
       reason: The typescript sdk has built-in security handling. Security definitions can be removed.
@@ -80,16 +78,16 @@ directive:
           if ($[i].$ref && $doc.parameters) {
             var path = $[i].$ref.split("/");
             var param = path[path.length - 1];
-            if ($doc.parameters[param].name.toLowerCase() === "subscription-key") {
+            if (["subscription-key", "x-ms-client-id"].indexOf($doc.parameters[param].name.toLowerCase()) !== -1) {
               $.splice(i--, 1);
             }
           }
         }
-      reason: The typescript sdk has built-in security handling. Subscription key can be removed from parameters.
+      reason: The typescript sdk has built-in security handling. Subscription key and client id can be removed from parameters.
     - from: swagger-document
-      where: $.parameters[?(@.name.toLowerCase() === "subscription-key")]
+      where: $.parameters[?(["subscription-key", "x-ms-client-id"].indexOf(@.name.toLowerCase()) !== -1)]
       transform: $ = undefined;
-      reason: The typescript sdk has built-in security handling. Subscription key can be removed from parameters.
+      reason: The typescript sdk has built-in security handling. Subscription key and client id can be removed from parameters.
 
 ```
 
