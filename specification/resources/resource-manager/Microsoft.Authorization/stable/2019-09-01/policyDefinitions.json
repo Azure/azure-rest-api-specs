@@ -511,14 +511,68 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The policy definition metadata."
+          "description": "The policy definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "parameters": {
-          "type": "object",
-          "description": "Required if a parameter is used in policy rule."
+          "description": "The parameter definitions for parameters used in the policy rule. The keys are the parameter names.",
+          "$ref": "#/definitions/ParameterDefinitions"
         }
       },
       "description": "The policy definition properties."
+    },
+    "ParameterDefinitions": {
+      "description": "The parameter definitions for parameters used in the policy. The keys are the parameter names.",
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "description": "The data type of the parameter.",
+            "type": "string",
+            "enum": [
+              "String",
+              "Array",
+              "Object",
+              "Boolean",
+              "Integer",
+              "Float",
+              "DateTime"
+            ],
+            "x-ms-enum": {
+              "name": "parameterType",
+              "modelAsString": true
+            }
+          },
+          "allowedValues": {
+            "type": "array",
+            "items": {
+              "type": "object"
+            },
+            "description": "The allowed values for the parameter."
+          },
+          "defaultValue": {
+            "type": "object",
+            "description": "The default value for the parameter if no value is provided."
+          },
+          "metadata": {
+            "type": "object",
+            "properties": {
+              "displayName": {
+                "type": "string",
+                "description": "The display name for the parameter."
+              },
+              "description": {
+                "type": "string",
+                "description": "The description of the parameter."
+              }
+            },
+            "additionalProperties": {
+              "type": "object"
+            },
+            "description": "General metadata for the parameter."
+          }
+        }
+      }
     },
     "PolicyDefinition": {
       "properties": {

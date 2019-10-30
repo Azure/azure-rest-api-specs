@@ -566,8 +566,8 @@
           "description": "The policy's excluded scopes."
         },
         "parameters": {
-          "type": "object",
-          "description": "Required if a parameter is used in policy rule."
+          "description": "The parameter values for the assigned policy rule. The keys are the parameter names.",
+          "$ref": "#/definitions/ParameterValues"
         },
         "description": {
           "type": "string",
@@ -575,7 +575,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The policy assignment metadata."
+          "description": "The policy assignment metadata. Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "enforcementMode": {
           "type": "string",
@@ -601,6 +601,19 @@
         }
       },
       "description": "The policy assignment properties."
+    },
+    "ParameterValues": {
+      "type": "object",
+      "additionalProperties": {
+        "type": "object",
+        "properties": {
+          "value": {
+            "description": "The value of the parameter.",
+            "type": "object"
+          }
+        }
+      },
+      "description": "The parameter values for the policy rule. The keys are the parameter names."
     },
     "PolicySku": {
       "properties": {

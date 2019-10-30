@@ -521,11 +521,11 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The policy set definition metadata."
+          "description": "The policy set definition metadata.  Metadata is an open ended object and is typically a collection of key value pairs."
         },
         "parameters": {
-          "type": "object",
-          "description": "The policy set definition parameters that can be used in policy definition references."
+          "description": "The policy set definition parameters that can be used in policy definition references.",
+          "$ref": "./policyDefinitions.json#/definitions/ParameterDefinitions"
         },
         "policyDefinitions": {
           "type": "array",
@@ -554,8 +554,8 @@
           "description": "The ID of the policy definition or policy set definition."
         },
         "parameters": {
-          "type": "object",
-          "description": "Required if a parameter is used in policy rule."
+          "description": "The parameter values for the referenced policy rule. The keys are the parameter names.",
+          "$ref": "./policyAssignments.json#/definitions/ParameterValues"
         },
         "policyDefinitionReferenceId": {
           "type": "string",
@@ -563,13 +563,15 @@
         },
         "groupNames": {
           "type": "array",
-          "items": { 
+          "items": {
             "type": "string"
           },
           "description": "The name of the groups that this policy definition reference belongs to."
         }
       },
-      "required": [ "policyDefinitionId" ],
+      "required": [
+        "policyDefinitionId"
+      ],
       "description": "The policy definition reference."
     },
     "PolicyDefinitionGroup": {
@@ -595,7 +597,9 @@
           "description": "A resource ID of a resource that contains additional metadata about the group."
         }
       },
-      "required": [ "name" ],
+      "required": [
+        "name"
+      ],
       "description": "The policy definition group."
     },
     "PolicySetDefinition": {
