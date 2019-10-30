@@ -1445,7 +1445,7 @@
           "format": "int32",
           "minimum": 30,
           "maximum": 730,
-          "description": "The table data retention in days, between 30 and 730. Setting this property to null will default to the workspace retention."
+          "description": "The data table data retention in days, between 30 and 730. Setting this property to null will default to the workspace retention."
         }
       },
       "description": "Table properties."
@@ -1455,12 +1455,17 @@
         "id": {
           "readOnly": true,
           "type": "string",
-          "description": "Table ID"
+          "description": "Resource ID"
         },
         "name": {
           "readOnly": true,
           "type": "string",
           "description": "Resource name"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
         },
         "properties": {
           "x-ms-client-flatten": true,
@@ -1468,7 +1473,8 @@
           "description": "Table properties."
         }        
       },
-      "description": "Workspace data table definition."
+      "description": "Workspace data table definition.",
+      "x-ms-azure-resource": true
     },
     "TablesListResult": {
       "properties": {
