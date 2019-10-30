@@ -8528,7 +8528,7 @@
         "instanceOf": {
           "type": "string"
         },
-        "Children": {
+        "children": {
             "items": {
                 "type": "object",
                 "$ref": "#/definitions/JsonChild"
@@ -8538,7 +8538,7 @@
         "features": {
             "items": {
                 "type": "object",
-                "$ref": "#/definitions/ModelFeatureInformation"
+                "$ref": "#/definitions/JsonModelFeatureInformation"
             },
             "type": "array"
         }
@@ -8550,7 +8550,7 @@
         "name": {
           "type": "string"
         },
-        "Children": {
+        "children": {
             "items": {
                 "type": "object",
                 "$ref": "#/definitions/JsonChild"
@@ -8560,9 +8560,19 @@
         "features": {
             "items": {
                 "type": "object",
-                "$ref": "#/definitions/ModelFeatureInformation"
+                "$ref": "#/definitions/JsonModelFeatureInformation"
             },
             "type": "array"
+        },
+        "roles": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "inherits": {
+          "type": "object",
+          "$ref": "#/definitions/PrebuiltDomainObject"          
         }
       }
     },
@@ -8635,7 +8645,7 @@
           "type": "array"
         },
         "hierarchicals": {
-          "description": "List of composite entities.",
+          "description": "List of hierarchical entities.",
           "items": {
             "type": "object",
             "$ref": "#/definitions/HierarchicalModel"
@@ -10183,6 +10193,20 @@
       }
     },
     "ModelFeatureInformation": {
+      "description": "An object containing the model feature information either the model name or feature name.",
+      "type": "object",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used."
+        },
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature used."
+        }
+      }
+    },
+    "JsonModelFeatureInformation": {
       "description": "An object containing the model feature information either the model name or feature name.",
       "type": "object",
       "properties": {
