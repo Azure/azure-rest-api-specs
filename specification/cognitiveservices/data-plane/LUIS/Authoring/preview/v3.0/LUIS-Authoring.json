@@ -8268,6 +8268,11 @@
         "mode": {
           "description": "An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.",
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -8514,27 +8519,50 @@
         }
       }
     },
+    "JsonChild": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "instanceOf": {
+          "type": "string"
+        },
+        "Children": {
+            "items": {
+                "type": "object",
+                "$ref": "#/definitions/JsonChild"
+            },
+            "type": "array"
+        },
+        "features": {
+            "items": {
+                "type": "object",
+                "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "type": "array"
+        }
+      }
+    },
     "HierarchicalModel": {
       "type": "object",
       "properties": {
         "name": {
           "type": "string"
         },
-        "children": {
-          "items": {
-            "type": "string"
-          },
-          "type": "array"
+        "Children": {
+            "items": {
+                "type": "object",
+                "$ref": "#/definitions/JsonChild"
+            },
+            "type": "array"
         },
-        "inherits": {
-          "type": "object",
-          "$ref": "#/definitions/PrebuiltDomainObject"
-        },
-        "roles": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
+        "features": {
+            "items": {
+                "type": "object",
+                "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "type": "array"
         }
       }
     },
@@ -8606,6 +8634,14 @@
           },
           "type": "array"
         },
+        "hierarchicals": {
+          "description": "List of composite entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModel"
+          },
+          "type": "array"
+        },
         "patternAnyEntities": {
           "description": "List of Pattern.Any entities.",
           "items": {
@@ -8638,7 +8674,7 @@
           },
           "type": "array"
         },
-        "model_features": {
+        "phraselists": {
           "description": "List of model features.",
           "items": {
             "type": "object",
