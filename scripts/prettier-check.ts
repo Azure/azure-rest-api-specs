@@ -17,6 +17,6 @@ runCheckOverChangedSpecFiles({
   },
 
   onFinalFailed: async () => {
-    logError('Code style issues found in the above file(s). Please run `npm install && npm run prettier -- --write "specification/<service>/**/*.json"` to fix.')
+    logError('Code style issues found in the above file(s). Please follow https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/ci-fix.md')
   }
 })
