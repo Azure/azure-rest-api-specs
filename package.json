@@ -36,10 +36,10 @@
     "url": "http://github.com/azure/azure-rest-api-specs/issues"
   },
   "scripts": {
-    "postinstall": "scripts/switch-to-preproduction.sh",
+    "postinstall": "ts-node scripts/switch-to-preproduction.ts && tsc",
     "test": "tsc && mocha -t 500000 --reporter min",
     "spellcheck": "ts-node ./scripts/spellcheck.ts",
-    "prettier-check": "tsc && ts-node ./scripts/prettier-check.ts",
+    "prettier-check": "ts-node ./scripts/prettier-check.ts",
     "prettier": "prettier",
     "tsc": "tsc",
     "multiapi": "ts-node ./scripts/multiapi.ts"
