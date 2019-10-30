@@ -561,12 +561,6 @@
               "$ref": "#/definitions/TenantBackfillStatusResult"
             }
           },
-          "202": {
-            "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/TenantBackfillStatusResult"
-            }
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1024,11 +1018,10 @@
           "description": "The name of the management group. For example, 00000000-0000-0000-0000-000000000000",
           "readOnly": true
         },
-        "properties": {
-          "title": "Properties",
-          "x-ms-client-flatten": true,
-          "type": "object",
-          "$ref": "#/definitions/ManagementGroupInfoProperties"
+        "status": {
+          "type": "string",
+          "description": "The current status of the operation",
+          "readOnly": true
         }
       }
     },
