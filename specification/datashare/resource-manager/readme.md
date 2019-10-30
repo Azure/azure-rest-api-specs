@@ -26,7 +26,7 @@ These are the global settings for the DataShare API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2018-11-01-preview
+tag: package-2019-11-01
 ```
 
 
@@ -37,6 +37,15 @@ These settings apply only when `--tag=package-2018-11-01-preview` is specified o
 ``` yaml $(tag) == 'package-2018-11-01-preview'
 input-file:
 - Microsoft.DataShare/preview/2018-11-01-preview/DataShare.json
+```
+
+### Tag: package-2019-11-01
+
+These settings apply only when `--tag=package-2019-11-01` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-11-01'
+input-file:
+- Microsoft.DataShare/stable/2019-11-01/DataShare.json
 ```
 
 ---
@@ -115,6 +124,7 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.DataShare/preview/2018-11-01-preview/DataShare.json
+  - $(this-folder)/Microsoft.DataShare/stable/2019-11-01/DataShare.json
 
 ```
 
@@ -125,4 +135,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
