@@ -20,6 +20,7 @@
               "documentEndpoint": "https://ddb1.documents.azure.com:443/",
               "ipRangeFilter": "",
               "databaseAccountOfferType": "Standard",
+              "disableKeyBasedMetadataWriteAccess": false,
               "consistencyPolicy": {
                 "defaultConsistencyLevel": "Session",
                 "maxIntervalInSeconds": 5,
@@ -35,6 +36,15 @@
                 }
               ],
               "readLocations": [
+                {
+                  "id": "ddb1-eastus",
+                  "locationName": "East US",
+                  "documentEndpoint": "https://ddb1-eastus.documents.azure.com:443/",
+                  "provisioningState": "Succeeded",
+                  "failoverPriority": 0
+                }
+              ],
+              "locations": [
                 {
                   "id": "ddb1-eastus",
                   "locationName": "East US",

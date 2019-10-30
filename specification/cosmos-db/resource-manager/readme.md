@@ -26,14 +26,7 @@ These are the global settings for the Cosmos-DB API.
 
 ``` yaml
 openapi-type: arm
-```
-
-``` yaml
 tag: package-2019-08
-```
-
-``` yaml
-tag: package-2015-04
 ```
 
 ### Tag: package-2019-08
