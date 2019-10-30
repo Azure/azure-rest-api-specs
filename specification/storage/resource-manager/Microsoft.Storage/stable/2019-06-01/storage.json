@@ -1925,6 +1925,19 @@
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
           "description": "List of private endpoint connection associated with the specified storage account"
+        },
+        "minimumTlsVersion": {
+          "type": "string",
+          "enum": [
+            "TLS1_0",
+            "TLS1_1",
+            "TLS1_2"
+          ],
+          "x-ms-enum": {
+            "name": "MinimumTlsVersion",
+            "modelAsString": true
+          },
+          "description": "Specifies the minimum TLS version required to accept the request. TLS 1.2 will be default value for new created storage account in the next release version."
         }
       },
       "description": "Properties of the storage account."
