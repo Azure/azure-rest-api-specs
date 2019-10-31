@@ -31,6 +31,7 @@ Please also specify `--ruby-sdks-folder=<path to the root directory of your azur
 
 namespace: "Azure::EventGrid::Mgmt::V2020_01_01_preview"
 output-folder: $(ruby-sdks-folder)/management/azure_mgmt_event_grid/lib
+```
 
 ### Tag: package-2019-06 and ruby
 These settings apply only when `--tag=package-2019-06 --ruby` is specified on the command line.
