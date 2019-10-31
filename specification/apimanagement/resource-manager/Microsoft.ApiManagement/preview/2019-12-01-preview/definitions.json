@@ -3498,12 +3498,12 @@
       ],
       "description": "Parameters supplied to the Update Product operation."
     },
-    "PropertyCollection": {
+    "NamedValueCollection": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PropertyContract"
+            "$ref": "#/definitions/NamedValueContract"
           },
           "description": "Page values."
         },
@@ -3512,14 +3512,14 @@
           "description": "Next page link if any."
         }
       },
-      "description": "Paged Property list representation."
+      "description": "Paged NamedValue list representation."
     },
-    "PropertyContract": {
+    "NamedValueContract": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PropertyContractProperties",
-          "description": "Property entity contract properties."
+          "$ref": "#/definitions/NamedValueContractProperties",
+          "description": "NamedValue entity contract properties."
         }
       },
       "allOf": [
@@ -3527,36 +3527,36 @@
           "$ref": "./apimanagement.json#/definitions/Resource"
         }
       ],
-      "description": "Property details."
+      "description": "NamedValue details."
     },
-    "PropertyContractProperties": {
+    "NamedValueContractProperties": {
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
+          "description": "Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.",
           "minLength": 1,
           "maxLength": 256,
           "pattern": "^[A-Za-z0-9-._]+$"
         },
         "value": {
           "type": "string",
-          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.",
           "minLength": 1,
           "maxLength": 4096
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PropertyEntityBaseParameters"
+          "$ref": "#/definitions/NamedValueEntityBaseParameters"
         }
       ],
       "required": [
         "displayName",
         "value"
       ],
-      "description": "Property Contract properties."
+      "description": "NamedValue Contract properties."
     },
-    "PropertyEntityBaseParameters": {
+    "NamedValueEntityBaseParameters": {
       "properties": {
         "tags": {
           "type": "array",
@@ -3564,47 +3564,47 @@
             "type": "string"
           },
           "maxItems": 32,
-          "description": "Optional tags that when provided can be used to filter the property list."
+          "description": "Optional tags that when provided can be used to filter the NamedValue list."
         },
         "secret": {
           "description": "Determines whether the value is a secret and should be encrypted or not. Default value is false.",
           "type": "boolean"
         }
       },
-      "description": "Property Entity Base Parameters set."
+      "description": "NamedValue Entity Base Parameters set."
     },
-    "PropertyUpdateParameterProperties": {
+    "NamedValueUpdateParameterProperties": {
       "properties": {
         "displayName": {
           "type": "string",
-          "description": "Unique name of Property. It may contain only letters, digits, period, dash, and underscore characters.",
+          "description": "Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.",
           "minLength": 1,
           "maxLength": 256,
           "pattern": "^[A-Za-z0-9-._]+$"
         },
         "value": {
           "type": "string",
-          "description": "Value of the property. Can contain policy expressions. It may not be empty or consist only of whitespace.",
+          "description": "Value of the NamedValue. Can contain policy expressions. It may not be empty or consist only of whitespace.",
           "minLength": 1,
           "maxLength": 4096
         }
       },
       "allOf": [
         {
-          "$ref": "#/definitions/PropertyEntityBaseParameters"
+          "$ref": "#/definitions/NamedValueEntityBaseParameters"
         }
       ],
-      "description": "Property Contract properties."
+      "description": "NamedValue Contract properties."
     },
-    "PropertyUpdateParameters": {
+    "NamedValueUpdateParameters": {
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/PropertyUpdateParameterProperties",
-          "description": "Property entity Update contract properties."
+          "$ref": "#/definitions/NamedValueUpdateParameterProperties",
+          "description": "NamedValue entity Update contract properties."
         }
       },
-      "description": "Property update Parameters."
+      "description": "NamedValue update Parameters."
     },
     "QuotaCounterCollection": {
       "properties": {
