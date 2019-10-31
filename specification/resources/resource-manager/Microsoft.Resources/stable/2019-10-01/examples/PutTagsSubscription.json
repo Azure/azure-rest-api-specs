@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2019-10-01",
+    "parameters": {
+      "properties": {
+        "tags":
+        {
+          "tagKey1": "tagValue1",
+          "tagKey2": "tagValue2"
+         }
+      }
+    }
+  },
+  "responses": {
+    "404": {
+      "message": "Not Found - Subscription Not Found."
+    },
+    "400": {
+      "message": "Bad Request - Invalid Tags Definition Properties."
+    },
+    "200": {
+      "body": {
+        "properties": {
+          "tags":
+          {
+            "tagKey1": "tagValue1",
+            "tagKey2": "tagValue2"
+           }
+        }
+      }
+    }
+  }
+}
