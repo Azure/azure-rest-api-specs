@@ -4173,7 +4173,8 @@
           "type": "string",
           "enum": [
             "SSISDB",
-            "File"
+            "File",
+            "InlinePackage"
           ],
           "x-ms-enum": {
             "name": "SsisPackageLocationType",
@@ -4185,10 +4186,7 @@
           "description": "SSIS package location properties.",
           "$ref": "#/definitions/SSISPackageLocationTypeProperties"
         }
-      },
-      "required": [
-        "packagePath"
-      ]
+      }
     },
     "SSISPackageLocationTypeProperties": {
       "description": "SSIS package location properties.",
@@ -4205,6 +4203,25 @@
         "configurationPath": {
           "description": "The configuration file of the package execution. Type: string (or Expression with resultType string).",
           "type": "object"
+        },
+        "packageName": {
+          "description": "The package name.",
+          "type": "string"
+        },
+        "packageContent": {
+          "description": "The embedded package content. Type: string (or Expression with resultType string).",
+          "type": "object"
+        },
+        "packageLastModifiedDate": {
+          "description": "The embedded package last modified date.",
+          "type": "string"
+        },
+        "childPackages": {
+          "description": "The embedded child package list.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SSISChildPackage"
+          }
         }
       }
     },
@@ -4289,6 +4306,32 @@
         "domain",
         "userName",
         "password"
+      ]
+    },
+    "SSISChildPackage": {
+      "description": "SSIS embedded child package.",
+      "type": "object",
+      "properties": {
+        "packagePath": {
+          "type": "object",
+          "description": "Path for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageName": {
+          "type": "string",
+          "description": "Name for embedded child package."
+        },
+        "packageContent": {
+          "type": "object",
+          "description": "Content for embedded child package. Type: string (or Expression with resultType string)."
+        },
+        "packageLastModifiedDate": {
+          "type": "string",
+          "description": "Last modified date for embedded child package."
+        }
+      },
+      "required": [
+        "packagePath",
+        "packageContent"
       ]
     },
     "SSISLogLocation": {
