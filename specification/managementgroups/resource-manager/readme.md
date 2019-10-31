@@ -234,6 +234,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.Management/stable/2019-11-01/management.json
   - $(this-folder)/Microsoft.Management/preview/2018-03-01-preview/management.json
   - $(this-folder)/Microsoft.Management/preview/2018-01-01-preview/management.json
   - $(this-folder)/Microsoft.Management/preview/2017-11-01-preview/management.json
