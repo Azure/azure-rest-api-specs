@@ -26,6 +26,7 @@ These are the global settings for the API.
 openapi-type: arm
 tag: package-2019-11
 ```
+
 ### Tag: package-2019-11
 These settings apply only when `--tag=package-2019-11` is specified on the command line.
 
