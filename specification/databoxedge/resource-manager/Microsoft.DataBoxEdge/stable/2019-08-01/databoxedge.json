@@ -3913,6 +3913,23 @@
         }
       }
     },
+    "ResourceTypeSku": {
+      "description": "SkuInformation object",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The type of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "skus": {
+          "items": { "$ref": "#/definitions/SkuInformation" },
+          "type": "array",
+          "description": "The information of the Sku.",
+          "readOnly": true
+        }
+      }
+    },
     "Role": {
       "description": "Compute role.",
       "required": [ "kind" ],
@@ -4140,25 +4157,53 @@
       }
     },
     "SkuInformation": {
-      "description": "Sku information",
+      "description": "Properties of the Sku",
       "type": "object",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/SkuInformationProperties",
-          "description": "Properties of the SKU information",
+        "name": {
+          "description": "The Sku name",
+          "enum": [ "Gateway", "Edge", "TEA_1Node", "TEA_1Node_UPS", "TEA_1Node_Heater", "TEA_1Node_UPS_Heater", "TEA_4Node_Heater", "TEA_4Node_UPS_Heater", "TMA" ],
+          "type": "string",
           "readOnly": true,
-          "x-ms-client-flatten": true
+          "x-ms-enum": {
+            "name": "SkuName",
+            "modelAsString": true
+          }
+        },
+        "locations": {
+          "description": "Availability of the SKU for the region",
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "locationInfo": {
+          "description": "Availability of the SKU for the location/zone",
+          "type": "array",
+          "items": { "$ref": "#/definitions/SkuLocationInfo" },
+          "readOnly": true
+        },
+        "requiredFeatures": {
+          "description": "Specifies the feature flags required to enable this Sku (if disabled)",
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "requiredQuotaIds": {
+          "description": "The restrictions because of which SKU cannot be used.",
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
         }
       }
     },
     "SkuInformationList": {
-      "description": "List of SKU Information",
+      "description": "List of SKU Information objects",
       "type": "object",
       "properties": {
         "value": {
-          "description": "List of SKU Information",
+          "description": "List of ResourceType Sku",
           "type": "array",
-          "items": { "$ref": "#/definitions/SkuInformation" },
+          "items": { "$ref": "#/definitions/ResourceTypeSku" },
           "readOnly": true
         },
         "nextLink": {
@@ -4168,90 +4213,19 @@
         }
       }
     },
-    "SkuInformationProperties": {
-      "description": "Properties of the Sku",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the SKU",
-          "enum": [ "Gateway", "Edge", "TEA_1Node", "TEA_1Node_UPS", "TEA_1Node_Heater", "TEA_1Node_UPS_Heater", "TEA_4Node_Heater", "TEA_4Node_UPS_Heater", "TMA" ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
-        },
-        "resourceType": {
-          "description": "The type of the resource",
-          "type": "string",
-          "readOnly": true
-        },
-        "locations": {
-          "description": "Availability of the SKU for the region",
-          "type": "array",
-          "items": { "type": "string" },
-          "readOnly": true
-        },
-        "locationInfo": {
-          "$ref": "#/definitions/SkuLocationInfo",
-          "description": "Availability of the SKU for the location/zone",
-          "readOnly": true
-        },
-        "requiredFeatures": {
-          "description": "Specifies the feature flags required to enable this Sku (if disabled)",
-          "type": "array",
-          "items": { "type": "string" },
-          "readOnly": true
-        },
-        "restrictions": {
-          "$ref": "#/definitions/SkuRestriction",
-          "description": "The restrictions because of which SKU cannot be used.",
-          "readOnly": true
-        }
-      }
-    },
     "SkuLocationInfo": {
       "description": "The location info.",
       "type": "object",
       "properties": {
-        "locations": {
-          "description": "The locations",
-          "type": "array",
-          "items": { "type": "string" },
+        "location": {
+          "description": "The location",
+          "type": "string",
           "readOnly": true
         },
         "zones": {
           "description": "The zones",
           "type": "array",
           "items": { "type": "string" }
-        }
-      }
-    },
-    "SkuRestriction": {
-      "description": "The restrictions because of which SKU cannot be used.",
-      "type": "object",
-      "properties": {
-        "values": {
-          "description": "The locations where sku is restricted.",
-          "type": "array",
-          "items": { "type": "string" },
-          "readOnly": true
-        },
-        "reasonCode": {
-          "description": "The SKU restriction reason.",
-          "enum": [ "NotAvailableForSubscription", "QuotaId" ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SkuRestrictionReasonCode",
-            "modelAsString": true
-          }
-        },
-        "restrictionInfo": {
-          "$ref": "#/definitions/SkuLocationInfo",
-          "description": "Restriction of the SKU for the location/zone",
-          "readOnly": true
         }
       }
     },
