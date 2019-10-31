@@ -71,6 +71,21 @@
         "allowedHeaders"
       ],
       "description": "Specifies a CORS rule for the Blob service."
+    },
+    "DeleteRetentionPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether DeleteRetentionPolicy is enabled for the Blob service."
+        },
+        "days": {
+          "type": "integer",
+          "minimum": 1,
+          "maximum": 365,
+          "description": "Indicates the number of days that the deleted blob should be retained. The minimum specified value can be 1 and the maximum value can be 365."
+        }
+      },
+      "description": "The blob service properties for soft delete."
     }
   }
 }
