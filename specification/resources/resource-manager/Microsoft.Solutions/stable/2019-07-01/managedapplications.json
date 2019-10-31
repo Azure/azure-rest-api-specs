@@ -1020,7 +1020,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JitRequestDefinition"
+              "$ref": "#/definitions/JitRequestPatchable"
             },
             "description": "Parameters supplied to the update JIT request."
           },
@@ -1033,7 +1033,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Created - Returns information about the JIT request.",
+            "description": "Ok - Returns information about the JIT request.",
             "schema": {
               "$ref": "#/definitions/JitRequestDefinition"
             }
@@ -1044,8 +1044,7 @@
               "$ref": "#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "tags": [
@@ -1834,6 +1833,18 @@
         }
       ],
       "description": "Information about JIT request definition."
+    },
+    "JitRequestPatchable": {
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Jit request tags"
+        }
+      },
+      "description": "Information about JIT request."
     },
     "JitRequestDefinitionListResult": {
       "properties": {
