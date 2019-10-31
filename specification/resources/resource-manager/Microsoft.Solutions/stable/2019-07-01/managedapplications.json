@@ -34,6 +34,36 @@
     }
   },
   "paths": {
+    "/providers/Microsoft.Solutions/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "operationId": "ListOperations",
+        "description": "Lists all of the available Microsoft.Solutions REST API operations.",
+        "x-ms-examples": {
+          "List Solutions operations": {
+            "$ref": "./examples/listSolutionsOperations.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}": {
       "get": {
         "tags": [
@@ -598,9 +628,6 @@
               "$ref": "#/definitions/Application"
             }
           },
-          "404": {
-            "description": "Not Found"
-          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -1079,6 +1106,54 @@
           }
         } 
       }
+    },
+    "subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Solutions/applications/{applicationName}/refreshPermissions": {
+      "post": {
+        "tags": [
+          "refreshPermissions"
+        ],
+        "operationId": "refreshPermissions_Post",
+        "description": "Refresh Permissions for application.",
+        "parameters": [
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the managed application.",
+            "minLength": 3,
+            "maxLength": 64
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted - Returns this status until the asynchronous operation has completed."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "x-ms-paths": {
@@ -1108,9 +1183,6 @@
             "schema": {
               "$ref": "#/definitions/ApplicationDefinition"
             }
-          },
-          "404": {
-            "description": "Not Found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1718,7 +1790,7 @@
           "description": "The URL to use for getting the next set of results."
         }
       },
-      "description": "List of managed applications."
+      "description": "List of JIT requests."
     },
     "JitRequestProperties": {
       "properties": {
