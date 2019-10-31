@@ -61,11 +61,20 @@
         "parameters": {
           "OutputBlobNameList": {
             "type": "Array"
+          },
+          "JobId": {
+            "type": "String"
           }
         },
         "variables": {
           "TestVariableArray": {
             "type": "Array"
+          }
+        },
+        "runDimensions": {
+          "JobId": {
+            "value": "@pipeline().parameters.JobId",
+            "type": "Expression"
           }
         }
       }
@@ -140,11 +149,20 @@
           "parameters": {
             "OutputBlobNameList": {
               "type": "Array"
+            },
+            "JobId": {
+              "type": "String"
             }
           },
           "variables": {
             "TestVariableArray": {
               "type": "Array"
+            }
+          },
+          "runDimensions": {
+            "JobId": {
+              "value": "@pipeline().parameters.JobId",
+              "type": "Expression"
             }
           }
         },
