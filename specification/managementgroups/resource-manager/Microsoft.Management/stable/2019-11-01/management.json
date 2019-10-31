@@ -173,18 +173,18 @@
           "202": {
             "description": "Accepted",
             "schema": {
-                "$ref": "#/definitions/OperationResults"
+              "$ref": "#/definitions/OperationResults"
+            },
+            "headers": {
+              "Location": {
+                "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\n The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state \n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
+                "type": "string"
               },
-              "headers": {
-                "Location": {
-                  "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\n The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state \n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
-                  "type": "string"
-                },
-                "Azure-AsyncOperation":{
-                  "description": "URL for checking the ongoing status of the operation.\n To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
-                  "type": "string"
-                }
+              "Azure-AsyncOperation": {
+                "description": "URL for checking the ongoing status of the operation.\n To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
+                "type": "string"
               }
+            }
           },
           "default": {
             "description": "Error",
@@ -268,7 +268,7 @@
                 "description": "URL for determining when an operation has completed. Send a GET request to the URL in Location header.\n The URI should return a 202 until the operation reaches a terminal state and 200 once it reaches a terminal state \n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#202-accepted-and-location-headers",
                 "type": "string"
               },
-              "Azure-AsyncOperation":{
+              "Azure-AsyncOperation": {
                 "description": "URL for checking the ongoing status of the operation.\n To get the status of the asynchronous operation, send a GET request to the URL in Azure-AsyncOperation header value.\n\nFor more info: https://github.com/Azure/azure-resource-manager-rpc/blob/master/v1.0/Addendum.md#asynchronous-operations",
                 "type": "string"
               }
@@ -294,7 +294,9 @@
     },
     "/providers/Microsoft.Management/managementGroups/{groupId}/descendants": {
       "post": {
-        "tags": [ "ManagementGroups_Descendants" ],
+        "tags": [
+          "ManagementGroups_Descendants"
+        ],
         "operationId": "ManagementGroups_GetDescendants",
         "description": "List all entities that descend from a management group.",
         "parameters": [
