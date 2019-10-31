@@ -461,7 +461,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Additional parameters supplied to the operation."
           },
@@ -571,7 +571,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Parameters to validate."
           },
@@ -765,7 +765,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Additional parameters supplied to the operation."
           },
@@ -884,7 +884,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Deployment"
+              "$ref": "#/definitions/ScopedDeployment"
             },
             "description": "Parameters to validate."
           },
@@ -4142,6 +4142,23 @@
         }
       },
       "required": [
+        "properties"
+      ],
+      "description": "Deployment operation parameters."
+    },
+    "ScopedDeployment": {
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "The location to store the deployment data."
+        },
+        "properties": {
+          "$ref": "#/definitions/DeploymentProperties",
+          "description": "The deployment properties."
+        }
+      },
+      "required": [
+        "location",
         "properties"
       ],
       "description": "Deployment operation parameters."
