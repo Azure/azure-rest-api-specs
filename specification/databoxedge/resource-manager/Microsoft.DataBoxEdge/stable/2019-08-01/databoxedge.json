@@ -67,19 +67,25 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/locations/{location}/availableSkus": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/skus": {
       "get": {
         "tags": [ "Locations" ],
         "summary": "List all the available Skus in the region and information related to them",
         "operationId": "Locations_ListAvailableSkus",
         "parameters": [
           { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/locationParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" }
+          { "$ref": "#/parameters/apiVersionParameter" },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "Specify $filter='location eq <location>' to filter on location",
+            "required": false,
+            "type": "string"
+          }
         ],
         "responses": {
           "200": {
-            "description": "Lists the available Skus in the region and information related to them",
+            "description": "Lists the available Skus and information related to them",
             "schema": { "$ref": "#/definitions/SkuInformationList" }
           },
           "default": {
@@ -91,34 +97,6 @@
         "x-ms-examples": {
           "ListSkus": {
             "$ref": "./examples/ListSkus.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataBoxEdge/locations/{location}/pickupAddresses": {
-      "get": {
-        "tags": [ "Locations" ],
-        "summary": "Lists all the pickup addresses in the region",
-        "operationId": "Locations_ListPickupAddresses",
-        "parameters": [
-          { "$ref": "#/parameters/subscriptionIdParameter" },
-          { "$ref": "#/parameters/locationParameter" },
-          { "$ref": "#/parameters/apiVersionParameter" }
-        ],
-        "responses": {
-          "200": {
-            "description": "Lists the available pickup addresses in the region",
-            "schema": { "$ref": "#/definitions/PickupAddressList" }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": { "$ref": "#/definitions/CloudError" }
-          }
-        },
-        "x-ms-pageable": { "nextLinkName": null },
-        "x-ms-examples": {
-          "ListPickupAddress": {
-            "$ref": "./examples/ListPickupAddress.json"
           }
         }
       }
@@ -1953,7 +1931,7 @@
           { "$ref": "#/parameters/resourceGroupNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='CustomContextTag eq <tag>' to filter on custom context tag property",
             "required": false,
@@ -2198,7 +2176,7 @@
           { "$ref": "#/parameters/resourceGroupNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
-            "name": "$expand",
+            "name": "filter",
             "in": "query",
             "description": "Specify $filter='UserType eq <type>' to filter on user type property",
             "required": false,
@@ -3293,13 +3271,8 @@
           "type": "string",
           "readOnly": true
         },
-        "shareId": {
-          "description": "ARM ID of the share that was refreshed.",
-          "type": "string",
-          "readOnly": true
-        },
-        "containerId": {
-          "description": "ARM ID of the container that was refreshed.",
+        "refreshedEntityId": {
+          "description": "ARM ID of the entity that was refreshed.",
           "type": "string",
           "readOnly": true
         },
@@ -3757,7 +3730,7 @@
     },
     "OrderProperties": {
       "description": "Order properties.",
-      "required": [ "contactInformation", "shippingAddress", "shipmentType" ],
+      "required": [ "contactInformation", "shippingAddress" ],
       "type": "object",
       "properties": {
         "contactInformation": {
@@ -3767,19 +3740,6 @@
         "shippingAddress": {
           "$ref": "#/definitions/Address",
           "description": "The shipping address."
-        },
-        "shipmentType": {
-          "description": "Shipment type of the order.",
-          "enum": [ "NotApplicable", "ShippedToCustomer", "SelfPickup" ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "ShipmentType",
-            "modelAsString": true
-          }
-        },
-        "pickupAddressCode": {
-          "description": "Code of the pickup address (This field cannot be empty if shipment type is self pickup).",
-          "type": "string"
         },
         "currentStatus": {
           "$ref": "#/definitions/OrderStatus",
@@ -3817,7 +3777,7 @@
       "properties": {
         "status": {
           "description": "Status of the order as per the allowed status types.",
-          "enum": [ "Untracked", "AwaitingFulfilment", "AwaitingPreparation", "AwaitingShipment", "Shipped", "Arriving", "Delivered", "ReplacementRequested", "LostDevice", "Declined", "ReturnInitiated", "AwaitingReturnShipment", "ShippedBack", "CollectedAtMicrosoft", "ReadyForPickup", "PickedUp", "DropInitiated" ],
+          "enum": [ "Untracked", "AwaitingFulfilment", "AwaitingPreparation", "AwaitingShipment", "Shipped", "Arriving", "Delivered", "ReplacementRequested", "LostDevice", "Declined", "ReturnInitiated", "AwaitingReturnShipment", "ShippedBack", "CollectedAtMicrosoft" ],
           "type": "string",
           "x-ms-enum": {
             "name": "OrderState",
@@ -3834,13 +3794,8 @@
           "description": "Comments related to this status change.",
           "type": "string"
         },
-        "trackingInformation": {
-          "$ref": "#/definitions/TrackingInfo",
-          "description": "Tracking information related to the state in the ordering flow.",
-          "readOnly": true
-        },
-        "additionalDetails": {
-          "description": "Generic information.",
+        "additionalOrderDetails": {
+          "description": "Dictionary to hold generic information which is not stored\r\nby the already existing properties",
           "type": "object",
           "additionalProperties": { "type": "string" },
           "readOnly": true
@@ -3912,65 +3867,6 @@
         "topic": {
           "description": "Topic where periodic events are published to IoT device.",
           "type": "string"
-        }
-      }
-    },
-    "PickupAddress": {
-      "description": "Pickup address",
-      "type": "object",
-      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PickupAddressProperties",
-          "description": "Properties of the pickup addresses",
-          "readOnly": true,
-          "x-ms-client-flatten": true
-        }
-      }
-    },
-    "PickupAddressList": {
-      "description": "List of pickup addresses",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "List of pickup addresses",
-          "type": "array",
-          "items": { "$ref": "#/definitions/PickupAddress" },
-          "readOnly": true
-        },
-        "nextLink": {
-          "description": "Links to the next set of results",
-          "type": "string",
-          "readOnly": true
-        }
-      }
-    },
-    "PickupAddressProperties": {
-      "description": "Properties of the pickup address",
-      "type": "object",
-      "properties": {
-        "uniqueCode": {
-          "description": "Unique code used to identify a pickup addresses",
-          "type": "string",
-          "readOnly": true
-        },
-        "capabilities": {
-          "description": "Capabilities of a pickup address",
-          "type": "array",
-          "items": {
-            "enum": [ "Pickup", "Drop" ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "FacilityCapability",
-              "modelAsString": true
-            }
-          },
-          "readOnly": true
-        },
-        "address": {
-          "$ref": "#/definitions/Address",
-          "description": "Pickup address",
-          "readOnly": true
         }
       }
     },
@@ -4246,7 +4142,6 @@
     "SkuInformation": {
       "description": "Sku information",
       "type": "object",
-      "allOf": [ { "$ref": "#/definitions/ARMBaseModel" } ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/SkuInformationProperties",
@@ -4277,7 +4172,7 @@
       "description": "Properties of the Sku",
       "type": "object",
       "properties": {
-        "skuName": {
+        "name": {
           "description": "Name of the SKU",
           "enum": [ "Gateway", "Edge", "TEA_1Node", "TEA_1Node_UPS", "TEA_1Node_Heater", "TEA_1Node_UPS_Heater", "TEA_4Node_Heater", "TEA_4Node_UPS_Heater", "TMA" ],
           "type": "string",
@@ -4287,47 +4182,75 @@
             "modelAsString": true
           }
         },
-        "availability": {
+        "resourceType": {
+          "description": "The type of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "locations": {
           "description": "Availability of the SKU for the region",
-          "enum": [ "Unavailable", "Available" ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SkuAvailability",
-            "modelAsString": true
-          }
-        },
-        "disabledReason": {
-          "description": "Reason of disabling the Sku",
-          "enum": [ "None", "Region", "OfferType", "NoSubscriptionInfo" ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "SkuDisabledReason",
-            "modelAsString": true
-          }
-        },
-        "disabledReasonMessage": {
-          "description": "Localised message to disable the SKU",
-          "type": "string",
-          "readOnly": true
-        },
-        "shipmentTypes": {
-          "description": "Specifies the shipment types allowed for this SKU",
           "type": "array",
-          "items": {
-            "enum": [ "NotApplicable", "ShippedToCustomer", "SelfPickup" ],
-            "type": "string",
-            "x-ms-enum": {
-              "name": "ShipmentType",
-              "modelAsString": true
-            }
-          },
+          "items": { "type": "string" },
           "readOnly": true
         },
-        "requiredFeature": {
-          "description": "Specifies the feature flag required to enable this Sku (if disabled)",
+        "locationInfo": {
+          "$ref": "#/definitions/SkuLocationInfo",
+          "description": "Availability of the SKU for the location/zone",
+          "readOnly": true
+        },
+        "requiredFeatures": {
+          "description": "Specifies the feature flags required to enable this Sku (if disabled)",
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "restrictions": {
+          "$ref": "#/definitions/SkuRestriction",
+          "description": "The restrictions because of which SKU cannot be used.",
+          "readOnly": true
+        }
+      }
+    },
+    "SkuLocationInfo": {
+      "description": "The location info.",
+      "type": "object",
+      "properties": {
+        "locations": {
+          "description": "The locations",
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "zones": {
+          "description": "The zones",
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      }
+    },
+    "SkuRestriction": {
+      "description": "The restrictions because of which SKU cannot be used.",
+      "type": "object",
+      "properties": {
+        "values": {
+          "description": "The locations where sku is restricted.",
+          "type": "array",
+          "items": { "type": "string" },
+          "readOnly": true
+        },
+        "reasonCode": {
+          "description": "The SKU restriction reason.",
+          "enum": [ "NotAvailableForSubscription", "QuotaId" ],
           "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "SkuRestrictionReasonCode",
+            "modelAsString": true
+          }
+        },
+        "restrictionInfo": {
+          "$ref": "#/definitions/SkuLocationInfo",
+          "description": "Restriction of the SKU for the location/zone",
           "readOnly": true
         }
       }
