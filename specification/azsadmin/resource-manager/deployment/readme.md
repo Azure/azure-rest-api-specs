@@ -78,6 +78,24 @@ input-file:
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
 ```
 
+``` yaml
+title: DeploymentAdminClient
+description: Deployment Admin Client
+openapi-type: arm
+tag: package-2019-01-01
+```
+
+``` yaml
+input-file: 
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/Deployment.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlan.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ActionPlanOperation.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/FileContainer.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductDeployment.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductPackage.json
+  - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
+```
+
 If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
