@@ -129,7 +129,7 @@
           }
         ],
         "responses": {
-          "201": {
+          "200": {
             "description": "The workbook template has been successfully deleted."
           },
           "204": {
@@ -218,7 +218,7 @@
           },
           {
             "name": "WorkbookTemplateUpdateParameters",
-            "description": "Properties that need to be specified to create a new workbook.",
+            "description": "Properties that need to be specified to patch a workbook template.",
             "in": "body",
             "required": false,
             "schema": {
@@ -251,7 +251,7 @@
   "definitions": {
     "WorkbookTemplateResource": {
       "properties": {
-        "resourceId": {
+        "id": {
           "type": "string",
           "readOnly": true,
           "description": "Azure resource Id"
@@ -318,15 +318,10 @@
     "WorkbookTemplateProperties": {
       "description": "Properties that contain a workbook template.",
       "required": [
-        "id",
         "templateData",
         "galleries"
       ],
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "Id of the workbook template. This is GUID value."
-        },
         "priority": {
           "type": "integer",
           "description": "Priority of the template. Determines which template to open when a workbook gallery is opened in viewer mode."
