@@ -641,7 +641,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLog"
+              "$ref": "#/definitions/FlowLogRequestParameters"
             },
             "description": "Parameters that define the create or update flow log resource."
           },
@@ -2503,6 +2503,39 @@
       ],
       "description": "A flow log resource."
     },
+    "FlowLogRequestParameters": {
+      "description": "Parameters that define the configuration of flow log.",
+      "required": [
+        "targetResourceId",
+        "storageId"
+      ],
+      "properties": {
+        "targetResourceId": {
+          "description": "ID of network security group to which flow log will be applied.",
+          "type": "string"
+        },
+        "storageId": {
+          "description": "ID of the storage account which is used to store the flow log.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Flag to enable/disable flow logging.",
+          "type": "boolean"
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/RetentionPolicyParameters",
+          "description": "Parameters that define the retention policy for flow log."
+        },
+        "format": {
+          "$ref": "#/definitions/FlowLogFormatParameters",
+          "description": "Parameters that define the flow log format."
+        },
+        "flowAnalyticsConfiguration": {
+          "$ref": "#/definitions/TrafficAnalyticsProperties",
+          "description": "Parameters that define the configuration of traffic analytics."
+        }
+      }
+    },
     "FlowLogPropertiesFormat": {
       "description": "Parameters that define the configuration of flow log.",
       "required": [
@@ -2512,6 +2545,10 @@
       "properties": {
         "targetResourceId": {
           "description": "ID of network security group to which flow log will be applied.",
+          "type": "string"
+        },
+        "targetResourceGuid": {
+          "description": "Guid of network security group to which flow log will be applied.",
           "type": "string"
         },
         "storageId": {
