@@ -45,13 +45,19 @@
             "$ref": "#/parameters/AdministratorNameParameter"
           },
           {
-            "name": "properties",
+            "name": "administratorName",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "parameters",
             "in": "body",
+            "description": "The required parameters for creating or updating an Active Directory Administrator.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ServerAzureADAdministrator"
-            },
-            "description": "The required parameters for creating or updating an Active Directory Administrator."
+            }
           }
         ],
         "responses": {
