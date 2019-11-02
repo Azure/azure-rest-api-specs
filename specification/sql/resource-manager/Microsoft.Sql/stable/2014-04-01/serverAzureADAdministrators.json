@@ -63,22 +63,17 @@
           },
           "201": {
             "description": "Created",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
             }
           },
           "202": {
             "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
-            }
           }
         },
         "x-ms-long-running-operation": true
       },
       "delete": {
         "tags": [
-          "ServerAdministrators"
+          "ServerAzureADAdministrators"
         ],
         "operationId": "ServerAzureADAdministrators_Delete",
         "description": "Deletes an existing server Active Directory Administrator.",
@@ -107,20 +102,14 @@
         "responses": {
           "202": {
             "description": "Accepted",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
             }
           },
           "204": {
             "description": "No Content",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
             }
           },
           "200": {
             "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
             }
           }
         },
@@ -131,7 +120,7 @@
           "ServerAdministrators"
         ],
         "operationId": "ServerAzureADAdministrators_Get",
-        "description": "Gets an server Administrator.",
+        "description": "Gets a server Administrator.",
         "x-ms-examples": {
           "Get the Active Directory Administrator": {
             "$ref": "./examples/ServerAdminGet.json"
@@ -167,7 +156,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
       "get": {
         "tags": [
-          "ServerAdministrators"
+          "ServerAzureADAdministrators"
         ],
         "operationId": "ServerAzureADAdministrators_ListByServer",
         "description": "Gets a list of server Administrators.",
