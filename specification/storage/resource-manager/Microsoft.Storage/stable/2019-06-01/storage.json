@@ -1176,7 +1176,7 @@
           "readOnly": true,
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Sku"
+            "$ref": "./common.json#/definitions/Sku"
           },
           "description": "Get the list result of storage SKUs and their properties."
         }
@@ -1210,89 +1210,6 @@
         }
       },
       "description": "The CheckNameAvailability operation response."
-    },
-    "Sku": {
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Gets or sets the SKU name. Required for account creation; optional for update. Note that in older versions, SKU name was called accountType.",
-          "enum": [
-            "Standard_LRS",
-            "Standard_GRS",
-            "Standard_RAGRS",
-            "Standard_ZRS",
-            "Premium_LRS",
-            "Premium_ZRS",
-            "Standard_GZRS",
-            "Standard_RAGZRS"
-          ],
-          "x-ms-enum": {
-            "name": "SkuName",
-            "modelAsString": true
-          }
-        },
-        "tier": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the SKU tier. This is based on the SKU name.",
-          "enum": [
-            "Standard",
-            "Premium"
-          ],
-          "x-ms-enum": {
-            "name": "SkuTier",
-            "modelAsString": false
-          }
-        },
-        "resourceType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource, usually it is 'storageAccounts'."
-        },
-        "kind": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Indicates the type of storage account.",
-          "enum": [
-            "Storage",
-            "StorageV2",
-            "BlobStorage",
-            "FileStorage",
-            "BlockBlobStorage"
-          ],
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
-        },
-        "locations": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
-        },
-        "capabilities": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SKUCapability"
-          },
-          "description": "The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc."
-        },
-        "restrictions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Restriction"
-          },
-          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
-        }
-      },
-      "required": [
-        "name"
-      ],
-      "description": "The SKU of the storage account."
     },
     "CustomDomain": {
       "properties": {
@@ -1666,7 +1583,7 @@
     "StorageAccountCreateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "description": "Required. Gets or sets the SKU name."
         },
         "kind": {
@@ -1932,7 +1849,7 @@
     "StorageAccount": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "readOnly": true,
           "description": "Gets the SKU."
         },
@@ -2094,7 +2011,7 @@
     "StorageAccountUpdateParameters": {
       "properties": {
         "sku": {
-          "$ref": "#/definitions/Sku",
+          "$ref": "./common.json#/definitions/Sku",
           "description": "Gets or sets the SKU name. Note that the SKU name cannot be updated to Standard_ZRS, Premium_LRS or Premium_ZRS, nor can accounts of those SKU names be updated to any other value."
         },
         "tags": {
