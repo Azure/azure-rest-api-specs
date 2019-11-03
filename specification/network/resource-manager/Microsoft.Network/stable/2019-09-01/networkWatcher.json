@@ -641,7 +641,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FlowLogRequestParameters"
+              "$ref": "#/definitions/FlowLogRequest"
             },
             "description": "Parameters that define the create or update flow log resource."
           },
@@ -2502,6 +2502,23 @@
         }
       ],
       "description": "A flow log resource."
+    },
+    "FlowLogRequest": {
+      "description": "Parameters that define the configuration of flow log.",
+      "required": [
+        "properties"
+      ],
+      "properties": {
+        "location": {
+          "type": "string",
+          "description": "Flow log location."
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FlowLogRequestParameters",
+          "description": "Properties of the flow log."
+        }
+      }
     },
     "FlowLogRequestParameters": {
       "description": "Parameters that define the configuration of flow log.",
