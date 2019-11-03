@@ -35,16 +35,16 @@ cli:
   flatten-all: true
   test-setup:
     - name: ManagedNetworksPut
+    - name: ManagementNetworkGroupsPut
+    - name: ScopeAssignmentsPut
+    - name: ManagedNetworkPeeringPoliciesPut
     - name: ManagedNetworksGet
     - name: ManagedNetworksListByResourceGroup
     - name: ManagedNetworksListBySubscription
-    - name: ScopeAssignmentsPut
     - name: ScopeAssignmentsGet
     - name: ScopeAssignmentsList
-    - name: ManagementNetworkGroupsPut
     - name: ManagementNetworkGroupsGet
     - name: ManagedNetworksGroupsListByManagedNetwork
-    - name: ManagedNetworkPeeringPoliciesPut
     - name: ManagedNetworkPeeringPoliciesGet
     - name: ManagedNetworkPeeringPoliciesListByManagedNetwork
     - name: ManagedNetworkPeeringPoliciesDelete
