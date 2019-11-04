@@ -36,13 +36,8 @@
   "paths": {
     "{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
       "get": {
-        "operationId": "SystemAssignedIdentities_ListByScope",
-        "description": "Lists all the systemAssignedIdentities available under the specified RP scope.",
-        "x-ms-examples": {
-          "IdentityListBySubscription": {
-            "$ref": "./examples/IdentityListBySubscription.json"
-          }
-        },
+        "operationId": "SystemAssignedIdentities_DisplayByScope",
+        "description": "Displays the systemAssignedIdentity available under the specified RP scope.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -53,9 +48,9 @@
         ],
         "responses": {
           "200": {
-            "description": "OK. The list of systemAssignedIdentities was retrieved and returned successfully.",
+            "description": "OK. The systemAssignedIdentity was retrieved and returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SystemAssignedIdentitiesListResult"
+              "$ref": "#/definitions/SystemAssignedIdentityResult"
             }
           },
           "default": {
@@ -64,9 +59,6 @@
               "$ref": "#/definitions/CloudError"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -368,6 +360,7 @@
         },
         "location": {
           "type": "string",
+          "required": true,
           "description": "The Azure region where the identity lives."
         },
         "tags": {
@@ -379,6 +372,7 @@
         },
         "properties": {
           "x-ms-client-flatten": true,
+          "readOnly": true,
           "description": "The properties associated with the identity.",
           "$ref": "#/definitions/IdentityProperties"
         },
@@ -444,21 +438,17 @@
       },
       "description": "Values returned by the List operation."
     },
-    "SystemAssignedIdentitiesListResult": {
+    "SystemAssignedIdentityResult": {
       "properties": {
         "value": {
-          "type": "array",
+          "type": "string",
           "items": {
             "$ref": "#/definitions/Identity"
           },
-          "description": "The collection of systemAssignedIdentities returned by the listing operation."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The url to get the next page of results, if any."
+          "description": "The systemAssignedIdentity returned by the operation."
         }
       },
-      "description": "Values returned by the List operation."
+      "description": "Values returned by the display operation."
     },
     "CloudError": {
       "x-ms-external": true,
@@ -564,7 +554,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Parent  resource being extended by Managed Identities.",
+      "description": "The scope of the resource. Parent resource being extended by Managed Identities.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
