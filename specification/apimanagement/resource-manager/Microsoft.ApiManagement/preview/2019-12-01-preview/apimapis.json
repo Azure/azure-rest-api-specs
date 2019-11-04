@@ -301,7 +301,13 @@
             }
           },
           "202": {
-            "description": "Request to create or update API was accepted."
+            "description": "Request to create or update API was accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "API was successfully updated.",
@@ -2314,38 +2320,48 @@
           }
         ],
         "responses": {
-          "201": {
-            "description": "Api schema configuration was successfully created.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaContract"
-            },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+          "responses": {
+            "202": {
+              "description": "Request to create or update Api schema configuration was accepted.",
+              "headers": {
+                "Location": {
+                  "description": "The URL where the status of the long running operation can be checked.",
+                  "type": "string"
+                }
               }
-            }
-          },
-          "200": {
-            "description": "Api schema configuration of the tenant was successfully updated.",
-            "schema": {
-              "$ref": "./definitions.json#/definitions/SchemaContract"
             },
-            "headers": {
-              "ETag": {
-                "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
-                "type": "string"
+            "201": {
+              "description": "Api schema configuration was successfully created.",
+              "schema": {
+                "$ref": "./definitions.json#/definitions/SchemaContract"
+              },
+              "headers": {
+                "ETag": {
+                  "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                  "type": "string"
+                }
               }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            },
+            "200": {
+              "description": "Api schema configuration of the tenant was successfully updated.",
+              "schema": {
+                "$ref": "./definitions.json#/definitions/SchemaContract"
+              },
+              "headers": {
+                "ETag": {
+                  "description": "Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.",
+                  "type": "string"
+                }
+              }
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+              }
             }
           }
-        }
-      },
+        },
       "delete": {
         "tags": [
           "ApiSchema"

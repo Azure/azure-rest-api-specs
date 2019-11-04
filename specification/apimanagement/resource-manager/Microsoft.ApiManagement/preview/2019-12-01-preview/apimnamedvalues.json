@@ -233,6 +233,15 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Request to create or update NamedValue was accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "201": {
             "description": "NamedValue was successfully created.",
             "schema": {
@@ -306,17 +315,27 @@
           }
         ],
         "responses": {
-          "204": {
-            "description": "NamedValue was successfully updated."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+          "responses": {
+            "202": {
+              "description": "Request to update NamedValue was accepted.",
+              "headers": {
+                "Location": {
+                  "description": "The URL where the status of the long running operation can be checked.",
+                  "type": "string"
+                }
+              }
+            },
+            "204": {
+              "description": "NamedValue was successfully updated."
+            },
+            "default": {
+              "description": "Error response describing why the operation failed.",
+              "schema": {
+                "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+              }
             }
           }
-        }
-      },
+        },
       "delete": {
         "tags": [
           "NamedValue"
