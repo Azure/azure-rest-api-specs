@@ -117,6 +117,125 @@
           }
         }
       }
+    },
+    "/providers/Microsoft.Subscription/PurchaseSupportStatus/{Id}": {
+      "post": {
+        "operationId": "Purchase_SupportStatus",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/SupportStatus.json"
+          }
+        },
+        "description": "The operation to find out the purchase support status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/IdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/operationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/FetchMcapiObjectResponseResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "providers/Microsoft.Subscription/Subscriptions/{SubscriptionId}/SupportPlan": {
+      "get": {
+        "operationId": "GetSupportPlan",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/SupportPlan.json"
+          }
+        },
+        "description": "The operation to find out the purchase support status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SupportPlanResponseResult"
+            }
+          },
+          "default": {
+            "description": "Describes the error if the operation is not successful.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "providers/Microsoft.Subscription/Subscriptions/{subscriptionId}/PurchaseSupport": {
+      "get": {
+        "operationId": "Purchase_SupportPlan",
+        "x-ms-examples": {
+          "enableSubscription": {
+            "$ref": "./examples/PurchaseSupport.json"
+          }
+        },
+        "description": "The operation to find out the purchase support status",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/planTypeParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Normal response for a successful query.",
+            "schema": {
+              "$ref": "#/definitions/PurchaseResponseResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Purchase support plan is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
     }
   },
   "definitions": {
@@ -174,45 +293,154 @@
         }
       }
     },
-    "OperationListResult": {
-      "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+    "Id": {
+      "type": "object",
+      "description": "The purchase record Id parameter.",
       "properties": {
         "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Operation"
-          },
-          "description": "List of operations."
-        },
-        "nextLink": {
+          "description": "The purchase record Id",
           "type": "string",
-          "description": "URL to get the next set of operation list results if there are any."
+          "readOnly": true
         }
       }
     },
-    "Operation": {
-      "description": "REST API operation",
+    "operationName": {
       "type": "object",
+      "description": "The operation Name parameter.",
       "properties": {
-        "name": {
-          "description": "Operation name: {provider}/{resource}/{operation}",
-          "type": "string"
+        "value": {
+          "description": "The operation Name",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "planType": {
+    "type": "object",
+    "description": "The Support plan type parameter.",
+    "properties": {
+      "value": {
+        "description": "The Support plan type",
+        "type": "string",
+        "readOnly": true
+      }
+    }
+  },
+  "FetchMcapiObjectResponseResult": {
+    "description": "A list of containing Purchase Records.",
+    "properties": {
+      "CreatedTimestamp": {
+        "type": "string",
+        "description": "Created timestamp"
+      },
+      "QuoteId": {
+        "type": "string",
+        "description": "the Quotation Id"
+      },
+      "Purchaser": {
+        "type": "object",
+        "description": "contains purchaser data"
+      },
+      "SelfUrl": {
+        "type": "string",
+        "description": "SelfUrl"
+      }
+    }
+  },
+  "SupportPlanResponseResult": {
+    "description": "A list of containing support plan result.",
+    "properties": {
+      "Id": {
+        "type": "string",
+        "description": "the Asset Id"
+      },
+      "OfferId": {
+        "type": "string",
+        "description": "the support plan"
+      },
+      "StartDate": {
+        "type": "string",
+        "description": "the start date"
+      },
+      "EndDate": {
+        "type": "string",
+        "description": "the end date"
+      },
+      "ProductId": {
+        "type": "string",
+        "description": "the productId"
+      },
+      "SkuId": {
+        "type": "string",
+        "description": "the skuId"
+      }
+    }
+  },
+  "PurchaseResponseResult": {
+    "description": "A list of containing support plan result.",
+    "properties": {
+      "PurchaseRecordId": {
+        "type": "string",
+        "description": "the purchase record Id"
+      },
+      "Status": {
+        "type": "string",
+        "description": "the status"
+      },
+      "Result": {
+        "type": "string",
+        "description": "the result"
+      },
+      "DetailedErrorCode": {
+        "type": "string",
+        "description": "the detailed error code"
+      },
+      "BillingTotal": {
+        "type": "string",
+        "description": "the billing total"
+      }
+    }
+  },
+
+  "OperationListResult": {
+    "description": "Result of the request to list operations. It contains a list of operations and a URL link to get the next set of results.",
+    "properties": {
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Operation"
         },
-        "display": {
-          "description": "The object that represents the operation.",
-          "properties": {
-            "provider": {
-              "description": "Service provider: Microsoft.Subscription",
-              "type": "string"
-            },
-            "resource": {
-              "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
-              "type": "string"
-            },
-            "operation": {
-              "description": "Operation type: Read, write, delete, etc.",
-              "type": "string"
-            }
+        "description": "List of operations."
+      },
+      "nextLink": {
+        "type": "string",
+        "description": "URL to get the next set of operation list results if there are any."
+      }
+    }
+  },
+  "Operation": {
+    "description": "REST API operation",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Operation name: {provider}/{resource}/{operation}",
+        "type": "string"
+      },
+      "display": {
+        "description": "The object that represents the operation.",
+        "properties": {
+          "provider": {
+            "description": "Service provider: Microsoft.Subscription",
+            "type": "string"
+          },
+          "resource": {
+            "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+            "type": "string"
+          },
+          "operation": {
+            "description": "Operation type: Read, write, delete, etc.",
+            "type": "string"
           }
         }
       }
@@ -234,6 +462,14 @@
       "type": "string",
       "description": "Subscription Id."
     },
+    "planTypeParameter": {
+      "name": "planType",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "the support planType"
+    },
     "subscriptionNameParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
@@ -242,6 +478,26 @@
       "description": "Subscription Name",
       "schema": {
         "$ref": "#/definitions/SubscriptionName"
+      }
+    },
+    "IdParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "Id",
+      "schema": {
+        "$ref": "#/definitions/Id"
+      }
+    },
+    "operationNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "operationName",
+      "schema": {
+        "$ref": "#/definitions/operationName"
       }
     }
   },
