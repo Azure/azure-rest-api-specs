@@ -315,27 +315,26 @@
           }
         ],
         "responses": {
-          "responses": {
-            "202": {
-              "description": "Request to update NamedValue was accepted.",
-              "headers": {
-                "Location": {
-                  "description": "The URL where the status of the long running operation can be checked.",
-                  "type": "string"
-                }
-              }
-            },
-            "204": {
-              "description": "NamedValue was successfully updated."
-            },
-            "default": {
-              "description": "Error response describing why the operation failed.",
-              "schema": {
-                "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+          "202": {
+            "description": "Request to update NamedValue was accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the long running operation can be checked.",
+                "type": "string"
               }
             }
+          },
+          "204": {
+            "description": "NamedValue was successfully updated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
           }
-        },
+        }
+      },
       "delete": {
         "tags": [
           "NamedValue"
