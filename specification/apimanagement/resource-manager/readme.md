@@ -61,7 +61,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimportalsettings.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproducts.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproductsByTags.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproperties.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnamedvalues.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimquotas.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimregions.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimreports.json
