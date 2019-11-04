@@ -15,7 +15,7 @@
   "produces": [
     "application/json"
   ],
-  "paths": {    
+  "paths": {
     "/providers/Microsoft.Subscription/PurchaseSupportStatus/{Id}": {
       "post": {
         "operationId": "Purchase_SupportStatus",
@@ -52,7 +52,7 @@
         }
       }
     },
-    "/providers/Microsoft.Subscription/Subscriptions/{SubscriptionId}/SupportPlan": {
+    "/providers/Microsoft.Subscription/Subscriptions/{subscriptionId}/SupportPlan": {
       "get": {
         "operationId": "GetSupportPlan",
         "x-ms-examples": {
@@ -249,11 +249,7 @@
         "QuoteId": {
           "type": "string",
           "description": "the Quotation Id"
-        },
-        "Purchaser": {
-          "type": "object",
-          "description": "contains purchaser data"
-        },
+        },      
         "SelfUrl": {
           "type": "string",
           "description": "SelfUrl"
@@ -367,7 +363,7 @@
     "IdParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
-      "in": "body",
+      "in": "path",
       "required": true,
       "description": "Id",
       "schema": {
