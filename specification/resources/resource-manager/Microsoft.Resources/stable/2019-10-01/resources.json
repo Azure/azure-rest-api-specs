@@ -4009,7 +4009,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_PutResourceTags",
+        "operationId": "Tags_Create",
         "description": "Creates multiple tags.",
         "parameters": [
 		      {
@@ -4061,7 +4061,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagRequest"
+              "$ref": "#/definitions/TagArray"
             },
             "description": "Parameters for creating multiple tags."
           }
@@ -4088,7 +4088,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_PatchResourceTags",
+        "operationId": "Tags_Update",
         "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
         "parameters": [
 		      {
@@ -4167,7 +4167,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_GetResourceTags",
+        "operationId": "Tags_Get",
         "description": "Gets all the tags for the resource.",
         "parameters": [
           {
@@ -4237,7 +4237,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_DeleteResourceTags",
+        "operationId": "Tags_Delete",
         "description": "Deletes all the tags for the resource.",
         "parameters": [
           {
@@ -4303,7 +4303,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_PutSubscriptionTags",
+        "operationId": "Tags_Create",
         "description": "Creates multiple tags for subscription.",
         "parameters": [
 		      {
@@ -4321,7 +4321,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagRequest"
+              "$ref": "#/definitions/TagArray"
             },
             "description": "Parameters for creating multiple tags."
           }
@@ -4351,7 +4351,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_PatchSubscriptionTags",
+        "operationId": "Tags_Update",
         "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
         "parameters": [
 		      {
@@ -4399,7 +4399,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_GetSubscriptionTags",
+        "operationId": "Tags_Get",
         "description": "Gets all the tags for the subscription.",
         "parameters": [
           {
@@ -4435,7 +4435,7 @@
         "tags": [
           "Tags"
         ],
-        "operationId": "Tags_DeleteSubscriptionTags",
+        "operationId": "Tags_Delete",
         "description": "Deletes all the tags for the subscription.",
         "parameters": [
           {
@@ -5797,12 +5797,15 @@
       "description": "key and value pair for a specific tag",
       "properties": {
         "tagKey": {
-          "type": "string"
+          "type": "string",
+          "description": "the key of the tag."
         },
         "tagValue": {
-          "type": "string"
+          "type": "string",
+          "description": "the value of the tag."
         }
-      }
+      },
+      "x-ms-azure-resource": true
     },
     "TagArray": {
       "type": "array",
@@ -5810,7 +5813,8 @@
       "items": {
         "$ref": "#/definitions/Tag"
       },
-      "maxItems": 50
+      "maxItems": 50,
+      "x-ms-azure-resource": true
     },
     "TagPatchRequest": {
       "type": "object",
@@ -5826,16 +5830,8 @@
           ]
         },
         "tags": {
-          "$ref": "#/definitions/TagArray"
-        }
-      }
-    },
-    "TagRequest": {
-      "type": "object",
-      "description": "Tag Request including Put, Get, Delete operations.",
-      "properties": {
-        "tags": {
-          "$ref": "#/definitions/TagArray"
+          "$ref": "#/definitions/TagArray",
+          "description": "array of tag objects passing in the request"
         }
       }
     }
