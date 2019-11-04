@@ -30,11 +30,7 @@ tag: package-2018-07
 
 directive:
   - where:
-      - $.paths./Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults
-    suppress:
-      - UniqueResourcePaths
-  - where:
-      - $.paths./Subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Compute/virtualMachines/{virtualMachineName}/providers/Microsoft.RecoveryServices/replicationEligibilityResults/default
+      - $.paths
     suppress:
       - UniqueResourcePaths
 	  
