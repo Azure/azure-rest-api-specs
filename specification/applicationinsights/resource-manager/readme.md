@@ -19,9 +19,8 @@ To see additional help and options, run:
 
 ## Configuration
 
-
-
 ### Basic Information
+
 These are the global settings for the ApplicationInsights API.
 
 ``` yaml
@@ -32,6 +31,7 @@ tag: package-2015-05
 ```
 
 ## Suppression
+
 ``` yaml
 directive:
   - suppress: LongRunningOperationsWithLongRunningExtension
@@ -277,6 +277,15 @@ input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 
+### Tag: package-2019-10-17-preview
+
+These settings apply only when `--tag=package-2019-10-17-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10-17-preview'
+input-file:
+  - Microsoft.Insights/preview/2019-10-17-preview/workbookTemplates_API.json
+```
+
 ### Tag: package-2018-05-01-preview
 
 These settings apply only when `--tag=package-2018-05-01-preview` is specified on the command line.
@@ -297,8 +306,8 @@ input-file:
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
@@ -377,7 +386,7 @@ input-file:
 - Microsoft.Insights/preview/2018-06-17-preview/workbooks_API.json
 ```
 
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -411,11 +420,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
