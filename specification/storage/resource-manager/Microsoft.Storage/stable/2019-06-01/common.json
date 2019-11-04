@@ -119,50 +119,6 @@
             "name": "SkuTier",
             "modelAsString": false
           }
-        },
-        "resourceType": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The type of the resource, usually it is 'storageAccounts'."
-        },
-        "kind": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Indicates the type of storage account.",
-          "enum": [
-            "Storage",
-            "StorageV2",
-            "BlobStorage",
-            "FileStorage",
-            "BlockBlobStorage"
-          ],
-          "x-ms-enum": {
-            "name": "Kind",
-            "modelAsString": true
-          }
-        },
-        "locations": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "The set of locations that the SKU is available. This will be supported and registered Azure Geo Regions (e.g. West US, East US, Southeast Asia, etc.)."
-        },
-        "capabilities": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SKUCapability"
-          },
-          "description": "The capability information in the specified SKU, including file encryption, network ACLs, change notification, etc."
-        },
-        "restrictions": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Restriction"
-          },
-          "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       },
       "required": [
