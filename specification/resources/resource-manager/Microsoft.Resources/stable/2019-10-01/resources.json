@@ -4073,7 +4073,7 @@
           "200": {
             "description": "OK - Returns updated tag information about the resource.",
             "schema": {
-              "$ref": "#/definitions/ArrayOfTags"
+              "$ref": "#/definitions/TagArray"
             }
           },
           "default": {
@@ -4140,7 +4140,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagRequest"
+              "$ref": "#/definitions/TagPatchRequest"
             },
             "description": "Parameters for updating multiple tags."
           }
@@ -4152,7 +4152,7 @@
           "200": {
             "description": "OK - Returns updated tag information about the resource.",
             "schema": {
-              "$ref": "#/definitions/ArrayOfTags"
+              "$ref": "#/definitions/TagArray"
             }
           },
           "default": {
@@ -4222,7 +4222,7 @@
           "200": {
             "description": "OK - Returns tag information about the resource.",
             "schema": {
-              "$ref": "#/definitions/ArrayOfTags"
+              "$ref": "#/definitions/TagArray"
             }
           },
           "default": {
@@ -4336,7 +4336,7 @@
           "200": {
             "description": "OK - Returns updated tag information about the subscription.",
             "schema": {
-              "$ref": "#/definitions/ArrayOfTags"
+              "$ref": "#/definitions/TagArray"
             }
           },
           "default": {
@@ -4369,7 +4369,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagRequest"
+              "$ref": "#/definitions/TagPatchRequest"
             },
             "description": "Parameters for creating multiple tags."
           }
@@ -4384,7 +4384,7 @@
           "200": {
             "description": "OK - Returns updated tag information about the subscription.",
             "schema": {
-              "$ref": "#/definitions/ArrayOfTags"
+              "$ref": "#/definitions/TagArray"
             }
           },
           "default": {
@@ -4420,7 +4420,7 @@
           "200": {
             "description": "OK - Returns tag information about the subscription.",
             "schema": {
-              "$ref": "#/definitions/ArrayOfTags"
+              "$ref": "#/definitions/TagArray"
             }
           },
           "default": {
@@ -5792,27 +5792,6 @@
         }
       }
     },
-    "TagRequest": {
-      "type": "object",
-      "required": [
-        "tags"
-      ],
-      "description": "Tag Request information.",
-      "properties": {
-        "operation": {
-          "type": "string",
-          "description": "The operation for the patch api.",
-          "enum": [
-            "Replace",
-            "Merge",
-            "Delete"
-          ]
-        },
-        "tags": {
-          "$ref": "#/definitions/ArrayOfTags"
-        }
-      }
-    },
     "Tag": {
       "type": "object",
       "description": "key and value pair for a specific tag",
@@ -5825,13 +5804,40 @@
         }
       }
     },
-    "ArrayOfTags": {
+    "TagArray": {
       "type": "array",
       "description": "array of tag items",
       "items": {
         "$ref": "#/definitions/Tag"
       },
       "maxItems": 50
+    },
+    "TagPatchRequest": {
+      "type": "object",
+      "description": "Tag Request for Patch operation.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The operation type for the patch api.",
+          "enum": [
+            "Replace",
+            "Merge",
+            "Delete"
+          ]
+        },
+        "tags": {
+          "$ref": "#/definitions/TagArray"
+        }
+      }
+    },
+    "TagRequest": {
+      "type": "object",
+      "description": "Tag Request including Put, Get, Delete operations.",
+      "properties": {
+        "tags": {
+          "$ref": "#/definitions/TagArray"
+        }
+      }
     }
   },
   "parameters": {
