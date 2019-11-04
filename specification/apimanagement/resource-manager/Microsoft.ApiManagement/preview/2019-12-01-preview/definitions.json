@@ -2193,6 +2193,45 @@
       },
       "description": "Identity Provider Base Parameter Properties."
     },
+    "IdentityProviderCreateContract": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/IdentityProviderCreateContractProperties",
+          "description": "Identity Provider contract properties for create operation."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Identity Provider details."
+    },
+    "IdentityProviderCreateContractProperties": {
+      "properties": {
+        "clientId": {
+          "type": "string",
+          "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
+          "minLength": 1
+        },
+        "clientSecret": {
+          "type": "string",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+          "minLength": 1
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/IdentityProviderBaseParameters"
+        }
+      ],
+      "required": [
+        "clientId",
+        "clientSecret"
+      ],
+      "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
+    },
     "IdentityProviderContract": {
       "properties": {
         "properties": {
@@ -2213,11 +2252,6 @@
         "clientId": {
           "type": "string",
           "description": "Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.",
-          "minLength": 1
-        },
-        "clientSecret": {
-          "type": "string",
-          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
           "minLength": 1
         }
       },
@@ -5136,6 +5170,15 @@
         "url": "https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-windows-cluster-x509-security"
       },
       "description": "Properties of server X509Names."
+    },
+    "ClientSecretContract": {
+      "properties": {
+        "clientSecret": {
+          "type": "string",
+          "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+        }
+      },
+      "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
     }
   },
   "parameters": {}
