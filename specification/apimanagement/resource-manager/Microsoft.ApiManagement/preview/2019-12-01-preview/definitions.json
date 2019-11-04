@@ -2217,7 +2217,7 @@
         },
         "clientSecret": {
           "type": "string",
-          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled by 'GET' operations! Use POST 'listSecrets' endpoint to get the value. ",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1
         }
       },
@@ -4371,13 +4371,13 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": "Subscription primary key.",
+          "description": "Subscription primary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
           "type": "string",
-          "description": "Subscription secondary key.",
+          "description": "Subscription secondary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 256
         },
@@ -4393,9 +4393,7 @@
       },
       "required": [
         "scope",
-        "state",
-        "primaryKey",
-        "secondaryKey"
+        "state"
       ],
       "description": "Subscription details."
     },
@@ -5144,6 +5142,23 @@
         }
       },
       "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+    },
+    "SubscriptionKeysContract": {
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "Subscription primary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Subscription secondary key.",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "description": "Subscrition keys."
     }
   },
   "parameters": {}
