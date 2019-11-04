@@ -6,15 +6,9 @@
     "description": "Deployment Admin Client."
   },
   "host": "adminmanagement.local.azurestack.external",
-  "schemes": [
-    "https"
-  ],
-  "produces": [
-    "application/json"
-  ],
-  "consumes": [
-    "application/json"
-  ],
+  "schemes": ["https"],
+  "produces": ["application/json"],
+  "consumes": ["application/json"],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/actionPlans": {
       "get": {
@@ -24,11 +18,10 @@
           }
         },
         "description": "Gets the list of action plans",
-        "tags": [
-          "ActionPlans"
-        ],
+        "tags": ["ActionPlans"],
         "operationId": "ActionPlans_List",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -56,11 +49,10 @@
           }
         },
         "description": "Gets the specified action plan",
-        "tags": [
-          "ActionPlans"
-        ],
+        "tags": ["ActionPlans"],
         "operationId": "ActionPlans_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -115,9 +107,11 @@
           "type": "string"
         }
       },
-      "allOf": [{
-        "$ref": "Deployment.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
     },
     "ActionPlanAdminProperties": {
       "type": "object",
@@ -190,9 +184,9 @@
       }
     }
   },
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }]
+  "security": [
+    {
+      "azure_auth": ["user_impersonation"]
+    }
+  ]
 }
