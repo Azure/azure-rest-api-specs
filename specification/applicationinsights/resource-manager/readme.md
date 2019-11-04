@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for ApplicationInsights.
 
+
+
 ---
-
 ## Getting Started
-
 To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,7 +15,6 @@ To build the SDK for ApplicationInsights, simply [Install AutoRest](https://aka.
 To see additional help and options, run:
 
 > `autorest --help`
-
 ---
 
 ## Configuration
@@ -28,7 +27,7 @@ These are the global settings for the ApplicationInsights API.
 title: ApplicationInsightsManagementClient
 description: Composite Swagger for Application Insights Management Client
 openapi-type: arm
-tag: package-preview-2015-05
+tag: package-2015-05
 ```
 
 ## Suppression
