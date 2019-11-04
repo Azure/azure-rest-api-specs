@@ -44,6 +44,9 @@
         "x-ms-examples": {
           "Get a workspace": {
             "$ref": "./examples/WorkspaceGet.json"
+          },
+          "Get a workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceGetParameters.json"
           }
         },
         "parameters": [
@@ -128,6 +131,9 @@
         "x-ms-examples": {
           "Create or update workspace": {
             "$ref": "./examples/WorkspaceCreate.json"
+          },
+          "Create or update workspace with custom parameters": {
+            "$ref": "./examples/WorkspaceCreateWithParameters.json"
           }
         },
         "parameters": [
@@ -494,14 +500,57 @@
         "modelAsString": true
       }
     },
+    "WorkspaceCustomBooleanParameter": {
+      "properties": {
+        "value": {
+          "type": "boolean",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomObjectParameter": {
+      "properties": {
+        "value": {
+          "type": "object",
+          "description": "The value which should be used for this field.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The value which should be used for this field."
+    },
+    "WorkspaceCustomStringParameter": {
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The value which should be used for this field."
+        }
+      },
+      "required": [
+        "value"
+      ],
+      "description": "The Value."
+    },
     "WorkspaceCustomParameters": {
       "properties": {
+        "amlWorkspaceId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The Workspace ID of an Azure Machine Learning Workspace"
+        },
         "customVirtualNetworkId": {
-          "type": "string",
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The ID of a Virtual Network where this Databricks Cluster should be created"
         },
         "customPublicSubnetName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The name of a Public Subnet within the Virtual Network"
         },
         "customPrivateSubnetName": {
@@ -509,35 +558,36 @@
           "description": "The name of the Private Subnet within the Virtual Network"
         },
         "enableNoPublicIp": {
-          "type": "boolean",
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
           "description": "Should the Public IP be Disabled?"
         },
+        "loadBalancerBackendPoolName": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The name of a Backend Address Pool within an Azure Load Balancer"
+        },
+        "loadBalancerId": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The Resource ID of an Azure Load Balancer"
+        },
         "relayNamespaceName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The name of an Azure Relay Namespace"
         },
         "storageAccountName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The name which should be used for the Storage Account"
         },
         "storageAccountSkuName": {
-          "type": "string",
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
           "description": "The SKU which should be used for this Storage Account"
         },
-        "vnetAddressPrefix": {
-          "type": "string",
-          "description": "The first 2 octets of the virtual network /16 address range (e.g., '10.139' for the address range 10.139.0.0/16)."
-        },
         "resourceTags": {
-          "type": "object",
-          "description": "A map of Tags which should be applied to the resources used by this Databricks Cluster.",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "$ref": "#/definitions/WorkspaceCustomObjectParameter",
+          "description": "A map of Tags which should be applied to the resources used by this Databricks Cluster."
         },
-        "amlWorkspaceId": {
-          "type": "string",
-          "description": "The Workspace ID of an Azure Machine Learning Workspace"
+        "vnetAddressPrefix": {
+          "$ref": "#/definitions/WorkspaceCustomStringParameter",
+          "description": "The first 2 octets of the virtual network /16 address range (e.g., '10.139' for the address range 10.139.0.0/16)."
         }
       },
       "description": "Custom Parameters used for Cluster Creation."
