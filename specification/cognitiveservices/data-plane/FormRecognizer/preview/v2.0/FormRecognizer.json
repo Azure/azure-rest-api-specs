@@ -33,8 +33,11 @@
     "/custom/models": {
       "post": {
         "summary": "Train Custom Model",
+        "tags": [
+          "Custom Models"
+        ],
         "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored.",
-        "operationId": "TrainCustomModelAsync",
+        "operationId": "CustomModels_Train",
         "consumes": [
           "application/json"
         ],
@@ -77,8 +80,11 @@
       },
       "get": {
         "summary": "List Custom Models",
+        "tags": [
+          "Custom Models"
+        ],
         "description": "Get information about all custom models",
-        "operationId": "GetCustomModels",
+        "operationId": "CustomModels_List",
         "consumes": [],
         "produces": [
           "application/json"
@@ -125,8 +131,11 @@
     "/custom/models/{modelId}": {
       "get": {
         "summary": "Get Custom Model",
+        "tags": [
+          "Custom Models"
+        ],
         "description": "Get detailed information about a custom model.",
-        "operationId": "GetCustomModel",
+        "operationId": "CustomModels_Get",
         "consumes": [],
         "produces": [
           "application/json"
@@ -172,8 +181,11 @@
       },
       "delete": {
         "summary": "Delete Custom Model",
+        "tags": [
+          "Custom Models"
+        ],
         "description": "Mark model for deletion. Model artifacts will be permanently removed within a predetermined period.",
-        "operationId": "DeleteCustomModel",
+        "operationId": "CustomModels_Delete",
         "consumes": [],
         "produces": [
           "application/json"
@@ -209,8 +221,11 @@
     "/custom/models/{modelId}/analyze": {
       "post": {
         "summary": "Analyze Form",
+        "tags": [
+          "Custom Models"
+        ],
         "description": "Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "AnalyzeWithCustomModel",
+        "operationId": "CustomModels_Analyze",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -267,8 +282,11 @@
     "/custom/models/{modelId}/analyzeResults/{resultId}": {
       "get": {
         "summary": "Get Analyze Form Result",
+        "tags": [
+          "Custom Models"
+        ],
         "description": "Obtain current status and the result of the analyze form operation.",
-        "operationId": "GetAnalyzeFormResult",
+        "operationId": "CustomModels_GetAnalyzeResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -315,8 +333,11 @@
     "/prebuilt/receipt/analyze": {
       "post": {
         "summary": "Analyze Receipt",
+        "tags": [
+          "Prebuilt"
+        ],
         "description": "Extract field text and semantic values from a given receipt document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "AnalyzeReceiptAsync",
+        "operationId": "Receipts_Analyze",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -359,8 +380,11 @@
     "/prebuilt/receipt/analyzeResults/{resultId}": {
       "get": {
         "summary": "Get Analyze Receipt Result",
+        "tags": [
+          "Prebuilt"
+        ],
         "description": "Track the progress and obtain the result of the analyze receipt operation.",
-        "operationId": "GetAnalyzeReceiptResult",
+        "operationId": "Receipts_GetAnalyzeResult",
         "consumes": [],
         "produces": [
           "application/json"
@@ -399,8 +423,11 @@
     "/layout/analyze": {
       "post": {
         "summary": "Analyze Layout",
+        "tags": [
+          "Layout"
+        ],
         "description": "Extract text and layout information from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
-        "operationId": "AnalyzeLayoutAsync",
+        "operationId": "Layout_Analyze",
         "consumes": [
           "application/pdf",
           "application/json",
@@ -443,8 +470,11 @@
     "/layout/analyzeResults/{resultId}": {
       "get": {
         "summary": "Get Analyze Layout Result",
+        "tags": [
+          "Layout"
+        ],
         "description": "Track the progress and obtain the result of the analyze layout operation",
-        "operationId": "GetAnalyzeLayoutResult",
+        "operationId": "Layout_GetAnalyzeResult",
         "consumes": [],
         "produces": [
           "application/json"
