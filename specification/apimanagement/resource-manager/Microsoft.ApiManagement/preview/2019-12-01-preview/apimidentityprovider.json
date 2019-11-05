@@ -349,6 +349,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/identityProviders/{identityProviderName}/listSecrets": {
+      "post": {
+        "tags": [
+          "IdentityProvider"
+        ],
+        "operationId": "IdentityProvider_ListSecrets",
+        "description": "Gets the client secret details of the Identity Provider.",
+        "x-ms-examples": {
+          "ApiManagementListSecretsIdentityProvider": {
+            "$ref": "./examples/ApiManagementListSecretsIdentityProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/IdentityProviderNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the client secret.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ClientSecretContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},

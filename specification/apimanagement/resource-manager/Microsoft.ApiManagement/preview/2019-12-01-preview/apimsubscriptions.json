@@ -370,7 +370,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regeneratePrimaryKey": {
       "post": {
         "tags": [
-          "Subscriptions"
+          "Subscription"
         ],
         "operationId": "Subscription_RegeneratePrimaryKey",
         "description": "Regenerates primary key of existing subscription of the API Management service instance.",
@@ -412,7 +412,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/regenerateSecondaryKey": {
       "post": {
         "tags": [
-          "Subscriptions"
+          "Subscription"
         ],
         "operationId": "Subscription_RegenerateSecondaryKey",
         "description": "Regenerates secondary key of existing subscription of the API Management service instance.",
@@ -441,6 +441,51 @@
         "responses": {
           "204": {
             "description": "The secondary key was successfully regenerated."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/subscriptions/{sid}/listSecrets": {
+      "post": {
+        "tags": [
+          "Subscription"
+        ],
+        "operationId": "Subscription_ListSecrets",
+        "description": "Gets the subscription keys.",
+        "x-ms-examples": {
+          "ApiManagementListSecretsSubscription": {
+            "$ref": "./examples/ApiManagementListSecretsSubscription.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionEntityIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains subscription keys.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/SubscriptionKeysContract"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",

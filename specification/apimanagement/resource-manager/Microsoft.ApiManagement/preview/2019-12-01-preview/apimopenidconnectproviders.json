@@ -360,6 +360,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/openidConnectProviders/{opid}/listSecrets": {
+      "post": {
+        "tags": [
+          "OpenidConnectProvider"
+        ],
+        "operationId": "OpenidConnectProvider_ListSecrets",
+        "description": "Gets the client secret details of the OpenID Connect Provider.",
+        "x-ms-examples": {
+          "ApiManagementListSecretsOpenidConnectProvider": {
+            "$ref": "./examples/ApiManagementListSecretsOpenIdConnectProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/OpenIdConnectIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the client secret.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ClientSecretContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},

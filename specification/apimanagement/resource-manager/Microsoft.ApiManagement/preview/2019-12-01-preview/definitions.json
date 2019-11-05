@@ -43,11 +43,11 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": "Primary access key."
+          "description": "Primary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
         },
         "secondaryKey": {
           "type": "string",
-          "description": "Secondary access key."
+          "description": "Secondary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
         },
         "enabled": {
           "type": "boolean",
@@ -990,7 +990,7 @@
         },
         "clientSecret": {
           "type": "string",
-          "description": "Client or app secret registered with this authorization server."
+          "description": "Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value."
         },
         "resourceOwnerUsername": {
           "type": "string",
@@ -2217,7 +2217,7 @@
         },
         "clientSecret": {
           "type": "string",
-          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.",
+          "description": "Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1
         }
       },
@@ -2227,8 +2227,7 @@
         }
       ],
       "required": [
-        "clientId",
-        "clientSecret"
+        "clientId"
       ],
       "description": "The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users."
     },
@@ -4372,13 +4371,13 @@
         },
         "primaryKey": {
           "type": "string",
-          "description": "Subscription primary key.",
+          "description": "Subscription primary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 256
         },
         "secondaryKey": {
           "type": "string",
-          "description": "Subscription secondary key.",
+          "description": "Subscription secondary key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.",
           "minLength": 1,
           "maxLength": 256
         },
@@ -4394,9 +4393,7 @@
       },
       "required": [
         "scope",
-        "state",
-        "primaryKey",
-        "secondaryKey"
+        "state"
       ],
       "description": "Subscription details."
     },
@@ -5136,6 +5133,32 @@
         "url": "https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-windows-cluster-x509-security"
       },
       "description": "Properties of server X509Names."
+    },
+    "ClientSecretContract": {
+      "properties": {
+        "clientSecret": {
+          "type": "string",
+          "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+        }
+      },
+      "description": "Client or app secret used in IdentityProviders, Aad, OpenID or OAuth."
+    },
+    "SubscriptionKeysContract": {
+      "properties": {
+        "primaryKey": {
+          "type": "string",
+          "description": "Subscription primary key.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "secondaryKey": {
+          "type": "string",
+          "description": "Subscription secondary key.",
+          "minLength": 1,
+          "maxLength": 256
+        }
+      },
+      "description": "Subscription keys."
     }
   },
   "parameters": {}
