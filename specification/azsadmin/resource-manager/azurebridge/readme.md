@@ -37,7 +37,6 @@ input-file:
     - Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
     - Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
     - Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
-    - Microsoft.AzureBridge.Admin/preview/2016-01-01/Configuration.json
 ```
 
 ---
@@ -71,7 +70,6 @@ input-file:
   - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/DownloadedProduct.json
   - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/Product.json
   - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/Activation.json
-  - $(this-folder)/Microsoft.AzureBridge.Admin/preview/2016-01-01/Configuration.json
 
 ```
 
