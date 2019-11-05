@@ -65,7 +65,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -163,7 +162,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -254,7 +252,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -343,7 +340,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -408,7 +404,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/importExport.json
 - Microsoft.Sql/stable/2014-04-01/metrics.json
 - Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-- Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
 - Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
 - Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
 - Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -483,8 +478,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
- - ./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
-
+ 
 # Needed when there is more than one input file
 override-info:
   title: SqlManagementClient
@@ -631,7 +625,6 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
  - ./Microsoft.Sql/stable/2014-04-01/replicationLinks.json
  - ./Microsoft.Sql/stable/2014-04-01/restorePoints.json
- - ./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
  - ./Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
  - ./Microsoft.Sql/stable/2014-04-01/servers.json
  - ./Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
@@ -760,7 +753,6 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/metrics.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/recommendedElasticPoolsDecoupled.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/replicationLinks.json
-  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/sql.core.json
@@ -820,6 +812,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
   - $(this-folder)/Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+  - $(this-folder)Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/elasticPools.json
@@ -845,7 +838,6 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
-  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ServerAzureADAdministrators.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/cancelPoolOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2017-10-01-preview/databaseVulnerabilityAssessmentScans.json
@@ -921,7 +913,6 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/recommendedElasticPools.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/replicationLinks.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/restorePoints.json
-  - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/serverAzureADAdministrators.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/serverCommunicationLinks.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/servers.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/serviceObjectives.json
