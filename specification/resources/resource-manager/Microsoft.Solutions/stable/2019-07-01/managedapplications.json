@@ -1810,6 +1810,7 @@
           "description": "The parent application id."
         },
         "publisherTenantId": {
+          "readOnly": true,
           "type": "string",
           "description": "The publisher tenant id."
         },
@@ -1835,10 +1836,12 @@
           "description": "The JIT request state."
         },
         "createdBy": {
+          "readOnly": true,
           "$ref": "#/definitions/ApplicationClientDetails",
           "description": "The client entity that created the JIT request."
         },
         "updatedBy": {
+          "readOnly": true,
           "$ref": "#/definitions/ApplicationClientDetails",
           "description": "The client entity that last updated the JIT request."
         }
@@ -1892,6 +1895,7 @@
       "description": "The JIT scheduling policies."
     },
     "ApplicationClientDetails": {
+      "readOnly": true,
       "properties": {
         "oid": {
           "type": "string",
