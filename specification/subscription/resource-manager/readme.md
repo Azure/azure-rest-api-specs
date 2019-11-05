@@ -33,7 +33,7 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-10
+tag: package-2019-03-preview
 ```
 
 
