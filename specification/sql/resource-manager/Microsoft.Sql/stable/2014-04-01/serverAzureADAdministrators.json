@@ -17,6 +17,43 @@
   ],
   "paths": {
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators/{administratorName}": {
+      "get": {
+        "tags": [
+          "ServerAzureADAdministrators"
+        ],
+        "operationId": "ServerAzureADAdministrators_Get",
+        "description": "Gets a server Administrator.",
+        "x-ms-examples": {
+          "Get the Active Directory Administrator": {
+            "$ref": "./examples/ServerAdminGet.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
+          },
+          {
+            "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdministratorNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ServerAzureADAdministrator"
+            }
+          }
+        }
+      },
       "put": {
         "tags": [
           "ServerAzureADAdministrators"
@@ -110,44 +147,7 @@
             }
           },
         "x-ms-long-running-operation": true
-      },
-      "get": {
-        "tags": [
-          "ServerAdministrators"
-        ],
-        "operationId": "ServerAzureADAdministrators_Get",
-        "description": "Gets a server Administrator.",
-        "x-ms-examples": {
-          "Get the Active Directory Administrator": {
-            "$ref": "./examples/ServerAdminGet.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
-          },
-          {
-            "$ref": "#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/AdministratorNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "$ref": "#/definitions/ServerAzureADAdministrator"
-            }
-          }
-        }
-      }
+      }      
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers/{serverName}/administrators": {
       "get": {
