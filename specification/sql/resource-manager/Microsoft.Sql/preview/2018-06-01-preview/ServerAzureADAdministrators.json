@@ -69,10 +69,19 @@
         "operationId": "ServerAzureADAdministrators_CreateOrUpdate",
         "parameters": [
           {
-            "$ref": "#/parameters/ResourceGroupParameter"
+            "$ref": "../../../common/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/ResourceGroupParameter"
           },
           {
             "$ref": "#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AdministratorNameParameter"
           },
           {
             "name": "administratorName",
@@ -88,12 +97,6 @@
             "schema": {
               "$ref": "#/definitions/ServerAzureADAdministrator"
             }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
