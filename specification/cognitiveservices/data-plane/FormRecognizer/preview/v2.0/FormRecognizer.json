@@ -36,7 +36,7 @@
         "tags": [
           "Custom Models"
         ],
-        "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other type of content is ignored.",
+        "description": "Create and train a custom model. The request must include a source parameter that is either an externally accessible Azure storage blob container Uri (preferably a Shared Access Signature Uri) or valid path to a data folder in a locally mounted drive. When local paths are specified, they must follow the Linux/Unix path format and be an absolute path rooted to the input mount configuration setting value e.g., if '{Mounts:Input}' configuration setting value is '/input' then a valid source path would be '/input/contosodataset'. All data to be trained is expected to be under the source folder or sub folders under it. Models are trained using documents that are of the following content type - 'application/pdf', 'image/jpeg', 'image/png', 'image/tiff'. Other types of content are ignored.",
         "operationId": "CustomModels_Train",
         "consumes": [
           "application/json"
@@ -202,7 +202,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully marked model for deletion. Model artifacts will be removed within predefined time period."
+            "description": "Successfully marked model for deletion. Model artifacts will be removed within a predefined time period."
           },
           "default": {
             "description": "Response entity accompanying non-successful responses containing additional details about the error.",
@@ -224,7 +224,7 @@
         "tags": [
           "Custom Models"
         ],
-        "description": "Extract key-value pairs, tables, and semantic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
+        "description": "Extract key-value pairs, tables, and semandstic values from a given document. The input document must be of one of the supported content types - 'application/pdf', 'image/jpeg', 'image/png' or 'image/tiff'. Alternatively, use 'application/json' type to specify the location (Uri or local path) of the document to be analyzed.",
         "operationId": "CustomModels_Analyze",
         "consumes": [
           "application/pdf",
@@ -542,13 +542,13 @@
         },
         "createdDateTime": {
           "format": "date-time",
-          "description": "Date and time (UTC) the analyze operation was submitted.",
+          "description": "Date and time (UTC) when the analyze operation was submitted.",
           "type": "string",
           "x-nullable": false
         },
         "lastUpdatedDateTime": {
           "format": "date-time",
-          "description": "Date and time (UTC) when the status is last updated.",
+          "description": "Date and time (UTC) when the status was last updated.",
           "type": "string",
           "x-nullable": false
         },
@@ -587,7 +587,7 @@
       "type": "object",
       "properties": {
         "prefix": {
-          "description": "A case-sensitive prefix string to filter documents in the source path for training. For example, when using a Azure storage blob Uri, use the prefix to restrict sub folders for training.",
+          "description": "A case-sensitive prefix string to filter documents in the source path for training. For example, when using an Azure Storage blob Uri, use the prefix to restrict sub folders for training.",
           "maxLength": 1024,
           "minLength": 0,
           "type": "string"
@@ -648,7 +648,7 @@
       }
     },
     "SourceDataStream": {
-      "description": "A pdf document or image (jpg,png,tiff) file to analyze.",
+      "description": "A PDF document, image (jpg/png/tiff), or JSON file to analyze.",
       "type": "object"
     },
     "ModelInfo": {
@@ -689,7 +689,7 @@
         },
         "lastUpdatedDateTime": {
           "format": "date-time",
-          "description": "Date and time (UTC) when the status is last updated.",
+          "description": "Date and time (UTC) when the status was last updated.",
           "type": "string",
           "x-nullable": false
         }
@@ -720,7 +720,7 @@
             },
             "lastUpdatedDateTime": {
               "format": "date-time",
-              "description": "Date and time (UTC) when the summary is last updated.",
+              "description": "Date and time (UTC) when the summary was last updated.",
               "type": "string",
               "x-nullable": false
             }
@@ -747,15 +747,12 @@
       ],
       "properties": {
         "modelInfo": {
-          "$ref": "#/definitions/ModelInfo",
-          "description": "Basic custom model information."
+          "$ref": "#/definitions/ModelInfo"
         },
         "keys": {
-          "$ref": "#/definitions/KeysResult",
-          "description": "Keys extracted by the custom model."
+          "$ref": "#/definitions/KeysResult"
         },
         "trainResult": {
-          "description": "Custom model training result.",
           "$ref": "#/definitions/TrainResult"
         }
       }
