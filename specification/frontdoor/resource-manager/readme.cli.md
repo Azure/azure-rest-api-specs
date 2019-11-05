@@ -19,6 +19,15 @@ cli:
     "/sku": "Sku*/"
     "/properties/endpointa": "endpointA_*/"
     "/properties/endpointb": "endpointB_*/"
+  option-override:
+    "resource_state":
+      readonly: true
+    "etag":
+      readonly: true
+    "endpoint_a_name":
+      doc: The name of the control endpoint
+    "endpoint_b_name":
+      doc: The name of the other endpoint
   test-setup:
     - name: Creates an NetworkExperiment Profile in a Resource Group
     - name: Creates an Experiment
