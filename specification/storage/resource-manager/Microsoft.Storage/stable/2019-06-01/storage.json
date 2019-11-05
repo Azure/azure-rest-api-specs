@@ -1213,11 +1213,12 @@
     },
     "SkuInformation": {
       "properties": {
-        "allOf": [
-          {
-            "$ref": "./common.json#/definitions/Sku"
-          }
-        ],
+        "name": {
+          "$ref": "./common.json#/definitions/SkuName"
+        },
+        "tier": {
+          "$ref": "./common.json#/definitions/Tier"
+        },
         "resourceType": {
           "readOnly": true,
           "type": "string",
@@ -1263,6 +1264,9 @@
           "description": "The restrictions because of which SKU cannot be used. This is empty if there are no restrictions."
         }
       },
+      "required": [
+        "name"
+      ],
       "description": "Storage SKU and its properties"
     },
     "CustomDomain": {
