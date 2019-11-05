@@ -6,9 +6,15 @@
     "description": "Deployment Admin Client."
   },
   "host": "adminmanagement.local.azurestack.external",
-  "schemes": ["https"],
-  "produces": ["application/json"],
-  "consumes": ["application/json"],
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
   "paths": {
     "/subscriptions/{subscriptionId}/providers/Microsoft.Deployment.Admin/locations/global/fileContainers": {
       "get": {
@@ -18,7 +24,9 @@
           }
         },
         "description": "Returns an array of file containers.",
-        "tags": ["FileContainers"],
+        "tags": [
+          "FileContainers"
+        ],
         "operationId": "FileContainers_List",
         "parameters": [
           {
@@ -49,7 +57,9 @@
           }
         },
         "description": "Retrieves the specific file container details.",
-        "tags": ["FileContainers"],
+        "tags": [
+          "FileContainers"
+        ],
         "operationId": "FileContainers_Get",
         "parameters": [
           {
@@ -81,7 +91,9 @@
           }
         },
         "description": "Creates a new file container.",
-        "tags": ["FileContainers"],
+        "tags": [
+          "FileContainers"
+        ],
         "operationId": "FileContainers_Create",
         "parameters": [
           {
@@ -109,8 +121,12 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "produces": ["application/json"],
-        "consumes": ["application/json"]
+        "produces": [
+          "application/json"
+        ],
+        "consumes": [
+          "application/json"
+        ]
       },
       "delete": {
         "x-ms-examples": {
@@ -118,7 +134,9 @@
             "$ref": "examples/FileContainer/Delete.json"
           }
         },
-        "tags": ["FileContainers"],
+        "tags": [
+          "FileContainers"
+        ],
         "summary": "Deletes specified file container.",
         "description": "Delete an existing file container.",
         "operationId": "FileContainers_Delete",
@@ -231,7 +249,10 @@
     "PostCopyAction": {
       "description": "Specifies the file post copy action.",
       "type": "string",
-      "enum": ["None", "Unzip"],
+      "enum": [
+        "None",
+        "Unzip"
+      ],
       "x-ms-enum": {
         "modelAsString": true,
         "name": "PostCopyAction"
@@ -293,7 +314,9 @@
   },
   "security": [
     {
-      "azure_auth": ["user_impersonation"]
+      "azure_auth": [
+        "user_impersonation"
+      ]
     }
   ]
 }
