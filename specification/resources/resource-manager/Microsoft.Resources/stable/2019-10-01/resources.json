@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ResourceManagementClient",
-    "version": "2019-08-01",
+    "version": "2019-10-01",
     "description": "Provides operations for working with resources and resource groups."
   },
   "host": "management.azure.com",
@@ -4003,6 +4003,487 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/tags/default": {
+      "put": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_ResourceCreate",
+        "description": "Creates multiple tags.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group for the resource. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource to create.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to create.",
+            "minLength": 1,
+            "maxLength": 260
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagRequest"
+            },
+            "description": "Parameters for creating multiple tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns updated tag information about the resource.",
+            "schema": {
+              "$ref": "#/definitions/TagResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Creates multiple tags for a tracked resource.": {
+            "$ref": "./examples/PutTagsResource.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_ResourceUpdate",
+        "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group for the resource. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource to create.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to create.",
+            "minLength": 1,
+            "maxLength": 260
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagPatchRequest"
+            },
+            "description": "Parameters for updating multiple tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns updated tag information about the resource.",
+            "schema": {
+              "$ref": "#/definitions/TagResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_ResourceGet",
+        "description": "Gets all the tags for the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group for the resource. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource to create.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to create.",
+            "minLength": 1,
+            "maxLength": 260
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns tag information about the resource.",
+            "schema": {
+              "$ref": "#/definitions/TagResponse"
+            }
+          },
+          "404": {
+            "description": "Not Found - Resource Group Not Found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all the tags for a tracked resource.": {
+            "$ref": "./examples/GetTagsResource.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_ResourceDelete",
+        "description": "Deletes all the tags for the resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroupName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource group for the resource. The name is case insensitive.",
+            "pattern": "^[-\\w\\._\\(\\)]+$",
+            "minLength": 1,
+            "maxLength": 90
+          },
+          {
+            "name": "resourceProviderNamespace",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The namespace of the resource provider."
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The resource type of the resource to create.",
+            "x-ms-skip-url-encoding": true
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the resource to create.",
+            "minLength": 1,
+            "maxLength": 260
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/tags/default": {
+      "put": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_SubscriptionCreate",
+        "description": "Creates multiple tags for subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagRequest"
+            },
+            "description": "Parameters for creating multiple tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns updated tag information about the subscription.",
+            "schema": {
+              "$ref": "#/definitions/TagResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
+          },
+          "404": {
+            "description": "Not Found - Subscription Not Found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create multiple tags for a subscription.": {
+            "$ref": "./examples/PutTagsSubscription.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_SubscriptionUpdate",
+        "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagPatchRequest"
+            },
+            "description": "Parameters for creating multiple tags."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns updated tag information about the subscription.",
+            "schema": {
+              "$ref": "#/definitions/TagResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
+          },
+          "404": {
+            "description": "Not Found - Subscription Not Found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_SubscriptionGet",
+        "description": "Gets all the tags for the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK - Returns tag information about the subscription.",
+            "schema": {
+              "$ref": "#/definitions/TagResponse"
+            }
+          },
+          "400": {
+            "description": "Bad Request: Invalid API version for subscription tags | Invalid Subscription."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Gets all the tags for a subscription.": {
+            "$ref": "./examples/GetTagsSubscription.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "Tags"
+        ],
+        "operationId": "Tags_SubscriptionDelete",
+        "description": "Deletes all the tags for the subscription.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "required": true,
+            "type": "string",
+            "description": "The API version to use for the operation."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found - Subscription Not Found."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -5330,6 +5811,70 @@
           "description": "Error when What-If operation fails."
         }
       }
+    },
+    "Tags": {
+      "type": "object",
+      "description": "key and value pairs for tags",
+      "properties": {
+        "tags": {
+          "type":"object"
+        }
+      }
+    },
+    "TagPatchRequest": {
+      "type": "object",
+      "description": "Tag Request for Patch operation.",
+      "properties": {
+        "operation": {
+          "type": "string",
+          "description": "The operation type for the patch api.",
+          "enum": [
+            "Replace",
+            "Merge",
+            "Delete"
+          ]
+        },
+        "properties": {
+          "$ref": "#/definitions/Tags",
+          "description": "tags object passing in the request."
+        }
+      }
+    },
+    "TagRequest": {
+      "type": "object",
+      "description": "Tag Request for Put, Get, Delete operations.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/Tags",
+          "description": "tags object passing in the request."
+        }
+      }
+    },
+    "TagResponse": {
+      "type": "object",
+      "description": "Tag Response for Patch, Put, Get, Delete operations.",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the tag response."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the tag response."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The type of the tag response."
+        },
+        "properties": {
+          "$ref": "#/definitions/Tags",
+          "description": "tags object returned in the response body."
+        }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
