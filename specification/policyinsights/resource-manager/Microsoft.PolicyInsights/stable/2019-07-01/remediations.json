@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RemediationsClient",
-    "version": "2018-07-01-preview"
+    "version": "2019-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -1165,6 +1165,28 @@
           "type": "string",
           "description": "The policy definition reference ID of the individual definition that should be remediated. Required when the policy assignment being remediated assigns a policy set definition."
         },
+        "resourceDiscoveryMode": {
+          "type": "string",
+          "enum": [
+            "ExistingNonCompliant",
+            "ReEvaluateCompliance"
+          ],
+          "x-ms-enum": {
+            "name": "ResourceDiscoveryMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "ExistingNonCompliant",
+                "description": "Remediate resources that are already known to be non-compliant."
+              },
+              {
+                "value": "ReEvaluateCompliance",
+                "description": "Re-evaluate the compliance state of resources and then remediate the resources found to be non-compliant."
+              }
+            ]
+          },
+          "description": "The way resources to remediate are discovered. Defaults to ExistingNonCompliant if not specified."
+        },
         "provisioningState": {
           "type": "string",
           "description": "The status of the remediation.",
@@ -1188,7 +1210,8 @@
         },
         "deploymentStatus": {
           "$ref": "#/definitions/RemediationDeploymentSummary",
-          "description": "The deployment status summary for all deployments created by the remediation."
+          "description": "The deployment status summary for all deployments created by the remediation.",
+          "readOnly": true
         }
       },
       "description": "The remediation properties."
@@ -1209,15 +1232,18 @@
       "properties": {
         "totalDeployments": {
           "type": "integer",
-          "description": "The number of deployments required by the remediation."
+          "description": "The number of deployments required by the remediation.",
+          "readOnly": true
         },
         "successfulDeployments": {
           "type": "integer",
-          "description": "The number of deployments required by the remediation that have succeeded."
+          "description": "The number of deployments required by the remediation that have succeeded.",
+          "readOnly": true
         },
         "failedDeployments": {
           "type": "integer",
-          "description": "The number of deployments required by the remediation that have failed."
+          "description": "The number of deployments required by the remediation that have failed.",
+          "readOnly": true
         }
       },
       "description": "The deployment status summary for all deployments created by the remediation."
