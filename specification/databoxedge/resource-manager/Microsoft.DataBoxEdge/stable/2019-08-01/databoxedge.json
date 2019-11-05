@@ -2142,7 +2142,7 @@
           { "$ref": "#/parameters/resourceGroupNameParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
-            "name": "filter",
+            "name": "$filter",
             "in": "query",
             "description": "Specify $filter='UserType eq <type>' to filter on user type property",
             "required": false,
@@ -2304,9 +2304,9 @@
           { "$ref": "#/parameters/subscriptionIdParameter" },
           { "$ref": "#/parameters/apiVersionParameter" },
           {
-            "name": "$expand",
+            "name": "$filter",
             "in": "query",
-            "description": "Specify $filter='location eq <location>' to filter on location resource or Specify $skipToken=<token> to populate the next page in the list.",
+            "description": "Specify $filter='location eq <location>' to filter on location.",
             "required": false,
             "type": "string"
           }
