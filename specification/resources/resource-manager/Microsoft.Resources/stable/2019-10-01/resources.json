@@ -4012,7 +4012,7 @@
         "operationId": "Tags_ResourceCreate",
         "description": "Creates multiple tags.",
         "parameters": [
-		      {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -4067,14 +4067,14 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
-          },
           "200": {
             "description": "OK - Returns updated tag information about the resource.",
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
+          },
+          "400": {
+            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4096,7 +4096,7 @@
         "operationId": "Tags_ResourceUpdate",
         "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
         "parameters": [
-		      {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -4151,14 +4151,14 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
-          },
           "200": {
             "description": "OK - Returns updated tag information about the resource.",
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
+          },
+          "400": {
+            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4221,14 +4221,14 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found - Resource Group Not Found."
-          },
           "200": {
             "description": "OK - Returns tag information about the resource.",
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
+          },
+          "404": {
+            "description": "Not Found - Resource Group Not Found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4316,7 +4316,7 @@
         "operationId": "Tags_SubscriptionCreate",
         "description": "Creates multiple tags for subscription.",
         "parameters": [
-		      {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -4337,17 +4337,17 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found - Subscription Not Found."
-          },
-          "400": {
-            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
-          },
           "200": {
             "description": "OK - Returns updated tag information about the subscription.",
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
+          },
+          "400": {
+            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
+          },
+          "404": {
+            "description": "Not Found - Subscription Not Found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4369,7 +4369,7 @@
         "operationId": "Tags_SubscriptionUpdate",
         "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
         "parameters": [
-		      {
+          {
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
@@ -4390,17 +4390,17 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found - Subscription Not Found."
-          },
-          "400": {
-            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
-          },
           "200": {
             "description": "OK - Returns updated tag information about the subscription.",
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
+          },
+          "400": {
+            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
+          },
+          "404": {
+            "description": "Not Found - Subscription Not Found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4429,14 +4429,14 @@
           }
         ],
         "responses": {
-          "400": {
-            "description": "Bad Request: Invalid API version for subscription tags | Invalid Subscription."
-          },
           "200": {
             "description": "OK - Returns tag information about the subscription.",
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
+          },
+          "400": {
+            "description": "Bad Request: Invalid API version for subscription tags | Invalid Subscription."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4470,11 +4470,11 @@
           }
         ],
         "responses": {
-          "404": {
-            "description": "Not Found - Subscription Not Found."
-          },
           "200": {
             "description": "OK"
+          },
+          "404": {
+            "description": "Not Found - Subscription Not Found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -5828,13 +5828,17 @@
       "x-ms-azure-resource": true
     },
     "TagArray": {
-      "type": "array",
-      "description": "array of tag items",
-      "items": {
-        "$ref": "#/definitions/Tag"
-      },
-      "maxItems": 50,
-      "x-ms-azure-resource": true
+      "type": "object",
+      "description": "object contains array of tag items",
+      "properties": {
+        "tags": {
+          "type":"array",
+          "items": {
+            "$ref": "#/definitions/Tag"
+          },
+          "maxItems": 50
+        }
+      }
     },
     "TagPatchRequest": {
       "type": "object",
@@ -5849,9 +5853,9 @@
             "Delete"
           ]
         },
-        "tags": {
+        "properties": {
           "$ref": "#/definitions/TagArray",
-          "description": "array of tag objects passing in the request"
+          "description": "array of tag objects passing in the request."
         }
       }
     },
@@ -5859,18 +5863,15 @@
       "type": "object",
       "description": "Tag Request for Put, Get, Delete operations.",
       "properties": {
-        "tags": {
+        "properties": {
           "$ref": "#/definitions/TagArray",
-          "description": "array of tag objects passing in the request"
+          "description": "array of tag objects passing in the request."
         }
       }
     },
     "TagResponse": {
       "type": "object",
       "description": "Tag Response for Patch, Put, Get, Delete operations.",
-      "required": [
-        "tags"
-      ],
       "properties": {
         "id": {
           "readOnly": true,
@@ -5887,9 +5888,9 @@
           "type": "object",
           "description": "The type of the tag response."
         },
-        "tags": {
+        "properties": {
           "$ref": "#/definitions/TagArray",
-          "description": "array of tag objects returned in the response body"
+          "description": "array of tag objects returned in the response body."
         }
       },
       "x-ms-azure-resource": true
