@@ -1750,12 +1750,12 @@
           "description": "Gets the dfs endpoint."
         },
         "microsoftEndpoints":{
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/StorageAccountMicrosoftEndpoints",
           "description": "Gets the microsoft routing storage endpoints."
         },
         "internetEndpoints":{
-          "x-ms-client-flatten": true,
+          "x-ms-client-flatten": false,
           "$ref": "#/definitions/StorageAccountInternetEndpoints",
           "description": "Gets the internet routing storage endpoints"
         }
@@ -1856,7 +1856,7 @@
       "properties": {
         "routingChoice": {
           "type": "string",
-          "description": "Routing Choice defines the kind of network routing opted by the user. The default option is microsoft routing",
+          "description": "Routing Choice defines the kind of network routing opted by the user.",
           "enum": [
             "MicrosoftRouting",
             "InternetRouting"
