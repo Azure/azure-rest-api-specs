@@ -541,6 +541,115 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/folders": {
+      "get": {
+        "description": "Returns list of folders in region for private cloud",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Implements get of folders list",
+        "operationId": "Folders_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "type": "string",
+            "description": "Resource pool id used to derive vSphere datacenter which contains virtual folders",
+            "name": "resourcePoolName",
+            "in": "query",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/FoldersListResponse"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListFolders": {
+            "$ref": "./examples/ListFolders.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/folders/{folderName}": {
+      "get": {
+        "description": "Returns Folder",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "Folders"
+        ],
+        "summary": "Implements get of folder",
+        "operationId": "Folders_Get",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/regionId"
+          },
+          {
+            "$ref": "#/parameters/pcName"
+          },
+          {
+            "type": "string",
+            "description": "folderName id (vsphereId)",
+            "name": "folderName",
+            "in": "path",
+            "required": true
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "successful operation",
+            "schema": {
+              "$ref": "#/definitions/Folder"
+            }
+          },
+          "default": {
+            "description": "BadRequest",
+            "schema": {
+              "$ref": "#/definitions/CSRPError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GetFolder": {
+            "$ref": "./examples/GetFolder.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.VMwareCloudSimple/locations/{regionId}/privateClouds/{pcName}/resourcePools": {
       "get": {
         "description": "Returns list of resource pools in region for private cloud",
@@ -1436,6 +1545,9 @@
             "$ref": "#/parameters/resourceGroupName"
           },
           {
+            "$ref": "#/parameters/referer"
+          },
+          {
             "pattern": "^[a-zA-Z0-9]([-_.a-zA-Z0-9]*[a-zA-Z0-9])?$",
             "type": "string",
             "description": "dedicated cloud Service name",
@@ -1461,6 +1573,17 @@
             "description": "If resource is created or updated successfully, 200 should be returned",
             "schema": {
               "$ref": "#/definitions/DedicatedCloudService"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              },
+              "Location": {
+                "type": "string"
+              },
+              "Retry-After": {
+                "type": "integer"
+              }
             }
           },
           "default": {
@@ -2417,6 +2540,7 @@
           "$ref": "#/definitions/CustomizationPolicyProperties"
         },
         "type": {
+          "description": "Resource type",
           "type": "string",
           "readOnly": true
         }
@@ -2588,9 +2712,18 @@
           "readOnly": true
         },
         "purchaseId": {
-          "description": "purchase id",
+          "description": "Id uniquely identifying a purchase. Must be the same for the case when multiple nodes are being purchased at once.",
           "type": "string",
           "format": "uuid"
+        },
+        "purchaseType": {
+          "description": "Indicates whether purchase made for a node(s) only or for a node(s), service, and private cloud",
+          "type": "string",
+          "default": "node",
+          "enum": [
+            "node",
+            "node-and-service"
+          ]
         },
         "skuDescription": {
           "description": "Dedicated Cloud Nodes SKU's description",
@@ -2677,9 +2810,6 @@
     },
     "DedicatedCloudServiceProperties": {
       "description": "Properties of dedicated cloud service",
-      "required": [
-        "gatewaySubnet"
-      ],
       "properties": {
         "gatewaySubnet": {
           "description": "gateway Subnet for the account. It will collect the subnet address and always treat it as /28",
@@ -2705,10 +2835,89 @@
           "type": "integer",
           "readOnly": true
         },
+        "privateCloud": {
+          "description": "The private cloud",
+          "type": "object",
+          "$ref": "#/definitions/PrivateCloud"
+        },
+        "provisioningState": {
+          "description": "The provisioning status of the resource",
+          "type": "string",
+          "readOnly": true
+        },
+        "purchaseId": {
+          "description": "Id uniquely identifying a purchase. Must be the same for the case when multiple nodes are being purchased at once.",
+          "type": "string",
+          "format": "uuid"
+        },
         "serviceURL": {
           "description": "link to a service management web portal",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "Folder": {
+      "description": "Folder model",
+      "required": [
+        "id"
+      ],
+      "properties": {
+        "id": {
+          "description": "folder id",
+          "type": "string"
+        },
+        "location": {
+          "description": "Azure region",
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "description": "folder name",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "description": "Resource pool properties",
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/FolderProperties"
+        },
+        "type": {
+          "description": "folder type",
+          "type": "string",
+          "readOnly": true,
+          "example": "Microsoft.VMwareCloudSimple/folders"
+        }
+      }
+    },
+    "FolderProperties": {
+      "description": "Properties of folder",
+      "properties": {
+        "fullName": {
+          "description": "Full name of a folder",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateCloudId": {
+          "description": "The Private Cloud Id",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "FoldersListResponse": {
+      "description": "List of folders response model",
+      "properties": {
+        "nextLink": {
+          "description": "Link for next list of ResourcePoolsList",
+          "type": "string"
+        },
+        "value": {
+          "description": "Results of the Folders list",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Folder"
+          }
         }
       }
     },
@@ -2927,6 +3136,10 @@
         },
         "expires": {
           "description": "Expiration date of PC",
+          "type": "string"
+        },
+        "managementSubnet": {
+          "description": "VMware Management Network (CIDR Range for vSphere/vSAN subnets etc.)",
           "type": "string"
         },
         "nsxType": {
@@ -3412,7 +3625,7 @@
           "type": "boolean"
         },
         "folder": {
-          "description": "The path to virtual machine folder in VCenter",
+          "description": "The path to virtual machine folder in VCenter, deprecated - use virtualFolder",
           "type": "string",
           "readOnly": true
         },
@@ -3499,6 +3712,10 @@
           "items": {
             "type": "string"
           }
+        },
+        "virtualFolder": {
+          "description": "Virtual Machines Folder",
+          "$ref": "#/definitions/Folder"
         },
         "vmId": {
           "description": "The internal id of Virtual Machine in VCenter",
@@ -3767,6 +3984,13 @@
         "powerOnBoot": {
           "description": "Is NIC powered on/off on boot",
           "type": "boolean"
+        },
+        "publicIpAddresses": {
+          "description": "List of IP addresses associated with VM",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
         },
         "virtualNicId": {
           "description": "NIC id",
