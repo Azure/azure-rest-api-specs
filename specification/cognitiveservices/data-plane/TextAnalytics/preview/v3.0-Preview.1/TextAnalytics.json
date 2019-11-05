@@ -36,7 +36,7 @@
       "post" : {
         "summary" : "Named Entity Recognition",
         "description" : "The API returns a list of general named entities in a given document. For the list of supported entity types, check <a href=\"https://aka.ms/taner\">Supported Entity Types in Text Analytics API</a>. For the list of enabled languages, check <a href=\"https://aka.ms/talangs\">Supported languages in Text Analytics API</a>.\n",
-        "operationId" : "/entities/recognition/general",
+        "operationId" : "EntitiesRecognitionGeneral",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
@@ -109,8 +109,8 @@
     "/entities/recognition/pii" : {
       "post" : {
         "summary" : "Entities containing personal information",
-        "description" : "The API returns a list of personal information entities (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. See the &lt;a href=\"https://aka.ms/talangs\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.\n",
-        "operationId" : "/entities/recognition/pii",
+        "description" : "The API returns a list of entities with personal information (\\\"SSN\\\", \\\"Bank Account\\\" etc) in the document. See the &lt;a href=\"https://aka.ms/talangs\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.\n",
+        "operationId" : "EntitiesRecognitionPii",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
@@ -178,7 +178,7 @@
       "post" : {
         "summary" : "Linked entities from a well-known knowledge base",
         "description" : "The API returns a list of recognized entities with links to a well-known knowledge base. See the &lt;a href=\"https://aka.ms/talangs\"&gt;Supported languages in Text Analytics API.\n",
-        "operationId" : "/entities/linking",
+        "operationId" : "EntitiesLinking",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
@@ -259,7 +259,7 @@
       "post" : {
         "summary" : "Key Phrases",
         "description" : "The API returns a list of strings denoting the key phrases in the input text. See the &lt;a href=\"https://aka.ms/talangs\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
-        "operationId" : "/keyPhrases",
+        "operationId" : "KeyPhrases",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
@@ -317,7 +317,7 @@
       "post" : {
         "summary" : "Detect Language",
         "description" : "The API returns the detected language and a numeric score between 0 and 1. Scores close to 1 indicate 100% certainty that the identified language is true. See the &lt;a href=\"https://aka.ms/talangs\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
-        "operationId" : "/languages",
+        "operationId" : "Languages",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
@@ -394,7 +394,7 @@
       "post" : {
         "summary" : "Sentiment",
         "description" : "The API returns a sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral) for the document and each sentence within it. See the &lt;a href=\"https://aka.ms/talangs\"&gt;Supported languages in Text Analytics API&lt;/a&gt; for the list of enabled languages.",
-        "operationId" : "/sentiment",
+        "operationId" : "Sentiment",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
         "parameters" : [ {
@@ -1026,7 +1026,7 @@
         "score" : {
           "type" : "number",
           "format" : "double",
-          "description" : "(Optional) If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
+          "description" : "If a well-known item is recognized, a decimal number denoting the confidence level between 0 and 1 will be returned."
         },
         "text" : {
           "type" : "string",
@@ -1193,14 +1193,14 @@
       "type" : "object",
       "required" : [
         "id",
-        "detectedLanguage"
+        "detectedLanguages"
       ],
       "properties" : {
         "id" : {
           "type" : "string",
           "description" : "Unique, non-empty document identifier."
         },
-        "detectedLanguage" : {
+        "detectedLanguages" : {
           "type" : "array",
           "description" : "A list of extracted languages.",
           "items" : {
