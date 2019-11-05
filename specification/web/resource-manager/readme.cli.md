@@ -9,4 +9,5 @@ cli:
   namespace: azure.mgmt.web
   test-setup:
     - name: "Create Or Update App Service plan"
+    - name: "List operations"
 ```
