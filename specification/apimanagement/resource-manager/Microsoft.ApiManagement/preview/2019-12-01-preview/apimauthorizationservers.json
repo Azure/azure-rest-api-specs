@@ -360,6 +360,51 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/authorizationServers/{authsid}/listSecrets": {
+      "post": {
+        "tags": [
+          "AuthorizationServer"
+        ],
+        "operationId": "AuthorizationServer_ListSecrets",
+        "description": "Gets the client secret details of the authorization server.",
+        "x-ms-examples": {
+          "ApiManagementListSecretsAuthorizationServer": {
+            "$ref": "./examples/ApiManagementListSecretsAuthorizationServer.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "./apimanagement.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ServiceNameParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/AuthenticationServerIdParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "./apimanagement.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The response body contains the client secret.",
+            "schema": {
+              "$ref": "./definitions.json#/definitions/ClientSecretContract"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./apimanagement.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {},
