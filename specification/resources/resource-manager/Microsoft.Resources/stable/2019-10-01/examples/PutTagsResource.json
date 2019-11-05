@@ -8,8 +8,7 @@
     "api-version": "2019-10-01",
     "parameters": {
       "properties": {
-        "tags":
-        {
+        "tags": {
           "tagKey1": "tagValue1",
           "tagKey2": "tagValue2"
         }
@@ -17,19 +16,18 @@
     }
   },
   "responses": {
-    "400": {
-      "message": "Bad Request - Invalid Tags Definition Properties."
-    },
     "200": {
       "body": {
         "properties": {
-          "tags":
-          {
+          "tags": {
             "tagKey1": "tagValue1",
             "tagKey2": "tagValue2"
           }
         }
       }
+    },
+    "400": {
+      "message": "Bad Request - Invalid Tags Definition Properties."
     }
   }
 }
