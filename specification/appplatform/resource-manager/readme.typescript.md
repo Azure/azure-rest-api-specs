@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-appplatform"
   output-folder: "$(typescript-sdks-folder)/sdk/appplatform/arm-appplatform"
+  clear-output-folder: true
   generate-metadata: true
 ```

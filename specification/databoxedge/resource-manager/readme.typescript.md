@@ -10,5 +10,6 @@ typescript:
   payload-flattening-threshold: 0
   package-name: "@azure/arm-databoxedge"
   output-folder: "$(typescript-sdks-folder)/sdk/databoxedge/arm-databoxedge"
+  clear-output-folder: true
   generate-metadata: true
 ```
