@@ -5868,12 +5868,31 @@
     "TagResponse": {
       "type": "object",
       "description": "Tag Response for Patch, Put, Get, Delete operations.",
+      "required": [
+        "tags"
+      ],
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The ID of the tag response."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the tag response."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "object",
+          "description": "The type of the tag response."
+        },
         "tags": {
           "$ref": "#/definitions/TagArray",
           "description": "array of tag objects returned in the response body"
         }
-      }
+      },
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
