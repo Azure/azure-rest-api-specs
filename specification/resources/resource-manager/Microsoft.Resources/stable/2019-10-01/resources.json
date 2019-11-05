@@ -5812,31 +5812,12 @@
         }
       }
     },
-    "Tag": {
+    "Tags": {
       "type": "object",
-      "description": "key and value pair for a specific tag",
-      "properties": {
-        "tagKey": {
-          "type": "string",
-          "description": "the key of the tag."
-        },
-        "tagValue": {
-          "type": "string",
-          "description": "the value of the tag."
-        }
-      },
-      "x-ms-azure-resource": true
-    },
-    "TagArray": {
-      "type": "object",
-      "description": "object contains array of tag items",
+      "description": "key and value pairs for tags",
       "properties": {
         "tags": {
-          "type":"array",
-          "items": {
-            "$ref": "#/definitions/Tag"
-          },
-          "maxItems": 50
+          "type":"object"
         }
       }
     },
@@ -5854,8 +5835,8 @@
           ]
         },
         "properties": {
-          "$ref": "#/definitions/TagArray",
-          "description": "array of tag objects passing in the request."
+          "$ref": "#/definitions/Tags",
+          "description": "tags object passing in the request."
         }
       }
     },
@@ -5864,8 +5845,8 @@
       "description": "Tag Request for Put, Get, Delete operations.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/TagArray",
-          "description": "array of tag objects passing in the request."
+          "$ref": "#/definitions/Tags",
+          "description": "tags object passing in the request."
         }
       }
     },
@@ -5889,8 +5870,8 @@
           "description": "The type of the tag response."
         },
         "properties": {
-          "$ref": "#/definitions/TagArray",
-          "description": "array of tag objects returned in the response body."
+          "$ref": "#/definitions/Tags",
+          "description": "tags object returned in the response body."
         }
       },
       "x-ms-azure-resource": true
