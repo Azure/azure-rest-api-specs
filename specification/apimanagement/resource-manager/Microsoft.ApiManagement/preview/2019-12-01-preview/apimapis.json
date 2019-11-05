@@ -301,7 +301,13 @@
             }
           },
           "202": {
-            "description": "Request to create or update API was accepted."
+            "description": "Request to create or update API was accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
           },
           "200": {
             "description": "API was successfully updated.",
@@ -2314,6 +2320,15 @@
           }
         ],
         "responses": {
+          "202": {
+            "description": "Request to create or update Api schema configuration was accepted.",
+            "headers": {
+              "Location": {
+                "description": "The URL where the status of the long running operation can be checked.",
+                "type": "string"
+              }
+            }
+          },
           "201": {
             "description": "Api schema configuration was successfully created.",
             "schema": {
