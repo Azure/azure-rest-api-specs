@@ -138,8 +138,8 @@ swagger-to-sdk:
     autorest_options:
       use: "@microsoft.azure/autorest.python@4.0.70"
     after_scripts:
-      - python ./scripts/multiapi_init_gen.py azure-mgmt-network
-      - python ./scripts/trim_aio.py ./sdk/network/azure-mgmt-network
+      - python ./scripts/multiapi_init_gen.py azure-mgmt-cosmosdb
+      - python ./scripts/trim_aio.py ./sdk/cosmos/azure-mgmt-cosmosdb
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
