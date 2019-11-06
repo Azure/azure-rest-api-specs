@@ -17,11 +17,11 @@
   ],
   "paths": {
     "/providers/Microsoft.Subscription/PurchaseSupportStatus/{Id}": {
-      "post": {
-        "operationId": "PurchaseSupportStatus_Post",
+      "get": {
+        "operationId": "GetPurchaseSupportStatus_Get",
         "x-ms-examples": {
           "PurchaseSupportStatus": {
-            "$ref": "./examples/PurchaseSupportStatus.json"
+            "$ref": "./examples/GetPurchaseSupportStatus.json"
           }
         },
         "description": "The operation to find out the purchase support status",
@@ -31,9 +31,6 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/operationNameParameter"
           }
         ],
         "responses": {
@@ -41,6 +38,19 @@
             "description": "OK. The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/PurchaseSupportStatusResponseResult"
+            }
+          },
+          "202": {
+            "description": "Accepted. Purchase support plan is in progress.",
+            "headers": {
+              "Location": {
+                "description": "GET this URL to retrieve the status of the asynchronous operation.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "The amount of delay to use while the status of the operation is checked. The value is expressed in seconds.",
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -100,6 +110,9 @@
           },
           {
             "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/supportPlanNameParameter"
           }
         ],
         "responses": {
@@ -172,46 +185,32 @@
     "SupportPlanResponseResult": {
       "description": "A list of containing support plan result.",
       "properties": {
-        "id": {
-          "type": "string",
-          "description": "the Asset Id"
-        },
-        "offerId": {
+        "planType": {
           "type": "string",
           "description": "the support plan"
-        },
-        "startDate": {
-          "type": "string",
-          "description": "the start date"
         },
         "endDate": {
           "type": "string",
           "description": "the end date"
-        },
-        "productId": {
-          "type": "string",
-          "description": "the productId"
-        },
-        "skuId": {
-          "type": "string",
-          "description": "the skuId"
         }
       }
     },
     "PurchaseSupportStatusResponseResult": {
       "description": "A list of containing Purchase Records.",
       "properties": {
-        "createdTimestamp": {
+        "purchaseRecordId": {
           "type": "string",
-          "description": "Created timestamp"
-        },
-        "quoteId": {
+          "description": "the purchase record Id"
+        }
+      }
+    },
+    "SupportPlanName": {
+      "type": "object",
+      "description": "The supportPlan Name.",
+      "properties": {
+        "planType": {
           "type": "string",
-          "description": "the Quotation Id"
-        },
-        "selfUrl": {
-          "type": "string",
-          "description": "SelfUrl"
+          "description": "the planType"
         }
       }
     },
@@ -221,22 +220,6 @@
         "purchaseRecordId": {
           "type": "string",
           "description": "the purchase record Id"
-        },
-        "status": {
-          "type": "string",
-          "description": "the status"
-        },
-        "result": {
-          "type": "string",
-          "description": "the result"
-        },
-        "detailedErrorCode": {
-          "type": "string",
-          "description": "the detailed error code"
-        },
-        "billingTotal": {
-          "type": "string",
-          "description": "the billing total"
         }
       }
     },
@@ -300,14 +283,6 @@
       "type": "string",
       "description": "Subscription Id."
     },
-    "planTypeParameter": {
-      "name": "planType",
-      "x-ms-parameter-location": "method",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "description": "the support planType"
-    },
     "subscriptionNameParameter": {
       "name": "body",
       "x-ms-parameter-location": "method",
@@ -316,6 +291,24 @@
       "description": "Subscription Name",
       "schema": {
         "$ref": "#/definitions/SubscriptionName"
+      }
+    },
+    "planTypeParameter": {
+      "name": "planType",
+      "x-ms-parameter-location": "method",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "the support planType"
+    },
+    "supportPlanNameParameter": {
+      "name": "body",
+      "x-ms-parameter-location": "method",
+      "in": "body",
+      "required": true,
+      "description": "SupportPlan Name",
+      "schema": {
+        "$ref": "#/definitions/SupportPlanName"
       }
     },
     "IdParameter": {
