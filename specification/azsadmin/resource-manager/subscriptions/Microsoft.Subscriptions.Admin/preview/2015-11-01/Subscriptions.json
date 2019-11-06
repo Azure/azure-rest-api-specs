@@ -238,7 +238,7 @@
         "x-ms-pageable": {
           "nextLinkName": null
         },
-        "x-ms-odata": "#/definitions/Subscription"
+        "x-ms-odata": "#/definitions/SubscriptionDefinition"
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/checkNameAvailability": {
@@ -301,7 +301,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           }
         }
@@ -335,13 +335,13 @@
           "201": {
             "description": "Created",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           },
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/Subscription"
+              "$ref": "#/definitions/SubscriptionDefinition"
             }
           }
         }
@@ -767,8 +767,8 @@
         }
       }
     },
-    "Subscription": {
-      "description": "List of supported operations.",
+    "SubscriptionDefinition": {
+      "description": "Subscription object properties.",
       "type": "object",
       "properties": {
         "delegatedProviderSubscriptionId": {
@@ -820,7 +820,7 @@
           "type": "array",
           "description": "Subscription definition.",
           "items": {
-            "$ref": "#/definitions/Subscription"
+            "$ref": "#/definitions/SubscriptionDefinition"
           }
         },
         "nextLink": {
@@ -1228,7 +1228,7 @@
       "name": "subscriptionObject",
       "in": "body",
       "schema": {
-        "$ref": "#/definitions/Subscription"
+        "$ref": "#/definitions/SubscriptionDefinition"
       },
       "required": true,
       "x-ms-parameter-location": "method"
