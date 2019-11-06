@@ -119,7 +119,7 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.Capacity/appliedReservations": {
       "get": {
         "summary": "Get list of applicable `Reservation`s.",
-        "description": "Get applicable `Reservation`s that are applied to this subscription.",
+        "description": "Get applicable `Reservation`s that are applied to this subscription or a resource group under this subscription.",
         "operationId": "GetAppliedReservationList",
         "x-ms-examples": {
           "AppliedReservationList": {
@@ -283,6 +283,9 @@
         "x-ms-examples": {
           "GetReservation": {
             "$ref": "./examples/GetReservationOrderDetails.json"
+          },
+          "GetReservationWithExpandPayments": {
+            "$ref": "./examples/GetReservationOrderDetailsWithExpandPlanInformation.json"
           }
         },
         "parameters": [
@@ -291,6 +294,13 @@
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "$expand",
+            "description": "May be used to expand the planInformation.",
+            "in": "query",
+            "required": false,
+            "type": "string"
           }
         ],
         "tags": [
@@ -323,6 +333,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -370,6 +383,9 @@
           }
         },
         "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
         "parameters": [
           {
             "$ref": "#/parameters/ReservationOrderIdParameter"
@@ -720,6 +736,16 @@
           "description": "The name of SKU",
           "readOnly": true
         },
+        "billingPlans": {
+          "type": "object",
+          "description": "The billing plan options available for this SKU.",
+          "additionalProperties": {
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/ReservationBillingPlan"
+            }
+          }
+        },
         "terms": {
           "type": "array",
           "readOnly": true,
@@ -813,6 +839,18 @@
         }
       }
     },
+    "ReservationBillingPlan": {
+      "type": "string",
+      "description": "Represent the billing plans.",
+      "enum": [
+        "Upfront",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "ReservationBillingPlan",
+        "modelAsString": true
+      }
+    },
     "ReservationTerm": {
       "type": "string",
       "description": "Represent the term of Reservation.",
@@ -823,6 +861,80 @@
       "x-ms-enum": {
         "name": "ReservationTerm",
         "modelAsString": true
+      }
+    },
+    "PaymentStatus": {
+      "type": "string",
+      "description": "Describes whether the payment is completed, failed, cancelled or scheduled in the future.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Scheduled",
+        "Cancelled"
+      ],
+      "x-ms-enum": {
+        "name": "PaymentStatus",
+        "modelAsString": true
+      }
+    },
+    "PaymentDetail": {
+      "type": "object",
+      "description": "Information about payment related to a reservation order.",
+      "properties": {
+        "dueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the payment needs to be done."
+        },
+        "paymentDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the transaction is completed. Is null when it is scheduled."
+        },
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount in pricing currency. Tax not included."
+        },
+        "billingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount charged in Billing currency. Tax not included. Is null for future payments"
+        },
+        "billingAccount": {
+          "type": "string",
+          "description": "Shows the Account that is charged for this payment."
+        },
+        "status": {
+          "$ref": "#/definitions/PaymentStatus"
+        },
+        "extendedStatusInfo": {
+          "$ref": "#/definitions/ExtendedStatusInfo"
+        }
+      }
+    },
+    "ReservationOrderBillingPlanInformation": {
+      "type": "object",
+      "description": "Information describing the type of billing plan for this reservation.",
+      "properties": {
+        "pricingCurrencyTotal": {
+          "$ref": "#/definitions/Price",
+          "description": "Amount of money to be paid for the Order. Tax is not included."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date",
+          "description": "Date when the billing plan has started."
+        },
+        "nextPaymentDueDate": {
+          "type": "string",
+          "format": "date",
+          "description": "For recurring billing plans, indicates the date when next payment will be processed. Null when total is paid off."
+        },
+        "transactions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
+          }
+        }
       }
     },
     "ReservationOrderProperties": {
@@ -856,6 +968,12 @@
         "provisioningState": {
           "type": "string",
           "description": "Current state of the reservation."
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
+        },
+        "planInformation": {
+          "$ref": "#/definitions/ReservationOrderBillingPlanInformation"
         },
         "reservations": {
           "type": "array",
@@ -982,6 +1100,12 @@
               "type": "number"
             }
           }
+        },
+        "paymentSchedule": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PaymentDetail"
+          }
         }
       }
     },
@@ -1033,6 +1157,9 @@
         },
         "extendedStatusInfo": {
           "$ref": "#/definitions/ExtendedStatusInfo"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
         },
         "splitProperties": {
           "$ref": "#/definitions/ReservationSplitProperties"
@@ -1105,6 +1232,9 @@
         },
         "term": {
           "$ref": "#/definitions/ReservationTerm"
+        },
+        "billingPlan": {
+          "$ref": "#/definitions/ReservationBillingPlan"
         },
         "quantity": {
           "$ref": "#/definitions/ReservationQuantity"
@@ -1483,6 +1613,19 @@
       "x-ms-enum": {
         "name": "ReservedResourceType",
         "modelAsString": true
+      }
+    },
+    "Price": {
+      "type": "object",
+      "properties": {
+        "currencyCode": {
+          "type": "string",
+          "description": "The ISO 4217 3-letter currency code for the currency used by this purchase record."
+        },
+        "amount": {
+          "type": "number",
+          "format": "double"
+        }
       }
     }
   },

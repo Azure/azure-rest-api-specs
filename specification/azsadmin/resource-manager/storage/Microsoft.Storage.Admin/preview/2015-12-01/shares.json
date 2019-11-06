@@ -46,7 +46,7 @@
           "200": {
             "description": "OK -- The list of storage shares has been returned.",
             "schema": {
-              "$ref": "shares.json#/definitions/ShareList"
+              "$ref": "#/definitions/ShareList"
             }
           },
           "404": {
@@ -181,7 +181,7 @@
           "200": {
             "description": "OK -- The storage share has been returned.",
             "schema": {
-              "$ref": "shares.json#/definitions/Share"
+              "$ref": "#/definitions/Share"
             }
           },
           "404": {
@@ -199,7 +199,7 @@
         "properties": {
           "description": "Storage share properties.",
           "x-ms-client-flatten": true,
-          "$ref": "shares.json#/definitions/ShareProperties",
+          "$ref": "#/definitions/ShareProperties",
           "readOnly": true
         }
       },
@@ -213,7 +213,7 @@
       "description": "List of storage shares.",
       "type": "array",
       "items": {
-        "$ref": "shares.json#/definitions/Share"
+        "$ref": "#/definitions/Share"
       }
     },
     "ShareProperties": {

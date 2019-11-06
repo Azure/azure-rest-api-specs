@@ -25,7 +25,7 @@ batch:
   - tag: package-locks-2016-09
   - tag: package-locks-2015-01
   - tag: package-managedapplications-2018-06
-  - tag: package-managedapplications-2017-09
+  - tag: package-policy-2019-09
   - tag: package-policy-2019-06
   - tag: package-policy-2019-01  
   - tag: package-policy-2018-05
@@ -44,6 +44,7 @@ batch:
   - tag: package-resources-2017-05
   - tag: package-resources-2016-09
   - tag: package-resources-2016-02
+  - tag: package-subscriptions-2019-06
   - tag: package-subscriptions-2018-06
   - tag: package-subscriptions-2016-06
 ```
@@ -103,15 +104,15 @@ python:
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
 ```
 
-### Tag: package-managedapplications-2017-09 and python
+### Tag: package-policy-2019-09 and python
 
-These settings apply only when `--tag=package-managedapplications-2017-09 --python` is specified on the command line.
+These settings apply only when `--tag=package-policy-2019-09 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-managedapplications-2017-09' && $(python)
+``` yaml $(tag) == 'package-policy-2019-09' && $(python)
 python:
-  namespace: azure.mgmt.resource.managedapplications
-  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/managedapplications
+  namespace: azure.mgmt.resource.policy.v2019_09_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/policy/v2019_09_01
 ```
 
 ### Tag: package-policy-2019-06 and python
@@ -299,6 +300,17 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 python:
   namespace: azure.mgmt.resource.resources.v2016_02_01
   output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/resources/v2016_02_01
+```
+
+### Tag: package-subscriptions-2019-06 and python
+
+These settings apply only when `--tag=package-subscriptions-2019-06 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-subscriptions-2019-06' && $(python)
+python:
+  namespace: azure.mgmt.resource.subscriptions.v2019_06_01
+  output-folder: $(python-sdks-folder)/resources/azure-mgmt-resource/azure/mgmt/resource/subscriptions/v2019_06_01
 ```
 
 ### Tag: package-subscriptions-2018-06 and python
