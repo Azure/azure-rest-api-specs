@@ -76,6 +76,7 @@ input-file:
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductDeployment.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductPackage.json
   - $(this-folder)/Microsoft.Deployment.Admin/preview/2019-01-01/ProductSecret.json
+
 ```
 
 If there are files that should not be in the `all-api-versions` set,
