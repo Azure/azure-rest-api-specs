@@ -38,6 +38,15 @@ input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
 ```
 
+### Tag: package-2019-08-only
+
+These settings apply only when `--tag=package-2019-08-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-only'
+input-file:
+- Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
+```
+
 ### Tag: package-2019-08-preview
 
 These settings apply only when `--tag=package-2019-08-preview` is specified on the command line.
@@ -49,11 +58,30 @@ input-file:
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
+### Tag: package-2019-08-preview-only
+
+These settings apply only when `--tag=package-2019-08-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview-only'
+input-file:
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+```
+
 ### Tag: package-2015-04
 
 These settings apply only when `--tag=package-2015-04` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2015-04'
+input-file:
+- Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+```
+
+### Tag: package-2015-04-only
+
+These settings apply only when `--tag=package-2015-04-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-04-only'
 input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 ```
