@@ -27,6 +27,13 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 ``` yaml
 openapi-type: arm
 tag: package-2018-07
+
+directive:
+  - where:
+      - $.paths
+    suppress:
+      - UniqueResourcePaths
+	  
 ```
 
 
