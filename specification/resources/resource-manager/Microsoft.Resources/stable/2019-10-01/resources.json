@@ -5813,11 +5813,14 @@
       }
     },
     "Tags": {
-      "type": "object",
       "description": "key and value pairs for tags",
       "properties": {
         "tags": {
-          "type": "object"
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The tag value."
+          }
         }
       }
     },
@@ -5853,6 +5856,9 @@
     "TagResponse": {
       "type": "object",
       "description": "Tag Response for Patch, Put, Get, Delete operations.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "id": {
           "readOnly": true,
