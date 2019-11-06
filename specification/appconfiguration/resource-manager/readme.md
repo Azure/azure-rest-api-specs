@@ -88,6 +88,10 @@ See configuration in [readme.go.md](./readme.go.md)
 
 See configuration in [readme.ruby.md](./readme.ruby.md)
 
+## CLI
+
+See configuration in [readme.cli.md](./readme.cli.md)
+
 ## Suppression
 
 ``` yaml
