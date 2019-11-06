@@ -274,7 +274,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{subscription}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscriptions.Admin/subscriptions/{targetSubscriptionId}": {
       "get": {
         "x-ms-examples": {
           "Get a specified subscription.": {
@@ -291,7 +291,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -322,10 +322,10 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/NewSubscriptionParameter"
+            "$ref": "#/parameters/SubscriptionObjectParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -362,7 +362,7 @@
             "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/SubscriptionParameter"
+            "$ref": "#/parameters/TargetSubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -1215,17 +1215,17 @@
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "SubscriptionParameter": {
-      "description": "Subscription parameter.",
-      "name": "subscription",
+    "TargetSubscriptionIdParameter": {
+      "description": "Target Subscription parameter.",
+      "name": "targetSubscriptionId",
       "in": "path",
       "type": "string",
       "required": true,
       "x-ms-parameter-location": "method"
     },
-    "NewSubscriptionParameter": {
+    "SubscriptionObjectParameter": {
       "description": "Subscription parameter.",
-      "name": "newSubscription",
+      "name": "subscriptionObject",
       "in": "body",
       "schema": {
         "$ref": "#/definitions/Subscription"
