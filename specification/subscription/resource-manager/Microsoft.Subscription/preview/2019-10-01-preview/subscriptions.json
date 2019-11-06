@@ -16,7 +16,7 @@
     "application/json"
   ],
   "paths": {
-    "/providers/Microsoft.Subscription/PurchaseSupportStatus/{Id}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Subscription/PurchaseSupportStatus/{Id}": {
       "get": {
         "operationId": "GetPurchaseSupportStatus_Get",
         "x-ms-examples": {
@@ -26,6 +26,9 @@
         },
         "description": "The operation to find out the purchase support status",
         "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
           {
             "$ref": "#/parameters/IdParameter"
           },
@@ -198,9 +201,13 @@
     "PurchaseSupportStatusResponseResult": {
       "description": "A list of containing Purchase Records.",
       "properties": {
-        "purchaseRecordId": {
+        "planType": {
           "type": "string",
-          "description": "the purchase record Id"
+          "description": "the planType"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "the end date"
         }
       }
     },
@@ -217,9 +224,13 @@
     "PurchaseSupportResponseResult": {
       "description": "A list of containing support plan result.",
       "properties": {
-        "purchaseRecordId": {
+        "planType": {
           "type": "string",
-          "description": "the purchase record Id"
+          "description": "the planType"
+        },
+        "endDate": {
+          "type": "string",
+          "description": "the end date"
         }
       }
     },
