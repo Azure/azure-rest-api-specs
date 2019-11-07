@@ -3399,15 +3399,15 @@
           ]
         },
         "sourcePattern": {
-          "description": "define a request URI pattern that identifies the type of requests that may be rewritten. If value is blank, all strings are matched.",
+          "description": "define a request URI pattern that identifies the type of requests that may be rewritten. Currently, source pattern uses a prefix-based match. To match all URL paths, use \"/\" as the source pattern value. To match only the root directory and re-write this path, use the origin path field",
           "type": "string"
         },
         "destination": {
-          "description": "Define the relative URL to which the above requests will be rewritten by.",
+          "description": "Define the destination path for be used in the rewrite. This will overwrite the source pattern ",
           "type": "string"
         },
         "preserveUnmatchedPath": {
-          "description": "Whether to preserve unmatched path. Default value is true.",
+          "description": "If True, the remaining path after the source pattern will be appended to the new destination path.  ",
           "type": "boolean"
         }
       }

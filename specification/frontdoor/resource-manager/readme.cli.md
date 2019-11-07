@@ -20,5 +20,17 @@ cli:
     "/properties/endpointa": "endpointA_*/"
     "/properties/endpointb": "endpointB_*/"
   test-setup:
-    - name: Create or Update a service with all parameters
+    - name: Creates an NetworkExperiment Profile in a Resource Group
+    - name: Creates an Experiment
+    - name: List NetworkExperiment Profiles in a Resource Group
+    # - name: Updates an Experiment
+    - name: Gets an NetworkExperiment Profile by Profile Id
+    - name: Gets an Experiment by ExperimentName
+    - name: Gets a list of Experiments
+    - name: Gets a list of Preconfigured Endpoints
+    - name: Gets a Latency Scorecard for a given Experiment
+    - name: Gets a Timeseries for a given Experiment
+    - name: Deletes an Experiment
+    - name: Deletes an NetworkExperiment Profile by ProfileName
+
 ```
