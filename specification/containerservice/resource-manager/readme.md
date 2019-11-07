@@ -37,6 +37,18 @@ openapi-type: arm
 tag: package-2019-10
 ```
 
+### Tag: package-2019-10-27-preview
+
+These settings apply only when `--tag=package-2019-10-27-preview` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-10-27-preview'
+input-file:
+  - Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
+  - Microsoft.ContainerService/stable/2017-07-01/containerService.json
+  - Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+  - Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
+```
+
 ### Tag: package-2019-09-30-preview
 
 These settings apply only when `--tag=package-2019-09-30-preview` is specified on the command line.
@@ -394,6 +406,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/preview/2019-09-30/openShiftManagedClusters.json
   - $(this-folder)/Microsoft.ContainerService/stable/2017-07-01/containerService.json
   - $(this-folder)/Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
