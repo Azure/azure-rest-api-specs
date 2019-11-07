@@ -125,6 +125,9 @@ input-file:
 - Microsoft.Sql/preview/2018-06-01-preview/FailoverElasticPools.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateEndpointConnections.json
 - Microsoft.Sql/preview/2018-06-01-preview/PrivateLinkResources.json
+- Microsoft.Sql/preview/2019-06-01-preview/databases.json
+- Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+- Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
 
 # Needed when there is more than one input file
 override-info:
@@ -472,6 +475,7 @@ input-file:
  - ./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
+ - ./Microsoft.Sql/preview/2018-06-01-preview/managedInstanceOperations.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
  - ./Microsoft.Sql/preview/2018-06-01-preview/usages.json
