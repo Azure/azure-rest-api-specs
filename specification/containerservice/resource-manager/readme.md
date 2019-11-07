@@ -34,7 +34,7 @@ These are the global settings for the ContainerServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-10
+tag: package-2019-10-27-preview
 ```
 
 ### Tag: package-2019-10-27-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2019-10-27-preview` is specified o
 input-file:
   - Microsoft.ContainerService/preview/2019-10-27-preview/openShiftManagedClusters.json
   - Microsoft.ContainerService/stable/2017-07-01/containerService.json
-  - Microsoft.ContainerService/stable/2019-08-01/managedClusters.json
+  - Microsoft.ContainerService/stable/2019-08-01/location.json
   - Microsoft.ContainerService/stable/2019-10-01/managedClusters.json
 ```
 
