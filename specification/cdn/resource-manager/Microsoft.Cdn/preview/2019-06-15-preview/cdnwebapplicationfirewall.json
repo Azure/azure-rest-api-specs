@@ -649,7 +649,30 @@
           "items": {
             "type": "string"
           }
+        },
+        "transforms": {
+          "description": "List of transforms.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TransformType"
+          }
         }
+      }
+    },
+    "TransformType": {
+      "description": "Describes what transforms were applied before matching.",
+      "type": "string",
+      "enum": [
+        "Lowercase",
+        "Uppercase",
+        "Trim",
+        "UrlDecode",
+        "UrlEncode",
+        "RemoveNulls"
+      ],
+      "x-ms-enum": {
+        "name": "TransformType",
+        "modelAsString": true
       }
     },
     "ManagedRuleSetList": {
