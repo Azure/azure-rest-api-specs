@@ -3232,21 +3232,26 @@
       ],
       "description": "Policy contract Properties."
     },
-    "PolicySnippetContract": {
+    "PolicyDescriptionContract": {
       "properties": {
-        "name": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PolicyDescriptionContractProperties",
+          "description": "Policy description contract properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./apimanagement.json#/definitions/Resource"
+        }
+      ],
+      "description": "Policy description details."
+    },
+    "PolicyDescriptionContractProperties": {
+      "properties": {
+        "description": {
           "type": "string",
-          "description": "Snippet name.",
-          "readOnly": true
-        },
-        "content": {
-          "type": "string",
-          "description": "Snippet content.",
-          "readOnly": true
-        },
-        "toolTip": {
-          "type": "string",
-          "description": "Snippet toolTip.",
+          "description": "Policy description.",
           "readOnly": true
         },
         "scope": {
@@ -3255,19 +3260,19 @@
           "readOnly": true
         }
       },
-      "description": "Policy snippet."
+      "description": "Policy description properties."
     },
-    "PolicySnippetsCollection": {
+    "PolicyDescriptionCollection": {
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/PolicySnippetContract"
+            "$ref": "#/definitions/PolicyDescriptionContract"
           },
-          "description": "Policy snippet value."
+          "description": "Descriptions of APIM policies."
         }
       },
-      "description": "The response of the list policy snippets operation."
+      "description": "Descriptions of APIM policies."
     },
     "PortalDelegationSettings": {
       "properties": {

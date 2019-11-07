@@ -57,7 +57,7 @@ input-file:
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimnotifications.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimopenidconnectproviders.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicies.json
-  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicysnippets.json
+  - Microsoft.ApiManagement/preview/2019-12-01-preview/apimpolicydescriptions.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimportalsettings.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproducts.json
   - Microsoft.ApiManagement/preview/2019-12-01-preview/apimproductsByTags.json
