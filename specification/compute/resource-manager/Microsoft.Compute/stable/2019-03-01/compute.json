@@ -264,6 +264,11 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List availability sets in a subscription.": {
+            "$ref": "./examples/ListAvailabilitySetsInASubscription.json"
+          }
         }
       }
     },
@@ -2913,7 +2918,7 @@
           "VirtualMachines"
         ],
         "operationId": "VirtualMachines_Redeploy",
-        "description": "The operation to redeploy a virtual machine.",
+        "description": "Shuts down the virtual machine, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -3136,6 +3141,9 @@
           },
           "Create a scale set with terminate scheduled events enabled.": {
             "$ref": "./examples/CreateAScaleSetWithTerminateScheduledEventEnabled.json"
+          },
+          "Create a scale set with automatic repairs enabled": {
+            "$ref": "./examples/CreateAScaleSetWithAutomaticRepairs.json"
           }
         }
       },
@@ -3913,7 +3921,7 @@
           "VirtualMachineScaleSets"
         ],
         "operationId": "VirtualMachineScaleSets_Redeploy",
-        "description": "Redeploy one or more virtual machines in a VM scale set.",
+        "description": "Shuts down all the virtual machines in the virtual machine scale set, moves them to a new node, and powers them back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -4987,7 +4995,7 @@
           "VirtualMachineScaleSetVMs"
         ],
         "operationId": "VirtualMachineScaleSetVMs_Redeploy",
-        "description": "Redeploys a virtual machine in a VM scale set.",
+        "description": "Shuts down the virtual machine in the virtual machine scale set, moves it to a new node, and powers it back on.",
         "parameters": [
           {
             "name": "resourceGroupName",
@@ -6942,9 +6950,30 @@
         "allowExtensionOperations": {
           "type": "boolean",
           "description": "Specifies whether extension operations should be allowed on the virtual machine. <br><br>This may only be set to False when no extensions are present on the virtual machine."
+        },
+        "requireGuestProvisionSignal": {
+          "type": "boolean",
+          "description": "Specifies whether the guest provision signal is required from the virtual machine."
         }
       },
       "description": "Specifies the operating system settings for the virtual machine."
+    },
+    "AutomaticRepairsPolicy": {
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Specifies whether automatic repairs should be enabled on the virtual machine scale set. The default value is false."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "description": "The amount of time for which automatic repairs are suspended due to a state change on VM. The grace time starts after the state change has completed. This helps avoid premature or accidental repairs. The time duration should be specified in ISO 8601 format. The default value is 5 minutes (PT5M)."
+        },
+        "maxInstanceRepairsPercent": {
+          "type": "integer",
+          "description": "The percentage (capacity of scaleset) of virtual machines that will be simultaneously repaired. The default value is 20%."
+        }
+      },
+      "description": "Specifies the configuration parameters for automatic repairs on the virtual machine scale set."
     },
     "NetworkInterfaceReferenceProperties": {
       "properties": {
@@ -8435,6 +8464,10 @@
     },
     "VirtualMachineScaleSetUpdateNetworkProfile": {
       "properties": {
+        "healthProbe": {
+          "$ref": "#/definitions/ApiEntityReference",
+          "description": "A reference to a load balancer probe used to determine the health of an instance in the virtual machine scale set. The reference will be in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/loadBalancers/{loadBalancerName}/probes/{probeName}'."
+        },
         "networkInterfaceConfigurations": {
           "type": "array",
           "items": {
@@ -8643,6 +8676,10 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
         },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetVMProfile",
           "description": "The virtual machine profile."
@@ -8699,6 +8736,10 @@
           "$ref": "#/definitions/UpgradePolicy",
           "description": "The upgrade policy."
         },
+        "automaticRepairsPolicy": {
+          "$ref": "#/definitions/AutomaticRepairsPolicy",
+          "description": "Policy for automatic repairs."
+        },
         "virtualMachineProfile": {
           "$ref": "#/definitions/VirtualMachineScaleSetUpdateVMProfile",
           "description": "The virtual machine profile."
@@ -8706,6 +8747,10 @@
         "overprovision": {
           "type": "boolean",
           "description": "Specifies whether the Virtual Machine Scale Set should be overprovisioned."
+        },
+        "doNotRunExtensionsOnOverprovisionedVMs": {
+          "type": "boolean",
+          "description": "When Overprovision is enabled, extensions are launched only on the requested number of VMs which are finally kept. This property will hence ensure that the extensions do not run on the extra overprovisioned VMs."
         },
         "singlePlacementGroup": {
           "type": "boolean",

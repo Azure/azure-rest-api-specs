@@ -5,9 +5,11 @@
 This repository is the canonical source for REST API specifications for Microsoft Azure.
 
 ## Getting started
-If you're a spec author looking for information about all of the repositories and steps in the pipeline, go to our [documentation](https://github.com/Azure/adx-documentation-pr/wiki) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo. 
+If you're a Microsoft employee looking for information about all of the repositories and steps in the pipeline, go to our [documentation](https://github.com/Azure/adx-documentation-pr/wiki) repository. Make sure to [join the Github Azure organization](http://aka.ms/azuregithub) to get access to that repo. 
 
 <b>Latest improvement:</b><i> Microsoft employees can try out our new experience at [OpenAPI Hub](https://aka.ms/openapihub) - online experience for using our validation tools and finding your workflow.</i>
+
+External Contributors can get started [here](https://github.com/Azure/azure-rest-api-specs/blob/master/documentation/Getting%20started%20with%20OpenAPI%20specifications.md)
 
 Please check the [announcements page](https://github.com/Azure/azure-rest-api-specs/wiki/Announcements) for any new updates since your last visit.
 
@@ -17,7 +19,7 @@ The structure of the directory should strictly follow these rules:
 
 1. **Profile**: The profile holder contains the profiles' definition MD files. these files will contain information and references to the snapshots of the RPs' Resource types or Dataplane API versions that represent a specific profile.
 
-1. **Specification**: This folder the is root folder for all Specs (Management and Dataplane) related docs.
+1. **Specification**: This folder is the root folder for all Specs (Management and Dataplane) related docs.
 
 1. **{RP-Name} Folders** - each RP will have a separate folder
 

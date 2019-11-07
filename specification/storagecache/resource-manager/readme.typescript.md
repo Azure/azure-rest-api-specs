@@ -9,5 +9,6 @@ typescript:
   package-name: "@azure/arm-storagecache"
   payload-flattening-threshold: 2
   output-folder: "$(typescript-sdks-folder)/sdk/storagecache/arm-storagecache"
+  clear-output-folder: true
   generate-metadata: true
 ```
