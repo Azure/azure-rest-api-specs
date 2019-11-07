@@ -28,7 +28,8 @@
           "ActionPlanOperations"
         ],
         "operationId": "ActionPlanOperations_List",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -63,7 +64,8 @@
           "ActionPlanOperations"
         ],
         "operationId": "ActionPlanOperations_Get",
-        "parameters": [{
+        "parameters": [
+          {
             "$ref": "Deployment.json#/parameters/SubscriptionIdParameter"
           },
           {
@@ -121,9 +123,11 @@
           "type": "string"
         }
       },
-      "allOf": [{
-        "$ref": "Deployment.json#/definitions/Resource"
-      }]
+      "allOf": [
+        {
+          "$ref": "Deployment.json#/definitions/Resource"
+        }
+      ]
     },
     "ActionPlanOperationAdminProperties": {
       "description": "Action Plan Operation Properties",
@@ -147,7 +151,7 @@
         },
         "parameters": {
           "description": "The deployment parameters in JToken format",
-          "type": "string"
+          "type": "object"
         },
         "startTime": {
           "description": "The deployment start time",
@@ -161,7 +165,7 @@
         },
         "outputs": {
           "description": "The action plan operation outputs in JToken format",
-          "type": "string"
+          "type": "object"
         },
         "error": {
           "description": "Error Information",
@@ -219,9 +223,11 @@
       }
     }
   },
-  "security": [{
-    "azure_auth": [
-      "user_impersonation"
-    ]
-  }]
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
 }
