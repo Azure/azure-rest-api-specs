@@ -240,7 +240,10 @@ These settings apply only when `--tag=package-2019-07-01-only` is specified on t
 
 ``` yaml $(tag) == 'package-2019-07-01-only'
 input-file:
+- Microsoft.Compute/stable/2019-07-01/compute.json
+- Microsoft.Compute/stable/2019-07-01/disk.json
 - Microsoft.Compute/stable/2019-07-01/gallery.json
+- Microsoft.Compute/stable/2019-07-01/runCommands.json
 ```
 
 ### Tag: package-2019-03-01
