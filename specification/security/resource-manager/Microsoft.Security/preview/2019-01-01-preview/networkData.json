@@ -285,10 +285,10 @@
               }
             },
             "inboundConnectedResources": {
-              "$ref": "#/definitions/ActualTrafficConnectedResources"
+              "$ref": "#/definitions/ConnectedResources"
             },
             "outboundConnectedResources": {
-              "$ref": "#/definitions/ActualTrafficConnectedResources"
+              "$ref": "#/definitions/ConnectedResources"
             }
           }
         },
@@ -331,40 +331,6 @@
           "readOnly": true,
           "type": "string",
           "description": "The connections udp ports"
-        }
-      }
-    },
-    "ActualTrafficConnectedResources": {
-      "readOnly": true,
-      "type": "object",
-      "description": "The actual traffic details",
-      "properties": {
-        "volume": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The actual traffic volume between the actual traffic start time to the actual traffic end time"
-        },
-        "connectionsDetails": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectionDetails"
-          }
-        }
-      }
-    },
-    "ConnectionDetails": {
-      "type": "object",
-      "description": "Details of the actual traffic connections",
-      "properties": {
-        "portAndProtocol": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The port and the protocol of the traffic"
-        },
-        "volume": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The volume of the traffic between the actual traffic start time to the actual traffic end time"
         }
       }
     }
