@@ -413,9 +413,6 @@
             "schema": {
               "$ref": "#/definitions/TaskRun"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -472,9 +469,6 @@
             "schema": {
               "$ref": "#/definitions/TaskRun"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -520,9 +514,6 @@
           },
           "204": {
             "description": "No Content - the specified resource was not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-long-running-operation": true,
@@ -580,9 +571,6 @@
             "schema": {
               "$ref": "#/definitions/TaskRun"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -620,9 +608,6 @@
             "schema": {
               "$ref": "#/definitions/TaskRunListResult"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-pageable": {
@@ -1310,10 +1295,6 @@
             "modelAsString": true
           }
         },
-        "taskRunName": {
-          "description": "The name of task run associated with this run.",
-          "type": "string"
-        },
         "status": {
           "description": "The current status of the run.",
           "enum": [
@@ -1453,14 +1434,18 @@
           }
         },
         "runRequest": {
-            "$ref": "#/definitions/RunRequest",
-            "description": "The request (parameters) for the run"
+          "$ref": "#/definitions/RunRequest",
+          "description": "The request (parameters) for the run"
         },
         "runResult": {
-            "$ref": "#/definitions/Run",
-            "description": "The result of this task run",
-            "readOnly": true
-        }  
+          "$ref": "#/definitions/Run",
+          "description": "The result of this task run",
+          "readOnly": true
+        },
+        "forceUpdateTag": {
+          "description": "How the run should be forced to rerun even if the run request configuration has not changed",
+          "type": "string"
+        }
       }
     },
     "UserIdentityProperties": {
@@ -1505,6 +1490,10 @@
         "runRequest": {
           "$ref": "#/definitions/RunRequest",
           "description": "The request (parameters) for the new run"
+        },
+        "forceUpdateTag": {
+          "description": "How the run should be forced to rerun even if the run request configuration has not changed",
+          "type": "string"
         }
       }
     },
@@ -2436,7 +2425,6 @@
     "DockerBuildRequest": {
       "description": "The parameters for a docker quick build.",
       "required": [
-        "type",
         "dockerFilePath",
         "platform"
       ],
@@ -2532,7 +2520,6 @@
     "FileTaskRunRequest": {
       "description": "The request parameters for a scheduling run against a task file.",
       "required": [
-        "type",
         "taskFilePath",
         "platform"
       ],
@@ -2611,7 +2598,6 @@
     "TaskRunRequest": {
       "description": "The parameters for a task run request.",
       "required": [
-        "type",
         "taskId"
       ],
       "type": "object",
@@ -2670,7 +2656,6 @@
     "EncodedTaskRunRequest": {
       "description": "The parameters for a quick task run request.",
       "required": [
-        "type",
         "encodedTaskContent",
         "platform"
       ],
