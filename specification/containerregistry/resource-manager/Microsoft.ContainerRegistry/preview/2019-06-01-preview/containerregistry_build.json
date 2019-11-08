@@ -369,7 +369,7 @@
         "tags": [
           "TaskRuns"
         ],
-        "description": "Gets the detailed information for a given run request.",
+        "description": "Gets the detailed information for a given task run.",
         "operationId": "TaskRuns_Get",
         "parameters": [
           {
@@ -398,9 +398,6 @@
             "schema": {
               "$ref": "#/definitions/TaskRun"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry/run doesn't exist, 404 (Not found) is returned."
           }
         },
         "x-ms-examples": {
@@ -413,7 +410,7 @@
         "tags": [
           "TaskRuns"
         ],
-        "description": "Creates a run request for a container registry with the specified parameters.",
+        "description": "Creates a task run for a container registry with the specified parameters.",
         "operationId": "TaskRuns_Create",
         "parameters": [
           {
@@ -457,9 +454,6 @@
             "schema": {
               "$ref": "#/definitions/TaskRun"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
           }
         },
         "x-ms-long-running-operation": true,
@@ -473,7 +467,7 @@
         "tags": [
           "TaskRuns"
         ],
-        "description": "Deletes a specified TaskRun resource.",
+        "description": "Deletes a specified task run resource.",
         "operationId": "TaskRuns_Delete",
         "parameters": [
           {
@@ -491,7 +485,7 @@
           {
             "name": "taskRunName",
             "in": "path",
-            "description": "The Run Request name.",
+            "description": "The task run name.",
             "required": true,
             "type": "string"
           }
@@ -505,9 +499,6 @@
           },
           "204": {
             "description": "No Content - the specified resource was not found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-long-running-operation": true,
@@ -539,7 +530,7 @@
           {
             "name": "taskRunName",
             "in": "path",
-            "description": "The run request name.",
+            "description": "The task run name.",
             "required": true,
             "type": "string"
           },
@@ -554,11 +545,17 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "The request was successfully accepted; the operation will complete asynchronously."
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
           },
-          "default": {
-            "description": "Error response describing why the operation failed. If the registry doesn't exist, 404 (Not found) is returned. If any of the input parameters is wrong, 400(Bad Request) is returned."
+          "201": {
+            "description": "The request was successfully accepted; the operation will complete asynchronously. The provisioning state of the resource should indicate the current state of the resource.",
+            "schema": {
+              "$ref": "#/definitions/TaskRun"
+            }
           }
         },
         "x-ms-long-running-operation": true,
@@ -596,9 +593,6 @@
             "schema": {
               "$ref": "#/definitions/TaskRunListResult"
             }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed."
           }
         },
         "x-ms-pageable": {
@@ -1268,10 +1262,6 @@
             "modelAsString": true
           }
         },
-        "taskRunName": {
-          "description": "The name of task run associated with this run.",
-          "type": "string"
-        },
         "status": {
           "description": "The current status of the run.",
           "enum": [
@@ -1335,6 +1325,7 @@
       }
     },
     "TaskRun": {
+      "description": "The task run that has the ARM resource and properties. \r\nThe task run will have the information of request and result of a run.",
       "type": "object",
       "allOf": [
         {
@@ -1348,13 +1339,8 @@
         },
         "properties": {
           "$ref": "#/definitions/TaskRunProperties",
+          "description": "The properties associated with the task run, i.e., request and result of the run",
           "x-ms-client-flatten": true
-        },
-        "runRequest": {
-          "$ref": "#/definitions/RunRequest"
-        },
-        "runResult": {
-          "$ref": "#/definitions/Run"
         }
       }
     },
@@ -1394,9 +1380,11 @@
       }
     },
     "TaskRunProperties": {
+      "description": "The properties of task run.",
       "type": "object",
       "properties": {
         "provisioningState": {
+          "description": "The provisioning state of this task run",
           "enum": [
             "Creating",
             "Updating",
@@ -1411,6 +1399,19 @@
             "name": "ProvisioningState",
             "modelAsString": true
           }
+        },
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest",
+          "description": "The request (parameters) for the run"
+        },
+        "runResult": {
+          "$ref": "#/definitions/Run",
+          "description": "The result of this task run",
+          "readOnly": true
+        },
+        "forceUpdateTag": {
+          "description": "How the run should be forced to rerun even if the run request configuration has not changed",
+          "type": "string"
         }
       }
     },
@@ -1428,14 +1429,17 @@
       }
     },
     "TaskRunUpdateParameters": {
+      "description": "The parameters for updating a task run.",
       "type": "object",
       "properties": {
         "identity": {
           "$ref": "#/definitions/IdentityProperties",
           "description": "Identity for the resource."
         },
-        "runRequest": {
-          "$ref": "#/definitions/RunRequest"
+        "properties": {
+          "$ref": "#/definitions/TaskRunPropertiesUpdateParameters",
+          "description": "The properties for updating a task run.",
+          "x-ms-client-flatten": true
         },
         "tags": {
           "description": "The ARM resource tags.",
@@ -1446,7 +1450,22 @@
         }
       }
     },
+    "TaskRunPropertiesUpdateParameters": {
+      "description": "The properties of a task run update parameters.",
+      "type": "object",
+      "properties": {
+        "runRequest": {
+          "$ref": "#/definitions/RunRequest",
+          "description": "The request (parameters) for the new run"
+        },
+        "forceUpdateTag": {
+          "description": "How the run should be forced to rerun even if the run request configuration has not changed",
+          "type": "string"
+        }
+      }
+    },
     "TaskRunListResult": {
+      "description": "The collection of task runs.",
       "type": "object",
       "properties": {
         "value": {
