@@ -58,13 +58,13 @@ input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 ```
 
-### Tag: package-2015-04-01
+### Tag: package-2014-04
 
-These settings apply only when `--tag=package-2015-04-01` is specified on the command line.
+These settings apply only when `--tag=package-2014-04` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-04-01'
+``` yaml $(tag) == 'package-2014-04'
 input-file:
-- Microsoft.DocumentDB/stable/2015-04-01/cosmos-db.json
+- Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
 ```
 
 ### Tag: package-2015-11

@@ -45,13 +45,13 @@ Please also specify `--go-sdk-folder=<path to the root directory of your azure-s
 output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2015-04-08/$(namespace)
 ```
 
-### Tag: package-2015-04-01 and go
+### Tag: package-2014-04 and go
 
-These settings apply only when `--tag=package-2015-04-01 --go` is specified on the command line.
+These settings apply only when `--tag=package-2014-04 --go` is specified on the command line.
 Please also specify `--go-sdk-folder=<path to the root directory of your azure-sdk-for-go clone>`.
 
-``` yaml $(tag) == 'package-2015-04-01' && $(go)
-output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2015-04-01/$(namespace)
+``` yaml $(tag) == 'package-2014-04' && $(go)
+output-folder: $(go-sdk-folder)/services/cosmos-db/mgmt/2014-04/$(namespace)
 ```
 
 ### Tag: package-2015-11 and go

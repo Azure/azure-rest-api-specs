@@ -56,15 +56,15 @@ python:
   output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-cosmosdb/azure/mgmt/cosmosdb/v2015_04_01
 ```
 
-### Tag: package-2015-04-01 and python
+### Tag: package-2014-04 and python
 
-These settings apply only when `--tag=package-2015-04-01 --python` is specified on the command line.
+These settings apply only when `--tag=package-2014-04 --python` is specified on the command line.
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
-``` yaml $(tag) == 'package-2015-04-01' && $(python)
+``` yaml $(tag) == 'package-2014-04' && $(python)
 python:
-  namespace: azure.mgmt.cosmosdb.v2015_04_02
-  output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-cosmosdb/azure/mgmt/cosmosdb/v2015_04_02
+  namespace: azure.mgmt.cosmosdb.v2014_04_01
+  output-folder: $(python-sdks-folder)/cosmos/azure-mgmt-cosmosdb/azure/mgmt/cosmosdb/v2014_04_01
 ```
 
 ### Tag: package-2015-11 and python
