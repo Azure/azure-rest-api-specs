@@ -26,18 +26,27 @@ These are the global settings for the ManagedServices API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-09
+tag: package-preview-2019-12
 ```
 
 
+### Tag: package-preview-2019-12
+
+These settings apply only when `--tag=package-preview-2019-12` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2019-12'
+input-file:
+  - Microsoft.ManagedServices/preview/2019-12-01-preview/managedservices.json
+```
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
 
-```yaml $(tag) == 'package-2019-09'
+``` yaml $(tag) == 'package-2019-09'
 input-file:
   - Microsoft.ManagedServices/stable/2019-09-01/managedservices.json
 ```
+
 ### Tag: package-2019-06
 
 These settings apply only when `--tag=package-2019-06` is specified on the command line.
