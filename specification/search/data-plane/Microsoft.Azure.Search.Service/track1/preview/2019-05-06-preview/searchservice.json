@@ -3434,7 +3434,7 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "The name of the table or view (for Azure SQL data source) or collection (for DocumentDB data source) that will be indexed."
+          "description": "The name of the table or view (for Azure SQL data source) or collection (for CosmosDB data source) that will be indexed."
         },
         "query": {
           "type": "string",
@@ -3444,7 +3444,7 @@
       "required": [
         "name"
       ],
-      "description": "Represents information about the entity (such as Azure SQL table or DocumentDb collection) that will be indexed."
+      "description": "Represents information about the entity (such as Azure SQL table or CosmosDB collection) that will be indexed."
     },
     "DataChangeDetectionPolicy": {
       "discriminator": "@odata.type",
@@ -3526,7 +3526,25 @@
       ],
       "x-ms-enum": {
         "name": "DataSourceType",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "azuresql",
+            "name": "AzureSql"
+          },
+          {
+            "value": "cosmosdb",
+            "name": "CosmosDb"
+          },
+          {
+            "value": "azureblob",
+            "name": "AzureBlob"
+          },
+          {
+            "value": "azuretable",
+            "name": "AzureTable"
+          }
+        ]
       },
       "description": "Defines the type of a datasource."
     },
