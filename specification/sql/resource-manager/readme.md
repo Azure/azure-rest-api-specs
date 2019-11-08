@@ -852,9 +852,13 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/restorePoints.json
   - $(this-folder)/Microsoft.Sql/stable/2015-05-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/databases.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/DatabaseSecurityAlertPolicies.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedDatabaseSensitivityLabels.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ManagedInstanceVulnerabilityAssessments.json
+  - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/managedInstanceOperations.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/ServerVulnerabilityAssessments.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/instancePools.json
   - $(this-folder)/./Microsoft.Sql/preview/2018-06-01-preview/usages.json
