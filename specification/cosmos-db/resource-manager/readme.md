@@ -60,15 +60,6 @@ input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 ```
 
-### Tag: package-2015-04-only
-
-These settings apply only when `--tag=package-2015-04-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2015-04-only'
-input-file:
-- Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
-```
-
 ## Suppression
 ``` yaml
 directive:
@@ -186,4 +177,3 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
