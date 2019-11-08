@@ -12,5 +12,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-containerregistry"
   output-folder: "$(typescript-sdks-folder)/sdk/containerregistry/arm-containerregistry"
+  clear-output-folder: true
   generate-metadata: true
 ```

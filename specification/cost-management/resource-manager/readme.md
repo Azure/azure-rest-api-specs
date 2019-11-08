@@ -26,12 +26,21 @@ These are the global settings for the Cost Management API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2019-04
+tag: package-2019-10
 azure-validator: true
 ```
 
 ---
 
+
+### Tag: package-2019-10
+
+These settings apply only when `--tag=package-2019-10` is specified on the command line.
+
+```yaml $(tag) == 'package-2019-10'
+input-file:
+  - Microsoft.CostManagement/stable/2019-10-01/costmanagement.json
+```
 ### Tag: package-2019-09
 
 These settings apply only when `--tag=package-2019-09` is specified on the command line.
@@ -45,10 +54,11 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2019-04` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2019-04'
+``` yaml $(tag) == 'package-preview-2019-04'
 input-file:
   - Microsoft.CostManagement/preview/2019-04-01-preview/costmanagement.json
 ```
+
 ### Tag: package-2019-01
 
 These settings apply only when `--tag=package-2019-01` is specified on the command line.
@@ -310,8 +320,7 @@ regenerate-manager: true
 generate-interface: true
 ```
 
-
-## Multi-API/Profile support for AutoRest v3 generators 
+## Multi-API/Profile support for AutoRest v3 generators
 
 AutoRest V3 generators require the use of `--tag=all-api-versions` to select api files.
 
@@ -323,6 +332,7 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
+  - $(this-folder)/Microsoft.CostManagement/stable/2019-10-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-09-01/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/preview/2019-04-01-preview/costmanagement.json
   - $(this-folder)/Microsoft.CostManagement/stable/2019-01-01/costmanagement.json
@@ -333,11 +343,10 @@ input-file:
 
 ```
 
-If there are files that should not be in the `all-api-versions` set, 
+If there are files that should not be in the `all-api-versions` set,
 uncomment the  `exclude-file` section below and add the file paths.
 
 ``` yaml $(tag) == 'all-api-versions'
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
-
