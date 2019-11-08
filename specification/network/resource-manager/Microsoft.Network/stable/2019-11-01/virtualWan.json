@@ -3092,7 +3092,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{gatewayName}/disconnectp2svpnconnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/p2svpnGateways/{p2sVpnGatewayName}/disconnectP2sVpnConnections": {
       "post": {
         "tags": [
           "P2SVpnGateways"
@@ -3111,20 +3111,20 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "gatewayName",
+            "name": "p2sVpnGatewayName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the P2SVpnGateway."
+            "description": "The name of the P2S Vpn Gateway."
           },
           {
             "name": "request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/P2SVpnConnectionRequest"
+              "$ref": "#/definitions/DisconnectP2sVpnConnectionsParameter"
             },
-            "description": "Request parameters supplied to disconnect p2s vpn connections."
+            "description": "The parameters are supplied to disconnect p2s vpn connections."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -3145,7 +3145,7 @@
           }
         },
         "x-ms-examples": {
-          "P2sVpnGatewaysDisconnectP2sVpnConnections": {
+          "Disconnect VpnConnections from P2sVpn Gateway": {
             "$ref": "./examples/P2sVpnGatewaysDisconnectP2sVpnConnections.json"
           }
         },
@@ -4588,8 +4588,8 @@
         }
       }
     },
-    "P2SVpnConnectionRequest": {
-      "description": "List of p2s vpn connections.",
+    "DisconnectP2sVpnConnectionsParameter": {
+      "description": "List of p2s vpn connections to be disconnected.",
       "properties": {
         "vpnConnectionIds": {
           "type": "array",

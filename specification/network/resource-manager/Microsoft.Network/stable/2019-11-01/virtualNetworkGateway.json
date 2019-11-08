@@ -2161,12 +2161,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{gatewayName}/disconnectvirtualnetworkgatewayvpnconnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworkGateways/{virtualNetworkGatewayName}/disconnectVirtualNetworkGatewayVpnConnections": {
       "post": {
         "tags": [
           "VirtualNetworkGateways"
         ],
-        "operationId": "VirtualNetworkGateways_disconnectvirtualnetworkgatewayvpnconnections",
+        "operationId": "VirtualNetworkGateways_DisconnectVirtualNetworkGatewayVpnConnections",
         "description": "Disconnect vpn connections of virtual network gateway in the specified resource group.",
         "parameters": [
           {
@@ -2180,20 +2180,20 @@
             "description": "The name of the resource group."
           },
           {
-            "name": "gatewayName",
+            "name": "virtualNetworkGatewayName ",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the P2SVpnGateway."
+            "description": "The name of the virtual network gateway."
           },
           {
             "name": "request",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "./virtualWan.json#/definitions/P2SVpnConnectionRequest"
+              "$ref": "./virtualWan.json#/definitions/DisconnectP2sVpnConnectionsParameter"
             },
-            "description": "Request parameters supplied to disconnect vpn connections."
+            "description": "The parameters are supplied to disconnect vpn connections."
           },
           {
             "$ref": "./network.json#/parameters/ApiVersionParameter"
@@ -2214,7 +2214,7 @@
           }
         },
         "x-ms-examples": {
-          "VirtualNetworkGatewaysDisconnectP2sVpnConnections": {
+          "Disconnect VpnConnections from Virtual Network Gateway": {
             "$ref": "./examples/VirtualNetworkGatewaysDisconnectP2sVpnConnections.json"
           }
         },
