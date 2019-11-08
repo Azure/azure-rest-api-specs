@@ -4343,6 +4343,14 @@
         "enableMultipleWriteLocations": {
           "description": "Enables the account to write in multiple locations",
           "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
         }
       }
     },
@@ -4407,6 +4415,14 @@
         "enableMultipleWriteLocations": {
           "description": "Enables the account to write in multiple locations",
           "type": "boolean"
+        },
+        "enableCassandraConnector": {
+          "description": "Enables the cassandra connector on the Cosmos DB C* account",
+          "type": "boolean"
+        },
+        "connectorOffer": {
+          "description": "The cassandra connector offer type for the Cosmos DB database C* account.",
+          "$ref": "#/definitions/ConnectorOffer"
         }
       },
       "required": [
@@ -4486,12 +4502,13 @@
           "readOnly": true,
           "type": "string",
           "description": "Base 64 encoded value of the secondary read-write key."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
+        }
+      },
+      "allOf": [
+        {
           "$ref": "#/definitions/DatabaseAccountListReadOnlyKeysResult"
         }
-      }
+      ]
     },
     "DatabaseAccountConnectionString": {
       "description": "Connection string for the Cosmos DB account",
@@ -5565,7 +5582,7 @@
             "None",
             "Average",
             "Total",
-            "Minimimum",
+            "Minimum",
             "Maximum",
             "Last"
           ],
@@ -5867,6 +5884,17 @@
       "x-ms-enum": {
         "modelAsString": true,
         "name": "UnitType"
+      }
+    },
+    "ConnectorOffer": {
+      "description": "The cassandra connector offer type for the Cosmos DB C* database account.",
+      "type": "string",
+      "enum": [
+        "Small"
+      ],
+      "x-ms-enum": {
+        "name": "ConnectorOffer",
+        "modelAsString": true
       }
     }
   },
