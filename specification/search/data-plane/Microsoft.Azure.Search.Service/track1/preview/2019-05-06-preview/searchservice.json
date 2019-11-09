@@ -1733,7 +1733,179 @@
       ],
       "x-ms-enum": {
         "name": "TokenFilterName",
-        "modelAsString": false
+        "modelAsString": false,
+        "values": [
+          {
+            "value": "arabic_normalization", 
+            "name": "ArabicNormalization", 
+            "description": "A token filter that applies the Arabic normalizer to normalize the orthography." 
+          },
+          {
+            "value": "apostrophe", 
+            "name": "Apostrophe", 
+            "description": "Strips all characters after an apostrophe (including the apostrophe itself)." 
+          },
+          {
+            "value": "asciifolding", 
+            "name": "AsciiFolding", 
+            "description": "Converts alphabetic, numeric, and symbolic Unicode characters which are not in the first 127 ASCII characters (the \"Basic Latin\" Unicode block) into their ASCII equivalents, if such equivalents exist." 
+          },
+          {
+            "value": "cjk_bigram", 
+            "name": "CjkBigram", 
+            "description": "Forms bigrams of CJK terms that are generated from StandardTokenizer." 
+          },
+          {
+            "value": "cjk_width", 
+            "name": "CjkWidth", 
+            "description": "Normalizes CJK width differences. Folds fullwidth ASCII variants into the equivalent basic Latin, and half-width Katakana variants into the equivalent Kana." 
+          },
+          {
+            "value": "classic", 
+            "name": "Classic", 
+            "description": "Removes English possessives, and dots from acronyms." 
+          },
+          {
+            "value": "common_grams",
+            "name": "CommonGram",
+            "description": "Construct bigrams for frequently occurring terms while indexing. Single terms are still indexed too, with bigrams overlaid."
+          },
+          {
+            "value": "edgeNGram_v2",
+            "name": "EdgeNGram",
+            "description": "Generates n-grams of the given size(s) starting from the front or the back of an input token."
+          },
+          {
+            "value": "elision",
+            "name": "Elision",
+            "description": "Removes elisions. For example, \"l'avion\" (the plane) will be converted to \"avion\" (plane)."
+          },
+          {
+            "value": "german_normalization",
+            "name": "GermanNormalization",
+            "description": "Normalizes German characters according to the heuristics of the German2 snowball algorithm."
+          },
+          {
+            "value": "hindi_normalization",
+            "name": "HindiNormalization",
+            "description": "Normalizes text in Hindi to remove some differences in spelling variations."
+          },
+          {
+            "value": "indic_normalization",
+            "name": "IndicNormalization",
+            "description": "Normalizes the Unicode representation of text in Indian languages."
+          },
+          {
+            "value": "keyword_repeat",
+            "name": "Emits each incoming token twice, once as keyword and once as non-keyword.",
+            "description": "KeywordRepeat"
+          },
+          {
+            "value": "kstem",
+            "name": "KStem",
+            "description": "A high-performance kstem filter for English."
+          },
+          {
+            "value": "length",
+            "name": "Length",
+            "description": "Removes words that are too long or too short."
+          },
+          {
+            "value": "limit",
+            "name": "Limit",
+            "description": "Limits the number of tokens while indexing."
+          },
+          {
+            "value": "lowercase",
+            "name": "Lowercase",
+            "description": "Normalizes token text to lower case."
+          },
+          {
+            "value": "nGram_v2",
+            "name": "NGram",
+            "description": "Generates n-grams of the given size(s)."
+          },
+          {
+            "value": "persian_normalization",
+            "name": "PersianNormalization",
+            "description": "Applies normalization for Persian."
+          },
+          {
+            "value": "phonetic",
+            "name": "Phonetic",
+            "description": "Create tokens for phonetic matches."
+          },
+          {
+            "value": "porter_stem",
+            "name": "PorterStem",
+            "description": "Uses the Porter stemming algorithm to transform the token stream."
+          },
+          {
+            "value": "reverse",
+            "name": "Reverse",
+            "description": "Reverses the token string."
+          },
+          {
+            "value": "scandinavian_normalization",
+            "name": "ScandinavianNormalization",
+            "description": "Normalizes use of the interchangeable Scandinavian characters."
+          },
+          {
+            "value": "scandinavian_folding",
+            "name": "ScandinavianFoldingNormalization",
+            "description": "Folds Scandinavian characters åÅäæÄÆ-&gt;a and öÖøØ-&gt;o. It also discriminates against use of double vowels aa, ae, ao, oe and oo, leaving just the first one."
+          },
+          {
+            "value": "shingle",
+            "name": "Shingle",
+            "description": "Creates combinations of tokens as a single token."
+          },
+          {
+            "value": "snowball",
+            "name": "Snowball",
+            "description": "A filter that stems words using a Snowball-generated stemmer."
+          },
+          {
+            "value": "sorani_normalization",
+            "name": "SoraniNormalization",
+            "description": "Normalizes the Unicode representation of Sorani text."
+          },
+          {
+            "value": "stemmer",
+            "name": "Stemmer",
+            "description": "Language specific stemming filter."
+          },
+          {
+            "value": "stopwords",
+            "name": "Stopwords",
+            "description": "Removes stop words from a token stream."
+          },
+          {
+            "value": "trim",
+            "name": "Trim",
+            "description": "Trims leading and trailing whitespace from tokens."
+          },
+          {
+            "value": "truncate",
+            "name": "Truncate",
+            "description": "Truncates the terms to a specific length."
+          },
+          {
+            "value": "unique",
+            "name": "Unique",
+            "description": "Filters out tokens with same text as the previous token."
+          },
+          {
+            "value": "uppercase",
+            "name": "Uppercase",
+            "description": "Normalizes token text to upper case."
+          },
+          {
+            "value": "word_delimiter",
+            "name": "WordDelimiter",
+            "description": "Splits words into subwords and performs optional transformations on subword groups."
+          }
+        ]
       },
       "description": "Defines the names of all token filters supported by Azure Cognitive Search.",
       "externalDocs": {
