@@ -771,7 +771,7 @@
           "type": "array",
           "readOnly": true,
           "items": {
-            "$ref": "#/definitions/RegistrationDefinition"
+            "$ref": "#/definitions/MarketplaceRegistrationDefinition"
           },
           "description": "List of marketplace registration definitions."
         },
@@ -782,6 +782,105 @@
         }
       },
       "description": "List of marketplace registration definitions."
+    },
+    "MarketplaceRegistrationDefinition": {
+      "properties": {
+        "properties": {
+          "description": "Properties of a marketplace registration definition.",
+          "$ref": "#/definitions/MarketplaceRegistrationDefinitionProperties"
+        },
+        "plan": {
+          "description": "Plan details for the managed services.",
+          "$ref": "#/definitions/Plan"
+        },
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Fully qualified path of the marketplace registration definition."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Type of the resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the marketplace registration definition."
+        }
+      },
+      "x-ms-azure-resource": true,
+      "type": "object",
+      "description": "Marketplace registration definition."
+    },
+    "MarketplaceRegistrationDefinitionProperties": {
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the marketplace registration definition."
+        },
+        "authorizations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Authorization"
+          },
+          "description": "Authorization tuple containing principal id of the user/security group or service principal and id of the build-in role."
+        },
+        "registrationDefinitionName": {
+          "type": "string",
+          "description": "Name of the marketplace registration definition."
+        },
+        "managedByTenantId": {
+          "type": "string",
+          "description": "Id of the managedBy tenant."
+        },
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Current state of the marketplace registration definition.",
+          "enum": [
+            "NotSpecified",
+            "Accepted",
+            "Running",
+            "Ready",
+            "Creating",
+            "Created",
+            "Deleting",
+            "Deleted",
+            "Canceled",
+            "Failed",
+            "Succeeded",
+            "Updating"
+          ],
+          "x-ms-enum": {
+            "name": "ProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "managedByTenantName": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Name of the managedBy tenant."
+        },
+        "offerDisplayName": {
+          "type": "string",
+          "description": "The display name of the offer."
+        },
+        "publisherDisplayName": {
+          "type": "string",
+          "description": "The display name of the publisher."
+        },
+        "planDisplayName": {
+          "type": "string",
+          "description": "The display name of the plan."
+        }
+      },
+      "required": [
+        "managedByTenantId",
+        "authorizations"
+      ],
+      "type": "object",
+      "description": "Properties of a marketplace registration definition."
     },
     "Plan": {
       "properties": {
@@ -867,6 +966,44 @@
         "roleDefinitionId": {
           "type": "string",
           "description": "The role definition identifier. This role will define all the permissions that the security group/service principal/user must have on the projected subscription. This role cannot be an owner role."
+        },
+        "principalIdDisplayName": {
+          "type": "string",
+          "description": "Principal Id display name of the security group/service principal/user that would be assigned permissions to the projected subscription"
+        },
+        "roleAssignmentType": {
+          "type": "string",
+          "enum": [
+            "Permanent",
+            "Eligible"
+          ],
+          "x-ms-enum": {
+            "name": "roleAssignmentType",
+            "modelAsString": true
+          },
+          "description": "The role assignment type to specify whether to use just in time (JIT) eligible delegation or permanent delegation (Default: Permanent)."
+        },
+        "justInTimeAccessPolicy": {
+          "type": "object",
+          "properties": {
+            "maximumActivationDuration": {
+              "type": "string",
+              "description": "The maximum just in time activation duration (Default: PT8H)."
+            },
+            "multiFactorAuthProvider": {
+              "type": "string",
+              "enum": [
+                "Azure",
+                "None"
+              ],
+              "x-ms-enum": {
+                "name": "multiFactorAuthProvider",
+                "modelAsString": true
+              },
+              "description": "The multi factor authentication provider to use for just in time activated permissions."
+            }
+          },
+          "description": "The just in time access policy."
         }
       },
       "required": [
