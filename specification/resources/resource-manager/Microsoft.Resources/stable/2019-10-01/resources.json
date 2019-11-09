@@ -4004,7 +4004,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}/providers/Microsoft.Resources/tags/default": {
+    "/{scope}/providers/Microsoft.Resources/tags/default": {
       "put": {
         "tags": [
           "Tags"
@@ -4013,41 +4013,12 @@
         "description": "Creates multiple tags.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group for the resource. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
-          },
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource to create.",
+            "description": "The scope of the resources.",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to create.",
-            "minLength": 1,
-            "maxLength": 260
           },
           {
             "name": "api-version",
@@ -4097,41 +4068,12 @@
         "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group for the resource. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
-          },
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource to create.",
+            "description": "The scope of the resources.",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to create.",
-            "minLength": 1,
-            "maxLength": 260
           },
           {
             "name": "api-version",
@@ -4176,41 +4118,12 @@
         "description": "Gets all the tags for the resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group for the resource. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
-          },
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource to create.",
+            "description": "The scope of the resources.",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to create.",
-            "minLength": 1,
-            "maxLength": 260
           },
           {
             "name": "api-version",
@@ -4251,41 +4164,12 @@
         "description": "Deletes all the tags for the resource.",
         "parameters": [
           {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "resourceGroupName",
+            "name": "scope",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the resource group for the resource. The name is case insensitive.",
-            "pattern": "^[-\\w\\._\\(\\)]+$",
-            "minLength": 1,
-            "maxLength": 90
-          },
-          {
-            "name": "resourceProviderNamespace",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The namespace of the resource provider."
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The resource type of the resource to create.",
+            "description": "The scope of the resources.",
             "x-ms-skip-url-encoding": true
-          },
-          {
-            "name": "resourceName",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The name of the resource to create.",
-            "minLength": 1,
-            "maxLength": 260
           },
           {
             "name": "api-version",
