@@ -1619,7 +1619,74 @@
       ],
       "x-ms-enum": {
         "name": "TokenizerName",
-        "modelAsString": false
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "classic",
+            "name": "Classic",
+            "description": "Grammar-based tokenizer that is suitable for processing most European-language documents."
+          },
+          {
+            "value": "edgeNGram",
+            "name": "EdgeNGram",
+            "description": "Tokenizes the input from an edge into n-grams of the given size(s)."
+          },
+          {
+            "value": "keyword_v2",
+            "name": "Keyword",
+            "description": "Emits the entire input as a single token."
+          },
+          {
+            "value": "letter",
+            "name": "Letter",
+            "description": "Divides text at non-letters."
+          },
+          {
+            "value": "lowercase",
+            "name": "Lowercase",
+            "description": "Divides text at non-letters and converts them to lower case."
+          },
+          {
+            "value": "microsoft_language_tokenizer",
+            "name": "MicrosoftLanguageTokenizer",
+            "description": "Divides text using language-specific rules."
+          },
+          {
+            "value": "microsoft_language_stemming_tokenizer",
+            "name": "MicrosoftLanguageStemmingTokenizer",
+            "description": "Divides text using language-specific rules and reduces words to their base forms."
+          },
+          {
+            "value": "nGram",
+            "name": "NGram",
+            "description": "Tokenizes the input into n-grams of the given size(s)."
+          },
+          {
+            "value": "path_hierarchy_v2",
+            "name": "PathHierarchy",
+            "description": "Tokenizer for path-like hierarchies."
+          },
+          {
+            "value": "pattern",
+            "name": "Pattern",
+            "description": "Tokenizer that uses regex pattern matching to construct distinct tokens."
+          },
+          {
+            "value": "standard_v2",
+            "name": "Standard",
+            "description": "Standard Lucene analyzer; Composed of the standard tokenizer, lowercase filter and stop filter."
+          },
+          {
+            "value": "uax_url_email",
+            "name": "UaxUrlEmail",
+            "description": "Tokenizes urls and emails as one token."
+          },
+          {
+            "value": "whitespace",
+            "name": "Whitespace",
+            "description": "Divides text at whitespace."
+          }
+        ]
       },
       "description": "Defines the names of all tokenizers supported by Azure Cognitive Search.",
       "externalDocs": {
