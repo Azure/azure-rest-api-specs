@@ -34,11 +34,6 @@ These settings apply only when `package-2019-11-01-preview` is specified on the 
 ``` yaml $(tag) == 'package-2019-11-01-preview'
 input-file:
 - Microsoft.DeploymentManager/preview/2019-11-01-preview/deploymentmanager.json
-```
-
-## Suppression
-
-``` yaml
 directive:
   - suppress: EnumInsteadOfBoolean
     reason:  The boolean properties in the specification are actually boolean values in the Deployment Manager application model.
@@ -53,6 +48,9 @@ directive:
     from: deploymentmanager.json
   - suppress: TrackedResourceListByResourceGroup
     reason: Not available at this time.
+    from: deploymentmanager.json
+  - suppress: PageableOperation
+    reason: List operations returns a static list of supported operations for each API version and does not need paging.
     from: deploymentmanager.json
   - suppress: TrackedResourceGetOperation
     reason: The rollout resource has a get operation. The request and response types are separated for clarity.
@@ -72,11 +70,6 @@ These settings apply only when `package-2018-09-01-preview` is specified on the 
 ``` yaml $(tag) == 'package-2018-09-01-preview'
 input-file:
 - Microsoft.DeploymentManager/preview/2018-09-01-preview/deploymentmanager.json
-```
-
-## Suppression
-
-``` yaml
 directive:
   - suppress: EnumInsteadOfBoolean
     reason:  The boolean properties in the specification are actually boolean values in the Deployment Manager application model.
@@ -113,6 +106,7 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
+  - repo: azure-sdk-for-net
   - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
@@ -152,7 +146,7 @@ python:
   payload-flattening-threshold: 2
   namespace: azure.mgmt.deploymentmanager
   package-name: azure-mgmt-deploymentmanager
-  package-version: 0.9.0
+  package-version: 0.9.1
   clear-output-folder: true
   override-client-name: DeploymentManagerClient
 ```
