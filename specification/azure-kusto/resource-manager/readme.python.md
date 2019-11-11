@@ -18,10 +18,10 @@ python:
 ``` yaml $(python) && $(python-mode) == 'update'
 python:
   no-namespace-folders: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-kusto/azure/mgmt/kusto
+  output-folder: $(python-sdks-folder)/kusto/azure-mgmt-kusto/azure/mgmt/kusto
 ```
 ``` yaml $(python) && $(python-mode) == 'create'
 python:
   basic-setup-py: true
-  output-folder: $(python-sdks-folder)/azure-mgmt-kusto
+  output-folder: $(python-sdks-folder)/kusto/azure-mgmt-kusto
 ```
