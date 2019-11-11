@@ -365,13 +365,6 @@
                     "iso6391Name" : "es",
                     "score" : 1
                   } ]
-                }, {
-                  "id" : "4",
-                  "detectedLanguages" : [ {
-                    "name" : "(Unknown)",
-                    "iso6391Name" : "(Unknown)",
-                    "score" : 0
-                  } ]
                 } ],
                 "errors" : [ ],
                 "modelVersion": "2019-10-01"
@@ -601,6 +594,12 @@
       "properties": {
         "code": {
           "type": "string",
+          "enum":[  
+            "invalidRequest",
+            "invalidArgument",
+            "internalServerError",
+            "serviceUnavailable"
+          ],        
           "description" : "Error code."
         },
         "message": {
@@ -633,6 +632,17 @@
       "properties": {
         "code": {
           "type": "string",
+          "enum": [
+            "invalidParameterValue",
+            "invalidRequestBodyFormat",
+            "emptyRequest",
+            "missingInputRecords",
+            "invalidDocument",
+            "modelVersionIncorrect",
+            "invalidDocumentBatch",
+            "unsupportedLanguageCode",
+            "invalidCountryHint"
+          ],
           "description" : "Error code."
         },
         "message": {
