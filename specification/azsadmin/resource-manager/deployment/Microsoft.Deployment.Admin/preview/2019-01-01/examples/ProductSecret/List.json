@@ -1,0 +1,92 @@
+{
+  "parameters": {
+    "subscriptionId": "20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "location": "global",
+    "api-version": "2019-01-01",
+    "productId": "Microsoft.IotHubPreview.1.0.2",
+    "secretValue": "sslCert"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/be8b2e19-7f92-4644-b808-a18283aebb01/providers/Microsoft.Deployment.Admin/locations/global/productPackages/Microsoft.NullProvider.1.1/secrets/AdHoc",
+            "name": "global/Microsoft.NullProvider.1.1/AdHoc",
+            "type": "Microsoft.Deployment.Admin/locations/productPackages/secrets",
+            "properties": {
+              "secretKind": "AdHoc",
+              "description": "This is an ad-hoc secret.",
+              "expiresAfter": "P365D",
+              "secretState": {
+                "status": "NotUploaded",
+                "rotationStatus": "None"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/be8b2e19-7f92-4644-b808-a18283aebb01/providers/Microsoft.Deployment.Admin/locations/global/productPackages/Microsoft.NullProvider.1.1/secrets/TlsCertificate",
+            "name": "global/Microsoft.NullProvider.1.1/TlsCertificate",
+            "type": "Microsoft.Deployment.Admin/locations/productPackages/secrets",
+            "properties": {
+              "secretKind": "Certificate",
+              "description": "This is a TLS certificate.",
+              "expiresAfter": "P365D",
+              "secretDescriptor": {
+                "subject": "CN=NullProviderTLS",
+                "keyLength": 4096,
+                "alternativeDnsNames": [
+                  "noterp.redmond.ext-n22r1708.masd.stbtest.microsoft.com"
+                ]
+              },
+              "secretState": {
+                "status": "NotUploaded",
+                "rotationStatus": "None"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/be8b2e19-7f92-4644-b808-a18283aebb01/providers/Microsoft.Deployment.Admin/locations/global/productPackages/Microsoft.NullProvider.1.1/secrets/ExternalPassword",
+            "name": "global/Microsoft.NullProvider.1.1/ExternalPassword",
+            "type": "Microsoft.Deployment.Admin/locations/productPackages/secrets",
+            "properties": {
+              "secretKind": "Password",
+              "description": "This is an external password.",
+              "expiresAfter": "P365D",
+              "secretDescriptor": {
+                "passwordLength": 10,
+                "allowedCharacters": "0123456789ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz",
+                "passwordValidationRegex": "^(?=.*\\d)(?=.*[A-Z])(?=.*[a-z]).*$"
+              },
+              "secretState": {
+                "status": "NotUploaded",
+                "rotationStatus": "None"
+              },
+              "provisioningState": "Succeeded"
+            }
+          },
+          {
+            "id": "/subscriptions/be8b2e19-7f92-4644-b808-a18283aebb01/providers/Microsoft.Deployment.Admin/locations/global/productPackages/Microsoft.NullProvider.1.1/secrets/ExternalSymmetricKey",
+            "name": "global/Microsoft.NullProvider.1.1/ExternalSymmetricKey",
+            "type": "Microsoft.Deployment.Admin/locations/productPackages/secrets",
+            "properties": {
+              "secretKind": "SymmetricKey",
+              "description": "This is an external symmetric key.",
+              "expiresAfter": "P365D",
+              "secretDescriptor": {
+                "keyLength": 128
+              },
+              "secretState": {
+                "status": "NotUploaded",
+                "rotationStatus": "None"
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  }
+}
