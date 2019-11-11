@@ -201,6 +201,10 @@ input-file:
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
 
 ```
 
