@@ -1398,6 +1398,11 @@
           "type": "boolean",
           "description": "Specifies whether the non-ssl Redis server port (6379) is enabled."
         },
+        "replicasPerMaster": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of replicas to be created per master."
+        },
         "tenantSettings": {
           "type": "object",
           "additionalProperties": {
@@ -1529,6 +1534,14 @@
             "$ref": "#/definitions/RedisLinkedServer"
           },
           "description": "List of the linked servers associated with the cache"
+        },
+        "instances": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RedisInstanceDetails"
+          },
+          "description": "List of the Redis instances associated with the cache"
         }
       },
       "allOf": [
@@ -1758,6 +1771,34 @@
         }
       ],
       "description": "A single Redis item in List or Get Operation."
+    },
+    "RedisInstanceDetails": {
+      "properties": {
+        "sslPort": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis instance SSL port."
+        },
+        "nonSslPort": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "Redis instance Non-SSL port."
+        },
+        "zone": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Availability zone where instance is located."
+        },
+        "shardId": {
+          "readOnly": true,
+          "type": "integer",
+          "format": "int32",
+          "description": "If clustering is enabled, the Shard ID of Redis Instance"
+        }
+      },      
+      "description": "Details of single instance of redis."
     },
     "RedisListResult": {
       "properties": {

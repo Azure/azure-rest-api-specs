@@ -17,6 +17,7 @@
         },
         "enableNonSslPort": true,
         "shardCount": 2,
+        "replicasPerMaster": 2,
         "redisConfiguration": {
           "maxmemory-policy": "allkeys-lru"
         },
@@ -50,13 +51,52 @@
             "capacity": 1
           },
           "enableNonSslPort": false,
+          "replicasPerMaster": 2,
           "redisConfiguration": {
             "maxmemory-policy": "allkeys-lru"
           },
           "hostName": "cache1.redis.cache.windows.net",
           "port": 6379,
           "sslPort": 6380,
-          "minimumTlsVersion": "1.2"
+          "minimumTlsVersion": "1.2",
+          "instances": [
+            {
+              "sslPort": 15000,
+              "nonSslPort": 13000,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15001,
+              "nonSslPort": 13001,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15002,
+              "nonSslPort": 13002,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15003,
+              "nonSslPort": 13003,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15004,
+              "nonSslPort": 13004,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15005,
+              "nonSslPort": 13005,
+              "zone": "1",
+              "shardId": 1
+            }
+          ]
         }
       }
     },
@@ -83,6 +123,7 @@
             "capacity": 1
           },
           "enableNonSslPort": false,
+          "replicasPerMaster": 2,
           "redisConfiguration": {
             "maxclients": "1000",
             "maxmemory-reserved": "50",
@@ -91,7 +132,45 @@
           "hostName": "cache1.redis.cache.windows.net",
           "port": 6379,
           "sslPort": 6380,
-          "minimumTlsVersion": "1.2"
+          "minimumTlsVersion": "1.2",
+          "instances": [
+            {
+              "sslPort": 15000,
+              "nonSslPort": 13000,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15001,
+              "nonSslPort": 13001,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15002,
+              "nonSslPort": 13002,
+              "zone": "1",
+              "shardId": 0
+            },
+            {
+              "sslPort": 15003,
+              "nonSslPort": 13003,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15004,
+              "nonSslPort": 13004,
+              "zone": "1",
+              "shardId": 1
+            },
+            {
+              "sslPort": 15005,
+              "nonSslPort": 13005,
+              "zone": "1",
+              "shardId": 1
+            }
+          ]
         }
       }
     }
