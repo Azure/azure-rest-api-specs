@@ -5134,39 +5134,6 @@
       },
       "description": "Text analytics entity recognition."
     },
-    "NamedEntityRecognitionSkill": {
-      "x-ms-discriminator-value": "#Microsoft.Skills.Text.NamedEntityRecognitionSkill",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Skill"
-        }
-      ],
-      "properties": {
-        "categories": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NamedEntityCategory",
-            "x-nullable": false
-          },
-          "description": "A list of named entity categories."
-        },
-        "defaultLanguageCode": {
-          "$ref": "#/definitions/NamedEntityRecognitionSkillLanguage",
-          "description": "A value indicating which language code to use. Default is en."
-        },
-        "minimumPrecision": {
-          "type": "number",
-          "format": "double",
-          "x-nullable": true,
-          "description": "A value between 0 and 1 to indicate the confidence of the results."
-        }
-      },
-      "externalDocs": {
-        "url": "https://docs.microsoft.com/azure/search/cognitive-search-skill-named-entity-recognition"
-      },
-      "description": "Text analytics named entity recognition. This skill is deprecated in favor of EntityRecognitionSkill.",
-      "x-ms-external": true
-    },
     "SentimentSkill": {
       "x-ms-discriminator-value": "#Microsoft.Skills.Text.SentimentSkill",
       "allOf": [
@@ -5893,30 +5860,6 @@
         ]
       },
       "description": "The language codes supported for input text by EntityRecognitionSkill."
-    },
-    "NamedEntityRecognitionSkillLanguage": {
-      "type": "string",
-      "enum": [
-        "ar",
-        "cs",
-        "da",
-        "de",
-        "en",
-        "es",
-        "fi",
-        "fr",
-        "he",
-        "hu",
-        "it",
-        "ko",
-        "pt-br",
-        "pt"
-      ],
-      "x-ms-enum": {
-        "name": "NamedEntityRecognitionSkillLanguage",
-        "modelAsString": false
-      },
-      "description": "The language codes supported for input text by NamedEntityRecognitionSkill."
     },
     "TextTranslationSkillLanguage": {
       "type": "string",
