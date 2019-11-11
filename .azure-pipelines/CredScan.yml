@@ -1,0 +1,8 @@
+jobs:
+- job: "CredScan"
+  pool:
+    vmImage: 'windows-2019'
+  steps:
+  - task: CredScan@2
+    inputs:
+      toolMajorVersion: 'V2' 
