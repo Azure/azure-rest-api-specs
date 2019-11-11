@@ -4,7 +4,7 @@ These settings apply only when `--cli` is specified on the command line.
 
 ``` yaml $(cli)
 cli:
-  cli-name: internet-analyzer
+  group-name: internet-analyzer
   namespace: azure.mgmt.frontdoor
   package-name: azure-mgmt-frontdoor
   debug: false
@@ -16,6 +16,12 @@ cli:
     "^.*[/]networkexperimentprofiles[/].*[/]experiments([/][^/]*)?$": "internet-analyzer test"
     "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]latencyscorecard$": "internet-analyzer scorecard latency"
     "^.*[/]networkexperimentprofiles[/].*[/]experiments[/].*[/]timeseries$": "internet-analyzer scorecard timeseries"
+
+    # renaming suggested command names
+    "^network-experiment-profile$": "* profile"
+    "^network-experiment-profile preconfigured-endpoint$": "* profile preconfigured-endpoint"
+    "^network-experiment-profile experiment$": "* test"
+
   flatten-all: true
   option-override:
     "resource_state":
@@ -29,7 +35,7 @@ cli:
     "^.*$":
       doc-replace:
         "network experiment": "internet analyzer"
-  test-setup:
+  test-scenario:
     - name: Creates an NetworkExperiment Profile in a Resource Group
       title: Creates an Internet Analyzer Profile in a Resource Group
     - name: Creates an Experiment
