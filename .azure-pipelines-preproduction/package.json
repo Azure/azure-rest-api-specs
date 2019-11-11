@@ -10,20 +10,22 @@
   "description": "Tests for Azure REST API Specifications",
   "license": "MIT",
   "devDependencies": {
-    "@azure/avocado": "^0.6.0",
-    "@azure/rest-api-specs-scripts": "^0.5.1",
+    "@azure/avocado": "^0.6.2",
+    "@azure/rest-api-specs-scripts": "^0.5.7",
     "@ts-common/commonmark-to-markdown": "^1.2.0",
     "@ts-common/fs": "0.2.0",
     "@ts-common/iterator": "^0.3.6",
     "@types/js-yaml": "^3.12.1",
     "@types/mocha": "^5.2.6",
-    "cspell": "^4.0.12",
+    "@types/prettier": "^1.18.3",
+    "cspell": "^4.0.30",
     "js-yaml": "^3.13.1",
     "json-schema-ref-parser": "^6.1.0",
     "mocha": "*",
     "ts-node": "^8.1.0",
     "tslib": "^1.10.0",
-    "typescript": "3.5.3"
+    "typescript": "3.5.3",
+    "prettier": "^1.18.2"
   },
   "homepage": "https://github.com/azure/azure-rest-api-specs",
   "repository": {
@@ -36,6 +38,8 @@
   "scripts": {
     "test": "tsc && mocha -t 500000 --reporter min",
     "spellcheck": "ts-node ./scripts/spellcheck.ts",
+    "prettier-check": "tsc && ts-node ./scripts/prettier-check.ts",
+    "prettier": "prettier",
     "tsc": "tsc",
     "multiapi": "ts-node ./scripts/multiapi.ts"
   }
