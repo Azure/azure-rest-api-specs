@@ -23,6 +23,7 @@ To see additional help and options, run:
 These are the global settings for SearchServiceClient.
 
 ``` yaml
+opt-in-extensible-enums: true
 openapi-type: data-plane
 tag: package-2019-05
 ```
@@ -105,7 +106,6 @@ These settings apply only when `--tag=track1-package-2019-05-preview` is specifi
 It is meant to be used for generating Track 1 .NET SDK only!
 
 ``` yaml $(tag) == 'track1-package-2019-05-preview'
-opt-in-extensible-enums: true
 input-file:
 - track1/preview/2019-05-06-preview/searchservice.json
 ```
