@@ -58,6 +58,42 @@ input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
 ```
 
+### Tag: package-2014-04
+
+These settings apply only when `--tag=package-2014-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2014-04'
+input-file:
+- Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+```
+
+### Tag: package-2015-11
+
+These settings apply only when `--tag=package-2015-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-11'
+input-file:
+- Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+```
+
+### Tag: package-2016-03-19
+
+These settings apply only when `--tag=package-2016-03-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-19'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+```
+
+### Tag: package-2016-03-31
+
+These settings apply only when `--tag=package-2016-03-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-31'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
+```
+
 ## Suppression
 ``` yaml
 directive:
