@@ -4010,7 +4010,7 @@
           "Tags"
         ],
         "operationId": "Tags_ResourceCreate",
-        "description": "Creates multiple tags.",
+        "description": "Create or Replace existing tags with pass-in tags.",
         "parameters": [
           {
             "name": "scope",
@@ -4039,13 +4039,16 @@
         ],
         "responses": {
           "200": {
-            "description": "OK - Returns updated tag information about the resource.",
+            "description": "OK - Returns added tag information about the resource.",
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
           },
           "400": {
-            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4057,6 +4060,9 @@
         "x-ms-examples": {
           "Creates multiple tags for a tracked resource.": {
             "$ref": "./examples/PutTagsResource.json"
+          },
+          "Create multiple tags for a subscription.": {
+            "$ref": "./examples/PutTagsSubscription.json"
           }
         }
       },
@@ -4100,7 +4106,10 @@
             }
           },
           "400": {
-            "description": "Bad Request - Invalid Tags Definition | Invalid Tags Definition Properties."
+            "description": "Bad Request"
+          },
+          "404": {
+            "description": "Not Found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4140,8 +4149,11 @@
               "$ref": "#/definitions/TagResponse"
             }
           },
+          "400": {
+            "description": "Bad Request"
+          },
           "404": {
-            "description": "Not Found - Resource Group Not Found."
+            "description": "Not Found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -4153,6 +4165,9 @@
         "x-ms-examples": {
           "Gets all the tags for a tracked resource.": {
             "$ref": "./examples/GetTagsResource.json"
+          },
+          "Gets all the tags for a subscription.": {
+            "$ref": "./examples/GetTagsSubscription.json"
           }
         }
       },
@@ -4183,182 +4198,11 @@
           "200": {
             "description": "OK"
           },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/tags/default": {
-      "put": {
-        "tags": [
-          "Tags"
-        ],
-        "operationId": "Tags_SubscriptionCreate",
-        "description": "Creates multiple tags for subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TagRequest"
-            },
-            "description": "Parameters for creating multiple tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns updated tag information about the subscription.",
-            "schema": {
-              "$ref": "#/definitions/TagResponse"
-            }
-          },
           "400": {
-            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
+            "description": "Bad Request"
           },
           "404": {
-            "description": "Not Found - Subscription Not Found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Create multiple tags for a subscription.": {
-            "$ref": "./examples/PutTagsSubscription.json"
-          }
-        }
-      },
-      "patch": {
-        "tags": [
-          "Tags"
-        ],
-        "operationId": "Tags_SubscriptionUpdate",
-        "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/TagPatchRequest"
-            },
-            "description": "Parameters for creating multiple tags."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns updated tag information about the subscription.",
-            "schema": {
-              "$ref": "#/definitions/TagResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request: Invalid tags definition | Invalid tags definition properties | Invalid tag count | Tags size limit exceeded."
-          },
-          "404": {
-            "description": "Not Found - Subscription Not Found."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        }
-      },
-      "get": {
-        "tags": [
-          "Tags"
-        ],
-        "operationId": "Tags_SubscriptionGet",
-        "description": "Gets all the tags for the subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK - Returns tag information about the subscription.",
-            "schema": {
-              "$ref": "#/definitions/TagResponse"
-            }
-          },
-          "400": {
-            "description": "Bad Request: Invalid API version for subscription tags | Invalid Subscription."
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets all the tags for a subscription.": {
-            "$ref": "./examples/GetTagsSubscription.json"
-          }
-        }
-      },
-      "delete": {
-        "tags": [
-          "Tags"
-        ],
-        "operationId": "Tags_SubscriptionDelete",
-        "description": "Deletes all the tags for the subscription.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK"
-          },
-          "404": {
-            "description": "Not Found - Subscription Not Found."
+            "description": "Not Found"
           },
           "default": {
             "description": "Error response describing why the operation failed.",
