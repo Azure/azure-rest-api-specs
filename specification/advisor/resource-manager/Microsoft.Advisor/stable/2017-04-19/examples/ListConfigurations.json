@@ -14,7 +14,20 @@
             "name": "configurationName",
             "properties": {
               "low_cpu_threshold": "5",
-              "exclude": false
+              "exclude": false,
+              "digests": [
+                {
+                  "actionGroupResourceId": "/subscriptions/subscriptionId/resourceGroups/resourceGroup/providers/microsoft.insights/actionGroups/actionGroupName",
+                  "frequency": "P30D",
+                  "categories": [
+                    "HighAvailability",
+                    "Security",
+                    "Performance",
+                    "Cost",
+                    "OperationalExcellence"
+                  ]
+                }
+              ]
             }
           }
         ],
