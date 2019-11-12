@@ -5,12 +5,12 @@
     "title": "AzureBridgeAdminClient",
     "description": "AzureBridge Admin Client."
   },
-  "host": "adminmanagement.local.azurestack.external",
+  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
   "paths": {
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products": {
       "get": {
         "x-ms-examples": {
           "Return product name.": {
@@ -55,7 +55,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}": {
       "get": {
         "x-ms-examples": {
           "Return product name.": {
@@ -103,7 +103,7 @@
         ]
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroup}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}/download": {
+    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.AzureBridge.Admin/activations/{activationName}/products/{productName}/download": {
       "post": {
         "x-ms-examples": {
           "Return product name.": {
