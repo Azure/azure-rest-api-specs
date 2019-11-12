@@ -627,6 +627,16 @@
               "$ref": "#/definitions/UpdateKbContentsDTO"
             }
           ]
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. The value set during KB creation will be used if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction": {
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
         }
       }
     },
@@ -879,6 +889,16 @@
           "items": {
             "$ref": "#/definitions/FileDTO"
           }
+        },
+        "enableHierarchicalExtraction": {
+          "type": "boolean",
+          "description": "Enable hierarchical extraction of Q-A from files and urls. Value to be considered False if this field is not present."
+        },
+        "defaultAnswerUsedForExtraction":{
+          "type": "string",
+          "description": "Text string to be used as the answer in any Q-A which has no extracted answer from the document but has a hierarchy. Required when EnableHierarchicalExtraction field is set to True.",
+          "maxLength": 300,
+          "minLength": 1
         }
       }
     },
