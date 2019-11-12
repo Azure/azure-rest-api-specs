@@ -384,6 +384,14 @@ input-file:
 - Microsoft.Resources/stable/2016-09-01/links.json
 ```
 
+### Tag: package-managedapplications-2019-07
+These settings apply only when `--tag=package-managedapplications-2019-07` is specified on the command line.
+
+``` yaml $(tag) == 'package-managedapplications-2019-07'
+input-file:
+- Microsoft.Solutions/stable/2019-07-01/managedapplications.json
+```
+
 ### Tag: package-managedapplications-2018-06
 
 These settings apply only when `--tag=package-managedapplications-2018-06` is specified on the command line.
