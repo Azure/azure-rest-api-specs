@@ -6,12 +6,12 @@ trigger:
 
 jobs:
 - job: "SDKAutomation"
-  displayName: SDK
+  displayName: SDK Automation
   pool:
-    vmImage: 'Ubuntu 18.04'
+    vmImage: 'Ubuntu 16.04'
   container:
-    image: azopenapi.azurecr.io/openapi/sdk-automation:prod
-    endpoint: azopenapi-registry
+    image: sdkautomation.azurecr.io/openapi-sdk-automation:ppe
+    endpoint: sdkautomationv2-registry
   timeoutInMinutes: 180
 
   variables:
