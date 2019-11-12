@@ -49,6 +49,16 @@ input-file:
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
+### Tag: package-2019-08-preview-only
+
+These settings apply only when `--tag=package-2019-08-preview-only` is specified on the command line.
+
+``` yaml $(tag) == 'package-2019-08-preview-only'
+input-file:
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
+- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
+```
+
 ### Tag: package-2015-04
 
 These settings apply only when `--tag=package-2015-04` is specified on the command line.
