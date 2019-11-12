@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-managementgroups"
   output-folder: "$(typescript-sdks-folder)/sdk/managementgroups/arm-managementgroups"
+  clear-output-folder: true
   generate-metadata: true
 ```

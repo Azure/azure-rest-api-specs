@@ -15,4 +15,5 @@ typescript:
 typescript:
   package-name: "@azure/arm-botservice"
   output-folder: "$(typescript-sdks-folder)/sdk/botservice/arm-botservice"
+  clear-output-folder: true
 ```

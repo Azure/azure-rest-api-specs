@@ -5,7 +5,7 @@
     "version": "3.0-preview"
   },
   "x-ms-parameterized-host": {
-    "hostTemplate": "{Endpoint}/luis/api/v3.0-preview",
+    "hostTemplate": "{Endpoint}/luis/authoring/v3.0-preview",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -26,96 +26,6 @@
     }
   ],
   "paths": {
-    "/apps/{appId}/versions/{versionId}/patterns": {
-      "post": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Creates a new pattern feature in a version of the application.",
-        "operationId": "Features_CreatePatternFeature",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternCreateObject",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatternCreateObject"
-            },
-            "description": "The Name and Pattern of the feature."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "responses": {
-          "201": {
-            "description": "The ID of the created feature.",
-            "schema": {
-              "$ref": "#/definitions/FeatureIDResponse"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Create Pattern Feature request": {
-            "$ref": "./examples/features/SuccessfulCreatePatternFeatureRequest.json"
-          }
-        }
-      },
-      "get": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets all the pattern features.",
-        "operationId": "Features_ListApplicationVersionPatternFeatures",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "$ref": "#/parameters/SkipInPath"
-          },
-          {
-            "$ref": "#/parameters/TakeInPath"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "A list of pattern features.",
-            "schema": {
-              "$ref": "#/definitions/PatternFeatureInfoList"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Application Version Pattern Features request": {
-            "$ref": "./examples/features/SuccessfulGetApplicationVersionPatternFeaturesRequest.json"
-          }
-        }
-      }
-    },
     "/apps/{appId}/versions/{versionId}/phraselists": {
       "post": {
         "description": "Creates a new phraselist feature in a version of the application.",
@@ -242,146 +152,6 @@
         "x-ms-examples": {
           "Successful Get Application Version Features request": {
             "$ref": "./examples/features/SuccessfulGetApplicationVersionFeaturesRequest.json"
-          }
-        }
-      }
-    },
-    "/apps/{appId}/versions/{versionId}/patterns/{patternId}": {
-      "get": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Gets the specified pattern feature's info in a version of the application.",
-        "operationId": "Features_GetPatternFeatureInfo",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternId",
-            "in": "path",
-            "description": "The pattern feature ID.",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The pattern feature info.",
-            "schema": {
-              "$ref": "#/definitions/PatternFeatureInfo"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Get Pattern Feature Info request": {
-            "$ref": "./examples/features/SuccessfulGetPatternFeatureInfoRequest.json"
-          }
-        }
-      },
-      "put": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Updates the pattern, the name and the state of the pattern feature in a version of the application.",
-        "operationId": "Features_UpdatePatternFeature",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternId",
-            "in": "path",
-            "description": "The pattern feature ID.",
-            "required": true,
-            "type": "integer"
-          },
-          {
-            "name": "patternUpdateObject",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PatternUpdateObject"
-            },
-            "description": "The new values for: - Just a boolean called IsActive, in which case the status of the feature will be changed. - Name, Pattern and a boolean called IsActive to update the feature."
-          }
-        ],
-        "consumes": [
-          "application/json"
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Successful Update Pattern Feature Info request": {
-            "$ref": "./examples/features/SuccessfulUpdatePatternFeatureInfoRequest.json"
-          }
-        }
-      },
-      "delete": {
-        "description": "[DEPRECATED NOTICE: This operation will soon be removed] Deletes a pattern feature in a version of the application.",
-        "operationId": "Features_DeletePatternFeature",
-        "deprecated": true,
-        "parameters": [
-          {
-            "$ref": "#/parameters/AppIdInPath"
-          },
-          {
-            "$ref": "#/parameters/VersionIdInPath"
-          },
-          {
-            "name": "patternId",
-            "in": "path",
-            "description": "The pattern feature ID.",
-            "required": true,
-            "type": "integer"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successful operation.",
-            "schema": {
-              "$ref": "#/definitions/OperationStatus"
-            }
-          },
-          "default": {
-            "description": "Error Response.",
-            "schema": {
-              "$ref": "#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "produces": [
-          "application/json"
-        ],
-        "x-ms-examples": {
-          "Successful Delete Pattern Feature Info request": {
-            "$ref": "./examples/features/SuccessfulDeletePatternFeatureInfoRequest.json"
           }
         }
       }
@@ -1542,6 +1312,372 @@
         "x-ms-examples": {
           "Successful Update Entity Extractor request": {
             "$ref": "./examples/model/SuccessfulUpdateEntityExtractorRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/intents/{intentId}/features": {
+      "post": {
+        "description": "Adds a new feature relation to be used by the intent in a version of the application.",
+        "operationId": "Features_AddIntentFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationCreateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A Feature relation information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Add Feature Relation request": {
+            "$ref": "./examples/model/SuccessfulAddIntentFeatureRelationRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the information of the features used by the intent in a version of the application.",
+        "operationId": "Model_GetIntentFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of feature information objects for the intent.",
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Features information request": {
+            "$ref": "./examples/model/SuccessfulGetIntentFeaturesInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the information of the features used by the intent in a version of the application.",
+        "operationId": "Model_ReplaceIntentFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationsUpdateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            },
+            "description": "A list of feature information objects containing the new feature relations."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Replace Features request": {
+            "$ref": "./examples/model/SuccessfulReplaceIntentFeaturesRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a relation from the feature relations used by the intent in a version of the application.",
+        "operationId": "Model_DeleteIntentFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/IntentIdInPath"
+          },
+          {
+            "name": "featureRelationDeleteObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A feature information object containing the feature relation to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Delete feature relation request": {
+            "$ref": "./examples/model/SuccessfulDeleteIntentFeatureRelationRequest.json"
+          }
+        }
+      }
+    },
+    "/apps/{appId}/versions/{versionId}/entities/{entityId}/features": {
+      "post": {
+        "description": "Adds a new feature relation to be used by the entity in a version of the application.",
+        "operationId": "Features_AddEntityFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          },
+          {
+            "name": "featureRelationCreateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A Feature relation information object."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Add Feature Relation request": {
+            "$ref": "./examples/model/SuccessfulAddEntityFeatureRelationRequest.json"
+          }
+        }
+      },
+      "get": {
+        "description": "Gets the information of the features used by the entity in a version of the application.",
+        "operationId": "Model_GetEntityFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "A list of feature information objects for the entity.",
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Get Features information request": {
+            "$ref": "./examples/model/SuccessfulGetEntityFeaturesInfoRequest.json"
+          }
+        }
+      },
+      "put": {
+        "description": "Updates the information of the features used by the entity in a version of the application.",
+        "operationId": "Model_ReplaceEntityFeatures",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          },
+          {
+            "name": "featureRelationsUpdateObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FeaturesPerModelResponseObject"
+            },
+            "description": "A list of feature information objects containing the new feature relations."
+          }
+        ],
+        "consumes": [
+          "application/json"
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Replace Features request": {
+            "$ref": "./examples/model/SuccessfulReplaceEntityFeaturesRequest.json"
+          }
+        }
+      },
+      "delete": {
+        "description": "Deletes a relation from the feature relations used by the entity in a version of the application.",
+        "operationId": "Model_DeleteEntityFeature",
+        "parameters": [
+          {
+            "$ref": "#/parameters/AppIdInPath"
+          },
+          {
+            "$ref": "#/parameters/VersionIdInPath"
+          },
+          {
+            "$ref": "#/parameters/EntityIdInPath"
+          },
+          {
+            "name": "featureRelationDeleteObject",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ModelFeatureInformation"
+            },
+            "description": "A feature information object containing the feature relation to delete."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successful operation.",
+            "schema": {
+              "$ref": "#/definitions/OperationStatus"
+            }
+          },
+          "default": {
+            "description": "Error Response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Successful Delete feature relation request": {
+            "$ref": "./examples/model/SuccessfulDeleteEntityFeatureRelationRequest.json"
           }
         }
       }
@@ -7995,6 +8131,11 @@
           "description": "An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.",
           "default": true,
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -8070,25 +8211,6 @@
         }
       }
     },
-    "PatternUpdateObject": {
-      "description": "Object model for updating an existing Pattern feature.",
-      "type": "object",
-      "properties": {
-        "pattern": {
-          "description": "The Regular Expression to match.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the feature.",
-          "type": "string"
-        },
-        "isActive": {
-          "description": "Indicates if the Pattern feature is enabled.",
-          "default": true,
-          "type": "boolean"
-        }
-      }
-    },
     "ClosedList": {
       "description": "Exported Model - A list entity.",
       "type": "object",
@@ -8146,6 +8268,11 @@
         "mode": {
           "description": "An interchangeable phrase list feature serves as a list of synonyms for training. A non-exchangeable phrase list serves as separate features for training. So, if your non-interchangeable phrase list contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-interchangeable phrase list as an additional bag of words to add to LUIS existing vocabulary features. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t.  Default value is true.",
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -8155,20 +8282,6 @@
       "properties": {
         "name": {
           "description": "Name of the new entity extractor.",
-          "type": "string"
-        }
-      }
-    },
-    "PatternCreateObject": {
-      "description": "Object model for creating a Pattern feature.",
-      "type": "object",
-      "properties": {
-        "pattern": {
-          "description": "The Regular Expression to match.",
-          "type": "string"
-        },
-        "name": {
-          "description": "Name of the feature.",
           "type": "string"
         }
       }
@@ -8387,6 +8500,11 @@
           "description": "An exchangeable phrase list feature are serves as single feature to the LUIS underlying training algorithm. It is used as a lexicon lookup feature where its value is 1 if the lexicon contains a given word or 0 if it doesn’t. Think of an exchangeable as a synonyms list. A non-exchangeable phrase list feature has all the phrases in the list serve as separate features to the underlying training algorithm. So, if you your phrase list feature contains 5 phrases, they will be mapped to 5 separate features. You can think of the non-exchangeable phrase list feature as an additional bag of words that you are willing to add to LUIS existing vocabulary features. Think of a non-exchangeable as set of different words. Default value is true.",
           "default": true,
           "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the Phraselist is enabled for all models in the application.",
+          "default": true,
+          "type": "boolean"
         }
       }
     },
@@ -8401,6 +8519,31 @@
         }
       }
     },
+    "JsonChild": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "instanceOf": {
+          "type": "string"
+        },
+        "children": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JsonChild"
+          },
+          "type": "array"
+        },
+        "features": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JsonModelFeatureInformation"
+          },
+          "type": "array"
+        }
+      }
+    },
     "HierarchicalModel": {
       "type": "object",
       "properties": {
@@ -8409,19 +8552,27 @@
         },
         "children": {
           "items": {
-            "type": "string"
+            "type": "object",
+            "$ref": "#/definitions/JsonChild"
           },
           "type": "array"
         },
-        "inherits": {
-          "type": "object",
-          "$ref": "#/definitions/PrebuiltDomainObject"
+        "features": {
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/JsonModelFeatureInformation"
+          },
+          "type": "array"
         },
         "roles": {
           "type": "array",
           "items": {
             "type": "string"
           }
+        },
+        "inherits": {
+          "type": "object",
+          "$ref": "#/definitions/PrebuiltDomainObject"
         }
       }
     },
@@ -8493,6 +8644,14 @@
           },
           "type": "array"
         },
+        "hierarchicals": {
+          "description": "List of hierarchical entities.",
+          "items": {
+            "type": "object",
+            "$ref": "#/definitions/HierarchicalModel"
+          },
+          "type": "array"
+        },
         "patternAnyEntities": {
           "description": "List of Pattern.Any entities.",
           "items": {
@@ -8525,7 +8684,7 @@
           },
           "type": "array"
         },
-        "model_features": {
+        "phraselists": {
           "description": "List of model features.",
           "items": {
             "type": "object",
@@ -9212,6 +9371,10 @@
         },
         "isActive": {
           "description": "Indicates if the feature is enabled.",
+          "type": "boolean"
+        },
+        "enabledForAllModels": {
+          "description": "Indicates if the feature is enabled for all models in the application.",
           "type": "boolean"
         }
       }
@@ -10022,6 +10185,41 @@
         }
       }
     },
+    "FeaturesPerModelResponseObject": {
+      "description": "A list of feature information objects per model.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/ModelFeatureInformation"
+      }
+    },
+    "ModelFeatureInformation": {
+      "description": "An object containing the model feature information either the model name or feature name.",
+      "type": "object",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used."
+        },
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature used."
+        }
+      }
+    },
+    "JsonModelFeatureInformation": {
+      "description": "An object containing the model feature information either the model name or feature name.",
+      "type": "object",
+      "properties": {
+        "modelName": {
+          "type": "string",
+          "description": "The name of the model used."
+        },
+        "featureName": {
+          "type": "string",
+          "description": "The name of the feature used."
+        }
+      }
+    },
     "PatternAny": {
       "description": "Pattern.Any Entity Extractor.",
       "type": "object",
@@ -10175,6 +10373,15 @@
       "name": "intentId",
       "in": "path",
       "description": "The intent classifier ID.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "EntityIdInPath": {
+      "name": "entityId",
+      "in": "path",
+      "description": "The entity extractor ID.",
       "required": true,
       "type": "string",
       "format": "uuid",

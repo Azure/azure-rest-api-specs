@@ -1,0 +1,114 @@
+{
+  "parameters": {
+    "resourceGroupName": "sample-resource-group",
+    "vaultName": "sample-vault",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2019-09-01",
+    "parameters": {
+      "location": "westus",
+      "properties": {
+        "tenantId": "00000000-0000-0000-0000-000000000000",
+        "sku": {
+          "family": "A",
+          "name": "standard"
+        },
+        "networkAcls": {
+          "defaultAction": "Deny",
+          "bypass": "AzureServices",
+          "ipRules": [
+            {
+              "value": "124.56.78.91"
+            },
+            {
+              "value": "'10.91.4.0/24'"
+            }
+          ],
+          "virtualNetworkRules": [
+            {
+              "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/test-vnet/subnets/subnet1"
+            }
+          ]
+        },
+        "enabledForDeployment": true,
+        "enabledForDiskEncryption": true,
+        "enabledForTemplateDeployment": true
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "networkAcls": {
+            "defaultAction": "Deny",
+            "bypass": "AzureServices",
+            "ipRules": [
+              {
+                "value": "124.56.78.91/32"
+              },
+              {
+                "value": "'10.91.4.0/24'"
+              }
+            ],
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.network/virtualnetworks/test-vnet/subnets/subnet1"
+              }
+            ]
+          },
+          "enabledForDeployment": true,
+          "enabledForDiskEncryption": true,
+          "enabledForTemplateDeployment": true,
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/sample-resource-group/providers/Microsoft.KeyVault/vaults/sample-vault",
+        "name": "sample-vault",
+        "type": "Microsoft.KeyVault/vaults",
+        "location": "westus",
+        "tags": {},
+        "properties": {
+          "sku": {
+            "family": "A",
+            "name": "standard"
+          },
+          "tenantId": "00000000-0000-0000-0000-000000000000",
+          "networkAcls": {
+            "defaultAction": "Deny",
+            "bypass": "AzureServices",
+            "ipRules": [
+              {
+                "value": "124.56.78.91/32"
+              },
+              {
+                "value": "'10.91.4.0/24'"
+              }
+            ],
+            "virtualNetworkRules": [
+              {
+                "id": "/subscriptions/subid/resourcegroups/rg1/providers/microsoft.network/virtualnetworks/test-vnet/subnets/subnet1"
+              }
+            ]
+          },
+          "enabledForDeployment": true,
+          "enabledForDiskEncryption": true,
+          "enabledForTemplateDeployment": true,
+          "vaultUri": "https://sample-vault.vault.azure.net"
+        }
+      }
+    }
+  }
+}

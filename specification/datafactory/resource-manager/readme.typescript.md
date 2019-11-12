@@ -8,5 +8,6 @@ typescript:
   azure-arm: true
   package-name: "@azure/arm-datafactory"
   output-folder: "$(typescript-sdks-folder)/sdk/datafactory/arm-datafactory"
+  clear-output-folder: true
   generate-metadata: true
 ```
