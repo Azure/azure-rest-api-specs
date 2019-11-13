@@ -1850,7 +1850,7 @@
           },
           {
             "$ref": "#/parameters/invoiceNameParameter"
-          }
+          },
           {
             "$ref": "#/parameters/apiVersionParameter"
           }
@@ -5993,6 +5993,19 @@
           "type": "string",
           "format": "date-time",
           "readOnly": true
+        },
+        "invoiceType" : {
+          "description": "Invoice type.",
+          "enum": [
+            "AzureService",
+            "AzureMarketplace",
+            "AzureSupport"
+          ],
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "InvoiceType",
+            "modelAsString": true
+          }
         },
         "billingProfileId": {
           "description": "The billing profile id this invoice belongs to.",
