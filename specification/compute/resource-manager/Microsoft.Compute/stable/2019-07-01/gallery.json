@@ -129,7 +129,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Gallery"
+              "$ref": "#/definitions/GalleryUpdate"
             },
             "description": "Parameters supplied to the update Shared Image Gallery operation."
           }
@@ -352,7 +352,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GalleryImage"
+              "$ref": "#/definitions/GalleryImageUpdate"
             },
             "description": "Parameters supplied to the update gallery image operation."
           }
@@ -606,7 +606,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GalleryImageVersion"
+              "$ref": "#/definitions/GalleryImageVersionUpdate"
             },
             "description": "Parameters supplied to the update gallery Image Version operation."
           }
@@ -877,7 +877,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GalleryApplication"
+              "$ref": "#/definitions/GalleryApplicationUpdate"
             },
             "description": "Parameters supplied to the update gallery Application operation."
           }
@@ -1128,7 +1128,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/GalleryApplicationVersion"
+              "$ref": "#/definitions/GalleryApplicationVersionUpdate"
             },
             "description": "Parameters supplied to the update gallery Application Version operation."
           }
@@ -1594,6 +1594,20 @@
       ],
       "description": "Specifies information about the Shared Image Gallery that you want to create or update."
     },
+    "GalleryUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the Shared Image Gallery that you want to update."
+    },
     "GalleryProperties": {
       "properties": {
         "description": {
@@ -1643,6 +1657,20 @@
         }
       ],
       "description": "Specifies information about the gallery Application Definition that you want to create or update."
+    },
+    "GalleryApplicationUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryApplicationProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the gallery Application Definition that you want to update."
     },
     "GalleryApplicationProperties": {
       "properties": {
@@ -1698,6 +1726,20 @@
         }
       ],
       "description": "Specifies information about the gallery Application Version that you want to create or update."
+    },
+    "GalleryApplicationVersionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryApplicationVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the gallery Application Version that you want to update."
     },
     "GalleryApplicationVersionProperties": {
       "properties": {
@@ -1782,6 +1824,20 @@
         }
       ],
       "description": "Specifies information about the gallery Image Definition that you want to create or update."
+    },
+    "GalleryImageUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryImageProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the gallery Image Definition that you want to update."
     },
     "GalleryImageProperties": {
       "properties": {
@@ -1966,6 +2022,20 @@
         }
       ],
       "description": "Specifies information about the gallery Image Version that you want to create or update."
+    },
+    "GalleryImageVersionUpdate": {
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/GalleryImageVersionProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/UpdateResource"
+        }
+      ],
+      "description": "Specifies information about the gallery Image Version that you want to update."
     },
     "GalleryImageVersionProperties": {
       "properties": {
@@ -2445,6 +2515,19 @@
       "required": [
         "location"
       ],
+      "x-ms-azure-resource": true
+    },
+    "UpdateResource": {
+      "description": "The Update Resource model definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        }
+      },
       "x-ms-azure-resource": true
     }
   },
