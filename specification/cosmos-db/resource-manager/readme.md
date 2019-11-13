@@ -26,7 +26,7 @@ These are the global settings for the Cosmos-DB API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-08-preview
+tag: package-2019-08-01-preview
 ```
 
 ### Tag: package-2019-08
@@ -36,8 +36,6 @@ These settings apply only when `--tag=package-2019-08` is specified on the comma
 ``` yaml $(tag) == 'package-2019-08'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
-- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
-- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
 
 ### Tag: package-2019-08-preview
@@ -46,7 +44,7 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
-- Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+- Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
@@ -177,3 +175,4 @@ uncomment the  `exclude-file` section below and add the file paths.
 #exclude-file: 
 #  - $(this-folder)/Microsoft.Example/stable/2010-01-01/somefile.json
 ```
+
