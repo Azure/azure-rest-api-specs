@@ -728,14 +728,12 @@
   "definitions": {
     "RunRequest": {
       "description": "The request parameters for scheduling a run.",
-      "required": [
-        "type"
-      ],
       "type": "object",
       "properties": {
         "type": {
           "description": "The type of the run request.",
-          "type": "string"
+          "type": "string",
+          "readOnly": true
         },
         "isArchiveEnabled": {
           "description": "The value that indicates whether archiving is enabled for the run or not.",
