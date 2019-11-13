@@ -23,17 +23,9 @@ To see additional help and options, run:
 These are the global settings for SearchServiceClient.
 
 ``` yaml
+opt-in-extensible-enums: true
 openapi-type: data-plane
 tag: package-2019-05
-```
-
-### Tag: package-2019-05-preview
-
-These settings apply only when `--tag=package-2019-05-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-05-preview'
-input-file:
-- preview/2019-05-06-preview/searchservice.json
 ```
 
 ### Tag: package-2019-05
@@ -187,7 +179,6 @@ require: $(this-folder)/../../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/preview/2019-05-06-preview/searchservice.json
   - $(this-folder)/stable/2019-05-06/searchservice.json
   - $(this-folder)/preview/2017-11-11-preview/searchservice.json
   - $(this-folder)/preview/2017-11-11/searchservice.json
