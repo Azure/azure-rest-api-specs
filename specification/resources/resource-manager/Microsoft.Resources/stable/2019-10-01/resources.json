@@ -4013,19 +4013,10 @@
         "description": "Create or Replace existing tags with pass-in tags.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the resources.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -4043,9 +4034,6 @@
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -4074,19 +4062,10 @@
         "description": "Update multiple tags: if the tagKey exists, update tagValue with the new value; if not, insert the new record.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the resources.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
             "name": "parameters",
@@ -4104,9 +4083,6 @@
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -4127,19 +4103,10 @@
         "description": "Gets all the tags for the resource.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the resources.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -4148,9 +4115,6 @@
             "schema": {
               "$ref": "#/definitions/TagResponse"
             }
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -4179,27 +4143,15 @@
         "description": "Deletes all the tags for the resource.",
         "parameters": [
           {
-            "name": "scope",
-            "in": "path",
-            "required": true,
-            "type": "string",
-            "description": "The scope of the resources.",
-            "x-ms-skip-url-encoding": true
+            "$ref": "#/parameters/ScopeParameter"
           },
           {
-            "name": "api-version",
-            "in": "query",
-            "required": true,
-            "type": "string",
-            "description": "The API version to use for the operation."
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK"
-          },
-          "400": {
-            "description": "Bad Request"
           },
           "404": {
             "description": "Not Found"
@@ -5555,6 +5507,10 @@
     "TagPatchRequest": {
       "type": "object",
       "description": "Tag Request for Patch operation.",
+      "required": [
+        "operation",
+        "properties"
+      ],
       "properties": {
         "operation": {
           "type": "string",
@@ -5574,6 +5530,9 @@
     "TagRequest": {
       "type": "object",
       "description": "Tag Request for Put, Get, Delete operations.",
+      "required": [
+        "properties"
+      ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/Tags",
@@ -5617,7 +5576,7 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of a deployment.",
+      "description": "The resource scope.",
       "x-ms-parameter-location": "method"
     },
     "GroupIdParameter": {
