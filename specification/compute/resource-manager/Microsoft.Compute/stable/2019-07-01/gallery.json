@@ -148,7 +148,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple gallery.": {
+            "$ref": "./examples/UpdateASimpleGallery.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -371,7 +376,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple gallery image.": {
+            "$ref": "./examples/UpdateASimpleGalleryImage.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -625,7 +635,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple Gallery Image Version (Managed Image as source).": {
+            "$ref": "./examples/UpdateASimpleGalleryImageVersion.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -896,7 +911,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple gallery Application.": {
+            "$ref": "./examples/UpdateASimpleGalleryApplication.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -1147,7 +1167,12 @@
             }
           }
         },
-        "x-ms-long-running-operation": true
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Update a simple gallery Application Version.": {
+            "$ref": "./examples/UpdateASimpleGalleryApplicationVersion.json"
+          }
+        }
       },
       "get": {
         "tags": [
@@ -2520,6 +2545,16 @@
     "UpdateResource": {
       "description": "The Update Resource model definition.",
       "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource Id"
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "Resource type"
+        },
         "tags": {
           "type": "object",
           "additionalProperties": {
