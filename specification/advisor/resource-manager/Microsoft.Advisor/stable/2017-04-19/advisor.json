@@ -88,16 +88,20 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/configurations": {
       "get": {
-        "tags": ["Configurations"],
+        "tags": [
+          "Configurations"
+        ],
         "summary": "Retrieve Azure Advisor configurations.",
         "description": "Retrieve Azure Advisor configurations and also retrieve configurations of contained resource groups.",
         "operationId": "Configurations_ListBySubscription",
-        "parameters": [{
-          "$ref": "#/parameters/apiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/subscriptionIdParameter"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK. Successfully retrieved zero or more configurations.",
@@ -117,25 +121,29 @@
         }
       },
       "put": {
-        "tags": ["Configurations"],
+        "tags": [
+          "Configurations"
+        ],
         "summary": "Create/Overwrite Azure Advisor configuration.",
         "description": "Create/Overwrite Azure Advisor configuration and also delete all configurations of contained resource groups.",
         "operationId": "Configurations_CreateInSubscription",
-        "parameters": [{
-          "$ref": "#/parameters/apiVersionParameter"
-        },
-        {
-          "name": "configContract",
-          "in": "body",
-          "description": "The Azure Advisor configuration data structure.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ConfigData"
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "configContract",
+            "in": "body",
+            "description": "The Azure Advisor configuration data structure.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
           }
-        },
-        {
-          "$ref": "#/parameters/subscriptionIdParameter"
-        }],
+        ],
         "responses": {
           "204": {
             "description": "No Content. Successfully created/overwrote configuration."
@@ -157,22 +165,26 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroup}/providers/Microsoft.Advisor/configurations": {
       "get": {
-        "tags": ["Configurations"],
+        "tags": [
+          "Configurations"
+        ],
         "summary": "Retrieve Azure Advisor configurations.",
         "operationId": "Configurations_ListByResourceGroup",
-        "parameters": [{
-          "$ref": "#/parameters/apiVersionParameter"
-        },
-        {
-          "$ref": "#/parameters/subscriptionIdParameter"
-        },
-        {
-          "name": "resourceGroup",
-          "in": "path",
-          "description": "The name of the Azure resource group.",
-          "required": true,
-          "type": "string"
-        }],
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "description": "The name of the Azure resource group.",
+            "required": true,
+            "type": "string"
+          }
+        ],
         "responses": {
           "200": {
             "description": "OK. Successfully retrieved zero or more configurations.",
@@ -192,31 +204,35 @@
         }
       },
       "put": {
-        "tags": ["Configurations"],
+        "tags": [
+          "Configurations"
+        ],
         "summary": "Create/Overwrite Azure Advisor configuration.",
         "operationId": "Configurations_CreateInResourceGroup",
-        "parameters": [{
-          "$ref": "#/parameters/apiVersionParameter"
-        },
-        {
-          "name": "configContract",
-          "in": "body",
-          "description": "The Azure Advisor configuration data structure.",
-          "required": true,
-          "schema": {
-            "$ref": "#/definitions/ConfigData"
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          },
+          {
+            "name": "configContract",
+            "in": "body",
+            "description": "The Azure Advisor configuration data structure.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConfigData"
+            }
+          },
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "resourceGroup",
+            "in": "path",
+            "description": "The name of the Azure resource group.",
+            "required": true,
+            "type": "string"
           }
-        },
-        {
-          "$ref": "#/parameters/subscriptionIdParameter"
-        },
-        {
-          "name": "resourceGroup",
-          "in": "path",
-          "description": "The name of the Azure resource group.",
-          "required": true,
-          "type": "string"
-        }],
+        ],
         "responses": {
           "204": {
             "description": "No Content. Successfully created/overwrote configuration."
