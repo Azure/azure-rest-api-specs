@@ -25,8 +25,9 @@ To see additional help and options, run:
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
+title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2019-08
+tag: package-2019-08-preview
 ```
 
 ### Tag: package-2019-08
@@ -45,16 +46,6 @@ These settings apply only when `--tag=package-2019-08-preview` is specified on t
 ``` yaml $(tag) == 'package-2019-08-preview'
 input-file:
 - Microsoft.DocumentDB/stable/2019-08-01/cosmos-db.json
-- Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
-- Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
-```
-
-### Tag: package-2019-08-preview-only
-
-These settings apply only when `--tag=package-2019-08-preview-only` is specified on the command line.
-
-``` yaml $(tag) == 'package-2019-08-preview-only'
-input-file:
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
 - Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
 ```
