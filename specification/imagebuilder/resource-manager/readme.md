@@ -90,7 +90,7 @@ python:
   namespace: azure.mgmt.imagebuilder
   package-name: azure-mgmt-imagebuilder
   clear-output-folder: true
-  package-version: 0.2.1
+  package-version: 0.3.0
 ```
 
 ``` yaml $(python) && $(python-mode) == 'update'
