@@ -34,7 +34,7 @@
     }
   },
   "paths": {
-    "/{scope}/providers/Microsoft.ManagedIdentity/identities/default": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderScope}/providers/Microsoft.ManagedIdentity/identities/default": {
       "get": {
         "operationId": "SystemAssignedIdentities_GetByScope",
         "description": "Gets the systemAssignedIdentity available under the specified RP scope.",
@@ -45,7 +45,13 @@
         },
         "parameters": [
           {
-            "$ref": "#/parameters/ScopeParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceProviderScope"
           },
           {
             "$ref": "#/parameters/ApiVersionParameter"
@@ -55,7 +61,7 @@
           "200": {
             "description": "OK. The systemAssignedIdentity was retrieved and returned successfully.",
             "schema": {
-              "$ref": "#/definitions/SystemAssignedIdentityResult"
+              "$ref": "#/definitions/SystemAssignedIdentity"
             }
           },
           "default": {
@@ -396,6 +402,45 @@
       "x-ms-azure-resource": true,
       "description": "Describes an identity resource."
     },
+    "SystemAssignedIdentity": {
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The id of the created identity."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The name of the created identity."
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure region where the identity lives."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Resource tags"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "readOnly": true,
+          "description": "The properties associated with the identity.",
+          "$ref": "#/definitions/IdentityProperties"
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+
+          "description": "The type of resource i.e. Microsoft.Compute/virtualMachineScaleSets"
+        }
+      },
+      "x-ms-azure-resource": true,
+      "description": "Describes an identity resource."
+    },
     "IdentityProperties": {
       "description": "The properties associated with the identity.",
       "type": "object",
@@ -441,18 +486,6 @@
         }
       },
       "description": "Values returned by the List operation."
-    },
-    "SystemAssignedIdentityResult": {
-      "properties": {
-        "value": {
-          "type": "string",
-          "items": {
-            "$ref": "#/definitions/Identity"
-          },
-          "description": "The systemAssignedIdentity returned by the operation."
-        }
-      },
-      "description": "Values returned by the display operation."
     },
     "CloudError": {
       "x-ms-external": true,
@@ -553,12 +586,12 @@
     }
   },
   "parameters": {
-    "ScopeParameter": {
-      "name": "scope",
+    "ResourceProviderScopeParameter": {
+      "name": "resourceProviderScope",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "The scope of the resource. Parent resource being extended by Managed Identities.",
+      "description": "The resource provider scope of the resource. Parent resource being extended by Managed Identities.",
       "x-ms-parameter-location": "method",
       "x-ms-skip-url-encoding": true
     },
