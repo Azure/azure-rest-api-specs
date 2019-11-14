@@ -74,7 +74,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/preview/2015-05-01-preview/servers.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -171,7 +170,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/preview/2015-05-01-preview/servers.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -261,7 +259,6 @@ input-file:
 - Microsoft.Sql/preview/2015-05-01-preview/failoverGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/operations.json
 - Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-- Microsoft.Sql/preview/2015-05-01-preview/servers.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
 - Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
@@ -848,6 +845,7 @@ input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/restorePoints.json
   - $(this-folder)/Microsoft.Sql/stable/2015-05-01/capabilities.json
   - $(this-folder)/Microsoft.Sql/preview/2015-05-01-preview/blobAuditing.json
+  - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/servers.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/databases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/managedDatabases.json
   - $(this-folder)/./Microsoft.Sql/preview/2019-06-01-preview/serverOperations.json
@@ -909,7 +907,6 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/managedInstances.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/operations.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/serverKeys.json
-  - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/servers.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncAgents.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncGroups.json
   - $(this-folder)/./Microsoft.Sql/preview/2015-05-01-preview/syncMembers.json
