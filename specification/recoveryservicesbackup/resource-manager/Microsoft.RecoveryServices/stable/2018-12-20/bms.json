@@ -315,9 +315,6 @@
             "schema":{
               "$ref":"#/definitions/CrrAccessTokenResource"
             }
-          },
-          "400":{
-            "description":"BadRequest"
           }
         },
         "x-ms-examples":{
@@ -3016,6 +3013,9 @@
     "ProtectedItem": {
       "description": "Base class for backup items.",
       "type": "object",
+      "required": [
+        "protectedItemType"
+      ],
       "properties": {
         "protectedItemType": {
           "description": "backup item type.",
