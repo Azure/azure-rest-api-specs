@@ -154,7 +154,7 @@ log-file: logs/log.txt
 These settings apply only when `--tag=release_3_0_preview.1` is specified on the command line.
 
 ``` yaml $(tag) == 'release_3_0_preview.1'
-input-file: preview/v3.0-Preview.1/TextAnalytics.json
+input-file: preview/v3.0-preview.1/TextAnalytics.json
 log-file: logs/log.txt
 ```
 
@@ -253,7 +253,7 @@ input-file:
   - $(this-folder)/stable/v2.0/TextAnalytics.json
   - $(this-folder)/stable/v2.1/TextAnalytics.json
   - $(this-folder)/preview/v2.1/TextAnalytics.json
-  - $(this-folder)/preview/v3.0-Preview.1/TextAnalytics.json
+  - $(this-folder)/preview/v3.0-preview.1/TextAnalytics.json
 
 ```
 
