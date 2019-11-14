@@ -55,7 +55,6 @@ Differences in v3 (compared to v2):
 ``` yaml $(tag) == 'package-composite-v3'
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
 - Microsoft.Sql/stable/2014-04-01/dataMasking.json
@@ -151,7 +150,6 @@ Differences in v2 (compared to v1):
 input-file:
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -242,7 +240,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -332,7 +329,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/capabilities.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -397,7 +393,6 @@ input-file:
 - Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
 - Microsoft.Sql/stable/2014-04-01/backups.json
 - Microsoft.Sql/stable/2014-04-01/restorePoints.json
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -441,7 +436,6 @@ APIs must only be added to this section when the API is publicly available in at
 
 ``` yaml $(tag) == 'package-2014-04'
 input-file:
-- Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
 - Microsoft.Sql/stable/2014-04-01/databases.json
 - Microsoft.Sql/stable/2014-04-01/elasticPools.json
 - Microsoft.Sql/stable/2014-04-01/firewallRules.json
@@ -636,7 +630,6 @@ input-file:
  - ./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
  - ./Microsoft.Sql/stable/2014-04-01/backups.json
  - ./Microsoft.Sql/stable/2014-04-01/capabilities.json
- - ./Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
  - ./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
  - ./Microsoft.Sql/stable/2014-04-01/databases.json
  - ./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
@@ -772,7 +765,6 @@ require: $(this-folder)/../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/backups.json
-  - $(this-folder)/Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
   - $(this-folder)/Microsoft.Sql/stable/2014-04-01/dataMasking.json
@@ -929,7 +921,6 @@ input-file:
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/backupLongTermRetentionVaults.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/backups.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/capabilities.json
-  - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/checkNameAvailability.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/connectionPolicies.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/databases.json
   - $(this-folder)/./Microsoft.Sql/stable/2014-04-01/databaseSecurityAlertPolicies.json
