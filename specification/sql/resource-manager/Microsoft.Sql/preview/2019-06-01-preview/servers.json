@@ -16,6 +16,54 @@
     "application/json"
   ],
   "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "Servers"
+        ],
+        "description": "Determines whether a resource can be created with the specified name.",
+        "operationId": "Servers_CheckNameAvailability",
+        "parameters": [
+          {
+            "name": "parameters",
+            "in": "body",
+            "description": "The name availability request parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully completed the availability check.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "*** Error Responses: ***\n\n * 400 InvalidNameAvailabilityRequest - The check name availability request is invalid.\n\n * 400 UnknownNameType - Unknown resource type specified for a subscription level name availability check."
+          }
+        },
+        "x-ms-examples": {
+          "Check for a server name that already exists": {
+            "$ref": "./examples/CheckNameAvailabilityServerAlreadyExists.json"
+          },
+          "Check for a server name that is available": {
+            "$ref": "./examples/CheckNameAvailabilityServerAvailable.json"
+          },
+          "Check for a server name that is invalid": {
+            "$ref": "./examples/CheckNameAvailabilityServerInvalid.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Sql/servers": {
       "get": {
         "tags": [
@@ -276,57 +324,66 @@
           }
         }
       }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Sql/checkNameAvailability": {
-      "post": {
-        "tags": [
-          "Servers"
-        ],
-        "description": "Determines whether a resource can be created with the specified name.",
-        "operationId": "Servers_CheckNameAvailability",
-        "parameters": [
-          {
-            "name": "parameters",
-            "in": "body",
-            "description": "The name availability request parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityRequest"
-            }
-          },
-          {
-            "$ref": "#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/ApiVersionParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully completed the availability check.",
-            "schema": {
-              "$ref": "#/definitions/CheckNameAvailabilityResponse"
-            }
-          },
-          "default": {
-            "description": "*** Error Responses: ***\n\n * 400 InvalidNameAvailabilityRequest - The check name availability request is invalid.\n\n * 400 UnknownNameType - Unknown resource type specified for a subscription level name availability check."
-          }
-        },
-        "x-ms-examples": {
-          "Check for a server name that already exists": {
-            "$ref": "./examples/CheckNameAvailabilityServerAlreadyExists.json"
-          },
-          "Check for a server name that is available": {
-            "$ref": "./examples/CheckNameAvailabilityServerAvailable.json"
-          },
-          "Check for a server name that is invalid": {
-            "$ref": "./examples/CheckNameAvailabilityServerInvalid.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
+    "CheckNameAvailabilityRequest": {
+      "description": "A request to check whether the specified name for a resource is available.",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "enum": [
+            "Microsoft.Sql/servers"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityResourceType",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "CheckNameAvailabilityResponse": {
+      "description": "The result of a name availability check.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name whose availability was checked.",
+          "type": "string",
+          "readOnly": true
+        },
+        "available": {
+          "description": "True if the name is available, otherwise false.",
+          "type": "boolean",
+          "readOnly": true
+        },
+        "reason": {
+          "description": "The reason code explaining why the name is unavailable. Will be undefined if the name is available.",
+          "enum": [
+            "Invalid",
+            "AlreadyExists"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "CheckNameAvailabilityReason",
+            "modelAsString": false
+          }
+        },
+        "message": {
+          "description": "A message explaining why the name is unavailable. Will be undefined if the name is available.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "ServerListResult": {
       "description": "A list of servers.",
       "type": "object",
@@ -583,63 +640,6 @@
           "additionalProperties": {
             "type": "string"
           }
-        }
-      }
-    },
-    "CheckNameAvailabilityRequest": {
-      "description": "A request to check whether the specified name for a resource is available.",
-      "required": [
-        "name",
-        "type"
-      ],
-      "type": "object",
-      "properties": {
-        "name": {
-          "type": "string"
-        },
-        "type": {
-          "enum": [
-            "Microsoft.Sql/servers"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "CheckNameAvailabilityResourceType",
-            "modelAsString": false
-          }
-        }
-      }
-    },
-    "CheckNameAvailabilityResponse": {
-      "description": "The result of a name availability check.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "The name whose availability was checked.",
-          "type": "string",
-          "readOnly": true
-        },
-        "available": {
-          "description": "True if the name is available, otherwise false.",
-          "type": "boolean",
-          "readOnly": true
-        },
-        "reason": {
-          "description": "The reason code explaining why the name is unavailable. Will be undefined if the name is available.",
-          "enum": [
-            "Invalid",
-            "AlreadyExists"
-          ],
-          "type": "string",
-          "readOnly": true,
-          "x-ms-enum": {
-            "name": "CheckNameAvailabilityReason",
-            "modelAsString": false
-          }
-        },
-        "message": {
-          "description": "A message explaining why the name is unavailable. Will be undefined if the name is available.",
-          "type": "string",
-          "readOnly": true
         }
       }
     }
