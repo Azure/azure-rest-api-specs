@@ -4010,7 +4010,7 @@
           "Tags"
         ],
         "operationId": "Tags_ResourceCreate",
-        "description": "Create or Replace existing tags with pass-in tags.",
+        "description": "Create or Replace existing tags with passing in tags.",
         "parameters": [
           {
             "$ref": "#/parameters/ScopeParameter"
@@ -4023,7 +4023,7 @@
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/TagRequest"
+              "$ref": "#/definitions/TagsResource"
             },
             "description": "Parameters for creating multiple tags."
           }
@@ -4032,7 +4032,7 @@
           "200": {
             "description": "OK - Returns added tag information about the resource.",
             "schema": {
-              "$ref": "#/definitions/TagResponse"
+              "$ref": "#/definitions/TagsResource"
             }
           },
           "404": {
@@ -4081,7 +4081,7 @@
           "200": {
             "description": "OK - Returns updated tag information about the resource.",
             "schema": {
-              "$ref": "#/definitions/TagResponse"
+              "$ref": "#/definitions/TagsResource"
             }
           },
           "404": {
@@ -4113,7 +4113,7 @@
           "200": {
             "description": "OK - Returns tag information about the resource.",
             "schema": {
-              "$ref": "#/definitions/TagResponse"
+              "$ref": "#/definitions/TagsResource"
             }
           },
           "404": {
@@ -5523,47 +5523,23 @@
         }
       }
     },
-    "TagRequest": {
+    "TagsResource": {
       "type": "object",
-      "description": "Tag Request for Put, Get, Delete operations.",
+      "description": "Tags for the resource.",
       "required": [
         "properties"
       ],
       "properties": {
         "properties": {
           "$ref": "#/definitions/Tags",
-          "description": "tags object passing in the request."
-        }
-      }
-    },
-    "TagResponse": {
-      "type": "object",
-      "description": "Tag Response for Patch, Put, Get, Delete operations.",
-      "required": [
-        "properties"
-      ],
-      "properties": {
-        "id": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The ID of the tag response."
-        },
-        "name": {
-          "readOnly": true,
-          "type": "string",
-          "description": "The name of the tag response."
-        },
-        "type": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The type of the tag response."
-        },
-        "properties": {
-          "$ref": "#/definitions/Tags",
-          "description": "tags object returned in the response body."
+          "description": "tags property."
         }
       },
-      "x-ms-azure-resource": true
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Resource"
+        }
+      ]
     }
   },
   "parameters": {
