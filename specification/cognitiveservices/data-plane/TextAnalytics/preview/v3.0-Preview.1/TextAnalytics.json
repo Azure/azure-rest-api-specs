@@ -61,38 +61,6 @@
         "responses" : {
           "200" : {
             "description" : "A successful call results in a list of recognized entities returned for each valid document.",
-            "examples" : {
-              "application/json" : {
-                "documents" : [ {
-                  "id" : "1",
-                  "entities" : [ {
-                    "text" : "Microsoft",
-                    "type" : "Organization",
-                    "offset" : 25,
-                    "length" : 9,
-                    "score" : 0.99
-                  } ]
-                }, {
-                  "id" : "2",
-                  "entities" : [ {
-                    "text" : "John",
-                    "type" : "Person",
-                    "offset" : 25,
-                    "length" : 9,
-                    "score" : 0.99
-                  }, {
-                    "text" : 20,
-                    "type" : "Number",
-                    "subType" : "Age",
-                    "offset" : 30,
-                    "length" : 2,
-                    "score" : 0.88
-                  } ]
-                } ],
-                "errors" : [ ],
-                "modelVersion": "2019-10-01"
-              }
-            },
             "schema" : {
               "$ref": "#/definitions/EntitiesResult"
             }
@@ -103,7 +71,13 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Entities request": {
+            "$ref": ".//examples//SuccessfulEntitiesRequest.json"
+          }
+        },
+        "deprecated": false
       }
     },
     "/entities/recognition/pii" : {
@@ -135,32 +109,6 @@
         "responses" : {
           "200" : {
             "description" : "A successful call results in a list of entities containing personal information returned for each valid document",
-            "examples" : {
-              "application/json" : {
-                "documents" : [ {
-                  "id" : "1",
-                  "entities" : [ {
-                    "text": "897-09-9876",
-                    "type": "U.S. Social Security Number (SSN)",
-                    "offset": 10,
-                    "length": 11,
-                    "Score": 0.65
-                  }]
-                }, {
-                  "id" : "1",
-                  "entities" : [ {
-                    "text": "111000025",
-                    "type": "ABA Routing Number",
-                    "offset": 18,
-                    "length": 9,
-                    "score": 0.75
-                  }]
-                }                
-               ],
-                "errors" : [ ],
-                "modelVersion": "2019-10-01"
-              }
-            },
             "schema" : {
               "$ref" : "#/definitions/EntitiesResult"
             }
@@ -171,7 +119,13 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Entity PII request": {
+            "$ref": ".//examples//SuccessfulEntityPIIRequest.json"
+          }
+        },
+        "deprecated": false
       }
     },
     "/entities/linking" : {
@@ -203,45 +157,6 @@
         "responses" : {
           "200" : {
             "description" : "A successful call results in a list of recognized entities with links to a well-known knowledge base returned for each valid document",
-            "examples" : {
-              "application/json" : {
-                "documents" : [ {
-                  "id" : "1",
-                  "entities" : [ {
-                    "name" : "Microsoft",
-                    "matches" : [ {
-                      "score" : 0.88,
-                      "text" : "MSFT",
-                      "offset" : 0,
-                      "length" : 4
-                    }, {
-                      "score" : 0.99,
-                      "text" : "Microsoft",
-                      "offset" : 25,
-                      "length" : 9
-                    } ],
-                    "language" : "en",
-                    "id" : "Microsoft",
-                    "url" : "https://en.wikipedia.org/wiki/Microsoft",
-                    "dataSource" : "Wikipedia"
-                  }, {
-                    "name" : "Windows 10",
-                    "matches" : [ {
-                      "score" : 0.88,
-                      "text" : "Windows 10",
-                      "offset" : 44,
-                      "length" : 10
-                    } ],
-                    "language" : "en",
-                    "id" : "Windows 10",
-                    "url" : "https://en.wikipedia.org/wiki/Windows_10",
-                    "dataSource" : "Wikipedia"
-                  } ]
-                }],
-                "errors" : [ ],
-                "modelVersion": "2019-10-01"
-              }
-            },
             "schema" : {
               "$ref" : "#/definitions/EntityLinkingResult"
             }
@@ -252,7 +167,13 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Entity Linking request": {
+            "$ref": ".//examples//SuccessfulEntityLinkingRequest.json"
+          }
+        },
+        "deprecated": false
       }
     },
     "/keyPhrases" : {
@@ -284,22 +205,6 @@
         "responses" : {
           "200" : {
             "description" : "A successful response results in 0 or more key phrases identified in each valid document",
-            "examples" : {
-              "application/json" : {
-                "documents" : [ {
-                  "id" : "1",
-                  "keyPhrases" : [ "world", "input text" ]
-                }, {
-                  "id" : "2",
-                  "keyPhrases" : [ "monde" ]
-                }, {
-                  "id" : "3",
-                  "keyPhrases" : [ "carretera", "tráfico", "día" ]
-                } ],
-                "errors" : [ ],
-                "modelVersion": "2019-10-01"
-              }
-            },
             "schema" : {
               "$ref" : "#/definitions/KeyPhraseResult"
             }
@@ -310,7 +215,13 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Detect Language request": {
+            "$ref": ".//examples//SuccessfulKeyPhrasesRequest.json"
+          }
+        },
+        "deprecated": false
       }
     },
     "/languages" : {
@@ -342,34 +253,6 @@
         "responses" : {
           "200" : {
             "description" : "A successful call results in the detected language with the highest probability for each valid document",
-            "examples" : {
-              "application/json" : {
-                "documents" : [ {
-                  "id" : "1",
-                  "detectedLanguages" : [ {
-                    "name" : "English",
-                    "iso6391Name" : "en",
-                    "score" : 1
-                  } ]
-                }, {
-                  "id" : "2",
-                  "detectedLanguages" : [ {
-                    "name" : "French",
-                    "iso6391Name" : "fr",
-                    "score" : 1
-                  } ]
-                }, {
-                  "id" : "3",
-                  "detectedLanguages" : [ {
-                    "name" : "Spanish",
-                    "iso6391Name" : "es",
-                    "score" : 1
-                  } ]
-                } ],
-                "errors" : [ ],
-                "modelVersion": "2019-10-01"
-              }
-            },
             "schema" : {
               "$ref" : "#/definitions/LanguageResult"
             }
@@ -380,7 +263,13 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Detect Language request": {
+            "$ref": ".//examples//SuccessfulLanguagesRequest.json"
+          }
+        },
+        "deprecated": false
       }
     },
     "/sentiment" : {
@@ -412,85 +301,6 @@
         "responses" : {
           "200" : {
             "description" : "A successful call results in a document sentiment prediction, as well as sentiment scores for each sentiment class (Positive, Negative, and Neutral)",
-            "examples" : {
-              "application/json" : {
-                "documents" : [ {
-                  "id" : "1",
-                  "sentiment" : "positive",
-                  "documentScores" : {
-                    "positive" : 0.998519241809845,
-                    "neutral" : 9.635657188483E-4,
-                    "negative" : 5.17153472174E-4
-                  },
-                  "sentences" : [ {
-                    "sentiment" : "neutral",
-                    "sentenceScores" : {
-                      "positive" : 0.070910170674324,
-                      "neutral" : 0.9124033451080322,
-                      "negative" : 0.0166865326464176
-                    },
-                    "offset" : 0,
-                    "length" : 12
-                  }, {
-                    "sentiment" : "positive",
-                    "sentenceScores" : {
-                      "positive" : 0.998519241809845,
-                      "neutral" : 9.635657188483E-4,
-                      "negative" : 5.17153472174E-4
-                    },
-                    "offset" : 13,
-                    "length" : 36
-                  } ]
-                }, {
-                  "id" : "2",
-                  "sentiment" : "positive",
-                  "documentScores" : {
-                    "positive" : 0.9954571723937988,
-                    "neutral" : 0.0034653299953789,
-                    "negative" : 0.0010774657130241
-                  },
-                  "sentences" : [ {
-                    "sentiment" : "neutral",
-                    "sentenceScores" : {
-                      "positive" : 0.0499138832092285,
-                      "neutral" : 0.9387012720108032,
-                      "negative" : 0.0113849258050323
-                    },
-                    "offset" : 0,
-                    "length" : 30
-                  }, {
-                    "sentiment" : "positive",
-                    "sentenceScores" : {
-                      "positive" : 0.9954571723937988,
-                      "neutral" : 0.0034653299953789,
-                      "negative" : 0.0010774657130241
-                    },
-                    "offset" : 31,
-                    "length" : 13
-                  } ]
-                }, {
-                  "id" : "3",
-                  "sentiment" : "positive",
-                  "documentScores" : {
-                    "positive" : 0.9965128302574158,
-                    "neutral" : 0.0018965365597978,
-                    "negative" : 0.0015906029148027
-                  },
-                  "sentences" : [ {
-                    "sentiment" : "positive",
-                    "sentenceScores" : {
-                      "positive" : 0.9965128302574158,
-                      "neutral" : 0.0018965365597978,
-                      "negative" : 0.0015906029148027
-                    },
-                    "offset" : 0,
-                    "length" : 52
-                  } ]
-                } ],
-                "errors" : [ ],
-                "modelVersion": "2019-10-01"
-              }
-            },
             "schema" : {
               "$ref" : "#/definitions/SentimentResponse"
             }
@@ -501,7 +311,13 @@
               "$ref" : "#/definitions/Error"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "Successful Detect Language request": {
+            "$ref": ".//examples//SuccessfulSentimentRequest.json"
+          }
+        },
+        "deprecated": false
       }
     }
   },
@@ -1132,18 +948,11 @@
             },            
             {
               "id": "2",
-              "text": "Bonjour tout le monde",
-              "countryHint": "US"
+              "text": "Bonjour tout le monde"
             },
             {
               "id": "3",
-              "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer.",
-              "countryHint": "US"
-            },
-            {
-              "id": "4",
-              "text": ":) :( :D",
-              "countryHint": "US"
+              "text": "La carretera estaba atascada. Había mucho tráfico el día de ayer."
             }
           ]
         }
