@@ -25,8 +25,9 @@ To see additional help and options, run:
 These are the global settings for the Cosmos-DB API.
 
 ``` yaml
+title: CosmosDBManagementClient
 openapi-type: arm
-tag: package-2019-08
+tag: package-2019-08-preview
 ```
 
 ### Tag: package-2019-08
@@ -56,6 +57,42 @@ These settings apply only when `--tag=package-2015-04` is specified on the comma
 ``` yaml $(tag) == 'package-2015-04'
 input-file:
 - Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+```
+
+### Tag: package-2014-04
+
+These settings apply only when `--tag=package-2014-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2014-04'
+input-file:
+- Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+```
+
+### Tag: package-2015-11
+
+These settings apply only when `--tag=package-2015-11` is specified on the command line.
+
+``` yaml $(tag) == 'package-2015-11'
+input-file:
+- Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+```
+
+### Tag: package-2016-03-19
+
+These settings apply only when `--tag=package-2016-03-19` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-19'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+```
+
+### Tag: package-2016-03-31
+
+These settings apply only when `--tag=package-2016-03-31` is specified on the command line.
+
+``` yaml $(tag) == 'package-2016-03-31'
+input-file:
+- Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
 ```
 
 ## Suppression
@@ -165,6 +202,10 @@ input-file:
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateLinkResources.json
   - $(this-folder)/Microsoft.DocumentDB/preview/2019-08-01-preview/privateEndpointConnection.json
   - $(this-folder)/Microsoft.DocumentDB/stable/2015-04-08/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2014-04-01/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2015-11-06/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-19/cosmos-db.json
+  - $(this-folder)/Microsoft.DocumentDB/stable/2016-03-31/cosmos-db.json
 
 ```
 

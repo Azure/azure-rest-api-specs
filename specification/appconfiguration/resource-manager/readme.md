@@ -26,7 +26,7 @@ These are the global settings for the AppConfiguration API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2019-02-01-preview
+tag: package-2019-10-01
 ```
 
 ### Tag: package-2019-02-01-preview
