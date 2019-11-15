@@ -39,29 +39,31 @@
         "operationId" : "EntitiesRecognitionGeneral",
         "consumes" : [ "application/json", "text/json" ],
         "produces" : [ "application/json", "text/json" ],
-        "parameters" : [ {
-          "name" : "model-version",
-          "in" : "query",
-          "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
-          "type" : "string",
-          "required": false,
-          "x-nullable": true
-        }, {
+        "parameters" : [ 
+          {
+            "name" : "model-version",
+            "in" : "query",
+            "description" : "(Optional) This value indicates which model will be used for scoring. If a model-version is not specified, the API should default to the latest, non-preview version. ",
+            "type" : "string",
+            "required": false
+          }, 
+          {
           "name" : "showStats",
           "in" : "query",
           "description" : "(Optional) if set to true, response will contain input and document level statistics.",
           "type" : "boolean",
-          "required": false,
-          "x-nullable": true
-        }, {
-          "in" : "body",
-          "name" : "input",
-          "description" : "Collection of documents to analyze.",
-          "required": true,
-          "schema" : {
-            "$ref" : "#/definitions/MultiLanguageBatchInput"
-          }
-        } ],
+          "required": false
+          }, 
+          {
+            "in" : "body",
+            "name" : "input",
+            "description" : "Collection of documents to analyze.",
+            "required": true,
+            "schema" : {
+              "$ref" : "#/definitions/MultiLanguageBatchInput"
+            }
+          } 
+        ],
         "responses" : {
           "200" : {
             "description" : "A successful call results in a list of recognized entities returned for each valid document.",
